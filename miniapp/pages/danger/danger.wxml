@@ -1,0 +1,50 @@
+<!-- 答题模式 -->
+<view class="container" wx:if="{{!showResult}}">
+  <view class="progress-wrap">
+    <view class="progress-bar" style="width:{{progress}}%"></view>
+  </view>
+  <view class="progress-text">{{current+1}} / {{questions.length}}</view>
+
+  <view class="danger-badge">⚠️ 踩雷检测</view>
+  <view class="q-text">{{questions[current].text}}</view>
+
+  <view class="options">
+    <view 
+      wx:for="{{questions[current].options}}" 
+      wx:key="index"
+      class="opt {{selectedIndex === index ? 'opt-danger' : ''}}"
+      data-index="{{index}}"
+      bindtap="selectOption">
+      {{item}}
+    </view>
+  </view>
+
+  <view class="btn-row">
+    <button wx:if="{{current > 0}}" class="btn btn-prev" bindtap="prev">上一题</button>
+    <button wx:if="{{current < questions.length - 1}}" class="btn btn-next" bindtap="next" disabled="{{selectedIndex === null}}">下一题</button>
+    <button wx:if="{{current === questions.length - 1}}" class="btn btn-submit" bindtap="submit" disabled="{{selectedIndex === null}}">查看结果</button>
+  </view>
+</view>
+
+<!-- 结果模式 -->
+<view class="container result-page" wx:if="{{showResult}}">
+  <view class="result-icon">{{result.icon}}</view>
+  <view class="result-name">{{result.name}}</view>
+  <view class="result-bar-wrap">
+    <view class="result-bar" style="width:{{resultAvg}}%;background:{{resultBarColor}}"></view>
+  </view>
+  <view class="result-score">风险指数 {{resultAvg}}%</view>
+  <view class="result-desc">{{result.desc}}</view>
+  <view class="result-action">
+    <text class="result-action-label">💡 建议行动</text>
+    <text class="result-action-text">{{result.action}}</text>
+  </view>
+  <view class="result-breakdown">
+    <text class="breakdown-title">各信号分布</text>
+    <view class="breakdown-row" wx:for="{{signalCounts}}" wx:key="index">
+      <text>{{item.label}}</text>
+      <text>{{item.count}}/{{item.total}}题</text>
+    </view>
+  </view>
+  <button class="btn-retake" bindtap="retake">重新检测</button>
+</view>
