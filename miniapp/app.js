@@ -1,1 +1,6 @@
-App({})
+App({
+  globalData: {
+    answers: {},
+    scores: null
+  }
+})

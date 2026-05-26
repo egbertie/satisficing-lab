@@ -1,0 +1,49 @@
+<!-- 五维决策测评 · 简版19题 -->
+<view class="container">
+  <!-- 进度条 -->
+  <view class="progress-wrap">
+    <view class="progress-bar" style="width:{{progress}}%"></view>
+  </view>
+  <view class="progress-text">{{current+1}} / {{questions.length}}</view>
+
+  <!-- 维度标签 -->
+  <view class="dim-tag dim-{{questions[current].dim}}">{{dimNames[questions[current].dim]}}</view>
+
+  <!-- 题目 -->
+  <view class="q-text">{{questions[current].text}}</view>
+
+  <!-- 选项 -->
+  <view class="options">
+    <view 
+      wx:for="{{questions[current].options}}" 
+      wx:key="index"
+      class="opt {{selectedIndex === index ? 'opt-selected' : ''}}"
+      data-index="{{index}}"
+      bindtap="selectOption">
+      <text class="opt-label">{{item.label}}</text>
+      <text class="opt-desc">{{item.desc}}</text>
+    </view>
+  </view>
+
+  <!-- 按钮 -->
+  <view class="btn-row">
+    <button wx:if="{{current > 0}}" class="btn btn-prev" bindtap="prevQuestion">上一题</button>
+    <button 
+      wx:if="{{current < questions.length - 1}}" 
+      class="btn btn-next" 
+      disabled="{{selectedIndex === null}}"
+      bindtap="nextQuestion">下一题</button>
+    <button 
+      wx:if="{{current === questions.length - 1}}" 
+      class="btn btn-submit" 
+      disabled="{{selectedIndex === null}}"
+      bindtap="submit">查看结果</button>
+  </view>
+</view>
+
+<!-- 评分键盘 -->
+<view class="scale-bar">
+  <text>1 = 不同意</text>
+  <text class="scale-dot">···</text>
+  <text>5 = 同意</text>
+</view>

@@ -1,0 +1,47 @@
+<view class="container">
+  <view class="header">
+    <text class="title">五维决策测评结果</text>
+    <text class="subtitle">满意解研究所</text>
+  </view>
+
+  <!-- 雷达图 canvas -->
+  <view class="radar-box">
+    <canvas type="2d" id="radarCanvas" class="radar-canvas"></canvas>
+  </view>
+
+  <!-- 分数条 -->
+  <view class="scores" wx:if="{{scores}}">
+    <view class="score-row" wx:for="{{dimOrder}}" wx:key="*this">
+      <view class="dim-name" style="color:{{colors[item]}}">{{names[item]}}</view>
+      <view class="dim-bar-wrap">
+        <view class="dim-bar" style="width:{{scores[item]*20}}%;background:{{colors[item]}}"></view>
+      </view>
+      <text class="dim-val">{{scores[item]}}</text>
+      <text class="dim-lv">{{levels[scores[item]]}}</text>
+    </view>
+  </view>
+
+  <!-- 平均分 -->
+  <view class="avg-block" wx:if="{{avgScore}}">
+    <text class="avg-label">综合均分</text>
+    <text class="avg-num">{{avgScore}}</text>
+    <text class="avg-5">/ 5.0</text>
+  </view>
+
+  <!-- 模式识别 -->
+  <view class="pattern-block" wx:if="{{pattern}}">
+    <text class="pattern-icon">{{pattern.icon}}</text>
+    <text class="pattern-name">{{pattern.name}}</text>
+    <text class="pattern-desc">{{pattern.desc}}</text>
+    <text class="pattern-rec">💡 {{pattern.recommend}}</text>
+  </view>
+
+  <!-- 行动 -->
+  <view class="actions">
+    <button class="btn-retake" bindtap="retake">重新测评</button>
+  </view>
+
+  <view class="footer">
+    <text>满意解研究所 · Satisficing Research Institute</text>
+  </view>
+</view>
