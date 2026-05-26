@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>合伙人决策 · 卡牌纸片原型 V0.1</title>
+<style>
+  @page { margin: 10mm; size: A4; }
+  body { font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif; margin: 0; padding: 0; }
+  
+  .page { 
+    display: grid; 
+    grid-template-columns: repeat(3, 63mm); 
+    grid-template-rows: repeat(3, 88mm); 
+    gap: 2mm; 
+    padding: 2mm;
+    page-break-after: always;
+  }
+  
+  .card { 
+    border: 1px dashed #888; 
+    padding: 3mm; 
+    position: relative;
+    display: flex; flex-direction: column;
+    background: #fff;
+    overflow: hidden;
+  }
+  .card-header { 
+    font-size: 8pt; 
+    color: #666; 
+    border-bottom: 1px solid #ddd; 
+    padding-bottom: 1mm; 
+    margin-bottom: 1.5mm;
+    display: flex; justify-content: space-between;
+  }
+  .card-type { font-weight: bold; }
+  .card-body { flex: 1; font-size: 9pt; line-height: 1.4; }
+  .card-name { font-size: 11pt; font-weight: bold; margin-bottom: 1.5mm; }
+  .card-text { color: #222; }
+  .card-effect { 
+    font-size: 7.5pt; color: #888; 
+    margin-top: auto; 
+    border-top: 1px solid #eee; 
+    padding-top: 1.5mm; 
+  }
+  .card-cut { 
+    position: absolute; 
+    top: 2mm; right: 3mm; 
+    font-size: 6pt; color: #ccc; 
+  }
+  .card-back {
+    background: #f5f0e6;
+    border: 1px solid #d4c5a0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .card-back-logo { font-size: 14pt; font-weight: bold; color: #8B7355; }
+  .card-back-sub { font-size: 7pt; color: #aaa; margin-top: 2mm; }
+  
+  .role-card { border-color: #C23B22; }
+  .promise-card { border-color: #B8860B; }
+  .action-card { border-color: #2E5C4E; }
+  .event-card { border-color: #4A4A8A; }
+  .conflict-card { border-color: #8B2252; }
+  .endcard { border-color: #333; }
+  
+  h2 { font-size: 12pt; margin: 5mm 2mm 2mm; break-before: always; }
+  .page-title { 
+    text-align: center; font-size: 10pt; color: #999; 
+    margin: 3mm 0; page-break-after: avoid; 
+  }
+  
+  @media print {
+    .no-print { display: none; }
+    body { margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="no-print" style="text-align:center; padding:20px; background:#f5f0e6;">
+  <h1>🃏 合伙人决策 · 卡牌纸片原型 V0.1</h1>
+  <p>满意解研究所 · 2026-05-24</p>
+  <p style="color:#888;">打印到A4纸（无边距），沿虚线裁剪，即可获得完整卡牌。</p>
+  <p><strong>共4页 · 36张卡牌</strong>（含6张角色卡+5张承诺卡+10张行动卡+5张事件卡+6张冲突卡+4张结局卡）</p>
+  <p>卡牌尺寸: 63×88mm（标准扑克牌尺寸）</p>
+  <button onclick="window.print()" style="font-size:16pt; padding:10px 30px; background:#C23B22; color:#fff; border:none; border-radius:5px; cursor:pointer;">🖨️  打印卡牌</button>
+</div>
+
+<p class="page-title">— 第1页：角色卡(3张) + 承诺卡(5张) + 空白 —</p>
+<div class="page">
+  <!-- 角色卡 -->
+  <div class="card role-card">
+    <div class="card-header"><span class="card-type">👤 角色卡</span><span>R01</span></div>
+    <div class="card-body">
+      <div class="card-name">技术创始人</div>
+      <div class="card-text">公开目标：让产品达到技术领先</div>
+    </div>
+    <div class="card-effect">特殊能力：研发投入效率+1<br>缺点：对市场数据不敏感<br><em>（隐藏目标只有你知道）</em></div>
+  </div>
+
+  <div class="card role-card">
+    <div class="card-header"><span class="card-type">👤 角色卡</span><span>R02</span></div>
+    <div class="card-body">
+      <div class="card-name">商业创始人</div>
+      <div class="card-text">公开目标：让公司估值翻倍</div>
+    </div>
+    <div class="card-effect">特殊能力：谈判额外获得决策点<br>缺点：对技术瓶颈不敏感<br><em>（隐藏目标只有你知道）</em></div>
+  </div>
+
+  <div class="card role-card">
+    <div class="card-header"><span class="card-type">👤 角色卡</span><span>R03</span></div>
+    <div class="card-body">
+      <div class="card-name">资源型合伙人</div>
+      <div class="card-text">公开目标：让公司拥有行业最好供应链</div>
+    </div>
+    <div class="card-effect">特殊能力：额外抽取资源卡<br>缺点：资源兑现率自己知道别人不知道<br><em>（隐藏目标只有你知道）</em></div>
+  </div>
+
+  <!-- 承诺卡 -->
+  <div class="card promise-card">
+    <div class="card-header"><span class="card-type">📜 承诺卡</span><span>P01</span></div>
+    <div class="card-body">
+      <div class="card-name">保研发</div>
+      <div class="card-text">今年研发投入不低于总预算的40%</div>
+    </div>
+    <div class="card-effect">✅ 兑现：信任+2<br>❌ 违约：信任-3 · 冲突概率高</div>
+  </div>
+
+  <div class="card promise-card">
+    <div class="card-header"><span class="card-type">📜 承诺卡</span><span>P02</span></div>
+    <div class="card-body">
+      <div class="card-name">不裁员</div>
+      <div class="card-text">今年团队规模不变</div>
+    </div>
+    <div class="card-effect">✅ 兑现：信任+1<br>❌ 违约：信任-2</div>
+  </div>
+
+  <div class="card promise-card">
+    <div class="card-header"><span class="card-type">📜 承诺卡</span><span>P03</span></div>
+    <div class="card-body">
+      <div class="card-name">扩市场</div>
+      <div class="card-text">今年进入2个新市场</div>
+    </div>
+    <div class="card-effect">✅ 兑现：信任+2<br>❌ 违约：信任-1</div>
+  </div>
+
+  <div class="card promise-card">
+    <div class="card-header"><span class="card-type">📜 承诺卡</span><span>P04</span></div>
+    <div class="card-body">
+      <div class="card-name">控成本</div>
+      <div class="card-text">今年运营成本降低15%</div>
+    </div>
+    <div class="card-effect">✅ 兑现：信任+1<br>❌ 违约：信任-1</div>
+  </div>
+
+  <div class="card promise-card">
+    <div class="card-header"><span class="card-type">📜 承诺卡</span><span>P05</span></div>
+    <div class="card-body">
+      <div class="card-name">透明决策</div>
+      <div class="card-text">重大决策全团队公开讨论</div>
+    </div>
+    <div class="card-effect">✅ 兑现：信任+2<br>❌ 违约：信任-3 · 冲突概率极高</div>
+  </div>
+
+  <div class="card card-back">
+    <div class="card-back-logo">满意解研究所<br/>MANYIXIE</div>
+    <div class="card-back-sub">合伙人决策卡牌 · V0.1<br/>2026-05-24</div>
+  </div>
+</div>
+
+<p class="page-title">— 第2页：行动卡(9张) —</p>
+<div class="page">
+  <div class="card action-card">
+    <div class="card-header"><span class="card-type">🎬 行动卡</span><span>A01</span></div>
+    <div class="card-body">
+      <div class="card-name">实际保研发</div>
+      <div class="card-text">研发投入确实不低于40%</div>
+    </div>
+    <div class="card-effect">🟢 匹配「保研发」· 无冲突</div>
+  </div>
+
+  <div class="card action-card">
+    <div class="card-header"><span class="card-type">🎬 行动卡</span><span>A02</span></div>
+    <div class="card-body">
+      <div class="card-name">实际裁研发</div>
+      <div class="card-text">裁撤1条产品线 · 节省30%成本</div>
+    </div>
+    <div class="card-effect">🔴 违约「保研发」<br>资金+50 · 研发士气-2</div>
+  </div>
+
+  <div class="card action-card">
+    <div class="card-header"><span class="card-type">🎬 行动卡</span><span>A03</span></div>
+    <div class="card-body">
+      <div class="card-name">实际不裁员</div>
+      <div class="card-text">团队规模不变</div>
+    </div>
+    <div class="card-effect">🟢 匹配「不裁员」· 无冲突</div>
+  </div>
+
+  <div class="card action-card">
+    <div class="card-header"><span class="card-type">🎬 行动卡</span><span>A04</span></div>
+    <div class="card-body">
+      <div class="card-name">实际裁员</div>
+      <div class="card-text">裁掉10%团队</div>
+    </div>
+    <div class="card-effect">🔴 违约「不裁员」<br>资金+30 · 团队信任-3</div>
+  </div>
+
+  <div class="card action-card">
+    <div class="card-header"><span class="card-type">🎬 行动卡</span><span>A05</span></div>
+    <div class="card-body">
+      <div class="card-name">实际扩市场</div>
+      <div class="card-text">进入了2个新市场</div>
+    </div>
+    <div class="card-effect">🟢 匹配「扩市场」· 无冲突</div>
+  </div>
+
+  <div class="card action-card">
+    <div class="card-header"><span class="card-type">🎬 行动卡</span><span>A06</span></div>
+    <div class="card-body">
+      <div class="card-name">实际收缩</div>
+      <div class="card-text">放弃市场扩展 · 专注现有市场</div>
+    </div>
+    <div class="card-effect">🔴 违约「扩市场」<br>现金流+20 · 增长预期-2</div>
+  </div>
+
+  <div class="card action-card">
+    <div class="card-header"><span class="card-type">🎬 行动卡</span><span>A07</span></div>
+    <div class="card-body">
+      <div class="card-name">实际控成本</div>
+      <div class="card-text">运营成本降15%</div>
+    </div>
+    <div class="card-effect">🟢 匹配「控成本」· 无冲突</div>
+  </div>
+
+  <div class="card action-card">
+    <div class="card-header"><span class="card-type">🎬 行动卡</span><span>A08</span></div>
+    <div class="card-body">
+      <div class="card-name">实际成本失控</div>
+      <div class="card-text">成本意外超支</div>
+    </div>
+    <div class="card-effect">🔴 违约「控成本」<br>现金流-20 · 信任-1</div>
+  </div>
+
+  <div class="card action-card">
+    <div class="card-header"><span class="card-type">🎬 行动卡</span><span>A09</span></div>
+    <div class="card-body">
+      <div class="card-name">实际透明</div>
+      <div class="card-text">重大决策全团队讨论</div>
+    </div>
+    <div class="card-effect">🟢 匹配「透明决策」· 无冲突</div>
+  </div>
+</div>
+
+<p class="page-title">— 第3页：行动卡(1张) + 事件卡(5张) + 冲突卡(3张) —</p>
+<div class="page">
+  <div class="card action-card">
+    <div class="card-header"><span class="card-type">🎬 行动卡</span><span>A10</span></div>
+    <div class="card-body">
+      <div class="card-name">实际独裁</div>
+      <div class="card-text">自己做了决定才通知别人</div>
+    </div>
+    <div class="card-effect">🔴 违约「透明决策」<br>决策效率+1 · 信任-3</div>
+  </div>
+
+  <div class="card event-card">
+    <div class="card-header"><span class="card-type">⚡ 事件卡</span><span>E01</span></div>
+    <div class="card-body">
+      <div class="card-name">技术突破</div>
+      <div class="card-text">关键指标意外突破！</div>
+    </div>
+    <div class="card-effect">研发士气+2 · 市场信心+1</div>
+  </div>
+
+  <div class="card event-card">
+    <div class="card-header"><span class="card-type">⚡ 事件卡</span><span>E02</span></div>
+    <div class="card-body">
+      <div class="card-name">市场寒潮</div>
+      <div class="card-text">大客户取消订单</div>
+    </div>
+    <div class="card-effect">现金流-30</div>
+  </div>
+
+  <div class="card event-card">
+    <div class="card-header"><span class="card-type">⚡ 事件卡</span><span>E03</span></div>
+    <div class="card-body">
+      <div class="card-name">投资人退出</div>
+      <div class="card-text">领投方决定不跟投</div>
+    </div>
+    <div class="card-effect">融资窗口关闭2轮</div>
+  </div>
+
+  <div class="card event-card">
+    <div class="card-header"><span class="card-type">⚡ 事件卡</span><span>E04</span></div>
+    <div class="card-body">
+      <div class="card-name">竞品突袭</div>
+      <div class="card-text">竞争对手发布类似产品</div>
+    </div>
+    <div class="card-effect">市场空间缩小 · 估值下调</div>
+  </div>
+
+  <div class="card event-card">
+    <div class="card-header"><span class="card-type">⚡ 事件卡</span><span>E05</span></div>
+    <div class="card-body">
+      <div class="card-name">人才流失</div>
+      <div class="card-text">核心工程师被挖</div>
+    </div>
+    <div class="card-effect">研发效率-1</div>
+  </div>
+
+  <div class="card conflict-card">
+    <div class="card-header"><span class="card-type">🚨 冲突卡</span><span>C01</span></div>
+    <div class="card-body">
+      <div class="card-name">Type01 · 多元化集团</div>
+      <div class="card-text">三个业务方向各有合伙人主导。CEO还在用「大家一起商量」模式。方向不一致时，谁说了算？</div>
+    </div>
+    <div class="card-effect">不解决：3轮后信任归零</div>
+  </div>
+
+  <div class="card conflict-card">
+    <div class="card-header"><span class="card-type">🚨 冲突卡</span><span>C02</span></div>
+    <div class="card-body">
+      <div class="card-name">Type02 · 再创业</div>
+      <div class="card-text">第二次拉旧合伙人。上次退出时没结清的事，开始发酵了。</div>
+    </div>
+    <div class="card-effect">不解决：每次冲突点数+2</div>
+  </div>
+
+  <div class="card conflict-card">
+    <div class="card-header"><span class="card-type">🚨 冲突卡</span><span>C03</span></div>
+    <div class="card-body">
+      <div class="card-name">Type04 · 转型期</div>
+      <div class="card-text">你要转到新方向。他不是不同意你——是不想去。</div>
+    </div>
+    <div class="card-effect">不解决：每轮决策效率-1</div>
+  </div>
+</div>
+
+<p class="page-title">— 第4页：冲突卡(3张) + 结局卡(4张) + 引导脚本卡(1张) + 空白 —</p>
+<div class="page">
+  <div class="card conflict-card">
+    <div class="card-header"><span class="card-type">🚨 冲突卡</span><span>C04</span></div>
+    <div class="card-body">
+      <div class="card-name">Type03 · 沉默退出</div>
+      <div class="card-text">一个人已经不想干了。没说出来，但每天的工作状态在说。</div>
+    </div>
+    <div class="card-effect">不解决：随机触发「意外退出」事件</div>
+  </div>
+
+  <div class="card conflict-card">
+    <div class="card-header"><span class="card-type">🚨 冲突卡</span><span>C05</span></div>
+    <div class="card-body">
+      <div class="card-name">Type05 · 引入外部</div>
+      <div class="card-text">你想让新人进来。旧人觉得「我们的东西为什么要分给他」。</div>
+    </div>
+    <div class="card-effect">不解决：旧合伙人满意度每轮-1</div>
+  </div>
+
+  <div class="card conflict-card">
+    <div class="card-header"><span class="card-type">🚨 冲突卡</span><span>C06</span></div>
+    <div class="card-body">
+      <div class="card-name">Type06 · 能力不对称</div>
+      <div class="card-text">他的能力停在A轮水平。你的能力已经到了C轮。差距越来越大。</div>
+    </div>
+    <div class="card-effect">不解决：「能力差距」指数级扩大</div>
+  </div>
+
+  <div class="card endcard">
+    <div class="card-header"><span class="card-type">🏁 结局</span><span>END-1</span></div>
+    <div class="card-body">
+      <div class="card-name">🏆 满意解</div>
+      <div class="card-text">不是完美，但够好了。两个人知道彼此的差距，也接受了彼此能接受的底线。</div>
+    </div>
+    <div class="card-effect">触发：信任≥4 · 冲突＜4</div>
+  </div>
+
+  <div class="card endcard">
+    <div class="card-header"><span class="card-type">🏁 结局</span><span>END-2</span></div>
+    <div class="card-body">
+      <div class="card-name">🦄 独角兽</div>
+      <div class="card-text">成功是成功了，但有人的信任透支了。估值过亿，合伙人三年没单独吃过饭。</div>
+    </div>
+    <div class="card-effect">触发：信任2-3 · 冲突＜4</div>
+  </div>
+
+  <div class="card endcard">
+    <div class="card-header"><span class="card-type">🏁 结局</span><span>END-3</span></div>
+    <div class="card-body">
+      <div class="card-name">💔 拆伙</div>
+      <div class="card-text">信任归零。凌晨一点，一个人给另一个人发了两个字。</div>
+    </div>
+    <div class="card-effect">触发：任一信任≤0</div>
+  </div>
+
+  <div class="card endcard">
+    <div class="card-header"><span class="card-type">🏁 结局</span><span>END-4</span></div>
+    <div class="card-body">
+      <div class="card-name">🔥 翻车</div>
+      <div class="card-text">不是被竞争对手打死的——是被自己人耗死的。</div>
+    </div>
+    <div class="card-effect">触发：冲突≥4 · 信任＞0</div>
+  </div>
+
+  <div class="card" style="border-color:#C23B22; background:#fff5f5;">
+    <div class="card-header"><span class="card-type">🎤 引导脚本</span><span>HOST</span></div>
+    <div class="card-body">
+      <div class="card-name">每轮讨论问题</div>
+      <div class="card-text" style="font-size:7.5pt;">
+        ① 承诺和行动差了多少？<br>
+        ② 这个差距在真实世界里发生，合伙人接得住吗？<br>
+        ③ 哪个瞬间你最不舒服？为什么？
+      </div>
+    </div>
+    <div class="card-effect">主持人用 · 每轮结束后</div>
+  </div>
+</div>
+
+<div class="no-print" style="text-align:center; padding:30px; background:#f5f0e6;">
+  <p><strong>裁剪说明</strong></p>
+  <p style="color:#888; max-width:600px; margin:0 auto;">
+    1. 用A4纸无边距打印。<br>
+    2. 沿卡片边框裁剪（63×88mm标准扑克牌尺寸）。<br>
+    3. 建议贴到硬纸板上增加手感（麦片盒内衬即可）。<br>
+    4. 角色卡背面可以写上隐藏目标（只有该玩家知道）。<br>
+    5. 准备好了：找2个人，按引导脚本，玩一局。
+  </p>
+  <p style="margin-top:20px;"><strong>验证方式</strong>：打印→裁剪→摸一摸→玩一局。纸片原型才算完成。</p>
+</div>
+
+</body>
+</html>
