@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>五维决策测评 · 简版 | 满意解研究所</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  :root {
+    --c1: #3B82F6; --c2: #10B981; --c3: #F59E0B; --c4: #EF4444; --c5: #8B5CF6;
+    --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --muted: #94a3b8;
+    --brand: #C23B22; --brand2: #B8860B;
+  }
+  body { font-family:-apple-system,"Noto Sans SC","PingFang SC",sans-serif; background:var(--bg); color:var(--text); min-height:100vh; padding-bottom:60px; }
+  
+  /* 顶部 */
+  .hero { background:linear-gradient(135deg,var(--brand),var(--brand2)); padding:40px 24px 28px; text-align:center; }
+  .hero h1 { font-size:24px; font-weight:700; margin-bottom:6px; }
+  .hero p { font-size:13px; opacity:0.9; }
+  
+  /* 进度条 */
+  .progress-wrap { background:#334155; height:4px; position:sticky; top:0; z-index:10; }
+  .progress-bar { height:100%; background:linear-gradient(90deg,var(--brand),var(--brand2)); transition:width 0.4s ease; width:0%; }
+  
+  /* 步骤 */
+  .step { display:none; padding:20px 16px; max-width:480px; margin:0 auto; }
+  .step.active { display:block; animation:fadeIn 0.3s ease; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+  
+  /* 模块标题 */
+  .module-tag { display:inline-block; font-size:11px; font-weight:600; padding:3px 10px; border-radius:12px; margin-bottom:8px; color:#fff; }
+  .module-tag.t { background:var(--c1); }
+  .module-tag.d { background:var(--c2); }
+  .module-tag.b { background:var(--c3); color:#1e293b; }
+  .module-tag.x { background:var(--c4); }
+  .module-tag.z { background:var(--c5); }
+  
+  .q-num { font-size:12px; color:var(--muted); margin-bottom:4px; }
+  .q-text { font-size:17px; font-weight:500; line-height:1.6; margin-bottom:20px; }
+  
+  /* 选项按钮 */
+  .options { display:flex; flex-direction:column; gap:10px; }
+  .opt { background:var(--card); border:2px solid transparent; border-radius:12px; padding:14px 16px; font-size:14px; line-height:1.5; color:var(--text); cursor:pointer; transition:all 0.2s; text-align:left; }
+  .opt:active { transform:scale(0.98); }
+  .opt.selected { border-color:var(--brand); background:rgba(194,59,34,0.15); }
+  
+  /* 按钮 */
+  .btn { display:block; width:100%; padding:14px; border:none; border-radius:12px; font-size:16px; font-weight:600; cursor:pointer; margin-top:20px; transition:all 0.2s; }
+  .btn-primary { background:linear-gradient(135deg,var(--brand),var(--brand2)); color:#fff; }
+  .btn-primary:disabled { opacity:0.4; cursor:not-allowed; }
+  .btn-secondary { background:transparent; border:1px solid var(--muted); color:var(--muted); font-size:13px; }
+  
+  /* 结果页 */
+  .result-card { background:var(--card); border-radius:16px; padding:24px 20px; margin:16px; }
+  .result-title { text-align:center; font-size:18px; font-weight:700; margin-bottom:4px; }
+  .result-sub { text-align:center; font-size:12px; color:var(--muted); margin-bottom:20px; }
+  .radar-box { text-align:center; margin:16px 0; }
+  .radar-box svg { max-width:100%; height:auto; }
+  
+  .dim-row { display:flex; align-items:center; gap:10px; margin:8px 0; }
+  .dim-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+  .dim-name { font-size:14px; font-weight:600; width:56px; }
+  .dim-bar-bg { flex:1; height:8px; background:#334155; border-radius:4px; overflow:hidden; }
+  .dim-bar { height:100%; border-radius:4px; transition:width 0.6s ease; }
+  .dim-score { font-size:14px; font-weight:700; width:36px; text-align:right; }
+  .dim-badge { font-size:11px; padding:2px 8px; border-radius:10px; color:#fff; flex-shrink:0; }
+  .badge-green { background:#10B981; }
+  .badge-yellow { background:#F59E0B; color:#1e293b; }
+  .badge-red { background:#EF4444; }
+  
+  .alert-box { border-radius:12px; padding:14px 16px; margin:16px 0; font-size:13px; line-height:1.6; }
+  .alert-red { background:rgba(239,68,68,0.12); border-left:4px solid #EF4444; }
+  .alert-yellow { background:rgba(245,158,11,0.12); border-left:4px solid #F59E0B; }
+  .alert-green { background:rgba(16,185,129,0.12); border-left:4px solid #10B981; }
+  
+  .cta-box { text-align:center; padding:20px; }
+  .cta-box h3 { font-size:16px; margin-bottom:8px; }
+  .cta-box p { font-size:13px; color:var(--muted); margin-bottom:16px; }
+  
+  .footer { text-align:center; padding:24px 16px 8px; font-size:11px; color:#475569; }
+</style>
+</head>
+<body>
+
+<div class="progress-wrap"><div class="progress-bar" id="prog"></div></div>
+
+<div class="hero" id="heroSection">
+  <h1>五维决策测评</h1>
+  <p>满意解研究所 · 快速踩雷检测 · 15题</p>
+</div>
+
+<!-- 欢迎页 -->
+<div class="step active" id="step-welcome">
+  <div style="text-align:center;padding:40px 0 20px;">
+    <div style="font-size:48px;margin-bottom:16px;">🔥</div>
+    <h2 style="font-size:20px;margin-bottom:12px;">你的合伙人决策健康吗？</h2>
+    <p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:24px;">
+      基于满意解五维决策框架<br>
+      对标 Hogan HPI · Gallup Q12 · 360°反馈<br>
+      <span style="color:#e2e8f0;">3分钟 · 15题 · 即时出结果</span>
+    </p>
+  </div>
+  <button class="btn btn-primary" onclick="goStep('T1')">开始测评</button>
+</div>
+
+<!-- 问题容器 -->
+<div id="questions"></div>
+
+<!-- 结果页 -->
+<div class="step" id="step-result">
+  <div class="result-card">
+    <div class="result-title">测评结果</div>
+    <div class="result-sub">满意解研究所 · 五维决策测评</div>
+    <div class="radar-box" id="radarBox"></div>
+    <div id="dimBars"></div>
+  </div>
+  <div id="alerts" style="padding:0 16px;"></div>
+  <div class="cta-box">
+    <h3>想做更深入的诊断？</h3>
+    <p>完整版测评（88题·25分钟）提供L1/L2/L3三层报告<br>含脱轨因子检测 · 信效度验证 · 行为指引</p>
+    <button class="btn btn-primary" onclick="shareResult()">分享我的结果</button>
+    <button class="btn btn-secondary" style="margin-top:10px;" onclick="restart()">重新测评</button>
+  </div>
+  <div class="footer">
+    满意解研究所 · Satisficing Research Institute<br>
+    让每个合伙人决策都有据可依
+  </div>
+</div>
+
+<script>
+// ===== 题目数据 =====
+const questions = [
+  // 时间轴
+  {id:"T1",tag:"t",tagLabel:"时间轴",num:"1/15",
+   text:"短期利益和长期利益冲突时，我通常会选短期。",
+   opts:["非常符合","比较符合","说不清","比较不符合","非常不符合"],reverse:true},
+  {id:"T2",tag:"t",tagLabel:"时间轴",num:"2/15",
+   text:"投资人说「市场窗口就这半年，先冲了再说」。你的合伙人想冲。你觉得：",
+   opts:["合伙人说得对，先冲再说","有一定道理但需要更多分析","不确定，要看具体情况","这需要冷静评估，窗口焦虑不是决策理由","必须拒绝——冲不等于快"]},
+  {id:"T3",tag:"t",tagLabel:"时间轴",num:"3/15",
+   text:"过去一年里，你因为「等不及」而在事情没有准备好的情况下做了决定——次数是多少？",
+   opts:["0次","1次","2次","3-4次","5次以上"],reverse:true},
+  // 可行域
+  {id:"D1",tag:"d",tagLabel:"可行域",num:"4/15",
+   text:"我清楚知道自己在合伙人决策上最多能承受的损失是多少。",
+   opts:["完全不知道","不太清楚","大概知道","比较清楚","很清楚"]},
+  {id:"D2",tag:"d",tagLabel:"可行域",num:"5/15",
+   text:"一个技术大牛要求超出你预算的股权，但他说「值这个价」。你：",
+   opts:["觉得有道理，可以谈","愿意谈但要控制幅度","不确定","明确拒绝，超出底线就是超出","超出底线绝对不行，再好也不妥协"]},
+  {id:"D3",tag:"d",tagLabel:"可行域",num:"6/15",
+   text:"你在合伙人谈判中临时改变过底线的次数？",
+   opts:["从来没有","很少，偶尔1次","有过2-3次","比较多","每次都变"],reverse:true},
+  // 身心流
+  {id:"B1",tag:"b",tagLabel:"身心流",num:"7/15",
+   text:"我在做重要决策时会注意身体的感觉（心跳、肩膀、胃），并且会把这些感觉纳入考虑。",
+   opts:["几乎不","很少","有时","经常","这是我决策的一部分"]},
+  {id:"B2",tag:"b",tagLabel:"身心流",num:"8/15",
+   text:"连续高强度工作后，一个重大决策需要现在做出。你：",
+   opts:["现在决定，不能再等了","有点犹豫但会做决定","先快速过一遍关键信息","知道自己疲劳时判断会偏差，先休息至少2小时","必须休息——疲惫时的决定最危险"]},
+  {id:"B3",tag:"b",tagLabel:"身心流",num:"9/15",
+   text:"过去三个月里，你身体发出警报（失眠/头痛/胃痛），但你继续往前冲——发生了多少次？",
+   opts:["0次","1-2次","3-5次","基本每周都有","几乎每天都在"],reverse:true},
+  // 信义观
+  {id:"X1",tag:"x",tagLabel:"信义观",num:"10/15",
+   text:"我能具体说出：合伙人的哪三件事让我完全放心，哪三件事让我心里打鼓。",
+   opts:["说不上来","能说出部分","大概知道但不够具体","比较清晰","非常清晰"]},
+  {id:"X2",tag:"x",tagLabel:"信义观",num:"11/15",
+   text:"你发现合伙人在外把「你们的」成绩说成「我的」。你：",
+   opts:["小事，忍了","心里不舒服但不说","觉得需要找机会表达不满","这是信任问题，必须谈清楚","立即约谈——这不是面子，是信任底线"]},
+  {id:"X3",tag:"x",tagLabel:"信义观",num:"12/15",
+   text:"你有没有因为「不好意思」而推迟了和合伙人之间必须发生的艰难对话？",
+   opts:["从不推迟","偶尔推迟","有过几次","经常推迟","推迟了多次"],reverse:true},
+  // 直觉阈
+  {id:"Z1",tag:"z",tagLabel:"直觉阈",num:"13/15",
+   text:"我的数据分析和我的直觉打架时，我通常会听数据分析的。",
+   opts:["非常符合","比较符合","说不清","比较不符合","非常不符合"],reverse:true},
+  {id:"Z2",tag:"z",tagLabel:"直觉阈",num:"14/15",
+   text:"见一个潜在合伙人，表面一切完美，但你心里有个细微的声音说「不对」。你：",
+   opts:["忽略，一切看起来都很好","不太在意但会留意","有点不安但继续推进","把这个声音当回事，做深度背调","绝对重视——直觉信号值得认真对待"]},
+  {id:"Z3",tag:"z",tagLabel:"直觉阈",num:"15/15",
+   text:"过去一年，你有过「第一反应是对的，但后来被人说服了，结果果然出问题」的经历——次数？",
+   opts:["0次","1次","2次","3-4次","5次以上"],reverse:true},
+];
+
+const dimNames = ["时间轴","可行域","身心流","信义观","直觉阈"];
+const dimColors = {"T":"#3B82F6","D":"#10B981","B":"#F59E0B","X":"#EF4444","Z":"#8B5CF6"};
+const dimGuidance = {
+  "时间轴": {low:"你可能在透支未来。建议先做心理对照练习——在做每个决定前，先问「五年后回头看会怎样」。",mid:"时间轴维度有提升空间。建议定期(季度)做长远方向思考，不被日常推着走。",high:"你的时间轴维度很健康。你能平衡短期和长期，这是合伙人决策的核心能力。"},
+  "可行域": {low:"你的底线可能不够硬。建议先明确退出机制——在投入前先想好「什么情况下撤」。",mid:"可行域判断还可以更坚定。建议在投入前白纸黑字写下底线，并且守住它。",high:"你的可行域判断很清晰。你知道什么是「够用就好」，这是满意解的核心。"},
+  "身心流": {low:"你可能在忽视身体警报。建议纳入身心流觉察——身体是你的第二大脑。",mid:"身心流维度有提升空间。试着在决策前停顿3秒，感受身体的第一反应。",high:"你能读取身体信号并纳入决策。身心流的平衡让你在压力下也能保持判断力。"},
+  "信义观": {low:"信任可能出了问题。建议启动一次艰难对话——不说会比说更危险。",mid:"信义观维度有提升空间。试着更具体地分辨「在哪些事上信」vs「在哪些事上打鼓」。",high:"你的信任判断很分化。你能区分「整体信任」和「具体信任」，这是成熟的标志。"},
+  "直觉阈": {low:"你可能在压抑直觉。建议区分「恐惧」和「直觉信号」——前者吵闹，后者平静。",mid:"直觉阈维度有提升空间。下次数据与直觉打架时，先感受身体第一反应，再用理性核对。",high:"你能平衡直觉和理性。直觉是你决策工具箱里的重要工具，而非敌人。"},
+};
+
+let answers = {};
+let currentQ = 0;
+const DIM_MAP = {T:"T",D:"D",B:"B",X:"X",Z:"Z"};
+
+// 构建问题DOM
+function buildQuestions() {
+  const container = document.getElementById('questions');
+  let html = '';
+  questions.forEach((q,i) => {
+    html += `<div class="step" id="step-${q.id}">
+      <div class="q-num">第 ${q.num} 题</div>
+      <span class="module-tag ${q.tag}">${q.tagLabel}</span>
+      <div class="q-text">${q.text}</div>
+      <div class="options" id="opts-${q.id}">
+        ${q.opts.map((o,j) => `<button class="opt" data-v="${j+1}" onclick="pick('${q.id}',${j+1},this)">${o}</button>`).join('')}
+      </div>
+      <button class="btn btn-primary" id="next-${q.id}" disabled onclick="nextQ('${q.id}')">
+        ${i < questions.length - 1 ? '下一题' : '查看结果'}
+      </button>
+    </div>`;
+  });
+  container.innerHTML = html;
+}
+
+function pick(qid, val, el) {
+  answers[qid] = val;
+  const opts = document.querySelectorAll(`#opts-${qid} .opt`);
+  opts.forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById(`next-${qid}`).disabled = false;
+}
+
+function nextQ(qid) {
+  const idx = questions.findIndex(q => q.id === qid);
+  if (idx < questions.length - 1) {
+    goStep(questions[idx+1].id);
+  } else {
+    showResult();
+  }
+}
+
+function goStep(qid) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById(`step-${qid}`);
+  if(target) target.classList.add('active');
+  const idx = questions.findIndex(q => q.id === qid);
+  const pct = ((idx) / questions.length) * 100;
+  document.getElementById('prog').style.width = pct + '%';
+}
+
+function showResult() {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step-result').classList.add('active');
+  document.getElementById('prog').style.width = '100%';
+  document.getElementById('heroSection').style.display = 'none';
+  
+  // 计算各维度得分
+  const dimScores = {};
+  const dimQuestions = {};
+  questions.forEach(q => {
+    const d = q.id.charAt(0);
+    if(!dimQuestions[d]) dimQuestions[d] = [];
+    dimQuestions[d].push(q);
+  });
+  
+  for(const [d, qs] of Object.entries(dimQuestions)) {
+    let sum = 0, count = 0;
+    qs.forEach(q => {
+      if(answers[q.id] !== undefined) {
+        let v = answers[q.id];
+        if(q.reverse) v = 6 - v;
+        sum += v;
+        count++;
+      }
+    });
+    dimScores[d] = count > 0 ? (sum / count) : 0;
+  }
+  
+  // 雷达图
+  renderRadar(dimScores);
+  
+  // 维度条形图
+  let barsHtml = '';
+  for(const d of ['T','D','B','X','Z']) {
+    const name = dimNames[['T','D','B','X','Z'].indexOf(d)];
+    const score = dimScores[d];
+    const pct = (score / 5) * 100;
+    const color = dimColors[d];
+    let badge, badgeClass;
+    if(score >= 3.5) { badge = '健康'; badgeClass = 'badge-green'; }
+    else if(score >= 2.5) { badge = '临界'; badgeClass = 'badge-yellow'; }
+    else { badge = '关注'; badgeClass = 'badge-red'; }
+    barsHtml += `<div class="dim-row">
+      <div class="dim-dot" style="background:${color}"></div>
+      <div class="dim-name" style="color:${color}">${name}</div>
+      <div class="dim-bar-bg"><div class="dim-bar" style="width:${pct}%;background:${color}"></div></div>
+      <div class="dim-score" style="color:${color}">${score.toFixed(1)}</div>
+      <span class="dim-badge ${badgeClass}">${badge}</span>
+    </div>`;
+  }
+  document.getElementById('dimBars').innerHTML = barsHtml;
+  
+  // 提示
+  let alertsHtml = '';
+  for(const d of ['T','D','B','X','Z']) {
+    const name = dimNames[['T','D','B','X','Z'].indexOf(d)];
+    const score = dimScores[d];
+    const g = dimGuidance[name];
+    if(score < 2.5) {
+      alertsHtml += `<div class="alert-box alert-red">🔴 <strong>${name}</strong>（${score.toFixed(1)}/5.0）<br>${g.low}</div>`;
+    } else if(score < 3.5) {
+      alertsHtml += `<div class="alert-box alert-yellow">🟡 <strong>${name}</strong>（${score.toFixed(1)}/5.0）<br>${g.mid}</div>`;
+    } else {
+      alertsHtml += `<div class="alert-box alert-green">🟢 <strong>${name}</strong>（${score.toFixed(1)}/5.0）<br>${g.high}</div>`;
+    }
+  }
+  
+  // 检查是否有红灯
+  const redDims = Object.entries(dimScores).filter(([d,s]) => s < 2.5);
+  if(redDims.length > 0) {
+    const names = redDims.map(([d]) => dimNames[['T','D','B','X','Z'].indexOf(d)]);
+    alertsHtml += `<div class="alert-box alert-red" style="margin-top:12px;">⚠️ <strong>检测到 ${redDims.length} 个维度触发红灯</strong><br>建议做完整版测评（88题·25分钟）获全维度分析 + 脱轨因子检测 + 信效度验证 + 行为指引。</div>`;
+  }
+  
+  document.getElementById('alerts').innerHTML = alertsHtml;
+}
+
+function renderRadar(dimScores) {
+  const dims = ['T','D','B','X','Z'];
+  const labels = dimNames;
+  const colors = ['#3B82F6','#10B981','#F59E0B','#EF4444','#8B5CF6'];
+  const n = 5;
+  const cx = 150, cy = 140, maxR = 100;
+  const angles = dims.map((_,i) => Math.PI/2 - 2*Math.PI*i/n);
+  
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 260" width="300" height="260">`;
+  svg += `<rect width="300" height="260" fill="none"/>`;
+  
+  // 网格
+  for(let level=0.2;level<=1.0;level+=0.2){
+    const r = maxR*level;
+    const pts = angles.map(a => `${cx+r*Math.cos(a)},${cy-r*Math.sin(a)}`).join(' ');
+    svg += `<polygon points="${pts}" fill="none" stroke="${level>=0.8?'#475569':'#334155'}" stroke-width="${level>=0.8?1:0.5}"/>`;
+  }
+  
+  // 轴线
+  angles.forEach(a => {
+    svg += `<line x1="${cx}" y1="${cy}" x2="${cx+maxR*Math.cos(a)}" y2="${cy-maxR*Math.sin(a)}" stroke="#475569" stroke-width="1"/>`;
+  });
+  
+  // 数据
+  const pts = dims.map((d,i) => {
+    const r = maxR*(dimScores[d]/5);
+    return `${cx+r*Math.cos(angles[i])},${cy-r*Math.sin(angles[i])}`;
+  });
+  
+  svg += `<polygon points="${pts.join(' ')}" fill="rgba(59,130,246,0.18)" stroke="#3B82F6" stroke-width="2" stroke-linejoin="round"/>`;
+  
+  dims.forEach((d,i) => {
+    const r = maxR*(dimScores[d]/5);
+    const px = cx+r*Math.cos(angles[i]);
+    const py = cy-r*Math.sin(angles[i]);
+    svg += `<circle cx="${px}" cy="${py}" r="7" fill="${colors[i]}" fill-opacity="0.25"/>`;
+    svg += `<circle cx="${px}" cy="${py}" r="4" fill="${colors[i]}" stroke="#0f172a" stroke-width="1.5"/>`;
+    svg += `<text x="${px}" y="${py-10}" text-anchor="middle" font-size="11" font-weight="bold" fill="${colors[i]}">${dimScores[d].toFixed(1)}</text>`;
+  });
+  
+  // 标签
+  const labelR = maxR + 22;
+  angles.forEach((a,i) => {
+    const lx = cx + labelR*Math.cos(a);
+    const ly = cy - labelR*Math.sin(a);
+    let anchor = "middle";
+    if(a > 0.2) anchor = "end";
+    else if(a < -0.2) anchor = "start";
+    svg += `<text x="${lx}" y="${ly}" text-anchor="${anchor}" font-size="12" font-weight="bold" fill="${colors[i]}">${labels[i]}</text>`;
+  });
+  
+  svg += `</svg>`;
+  document.getElementById('radarBox').innerHTML = svg;
+}
+
+function shareResult() {
+  const dims = ['T','D','B','X','Z'];
+  const labels = dimNames;
+  let text = "我的五维决策测评结果（满意解研究所）\n\n";
+  dims.forEach((d,i) => {
+    text += `${labels[i]}：${answers[d] !== undefined ? '已测' : '未测'}\n`;
+  });
+  text += "\n你也来测测：五维决策测评";
+  if(navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => alert('结果已复制到剪贴板'));
+  } else {
+    alert('分享功能需要HTTPS环境');
+  }
+}
+
+function restart() {
+  answers = {};
+  document.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+  document.querySelectorAll('[id^="next-"]').forEach(b => b.disabled = true);
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step-welcome').classList.add('active');
+  document.getElementById('heroSection').style.display = '';
+  document.getElementById('prog').style.width = '0%';
+}
+
+// 初始化
+buildQuestions();
+</script>
+
+</body>
+</html>
