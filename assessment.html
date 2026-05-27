@@ -122,6 +122,7 @@
     <p style="font-size:12px;color:var(--muted);margin-top:8px">⏳ 这正是完整诊断要回答的问题——3分钟吸引·8分钟深度诊断·30天追踪</p>
     <button class="btn btn-primary" onclick="window.location.href='chemical-report.html'">→ 查看模拟完整报告（矛盾热力图·8模块）</button>
     <button class="btn btn-secondary" style="margin-top:10px;" onclick="window.location.href='decision-theatre.html'">→ 体验决策剧场（场景体验·右脑通道）</button>
+    <button class="btn btn-secondary" style="margin-top:10px;" onclick="downloadData()">💾 下载我的诊断数据（JSON）</button>
     <button class="btn btn-secondary" style="margin-top:10px;" onclick="shareResult()">分享我的结果</button>
     <button class="btn btn-secondary" style="margin-top:10px;" onclick="restart()">重新测评</button>
   </div>
@@ -391,6 +392,36 @@ function shareResult() {
   } else {
     alert('分享功能需要HTTPS环境');
   }
+}
+
+// V4.0·下载诊断数据JSON
+function downloadData() {
+  // 将assessment的answers转换为评分引擎紧凑版格式
+  const engineData = {"answers":{}};
+  const mapping = {
+    'T': ['A1','A2','A3'],
+    'D': ['B1','B2','B3'],
+    'B': ['C1','C2'],
+    'X': ['C3','C4'],
+    'Z': ['Z1','Z2','Z3']
+  };
+  // 从assessment的维度得分反推紧凑版字段
+  const dimQuestions = {};
+  questions.forEach(q => { const d = q.id.charAt(0); if(!dimQuestions[d]) dimQuestions[d]=[]; dimQuestions[d].push(q); });
+  for(const [dim, fields] of Object.entries(mapping)) {
+    if(dimQuestions[dim]) {
+      const qs = dimQuestions[dim];
+      for(let i=0; i<fields.length && i<qs.length; i++) {
+        engineData.answers[fields[i]] = answers[qs[i].id] || 3;
+      }
+    }
+  }
+  const blob = new Blob([JSON.stringify(engineData)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'my_diagnosis.json';
+  a.click();
+  alert('诊断数据已下载！\n\n运行: python3 scoring_engine_v3.0.py --json my_diagnosis.json\n或联系满意红帮你分析。');
 }
 
 function restart() {
