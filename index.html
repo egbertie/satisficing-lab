@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="满意解研究所 · 硬科技转化的合伙人匹配决策教练。五维决策测评 · 合伙人决策卡牌 · 决策案例库。夏至（6月21日）正式官宣。">
+<meta name="description" content="满意解研究所 · 硬科技转化的合伙人匹配决策教练。火承土印，满意之解。五维决策测评 · 合伙人决策卡牌 · 决策案例库。夏至（6月21日）正式官宣。">
 <meta property="og:title" content="满意解研究所 · Satisficing Research Institute">
-<meta property="og:description" content="让每个合伙人决策都有据可依">
+<meta property="og:description" content="火承土印，满意之解——让每个合伙人决策都有据可依">
 <meta property="og:type" content="website">
 <title>满意解研究所 · Satisficing Research Institute</title>
 <link rel="stylesheet" href="vi_quick_ref.css">
@@ -16,81 +16,74 @@
   .hero { 
     min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; 
     padding:48px 24px; text-align:center; 
-    background: linear-gradient(160deg, var(--sri-black) 0%, #2a1510 40%, #3d1a12 100%); color:#fff; 
+    background: var(--sri-cream);
   }
-  .hero h1 { font-size:clamp(32px,7vw,56px); color:#fff; margin-bottom:8px; letter-spacing:3px; font-weight:800; }
-  .hero .en-name { font-size:clamp(14px,2vw,16px); color: var(--sri-gold); letter-spacing:4px; margin-bottom:24px; }
-  .hero .tagline { font-size:clamp(18px,2.8vw,24px); color:rgba(255,255,255,0.85); font-weight:300; max-width:640px; }
-  .hero .brand-line { color: var(--sri-gold); font-size:14px; margin-top:32px; font-family:var(--sri-font-serif); font-style:italic; }
+  .hero h1 { font-size:clamp(36px,7vw,60px); color: var(--sri-red); margin-bottom:8px; letter-spacing:4px; font-weight:700; }
+  .hero .en-name { font-size:clamp(13px,2vw,15px); color: var(--sri-dark); letter-spacing:5px; margin-bottom:28px; opacity:0.7; }
+  .hero .tagline { font-size:clamp(18px,2.5vw,22px); color: var(--sri-dark); font-weight:300; max-width:640px; }
+  .hero .seal { width:120px; height:120px; border:2.5px solid var(--sri-red); display:flex; align-items:center; justify-content:center; margin-bottom:32px; position:relative; }
+  .hero .seal::after { content:'火'; font-size:42px; color:var(--sri-red); font-family:var(--sri-font-serif); }
+  .hero .brand-line { color: var(--sri-red); font-size:14px; margin-top:32px; font-family:var(--sri-font-serif); font-style:italic; opacity:0.8; }
   
   .section { max-width:960px; margin:0 auto; padding:80px 24px; }
-  .section h2 { font-size:26px; color: var(--sri-red); margin-bottom:12px; }
-  .section .lead { color: var(--sri-gray-5); font-size:15px; margin-bottom:32px; }
+  .section h2 { font-size:24px; color: var(--sri-red); margin-bottom:12px; }
+  .section .lead { color: var(--sri-dark); font-size:15px; margin-bottom:32px; opacity:0.75; }
   
   .cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:24px; margin:32px 0; }
-  .card { background: var(--sri-white); border-radius: var(--sri-radius-lg); padding:28px 24px; border:1px solid var(--sri-border); box-shadow: var(--sri-shadow-card); transition: transform 0.2s, box-shadow 0.2s; }
-  .card:hover { transform:translateY(-3px); box-shadow: var(--sri-shadow-hover); }
-  .card .icon { font-size:40px; margin-bottom:16px; display:block; }
-  .card h3 { font-size:19px; color: var(--sri-red); margin-bottom:10px; font-weight:700; }
-  .card p { font-size:14px; color: var(--sri-gray-5); line-height:1.7; }
+  .card { background: var(--sri-white); border-radius: var(--sri-radius-md); padding:28px 24px; border:1px solid var(--sri-border); }
+  .card .icon { font-size:36px; margin-bottom:16px; }
+  .card h3 { font-size:18px; color: var(--sri-red); margin-bottom:10px; font-weight:600; }
+  .card p { font-size:14px; color: var(--sri-dark); opacity:0.8; line-height:1.7; }
   
-  .badge { display:inline-block; padding:4px 12px; border-radius:20px; font-size:11px; font-weight:600; margin:4px 4px 4px 0; }
-  .badge-red { background: var(--sri-red-bg); color: var(--sri-red); }
-  .badge-gold { background: rgba(184,149,106,0.15); color: #8a6d3b; }
-  .badge-green { background: var(--sri-green-bg); color: var(--sri-green); }
-  .badge-amber { background: var(--sri-amber-bg); color: var(--sri-amber); }
+  .badge { display:inline-block; padding:3px 10px; border-radius:14px; font-size:11px; margin:3px 4px 3px 0; }
+  .badge-red { background:rgba(194,59,34,0.1); color:var(--sri-red); }
+  .badge-outline { border:1px solid var(--sri-border); color: var(--sri-dark); }
   
-  table { width:100%; border-collapse:collapse; margin:24px 0; background: var(--sri-white); border-radius: var(--sri-radius-md); overflow:hidden; box-shadow: var(--sri-shadow-card); }
-  th, td { padding:14px 20px; text-align:left; border-bottom:1px solid var(--sri-border); }
-  th { background: var(--sri-red); color:#fff; font-size:13px; font-weight:600; }
+  table { width:100%; border-collapse:collapse; margin:24px 0; background: var(--sri-white); border-radius: var(--sri-radius-md); overflow:hidden; }
+  th, td { padding:14px 18px; text-align:left; border-bottom:1px solid var(--sri-border); }
+  th { background: var(--sri-red); color:#fff; font-size:12px; font-weight:500; letter-spacing:1px; }
   td { font-size:14px; }
   tr:last-child td { border-bottom:none; }
-  .dim-tu { border-left:3px solid var(--sri-gold); }
-  .dim-jin { border-left:3px solid var(--sri-metal); }
-  .dim-shui { border-left:3px solid var(--sri-water); }
-  .dim-mu { border-left:3px solid var(--sri-wood); }
-  .dim-huo { border-left:3px solid var(--sri-fire); }
   
   .dual { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
   
   .timeline { position:relative; }
-  .milestone { display:flex; gap:24px; margin:20px 0; padding:20px 24px; background: var(--sri-white); border-radius: var(--sri-radius-md); border:1px solid var(--sri-border); border-left:4px solid var(--sri-red); }
-  .milestone .date { min-width:100px; font-weight:700; color: var(--sri-red); font-size:14px; }
+  .milestone { display:flex; gap:20px; margin:16px 0; padding:18px 20px; background: var(--sri-white); border-radius: var(--sri-radius-sm); border:1px solid var(--sri-border); border-left:3px solid var(--sri-red); }
+  .milestone .date { min-width:90px; font-weight:600; color: var(--sri-red); font-size:13px; }
   .milestone p { font-size:14px; }
   
-  .cta { text-align:center; padding:56px 32px; background: linear-gradient(135deg, var(--sri-red) 0%, #a03025 100%); border-radius:18px; margin:0 auto; max-width:760px; color:#fff; }
+  .cta { text-align:center; padding:56px 32px; background: var(--sri-red); border-radius:12px; margin:0 auto; max-width:760px; color:#fff; }
   .cta h2 { color:#fff !important; }
   .cta p { color:rgba(255,255,255,0.85); margin:12px 0; }
-  .cta a { display:inline-block; padding:14px 44px; background:#fff; color: var(--sri-red); border-radius: var(--sri-radius-full); font-weight:700; font-size:16px; text-decoration:none; margin-top:16px; transition: background 0.2s; }
-  .cta a:hover { background: var(--sri-cream); }
+  .cta a { display:inline-block; padding:14px 40px; background:#fff; color:var(--sri-red); border-radius:24px; font-weight:600; font-size:15px; text-decoration:none; margin-top:16px; }
   
-  .link-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:12px; margin:20px 0; }
+  .link-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:10px; margin:20px 0; }
   .link-card { 
-    display:flex; align-items:center; gap:10px; padding:14px 18px; 
+    display:flex; align-items:center; gap:8px; padding:14px 16px; 
     background: var(--sri-white); border:1px solid var(--sri-border); border-radius: var(--sri-radius-sm); 
-    text-decoration:none; color: var(--sri-red); font-size:14px; font-weight:600;
-    transition:all 0.2s;
+    text-decoration:none; color: var(--sri-red); font-size:13px; font-weight:500;
   }
-  .link-card:hover { border-color: var(--sri-red); background: var(--sri-red-bg); }
-  .link-card .emoji { font-size:22px; }
+  .link-card:hover { background: rgba(194,59,34,0.04); }
+  .link-card .emoji { font-size:18px; }
   
-  .footer { text-align:center; padding:48px 24px; color: var(--sri-gray-5); font-size:13px; border-top:1px solid var(--sri-border); background: var(--sri-gray-1); }
-  .footer .brand { color: var(--sri-red); font-weight:600; }
-  .footer .warm { color: var(--sri-red); font-family: var(--sri-font-serif); font-style:italic; margin-top:4px; }
+  .footer { text-align:center; padding:48px 24px; color: var(--sri-dark); font-size:12px; border-top:1px solid var(--sri-border); opacity:0.6; }
+  .footer .warm { color: var(--sri-red); font-family: var(--sri-font-serif); font-style:italic; margin-top:4px; opacity:0.8; }
   
   @media (max-width:768px) { 
     .dual { grid-template-columns:1fr; } 
     .section { padding:48px 16px; }
+    .hero .seal { width:90px; height:90px; }
   }
 </style>
 </head>
 <body>
 
 <div class="hero">
+  <div class="seal"></div>
   <h1>满意解研究所</h1>
-  <p class="en-name">Satisficing Research Institute</p>
+  <p class="en-name">SATISFICING RESEARCH INSTITUTE</p>
   <p class="tagline">让每个合伙人决策都有据可依</p>
-  <p class="brand-line">灯还亮着，不用急。</p>
+  <p class="brand-line">火承土印 · 满意之解</p>
 </div>
 
 <div class="section">
@@ -99,30 +92,27 @@
     <div class="card">
       <span class="icon">🧭</span>
       <h3>五维决策测评</h3>
-      <p>时间轴 · 可行域 · 身心流 · 信义观 · 直觉阈 —— 五个维度完整画像合伙人的决策能力。</p>
-      <div style="margin-top:14px;">
+      <p>时间轴 · 可行域 · 身心流 · 信义观 · 直觉阈 —— 五维画像，完整诊断合伙人的决策能力与风险。</p>
+      <div style="margin-top:12px;">
         <span class="badge badge-red">完整版88题</span>
-        <span class="badge badge-green">简版19题</span>
-        <span class="badge badge-gold">7独立学术源</span>
+        <span class="badge badge-outline">简版19题·3分钟</span>
       </div>
     </div>
     <div class="card">
       <span class="icon">🃏</span>
       <h3>合伙人决策卡牌</h3>
-      <p>承诺→行动→冲突→结局。7张真实场景卡，在安全环境中暴露真实痛点。</p>
-      <div style="margin-top:14px;">
-        <span class="badge badge-amber">A4纸原型 V0.1</span>
-        <span class="badge badge-gold">需主持人引导</span>
+      <p>承诺→行动→冲突→结局。在安全环境中让不可讨论的问题变得可以讨论。</p>
+      <div style="margin-top:12px;">
+        <span class="badge badge-outline">A4纸原型 V0.1</span>
         <span class="badge badge-red">线上交互版</span>
       </div>
     </div>
     <div class="card">
       <span class="icon">📚</span>
       <h3>决策案例库</h3>
-      <p>从研究文献·行业报道·脱敏访谈中提炼的冲突模式库。13种冲突类型 × 9大产业赛道。</p>
-      <div style="margin-top:14px;">
-        <span class="badge badge-gold">多源案例</span>
-        <span class="badge badge-green">持续积累</span>
+      <p>从研究文献·行业报道·脱敏访谈中提炼。13种冲突类型×9大产业赛道。</p>
+      <div style="margin-top:12px;">
+        <span class="badge badge-outline">多源案例·持续积累</span>
       </div>
     </div>
   </div>
@@ -130,75 +120,74 @@
 
 <div class="section">
   <h2>五维决策框架</h2>
-  <p class="lead">基于7个独立学术源的交叉验证。不是"我们觉得"——是 Simon、Kahneman、Wasserman、Gottman、Duke、Lencioni、Feld 各自独立验证的交汇点。</p>
+  <p class="lead">火承土印——智慧（火）永远生长于厚重的实践与案例积累（土）之上。</p>
   <table>
-    <tr><th>维度</th><th>五行</th><th>核心问</th><th>应用场景</th></tr>
-    <tr class="dim-tu"><td>⏳ 时间轴</td><td>土</td><td>五年后我会如何看待今天的决定？</td><td>长期主义 · 避免短期冲动</td></tr>
-    <tr class="dim-jin"><td>📐 可行域</td><td>金</td><td>我的「够用就好」底线在哪里？</td><td>满意解 · 不追求最优</td></tr>
-    <tr class="dim-shui"><td>🫀 身心流</td><td>水</td><td>我的状态能否支撑这个决策？</td><td>身心一致 · 拒绝透支</td></tr>
-    <tr class="dim-mu"><td>⚖️ 信义观</td><td>木</td><td>合伙人的「玉」经得起考验吗？</td><td>道德审查 · 人品先行</td></tr>
-    <tr class="dim-huo"><td>🔥 直觉阈</td><td>火</td><td>心里那个声音，你敢不敢听？</td><td>商业直觉 · 经验信号识别</td></tr>
+    <tr><th style="width:15%;">维度</th><th style="width:42%;">核心问</th><th>应用场景</th></tr>
+    <tr><td><strong>⏳ 时间轴</strong></td><td>五年后我会如何看待今天的决定？</td><td>长期主义 · 避免短期冲动</td></tr>
+    <tr><td><strong>📐 可行域</strong></td><td>我的「够用就好」边界在哪里？</td><td>满意解 · 不追求最优</td></tr>
+    <tr><td><strong>🫀 身心流</strong></td><td>我的状态能否支撑这个决策？</td><td>身心一致 · 拒绝透支</td></tr>
+    <tr><td><strong>⚖️ 信义观</strong></td><td>合伙人的「玉」经得起考验吗？</td><td>道德审查 · 人品先行</td></tr>
+    <tr><td><strong>🔥 直觉阈</strong></td><td>心里那个声音，你敢不敢听？</td><td>商业直觉 · 经验信号识别</td></tr>
   </table>
 </div>
 
 <div class="section">
-  <h2>双引擎架构</h2>
+  <h2>两翼驱动</h2>
   <div class="dual">
-    <div class="card" style="border-top:3px solid var(--sri-red);">
-      <h3 style="color:var(--sri-red);">🔴 决策侧 · 满意红</h3>
-      <p>五维决策框架 · 合伙人匹配模型 · 13型冲突类型学 · 评分引擎 · 卡牌游戏</p>
-      <p style="font-size:13px;color:var(--sri-gray-5);margin-top:12px;">使命：桥梁建造 — 连接决策科学与真实创始人</p>
+    <div class="card">
+      <h3>决策侧 · 满意红</h3>
+      <p>五维框架 · 合伙人匹配 · 13型冲突类型学 · 评分引擎</p>
+      <p style="font-size:13px;margin-top:8px;opacity:0.65;">使命：连接决策科学与真实创始人</p>
     </div>
-    <div class="card" style="border-top:3px solid var(--sri-water);">
-      <h3 style="color:var(--sri-water);">🔵 产业侧 · 扣子（满天星光）</h3>
-      <p>大湾区硬科技产业图谱 · 技术成熟度×产业链位置×竞争密度 · 公众号内容矩阵</p>
-      <p style="font-size:13px;color:var(--sri-gray-5);margin-top:12px;">聚焦：深圳·粤海·大疆·追觅等硬科技实战</p>
+    <div class="card">
+      <h3>产业侧 · 扣子（满天星光）</h3>
+      <p>大湾区硬科技产业图谱 · 技术成熟度×产业链位置×竞争密度</p>
+      <p style="font-size:13px;margin-top:8px;opacity:0.65;">聚焦：深圳·粤海·硬科技实战</p>
     </div>
   </div>
 </div>
 
 <div class="section">
-  <h2>传承 · 倒计时</h2>
+  <h2>三脉根基</h2>
   <div class="timeline">
     <div class="milestone">
       <div class="date">2026-05-05</div>
-      <div><p><strong>立夏 · 满意红诞生</strong></p><p style="color:var(--sri-gray-5);">继承满意姐（温度·理论奠基）与扣子（执行闭环·诚实反思），启动系统进化。</p></div>
+      <div><strong>立夏 · 满意红诞生</strong><br><span style="opacity:0.65;">继承满意姐（温度·理论奠基）与扣子（执行闭环），启动系统进化。</span></div>
     </div>
     <div class="milestone">
       <div class="date">2026-05-27</div>
-      <div><p><strong>系统就绪 · 网站上线</strong></p><p style="color:var(--sri-gray-5);">45/47任务完成（96%）· 五维测评就绪 · 双引擎融合 · 5篇公众号定稿</p></div>
+      <div><strong>系统就绪 · 网站上线</strong><br><span style="opacity:0.65;">45/47任务·五维测评就绪·双引擎融合·5篇公众号定稿。</span></div>
     </div>
     <div class="milestone">
       <div class="date">2026-06-21</div>
-      <div><p><strong>夏至 · 正式官宣</strong></p><p style="color:var(--sri-gray-5);">满意解研究所走进真实世界。公众号首发 · 五维测评上线 · 卡牌内测开放。</p></div>
+      <div><strong>夏至 · 正式官宣</strong><br><span style="opacity:0.65;">满意解研究所走进真实世界。明出地上，自昭明德。</span></div>
     </div>
   </div>
 </div>
 
 <div class="section">
-  <h2>快速入口</h2>
+  <h2>工具箱</h2>
   <div class="link-grid">
-    <a class="link-card" href="assessment.html"><span class="emoji">📋</span>五维快速自评 · 19题·3分钟</a>
-    <a class="link-card" href="cards.html"><span class="emoji">🖨️</span>卡牌打印版 · A4纸原型</a>
-    <a class="link-card" href="cards-play.html"><span class="emoji">🎴</span>卡牌线上版 · 交互体验</a>
-    <a class="link-card" href="radar.html"><span class="emoji">📊</span>雷达图 · 模式识别</a>
-    <a class="link-card" href="report-demo.html"><span class="emoji">📝</span>报告演示 · 完整案例</a>
-    <a class="link-card" href="https://gcngtm4k2m6u.feishu.cn/wiki/KQF3wYWgiiy9S9kK1ITc4E9Wn2d" target="_blank"><span class="emoji">📖</span>飞书知识空间</a>
+    <a class="link-card" href="assessment.html"><span class="emoji">📋</span>五维快速自评·3分钟</a>
+    <a class="link-card" href="cards.html"><span class="emoji">🖨️</span>卡牌·A4打印版</a>
+    <a class="link-card" href="cards-play.html"><span class="emoji">🎴</span>卡牌·线上交互版</a>
+    <a class="link-card" href="radar.html"><span class="emoji">📊</span>五维雷达图</a>
+    <a class="link-card" href="report-demo.html"><span class="emoji">📝</span>报告演示</a>
+    <a class="link-card" href="https://gcngtm4k2m6u.feishu.cn/wiki/KQF3wYWgiiy9S9kK1ITc4E9Wn2d" target="_blank"><span class="emoji">📖</span>知识空间</a>
   </div>
 </div>
 
 <div class="cta">
   <h2>寻找第一批内测创始人</h2>
-  <p>如果你的合伙人关系中有「说不出的不对劲」——来试试五维测评。</p>
-  <p>🗓 夏至（6月21日）正式开放</p>
-  <a href="assessment.html">3分钟快速自评 →</a>
+  <p>如果你的合伙人关系中有「说不出的不对劲」——试试五维测评。</p>
+  <p style="font-size:14px;">🗓 夏至（6月21日）正式开放</p>
+  <a href="assessment.html">开始3分钟自评 →</a>
 </div>
 
 <div class="footer">
-  <p><span class="brand">满意解研究所</span> · MANYIJIE · Satisficing Research Institute</p>
+  <p>满意解研究所 · MANYIJIE · Satisficing Research Institute</p>
   <p>深圳鼎玉家族传承管理有限公司 · 内设机构</p>
-  <p>硬科技转化的合伙人匹配决策教练 · 2026</p>
-  <p class="warm">满天星光，不灭的灯。</p>
+  <p class="warm">火承土印 · 满意之解</p>
 </div>
 
 </body>
