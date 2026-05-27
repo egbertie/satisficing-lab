@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>五分钟决策剧场 · 满意解研究所</title>
+<link rel="stylesheet" href="vi_quick_ref.css">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root { --brand: #C23B22; --gold: #B8860B; --bg: #F5F0E6; --text: #2A2A2A; --muted: #4A4A4A; }
+  body { font-family: -apple-system, "PingFang SC", "Noto Sans SC", serif; background: var(--bg); color: var(--text); min-height:100vh; }
+  .container { max-width: 680px; margin:0 auto; padding:24px 20px 80px; }
+  
+  .scene { display:none; animation: fadeIn 0.6s ease; }
+  .scene.active { display:block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+  
+  .scene-card { background:var(--bg); border:1px solid var(--gold); border-radius:20px; padding:32px 24px; margin-bottom:20px; text-align:center; }
+  .scene-card .scene-num { font-size:13px; color:var(--gold); letter-spacing:2px; margin-bottom:12px; }
+  .scene-card .scene-title { font-size:22px; font-weight:700; color:var(--brand); margin-bottom:8px; line-height:1.4; }
+  .scene-card .scene-quote { font-size:15px; color:var(--muted); font-style:italic; line-height:1.8; margin:20px 0; padding:0 12px; border-left:3px solid var(--brand); text-align:left; }
+  .scene-card .scene-body { font-size:15px; color:var(--text); line-height:2; text-align:left; margin:24px 0; }
+  .scene-card .scene-body .highlight { color:var(--brand); font-weight:600; }
+  .scene-card .scene-data { font-size:13px; color:var(--muted); margin:16px 0; line-height:1.8; text-align:left; background:#C23B2204; padding:16px; border-radius:12px; }
+  
+  .choices { display:flex; flex-direction:column; gap:10px; margin:24px 0; }
+  .choice { background:var(--bg); border:2px solid var(--gold); border-radius:14px; padding:16px 20px; font-size:15px; cursor:pointer; text-align:left; transition:all 0.2s; color:var(--text); }
+  .choice:hover { border-color:var(--brand); background:#C23B2204; }
+  .choice .letter { color:var(--brand); font-weight:700; margin-right:10px; }
+  
+  .btn { display:inline-block; background:var(--brand); color:var(--bg); padding:14px 40px; border-radius:14px; font-size:15px; font-weight:600; cursor:pointer; border:none; margin-top:16px; transition:all 0.2s; }
+  .btn:hover { opacity:0.9; }
+  .btn-secondary { background:transparent; color:var(--brand); border:2px solid var(--brand); }
+  
+  .nav { text-align:center; margin-top:24px; }
+  
+  .body-check { text-align:center; padding:40px 0; }
+  .body-check h3 { font-size:18px; color:var(--brand); margin-bottom:20px; }
+  .body-check .signal { display:inline-block; margin:0 12px; }
+  .body-check .signal .emoji { font-size:40px; }
+  .body-check .signal .lbl { font-size:12px; color:var(--muted); margin-top:4px; }
+  
+  .footer { text-align:center; padding:40px 0; color:var(--muted); font-size:12px; }
+  .footer a { color:var(--brand); }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ======== 场景一：七个月 ======== -->
+<div class="scene active" id="scene1">
+  <div class="scene-card">
+    <div class="scene-num">场景一 · 临界区</div>
+    <div class="scene-title">七个月</div>
+    <div class="scene-quote">"数据告诉我，你们离临界点大约七个月。大疆在临界点之前有李泽湘。你们有谁？"</div>
+    <div class="scene-body">
+      <p>你坐在办公室里。刚才的合伙人会议又吵了一个小时。不是那种拍桌子的吵——是那种<span class="highlight">每个人都在说话，但没有人真的在听</span>的吵。</p>
+      <p>你想起比锐精密的创始人。他们也是在第二年开始吵的。吵到第三年，公司清算。</p>
+      <p>你手心有点凉。</p>
+    </div>
+    <div class="scene-data">
+      📊 CI: 0.464🟡 · 距临界点约7个月<br>
+      ⚡ 批评🟠+防御🟠 正在循环<br>
+      📋 股权健康: 0.39🔴 · 结构高危<br>
+      💡 参考: 大疆CI≈0.7时导师介入→存活
+    </div>
+    <div class="choices">
+      <div class="choice" onclick="nextScene(2,'A')"><span class="letter">A.</span> 立刻启动深度沟通——先把"虚假和谐"打破</div>
+      <div class="choice" onclick="nextScene(2,'B')"><span class="letter">B.</span> 先修复股权结构——不解决根因，沟通只是创可贴</div>
+      <div class="choice" onclick="nextScene(2,'C')"><span class="letter">C.</span> 再观察一个月——也许只是阶段性压力</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== 场景二：分岔口 ======== -->
+<div class="scene" id="scene2">
+  <div class="scene-card">
+    <div class="scene-num" id="scene2-num">场景二 · 你的选择</div>
+    <div class="scene-title" id="scene2-title"></div>
+    <div class="scene-body" id="scene2-body"></div>
+    <div class="scene-data" id="scene2-data"></div>
+    <div class="nav">
+      <button class="btn" onclick="goToBodyCheck()">继续 → 身体觉察</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======== 身体觉察 ======== -->
+<div class="scene" id="bodyCheck">
+  <div class="scene-card">
+    <div class="scene-num">中场 · 身体觉察</div>
+    <div class="scene-title">你的身体在投票</div>
+    <div class="scene-quote">"人在临界区最危险的不是看错数据——是身体已经知道答案，但脑子还在跟自己辩论。"</div>
+    <div class="body-check">
+      <h3>现在，感受一下——</h3>
+      <div class="signal"><div class="emoji">✋</div><div class="lbl">手心温度<br>暖还是凉？</div></div>
+      <div class="signal"><div class="emoji">❤️</div><div class="lbl">心跳<br>快还是慢？</div></div>
+      <div class="signal"><div class="emoji">🫃</div><div class="lbl">胃部<br>松还是紧？</div></div>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:20px">Damasio发现: 身体在决策前就已经在投票。如果手心凉+心跳快+胃部紧——你的身体比你的大脑早6-12个月知道这个合伙关系正在走向解体。</p>
+    <p style="font-size:11px;color:var(--muted);margin-top:8px">PRE-0 · 预期性躯体标记 · Damasio 2024</p>
+    <div class="nav">
+      <button class="btn" onclick="goToFinal()">继续 → 最后场景</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======== 场景三：终场 ======== -->
+<div class="scene" id="scene3">
+  <div class="scene-card">
+    <div class="scene-num">终场 · 你走之后</div>
+    <div class="scene-title">你走之后</div>
+    <div class="scene-quote">"数据是左脑的。卡牌是右脑的。身体觉察是连接两个脑的桥。现在——你知道了你的七个月、你的矛盾、你的身体在说什么。接下来不是看报告。是做一个决定。"</div>
+    <div class="scene-body">
+      <p style="text-align:center;font-size:18px;color:var(--brand);font-weight:600;">
+        矛盾热力图：三个矛盾<br>两个互相确认的信号<br>四条建议——先止血再调理
+      </p>
+      <p style="text-align:center;margin-top:20px">
+        <a href="chemical-report.html" style="color:var(--brand);font-weight:600;">→ 查看完整数据报告（左脑版）</a>
+      </p>
+    </div>
+    <div style="text-align:center;margin-top:24px">
+      <button class="btn" onclick="restart()">重新走一次</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>满意解研究所 · 硬科技转化的合伙人匹配决策教练</p>
+  <p>左脑+右脑 = 完整决策</p>
+  <p><a href="index.html">← 返回首页</a></p>
+</div>
+
+</div>
+
+<script>
+let userChoice = '';
+const outcomes = {
+  'A': {
+    title: '你选择了直面',
+    body: '<p>你拿起电话。约了明天上午九点的咖啡。</p><p>你知道这场对话不会轻松。Gottman的数据告诉你——如果对话从<span class="highlight">批评</span>开始，有94%的概率以争吵结束。你决定用Gentle Start Up: "我感觉___，我需要___。"</p><p>大疆的汪滔没有打那通电话。所有人都走了之后，出纳是最后一个留下来的。你不会等到只剩出纳。</p>',
+    data: '💡 启动了Gottman解毒流程·Gentle Start Up<br>📊 修复沟通→CI可能降至0.35以下<br>⚠️ 但如果不修复股权结构·沟通改善只是延缓'
+  },
+  'B': {
+    title: '你选择了先止血',
+    body: '<p>你打开电脑，重新看了一遍创始人的股权协议。Vesting条款写在第4页，但你已经三年没翻开过这份文件了。</p><p>Moyer的公式在你脑中闪过: <span class="highlight">每个人的股权 = 贡献(公平市场价值-已获报酬) / 总下注</span>。你算了一下差距——超过30%。</p><p>比锐精密的创始人是在清算前一天才第一次认真看对赌条款的。你不是他。</p>',
+    data: '💡 启动了SlicingPie公平度校准<br>📊 股权健康评分0.39→目标0.55+(修复Vesting)<br>⚠️ 但结构修复需要沟通配合·否则被误解为"你在质疑我的价值"'
+  },
+  'C': {
+    title: '你选择了等待',
+    body: '<p>你告诉自己"也许只是阶段性压力"。</p><p>比锐精密的创始人也是这么想的。三个月后——对赌触发。五个月后——公司清算。</p><p>临界慢化的信号: 决策速度变慢·情绪恢复变慢·小事引发的连锁反应变多。<span class="highlight">你刚才会议上那场"每个人都在说话但没人真的在听"的对话——就是第一个信号。</span></p>',
+    data: '⚠️ CI从0.464→下一个数据点可能更高<br>📊 临界慢化三问——你的回答是什么？<br>💡 下次再选择等待的时候——\"七个月\"已经过去了'
+  }
+};
+
+function nextScene(num, choice) {
+  userChoice = choice;
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+  const s = document.getElementById('scene2');
+  s.classList.add('active');
+  const o = outcomes[choice];
+  document.getElementById('scene2-num').textContent = '场景二 · 分岔口';
+  document.getElementById('scene2-title').textContent = o.title;
+  document.getElementById('scene2-body').innerHTML = o.body;
+  document.getElementById('scene2-data').innerHTML = o.data;
+}
+
+function goToBodyCheck() {
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+  document.getElementById('bodyCheck').classList.add('active');
+}
+
+function goToFinal() {
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+  document.getElementById('scene3').classList.add('active');
+}
+
+function restart() {
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+  document.getElementById('scene1').classList.add('active');
+  userChoice = '';
+}
+</script>
+</body>
+</html>
