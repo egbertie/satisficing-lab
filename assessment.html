@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>五维决策测评 · 简版 | 满意解研究所</title>
+<link rel="stylesheet" href="vi_quick_ref.css">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   :root {
-    --c1: #3B82F6; --c2: #10B981; --c3: #F59E0B; --c4: #EF4444; --c5: #8B5CF6;
-    --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --muted: #94a3b8;
+    --c1: #C23B22; --c2: #C23B22; --c3: #C23B22; --c4: #C23B22; --c5: #C23B22;
+    --bg: #F5F0E6; --card: #FFFFFF; --text: #F5F0E6; --muted: #4A4A4A;
     --brand: #C23B22; --brand2: #B8860B;
   }
   body { font-family:-apple-system,"Noto Sans SC","PingFang SC",sans-serif; background:var(--bg); color:var(--text); min-height:100vh; padding-bottom:60px; }
@@ -19,7 +20,7 @@
   .hero p { font-size:13px; opacity:0.9; }
   
   /* 进度条 */
-  .progress-wrap { background:#334155; height:4px; position:sticky; top:0; z-index:10; }
+  .progress-wrap { background:#E0D5CC; height:4px; position:sticky; top:0; z-index:10; }
   .progress-bar { height:100%; background:linear-gradient(90deg,var(--brand),var(--brand2)); transition:width 0.4s ease; width:0%; }
   
   /* 步骤 */
@@ -31,7 +32,7 @@
   .module-tag { display:inline-block; font-size:11px; font-weight:600; padding:3px 10px; border-radius:12px; margin-bottom:8px; color:#fff; }
   .module-tag.t { background:var(--c1); }
   .module-tag.d { background:var(--c2); }
-  .module-tag.b { background:var(--c3); color:#1e293b; }
+  .module-tag.b { background:var(--c3); color:#FFFFFF; }
   .module-tag.x { background:var(--c4); }
   .module-tag.z { background:var(--c5); }
   
@@ -60,24 +61,24 @@
   .dim-row { display:flex; align-items:center; gap:10px; margin:8px 0; }
   .dim-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
   .dim-name { font-size:14px; font-weight:600; width:56px; }
-  .dim-bar-bg { flex:1; height:8px; background:#334155; border-radius:4px; overflow:hidden; }
+  .dim-bar-bg { flex:1; height:8px; background:#E0D5CC; border-radius:4px; overflow:hidden; }
   .dim-bar { height:100%; border-radius:4px; transition:width 0.6s ease; }
   .dim-score { font-size:14px; font-weight:700; width:36px; text-align:right; }
   .dim-badge { font-size:11px; padding:2px 8px; border-radius:10px; color:#fff; flex-shrink:0; }
-  .badge-green { background:#10B981; }
-  .badge-yellow { background:#F59E0B; color:#1e293b; }
-  .badge-red { background:#EF4444; }
+  .badge-green { background:#C23B22; }
+  .badge-yellow { background:#C23B22; color:#FFFFFF; }
+  .badge-red { background:#C23B22; }
   
   .alert-box { border-radius:12px; padding:14px 16px; margin:16px 0; font-size:13px; line-height:1.6; }
-  .alert-red { background:rgba(239,68,68,0.12); border-left:4px solid #EF4444; }
-  .alert-yellow { background:rgba(245,158,11,0.12); border-left:4px solid #F59E0B; }
-  .alert-green { background:rgba(16,185,129,0.12); border-left:4px solid #10B981; }
+  .alert-red { background:rgba(239,68,68,0.12); border-left:4px solid #C23B22; }
+  .alert-yellow { background:rgba(245,158,11,0.12); border-left:4px solid #C23B22; }
+  .alert-green { background:rgba(16,185,129,0.12); border-left:4px solid #C23B22; }
   
   .cta-box { text-align:center; padding:20px; }
   .cta-box h3 { font-size:16px; margin-bottom:8px; }
   .cta-box p { font-size:13px; color:var(--muted); margin-bottom:16px; }
   
-  .footer { text-align:center; padding:24px 16px 8px; font-size:11px; color:#475569; }
+  .footer { text-align:center; padding:24px 16px 8px; font-size:11px; color:#4A4A4A; }
 </style>
 </head>
 <body>
@@ -97,7 +98,7 @@
     <p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:24px;">
       基于满意解五维决策框架<br>
       对标 Hogan HPI · Gallup Q12 · 360°反馈<br>
-      <span style="color:#e2e8f0;">3分钟 · 15题 · 即时出结果</span>
+      <span style="color:#E0D5CC;">3分钟 · 15题 · 即时出结果</span>
     </p>
   </div>
   <button class="btn btn-primary" onclick="goStep('T1')">开始测评</button>
@@ -183,7 +184,7 @@ const questions = [
 ];
 
 const dimNames = ["时间轴","可行域","身心流","信义观","直觉阈"];
-const dimColors = {"T":"#3B82F6","D":"#10B981","B":"#F59E0B","X":"#EF4444","Z":"#8B5CF6"};
+const dimColors = {"T":"#C23B22","D":"#C23B22","B":"#C23B22","X":"#C23B22","Z":"#C23B22"};
 const dimGuidance = {
   "时间轴": {low:"你可能在透支未来。建议先做心理对照练习——在做每个决定前，先问「五年后回头看会怎样」。",mid:"时间轴维度有提升空间。建议定期(季度)做长远方向思考，不被日常推着走。",high:"你的时间轴维度很健康。你能平衡短期和长期，这是合伙人决策的核心能力。"},
   "可行域": {low:"你的底线可能不够硬。建议先明确退出机制——在投入前先想好「什么情况下撤」。",mid:"可行域判断还可以更坚定。建议在投入前白纸黑字写下底线，并且守住它。",high:"你的可行域判断很清晰。你知道什么是「够用就好」，这是满意解的核心。"},
@@ -322,7 +323,7 @@ function showResult() {
 function renderRadar(dimScores) {
   const dims = ['T','D','B','X','Z'];
   const labels = dimNames;
-  const colors = ['#3B82F6','#10B981','#F59E0B','#EF4444','#8B5CF6'];
+  const colors = ['#C23B22','#C23B22','#C23B22','#C23B22','#C23B22'];
   const n = 5;
   const cx = 150, cy = 140, maxR = 100;
   const angles = dims.map((_,i) => Math.PI/2 - 2*Math.PI*i/n);
@@ -334,12 +335,12 @@ function renderRadar(dimScores) {
   for(let level=0.2;level<=1.0;level+=0.2){
     const r = maxR*level;
     const pts = angles.map(a => `${cx+r*Math.cos(a)},${cy-r*Math.sin(a)}`).join(' ');
-    svg += `<polygon points="${pts}" fill="none" stroke="${level>=0.8?'#475569':'#334155'}" stroke-width="${level>=0.8?1:0.5}"/>`;
+    svg += `<polygon points="${pts}" fill="none" stroke="${level>=0.8?'#4A4A4A':'#E0D5CC'}" stroke-width="${level>=0.8?1:0.5}"/>`;
   }
   
   // 轴线
   angles.forEach(a => {
-    svg += `<line x1="${cx}" y1="${cy}" x2="${cx+maxR*Math.cos(a)}" y2="${cy-maxR*Math.sin(a)}" stroke="#475569" stroke-width="1"/>`;
+    svg += `<line x1="${cx}" y1="${cy}" x2="${cx+maxR*Math.cos(a)}" y2="${cy-maxR*Math.sin(a)}" stroke="#4A4A4A" stroke-width="1"/>`;
   });
   
   // 数据
@@ -348,14 +349,14 @@ function renderRadar(dimScores) {
     return `${cx+r*Math.cos(angles[i])},${cy-r*Math.sin(angles[i])}`;
   });
   
-  svg += `<polygon points="${pts.join(' ')}" fill="rgba(59,130,246,0.18)" stroke="#3B82F6" stroke-width="2" stroke-linejoin="round"/>`;
+  svg += `<polygon points="${pts.join(' ')}" fill="rgba(59,130,246,0.18)" stroke="#C23B22" stroke-width="2" stroke-linejoin="round"/>`;
   
   dims.forEach((d,i) => {
     const r = maxR*(dimScores[d]/5);
     const px = cx+r*Math.cos(angles[i]);
     const py = cy-r*Math.sin(angles[i]);
     svg += `<circle cx="${px}" cy="${py}" r="7" fill="${colors[i]}" fill-opacity="0.25"/>`;
-    svg += `<circle cx="${px}" cy="${py}" r="4" fill="${colors[i]}" stroke="#0f172a" stroke-width="1.5"/>`;
+    svg += `<circle cx="${px}" cy="${py}" r="4" fill="${colors[i]}" stroke="#F5F0E6" stroke-width="1.5"/>`;
     svg += `<text x="${px}" y="${py-10}" text-anchor="middle" font-size="11" font-weight="bold" fill="${colors[i]}">${dimScores[d].toFixed(1)}</text>`;
   });
   

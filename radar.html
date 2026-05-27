@@ -4,18 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>五维决策测评 · 问卷评分雷达图 V0.1</title>
+<link rel="stylesheet" href="vi_quick_ref.css">
 <style>
   :root {
-    --bg: #0f172a;
-    --card-bg: #1e293b;
-    --text: #e2e8f0;
-    --text-dim: #94a3b8;
-    --border: #334155;
-    --blue: #3B82F6;
-    --green: #10B981;
-    --amber: #F59E0B;
-    --red: #EF4444;
-    --purple: #8B5CF6;
+    --bg: #F5F0E6;
+    --card-bg: #FFFFFF;
+    --text: #E0D5CC;
+    --text-dim: #4A4A4A;
+    --border: #E0D5CC;
+    --blue: #C23B22;
+    --green: #C23B22;
+    --amber: #C23B22;
+    --red: #C23B22;
+    --purple: #C23B22;
   }
   body { margin:0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); }
   .container { max-width: 900px; margin: 0 auto; padding: 24px 20px; }
@@ -27,7 +28,7 @@
   .chart-wrap svg { max-width: 100%; height: auto; }
   .controls { display: flex; gap: 12px; margin: 16px 0; flex-wrap: wrap; }
   .btn { padding: 8px 18px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); cursor: pointer; font-size: 13px; transition: all .15s; }
-  .btn:hover { background: #334155; }
+  .btn:hover { background: #E0D5CC; }
   .btn.active { border-color: var(--blue); color: var(--blue); background: rgba(59,130,246,.1); }
   .mode-tag { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
   .tag { padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; }
@@ -107,7 +108,7 @@ const SAMPLES = {
 
 // ===== 维度配置 =====
 const DIMS = ["时间轴","可行域","身心流","信义观","直觉阈"];
-const COLORS = { "时间轴":"#3B82F6","可行域":"#10B981","身心流":"#F59E0B","信义观":"#EF4444","直觉阈":"#8B5CF6" };
+const COLORS = { "时间轴":"#C23B22","可行域":"#C23B22","身心流":"#C23B22","信义观":"#C23B22","直觉阈":"#C23B22" };
 const LEVELS = { 5:"🟢 卓越", 4:"🟢 健康", 3:"🟡 临界", 2:"🟠 关注", 1:"🔴 高危" };
 const PATTERNS = {
   balanced:    { name:"均衡型", desc:"五维得分差异小于1.0分。决策风格均衡，没有明显的系统盲区。建议在各维度上平均提升，重点做脱轨因子检测。推荐卡牌：全能组（7张基础卡）。", cls:"uniform" },
@@ -148,24 +149,24 @@ function renderRadar(scores) {
   let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" width="600" height="480">
   <defs>
     <radialGradient id="bg" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#1e293b"/><stop offset="100%" stop-color="#0f172a"/>
+      <stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#F5F0E6"/>
     </radialGradient>
   </defs>
   <rect width="600" height="480" fill="url(#bg)"/>
-  <text x="300" y="28" text-anchor="middle" font-size="15" fill="#e2e8f0" font-weight="600" font-family="sans-serif">五维能力雷达图</text>`;
+  <text x="300" y="28" text-anchor="middle" font-size="15" fill="#E0D5CC" font-weight="600" font-family="sans-serif">五维能力雷达图</text>`;
 
   // 网格
   for (let level of [0.2, 0.4, 0.6, 0.8, 1.0]) {
     const r = maxR * level;
     const pts = angles.map(a => `${(cx + r*Math.cos(a)).toFixed(1)},${(cy - r*Math.sin(a)).toFixed(1)}`).join(' ');
-    const stroke = level >= 0.8 ? '#475569' : '#334155';
+    const stroke = level >= 0.8 ? '#4A4A4A' : '#E0D5CC';
     const sw = level === 1.0 ? 1 : 0.5;
     svg += `<polygon points="${pts}" fill="none" stroke="${stroke}" stroke-width="${sw}"/>`;
   }
 
   // 轴线
   for (let a of angles) {
-    svg += `<line x1="${cx}" y1="${cy}" x2="${(cx+maxR*Math.cos(a)).toFixed(1)}" y2="${(cy-maxR*Math.sin(a)).toFixed(1)}" stroke="#475569" stroke-width="0.5"/>`;
+    svg += `<line x1="${cx}" y1="${cy}" x2="${(cx+maxR*Math.cos(a)).toFixed(1)}" y2="${(cy-maxR*Math.sin(a)).toFixed(1)}" stroke="#4A4A4A" stroke-width="0.5"/>`;
   }
 
   // 数据多边形
@@ -173,7 +174,7 @@ function renderRadar(scores) {
     const r = maxR * (scores[d] / 5.0);
     return `${(cx+r*Math.cos(angles[i])).toFixed(1)},${(cy-r*Math.sin(angles[i])).toFixed(1)}`;
   }).join(' ');
-  svg += `<polygon points="${dataPts}" fill="rgba(59,130,246,0.15)" stroke="#3B82F6" stroke-width="2.5" stroke-linejoin="round"/>`;
+  svg += `<polygon points="${dataPts}" fill="rgba(59,130,246,0.15)" stroke="#C23B22" stroke-width="2.5" stroke-linejoin="round"/>`;
 
   // 数据点 + 标签
   DIMS.forEach((d,i) => {
@@ -182,7 +183,7 @@ function renderRadar(scores) {
     const py = (cy - r*Math.sin(angles[i])).toFixed(1);
     const color = COLORS[d];
     svg += `<circle cx="${px}" cy="${py}" r="9" fill="${color}" fill-opacity="0.2"/>
-    <circle cx="${px}" cy="${py}" r="4.5" fill="${color}" stroke="#0f172a" stroke-width="2"/>
+    <circle cx="${px}" cy="${py}" r="4.5" fill="${color}" stroke="#F5F0E6" stroke-width="2"/>
     <text x="${px}" y="${(parseFloat(py)-12).toFixed(1)}" text-anchor="middle" font-size="12" font-weight="bold" fill="${color}" font-family="sans-serif">${scores[d].toFixed(1)}</text>`;
   });
 
@@ -200,10 +201,10 @@ function renderRadar(scores) {
   DIMS.forEach((d,i) => {
     const x = 70 + i * 98;
     svg += `<rect x="${x}" y="435" width="12" height="12" rx="3" fill="${COLORS[d]}"/>
-    <text x="${x+16}" y="445" font-size="10" fill="#94a3b8" font-family="sans-serif">${d} ${scores[d].toFixed(1)}</text>`;
+    <text x="${x+16}" y="445" font-size="10" fill="#4A4A4A" font-family="sans-serif">${d} ${scores[d].toFixed(1)}</text>`;
   });
 
-  svg += `<text x="300" y="470" text-anchor="middle" font-size="9" fill="#475569" font-family="sans-serif">满意解研究所 · 五维测评 V2.1 · ${new Date().toISOString().slice(0,10)}</text>`;
+  svg += `<text x="300" y="470" text-anchor="middle" font-size="9" fill="#4A4A4A" font-family="sans-serif">满意解研究所 · 五维测评 V2.1 · ${new Date().toISOString().slice(0,10)}</text>`;
   svg += '</svg>';
 
   document.getElementById('radar-container').innerHTML = svg;
@@ -260,8 +261,8 @@ function updatePattern(scores) {
   let tags = `<span class="tag tag-${p.cls}">${p.name}</span>`;
   // 脱轨模拟
   const derail = Math.random();
-  if (derail > 0.7) tags += `<span class="tag" style="background:rgba(239,68,68,.15);color:#EF4444">🚨 脱轨:${Math.floor(Math.random()*3)+1}红灯</span>`;
-  else tags += `<span class="tag" style="background:rgba(16,185,129,.15);color:#10B981">✅ 脱轨:健康</span>`;
+  if (derail > 0.7) tags += `<span class="tag" style="background:rgba(239,68,68,.15);color:#C23B22">🚨 脱轨:${Math.floor(Math.random()*3)+1}红灯</span>`;
+  else tags += `<span class="tag" style="background:rgba(16,185,129,.15);color:#C23B22">✅ 脱轨:健康</span>`;
   document.getElementById('mode-tag').innerHTML = tags;
 }
 
