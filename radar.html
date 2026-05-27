@@ -8,10 +8,10 @@
 <style>
   :root {
     --bg: #F5F0E6;
-    --card-bg: #FFFFFF;
-    --text: #E0D5CC;
+    --card-bg: #F5F0E6;
+    --text: #D4C5A0;
     --text-dim: #4A4A4A;
-    --border: #E0D5CC;
+    --border: #D4C5A0;
     --blue: #C23B22;
     --green: #C23B22;
     --amber: #C23B22;
@@ -28,7 +28,7 @@
   .chart-wrap svg { max-width: 100%; height: auto; }
   .controls { display: flex; gap: 12px; margin: 16px 0; flex-wrap: wrap; }
   .btn { padding: 8px 18px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); cursor: pointer; font-size: 13px; transition: all .15s; }
-  .btn:hover { background: #E0D5CC; }
+  .btn:hover { background: #D4C5A0; }
   .btn.active { border-color: var(--blue); color: var(--blue); background: rgba(194,59,34,.1); }
   .mode-tag { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
   .tag { padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; }
@@ -149,17 +149,17 @@ function renderRadar(scores) {
   let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" width="600" height="480">
   <defs>
     <radialGradient id="bg" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#F5F0E6"/>
+      <stop offset="0%" stop-color="#F5F0E6"/><stop offset="100%" stop-color="#F5F0E6"/>
     </radialGradient>
   </defs>
   <rect width="600" height="480" fill="url(#bg)"/>
-  <text x="300" y="28" text-anchor="middle" font-size="15" fill="#E0D5CC" font-weight="600" font-family="sans-serif">五维能力雷达图</text>`;
+  <text x="300" y="28" text-anchor="middle" font-size="15" fill="#D4C5A0" font-weight="600" font-family="sans-serif">五维能力雷达图</text>`;
 
   // 网格
   for (let level of [0.2, 0.4, 0.6, 0.8, 1.0]) {
     const r = maxR * level;
     const pts = angles.map(a => `${(cx + r*Math.cos(a)).toFixed(1)},${(cy - r*Math.sin(a)).toFixed(1)}`).join(' ');
-    const stroke = level >= 0.8 ? '#4A4A4A' : '#E0D5CC';
+    const stroke = level >= 0.8 ? '#4A4A4A' : '#D4C5A0';
     const sw = level === 1.0 ? 1 : 0.5;
     svg += `<polygon points="${pts}" fill="none" stroke="${stroke}" stroke-width="${sw}"/>`;
   }

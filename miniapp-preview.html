@@ -6,90 +6,90 @@
 <title>满意解研究所·小程序预览</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,"Noto Sans SC","PingFang SC",sans-serif;background:#0f172a;color:#e2e8f0;display:flex;justify-content:center}
-.phone{width:390px;min-height:100vh;background:#0f172a;position:relative;overflow:hidden;border-left:1px solid #1e293b;border-right:1px solid #1e293b}
+body{font-family:-apple-system,"Noto Sans SC","PingFang SC",sans-serif;background:#2A2A2A;color:#D4C5A0;display:flex;justify-content:center}
+.phone{width:390px;min-height:100vh;background:#2A2A2A;position:relative;overflow:hidden;border-left:1px solid #2A2A2A;border-right:1px solid #2A2A2A}
 .status-bar{height:44px;background:#C23B22;display:flex;align-items:center;justify-content:center}
 .status-title{font-size:15px;font-weight:600;color:#fff}
 .page{display:none;padding-bottom:70px;min-height:calc(100vh-44px)}
 .page.active{display:block;animation:fadeIn .25s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .hero{padding:48px 28px 36px;text-align:center;background:linear-gradient(180deg,rgba(194,59,34,.15),rgba(15,23,42,1))}
-.hero h1{font-size:26px;font-weight:800;color:#f8fafc;letter-spacing:2px}
-.hero .sub{font-size:13px;color:#64748b;margin-top:4px}
+.hero h1{font-size:26px;font-weight:800;color:#F5F0E6;letter-spacing:2px}
+.hero .sub{font-size:13px;color:#4A4A4A;margin-top:4px}
 .hero .tagline{font-size:15px;color:#C23B22;margin-top:14px;font-weight:300}
 .section{padding:20px 24px}
-.card{background:#1e293b;border-radius:16px;padding:28px 24px;margin-bottom:16px;text-align:center;cursor:pointer;transition:all .15s}
+.card{background:#2A2A2A;border-radius:16px;padding:28px 24px;margin-bottom:16px;text-align:center;cursor:pointer;transition:all .15s}
 .card:active{transform:scale(.97);opacity:.95}
 .card .icon{font-size:48px;display:block;margin-bottom:8px}
-.card h3{font-size:18px;font-weight:700;color:#f8fafc;margin:8px 0}
-.card p{font-size:13px;color:#94a3b8;margin-bottom:14px}
+.card h3{font-size:18px;font-weight:700;color:#F5F0E6;margin:8px 0}
+.card p{font-size:13px;color:#4A4A4A;margin-bottom:14px}
 .card .cbtn{display:inline-block;padding:10px 28px;border-radius:24px;font-size:14px;font-weight:600;color:#fff}
 .btn-red{background:linear-gradient(135deg,#C23B22,#B8860B)}
-.btn-danger{background:linear-gradient(135deg,#EF4444,#F59E0B)}
+.btn-danger{background:linear-gradient(135deg,#C23B22,#B8860B)}
 .card.danger{border:2px solid rgba(239,68,68,.15)}
 .row2{display:flex;gap:12px}
-.card-sm{flex:1;background:#1e293b;border-radius:14px;padding:24px 16px;text-align:center}
+.card-sm{flex:1;background:#2A2A2A;border-radius:14px;padding:24px 16px;text-align:center}
 .card-sm .icon{font-size:36px;display:block}
-.card-sm h3{font-size:15px;color:#f8fafc;margin:6px 0;font-weight:600}
-.card-sm p{font-size:12px;color:#64748b}
-.pbar-wrap{height:6px;background:#334155;border-radius:3px;margin:16px 24px 8px}
+.card-sm h3{font-size:15px;color:#F5F0E6;margin:6px 0;font-weight:600}
+.card-sm p{font-size:12px;color:#4A4A4A}
+.pbar-wrap{height:6px;background:#4A4A4A;border-radius:3px;margin:16px 24px 8px}
 .pbar{height:100%;background:linear-gradient(90deg,#C23B22,#B8860B);border-radius:3px;transition:width .3s}
-.pnum{text-align:right;padding:0 24px;font-size:12px;color:#64748b;margin-bottom:20px}
+.pnum{text-align:right;padding:0 24px;font-size:12px;color:#4A4A4A;margin-bottom:20px}
 .dim-tag{display:inline-block;padding:4px 14px;border-radius:14px;font-size:12px;font-weight:600;margin:0 24px 14px}
-.dim-T{background:rgba(59,130,246,.2);color:#60a5fa}
-.dim-D{background:rgba(16,185,129,.2);color:#34d399}
-.dim-B{background:rgba(245,158,11,.2);color:#fbbf24}
-.dim-X{background:rgba(239,68,68,.2);color:#f87171}
-.dim-Z{background:rgba(139,92,246,.2);color:#a78bfa}
-.q-text{font-size:17px;font-weight:500;line-height:1.7;padding:0 24px;margin-bottom:24px;color:#f1f5f9}
+.dim-T{background:rgba(59,130,246,.2);color:#C23B22}
+.dim-D{background:rgba(16,185,129,.2);color:#B8860B}
+.dim-B{background:rgba(245,158,11,.2);color:#B8860B}
+.dim-X{background:rgba(239,68,68,.2);color:#C23B22}
+.dim-Z{background:rgba(139,92,246,.2);color:#C23B22}
+.q-text{font-size:17px;font-weight:500;line-height:1.7;padding:0 24px;margin-bottom:24px;color:#F5F0E6}
 .opts{padding:0 24px;display:flex;flex-direction:column;gap:10px}
-.opt{background:#1e293b;border:2px solid #334155;border-radius:12px;padding:16px 20px;font-size:14px;color:#e2e8f0;cursor:pointer;transition:all .15s}
+.opt{background:#2A2A2A;border:2px solid #4A4A4A;border-radius:12px;padding:16px 20px;font-size:14px;color:#D4C5A0;cursor:pointer;transition:all .15s}
 .opt:active{transform:scale(.98)}
 .opt.sel{border-color:#C23B22;background:rgba(194,59,34,.1)}
-.opt .ol{font-size:14px;font-weight:600;color:#f8fafc}
-.opt .od{font-size:12px;color:#94a3b8;margin-top:2px}
-.opt-sel-danger{border-color:#EF4444;background:rgba(239,68,68,.1)}
+.opt .ol{font-size:14px;font-weight:600;color:#F5F0E6}
+.opt .od{font-size:12px;color:#4A4A4A;margin-top:2px}
+.opt-sel-danger{border-color:#C23B22;background:rgba(239,68,68,.1)}
 .btn-row{display:flex;gap:12px;padding:24px;margin-top:12px}
 .btn-row button{flex:1;padding:14px;border-radius:12px;font-size:15px;font-weight:600;border:none;cursor:pointer}
-.btn-prev{background:#334155;color:#94a3b8}
+.btn-prev{background:#4A4A4A;color:#4A4A4A}
 .btn-next{background:linear-gradient(135deg,#C23B22,#B8860B);color:#fff}
 .btn-next:disabled{opacity:.3}
 .result-h{text-align:center;padding:28px 24px 12px}
-.result-h h2{font-size:20px;color:#f8fafc}
-.result-h .sub{font-size:13px;color:#94a3b8}
+.result-h h2{font-size:20px;color:#F5F0E6}
+.result-h .sub{font-size:13px;color:#4A4A4A}
 .radar-box{width:320px;height:280px;margin:0 auto}
 .score-row{display:flex;align-items:center;gap:10px;margin:14px 24px}
 .score-row .dn{width:72px;font-size:13px;font-weight:600}
-.score-row .db{flex:1;height:8px;background:#334155;border-radius:4px;overflow:hidden}
+.score-row .db{flex:1;height:8px;background:#4A4A4A;border-radius:4px;overflow:hidden}
 .score-row .df{height:100%;border-radius:4px;transition:width .8s}
 .score-row .dv{font-size:14px;font-weight:700;min-width:40px;text-align:right}
-.avg-block{background:#1e293b;border-radius:14px;padding:22px;margin:16px 24px;text-align:center}
-.avg-block .al{font-size:13px;color:#94a3b8}
+.avg-block{background:#2A2A2A;border-radius:14px;padding:22px;margin:16px 24px;text-align:center}
+.avg-block .al{font-size:13px;color:#4A4A4A}
 .avg-block .an{font-size:42px;font-weight:800;color:#C23B22}
-.avg-block .a5{font-size:16px;color:#64748b}
-.pattern{background:#1e293b;border-radius:14px;padding:22px;margin:16px 24px;text-align:center}
+.avg-block .a5{font-size:16px;color:#4A4A4A}
+.pattern{background:#2A2A2A;border-radius:14px;padding:22px;margin:16px 24px;text-align:center}
 .pattern .pi{font-size:42px;display:block}
-.pattern h3{font-size:18px;color:#f8fafc;margin:8px 0}
-.pattern p{font-size:13px;color:#94a3b8;line-height:1.7}
-.pattern .rec{font-size:13px;color:#fbbf24;margin-top:8px}
-.btn-retake{display:block;margin:24px;padding:14px;background:#334155;color:#94a3b8;border-radius:12px;text-align:center;font-size:15px;cursor:pointer}
-.danger-badge{display:inline-block;padding:4px 14px;border-radius:14px;font-size:12px;background:rgba(239,68,68,.2);color:#f87171;margin:12px 24px 14px}
+.pattern h3{font-size:18px;color:#F5F0E6;margin:8px 0}
+.pattern p{font-size:13px;color:#4A4A4A;line-height:1.7}
+.pattern .rec{font-size:13px;color:#B8860B;margin-top:8px}
+.btn-retake{display:block;margin:24px;padding:14px;background:#4A4A4A;color:#4A4A4A;border-radius:12px;text-align:center;font-size:15px;cursor:pointer}
+.danger-badge{display:inline-block;padding:4px 14px;border-radius:14px;font-size:12px;background:rgba(239,68,68,.2);color:#C23B22;margin:12px 24px 14px}
 .danger-result{text-align:center;padding:40px 24px}
 .danger-result .dr-icon{font-size:72px}
-.danger-result h3{font-size:24px;color:#f8fafc;margin:12px 0 8px}
-.danger-result .dr-bar-wrap{height:12px;background:#334155;border-radius:6px;margin:16px 40px;overflow:hidden}
+.danger-result h3{font-size:24px;color:#F5F0E6;margin:12px 0 8px}
+.danger-result .dr-bar-wrap{height:12px;background:#4A4A4A;border-radius:6px;margin:16px 40px;overflow:hidden}
 .danger-result .dr-bar{height:100%;border-radius:6px;transition:width .8s}
-.danger-result .dr-score{font-size:14px;color:#94a3b8;margin:4px 0 16px}
-.danger-result .dr-desc{font-size:14px;color:#94a3b8;line-height:1.8;margin:0 20px 20px}
-.danger-result .dr-action{background:#1e293b;border-radius:12px;padding:20px;margin:0 20px 20px;text-align:left}
-.danger-result .dr-action-label{font-size:13px;color:#fbbf24;display:block;margin-bottom:6px}
-.danger-result .dr-action-text{font-size:14px;color:#e2e8f0}
-.tab-bar{position:fixed;bottom:0;width:390px;height:56px;background:#1e293b;display:flex;border-top:1px solid #334155;z-index:10}
+.danger-result .dr-score{font-size:14px;color:#4A4A4A;margin:4px 0 16px}
+.danger-result .dr-desc{font-size:14px;color:#4A4A4A;line-height:1.8;margin:0 20px 20px}
+.danger-result .dr-action{background:#2A2A2A;border-radius:12px;padding:20px;margin:0 20px 20px;text-align:left}
+.danger-result .dr-action-label{font-size:13px;color:#B8860B;display:block;margin-bottom:6px}
+.danger-result .dr-action-text{font-size:14px;color:#D4C5A0}
+.tab-bar{position:fixed;bottom:0;width:390px;height:56px;background:#2A2A2A;display:flex;border-top:1px solid #4A4A4A;z-index:10}
 .tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer}
 .tab .tab-icon{font-size:20px}
-.tab .tab-label{font-size:11px;color:#64748b;margin-top:2px}
+.tab .tab-label{font-size:11px;color:#4A4A4A;margin-top:2px}
 .tab.active .tab-label{color:#C23B22}
-.footer-note{text-align:center;padding:20px 24px 40px;font-size:12px;color:#475569}
+.footer-note{text-align:center;padding:20px 24px 40px;font-size:12px;color:#4A4A4A}
 @media(max-width:390px){.phone{width:100vw}.tab-bar{width:100vw}}
 </style>
 </head>
@@ -114,7 +114,7 @@ body{font-family:-apple-system,"Noto Sans SC","PingFang SC",sans-serif;backgroun
 <div class="pattern"><span class="pi" id="pi">⚖️</span><h3 id="pn2">均衡型</h3><p id="pd"></p><div class="rec" id="pr"></div></div>
 <div class="btn-retake" onclick="R()">重新测评</div></div>
 <div class="page" id="pg-danger">
-<div class="pbar-wrap"><div class="pbar" id="dpb" style="background:linear-gradient(90deg,#EF4444,#F59E0B)"></div></div><div class="pnum" id="dpn">1/15</div>
+<div class="pbar-wrap"><div class="pbar" id="dpb" style="background:linear-gradient(90deg,#C23B22,#B8860B)"></div></div><div class="pnum" id="dpn">1/15</div>
 <div class="danger-badge">⚠️踩雷检测</div><div class="q-text" id="dqt"></div><div class="opts" id="dqo"></div>
 <div class="btn-row"><button class="btn-prev" id="dbp" onclick="dP()">上一题</button><button class="btn-danger" id="dbn" onclick="dN()" disabled>下一题</button></div></div>
 <div class="tab-bar"><div class="tab active" onclick="G('home')"><span class="tab-icon">🏠</span><span class="tab-label">首页</span></div><div class="tab" onclick="G('assessment')"><span class="tab-icon">📋</span><span class="tab-label">测评</span></div><div class="tab" onclick="G('danger')"><span class="tab-icon">⚡</span><span class="tab-label">踩雷</span></div></div>
@@ -123,7 +123,7 @@ body{font-family:-apple-system,"Noto Sans SC","PingFang SC",sans-serif;backgroun
 const AQ=[{dim:"T",text:"短期利益和长期利益冲突时，我通常会选短期。",opts:[{l:"1",d:"非常符合"},{l:"2",d:"符合"},{l:"3",d:"一般"},{l:"4",d:"不符合"},{l:"5",d:"非常不符合"}]},{dim:"T",text:"投资人催赶窗口、合伙人想冲，你更倾向于：",opts:[{l:"1",d:"合伙人说得对"},{l:"2",d:"有道理"},{l:"3",d:"中立"},{l:"4",d:"需冷静"},{l:"5",d:"需冷静评估"}]},{dim:"T",text:"过去一年因等不及在没准备好的情况下做决定的次数：",opts:[{l:"1",d:"5次以上"},{l:"2",d:"3-4次"},{l:"3",d:"2次"},{l:"4",d:"1次"},{l:"5",d:"0次"}]},{dim:"D",text:"我清楚自己在合伙人决策上最多能承受的损失是多少。",opts:[{l:"1",d:"完全不知道"},{l:"2",d:"大概知道"},{l:"3",d:"有点概念"},{l:"4",d:"比较清楚"},{l:"5",d:"很清楚"}]},{dim:"D",text:"技术大牛要求超出预算的股权说值这个价。你：",opts:[{l:"1",d:"觉得有道理"},{l:"2",d:"有点犹豫"},{l:"3",d:"中立"},{l:"4",d:"超出就是超出"},{l:"5",d:"坚决不行"}]},{dim:"D",text:"在合伙人谈判中临时改变过底线的次数：",opts:[{l:"1",d:"每次都变"},{l:"2",d:"经常"},{l:"3",d:"偶尔"},{l:"4",d:"极少"},{l:"5",d:"从来没有"}]},{dim:"B",text:"做重要决策时，我会注意身体的感觉并纳入考虑。",opts:[{l:"1",d:"几乎不"},{l:"2",d:"偶尔"},{l:"3",d:"有时"},{l:"4",d:"经常"},{l:"5",d:"决策的一部分"}]},{dim:"B",text:"连续高强度后重大决策需立刻做。你：",opts:[{l:"1",d:"现在决定"},{l:"2",d:"快速判断"},{l:"3",d:"犹豫"},{l:"4",d:"想休息再做"},{l:"5",d:"知道影响，先休息"}]},{dim:"B",text:"近三个月身体警报（失眠/头痛/胃痛）但继续冲的次数：",opts:[{l:"1",d:"每周都有"},{l:"2",d:"经常"},{l:"3",d:"偶尔"},{l:"4",d:"极少"},{l:"5",d:"0次"}]},{dim:"X",text:"我能说出合伙人的三件让我放心的事和三件让我打鼓的事。",opts:[{l:"1",d:"说不上来"},{l:"2",d:"1-2件"},{l:"3",d:"模糊有感觉"},{l:"4",d:"能说大部分"},{l:"5",d:"非常清晰"}]},{dim:"X",text:"发现合伙人把你们的成绩说成我的。你：",opts:[{l:"1",d:"小事，忍了"},{l:"2",d:"不舒服但算了"},{l:"3",d:"记在心里"},{l:"4",d:"要找机会谈"},{l:"5",d:"信任问题，必须谈"}]},{dim:"X",text:"因不好意思推迟和合伙人必须发生的艰难对话：",opts:[{l:"1",d:"推迟了多次"},{l:"2",d:"几次"},{l:"3",d:"一两次"},{l:"4",d:"几乎没有"},{l:"5",d:"从不推迟"}]},{dim:"Z",text:"数据和直觉打架时，我通常会听数据的。",opts:[{l:"1",d:"非常符合"},{l:"2",d:"符合"},{l:"3",d:"看情况"},{l:"4",d:"有点抗拒"},{l:"5",d:"非常不符合"}]},{dim:"Z",text:"见潜在合伙人，表面完美但心里有个声音说不对。你：",opts:[{l:"1",d:"忽略"},{l:"2",d:"记下但不管"},{l:"3",d:"犹豫"},{l:"4",d:"当回事"},{l:"5",d:"深度背调"}]},{dim:"Z",text:"有过第一反应对但被人说服然后果然出问题的次数：",opts:[{l:"1",d:"5次以上"},{l:"2",d:"3-4次"},{l:"3",d:"2次"},{l:"4",d:"1次"},{l:"5",d:"0次"}]}];
 const DQ=[{text:"你多久和合伙人进行一次深度沟通？",opts:["每周","每月","每季度","半年","几乎不"]},{text:"合伙人有过说好了这样但后来做的又不一样的情况吗？",opts:["从来没有","偶尔一次","有过几次","经常","几乎每次都这样"]},{text:"你们两个对成功的定义一样吗？",opts:["完全一样","大致一样","有点不同","很不同","完全不一样"]},{text:"如果公司明天估值翻十倍，他还会留吗？",opts:["肯定会","大概率会","不确定","可能不会","肯定不会"]},{text:"你跟别人聊天时，抱怨过这个合伙人的次数？",opts:["从来没有","极少","偶尔","经常","每周都在抱怨"]},{text:"他有没有在你不在场的场合把团队的功劳说成自己的？",opts:["从来没有","偶尔一次","有过几次","经常","几乎只说自己"]},{text:"你信任他多还是他信任你多？",opts:["完全互相信任","我信任他更多","差不多","他信任我更多","都不太信任"]},{text:"你有过想和他谈这件事但觉得算了的时刻吗？",opts:["从来没有","极少","偶尔","经常","几乎每次都是"]},{text:"如果公司亏钱了，他会怎么反应？",opts:["一起扛","想办法解决","先分析原因","开始推责任","他大概率会走"]},{text:"他的家庭对他在公司的投入怎么看？",opts:["全力支持","支持","一般","有点意见","多次吵架"]},{text:"你们有没有因为对钱该怎么分有分歧而吵过？",opts:["从来没有","偶尔讨论","有过小分歧","吵过几次","现在还在吵"]},{text:"他现在对公司的热情，跟最初比是？",opts:["更热情了","一样热情","差不多","稍微淡了","明显降温了"]},{text:"如果有一个更好的机会，你觉得他会怎么选？",opts:["他会先跟我说","他会和我商量","他自己决定","他可能不会说","他已经有别的想法"]},{text:"在用人这件事上，你们的判断一致吗？",opts:["几乎完全一致","大部分一致","有时不一致","经常不一致","完全不一致"]},{text:"你回答这些问题的时候，心里慌吗？",opts:["完全不慌","有点慌","挺慌的","很慌","我现在需要喝一杯"]}];
 const DN={T:"时间轴",D:"可行域",B:"身心流",X:"信义观",Z:"直觉阈"};
-const DC={T:"#3B82F6",D:"#10B981",B:"#F59E0B",X:"#EF4444",Z:"#8B5CF6"};
+const DC={T:"#C23B22",D:"#B8860B",B:"#B8860B",X:"#C23B22",Z:"#C23B22"};
 let a=[],d=[],as=null,ds=null,ai=0,di=0,cp="home";
 function G(p){cp=p;ai=0;as=null;a=[];di=0;ds=null;d=[];
 document.querySelectorAll(".page").forEach(e=>e.classList.remove("active"));
@@ -136,12 +136,12 @@ function SA(i){as=i;a[ai]=i+1;RA();}
 function nextA(){ai++;as=a[ai]?a[ai]-1:null;RA();}
 function P(){ai--;as=a[ai]?a[ai]-1:null;RA();}
 function SubA(){a[ai]=as+1;let ds={},dc={};AQ.forEach((q,i)=>{let d=q.dim;if(!ds[d]){ds[d]=0;dc[d]=0;}ds[d]+=(a[i]||3);dc[d]++;});let sc={};Object.keys(ds).forEach(d=>{sc[d]=parseFloat((ds[d]/dc[d]).toFixed(2))});let vl=Object.values(sc);let avg=parseFloat((vl.reduce((a,b)=>a+b,0)/vl.length).toFixed(2));document.getElementById("an").textContent=avg;let bars="";Object.entries(sc).forEach(([d,v])=>{bars+='<div class=score-row><span class=dn style=color:'+DC[d]+">"+DN[d]+'</span><div class=db><div class=df style="width:'+v*20+'%;background:'+DC[d]+'"></div></div><span class=dv>'+v+"</span></div>"});document.getElementById("sb").innerHTML=bars;let vs=vl.sort((a,b)=>a-b),range=vs[vs.length-1]-vs[0];let pat;if(range<1)pat={icon:"⚖️",name:"均衡型",desc:"五维得分接近，决策风格均衡，无系统盲区。",rec:"💡 使用全能组卡牌，关注脱轨因子检测。"};else if(vs[vs.length-1]-vs[vs.length-2]>1.2)pat={icon:"⛰️",name:"单峰型",desc:"某一维度显著突出，可能过度依赖该维度。",rec:"💡 使用广度拓展组卡牌，刻意练习其他维度。"};else if(vs[1]-vs[0]>1.2)pat={icon:"🕳️",name:"缺口型",desc:"某一维度显著落后，存在系统盲区。",rec:"💡 使用缺口补防组卡牌，配置合伙人补偿机制。"};else pat={icon:"🔀",name:"锯齿型",desc:"高低交替明显，有依赖维度也有回避维度。",rec:"💡 用强项维度带动弱项，使用针对性补弱组卡牌。"};document.getElementById("pi").textContent=pat.icon;document.getElementById("pn2").textContent=pat.name;document.getElementById("pd").textContent=pat.desc;document.getElementById("pr").textContent=pat.rec;setTimeout(()=>DR(sc),200);cp="result";document.querySelectorAll(".page").forEach(e=>e.classList.remove("active"));document.getElementById("pg-result").classList.add("active");document.getElementById("st").textContent="测评结果";}
-function DR(sc){let cv=document.getElementById("rc"),ctx=cv.getContext("2d"),dpr=window.devicePixelRatio||1,rect=cv.parentElement.getBoundingClientRect(),w=rect.width,h=280;cv.width=w*dpr;cv.height=h*dpr;cv.style.width=w+"px";cv.style.height=h+"px";ctx.scale(dpr,dpr);let cx=w/2,cy=h/2-5,mx=Math.min(w,h)*0.38,dms=["T","D","B","X","Z"],ags=dms.map((_,i)=>Math.PI*1.5+2*Math.PI*i/5);for(let lvl=1;lvl<=5;lvl++){let r=mx*lvl/5;ctx.beginPath();ags.forEach((a,i)=>{let x=cx+r*Math.cos(a),y=cy+r*Math.sin(a);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});ctx.closePath();ctx.strokeStyle=lvl===5?"#475569":"#334155";ctx.lineWidth=lvl===5?1.5:0.5;ctx.stroke();}ctx.beginPath();dms.forEach((d,i)=>{let s=sc[d]||3,r=mx*s/5,x=cx+r*Math.cos(ags[i]),y=cy+r*Math.sin(ags[i]);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});ctx.closePath();ctx.fillStyle="rgba(194,59,34,0.15)";ctx.fill();ctx.strokeStyle="#C23B22";ctx.lineWidth=2;ctx.stroke();dms.forEach((d,i)=>{let s=sc[d]||3,r=mx*s/5,x=cx+r*Math.cos(ags[i]),y=cy+r*Math.sin(ags[i]);ctx.beginPath();ctx.arc(x,y,5,0,Math.PI*2);ctx.fillStyle=DC[d];ctx.fill();ctx.font="bold 11px sans-serif";ctx.fillStyle=DC[d];ctx.textAlign="center";ctx.fillText(s.toFixed(1),x,y-12)});let lr=mx+22;dms.forEach((d,i)=>{let lx=cx+lr*Math.cos(ags[i]),ly=cy+lr*Math.sin(ags[i]);ctx.font="bold 12px sans-serif";ctx.fillStyle=DC[d];ctx.textAlign="center";ctx.fillText(DN[d],lx,ly+5)});}
+function DR(sc){let cv=document.getElementById("rc"),ctx=cv.getContext("2d"),dpr=window.devicePixelRatio||1,rect=cv.parentElement.getBoundingClientRect(),w=rect.width,h=280;cv.width=w*dpr;cv.height=h*dpr;cv.style.width=w+"px";cv.style.height=h+"px";ctx.scale(dpr,dpr);let cx=w/2,cy=h/2-5,mx=Math.min(w,h)*0.38,dms=["T","D","B","X","Z"],ags=dms.map((_,i)=>Math.PI*1.5+2*Math.PI*i/5);for(let lvl=1;lvl<=5;lvl++){let r=mx*lvl/5;ctx.beginPath();ags.forEach((a,i)=>{let x=cx+r*Math.cos(a),y=cy+r*Math.sin(a);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});ctx.closePath();ctx.strokeStyle=lvl===5?"#4A4A4A":"#4A4A4A";ctx.lineWidth=lvl===5?1.5:0.5;ctx.stroke();}ctx.beginPath();dms.forEach((d,i)=>{let s=sc[d]||3,r=mx*s/5,x=cx+r*Math.cos(ags[i]),y=cy+r*Math.sin(ags[i]);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});ctx.closePath();ctx.fillStyle="rgba(194,59,34,0.15)";ctx.fill();ctx.strokeStyle="#C23B22";ctx.lineWidth=2;ctx.stroke();dms.forEach((d,i)=>{let s=sc[d]||3,r=mx*s/5,x=cx+r*Math.cos(ags[i]),y=cy+r*Math.sin(ags[i]);ctx.beginPath();ctx.arc(x,y,5,0,Math.PI*2);ctx.fillStyle=DC[d];ctx.fill();ctx.font="bold 11px sans-serif";ctx.fillStyle=DC[d];ctx.textAlign="center";ctx.fillText(s.toFixed(1),x,y-12)});let lr=mx+22;dms.forEach((d,i)=>{let lx=cx+lr*Math.cos(ags[i]),ly=cy+lr*Math.sin(ags[i]);ctx.font="bold 12px sans-serif";ctx.fillStyle=DC[d];ctx.textAlign="center";ctx.fillText(DN[d],lx,ly+5)});}
 function R(){G("assessment");}
 function RD(){let q=DQ[di];document.getElementById("dpb").style.width=(di/DQ.length*100)+"%";document.getElementById("dpn").textContent=(di+1)+"/"+DQ.length;document.getElementById("dqt").textContent=q.text;let h="";q.opts.forEach((o,i)=>{h+='<div class="opt'+(ds===i?" opt-sel-danger":"")+'" onclick="SD('+i+')">'+o+"</div>"});document.getElementById("dqo").innerHTML=h;document.getElementById("dbp").style.display=di>0?"":"none";let bn=document.getElementById("dbn");bn.textContent=di===DQ.length-1?"查看结果":"下一题";bn.disabled=ds===null;bn.onclick=di===DQ.length-1?SubD:dnextD;}
 function SD(i){ds=i;d[di]=i+1;RD();}
 function dnextD(){di++;ds=d[di]?d[di]-1:null;RD();}
 function dP(){di--;ds=d[di]?d[di]-1:null;RD();}
-function SubD(){d[di]=ds+1;let vl=Object.values(d),tt=vl.reduce((a,b)=>a+b,0),avg=Math.round(tt/(vl.length*5)*100);let rs,rc="#10B981";if(avg<=40){rs={icon:"🟢",name:"相对健康",desc:"你的合伙人关系正处在健康区间。没有明显的系统风险信号。",action:"继续保持沟通频率，每季度做一次踩雷复检。"}}else if(avg<=65){rs={icon:"🟡",name:"需要关注",desc:"你的合伙人关系存在一些需要关注的信号。不是紧急的，但不能再忽视了。",action:"本周内找合伙人进行一场深度沟通，不谈业务，只谈关系。"};rc="#F59E0B"}else{rs={icon:"🔴",name:"高危预警",desc:"你的合伙人关系存在多个危险信号。这些问题不会自己消失。",action:"强烈建议启动蓝军审计。找一个第三方，以独立视角审视你们的合伙关系。"};rc="#EF4444"}let html='<div class="danger-result"><div class="dr-icon">'+rs.icon+'</div><h3>'+rs.name+'</h3>';html+='<div class="dr-bar-wrap"><div class="dr-bar" style="width:'+avg+'%;background:'+rc+'"></div></div>';html+='<div class="dr-score">风险指数 '+avg+'%</div><div class="dr-desc">'+rs.desc+'</div>';html+='<div class="dr-action"><span class="dr-action-label">💡 建议行动</span><span class="dr-action-text">'+rs.action+'</span></div></div>';document.getElementById("pg-danger").innerHTML=html;cp="danger";document.querySelectorAll(".page").forEach(e=>e.classList.remove("active"));document.getElementById("pg-danger").classList.add("active");document.getElementById("st").textContent="踩雷结果";document.getElementById("pg-danger").querySelector(".danger-result").innerHTML+=html.match(/<div class="danger-result">(.*)<\/div>/)?.[1]||""}
+function SubD(){d[di]=ds+1;let vl=Object.values(d),tt=vl.reduce((a,b)=>a+b,0),avg=Math.round(tt/(vl.length*5)*100);let rs,rc="#B8860B";if(avg<=40){rs={icon:"🟢",name:"相对健康",desc:"你的合伙人关系正处在健康区间。没有明显的系统风险信号。",action:"继续保持沟通频率，每季度做一次踩雷复检。"}}else if(avg<=65){rs={icon:"🟡",name:"需要关注",desc:"你的合伙人关系存在一些需要关注的信号。不是紧急的，但不能再忽视了。",action:"本周内找合伙人进行一场深度沟通，不谈业务，只谈关系。"};rc="#B8860B"}else{rs={icon:"🔴",name:"高危预警",desc:"你的合伙人关系存在多个危险信号。这些问题不会自己消失。",action:"强烈建议启动蓝军审计。找一个第三方，以独立视角审视你们的合伙关系。"};rc="#C23B22"}let html='<div class="danger-result"><div class="dr-icon">'+rs.icon+'</div><h3>'+rs.name+'</h3>';html+='<div class="dr-bar-wrap"><div class="dr-bar" style="width:'+avg+'%;background:'+rc+'"></div></div>';html+='<div class="dr-score">风险指数 '+avg+'%</div><div class="dr-desc">'+rs.desc+'</div>';html+='<div class="dr-action"><span class="dr-action-label">💡 建议行动</span><span class="dr-action-text">'+rs.action+'</span></div></div>';document.getElementById("pg-danger").innerHTML=html;cp="danger";document.querySelectorAll(".page").forEach(e=>e.classList.remove("active"));document.getElementById("pg-danger").classList.add("active");document.getElementById("st").textContent="踩雷结果";document.getElementById("pg-danger").querySelector(".danger-result").innerHTML+=html.match(/<div class="danger-result">(.*)<\/div>/)?.[1]||""}
 </script>
 </body></html>

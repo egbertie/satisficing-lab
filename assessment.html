@@ -9,7 +9,7 @@
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   :root {
     --c1: #C23B22; --c2: #C23B22; --c3: #C23B22; --c4: #C23B22; --c5: #C23B22;
-    --bg: #F5F0E6; --card: #FFFFFF; --text: #F5F0E6; --muted: #4A4A4A;
+    --bg: #F5F0E6; --card: #F5F0E6; --text: #F5F0E6; --muted: #4A4A4A;
     --brand: #C23B22; --brand2: #B8860B;
   }
   body { font-family:-apple-system,"Noto Sans SC","PingFang SC",sans-serif; background:var(--bg); color:var(--text); min-height:100vh; padding-bottom:60px; }
@@ -20,7 +20,7 @@
   .hero p { font-size:13px; opacity:0.9; }
   
   /* 进度条 */
-  .progress-wrap { background:#E0D5CC; height:4px; position:sticky; top:0; z-index:10; }
+  .progress-wrap { background:#D4C5A0; height:4px; position:sticky; top:0; z-index:10; }
   .progress-bar { height:100%; background:linear-gradient(90deg,var(--brand),var(--brand2)); transition:width 0.4s ease; width:0%; }
   
   /* 步骤 */
@@ -32,7 +32,7 @@
   .module-tag { display:inline-block; font-size:11px; font-weight:600; padding:3px 10px; border-radius:12px; margin-bottom:8px; color:#fff; }
   .module-tag.t { background:var(--c1); }
   .module-tag.d { background:var(--c2); }
-  .module-tag.b { background:var(--c3); color:#FFFFFF; }
+  .module-tag.b { background:var(--c3); color:#F5F0E6; }
   .module-tag.x { background:var(--c4); }
   .module-tag.z { background:var(--c5); }
   
@@ -61,12 +61,12 @@
   .dim-row { display:flex; align-items:center; gap:10px; margin:8px 0; }
   .dim-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
   .dim-name { font-size:14px; font-weight:600; width:56px; }
-  .dim-bar-bg { flex:1; height:8px; background:#E0D5CC; border-radius:4px; overflow:hidden; }
+  .dim-bar-bg { flex:1; height:8px; background:#D4C5A0; border-radius:4px; overflow:hidden; }
   .dim-bar { height:100%; border-radius:4px; transition:width 0.6s ease; }
   .dim-score { font-size:14px; font-weight:700; width:36px; text-align:right; }
   .dim-badge { font-size:11px; padding:2px 8px; border-radius:10px; color:#fff; flex-shrink:0; }
   .badge-green { background:#C23B22; }
-  .badge-yellow { background:#C23B22; color:#FFFFFF; }
+  .badge-yellow { background:#C23B22; color:#F5F0E6; }
   .badge-red { background:#C23B22; }
   
   .alert-box { border-radius:12px; padding:14px 16px; margin:16px 0; font-size:13px; line-height:1.6; }
@@ -98,7 +98,7 @@
     <p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:24px;">
       基于满意解五维决策框架<br>
       对标 Hogan HPI · Gallup Q12 · 360°反馈<br>
-      <span style="color:#E0D5CC;">3分钟 · 15题 · 即时出结果</span>
+      <span style="color:#D4C5A0;">3分钟 · 15题 · 即时出结果</span>
     </p>
   </div>
   <button class="btn btn-primary" onclick="goStep('T1')">开始测评</button>
@@ -184,7 +184,7 @@ const questions = [
 ];
 
 const dimNames = ["时间轴","可行域","身心流","信义观","直觉阈"];
-const dimColors = {"T":"#C23B22","D":"#B8860B","B":"#9A2F1B","X":"#D4756A","Z":"#8B1A1A"};
+const dimColors = {"T":"#C23B22","D":"#B8860B","B":"#C23B22","X":"#D4756A","Z":"#8B1A1A"};
 const dimGuidance = {
   "时间轴": {low:"你可能在透支未来。建议先做心理对照练习——在做每个决定前，先问「五年后回头看会怎样」。",mid:"时间轴维度有提升空间。建议定期(季度)做长远方向思考，不被日常推着走。",high:"你的时间轴维度很健康。你能平衡短期和长期，这是合伙人决策的核心能力。"},
   "可行域": {low:"你的底线可能不够硬。建议先明确退出机制——在投入前先想好「什么情况下撤」。",mid:"可行域判断还可以更坚定。建议在投入前白纸黑字写下底线，并且守住它。",high:"你的可行域判断很清晰。你知道什么是「够用就好」，这是满意解的核心。"},
@@ -323,7 +323,7 @@ function showResult() {
 function renderRadar(dimScores) {
   const dims = ['T','D','B','X','Z'];
   const labels = dimNames;
-  const colors = ['#C23B22','#B8860B','#9A2F1B','#D4756A','#8B1A1A'];
+  const colors = ['#C23B22','#B8860B','#C23B22','#D4756A','#8B1A1A'];
   const n = 5;
   const cx = 150, cy = 140, maxR = 100;
   const angles = dims.map((_,i) => Math.PI/2 - 2*Math.PI*i/n);
@@ -335,7 +335,7 @@ function renderRadar(dimScores) {
   for(let level=0.2;level<=1.0;level+=0.2){
     const r = maxR*level;
     const pts = angles.map(a => `${cx+r*Math.cos(a)},${cy-r*Math.sin(a)}`).join(' ');
-    svg += `<polygon points="${pts}" fill="none" stroke="${level>=0.8?'#4A4A4A':'#E0D5CC'}" stroke-width="${level>=0.8?1:0.5}"/>`;
+    svg += `<polygon points="${pts}" fill="none" stroke="${level>=0.8?'#4A4A4A':'#D4C5A0'}" stroke-width="${level>=0.8?1:0.5}"/>`;
   }
   
   // 轴线
