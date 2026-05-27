@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>合伙人决策卡牌 · 线上版 V0.1</title>
+<style>
+  :root {
+    --primary: #0B4F6C;
+    --secondary: #F26419;
+    --gold: #D4A574;
+    --bg: #FBFBFB;
+    --bg-card: #FFFFFF;
+    --bg-dark: #0D1B2A;
+    --text: #1B1B1B;
+    --text-sub: #6B7280;
+    --border: #E5E7EB;
+    --danger: #C44536;
+    --success: #2D6A4F;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, "PingFang SC", "Noto Sans SC", sans-serif; background: linear-gradient(135deg, #f0f4f8 0%, #e8edf2 100%); color: var(--text); min-height:100vh; }
+  .container { max-width:480px; margin:0 auto; padding:16px; }
+  
+  header { text-align:center; padding:24px 0 16px; }
+  header h1 { font-size:22px; color: var(--primary); font-weight:700; }
+  header .sub { font-size:13px; color: var(--text-sub); margin-top:4px; }
+  
+  .phase-indicator { 
+    text-align:center; padding:8px 16px; background: rgba(212,165,116,0.12); 
+    border-radius:8px; font-size:12px; color: #B8860B; margin-bottom:16px; 
+  }
+  
+  .game-area { background: var(--bg-card); border-radius:16px; padding:24px; box-shadow:0 2px 12px rgba(0,0,0,0.06); margin-bottom:16px; }
+  
+  .card-stage { min-height:280px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; transition:all 0.3s; }
+  
+  .card-front { 
+    width:100%; max-width:320px; border:2px solid var(--primary); border-radius:16px; 
+    padding:24px 20px; background: linear-gradient(180deg, rgba(11,79,108,0.04) 0%, rgba(11,79,108,0.01) 100%);
+    position:relative; 
+  }
+  .card-type { 
+    position:absolute; top:-1px; left:-1px; 
+    background: var(--primary); color:#fff; font-size:11px; padding:4px 14px; 
+    border-radius:16px 0 12px 0; font-weight:600; 
+  }
+  .card-number { position:absolute; top:8px; right:12px; font-size:12px; color: var(--text-sub); }
+  .card-emoji { font-size:48px; margin:16px 0 8px; }
+  .card-title { font-size:18px; font-weight:700; color: var(--primary); margin:8px 0; }
+  .card-scene { font-size:14px; color: var(--text); line-height:1.7; margin:12px 0; }
+  .card-choices { text-align:left; margin-top:12px; }
+  .choice { 
+    display:block; width:100%; padding:12px 16px; margin:8px 0; 
+    border:1.5px solid var(--border); border-radius:10px; background:#fff;
+    font-size:14px; cursor:pointer; transition:all 0.2s; text-align:left;
+  }
+  .choice:hover, .choice.selected { border-color: var(--primary); background: rgba(11,79,108,0.04); }
+  .choice.selected { border-color: var(--secondary); background: rgba(242,100,25,0.04); }
+  
+  .result-area { display:none; }
+  .result-area.show { display:block; }
+  .conflict-score { 
+    font-size:32px; font-weight:800; margin:12px 0; 
+    padding:8px 24px; border-radius:12px; display:inline-block;
+  }
+  .score-low { color: var(--success); background: rgba(45,106,79,0.08); }
+  .score-mid { color: #E09F3E; background: rgba(224,159,62,0.08); }
+  .score-high { color: var(--danger); background: rgba(196,69,54,0.08); }
+  
+  .controls { display:flex; gap:12px; margin-top:16px; flex-wrap:wrap; justify-content:center; }
+  .btn { 
+    padding:10px 24px; border:none; border-radius:10px; font-size:14px; font-weight:600; 
+    cursor:pointer; transition:all 0.2s; 
+  }
+  .btn-primary { background: var(--primary); color:#fff; }
+  .btn-primary:hover { background: #0A3D54; }
+  .btn-outline { background:#fff; color: var(--primary); border:1.5px solid var(--primary); }
+  .btn-secondary { background: var(--secondary); color:#fff; }
+  
+  .progress { display:flex; gap:6px; justify-content:center; margin:16px 0; }
+  .dot { width:10px; height:10px; border-radius:50%; background: var(--border); transition:all 0.3s; }
+  .dot.done { background: var(--primary); }
+  .dot.current { background: var(--secondary); transform:scale(1.3); }
+  
+  .mode-select { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
+  .mode-btn { 
+    padding:16px 12px; border:2px solid var(--border); border-radius:12px; 
+    background:#fff; text-align:center; cursor:pointer; transition:all 0.2s; 
+  }
+  .mode-btn:hover, .mode-btn.active { border-color: var(--primary); }
+  .mode-btn .icon { font-size:28px; display:block; margin-bottom:6px; }
+  .mode-btn .label { font-size:13px; font-weight:600; color: var(--primary); }
+  .mode-btn .desc { font-size:11px; color: var(--text-sub); margin-top:2px; }
+  
+  .footer { text-align:center; padding:24px 16px; font-size:12px; color: var(--text-sub); }
+  .footer a { color: var(--primary); text-decoration:none; }
+  
+  @media (min-width:768px) {
+    .container { max-width:640px; }
+    .card-front { max-width:420px; padding:32px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>🎴 合伙人决策卡牌</h1>
+    <p class="sub">线上交互版 V0.1 · 满意解研究所</p>
+  </header>
+  
+  <div class="phase-indicator">
+    🟡 纸片原型阶段 · 需主持人引导 · 不可独立使用
+  </div>
+
+  <!-- Mode Selection -->
+  <div class="mode-select" id="modeSelect">
+    <button class="mode-btn active" onclick="setMode('solo')">
+      <span class="icon">🧑‍💻</span>
+      <span class="label">单人自查</span>
+      <span class="desc">快速自测·10分钟</span>
+    </button>
+    <button class="mode-btn" onclick="setMode('duo')">
+      <span class="icon">👥</span>
+      <span class="label">双人诊断</span>
+      <span class="desc">面对面·30分钟</span>
+    </button>
+  </div>
+
+  <!-- Game Area -->
+  <div class="game-area">
+    <div class="progress" id="progress"></div>
+    <div class="card-stage" id="cardStage">
+      <div style="color:var(--text-sub);font-size:14px;">👆 选择模式开始</div>
+    </div>
+    <div class="result-area" id="resultArea">
+      <h3 style="color:var(--primary);margin-bottom:12px;">📊 本轮诊断</h3>
+      <div style="margin:8px 0;font-size:14px;color:var(--text-sub);">
+        你的选择反映了以下冲突模式：
+      </div>
+      <div id="conflictSummary" style="margin:12px 0;line-height:1.7;"></div>
+      <div class="controls">
+        <button class="btn btn-primary" onclick="restart()">再来一轮</button>
+        <button class="btn btn-outline" onclick="window.open('https://egbertie.github.io/satisficing-lab/assessment.html')">去自评 →</button>
+      </div>
+    </div>
+    <div class="controls" id="controls" style="display:none;">
+      <button class="btn btn-outline" onclick="prevCard()">◀ 上一张</button>
+      <button class="btn btn-primary" onclick="nextCard()">下一张 ▶</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>满意解研究所 · MANYIJIE · Satisficing Research Institute</p>
+    <p>硬科技转化的合伙人匹配决策教练 · 2026</p>
+    <p style="margin-top:4px;">
+      <a href="https://egbertie.github.io/satisficing-lab/">官网</a> · 
+      <a href="https://egbertie.github.io/satisficing-lab/cards.html">打印版</a> · 
+      <a href="assessment.html">快速自评</a>
+    </p>
+  </div>
+</div>
+
+<script>
+// ===== 卡牌数据 =====
+const CARDS = [
+  {
+    id: 1, type:"承诺", emoji:"🤝", title:"股权分配的第一句话",
+    scene: "你和合伙人坐在咖啡馆，第一次讨论股权。他说：'咱们五五开，公平。'你的直觉告诉你这不对——但你不知道怎么开口。",
+    choices: ["A. 同意五五开——先做起来再说","B. 提出动态分配——按贡献调整","C. 转移话题——先不谈这个"],
+    conflictType: "股权静态分配", sources: "Wasserman·Moyer", bestChoice:1,
+    analysis: "73%的创始人在首月选择静态分配（Wasserman·HBS）。'先做起来再说'是创始人最常见的拖延策略——但拖得越久，修正越难。动态分配不是'斤斤计较'——是'让贡献被看见'。"
+  },
+  {
+    id: 2, type:"冲突", emoji:"💢", title:"他改了你的方案",
+    scene: "周一晨会，你发现合伙人在你没参与的情况下，改了你主导的产品路线图。他没跟你说。你在群里看到了更新。",
+    choices: ["A. 群里回'收到'——私下找他谈","B. 直接在群里指出改动有问题","C. 算了——可能他有他的道理"],
+    conflictType: "决策边界模糊", sources: "Lencioni·Duke", bestChoice:0,
+    analysis: "Lencioni金字塔第二层：惧怕冲突。你选了私下谈——这避免了公开对抗，但也意味着团队其他人不知道你们的分歧在哪。健康的冲突是公开的——'我不是否定你，但我不同意这个方向。'"
+  },
+  {
+    id: 3, type:"危机", emoji:"🔥", title:"投资人问你一个问题",
+    scene: "投资人问：'你们两个谁是最终决策者？'你看向合伙人。他没说话。投资人在等你回答。",
+    choices: ["A. '我们共同决策'","B. '我是CEO，最终决策在我'","C. 看向合伙人，让他回答"],
+    conflictType: "角色不清晰", sources: "Altman·Feld", bestChoice:1,
+    analysis: "Altman(YC): '坏合伙人 > 没合伙人'。投资人问的不是'谁说了算'——是'出了问题谁负责'。如果你不能当场说出谁有最终决策权，投资人看到的是治理结构缺失。"
+  },
+  {
+    id: 4, type:"承诺", emoji:"📝", title:"竞业限制该不该签",
+    scene: "合伙人的律师发来协议，里面有竞业条款：离职后2年不能做同类业务。你觉得太长，但又不想显得'不信任'。",
+    choices: ["A. 签——信任是基础","B. 提出改为1年+补偿条款","C. 找律师审——但不说为什么"],
+    conflictType: "协议陷阱", sources: "Feld·Wasserman", bestChoice:1,
+    analysis: "Feld(VC交易圣经): '估值越高条款越危险'。竞业不是'信任问题'——是'如果最坏情况发生，怎么保护双方'。2年无补偿的竞业在中国很多地区不具可执行性，但它代表的态度是：'我不相信我们的关系能自然维持。'"
+  },
+  {
+    id: 5, type:"冲突", emoji:"😶", title:"什么都不说了",
+    scene: "最近一个月，你们不再争论了。会议很'和谐'。但项目推进明显慢了。每次你想提一个敏感话题——比如股权重新分配——你看到他的表情，就咽回去了。",
+    choices: ["A. 继续等——等合适的时机","B. 约他喝咖啡——只说'我感觉我们之间有些东西没聊'","C. 用卡牌做媒介——'朋友推荐了一个游戏，一起试试？'"],
+    conflictType: "虚假和谐", sources: "Gottman·Lencioni", bestChoice:1,
+    analysis: "Gottman: 冷漠是四骑士中最后出现的——也是最危险的。不是'关系好才不吵'——是'吵不动了所以不吵'。Lencioni: 虚假和谐是团队第一杀手。你的合伙人可能和你有同样的感受——两个人都想开口，但谁都不敢。"
+  },
+  {
+    id: 6, type:"危机", emoji:"🌪️", title:"他在外面说你坏话",
+    scene: "一个共同的朋友告诉你，合伙人在一次饭局上说：'项目都是我在扛，他只会画饼。'你听到后，心脏沉了一下。",
+    choices: ["A. 当面质问——'你朋友告诉我了'","B. 不提。但以后观察","C. 约正式谈话——'我听到一些话，想听听你的版本'"],
+    conflictType: "蔑视信号", sources: "Gottman·Duke", bestChoice:2,
+    analysis: "Gottman号发现：蔑视是关系解体的头号杀手（91%预测准确率）。他不是在批评你做错了某件事——他在否定你这个人。Duke: 不要用结果（他说的那句话）反推意图。先问他——但要用'我不知道这些是不是真的，所以来问你'的开场。"
+  },
+  {
+    id: 7, type:"承诺", emoji:"💰", title:"估值3亿——他想要更多",
+    scene: "投资人给了3亿估值。合伙人突然说：'我觉得我的贡献被低估了。我应该多拿10%。'融资窗口只有两周。",
+    choices: ["A. 给他。先拿钱","B. 拒绝。'签了什么就是什么'","C. '我们先把融资关掉，然后坐下来重新谈'"],
+    conflictType: "股权重谈", sources: "Moyer·Wasserman·Feld", bestChoice:2,
+    analysis: "Moyer(Slicing Pie): '股权不是激励——是记账。'如果他真的贡献了更多，重算就是。但融资窗口中重谈股权是极端危险的——Feld称之为'核选项'。Wasserman: 在最高估值点重谈股权——几乎总是坏的。你的对：先把融资关掉，然后再谈。'
+  }
+];
+
+let currentMode = 'solo';
+let currentCard = 0;
+let answeredCards = [];
+let chosenAnswers = {};
+let cardOrder = [];
+
+function setMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  event.target.closest('.mode-btn').classList.add('active');
+  restart();
+}
+
+function shuffle(arr) {
+  let a = [...arr];
+  for (let i = a.length-1; i>0; i--) {
+    let j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function startGame() {
+  currentCard = 0;
+  answeredCards = [];
+  chosenAnswers = {};
+  cardOrder = shuffle([...Array(CARDS.length).keys()]);
+  if (currentMode === 'solo') cardOrder = cardOrder.slice(0, 5);
+  document.getElementById('modeSelect').style.display = 'none';
+  document.getElementById('resultArea').classList.remove('show');
+  updateProgress();
+  renderCard();
+  document.getElementById('controls').style.display = 'flex';
+}
+
+function updateProgress() {
+  let html = '';
+  for (let i=0; i<cardOrder.length; i++) {
+    let cls = 'dot';
+    if (answeredCards.includes(cardOrder[i])) cls += ' done';
+    if (i === currentCard) cls += ' current';
+    html += `<div class="${cls}"></div>`;
+  }
+  document.getElementById('progress').innerHTML = html;
+}
+
+function renderCard() {
+  if (currentCard >= cardOrder.length) {
+    showResult();
+    return;
+  }
+  let c = CARDS[cardOrder[currentCard]];
+  let html = `
+    <div class="card-front">
+      <div class="card-type">${c.type}卡</div>
+      <div class="card-number">#${c.id}/${CARDS.length}</div>
+      <div class="card-emoji">${c.emoji}</div>
+      <div class="card-title">${c.title}</div>
+      <div class="card-scene">${c.scene}</div>
+      <div class="card-choices">
+        ${c.choices.map((ch,i) => `<button class="choice${chosenAnswers[c.id]===i?' selected':''}" onclick="choose(${c.id},${i})">${ch}</button>`).join('')}
+      </div>
+      ${chosenAnswers[c.id]!==undefined ? `<div style="margin-top:12px;font-size:13px;color:var(--text-sub);padding:8px 12px;background:rgba(11,79,108,0.04);border-radius:8px;text-align:left;">💡 ${c.analysis}</div>` : ''}
+    </div>
+  `;
+  document.getElementById('cardStage').innerHTML = html;
+  updateProgress();
+}
+
+function choose(cardId, choiceIndex) {
+  chosenAnswers[cardId] = choiceIndex;
+  if (!answeredCards.includes(cardOrder[currentCard])) {
+    answeredCards.push(cardOrder[currentCard]);
+  }
+  renderCard();
+}
+
+function nextCard() {
+  if (chosenAnswers[CARDS[cardOrder[currentCard]].id] === undefined) {
+    // gentle nudge
+  }
+  currentCard++;
+  if (currentCard >= cardOrder.length) {
+    showResult();
+  } else {
+    renderCard();
+  }
+}
+
+function prevCard() {
+  if (currentCard > 0) {
+    currentCard--;
+    renderCard();
+  }
+}
+
+function showResult() {
+  document.getElementById('controls').style.display = 'none';
+  document.getElementById('cardStage').innerHTML = '';
+  document.getElementById('resultArea').classList.add('show');
+  
+  let conflicts = [];
+  let highConflict = 0;
+  for (let idx of cardOrder) {
+    let c = CARDS[idx];
+    if (chosenAnswers[c.id] !== undefined) {
+      if (chosenAnswers[c.id] !== c.bestChoice) highConflict++;
+      conflicts.push({
+        title: c.title,
+        type: c.conflictType,
+        sources: c.sources,
+        alert: chosenAnswers[c.id] !== c.bestChoice
+      });
+    }
+  }
+  
+  let ratio = highConflict / Math.max(conflicts.length, 1);
+  let scoreClass = ratio < 0.3 ? 'score-low' : ratio < 0.6 ? 'score-mid' : 'score-high';
+  let level = ratio < 0.3 ? '🟢 低冲突风险' : ratio < 0.6 ? '🟡 中等冲突风险' : '🔴 高冲突风险';
+  
+  let summary = `<div class="conflict-score ${scoreClass}">${level}</div>`;
+  summary += `<p style="font-size:13px;color:var(--text-sub);margin:8px 0;">${conflicts.length}张卡牌中，${highConflict}张触发了冲突预警</p>`;
+  summary += `<div style="text-align:left;margin-top:16px;">`;
+  conflicts.forEach(c => {
+    summary += `<div style="padding:8px 0;border-bottom:1px solid var(--border);">
+      <strong>${c.alert?'🔴':'🟢'} ${c.title}</strong>
+      <span style="font-size:12px;color:var(--text-sub);"> · ${c.type} · ${c.sources}</span>
+    </div>`;
+  });
+  summary += `</div>`;
+  summary += `<p style="margin-top:16px;font-size:12px;color:var(--text-sub);">
+    ⚠️ 这是纸片原型的快速自检，不是诊断工具。<br/>深度评估请使用<a href="assessment.html">五维快速自评</a>。
+  </p>`;
+  
+  document.getElementById('conflictSummary').innerHTML = summary;
+}
+
+function restart() {
+  document.getElementById('modeSelect').style.display = 'grid';
+  document.getElementById('cardStage').innerHTML = '<div style="color:var(--text-sub);font-size:14px;">👆 选择模式，点击"开始"</div>';
+  document.getElementById('controls').style.display = 'none';
+  document.getElementById('resultArea').classList.remove('show');
+  document.getElementById('progress').innerHTML = '';
+  currentCard = 0;
+  answeredCards = [];
+  chosenAnswers = {};
+}
+</script>
+
+<!-- Start button in game area when empty -->
+<div style="text-align:center;margin-top:12px;" id="startBtnArea">
+  <button class="btn btn-secondary" onclick="startGame()" style="font-size:16px;padding:14px 48px;">
+    🎴 开始抽卡
+  </button>
+</div>
+
+</body>
+</html>
