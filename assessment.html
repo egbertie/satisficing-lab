@@ -275,6 +275,29 @@ function showResult() {
     dimScores[d] = count > 0 ? (sum / count) : 0;
   }
   
+  // V4.0·30天重测自动对比
+  const prevData = localStorage.getItem('sri_baseline');
+  if(prevData) {
+    const prev = JSON.parse(prevData);
+    const dims = ['T','D','B','X','Z'];
+    const names = ['时间轴','可行域','身心流','信义观','直觉阈'];
+    let compHtml = '<div class="card" style="margin-top:12px;background:#C23B2204;border:1px solid var(--gold);border-radius:16px;padding:16px">';
+    compHtml += '<h4 style="color:var(--brand);margin-bottom:8px">📈 距上次诊断的变化</h4>';
+    dims.forEach((d,i) => {
+      if(prev[d] !== undefined) {
+        const delta = (dimScores[d] - prev[d]).toFixed(2);
+        const arrow = delta > 0 ? '↑' : (delta < 0 ? '↓' : '→');
+        const color = delta > 0.15 ? '#B8860B' : (delta < -0.15 ? '#C23B22' : '#4A4A4A');
+        compHtml += `<p style="font-size:12px;color:${color}">${names[i]}: ${prev[d].toFixed(1)}→${dimScores[d].toFixed(1)} Δ${delta} ${arrow}</p>`;
+      }
+    });
+    compHtml += '</div>';
+    document.getElementById('alerts').insertAdjacentHTML('beforeend', compHtml);
+  }
+  // 保存当前基线
+  localStorage.setItem('sri_baseline', JSON.stringify(dimScores));
+  localStorage.setItem('sri_baseline_date', new Date().toISOString());
+  
   // 雷达图
   renderRadar(dimScores);
   
