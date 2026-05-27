@@ -141,9 +141,14 @@
         你的选择反映了以下冲突模式：
       </div>
       <div id="conflictSummary" style="margin:12px 0;line-height:1.7;"></div>
-      <div class="controls">
+      <div style="margin-top:16px;text-align:left;padding:12px 16px;background:rgba(194,59,34,0.04);border-radius:8px;">
+        <strong style="font-size:13px;color:var(--sri-red);">📋 本轮卡组总览</strong>
+        <div id="deckSummary" style="font-size:12px;color:var(--text);margin-top:6px;line-height:1.6;"></div>
+      </div>
+      <div class="controls" style="margin-top:12px;">
         <button class="btn btn-primary" onclick="restart()">再来一轮</button>
         <button class="btn btn-outline" onclick="window.open('https://egbertie.github.io/satisficing-lab/assessment.html')">去自评 →</button>
+        <button class="btn btn-outline" onclick="shareResult()">📤 分享结果</button>
       </div>
     </div>
     <div class="controls" id="controls" style="display:none;">
@@ -347,11 +352,34 @@ function showResult() {
     </div>`;
   });
   summary += `</div>`;
+  // 卡组总览
+  const types = {};
+  conflicts.forEach(c => { types[c.type] = (types[c.type]||0)+1; });
+  let deckHTML = '';
+  Object.entries(types).forEach(([type, count]) => {
+    deckHTML += `<span style="display:inline-block;margin:2px 4px;padding:2px 8px;border-radius:10px;font-size:11px;background:rgba(194,59,34,0.08);color:var(--sri-red);">${type} ×${count}</span>`;
+  });
+  deckHTML += `<br><span style="font-size:11px;color:var(--text-sub);">共 ${conflicts.length} 张卡牌 · ${highConflict} 张触发冲突预警</span>`;
+  document.getElementById('deckSummary').innerHTML = deckHTML;
   summary += `<p style="margin-top:16px;font-size:12px;color:var(--text-sub);">
     ⚠️ 这是纸片原型的快速自检，不是诊断工具。<br/>深度评估请使用<a href="assessment.html">五维快速自评</a>。
   </p>`;
   
   document.getElementById('conflictSummary').innerHTML = summary;
+}
+
+
+function shareResult() {
+  const summary = document.getElementById('conflictSummary').innerText;
+  const url = window.location.href;
+  const text = `我刚完成了满意解研究所的合伙人决策卡牌自测。\n\n${summary.split('\n').slice(0,3).join('\n')}\n\n试试: ${url}`;
+  if (navigator.share) {
+    navigator.share({title:'合伙人决策卡牌自测', text:text, url:url}).catch(()=>{});
+  } else if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(()=>alert('结果已复制到剪贴板！'));
+  } else {
+    prompt('复制以下文字分享:', text);
+  }
 }
 
 function restart() {
