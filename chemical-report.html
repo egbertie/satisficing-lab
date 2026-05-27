@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>合伙人关系健康度报告 · 五维决策测评 | 满意解研究所</title>
+<link rel="stylesheet" href="vi_quick_ref.css">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --c1: #C23B22; --bg: #F5F0E6; --card: #F5F0E6;
+    --brand: #C23B22; --gold: #B8860B; --text: #2A2A2A; --muted: #4A4A4A;
+  }
+  body { font-family: -apple-system, "PingFang SC", "Noto Sans SC", sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  .container { max-width: 680px; margin: 0 auto; padding: 32px 20px 80px; }
+  
+  .header { text-align: center; padding: 40px 0 24px; }
+  .header h1 { font-size: 22px; font-weight: 700; color: var(--brand); margin-bottom: 8px; }
+  .header .sub { font-size: 13px; color: var(--muted); }
+  .header .badge { display: inline-block; background: var(--brand); color: var(--bg); font-size: 11px; padding: 3px 10px; border-radius: 12px; margin-top: 8px; }
+  
+  .card { background: var(--card); border: 1px solid var(--gold); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+  .card h3 { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+  .card h3 .icon { font-size: 24px; }
+  .card p { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 12px; }
+  
+  .score-row { display: flex; gap: 12px; margin: 16px 0; }
+  .score-box { flex: 1; background: var(--bg); border-radius: 12px; padding: 16px; text-align: center; border: 1px solid var(--gold); }
+  .score-box .num { font-size: 28px; font-weight: 700; color: var(--brand); }
+  .score-box .lbl { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  
+  .bar-wrap { background: #D4C5A0; height: 6px; border-radius: 3px; margin: 8px 0 16px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--brand); border-radius: 3px; transition: width 0.6s; }
+  
+  .metric { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #D4C5A0; }
+  .metric:last-child { border-bottom: none; }
+  .metric .name { font-size: 14px; font-weight: 600; }
+  .metric .val { font-size: 15px; font-weight: 700; color: var(--brand); }
+  .metric .desc { font-size: 11px; color: var(--muted); }
+  
+  .warning { background: #C23B2208; border-left: 4px solid var(--brand); padding: 14px 18px; border-radius: 0 12px 12px 0; margin: 16px 0; }
+  .warning p { font-size: 13px; margin: 0; }
+  .warning strong { color: var(--brand); }
+  
+  .chain { padding: 8px 0; }
+  .chain .item { font-size: 13px; color: var(--muted); padding: 6px 0; }
+  .chain .item .arrow { color: var(--brand); margin: 0 6px; }
+  
+  .antidote { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+  .antidote .a-card { background: var(--bg); border-radius: 10px; padding: 14px; border: 1px solid var(--gold); }
+  .antidote .a-card .signal { font-size: 12px; font-weight: 600; color: var(--brand); }
+  .antidote .a-card .fix { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+  
+  .footer { text-align: center; padding: 40px 0; color: var(--muted); font-size: 12px; line-height: 1.8; }
+  .footer a { color: var(--brand); }
+  
+  .demo-tag { font-size: 10px; background: var(--gold); color: var(--bg); padding: 2px 8px; border-radius: 8px; margin-left: 8px; vertical-align: middle; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <h1>合伙人关系健康度报告</h1>
+  <p class="sub">基于五维决策测评·11源交叉验证·化学融合增强</p>
+  <span class="badge">满意解研究所 · Satisficing Research Institute</span>
+  <span class="demo-tag">DEMO</span>
+</div>
+
+<!-- C5: 相变临界点预测 -->
+<div class="card">
+  <h3><span class="icon">🌡️</span> 关系相变临界指数 (CI)</h3>
+  <div class="score-row">
+    <div class="score-box">
+      <div class="num">0.46</div>
+      <div class="lbl">临界指数</div>
+    </div>
+    <div class="score-box">
+      <div class="num">🟡</div>
+      <div class="lbl">临界区(显现期)</div>
+    </div>
+    <div class="score-box">
+      <div class="num">~7月</div>
+      <div class="lbl">距临界点</div>
+    </div>
+  </div>
+  <div class="bar-wrap"><div class="bar-fill" style="width:46%; background:linear-gradient(90deg,#B8860B,#C23B22)"></div></div>
+  <p>涨落开始放大·需监控临界慢化信号。参考: 大疆2007年CI≈0.7时导师介入→存活。比锐精密CI持续上升到0.85→3个月内清算。</p>
+  <div class="warning">
+    <p><strong>⚠️ 临界慢化检测三问:</strong></p>
+    <p>① 最近一次分歧，多久才回到正常沟通？</p>
+    <p>② 一件小事引发的连锁反应比以前多了吗？</p>
+    <p>③ 最近的决策速度比以前快了还是慢了？</p>
+  </div>
+  <p style="font-size:11px;color:var(--muted)">化学产物C5·复杂系统相变理论 × Gottman四骑士 × 三阶段两节点</p>
+</div>
+
+<!-- C2: 决策质量双引擎 DQI -->
+<div class="card">
+  <h3><span class="icon">📊</span> 决策质量指数 (DQI)</h3>
+  <div class="score-row">
+    <div class="score-box">
+      <div class="num">0.67</div>
+      <div class="lbl">DQI</div>
+    </div>
+    <div class="score-box">
+      <div class="num">🟡</div>
+      <div class="lbl">中等质量</div>
+    </div>
+  </div>
+  <div class="metric"><span class="name">偏差引擎(维度分差)</span><span class="val">0.45</span></div>
+  <div class="metric"><span class="name">噪声引擎(验证密度σ)</span><span class="val">0.229</span></div>
+  <div style="font-size:12px;color:var(--muted);margin-top:8px">建议: 偏差或噪声中某一项偏高——针对性校准后再决定</div>
+  <p style="font-size:11px;color:var(--muted);margin-top:8px">化学产物C2·Kahneman噪声 × 交叉验证矩阵 × Duke Resulting</p>
+</div>
+
+<!-- Gottman解毒方案 + 四骑士 -->
+<div class="card">
+  <h3><span class="icon">🛡️</span> 四骑士信号检测 & 解毒方案</h3>
+  <div class="antidote">
+    <div class="a-card">
+      <div class="signal">🟠 批评信号</div>
+      <div class="fix">解毒: 用"我感觉___，我需要___"代替"你总是___"<br>方太每日晨读——先内省后表达</div>
+    </div>
+    <div class="a-card">
+      <div class="signal">🟡 蔑视信号</div>
+      <div class="fix">解毒: 找出对方3个值得感谢的行为，当面表达<br>儒商全员身股·感恩文化制度化</div>
+    </div>
+    <div class="a-card">
+      <div class="signal">🟠 防御信号</div>
+      <div class="fix">解毒: 先承认"我有责任的部分是___"，再讨论对方<br>方太ABC错误分类·先认错后改进</div>
+    </div>
+    <div class="a-card">
+      <div class="signal">🟡 冷漠信号</div>
+      <div class="fix">解毒: "我需要20分钟冷静一下，然后继续谈"<br>比锐教训: 冷漠=沉默地分手</div>
+    </div>
+  </div>
+  <p style="font-size:11px;color:var(--muted)">化学产物·Gottman四骑士(91%预测率) × 方太儒道 × 比锐精密</p>
+</div>
+
+<!-- E5: 时间贴现率 -->
+<div class="card">
+  <h3><span class="icon">⏳</span> 时间贴现校准</h3>
+  <div class="score-row">
+    <div class="score-box">
+      <div class="num">34%</div>
+      <div class="lbl">个人贴现率/年</div>
+    </div>
+    <div class="score-box">
+      <div class="num">🟢</div>
+      <div class="lbl">长期视角健康</div>
+    </div>
+  </div>
+  <p>5年后的100万·你现在感觉只值<strong>23万</strong>——你高估了"现在"77%。参考: 普通创业者贴现率50-100%·大疆2007: 40%初始股权→5年后稀释至5%</p>
+  <p style="font-size:11px;color:var(--muted)">化学产物E5·双曲贴现 × 晋卦文化 × Carta2025</p>
+</div>
+
+<!-- E2: MRI 引擎可靠性 -->
+<div class="card">
+  <h3><span class="icon">🔬</span> 评估引擎自身可靠性 (MRI)</h3>
+  <div class="score-row">
+    <div class="score-box">
+      <div class="num">0.70</div>
+      <div class="lbl">MRI</div>
+    </div>
+    <div class="score-box">
+      <div class="num">🟡</div>
+      <div class="lbl">可靠但需验证</div>
+    </div>
+  </div>
+  <div class="metric"><span class="name">源覆盖率</span><span class="val">1.00</span></div>
+  <div class="metric"><span class="name">同行审议比</span><span class="val">0.38</span></div>
+  <div class="metric"><span class="name">内部一致性</span><span class="val">0.93</span></div>
+  <div class="warning"><p><strong>⚠️ 引擎尚未在真实案例中验证——不应将本报告作为唯一决策依据</strong></p></div>
+  <p style="font-size:11px;color:var(--muted)">化学产物E2·元认知自指涉 × Metacognitive AI(MDPI 2025)</p>
+</div>
+
+<!-- E7: 五行生克审核连锁 -->
+<div class="card">
+  <h3><span class="icon">🔗</span> 五行生克审核连锁反应</h3>
+  <p style="font-size:13px;color:var(--muted);">五路图腾按照五行因果链依次审核·以下为实际触发的连锁:</p>
+  <div class="chain">
+    <div class="item">🟢 刘禹锡(土)·贴现率34% → 健康·快速通过 → 司马贺</div>
+    <div class="item">⚡ 司马贺(金)·克: 金→木·孔子·"方法不可靠"→伦理判断需重审</div>
+    <div class="item">⚡ 司马贺(金)·生: 金→水·观自在·不确定性在身体信号中有反映?</div>
+    <div class="item">⚡ 孔子(木)·克: 木→金·司马贺·相变风险是否被方法论低估?</div>
+    <div class="item">⚡ 孔子(木)·生: 木→火·慧能·伦理风险是否被直觉预感到?</div>
+  </div>
+  <p style="font-size:13px;color:var(--brand);margin-top:12px"><strong>体系行为: 独立审核遮蔽的矛盾·连锁反应让矛盾暴露</strong></p>
+  <p style="font-size:11px;color:var(--muted)">化学产物E7·五行生克 × 复杂适应系统·相变涌现</p>
+</div>
+
+<!-- 股权健康评分 -->
+<div class="card">
+  <h3><span class="icon">📋</span> 股权健康评分 & 深度审核链</h3>
+  <div class="score-row">
+    <div class="score-box">
+      <div class="num">0.39</div>
+      <div class="lbl">健康评分</div>
+    </div>
+    <div class="score-box">
+      <div class="num">🔴</div>
+      <div class="lbl">高危</div>
+    </div>
+  </div>
+  <div class="metric"><span class="name">L1·动机(Rich vs King)</span><span class="val">⚠️ 未明确</span></div>
+  <div class="metric"><span class="name">L2·公平(SlicingPie差距)</span><span class="val">⚠️ 未知</span></div>
+  <div class="metric"><span class="name">L3·陷阱(条款风险)</span><span class="val">⚠️ 未审查</span></div>
+  <p style="font-size:12px;color:var(--muted)">大疆2007(无对赌→存活) vs 比锐精密(对赌回购→致命)·Carta2025: 45%四年分手率</p>
+  <p style="font-size:11px;color:var(--muted)">化学产物·股健康评分 + E17审核深度三层链</p>
+</div>
+
+<!-- 直觉可信度 -->
+<div class="card">
+  <h3><span class="icon">🎯</span> 直觉可信度区间</h3>
+  <div class="score-row">
+    <div class="score-box">
+      <div class="num">RPD L1</div>
+      <div class="lbl">简单匹配</div>
+    </div>
+    <div class="score-box">
+      <div class="num">IQ 0.2</div>
+      <div class="lbl">低可信度</div>
+    </div>
+  </div>
+  <p>你的直觉目前主要是Level 1(简单匹配)——需要积累100+次相关决策经验才能升级到Level 2(诊断)。建议: 在达到L2之前，重大决策使用五维评分而非直觉。</p>
+  <p style="font-size:12px;color:var(--muted)">案例: 李泽湘270+案例→直觉"拒绝贴牌"→正确·比锐无经验→双线作战→失败</p>
+  <p style="font-size:11px;color:var(--muted)">化学产物E4·Klein RPD × 专家-新手边界动力学</p>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>满意解研究所 · Satisficing Research Institute</p>
+  <p>深圳鼎玉家族传承管理有限公司（法人主体）</p>
+  <p>硬科技转化的合伙人匹配决策教练</p>
+  <p style="margin-top:12px">本报告由五维决策评分引擎V3.0生成 · 7独立学术源×4内部建构源</p>
+  <p>11源交叉验证 · 6化学产物增强 · 五行生克连锁审核</p>
+  <p style="margin-top:8px">⚠️ 本报告为演示版本(DEMO)·不构成投资/法律/财务建议</p>
+  <p><a href="https://egbertie.github.io/satisficing-lab/">← 返回首页</a></p>
+</div>
+
+</div>
+</body>
+</html>
