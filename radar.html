@@ -29,10 +29,10 @@
   .controls { display: flex; gap: 12px; margin: 16px 0; flex-wrap: wrap; }
   .btn { padding: 8px 18px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); cursor: pointer; font-size: 13px; transition: all .15s; }
   .btn:hover { background: #E0D5CC; }
-  .btn.active { border-color: var(--blue); color: var(--blue); background: rgba(59,130,246,.1); }
+  .btn.active { border-color: var(--blue); color: var(--blue); background: rgba(194,59,34,.1); }
   .mode-tag { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
   .tag { padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; }
-  .tag-uniform { background: rgba(59,130,246,.15); color: var(--blue); }
+  .tag-uniform { background: rgba(194,59,34,.15); color: var(--blue); }
   .tag-sawtooth { background: rgba(245,158,11,.15); color: var(--amber); }
   .tag-peak { background: rgba(139,92,246,.15); color: var(--purple); }
   .tag-gap { background: rgba(239,68,68,.15); color: var(--red); }
@@ -41,7 +41,7 @@
   th { color: var(--text-dim); font-weight: 500; font-size: 12px; }
   .score-bar { height: 8px; border-radius: 4px; background: var(--border); margin-top: 4px; overflow: hidden; }
   .score-fill { height: 100%; border-radius: 4px; transition: width .5s ease; }
-  .interpretation { margin-top: 16px; padding: 16px; border-radius: 8px; background: rgba(59,130,246,.06); border: 1px solid rgba(59,130,246,.15); }
+  .interpretation { margin-top: 16px; padding: 16px; border-radius: 8px; background: rgba(194,59,34,0.06); border: 1px solid rgba(194,59,34,.15); }
   .interpretation h3 { font-size: 14px; margin: 0 0 8px; }
   .interpretation p { font-size: 13px; line-height: 1.6; color: var(--text-dim); margin: 0; }
   .slider-group { margin: 16px 0; }
@@ -174,7 +174,7 @@ function renderRadar(scores) {
     const r = maxR * (scores[d] / 5.0);
     return `${(cx+r*Math.cos(angles[i])).toFixed(1)},${(cy-r*Math.sin(angles[i])).toFixed(1)}`;
   }).join(' ');
-  svg += `<polygon points="${dataPts}" fill="rgba(59,130,246,0.15)" stroke="#C23B22" stroke-width="2.5" stroke-linejoin="round"/>`;
+  svg += `<polygon points="${dataPts}" fill="rgba(194,59,34,0.12)" stroke="#C23B22" stroke-width="2.5" stroke-linejoin="round"/>`;
 
   // 数据点 + 标签
   DIMS.forEach((d,i) => {

@@ -184,7 +184,7 @@ const questions = [
 ];
 
 const dimNames = ["时间轴","可行域","身心流","信义观","直觉阈"];
-const dimColors = {"T":"#C23B22","D":"#C23B22","B":"#C23B22","X":"#C23B22","Z":"#C23B22"};
+const dimColors = {"T":"#C23B22","D":"#B8860B","B":"#9A2F1B","X":"#D4756A","Z":"#8B1A1A"};
 const dimGuidance = {
   "时间轴": {low:"你可能在透支未来。建议先做心理对照练习——在做每个决定前，先问「五年后回头看会怎样」。",mid:"时间轴维度有提升空间。建议定期(季度)做长远方向思考，不被日常推着走。",high:"你的时间轴维度很健康。你能平衡短期和长期，这是合伙人决策的核心能力。"},
   "可行域": {low:"你的底线可能不够硬。建议先明确退出机制——在投入前先想好「什么情况下撤」。",mid:"可行域判断还可以更坚定。建议在投入前白纸黑字写下底线，并且守住它。",high:"你的可行域判断很清晰。你知道什么是「够用就好」，这是满意解的核心。"},
@@ -323,7 +323,7 @@ function showResult() {
 function renderRadar(dimScores) {
   const dims = ['T','D','B','X','Z'];
   const labels = dimNames;
-  const colors = ['#C23B22','#C23B22','#C23B22','#C23B22','#C23B22'];
+  const colors = ['#C23B22','#B8860B','#9A2F1B','#D4756A','#8B1A1A'];
   const n = 5;
   const cx = 150, cy = 140, maxR = 100;
   const angles = dims.map((_,i) => Math.PI/2 - 2*Math.PI*i/n);
