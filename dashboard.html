@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>驾驶舱 · 质量管理 · 满意解研究所</title>
+<style>
+:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
+.hero{background:var(--title-color);color:#F5F0E6;padding:32px 20px 24px;text-align:center}
+.hero h1{font-size:20px;font-weight:700}.hero p{font-size:12px;opacity:.8}
+.main{max-width:680px;margin:0 auto;padding:16px}
+.panel{background:#fff;border-radius:14px;padding:20px;margin-bottom:12px;border:1px solid #D4C5A0}
+.panel h3{font-size:14px;color:var(--title-color);margin-bottom:10px}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+.stat{text-align:center;padding:12px;border-radius:10px;background:var(--sri-bg)}
+.stat .num{font-size:22px;font-weight:700;color:var(--sri-red)}
+.stat .label{font-size:10px;opacity:.6}
+
+.bar{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:12px}
+.bar .label{min-width:120px;font-weight:600}
+.bar .track{flex:1;height:8px;background:#f0e8d8;border-radius:4px;overflow:hidden}
+.bar .fill{height:100%;border-radius:4px;transition:width .5s}
+.fill-green{background:#4A8C5C}.fill-amber{background:var(--sri-gold)}.fill-red{background:var(--sri-red)}
+
+table{width:100%;font-size:11px;border-collapse:collapse;margin:8px 0}
+th{text-align:left;padding:6px 4px;border-bottom:1px solid #D4C5A0;color:var(--sri-gold);font-size:10px}
+td{padding:6px 4px;border-bottom:1px solid #f0e8d8;font-size:11px}
+.badge{display:inline-block;padding:1px 6px;border-radius:6px;font-size:9px;font-weight:600}
+.badge-green{background:rgba(74,140,92,.12);color:#4A8C5C}.badge-amber{background:rgba(184,134,11,.12);color:var(--sri-gold)}.badge-red{background:rgba(194,59,34,.12);color:var(--sri-red)}
+.footer{text-align:center;padding:20px;font-size:10px;opacity:.4}
+</style>
+</head>
+<body>
+<div class="hero"><h1>📊 驾驶舱 · 质量仪表盘</h1><p>满意解研究所 · 对标20+全球顶级机构</p></div>
+<div class="main">
+  <div class="panel">
+    <h3>📈 核心指标</h3>
+    <div class="stats">
+      <div class="stat"><div class="num">231</div><div class="label">产品总数</div></div>
+      <div class="stat"><div class="num">55%</div><div class="label">四关通过率(已修复后)</div></div>
+      <div class="stat"><div class="num">6</div><div class="label">自动化脚本</div></div>
+      <div class="stat"><div class="num">12</div><div class="label">cron任务</div></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>🔍 六级审核体系 (对标 HBR三审+KPMG三道防线+ICF督导)</h3>
+    <table>
+    <tr><th>级</th><th>名称</th><th>对标</th><th>方法</th></tr>
+    <tr><td>L0</td><td>提案审核</td><td>HBR提案·MIT SMR"新在哪里"</td><td>产品概念文档</td></tr>
+    <tr><td>L1</td><td>方法论审核</td><td>McKinsey MECE</td><td>自动脚本</td></tr>
+    <tr><td>L2</td><td>内容审核</td><td>HBR五条·Penguin三校</td><td>自动脚本</td></tr>
+    <tr><td>L3</td><td>体验审核</td><td>Gartner Peer Insights</td><td>自动脚本</td></tr>
+    <tr><td>L4</td><td>独立复审</td><td>KPMG内审·ICF督导</td><td>蓝军Skeptor-7</td></tr>
+    <tr><td>L5</td><td>终审</td><td>HBR主编·Partner签字</td><td>Egbertie</td></tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h3>📐 运营自动化状态</h3>
+    <table>
+    <tr><th>自动化项</th><th>频率</th><th>对标</th><th>状态</th></tr>
+    <tr><td>L0-L3自动审核</td><td>每次Push</td><td>HBR编辑初审</td><td><span class="badge badge-green">待实现</span></td></tr>
+    <tr><td>产品健康扫描</td><td>周一06:00</td><td>KPMG内部审计</td><td><span class="badge badge-green">已运行</span></td></tr>
+    <tr><td>死链接检测</td><td>周一06:00</td><td>Gartner数据质量</td><td><span class="badge badge-green">已运行</span></td></tr>
+    <tr><td>隐私审计</td><td>每月1日</td><td>APA伦理·CC保密</td><td><span class="badge badge-green">已运行</span></td></tr>
+    <tr><td>淘汰评估</td><td>每月1日</td><td>BCG矩阵·产品生命周期</td><td><span class="badge badge-amber">脚本就绪</span></td></tr>
+    <tr><td>密码同步</td><td>周三18:00</td><td>ISO数据安全</td><td><span class="badge badge-green">已运行</span></td></tr>
+    <tr><td>运维清理</td><td>周六10:00</td><td>系统健康</td><td><span class="badge badge-green">已运行</span></td></tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h3>🎯 对标差距</h3>
+    <table>
+    <tr><th>差距项</th><th>当前</th><th>目标</th><th>行动计划</th></tr>
+    <tr><td>产品健康通过率</td><td>55%</td><td>≥80%</td><td>逐周修复·周一扫描</td></tr>
+    <tr><td>测评信效度</td><td>未验证</td><td>信度≥0.7</td><td>收集≥100样本后分析</td></tr>
+    <tr><td>商标注册</td><td>未申请</td><td>商标™</td><td>Egbertie申请</td></tr>
+    <tr><td>认证体系</td><td>框架完成</td><td>AG/PG/MG三级</td><td>夏至后启动</td></tr>
+    <tr><td>L0-L3自动审核</td><td>55%通过</td><td>自动阻断违规提交</td><td>开发pre_commit_check</td></tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h3>📁 标准文档索引</h3>
+    <table>
+    <tr><th>#</th><th>文档</th><th>位置</th></tr>
+    <tr><td>1</td><td>产品体系标准 V1.0</td><td>对话/2026-05-28/公众号产品化/17_产品体系运营标准_V1.0.md</td></tr>
+    <tr><td>2</td><td>产品质量管理体系 V2.0</td><td>对话/2026-05-28/公众号产品化/18_产品质量管理体系_V2.0.md</td></tr>
+    <tr><td>3</td><td>产品质量管理体系 V3.0</td><td>对话/2026-05-28/公众号产品化/19_产品质量管理体系_V3.0.md</td></tr>
+    <tr><td>4</td><td>产品质量管理体系 VFinal</td><td>对话/2026-05-28/公众号产品化/20_产品质量管理体系_VFinal.md</td></tr>
+    <tr><td>5</td><td>产品命名体系深度思考</td><td>对话/2026-05-28/公众号产品化/10_产品命名体系深度思考_通道法.md</td></tr>
+    <tr><td>6</td><td>产品形态优化方案</td><td>对话/2026-05-28/公众号产品化/15_产品形态优化方案.md</td></tr>
+    <tr><td>7</td><td>产品体系最终整合方案</td><td>对话/2026-05-28/公众号产品化/11_产品体系最终整合方案.md</td></tr>
+    </table>
+  </div>
+</div>
+<div class="footer">满意解研究所 · 质量仪表盘 · 对标20+全球顶级机构 · 自动更新中</div>
+</body>
+</html>
