@@ -446,27 +446,49 @@ function generateQuickDiagnosis(dimScores) {
   const scores = dims.map(d => dimScores[d] || 3);
   const avg = (scores.reduce((a,b)=>a+b,0)/5).toFixed(2);
   const spread = (Math.max(...scores)-Math.min(...scores)).toFixed(2);
-  const ciApprox = Math.min(0.95, Math.max(0.05, (6-avg)/6)).toFixed(2);
-  const monthsApprox = Math.round((0.8 - ciApprox) / 0.06);
+  
+  // Find the two dimensions with biggest gap
+  const gaps = dims.map((d,i) => ({dim:d, name:names[i], score:scores[i]}));
+  gaps.sort((a,b) => Math.abs(a.score-avg) - Math.abs(b.score-avg));
+  const top2 = gaps.slice(-2).reverse();
+  
+  // Determine stage label (not score)
+  let stageLabel, stageClass, stageDetail;
+  const bx = dimScores['X'] || 3;  // 信义观
+  if(bx < 2.5) {
+    stageLabel = '腐蚀期';
+    stageClass = 'red';
+    stageDetail = '信义观得分低于2.5是你唯一需要关注的信号。在84案例中没有一对信义观<3的合伙人通过调解恢复。';
+  } else if(spread > 2.0) {
+    stageLabel = '胶着期';
+    stageClass = 'orange';
+    stageDetail = `你的团队在${top2[0].name}和${top2[1].name}两个维度分歧最大。这不是'谁对谁错'——这是两个人对'公司核心资产是什么'有不同的答案。`;
+  } else if(spread > 1.0) {
+    stageLabel = '摩擦期';
+    stageClass = 'yellow';
+    stageDetail = `你和你合伙人的节奏分歧主要在${top2[0].name}维度上。35%的硬科技团队都有同样的问题。这很正常——但你需要在分歧变成裂痕之前做一次对齐对话。`;
+  } else {
+    stageLabel = '健康期';
+    stageClass = 'green';
+    stageDetail = '你们的五个维度高度对齐。这是签章的最佳时机——最好的合同是在你们还相爱的时候签的。';
+  }
   
   let diagnosisHtml = '<div class="card" style="margin-top:16px;background:#C23B2204;border:1px solid var(--brand);border-radius:16px;padding:20px">';
-  diagnosisHtml += '<h3 style="color:var(--brand);font-size:16px;margin-bottom:12px">📊 当场诊断摘要 (无需命令行)</h3>';
-  diagnosisHtml += `<p style="font-size:13px;color:var(--muted);">均分: ${avg}/5 | 维度分差: ${spread} | CI近似: ${ciApprox}</p>`;
-  diagnosisHtml += `<p style="font-size:12px;color:var(--muted);margin-top:4px">如果CI≈${ciApprox}·距临界点约${monthsApprox}个月·`;
-  if(ciApprox > 0.5) diagnosisHtml += '当前处于临界区·建议立即干预';
-  else if(ciApprox > 0.25) diagnosisHtml += '当前处于显现期·建议监控临界慢化信号';
-  else diagnosisHtml += '当前处于健康区间·建议定期检查';
-  diagnosisHtml += '</p>';
+  diagnosisHtml += '<h3 style="color:var(--brand);font-size:16px;margin-bottom:12px">📊 你的团队关系阶段</h3>';
   
-  // 四骑士近似信号
-  const bx = dimScores['X'] || 3;
-  const bb = dimScores['B'] || 3;
-  if(bx < 2.5) diagnosisHtml += '<p style="font-size:12px;color:#C23B22;margin-top:4px">⚠️ 信义观偏低(信义观<'+(bx).toFixed(1)+')——Gottman四骑士信号可能活跃·建议关注批讽/蔑视/防御/冷漠</p>';
-  if(bb < 2.5) diagnosisHtml += '<p style="font-size:12px;color:#C23B22;margin-top:4px">⚠️ 身心流偏低(身心流<'+(bb).toFixed(1)+')——身体可能在投票·建议关注躯体信号</p>';
+  // Stage badge - no score, just label
+  const stageColors = {red:'#C62828',orange:'#E65100',yellow:'#F9A825',green:'#2E7D32'};
+  diagnosisHtml += `<div style="text-align:center;margin:16px 0">`;
+  diagnosisHtml += `<div style="font-size:42px;font-weight:700;color:${stageColors[stageClass]}">${stageLabel}</div>`;
+  diagnosisHtml += `</div>`;
   
-  diagnosisHtml += '<div style="margin-top:12px;display:flex;gap:8px">';
-  diagnosisHtml += '<a href="chemical-report.html" style="flex:1;text-align:center;background:#C23B22;color:#F5F0E6;padding:8px;border-radius:10px;font-size:13px;text-decoration:none">完整矛盾报告</a>';
-  diagnosisHtml += '<a href="decision-theatre.html" style="flex:1;text-align:center;background:#B8860B;color:#F5F0E6;padding:8px;border-radius:10px;font-size:13px;text-decoration:none">决策剧场</a>';
+  // Key insight - not radar, just the two most important dimensions
+  diagnosisHtml += `<p style="font-size:14px;color:var(--text);line-height:1.6;margin-bottom:16px">${stageDetail}</p>`;
+  
+  // CTA - experience solving, not buying
+  diagnosisHtml += '<div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">';
+  diagnosisHtml += '<a href="thermometer.html" style="text-align:center;background:#C23B22;color:#F5F0E6;padding:10px;border-radius:10px;font-size:14px;text-decoration:none">🩺 30秒关系温度计（免费）</a>';
+  diagnosisHtml += '<p style="text-align:center;font-size:12px;color:var(--muted);margin:4px 0">做完温度计后把这个链接发给你的合伙人——这可能是你们今年最重要的对话。</p>';
   diagnosisHtml += '</div></div>';
   
   document.getElementById('alerts').insertAdjacentHTML('beforeend', diagnosisHtml);
