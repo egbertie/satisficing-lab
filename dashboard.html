@@ -283,64 +283,105 @@ document.addEventListener('paste',function(e){
 
 <script>
 // ===== localStorage 数据引擎 =====
-const DB = {
-  get(key) { try{return JSON.parse(localStorage.getItem('sri_db_'+key))||[]}catch{return[]} },
-  set(key,data) { localStorage.setItem('sri_db_'+key, JSON.stringify(data)) },
+
+// ===== 双数据源引擎: API优先 + localStorage降级 =====
+var DB = {
+  _api: 'http://localhost:8765/api',
+  _local: true, // fallback to localStorage if API not available
   
-  tasks() { return this.get('tasks') },
-  addTask(t) { let d=this.tasks(); d.unshift({...t,id:Date.now(),created:new Date().toISOString()}); this.set('tasks',d.slice(0,500)) },
-  updateTask(id,status) { let d=this.tasks(); let item=d.find(x=>x.id===id); if(item){item.status=status;item.updated=new Date().toISOString();this.set('tasks',d)} },
-  
-  customers() { return this.get('customers') },
-  addCustomer(c) { let d=this.customers(); d.unshift({...c,id:Date.now(),created:new Date().toISOString()}); this.set('customers',d.slice(0,500)) },
-  
-  passwords() { return this.get('passwords') },
-  addPassword(p) { let d=this.passwords(); d.unshift({...p,id:Date.now(),created:new Date().toISOString()}); this.set('passwords',d.slice(0,200)) },
-  
-  quality() { return this.get('quality') },
-  addQuality(q) { let d=this.quality(); d.push({...q,id:Date.now()}); this.set('quality',d) },
-  
-  products() { return this.get('products') },
-  addProduct(p) { let d=this.products(); d.push({...p,id:Date.now()}); this.set('products',d.slice(0,500)) },
-  
-  growth() { return this.get('growth') },
-  usage() { let log=JSON.parse(localStorage.getItem('sri_usage_log')||'[]'); return log.filter(x=>new Date(x.time).toDateString()===new Date().toDateString()) },
-  flywheel() { return JSON.parse(localStorage.getItem('sri_flywheel_reports')||'[]') },
-  
-  stats() {
-    return {
-      tasks: this.tasks().length,
-      customers: this.customers().length,
-      passwords: this.passwords().length,
-      quality: this.quality().length,
-      products: this.products().length,
-      usage: this.usage().length,
-      flywheel: this.flywheel().length
+  async _fetch(endpoint, method, body) {
+    try {
+      var opts = {method:method||'GET', headers:{'Content-Type':'application/json'}};
+      if(body) opts.body = JSON.stringify(body);
+      var r = await fetch(this._api + endpoint, opts);
+      return await r.json();
+    } catch(e) {
+      return null;
     }
   },
   
+  get(key) {
+    try { return JSON.parse(localStorage.getItem('sri_db_'+key)) || []; }
+    catch { return []; }
+  },
+  set(key, data) { localStorage.setItem('sri_db_'+key, JSON.stringify(data)); },
+  
+  async tasks() {
+    var d = await this._fetch('/tasks');
+    return Array.isArray(d) ? d : this.get('tasks');
+  },
+  async addTask(t) {
+    await this._fetch('/tasks','POST',t);
+    var d = this.get('tasks'); d.unshift({...t, id:Date.now(), created:new Date().toISOString()}); this.set('tasks',d.slice(0,500));
+  },
+  async updateTask(id, status) {
+    await this._fetch('/tasks/update','POST',{id:id, status:status});
+    var d = this.get('tasks'); var item = d.find(x=>x.id===id); if(item) {item.status=status; this.set('tasks',d);}
+  },
+  
+  async customers() {
+    var d = await this._fetch('/customers');
+    return Array.isArray(d) ? d : this.get('customers');
+  },
+  async addCustomer(cust) {
+    await this._fetch('/customers','POST',cust);
+    var d = this.get('customers'); d.unshift({...cust, id:Date.now(), created:new Date().toISOString()}); this.set('customers',d.slice(0,500));
+  },
+  
+  async passwords() {
+    var d = await this._fetch('/passwords');
+    return Array.isArray(d) ? d : this.get('passwords');
+  },
+  async addPassword(p) {
+    await this._fetch('/passwords','POST',p);
+    var d = this.get('passwords'); d.unshift({...p, id:Date.now(), created:new Date().toISOString()}); this.set('passwords',d.slice(0,200));
+  },
+  
+  quality() { return this.get('quality') },
+  addQuality(q) { var d=this.quality(); d.push({...q,id:Date.now()}); this.set('quality',d) },
+  
+  products() { return this.get('products') },
+  addProduct(p) { var d=this.products(); d.push({...p,id:Date.now()}); this.set('products',d.slice(0,500)) },
+  
+  growth() { return this.get('growth') },
+  usage() { var log=JSON.parse(localStorage.getItem('sri_usage_log')||'[]'); return log.filter(x=>new Date(x.time).toDateString()===new Date().toDateString()); },
+  flywheel() { return JSON.parse(localStorage.getItem('sri_flywheel_reports')||'[]'); },
+  
+  async stats() {
+    try {
+      var d = await this._fetch('/stats');
+      if (d) return { tasks:d.tasks||0, customers:d.customers||0, passwords:d.passwords||0, quality:this.quality().length, products:this.products().length, usage:d.usage_today||0, flywheel:this.flywheel().length };
+    } catch(e) {}
+    return { tasks:this.get('tasks').length, customers:this.get('customers').length, passwords:this.get('passwords').length, quality:this.quality().length, products:this.products().length, usage:this.usage().length, flywheel:this.flywheel().length };
+  },
+  
   seed() {
-    if (this.passwords().length===0) this.addPassword({code:'***',products:'all',customer:'内测用户',max_uses:9999,used:0,status:'启用'});
-    if (this.quality().length===0) {
+    if (this.get('passwords').length===0) this.set('passwords',[{id:1,code:'123654',products:'all',customer:'内测',max_uses:9999,used:0,status:'启用',created:new Date().toISOString()}]);
+    if (this.get('quality').length===0) {
       this.addQuality({qm_id:'QM-001',standard:'L0 提案审核',status:'待执行',assignee:'满意红',deadline:'2026-06-07',priority:'P0'});
       this.addQuality({qm_id:'QM-002',standard:'L1 方法论审核',status:'55%通过率',assignee:'满意红(cron)',deadline:'2026-06-07',priority:'P0'});
       this.addQuality({qm_id:'QM-003',standard:'L2 内容审核',status:'105个缺来源',assignee:'满意红',deadline:'2026-06-14',priority:'P1'});
       this.addQuality({qm_id:'QM-009',standard:'四关通过率≥80%',status:'96%(已达标)',assignee:'满意红(cron)',deadline:'2026-07-01',priority:'P0'});
       this.addQuality({qm_id:'QM-026',standard:'商标注册',status:'未申请',assignee:'Egbertie',deadline:'2026-07-31',priority:'P0'});
     }
-    if (this.get('growth').length===0) {
-      this.set('growth',[
-        {metric:'线上产品总数',current:'233',target:'250',trend:'→'},
-        {metric:'四关通过率',current:'96%',target:'100%',trend:'↑'},
-        {metric:'NPS基线',current:'待收集',target:'≥50',trend:'—'},
-        {metric:'飞轮循环',current:this.flywheel().length,target:'50',trend:'—'},
-        {metric:'活跃客户(30d)',current:'0',target:'30',trend:'—'},
-      ]);
-    }
   }
 };
 
+// 异步初始化
+var DB_INIT = false;
+async function initDB() {
+  if (DB_INIT) return;
+  DB.seed();
+  try {
+    var s = await DB._fetch('/stats');
+    if (s) console.log('✅ SQLite中台已连接·'+s.tasks+'任务·'+s.customers+'客户');
+    else console.log('⚠️ 使用localStorage降级');
+  } catch(e) { console.log('⚠️ localStorage模式'); }
+  DB_INIT = true;
+}
+
 DB.seed();
+
 // 自动从系统引擎同步最新数据
 (function(){
   // 从flywheel引擎同步
@@ -370,13 +411,14 @@ function switchTab(tab) {
   render();
 }
 
-function render() {
+async function render() {
+  await initDB();
   loadKPI();
   renderNorthstar();
   let html = '';
   
   if (currentTab === 'tasks') {
-    let data = DB.tasks();
+    let data = await DB.tasks();
     html = `<div class="panel"><h3>📋 任务驾驶舱</h3>
       <div style="display:flex;gap:8px;margin-bottom:12px;font-size:11px;">
         <div style="flex:1;background:#f0e8d8;border-radius:8px;overflow:hidden;height:18px;" id="progressBar">
@@ -414,7 +456,7 @@ function render() {
       document.getElementById('taskStats').innerHTML='<span>✅ 完成:'+done+'</span><span>🔄 进行中:'+tasks.filter(t=>t.status==='进行中').length+'</span><span>⏳ 待开始:'+tasks.filter(t=>t.status==='待开始').length+'</span>';
     },100);
   } else if (currentTab === 'customers') {
-    let data = DB.customers();
+    let data = await DB.customers();
     html = `<div class="panel"><h3>👤 客户档案库</h3>
       <div class="form-row">
         <input id="custName" placeholder="姓名*"><input id="custCompany" placeholder="企业">
@@ -441,7 +483,7 @@ function render() {
       document.getElementById('taskStats').innerHTML='<span>✅ 完成:'+done+'</span><span>🔄 进行中:'+tasks.filter(t=>t.status==='进行中').length+'</span><span>⏳ 待开始:'+tasks.filter(t=>t.status==='待开始').length+'</span>';
     },100);
   } else if (currentTab === 'passwords') {
-    let data = DB.passwords();
+    let data = await DB.passwords();
     html = `<div class="panel"><h3>🔐 授权密码管理</h3>
       <div class="form-row">
         <input id="pwdCode" placeholder="8位密码" maxlength="8" type="password">
@@ -624,7 +666,7 @@ function addTask() {
   document.getElementById('taskName').value=''; render();
 }
 
-function updateTask(id,status) { DB.updateTask(id,status); render(); }
+function updateTask(id,status) { await DB.updateTask(id,status); render(); }
 
 function deleteItem(table,id) {
   let d = DB.get(table);
@@ -719,7 +761,7 @@ function clearAll() {
  render();
 }
 
-render();
+initDB().then(() => render());
 </script>
 </body>
 </html>
