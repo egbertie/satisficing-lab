@@ -339,6 +339,24 @@ const DB = {
 };
 
 DB.seed();
+// 自动从系统引擎同步最新数据
+(function(){
+  // 从flywheel引擎同步
+  if(window.FlywheelEngine){
+    var s=FlywheelEngine.refine();
+    if(s.totalUsage>0){
+      var g=DB.get('growth');
+      g.find(x=>x.metric==='飞轮循环').current=s.flywheel_cycles||0;
+      g.find(x=>x.metric==='线上产品总数').current=s.totalProducts||233;
+      DB.set('growth',g);
+    }
+  }
+  // 同步使用日志到驾驶舱
+  var usage=JSON.parse(localStorage.getItem('sri_usage_log')||'[]');
+  var todayLog=usage.filter(x=>new Date(x.time).toDateString()===new Date().toDateString());
+  document.getElementById('kv_usage')&&(document.getElementById('kv_usage').textContent=todayLog.length||0);
+})();
+
 
 // ===== UI渲染 =====
 let currentTab = 'tasks';
@@ -352,11 +370,19 @@ function switchTab(tab) {
 
 function render() {
   loadKPI();
+  renderNorthstar();
   let html = '';
   
   if (currentTab === 'tasks') {
     let data = DB.tasks();
     html = `<div class="panel"><h3>📋 任务驾驶舱</h3>
+      <div style="display:flex;gap:8px;margin-bottom:12px;font-size:11px;">
+        <div style="flex:1;background:#f0e8d8;border-radius:8px;overflow:hidden;height:18px;" id="progressBar">
+          <div id="progressFill" style="height:100%;background:#C23B22;border-radius:8px;width:0%;transition:width 0.3s;"></div>
+        </div>
+        <span id="progressText" style="white-space:nowrap;color:#6E6E6E;">0%</span>
+      </div>
+      <div style="display:flex;gap:12px;margin-bottom:8px;font-size:10px;color:#6E6E6E;" id="taskStats"></div>
       <div class="form-row">
         <input id="taskName" placeholder="任务名称">
         <select id="taskPri"><option>P0</option><option selected>P1</option><option>P2</option><option>P3</option></select>
@@ -374,7 +400,17 @@ function render() {
       });
       html += '</table>';
     }
+    html += '</table>';}
     html += '</div>';
+    // Update progress bar
+    setTimeout(()=>{
+      let tasks=DB.tasks();
+      let done=tasks.filter(t=>t.status==='完成').length;
+      let pct=tasks.length>0?Math.round(done/tasks.length*100):0;
+      document.getElementById('progressFill').style.width=pct+'%';
+      document.getElementById('progressText').textContent=pct+'% ('+done+'/'+tasks.length+')';
+      document.getElementById('taskStats').innerHTML='<span>✅ 完成:'+done+'</span><span>🔄 进行中:'+tasks.filter(t=>t.status==='进行中').length+'</span><span>⏳ 待开始:'+tasks.filter(t=>t.status==='待开始').length+'</span>';
+    },100);
   } else if (currentTab === 'customers') {
     let data = DB.customers();
     html = `<div class="panel"><h3>👤 客户档案库</h3>
@@ -391,7 +427,17 @@ function render() {
       });
       html += '</table>';
     }
+    html += '</table>';}
     html += '</div>';
+    // Update progress bar
+    setTimeout(()=>{
+      let tasks=DB.tasks();
+      let done=tasks.filter(t=>t.status==='完成').length;
+      let pct=tasks.length>0?Math.round(done/tasks.length*100):0;
+      document.getElementById('progressFill').style.width=pct+'%';
+      document.getElementById('progressText').textContent=pct+'% ('+done+'/'+tasks.length+')';
+      document.getElementById('taskStats').innerHTML='<span>✅ 完成:'+done+'</span><span>🔄 进行中:'+tasks.filter(t=>t.status==='进行中').length+'</span><span>⏳ 待开始:'+tasks.filter(t=>t.status==='待开始').length+'</span>';
+    },100);
   } else if (currentTab === 'passwords') {
     let data = DB.passwords();
     html = `<div class="panel"><h3>🔐 授权密码管理</h3>
@@ -410,7 +456,17 @@ function render() {
       });
       html += '</table>';
     }
+    html += '</table>';}
     html += '</div>';
+    // Update progress bar
+    setTimeout(()=>{
+      let tasks=DB.tasks();
+      let done=tasks.filter(t=>t.status==='完成').length;
+      let pct=tasks.length>0?Math.round(done/tasks.length*100):0;
+      document.getElementById('progressFill').style.width=pct+'%';
+      document.getElementById('progressText').textContent=pct+'% ('+done+'/'+tasks.length+')';
+      document.getElementById('taskStats').innerHTML='<span>✅ 完成:'+done+'</span><span>🔄 进行中:'+tasks.filter(t=>t.status==='进行中').length+'</span><span>⏳ 待开始:'+tasks.filter(t=>t.status==='待开始').length+'</span>';
+    },100);
   } else if (currentTab === 'quality') {
     let data = DB.quality();
     html = `<div class="panel"><h3>✅ 质量仪表盘 · QM质量标准</h3>`;
@@ -422,7 +478,17 @@ function render() {
       });
       html += '</table>';
     }
+    html += '</table>';}
     html += '</div>';
+    // Update progress bar
+    setTimeout(()=>{
+      let tasks=DB.tasks();
+      let done=tasks.filter(t=>t.status==='完成').length;
+      let pct=tasks.length>0?Math.round(done/tasks.length*100):0;
+      document.getElementById('progressFill').style.width=pct+'%';
+      document.getElementById('progressText').textContent=pct+'% ('+done+'/'+tasks.length+')';
+      document.getElementById('taskStats').innerHTML='<span>✅ 完成:'+done+'</span><span>🔄 进行中:'+tasks.filter(t=>t.status==='进行中').length+'</span><span>⏳ 待开始:'+tasks.filter(t=>t.status==='待开始').length+'</span>';
+    },100);
   } else if (currentTab === 'growth') {
     let data = DB.get('growth');
     html = `<div class="panel"><h3>📈 增长飞轮</h3><table><tr><th>指标</th><th>当前值</th><th>目标值</th><th>趋势</th></tr>`;
@@ -445,7 +511,17 @@ function render() {
       });
       html += '</table>';
     }
+    html += '</table>';}
     html += '</div>';
+    // Update progress bar
+    setTimeout(()=>{
+      let tasks=DB.tasks();
+      let done=tasks.filter(t=>t.status==='完成').length;
+      let pct=tasks.length>0?Math.round(done/tasks.length*100):0;
+      document.getElementById('progressFill').style.width=pct+'%';
+      document.getElementById('progressText').textContent=pct+'% ('+done+'/'+tasks.length+')';
+      document.getElementById('taskStats').innerHTML='<span>✅ 完成:'+done+'</span><span>🔄 进行中:'+tasks.filter(t=>t.status==='进行中').length+'</span><span>⏳ 待开始:'+tasks.filter(t=>t.status==='待开始').length+'</span>';
+    },100);
   } else if (currentTab === 'import') {
     html = `<div class="panel"><h3>📥 导入历史数据</h3>
       <p style="font-size:12px;opacity:0.6;margin-bottom:12px;">从旧飞书驾驶舱拉取的498条历史记录</p>
@@ -460,6 +536,37 @@ function render() {
   
   document.getElementById('content').innerHTML = html;
 }
+
+
+function renderNorthstar(){
+  let d=DB.get('growth');
+  let html='';
+  d.forEach(g => {
+    html+='<div style="background:#F5F0E6;border-radius:8px;padding:8px;"><div style="font-size:11px;color:#6E6E6E;">'+g.metric+'</div><div style="font-size:18px;font-weight:700;color:#C23B22;">'+g.current+'</div><div style="font-size:9px;color:#6E6E6E;">目标: '+g.target+' '+g.trend+'</div></div>';
+  });
+  document.getElementById('northstar').innerHTML=html;
+  
+  // 倒计时
+  var today=new Date();
+  var solstice=new Date(2026,5,21); // 6月21日(JS月份0-11)
+  var days=Math.ceil((solstice-today)/86400000);
+  document.getElementById('countdownDays').textContent=days+'天';
+}
+
+// 自动同步飞轮数据
+function syncFlywheelData(){
+  var reports=JSON.parse(localStorage.getItem('sri_flywheel_reports')||'[]');
+  var usage=JSON.parse(localStorage.getItem('sri_usage_log')||'[]');
+  var profile=JSON.parse(localStorage.getItem('sri_profile')||'{}');
+  var nps=localStorage.getItem('sri_nps_score');
+  
+  var g=DB.get('growth');
+  g.find(x=>x.metric==='飞轮循环').current=reports.length;
+  g.find(x=>x.metric==='活跃客户(30d)').current=profile.name?1:0;
+  if(nps) g.find(x=>x.metric==='NPS基线').current=nps+'/10';
+  DB.set('growth',g);
+}
+syncFlywheelData();
 
 function loadKPI() {
   let s = DB.stats();
@@ -553,7 +660,25 @@ function exportAll() {
 function clearAll() {
   if(!confirm('确定清空所有本地数据？此操作不可恢复！建议先导出备份。')) return;
   ['tasks','customers','passwords','quality','products','growth'].forEach(t => localStorage.removeItem('sri_db_'+t));
-  DB.seed(); render();
+  DB.seed();
+// 自动从系统引擎同步最新数据
+(function(){
+  // 从flywheel引擎同步
+  if(window.FlywheelEngine){
+    var s=FlywheelEngine.refine();
+    if(s.totalUsage>0){
+      var g=DB.get('growth');
+      g.find(x=>x.metric==='飞轮循环').current=s.flywheel_cycles||0;
+      g.find(x=>x.metric==='线上产品总数').current=s.totalProducts||233;
+      DB.set('growth',g);
+    }
+  }
+  // 同步使用日志到驾驶舱
+  var usage=JSON.parse(localStorage.getItem('sri_usage_log')||'[]');
+  var todayLog=usage.filter(x=>new Date(x.time).toDateString()===new Date().toDateString());
+  document.getElementById('kv_usage')&&(document.getElementById('kv_usage').textContent=todayLog.length||0);
+})();
+ render();
 }
 
 render();
