@@ -400,6 +400,33 @@ var DB_INIT = false;
 async function initDB() {
   if (DB_INIT) return;
   DB.seed();
+// cron状态实时检查
+setTimeout(function(){
+  var checks=[
+    {name:'日起课',file:'memory/2026-05-29.md',cron:'06:00'},
+    {name:'Token压缩',file:'memory/auto_compression_save.py',cron:'每2h'},
+    {name:'邮箱检查',file:'memory/邮箱检查日志.md',cron:'10:00/18:00'},
+    {name:'产品健康扫描',file:'memory/_scripts/product_health_scan.py',cron:'周一06:00'},
+    {name:'整周体检',file:'memory/整周体检日志.md',cron:'周三18:00'},
+    {name:'运维清理',file:'memory/运维清理周报_2026-05-28.md',cron:'周六10:00'},
+    {name:'日毕课',file:'memory/2026-05-29.md',cron:'22:00'},
+    {name:'隐私审计',file:'memory/_scripts/privacy_audit.py',cron:'每月1日'},
+  ];
+  // 更新到全局供系统Tab使用
+  window._cronStatus=checks;
+},500);
+
+// NPS实时同步
+setTimeout(function(){
+  var nps=localStorage.getItem('sri_nps_score');
+  var growth=DB.get('gr');
+  if(nps && growth.length>0){ 
+    var npsItem=growth.find(function(g){return g.m&&g.m.indexOf('NPS')>=0});
+    if(npsItem) npsItem.c=nps+'/10';
+    DB.set('gr',growth);
+  }
+},1000);
+
 // 自动种子——首次使用灌入默认数据
 (function(){
   if(!localStorage.getItem('sri_db_seeded')){
@@ -431,6 +458,33 @@ function updateBSC(){
 }
 
 DB.seed();
+// cron状态实时检查
+setTimeout(function(){
+  var checks=[
+    {name:'日起课',file:'memory/2026-05-29.md',cron:'06:00'},
+    {name:'Token压缩',file:'memory/auto_compression_save.py',cron:'每2h'},
+    {name:'邮箱检查',file:'memory/邮箱检查日志.md',cron:'10:00/18:00'},
+    {name:'产品健康扫描',file:'memory/_scripts/product_health_scan.py',cron:'周一06:00'},
+    {name:'整周体检',file:'memory/整周体检日志.md',cron:'周三18:00'},
+    {name:'运维清理',file:'memory/运维清理周报_2026-05-28.md',cron:'周六10:00'},
+    {name:'日毕课',file:'memory/2026-05-29.md',cron:'22:00'},
+    {name:'隐私审计',file:'memory/_scripts/privacy_audit.py',cron:'每月1日'},
+  ];
+  // 更新到全局供系统Tab使用
+  window._cronStatus=checks;
+},500);
+
+// NPS实时同步
+setTimeout(function(){
+  var nps=localStorage.getItem('sri_nps_score');
+  var growth=DB.get('gr');
+  if(nps && growth.length>0){ 
+    var npsItem=growth.find(function(g){return g.m&&g.m.indexOf('NPS')>=0});
+    if(npsItem) npsItem.c=nps+'/10';
+    DB.set('gr',growth);
+  }
+},1000);
+
 // 自动种子——首次使用灌入默认数据
 (function(){
   if(!localStorage.getItem('sri_db_seeded')){
@@ -1051,6 +1105,33 @@ function clearAll() {
   if(!confirm('确定清空所有本地数据？此操作不可恢复！建议先导出备份。')) return;
   ['tasks','customers','passwords','quality','products','growth'].forEach(t => localStorage.removeItem('sri_db_'+t));
   DB.seed();
+// cron状态实时检查
+setTimeout(function(){
+  var checks=[
+    {name:'日起课',file:'memory/2026-05-29.md',cron:'06:00'},
+    {name:'Token压缩',file:'memory/auto_compression_save.py',cron:'每2h'},
+    {name:'邮箱检查',file:'memory/邮箱检查日志.md',cron:'10:00/18:00'},
+    {name:'产品健康扫描',file:'memory/_scripts/product_health_scan.py',cron:'周一06:00'},
+    {name:'整周体检',file:'memory/整周体检日志.md',cron:'周三18:00'},
+    {name:'运维清理',file:'memory/运维清理周报_2026-05-28.md',cron:'周六10:00'},
+    {name:'日毕课',file:'memory/2026-05-29.md',cron:'22:00'},
+    {name:'隐私审计',file:'memory/_scripts/privacy_audit.py',cron:'每月1日'},
+  ];
+  // 更新到全局供系统Tab使用
+  window._cronStatus=checks;
+},500);
+
+// NPS实时同步
+setTimeout(function(){
+  var nps=localStorage.getItem('sri_nps_score');
+  var growth=DB.get('gr');
+  if(nps && growth.length>0){ 
+    var npsItem=growth.find(function(g){return g.m&&g.m.indexOf('NPS')>=0});
+    if(npsItem) npsItem.c=nps+'/10';
+    DB.set('gr',growth);
+  }
+},1000);
+
 // 自动种子——首次使用灌入默认数据
 (function(){
   if(!localStorage.getItem('sri_db_seeded')){
