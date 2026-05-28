@@ -634,5 +634,19 @@ buildQuestions();
 })();
 </script>
 
-</body>
+
+<div style="text-align:center;margin:12px 0;">
+  <button onclick="shareResult()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;color:#C23B22;cursor:pointer;font-size:13px;font-weight:600;">📤 分享你的结果</button>
+  <p id="shareDone" style="display:none;color:#4A8C5C;font-size:12px;margin-top:4px;">✅ 已生成分享卡片</p>
+</div>
+<script>
+function shareResult(){
+  let t=dimScores.T.toFixed(1),d=dimScores.D.toFixed(1),b=dimScores.B.toFixed(1),x=dimScores.X.toFixed(1),z=dimScores.Z.toFixed(1);
+  let stage=document.querySelector('.stage-badge')?.textContent||'';
+  let text=`我的五维决策画像\n⏰时间轴:${t} | 📐可行域:${d} | 🌊身心流:${b}\n🌳信义观:${x} | 🔥直觉阈:${z}\n📊阶段:${stage}\n\n你也来测一下：`;
+  let url=window.location.href.replace('assessment.html','go.html');
+  if(navigator.share){navigator.share({title:'五维决策自评',text,url}).catch(()=>{});}
+  else{navigator.clipboard.writeText(text+' '+url).then(()=>{document.getElementById('shareDone').style.display='block';setTimeout(()=>document.getElementById('shareDone').style.display='none',3000);});}
+}
+</script></body>
 </html>
