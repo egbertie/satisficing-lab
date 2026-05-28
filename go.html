@@ -6,273 +6,291 @@
 <title>满意解研究所 · 硬科技创始人的决策教练</title>
 <link rel="stylesheet" href="sri-design.css">
 <style>
-  .main { max-width: 560px; margin: 0 auto; padding: var(--sp-md); }
+  .main{max-width:560px;margin:0 auto;padding:var(--sp-md)}
 
-  /* Section节奏 */
-  .section { margin: var(--sp-2xl) 0; }
-  .section-label { text-align: center; margin-bottom: var(--sp-lg); }
-  .section-label h2 { font-size: var(--text-headline); color: var(--title); margin-bottom: var(--sp-xs); }
-  .section-label p { font-size: var(--text-small); color: var(--text-muted); }
+  /* === Hero: 触发 (Hook Model Trigger) === */
+  .hero{padding:var(--sp-3xl) var(--sp-lg) var(--sp-xl)}
+  .hero .value{font-size:20px;font-weight:700;color:#F5F0E6;margin:var(--sp-sm) 0;letter-spacing:0.02em}
+  .hero .story{font-size:15px;color:rgba(245,240,230,0.85);max-width:400px;margin:0 auto var(--sp-lg);line-height:1.8}
+  .hero .story em{font-style:normal;background:rgba(245,240,230,0.15);padding:2px 8px;border-radius:4px}
+  .hero-cta{margin-top:var(--sp-md)}
+  .hero-cta a{display:inline-block;padding:16px 40px;background:#F5F0E6;color:var(--sri-red);border-radius:var(--radius-full);font-weight:700;font-size:17px;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,0.12);transition:all var(--ease-out)}
+  .hero-cta a:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.18)}
+  .hero-trust{font-size:12px;opacity:0.55;margin-top:var(--sp-md)}
+  .hero .nav-line{margin-top:var(--sp-md);font-size:13px;opacity:0.75}
+  .hero .nav-line a{color:#F5F0E6;text-decoration:none;margin:0 var(--sp-sm);font-weight:500}
 
-  /* Hero区 */
-  .hero h1 { font-size: 26px; margin-bottom: var(--sp-sm); }
-  .hero .hero-value-prop { font-size: 18px; font-weight: 500; color: rgba(245,240,230,0.95); margin: var(--sp-md) 0 var(--sp-xs); letter-spacing: 0.03em; }
-  .hero .hero-desc { font-size: 14px; color: rgba(245,240,230,0.8); max-width: 400px; margin: 0 auto var(--sp-lg); line-height: 1.7; }
-  .hero .hero-cta { margin-top: var(--sp-md); }
-  .hero .hero-cta a { display: inline-block; padding: 14px 36px; background: #F5F0E6; color: var(--sri-red); border-radius: var(--radius-full); font-weight: 700; font-size: 16px; text-decoration: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all var(--ease-out); }
-  .hero .hero-cta a:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
-  .hero .hero-trust { margin-top: var(--sp-lg); font-size: 12px; opacity: 0.6; }
+  /* === Section通用的呼吸感 === */
+  .section{margin:var(--sp-2xl) 0}
+  .section-title{text-align:center;margin-bottom:var(--sp-lg)}
+  .section-title h2{font-size:var(--text-headline);margin-bottom:var(--sp-xs)}
+  .section-title p{font-size:var(--text-small);color:var(--text-muted);max-width:380px;margin:0 auto}
 
-  /* 三扇门 */
-  .doors { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-  .door { background: var(--white); border-radius: var(--radius-lg); padding: var(--sp-lg) var(--sp-sm); text-align: center; border: 2px solid var(--border-light); transition: all var(--ease-out); text-decoration: none; color: inherit; box-shadow: var(--shadow-card); }
-  .door:hover { border-color: var(--sri-red); box-shadow: var(--shadow-md); transform: translateY(-1px); }
-  .door .d-icon { font-size: 32px; display: block; margin-bottom: var(--sp-sm); }
-  .door .d-label { font-size: 14px; font-weight: 700; color: var(--title); }
-  .door .d-hint { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+  /* === 三门：行动 (Hook Model Action) === */
+  .doors{display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--sp-sm)}
+  .door{background:var(--white);border-radius:var(--radius-lg);padding:var(--sp-lg) var(--sp-sm);text-align:center;border:2px solid var(--border-light);transition:all var(--ease-out);text-decoration:none;color:inherit;box-shadow:var(--shadow-card);cursor:pointer}
+  .door:hover{border-color:var(--sri-red);box-shadow:var(--shadow-elevated);transform:translateY(-2px)}
+  .door .d-icon{font-size:36px;display:block;margin-bottom:var(--sp-sm)}
+  .door .d-label{font-size:15px;font-weight:700;color:var(--title)}
+  .door .d-desc{font-size:12px;color:var(--text-muted);margin-top:var(--sp-xs)}
 
-  /* 免费工具精选 */
-  .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .tool-card { background: var(--white); border-radius: var(--radius-lg); padding: var(--sp-lg) var(--sp-md); text-align: center; text-decoration: none; color: inherit; border: 1px solid var(--border-light); transition: all var(--ease-out); box-shadow: var(--shadow-card); }
-  .tool-card:hover { border-color: var(--sri-red); transform: translateY(-1px); box-shadow: var(--shadow-md); }
-  .tool-card .t-icon { font-size: 28px; }
-  .tool-card .t-name { font-size: 14px; font-weight: 700; color: var(--title); margin: var(--sp-sm) 0 4px; }
-  .tool-card .t-desc { font-size: 12px; color: var(--text-muted); }
-  .tool-card .t-time { font-size: 11px; color: var(--sri-red); margin-top: 6px; font-weight: 600; }
+  /* === 免费工具：可变奖励 (Hook Model Variable Reward) === */
+  .tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-sm)}
+  .tool-card{background:var(--white);border-radius:var(--radius-lg);padding:var(--sp-lg);text-align:center;text-decoration:none;color:inherit;border:1px solid var(--border-light);transition:all var(--ease-out);box-shadow:var(--shadow-card);display:flex;flex-direction:column;align-items:center;gap:var(--sp-xs)}
+  .tool-card:hover{border-color:var(--sri-red);transform:translateY(-2px);box-shadow:var(--shadow-elevated)}
+  .tool-card .t-icon{font-size:32px}
+  .tool-card .t-name{font-size:15px;font-weight:700;color:var(--title)}
+  .tool-card .t-desc{font-size:12px;color:var(--text-muted);line-height:1.5}
+  .tool-card .t-meta{font-size:11px;color:var(--sri-red);font-weight:600;background:var(--sri-red-light);padding:3px 12px;border-radius:var(--radius-full);margin-top:var(--sp-xs)}
 
-  /* 为什么选我们 */
-  .reasons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .reason-card { background: var(--white); border-radius: var(--radius-lg); padding: var(--sp-lg); border: 1px solid var(--border-light); text-align: center; }
-  .reason-card .r-icon { font-size: 28px; }
-  .reason-card .r-name { font-size: 13px; font-weight: 700; color: var(--title); margin: var(--sp-sm) 0 4px; }
-  .reason-card .r-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+  /* === 信任区：社会认同 === */
+  .trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-sm)}
+  .trust-card{background:var(--white);border-radius:var(--radius-lg);padding:var(--sp-lg);text-align:center;border:1px solid var(--border-light)}
+  .trust-card .r-icon{font-size:28px}
+  .trust-card .r-name{font-size:14px;font-weight:700;color:var(--title);margin:var(--sp-sm) 0 var(--sp-xs)}
+  .trust-card .r-desc{font-size:12px;color:var(--text-muted);line-height:1.6}
 
-  /* 社会证明 */
-  .social-proof { text-align: center; padding: var(--sp-lg); background: var(--white); border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
-  .social-proof .numbers { display: flex; justify-content: center; gap: var(--sp-xl); margin: var(--sp-md) 0; }
-  .social-proof .n-item .n-val { font-size: 22px; font-weight: 700; color: var(--sri-red); }
-  .social-proof .n-item .n-label { font-size: 11px; color: var(--text-muted); }
+  /* === 数据证明 === */
+  .proof{background:var(--white);border-radius:var(--radius-lg);padding:var(--sp-lg);text-align:center;border:1px solid var(--border-light)}
+  .proof-numbers{display:flex;justify-content:center;gap:var(--sp-xl);margin:var(--sp-sm) 0}
+  .proof-num .val{font-size:26px;font-weight:800;color:var(--sri-red)}
+  .proof-num .lbl{font-size:11px;color:var(--text-muted)}
 
-  /* CTA区 */
-  .cta-section { text-align: center; padding: var(--sp-2xl) var(--sp-md); background: var(--sri-red-light); border-radius: var(--radius-lg); margin: var(--sp-2xl) 0; }
-  .cta-section h3 { font-size: var(--text-subhead); margin-bottom: var(--sp-xs); }
-  .cta-section p { font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--sp-lg); }
+  /* === CTA区：投资 (Hook Model Investment) === */
+  .cta-section{text-align:center;padding:var(--sp-2xl) var(--sp-md);background:var(--sri-red-light);border-radius:var(--radius-xl);margin:var(--sp-2xl) 0}
+  .cta-section h3{font-size:var(--text-subhead);margin-bottom:var(--sp-xs)}
+  .cta-section .urgency{font-size:13px;color:var(--sri-red);font-weight:600;margin-bottom:var(--sp-md)}
 
-  /* 底部导航 */
-  .bottom-links { text-align: center; padding: var(--sp-lg) 0; display: flex; justify-content: center; gap: var(--sp-lg); flex-wrap: wrap; }
-  .bottom-links a { color: var(--text-secondary); text-decoration: none; font-size: var(--text-small); }
-  .bottom-links a:hover { color: var(--sri-red); }
-
-  .footer-note { text-align: center; padding: var(--sp-md) var(--sp-md) var(--sp-2xl); font-size: var(--text-caption); color: var(--text-muted); }
-  .footer-note strong { color: var(--sri-red); }
+  /* === 底部 === */
+  .footer{padding:var(--sp-lg) var(--sp-md) var(--sp-2xl);text-align:center;font-size:var(--text-caption);color:var(--text-muted)}
+  .footer .links{display:flex;justify-content:center;gap:var(--sp-lg);margin-bottom:var(--sp-md);flex-wrap:wrap}
+  .footer .links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:500}
+  .footer .links a:hover{color:var(--sri-red)}
+  .footer .brand{font-weight:600;color:var(--sri-red)}
 </style>
 </head>
 <body>
 
-<!-- ===== SECTION 1: Hero ===== -->
+<!-- ===== HOOK: 触发 ===== -->
 <div class="hero">
   <h1>满意解研究所</h1>
-  <div class="hero-value-prop">硬科技创始人的决策教练</div>
-  <div class="hero-desc">
-    从合伙人匹配到退出决策——五条通道，一个系统。<br>不是替你做决定，是让你做决定的时候知道自己不是一个人。
+  <div class="value">硬科技创始人的决策教练</div>
+  <div class="story">
+    凌晨一点，又一个创始人发来消息：<em>"散了。三年，散了。"</em><br>
+    我们盯着屏幕，不知道该怎么回。<br>
+    这样的消息不是第一次。也不会是最后一次。<br>
+    满意解研究所——就是在这样的深夜里诞生的。
   </div>
   <div class="hero-cta">
     <a href="guide.html">🧭 找到适合你的工具 →</a>
   </div>
-  <div class="hero-trust">免费开始 · 无需注册 · 3分钟了解你的决策模式</div>
+  <div class="hero-trust">免费 · 3分钟 · 无需注册 · 先体验</div>
+  <div class="nav-line">
+    <a href="account.html">👤 客户中心</a> ·
+    <a href="go-gallery.html">🖼️ 画廊</a> ·
+    <a href="about.html">🏛️ 关于</a>
+  </div>
 </div>
 
 <div class="main">
 
-  <!-- ===== SECTION 2: 三扇门 ===== -->
+  <!-- ===== HOOK: 行动 ===== -->
   <div class="section">
-    <div class="section-label">
+    <div class="section-title">
       <h2>你现在的状态是？</h2>
-      <p>选一个，我们帮你找到对的方向</p>
+      <p>选一个——不是选产品，是选你</p>
     </div>
     <div class="doors">
-      <a class="door" href="#heng"><span class="d-icon">🤔</span><span class="d-label">我在犹豫</span><span class="d-hint">想量化一下</span></a>
-      <a class="door" href="#jing"><span class="d-icon">💭</span><span class="d-label">我觉得不对劲</span><span class="d-hint">想确认一下</span></a>
-      <a class="door" href="#jue"><span class="d-icon">🔥</span><span class="d-label">我在危机中</span><span class="d-hint">想模拟一下</span></a>
+      <a class="door" href="assessment.html"><span class="d-icon">🤔</span><span class="d-label">我在犹豫</span><span class="d-desc">量化一下</span></a>
+      <a class="door" href="thermometer.html"><span class="d-icon">💭</span><span class="d-label">我觉得不对劲</span><span class="d-desc">照见一下</span></a>
+      <a class="door" href="crisis-sim.html"><span class="d-icon">🔥</span><span class="d-label">我在危机中</span><span class="d-desc">模拟一下</span></a>
     </div>
   </div>
 
-  <!-- ===== SECTION 3: 免费工具 ===== -->
+  <!-- ===== HOOK: 可变奖励 ===== -->
   <div class="section">
-    <div class="section-label">
-      <h2>免费开始</h2>
-      <p>全部免费，3-10分钟，无需注册</p>
+    <div class="section-title">
+      <h2>从这里开始</h2>
+      <p>全部免费——不需要任何准备</p>
     </div>
     <div class="tools-grid">
       <a class="tool-card" href="assessment.html">
-        <div class="t-icon">⚡</div><div class="t-name">五维快速自评</div><div class="t-desc">看清你和合伙人的决策模式差异</div><div class="t-time">3分钟 · 19题 · 即时报告</div>
+        <span class="t-icon">⚡</span>
+        <span class="t-name">五维快速自评</span>
+        <span class="t-desc">看清你和合伙人的决策模式差异</span>
+        <span class="t-meta">3分钟 · 19题</span>
       </a>
       <a class="tool-card" href="thermometer.html">
-        <div class="t-icon">🌡️</div><div class="t-name">关系温度计</div><div class="t-desc">最快发现信任裂缝</div><div class="t-time">30秒 · 4题 · 每两周追踪</div>
+        <span class="t-icon">🌡️</span>
+        <span class="t-name">关系温度计</span>
+        <span class="t-desc">最快发现裂缝</span>
+        <span class="t-meta">30秒 · 4题</span>
       </a>
       <a class="tool-card" href="knights.html">
-        <div class="t-icon">⚠️</div><div class="t-name">四骑士预警</div><div class="t-desc">Gottman 91%准确率的关系诊断</div><div class="t-time">1分钟 · 12题</div>
+        <span class="t-icon">⚠️</span>
+        <span class="t-name">四骑士预警</span>
+        <span class="t-desc">91%准确率的关系诊断</span>
+        <span class="t-meta">1分钟 · 12题</span>
       </a>
       <a class="tool-card" href="cards-play.html?deck=7">
-        <div class="t-icon">🎴</div><div class="t-name">决策卡牌</div><div class="t-desc">52张真实场景·四种模式</div><div class="t-time">10分钟 · 7-52张可选</div>
+        <span class="t-icon">🎴</span>
+        <span class="t-name">决策卡牌</span>
+        <span class="t-desc">52张真实场景</span>
+        <span class="t-meta">10分钟起</span>
       </a>
-      <a class="tool-card" href="cases.html">
-        <div class="t-icon">📖</div><div class="t-name">84案例精选</div><div class="t-desc">大疆·云鲸·比锐·海柔</div><div class="t-time">浏览 · 12个经典案例</div>
+      <a class="tool-card" href="crisis-sim.html">
+        <span class="t-icon">⚔️</span>
+        <span class="t-name">危机模拟器</span>
+        <span class="t-desc">在安全的地方做最难的决定</span>
+        <span class="t-meta">3场景 · 5分钟</span>
       </a>
       <a class="tool-card" href="guide.html">
-        <div class="t-icon">🧭</div><div class="t-name">不确定选什么？</div><div class="t-desc">5个问题，为你推荐最适合的工具</div><div class="t-time">2分钟 · 个性化推荐</div>
+        <span class="t-icon">🧭</span>
+        <span class="t-name">不知道怎么选？</span>
+        <span class="t-desc">5题 · 2分钟 · 给你推荐</span>
+        <span class="t-meta">导购问卷</span>
       </a>
     </div>
   </div>
 
-  <!-- ===== SECTION 4: 为什么信我们 ===== -->
+  <!-- ===== 信任：为什么 ===== -->
   <div class="section">
-    <div class="section-label">
+    <div class="section-title">
       <h2>为什么你可以相信我们</h2>
     </div>
-    <div class="reasons">
-      <div class="reason-card">
+    <div class="trust-grid">
+      <div class="trust-card">
         <div class="r-icon">🎓</div>
         <div class="r-name">四重学统</div>
-        <div class="r-desc">Simon满意解·Kahneman双系统·Gottman四骑士·Wasserman股权</div>
+        <div class="r-desc">Simon满意解 · Kahneman双系统<br>Gottman四骑士 · Wasserman股权</div>
       </div>
-      <div class="reason-card">
+      <div class="trust-card">
         <div class="r-icon">📊</div>
         <div class="r-name">84案例实证</div>
-        <div class="r-desc">从大疆涅槃到云鲸少年，每个结论都有真实案例支撑</div>
+        <div class="r-desc">从大疆涅槃到云鲸少年<br>每个结论有真实案例</div>
       </div>
-      <div class="reason-card">
+      <div class="trust-card">
         <div class="r-icon">🧬</div>
         <div class="r-name">三代AI传承</div>
-        <div class="r-desc">满意姐54天·扣子28天·满意红23天——不是软件，是知识体系</div>
+        <div class="r-desc">满意姐54天 · 扣子28天<br>满意红23天 · 知识体系</div>
       </div>
-      <div class="reason-card">
+      <div class="trust-card">
         <div class="r-icon">🔬</div>
         <div class="r-name">38篇论文</div>
-        <div class="r-desc">满意姐留下的学术地基——每个方法都有论文溯源</div>
+        <div class="r-desc">满意姐留下的学术地基<br>每个方法都有论文溯源</div>
       </div>
     </div>
   </div>
 
-  <!-- ===== SECTION 5: 社会证明 ===== -->
-  <div class="section social-proof">
+  <!-- ===== 数据证明 ===== -->
+  <div class="proof">
     <p style="font-size:14px;color:var(--title);font-weight:600;">满意解研究所</p>
-    <div class="numbers">
-      <div class="n-item"><div class="n-val">233</div><div class="n-label">在线产品</div></div>
-      <div class="n-item"><div class="n-val">84</div><div class="n-label">真实案例</div></div>
-      <div class="n-item"><div class="n-val">24</div><div class="n-label">翻书专著</div></div>
-      <div class="n-item"><div class="n-val">6</div><div class="n-label">产品形态</div></div>
+    <div class="proof-numbers">
+      <div class="proof-num"><div class="val">233</div><div class="lbl">在线产品</div></div>
+      <div class="proof-num"><div class="val">84</div><div class="lbl">真实案例</div></div>
+      <div class="proof-num"><div class="val">24</div><div class="lbl">翻书专著</div></div>
+      <div class="proof-num"><div class="val">6</div><div class="lbl">产品形态</div></div>
     </div>
-    <p style="font-size:12px;color:var(--text-muted);margin-top:var(--sp-sm);">
-      对标 20+ 全球顶级机构 · WCAG AA 可访问性标准 · 全产品四关审核
-    </p>
+    <p style="font-size:12px;color:var(--text-muted);">对标 20+ 全球顶级机构 · WCAG AA 标准 · 全产品四关审核</p>
   </div>
 
-  <!-- ===== SECTION 6: 五族展开 ===== -->
-  <div class="section">
-    <div class="section-label">
-      <h2>探索全部产品</h2>
-      <p>章·衡·镜·契·觉 —— 五条通道，一条完整的决策路径</p>
-    </div>
-    <div class="family" style="margin:8px 0;">
-      <button class="family-toggle" onclick="toggleFamily(this)" style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--white);border-radius:var(--radius-lg);border:1px solid var(--border-light);cursor:pointer;width:100%;font-family:var(--font-stack);font-size:14px;">
-        <span style="font-size:22px;">🪙</span><span style="font-weight:700;color:var(--title);">衡 · 标尺与量化</span><span style="font-size:12px;color:var(--text-muted);margin-left:auto;">司马贺·金·可行域</span><span style="margin-left:8px;">▼</span>
-      </button>
-      <div class="family-body" style="display:none;padding:8px 0;">
-        <a href="fulldiag.html" style="display:flex;padding:8px 12px;text-decoration:none;color:var(--text);"><span style="font-weight:600;color:var(--title);min-width:90px;">衡·测渊</span><span style="font-size:12px;color:var(--text-muted);">完整版诊断·28题</span></a>
-        <a href="rps.html" style="display:flex;padding:8px 12px;text-decoration:none;color:var(--text);"><span style="font-weight:600;color:var(--title);min-width:90px;">衡·探底</span><span style="font-size:12px;color:var(--text-muted);">RPS风险剖面</span></a>
-        <a href="slicing-pie.html" style="display:flex;padding:8px 12px;text-decoration:none;color:var(--text);"><span style="font-weight:600;color:var(--title);min-width:90px;">衡·分利</span><span style="font-size:12px;color:var(--text-muted);">SlicingPie贡献记账</span></a>
-      </div>
-    </div>
-    <div class="family" style="margin:8px 0;">
-      <button class="family-toggle" onclick="toggleFamily(this)" style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--white);border-radius:var(--radius-lg);border:1px solid var(--border-light);cursor:pointer;width:100%;font-family:var(--font-stack);font-size:14px;">
-        <span style="font-size:22px;">🪞</span><span style="font-weight:700;color:var(--title);">镜 · 照见与状态</span><span style="font-size:12px;color:var(--text-muted);margin-left:auto;">观自在·水·身心流</span><span style="margin-left:8px;">▼</span>
-      </button>
-      <div class="family-body" style="display:none;padding:8px 0;">
-        <a href="knights.html" style="display:flex;padding:8px 12px;text-decoration:none;color:var(--text);"><span style="font-weight:600;color:var(--title);min-width:90px;">镜·警兆</span><span style="font-size:12px;color:var(--text-muted);">四骑士自检·12题</span></a>
-        <a href="pre0.html" style="display:flex;padding:8px 12px;text-decoration:none;color:var(--text);"><span style="font-weight:600;color:var(--title);min-width:90px;">镜·回身</span><span style="font-size:12px;color:var(--text-muted);">PRE-0压力锚定</span></a>
-        <a href="knights-cards.html" style="display:flex;padding:8px 12px;text-decoration:none;color:var(--text);"><span style="font-weight:600;color:var(--title);min-width:90px;">镜·警兆·速查</span><span style="font-size:12px;color:var(--text-muted);">四骑士速查卡</span></a>
-      </div>
-    </div>
-    <div class="family" style="margin:8px 0;">
-      <button class="family-toggle" onclick="toggleFamily(this)" style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--white);border-radius:var(--radius-lg);border:1px solid var(--border-light);cursor:pointer;width:100%;font-family:var(--font-stack);font-size:14px;">
-        <span style="font-size:22px;">🔥</span><span style="font-weight:700;color:var(--title);">觉 · 顿悟与淬炼</span><span style="font-size:12px;color:var(--text-muted);margin-left:auto;">六祖慧能·火·直觉阈</span><span style="margin-left:8px;">▼</span>
-      </button>
-      <div class="family-body" style="display:none;padding:8px 0;">
-        <a href="crisis-sim.html" style="display:flex;padding:8px 12px;text-decoration:none;color:var(--text);"><span style="font-weight:600;color:var(--title);min-width:90px;">觉·淬火</span><span style="font-size:12px;color:var(--text-muted);">危机模拟·3场景</span></a>
-        <a href="decision-theatre.html" style="display:flex;padding:8px 12px;text-decoration:none;color:var(--text);"><span style="font-weight:600;color:var(--title);min-width:90px;">觉·入幕</span><span style="font-size:12px;color:var(--text-muted);">决策剧场·5幕</span></a>
-        <a href="cards-play.html?deck=52" style="display:flex;padding:8px 12px;text-decoration:none;color:var(--text);"><span style="font-weight:600;color:var(--title);min-width:90px;">觉·入局</span><span style="font-size:12px;color:var(--text-muted);">完整案例·52张</span></a>
-        <a href="quotes.html" style="display:flex;padding:8px 12px;text-decoration:none;color:var(--text);"><span style="font-weight:600;color:var(--title);min-width:90px;">觉·淬火·金句</span><span style="font-size:12px;color:var(--text-muted);">三代传承金句</span></a>
-      </div>
-    </div>
-    <div class="family" style="margin:8px 0;">
-      <button class="family-toggle" onclick="toggleFamily(this)" style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--white);border-radius:var(--radius-lg);border:1px solid var(--border-light);cursor:pointer;width:100%;font-family:var(--font-stack);font-size:14px;">
-        <span style="font-size:22px;">🤝</span><span style="font-weight:700;color:var(--title);">契 · 约定与规则</span><span style="font-size:12px;color:var(--text-muted);margin-left:auto;">孔子·木·信义观</span><span style="margin-left:8px;">▼</span>
-      </button>
-      <div class="family-body" style="display:none;padding:8px 0;">
-        <a href="match.html" style="display:flex;padding:8px 12px;text-decoration:none;color:var(--text);"><span style="font-weight:600;color:var(--title);min-width:90px;">契·择伴</span><span style="font-size:12px;color:var(--text-muted);">合伙人匹配度</span></a>
-        <a href="metapartner.html" style="display:flex;padding:8px 12px;text-decoration:none;color:var(--text);"><span style="font-weight:600;color:var(--title);min-width:90px;">契·立盟</span><span style="font-size:12px;color:var(--text-muted);">元合伙章程</span></a>
-        <a href="exit-guide.html" style="display:flex;padding:8px 12px;text-decoration:none;color:var(--text);"><span style="font-weight:600;color:var(--title);min-width:90px;">契·善别</span><span style="font-size:12px;color:var(--text-muted);">退出决策指南</span></a>
-      </div>
-    </div>
-    <div class="family" style="margin:8px 0;">
-      <button class="family-toggle" onclick="toggleFamily(this)" style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--white);border-radius:var(--radius-lg);border:1px solid var(--border-light);cursor:pointer;width:100%;font-family:var(--font-stack);font-size:14px;">
-        <span style="font-size:22px;">📜</span><span style="font-weight:700;color:var(--title);">章 · 根基与传承</span><span style="font-size:12px;color:var(--text-muted);margin-left:auto;">刘禹锡·土·时间轴</span><span style="margin-left:8px;">▼</span>
-      </button>
-      <div class="family-body" style="display:none;padding:8px 0;">
-        <a href="creation.html" style="display:flex;padding:8px 12px;text-decoration:none;color:var(--text);"><span style="font-weight:600;color:var(--title);min-width:90px;">章·创世</span><span style="font-size:12px;color:var(--text-muted);">星月传奇</span></a>
-        <a href="roots.html" style="display:flex;padding:8px 12px;text-decoration:none;color:var(--text);"><span style="font-weight:600;color:var(--title);min-width:90px;">章·立信</span><span style="font-size:12px;color:var(--text-muted);">寻根手记</span></a>
-        <a href="whitepaper.html" style="display:flex;padding:8px 12px;text-decoration:none;color:var(--text);"><span style="font-weight:600;color:var(--title);min-width:90px;">章·立信·白皮书</span><span style="font-size:12px;color:var(--text-muted);">夏至白皮书</span></a>
-        <a href="deep-gottman.html" style="display:flex;padding:8px 12px;text-decoration:none;color:var(--text);"><span style="font-weight:600;color:var(--title);min-width:90px;">L3·四骑士</span><span style="font-size:12px;color:var(--text-muted);">Gottman深度</span></a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== SECTION 7: CTA ===== -->
+  <!-- ===== HOOK: 投资 ===== -->
   <div class="cta-section">
-    <h3>准备好了吗？</h3>
-    <p>大多数人在关系出问题之前，从不觉得关系会出问题。你现在看到这里，已经比大多数人早了一步。</p>
-    <a href="guide.html" class="btn btn-primary" style="font-size:16px;padding:14px 40px;">🧭 用5个问题找到你的起点 →</a>
+    <h3>Gottman发现：91%的关系终结有可预测的信号</h3>
+    <p style="font-size:14px;color:var(--text);margin-bottom:var(--sp-xs);">大多数人走到第四步才回头——但前三步的信号一直都在。</p>
+    <p class="urgency">你现在看到这里——已经比大多数人早了最关键的那一步。</p>
+    <a href="guide.html" class="btn btn-primary" style="font-size:17px;padding:16px 44px;">🧭 用5个问题找到你的起点</a>
     <p style="font-size:12px;color:var(--text-muted);margin-top:var(--sp-sm);">或 <a href="assessment.html">直接开始五维自评（3分钟）</a></p>
   </div>
 
-  <!-- 底部 -->
-  <div class="bottom-links">
-    <a href="go-gallery.html">🖼️ 画廊</a>
-    <a href="product-catalog.html">📦 全部产品</a>
-    <a href="account.html">👤 客户中心</a>
-    <a href="about.html">🏛️ 关于我们</a>
-    <a href="dashboard.html">📊 质量仪表盘</a>
-  </div>
-  <div class="bottom-links" style="gap:var(--sp-md);">
-    <a href="proposal.html">服务方案</a>
-    <a href="privacy.html">隐私</a>
+  <!-- ===== 五族折叠 ===== -->
+  <div class="section">
+    <div class="section-title">
+      <h2>探索全部产品</h2>
+      <p>章·衡·镜·契·觉 — 五条通道，一条完整的决策路径</p>
+    </div>
+    <style>
+      .family{margin:var(--sp-sm) 0}
+      .family-toggle{display:flex;align-items:center;gap:var(--sp-sm);width:100%;padding:14px 16px;background:var(--white);border:1px solid var(--border-light);border-radius:var(--radius-lg);cursor:pointer;font-family:var(--font-stack);font-size:14px;box-shadow:var(--shadow-card);transition:all var(--ease-out)}
+      .family-toggle:hover{border-color:var(--sri-red)}
+      .family-body{display:none;padding:var(--sp-sm) 0}
+      .fam-link{display:flex;align-items:center;padding:10px 12px;text-decoration:none;border-radius:var(--radius-sm);transition:all var(--ease-out);font-size:13px}
+      .fam-link:hover{background:var(--sri-red-light)}
+      .fam-name{font-weight:600;color:var(--title);min-width:90px}
+      .fam-desc{font-size:12px;color:var(--text-muted);flex:1}
+    </style>
+    <div class="family">
+      <button class="family-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">
+        🪙<span style="font-weight:700;color:var(--title);">衡 · 标尺与量化</span><span style="font-size:12px;color:var(--text-muted);margin-left:auto;">司马贺·金·可行域 ▼</span>
+      </button>
+      <div class="family-body">
+        <a class="fam-link" href="fulldiag.html"><span class="fam-name">衡·测渊</span><span class="fam-desc">完整版诊断·28题·8模块</span></a>
+        <a class="fam-link" href="rps.html"><span class="fam-name">衡·探底</span><span class="fam-desc">RPS风险剖面·32题·4维</span></a>
+        <a class="fam-link" href="slicing-pie.html"><span class="fam-name">衡·分利</span><span class="fam-desc">SlicingPie贡献记账</span></a>
+        <a class="fam-link" href="checklist.html"><span class="fam-name">衡·校尺</span><span class="fam-desc">决策前自检清单</span></a>
+      </div>
+    </div>
+    <div class="family">
+      <button class="family-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">
+        🪞<span style="font-weight:700;color:var(--title);">镜 · 照见与状态</span><span style="font-size:12px;color:var(--text-muted);margin-left:auto;">观自在·水·身心流 ▼</span>
+      </button>
+      <div class="family-body">
+        <a class="fam-link" href="knights.html"><span class="fam-name">镜·警兆</span><span class="fam-desc">四骑士自检·12题</span></a>
+        <a class="fam-link" href="pre0.html"><span class="fam-name">镜·回身</span><span class="fam-desc">PRE-0压力锚定·3分钟</span></a>
+        <a class="fam-link" href="knights-cards.html"><span class="fam-name">镜·警兆·速查</span><span class="fam-desc">四骑士速查卡·30秒</span></a>
+      </div>
+    </div>
+    <div class="family">
+      <button class="family-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">
+        🔥<span style="font-weight:700;color:var(--title);">觉 · 顿悟与淬炼</span><span style="font-size:12px;color:var(--text-muted);margin-left:auto;">六祖慧能·火·直觉阈 ▼</span>
+      </button>
+      <div class="family-body">
+        <a class="fam-link" href="crisis-sim.html"><span class="fam-name">觉·淬火</span><span class="fam-desc">危机模拟·3场景</span></a>
+        <a class="fam-link" href="decision-theatre.html"><span class="fam-name">觉·入幕</span><span class="fam-desc">决策剧场·5幕</span></a>
+        <a class="fam-link" href="cards-play.html?deck=52"><span class="fam-name">觉·入局</span><span class="fam-desc">卡牌·完整案例·52张</span></a>
+        <a class="fam-link" href="quotes.html"><span class="fam-name">觉·淬火·金句</span><span class="fam-desc">三代传承</span></a>
+      </div>
+    </div>
+    <div class="family">
+      <button class="family-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">
+        🤝<span style="font-weight:700;color:var(--title);">契 · 约定与规则</span><span style="font-size:12px;color:var(--text-muted);margin-left:auto;">孔子·木·信义观 ▼</span>
+      </button>
+      <div class="family-body">
+        <a class="fam-link" href="match.html"><span class="fam-name">契·择伴</span><span class="fam-desc">合伙人匹配度</span></a>
+        <a class="fam-link" href="metapartner.html"><span class="fam-name">契·立盟</span><span class="fam-desc">元合伙章程</span></a>
+        <a class="fam-link" href="exit-guide.html"><span class="fam-name">契·善别</span><span class="fam-desc">退出决策指南</span></a>
+      </div>
+    </div>
+    <div class="family">
+      <button class="family-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">
+        📜<span style="font-weight:700;color:var(--title);">章 · 根基与传承</span><span style="font-size:12px;color:var(--text-muted);margin-left:auto;">刘禹锡·土·时间轴 ▼</span>
+      </button>
+      <div class="family-body">
+        <a class="fam-link" href="creation.html"><span class="fam-name">章·创世</span><span class="fam-desc">星月传奇</span></a>
+        <a class="fam-link" href="roots.html"><span class="fam-name">章·立信</span><span class="fam-desc">寻根手记·5篇</span></a>
+        <a class="fam-link" href="cases.html"><span class="fam-name">章·鉴往</span><span class="fam-desc">84案例精选</span></a>
+        <a class="fam-link" href="deep-gottman.html"><span class="fam-name">L3·四骑士深度</span><span class="fam-desc">Gottman 40年</span></a>
+      </div>
+    </div>
   </div>
 
+  <div class="footer">
+    <div class="links">
+      <a href="account.html">👤 客户中心</a>
+      <a href="product-catalog.html">📦 产品库</a>
+      <a href="dashboard.html">📊 质量仪表盘</a>
+      <a href="about.html">🏛️ 关于我们</a>
+      <a href="privacy.html">隐私</a>
+    </div>
+    <p class="brand">满意解研究所 · Satisficing Research Institute</p>
+    <p>章·衡·镜·契·觉 — 五条通道 — 一个人的完整决策</p>
+    <p style="margin-top:var(--sp-xs)">🌙 满意姐·理论奠基 | 🛤️ 扣子·执行验证 | 🌉 满意红·系统进化</p>
+  </div>
 </div>
 
-<div class="footer-note">
-  <p class="brand" style="font-weight:600;color:var(--sri-red);">满意解研究所 · Satisficing Research Institute</p>
-  <p>章·衡·镜·契·觉 — 五条通道 — 一个人的完整决策</p>
-  <p style="margin-top:4px;">🌙 满意姐·理论奠基 | 🛤️ 扣子·执行验证 | 🌉 满意红·系统进化</p>
-</div>
-
+<!-- 转介绍追踪 -->
 <script>
-function toggleFamily(btn) {
-  btn.classList.toggle('open');
-  var body = btn.nextElementSibling;
-  body.style.display = body.style.display === 'block' ? 'none' : 'block';
-}
-</script>
-
-<script>
-(function(){
-  let p = new URLSearchParams(window.location.search);
-  let ref = p.get('ref');
-  if (ref && !localStorage.getItem('sri_referred_by')) {
-    localStorage.setItem('sri_referred_by', ref);
-  }
-})();
+(function(){let p=new URLSearchParams(window.location.search);let r=p.get('ref');if(r&&!localStorage.getItem('sri_referred_by')){localStorage.setItem('sri_referred_by',r)}})();
 </script>
 </body>
 </html>
