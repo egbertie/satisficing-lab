@@ -162,15 +162,15 @@
     <div id="dimBars"></div>
   </div>
   <div id="alerts" style="padding:0 16px;"></div>
+  <div id="actionAdvice" style="padding:0 16px;margin:12px 0;"></div>
   <div class="cta-box">
-    <h3>你的结果只是冰山一角</h3>
-    <p>简版看到的是分数——但看不到<span style="color:var(--brand)">矛盾热力图</span>。你的时间贴现率在说你高估了现在多少？你的CI临界指数和股权健康度在互相否定吗？</p>
-    <p style="font-size:12px;color:var(--muted);margin-top:8px">⏳ 这正是完整诊断要回答的问题——3分钟吸引·8分钟深度诊断·30天追踪</p>
-    <button class="btn btn-primary" onclick="goToReport()">→ 查看完整化学报告（基于你的分数·实时生成）</button>
-    <button class="btn btn-secondary" style="margin-top:10px;" onclick="window.location.href='decision-theatre.html'">→ 体验决策剧场（场景体验·右脑通道）</button>
-    <button class="btn btn-secondary" style="margin-top:10px;" onclick="downloadData()">💾 下载我的诊断数据（JSON）</button>
-    <button class="btn btn-secondary" style="margin-top:10px;" onclick="shareResult()">分享我的结果</button>
-    <button class="btn btn-secondary" style="margin-top:10px;" onclick="restart()">重新测评</button>
+    <h3>你的完整诊断报告</h3>
+    <p>基于你的15题回答·实时生成个人化诊断报告·含行动建议</p>
+    <button class="btn btn-primary" onclick="goToReport()">→ 查看我的完整诊断报告</button>
+    <p style="font-size:11px;color:var(--muted);margin-top:12px">想知道更多？</p>
+    <button class="btn btn-secondary" style="margin-top:8px;" onclick="window.location.href='decision-theatre.html'">🎭 决策剧场·场景体验</button>
+    <button class="btn btn-secondary" style="margin-top:6px;" onclick="downloadData()">💾 下载我的诊断数据</button>
+    <button class="btn btn-secondary" style="margin-top:6px;" onclick="restart()">重新测评</button>
   </div>
   <div class="footer">
     满意解研究所 · Satisficing Research Institute<br>
@@ -397,6 +397,27 @@ function renderFullResult() {
   }
   
   document.getElementById('alerts').innerHTML = alertsHtml;
+  
+  // 行动建议（基于分数自动生成）
+  let adviceHtml = '<div class="result-card"><div class="result-title" style="font-size:16px">📋 建议优先关注</div>';
+  const sorted = Object.entries(dimScores).sort((a,b) => a[1]-b[1]);
+  const lowest = sorted[0];
+  const secondLowest = sorted[1];
+  const adviceMap = {
+    'T': '时间轴偏低：你倾向于高估短期利益。建议：下一次做重大决策前，先问自己——"如果今天是五年后回头看，这个决定还成立吗？"把这句话写在会议室白板上。',
+    'D': '可行域偏低：你的底线可能不够清晰。建议：和合伙人一起列出"绝不妥协的3条底线"——写下来、签字、贴在看得见的地方。',
+    'B': '身心流偏低：你的身体在发出信号但你忽略了。建议：下次在做出重要决定前，停下来做三次深呼吸。感觉一下手心是暖还是凉。带着身体的答案再决策。',
+    'X': '信义观偏低：你和合伙人之间可能有一些"没说出口的话"。建议：约合伙人单独喝一次咖啡——不聊业务，只问一句"我们之间最近有什么你觉得不对但没说的事？"',
+    'Z': '直觉阈偏低：你可能过度依赖数据忽略了直觉。建议：下次遇到两难选择时，抛硬币——不是用硬币做决定，是在硬币飞起来的瞬间，感受你希望它是哪一面。'
+  };
+  adviceHtml += `<p style="font-size:14px;color:var(--brand);margin:12px 0"><strong>${dimNames[['T','D','B','X','Z'].indexOf(lowest[0])]}（${lowest[1].toFixed(0)}/5）</strong></p>`;
+  adviceHtml += `<p style="font-size:13px;line-height:1.7">${adviceMap[lowest[0]]}</p>`;
+  if(secondLowest[1] < 3.5){
+    adviceHtml += `<p style="font-size:14px;color:var(--brand);margin:16px 0 8px"><strong>其次关注：${dimNames[['T','D','B','X','Z'].indexOf(secondLowest[0])]}（${secondLowest[1].toFixed(0)}/5）</strong></p>`;
+    adviceHtml += `<p style="font-size:13px;line-height:1.7">${adviceMap[secondLowest[0]]}</p>`;
+  }
+  adviceHtml += '</div>';
+  document.getElementById('actionAdvice').innerHTML = adviceHtml;
   
   // V4.0·当场生成诊断摘要(无需命令行)
   generateQuickDiagnosis(dimScores);
