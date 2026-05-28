@@ -299,6 +299,7 @@ document.addEventListener('paste',function(e){
     <button class="tab-btn" onclick="switchTab('system')">⚡ 系统</button>
     <button class="tab-btn" onclick="switchTab('docs')">📂 文档</button>
     <button class="tab-btn" onclick="switchTab('flywheel')">⚙️ 资产</button>
+    <button class="tab-btn" onclick="switchTab('project')">🗓️ 项目</button>
     <button class="tab-btn" onclick="switchTab('marketing')">📢 宣发</button>
     <button class="tab-btn" onclick="switchTab('media')">📰 媒体</button>
     <button class="tab-btn" onclick="switchTab('import')">📥 导入</button>
@@ -641,6 +642,60 @@ async function render() {
       <tr><td>🆓 免费工具</td><td>¥0</td><td>—</td><td>引流·获客</td></tr>
       <tr><td>🔐 完整诊断</td><td>¥3K-5K</td><td>2-5</td><td>¥6K-25K</td></tr>
       <tr><td>💎 年度顾问</td><td>¥30K-100K</td><td>0.5-2</td><td>¥15K-200K</td></tr></table></div>`;
+  } else if (currentTab === 'project') {
+    let now=new Date(); let solstice=new Date(2026,5,21); let days=Math.ceil((solstice-now)/86400000);
+    let today=new Date(2026,4,29); // 5月29日
+    let phaseStart1=new Date(2026,3,1); let phaseEnd1=new Date(2026,4,15);
+    let phaseStart2=new Date(2026,4,16); let phaseEnd2=new Date(2026,5,21);
+    let phaseStart3=new Date(2026,5,22); let phaseEnd3=new Date(2026,11,31);
+    let totalDays=Math.ceil((phaseEnd2-phaseStart1)/86400000);
+    let elapsed=Math.ceil((today-phaseStart1)/86400000);
+    let overallPct=Math.min(100,Math.round(elapsed/totalDays*100));
+    
+    html = `<div class="panel" style="border-left:4px solid #C23B22;"><h3>🗓️ 项目总览</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:16px;">
+        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">总工期</div><div style="font-size:18px;font-weight:700;color:#2A2A2A;">81天</div><div style="font-size:9px;color:#3D7A4F;">3月1日-6月21日</div></div>
+        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">整体进度</div><div style="font-size:18px;font-weight:700;color:#C23B22;">${overallPct}%</div><div style="font-size:9px;color:#6E6E6E;">距夏至${days}天</div></div>
+        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">Phase</div><div style="font-size:18px;font-weight:700;color:#B8860B;">2/3</div><div style="font-size:9px;color:#6E6E6E;">产品化·冲刺</div></div>
+        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">产品上线</div><div style="font-size:18px;font-weight:700;color:#3D7A4F;">232</div><div style="font-size:9px;color:#6E6E6E;">全部200 OK</div></div>
+        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">工期偏差</div><div style="font-size:18px;font-weight:700;color:#C23B22;">0天</div><div style="font-size:9px;color:#6E6E6E;">按计划</div></div>
+        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">质量标准</div><div style="font-size:18px;font-weight:700;color:#3D7A4F;">96%</div><div style="font-size:9px;color:#6E6E6E;">四关通过率</div></div>
+      </div>
+
+      <h3 style="font-size:13px;color:var(--title);margin:16px 0 8px;">📅 三阶段里程碑</h3>
+      <table><tr><th>阶段</th><th>时间</th><th>目标</th><th>核心产出</th><th>完成度</th></tr>
+      <tr style="background:#F5F0E6;"><td><b>Phase 1 · 奠基</b></td><td>03-01至05-15</td><td>理论体系建立</td><td>38论文·84案例·14模块课程·五维框架</td><td><span class="badge" style="background:#3D7A4F;color:#fff;padding:2px 8px;border-radius:6px;font-size:10px;">100% ✅</span></td></tr>
+      <tr style="background:rgba(194,59,34,0.04);"><td><b>Phase 2 · 产品化</b></td><td>05-16至06-21</td><td>产品上线+内测</td><td>232产品·驾驶舱·标准体系·增长飞轮</td><td><span class="badge" style="background:#B8860B;color:#fff;padding:2px 8px;border-radius:6px;font-size:10px;">85% 🔄</span></td></tr>
+      <tr><td><b>Phase 3 · 公测</b></td><td>06-22至12-31</td><td>客户验证+规模化</td><td>NPS≥50·付费转化·认证引导师</td><td><span class="badge" style="background:#6E6E6E;color:#fff;padding:2px 8px;border-radius:6px;font-size:10px;">0% ⏳</span></td></tr>
+      </table>
+
+      <h3 style="font-size:13px;color:var(--title);margin:16px 0 8px;">🎯 Phase2 里程碑详情</h3>
+      <table><tr><th>里程碑</th><th>截止</th><th>状态</th><th>交付物</th></tr>
+      <tr><td>M2.1 产品体系命名确立</td><td>05-28</td><td><span class="status-dot dot-green"></span>完成</td><td>章衡镜契觉·五族通道体系</td></tr>
+      <tr><td>M2.2 233产品全面上线</td><td>05-28</td><td><span class="status-dot dot-green"></span>完成</td><td>GitHub Pages·全部200 OK</td></tr>
+      <tr><td>M2.3 产品标准体系建立</td><td>05-28</td><td><span class="status-dot dot-green"></span>完成</td><td>VFinal·六级审核·三星分级·三级认证</td></tr>
+      <tr><td>M2.4 驾驶舱中枢建立</td><td>05-29</td><td><span class="status-dot dot-green"></span>完成</td><td>15面板·360度·SQLite+localStorage</td></tr>
+      <tr><td>M2.5 增长飞轮引擎上线</td><td>05-28</td><td><span class="status-dot dot-green"></span>完成</td><td>flywheel-engine.js·14页面注入</td></tr>
+      <tr><td>M2.6 密码门控体系</td><td>05-28</td><td><span class="status-dot dot-green"></span>完成</td><td>gate.html·admin.html·多密码管理</td></tr>
+      <tr><td>M2.7 客户端到端体验优化</td><td>05-28</td><td><span class="status-dot dot-green"></span>完成</td><td>WCAG AA·设计系统V4·分享组件</td></tr>
+      <tr><td>M2.8 内容营销弹药就绪</td><td>05-28</td><td><span class="status-dot dot-green"></span>完成</td><td>10篇公众号·6篇传播·白皮书</td></tr>
+      <tr><td>M2.9 公开课页面+注册</td><td>05-28</td><td><span class="status-dot dot-green"></span>完成</td><td>workshop.html·注册表单</td></tr>
+      <tr><td>M2.10 认证体系框架</td><td>05-28</td><td><span class="status-dot dot-green"></span>完成</td><td>AG→PG→MG三级·对标ICF</td></tr>
+      <tr style="background:rgba(194,59,34,0.04);"><td>M2.11 飞书驾驶舱精简</td><td>05-29</td><td><span class="status-dot dot-green"></span>完成</td><td>29表→12表·清理完毕</td></tr>
+      <tr style="background:rgba(194,59,34,0.04);"><td>M2.12 资产飞轮运转</td><td>05-29</td><td><span class="status-dot dot-green"></span>完成</td><td>SQLite中枢·API+localStorage双轨</td></tr>
+      <tr style="background:rgba(184,134,11,0.08);"><td>M2.13 来源标注补齐</td><td>06-07</td><td><span class="status-dot dot-amber"></span>进行中</td><td>QM-003·105个产品·P1</td></tr>
+      <tr style="background:rgba(184,134,11,0.08);"><td>M2.14 产品星级评定</td><td>06-14</td><td><span class="status-dot dot-red"></span>未开始</td><td>QM-008·233产品·P1</td></tr>
+      <tr><td>M2.15 夏至路演准备</td><td>06-21</td><td><span class="status-dot dot-amber"></span>准备中</td><td>10人邀请·PPT·手册·24h清单</td></tr>
+      </table>
+
+      <h3 style="font-size:13px;color:var(--title);margin:16px 0 8px;">⚠️ 风险登记册</h3>
+      <table><tr><th>风险</th><th>概率</th><th>影响</th><th>等级</th><th>缓解措施</th><th>负责人</th></tr>
+      <tr><td>商标未注册·品牌被抢占</td><td>中</td><td>高</td><td>🔴</td><td>QM-026·尽快申请</td><td>Egbertie</td></tr>
+      <tr><td>公开课无人报名</td><td>中</td><td>中</td><td>🟡</td><td>公众号预热·邀请制</td><td>Egbertie</td></tr>
+      <tr><td>测评信效度未验证</td><td>低</td><td>中</td><td>🟡</td><td>≥100样本后·QM-018</td><td>满意红</td></tr>
+      <tr><td>GitHub Pages宕机</td><td>低</td><td>高</td><td>🟡</td><td>本地备份·可一键切换</td><td>满意红</td></tr>
+      <tr><td>公众号认证无法完成</td><td>高</td><td>中</td><td>🟡</td><td>阅读原文+自动回复过渡</td><td>Egbertie</td></tr>
+      </table></div>`;
   } else if (currentTab === 'marketing') {
     let today=new Date(); let wks=[];
     for(let i=0;i<12;i++){let d=new Date(today);d.setDate(d.getDate()+i*7);wks.push(d);}
