@@ -3,92 +3,159 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>驾驶舱 · 质量管理 · 满意解研究所</title>
+<title>驾驶舱 · 满意解研究所</title>
+<link rel="stylesheet" href="sri-design.css">
 <style>
-:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
-.hero{background:var(--title-color);color:#F5F0E6;padding:32px 20px 24px;text-align:center}
-.hero h1{font-size:20px;font-weight:700}.hero p{font-size:12px;opacity:.8}
-.main{max-width:680px;margin:0 auto;padding:16px}
-.panel{background:#fff;border-radius:14px;padding:20px;margin-bottom:12px;border:1px solid #D4C5A0}
-.panel h3{font-size:14px;color:var(--title-color);margin-bottom:10px}
+  .main{max-width:680px;margin:0 auto;padding:var(--sp-md)}
+  .hero{background:linear-gradient(160deg,var(--sri-red),var(--sri-gold));padding:var(--sp-2xl) var(--sp-lg);text-align:center;color:#F5F0E6}
+  .hero h1{font-size:22px;color:#F5F0E6}
+  .hero p{font-size:13px;opacity:0.8}
 
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
-.stat{text-align:center;padding:12px;border-radius:10px;background:var(--sri-bg)}
-.stat .num{font-size:22px;font-weight:700;color:var(--sri-red)}
-.stat .label{font-size:10px;opacity:.6}
+  /* KPI Row */
+  .kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin:var(--sp-md) 0}
+  .kpi-card{background:#fff;border-radius:var(--radius-lg);padding:14px;text-align:center;border:1px solid var(--border-light)}
+  .kpi-card .val{font-size:24px;font-weight:800;color:var(--sri-red)}
+  .kpi-card .lbl{font-size:10px;color:var(--text-muted);margin-top:2px}
 
-.bar{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:12px}
-.bar .label{min-width:120px;font-weight:600}
-.bar .track{flex:1;height:8px;background:#f0e8d8;border-radius:4px;overflow:hidden}
-.bar .fill{height:100%;border-radius:4px;transition:width .5s}
-.fill-green{background:#4A8C5C}.fill-amber{background:var(--sri-gold)}.fill-red{background:var(--sri-red)}
+  /* Section = 一堂五步法 */
+  .step-header{display:flex;align-items:center;gap:var(--sp-sm);padding:var(--sp-md);background:#fff;border-radius:var(--radius-lg);margin:var(--sp-sm) 0;border-left:4px solid var(--sri-red)}
+  .step-header .num{font-size:28px;font-weight:800;color:var(--sri-red);min-width:40px}
+  .step-header .title{font-size:16px;font-weight:700;color:var(--title)}
+  .step-header .desc{font-size:12px;color:var(--text-muted)}
 
-table{width:100%;font-size:11px;border-collapse:collapse;margin:8px 0}
-th{text-align:left;padding:6px 4px;border-bottom:1px solid #D4C5A0;color:var(--sri-gold);font-size:10px}
-td{padding:6px 4px;border-bottom:1px solid #f0e8d8;font-size:11px}
-.badge{display:inline-block;padding:1px 6px;border-radius:6px;font-size:9px;font-weight:600}
-.badge-green{background:rgba(74,140,92,.12);color:#4A8C5C}.badge-amber{background:rgba(184,134,11,.12);color:var(--sri-gold)}.badge-red{background:rgba(194,59,34,.12);color:var(--sri-red)}
-.footer{text-align:center;padding:20px;font-size:10px;opacity:.4}
+  .step-items{padding:0 var(--sp-md)}
+  .step-item{display:flex;align-items:center;gap:8px;padding:8px 0;font-size:12px;border-bottom:1px solid var(--border-light)}
+  .step-item:last-child{border-bottom:none}
+  .step-item .si-status{font-size:14px;min-width:24px;text-align:center}
+  .step-item .si-name{font-weight:600;color:var(--title);min-width:100px}
+  .step-item .si-desc{color:var(--text-muted);flex:1}
+  .step-item .si-table{font-size:10px;color:var(--sri-gold)}
+
+  /* Growth Funnel */
+  .funnel{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;padding:var(--sp-md);font-size:11px}
+  .funnel-step{background:#fff;border-radius:12px;padding:8px 14px;text-align:center;border:1px solid var(--border-light)}
+  .funnel-arrow{color:var(--sri-red);font-weight:700}
+  .funnel-step .fs-val{font-size:16px;font-weight:800;color:var(--sri-red)}
+  .funnel-step .fs-lbl{font-size:9px;color:var(--text-muted)}
 </style>
 </head>
 <body>
-<div class="hero"><h1>📊 驾驶舱 · 质量仪表盘</h1><p>满意解研究所 · 对标20+全球顶级机构</p></div>
+<div class="hero">
+  <h1>📊 驾驶舱</h1>
+  <p>对标: 一堂五步法 · Growth Loop · AI做课 · 增长飞轮</p>
+</div>
+
 <div class="main">
-  <div class="panel">
-    <h3>📈 核心指标</h3>
-    <div class="stats">
-      <div class="stat"><div class="num">231</div><div class="label">产品总数</div></div>
-      <div class="stat"><div class="num">55%</div><div class="label">四关通过率(已修复后)</div></div>
-      <div class="stat"><div class="num">6</div><div class="label">自动化脚本</div></div>
-      <div class="stat"><div class="num">12</div><div class="label">cron任务</div></div>
-    </div>
+
+  <!-- KPI -->
+  <div class="kpi-row">
+    <div class="kpi-card"><div class="val">233</div><div class="lbl">线上产品</div></div>
+    <div class="kpi-card"><div class="val">55%</div><div class="lbl">四关通过率(审计后)</div></div>
+    <div class="kpi-card"><div class="val">6</div><div class="lbl">自动化脚本</div></div>
+    <div class="kpi-card"><div class="val">12</div><div class="lbl">cron任务</div></div>
+    <div class="kpi-card"><div class="val">7</div><div class="lbl">增长飞轮环节</div></div>
+    <div class="kpi-card"><div class="val">4</div><div class="lbl">对标体系</div></div>
   </div>
 
-  <div class="panel">
-    <h3>📊 质量仪表盘 · 30条执行标准 (对标20+全球顶级机构)</h3>
-    <table>
-    <tr><th>编号</th><th>模块</th><th>标准项</th><th>状态</th><th>优先级</th><th>截止</th></tr>
-    <tr><td>QM-001</td><td>六级审核</td><td>L0 提案审核</td><td><span class="badge badge-amber">待执行</span></td><td>P0</td><td>06-07</td></tr>
-    <tr><td>QM-002</td><td>六级审核</td><td>L1 方法论审核</td><td><span class="badge badge-amber">55%通过</span></td><td>P0</td><td>06-07</td></tr>
-    <tr><td>QM-003</td><td>六级审核</td><td>L2 内容审核</td><td><span class="badge badge-amber">105个缺来源</span></td><td>P1</td><td>06-14</td></tr>
-    <tr><td>QM-004</td><td>六级审核</td><td>L3 体验审核</td><td><span class="badge badge-amber">55%通过</span></td><td>P1</td><td>06-14</td></tr>
-    <tr><td>QM-005</td><td>六级审核</td><td>L4 蓝军独立复审</td><td><span class="badge badge-amber">待完善</span></td><td>P1</td><td>06-21</td></tr>
-    <tr><td>QM-006</td><td>六级审核</td><td>L5 Egbertie终审</td><td><span class="badge badge-green">已运行</span></td><td>P0</td><td>持续</td></tr>
-    <tr><td>QM-007</td><td>产品矩阵</td><td>五族分类归属</td><td><span class="badge badge-amber">跨族待审查</span></td><td>P1</td><td>06-07</td></tr>
-    <tr><td>QM-008</td><td>产品矩阵</td><td>三星级评定</td><td><span class="badge badge-red">未开始</span></td><td>P1</td><td>06-14</td></tr>
-    <tr><td>QM-009</td><td>产品矩阵</td><td>四关通过率≥80%</td><td><span class="badge badge-red">55%</span></td><td>P0</td><td>07-01</td></tr>
-    <tr><td>QM-010</td><td>产品矩阵</td><td>休眠产品检测</td><td><span class="badge badge-red">未开始</span></td><td>P2</td><td>06-21</td></tr>
-    <tr><td>QM-011</td><td>产品矩阵</td><td>淘汰流程验证</td><td><span class="badge badge-red">未验证</span></td><td>P2</td><td>07-01</td></tr>
-    <tr><td>QM-012</td><td>运营自动化</td><td>周一产品健康扫描</td><td><span class="badge badge-green">已运行</span></td><td>P0</td><td>已运行</td></tr>
-    <tr><td>QM-013</td><td>运营自动化</td><td>死链接检测</td><td><span class="badge badge-green">已运行</span></td><td>P1</td><td>已运行</td></tr>
-    <tr><td>QM-014</td><td>运营自动化</td><td>每月隐私审计</td><td><span class="badge badge-green">已运行</span></td><td>P0</td><td>已运行</td></tr>
-    <tr><td>QM-015</td><td>运营自动化</td><td>内容过时检测</td><td><span class="badge badge-red">未上线</span></td><td>P2</td><td>06-14</td></tr>
-    <tr><td>QM-016</td><td>运营自动化</td><td>密码同步</td><td><span class="badge badge-green">已运行</span></td><td>P0</td><td>持续</td></tr>
-    <tr><td>QM-017</td><td>运营自动化</td><td>周六运维清理</td><td><span class="badge badge-green">已运行</span></td><td>P1</td><td>持续</td></tr>
-    <tr><td>QM-018</td><td>测评工具</td><td>重测信度≥0.7</td><td><span class="badge badge-red">未开始</span></td><td>P1</td><td>07-31</td></tr>
-    <tr><td>QM-019</td><td>测评工具</td><td>Cronbach α≥0.8</td><td><span class="badge badge-red">未开始</span></td><td>P1</td><td>07-31</td></tr>
-    <tr><td>QM-020</td><td>测评工具</td><td>≥3专家评审</td><td><span class="badge badge-red">0/3</span></td><td>P2</td><td>08-31</td></tr>
-    <tr><td>QM-021</td><td>测评工具</td><td>公平性检验</td><td><span class="badge badge-red">未开始</span></td><td>P2</td><td>09-30</td></tr>
-    <tr><td>QM-022</td><td>测评工具</td><td>方法透明声明</td><td><span class="badge badge-red">缺失</span></td><td>P1</td><td>06-21</td></tr>
-    <tr><td>QM-023</td><td>教练认证</td><td>三级认证细化</td><td><span class="badge badge-amber">框架完成</span></td><td>P2</td><td>07-31</td></tr>
-    <tr><td>QM-024</td><td>教练认证</td><td>培训课程制作</td><td><span class="badge badge-red">未开始</span></td><td>P2</td><td>08-31</td></tr>
-    <tr><td>QM-025</td><td>教练认证</td><td>督导制度建立</td><td><span class="badge badge-red">未开始</span></td><td>P2</td><td>09-30</td></tr>
-    <tr><td>QM-026</td><td>知识产权</td><td>商标注册</td><td><span class="badge badge-red">未申请</span></td><td>P0</td><td>07-31</td></tr>
-    <tr><td>QM-027</td><td>知识产权</td><td>著作权登记</td><td><span class="badge badge-red">未开始</span></td><td>P2</td><td>09-30</td></tr>
-    <tr><td>QM-028</td><td>知识产权</td><td>CC授权合规标注</td><td><span class="badge badge-amber">部分完成</span></td><td>P1</td><td>06-14</td></tr>
-    <tr><td>QM-029</td><td>客户服务</td><td>客户旅程完整度</td><td><span class="badge badge-amber">复购节点缺失</span></td><td>P2</td><td>07-01</td></tr>
-    <tr><td>QM-030</td><td>客户服务</td><td>NPS基线(≥30样本)</td><td><span class="badge badge-red">未开始</span></td><td>P2</td><td>07-31</td></tr>
-    </table>
-    <div style="margin-top:8px;font-size:10px;opacity:0.5;">
-      🟢已运行: 8 | 🟡待完善: 7 | 🔴未开始: 15 | P0: 6 | P1: 12 | P2: 12
-    </div>
+  <!-- ===== 一堂五步法驾驶舱 ===== -->
+  <div style="text-align:center;padding:var(--sp-lg) 0 var(--sp-sm);font-size:11px;color:var(--sri-gold);letter-spacing:2px;">对标一堂五步法</div>
+
+  <!-- Step 1: 需求 -->
+  <div class="step-header" style="border-left-color:#3D7A4F;">
+    <div class="num">1</div>
+    <div><div class="title">需求 · 真实创业问题</div><div class="desc">大规模低门槛·市场显著最佳</div></div>
   </div>
-<div class="footer">满意解研究所 · 质量仪表盘 · 对标20+全球顶级机构 · 自动更新中</div>
-<div style="max-width:600px;margin:0 auto;padding:12px 16px;font-size:14px;font-weight:500;">
-  <a href="go.html" style="color:#C23B22;text-decoration:none;display:inline-flex;align-items:center;gap:4px;">← 返回决策通道</a>
-  <span style="float:right;font-size:12px;color:#6E6E6E;">满意解研究所</span>
+  <div class="step-items">
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">客户画像</span><span class="si-desc">硬科技创始人·天使到B轮·合伙人决策痛点</span><span class="si-table">客户档案库</span></div>
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">市场验证</span><span class="si-desc">84案例实证·Gottman 91%准确率·Wasserman 10000+数据</span><span class="si-table">案例库</span></div>
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">竞争分析</span><span class="si-desc">12家对标机构·无直接竞品·空白市场</span><span class="si-table">competitor.html</span></div>
+  </div>
+
+  <!-- Step 2: 解决方案 -->
+  <div class="step-header">
+    <div class="num">2</div>
+    <div><div class="title">解决方案 · 产品内核</div><div class="desc">单时交付·真实创业问题</div></div>
+  </div>
+  <div class="step-items">
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">工具层</span><span class="si-desc">233产品·6形态·章衡镜契觉五族</span><span class="si-table">线上产品库</span></div>
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">课程层</span><span class="si-desc">公开课·14模块·认证引导师体系</span><span class="si-table">workshop/certification</span></div>
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">方法论层</span><span class="si-desc">五维框架·38论文·84案例·24翻书</span><span class="si-table">知识资产库</span></div>
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">质量保障</span><span class="si-desc">六级审核·五关审核·四关产品标准</span><span class="si-table">质量仪表盘V2</span></div>
+  </div>
+
+  <!-- Step 3: 商业模式 -->
+  <div class="step-header" style="border-left-color:var(--sri-gold);">
+    <div class="num">3</div>
+    <div><div class="title">商业模式 · 如何赚钱</div><div class="desc">获客→转化→粘性→高客单</div></div>
+  </div>
+  <div class="step-items">
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">获客</span><span class="si-desc">转介绍+分享组件+公号·ref追踪</span><span class="si-table">account.html</span></div>
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">转化</span><span class="si-desc">公开课(对标一堂直播体验课)·导购问卷</span><span class="si-table">workshop/guide</span></div>
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">粘性</span><span class="si-desc">30天重测·解锁进度·转介绍阶梯</span><span class="si-table">account.html</span></div>
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">高客单</span><span class="si-desc">认证引导师·年度顾问·团队工作坊</span><span class="si-table">certification</span></div>
+  </div>
+
+  <!-- Step 4: 增长 -->
+  <div class="step-header" style="border-left-color:#3D7A4F;">
+    <div class="num">4</div>
+    <div><div class="title">增长 · 规模化</div><div class="desc">Growth Loop·飞轮·K-factor</div></div>
+  </div>
+  <div class="step-items">
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">Growth Loop</span><span class="si-desc">体验→分享→新用户→解锁→再体验</span><span class="si-table">go.html飞轮</span></div>
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">NPS引擎</span><span class="si-desc">使用3工具后自动触发·0-10评分</span><span class="si-table">go/assessment等</span></div>
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">重测提醒</span><span class="si-desc">30天自动横幅·7工具使用日志</span><span class="si-table">go/assessment等</span></div>
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">内容传播</span><span class="si-desc">公众号·公开课·案例分享</span><span class="si-table">内容资产</span></div>
+  </div>
+
+  <!-- Step 5: 壁垒 -->
+  <div class="step-header" style="border-left-color:var(--sri-gold);">
+    <div class="num">5</div>
+    <div><div class="title">壁垒 · 护城河</div><div class="desc">方法论迁移成本·规模优势·品牌识别</div></div>
+  </div>
+  <div class="step-items">
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">方法论壁垒</span><span class="si-desc">五路图腾·契晋转桥恒·38论文·84案例</span><span class="si-table">知识资产库</span></div>
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">认证体系</span><span class="si-desc">AG→PG→MG三级·对标ICF+Vistage</span><span class="si-table">certification</span></div>
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">品牌识别</span><span class="si-desc">VI体系·章衡镜契觉·器物代号</span><span class="si-table">VI品牌体系</span></div>
+    <div class="step-item"><span class="si-status">⏳</span><span class="si-name">商标注册</span><span class="si-desc">QM-026·尽快申请</span><span class="si-table">质量仪表盘V2</span></div>
+  </div>
+
+  <!-- 增长漏斗 -->
+  <div style="text-align:center;padding:var(--sp-lg) 0 var(--sp-sm);font-size:11px;color:var(--sri-gold);letter-spacing:2px;">对标一堂增长飞轮</div>
+  <div class="funnel">
+    <div class="funnel-step"><div class="fs-val">📖</div><div class="fs-lbl">内容阅读</div></div>
+    <span class="funnel-arrow">→</span>
+    <div class="funnel-step"><div class="fs-val">🔐</div><div class="fs-lbl">注册/门控</div></div>
+    <span class="funnel-arrow">→</span>
+    <div class="funnel-step"><div class="fs-val">🧪</div><div class="fs-lbl">使用工具(Aha)</div></div>
+    <span class="funnel-arrow">→</span>
+    <div class="funnel-step"><div class="fs-val">📤</div><div class="fs-lbl">分享/转介绍</div></div>
+    <span class="funnel-arrow">→</span>
+    <div class="funnel-step"><div class="fs-val">🎙️</div><div class="fs-lbl">公开课</div></div>
+    <span class="funnel-arrow">→</span>
+    <div class="funnel-step"><div class="fs-val">💎</div><div class="fs-lbl">付费/认证</div></div>
+  </div>
+
+  <!-- 运营自动化状态 -->
+  <div style="text-align:center;padding:var(--sp-lg) 0 var(--sp-sm);font-size:11px;color:var(--sri-gold);letter-spacing:2px;">运营自动化</div>
+  <div class="step-items" style="background:#fff;border-radius:var(--radius-lg);padding:var(--sp-md);">
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">产品审核</span><span class="si-desc">L0-L3自动·周一扫描·4关+隐私</span></div>
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">内容运营</span><span class="si-desc">密码同步·死链接检测·运维清理</span></div>
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">客户运营</span><span class="si-desc">NPS自动·30天重测·转介绍追踪</span></div>
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">增长运营</span><span class="si-desc">Growth Loop·分享ref追踪·注册回传</span></div>
+    <div class="step-item"><span class="si-status">✅</span><span class="si-name">质量运营</span><span class="si-desc">每周健康扫描·每月隐私审计·淘汰评估</span></div>
+  </div>
+
+  <!-- Material system -->
+  <div style="text-align:center;padding:var(--sp-lg) 0 var(--sp-sm);font-size:11px;color:var(--sri-gold);letter-spacing:2px;">材料体系</div>
+  <div class="step-items" style="background:#fff;border-radius:var(--radius-lg);padding:var(--sp-md);">
+    <div class="step-item"><span class="si-status">📄</span><span class="si-name">产品标准 (27个)</span><span class="si-desc">01-27号文档·VFinal质量管理体系</span></div>
+    <div class="step-item"><span class="si-status">📄</span><span class="si-name">驾驶舱 (30表)</span><span class="si-desc">飞书Base·五步法重组·质量仪表盘</span></div>
+    <div class="step-item"><span class="si-status">📄</span><span class="si-name">规范体系 (233产品)</span><span class="si-desc">说明书规范·形态标准·五关审核</span></div>
+    <div class="step-item"><span class="si-status">📄</span><span class="si-name">运营引擎 (6脚本)</span><span class="si-desc">健康扫描·死链接·隐私·密码·运维·NPS</span></div>
+    <div class="step-item"><span class="si-status">📄</span><span class="si-name">增长体系 (7环)</span><span class="si-desc">入口→导购→工具→分享→公开课→认证→增长</span></div>
+  </div>
+
 </div>
+<p style="text-align:center;padding:var(--sp-lg);font-size:10px;opacity:0.4;">对标: 一堂五步法 · Reforge Growth Loop · AI做课33提示词 · 300条课程金句 · 增长飞轮</p>
 </body>
 </html>
