@@ -348,5 +348,54 @@
 </div>
 
 </div>
+<script>
+// Parse scores from URL hash (set by assessment.html)
+try {
+  const hash = window.location.hash.substring(1);
+  if (hash) {
+    const scores = JSON.parse(decodeURIComponent(hash));
+    const dims = {t:'时间轴',d:'可行域',b:'身心流',x:'信义观',z:'直觉阈'};
+    const dimLabels = {t:'T_时间轴',d:'D_可行域',b:'B_身心流',x:'X_信义观',z:'Z_直觉阈'};
+    
+    // Update all score displays on the page
+    Object.entries(scores).forEach(([key,val]) => {
+      if (key === 'stage') return;
+      const numVal = parseFloat(val);
+      // Find and update score boxes and bar fills
+      document.querySelectorAll('.score-box .num').forEach(el => {
+        if (el.textContent.trim() === '—' || !isNaN(parseFloat(el.textContent))) {
+          const parentText = el.parentElement?.textContent || '';
+          if (parentText.includes(dims[key]) || parentText.includes(dimLabels[key])) {
+            el.textContent = numVal.toFixed(1);
+          }
+        }
+      });
+      // Update bar fills
+      document.querySelectorAll('.bar-fill').forEach(el => {
+        const parentText = el.closest('.metric')?.textContent || el.closest('.card')?.textContent || '';
+        if (parentText.includes(dims[key]) || parentText.includes(dimLabels[key])) {
+          el.style.width = (numVal * 20) + '%';
+        }
+      });
+    });
+
+    // Show banner that report is personalized
+    const badge = document.querySelector('.badge');
+    if (badge) {
+      badge.textContent = '🟢 基于你的真实评分生成 · ' + new Date().toLocaleDateString('zh-CN');
+      badge.style.background = '#4A8C5C';
+    }
+    
+    // Update stage if available
+    if (scores.stage) {
+      document.querySelectorAll('.header .sub').forEach(el => {
+        el.textContent += ' · 阶段: ' + scores.stage;
+      });
+    }
+  }
+} catch(e) {
+  console.log('No scores in URL — showing demo data');
+}
+</script>
 </body>
 </html>
