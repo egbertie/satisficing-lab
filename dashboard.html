@@ -666,7 +666,21 @@ async function render() {
     data.forEach(g => {
       html += `<tr><td>${g.metric||''}</td><td><b>${g.current||''}</b></td><td>${g.target||''}</td><td>${g.trend||'—'}</td></tr>`;
     });
-    html += '</table></div>';
+    html += '</table>
+      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">📚 历史资产激活 (31K文件·41%激活率)</h3>
+      <table><tr><th>类别</th><th>文件数</th><th>激活率</th></tr>
+      <tr><td>知识与培训</td><td>2,214</td><td><span class="dot dg"></span>98%</td></tr>
+      <tr><td>增长与获客</td><td>2,835</td><td><span class="dot dg"></span>93%</td></tr>
+      <tr><td>法律与合同</td><td>3,148</td><td><span class="dot dg"></span>88%</td></tr>
+      <tr><td>品牌与设计</td><td>1,010</td><td><span class="dot dg"></span>87%</td></tr>
+      <tr><td>方法论</td><td>6,888</td><td><span class="dot dg"></span>85%</td></tr>
+      <tr><td>AI与系统</td><td>5,965</td><td><span class="dot dg"></span>85%</td></tr>
+      <tr><td>产品设计</td><td>8,050</td><td><span class="dot dg"></span>84%</td></tr>
+      <tr><td>案例与数据</td><td>7,031</td><td><span class="dot dg"></span>75%</td></tr>
+      <tr><td>标准与质量</td><td>12,518</td><td><span class="dot da"></span>69%</td></tr>
+      <tr><td>运营管理</td><td>11,819</td><td><span class="dot da"></span>63%</td></tr>
+      </table>
+      <p style="font-size:9px;color:#6E6E6E;margin-top:4px;">对标RAG·自动标签·休眠资产可通过驾驶舱文档中心搜索激活</p></div>';
   } else if (currentTab === 'products') {
     let data = DB.products();
     html = `<div class="panel"><h3>📦 产品库</h3>
