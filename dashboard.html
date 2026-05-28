@@ -273,6 +273,7 @@ document.addEventListener('paste',function(e){
     <button class="tab-btn" onclick="switchTab('quality')">✅ 质量</button>
     <button class="tab-btn" onclick="switchTab('growth')">📈 增长</button>
     <button class="tab-btn" onclick="switchTab('products')">📦 产品</button>
+    <button class="tab-btn" onclick="switchTab('system')">⚡ 系统</button>
     <button class="tab-btn" onclick="switchTab('docs')">📂 文档</button>
     <button class="tab-btn" onclick="switchTab('flywheel')">⚙️ 资产</button>
     <button class="tab-btn" onclick="switchTab('import')">📥 导入</button>
@@ -566,6 +567,53 @@ async function render() {
       document.getElementById('progressText').textContent=pct+'% ('+done+'/'+tasks.length+')';
       document.getElementById('taskStats').innerHTML='<span>✅ 完成:'+done+'</span><span>🔄 进行中:'+tasks.filter(t=>t.status==='进行中').length+'</span><span>⏳ 待开始:'+tasks.filter(t=>t.status==='待开始').length+'</span>';
     },100);
+  } else if (currentTab === 'system') {
+    html = `<div class="panel" style="border-left:4px solid #C23B22;"><h3>⚡ 系统运行状态</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
+        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#C23B22;">12</div><div style="font-size:10px;color:#6E6E6E;">cron任务</div></div>
+        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#3D7A4F;">6</div><div style="font-size:10px;color:#6E6E6E;">自动化脚本</div></div>
+        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#B8860B;">2</div><div style="font-size:10px;color:#6E6E6E;">飞书Base</div></div>
+        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#C23B22;">20</div><div style="font-size:10px;color:#6E6E6E;">脚本文件</div></div>
+        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#3D7A4F;">232</div><div style="font-size:10px;color:#6E6E6E;">线上产品</div></div>
+        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#B8860B;">2</div><div style="font-size:10px;color:#6E6E6E;">后台服务</div></div>
+      </div>
+      
+      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">⏰ Cron机制 (12个·24/7运行)</h3>
+      <table><tr><th>时间</th><th>任务</th><th>模型</th><th>状态</th></tr>
+      <tr><td>00:10</td><td>下载扣子飞书对话</td><td>systemEvent→main</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
+      <tr><td>04:00</td><td>梦境自动保存</td><td>deepseek-flash</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
+      <tr><td>06:00</td><td>日起课综合仪式</td><td>deepseek-pro</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
+      <tr><td>06:30</td><td>Inkwell每日阅读</td><td>systemEvent→main</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
+      <tr><td>每2h</td><td>Token压缩检查</td><td>deepseek-flash</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
+      <tr><td>10:00/18:00</td><td>查收Sina邮箱</td><td>deepseek-flash</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
+      <tr><td>周一06:00</td><td>产品健康扫描</td><td>deepseek-flash</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
+      <tr><td>周三18:00</td><td>整周体检+密码同步</td><td>deepseek-flash</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
+      <tr><td>周六10:00</td><td>运维清理·系统体检</td><td>deepseek-flash</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
+      <tr><td>22:00</td><td>日毕课综合仪式</td><td>deepseek-pro</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
+      <tr><td>23:00</td><td>每日飞书同步</td><td>deepseek-pro</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
+      <tr><td>每月1日</td><td>隐私审计+淘汰评估</td><td>deepseek-flash</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
+      </table>
+      
+      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">🔧 自动化脚本 (6个)</h3>
+      <table><tr><th>脚本</th><th>功能</th><th>频率</th></tr>
+      <tr><td>product_health_scan.py</td><td>产品四关审核</td><td>周一cron</td></tr>
+      <tr><td>dead_link_checker.py</td><td>死链接检测</td><td>周一cron</td></tr>
+      <tr><td>privacy_audit.py</td><td>隐私泄漏扫描</td><td>每月1日cron</td></tr>
+      <tr><td>sync_passwords.py</td><td>密码同步飞书→GitHub</td><td>周三cron</td></tr>
+      <tr><td>sync_dashboard_data.py</td><td>飞书数据→SQLite中枢</td><td>cron每30分钟</td></tr>
+      <tr><td>migrate_dashboard.py</td><td>旧Base→新Base迁移</td><td>已执行</td></tr>
+      </table>
+      
+      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">📊 飞书数据源 (双Base)</h3>
+      <table><tr><th>Base</th><th>状态</th><th>表数</th></tr>
+      <tr><td>旧驾驶舱 (HcCObLZAxalT3SsVLTocAfcvnmt)</td><td>📦 存档中</td><td>8(可读表)</td></tr>
+      <tr><td>新驾驶舱 V2 (DPm0bygWva3bbYsrP3scj3WJnNN)</td><td>📦 备份同步中</td><td>12表(待迁移数据)</td></tr>
+      <tr><td><b>本地SQLite中枢</b></td><td><span class="status-dot dot-green"></span>运行中·主数据源</td><td>10表·195任务·26客户</td></tr>
+      </table>
+      
+      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">🖥️ 后台服务 (2个·开机自启)</h3><table><tr><th>服务</th><th>端口</th><th>功能</th></tr>
+      <tr><td>数据中台 V2</td><td>8765</td><td>SQLite↔HTTP API↔驾驶舱</td></tr>
+      <tr><td>邮箱验证码</td><td>8766</td><td>密码变更·邮箱验证</td></tr></table></div>`;
   } else if (currentTab === 'docs') {
     html = `<div class="panel"><h3>📂 文档中枢 · 547个核心文件</h3>
       <div style="display:flex;gap:8px;margin-bottom:8px;">
