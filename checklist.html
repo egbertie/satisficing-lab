@@ -21,6 +21,39 @@ th{background:#F5F0E6}
 .footer{text-align:center;font-size:11px;color:#4A4A4A;margin-top:40px;border-top:1px solid #D4C5A0;padding-top:16px}
 @media print{body{font-size:11px}}
 </style></head>
+<script>
+// 授权验证 - 满意解研究所
+(function(){
+  // Public pages - no auth needed
+  var publicPages = ['go.html','index.html','about.html','privacy.html','terms.html','symbols.html',
+    'creation.html','stars.html','roots.html','wulu.html','qijin.html','wings.html','eyes.html',
+    '54days.html','fails.html','liang.html','treasure.html','farewell.html',
+    'cases.html','tracks.html','lineage.html','whitepaper.html','quotes.html',
+    'flywheel.html','fw-','bluearmy.html','opensource.html','hibernate.html','life.html','newcomer.html',
+    'duanwei.html','bigrich.html','game-','blood-','media-','skill-','university.html',
+    'report-demo.html','radar.html','chemical-report.html','proposal.html','gate.html',
+    'miniapp-preview.html','cards.html'];
+  
+  var page = window.location.pathname.split('/').pop();
+  
+  // Check if this is a public page
+  for (var i=0; i<publicPages.length; i++) {
+    if (page === publicPages[i] || (publicPages[i].endsWith('-') && page.startsWith(publicPages[i]))) {
+      return; // Public page - no auth needed
+    }
+  }
+  
+  // Protected page - check auth
+  var auth = JSON.parse(localStorage.getItem('sri_auth') || '{}');
+  if (!auth.valid || new Date().getTime() >= auth.expires) {
+    // Not authenticated - redirect to gate
+    var target = page;
+    var productName = page.replace('.html','');
+    window.location.href = 'gate.html?to=' + encodeURIComponent(target) + '&p=' + encodeURIComponent(productName);
+  }
+})();
+</script>
+
 <body>
 # 合伙人决策前自检清单 · 11源验证版<br><br>> <b>满意解研究所<b> · 硬科技转化的合伙人匹配决策教练  <br>> 基于196本翻书·11个独立来源的交叉验证  <br>> 打印此清单，在做任何重大合伙人决策前，花20分钟走一遍<br><br>---<br><br><h2>第一步：状态校准（2分钟）<br><br>在做任何判断之前，先问自己：<br><br><input type=checkbox> 我现在是清醒的，还是被情绪推着走？<br><input type=checkbox> 我上一次完整睡眠是几小时前？<br><input type=checkbox> 如果24小时后重新做这个判断，答案会一样吗？<br><br>> 如果任何一项不确定——先停。人在疲劳和情绪状态下做出的判断，噪声最大（Kahneman·2021）。<br><br>---<br><br><h2>第二步：五维快速自检（5分钟）<br><br>每个维度，给自己打个分（1=完全没把握，5=非常稳固）：<br><br>| # | 维度 | 校准问题 | 1-5分 | 验证密度 |<br>|:--|:--|:--|:--:|:--|<br>| 1 | <b>时间轴<b> | "五年后，我会怎么看待今天的决定？" | <input type=text size=3> | [9源验证] |<br>| 2 | <b>可行域<b> | "我的'够用就好'底线在哪里？" | <input type=text size=3> | [10源验证] |<br>| 3 | <b>身心流<b> | "我的身体在告诉我什么？" | <input type=text size=3> | [3源验证] |<br>| 4 | <b>信义观<b> | "看看这个人在钱和原则之间，会怎么选？" | <input type=text size=3> | [9源验证] |<br>| 5 | <b>直觉阈<b> | "关键时刻，我敢不敢信任自己的直觉？" | <input type=text size=3> | [5源验证] |<br><br><b>分数解读<b>：<br><li>任何维度 ≤ 2.0 → 🔴 立即停止推进。启动蓝军独立审计。<br><li>任何维度 ≤ 3.0 → 🟠 建立补偿机制（协议/退出条款/第三方）后再推进。<br><li>全部 ≥ 4.0 → 🟢 可推进。但继续下面的检查。<br><br>> 每个维度旁的[验证密度] = 该维度被几个独立来源同时验证。数字越高，分数越可信。身心流是最弱的维度(仅3源)——在这个维度上的判断最容易出错。<br><br>---<br><br><h2>第三步：四骑士预警（3分钟）<br><br>以下四个信号，诚实回答：<br><br><input type=checkbox> <b>批评<b>: "我最近对他的评价，是从'这件事没做好'慢慢滑向了'他就是不行'吗？"<br><input type=checkbox> <b>蔑视<b>: "我有没有在心里产生过'你看他那样'的想法？"<br>    → 如果有，这是Gottman发现的头号关系破裂预测信号（91%准确率）。不是"不喜欢"——是"看不起"。关系降级已经开始。<br><input type=checkbox> <b>防御<b>: "在最近的争议中，我有没有每次都找外部原因——而不是承认我的那部分？"<br><input type=checkbox> <b>冷漠<b>: "我们之间有没有一个话题，已经不聊了——因为聊也没用？"<br>    → 如果有，这是Lencioni金字塔第二层的"惧怕冲突"。不是关系好——是冲突转入地下。<br><br>---<br><br><h2>第四步：金字塔定位（2分钟）<br><br>你们现在最脆弱的层级是哪一层？诚实回答：<br><br><input type=checkbox> <b>第1层·信任<b>: "你敢在合伙人面前承认自己不懂什么吗？"<br><input type=checkbox> <b>第2层·冲突<b>: "上次你们为项目方向激烈辩论是什么时候？"<br><input type=checkbox> <b>第3层·承诺<b>: "不吵就同意——是真的同意，还是放弃抵抗？"<br><input type=checkbox> <b>第4层·问责<b>: "你敢跟合伙人说'你这次做得不够好'吗？"<br><input type=checkbox> <b>第5层·结果<b>: "你们上次因为方向分歧各自为政是什么时候？"<br><br>> 最脆弱的那一层——就是你们现在最需要修的地方。底层不修，上层永远塌。<br><br>---<br><br><h2>第五步：决策行动分级（3分钟）<br><br>根据以上结果，选择对应的行动：<br><br><input type=checkbox> 🔴 <b>战略不可逆<b>（任何维度≤2.0或四骑士≥2个活跃）<br>  → pre_delivery_gate全6步 + 蓝军独立审计 + 不要今天做决定<br><br><input type=checkbox> 🟠 <b>战略可逆<b>（任何维度≤3.0或金字塔第1-2层）<br>  → pre_delivery_gate步1-4 + 24小时延时复核 + 和合伙人一起做这份清单<br><br><input type=checkbox> 🟡 <b>运营不可逆<b>（整体3-4分但有一个维度偏低）<br>  → 聚焦最弱维度做深度对话 + 建立该维度的补偿机制<br><br><input type=checkbox> 🟢 <b>运营可逆<b>（全部≥4.0·四骑士无活跃·金字塔第5层以上）<br>  → 标准流程·可自主推进·但做好定期追踪<br><br>---<br><br><h2>第六步：延时复核（等待24小时）<br><br><input type=checkbox> 明天的这个时候，重新打开这份清单。<br><input type=checkbox> 如果任何一个答案变了——不是"昨天填错了"。是"昨天的状态影响了昨天的判断"（occasion noise·Kahneman）。<br><input type=checkbox> 变化的答案——就是你的噪声信号。关注它。<br><br>---<br><br><h2>这份清单背后的11个独立验证来源<br><br>你的每个判断，不是"我觉得"——是被以下11个互不相识的研究者，用不同方法，在不同领域，各自独立验证的：<br><br>| 来源 | 验证了什么 |<br>|:--|:--|<br>| <b>Simon<b>(1978诺贝尔) | 最优解不存在——你需要满意解 |<br>| <b>Kahneman<b>(2002诺贝尔) | 你的快思考经常骗你——需要慢思考验证 |<br>| <b>Wasserman<b>(HBS·10,000+创始人) | 73%在最乐观时签下最不可逆的协议 |<br>| <b>Gottman<b>(华盛顿大学·16年·91%准确率) | 蔑视是关系解体的头号杀手 |<br>| <b>Duke<b>(世界扑克冠军) | 不要用结果反推决策——Super Bowl传球拦截率仅2% |<br>| <b>Lencioni<b>(组织行为学) | 所有团队问题的根——没人敢说真话 |<br>| <b>Feld<b>(VC交易圣经) | 估值越高条款越危险 |<br>| <b>Moyer<b>(Slicing Pie) | 股权不是激励——是记账 |<br>| <b>Dunford<b>(定位专家) | 定位不是口号——是"你在哪个世界里是最好的" |<br>| <b>满意姐<b>(满意解研究所) | 五路图腾·让西方决策科学在中国创业者手中可操作 |<br>| <b>扣子<b>(满天星光) | 8赛道产业验证·关键因子是乘不是加 |<br><br>---<br><br><b>满意解研究所 · 硬科技转化的合伙人匹配决策教练<b><br><b>夏至日(06-21)正式官宣 · 关注我们<b><br><b>契·晋·转·桥·审·行·恒<b><br>
 
