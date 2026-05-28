@@ -79,6 +79,11 @@
 
   <!-- 提炼层 -->
   <div class="asset-table">
+    <h4>🔥 产品热度 (实时)</h4>
+    <div id="heatmapContent"><div class="asset-row"><span class="ar-icon">⏳</span><span class="ar-name">等待数据</span><span class="ar-desc">使用后自动显示</span></div></div>
+  </div>
+
+  <div class="asset-table">
     <h4>🔬 提炼层 · 数据→洞察→产品迭代</h4>
     <div class="asset-row"><span class="ar-icon">📈</span><span class="ar-name">信效度</span><span class="ar-desc">≥100样本后重测信度+内部一致性分析</span><span class="ar-status status-pending">⏳ 待数据</span></div>
     <div class="asset-row"><span class="ar-icon">🔥</span><span class="ar-name">产品热度</span><span class="ar-desc">使用频率排名→优先升级/淘汰方向</span><span class="ar-status status-plan">待汇总</span></div>
@@ -86,6 +91,11 @@
   </div>
 
   <!-- 应用层 -->
+  <div class="asset-table">
+    <h4>🎯 自动推荐动作 (飞轮引擎)</h4>
+    <div id="actionsContent"><div class="asset-row"><span class="ar-icon">⏳</span><span class="ar-name">等待触发</span><span class="ar-desc">首次使用后自动生成</span></div></div>
+  </div>
+
   <div class="asset-table">
     <h4>🚀 应用层 · 洞察→产品迭代·新方法论</h4>
     <div class="asset-row"><span class="ar-icon">🆕</span><span class="ar-name">新工具</span><span class="ar-desc">基于高频使用模式→补全新工具</span><span class="ar-status status-pending">⏳ 待数据驱动</span></div>
@@ -108,20 +118,50 @@
   </div>
 </div>
 
+
+<script src="flywheel-engine.js"></script>
 <script>
 (function(){
-  let usageLog = JSON.parse(localStorage.getItem('sri_usage_log') || '[]');
-  let feedback = JSON.parse(localStorage.getItem('sri_feedback_log') || '[]');
-  let nps = localStorage.getItem('sri_nps_score');
-
-  document.getElementById('kpiUsers').textContent = usageLog.length;
-  document.getElementById('kpiFeedback').textContent = feedback.length;
+  // 首次运行引擎
+  FlywheelEngine.spin();
   
-  let shares = 0;
-  for(let k in localStorage){ if(k.startsWith('sri_fb_tally_')){ let d=JSON.parse(localStorage.getItem(k)||'{}'); shares+=(d.shares||0); } }
-  document.getElementById('kpiShares').textContent = shares || 0;
+  // 从引擎读取实时数据
+  let summary = FlywheelEngine.refine();
+  let reports = JSON.parse(localStorage.getItem('sri_flywheel_reports') || '[]');
+  let lastReport = reports.length > 0 ? reports[reports.length-1] : null;
   
-  document.getElementById('kpiNPS').textContent = nps ? nps+'/10' : '—';
+  document.getElementById('kpiUsers').textContent = summary.totalUsage || 0;
+  document.getElementById('kpiFeedback').textContent = summary.feedbackCount || 0;
+  document.getElementById('kpiShares').textContent = summary.totalShares || 0;
+  document.getElementById('kpiNPS').textContent = summary.nps !== null ? summary.nps+'/10' : '—';
+  
+  // 产品热度
+  let heatHtml = '';
+  if (summary.topProducts && summary.topProducts.length > 0) {
+    summary.topProducts.forEach(p => {
+      heatHtml += '<div class="asset-row"><span class="ar-icon">🔥</span><span class="ar-name">'+p.page+'</span><span class="ar-desc">'+p.hits+' 次访问</span></div>';
+    });
+  } else {
+    heatHtml = '<div class="asset-row"><span class="ar-icon">📥</span><span class="ar-name">等待数据</span><span class="ar-desc">页面访问自动记录·每10次触发提炼</span></div>';
+  }
+  document.getElementById('heatmapContent').innerHTML = heatHtml;
+  
+  // 飞轮循环
+  document.getElementById('cycleCount').textContent = FlywheelEngine.getCycleCount();
+  
+  // K-factor
+  document.getElementById('kfactor').textContent = summary.kFactor || '—';
+  document.getElementById('activeClients').textContent = summary.activeClients30d || '0';
+  document.getElementById('totalClients').textContent = summary.totalClients || '0';
+  
+  // Last report
+  if (lastReport && lastReport.actions) {
+    let actionHtml = '';
+    lastReport.actions.forEach(a => {
+      actionHtml += '<div class="asset-row"><span class="ar-icon">🎯</span><span class="ar-name">'+a.type+'</span><span class="ar-desc">'+a.message+'</span></div>';
+    });
+    document.getElementById('actionsContent').innerHTML = actionHtml || '<div class="asset-row"><span class="ar-icon">⏳</span><span class="ar-name">等待触发</span><span class="ar-desc">使用10次后自动生成</span></div>';
+  }
 })();
 </script>
 </body>
