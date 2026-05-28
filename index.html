@@ -24,6 +24,8 @@
   .hero .seal { width:120px; height:120px; border:2.5px solid var(--sri-red); display:flex; align-items:center; justify-content:center; margin-bottom:32px; position:relative; }
   .hero .seal::after { content:'火'; font-size:42px; color:var(--sri-red); font-family:var(--sri-font-serif); }
   .hero .brand-line { color: var(--sri-red); font-size:14px; margin-top:32px; font-family:var(--sri-font-serif); font-style:italic; opacity:0.8; }
+  .hero .cta-btn { display:inline-block; padding:16px 42px; background:var(--sri-red); color:#fff; border-radius:28px; font-size:16px; font-weight:600; text-decoration:none; margin-top:24px; animation: breathe 2.5s ease-in-out infinite; }
+  @keyframes breathe { 0%,100% { transform:scale(1); opacity:1; } 50% { transform:scale(1.03); opacity:0.9; } }
   
   .section { max-width:960px; margin:0 auto; padding:80px 24px; }
   .section h2 { font-size:24px; color: var(--sri-red); margin-bottom:12px; }
@@ -85,7 +87,8 @@
   <p class="tagline">人比事更重要，信任比利益更持久</p>
   <p class="brand-line">火承土印 · 满意之解 · 硬科技转化的合伙人匹配决策教练</p>
   <p style="font-size:12px;color:var(--sri-gold);margin-top:6px;opacity:0.7">契·晋 —— 契约与成长。满意解研究所的灵魂始于这里。</p>
-  <p style="font-size:13px;color:var(--sri-gold);margin-top:16px">65%的创业失败源于合伙人冲突·你的关系健康吗？<a href="assessment.html" style="color:var(--sri-red);font-weight:600">3分钟测评→</a></p>
+  <p style="font-size:13px;color:var(--sri-gold);margin-top:16px">65%的创业失败源于合伙人冲突·你的关系健康吗？</p>
+  <a href="assessment.html" class="cta-btn">3分钟免费自评 →</a>
 </div>
 
 <div class="section">
