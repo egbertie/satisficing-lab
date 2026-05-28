@@ -240,6 +240,7 @@
   <div class="bottom-links">
     <a href="go-gallery.html">🖼️ 画廊</a>
     <a href="product-catalog.html">📦 全部产品</a>
+    <a href="account.html">👤 客户中心</a>
     <a href="about.html">🏛️ 关于我们</a>
     <a href="dashboard.html">📊 质量仪表盘</a>
   </div>
@@ -262,6 +263,16 @@ function toggleFamily(btn) {
   var body = btn.nextElementSibling;
   body.style.display = body.style.display === 'block' ? 'none' : 'block';
 }
+</script>
+
+<script>
+(function(){
+  let p = new URLSearchParams(window.location.search);
+  let ref = p.get('ref');
+  if (ref && !localStorage.getItem('sri_referred_by')) {
+    localStorage.setItem('sri_referred_by', ref);
+  }
+})();
 </script>
 </body>
 </html>
