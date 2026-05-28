@@ -133,32 +133,61 @@ function register() {
     return;
   }
 
+  // Auto-generate customer tags
+  let tags = [];
+  let role = document.getElementById('role').value;
+  let industry = document.getElementById('industry').value;
+  let stage = document.getElementById('stage').value;
+  let concern = document.getElementById('concern').value.trim();
+  
+  if (role.includes('CEO') || role.includes('创始人')) tags.push('决策者');
+  if (role.includes('CTO') || role.includes('技术')) tags.push('技术背景');
+  if (role.includes('投资人')) tags.push('投资方');
+  if (industry.includes('硬科技') || industry.includes('半导体')) tags.push('硬科技赛道');
+  if (industry.includes('AI') || industry.includes('智能') || industry.includes('机器人')) tags.push('AI赛道');
+  if (industry.includes('新能源') || industry.includes('储能')) tags.push('新能源赛道');
+  if (stage.includes('天使') || stage.includes('未融资')) tags.push('早期项目');
+  if (stage.includes('A轮') || stage.includes('B轮')) tags.push('成长期');
+  if (concern.includes('股权')) tags.push('关注股权');
+  if (concern.includes('退出')) tags.push('关注退出');
+  if (concern.includes('信任')) tags.push('关注信任');
+
   let profile = {
     name: name,
     company: company,
     email: document.getElementById('email').value.trim(),
-    role: document.getElementById('role').value,
-    industry: document.getElementById('industry').value,
-    stage: document.getElementById('stage').value,
-    concern: document.getElementById('concern').value.trim(),
+    role: role,
+    industry: industry,
+    stage: stage,
+    concern: concern,
+    tags: tags,
     registered: new Date().toISOString(),
     source: 'web_gate',
-    page: target
+    page: target,
+    customerId: 'WEB-' + Date.now().toString(36).toUpperCase()
   };
 
-  // Save to localStorage for now
+  // Save profile
   localStorage.setItem('sri_profile', JSON.stringify(profile));
+  
+  // Log customer acquisition
+  let customers = JSON.parse(localStorage.getItem('sri_customers') || '[]');
+  customers.push({ id: profile.customerId, name: name, company: company, time: new Date().toISOString(), tags: tags });
+  localStorage.setItem('sri_customers', JSON.stringify(customers.slice(-200)));
+
+  // Also save to customer-db in a structured way
+  let db = JSON.parse(localStorage.getItem('sri_customer_db') || '{}');
+  db[profile.customerId] = profile;
+  localStorage.setItem('sri_customer_db', JSON.stringify(db));
   
   // Show success
   document.getElementById('formCard').style.display = 'none';
   document.getElementById('successBox').classList.add('show');
   
-  // Redirect after brief delay
   setTimeout(() => { window.location.href = target; }, 1500);
 }
 
 function skipRegister() {
-  // Save empty profile to avoid re-prompting
   localStorage.setItem('sri_profile', JSON.stringify({skipped:true, time:new Date().toISOString()}));
   window.location.href = target;
 }
