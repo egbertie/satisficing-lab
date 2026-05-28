@@ -39,7 +39,7 @@ td{padding:6px 4px;border-bottom:1px solid #f0e8d8}
 <body>
 
 <div id="gateLayer" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#F5F0E6;z-index:9999;display:flex;align-items:center;justify-content:center;font-family:-apple-system,sans-serif;">
-<div style="background:#fff;border-radius:20px;padding:40px 28px;max-width:360px;width:90%;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,0.08);border:2px solid #C23B22;">
+<div style="background:#fff;border-radius:20px;padding:40px 28px;max-width:360px;width:90%;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,0.08);border:2px solid #C23B22;" id="gateBox">
 <div style="font-size:40px;margin-bottom:12px;">🔐</div>
 <h2 style="font-size:18px;color:#2A2A2A;margin-bottom:4px;">驾驶舱 · 授权访问</h2>
 <p style="font-size:12px;color:#6E6E6E;margin-bottom:16px;" id="gateMsg">请输入6位数字密码</p>
@@ -92,9 +92,80 @@ async function gateVerify(){
 }
 
 function gateForgot(){
-  let m=document.getElementById('gateMsg');
-  m.innerHTML='密码已发送到 manyi_hong@sina.com<br><span style="font-size:10px;opacity:0.6;">请查收邮箱</span>';
+  let box=document.getElementById('gateBox');
+  box.innerHTML=`
+    <div style="font-size:28px;margin-bottom:8px;">🔧</div>
+    <h2 style="font-size:18px;color:#2A2A2A;margin-bottom:4px;">变更密码</h2>
+    <p style="font-size:12px;color:#6E6E6E;margin-bottom:12px;">输入当前密码 + 新密码</p>
+    <div style="text-align:left;font-size:12px;margin-bottom:8px;">
+      <label style="color:#4A4A4A;font-weight:600;">当前密码</label>
+      <div style="display:flex;gap:6px;justify-content:center;margin:4px 0 10px;" id="oldDigits">
+        <input type="password" class="gateDigit" maxlength="1" inputmode="numeric" pattern="[0-9]" oninput="gateNext(this)" style="width:38px;height:44px;border:2px solid #D4C5A0;border-radius:8px;text-align:center;font-size:20px;font-weight:700;font-family:monospace;background:#F5F0E6;">
+        <input type="password" class="gateDigit" maxlength="1" inputmode="numeric" pattern="[0-9]" oninput="gateNext(this)" style="width:38px;height:44px;border:2px solid #D4C5A0;border-radius:8px;text-align:center;font-size:20px;font-weight:700;font-family:monospace;background:#F5F0E6;">
+        <input type="password" class="gateDigit" maxlength="1" inputmode="numeric" pattern="[0-9]" oninput="gateNext(this)" style="width:38px;height:44px;border:2px solid #D4C5A0;border-radius:8px;text-align:center;font-size:20px;font-weight:700;font-family:monospace;background:#F5F0E6;">
+        <input type="password" class="gateDigit" maxlength="1" inputmode="numeric" pattern="[0-9]" oninput="gateNext(this)" style="width:38px;height:44px;border:2px solid #D4C5A0;border-radius:8px;text-align:center;font-size:20px;font-weight:700;font-family:monospace;background:#F5F0E6;">
+        <input type="password" class="gateDigit" maxlength="1" inputmode="numeric" pattern="[0-9]" oninput="gateNext(this)" style="width:38px;height:44px;border:2px solid #D4C5A0;border-radius:8px;text-align:center;font-size:20px;font-weight:700;font-family:monospace;background:#F5F0E6;">
+        <input type="password" class="gateDigit" maxlength="1" inputmode="numeric" pattern="[0-9]" oninput="gateNext(this)" style="width:38px;height:44px;border:2px solid #D4C5A0;border-radius:8px;text-align:center;font-size:20px;font-weight:700;font-family:monospace;background:#F5F0E6;">
+      </div>
+      <label style="color:#4A4A4A;font-weight:600;">新密码（6位数字）</label>
+      <div style="display:flex;gap:6px;justify-content:center;margin:4px 0;" id="newDigits">
+        <input type="password" class="gateDigit" maxlength="1" inputmode="numeric" pattern="[0-9]" oninput="gateNext(this)" style="width:38px;height:44px;border:2px solid #D4C5A0;border-radius:8px;text-align:center;font-size:20px;font-weight:700;font-family:monospace;background:#F5F0E6;">
+        <input type="password" class="gateDigit" maxlength="1" inputmode="numeric" pattern="[0-9]" oninput="gateNext(this)" style="width:38px;height:44px;border:2px solid #D4C5A0;border-radius:8px;text-align:center;font-size:20px;font-weight:700;font-family:monospace;background:#F5F0E6;">
+        <input type="password" class="gateDigit" maxlength="1" inputmode="numeric" pattern="[0-9]" oninput="gateNext(this)" style="width:38px;height:44px;border:2px solid #D4C5A0;border-radius:8px;text-align:center;font-size:20px;font-weight:700;font-family:monospace;background:#F5F0E6;">
+        <input type="password" class="gateDigit" maxlength="1" inputmode="numeric" pattern="[0-9]" oninput="gateNext(this)" style="width:38px;height:44px;border:2px solid #D4C5A0;border-radius:8px;text-align:center;font-size:20px;font-weight:700;font-family:monospace;background:#F5F0E6;">
+        <input type="password" class="gateDigit" maxlength="1" inputmode="numeric" pattern="[0-9]" oninput="gateNext(this)" style="width:38px;height:44px;border:2px solid #D4C5A0;border-radius:8px;text-align:center;font-size:20px;font-weight:700;font-family:monospace;background:#F5F0E6;">
+        <input type="password" class="gateDigit" maxlength="1" inputmode="numeric" pattern="[0-9]" oninput="gateNext(this)" style="width:38px;height:44px;border:2px solid #D4C5A0;border-radius:8px;text-align:center;font-size:20px;font-weight:700;font-family:monospace;background:#F5F0E6;">
+      </div>
+    </div>
+    <p id="gateError" style="color:#C23B22;font-size:12px;min-height:18px;"></p>
+    <button onclick="gateChange()" style="width:100%;padding:12px;border:none;border-radius:12px;background:#C23B22;color:#fff;font-size:14px;font-weight:600;cursor:pointer;">变更密码</button>
+    <p style="font-size:11px;margin-top:8px;"><a href="javascript:void(0)" onclick="gateBack()" style="color:#6E6E6E;">← 返回登录</a></p>
+  `;
+  document.getElementById('gd0').parentElement.style.display='none';
   document.getElementById('gateError').textContent='';
+}
+
+async function gateChange(){
+  // 读旧密码
+  let oldDigits=document.getElementById('oldDigits').querySelectorAll('input');
+  let newDigits=document.getElementById('newDigits').querySelectorAll('input');
+  let old=''; for(let i=0;i<6;i++){if(!oldDigits[i].value){document.getElementById('gateError').textContent='请输入当前密码';return;} old+=oldDigits[i].value;}
+  let np=''; for(let i=0;i<6;i++){if(!newDigits[i].value){document.getElementById('gateError').textContent='请输入新密码';return;} np+=newDigits[i].value;}
+  if(np===old){document.getElementById('gateError').textContent='新密码不能与当前密码相同';return;}
+  
+  let oh=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(old));
+  let ohash=Array.from(new Uint8Array(oh)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  
+  // 验证旧密码
+  let stored=localStorage.getItem('sri_dash_hash')||'6460662e217c7a9f899208dd70a2c28abdea42f128666a9b78e6c0c064846493';
+  if(ohash!==stored){document.getElementById('gateError').textContent='当前密码错误';return;}
+  
+  // 保存新密码
+  let nh=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(np));
+  let nhash=Array.from(new Uint8Array(nh)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  localStorage.setItem('sri_dash_hash',nhash);
+  localStorage.setItem('sri_dashboard_auth','true');
+  document.getElementById('gateLayer').style.display='none';
+}
+
+function gateBack(){
+  document.getElementById('gateBox').innerHTML=`
+    <div style="font-size:40px;margin-bottom:12px;">🔐</div>
+    <h2 style="font-size:18px;color:#2A2A2A;margin-bottom:4px;">驾驶舱 · 授权访问</h2>
+    <p style="font-size:12px;color:#6E6E6E;margin-bottom:16px;" id="gateMsg">请输入6位数字密码</p>
+    <div style="display:flex;gap:6px;justify-content:center;margin-bottom:12px;" id="digitGroup">
+      <input type="password" class="gateDigit" maxlength="1" inputmode="numeric" pattern="[0-9]" oninput="gateNext(this)" onkeydown="gatePrev(event,this)" id="gd0" style="width:42px;height:52px;border:2px solid #D4C5A0;border-radius:10px;text-align:center;font-size:22px;font-weight:700;font-family:monospace;background:#F5F0E6;">
+      <input type="password" class="gateDigit" maxlength="1" inputmode="numeric" pattern="[0-9]" oninput="gateNext(this)" onkeydown="gatePrev(event,this)" id="gd1" style="width:42px;height:52px;border:2px solid #D4C5A0;border-radius:10px;text-align:center;font-size:22px;font-weight:700;font-family:monospace;background:#F5F0E6;">
+      <input type="password" class="gateDigit" maxlength="1" inputmode="numeric" pattern="[0-9]" oninput="gateNext(this)" onkeydown="gatePrev(event,this)" id="gd2" style="width:42px;height:52px;border:2px solid #D4C5A0;border-radius:10px;text-align:center;font-size:22px;font-weight:700;font-family:monospace;background:#F5F0E6;">
+      <input type="password" class="gateDigit" maxlength="1" inputmode="numeric" pattern="[0-9]" oninput="gateNext(this)" onkeydown="gatePrev(event,this)" id="gd3" style="width:42px;height:52px;border:2px solid #D4C5A0;border-radius:10px;text-align:center;font-size:22px;font-weight:700;font-family:monospace;background:#F5F0E6;">
+      <input type="password" class="gateDigit" maxlength="1" inputmode="numeric" pattern="[0-9]" oninput="gateNext(this)" onkeydown="gatePrev(event,this)" id="gd4" style="width:42px;height:52px;border:2px solid #D4C5A0;border-radius:10px;text-align:center;font-size:22px;font-weight:700;font-family:monospace;background:#F5F0E6;">
+      <input type="password" class="gateDigit" maxlength="1" inputmode="numeric" pattern="[0-9]" oninput="gateNext(this)" onkeydown="gatePrev(event,this)" id="gd5" style="width:42px;height:52px;border:2px solid #D4C5A0;border-radius:10px;text-align:center;font-size:22px;font-weight:700;font-family:monospace;background:#F5F0E6;">
+    </div>
+    <p id="gateError" style="color:#C23B22;font-size:12px;min-height:18px;margin:4px 0;"></p>
+    <button onclick="gateVerify()" style="width:100%;padding:12px;border:none;border-radius:12px;background:#C23B22;color:#fff;font-size:14px;font-weight:600;cursor:pointer;">验证 →</button>
+    <p style="font-size:11px;margin-top:12px;opacity:0.5;"><a href="javascript:void(0)" onclick="gateForgot()" style="color:#6E6E6E;">变更密码？</a></p>
+  `;
+  document.getElementById('gd0').focus();
 }
 
 // 粘贴支持
