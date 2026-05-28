@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>公开课 · 满意解研究所</title>
+<link rel="stylesheet" href="sri-design.css">
+<style>
+  .main{max-width:560px;margin:0 auto;padding:var(--sp-md)}
+
+  .hero{background:linear-gradient(160deg,#2A2A2A,#C23B22);padding:var(--sp-3xl) var(--sp-lg) var(--sp-2xl)}
+  .hero h1{font-size:24px;color:#F5F0E6;margin-bottom:var(--sp-sm)}
+  .hero .value{font-size:17px;color:rgba(245,240,230,0.9);font-weight:500;margin-bottom:var(--sp-sm)}
+  .hero .sub{font-size:13px;color:rgba(245,240,230,0.65);max-width:380px;margin:0 auto}
+
+  .course-card{background:#fff;border-radius:var(--radius-xl);padding:var(--sp-lg);border:2px solid var(--sri-red);margin:var(--sp-lg) 0}
+  .course-card .tag{display:inline-block;padding:4px 12px;background:var(--sri-red-light);color:var(--sri-red);border-radius:var(--radius-full);font-size:11px;font-weight:600;margin-bottom:var(--sp-sm)}
+  .course-card h3{font-size:18px;margin-bottom:var(--sp-xs)}
+  .course-card .meta{font-size:12px;color:var(--text-muted);margin-bottom:var(--sp-md)}
+  .course-card .modules{font-size:13px;line-height:2;margin:var(--sp-md) 0}
+  .course-card .module-item{padding:4px 0;border-bottom:1px solid var(--border-light)}
+  .course-card .module-item:last-child{border-bottom:none}
+
+  .register-form{background:#fff;border-radius:var(--radius-xl);padding:var(--sp-lg);border:1px solid var(--border-light);margin:var(--sp-lg) 0}
+  .register-form h3{font-size:16px;margin-bottom:var(--sp-xs)}
+  .register-form .hurry{font-size:13px;color:var(--sri-red);font-weight:600;margin:var(--sp-sm) 0}
+
+  .social-proof{text-align:center;padding:var(--sp-md);font-size:13px;color:var(--text-muted)}
+  .social-proof .num{font-size:24px;font-weight:800;color:var(--sri-red);display:block}
+
+  .how-it-works{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:var(--sp-lg) 0}
+  .hiw-step{text-align:center;padding:var(--sp-md);background:#fff;border-radius:var(--radius-lg);border:1px solid var(--border-light)}
+  .hiw-step .step-num{font-size:24px;font-weight:800;color:var(--sri-red);margin-bottom:4px}
+  .hiw-step .step-text{font-size:12px;color:var(--text)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>合伙人决策公开课</h1>
+  <div class="value">为什么70%的创业公司不是死在技术，而是死在人？</div>
+  <div class="sub">对标一堂直播体验课 · 免费 · 90分钟 · 线上</div>
+</div>
+
+<div class="main">
+
+  <!-- ===== 课程卡片 ===== -->
+  <div class="course-card">
+    <span class="tag">🔥 即将开课</span>
+    <h3>硬科技创业者的第一堂决策课</h3>
+    <div class="meta">📅 每周四 20:00 · ⏱️ 90分钟 · 💻 Zoom · 🆓 免费</div>
+
+    <div style="background:var(--sri-bg);border-radius:12px;padding:16px;margin:12px 0;">
+      <p style="font-size:14px;font-weight:600;color:var(--title);margin-bottom:4px;">在这场公开课中，你将：</p>
+      <p style="font-size:13px;line-height:2;color:var(--text);">
+        ✅ 用五维框架快速自评——看清你的决策模式<br>
+        ✅ 看3个真实案例——大疆、云鲸、比锐<br>
+        ✅ 体验四骑士自检——你和合伙人在哪一步<br>
+        ✅ 获得专属的工具推荐和下一步行动方案
+      </p>
+    </div>
+
+    <div class="modules">
+      <div class="module-item"><strong>Part 1 · 20分钟</strong> — 五维自评互动 + 即时解读</div>
+      <div class="module-item"><strong>Part 2 · 25分钟</strong> — 三个你不会忘记的案例</div>
+      <div class="module-item"><strong>Part 3 · 25分钟</strong> — 四骑士自检 + 小组讨论</div>
+      <div class="module-item"><strong>Part 4 · 20分钟</strong> — 你的专属行动方案 + Q&A</div>
+    </div>
+  </div>
+
+  <!-- ===== 三步注册 ===== -->
+  <div class="register-form">
+    <h3>🎟️ 注册参加</h3>
+    <p style="font-size:13px;color:var(--text-muted);">三步完成 · 免费参加</p>
+
+    <div class="how-it-works">
+      <div class="hiw-step"><div class="step-num">1</div><div class="step-text">填写姓名和邮箱</div></div>
+      <div class="hiw-step"><div class="step-num">2</div><div class="step-text">收到Zoom链接</div></div>
+      <div class="hiw-step"><div class="step-num">3</div><div class="step-text">准时参加</div></div>
+    </div>
+
+    <div class="field" style="margin-top:var(--sp-md);">
+      <label>姓名</label>
+      <input type="text" id="wsName" placeholder="你的姓名">
+    </div>
+    <div class="field">
+      <label>邮箱</label>
+      <input type="email" id="wsEmail" placeholder="your@email.com">
+    </div>
+    <div class="field">
+      <label>企业/机构（选填）</label>
+      <input type="text" id="wsCompany" placeholder="你所在的企业">
+    </div>
+    <button class="btn btn-primary" onclick="registerWS()" style="width:100%;margin-top:var(--sp-sm);">🎟️ 立即注册 · 免费</button>
+    <p class="hurry" id="registerConfirm" style="display:none;">✅ 注册成功！我们会在开课前24小时发送Zoom链接到你的邮箱。</p>
+  </div>
+
+  <!-- ===== 社会证明 ===== -->
+  <div class="social-proof">
+    <span class="num">91%</span>
+    <p>Gottman: 四骑士预测准确率91%——但大多数创始人不知道这四个信号</p>
+    <p style="margin-top:8px;font-size:11px;color:var(--sri-gold);">对标: 一堂直播体验课转化模型 · 年费会员· MBA高客单</p>
+  </div>
+
+  <div style="text-align:center;padding:var(--sp-md);">
+    <p style="font-size:12px;color:var(--text-muted);">— 满意解研究所 · 硬科技创始人的决策教练 —</p>
+    <p style="font-size:11px;color:var(--text-muted);">
+      对标: 一堂五步法(需求→方案→模式→增长→壁垒) · AI做课方法论 · 增长飞轮
+    </p>
+  </div>
+</div>
+<p style="text-align:center;padding:var(--sp-lg);"><a href="go.html">← 返回决策通道</a></p>
+
+<script>
+function registerWS() {
+  let name = document.getElementById('wsName').value.trim();
+  let email = document.getElementById('wsEmail').value.trim();
+  if (!name || !email) { alert('请填写姓名和邮箱'); return; }
+  
+  let registration = {
+    name, email,
+    company: document.getElementById('wsCompany').value.trim(),
+    course: '合伙人决策公开课',
+    registered: new Date().toISOString()
+  };
+  
+  let list = JSON.parse(localStorage.getItem('sri_workshop_registrations') || '[]');
+  list.push(registration);
+  localStorage.setItem('sri_workshop_registrations', JSON.stringify(list));
+  
+  document.getElementById('registerConfirm').style.display = 'block';
+  document.querySelectorAll('input').forEach(i => i.disabled = true);
+}
+</script>
+</body>
+</html>
