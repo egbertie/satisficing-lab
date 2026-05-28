@@ -2,99 +2,127 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>章·飞轮 | 知识飞轮总纲 | 满意解研究所</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>资产飞轮 · 满意解研究所</title>
+<link rel="stylesheet" href="sri-design.css">
 <style>
-  :root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title:#2A2A2A;--border:#D4C5A0}
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
-  .hero{background:linear-gradient(135deg,var(--title),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
-  .hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
-  .article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}
-  .article h2{font-size:18px;color:var(--title);margin:24px 0 10px}
-  .article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}
-  .article p{margin:8px 0}
-  .article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}
-  .article .highlight{color:var(--sri-red);font-weight:600}
-  .article ul{padding-left:20px}
-  .article li{margin:6px 0;font-size:14px}
-  .footer{text-align:center;padding:24px 16px 40px;font-size:11px;color:#999}
-  .footer a{color:var(--sri-red);text-decoration:none}
+  .main{max-width:620px;margin:0 auto;padding:var(--sp-md)}
+  .hero{background:linear-gradient(160deg,var(--title),var(--sri-gold));padding:var(--sp-2xl) var(--sp-lg);text-align:center;color:#F5F0E6}
+  .hero h1{color:#F5F0E6;font-size:22px}
+  .hero p{font-size:13px;opacity:0.8}
+
+  /* 飞轮可视化 */
+  .flywheel-viz{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;padding:var(--sp-lg);font-size:12px}
+  .fw-ring{background:#fff;border-radius:50%;width:70px;height:70px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:10px;font-weight:600;color:var(--title);border:2px solid var(--border);line-height:1.4}
+  .fw-ring.active{border-color:var(--sri-red);border-width:3px}
+  .fw-ring .fw-icon{font-size:18px;display:block}
+  .fw-arrow{color:var(--sri-red);font-weight:700;font-size:16px}
+
+  .kpi-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:6px;margin:var(--sp-md) 0}
+  .kpi{background:#fff;border-radius:var(--radius-lg);padding:12px;text-align:center;border:1px solid var(--border-light)}
+  .kpi .val{font-size:20px;font-weight:800;color:var(--sri-red)}
+  .kpi .lbl{font-size:10px;color:var(--text-muted);margin-top:2px}
+
+  .asset-table{background:#fff;border-radius:var(--radius-lg);padding:var(--sp-md);margin:var(--sp-sm) 0}
+  .asset-table h4{font-size:14px;color:var(--title);margin-bottom:8px}
+  .asset-row{display:flex;align-items:center;gap:8px;padding:8px 0;font-size:12px;border-bottom:1px solid var(--border-light)}
+  .asset-row:last-child{border-bottom:none}
+  .asset-row .ar-icon{font-size:16px;min-width:24px}
+  .asset-row .ar-name{font-weight:600;color:var(--title);min-width:80px}
+  .asset-row .ar-desc{color:var(--text-muted);flex:1;font-size:11px}
+  .asset-row .ar-status{font-size:11px}
+  .status-live{color:#3D7A4F;font-weight:600}.status-pending{color:var(--sri-gold)}.status-plan{color:var(--text-muted)}
 </style>
 </head>
 <body>
-<div class="hero"><h1>⚙️ 章·飞轮</h1><p>知识飞轮实战训练营 · 12模块总纲</p></div>
-<div class="article"><h2>课程定位</h2>
-<div class="quote">这不是一门"知识管理课"。<br>这是一门"如何把你的心血变成可传承资产，并让资产自己转起来"的实战课。</div>
-<p>满意姐用54天、摔了5次跤，才找到这条路。资深前辈用70年积累，才理解什么是真正的"传下去"。这门课，把他们的经验，浓缩成12个模块。</p>
-
-<h2>12模块总览</h2>
-<p><strong>模块1</strong>：有温度的人机协作<br>
-<strong>模块2</strong>：独立免疫系统搭建<br>
-<strong>模块3</strong>：双Agent治理架构<br>
-<strong>模块4</strong>：五维决策实战<br>
-<strong>模块5</strong>：Token经济学与效益经济学<br>
-<strong>模块6</strong>：认知偏差免疫训练<br>
-<strong>模块7</strong>：创始人5分钟检验法<br>
-<strong>模块8</strong>：记忆保存与知识复利<br>
-<strong>模块9</strong>：减法优先与满意解执行<br>
-<strong>模块10</strong>：战场扫描与外部情报<br>
-<strong>模块11</strong>：决策卡牌游戏实战<br>
-<strong>模块12</strong>：数字替身体系构建</p>
-
-<h2>双三角模型</h2>
-<p>AI时代竞争力 = <span class="highlight">知识资产 × 飞轮效率 × 传承能力</span></p>
-<p>人类的核心价值不在于"记住更多"——在于"把经验变成可运转的系统"。</p></div>
-<div class="footer"><p><a href="go.html">← 返回决策通道</a></p><p style="margin-top:4px">满意解研究所 · 章·飞轮 · 满意姐·三生万物</p></div>
-
-<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
-  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
-  <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
-    <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
-    <button onclick="showFeedbackText()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">💬</span>有建议</button>
-  </div>
-  <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
-  <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
-  <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
-  <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
-  <p style="font-size:10px;opacity:0.4;margin-top:8px;"><a href="go.html" style="color:inherit;">返回决策通道</a></p>
+<div class="hero">
+  <h1>⚙️ 资产飞轮</h1>
+  <p>五元飞轮: Prompt → Workflow → Case → Skill → Memory</p>
 </div>
+
+<div class="main">
+
+  <!-- 四层飞轮可视化 -->
+  <div style="text-align:center;padding:var(--sp-md);">
+    <div class="flywheel-viz">
+      <div class="fw-ring active"><span class="fw-icon">📥</span>积累</div>
+      <span class="fw-arrow">→</span>
+      <div class="fw-ring active"><span class="fw-icon">🔬</span>提炼</div>
+      <span class="fw-arrow">→</span>
+      <div class="fw-ring active"><span class="fw-icon">🚀</span>应用</div>
+      <span class="fw-arrow">→</span>
+      <div class="fw-ring active"><span class="fw-icon">🔄</span>反馈</div>
+      <span class="fw-arrow">→</span>
+      <div class="fw-ring active"><span class="fw-icon">📥</span>再积累</div>
+    </div>
+  </div>
+
+  <!-- 实时KPI -->
+  <div class="kpi-bar">
+    <div class="kpi"><div class="val" id="kpiProducts">233</div><div class="lbl">知识产品</div></div>
+    <div class="kpi"><div class="val" id="kpiUsers">0</div><div class="lbl">使用记录</div></div>
+    <div class="kpi"><div class="val" id="kpiFeedback">0</div><div class="lbl">反馈收集</div></div>
+    <div class="kpi"><div class="val" id="kpiShares">0</div><div class="lbl">分享次数</div></div>
+    <div class="kpi"><div class="val" id="kpiNPS">—</div><div class="lbl">NPS基线</div></div>
+  </div>
+
+  <!-- 积累层 -->
+  <div class="asset-table">
+    <h4>📥 积累层 · 每条使用行为自动入库</h4>
+    <div class="asset-row"><span class="ar-icon">🧪</span><span class="ar-name">使用日志</span><span class="ar-desc">7工具使用自动记录时间戳到localStorage</span><span class="ar-status status-live">✅ 运行中</span></div>
+    <div class="asset-row"><span class="ar-icon">📊</span><span class="ar-name">测评数据</span><span class="ar-desc">五维评分·CI指数·四骑士自检结果</span><span class="ar-status status-live">✅ 运行中</span></div>
+    <div class="asset-row"><span class="ar-icon">👤</span><span class="ar-name">客户注册</span><span class="ar-desc">姓名·企业·赛道·阶段 → 客户档案库</span><span class="ar-status status-live">✅ 运行中</span></div>
+    <div class="asset-row"><span class="ar-icon">📤</span><span class="ar-name">分享归因</span><span class="ar-desc">ref参数追踪·转介绍计数</span><span class="ar-status status-live">✅ 运行中</span></div>
+    <div class="asset-row"><span class="ar-icon">⭐</span><span class="ar-name">NPS反馈</span><span class="ar-desc">使用3工具后自动0-10评分</span><span class="ar-status status-live">✅ 运行中</span></div>
+    <div class="asset-row"><span class="ar-icon">💬</span><span class="ar-name">👍💬反馈</span><span class="ar-desc">每页底部·181页注入</span><span class="ar-status status-live">✅ 运行中</span></div>
+  </div>
+
+  <!-- 提炼层 -->
+  <div class="asset-table">
+    <h4>🔬 提炼层 · 数据→洞察→产品迭代</h4>
+    <div class="asset-row"><span class="ar-icon">📈</span><span class="ar-name">信效度</span><span class="ar-desc">≥100样本后重测信度+内部一致性分析</span><span class="ar-status status-pending">⏳ 待数据</span></div>
+    <div class="asset-row"><span class="ar-icon">🔥</span><span class="ar-name">产品热度</span><span class="ar-desc">使用频率排名→优先升级/淘汰方向</span><span class="ar-status status-plan">待汇总</span></div>
+    <div class="asset-row"><span class="ar-icon">🔄</span><span class="ar-name">K-factor</span><span class="ar-desc">分享归因→计算病毒传播系数</span><span class="ar-status status-plan">待计算</span></div>
+  </div>
+
+  <!-- 应用层 -->
+  <div class="asset-table">
+    <h4>🚀 应用层 · 洞察→产品迭代·新方法论</h4>
+    <div class="asset-row"><span class="ar-icon">🆕</span><span class="ar-name">新工具</span><span class="ar-desc">基于高频使用模式→补全新工具</span><span class="ar-status status-pending">⏳ 待数据驱动</span></div>
+    <div class="asset-row"><span class="ar-icon">📝</span><span class="ar-name">新案例</span><span class="ar-desc">用户反馈→提炼为新方法论案例</span><span class="ar-status status-pending">⏳ 待积累</span></div>
+    <div class="asset-row"><span class="ar-icon">🎓</span><span class="ar-name">新课程</span><span class="ar-desc">高频需求→设计新课</span><span class="ar-status status-pending">⏳ 待需求</span></div>
+  </div>
+
+  <!-- 反馈层 -->
+  <div class="asset-table">
+    <h4>🔄 反馈层 · 闭环→飞轮加速</h4>
+    <div class="asset-row"><span class="ar-icon">📢</span><span class="ar-name">客户改进</span><span class="ar-desc">低分NPS→主动联系→改进→告知客户</span><span class="ar-status status-live">✅</span></div>
+    <div class="asset-row"><span class="ar-icon">🔁</span><span class="ar-name">30天重测</span><span class="ar-desc">自动提醒→回访→新数据→追踪Δ</span><span class="ar-status status-live">✅ 运行中</span></div>
+    <div class="asset-row"><span class="ar-icon">🌟</span><span class="ar-name">转介绍</span><span class="ar-desc">分享→新用户→双方受益→再分享</span><span class="ar-status status-live">✅ 运行中</span></div>
+  </div>
+
+  <div style="text-align:center;padding:var(--sp-lg);font-size:11px;color:var(--text-muted);">
+    <strong style="color:var(--sri-red);">五元飞轮</strong>: 每次用户使用同时更新Prompt/Workflow/Case/Skill/Memory<br>
+    对标: 满意姐五元资产飞轮方案V1.0 · 54天·836文件·从混乱到知识图谱<br>
+    <a href="dashboard.html">← 驾驶舱</a> · <a href="go.html">← 决策通道</a>
+  </div>
+</div>
+
 <script>
 (function(){
-  let page=location.pathname.split('/').pop()||'index';
-  let key='sri_fb_'+page;
-  let data=JSON.parse(localStorage.getItem(key)||'{}');
-  if(data.sent){document.getElementById('fbQuestion').textContent='感谢你的反馈！';document.getElementById('fbActions').style.display='none';}
-  let tally=JSON.parse(localStorage.getItem('sri_fb_tally_'+page)||'{"up":0,"text":0}');
-  if(tally.up+tally.text>0) document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
-  window.submitFeedback=function(type){
-    tally[type]=(tally[type]||0)+1;
-    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
-    data.sent=true;data.type=type;data.time=new Date().toISOString();
-    localStorage.setItem(key,JSON.stringify(data));
-    document.getElementById('fbActions').style.display='none';
-    document.getElementById('fbQuestion').textContent='感谢你的反馈！';
-    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
-  };
-  window.showFeedbackText=function(){
-    document.getElementById('fbText').style.display='block';
-    document.getElementById('fbSubmit').style.display='inline-block';
-  };
-  window.submitFeedbackText=function(){
-    let text=document.getElementById('fbText').value.trim();
-    if(!text)return;
-    tally.text=(tally.text||0)+1;
-    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
-    data.sent=true;data.type='text';data.text=text;data.time=new Date().toISOString();
-    localStorage.setItem(key,JSON.stringify(data));
-    document.getElementById('fbActions').style.display='none';
-    document.getElementById('fbText').style.display='none';
-    document.getElementById('fbSubmit').style.display='none';
-    document.getElementById('fbQuestion').textContent='收到！感谢你的建议。';
-    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
-  };
+  let usageLog = JSON.parse(localStorage.getItem('sri_usage_log') || '[]');
+  let feedback = JSON.parse(localStorage.getItem('sri_feedback_log') || '[]');
+  let nps = localStorage.getItem('sri_nps_score');
+
+  document.getElementById('kpiUsers').textContent = usageLog.length;
+  document.getElementById('kpiFeedback').textContent = feedback.length;
+  
+  let shares = 0;
+  for(let k in localStorage){ if(k.startsWith('sri_fb_tally_')){ let d=JSON.parse(localStorage.getItem(k)||'{}'); shares+=(d.shares||0); } }
+  document.getElementById('kpiShares').textContent = shares || 0;
+  
+  document.getElementById('kpiNPS').textContent = nps ? nps+'/10' : '—';
 })();
 </script>
-
 </body>
 </html>
