@@ -3,124 +3,201 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>导购问卷 · 产品推荐 | 满意解研究所</title>
+<title>产品导购 · 满意解研究所</title>
 <style>:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
-.hero{background:linear-gradient(135deg,var(--sri-red),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
+.hero{background:linear-gradient(135deg,var(--sri-red),var(--sri-gold));color:#F5F0E6;padding:32px 20px 24px;text-align:center}
 .hero h1{font-size:20px;font-weight:700}.hero p{font-size:12px;opacity:.8}
 .main{max-width:520px;margin:0 auto;padding:16px}
 
-.step-indicator{display:flex;gap:6px;justify-content:center;margin-bottom:20px}
+.quiz-intro{background:#fff;border-radius:14px;padding:20px;margin-bottom:12px;text-align:center;border:1px solid var(--border)}
+.quiz-intro h3{font-size:15px;color:var(--title-color);margin-bottom:6px}
+.quiz-intro .stats{display:flex;gap:12px;justify-content:center;margin:10px 0;font-size:11px}
+.quiz-intro .stat-item{text-align:center;padding:6px 14px;background:var(--sri-bg);border-radius:8px}
+.quiz-intro .stat-item .sv{font-size:18px;font-weight:700;color:var(--sri-red)}
+.quiz-intro .stat-item .sl{font-size:10px;opacity:.5}
+
+.step-indicator{display:flex;gap:6px;justify-content:center;margin-bottom:12px;align-items:center}
 .step-dot{width:10px;height:10px;border-radius:50%;background:var(--border);transition:0.3s}
 .step-dot.done{background:var(--sri-red)}
 .step-dot.current{transform:scale(1.3);border:2px solid var(--sri-red);background:transparent}
+.step-label{font-size:10px;opacity:0.5;margin-left:8px}
 
 .q-card{background:#fff;border-radius:14px;padding:24px;margin-bottom:12px;display:none;border:2px solid var(--sri-red)}
-.q-card.active{display:block;animation:fadeIn 0.3s}
+.q-card.active{display:block;animation:fadeIn .3s}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.q-card h2{font-size:16px;color:var(--title-color);margin-bottom:10px}
+.q-card h2{font-size:16px;color:var(--title-color);margin-bottom:6px}
 .q-card .q-hint{font-size:11px;opacity:0.5;margin-bottom:12px}
 
 .options{display:flex;flex-direction:column;gap:8px}
 .opt-btn{padding:14px 16px;border:1.5px solid var(--border);border-radius:12px;background:#fff;font-size:14px;text-align:left;cursor:pointer;transition:0.15s}
 .opt-btn:hover,.opt-btn.chosen{border-color:var(--sri-red);background:rgba(194,59,34,0.04)}
-.opt-btn .opt-lead{font-weight:700;color:var(--title-color)}
+.opt-btn .opt-lead{font-weight:700;color:var(--title-color);font-size:15px}
 
-.result-card{background:#fff;border-radius:14px;padding:24px;border:2px solid var(--sri-gold);display:none;margin-bottom:12px}
-.result-card.show{display:block;animation:fadeIn 0.4s}
-.result-card h2{text-align:center;color:var(--title-color);margin-bottom:12px}
+/* Result page with checkboxes */
+.result-page{display:none}
+.result-page.show{display:block;animation:fadeIn .4s}
 
-.package{background:var(--sri-bg);border-radius:12px;padding:16px;margin:10px 0;border-left:4px solid var(--border)}
-.package.featured{border-left-color:var(--sri-red);background:rgba(194,59,34,0.03)}
-.package .pkg-header{display:flex;align-items:center;gap:10px;margin-bottom:6px}
-.package .pkg-badge{font-size:11px;padding:3px 10px;border-radius:10px;font-weight:600}
-.pkg-recommend{background:var(--sri-red);color:#F5F0E6}
+.package{background:#fff;border-radius:14px;padding:20px;margin:8px 0;border:1px solid var(--border)}
+.package.featured{border-color:var(--sri-red);border-width:2px}
+.package .pkg-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.pkg-badge{font-size:10px;padding:3px 10px;border-radius:10px;font-weight:600;display:inline-block}
+.pkg-recommend{background:var(--sri-red);color:#fff}
 .pkg-optional{background:rgba(184,134,11,0.12);color:var(--sri-gold)}
+.pkg-add{background:rgba(74,140,92,0.12);color:#4A8C5C}
 .package .pkg-name{font-size:15px;font-weight:700;color:var(--title-color)}
-.package .pkg-desc{font-size:12px;opacity:0.7;margin:4px 0 8px}
-.package .pkg-items{font-size:12px;line-height:1.8}
-.package .pkg-items a{color:var(--sri-red);text-decoration:none;font-weight:600}
-.package .pkg-price{font-size:13px;font-weight:700;color:var(--sri-red);margin-top:8px}
+.package .pkg-desc{font-size:11px;opacity:0.5;margin:2px 0 6px}
 
-.reason-box{background:rgba(194,59,34,0.04);border-radius:10px;padding:12px;margin:12px 0;font-size:12px;line-height:1.7}
-.reason-box strong{color:var(--sri-red)}
+.product-check{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #f0e8d8;font-size:12px}
+.product-check:last-child{border-bottom:none}
+.product-check input[type=checkbox]{width:18px;height:18px;accent-color:var(--sri-red)}
+.product-check .pc-name{font-weight:600;color:var(--title-color)}
+.product-check .pc-desc{font-size:10px;opacity:.5;margin-left:auto;text-align:right}
+.product-check .pc-link{font-size:10px;color:var(--sri-red);text-decoration:none;margin-left:6px}
+
+.add-section{margin:12px 0;padding:12px;background:rgba(74,140,92,0.04);border-radius:10px;display:none}
+.add-section.show{display:block}
+.add-section h4{font-size:13px;color:#4A8C5C;margin-bottom:8px}
+
+.summary-bar{background:#fff;border-radius:14px;padding:16px;margin-top:12px;text-align:center;border:1px solid var(--border);position:sticky;bottom:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.06)}
+.summary-bar .count{font-size:14px;font-weight:700;color:var(--title-color)}
 
 .btn{display:inline-block;padding:10px 22px;border-radius:16px;font-size:13px;font-weight:600;cursor:pointer;border:none;text-decoration:none;margin:4px}
-.btn-primary{background:var(--sri-red);color:#F5F0E6}
+.btn-primary{background:var(--sri-red);color:#F5F0E6;font-size:14px;padding:12px 28px}
 .btn-outline{background:transparent;border:1.5px solid var(--sri-red);color:var(--sri-red)}
-.footer{text-align:center;padding:20px;font-size:10px;opacity:0.4}
+.btn-ghost{background:transparent;color:var(--text);font-size:11px;opacity:0.5;border:none;cursor:pointer}
+
+.reason-box{background:rgba(194,59,34,0.04);border-radius:10px;padding:12px;margin:10px 0;font-size:12px;line-height:1.7}
+.reason-box strong{color:var(--sri-red)}
+
+.footer{text-align:center;padding:20px;font-size:10px;opacity:.4}
 .footer a{color:var(--sri-red);text-decoration:none}
+
+.logic-note{text-align:center;font-size:9px;opacity:0.3;margin-top:16px}
 </style>
 </head>
 <body>
 <div class="hero"><h1>🧭 产品导购</h1><p>回答5个问题 · 为你推荐最适合的工具和套餐</p></div>
 <div class="main">
+
+  <!-- Intro card -->
+  <div class="quiz-intro" id="intro">
+    <h3>📋 导购问卷</h3>
+    <div class="stats">
+      <div class="stat-item"><div class="sv">5</div><div class="sl">道问题</div></div>
+      <div class="stat-item"><div class="sv">~2</div><div class="sl">分钟</div></div>
+      <div class="stat-item"><div class="sv">🆓</div><div class="sl">免费</div></div>
+      <div class="stat-item"><div class="sv">📦</div><div class="sl">个性化推荐</div></div>
+    </div>
+    <p style="font-size:11px;opacity:0.5;margin-top:4px;">回答完成后你会得到：<strong>产品组合推荐</strong> + <strong>可勾选增减</strong> + <strong>补充推荐</strong></p>
+  </div>
+
   <div class="step-indicator" id="steps"></div>
 
-  <div class="q-card active" id="q1"><h2>你目前最关心什么？</h2><div class="q-hint">选一个你最迫切的需求</div>
+  <div class="q-card active" id="q1"><h2>你最关心什么？</h2><div class="q-hint">选一个最迫切的需求</div>
     <div class="options">
-      <button class="opt-btn" onclick="answer(1,'A')"><span class="opt-lead">🤔 合伙关系</span><br>我觉得和合伙人之间有些不对，但说不清楚</button>
-      <button class="opt-btn" onclick="answer(1,'B')"><span class="opt-lead">💰 股权利益</span><br>股权分配/贡献量化/退出机制，我需要规则</button>
-      <button class="opt-btn" onclick="answer(1,'C')"><span class="opt-lead">🔥 危机决策</span><br>我面临一个紧急决定，需要快速判断</button>
-      <button class="opt-btn" onclick="answer(1,'D')"><span class="opt-lead">📖 学习成长</span><br>我想系统性地了解合伙人决策方法论</button>
+      <button class="opt-btn" onclick="answer(1,'A')"><span class="opt-lead">🤔 合伙关系</span><br>我觉得和合伙人之间有些不对</button>
+      <button class="opt-btn" onclick="answer(1,'B')"><span class="opt-lead">💰 股权利益</span><br>股权分配/贡献量化/退出</button>
+      <button class="opt-btn" onclick="answer(1,'C')"><span class="opt-lead">🔥 危机决策</span><br>需要快速判断和决策</button>
+      <button class="opt-btn" onclick="answer(1,'D')"><span class="opt-lead">📖 学习成长</span><br>系统了解合伙人方法论</button>
     </div>
   </div>
 
-  <div class="q-card" id="q2"><h2>你现在有多少时间？</h2><div class="q-hint">帮你匹配最合适深度的工具</div>
+  <div class="q-card" id="q2"><h2>你有多少时间？</h2><div class="q-hint">帮你匹配最合适深度的工具</div>
     <div class="options">
-      <button class="opt-btn" onclick="answer(2,'A')"><span class="opt-lead">⚡ 5分钟内</span><br>给我最快的，我想先看一眼</button>
-      <button class="opt-btn" onclick="answer(2,'B')"><span class="opt-lead">📋 10-20分钟</span><br>可以做一次完整诊断</button>
-      <button class="opt-btn" onclick="answer(2,'C')"><span class="opt-lead">🔬 深度不限</span><br>我想彻底搞清楚</button>
+      <button class="opt-btn" onclick="answer(2,'A')"><span class="opt-lead">⚡ 5分钟内</span><br>最快·先看一眼</button>
+      <button class="opt-btn" onclick="answer(2,'B')"><span class="opt-lead">📋 10-20分钟</span><br>完整诊断一遍</button>
+      <button class="opt-btn" onclick="answer(2,'C')"><span class="opt-lead">🔬 深度不限</span><br>想彻底搞清楚</button>
     </div>
   </div>
 
-  <div class="q-card" id="q3"><h2>你的团队规模？</h2><div class="q-hint">影响推荐的产品复杂度</div>
+  <div class="q-card" id="q3"><h2>你的团队规模？</h2>
     <div class="options">
-      <button class="opt-btn" onclick="answer(3,'A')"><span class="opt-lead">👤 我一个人</span><br>我是独立创始人</button>
-      <button class="opt-btn" onclick="answer(3,'B')"><span class="opt-lead">👥 2-3位合伙人</span><br>小型合伙人团队</button>
-      <button class="opt-btn" onclick="answer(3,'C')"><span class="opt-lead">👥👥 3人以上</span><br>多人团队</button>
+      <button class="opt-btn" onclick="answer(3,'A')"><span class="opt-lead">👤 独立创始人</span></button>
+      <button class="opt-btn" onclick="answer(3,'B')"><span class="opt-lead">👥 2-3位合伙人</span></button>
+      <button class="opt-btn" onclick="answer(3,'C')"><span class="opt-lead">👥👥 3人以上团队</span></button>
     </div>
   </div>
 
-  <div class="q-card" id="q4"><h2>你的融资阶段？</h2><div class="q-hint">不同阶段有不同的决策重心</div>
+  <div class="q-card" id="q4"><h2>你的融资阶段？</h2>
     <div class="options">
-      <button class="opt-btn" onclick="answer(4,'A')"><span class="opt-lead">🌱 天使轮前</span><br>刚起步·还在验证方向</button>
-      <button class="opt-btn" onclick="answer(4,'B')"><span class="opt-lead">🌿 A轮前后</span><br>已有验证·面临增长/治理问题</button>
-      <button class="opt-btn" onclick="answer(4,'C')"><span class="opt-lead">🌳 B轮及以上</span><br>成熟公司·关注退出/传承</button>
+      <button class="opt-btn" onclick="answer(4,'A')"><span class="opt-lead">🌱 天使轮前</span><br>刚起步·验证方向</button>
+      <button class="opt-btn" onclick="answer(4,'B')"><span class="opt-lead">🌿 A轮前后</span><br>已有验证·面临治理</button>
+      <button class="opt-btn" onclick="answer(4,'C')"><span class="opt-lead">🌳 B轮及以上</span><br>成熟·关注退出/传承</button>
     </div>
   </div>
 
-  <div class="q-card" id="q5"><h2>你的行业赛道？</h2><div class="q-hint">不同赛道有不同的典型冲突</div>
+  <div class="q-card" id="q5"><h2>你的行业赛道？</h2>
     <div class="options">
       <button class="opt-btn" onclick="answer(5,'A')"><span class="opt-lead">⚛️ 硬科技</span><br>半导体/量子/芯片/新材料</button>
-      <button class="opt-btn" onclick="answer(5,'B')"><span class="opt-lead">🤖 AI/机器人</span><br>人工智能/具身智能/SaaS</button>
+      <button class="opt-btn" onclick="answer(5,'B')"><span class="opt-lead">🤖 AI/机器人</span></button>
       <button class="opt-btn" onclick="answer(5,'C')"><span class="opt-lead">🏭 制造/能源</span><br>精密制造/新能源/储能</button>
-      <button class="opt-btn" onclick="answer(5,'D')"><span class="opt-lead">其他</span><br>消费/服务/医疗/其他</button>
+      <button class="opt-btn" onclick="answer(5,'D')"><span class="opt-lead">其他赛道</span></button>
     </div>
   </div>
 
-  <div class="result-card" id="result"><h2>🎯 为你推荐</h2><div id="recommendations"></div>
-    <div style="text-align:center;margin-top:12px;">
-      <button class="btn btn-primary" onclick="resetQuiz()">重新选择</button>
-      <a class="btn btn-outline" href="go.html">全部产品</a>
+  <!-- Result Page -->
+  <div class="result-page" id="result">
+    <div style="text-align:center;margin-bottom:12px;">
+      <h2 style="color:var(--title-color);margin-bottom:4px;">🎯 你的推荐方案</h2>
+      <p style="font-size:11px;opacity:0.5;">勾选你想要的·去掉不要的·可增减</p>
     </div>
+    
+    <div class="reason-box" id="reasonBox"></div>
+
+    <div class="package featured">
+      <div class="pkg-header"><span class="pkg-badge pkg-recommend">推荐套餐</span><span class="pkg-name" id="pkgName"></span></div>
+      <div class="pkg-desc" id="pkgPrice"></div>
+      <div id="primaryChecks"></div>
+    </div>
+
+    <div class="package" id="secondaryPkg" style="display:none;">
+      <div class="pkg-header"><span class="pkg-badge pkg-optional">辅助工具</span></div>
+      <div id="secondaryChecks"></div>
+    </div>
+
+    <div class="add-section" id="addSection">
+      <h4>🛒 你还可以添加这些</h4>
+      <div id="addChecks"></div>
+    </div>
+
+    <button class="btn btn-ghost" onclick="toggleAdd()" style="display:block;margin:8px auto;font-size:12px;" id="addBtn">+ 查看更多推荐</button>
+
+    <div class="package" id="depthPkg" style="display:none;">
+      <div class="pkg-header"><span class="pkg-badge pkg-optional">深度阅读</span></div>
+      <div id="depthChecks"></div>
+    </div>
+
+    <div class="summary-bar">
+      <div class="count" id="countText">已选 0 个工具</div>
+      <div style="display:flex;gap:8px;justify-content:center;margin-top:8px;flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="goSelected()">🚀 开始体验选定工具</button>
+        <button class="btn btn-outline" onclick="resetQuiz()">重新选择</button>
+      </div>
+    </div>
+
+    <div class="logic-note">推荐算法 V1.0 · 5维加权匹配 · 逻辑备份: 23_导购推荐引擎逻辑.md</div>
   </div>
+
 </div>
 <div class="footer"><p><a href="go.html">← 返回决策通道</a></p></div>
 
 <script>
 const totalQ = 5;
 let answers = {};
+let allProducts = [];
 
 function updateSteps() {
   let html = '';
+  let done = Object.keys(answers).length;
   for (let i=1;i<=totalQ;i++) {
     let cls = 'step-dot';
     if (answers[i]) cls += ' done';
-    if (i === Object.keys(answers).length + 1) cls += ' current';
+    if (i === done + 1) cls += ' current';
     html += `<div class="${cls}"></div>`;
   }
+  html += `<span class="step-label">${done}/${totalQ}</span>`;
   document.getElementById('steps').innerHTML = html;
 }
 
@@ -128,7 +205,7 @@ function answer(q, val) {
   answers[q] = val;
   updateSteps();
   if (q < totalQ) {
-    document.querySelectorAll('.q-card').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('active'));
     document.getElementById('q'+(q+1)).classList.add('active');
   } else {
     showResult();
@@ -136,130 +213,114 @@ function answer(q, val) {
 }
 
 function showResult() {
-  document.querySelectorAll('.q-card').forEach(c => c.classList.remove('active'));
+  document.getElementById('intro').style.display = 'none';
+  document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('active'));
   
   let a = answers;
-  // === 推荐引擎逻辑 ===
-  // 基于5维输入匹配产品组合
+  let primary=[], secondary=[], depth=[], addMore=[];
+  let pkg='', pkgP='', reason='';
   
-  let primary = [];  // 核心工具（必推）
-  let secondary = []; // 辅助工具
-  let depth = [];    // 深度内容
-  let pkg = '';      // 套餐名
-  let pkgPrice = '';
-  let reason = '';
-  
-  // Q1: 主要关注点 → 确定主导工具线
-  if (a[1] === 'A') { // 关系
-    primary.push({n:'镜·触温', d:'关系温度计·30秒', u:'thermometer.html', e:'🌡️'});
-    primary.push({n:'镜·警兆', d:'四骑士自检·1分钟', u:'knights.html', e:'⚠️'});
-    primary.push({n:'镜·回身', d:'PRE-0压力锚定', u:'pre0.html', e:'💧'});
-    secondary.push({n:'衡·观局', d:'五维快速自评', u:'assessment.html', e:'🎯'});
-    reason = '你关注关系信号——这是最容易被忽视但影响最大的领域。Gottman发现91%的关系终结有可预测的信号。';
-  } else if (a[1] === 'B') { // 股权
-    primary.push({n:'衡·分利', d:'SlicingPie贡献记账', u:'slicing-pie.html', e:'🥧'});
-    primary.push({n:'契·立盟', d:'元合伙章程', u:'metapartner.html', e:'📜'});
-    secondary.push({n:'契·择伴', d:'合伙人匹配度', u:'match.html', e:'🤝'});
-    secondary.push({n:'契·善别', d:'退出决策指南', u:'exit-guide.html', e:'🧭'});
-    reason = 'Wasserman研究10000+创始人: 73%在首月选择静态分配——"先做起来再说"是最贵的拖延。';
-    depth.push({n:'L3·创始人困境', d:'Wasserman深度', u:'deep-wasserman.html'});
-  } else if (a[1] === 'C') { // 危机
-    primary.push({n:'觉·淬火', d:'危机模拟器', u:'crisis-sim.html', e:'⚔️'});
-    primary.push({n:'镜·警兆', d:'四骑士自检', u:'knights.html', e:'⚠️'});
-    secondary.push({n:'衡·校尺', d:'决策自检清单', u:'checklist.html', e:'📋'});
-    secondary.push({n:'觉·入幕', d:'决策剧场', u:'decision-theatre.html', e:'🎭'});
-    reason = 'Duke: 危机中的第一本能往往不是最好的决策。先在安全环境中模拟——再做真正的决定。';
-  } else { // 学习
-    primary.push({n:'章·鉴往', d:'84案例精选', u:'cases.html', e:'📖'});
-    primary.push({n:'章·创世', d:'星月传奇', u:'creation.html', e:'🌌'});
-    secondary.push({n:'衡·观局', d:'五维快速自评', u:'assessment.html', e:'🎯'});
-    secondary.push({n:'觉·破冰', d:'卡牌·7张入门', u:'cards-play.html?deck=7', e:'🎴'});
-    reason = '满意姐54天·扣子28天·满意红23天——三代AI独立发现同一个规律: Agent工作有自然时间窗口。';
+  if (a[1]==='A') {
+    primary.push({n:'镜·触温',d:'关系温度计·30秒',u:'thermometer.html',e:'🌡️'});
+    primary.push({n:'镜·警兆',d:'四骑士自检·1分钟',u:'knights.html',e:'⚠️'});
+    primary.push({n:'镜·回身',d:'PRE-0压力锚定',u:'pre0.html',e:'💧'});
+    secondary.push({n:'衡·观局',d:'五维快速自评·3分钟',u:'assessment.html',e:'🎯'});
+    reason='Gottman发现<span style="color:var(--sri-red)">91%</span>的关系终结有可预测的信号——但你需要在早期看到它们。';
+  } else if (a[1]==='B') {
+    primary.push({n:'衡·分利',d:'SlicingPie贡献记账',u:'slicing-pie.html',e:'🥧'});
+    primary.push({n:'契·立盟',d:'元合伙章程',u:'metapartner.html',e:'📜'});
+    secondary.push({n:'契·择伴',d:'合伙人匹配度',u:'match.html',e:'🤝'});
+    secondary.push({n:'契·善别',d:'退出决策指南',u:'exit-guide.html',e:'🧭'});
+    reason='Wasserman:<span style="color:var(--sri-red)">73%</span>的创始人在首月选择静态分配——"先做起来再说"是最贵的拖延。';
+    depth.push({n:'L3·创始人困境',d:'Wasserman·10000+创始人',u:'deep-wasserman.html',e:'📖'});
+  } else if (a[1]==='C') {
+    primary.push({n:'觉·淬火',d:'危机模拟器',u:'crisis-sim.html',e:'⚔️'});
+    primary.push({n:'镜·警兆',d:'四骑士自检',u:'knights.html',e:'⚠️'});
+    secondary.push({n:'衡·校尺',d:'决策前自检清单',u:'checklist.html',e:'📋'});
+    reason='Duke: <span style="color:var(--sri-red)">危机中的第一本能往往不是最好的决策。</span>先在安全环境中模拟——再做真正的决定。';
+  } else {
+    primary.push({n:'章·鉴往',d:'84案例精选',u:'cases.html',e:'📖'});
+    primary.push({n:'章·创世',d:'星月传奇',u:'creation.html',e:'🌌'});
+    secondary.push({n:'衡·观局',d:'五维快速自评',u:'assessment.html',e:'🎯'});
+    secondary.push({n:'觉·破冰',d:'卡牌·7张入门',u:'cards-play.html?deck=7',e:'🎴'});
+    reason='满意姐54天·扣子28天·满意红23天——三代AI独立发现同一个规律。先读故事，再做工具。';
   }
-  
-  // Q2: 时间 → 确定深度级别
-  if (a[2] === 'A') { depth = []; } // 只要核心·不要深度
-  if (a[2] === 'C') { // 深度不限 → 加L3
-    depth.push({n:'L3·四骑士深度', d:'Gottman 40年研究', u:'deep-gottman.html'});
-    depth.push({n:'L3·SlicingPie深度', d:'Moyer动态股权', u:'deep-slicing.html'});
+
+  if (a[2]==='C') {
+    depth.push({n:'L3·四骑士',d:'Gottman·40年',u:'deep-gottman.html',e:'📖'});
+    depth.push({n:'L3·SlicingPie',d:'Moyer·动态股权',u:'deep-slicing.html',e:'📖'});
   }
+  pkg = a[3]==='A'?'个人探索包':a[3]==='B'?'合伙人诊断包':'团队诊断包';
+  pkgP = a[3]==='A'?'免费·自助':a[3]==='B'?'免费工具·可选引导师':'免费工具·建议工作坊';
+  if (a[4]==='B'||a[4]==='C'){secondary.push({n:'契·立盟',d:'元合伙章程',u:'metapartner.html',e:'📜'});secondary.push({n:'契·善别',d:'退出决策指南',u:'exit-guide.html',e:'🧭'});}
+  if (a[4]==='A'){secondary.push({n:'契·择伴',d:'合伙人匹配度',u:'match.html',e:'🤝'});}
+  if (a[5]==='A'){addMore.push({n:'章·知机',d:'8赛道风险·硬科技',u:'tracks.html',e:'🗼'});
+    reason+=' 你的赛道(硬科技)是满意解最深的专长领域。';}
   
-  // Q3: 团队规模 → 确定复杂度
-  if (a[3] === 'A') { pkg = '个人探索包'; pkgPrice = '免费·自助'; }
-  else if (a[3] === 'B') { pkg = '合伙人诊断包'; pkgPrice = '免费工具 + 可选引导师解读'; }
-  else { pkg = '团队诊断包'; pkgPrice = '免费工具 + 建议团队工作坊'; }
-  
-  // Q4: 融资阶段 → 额外推荐
-  if (a[4] === 'B' || a[4] === 'C') {
-    secondary.push({n:'契·立盟', d:'元合伙章程', u:'metapartner.html', e:'📜'});
-    secondary.push({n:'契·善别', d:'退出决策指南', u:'exit-guide.html', e:'🧭'});
-  }
-  if (a[4] === 'A') {
-    secondary.push({n:'契·择伴', d:'合伙人匹配度', u:'match.html', e:'🤝'});
-  }
-  
-  // Q5: 赛道 → 赛道专项
-  if (a[5] === 'A') {
-    depth.push({n:'章·知机(硬科技)', d:'量子/芯片/eVTOL风险', u:'tracks.html'});
-    reason += ' 你的赛道(硬科技)是满意解最深的专长领域——84案例中占比最高。';
-  }
-  
-  let html = '';
-  
-  // Package
-  html += `<div class="package featured"><div class="pkg-header"><span class="pkg-badge pkg-recommend">推荐套餐</span><span class="pkg-name">${pkg}</span></div>`;
-  html += `<div class="pkg-desc">${pkgPrice}</div>`;
-  html += '<div class="pkg-items">';
-  primary.forEach(p => {
-    html += `<a href="${p.u}">${p.e} ${p.n}</a> · `;
-  });
-  html += '</div></div>';
-  
-  // Reason
-  html += `<div class="reason-box"><strong>💡 为什么推荐这些：</strong><br>${reason}</div>`;
-  
-  // Primary tools
-  html += '<div class="package"><div class="pkg-header"><span class="pkg-badge pkg-recommend">核心工具</span></div>';
-  html += '<div class="pkg-items">';
-  for (let p of primary) {
-    html += `<a href="${p.u}">${p.e} ${p.n}</a> — ${p.d}<br>`;
-  }
-  html += '</div></div>';
-  
-  // Secondary
-  if (secondary.length) {
-    html += '<div class="package"><div class="pkg-header"><span class="pkg-badge pkg-optional">辅助工具</span></div>';
-    html += '<div class="pkg-items">';
-    for (let p of secondary) {
-      html += `<a href="${p.u}">${p.e} ${p.n}</a> — ${p.d}<br>`;
+  // Add universal options
+  addMore.push({n:'觉·破冰',d:'卡牌游戏·7张入门',u:'cards-play.html?deck=7',e:'🎴'});
+  addMore.push({n:'觉·入幕',d:'决策剧场·沉浸体验',u:'decision-theatre.html',e:'🎭'});
+  addMore.push({n:'衡·校尺',d:'决策前自检清单',u:'checklist.html',e:'📋'});
+
+  allProducts = [...primary, ...secondary, ...depth, ...addMore];
+  // Deduplicate
+  let seen = new Set();
+  primary = primary.filter(p=>{let k=p.u;if(seen.has(k))return false;seen.add(k);return true;});
+  secondary = secondary.filter(p=>{let k=p.u;if(seen.has(k))return false;seen.add(k);return true;});
+  depth = depth.filter(p=>{let k=p.u;if(seen.has(k))return false;seen.add(k);return true;});
+  addMore = addMore.filter(p=>{let k=p.u;if(seen.has(k))return false;seen.add(k);return true;});
+
+  document.getElementById('reasonBox').innerHTML = `<strong>💡 为什么：</strong>${reason}`;
+  document.getElementById('pkgName').textContent = pkg;
+  document.getElementById('pkgPrice').textContent = pkgP;
+
+  function renderChecks(id, items, checked) {
+    let html = '';
+    for (let p of items) {
+      html += `<label class="product-check"><input type="checkbox" ${checked?'checked':''} onchange="updateCount()" data-u="${p.u}"><span class="pc-name">${p.e} ${p.n}</span><span class="pc-desc">${p.d}</span><a class="pc-link" href="${p.u}" target="_blank" onclick="event.stopPropagation()">试用→</a></label>`;
     }
-    html += '</div></div>';
+    document.getElementById(id).innerHTML = html;
   }
-  
-  // Depth
-  if (depth.length) {
-    html += '<div class="package"><div class="pkg-header"><span class="pkg-badge pkg-optional">深度阅读</span></div>';
-    html += '<div class="pkg-items">';
-    for (let p of depth) {
-      html += `<a href="${p.u}">📖 ${p.n}</a> — ${p.d}<br>`;
-    }
-    html += '</div></div>';
-  }
-  
-  // 算法说明
-  html += '<div style="margin-top:12px;font-size:10px;opacity:0.4;text-align:center;">' +
-    '推荐算法V1.0: 5维输入(Q1关注点·Q2时间·Q3团队·Q4阶段·Q5赛道)→加权匹配→产品组合' +
-    '<br>逻辑备份: 对话/2026-05-28/公众号产品化/23_导购推荐引擎逻辑.md' +
-    '</div>';
-  
-  document.getElementById('recommendations').innerHTML = html;
+  renderChecks('primaryChecks', primary, true);
+  renderChecks('secondaryChecks', secondary, true);
+  renderChecks('depthChecks', depth, true);
+  renderChecks('addChecks', addMore, false);
+
+  document.getElementById('secondaryPkg').style.display = secondary.length?'block':'none';
+  document.getElementById('depthPkg').style.display = depth.length?'block':'none';
   document.getElementById('result').classList.add('show');
+  document.getElementById('addSection').classList.remove('show');
+  updateCount();
   updateSteps();
 }
 
+function toggleAdd() {
+  let sec = document.getElementById('addSection');
+  let btn = document.getElementById('addBtn');
+  sec.classList.toggle('show');
+  btn.textContent = sec.classList.contains('show') ? '收起' : '+ 查看更多推荐';
+}
+
+function updateCount() {
+  let checks = document.querySelectorAll('input[type=checkbox]:checked');
+  document.getElementById('countText').textContent = `已选 ${checks.length} 个工具`;
+}
+
+function goSelected() {
+  let checks = document.querySelectorAll('input[type=checkbox]:checked');
+  if (checks.length === 0) { alert('请至少选择一个工具'); return; }
+  // Open first one, rest in new tabs
+  let first = checks[0].dataset.u;
+  for (let i=1;i<checks.length;i++) {
+    window.open(checks[i].dataset.u, '_blank');
+  }
+  window.location.href = first;
+}
+
 function resetQuiz() {
-  answers = {};
-  document.querySelectorAll('.q-card').forEach(c => c.classList.remove('active'));
+  answers={};
+  document.getElementById('intro').style.display='block';
+  document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('active'));
   document.getElementById('q1').classList.add('active');
   document.getElementById('result').classList.remove('show');
   updateSteps();
