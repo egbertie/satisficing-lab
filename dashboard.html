@@ -299,6 +299,8 @@ document.addEventListener('paste',function(e){
     <button class="tab-btn" onclick="switchTab('system')">⚡ 系统</button>
     <button class="tab-btn" onclick="switchTab('docs')">📂 文档</button>
     <button class="tab-btn" onclick="switchTab('flywheel')">⚙️ 资产</button>
+    <button class="tab-btn" onclick="switchTab('marketing')">📢 宣发</button>
+    <button class="tab-btn" onclick="switchTab('media')">📰 媒体</button>
     <button class="tab-btn" onclick="switchTab('import')">📥 导入</button>
   </div>
 
@@ -639,6 +641,62 @@ async function render() {
       <tr><td>🆓 免费工具</td><td>¥0</td><td>—</td><td>引流·获客</td></tr>
       <tr><td>🔐 完整诊断</td><td>¥3K-5K</td><td>2-5</td><td>¥6K-25K</td></tr>
       <tr><td>💎 年度顾问</td><td>¥30K-100K</td><td>0.5-2</td><td>¥15K-200K</td></tr></table></div>`;
+  } else if (currentTab === 'marketing') {
+    let today=new Date(); let wks=[];
+    for(let i=0;i<12;i++){let d=new Date(today);d.setDate(d.getDate()+i*7);wks.push(d);}
+    html = `<div class="panel" style="border-left:4px solid #C23B22;"><h3>📢 宣发活动 · 对标GTM+营销日历</h3>
+      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">🚀 夏至路演(06-21) · 主战役 · 倒计时 <span id="mktCountdown" style="color:#C23B22;font-weight:800;"></span></h3>
+      <table><tr><th>阶段</th><th>活动</th><th>负责人</th><th>截止</th><th>状态</th></tr>
+      <tr><td>前·准备</td><td>邀请10人清单</td><td>Egbertie</td><td>06-07</td><td><span class="status-dot dot-red"></span>待启动</td></tr>
+      <tr><td>前·准备</td><td>路演引导师执行手册</td><td>满意红</td><td>06-14</td><td><span class="status-dot dot-green"></span>文档完成</td></tr>
+      <tr><td>前·准备</td><td>路演PPT·15页演示</td><td>满意红+Egbertie</td><td>06-14</td><td><span class="status-dot dot-amber"></span>框架完成</td></tr>
+      <tr><td>前·准备</td><td>路演邀请函设计</td><td>Egbertie</td><td>06-17</td><td><span class="status-dot dot-red"></span>待启动</td></tr>
+      <tr><td>中·执行</td><td>06-21路演(决策剧场+五维诊断)</td><td>Egbertie</td><td>06-21</td><td><span class="status-dot dot-red"></span>待执行</td></tr>
+      <tr><td>后·跟进</td><td>48小时执行清单</td><td>满意红</td><td>06-23</td><td><span class="status-dot dot-red"></span>待执行</td></tr>
+      <tr><td>后·跟进</td><td>路演案例复盘</td><td>满意红</td><td>06-30</td><td><span class="status-dot dot-red"></span>待执行</td></tr>
+      </table>
+
+      <h3 style="font-size:13px;color:var(--title);margin:16px 0 8px;">📢 公开课推广 · 第二战役</h3>
+      <table><tr><th>活动</th><th>渠道</th><th>频率</th><th>状态</th></tr>
+      <tr><td>公众号推文·合伙人冲突</td><td>公众号</td><td>1篇/周</td><td>10篇成品✅</td></tr>
+      <tr><td>小红书张雪机车系列</td><td>小红书</td><td>2篇/周</td><td>5篇成品✅</td></tr>
+      <tr><td>知乎·合伙人决策回答</td><td>知乎</td><td>3条/周</td><td>3篇成品✅</td></tr>
+      <tr><td>播客·知识飞轮传承</td><td>播客</td><td>1期/周</td><td>脚本完成✅</td></tr>
+      <tr><td>短视频·四骑士检测</td><td>抖音/视频号</td><td>3条/周</td><td>脚本完成✅</td></tr>
+      <tr><td>公开课注册页</td><td>workshop.html</td><td>持续</td><td>✅ 已上线</td></tr>
+      </table>
+
+      <h3 style="font-size:13px;color:var(--title);margin:16px 0 8px;">🎯 KPI追踪</h3>
+      <table><tr><th>指标</th><th>目标</th><th>当前</th></tr>
+      <tr><td>公众号粉丝（推文启）</td><td>500</td><td>—</td></tr>
+      <tr><td>公开课首次报名</td><td>≥10人</td><td>待启动</td></tr>
+      <tr><td>路演到场率</td><td>≥70%</td><td>—</td></tr>
+      <tr><td>首月NPS</td><td>≥50</td><td>—</td></tr>
+      </table></div>`;
+  } else if (currentTab === 'media') {
+    html = `<div class="panel" style="border-left:4px solid #B8860B;"><h3>📰 媒体关系 · 对标PR Tracker</h3>
+      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">👥 媒体联系人</h3>
+      <table><tr><th>媒体/渠道</th><th>类型</th><th>联系人</th><th>状态</th><th>备注</th></tr>
+      <tr><td>公众号「满意解禅堂」</td><td>自有媒体</td><td>Egbertie</td><td><span class="status-dot dot-green"></span>已开通</td><td>个人订阅号·未认证</td></tr>
+      <tr><td>36氪</td><td>科技媒体</td><td>—</td><td><span class="status-dot dot-red"></span>待联系</td><td>硬科技赛道·投稿/采访</td></tr>
+      <tr><td>虎嗅</td><td>科技媒体</td><td>—</td><td><span class="status-dot dot-red"></span>待联系</td><td>深度分析·合伙人话题</td></tr>
+      <tr><td>投资人说</td><td>VC垂直</td><td>—</td><td><span class="status-dot dot-red"></span>待联系</td><td>VC投后管理·合伙人匹配</td></tr>
+      <tr><td>创业邦</td><td>创业媒体</td><td>—</td><td><span class="status-dot dot-red"></span>待联系</td><td>创始人故事·案例投稿</td></tr>
+      <tr><td>知乎·硬科技话题</td><td>社区</td><td>满意红</td><td><span class="status-dot dot-green"></span>已开始</td><td>3篇回答成品✅</td></tr>
+      <tr><td>小红书·创业赛道</td><td>社交电商</td><td>满意红</td><td><span class="status-dot dot-green"></span>已开始</td><td>5篇笔记成品·张雪机车系列</td></tr>
+      </table>
+
+      <h3 style="font-size:13px;color:var(--title);margin:16px 0 8px;">📬 媒体触达记录</h3>
+      <table><tr><th>日期</th><th>媒体</th><th>内容</th><th>方式</th><th>状态</th></tr>
+      <tr><td colspan="5" style="text-align:center;color:#6E6E6E;padding:20px;">尚未有正式媒体触达·夏至路演后启动</td></tr>
+      </table>
+
+      <h3 style="font-size:13px;color:var(--title);margin:16px 0 8px;">📋 常见PR话术</h3>
+      <table><tr><th>场景</th><th>话术</th></tr>
+      <tr><td>介绍满意解</td><td>"满意解研究所——硬科技创始人的决策教练。我们帮助创始人识别合伙人关系中的隐形炸弹，在问题发生之前防患于未然。"</td></tr>
+      <tr><td>为什么是现在</td><td>"Gottman 40年研究发现91%的关系终结有可预测信号。Wasserman 10000+创始人数据印证：不是技术失败——是合伙人失败。"</td></tr>
+      <tr><td>差异化</td><td>"不是管理咨询、不是心理测试、不是法律顾问——是'合伙人决策教练'，全球空白市场。"</td></tr>
+      </table></div>`;
   } else if (currentTab === 'team') {
     html = `<div class="panel" style="border-left:4px solid #3D7A4F;"><h3>🧑‍🤝‍🧑 团队仪表盘</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:12px;">
@@ -780,6 +838,8 @@ function renderNorthstar(){
   var solstice=new Date(2026,5,21); // 6月21日(JS月份0-11)
   var days=Math.ceil((solstice-today)/86400000);
   document.getElementById('countdownDays').textContent=days+'天';
+  var mktEl=document.getElementById('mktCountdown');
+  if(mktEl) mktEl.textContent=days+'天';
 }
 
 // 自动同步飞轮数据
