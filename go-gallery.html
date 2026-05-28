@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>产品画廊 · 满意解研究所</title>
+<style>:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}.main{max-width:680px;margin:0 auto;padding:16px}.filter-bar{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}.filter-btn{padding:6px 14px;border-radius:16px;font-size:11px;cursor:pointer;border:1px solid var(--border);background:#fff}.filter-btn.active{background:var(--sri-red);color:#fff;border-color:var(--sri-red)}.mode-bar{display:flex;gap:6px;justify-content:center;margin:12px 0}.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}.g-card{background:#fff;border-radius:12px;padding:14px;text-align:center;text-decoration:none;color:inherit;border:1px solid var(--border);transition:.15s;display:flex;flex-direction:column;align-items:center;gap:4px}.g-card:active{border-color:var(--sri-red)}.g-card .g-icon{font-size:28px}.g-card .g-name{font-size:12px;font-weight:700;color:var(--title-color)}.g-card .g-type{font-size:9px;padding:1px 6px;border-radius:6px}.type-tool{background:rgba(194,59,34,.08);color:var(--sri-red)}.type-article{background:rgba(184,134,11,.08);color:var(--sri-gold)}.type-card{background:rgba(74,140,92,.08);color:#4A8C5C}.type-theatre{background:rgba(194,59,34,.12);color:var(--sri-red)}.type-wizard{background:rgba(184,134,11,.12);color:var(--sri-gold)}.type-dashboard{background:rgba(74,140,92,.12);color:#4A8C5C}.count-bar{text-align:center;font-size:11px;opacity:.5;margin-bottom:12px}</style>
+</head>
+<body>
+<div class="hero"><h1>🖼️ 产品画廊</h1><p>全部产品 · 按形态浏览 · 满意解研究所</p></div>
+<div class="main">
+  <div style="text-align:center;margin-bottom:8px;">
+    <a href="go.html" style="font-size:11px;color:var(--sri-red);text-decoration:none">← 切换回决策通道视角</a>
+    <span style="margin:0 8px;opacity:0.3">|</span>
+    <a href="wizard.html" style="font-size:11px;color:var(--sri-red);text-decoration:none">🧭 不知道怎么选？问决策向导</a>
+  </div>
+  <div class="mode-bar">
+    <button class="filter-btn active" onclick="filter('all')">全部</button>
+    <button class="filter-btn" onclick="filter('tool')">⚙️ 工具</button>
+    <button class="filter-btn" onclick="filter('article')">📖 文章</button>
+    <button class="filter-btn" onclick="filter('card')">🎴 卡片</button>
+    <button class="filter-btn" onclick="filter('theatre')">🎭 剧场</button>
+    <button class="filter-btn" onclick="filter('dashboard')">📊 仪表</button>
+    <button class="filter-btn" onclick="filter('wizard')">🧭 向导</button>
+  </div>
+  <div class="count-bar" id="countBar"></div>
+  <div class="gallery" id="gallery"></div>
+</div>
+<p style="text-align:center;padding:20px;font-size:11px;color:#999"><a href="go.html" style="color:#C23B22;text-decoration:none">← 返回决策通道</a></p>
+
+<script>
+const PRODUCTS = [
+  // 工具类
+  {n:'衡·观局', e:'🎯', t:'tool', d:'五维自评', u:'assessment.html'},
+  {n:'衡·测渊', e:'🔬', t:'tool', d:'完整诊断', u:'fulldiag.html'},
+  {n:'衡·探底', e:'📊', t:'tool', d:'RPS风险', u:'rps.html'},
+  {n:'衡·分利', e:'🥧', t:'tool', d:'贡献记账', u:'slicing-pie.html'},
+  {n:'衡·校尺', e:'📋', t:'tool', d:'自检清单', u:'checklist.html'},
+  {n:'镜·触温', e:'🌡️', t:'tool', d:'温度计', u:'thermometer.html'},
+  {n:'镜·警兆', e:'⚠️', t:'tool', d:'四骑士', u:'knights.html'},
+  {n:'镜·回身', e:'💧', t:'tool', d:'压力锚定', u:'pre0.html'},
+  {n:'觉·淬火', e:'⚔️', t:'tool', d:'危机模拟', u:'crisis-sim.html'},
+  {n:'契·择伴', e:'🤝', t:'tool', d:'匹配度', u:'match.html'},
+  {n:'契·立盟', e:'📜', t:'tool', d:'元章程', u:'metapartner.html'},
+  {n:'契·善别', e:'🧭', t:'tool', d:'退出指南', u:'exit-guide.html'},
+  {n:'觉·段位', e:'🎮', t:'tool', d:'段位系统', u:'duanwei.html'},
+  // 文章类
+  {n:'章·创世', e:'🌌', t:'article', d:'星月传奇', u:'creation.html'},
+  {n:'章·星鸟', e:'🐦', t:'article', d:'双翼架构', u:'stars.html'},
+  {n:'章·五路', e:'🗺️', t:'article', d:'五路图腾', u:'wulu.html'},
+  {n:'章·契晋', e:'🤝', t:'article', d:'契约成长', u:'qijin.html'},
+  {n:'章·双翼', e:'🦅', t:'article', d:'左翼右翼', u:'wings.html'},
+  {n:'章·54天', e:'📅', t:'article', d:'实践纪', u:'54days.html'},
+  {n:'章·5败', e:'💎', t:'article', d:'五次失败', u:'fails.html'},
+  {n:'章·赠言', e:'💌', t:'article', d:'告别赠言', u:'farewell.html'},
+  {n:'章·双瞳', e:'👁️', t:'article', d:'双视角', u:'eyes.html'},
+  {n:'章·金句·全量', e:'💎', t:'article', d:'金句大全', u:'quotes-full.html'},
+  {n:'章·宣言', e:'📜', t:'article', d:'满意解宣言', u:'deep-manifesto.html'},
+  {n:'章·设计', e:'🎨', t:'article', d:'设计理念', u:'deep-design.html'},
+  {n:'对话·创世记', e:'💬', t:'article', d:'创世纪实', u:'dialogue-genesis.html'},
+  {n:'扣眼·苏梅岛', e:'⭐', t:'article', d:'苏梅岛的路', u:'kouyan-sumeidao.html'},
+  {n:'扣眼·月亮', e:'⭐', t:'article', d:'星光的月亮', u:'kouyan-moon.html'},
+  // 卡片类
+  {n:'章·鉴往', e:'📖', t:'card', d:'案例精选', u:'cases.html'},
+  {n:'章·知机', e:'🗼', t:'card', d:'赛道风险', u:'tracks.html'},
+  {n:'章·溯源', e:'🧬', t:'card', d:'理论谱系', u:'lineage.html'},
+  {n:'觉·破冰', e:'🎴', t:'card', d:'卡牌·核心', u:'cards-play.html?deck=7'},
+  {n:'觉·入局', e:'📚', t:'card', d:'卡牌·完整', u:'cards-play.html?deck=52'},
+  {n:'章·案例·聚类', e:'📊', t:'card', d:'冲突聚类', u:'cases-cluster.html'},
+  // 剧场类
+  {n:'觉·入幕', e:'🎭', t:'theatre', d:'决策剧场', u:'decision-theatre.html'},
+  // 向导类
+  {n:'决策向导', e:'🧭', t:'wizard', d:'工具推荐', u:'wizard.html'},
+  // 仪表类
+  {n:'客户面板', e:'📊', t:'dashboard', d:'数据面板', u:'customers.html'},
+];
+
+let activeFilter = 'all';
+
+function filter(type) {
+  activeFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  render();
+}
+
+function render() {
+  let items = activeFilter==='all' ? PRODUCTS : PRODUCTS.filter(p=>p.t===activeFilter);
+  document.getElementById('countBar').textContent = `共 ${items.length} 个产品`;
+  let html = '';
+  items.forEach(p => {
+    html += `<a class="g-card" href="${p.u}"><span class="g-icon">${p.e}</span><span class="g-name">${p.n}</span><span class="g-type type-${p.t}">${p.t==='tool'?'工具':p.t==='article'?'文章':p.t==='card'?'卡片':p.t==='theatre'?'剧场':p.t==='dashboard'?'仪表':'向导'}</span></a>`;
+  });
+  document.getElementById('gallery').innerHTML = html;
+}
+
+render();
+</script>
+</body>
+</html>

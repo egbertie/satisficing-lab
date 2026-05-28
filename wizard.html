@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>决策向导 · 我该用哪个工具 | 满意解研究所</title>
+<style>:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}.main{max-width:520px;margin:0 auto;padding:16px}.q-card{background:#fff;border-radius:14px;padding:24px;margin-bottom:12px;display:none;border:2px solid var(--sri-red)}.q-card.active{display:block;animation:fadeIn .3s}@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}.q-card h2{font-size:17px;color:var(--title-color);margin-bottom:12px}.options{display:flex;flex-direction:column;gap:8px}.opt-btn{padding:14px 16px;border:1.5px solid var(--border);border-radius:12px;background:#fff;font-size:14px;text-align:left;cursor:pointer;transition:.15s}.opt-btn:hover,.opt-btn.chosen{border-color:var(--sri-red);background:rgba(194,59,34,0.04)}.result-card{background:#fff;border-radius:14px;padding:24px;border:2px solid #4A8C5C;margin-bottom:12px}.result-card h3{color:#4A8C5C;margin-bottom:10px}.rec-link{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text);margin:6px 0;background:#fff}.rec-link .r-emoji{font-size:24px}.rec-link .r-name{font-weight:600;font-size:14px;color:var(--title-color)}.rec-link .r-desc{font-size:11px;opacity:.6}.progress-wrap{display:flex;gap:6px;justify-content:center;margin-bottom:16px}.step-dot{width:10px;height:10px;border-radius:50%;background:var(--border);transition:.3s}.step-dot.done{background:var(--sri-red)}.step-dot.current{transform:scale(1.3);border:2px solid var(--sri-red);background:transparent}.btn{padding:10px 22px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;border:none;margin:4px}.btn-primary{background:var(--sri-red);color:#F5F0E6}.btn-outline{background:transparent;border:1.5px solid var(--sri-red);color:var(--sri-red);text-decoration:none;display:inline-block}</style>
+</head>
+<body>
+<div class="hero"><h1>🧭 决策向导</h1><p>回答3个问题，找到最适合你的工具</p></div>
+<div class="main">
+  <div class="progress-wrap" id="progress"></div>
+
+  <!-- Q1 -->
+  <div class="q-card active" id="q1">
+    <h2>你现在的状态是？</h2>
+    <div class="options">
+      <button class="opt-btn" onclick="answer(1,'A')">🤔 我在犹豫——不知道该怎么做决定</button>
+      <button class="opt-btn" onclick="answer(1,'B')">💭 我觉得不对劲——但说不出来哪里有问题</button>
+      <button class="opt-btn" onclick="answer(1,'C')">🔥 我在危机中——需要立刻做决定</button>
+      <button class="opt-btn" onclick="answer(1,'D')">📖 我想学习——了解方法论和案例</button>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" id="q2">
+    <h2>你需要的是？</h2>
+    <div class="options">
+      <button class="opt-btn" onclick="answer(2,'A')">⚡ 快速自检（5分钟内）</button>
+      <button class="opt-btn" onclick="answer(2,'B')">🔬 深度诊断（需要详细报告）</button>
+      <button class="opt-btn" onclick="answer(2,'C')">🛠️ 实操工具（产出可用的东西）</button>
+      <button class="opt-btn" onclick="answer(2,'D')">🎭 场景体验（沉浸式感受）</button>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" id="q3">
+    <h2>你现在最关心的是？</h2>
+    <div class="options">
+      <button class="opt-btn" onclick="answer(3,'A')">💰 股权和利益分配</button>
+      <button class="opt-btn" onclick="answer(3,'B')">🤝 合伙人关系与信任</button>
+      <button class="opt-btn" onclick="answer(3,'C')">🚪 退出与规则</button>
+      <button class="opt-btn" onclick="answer(3,'D')">🧠 决策方法与思维</button>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div class="q-card" id="result">
+    <h2>🎯 为你推荐</h2>
+    <div id="recommendations"></div>
+    <div style="text-align:center;margin-top:16px;">
+      <button class="btn btn-primary" onclick="resetWizard()">重新选择</button>
+      <a class="btn btn-outline" href="go.html">查看全部工具</a>
+    </div>
+  </div>
+</div>
+<p style="text-align:center;padding:20px;font-size:11px;color:#999"><a href="go.html" style="color:#C23B22;text-decoration:none">← 返回决策通道</a></p>
+
+<script>
+let answers = {};
+const totalSteps = 3;
+
+function updateProgress() {
+  let done = Object.keys(answers).length;
+  let html = '';
+  for (let i=1;i<=totalSteps;i++) {
+    let cls = 'step-dot';
+    if (answers[i]) cls += ' done';
+    if (i===done+1) cls += ' current';
+    html += `<div class="${cls}"></div>`;
+  }
+  document.getElementById('progress').innerHTML = html;
+}
+
+function answer(q, val) {
+  answers[q] = val;
+  updateProgress();
+  
+  if (q < totalSteps) {
+    document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('active'));
+    document.getElementById('q'+(q+1)).classList.add('active');
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  let recs = [];
+  let logic = answers[1]+answers[2]+answers[3];
+  
+  // Rule-based recommendation engine
+  if (answers[1]==='A') { // 犹豫
+    if (answers[2]==='A') recs.push({e:'🎯',n:'衡·观局',d:'五维快速自评·3分钟',u:'assessment.html'});
+    if (answers[2]==='B') recs.push({e:'🔬',n:'衡·测渊',d:'五维完整诊断·8模块',u:'fulldiag.html'});
+    recs.push({e:'📊',n:'衡·探底',d:'RPS风险剖面·看清决策基因',u:'rps.html'});
+  } else if (answers[1]==='B') { // 不对劲
+    recs.push({e:'🌡️',n:'镜·触温',d:'关系温度计·30秒',u:'thermometer.html'});
+    recs.push({e:'⚠️',n:'镜·警兆',d:'四骑士预警·Gottman',u:'knights.html'});
+    recs.push({e:'💧',n:'镜·回身',d:'PRE-0压力锚定',u:'pre0.html'});
+  } else if (answers[1]==='C') { // 危机
+    recs.push({e:'⚔️',n:'觉·淬火',d:'危机模拟器·3场景',u:'crisis-sim.html'});
+    recs.push({e:'🧭',n:'契·善别',d:'退出决策指南',u:'exit-guide.html'});
+    recs.push({e:'🎭',n:'觉·入幕',d:'决策剧场·5幕',u:'decision-theatre.html'});
+  } else { // 学习
+    recs.push({e:'📖',n:'章·鉴往',d:'84案例精选',u:'cases.html'});
+    recs.push({e:'📜',n:'章·创世',d:'星月传奇',u:'creation.html'});
+    recs.push({e:'🗺️',n:'章·五路',d:'五路图腾',u:'wulu.html'});
+  }
+  
+  // Refine by Q3
+  if (answers[3]==='A') recs.unshift({e:'🥧',n:'衡·分利',d:'SlicingPie贡献记账',u:'slicing-pie.html'});
+  if (answers[3]==='B') recs.unshift({e:'🤝',n:'契·择伴',d:'合伙人匹配度',u:'match.html'});
+  if (answers[3]==='C') recs.unshift({e:'📜',n:'契·立盟',d:'元合伙章程',u:'metapartner.html'});
+  if (answers[3]==='D') recs.unshift({e:'🎴',n:'觉·破冰',d:'卡牌·核心冲突',u:'cards-play.html?deck=7'});
+  
+  // Remove duplicates
+  let seen = new Set();
+  recs = recs.filter(r => { let k=r.n; if(seen.has(k))return false; seen.add(k);return true; }).slice(0,5);
+  
+  let html = '';
+  recs.forEach(r => {
+    html += `<a class="rec-link" href="${r.u}"><span class="r-emoji">${r.e}</span><div><div class="r-name">${r.n}</div><div class="r-desc">${r.d}</div></div></a>`;
+  });
+  document.getElementById('recommendations').innerHTML = html;
+  
+  document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('active'));
+  document.getElementById('result').classList.add('active');
+  updateProgress();
+}
+
+function resetWizard() {
+  answers = {};
+  document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('active'));
+  document.getElementById('q1').classList.add('active');
+  updateProgress();
+}
+updateProgress();
+</script>
+</body>
+</html>
