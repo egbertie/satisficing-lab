@@ -273,6 +273,8 @@ document.addEventListener('paste',function(e){
     <button class="tab-btn" onclick="switchTab('quality')">✅ 质量</button>
     <button class="tab-btn" onclick="switchTab('growth')">📈 增长</button>
     <button class="tab-btn" onclick="switchTab('products')">📦 产品</button>
+    <button class="tab-btn" onclick="switchTab('docs')">📂 文档</button>
+    <button class="tab-btn" onclick="switchTab('flywheel')">⚙️ 资产</button>
     <button class="tab-btn" onclick="switchTab('import')">📥 导入</button>
   </div>
 
@@ -522,6 +524,42 @@ function render() {
       document.getElementById('progressText').textContent=pct+'% ('+done+'/'+tasks.length+')';
       document.getElementById('taskStats').innerHTML='<span>✅ 完成:'+done+'</span><span>🔄 进行中:'+tasks.filter(t=>t.status==='进行中').length+'</span><span>⏳ 待开始:'+tasks.filter(t=>t.status==='待开始').length+'</span>';
     },100);
+  } else if (currentTab === 'docs') {
+    html = `<div class="panel"><h3>📂 文档中枢 · 547个核心文件</h3>
+      <div style="display:flex;gap:8px;margin-bottom:8px;">
+        <input id="docSearch" placeholder="搜索文件名..." style="flex:1;padding:8px;border:2px solid #D4C5A0;border-radius:8px;font-size:12px;" oninput="searchDocs()">
+        <select id="docTypeFilter" onchange="searchDocs()" style="padding:8px;border:2px solid #D4C5A0;border-radius:8px;font-size:12px;"><option value="">全部类型</option><option value="md">📝 MD</option><option value="html">🌐 HTML</option><option value="py">🐍 Python</option><option value="json">📋 JSON</option><option value="css">🎨 CSS</option><option value="js">⚡ JS</option><option value="sh">💻 Shell</option></select>
+      </div>
+      <div id="docResults" style="max-height:500px;overflow-y:auto;font-size:11px;">
+        <p style="color:#6E6E6E;text-align:center;padding:20px;">加载中...</p>
+      </div></div>`;
+    setTimeout(loadDocs, 50);
+  } else if (currentTab === 'flywheel') {
+    let reports=JSON.parse(localStorage.getItem('sri_flywheel_reports')||'[]');
+    let usage=JSON.parse(localStorage.getItem('sri_usage_log')||'[]');
+    html = `<div class="panel" style="border-left:4px solid #C23B22;"><h3>⚙️ 资产飞轮 · Pipeline</h3>
+      <div style="display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;padding:12px;font-size:11px;">
+        <span style="background:#fff;border-radius:20px;padding:8px 16px;border:2px solid #C23B22;font-weight:600;">📥 积累<br><small style="color:#6E6E6E;">${usage.length}条使用</small></span>
+        <span style="color:#C23B22;font-weight:700;">→</span>
+        <span style="background:#fff;border-radius:20px;padding:8px 16px;border:1px solid #D4C5A0;font-weight:600;">🔬 提炼<br><small style="color:#6E6E6E;">${reports.length}轮报告</small></span>
+        <span style="color:#C23B22;font-weight:700;">→</span>
+        <span style="background:#fff;border-radius:20px;padding:8px 16px;border:1px solid #D4C5A0;font-weight:600;">🚀 应用<br><small style="color:#6E6E6E;">${DB.products().length||233}产品</small></span>
+        <span style="color:#C23B22;font-weight:700;">→</span>
+        <span style="background:#fff;border-radius:20px;padding:8px 16px;border:1px solid #D4C5A0;font-weight:600;">🔄 反馈<br><small style="color:#6E6E6E;">NPS: ${localStorage.getItem('sri_nps_score')||'—'}</small></span>
+        <span style="color:#C23B22;font-weight:700;">→</span>
+        <span style="background:#fff;border-radius:20px;padding:8px 16px;border:2px solid #C23B22;font-weight:600;">🔁 增值<br><small style="color:#6E6E6E;">循环${reports.length}轮</small></span>
+      </div></div>
+      <div class="panel"><h3>📂 核心资产清单</h3><table><tr><th>资产类型</th><th>数量</th><th>状态</th></tr>
+      <tr><td>📄 产品标准文档</td><td>28份</td><td>✅ 完整</td></tr>
+      <tr><td>🌐 线上产品</td><td>233个</td><td>✅ 上线</td></tr>
+      <tr><td>⚙️ Skill体系</td><td>35个</td><td>✅ 产品化</td></tr>
+      <tr><td>📚 翻书专著</td><td>24本</td><td>✅</td></tr>
+      <tr><td>📝 核心论文</td><td>38篇</td><td>✅</td></tr>
+      <tr><td>📋 84案例</td><td>84个</td><td>✅ 12精案线上</td></tr>
+      <tr><td>🔧 自动化脚本</td><td>6个</td><td>✅ cron运行</td></tr>
+      <tr><td>📊 驾驶舱表</td><td>12张</td><td>✅</td></tr>
+      <tr><td>🤖 AI三代</td><td>满意姐54天·扣子28天·满意红23天</td><td>✅ 传承</td></tr>
+      </table></div>`;
   } else if (currentTab === 'import') {
     html = `<div class="panel"><h3>📥 导入历史数据</h3>
       <p style="font-size:12px;opacity:0.6;margin-bottom:12px;">从旧飞书驾驶舱拉取的498条历史记录</p>
