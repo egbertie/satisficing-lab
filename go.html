@@ -3,136 +3,330 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>免费测评 · 满意解研究所</title>
+<title>满意解研究所 · 产品中心</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-  :root {
-    --brand: #C23B22; --gold: #B8860B; --bg: #F5F0E6;
-    --text: #4A4A4A; --title: #2A2A2A;
-  }
-  body { font-family:-apple-system,"Noto Sans SC","PingFang SC",sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+  :root { --sri-red:#C23B22; --sri-gold:#B8860B; --sri-bg:#F5F0E6; --text:#4A4A4A; --title:#2A2A2A; --border:#D4C5A0; }
+  body { font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif; background:var(--sri-bg); color:var(--text); min-height:100vh; }
   
   /* Hero */
-  .hero { background:linear-gradient(135deg,var(--brand),var(--gold)); color:#F5F0E6; padding:44px 24px 36px; text-align:center; }
-  .hero .logo { font-size:13px; letter-spacing:3px; opacity:0.85; margin-bottom:12px; text-transform:uppercase; }
-  .hero h1 { font-size:26px; font-weight:700; margin-bottom:6px; }
-  .hero .sub { font-size:14px; opacity:0.9; margin-top:4px; }
-  .hero .tagline { font-size:13px; opacity:0.7; margin-top:8px; }
-
-  /* 工具卡片 */
-  .tools { padding:20px 16px; max-width:520px; margin:0 auto; }
-  .section-title { font-size:13px; color:var(--brand); font-weight:600; letter-spacing:2px; margin-bottom:12px; text-align:center; }
+  .hero { background:linear-gradient(135deg,var(--sri-red),var(--sri-gold)); color:#F5F0E6; padding:40px 20px 32px; text-align:center; }
+  .hero .logo { font-size:12px; letter-spacing:3px; opacity:0.8; text-transform:uppercase; }
+  .hero h1 { font-size:22px; font-weight:700; margin:6px 0 2px; }
+  .hero .sub { font-size:13px; opacity:0.9; }
   
-  .card { background:#fff; border-radius:12px; padding:20px; margin-bottom:16px; box-shadow:0 1px 4px rgba(0,0,0,0.06); border:1px solid rgba(194,59,34,0.08); }
-  .card .icon { font-size:28px; margin-bottom:8px; }
-  .card h3 { font-size:18px; color:var(--title); margin-bottom:4px; }
-  .card .meta { font-size:12px; color:var(--brand); margin-bottom:8px; font-weight:500; }
-  .card p { font-size:14px; line-height:1.6; color:var(--text); margin-bottom:12px; }
-  .card .btn { display:inline-block; background:var(--brand); color:#F5F0E6; padding:10px 28px; border-radius:24px; font-size:14px; font-weight:600; text-decoration:none; transition:background 0.2s; }
-  .card .btn:active { opacity:0.85; }
-  .card .btn.secondary { background:transparent; color:var(--brand); border:1.5px solid var(--brand); padding:8px 24px; }
+  .main { max-width:600px; margin:0 auto; padding:16px; }
 
-  /* 体系说明 */
-  .system { padding:20px 16px 32px; max-width:520px; margin:0 auto; }
-  .system .section-title { margin-bottom:16px; }
-  .tier { background:#fff; border-radius:12px; padding:16px; margin-bottom:12px; border-left:4px solid var(--brand); box-shadow:0 1px 3px rgba(0,0,0,0.04); }
-  .tier.free { border-left-color:var(--brand); }
-  .tier.paid { border-left-color:var(--gold); opacity:0.85; }
-  .tier h4 { font-size:16px; color:var(--title); margin-bottom:4px; }
-  .tier .price { font-size:12px; color:var(--brand); font-weight:600; }
-  .tier .desc { font-size:13px; color:var(--text); line-height:1.6; margin-top:4px; }
+  /* Series block */
+  .series { margin-bottom:24px; }
+  .series-header { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+  .series-icon { font-size:28px; }
+  .series-title { font-size:16px; font-weight:700; color:var(--title); }
+  .series-desc { font-size:12px; color:var(--text); opacity:0.7; }
 
-  /* Footer */
-  .footer { text-align:center; padding:24px 16px 40px; font-size:12px; color:#999; }
-  .footer a { color:#999; text-decoration:underline; }
-  .footer .brand { margin-top:8px; font-weight:600; color:var(--brand); }
+  /* Product cards in a series */
+  .prod-list { display:flex; flex-direction:column; gap:8px; }
+  .prod-card { background:#fff; border-radius:10px; padding:12px 14px; border:1px solid var(--border); display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); transition:all 0.15s; }
+  .prod-card:active { border-color:var(--sri-red); background:rgba(194,59,34,0.02); }
+  .prod-emoji { font-size:22px; min-width:32px; text-align:center; }
+  .prod-info { flex:1; min-width:0; }
+  .prod-name { font-size:14px; font-weight:600; color:var(--title); }
+  .prod-meta { font-size:11px; color:var(--text); opacity:0.6; margin-top:1px; }
+  .prod-arrow { font-size:14px; color:var(--sri-red); opacity:0.5; }
+
+  /* Badges */
+  .badge { display:inline-block; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600; }
+  .badge-free { background:rgba(194,59,34,0.1); color:var(--sri-red); }
+  .badge-beta { background:rgba(184,134,11,0.12); color:var(--sri-gold); }
+  .badge-new { background:rgba(74,140,92,0.12); color:#4A8C5C; }
+
+  /* Tiers */
+  .tier-divider { text-align:center; padding:16px 0; font-size:12px; color:var(--sri-gold); letter-spacing:2px; }
+  .tier-divider span { background:#fff; padding:4px 16px; border:1px solid var(--sri-gold); border-radius:16px; }
+
+  .footer { text-align:center; padding:24px 16px 40px; font-size:11px; color:#999; }
+  .footer a { color:var(--sri-red); text-decoration:none; }
+  .footer .brand { margin-top:6px; font-weight:600; color:var(--sri-red); }
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <div class="logo">Satisficing Lab</div>
+  <div class="logo">Product Center</div>
   <h1>满意解研究所</h1>
   <div class="sub">硬科技创始人的决策教练</div>
-  <div class="tagline">—— 先认识自己，再寻找答案 ——</div>
 </div>
 
-<div class="tools">
-  <div class="section-title">🧭 免费测评工具</div>
+<div class="main">
 
-  <!-- 主推：五维快速自评 -->
-  <div class="card">
-    <div class="icon">🎯</div>
-    <h3>合伙人五维快速自评</h3>
-    <div class="meta">19题 · 3分钟 · 即时出报告</div>
-    <p>从时间节奏、资源边界、身心状态、规则共识、风险分歧五个维度，看清你和合伙人的决策模式差异。</p>
-    <a class="btn" href="assessment.html">开始测评 →</a>
+  <!-- ===== 系列一: 测评工具 ===== -->
+  <div class="series">
+    <div class="series-header">
+      <span class="series-icon">🎯</span>
+      <div>
+        <div class="series-title">决策测评系列</div>
+        <div class="series-desc">从快速自评到深度诊断——逐步深入</div>
+      </div>
+    </div>
+    <div class="prod-list">
+      <a class="prod-card" href="assessment.html">
+        <span class="prod-emoji">⚡</span>
+        <div class="prod-info">
+          <span class="prod-name">五维快速自评 <span class="badge badge-free">免费</span></span>
+          <div class="prod-meta">19题·3分钟·即时出报告——新手从这里开始</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+      <a class="prod-card" href="fulldiag.html">
+        <span class="prod-emoji">🔬</span>
+        <div class="prod-info">
+          <span class="prod-name">完整版五维诊断 <span class="badge badge-beta">深度</span></span>
+          <div class="prod-meta">28题·8分钟·矛盾热力图·赛道参数——真正发现问题</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+      <a class="prod-card" href="rps.html">
+        <span class="prod-emoji">📊</span>
+        <div class="prod-info">
+          <span class="prod-name">RPS风险偏好测评 <span class="badge badge-free">免费</span></span>
+          <div class="prod-meta">32题·5分钟·4维风险剖面——看清你的决策基因</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+      <a class="prod-card" href="thermometer.html">
+        <span class="prod-emoji">🌡️</span>
+        <div class="prod-info">
+          <span class="prod-name">团队关系温度计 <span class="badge badge-free">免费</span></span>
+          <div class="prod-meta">4题·30秒·每两周追踪——最快发现裂缝</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+    </div>
   </div>
 
-  <!-- RPS风险偏好 -->
-  <div class="card">
-    <div class="icon">📊</div>
-    <h3>RPS风险偏好测评</h3>
-    <div class="meta">32题 · 5分钟 · 4维剖面</div>
-    <p>量化你的风险基因：财务风险、战略风险、人际风险、执行风险。理解你的"默认反应模式"。</p>
-    <a class="btn" href="rps.html">开始测评 →</a>
+  <!-- ===== 系列二: 卡牌游戏 ===== -->
+  <div class="series">
+    <div class="series-header">
+      <span class="series-icon">🎴</span>
+      <div>
+        <div class="series-title">决策卡牌系列</div>
+        <div class="series-desc">四种模式·52张案例·从自检到博弈</div>
+      </div>
+    </div>
+    <div class="prod-list">
+      <a class="prod-card" href="cards-play.html?deck=7">
+        <span class="prod-emoji">🎯</span>
+        <div class="prod-info">
+          <span class="prod-name">核心冲突卡组 <span class="badge badge-free">免费</span></span>
+          <div class="prod-meta">7张·10分钟·单人自查——快速碰撞测试</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+      <a class="prod-card" href="cards-play.html?deck=15">
+        <span class="prod-emoji">🗂️</span>
+        <div class="prod-info">
+          <span class="prod-name">全量诊断卡组 <span class="badge badge-free">免费</span></span>
+          <div class="prod-meta">15张·25分钟·13型冲突覆盖——全面扫描</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+      <a class="prod-card" href="cards-play.html?deck=52">
+        <span class="prod-emoji">📚</span>
+        <div class="prod-info">
+          <span class="prod-name">完整案例库 <span class="badge badge-free">免费</span></span>
+          <div class="prod-meta">52张·45分钟·真实案例沉浸——深度探索</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+      <a class="prod-card" href="cards-play.html?deck=daily">
+        <span class="prod-emoji">🌅</span>
+        <div class="prod-info">
+          <span class="prod-name">每日一卡 <span class="badge badge-free">免费</span></span>
+          <div class="prod-meta">1张·3分钟·每天一个决策场景——养成习惯</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+      <a class="prod-card" href="cards.html">
+        <span class="prod-emoji">🖨️</span>
+        <div class="prod-info">
+          <span class="prod-name">卡牌打印版 <span class="badge badge-free">免费</span></span>
+          <div class="prod-meta">可打印·团队面对面使用——线下工作坊必备</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+    </div>
   </div>
 
-  <!-- 温度计 -->
-  <div class="card">
-    <div class="icon">🌡️</div>
-    <h3>团队关系温度计</h3>
-    <div class="meta">4题 · 30秒 · 可每两周追踪</div>
-    <p>信任度、沟通质量、目标对齐、假装同意——四维温度，最快发现裂缝的工具。</p>
-    <a class="btn" href="thermometer.html">开始测温 →</a>
+  <!-- ===== 系列三: 决策剧场 ===== -->
+  <div class="series">
+    <div class="series-header">
+      <span class="series-icon">🎭</span>
+      <div>
+        <div class="series-title">决策剧场系列</div>
+        <div class="series-desc">沉浸式场景体验——走进真实企业家的决策时刻</div>
+      </div>
+    </div>
+    <div class="prod-list">
+      <a class="prod-card" href="decision-theatre.html#scene1">
+        <span class="prod-emoji">⏳</span>
+        <div class="prod-info">
+          <span class="prod-name">临界区·七个月 <span class="badge badge-free">免费</span></span>
+          <div class="prod-meta">CI=0.464·你的选择决定走向——身体也在投票</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+      <a class="prod-card" href="decision-theatre.html#scene4">
+        <span class="prod-emoji">🐋</span>
+        <div class="prod-info">
+          <span class="prod-name">云鲸少年 <span class="badge badge-free">免费</span></span>
+          <div class="prod-meta">26岁被diss→300张图纸→百亿独角兽</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+      <a class="prod-card" href="decision-theatre.html#scene5">
+        <span class="prod-emoji">🔥</span>
+        <div class="prod-info">
+          <span class="prod-name">大疆涅槃 <span class="badge badge-free">免费</span></span>
+          <div class="prod-meta">CI 0.72→0.35·李泽湘五层介入·凤凰涅槃</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+    </div>
   </div>
 
-  <!-- 卡牌 -->
-  <div class="card">
-    <div class="icon">🎴</div>
-    <h3>合伙人决策卡牌</h3>
-    <div class="meta">52张 · 4种模式 · 单人/双人</div>
-    <p>丰富的线上卡牌游戏。从7张核心冲突到52张完整案例库——涵盖13种冲突类型的真实场景。单人自查、双人对局、每日一卡。</p>
-    <a class="btn secondary" href="cards-play.html">开始抽卡 →</a>
+  <!-- ===== 系列四: 深度工具 ===== -->
+  <div class="series">
+    <div class="series-header">
+      <span class="series-icon">🛠️</span>
+      <div>
+        <div class="series-title">深度工具系列</div>
+        <div class="series-desc">可独立使用的专业决策工具</div>
+      </div>
+    </div>
+    <div class="prod-list">
+      <a class="prod-card" href="crisis-sim.html">
+        <span class="prod-emoji">🔥</span>
+        <div class="prod-info">
+          <span class="prod-name">危机决策模拟器·熔炉 <span class="badge badge-new">新</span></span>
+          <div class="prod-meta">3个高压场景·倒计时决策·事后复盘</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+      <a class="prod-card" href="exit-guide.html">
+        <span class="prod-emoji">🧭</span>
+        <div class="prod-info">
+          <span class="prod-name">退出决策指南·指南针 <span class="badge badge-new">新</span></span>
+          <div class="prod-meta">4步引导·财务+关系+法律三维评估</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+      <a class="prod-card" href="slicing-pie.html">
+        <span class="prod-emoji">🥧</span>
+        <div class="prod-info">
+          <span class="prod-name">贡献量化SlicingPie <span class="badge badge-new">新</span></span>
+          <div class="prod-meta">动态股权计算器·公平贡献记账</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+      <a class="prod-card" href="pre0.html">
+        <span class="prod-emoji">💧</span>
+        <div class="prod-info">
+          <span class="prod-name">PRE-0压力锚定·水镜 <span class="badge badge-new">新</span></span>
+          <div class="prod-meta">3分钟·身体觉察·决策前必修</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+      <a class="prod-card" href="metapartner.html">
+        <span class="prod-emoji">🧩</span>
+        <div class="prod-info">
+          <span class="prod-name">元合伙章程模板 <span class="badge badge-new">新</span></span>
+          <div class="prod-meta">可填充的线上章程·白纸黑字</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+      <a class="prod-card" href="checklist.html">
+        <span class="prod-emoji">📋</span>
+        <div class="prod-info">
+          <span class="prod-name">决策前自检清单 <span class="badge badge-free">免费</span></span>
+          <div class="prod-meta">重大决策前逐项打勾——防止遗漏</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+    </div>
   </div>
 
-  <!-- 决策剧场 -->
-  <div class="card">
-    <div class="icon">🎭</div>
-    <h3>五分钟决策剧场</h3>
-    <div class="meta">5场景 · 沉浸式体验</div>
-    <p>从临界区→分岔口→身体觉察→云鲸少年→大疆涅槃。不是看报告——是走进真实的企业家决策时刻，自己做选择、看结果。</p>
-    <a class="btn secondary" href="decision-theatre.html">进入剧场 →</a>
+  <!-- ===== 系列五: 报告与展示 ===== -->
+  <div class="series">
+    <div class="series-header">
+      <span class="series-icon">📄</span>
+      <div>
+        <div class="series-title">报告与展示</div>
+        <div class="series-desc">诊断后的深度报告与案例展示</div>
+      </div>
+    </div>
+    <div class="prod-list">
+      <a class="prod-card" href="chemical-report.html">
+        <span class="prod-emoji">🧪</span>
+        <div class="prod-info">
+          <span class="prod-name">化学报告·矛盾热力图</span>
+          <div class="prod-meta">8模块·完整数据可视化——做完测评必看</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+      <a class="prod-card" href="report-demo.html">
+        <span class="prod-emoji">📋</span>
+        <div class="prod-info">
+          <span class="prod-name">完整报告示例</span>
+          <div class="prod-meta">诊断后交付物预览——看看专业报告长什么样</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+      <a class="prod-card" href="radar.html">
+        <span class="prod-emoji">📈</span>
+        <div class="prod-info">
+          <span class="prod-name">五维雷达图</span>
+          <div class="prod-meta">交互式雷达图·模式识别——直观对比</div>
+        </div>
+        <span class="prod-arrow">→</span>
+      </a>
+    </div>
   </div>
-</div>
 
-<div class="system">
-  <div class="section-title">📐 产品体系</div>
-
-  <div class="tier free">
-    <h4>第一层：免费自评工具</h4>
-    <div class="price">¥0 · 自助使用</div>
-    <div class="desc">五维自评 · RPS风险偏好 · 关系温度计 · 决策卡牌 · 决策日志模板<br>→ 知道自己在哪个阶段，问题可能出在哪里</div>
+  <!-- ===== 产品体系 ===== -->
+  <div class="tier-divider"><span>📐 产品体系架构</span></div>
+  <div style="padding:0 4px;">
+    <div class="prod-card" style="background:transparent;border-left:3px solid var(--sri-red);">
+      <div style="flex:1">
+        <div style="font-weight:700;font-size:14px;color:var(--title);">第一层 · 免费自评工具</div>
+        <div style="font-size:12px;color:var(--text);margin-top:2px;">¥0 · 自助使用 · 测评+卡牌+剧场+温度计+模拟器+退出指南</div>
+      </div>
+    </div>
+    <div class="prod-card" style="background:transparent;border-left:3px solid var(--sri-gold);opacity:0.85;margin-top:6px;">
+      <div style="flex:1">
+        <div style="font-weight:700;font-size:14px;color:var(--title);">第二层 · 诊断服务</div>
+        <div style="font-size:12px;color:var(--text);margin-top:2px;">引导师参与 · 90分钟起 · 完整诊断+RPS+贡献量化+1v1解读</div>
+      </div>
+    </div>
+    <div class="prod-card" style="background:transparent;border-left:3px solid var(--sri-gold);opacity:0.85;margin-top:6px;">
+      <div style="flex:1">
+        <div style="font-weight:700;font-size:14px;color:var(--title);">第三层 · 深度解决</div>
+        <div style="font-size:12px;color:var(--text);margin-top:2px;">定制 · 长期陪伴 · 工作坊+熔炉+退出指南+年度顾问</div>
+      </div>
+    </div>
   </div>
 
-  <div class="tier paid">
-    <h4>第二层：诊断服务</h4>
-    <div class="price">引导师参与 · 90分钟起</div>
-    <div class="desc">完整版五维诊断 · 贡献量化评估 · 1v1结果解读<br>→ 不是给一个分数，是帮你理解分数背后的东西</div>
-  </div>
-
-  <div class="tier paid">
-    <h4>第三层：深度解决</h4>
-    <div class="price">定制 · 长期陪伴</div>
-    <div class="desc">决策对齐工作坊 · 危机模拟器 · 退出决策指南 · 年度顾问<br>→ 产出白纸黑字的章程，不只是"聊一聊"</div>
+  <div style="text-align:center;padding:16px 0;">
+    <a href="about.html" style="color:var(--sri-red);font-size:13px;text-decoration:none;">关于我们</a>
+    <span style="margin:0 10px;opacity:0.3;">|</span>
+    <a href="proposal.html" style="color:var(--sri-red);font-size:13px;text-decoration:none;">服务方案</a>
+    <span style="margin:0 10px;opacity:0.3;">|</span>
+    <a href="privacy.html" style="color:var(--sri-red);font-size:13px;text-decoration:none;">隐私</a>
   </div>
 </div>
 
 <div class="footer">
-  <p>满意解研究所 · Satisficing Research Institute</p>
-  <p>硬科技创始人的决策教练</p>
-  <p class="brand">契·晋·转·桥·审·行·恒</p>
-  <p style="margin-top:8px;"><a href="about.html">关于我们</a> · <a href="proposal.html">服务方案</a> · <a href="privacy.html">隐私</a></p>
+  <p class="brand">满意解研究所 · Satisficing Research Institute</p>
+  <p>契·晋·转·桥·审·行·恒</p>
 </div>
 
 </body>
