@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>免费测评 · 满意解研究所</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  :root {
+    --brand: #C23B22; --gold: #B8860B; --bg: #F5F0E6;
+    --text: #4A4A4A; --title: #2A2A2A;
+  }
+  body { font-family:-apple-system,"Noto Sans SC","PingFang SC",sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+  
+  /* Hero */
+  .hero { background:linear-gradient(135deg,var(--brand),var(--gold)); color:#F5F0E6; padding:44px 24px 36px; text-align:center; }
+  .hero .logo { font-size:13px; letter-spacing:3px; opacity:0.85; margin-bottom:12px; text-transform:uppercase; }
+  .hero h1 { font-size:26px; font-weight:700; margin-bottom:6px; }
+  .hero .sub { font-size:14px; opacity:0.9; margin-top:4px; }
+  .hero .tagline { font-size:13px; opacity:0.7; margin-top:8px; }
+
+  /* 工具卡片 */
+  .tools { padding:20px 16px; max-width:520px; margin:0 auto; }
+  .section-title { font-size:13px; color:var(--brand); font-weight:600; letter-spacing:2px; margin-bottom:12px; text-align:center; }
+  
+  .card { background:#fff; border-radius:12px; padding:20px; margin-bottom:16px; box-shadow:0 1px 4px rgba(0,0,0,0.06); border:1px solid rgba(194,59,34,0.08); }
+  .card .icon { font-size:28px; margin-bottom:8px; }
+  .card h3 { font-size:18px; color:var(--title); margin-bottom:4px; }
+  .card .meta { font-size:12px; color:var(--brand); margin-bottom:8px; font-weight:500; }
+  .card p { font-size:14px; line-height:1.6; color:var(--text); margin-bottom:12px; }
+  .card .btn { display:inline-block; background:var(--brand); color:#F5F0E6; padding:10px 28px; border-radius:24px; font-size:14px; font-weight:600; text-decoration:none; transition:background 0.2s; }
+  .card .btn:active { opacity:0.85; }
+  .card .btn.secondary { background:transparent; color:var(--brand); border:1.5px solid var(--brand); padding:8px 24px; }
+
+  /* 体系说明 */
+  .system { padding:20px 16px 32px; max-width:520px; margin:0 auto; }
+  .system .section-title { margin-bottom:16px; }
+  .tier { background:#fff; border-radius:12px; padding:16px; margin-bottom:12px; border-left:4px solid var(--brand); box-shadow:0 1px 3px rgba(0,0,0,0.04); }
+  .tier.free { border-left-color:var(--brand); }
+  .tier.paid { border-left-color:var(--gold); opacity:0.85; }
+  .tier h4 { font-size:16px; color:var(--title); margin-bottom:4px; }
+  .tier .price { font-size:12px; color:var(--brand); font-weight:600; }
+  .tier .desc { font-size:13px; color:var(--text); line-height:1.6; margin-top:4px; }
+
+  /* Footer */
+  .footer { text-align:center; padding:24px 16px 40px; font-size:12px; color:#999; }
+  .footer a { color:#999; text-decoration:underline; }
+  .footer .brand { margin-top:8px; font-weight:600; color:var(--brand); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="logo">Satisficing Lab</div>
+  <h1>满意解研究所</h1>
+  <div class="sub">硬科技创始人的决策教练</div>
+  <div class="tagline">—— 先认识自己，再寻找答案 ——</div>
+</div>
+
+<div class="tools">
+  <div class="section-title">🧭 免费测评工具</div>
+
+  <!-- 主推：五维快速自评 -->
+  <div class="card">
+    <div class="icon">🎯</div>
+    <h3>合伙人五维快速自评</h3>
+    <div class="meta">19题 · 3分钟 · 即时出报告</div>
+    <p>从时间节奏、资源边界、身心状态、规则共识、风险分歧五个维度，看清你和合伙人的决策模式差异。</p>
+    <a class="btn" href="assessment.html">开始测评 →</a>
+  </div>
+
+  <!-- RPS风险偏好 -->
+  <div class="card">
+    <div class="icon">📊</div>
+    <h3>RPS风险偏好测评</h3>
+    <div class="meta">32题 · 5分钟 · 4维剖面</div>
+    <p>量化你的风险基因：财务风险、战略风险、人际风险、执行风险。理解你的"默认反应模式"。</p>
+    <a class="btn" href="rps.html">开始测评 →</a>
+  </div>
+
+  <!-- 温度计 -->
+  <div class="card">
+    <div class="icon">🌡️</div>
+    <h3>团队关系温度计</h3>
+    <div class="meta">4题 · 30秒 · 可每两周追踪</div>
+    <p>信任度、沟通质量、目标对齐、假装同意——四维温度，最快发现裂缝的工具。</p>
+    <a class="btn" href="thermometer.html">开始测温 →</a>
+  </div>
+
+  <!-- 卡牌 -->
+  <div class="card">
+    <div class="icon">🎴</div>
+    <h3>合伙人决策卡牌</h3>
+    <div class="meta">14张 · 可打印 · 团队互动</div>
+    <p>物理卡牌工具。把"说不出口的问题"变成可以摊在桌上讨论的游戏。适合团队工作会议使用。</p>
+    <a class="btn secondary" href="cards.html">查看卡牌 →</a>
+  </div>
+</div>
+
+<div class="system">
+  <div class="section-title">📐 产品体系</div>
+
+  <div class="tier free">
+    <h4>第一层：免费自评工具</h4>
+    <div class="price">¥0 · 自助使用</div>
+    <div class="desc">五维自评 · RPS风险偏好 · 关系温度计 · 决策卡牌 · 决策日志模板<br>→ 知道自己在哪个阶段，问题可能出在哪里</div>
+  </div>
+
+  <div class="tier paid">
+    <h4>第二层：诊断服务</h4>
+    <div class="price">引导师参与 · 90分钟起</div>
+    <div class="desc">完整版五维诊断 · 贡献量化评估 · 1v1结果解读<br>→ 不是给一个分数，是帮你理解分数背后的东西</div>
+  </div>
+
+  <div class="tier paid">
+    <h4>第三层：深度解决</h4>
+    <div class="price">定制 · 长期陪伴</div>
+    <div class="desc">决策对齐工作坊 · 危机模拟器 · 退出决策指南 · 年度顾问<br>→ 产出白纸黑字的章程，不只是"聊一聊"</div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>满意解研究所 · Satisficing Research Institute</p>
+  <p>硬科技创始人的决策教练</p>
+  <p class="brand">契·晋·转·桥·审·行·恒</p>
+  <p style="margin-top:8px;"><a href="about.html">关于我们</a> · <a href="proposal.html">服务方案</a> · <a href="privacy.html">隐私</a></p>
+</div>
+
+</body>
+</html>
