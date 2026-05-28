@@ -144,4 +144,10 @@ function dnextD(){di++;ds=d[di]?d[di]-1:null;RD();}
 function dP(){di--;ds=d[di]?d[di]-1:null;RD();}
 function SubD(){d[di]=ds+1;let vl=Object.values(d),tt=vl.reduce((a,b)=>a+b,0),avg=Math.round(tt/(vl.length*5)*100);let rs,rc="#B8860B";if(avg<=40){rs={icon:"🟢",name:"相对健康",desc:"你的合伙人关系正处在健康区间。没有明显的系统风险信号。",action:"继续保持沟通频率，每季度做一次踩雷复检。"}}else if(avg<=65){rs={icon:"🟡",name:"需要关注",desc:"你的合伙人关系存在一些需要关注的信号。不是紧急的，但不能再忽视了。",action:"本周内找合伙人进行一场深度沟通，不谈业务，只谈关系。"};rc="#B8860B"}else{rs={icon:"🔴",name:"高危预警",desc:"你的合伙人关系存在多个危险信号。这些问题不会自己消失。",action:"强烈建议启动蓝军审计。找一个第三方，以独立视角审视你们的合伙关系。"};rc="#C23B22"}let html='<div class="danger-result"><div class="dr-icon">'+rs.icon+'</div><h3>'+rs.name+'</h3>';html+='<div class="dr-bar-wrap"><div class="dr-bar" style="width:'+avg+'%;background:'+rc+'"></div></div>';html+='<div class="dr-score">风险指数 '+avg+'%</div><div class="dr-desc">'+rs.desc+'</div>';html+='<div class="dr-action"><span class="dr-action-label">💡 建议行动</span><span class="dr-action-text">'+rs.action+'</span></div></div>';document.getElementById("pg-danger").innerHTML=html;cp="danger";document.querySelectorAll(".page").forEach(e=>e.classList.remove("active"));document.getElementById("pg-danger").classList.add("active");document.getElementById("st").textContent="踩雷结果";document.getElementById("pg-danger").querySelector(".danger-result").innerHTML+=html.match(/<div class="danger-result">(.*)<\/div>/)?.[1]||""}
 </script>
-</body></html>
+
+<div style="text-align:center;padding:24px 16px 40px;font-size:11px;color:#999;">
+  <p><a href="go.html" style="color:#C23B22;text-decoration:none;">← 返回决策通道</a></p>
+  <p style="margin-top:4px;">满意解研究所 · 硬科技创始人的决策教练</p>
+</div>
+</body>
+</html>
