@@ -235,10 +235,11 @@ function render() {
     }
     html += '</div>';
   } else if (currentTab === 'import') {
-    html = `<div class="panel"><h3>📥 导入旧数据</h3>
-      <p style="font-size:12px;opacity:0.6;margin-bottom:12px;">粘贴JSON数据来批量导入（可从旧飞书Base导出CSV后转换）</p>
-      <textarea id="importData" style="width:100%;height:120px;border:2px solid #D4C5A0;border-radius:8px;padding:8px;font-size:11px;" placeholder='{"tasks":[{"task":"示例任务","priority":"P1"}]}'></textarea>
-      <button class="btn" onclick="importJSON()">导入</button>
+    html = `<div class="panel"><h3>📥 导入历史数据</h3>
+      <p style="font-size:12px;opacity:0.6;margin-bottom:12px;">从旧飞书驾驶舱拉取的498条历史记录</p>
+      <button class="btn" onclick="importFromFile()">📥 一键导入498条历史数据</button>
+      <span id="importStatus" style="font-size:11px;margin-left:8px;"></span>
+      <hr style="margin:12px 0;border-color:#D4C5A0">
       <button class="btn" style="background:var(--sri-gold)" onclick="exportAll()">💾 导出全部数据</button>
       <button class="btn" style="background:#999" onclick="clearAll()">🗑️ 清空数据</button>
       <p style="font-size:10px;opacity:0.4;margin-top:8px;">数据仅存在于本浏览器的localStorage中·清空不可恢复·建议定期导出备份</p>
@@ -306,6 +307,26 @@ function importJSON() {
     }
     render(); alert('导入成功！');
   } catch(e) { alert('JSON格式错误: '+e.message); }
+}
+
+async function importFromFile() {
+  let s=document.getElementById('importStatus');
+  s.textContent='加载中...';
+  try {
+    let r=await fetch('import_data.json');
+    let d=await r.json();
+    let count=0;
+    let mapping={'任务驾驶舱':'tasks','客户档案库':'customers','决策日志':'decisions','北极星指标':'growth','五维测评记录':'assessments','知识资产库':'knowledge','内容资产':'content','案例库':'cases'};
+    for(let [table,items] of Object.entries(d)){
+      let key=mapping[table]||table;
+      let existing=DB.get(key);
+      items.forEach(item=>{item._id=Date.now()+Math.random();existing.unshift(item)});
+      DB.set(key,existing.slice(0,500));
+      count+=items.length;
+    }
+    s.textContent='✅ 已导入 '+count+' 条！' + (d['任务驾驶舱']?'含任务'+d['任务驾驶舱'].length+'条':'');
+    render();
+  } catch(e){s.textContent='❌ 加载失败: '+e.message;}
 }
 
 function exportAll() {
