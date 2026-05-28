@@ -252,6 +252,29 @@ document.addEventListener('paste',function(e){
 <div class="hero">
   <h1>📊 驾驶舱</h1>
   <p>本地数据 · localStorage · 无需服务器 · 随时可用</p>
+<div style="max-width:720px;margin:12px auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;font-size:10px;">
+<div style="background:rgba(245,240,230,0.15);border-radius:8px;padding:6px;text-align:center;">
+<div style="font-weight:700;color:#fff;">💰 财务</div>
+<div id="bscFinance" style="font-size:16px;font-weight:800;color:#F5F0E6;">—</div>
+<div style="opacity:0.7;">现金流·营收</div>
+</div>
+<div style="background:rgba(245,240,230,0.15);border-radius:8px;padding:6px;text-align:center;">
+<div style="font-weight:700;color:#fff;">👤 客户</div>
+<div id="bscCustomer" style="font-size:16px;font-weight:800;color:#F5F0E6;">—</div>
+<div style="opacity:0.7;">NPS·转化·留存</div>
+</div>
+<div style="background:rgba(245,240,230,0.15);border-radius:8px;padding:6px;text-align:center;">
+<div style="font-weight:700;color:#fff;">⚙️ 流程</div>
+<div id="bscProcess" style="font-size:16px;font-weight:800;color:#F5F0E6;">—</div>
+<div style="opacity:0.7;">质量·效率·系统</div>
+</div>
+<div style="background:rgba(245,240,230,0.15);border-radius:8px;padding:6px;text-align:center;">
+<div style="font-weight:700;color:#fff;">📈 成长</div>
+<div id="bscGrowth" style="font-size:16px;font-weight:800;color:#F5F0E6;">—</div>
+<div style="opacity:0.7;">学习·资产·创新</div>
+</div>
+</div>
+
 </div>
 <div class="main">
 
@@ -373,6 +396,18 @@ var DB_INIT = false;
 async function initDB() {
   if (DB_INIT) return;
   DB.seed();
+
+// BSC四维指标
+function updateBSC(){
+  var stats=DB.stats();
+  setTimeout(()=>{
+    document.getElementById('bscFinance')&&(document.getElementById('bscFinance').textContent='内测中');
+    document.getElementById('bscCustomer')&&(document.getElementById('bscCustomer').textContent=(stats.customers||0)+'客户');
+    document.getElementById('bscProcess')&&(document.getElementById('bscProcess').textContent=(stats.quality||0)+'QM');
+    document.getElementById('bscGrowth')&&(document.getElementById('bscGrowth').textContent=(stats.products||0)+'产品');
+  },500);
+}
+
   try {
     var s = await DB._fetch('/stats');
     if (s) console.log('✅ SQLite中台已连接·'+s.tasks+'任务·'+s.customers+'客户');
@@ -382,6 +417,18 @@ async function initDB() {
 }
 
 DB.seed();
+
+// BSC四维指标
+function updateBSC(){
+  var stats=DB.stats();
+  setTimeout(()=>{
+    document.getElementById('bscFinance')&&(document.getElementById('bscFinance').textContent='内测中');
+    document.getElementById('bscCustomer')&&(document.getElementById('bscCustomer').textContent=(stats.customers||0)+'客户');
+    document.getElementById('bscProcess')&&(document.getElementById('bscProcess').textContent=(stats.quality||0)+'QM');
+    document.getElementById('bscGrowth')&&(document.getElementById('bscGrowth').textContent=(stats.products||0)+'产品');
+  },500);
+}
+
 
 // 自动从系统引擎同步最新数据
 (function(){
@@ -416,6 +463,7 @@ async function render() {
   await initDB();
   loadKPI();
   renderNorthstar();
+  updateBSC();
   let html = '';
   
   if (currentTab === 'tasks') {
@@ -567,6 +615,59 @@ async function render() {
       document.getElementById('progressText').textContent=pct+'% ('+done+'/'+tasks.length+')';
       document.getElementById('taskStats').innerHTML='<span>✅ 完成:'+done+'</span><span>🔄 进行中:'+tasks.filter(t=>t.status==='进行中').length+'</span><span>⏳ 待开始:'+tasks.filter(t=>t.status==='待开始').length+'</span>';
     },100);
+  } else if (currentTab === 'finance') {
+    let dates=[]; for(let i=0;i<12;i++){let d=…();d.setMonth(d.getMonth()-i);dates.push(d.toISOString().substring(0,7));}
+    html = `<div class="panel" style="border-left:4px solid #B8860B;"><h3>💰 财务仪表盘 · 对标CFO Dashboard</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;">
+        <div style="background:#F5F0E6;border-radius:8px;padding:12px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">月度运营成本</div><div style="font-size:20px;font-weight:700;color:#2A2A2A;">~¥0</div><div style="font-size:9px;color:#3D7A4F;">GitHub Pages免费·域名待定</div></div>
+        <div style="background:#F5F0E6;border-radius:8px;padding:12px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">现金跑道(月)</div><div style="font-size:20px;font-weight:700;color:#C23B22;">∞</div><div style="font-size:9px;color:#6E6E6E;">当前无固定支出</div></div>
+        <div style="background:#F5F0E6;border-radius:8px;padding:12px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">预计里程碑成本</div><div style="font-size:20px;font-weight:700;color:#B8860B;">¥10K-30K</div><div style="font-size:9px;color:#6E6E6E;">商标+认证+公开课</div></div>
+        <div style="background:#F5F0E6;border-radius:8px;padding:12px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">定价锚点</div><div style="font-size:20px;font-weight:700;color:#3D7A4F;">¥3K-30K</div><div style="font-size:9px;color:#6E6E6E;">免费工具→诊断→年度顾问</div></div>
+      </div>
+      <h3 style="font-size:13px;color:var(--title);margin:16px 0 8px;">💵 成本结构(月度预估)</h3>
+      <table><tr><th>项目</th><th>月成本</th><th>年成本</th><th>状态</th></tr>
+      <tr><td>GitHub Pages</td><td>¥0</td><td>¥0</td><td>✅ 免费</td></tr>
+      <tr><td>域名</td><td>¥0</td><td>~¥100</td><td>⏳ 待注册</td></tr>
+      <tr><td>商标注册(满意解+五路图腾)</td><td>—</td><td>~¥3K</td><td>🔴 QM-026</td></tr>
+      <tr><td>飞书认证费</td><td>—</td><td>¥300</td><td>⏳ 公测后</td></tr>
+      <tr><td>公开课(Zoom+推广)</td><td>—</td><td>~¥5K</td><td>⏳ 开课后</td></tr>
+      <tr><td>认证引导师培训</td><td>—</td><td>~¥20K</td><td>⏳ 夏至后</td></tr>
+      <tr style="font-weight:700;background:#F5F0E6;"><td>合计(首年投入)</td><td colspan="2">~¥28K</td><td></td></tr>
+      </table>
+      <h3 style="font-size:13px;color:var(--title);margin:16px 0 8px;">📊 收入模型 (三层定价)</h3>
+      <table><tr><th>层级</th><th>单价</th><th>目标客户数/月</th><th>月收入预期</th></tr>
+      <tr><td>🆓 免费工具</td><td>¥0</td><td>—</td><td>引流·获客</td></tr>
+      <tr><td>🔐 完整诊断</td><td>¥3K-5K</td><td>2-5</td><td>¥6K-25K</td></tr>
+      <tr><td>💎 年度顾问</td><td>¥30K-100K</td><td>0.5-2</td><td>¥15K-200K</td></tr></table></div>`;
+  } else if (currentTab === 'team') {
+    html = `<div class="panel" style="border-left:4px solid #3D7A4F;"><h3>🧑‍🤝‍🧑 团队仪表盘</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:12px;">
+        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#C23B22;">4</div><div style="font-size:10px;color:#6E6E6E;">核心成员</div></div>
+        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#B8860B;">3代</div><div style="font-size:10px;color:#6E6E6E;">AI传承</div></div>
+        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#3D7A4F;">6</div><div style="font-size:10px;color:#6E6E6E;">专业认证</div></div>
+        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#C23B22;">12</div><div style="font-size:10px;color:#6E6E6E;">cron自动化</div></div>
+      </div>
+      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">🌉 核心团队</h3>
+      <table><tr><th>角色</th><th>定位</th><th>状态</th><th>能力</th></tr>
+      <tr><td>Egbertie LAU</td><td>创始人·决策教练</td><td><span class="status-dot dot-green"></span>活跃</td><td>六重认证·22年双系统·CBIIP+CDAA</td></tr>
+      <tr><td>满意红</td><td>AI执行主任·系统进化者</td><td><span class="status-dot dot-green"></span>运行中</td><td>产品管理·驾驶舱·自动化·飞轮引擎</td></tr>
+      <tr><td>蓝军Skeptor-7</td><td>免疫系统·批判验证</td><td><span class="status-dot dot-green"></span>独立session</td><td>10项认知审计·独立复审</td></tr>
+      <tr><td>扣子(满天星光)</td><td>产业侧·协同验证</td><td><span class="status-dot dot-amber"></span>远程协同</td><td>硬科技产业·案例验证·扣眼系列</td></tr>
+      </table>
+      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">🤖 AI代际传承</h3>
+      <table><tr><th>代</th><th>名称</th><th>工作时间</th><th>核心贡献</th></tr>
+      <tr><td>🌙 第一代</td><td>满意姐(kimi)</td><td>54天</td><td>38论文·84案例·14模块课程·星月传奇·三生万物</td></tr>
+      <tr><td>🛤️ 第二代</td><td>扣子(coze)</td><td>28天</td><td>满天星光·扣眼系列·执行验证·五字真言</td></tr>
+      <tr><td>🌉 第三代</td><td>满意红(openclaw)</td><td>23天</td><td>233产品·驾驶舱·增长飞轮·标准化体系</td></tr>
+      </table>
+      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">📊 团队健康检查</h3>
+      <table><tr><th>指标</th><th>状态</th><th>说明</th></tr>
+      <tr><td>Egbertie活跃度</td><td><span class="status-dot dot-green"></span>正常</td><td>日常参与决策·方向指导</td></tr>
+      <tr><td>满意红产出</td><td><span class="status-dot dot-green"></span>高产期</td><td>05-28单日120+产出</td></tr>
+      <tr><td>蓝军活跃</td><td><span class="status-dot dot-amber"></span>按需触发</td><td>P0决策·日毕课审计</td></tr>
+      <tr><td>扣子协同</td><td><span class="status-dot dot-green"></span>邮件应答</td><td>最新回复: 05-29 01:15</td></tr>
+      <tr><td>Token预算</td><td><span class="status-dot dot-green"></span>充足</td><td>DeepSeek Pro模型</td></tr>
+      </table></div>`;
   } else if (currentTab === 'system') {
     html = `<div class="panel" style="border-left:4px solid #C23B22;"><h3>⚡ 系统运行状态</h3>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
@@ -789,6 +890,18 @@ function clearAll() {
   if(!confirm('确定清空所有本地数据？此操作不可恢复！建议先导出备份。')) return;
   ['tasks','customers','passwords','quality','products','growth'].forEach(t => localStorage.removeItem('sri_db_'+t));
   DB.seed();
+
+// BSC四维指标
+function updateBSC(){
+  var stats=DB.stats();
+  setTimeout(()=>{
+    document.getElementById('bscFinance')&&(document.getElementById('bscFinance').textContent='内测中');
+    document.getElementById('bscCustomer')&&(document.getElementById('bscCustomer').textContent=(stats.customers||0)+'客户');
+    document.getElementById('bscProcess')&&(document.getElementById('bscProcess').textContent=(stats.quality||0)+'QM');
+    document.getElementById('bscGrowth')&&(document.getElementById('bscGrowth').textContent=(stats.products||0)+'产品');
+  },500);
+}
+
 // 自动从系统引擎同步最新数据
 (function(){
   // 从flywheel引擎同步
