@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>团队关系温度计 · 满意解研究所</title>
+<style>
+  :root {
+    --primary: #C23B22;
+    --bg: #F5F0E6;
+    --text: #4A4A4A;
+    --heading: #2A2A2A;
+    --border: #D4CFC5;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  .header { text-align: center; margin-bottom: 40px; }
+  .header h1 { color: var(--heading); font-size: 1.8em; margin-bottom: 8px; }
+  .header p { color: var(--text); font-size: 0.95em; }
+  .disclaimer {
+    background: white; border-left: 3px solid var(--primary);
+    padding: 12px 16px; margin-bottom: 32px; font-size: 0.85em;
+    border-radius: 4px;
+  }
+  .question { margin-bottom: 32px; }
+  .question label { display: block; font-weight: 600; color: var(--heading); margin-bottom: 8px; font-size: 1.05em; }
+  .question .hint { font-size: 0.85em; color: #888; margin-bottom: 12px; }
+  .scale { display: flex; justify-content: space-between; gap: 8px; }
+  .scale input[type="radio"] { display: none; }
+  .scale label {
+    flex: 1; text-align: center; padding: 10px 4px;
+    border: 2px solid var(--border); border-radius: 6px;
+    cursor: pointer; font-size: 0.85em; transition: all 0.2s;
+    background: white;
+  }
+  .scale label:hover { border-color: var(--primary); }
+  .scale input[type="radio"]:checked + label {
+    background: var(--primary); color: white; border-color: var(--primary);
+    font-weight: 600;
+  }
+  .scale-labels { display: flex; justify-content: space-between; font-size: 0.7em; color: #999; margin-top: 6px; }
+  .scale-labels span:first-child { text-align: left; }
+  .scale-labels span:last-child { text-align: right; }
+
+  .btn {
+    display: block; width: 100%; padding: 16px;
+    background: var(--primary); color: white; border: none;
+    border-radius: 8px; font-size: 1.1em; font-weight: 600;
+    cursor: pointer; margin-top: 40px;
+  }
+  .btn:hover { opacity: 0.9; }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .result { display: none; margin-top: 40px; padding: 24px; background: white; border-radius: 8px; text-align: center; }
+  .result .score { font-size: 3em; font-weight: 700; color: var(--primary); }
+  .result .verdict { font-size: 1.3em; margin: 12px 0; }
+  .result .detail { font-size: 0.95em; color: #666; margin-bottom: 20px; }
+  .result.green .verdict { color: #2E7D32; }
+  .result.yellow .verdict { color: #E65100; }
+  .result.red .verdict { color: #C62828; }
+
+  .cta { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); text-align: center; }
+  .cta p { margin-bottom: 12px; }
+  .cta a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  .footer { text-align: center; margin-top: 40px; font-size: 0.8em; color: #999; }
+  .footer a { color: var(--primary); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>团队关系温度计</h1>
+  <p>30秒 · 4个问题 · 诚实回答</p>
+</div>
+
+<div class="disclaimer">
+  <strong>隐私声明</strong><br>
+  你的回答不会被直接分享给你的合伙人。我们只推送聚合的团队温度评分。唯一要求：诚实。
+</div>
+
+<form id="thermometer">
+  <div class="question">
+    <label>1. 最近两周，你有多信任你的合伙人正在为公司做出正确的决策？</label>
+    <div class="hint">1 = 完全不信任，10 = 完全信任</div>
+    <div class="scale" data-name="trust">
+      <input type="radio" id="t1" name="trust" value="1"><label for="t1">1</label>
+      <input type="radio" id="t2" name="trust" value="2"><label for="t2">2</label>
+      <input type="radio" id="t3" name="trust" value="3"><label for="t3">3</label>
+      <input type="radio" id="t4" name="trust" value="4"><label for="t4">4</label>
+      <input type="radio" id="t5" name="trust" value="5"><label for="t5">5</label>
+      <input type="radio" id="t6" name="trust" value="6"><label for="t6">6</label>
+      <input type="radio" id="t7" name="trust" value="7"><label for="t7">7</label>
+      <input type="radio" id="t8" name="trust" value="8"><label for="t8">8</label>
+      <input type="radio" id="t9" name="trust" value="9"><label for="t9">9</label>
+      <input type="radio" id="t10" name="trust" value="10"><label for="t10">10</label>
+    </div>
+    <div class="scale-labels"><span>完全不信任</span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span>完全信任</span></div>
+  </div>
+
+  <div class="question">
+    <label>2. 最近两周，你和合伙人之间的沟通质量如何？</label>
+    <div class="hint">1 = 几乎不说话/每次开口都在吵架，10 = 可以坦诚讨论任何事情</div>
+    <div class="scale" data-name="communication">
+      <input type="radio" id="c1" name="communication" value="1"><label for="c1">1</label>
+      <input type="radio" id="c2" name="communication" value="2"><label for="c2">2</label>
+      <input type="radio" id="c3" name="communication" value="3"><label for="c3">3</label>
+      <input type="radio" id="c4" name="communication" value="4"><label for="c4">4</label>
+      <input type="radio" id="c5" name="communication" value="5"><label for="c5">5</label>
+      <input type="radio" id="c6" name="communication" value="6"><label for="c6">6</label>
+      <input type="radio" id="c7" name="communication" value="7"><label for="c7">7</label>
+      <input type="radio" id="c8" name="communication" value="8"><label for="c8">8</label>
+      <input type="radio" id="c9" name="communication" value="9"><label for="c9">9</label>
+      <input type="radio" id="c10" name="communication" value="10"><label for="c10">10</label>
+    </div>
+    <div class="scale-labels"><span>几乎不说话/每次吵架</span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span>坦诚讨论任何事情</span></div>
+  </div>
+
+  <div class="question">
+    <label>3. 最近两周，关于公司最重要的那件事，你和合伙人想法一致吗？</label>
+    <div class="hint">1 = 想去完全不同的方向，10 = 高度一致</div>
+    <div class="scale" data-name="alignment">
+      <input type="radio" id="a1" name="alignment" value="1"><label for="a1">1</label>
+      <input type="radio" id="a2" name="alignment" value="2"><label for="a2">2</label>
+      <input type="radio" id="a3" name="alignment" value="3"><label for="a3">3</label>
+      <input type="radio" id="a4" name="alignment" value="4"><label for="a4">4</label>
+      <input type="radio" id="a5" name="alignment" value="5"><label for="a5">5</label>
+      <input type="radio" id="a6" name="alignment" value="6"><label for="a6">6</label>
+      <input type="radio" id="a7" name="alignment" value="7"><label for="a7">7</label>
+      <input type="radio" id="a8" name="alignment" value="8"><label for="a8">8</label>
+      <input type="radio" id="a9" name="alignment" value="9"><label for="a9">9</label>
+      <input type="radio" id="a10" name="alignment" value="10"><label for="a10">10</label>
+    </div>
+    <div class="scale-labels"><span>完全不同方向</span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span>高度一致</span></div>
+  </div>
+
+  <div class="question">
+    <label>4. 最近一个月，你是否曾经口头同意了一个你内心并不同意的决策？</label>
+    <div class="hint">1 = 从未，5 = 三次以上</div>
+    <div class="scale" data-name="falseagree">
+      <input type="radio" id="f1" name="falseagree" value="1"><label for="f1">1</label>
+      <input type="radio" id="f2" name="falseagree" value="2"><label for="f2">2</label>
+      <input type="radio" id="f3" name="falseagree" value="3"><label for="f3">3</label>
+      <input type="radio" id="f4" name="falseagree" value="4"><label for="f4">4</label>
+      <input type="radio" id="f5" name="falseagree" value="5"><label for="f5">5</label>
+    </div>
+    <div class="scale-labels"><span>从未</span><span></span><span></span><span></span><span>三次以上</span></div>
+  </div>
+
+  <button type="submit" class="btn" id="submitBtn" disabled>查看团队温度</button>
+</form>
+
+<div class="result" id="result">
+  <div class="score" id="scoreDisplay"></div>
+  <div class="verdict" id="verdictDisplay"></div>
+  <div class="detail" id="detailDisplay"></div>
+  <div class="cta" id="ctaDisplay"></div>
+</div>
+
+<div class="footer">
+  <a href="https://egbertie.github.io/satisficing-lab" target="_blank">满意解研究所</a> · 2026年夏至
+</div>
+
+<script>
+const form = document.getElementById('thermometer');
+const submitBtn = document.getElementById('submitBtn');
+const resultDiv = document.getElementById('result');
+
+// Enable submit when all 4 questions answered
+form.addEventListener('change', () => {
+  const trust = form.querySelector('input[name="trust"]:checked');
+  const comm = form.querySelector('input[name="communication"]:checked');
+  const align = form.querySelector('input[name="alignment"]:checked');
+  const falseagree = form.querySelector('input[name="falseagree"]:checked');
+  submitBtn.disabled = !(trust && comm && align && falseagree);
+});
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const trust = parseInt(form.querySelector('input[name="trust"]:checked').value);
+  const comm = parseInt(form.querySelector('input[name="communication"]:checked').value);
+  const align = parseInt(form.querySelector('input[name="alignment"]:checked').value);
+  const falseagree = parseInt(form.querySelector('input[name="falseagree"]:checked').value);
+  const total = trust + comm + align;
+  
+  let className, verdict, detail, cta;
+  if (total > 24 && falseagree < 3) {
+    className = 'green';
+    verdict = '🟢 正常';
+    detail = `你的团队关系温度评分是 ${total}/30。你们的沟通在健康范围内。保持定期检查——最好的合同是在还相爱的时候签的。`;
+    cta = '<p>想为自己的团队留一条基线？</p><a href="https://egbertie.github.io/satisficing-lab/assessment.html">做一个完整版五维自评 →</a>';
+  } else if (total >= 18 && falseagree < 4) {
+    className = 'yellow';
+    verdict = '🟡 注意';
+    detail = `你的团队关系温度评分是 ${total}/30。有些信号值得关注——但现在还来得及。建议在未来两周内安排一次无议程的对话。`;
+    cta = '<p>看到信号了——不确定怎么处理？</p><p>预约一个15分钟的免费诊断通话。<br>我们会帮你把模糊的感觉翻译成可操作的对策。</p><p><strong>微信/飞书联系 Egbertie LAU</strong></p>';
+  } else {
+    className = 'red';
+    verdict = '🔴 危机';
+    detail = `你的团队关系温度评分是 ${total}/30，且存在虚假同意信号。这不是一个需要等待的信号——这是一个需要主动处理的预警。`;
+    cta = '<p>这不意味着散伙。但这意味着你们需要一个安全的第三方来引导对话。</p><p><strong>现在就联系 Egbertie LAU</strong><br>第一通电话免费 · 绝对私密</p>';
+  }
+  
+  resultDiv.className = 'result ' + className;
+  document.getElementById('scoreDisplay').textContent = total + '/30';
+  document.getElementById('verdictDisplay').textContent = verdict;
+  document.getElementById('detailDisplay').textContent = detail;
+  document.getElementById('ctaDisplay').innerHTML = cta;
+  resultDiv.style.display = 'block';
+  resultDiv.scrollIntoView({ behavior: 'smooth' });
+  form.style.display = 'none';
+});
+</script>
+</body>
+</html>
