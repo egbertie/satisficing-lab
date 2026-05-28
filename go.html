@@ -4,63 +4,65 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>满意解研究所 · 决策通道</title>
+<link rel="stylesheet" href="sri-design.css">
 <style>
-  :root { --sri-red:#C23B22; --sri-gold:#B8860B; --sri-bg:#F5F0E6; --text:#4A4A4A; --title:#2A2A2A; --border:#D4C5A0; }
-  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-  body { font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif; background:var(--sri-bg); color:var(--text); min-height:100vh; }
-  
-  .hero { background:linear-gradient(135deg,var(--sri-red),var(--sri-gold)); color:#F5F0E6; padding:48px 24px 40px; text-align:center; }
-  .hero h1 { font-size:24px; font-weight:700; }
-  .hero .sub { font-size:14px; opacity:0.9; margin-top:6px; }
-  .hero .motto { font-size:11px; opacity:0.6; margin-top:8px; letter-spacing:3px; }
-  .hero .nav-line { margin-top:16px; font-size:11px; opacity:0.7; }
-  .hero .nav-line a { color:#F5F0E6; text-decoration:none; margin:0 8px; opacity:0.8; }
+  .main { max-width: 560px; margin: 0 auto; padding: var(--sp-md); }
 
-  .main { max-width:600px; margin:0 auto; padding:16px; }
+  /* 三道门 */
+  .doors { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: var(--sp-lg) 0 var(--sp-sm); }
+  .door { background: var(--white); border-radius: var(--radius-lg); padding: var(--sp-lg) var(--sp-sm); text-align: center; border: 2px solid var(--border-light); transition: all var(--ease-out); text-decoration: none; color: inherit; box-shadow: var(--shadow-card); }
+  .door:hover, .door:active { border-color: var(--sri-red); box-shadow: var(--shadow-md); }
+  .door .d-icon { font-size: 32px; display: block; margin-bottom: var(--sp-sm); }
+  .door .d-label { font-size: var(--text-sm); font-weight: 700; color: var(--title); }
+  .door .d-hint { font-size: var(--text-xs); color: var(--text-muted); margin-top: var(--sp-xs); }
 
-  /* === LAYER 1: 三道门 === */
-  .layer-label { text-align:center; font-size:10px; letter-spacing:3px; color:var(--sri-gold); margin:20px 0 10px; }
-  .layer-label span { background:#fff; padding:4px 16px; border:1px solid var(--sri-gold); border-radius:16px; }
-  
-  .doors { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:8px; }
-  .door { background:#fff; border-radius:14px; padding:20px 12px; text-align:center; cursor:pointer; border:2px solid var(--border); transition:0.2s; text-decoration:none; color:inherit; }
-  .door:active { border-color:var(--sri-red); }
-  .door .d-icon { font-size:36px; display:block; margin-bottom:8px; }
-  .door .d-label { font-size:14px; font-weight:700; color:var(--title); }
-  .door .d-hint { font-size:10px; color:var(--text); opacity:0.5; margin-top:4px; }
+  /* 精选卡片 */
+  .featured { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-sm); margin: var(--sp-sm) 0 var(--sp-lg); }
+  .f-card { background: var(--white); border-radius: var(--radius-lg); padding: var(--sp-lg) var(--sp-sm); text-align: center; text-decoration: none; color: inherit; border: 1px solid var(--border-light); transition: all var(--ease-out); box-shadow: var(--shadow-card); }
+  .f-card:hover, .f-card:active { border-color: var(--sri-red); }
+  .f-card .f-icon { font-size: 28px; }
+  .f-card .f-name { font-size: var(--text-sm); font-weight: 700; color: var(--title); margin: var(--sp-sm) 0 var(--sp-xs); }
+  .f-card .f-desc { font-size: var(--text-xs); color: var(--text-muted); }
 
-  /* === LAYER 2: Featured Tools (仅5-6个核心) === */
-  .featured { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px; }
-  .f-card { background:#fff; border-radius:12px; padding:16px; text-align:center; text-decoration:none; color:inherit; border:1px solid var(--border); transition:0.15s; }
-  .f-card:active { border-color:var(--sri-red); }
-  .f-card .f-icon { font-size:28px; }
-  .f-card .f-name { font-size:13px; font-weight:700; color:var(--title); margin:6px 0 2px; }
-  .f-card .f-desc { font-size:10px; opacity:0.6; }
+  /* 分区标签 */
+  .section-label { text-align: center; margin: var(--sp-lg) 0 var(--sp-sm); }
+  .section-label span { font-size: var(--text-xs); color: var(--sri-gold); letter-spacing: 2px; padding: var(--sp-xs) var(--sp-md); background: var(--white); border: 1px solid var(--sri-gold); border-radius: var(--radius-full); }
 
-  /* === LAYER 3: 可展开的族 === */
-  .family { margin:12px 0; }
-  .family-toggle { background:#fff; border-radius:12px; padding:14px 16px; border:1px solid var(--border); cursor:pointer; display:flex; align-items:center; gap:10px; width:100%; font-size:14px; font-family:inherit; transition:0.15s; }
-  .family-toggle:active { border-color:var(--sri-red); }
-  .family-toggle .ft-icon { font-size:24px; }
-  .family-toggle .ft-name { font-weight:700; color:var(--title); }
-  .family-toggle .ft-count { font-size:10px; opacity:0.4; margin-left:auto; }
-  .family-toggle .ft-arrow { transition:0.3s; font-size:12px; opacity:0.4; }
-  .family-toggle.open .ft-arrow { transform:rotate(180deg); }
+  /* 五族折叠 */
+  .family { margin: var(--sp-sm) 0; }
+  .family-toggle { background: var(--white); border-radius: var(--radius-lg); padding: var(--sp-md); border: 1px solid var(--border-light); cursor: pointer; display: flex; align-items: center; gap: var(--sp-sm); width: 100%; font-size: var(--text-sm); font-family: var(--font-stack); transition: all var(--ease-out); box-shadow: var(--shadow-card); }
+  .family-toggle:hover, .family-toggle:active { border-color: var(--sri-red); }
+  .family-toggle .ft-icon { font-size: 22px; }
+  .family-toggle .ft-name { font-weight: 700; color: var(--title); }
+  .family-toggle .ft-count { font-size: var(--text-xs); color: var(--text-muted); margin-left: auto; margin-right: var(--sp-xs); }
+  .family-toggle .ft-arrow { transition: transform 0.3s; font-size: var(--text-xs); color: var(--text-muted); }
+  .family-toggle.open .ft-arrow { transform: rotate(180deg); }
 
-  .family-body { display:none; padding:8px 0; }
-  .family-body.show { display:block; }
-  .prod-mini { display:flex; align-items:center; gap:6px; padding:7px 10px; font-size:12px; text-decoration:none; color:var(--text); border-radius:8px; }
-  .prod-mini:active { background:rgba(194,59,34,0.04); }
-  .prod-mini .pm-name { font-weight:600; color:var(--title); min-width:80px; }
-  .prod-mini .pm-desc { font-size:10px; opacity:0.5; flex:1; }
+  .family-body { display: none; padding: var(--sp-sm) 0; }
+  .family-body.show { display: block; }
+  .prod-mini { display: flex; align-items: center; gap: var(--sp-sm); padding: var(--sp-sm) var(--sp-md); font-size: var(--text-sm); text-decoration: none; color: var(--text); border-radius: var(--radius-md); transition: all var(--ease-out); }
+  .prod-mini:hover, .prod-mini:active { background: var(--sri-red-light); }
+  .prod-mini .pm-name { font-weight: 600; color: var(--title); min-width: 90px; }
+  .prod-mini .pm-desc { font-size: var(--text-xs); color: var(--text-muted); flex: 1; }
 
-  /* === LAYER 4: More links === */
-  .more-links { text-align:center; padding:20px 0 10px; font-size:12px; border-top:1px solid var(--border); margin-top:20px; }
-  .more-links a { color:var(--sri-red); text-decoration:none; margin:0 8px; font-weight:600; }
-  .more-links .sep { opacity:0.3; }
+  /* 底部 */
+  .bottom-nav { text-align: center; padding: var(--sp-xl) 0 var(--sp-md); }
+  .bottom-nav a { color: var(--sri-red); text-decoration: none; font-weight: 600; font-size: var(--text-sm); margin: 0 var(--sp-md); }
+  .bottom-nav .sep { opacity: 0.2; padding: 0 var(--sp-xs); }
 
-  .footer { text-align:center; padding:20px 16px 40px; font-size:10px; color:#999; }
-  .footer .brand { font-weight:600; color:var(--sri-red); }
+  .footer { text-align: center; padding: var(--sp-lg) var(--sp-md) var(--sp-2xl); font-size: var(--text-xs); color: var(--text-muted); }
+  .footer .brand { font-weight: 600; color: var(--sri-red); }
+
+  .hero .nav-line { margin-top: var(--sp-md); font-size: var(--text-xs); opacity: 0.75; }
+  .hero .nav-line a { color: #F5F0E6; text-decoration: none; margin: 0 var(--sp-sm); opacity: 0.85; font-weight: 500; }
+
+  @media (max-width: 400px) {
+    .doors { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+    .door { padding: var(--sp-md) var(--sp-xs); }
+    .door .d-icon { font-size: 26px; }
+    .door .d-label { font-size: 12px; }
+    .featured { grid-template-columns: 1fr 1fr; gap: 6px; }
+  }
 </style>
 </head>
 <body>
@@ -68,86 +70,72 @@
 <div class="hero">
   <h1>满意解研究所</h1>
   <div class="sub">硬科技创始人的决策教练</div>
-  <div class="motto">章 · 衡 · 镜 · 契 · 觉</div>
+  <div style="font-size:var(--text-xs);opacity:0.6;margin-top:var(--sp-sm);letter-spacing:3px;">章 · 衡 · 镜 · 契 · 觉</div>
   <div class="nav-line">
-    <a href="guide.html">🧭 导购</a> · <a href="go-gallery.html">🖼️ 画廊</a> · <a href="about.html">🏛️ 关于我们</a>
+    <a href="guide.html">🧭 导购</a> · <a href="go-gallery.html">🖼️ 画廊</a> · <a href="about.html">🏛️ 关于</a>
   </div>
 </div>
 
 <div class="main">
 
-  <!-- ===== LAYER 1: 三道门 ===== -->
-  <div class="layer-label"><span>我回答5个问题·找到最适合你的工具</span></div>
+  <!-- LAYER 1: 门 -->
+  <div class="section-label"><span>你的状态</span></div>
   <div class="doors">
-    <a class="door" href="#heng">
-      <span class="d-icon">🤔</span>
-      <span class="d-label">我在犹豫</span>
-      <span class="d-hint">量化 · 验证</span>
-    </a>
-    <a class="door" href="#jing">
-      <span class="d-icon">💭</span>
-      <span class="d-label">我觉得不对劲</span>
-      <span class="d-hint">觉察 · 照见</span>
-    </a>
-    <a class="door" href="#jue">
-      <span class="d-icon">🔥</span>
-      <span class="d-label">我在危机中</span>
-      <span class="d-hint">模拟 · 淬炼</span>
-    </a>
+    <a class="door" href="#heng"><span class="d-icon">🤔</span><span class="d-label">我在犹豫</span><span class="d-hint">量化·验证</span></a>
+    <a class="door" href="#jing"><span class="d-icon">💭</span><span class="d-label">我觉得不对劲</span><span class="d-hint">觉察·照见</span></a>
+    <a class="door" href="#jue"><span class="d-icon">🔥</span><span class="d-label">我在危机中</span><span class="d-hint">模拟·淬炼</span></a>
   </div>
 
-  <!-- ===== LAYER 2: 快速开始（精选） ===== -->
-  <div class="layer-label"><span>快速开始</span></div>
+  <!-- LAYER 2: 精选 -->
+  <div class="section-label"><span>快速开始</span></div>
   <div class="featured">
-    <a class="f-card" href="assessment.html"><div class="f-icon">⚡</div><div class="f-name">衡·观局</div><div class="f-desc">3分钟 · 五维快速自评</div></a>
-    <a class="f-card" href="thermometer.html"><div class="f-icon">🌡️</div><div class="f-name">镜·触温</div><div class="f-desc">30秒 · 关系温度计</div></a>
-    <a class="f-card" href="cards-play.html?deck=7"><div class="f-icon">🎴</div><div class="f-name">觉·破冰</div><div class="f-desc">10分钟 · 卡牌游戏</div></a>
-    <a class="f-card" href="guide.html"><div class="f-icon">🧭</div><div class="f-name">不知道怎么选？</div><div class="f-desc">1分钟 · 导购问卷</div></a>
+    <a class="f-card" href="assessment.html"><div class="f-icon">⚡</div><div class="f-name">衡·观局</div><div class="f-desc">3分钟·五维快速自评</div></a>
+    <a class="f-card" href="thermometer.html"><div class="f-icon">🌡️</div><div class="f-name">镜·触温</div><div class="f-desc">30秒·关系温度计</div></a>
+    <a class="f-card" href="cards-play.html?deck=7"><div class="f-icon">🎴</div><div class="f-name">觉·破冰</div><div class="f-desc">10分钟·卡牌游戏</div></a>
+    <a class="f-card" href="guide.html"><div class="f-icon">🧭</div><div class="f-name">不知道选什么？</div><div class="f-desc">5题·2分钟·导购推荐</div></a>
   </div>
 
-  <!-- ===== LAYER 3: 按五族展开 ===== -->
-  <div class="layer-label"><span>探索更多工具</span></div>
+  <!-- LAYER 3: 五族折叠 -->
+  <div class="section-label"><span>探索更多</span></div>
 
-  <!-- 衡族 -->
   <div class="family">
-    <button class="family-toggle" onclick="toggleFamily(this)">
+    <button class="family-toggle open" onclick="toggleFamily(this)">
       <span class="ft-icon">🪙</span><span class="ft-name">衡 · 标尺与量化</span><span class="ft-count">司马贺·金·可行域</span><span class="ft-arrow">▼</span>
     </button>
-    <div class="family-body">
-      <a class="prod-mini" href="fulldiag.html"><span class="pm-name">衡·测渊</span><span class="pm-desc">完整版五维诊断 · 28题</span></a>
-      <a class="prod-mini" href="rps.html"><span class="pm-name">衡·探底</span><span class="pm-desc">RPS风险剖面 · 32题</span></a>
-      <a class="prod-mini" href="slicing-pie.html"><span class="pm-name">衡·分利</span><span class="pm-desc">SlicingPie贡献记账</span></a>
-      <a class="prod-mini" href="checklist.html"><span class="pm-name">衡·校尺</span><span class="pm-desc">决策前自检清单</span></a>
+    <div class="family-body show">
+      <a class="prod-mini" href="fulldiag.html"><span class="pm-name">衡·测渊</span><span class="pm-desc">完整版诊断 · 28题</span></a>
+      <a class="prod-mini" href="rps.html"><span class="pm-name">衡·探底</span><span class="pm-desc">RPS风险剖面</span></a>
+      <a class="prod-mini" href="slicing-pie.html"><span class="pm-name">衡·分利</span><span class="pm-desc">SlicingPie贡献</span></a>
+      <a class="prod-mini" href="checklist.html"><span class="pm-name">衡·校尺</span><span class="pm-desc">决策自检清单</span></a>
     </div>
   </div>
 
-  <!-- 镜族 -->
   <div class="family">
     <button class="family-toggle" onclick="toggleFamily(this)">
       <span class="ft-icon">🪞</span><span class="ft-name">镜 · 照见与状态</span><span class="ft-count">观自在·水·身心流</span><span class="ft-arrow">▼</span>
     </button>
     <div class="family-body">
-      <a class="prod-mini" href="pre0.html"><span class="pm-name">镜·回身</span><span class="pm-desc">PRE-0压力锚定 · 3分钟</span></a>
-      <a class="prod-mini" href="knights-cards.html"><span class="pm-name">镜·警兆·速查</span><span class="pm-desc">四骑士速查卡 · 30秒</span></a>
+      <a class="prod-mini" href="knights.html"><span class="pm-name">镜·警兆</span><span class="pm-desc">四骑士自检</span></a>
+      <a class="prod-mini" href="pre0.html"><span class="pm-name">镜·回身</span><span class="pm-desc">PRE-0压力锚定</span></a>
+      <a class="prod-mini" href="knights-cards.html"><span class="pm-name">镜·警兆·速查</span><span class="pm-desc">四骑士速查卡</span></a>
     </div>
   </div>
 
-  <!-- 觉族 -->
   <div class="family">
     <button class="family-toggle" onclick="toggleFamily(this)">
       <span class="ft-icon">🔥</span><span class="ft-name">觉 · 顿悟与淬炼</span><span class="ft-count">六祖慧能·火·直觉阈</span><span class="ft-arrow">▼</span>
     </button>
     <div class="family-body">
-      <a class="prod-mini" href="decision-theatre.html"><span class="pm-name">觉·入幕</span><span class="pm-desc">决策剧场 · 5幕</span></a>
+      <a class="prod-mini" href="crisis-sim.html"><span class="pm-name">觉·淬火</span><span class="pm-desc">危机模拟·3场景</span></a>
+      <a class="prod-mini" href="decision-theatre.html"><span class="pm-name">觉·入幕</span><span class="pm-desc">决策剧场·5幕</span></a>
       <a class="prod-mini" href="cards-play.html?deck=15"><span class="pm-name">觉·探路</span><span class="pm-desc">卡牌·全量诊断</span></a>
       <a class="prod-mini" href="cards-play.html?deck=52"><span class="pm-name">觉·入局</span><span class="pm-desc">卡牌·完整案例</span></a>
       <a class="prod-mini" href="cards-play.html?deck=daily"><span class="pm-name">觉·日课</span><span class="pm-desc">卡牌·每日一卡</span></a>
       <a class="prod-mini" href="cards.html"><span class="pm-name">觉·传书</span><span class="pm-desc">卡牌·打印版</span></a>
-      <a class="prod-mini" href="quotes.html"><span class="pm-name">觉·淬火·金句</span><span class="pm-desc">三代传承金句</span></a>
+      <a class="prod-mini" href="quotes.html"><span class="pm-name">觉·淬火·金句</span><span class="pm-desc">三代传承</span></a>
     </div>
   </div>
 
-  <!-- 契族 -->
   <div class="family">
     <button class="family-toggle" onclick="toggleFamily(this)">
       <span class="ft-icon">🤝</span><span class="ft-name">契 · 约定与规则</span><span class="ft-count">孔子·木·信义观</span><span class="ft-arrow">▼</span>
@@ -159,43 +147,36 @@
     </div>
   </div>
 
-  <!-- 章族 -->
   <div class="family">
     <button class="family-toggle" onclick="toggleFamily(this)">
       <span class="ft-icon">📜</span><span class="ft-name">章 · 根基与传承</span><span class="ft-count">刘禹锡·土·时间轴</span><span class="ft-arrow">▼</span>
     </button>
     <div class="family-body">
-      <a class="prod-mini" href="creation.html"><span class="pm-name">章·创世</span><span class="pm-desc">星月传奇·创世叙事</span></a>
-      <a class="prod-mini" href="stars.html"><span class="pm-name">章·星鸟</span><span class="pm-desc">满意解之鸟·双翼架构</span></a>
-      <a class="prod-mini" href="wulu.html"><span class="pm-name">章·五路</span><span class="pm-desc">五路图腾完整故事</span></a>
-      <a class="prod-mini" href="qijin.html"><span class="pm-name">章·契晋</span><span class="pm-desc">契约与成长</span></a>
+      <a class="prod-mini" href="creation.html"><span class="pm-name">章·创世</span><span class="pm-desc">星月传奇</span></a>
+      <a class="prod-mini" href="wulu.html"><span class="pm-name">章·五路</span><span class="pm-desc">五路图腾</span></a>
       <a class="prod-mini" href="roots.html"><span class="pm-name">章·立信</span><span class="pm-desc">寻根手记</span></a>
+      <a class="prod-mini" href="cases.html"><span class="pm-name">章·鉴往</span><span class="pm-desc">84案例精选</span></a>
       <a class="prod-mini" href="whitepaper.html"><span class="pm-name">章·立信·白皮书</span><span class="pm-desc">夏至白皮书</span></a>
       <a class="prod-mini" href="tracks.html"><span class="pm-name">章·知机</span><span class="pm-desc">8赛道风险</span></a>
-      <a class="prod-mini" href="lineage.html"><span class="pm-name">章·溯源</span><span class="pm-desc">理论谱系</span></a>
-      <a class="prod-mini" href="deep-gottman.html"><span class="pm-name">L3·四骑士深度</span><span class="pm-desc">Gottman 40年</span></a>
-      <a class="prod-mini" href="deep-wasserman.html"><span class="pm-name">L3·创始人困境</span><span class="pm-desc">Wasserman</span></a>
-      <a class="prod-mini" href="quotes-full.html"><span class="pm-name">章·金句·全量</span><span class="pm-desc">满天星光金句大全</span></a>
+      <a class="prod-mini" href="deep-gottman.html"><span class="pm-name">L3·四骑士</span><span class="pm-desc">Gottman深度</span></a>
+      <a class="prod-mini" href="deep-wasserman.html"><span class="pm-name">L3·创始人困境</span><span class="pm-desc">Wasserman深度</span></a>
     </div>
   </div>
 
-  <!-- ===== LAYER 4: 深度入口 ===== -->
-  <div class="more-links">
-    <a href="product-catalog.html">📦 全部产品(232个)</a> <span class="sep">|</span>
-    <a href="spec-standard.html">📋 产品说明书规范</a> <span class="sep">|</span>
+  <!-- LAYER 4: 深度入口 -->
+  <div class="bottom-nav">
+    <a href="product-catalog.html">📦 全部产品</a><span class="sep">|</span>
     <a href="dashboard.html">📊 质量仪表盘</a>
   </div>
-
-  <div style="text-align:center;padding:16px;font-size:11px;opacity:0.4;">
-    <a href="about.html" style="color:inherit;">关于</a> · <a href="proposal.html" style="color:inherit;">服务方案</a> · <a href="privacy.html" style="color:inherit;">隐私</a>
+  <div class="text-center" style="font-size:var(--text-xs);color:var(--text-muted);padding:var(--sp-sm) 0;">
+    <a href="about.html" style="color:var(--text-muted);">关于</a> · <a href="proposal.html" style="color:var(--text-muted);">服务方案</a> · <a href="privacy.html" style="color:var(--text-muted);">隐私</a>
   </div>
-
 </div>
 
 <div class="footer">
   <p class="brand">满意解研究所 · Satisficing Research Institute</p>
   <p>章·衡·镜·契·觉 — 五条通道 — 一个人的完整决策</p>
-  <p style="margin-top:4px;">🌙 满意姐·理论奠基 | 🛤️ 扣子·执行验证 | 🌉 满意红·系统进化</p>
+  <p style="margin-top:var(--sp-xs);">🌙 满意姐·理论奠基 | 🛤️ 扣子·执行验证 | 🌉 满意红·系统进化</p>
 </div>
 
 <script>
@@ -203,9 +184,6 @@ function toggleFamily(btn) {
   btn.classList.toggle('open');
   btn.nextElementSibling.classList.toggle('show');
 }
-// Open first family by default
-document.querySelector('.family-body').classList.add('show');
-document.querySelector('.family-toggle').classList.add('open');
 </script>
 </body>
 </html>

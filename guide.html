@@ -4,15 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>产品导购 · 满意解研究所</title>
-<style>:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
-.hero{background:linear-gradient(135deg,var(--sri-red),var(--sri-gold));color:#F5F0E6;padding:32px 20px 24px;text-align:center}
-.hero h1{font-size:20px;font-weight:700}.hero p{font-size:12px;opacity:.8}
+<link rel="stylesheet" href="sri-design.css">
+<style>
+.hero h1{font-size:20px}.hero p{font-size:12px}
 .main{max-width:520px;margin:0 auto;padding:16px}
 
 .quiz-intro{background:#fff;border-radius:14px;padding:20px;margin-bottom:12px;text-align:center;border:1px solid var(--border)}
-.quiz-intro h3{font-size:15px;color:var(--title-color);margin-bottom:6px}
+.quiz-intro h3{font-size:15px;color:var(--title);margin-bottom:6px}
 .quiz-intro .stats{display:flex;gap:12px;justify-content:center;margin:10px 0;font-size:11px}
 .quiz-intro .stat-item{text-align:center;padding:6px 14px;background:var(--sri-bg);border-radius:8px}
 .quiz-intro .stat-item .sv{font-size:18px;font-weight:700;color:var(--sri-red)}
@@ -27,13 +25,13 @@ body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;backgroun
 .q-card{background:#fff;border-radius:14px;padding:24px;margin-bottom:12px;display:none;border:2px solid var(--sri-red)}
 .q-card.active{display:block;animation:fadeIn .3s}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.q-card h2{font-size:16px;color:var(--title-color);margin-bottom:6px}
+.q-card h2{font-size:16px;color:var(--title);margin-bottom:6px}
 .q-card .q-hint{font-size:11px;opacity:0.5;margin-bottom:12px}
 
 .options{display:flex;flex-direction:column;gap:8px}
 .opt-btn{padding:14px 16px;border:1.5px solid var(--border);border-radius:12px;background:#fff;font-size:14px;text-align:left;cursor:pointer;transition:0.15s}
 .opt-btn:hover,.opt-btn.chosen{border-color:var(--sri-red);background:rgba(194,59,34,0.04)}
-.opt-btn .opt-lead{font-weight:700;color:var(--title-color);font-size:15px}
+.opt-btn .opt-lead{font-weight:700;color:var(--title);font-size:15px}
 
 /* Result page with checkboxes */
 .result-page{display:none}
@@ -46,13 +44,13 @@ body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;backgroun
 .pkg-recommend{background:var(--sri-red);color:#fff}
 .pkg-optional{background:rgba(184,134,11,0.12);color:var(--sri-gold)}
 .pkg-add{background:rgba(74,140,92,0.12);color:#4A8C5C}
-.package .pkg-name{font-size:15px;font-weight:700;color:var(--title-color)}
+.package .pkg-name{font-size:15px;font-weight:700;color:var(--title)}
 .package .pkg-desc{font-size:11px;opacity:0.5;margin:2px 0 6px}
 
 .product-check{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #f0e8d8;font-size:12px}
 .product-check:last-child{border-bottom:none}
 .product-check input[type=checkbox]{width:18px;height:18px;accent-color:var(--sri-red)}
-.product-check .pc-name{font-weight:600;color:var(--title-color)}
+.product-check .pc-name{font-weight:600;color:var(--title)}
 .product-check .pc-desc{font-size:10px;opacity:.5;margin-left:auto;text-align:right}
 .product-check .pc-link{font-size:10px;color:var(--sri-red);text-decoration:none;margin-left:6px}
 
@@ -61,7 +59,7 @@ body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;backgroun
 .add-section h4{font-size:13px;color:#4A8C5C;margin-bottom:8px}
 
 .summary-bar{background:#fff;border-radius:14px;padding:16px;margin-top:12px;text-align:center;border:1px solid var(--border);position:sticky;bottom:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.06)}
-.summary-bar .count{font-size:14px;font-weight:700;color:var(--title-color)}
+.summary-bar .count{font-size:14px;font-weight:700;color:var(--title)}
 
 .btn{display:inline-block;padding:10px 22px;border-radius:16px;font-size:13px;font-weight:600;cursor:pointer;border:none;text-decoration:none;margin:4px}
 .btn-primary{background:var(--sri-red);color:#F5F0E6;font-size:14px;padding:12px 28px}
@@ -140,7 +138,7 @@ body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;backgroun
   <!-- Result Page -->
   <div class="result-page" id="result">
     <div style="text-align:center;margin-bottom:12px;">
-      <h2 style="color:var(--title-color);margin-bottom:4px;">🎯 你的推荐方案</h2>
+      <h2 style="color:var(--title);margin-bottom:4px;">🎯 你的推荐方案</h2>
       <p style="font-size:11px;opacity:0.5;">勾选你想要的·去掉不要的·可增减</p>
     </div>
     
