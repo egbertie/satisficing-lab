@@ -4,171 +4,326 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>驾驶舱 · 满意解研究所</title>
-<link rel="stylesheet" href="sri-design.css">
 <style>
-  .main{max-width:640px;margin:0 auto;padding:var(--sp-md)}
-  .hero{background:var(--title);color:#F5F0E6;padding:var(--sp-2xl) var(--sp-lg);text-align:center}
-  .hero h1{font-size:20px;color:#F5F0E6}.hero p{font-size:12px;opacity:0.7}
-  
-  .kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:6px;margin:var(--sp-md) 0}
-  .kpi{background:#fff;border-radius:var(--radius-lg);padding:12px;text-align:center;border:1px solid var(--border-light)}
-  .kpi .v{font-size:22px;font-weight:800;color:var(--sri-red)}.kpi .l{font-size:9px;color:var(--text-muted)}
+:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title:#2A2A2A}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
+.hero{background:linear-gradient(160deg,var(--sri-red),var(--sri-gold));color:#F5F0E6;padding:24px 20px;text-align:center}
+.hero h1{font-size:20px;color:#F5F0E6}.hero p{font-size:12px;opacity:0.7}
+.main{max-width:720px;margin:0 auto;padding:16px}
 
-  .module{margin:var(--sp-md) 0;background:#fff;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border-light)}
-  .module-header{background:var(--sri-red-light);padding:10px 16px;display:flex;align-items:center;gap:8px}
-  .module-header .m-num{font-size:18px;font-weight:800;color:var(--sri-red);min-width:28px}
-  .module-header .m-name{font-size:14px;font-weight:700;color:var(--title)}
-  .module-header .m-meta{font-size:11px;color:var(--text-muted);margin-left:auto}
-  .module-body{padding:8px 16px}
-  
-  .item{display:flex;align-items:center;gap:8px;padding:7px 0;font-size:12px;border-bottom:1px solid var(--border-light)}
-  .item:last-child{border-bottom:none}
-  .item .i-status{font-size:14px;min-width:22px;text-align:center}
-  .item .i-name{font-weight:600;color:var(--title);min-width:90px}
-  .item .i-desc{color:var(--text-muted);flex:1;font-size:11px}
-  .item .i-data{font-size:10px;color:var(--sri-gold);min-width:60px;text-align:right}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:6px;margin-bottom:16px}
+.kpi-card{background:#fff;border-radius:12px;padding:12px;text-align:center;border:1px solid #D4C5A0;cursor:pointer;transition:0.15s}
+.kpi-card:hover{border-color:var(--sri-red)}
+.kpi-card .v{font-size:22px;font-weight:800;color:var(--sri-red)}.kpi-card .l{font-size:10px;opacity:0.5}
 
-  .legend{text-align:center;padding:var(--sp-md);font-size:10px;color:var(--text-muted)}
-  .legend span{margin:0 10px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+.tab-btn{padding:8px 16px;border-radius:20px;border:1px solid #D4C5A0;background:#fff;cursor:pointer;font-size:12px;font-weight:600}
+.tab-btn.active{background:var(--sri-red);color:#fff;border-color:var(--sri-red)}
+
+.panel{background:#fff;border-radius:14px;padding:16px;margin:8px 0;border:1px solid #D4C5A0}
+.panel h3{font-size:14px;color:var(--title);margin-bottom:8px}
+table{width:100%;border-collapse:collapse;font-size:11px}
+th{background:var(--sri-red);color:#fff;padding:6px 4px;text-align:left;font-size:10px}
+td{padding:6px 4px;border-bottom:1px solid #f0e8d8}
+
+.form-row{display:flex;gap:8px;margin:6px 0;flex-wrap:wrap}
+.form-row input,.form-row select{flex:1;padding:8px 10px;border:1.5px solid #D4C5A0;border-radius:8px;font-size:12px;min-width:100px}
+.btn{padding:8px 18px;border-radius:16px;border:none;cursor:pointer;font-size:12px;font-weight:600;background:var(--sri-red);color:#fff}
+.btn-sm{padding:4px 12px;font-size:10px}
+.status-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:4px}
+.dot-green{background:#3D7A4F}.dot-amber{background:var(--sri-gold)}.dot-red{background:var(--sri-red)}
+.empty{text-align:center;padding:40px;color:var(--text);opacity:0.4;font-size:13px}
 </style>
 </head>
 <body>
 <div class="hero">
   <h1>📊 驾驶舱</h1>
-  <p>飞书 29表 → 精简至 13个核心表</p>
+  <p>本地数据 · localStorage · 无需服务器 · 随时可用</p>
 </div>
 <div class="main">
 
-  
-  <div style="text-align:center;padding:var(--sp-md);background:var(--sri-red-light);border-radius:var(--radius-lg);margin-bottom:var(--sp-md);">
-    <a href="admin.html" style="display:inline-block;padding:14px 36px;background:var(--sri-red);color:#fff;border-radius:var(--radius-full);font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 2px 8px rgba(194,59,34,0.2);">🔐 生成密码</a>
-    <p style="font-size:11px;color:var(--text);margin-top:6px;opacity:0.7;">选产品→设有效期→生成8位密码→复制给客户</p>
+  <div class="kpi" id="kpiBar">
+    <div class="kpi-card"><div class="v" id="kv_tasks">0</div><div class="l">任务</div></div>
+    <div class="kpi-card"><div class="v" id="kv_customers">0</div><div class="l">客户</div></div>
+    <div class="kpi-card"><div class="v" id="kv_passwords">0</div><div class="l">密码</div></div>
+    <div class="kpi-card"><div class="v" id="kv_quality">0</div><div class="l">质量标准</div></div>
+    <div class="kpi-card"><div class="v" id="kv_products">0</div><div class="l">产品</div></div>
+    <div class="kpi-card"><div class="v" id="kv_usage">0</div><div class="l">今日使用</div></div>
+    <div class="kpi-card"><div class="v" id="kv_flywheel">0</div><div class="l">飞轮循环</div></div>
+    <div class="kpi-card" onclick="exportAll()" style="cursor:pointer"><div class="v">💾</div><div class="l">导出数据</div></div>
   </div>
 
-<div class="kpi-row">
-    <div class="kpi"><div class="v" id="kProducts">233</div><div class="l">线上产品</div></div>
-    <div class="kpi"><div class="v">96%</div><div class="l">质量通过率</div></div>
-    <div class="kpi"><div class="v" id="kUsage">0</div><div class="l">使用记录</div></div>
-    <div class="kpi"><div class="v" id="kCycle">0</div><div class="l">飞轮循环</div></div>
-    <div class="kpi"><div class="v" id="kKF">—</div><div class="l">K-factor</div></div>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('tasks')">📋 任务</button>
+    <button class="tab-btn" onclick="switchTab('customers')">👤 客户</button>
+    <button class="tab-btn" onclick="switchTab('passwords')">🔐 密码</button>
+    <button class="tab-btn" onclick="switchTab('quality')">✅ 质量</button>
+    <button class="tab-btn" onclick="switchTab('growth')">📈 增长</button>
+    <button class="tab-btn" onclick="switchTab('products')">📦 产品</button>
+    <button class="tab-btn" onclick="switchTab('import')">📥 导入</button>
   </div>
 
-  <!-- 1. 任务驾驶舱 -->
-  <div class="module">
-    <div class="module-header">
-      <span class="m-num">1</span><span class="m-name">任务驾驶舱</span><span class="m-meta">195条·10字段</span>
-    </div>
-    <div class="module-body">
-      <div class="item"><span class="i-status">🔴</span><span class="i-name">商标注册</span><span class="i-desc">QM-026 · Egbertie尽快申请</span><span class="i-data">P0·07-31</span></div>
-      <div class="item"><span class="i-status">🟡</span><span class="i-name">产品星级评定</span><span class="i-desc">233产品需标注 ⭐⭐⭐/⭐⭐/⭐</span><span class="i-data">P1·06-14</span></div>
-      <div class="item"><span class="i-status">🟡</span><span class="i-name">来源标注补齐</span><span class="i-desc">105个产品缺翻书来源</span><span class="i-data">P1·06-14</span></div>
-      <div class="item"><span class="i-status">🟡</span><span class="i-name">公开课开课</span><span class="i-desc">对标一堂直播体验课</span><span class="i-data">P1·待定</span></div>
-      <div class="item"><span class="i-status">🟡</span><span class="i-name">信效度验证</span><span class="i-desc">≥100样本后执行</span><span class="i-data">P1·07-31</span></div>
-    </div>
-  </div>
-
-  <!-- 2. 产品与质量 -->
-  <div class="module">
-    <div class="module-header">
-      <span class="m-num">2</span><span class="m-name">产品与质量</span><span class="m-meta">线上产品库217条 + 质量V2 30条</span>
-    </div>
-    <div class="module-body">
-      <div class="item"><span class="i-status">✅</span><span class="i-name">产品总数</span><span class="i-desc">233个·6种形态·章衡镜契觉</span><span class="i-data">全面上线</span></div>
-      <div class="item"><span class="i-status">✅</span><span class="i-name">四关审核</span><span class="i-desc">96%通过率·第一次全面审核完成</span><span class="i-data">05-28</span></div>
-      <div class="item"><span class="i-status">✅</span><span class="i-name">质量标准</span><span class="i-desc">QM-001~030·8运行/7待完/15未开始</span><span class="i-data">30条</span></div>
-      <div class="item"><span class="i-status">✅</span><span class="i-name">设计系统</span><span class="i-desc">V4·WCAG AA·对标Hermès+Apple</span><span class="i-data">sri-design.css</span></div>
-    </div>
-  </div>
-
-  <!-- 3. 客户与增长 -->
-  <div class="module">
-    <div class="module-header">
-      <span class="m-num">3</span><span class="m-name">客户与增长</span><span class="m-meta">客户档案库 26条 + 密码管理</span>
-    </div>
-    <div class="module-body">
-      <div class="item"><span class="i-status">✅</span><span class="i-name">三层服务</span><span class="i-desc">🟢公开·🟡门控·🔴邀约</span><span class="i-data">已分类</span></div>
-      <div class="item"><span class="i-status">✅</span><span class="i-name">转介绍</span><span class="i-desc">🌱→🥈→🥇→💎 四级阶梯</span><span class="i-data">account.html</span></div>
-      <div class="item"><span class="i-status">✅</span><span class="i-name">NPS引擎</span><span class="i-desc">使用3工具后自动触发</span><span class="i-data">运行中</span></div>
-      <div class="item"><span class="i-status">✅</span><span class="i-name">30天重测</span><span class="i-desc">7工具使用日志+首页横幅提醒</span><span class="i-data">运行中</span></div>
-      <div class="item"><span class="i-status">✅</span><span class="i-name">密码管理</span><span class="i-desc">测试期默认密码·飞书Base同步 <a href="admin.html" style="color:#C23B22;font-weight:600;">🔐 生成密码 →</a></span><span class="i-data">1条·cron</span></div>
-    </div>
-  </div>
-
-  <!-- 4. 知识资产 -->
-  <div class="module">
-    <div class="module-header">
-      <span class="m-num">4</span><span class="m-name">知识资产</span><span class="m-meta">148条·6字段 + 翻书4+学习16+连接6+Inbox 6</span>
-    </div>
-    <div class="module-body">
-      <div class="item"><span class="i-status">✅</span><span class="i-name">核心论文</span><span class="i-desc">38篇·满意姐学术地基</span><span class="i-data">SPM-014~038</span></div>
-      <div class="item"><span class="i-status">✅</span><span class="i-name">真实案例</span><span class="i-desc">84个·大疆/云鲸/比锐/海柔/固高·12精案上线</span><span class="i-data">案例库 80条</span></div>
-      <div class="item"><span class="i-status">✅</span><span class="i-name">翻书专著</span><span class="i-desc">24本·Wasserman/Gottman/Duke/Feld等</span><span class="i-data">4条</span></div>
-      <div class="item"><span class="i-status">✅</span><span class="i-name">Skill体系</span><span class="i-desc">35个线上产品·三生万物</span><span class="i-data">已上线</span></div>
-    </div>
-  </div>
-
-  <!-- 5. 内容资产 -->
-  <div class="module">
-    <div class="module-header">
-      <span class="m-num">5</span><span class="m-name">内容资产</span><span class="m-meta">17条·10字段</span>
-    </div>
-    <div class="module-body">
-      <div class="item"><span class="i-status">✅</span><span class="i-name">公开课</span><span class="i-desc">对标一堂直播体验课·90分钟·4部分</span><span class="i-data">workshop</span></div>
-      <div class="item"><span class="i-status">✅</span><span class="i-name">公众号推文</span><span class="i-desc">10篇·五路图腾A版+B版</span><span class="i-data">已上线</span></div>
-      <div class="item"><span class="i-status">✅</span><span class="i-name">传播弹药</span><span class="i-desc">小红书·知乎·播客·短视频·邮件·PPT</span><span class="i-data">6篇·已上线</span></div>
-      <div class="item"><span class="i-status">✅</span><span class="i-name">白皮书</span><span class="i-desc">夏至白皮书V1.0精编版</span><span class="i-data">已上线</span></div>
-      <div class="item"><span class="i-status">✅</span><span class="i-name">14模块课程</span><span class="i-desc">大纲完成·血液化14模块</span><span class="i-data">大纲</span></div>
-    </div>
-  </div>
-
-  <!-- 6. 测评与认证 -->
-  <div class="module">
-    <div class="module-header">
-      <span class="m-num">6</span><span class="m-name">测评与认证</span><span class="m-meta">五维测评 13条 + 认证体系</span>
-    </div>
-    <div class="module-body">
-      <div class="item"><span class="i-status">✅</span><span class="i-name">测评工具</span><span class="i-desc">观局·测渊·探底·触温·警兆·回身·淬火</span><span class="i-data">7个核心</span></div>
-      <div class="item"><span class="i-status">⏳</span><span class="i-name">重测信度</span><span class="i-desc">≥100样本后计算·目标≥0.7</span><span class="i-data">待数据</span></div>
-      <div class="item"><span class="i-status">✅</span><span class="i-name">认证体系</span><span class="i-desc">AG→PG→MG三级·对标ICF+Vistage</span><span class="i-data">certification</span></div>
-    </div>
-  </div>
-
-  <!-- 7. 品牌与内部 -->
-  <div class="module">
-    <div class="module-header">
-      <span class="m-num">7</span><span class="m-name">品牌与内部</span><span class="m-meta">VI品牌+数字替身+决策日志+团队健康</span>
-    </div>
-    <div class="module-body">
-      <div class="item"><span class="i-status">✅</span><span class="i-name">VI品牌体系</span><span class="i-desc">唯一主色#C23B22·资产库50个品牌素材</span><span class="i-data">已建立</span></div>
-      <div class="item"><span class="i-status">🔴</span><span class="i-name">商标注册</span><span class="i-desc">满意解研究所®·五路图腾™</span><span class="i-data">未申请</span></div>
-      <div class="item"><span class="i-status">✅</span><span class="i-name">数字替身</span><span class="i-desc">14角色已录入·33角色框架</span><span class="i-data">飞书</span></div>
-      <div class="item"><span class="i-status">✅</span><span class="i-name">决策日志</span><span class="i-desc">Notion Database·13条</span><span class="i-data">Notion</span></div>
-    </div>
-  </div>
-
-  <!-- 飞书整理方案 -->
-  <div class="module">
-    <div class="module-header">
-      <span class="m-num">🔧</span><span class="m-name">飞书驾驶舱整理方案 (29→13)</span>
-    </div>
-    <div class="module-body">
-      <div class="item"><span class="i-status">✅</span><span class="i-name">保留13个核心表</span><span class="i-desc">任务驾驶舱·产品库·质量V2·客户档案·密码·知识·内容·测评·北极星·案例·决策·VI·飞轮</span></div>
-      <div class="item"><span class="i-status">🔄</span><span class="i-name">合并7表</span><span class="i-desc">阶段里程碑+倒计时+联动追踪→任务驾驶舱 | 翻书+学习+连接+Inbox→知识资产库</span></div>
-      <div class="item"><span class="i-status">🗑️</span><span class="i-name">删除9表</span><span class="i-desc">简版(0条)·完整版(0条)·问卷(0条)·质量旧版·审核·测评回收·替身·健康·指令·链接</span></div>
-    </div>
-  </div>
-
-  <div class="legend">
-    <span>✅ 已完成</span><span>🟡 进行中</span><span>🔴 未开始</span><span>🗑️ 待清理</span>
-  </div>
-</div>
-<div style="text-align:center;padding:var(--sp-lg);font-size:10px;opacity:0.4;">
-  驾驶舱精简版 · 数据驱动 · 对标一堂五步法 · <a href="flywheel.html">资产飞轮 →</a>
+  <div id="content"></div>
 </div>
 
-<script src="flywheel-engine.js"></script>
 <script>
-(function(){let s=FlywheelEngine.refine();document.getElementById('kUsage').textContent=s.totalUsage||0;document.getElementById('kCycle').textContent=FlywheelEngine.getCycleCount();document.getElementById('kKF').textContent=s.kFactor||'—';})();
+// ===== localStorage 数据引擎 =====
+const DB = {
+  get(key) { try{return JSON.parse(localStorage.getItem('sri_db_'+key))||[]}catch{return[]} },
+  set(key,data) { localStorage.setItem('sri_db_'+key, JSON.stringify(data)) },
+  
+  tasks() { return this.get('tasks') },
+  addTask(t) { let d=this.tasks(); d.unshift({...t,id:Date.now(),created:new Date().toISOString()}); this.set('tasks',d.slice(0,500)) },
+  updateTask(id,status) { let d=this.tasks(); let item=d.find(x=>x.id===id); if(item){item.status=status;item.updated=new Date().toISOString();this.set('tasks',d)} },
+  
+  customers() { return this.get('customers') },
+  addCustomer(c) { let d=this.customers(); d.unshift({...c,id:Date.now(),created:new Date().toISOString()}); this.set('customers',d.slice(0,500)) },
+  
+  passwords() { return this.get('passwords') },
+  addPassword(p) { let d=this.passwords(); d.unshift({...p,id:Date.now(),created:new Date().toISOString()}); this.set('passwords',d.slice(0,200)) },
+  
+  quality() { return this.get('quality') },
+  addQuality(q) { let d=this.quality(); d.push({...q,id:Date.now()}); this.set('quality',d) },
+  
+  products() { return this.get('products') },
+  addProduct(p) { let d=this.products(); d.push({...p,id:Date.now()}); this.set('products',d.slice(0,500)) },
+  
+  growth() { return this.get('growth') },
+  usage() { let log=JSON.parse(localStorage.getItem('sri_usage_log')||'[]'); return log.filter(x=>new Date(x.time).toDateString()===new Date().toDateString()) },
+  flywheel() { return JSON.parse(localStorage.getItem('sri_flywheel_reports')||'[]') },
+  
+  stats() {
+    return {
+      tasks: this.tasks().length,
+      customers: this.customers().length,
+      passwords: this.passwords().length,
+      quality: this.quality().length,
+      products: this.products().length,
+      usage: this.usage().length,
+      flywheel: this.flywheel().length
+    }
+  },
+  
+  seed() {
+    if (this.passwords().length===0) this.addPassword({code:'***',products:'all',customer:'内测用户',max_uses:9999,used:0,status:'启用'});
+    if (this.quality().length===0) {
+      this.addQuality({qm_id:'QM-001',standard:'L0 提案审核',status:'待执行',assignee:'满意红',deadline:'2026-06-07',priority:'P0'});
+      this.addQuality({qm_id:'QM-002',standard:'L1 方法论审核',status:'55%通过率',assignee:'满意红(cron)',deadline:'2026-06-07',priority:'P0'});
+      this.addQuality({qm_id:'QM-003',standard:'L2 内容审核',status:'105个缺来源',assignee:'满意红',deadline:'2026-06-14',priority:'P1'});
+      this.addQuality({qm_id:'QM-009',standard:'四关通过率≥80%',status:'96%(已达标)',assignee:'满意红(cron)',deadline:'2026-07-01',priority:'P0'});
+      this.addQuality({qm_id:'QM-026',standard:'商标注册',status:'未申请',assignee:'Egbertie',deadline:'2026-07-31',priority:'P0'});
+    }
+    if (this.get('growth').length===0) {
+      this.set('growth',[
+        {metric:'线上产品总数',current:'233',target:'250',trend:'→'},
+        {metric:'四关通过率',current:'96%',target:'100%',trend:'↑'},
+        {metric:'NPS基线',current:'待收集',target:'≥50',trend:'—'},
+        {metric:'飞轮循环',current:this.flywheel().length,target:'50',trend:'—'},
+        {metric:'活跃客户(30d)',current:'0',target:'30',trend:'—'},
+      ]);
+    }
+  }
+};
+
+DB.seed();
+
+// ===== UI渲染 =====
+let currentTab = 'tasks';
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  render();
+}
+
+function render() {
+  loadKPI();
+  let html = '';
+  
+  if (currentTab === 'tasks') {
+    let data = DB.tasks();
+    html = `<div class="panel"><h3>📋 任务驾驶舱</h3>
+      <div class="form-row">
+        <input id="taskName" placeholder="任务名称">
+        <select id="taskPri"><option>P0</option><option selected>P1</option><option>P2</option><option>P3</option></select>
+        <input id="taskDeadline" type="date" style="max-width:130px">
+        <select id="taskAssignee"><option>Egbertie</option><option>满意红</option></select>
+        <button class="btn" onclick="addTask()">+</button>
+      </div>`;
+    if (data.length === 0) html += '<div class="empty">暂无任务·添一个吧</div>';
+    else {
+      html += '<table><tr><th>任务</th><th>优先级</th><th>状态</th><th>截止</th><th>负责</th><th>操作</th></tr>';
+      data.forEach(t => {
+        html += `<tr><td>${t.task||''}</td><td>${t.priority||''}</td><td><span class="status-dot ${t.status==='完成'?'dot-green':t.status==='进行中'?'dot-amber':'dot-red'}"></span>${t.status||'待开始'}</td><td>${t.deadline||''}</td><td>${t.assignee||''}</td><td>`;
+        if (t.status !== '完成') html += `<button class="btn btn-sm" onclick="updateTask(${t.id},'完成')">✓</button>`;
+        html += `<button class="btn btn-sm" style="background:#999" onclick="deleteItem('tasks',${t.id})">✕</button></td></tr>`;
+      });
+      html += '</table>';
+    }
+    html += '</div>';
+  } else if (currentTab === 'customers') {
+    let data = DB.customers();
+    html = `<div class="panel"><h3>👤 客户档案库</h3>
+      <div class="form-row">
+        <input id="custName" placeholder="姓名*"><input id="custCompany" placeholder="企业">
+        <input id="custEmail" placeholder="邮箱"><input id="custRole" placeholder="身份">
+        <button class="btn" onclick="addCustomer()">+</button>
+      </div>`;
+    if (data.length===0) html += '<div class="empty">暂无客户</div>';
+    else {
+      html += '<table><tr><th>姓名</th><th>企业</th><th>邮箱</th><th>身份</th><th>时间</th></tr>';
+      data.forEach(c => {
+        html += `<tr><td>${c.name||''}</td><td>${c.company||''}</td><td>${c.email||''}</td><td>${c.role||''}</td><td>${(c.created||'').substring(0,10)}</td></tr>`;
+      });
+      html += '</table>';
+    }
+    html += '</div>';
+  } else if (currentTab === 'passwords') {
+    let data = DB.passwords();
+    html = `<div class="panel"><h3>🔐 授权密码管理</h3>
+      <div class="form-row">
+        <input id="pwdCode" placeholder="8位密码" maxlength="8" type="password">
+        <input id="pwdCustomer" placeholder="绑定客户">
+        <select id="pwdProd"><option value="all">全部产品</option><option value="assessment">衡·观局</option><option value="thermometer">镜·触温</option><option value="knights">镜·警兆</option><option value="crisis-sim">觉·淬火</option></select>
+        <input id="pwdMaxUses" type="number" value="9999" style="max-width:70px" title="最大次数">
+        <button class="btn" onclick="addPassword()">生成</button>
+      </div>`;
+    if (data.length===0) html += '<div class="empty">暂无密码</div>';
+    else {
+      html += '<table><tr><th>密码</th><th>产品</th><th>客户</th><th>次数</th><th>状态</th><th>时间</th></tr>';
+      data.forEach(p => {
+        html += `<tr><td><b>${p.code||'***'}</b></td><td>${p.products||''}</td><td>${p.customer||''}</td><td>${p.used||0}/${p.max_uses||9999}</td><td>${p.status||''}</td><td>${(p.created||'').substring(0,10)}</td></tr>`;
+      });
+      html += '</table>';
+    }
+    html += '</div>';
+  } else if (currentTab === 'quality') {
+    let data = DB.quality();
+    html = `<div class="panel"><h3>✅ 质量仪表盘 · QM质量标准</h3>`;
+    if (data.length===0) html += '<div class="empty">暂无</div>';
+    else {
+      html += '<table><tr><th>编号</th><th>标准项</th><th>状态</th><th>负责</th><th>截止</th><th>优先级</th></tr>';
+      data.forEach(q => {
+        html += `<tr><td>${q.qm_id||''}</td><td>${q.standard||''}</td><td>${q.status||''}</td><td>${q.assignee||''}</td><td>${q.deadline||''}</td><td>${q.priority||''}</td></tr>`;
+      });
+      html += '</table>';
+    }
+    html += '</div>';
+  } else if (currentTab === 'growth') {
+    let data = DB.get('growth');
+    html = `<div class="panel"><h3>📈 增长飞轮</h3><table><tr><th>指标</th><th>当前值</th><th>目标值</th><th>趋势</th></tr>`;
+    data.forEach(g => {
+      html += `<tr><td>${g.metric||''}</td><td><b>${g.current||''}</b></td><td>${g.target||''}</td><td>${g.trend||'—'}</td></tr>`;
+    });
+    html += '</table></div>';
+  } else if (currentTab === 'products') {
+    let data = DB.products();
+    html = `<div class="panel"><h3>📦 产品库</h3>
+      <div class="form-row">
+        <input id="prodName" placeholder="产品名称"><input id="prodFamily" placeholder="五族(章衡镜契觉)">
+        <button class="btn" onclick="addProduct()">+</button>
+      </div>`;
+    if (data.length===0) html += '<div class="empty">暂无产品记录</div>';
+    else {
+      html += '<table><tr><th>名称</th><th>五族</th></tr>';
+      data.forEach(p => {
+        html += `<tr><td>${p.name||''}</td><td>${p.family||''}</td></tr>`;
+      });
+      html += '</table>';
+    }
+    html += '</div>';
+  } else if (currentTab === 'import') {
+    html = `<div class="panel"><h3>📥 导入旧数据</h3>
+      <p style="font-size:12px;opacity:0.6;margin-bottom:12px;">粘贴JSON数据来批量导入（可从旧飞书Base导出CSV后转换）</p>
+      <textarea id="importData" style="width:100%;height:120px;border:2px solid #D4C5A0;border-radius:8px;padding:8px;font-size:11px;" placeholder='{"tasks":[{"task":"示例任务","priority":"P1"}]}'></textarea>
+      <button class="btn" onclick="importJSON()">导入</button>
+      <button class="btn" style="background:var(--sri-gold)" onclick="exportAll()">💾 导出全部数据</button>
+      <button class="btn" style="background:#999" onclick="clearAll()">🗑️ 清空数据</button>
+      <p style="font-size:10px;opacity:0.4;margin-top:8px;">数据仅存在于本浏览器的localStorage中·清空不可恢复·建议定期导出备份</p>
+    </div>`;
+  }
+  
+  document.getElementById('content').innerHTML = html;
+}
+
+function loadKPI() {
+  let s = DB.stats();
+  document.getElementById('kv_tasks').textContent = s.tasks;
+  document.getElementById('kv_customers').textContent = s.customers;
+  document.getElementById('kv_passwords').textContent = s.passwords;
+  document.getElementById('kv_quality').textContent = s.quality;
+  document.getElementById('kv_products').textContent = s.products;
+  document.getElementById('kv_usage').textContent = s.usage;
+  document.getElementById('kv_flywheel').textContent = s.flywheel;
+}
+
+function addTask() {
+  let t = document.getElementById('taskName').value.trim();
+  if(!t) return;
+  DB.addTask({task:t, priority:document.getElementById('taskPri').value, deadline:document.getElementById('taskDeadline').value, assignee:document.getElementById('taskAssignee').value, status:'待开始'});
+  document.getElementById('taskName').value=''; render();
+}
+
+function updateTask(id,status) { DB.updateTask(id,status); render(); }
+
+function deleteItem(table,id) {
+  let d = DB.get(table);
+  d = d.filter(x=>x.id!==id);
+  DB.set(table, d);
+  render();
+}
+
+function addCustomer() {
+  let n=document.getElementById('custName').value.trim();
+  if(!n) return;
+  DB.addCustomer({name:n, company:document.getElementById('custCompany').value, email:document.getElementById('custEmail').value, role:document.getElementById('custRole').value});
+  document.getElementById('custName').value=''; render();
+}
+
+function addPassword() {
+  let c=document.getElementById('pwdCode').value.trim();
+  if(!c||c.length!==8) return alert('密码必须8位数字');
+  DB.addPassword({code:c, customer:document.getElementById('pwdCustomer').value, products:document.getElementById('pwdProd').value, max_uses:parseInt(document.getElementById('pwdMaxUses').value)||9999, used:0, status:'启用'});
+  document.getElementById('pwdCode').value=''; render();
+}
+
+function addProduct() {
+  let n=document.getElementById('prodName').value.trim();
+  if(!n) return;
+  DB.addProduct({name:n, family:document.getElementById('prodFamily').value});
+  document.getElementById('prodName').value=''; render();
+}
+
+function importJSON() {
+  try {
+    let d=JSON.parse(document.getElementById('importData').value);
+    for(let [table,items] of Object.entries(d)) {
+      let existing = DB.get(table);
+      items.forEach(item => { item.id = Date.now()+Math.random(); item.created = new Date().toISOString(); existing.unshift(item); });
+      DB.set(table, existing.slice(0,500));
+    }
+    render(); alert('导入成功！');
+  } catch(e) { alert('JSON格式错误: '+e.message); }
+}
+
+function exportAll() {
+  let data = {};
+  ['tasks','customers','passwords','quality','products','growth'].forEach(t => { data[t] = DB.get(t) });
+  let blob = new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  let a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = '驾驶舱备份_'+new Date().toISOString().substring(0,10)+'.json';
+  a.click();
+}
+
+function clearAll() {
+  if(!confirm('确定清空所有本地数据？此操作不可恢复！建议先导出备份。')) return;
+  ['tasks','customers','passwords','quality','products','growth'].forEach(t => localStorage.removeItem('sri_db_'+t));
+  DB.seed(); render();
+}
+
+render();
 </script>
 </body>
 </html>
