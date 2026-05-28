@@ -57,10 +57,13 @@ td{padding:6px 4px;border-bottom:1px solid #f0e8d8}
 </div></div>
 
 <script>
-// 如果这个浏览器之前验证过(同一设备)，跳过
-if(localStorage.getItem('sri_dashboard_auth')==='true'){
+// 验证哈希一致性——如果密码被其他设备变更了，这边的免登也会失效
+var currentHash=localStorage.getItem('sri_dash_hash')||'6460662e217c7a9f899208dd70a2c28abdea42f128666a9b78e6c0c064846493';
+var savedHash=localStorage.getItem('sri_dash_auth_hash');
+if(localStorage.getItem('sri_dashboard_auth')==='true' && savedHash===currentHash){
   document.getElementById('gateLayer').style.display='none';
 } else {
+  localStorage.removeItem('sri_dashboard_auth');
   document.getElementById('gd0').focus();
 }
 
@@ -83,6 +86,7 @@ async function gateVerify(){
   let valid='6460662e217c7a9f899208dd70a2c28abdea42f128666a9b78e6c0c064846493';
   if(h===valid){
     localStorage.setItem('sri_dashboard_auth','true');
+    localStorage.setItem('sri_dash_auth_hash',valid);
     document.getElementById('gateLayer').style.display='none';
   } else {
     document.getElementById('gateError').textContent='密码错误';
@@ -145,6 +149,7 @@ async function gateChange(){
   let nhash=Array.from(new Uint8Array(nh)).map(b=>b.toString(16).padStart(2,'0')).join('');
   localStorage.setItem('sri_dash_hash',nhash);
   localStorage.setItem('sri_dashboard_auth','true');
+    localStorage.setItem('sri_dash_auth_hash',valid);
   document.getElementById('gateLayer').style.display='none';
 }
 
