@@ -709,5 +709,12 @@ ${gameCards.length}张卡牌，${bad}张触发冲突预警。
 })();
 </script>
 
+
+<script>
+(function(){
+  var toolName = location.pathname.split('/').pop().replace('.html','');
+  localStorage.setItem('sri_last_use_'+toolName, Date.now().toString());
+})();
+</script>
 </body>
 </html>

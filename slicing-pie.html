@@ -230,5 +230,12 @@ function calculate() {
 })();
 </script>
 
+
+<script>
+(function(){
+  var toolName = location.pathname.split('/').pop().replace('.html','');
+  localStorage.setItem('sri_last_use_'+toolName, Date.now().toString());
+})();
+</script>
 </body>
 </html>

@@ -71,6 +71,22 @@
 </head>
 <body>
 
+
+<div style="text-align:center;margin:var(--sp-lg) 0;">
+  <div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--text-muted);">
+    <span style="background:#fff;border-radius:20px;padding:6px 14px;border:1px solid var(--border-light);">🧪 体验</span>
+    <span style="color:var(--sri-red);">→</span>
+    <span style="background:#fff;border-radius:20px;padding:6px 14px;border:1px solid var(--border-light);">📤 分享</span>
+    <span style="color:var(--sri-red);">→</span>
+    <span style="background:#fff;border-radius:20px;padding:6px 14px;border:1px solid var(--border-light);">👥 新朋友</span>
+    <span style="color:var(--sri-red);">→</span>
+    <span style="background:#fff;border-radius:20px;padding:6px 14px;border:1px solid var(--border-light);">🏆 解锁</span>
+    <span style="color:var(--sri-red);">→</span>
+    <span style="background:#fff;border-radius:20px;padding:6px 14px;border:2px solid var(--sri-red);font-weight:600;color:var(--sri-red);">🔁 再体验</span>
+  </div>
+  <p style="font-size:10px;color:var(--text-muted);margin-top:8px;">Growth Loop: 每一次使用都在帮你找到更多同行者</p>
+</div>
+
 <!-- ===== HOOK: 触发 ===== -->
 <div class="hero">
   <h1>满意解研究所</h1>
@@ -291,6 +307,60 @@
 <!-- 转介绍追踪 -->
 <script>
 (function(){let p=new URLSearchParams(window.location.search);let r=p.get('ref');if(r&&!localStorage.getItem('sri_referred_by')){localStorage.setItem('sri_referred_by',r)}})();
+</script>
+
+<script>
+// 30-day re-engagement engine
+(function(){
+  var TOOLS = ['assessment','thermometer','knights'];
+  TOOLS.forEach(function(tool){
+    var key = 'sri_last_use_' + tool;
+    var lastUse = localStorage.getItem(key);
+    if (lastUse){
+      var daysAgo = (Date.now() - parseInt(lastUse)) / (24*60*60*1000);
+      if (daysAgo >= 28 && daysAgo < 31){
+        // Show gentle reminder at top of page
+        var banner = document.createElement('div');
+        banner.style.cssText = 'background:#fff;border-bottom:2px solid #C23B22;padding:10px 16px;text-align:center;font-size:13px;color:#4D4D4D;';
+        banner.innerHTML = '⏰ 距离上次'+(tool==='assessment'?'五维自评':tool==='thermometer'?'温度计':'四骑士自检')+'已经'+Math.round(daysAgo)+'天了。<a href="'+tool+'.html" style="color:#C23B22;font-weight:600;">重新测一次 →</a>';
+        document.body.insertBefore(banner, document.body.firstChild);
+      }
+    }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var usageLog = JSON.parse(localStorage.getItem('sri_usage_log') || '[]');
+  var npsShown = localStorage.getItem('sri_nps_shown');
+  var toolCount = usageLog.length;
+  
+  if (toolCount >= 3 && !npsShown){
+    var nps = document.createElement('div');
+    nps.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid #C23B22;padding:16px;z-index:999;box-shadow:0 -4px 16px rgba(0,0,0,0.08);';
+    nps.innerHTML = '<div style="max-width:560px;margin:0 auto;text-align:center;">'+
+      '<p style="font-size:14px;font-weight:600;color:#2A2A2A;margin-bottom:6px;">你会推荐满意解给你的朋友吗？</p>'+
+      '<div style="display:flex;gap:8px;justify-content:center;margin:10px 0;">'+
+      Array.from({length:11}, (_,i) => '<button onclick="submitNPS('+i+')" style="width:32px;height:32px;border-radius:50%;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:11px;font-weight:600;">'+i+'</button>').join('')+
+      '</div>'+
+      '<p style="font-size:10px;color:#6E6E6E;">0=绝不推荐 · 10=一定推荐</p>'+
+      '</div>';
+    document.body.appendChild(nps);
+    
+    window.submitNPS = function(score){
+      localStorage.setItem('sri_nps_score', score.toString());
+      localStorage.setItem('sri_nps_shown', 'true');
+      nps.innerHTML = '<div style="max-width:560px;margin:0 auto;text-align:center;padding:12px;">'+
+        '<p style="font-size:14px;color:#3D7A4F;font-weight:600;">✅ 感谢！你的评分：'+score+'/10</p>'+
+        (score>=9?'<p style="font-size:13px;color:#4D4D4D;">很高兴能帮到你。<a href="account.html" style="color:#C23B22;font-weight:600;">邀请朋友 →</a></p>':
+         score>=7?'<p style="font-size:13px;color:#4D4D4D;">谢谢！我们会继续改进。</p>':
+         '<p style="font-size:13px;color:#4D4D4D;">抱歉没有达到你的期望。<a href="mailto:manyi_hong@sina.com" style="color:#C23B22;">告诉我们哪里可以改进 →</a></p>')+
+        '<button onclick="this.parentElement.parentElement.remove()" style="padding:4px 12px;margin-top:8px;background:transparent;border:1px solid #D4C5A0;border-radius:12px;cursor:pointer;font-size:11px;">关闭</button>'+
+        '</div>';
+    };
+  }
+})();
 </script>
 </body>
 </html>
