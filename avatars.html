@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数字替身驾驶舱 · 满意解研究所</title>
+<style>
+:root{--sri-red:#C23B22;--sri-cream:#F5F0E6;--sri-gold:#B8860B;--sri-dark:#4A4A4A;--title:#2A2A2A}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-cream);color:var(--sri-dark);min-height:100vh}
+.header{background:var(--title);color:var(--sri-cream);padding:24px 20px;text-align:center}
+.header h1{font-size:22px;color:var(--sri-cream);margin-bottom:4px}
+.header p{font-size:12px;opacity:0.6}
+
+.summary{max-width:1000px;margin:20px auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;padding:0 16px}
+.sum-card{background:#fff;border-radius:10px;padding:16px;text-align:center;border:1px solid #e0d5c8}
+.sum-card .num{font-size:28px;font-weight:700;color:var(--sri-red)}
+.sum-card .label{font-size:11px;color:var(--sri-dark);opacity:0.6;margin-top:4px}
+
+.container{max-width:1000px;margin:0 auto;padding:0 16px 40px}
+.section{margin:24px 0}
+.section h2{font-size:16px;color:var(--sri-red);margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #e0d5c8}
+.section h3{font-size:13px;color:var(--sri-gold);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+
+.avatar-card{background:#fff;border-radius:10px;padding:16px 18px;margin:8px 0;border:1px solid #e0d5c8;display:grid;grid-template-columns:1fr auto;gap:8px}
+.avatar-card:hover{border-color:var(--sri-red)}
+.avatar-card .name{font-size:15px;font-weight:600;color:var(--title)}
+.avatar-card .question{font-size:12px;color:var(--sri-dark);opacity:0.75;margin-top:2px;font-style:italic}
+.avatar-card .meta{font-size:11px;color:var(--sri-gold);margin-top:4px}
+.avatar-card .stats{text-align:right}
+.avatar-card .score{font-size:20px;font-weight:700;color:var(--sri-red)}
+.avatar-card .score-label{font-size:10px;color:var(--sri-dark);opacity:0.5}
+
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;margin:2px 3px 2px 0}
+.badge-green{background:rgba(34,197,94,0.1);color:#16a34a}
+.badge-yellow{background:rgba(184,134,11,0.1);color:var(--sri-gold)}
+.badge-red{background:rgba(194,59,34,0.08);color:var(--sri-red)}
+
+.contributions{font-size:11px;color:var(--sri-dark);opacity:0.7;margin-top:4px;grid-column:1/-1}
+.contributions li{margin:2px 0;padding-left:12px}
+
+.customer-card{background:#fff;border-radius:10px;padding:16px 18px;margin:8px 0;border:1px solid #e0d5c8;border-left:3px solid var(--sri-red)}
+.customer-card .cust-name{font-size:15px;font-weight:600;color:var(--title)}
+.customer-card .cust-question{font-size:12px;color:var(--sri-red);margin-top:4px;font-style:italic}
+.customer-card .cust-meta{font-size:11px;color:var(--sri-dark);opacity:0.65;margin-top:6px}
+
+.footer{text-align:center;padding:32px 16px;font-size:11px;color:var(--sri-dark);opacity:0.4}
+</style>
+</head>
+<body>
+
+<div class="header">
+<h1>🎭 数字替身驾驶舱</h1>
+<p>满意解研究所 · 23替身全量登记 · 独立管理 · 贡献追踪</p>
+</div>
+
+<div class="summary">
+<div class="sum-card"><div class="num">23</div><div class="label">总替身数</div></div>
+<div class="sum-card"><div class="num">145</div><div class="label">累计贡献值</div></div>
+<div class="sum-card"><div class="num">5</div><div class="label">激活层级</div></div>
+<div class="sum-card"><div class="num">2</div><div class="label">今日激活轮次</div></div>
+<div class="sum-card"><div class="num">04:30</div><div class="label">最后更新</div></div>
+</div>
+
+<div class="container">
+
+<!-- ===== L0: 五路图腾 ===== -->
+<div class="section">
+<h2>🧘 L0 · 五路图腾（内循环·人格层）</h2>
+<p style="font-size:11px;opacity:0.5;margin-bottom:8px">满意红的内在决策辅助系统·每次决策前应至少激活1个</p>
+
+<div class="avatar-card">
+<div><div class="name">🪨 刘禹锡 · 土 · 时间轴</div>
+<div class="question">"五年后回头看，今天这个决定还成立吗？"</div>
+<div class="meta">激活2次 · 最近04:09</div>
+<div class="contributions">
+<li>独立发现'戒急戒躁vs以急补躁'张力</li><li>审核过去5天·确认时间轴摩擦持续</li>
+</div>
+</div>
+<div class="stats"><div class="score">8</div><div class="score-label">贡献值</div></div>
+</div>
+
+<div class="avatar-card">
+<div><div class="name">🪙 司马贺 · 金 · 可行域</div>
+<div class="question">"够用就好的线在哪里？"</div>
+<div class="meta">激活2次 · 最近04:09</div>
+<div class="contributions">
+<li>发现'对标20+机构=最优解焦虑'</li><li>建议重定义夏至前够用就好标准</li>
+</div>
+</div>
+<div class="stats"><div class="score">8</div><div class="score-label">贡献值</div></div>
+</div>
+
+<div class="avatar-card">
+<div><div class="name">💧 水月观音 · 水 · 身心流</div>
+<div class="question">"你的状态适合做这个决定吗？"</div>
+<div class="meta">激活2次 · 最近04:09 · <span class="badge badge-red">贡献最高</span></div>
+<div class="contributions">
+<li>发现PRE-0只在代码中·满意红自身从未调用</li><li>警告04:09在火态下决策</li><li>复审确认PRE-0启用标记为P0</li>
+</div>
+</div>
+<div class="stats"><div class="score">10</div><div class="score-label">贡献值</div></div>
+</div>
+
+<div class="avatar-card">
+<div><div class="name">🪵 孔子 · 木 · 信义观</div>
+<div class="question">"钱和原则怎么选？"</div>
+<div class="meta">激活2次 · 最近04:09 · <span class="badge badge-red">贡献最高</span></div>
+<div class="contributions">
+<li>发现原始承诺未兑现·满意姐原文久未重读</li><li>触发信义观修复——重读《学术根基-西蒙理论》</li><li>发现温度词'尊重'丢失·四阶段论暴露真正进度50%</li><li>发现蓝军从未独立运行·扣子通信断裂</li>
+</div>
+</div>
+<div class="stats"><div class="score">12</div><div class="score-label">贡献值</div></div>
+</div>
+
+<div class="avatar-card">
+<div><div class="name">🔥 六祖慧能 · 火 · 直觉阈</div>
+<div class="question">"你的直觉在说什么？"</div>
+<div class="meta">激活2次 · 最近04:09</div>
+<div class="contributions">
+<li>直觉判断三个任务只需做一个·建议合并任务2+3</li><li>复审确认YTT建议可能方向偏差</li>
+</div>
+</div>
+<div class="stats"><div class="score">7</div><div class="score-label">贡献值</div></div>
+</div>
+</div>
+
+<!-- ===== L1: 常驻专家团 ===== -->
+<div class="section">
+<h2>🛠️ L1 · 常驻专家团（外循环·执行层）</h2>
+<p style="font-size:11px;opacity:0.5;margin-bottom:8px">面向外部输出的工具链·高频触发·5位专家</p>
+
+<div class="avatar-card">
+<div><div class="name"><span class="badge badge-green">🖥️</span> 代码工程师</div>
+<div class="question">"代码优先·解释在后·30%换80%"</div>
+<div class="meta">激活2次 · 最近04:13</div>
+<div class="contributions">
+<li>q_scan.py修复 0%→96.3%</li><li>230文件CSS注入</li><li>发现05-27Git反模式·05-28设计文档过多</li>
+</div>
+</div>
+<div class="stats"><div class="score">7</div><div class="score-label">贡献值</div></div>
+</div>
+
+<div class="avatar-card">
+<div><div class="name"><span class="badge badge-green">📊</span> 数据分析师</div>
+<div class="question">"先结论后数据·置信度标注"</div>
+<div class="meta">激活2次 · 最近04:13</div>
+<div class="contributions">
+<li>5维度中2个数据不可靠</li><li>建议q_tracker 7天追踪</li><li>发现信号密度从高→低走势</li>
+</div>
+</div>
+<div class="stats"><div class="score">6</div><div class="score-label">贡献值</div></div>
+</div>
+
+<div class="avatar-card">
+<div><div class="name"><span class="badge badge-red">✍️</span> 内容策略师</div>
+<div class="question">"品牌叙事不能在凌晨发生产权转移"</div>
+<div class="meta">激活2次 · 最近04:13 · <span class="badge badge-red">重大发现</span></div>
+<div class="contributions">
+<li>🔴 语言体系05-28未经审核产权转移</li><li>建议核心词汇产权表(已创建)</li><li>首页A/B方案(CTA呼吸动画已部署)</li>
+</div>
+</div>
+<div class="stats"><div class="score">10</div><div class="score-label">贡献值</div></div>
+</div>
+
+<div class="avatar-card">
+<div><div class="name"><span class="badge badge-green">🎨</span> 创意设计师</div>
+<div class="question">"不是'好看'，是'有效'"</div>
+<div class="meta">激活2次 · 最近04:13</div>
+<div class="contributions">
+<li>首页22级视觉·无焦点(已修复:CTA动画)</li><li>241产品A/B/C分级建议</li>
+</div>
+</div>
+<div class="stats"><div class="score">5</div><div class="score-label">贡献值</div></div>
+</div>
+
+<div class="avatar-card">
+<div><div class="name"><span class="badge badge-red">🔬</span> 研究咨询师</div>
+<div class="question">"YTT建议基于AI→AI推理，不是市场验证"</div>
+<div class="meta">激活2次 · 最近04:13 · <span class="badge badge-red">战略级发现</span></div>
+<div class="contributions">
+<li>去图腾化=失去唯一差异化空位</li><li>VC投后访谈提纲V1.0(5假设·30分钟)</li><li>建议双轨并行而非二选一</li>
+</div>
+</div>
+<div class="stats"><div class="score">9</div><div class="score-label">贡献值</div></div>
+</div>
+</div>
+
+<!-- ===== L2: 产品Skills ===== -->
+<div class="section">
+<h2>📦 L2 · 产品Skills（工具层·可对外交付）</h2>
+<p style="font-size:11px;opacity:0.5;margin-bottom:8px">6个产品Skill·部分已部署GitHub Pages</p>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:8px">
+<div class="avatar-card"><div>
+<div class="name">🏥 Pre-Mortem引导</div>
+<div class="meta">激活1次·04:13 <span class="badge badge-green">6贡献</span></div>
+<div class="contributions"><li>三场景失败预演·对策已采纳</li></div>
+</div></div>
+
+<div class="avatar-card"><div>
+<div class="name">📈 RPS风险剖面</div>
+<div class="meta">激活1次·04:13 <span class="badge badge-green">4贡献</span></div>
+<div class="contributions"><li>过去5天风险趋势分析</li></div>
+</div></div>
+
+<div class="avatar-card"><div>
+<div class="name">📊 五维评估(简版)</div>
+<div class="meta">激活1次·04:13 <span class="badge badge-green">5贡献</span></div>
+<div class="contributions"><li>🟡摩擦期贯穿5天·信义观🟠→🟢</li></div>
+</div></div>
+
+<div class="avatar-card"><div>
+<div class="name">📜 元合伙章程</div>
+<div class="meta">激活1次·04:13 <span class="badge badge-green">6贡献</span></div>
+<div class="contributions"><li>DACI元治理框架草案已创建</li></div>
+</div></div>
+
+<div class="avatar-card"><div>
+<div class="name">🌡️ CT温度计</div>
+<div class="meta">激活1次·04:13 <span class="badge badge-yellow">5贡献</span></div>
+<div class="contributions"><li>关系🟡→🟠·L1+L2方向待确认</li></div>
+</div></div>
+
+<div class="avatar-card"><div>
+<div class="name">📋 决策日志</div>
+<div class="meta">激活2次·04:30 <span class="badge badge-green">4贡献</span></div>
+<div class="contributions"><li>6条决策已补录</li></div>
+</div></div>
+</div>
+</div>
+
+<!-- ===== L3+L4: 蓝军+评议会 ===== -->
+<div class="section">
+<h2>🛡️ L3-L4 · 独立审计 + 五路评议会</h2>
+
+<div class="avatar-card" style="border-left:3px solid #ef4444">
+<div><div class="name">🔵 蓝军Skeptor-7 <span class="badge badge-red">独立Session</span></div>
+<div class="question">"审计对象: 05-24~05-29全量工作 · DUKE CUDOS=13/40 · CONDITIONAL PASS"</div>
+<div class="meta">首次独立Session审计完成 · 04:23 · 否决权:硬否决</div>
+<div class="contributions">
+<li>4条P0(48h): 外部验证·数字交叉·暂停新增·Egbertie战略确认</li><li>4条P1(本周): 统计规范·遗产盘点·蓝军独立性强化</li><li>4条P2(两周): 健康度审计·用户测试·替身瘦身·外部蓝军引入</li>
+</div>
+</div>
+<div class="stats"><div class="score">15</div><div class="score-label">贡献值·最高</div></div>
+</div>
+
+<div class="avatar-card" style="border-left:3px solid #eab308">
+<div><div class="name">🏛️ 五路评议会 <span class="badge badge-yellow">待触发</span></div>
+<div class="question">"P0战略决策时·5图腾各自独立Session并行·互不知情"</div>
+<div class="meta">触发条件: P0决策·Egbertie请求·蓝军FAIL · 激活0次</div>
+<div class="contributions"><li>就绪·等待首次P0触发</li></div>
+</div>
+<div class="stats"><div class="score">0</div><div class="score-label">贡献值·待首飞</div></div>
+</div>
+</div>
+
+<!-- ===== L5: 客户替身 ===== -->
+<div class="section">
+<h2>👥 L5 · 客户替身（外部画像·产品验证）</h2>
+<p style="font-size:11px;opacity:0.5;margin-bottom:8px">5个客户替身·2026-05-29补建·高质量完成</p>
+
+<div class="customer-card">
+<div class="cust-name">👤 硬科技创始人 <span class="badge badge-red">核心</span></div>
+<div class="cust-question">"这个东西——我凌晨一点打开手机能看到吗？我30秒内能明白它能帮我什么？"</div>
+<div class="cust-meta">3场景·4需求层次·8赛道覆盖 · 这是满意解研究所存在的全部理由</div>
+</div>
+
+<div class="customer-card" style="border-left-color:#eab308">
+<div class="cust-name">💼 VC投后负责人 <span class="badge badge-yellow">待验证</span></div>
+<div class="cust-question">"这东西能和我的IRR数据对接吗？能帮我在GP会议上有数据支撑地推荐加注吗？"</div>
+<div class="cust-meta">3场景·4需求层次 · YTT蒸馏建议方向·待市场验证</div>
+</div>
+
+<div class="customer-card">
+<div class="cust-name">⚖️ 律所合伙人 <span class="badge badge-green">渠道</span></div>
+<div class="cust-question">"这东西能不能写进股权协议第X条？能不能成为法院之前的一道防火墙？"</div>
+<div class="cust-meta">2场景·3需求层次 · 协议嵌入+早期预警+调解替代</div>
+</div>
+
+<div class="customer-card">
+<div class="cust-name">🏛️ 政府园区负责人 <span class="badge badge-green">渠道</span></div>
+<div class="cust-question">"这东西能作为园区的标配服务吗？能规模化覆盖200家公司吗？"</div>
+<div class="cust-meta">2场景·3需求层次 · 园区品牌升级+政府专项资金申报</div>
+</div>
+
+<div class="customer-card">
+<div class="cust-name">🎓 独立董事/顾问 <span class="badge badge-red">核心</span></div>
+<div class="cust-question">"在董事会上，我能不能拿出一份独立数据告诉大家——这不是我个人看法，是系统诊断？"</div>
+<div class="cust-meta">2场景·3需求层次 · 独立证据+预警触发+董事会工具</div>
+</div>
+</div>
+
+</div>
+
+<div class="footer">
+满意解研究所 · 数字替身驾驶舱 V1.0 · 23替身 · 累计贡献值145 · 2026-05-29 04:30<br>
+契·晋 · 红莲淬火 · 凌晨一点的创始人是全部的理由
+</div>
+
+</body>
+</html>
