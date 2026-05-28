@@ -77,7 +77,16 @@ function gatePrev(e,el){
   if(e.key==='Backspace'&&!el.value&&el.previousElementSibling&&el.previousElementSibling.classList.contains('gateDigit')) el.previousElementSibling.focus();
 }
 
+var gateFailCount=parseInt(localStorage.getItem('sri_gate_fails')||'0');
+var gateLockUntil=parseInt(localStorage.getItem('sri_gate_lock')||'0');
+
 async function gateVerify(){
+  var now=Date.now();
+  if(gateLockUntil>now){
+    var sec=Math.ceil((gateLockUntil-now)/1000);
+    document.getElementById('gateError').textContent='已锁定·请等待'+sec+'秒';
+    return;
+  }
   let code='';
   for(let i=0;i<6;i++){ let v=document.getElementById('gd'+i).value; if(!v){document.getElementById('gateError').textContent='请输入完整6位密码';return;} code+=v; }
   let hash=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(code));
@@ -85,11 +94,21 @@ async function gateVerify(){
   // 密码123654的哈希
   let valid='6460662e217c7a9f899208dd70a2c28abdea42f128666a9b78e6c0c064846493';
   if(h===valid){
+    localStorage.setItem('sri_gate_fails','0');
     localStorage.setItem('sri_dashboard_auth','true');
     localStorage.setItem('sri_dash_auth_hash',valid);
     document.getElementById('gateLayer').style.display='none';
   } else {
-    document.getElementById('gateError').textContent='密码错误';
+    gateFailCount++;
+    localStorage.setItem('sri_gate_fails',gateFailCount);
+    if(gateFailCount>=3){
+      var lockSec=300; // 5分钟锁定
+      localStorage.setItem('sri_gate_lock',Date.now()+lockSec*1000);
+      document.getElementById('gateError').textContent='已锁定5分钟·连续3次错误';
+      localStorage.setItem('sri_gate_fails','0');
+    } else {
+      document.getElementById('gateError').textContent='密码错误('+gateFailCount+'/3)';
+    }
     document.querySelectorAll('.gateDigit').forEach(d=>{d.classList.add('error');setTimeout(()=>{d.value='';d.classList.remove('error')},600)});
     document.getElementById('gd0').focus();
   }
@@ -122,6 +141,18 @@ function gateForgot(){
       </div>
     </div>
     <p id="gateError" style="color:#C23B22;font-size:12px;min-height:18px;"></p>
+    <div style="text-align:left;margin-bottom:8px;">
+      <label style="color:#4A4A4A;font-weight:600;font-size:12px;">收验证码邮箱</label>
+      <div style="display:flex;gap:6px;margin:4px 0;">
+        <input id="verifyEmail" value="egbertlau717@gmail.com" style="flex:1;padding:8px;border:2px solid #D4C5A0;border-radius:8px;font-size:12px;">
+        <button onclick="sendEmailCode()" style="padding:8px 14px;border:none;border-radius:8px;background:#B8860B;color:#fff;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;">发送验证码</button>
+      </div>
+      <div style="display:flex;gap:6px;margin:4px 0;">
+        <input id="emailCode" placeholder="输入邮箱验证码" style="flex:1;padding:8px;border:2px solid #D4C5A0;border-radius:8px;font-size:12px;">
+        <button onclick="verifyEmailCode()" style="padding:8px 14px;border:none;border-radius:8px;background:#B8860B;color:#fff;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;">验证</button>
+      </div>
+      <span id="emailCodeMsg" style="font-size:10px;"></span>
+    </div>
     <button onclick="gateChange()" style="width:100%;padding:12px;border:none;border-radius:12px;background:#C23B22;color:#fff;font-size:14px;font-weight:600;cursor:pointer;">变更密码</button>
     <p style="font-size:11px;margin-top:8px;"><a href="javascript:void(0)" onclick="gateBack()" style="color:#6E6E6E;">← 返回登录</a></p>
   `;
@@ -130,6 +161,12 @@ function gateForgot(){
 }
 
 async function gateChange(){
+  // 检查是否已获取邮箱验证码
+  var verifiedEmail=localStorage.getItem('sri_gate_email_verified');
+  if(!verifiedEmail){
+    document.getElementById('gateError').textContent='请先获取邮箱验证码';
+    return;
+  }
   // 读旧密码
   let oldDigits=document.getElementById('oldDigits').querySelectorAll('input');
   let newDigits=document.getElementById('newDigits').querySelectorAll('input');
@@ -148,9 +185,40 @@ async function gateChange(){
   let nh=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(np));
   let nhash=Array.from(new Uint8Array(nh)).map(b=>b.toString(16).padStart(2,'0')).join('');
   localStorage.setItem('sri_dash_hash',nhash);
-  localStorage.setItem('sri_dashboard_auth','true');
+  localStorage.setItem('sri_gate_fails','0');
+    localStorage.setItem('sri_dashboard_auth','true');
     localStorage.setItem('sri_dash_auth_hash',valid);
   document.getElementById('gateLayer').style.display='none';
+}
+
+
+async function sendEmailCode(){
+  var email=document.getElementById('verifyEmail').value.trim();
+  if(!email){document.getElementById('emailCodeMsg').textContent='请输入邮箱';return;}
+  document.getElementById('emailCodeMsg').textContent='发送中...';
+  try{
+    var r=await fetch('http://localhost:8766/api/send_code',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email})});
+    var d=await r.json();
+    if(d.ok){document.getElementById('emailCodeMsg').textContent='✅ 验证码已发送·5分钟有效';document.getElementById('emailCodeMsg').style.color='#3D7A4F';}
+    else{document.getElementById('emailCodeMsg').textContent='发送失败: '+d.error;}
+  }catch(e){document.getElementById('emailCodeMsg').textContent='发送失败·检查是否在本机访问';}
+}
+
+async function verifyEmailCode(){
+  var email=document.getElementById('verifyEmail').value.trim();
+  var code=document.getElementById('emailCode').value.trim();
+  if(!code){document.getElementById('emailCodeMsg').textContent='请输入验证码';return;}
+  try{
+    var r=await fetch('http://localhost:8766/api/verify_code',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,code:code})});
+    var d=await r.json();
+    if(d.ok){
+      localStorage.setItem('sri_gate_email_verified','true');
+      document.getElementById('emailCodeMsg').textContent='✅ 邮箱验证通过·可以变更密码了';
+      document.getElementById('emailCodeMsg').style.color='#3D7A4F';
+    }else{
+      document.getElementById('emailCodeMsg').textContent='验证码错误或过期';
+    }
+  }catch(e){document.getElementById('emailCodeMsg').textContent='验证失败·检查是否在本机访问';}
 }
 
 function gateBack(){
