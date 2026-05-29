@@ -303,6 +303,7 @@ document.addEventListener('paste',function(e){
     <button class="tab-btn" onclick="switchTab('project')">🗓️ 项目</button>
     <button class="tab-btn" onclick="switchTab('marketing')">📢 宣发</button>
     <button class="tab-btn" onclick="switchTab('media')">📰 媒体</button>
+    <button class="tab-btn" onclick="switchTab('avatars')">🎭 替身</button>
     <button class="tab-btn" onclick="switchTab('glossary')">📖 命名</button>
     <button class="tab-btn" onclick="switchTab('import')">📥 导入</button>
   </div>
@@ -450,11 +451,22 @@ function updateBSC(){
   },500);
 }
 
+  // 从API同步数据→localStorage（API优先，失败保留本地）
   try {
     var s = await DB._fetch('/stats');
-    if (s) console.log('✅ SQLite中台已连接·'+s.tasks+'任务·'+s.customers+'客户');
-    else console.log('⚠️ 使用localStorage降级');
-  } catch(e) { console.log('⚠️ localStorage模式'); }
+    if (s) {
+      console.log('✅ SQLite中台已连接·'+s.tasks+'任务·'+s.customers+'客户');
+      // 尝试拉取完整数据集
+      var t = await DB._fetch('/tasks');
+      if (Array.isArray(t) && t.length > 0) { DB.set('tasks', t.slice(0,500)); console.log('📋 同步'+t.length+'条任务'); }
+      var c = await DB._fetch('/customers');
+      if (Array.isArray(c) && c.length > 0) { DB.set('customers', c.slice(0,500)); console.log('👤 同步'+c.length+'条客户'); }
+      var p = await DB._fetch('/passwords');
+      if (Array.isArray(p) && p.length > 0) { DB.set('passwords', p.slice(0,200)); console.log('🔐 同步'+p.length+'条密码'); }
+    } else {
+      console.log('⚠️ API返回空，使用localStorage');
+    }
+  } catch(e) { console.log('⚠️ API不可达，使用localStorage: '+e.message); }
   DB_INIT = true;
 }
 
@@ -953,8 +965,52 @@ async function render() {
       <tr><td>🔧 自动化脚本</td><td>6个</td><td>✅ cron运行</td></tr>
       <tr><td>📊 驾驶舱表</td><td>12张</td><td>✅</td></tr>
       <tr><td>🤖 AI三代</td><td>满意姐54天·扣子28天·满意红23天</td><td>✅ 传承</td></tr>
-} else if (currentTab === 'glossary') {
-    html = `<div class="panel"><h3>📖 命名规范 · 术语表</h3><p style="font-size:10px;color:#6E6E6E;margin-bottom:8px;">对标Terminology Management·概念→术语→定义→禁止表述·单一真实源</p>
+} else if (currentTab === 'avatars') {
+    html = `<div class="panel" style="max-height:70vh;overflow-y:auto">
+<div class="summary" style="margin:0 0 16px;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px">
+<div class="sum-card" style="padding:12px"><div class="num" style="font-size:22px">23</div><div class="label" style="font-size:10px">总替身数</div></div>
+<div class="sum-card" style="padding:12px"><div class="num" style="font-size:22px">145</div><div class="label" style="font-size:10px">累计贡献值</div></div>
+<div class="sum-card" style="padding:12px"><div class="num" style="font-size:22px">5</div><div class="label" style="font-size:10px">激活层级</div></div>
+<div class="sum-card" style="padding:12px"><div class="num" style="font-size:22px">2</div><div class="label" style="font-size:10px">今日激活</div></div>
+<div class="sum-card" style="padding:12px"><div class="num" style="font-size:22px">04:30</div><div class="label" style="font-size:10px">最后更新</div></div>
+</div>
+<h3 style="font-size:14px;color:var(--sri-red);margin:12px 0 8px;padding-bottom:4px;border-bottom:1px solid #e0d5c8">🧘 L0 · 五路图腾（内循环·人格层）</h3>
+`+[
+{emoji:'🪨',name:'刘禹锡·土·时间轴',q:'"五年后回头看，今天这个决定还成立吗？"',meta:'激活2次·04:09',score:8,items:['独立发现戒急戒躁vs以急补躁张力','审核过去5天·确认时间轴摩擦持续']},
+{emoji:'🪙',name:'司马贺·金·可行域',q:'"够用就好的线在哪里？"',meta:'激活2次·04:09',score:8,items:['发现对标20+机构=最优解焦虑','建议重定义夏至前够用就好标准']},
+{emoji:'💧',name:'水月观音·水·身心流',q:'"你的状态适合做这个决定吗？"',meta:'激活2次·04:09 <b style="color:#C23B22">贡献最高</b>',score:10,items:['发现PRE-0只在代码中·满意红自身从未调用','警告04:09在火态下决策','复审确认PRE-0启用标记为P0']},
+{emoji:'🪵',name:'孔子·木·信义观',q:'"钱和原则怎么选？"',meta:'激活2次·04:09 <b style="color:#C23B22">贡献最高</b>',score:12,items:['发现原始承诺未兑现·满意姐原文久未重读','触发信义观修复——重读学术根基-西蒙理论','发现温度词尊重丢失·四阶段论暴露真正进度50%','发现蓝军从未独立运行·扣子通信断裂']},
+{emoji:'🔥',name:'六祖慧能·火·直觉阈',q:'"你的直觉在说什么？"',meta:'激活2次·04:09',score:7,items:['直觉判断三个任务只需做一个','复审确认YTT建议可能方向偏差']}
+].map(a=>'<div class="avatar-card"><div><b>'+a.emoji+' '+a.name+'</b><div style="font-size:11px;opacity:0.7;font-style:italic;margin-top:2px">'+a.q+'</div><div style="font-size:10px;color:#B8860B;margin-top:4px">'+a.meta+'</div><div style="font-size:10px;opacity:0.6;margin-top:4px">'+a.items.map(i=>'<li>'+i+'</li>').join('')+'</div></div><div style="text-align:right"><div style="font-size:18px;font-weight:700;color:#C23B22">'+a.score+'</div><div style="font-size:9px;opacity:0.4">贡献值</div></div></div>').join('')+
+`<h3 style="font-size:14px;color:var(--sri-red);margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid #e0d5c8">🛠️ L1 · 常驻专家团（外循环·执行层）</h3>
+`+[
+{emoji:'🖥️',name:'代码工程师',q:'"代码优先·解释在后·30%换80%"',meta:'激活2次·04:13',score:7,items:['q_scan.py修复 0%→96.3%','230文件CSS注入','发现05-27Git反模式·05-28设计文档过多']},
+{emoji:'📊',name:'数据分析师',q:'"先结论后数据·置信度标注"',meta:'激活2次·04:13',score:6,items:['5维度中2个数据不可靠','建议q_tracker 7天追踪','发现信号密度从高→低走势']},
+{emoji:'✍️',name:'内容策略师',q:'"品牌叙事不能在凌晨发生产权转移"',meta:'激活2次·04:13 <b style="color:#C23B22">重大发现</b>',score:10,items:['🔴 语言体系05-28未经审核产权转移','建议核心词汇产权表(已创建)','首页A/B方案(CTA呼吸动画已部署)']},
+{emoji:'🎨',name:'创意设计师',q:'"不是好看，是有效"',meta:'激活2次·04:13',score:5,items:['首页22级视觉·无焦点(已修复)','241产品A/B/C分级建议']},
+{emoji:'🔬',name:'研究咨询师',q:'"YTT建议基于AI→AI推理，不是市场验证"',meta:'激活2次·04:13 <b style="color:#C23B22">战略级</b>',score:9,items:['去图腾化=失去唯一差异化空位','VC投后访谈提纲V1.0','建议双轨并行而非二选一']}
+].map(a=>'<div class="avatar-card"><div><b>'+a.emoji+' '+a.name+'</b><div style="font-size:11px;opacity:0.7;font-style:italic;margin-top:2px">'+a.q+'</div><div style="font-size:10px;color:#B8860B;margin-top:4px">'+a.meta+'</div><div style="font-size:10px;opacity:0.6;margin-top:4px">'+a.items.map(i=>'<li>'+i+'</li>').join('')+'</div></div><div style="text-align:right"><div style="font-size:18px;font-weight:700;color:#C23B22">'+a.score+'</div><div style="font-size:9px;opacity:0.4">贡献值</div></div></div>').join('')+
+`<h3 style="font-size:14px;color:var(--sri-red);margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid #e0d5c8">📦 L2 · 产品Skills（工具层·可对外交付）</h3>
+`+[
+{name:'🏥 Pre-Mortem引导',meta:'激活1次·04:13',score:6,items:['三场景失败预演·对策已采纳']},
+{name:'📈 RPS风险剖面',meta:'激活1次·04:13',score:4,items:['过去5天风险趋势分析']},
+{name:'📊 五维评估(简版)',meta:'激活1次·04:13',score:5,items:['🟡摩擦期贯穿5天·信义观🟠→🟢']},
+{name:'📜 元合伙章程',meta:'激活1次·04:13',score:6,items:['DACI元治理框架草案已创建']},
+{name:'🌡️ CT温度计',meta:'激活1次·04:13',score:5,items:['关系🟡→🟠·L1+L2方向待确认']},
+{name:'📋 决策日志',meta:'激活2次·04:30',score:4,items:['6条决策已补录']}
+].map(a=>'<div class="avatar-card"><div><b>'+a.name+'</b><div style="font-size:10px;color:#B8860B;margin-top:2px">'+a.meta+'</div><div style="font-size:10px;opacity:0.6;margin-top:2px">'+a.items.map(i=>'<li>'+i+'</li>').join('')+'</div></div><div style="text-align:right"><div style="font-size:18px;font-weight:700;color:#C23B22">'+a.score+'</div><div style="font-size:9px;opacity:0.4">贡献值</div></div></div>').join('')+
+`<h3 style="font-size:14px;color:var(--sri-red);margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid #e0d5c8">🛡️ L3-L4 · 独立审计 + 五路评议会</h3>
+<div class="avatar-card" style="border-left:3px solid #ef4444"><div><b>🔵 蓝军Skeptor-7 <span style="display:inline-block;padding:2px 6px;border-radius:8px;font-size:9px;background:rgba(194,59,34,0.08);color:#C23B22">独立Session</span></b><div style="font-size:11px;opacity:0.7;font-style:italic;margin-top:2px">审计对象: 05-24~05-29全量工作 · DUKE CUDOS=13/40 · CONDITIONAL PASS</div><div style="font-size:10px;color:#B8860B;margin-top:4px">首次独立Session审计完成·04:23·否决权:硬否决</div><div style="font-size:10px;opacity:0.6;margin-top:4px"><li>4条P0(48h): 外部验证·数字交叉·暂停新增·战略确认</li><li>4条P1(本周): 统计规范·遗产盘点·蓝军独立性强化</li><li>4条P2(两周): 健康度审计·用户测试·替身瘦身·外部蓝军</li></div></div><div style="text-align:right"><div style="font-size:18px;font-weight:700;color:#C23B22">15</div><div style="font-size:9px;opacity:0.4">贡献值·最高</div></div></div>
+<div class="avatar-card" style="border-left:3px solid #eab308"><div><b>🏛️ 五路评议会 <span style="display:inline-block;padding:2px 6px;border-radius:8px;font-size:9px;background:rgba(184,134,11,0.1);color:#B8860B">待触发</span></b><div style="font-size:11px;opacity:0.7;font-style:italic;margin-top:2px">P0战略决策时·5图腾各自独立Session并行·互不知情</div><div style="font-size:10px;opacity:0.6;margin-top:2px"><li>就绪·等待首次P0触发</li></div></div><div style="text-align:right"><div style="font-size:18px;font-weight:700;color:#C23B22">0</div><div style="font-size:9px;opacity:0.4">贡献值·待首飞</div></div></div>
+<h3 style="font-size:14px;color:var(--sri-red);margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid #e0d5c8">👥 L5 · 客户替身（外部画像·产品验证）</h3>
+`+[
+{name:'👤 硬科技创始人',badge:'核心',badgeStyle:'color:#C23B22',borderColor:'#C23B22',q:'"我凌晨一点打开手机能看到吗？我30秒内能明白它能帮我什么？"',meta:'3场景·4需求层次·8赛道覆盖——满意解研究所存在的全部理由'},
+{name:'💼 VC投后负责人',badge:'待验证',badgeStyle:'color:#B8860B',borderColor:'#eab308',q:'"这东西能和我的IRR数据对接吗？能帮我在GP会议上有数据支撑地推荐加注吗？"',meta:'3场景·4需求层次·YTT蒸馏建议方向·待市场验证'},
+{name:'⚖️ 律所合伙人',badge:'渠道',badgeStyle:'color:#16a34a',borderColor:'#D4C5A0',q:'"这东西能不能写进股权协议第X条？能不能成为法院之前的一道防火墙？"',meta:'2场景·3需求层次·协议嵌入+早期预警+调解替代'},
+{name:'🏛️ 政府园区负责人',badge:'渠道',badgeStyle:'color:#16a34a',borderColor:'#D4C5A0',q:'"能作为园区的标配服务吗？能规模化覆盖200家公司吗？"',meta:'2场景·3需求层次·园区品牌升级+政府专项资金申报'},
+{name:'🎓 独立董事/顾问',badge:'核心',badgeStyle:'color:#C23B22',borderColor:'#C23B22',q:'"在董事会上，我能不能拿出一份独立数据告诉大家——这不是我个人看法，是系统诊断？"',meta:'2场景·3需求层次·独立证据+预警触发+董事会工具'}
+].map(c=>'<div class="customer-card" style="border-left-color:'+c.borderColor+'"><b>'+c.name+' <span class="badge" style="'+c.badgeStyle+'">'+c.badge+'</span></b><div style="font-size:11px;color:#C23B22;font-style:italic;margin-top:4px">'+c.q+'</div><div style="font-size:10px;opacity:0.6;margin-top:4px">'+c.meta+'</div></div>').join('')+
+'</div>';<p style="font-size:10px;color:#6E6E6E;margin-bottom:8px;">对标Terminology Management·概念→术语→定义→禁止表述·单一真实源</p>
 <table><tr><th>概念</th><th>标准术语</th><th>定义</th><th>❌禁止</th></tr>
 <tr><td>产品命名体系</td><td><b>章·衡·镜·契·觉</b></td><td>五族通道·五路图腾</td><td>—</td></tr>
 <tr><td>品牌名</td><td><b>满意解研究所</b></td><td>Satisficing Research Institute</td><td>—</td></tr>
