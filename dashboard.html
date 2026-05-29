@@ -80,20 +80,7 @@ body{font-family:-apple-system,"PingFang SC",sans-serif;background:#F5F0E6;color
 </div>
 
 <script>
-// 诊断记录
-var diag = [];
-function log(msg) { diag.push(new Date().toLocaleTimeString() + ' ' + msg); document.getElementById('diag').textContent = diag.join(' | '); }
 
-log('JS引擎启动');
-
-// localStorage 测试
-try { localStorage.setItem('_dash_test_', 'ok'); document.getElementById('lsWrite').textContent = '✅ 可写'; log('LS写入OK'); }
-catch(e) { document.getElementById('lsWrite').textContent = '❌ 不可写: '+e.message; log('LS写入FAIL'); }
-
-try { var v = localStorage.getItem('_dash_test_'); document.getElementById('lsRead').textContent = v==='ok'?'✅ 可读':'❌ 值不匹配'; log('LS读取: '+v); }
-catch(e) { document.getElementById('lsRead').textContent = '❌ 不可读'; log('LS读取FAIL'); }
-
-document.getElementById('loadTime').textContent = new Date().toLocaleTimeString();
 
 // 密码逻辑
 var GH = '6460662e217c7a9f899208dd70a2c28abdea42f128666a9b78e6c0c064846493';
@@ -141,15 +128,7 @@ var GH = '6460662e217c7a9f899208dd70a2c28abdea42f128666a9b78e6c0c064846493';
 })();
 
 // Tab切换
-function st(id) {
-  log('Tab切换: ' + id);
-  var btns = document.querySelectorAll('.tab button');
-  btns.forEach(function(b) { b.classList.remove('on'); });
-  // 找对应按钮
-  var map = { a: 0, b: 1, c: 2 };
-  if (btns[map[id]]) btns[map[id]].classList.add('on');
-  document.getElementById('content').innerHTML = '<h3 style="font-size:15px;color:#2A2A2A">✅ Tab ' + id.toUpperCase() + ' 已切换</h3><p style="font-size:12px;color:#6E6E6E;margin-top:8px">时间戳: ' + new Date().toLocaleTimeString() + '</p><p style="font-size:12px;color:#C23B22;margin-top:4px">切换成功！JS和DOM都正常工作。</p>';
-}
+
 
 // 打开应用
 
