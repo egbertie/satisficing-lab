@@ -455,7 +455,7 @@
   <div class="login-box">
     <h1>满意解研究所</h1>
     <p>满天星光 · 驾驶舱</p>
-    <input type="password" id="password-input" placeholder="输入访问密码" onkeypress="if(event.key==='Enter')attemptLogin()">
+    <input type="password" id="password-input" placeholder="输入访问密码">
     <button onclick="attemptLogin()">进入驾驶舱</button>
     <p class="login-error" id="login-error">密码错误，请重试</p>
   </div>
@@ -1164,7 +1164,8 @@ Store.updateCountdown = function() {
 // ===== 5. 登录/登出 =====
 function attemptLogin() {
   var input = document.getElementById('password-input');
-  var password = input.value;
+  var password = (input.value || '').trim();
+  if (!password) return;
 
   // SHA-256 哈希
   var hash = sha256(password);
@@ -1293,6 +1294,10 @@ function showMain() {
 
 // ===== 8. 页面加载 =====
 (function init() {
+  // Bind Enter key for password input
+  document.getElementById('password-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') attemptLogin();
+  });
   var loggedIn = localStorage.getItem(CONFIG.STORAGE_KEYS.loggedIn) === 'true';
   if (loggedIn) {
     showMain();
