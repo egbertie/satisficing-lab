@@ -1,0 +1,100 @@
+{
+  "timestamp": "2026-05-07T23:43:09.701697",
+  "task": "测试任务",
+  "files": [
+    "SOUL.md",
+    "AGENTS.md"
+  ],
+  "checks": {
+    "existence": {
+      "name": "存在性检查",
+      "passed": false,
+      "issues": [
+        "任务描述过于简短或为空，无法理解需求"
+      ],
+      "details": [
+        "✓ 产出文件明确: 2个文件"
+      ]
+    },
+    "syntax": {
+      "name": "语法检查",
+      "passed": true,
+      "issues": [],
+      "details": [
+        "✓ Markdown文件: SOUL.md",
+        "✓ Markdown文件: AGENTS.md"
+      ]
+    },
+    "executability": {
+      "name": "可执行性检查",
+      "passed": true,
+      "issues": [],
+      "details": [],
+      "dependencies": []
+    },
+    "coupling": {
+      "name": "配套映射检查",
+      "passed": true,
+      "issues": [
+        "关联文件未更新: MEMORY.md",
+        "关联文件未更新: HEARTBEAT.md",
+        "关联文件未更新: MEMORY.md",
+        "关联文件未更新: TOOLS.md",
+        "关联文件未更新: USER.md",
+        "关联文件未更新: IDENTITY.md"
+      ],
+      "details": [
+        "⚠ 关联文件需要检查: AGENTS.md",
+        "⚠ 关联文件需要检查: MEMORY.md",
+        "⚠ 关联文件需要检查: SOUL.md",
+        "⚠ 关联文件需要检查: HEARTBEAT.md",
+        "⚠ 关联文件需要检查: MEMORY.md",
+        "⚠ 关联文件需要检查: TOOLS.md",
+        "⚠ 关联文件需要检查: USER.md",
+        "⚠ 关联文件需要检查: IDENTITY.md"
+      ],
+      "coupled_files": [
+        "AGENTS.md",
+        "MEMORY.md",
+        "SOUL.md",
+        "HEARTBEAT.md",
+        "MEMORY.md",
+        "TOOLS.md",
+        "USER.md",
+        "IDENTITY.md"
+      ]
+    },
+    "skill_activation": {
+      "name": "Skill激活检查",
+      "passed": true,
+      "warnings": [],
+      "details": [],
+      "detected_skills": []
+    },
+    "closure": {
+      "name": "闭环检查",
+      "passed": true,
+      "issues": [],
+      "details": [
+        "✓ 闭环覆盖9个步骤: 归档, 同步, 执行, 接收, 确认"
+      ],
+      "closure_steps": [
+        "确认",
+        "执行",
+        "归档",
+        "同步",
+        "接收",
+        "确认",
+        "执行",
+        "归档",
+        "同步"
+      ]
+    }
+  },
+  "overall_status": "FAIL",
+  "issues": [
+    "任务描述过于简短或为空，无法理解需求"
+  ],
+  "warnings": [],
+  "recommendations": []
+}

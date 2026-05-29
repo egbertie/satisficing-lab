@@ -1,0 +1,2112 @@
+{
+  "extracted_at": "2026-05-30T01:53:29+08:00",
+  "total_rules_found": 48,
+  "status_summary": {
+    "active": 41,
+    "dormant": 6,
+    "broken": 1,
+    "never_activated": 0
+  },
+  "rules": [
+    {
+      "rule_id": "RULE-001",
+      "name": "L0提案审核门控",
+      "source": "QM-001",
+      "original_form": "质量指标",
+      "biological_layer": {
+        "trigger": "新提案提交时 / 产品进入概念→原型阶段",
+        "sensor": "pre_delivery_gate.py Hook + WF-006部署前检查触发",
+        "action": "执行L0级基础审核：一致性检查(术语统一)、规范性检查(格式/命名)、完整性检查(必填字段)",
+        "feedback": "审核结果写入gate_stats.json → 驾驶舱显示四关通过率 → 不合格提案打回并标注缺失项",
+        "adaptation": "连续10次提案一次通过→降为抽样审核；通过率<60%→升级为L0+L1双重审核"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-30T01:00:00+08:00",
+        "next_run": "下次Git Push时自动触发",
+        "success_rate": 0.95
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-047",
+          "relationship": "feeds_into"
+        },
+        {
+          "connected_rule": "RULE-017",
+          "relationship": "gate_of"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-002",
+      "name": "L1方法论审核",
+      "source": "QM-002",
+      "original_form": "质量指标",
+      "biological_layer": {
+        "trigger": "产品/方案通过L0审核后 / 关键方法论变更时",
+        "sensor": "蓝军独立Session审计 + WF-011每周生态审计",
+        "action": "审核产品/方案是否遵循满意解框架标准：五维体系覆盖度、65%规则应用、满意解12源验证",
+        "feedback": "审核通过率写入驾驶舱(当前55%标记为P0改进项)；低于80%触发每周生态审计报告预警",
+        "adaptation": "持续<70%→触发方法论培训模块；连续4周>90%→简化标准"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-29T00:00:00+08:00",
+        "next_run": "每周三10:00生态审计",
+        "success_rate": 0.55
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-001",
+          "relationship": "triggered_by"
+        },
+        {
+          "connected_rule": "RULE-021",
+          "relationship": "audited_by"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-003",
+      "name": "四关通过率门控(≥80%)",
+      "source": "QM-003",
+      "original_form": "质量指标",
+      "biological_layer": {
+        "trigger": "产品进入内侧阶段 / 每次四关审核完成时",
+        "sensor": "Gate门控评审(INST-022)统计 + gate_stats.json自动更新",
+        "action": "四关依次审查：L0提案→L1方法论→L2质量→L3客户。每关独立打分，综合通过率需≥80%",
+        "feedback": "当前96%达标 → 写入驾驶舱质量看板 → 不达标产品禁止进入公开阶段",
+        "adaptation": "某类产品(L1公开级)持续100%通过→简化L2审查深度；内侧产品反复不达标→升级蓝军预审"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-30T01:00:00+08:00",
+        "next_run": "每次Git Push Hook触发",
+        "success_rate": 0.96
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-001",
+          "relationship": "extends"
+        },
+        {
+          "connected_rule": "RULE-002",
+          "relationship": "extends"
+        },
+        {
+          "connected_rule": "RULE-017",
+          "relationship": "gated_by"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-004",
+      "name": "商标注册保护",
+      "source": "QM-004",
+      "original_form": "质量指标",
+      "biological_layer": {
+        "trigger": "品牌上线前 / 官宣日(2026-06-21)前30天",
+        "sensor": "驾驶舱品牌看板 + 日期倒计时引擎自动预警",
+        "action": "满意解研究所及子品牌在中国大陆申请商标注册：核心词汇保护→商标检索→提交申请→跟踪进度",
+        "feedback": "当前未申请 → P0待启动 → 驾驶舱红色标记 → 官宣前必须完成申请",
+        "adaptation": "若商标检索发现冲突→启动词汇产权审核流程(L0核心词不可替换→寻找替代注册策略)"
+      },
+      "execution_status": {
+        "current": "dormant",
+        "last_run": null,
+        "next_run": "2026-06-01前启动",
+        "success_rate": null
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-043",
+          "relationship": "protected_by"
+        },
+        {
+          "connected_rule": "RULE-045",
+          "relationship": "gate_of_official_launch"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": true
+    },
+    {
+      "rule_id": "RULE-005",
+      "name": "全站HTML结构完整性",
+      "source": "QM-005",
+      "original_form": "质量指标",
+      "biological_layer": {
+        "trigger": "每小时免疫扫描 / Git Push前",
+        "sensor": "immune_scan.sh Cron(每小时) + immune_engine.py L1物理屏障",
+        "action": "检测所有HTML文件：DOCTYPE声明存在性、head闭合、body闭合、无未闭合标签",
+        "feedback": "当前100%达标 → 每日免疫报告写入quality_scan_YYYYMMDD.json → 超标触发飞书告警",
+        "adaptation": "连续30天100%→扫描频率降为每2小时；新页面后SLA<95%→升级为L1+L2联合扫描"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-30T01:30:00+08:00",
+        "next_run": "每小时自动Cron",
+        "success_rate": 1.0
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-006",
+          "relationship": "paired_with"
+        },
+        {
+          "connected_rule": "RULE-010",
+          "relationship": "scanned_by"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-006",
+      "name": "CSS变量一致性",
+      "source": "QM-006",
+      "original_form": "质量指标",
+      "biological_layer": {
+        "trigger": "每小时免疫扫描L2阶段 / 新页面创建后5分钟内",
+        "sensor": "immune_scan.sh L2先天免疫 → CSS变量全站对比VI标准",
+        "action": "扫描所有HTML文件的CSS变量定义 → 与VI标准表逐项对比 → 检测偏离(色值/命名/缺失)",
+        "feedback": "当前98%达标(2个文件有轻微偏差) → 免疫报告标注具体文件和变量 → 累计后批量修复",
+        "adaptation": "若降到<95%→触发自动修复脚本；差异<3变量→先记录后批量修复"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-30T01:00:00+08:00",
+        "next_run": "每小时自动Cron",
+        "success_rate": 0.98
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-005",
+          "relationship": "paired_with"
+        },
+        {
+          "connected_rule": "RULE-044",
+          "relationship": "validated_by"
+        }
+      ],
+      "priority": "P1",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-007",
+      "name": "术语统一率监控",
+      "source": "QM-007",
+      "original_form": "质量指标",
+      "biological_layer": {
+        "trigger": "每小时免疫扫描L2 / 新内容发布前 / 手动触发term_sync",
+        "sensor": "term_sync_engine.py 全站扫描 + immune_scan.sh L2术语检查",
+        "action": "扫描全站术语一致性：观自在→水月观音、四骑士→关系危机信号、决策教练→决策外脑。自动替换site/目录",
+        "feedback": "当前100%达标 → 写入immune_memory.json → 发现不一致时自动修复并生成term_scan报告",
+        "adaptation": "每当词汇产权表更新(L0/L1/L2)，自动刷新术语映射表；新增术语首次扫描采用先检测后修复策略"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-30T01:30:00+08:00",
+        "next_run": "每小时免疫扫描自动触发",
+        "success_rate": 1.0
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-043",
+          "relationship": "enforces"
+        },
+        {
+          "connected_rule": "RULE-010",
+          "relationship": "checked_by"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-008",
+      "name": "导航链接有效性",
+      "source": "QM-008",
+      "original_form": "质量指标",
+      "biological_layer": {
+        "trigger": "每小时免疫扫描 / Git Push Hook / 部署前检查",
+        "sensor": "immune_scan.sh + pre_delivery_gate.py",
+        "action": "验证所有内部导航链接：目标文件存在、路径可访问、无死链、无循环跳转",
+        "feedback": "当前100%达标 → 发现死链立即告警 → 自动标记失效链接并建议修复路径",
+        "adaptation": "新增页面后扫描发现的链接自动加入验证白名单；死链超过5个触发紧急修复模式"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-30T01:00:00+08:00",
+        "next_run": "每小时自动Cron",
+        "success_rate": 1.0
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-005",
+          "relationship": "child_check"
+        },
+        {
+          "connected_rule": "RULE-017",
+          "relationship": "checked_by"
+        }
+      ],
+      "priority": "P1",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-009",
+      "name": "Git提交规范性",
+      "source": "Git提交规范_V1.0 + QM-009",
+      "original_form": "治理规范+质量指标",
+      "biological_layer": {
+        "trigger": "每次git commit / 免疫扫描git状态检查",
+        "sensor": "immune_scan.sh Git状态检查 + Git Hook(pre-commit)",
+        "action": "Conventional Commits规范(feat/fix/docs/style/refactor/chore) + 提交消息完整性 + 单次提交不跨逻辑域 + 不超过50文件",
+        "feedback": "当前100%达标 → 不合格提交拒绝入库 → 每周生态审计报告包含Git质量趋势",
+        "adaptation": "批量不规范提交→标记P2债务并排队修复；连续30天100%→降低检查频率"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-30T00:00:00+08:00",
+        "next_run": "每次commit自动",
+        "success_rate": 1.0
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-010",
+          "relationship": "checked_by"
+        },
+        {
+          "connected_rule": "RULE-048",
+          "relationship": "imposes_debt_on"
+        }
+      ],
+      "priority": "P1",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-010",
+      "name": "免疫扫描执行频率保障",
+      "source": "QM-010",
+      "original_form": "质量指标",
+      "biological_layer": {
+        "trigger": "每小时Cron自动 / Cron管理器监控",
+        "sensor": "Cron管理器监控 Cron心跳 / 免疫扫描结果文件时间戳检查",
+        "action": "每小时整点自动执行immune_scan.sh：MD5基线比对+HTML结构检查+术语扫描+CSS验证+链接检查",
+        "feedback": "当前每小时正常执行 → 延迟>5分钟触发告警 → 扫描失败自动重试1次 → 连续失败升级P0",
+        "adaptation": "连续48小时零异常→扫描深度调整为仅L0(基线比对)；异常频率上升→自动扩展为L0+L1+L2全量"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-30T01:00:00+08:00",
+        "next_run": "2026-05-30T02:00:00+08:00",
+        "success_rate": 1.0
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-005",
+          "relationship": "triggers"
+        },
+        {
+          "connected_rule": "RULE-012",
+          "relationship": "monitored_by"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-011",
+      "name": "数据管道执行频率保障",
+      "source": "QM-011",
+      "original_form": "质量指标",
+      "biological_layer": {
+        "trigger": "每6小时Cron触发(00:00/06:00/12:00/18:00)",
+        "sensor": "Cron管理器监控 + data_init_pipeline.py自检时间戳",
+        "action": "扫描workspace文件变化 → 提取新增实体/文档/脚本 → 更新files_index.json → 更新entities_index.json → 生成驾驶舱种子数据",
+        "feedback": "当前每6小时正常执行 → 发现异常发送警报 → 管道输出写入data流水日志",
+        "adaptation": "两次连续扫描无新增文件(<0.1%变化)→延长至12小时；文件变化率>1%→缩短至3小时"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-30T00:00:00+08:00",
+        "next_run": "2026-05-30T06:00:00+08:00",
+        "success_rate": 1.0
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-012",
+          "relationship": "feeds_data_to"
+        },
+        {
+          "connected_rule": "RULE-020",
+          "relationship": "provides_seed_to"
+        }
+      ],
+      "priority": "P1",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-012",
+      "name": "Cron心跳健康度保障",
+      "source": "QM-012",
+      "original_form": "质量指标",
+      "biological_layer": {
+        "trigger": "小时级自检 / 日起课06:00全量检查 / 周三10:00生态审计",
+        "sensor": "Cron管理器15任务在线状态轮询 + 每个Cron任务上次执行时间监控",
+        "action": "15个Cron任务全量健康检查：在线状态、延迟、成功率、失败重试、执行日志完整性",
+        "feedback": "当前15/15全部在线 → 驾驶舱Cron健康面板实时显示 → 失联任务立即P0告警 → 周报包含Cron健康趋势",
+        "adaptation": "单个Cron连续3次失败→自动挂起+通知；连续7天全绿→可考虑合并低频任务减少Cron总数"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-30T01:30:00+08:00",
+        "next_run": "每整点自动自检",
+        "success_rate": 1.0
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-010",
+          "relationship": "monitors"
+        },
+        {
+          "connected_rule": "RULE-011",
+          "relationship": "monitors"
+        },
+        {
+          "connected_rule": "RULE-013",
+          "relationship": "monitors"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-013",
+      "name": "MD5基线完整性保障",
+      "source": "QM-013",
+      "original_form": "质量指标",
+      "biological_layer": {
+        "trigger": "每日04:00 Cron梦境保存后 / 每日首次免疫扫描前",
+        "sensor": "immune_engine.py L0自身耐受 → MD5基线快照文件时间戳",
+        "action": "建立核心39个产品文件MD5基线 → 每次扫描比对当前哈希 vs 基线 → 任何偏差记录到immune_memory.json",
+        "feedback": "当前每日正常更新 → 偏差文件立即标记并记录变更类型 → 未知修改触发安全审计",
+        "adaptation": "文件变更与Git提交一致时自动更新基线；不一致时(非Git变更)标记为异常等待人工审核"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-30T04:00:00+08:00",
+        "next_run": "2026-05-31T04:00:00+08:00",
+        "success_rate": 1.0
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-005",
+          "relationship": "baseline_for"
+        },
+        {
+          "connected_rule": "RULE-010",
+          "relationship": "verified_by"
+        }
+      ],
+      "priority": "P1",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-014",
+      "name": "日起课工作流",
+      "source": "WF-001 + 转化-15",
+      "original_form": "工作流+操作规范",
+      "biological_layer": {
+        "trigger": "每日06:00 Cron触发 / 会话首次启动时(若>07:00未执行)",
+        "sensor": "Cron morning-ritual-comprehensive + 日起简报生成脚本检查",
+        "action": "1)检查夜间Cron执行报告 2)读取Token报告+昨日日志 3)更新生命体征仪表盘 4)生成今日任务优先级排序(P0→P1→P2) 5)发送日起简报至飞书群",
+        "feedback": "日起简报写入memory/YYYY-MM-DD.md → 飞书群推送 → 驾驶舱更新今日看板 → Cron失败时手动补执行",
+        "adaptation": "连续3天无P0任务→日起简报精简为3项健康检查+1句目标；积压任务>5→日起课增加10分钟任务重排模块"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-30T06:00:00+08:00",
+        "next_run": "2026-05-31T06:00:00+08:00",
+        "success_rate": 0.95
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-015",
+          "relationship": "triggers"
+        },
+        {
+          "connected_rule": "RULE-016",
+          "relationship": "paired_with"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-015",
+      "name": "日毕课工作流",
+      "source": "WF-002",
+      "original_form": "工作流",
+      "biological_layer": {
+        "trigger": "每日22:00 Cron触发 / 会话结束前自动触发",
+        "sensor": "Cron evening-ritual-comprehensive + 当日memory文件时间戳检查",
+        "action": "1)统计当日完成任务数 2)汇总今日决策日志 3)更新知识飞轮消化进度 4)生成日毕归档文件memory/YYYY-MM-DD.md 5)发送日毕简报至飞书群",
+        "feedback": "日毕归档写入记忆系统 → 飞书群推送今日总结 → 驾驶舱更新完成率 → 遗漏任务自动滚动到次日",
+        "adaptation": "当日完成率<50%→日毕报告增加根因分析(中断/阻塞/超估)；连续5天100%→简化为全绿状态"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-29T22:00:00+08:00",
+        "next_run": "2026-05-30T22:00:00+08:00",
+        "success_rate": 0.95
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-014",
+          "relationship": "paired_with"
+        },
+        {
+          "connected_rule": "RULE-022",
+          "relationship": "synced_with"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-016",
+      "name": "知识飞轮五步循环",
+      "source": "WF-005",
+      "original_form": "工作流",
+      "biological_layer": {
+        "trigger": "每次新知识摄入(网页阅读/文档学习/对话学习) / 翻书完成后",
+        "sensor": "知识摄入事件监听 → 飞轮消化队列(新知识自动入队)",
+        "action": "1)摄入:接收外部信息标注可信度 2)消化:提取关键概念+方法论 3)吸收:与已有知识图谱建立连接 4)同化:转化为可执行模板/检查清单 5)代谢:淘汰过时知识归档经验",
+        "feedback": "飞轮消化率写入驾驶舱 → 未消化知识计入知识债务统计 → 日毕课报告飞轮进度 → 代谢预警触发知识债务清算",
+        "adaptation": "知识债务(未消化)>20条→暂停新摄入优先消化；某领域知识连续3次标记为过时→降低该领域摄入权重"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-30T01:00:00+08:00",
+        "next_run": "下次知识摄入时",
+        "success_rate": 0.8
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-015",
+          "relationship": "reported_in"
+        },
+        {
+          "connected_rule": "RULE-032",
+          "relationship": "fuels_deep_learning"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-017",
+      "name": "部署前四关检查Hook",
+      "source": "WF-006",
+      "original_form": "工作流",
+      "biological_layer": {
+        "trigger": "Git Push前 / 发布前 / 任何文件变更部署前",
+        "sensor": "pre_delivery_gate.py Hook → Git pre-push钩子",
+        "action": "1)执行四关检查(L0提案→L1方法→L2质量→L3客户) 2)蓝军快速审计(敏感信息检测) 3)术语一致性终检 4)导航链接闭环验证 5)生成部署前报告",
+        "feedback": "部署前报告写入gate_stats.json → 不合格阻止部署 → 合格后自动释放发布锁 → 每次发布记录到部署日志",
+        "adaptation": "小变更(<3文件/非核心HTML)简化为快速模式(仅L0+L3)；P0级变更强制全量模式；连续5次快速模式通过后自动切换"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-30T00:00:00+08:00",
+        "next_run": "下次Git Push时",
+        "success_rate": 0.98
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-001",
+          "relationship": "triggers"
+        },
+        {
+          "connected_rule": "RULE-003",
+          "relationship": "triggers"
+        },
+        {
+          "connected_rule": "RULE-007",
+          "relationship": "includes"
+        },
+        {
+          "connected_rule": "RULE-008",
+          "relationship": "includes"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-018",
+      "name": "每日全量备份流程",
+      "source": "WF-007",
+      "original_form": "工作流",
+      "biological_layer": {
+        "trigger": "每日23:55 Cron触发 / 手动触发 / 重大发布前强制备份",
+        "sensor": "Cron定时 + star_backup.sh脚本 + 备份文件新鲜度监控",
+        "action": "1)star_backup.sh执行全量备份 2)压缩workspace关键目录 3)生成MD5校验文件 4)上传至备份存储 5)记录备份日志",
+        "feedback": "备份成功写入日志 → 免疫扫描检查备份新鲜度 → 超过48h无备份触发告警 → 恢复测试每月执行1次",
+        "adaptation": "磁盘使用率>85%→启用增量备份代替全量备份；检测到备份存储故障→自动切换到备用存储路径"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-29T23:55:00+08:00",
+        "next_run": "2026-05-30T23:55:00+08:00",
+        "success_rate": 0.99
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-012",
+          "relationship": "verified_by"
+        },
+        {
+          "connected_rule": "RULE-009",
+          "relationship": "backed_up_with"
+        }
+      ],
+      "priority": "P1",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-019",
+      "name": "术语自动修复流程",
+      "source": "WF-008",
+      "original_form": "工作流",
+      "biological_layer": {
+        "trigger": "免疫扫描L2发现术语不一致 / 词汇产权表更新 / 手动触发term_sync",
+        "sensor": "term_sync_engine.py + immune_scan.sh L2术语检查",
+        "action": "1)扫描全站术语 2)生成不一致清单 3)自动执行安全替换(仅site/目录) 4)重新扫描确认100%统一 5)生成修复报告",
+        "feedback": "修复报告写入term_scan_YYYYMMDD.json → 驾驶舱术语统一率更新 → 替换失败的术语标记为待人工审核",
+        "adaptation": "新术语映射加入时自动构建替换规则；连续3次扫描100%统一后→术语扫描频率从每小时降为每6小时"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-30T01:30:00+08:00",
+        "next_run": "每小时免疫扫描自动触发",
+        "success_rate": 1.0
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-007",
+          "relationship": "enforces"
+        },
+        {
+          "connected_rule": "RULE-043",
+          "relationship": "implements"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-020",
+      "name": "飞书Base同步流程",
+      "source": "WF-009",
+      "original_form": "工作流",
+      "biological_layer": {
+        "trigger": "每日23:00 Cron触发",
+        "sensor": "Cron 每日飞书同步-新增文件",
+        "action": "1)连接飞书Base多维表格 2)下载任务/客户增量数据 3)更新dashboard_seed_v2.json 4)写入新发现实体到飞书知识库 5)同步生命体征到飞书消息群",
+        "feedback": "同步状态写入驾驶舱 → 同步失败重试3次 → 持续失败通知 → 同步后数据一致性校验",
+        "adaptation": "增量数据>100条时启用批量模式(分批写入)；飞书API限流时自动降级为每小时分片同步"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-29T23:00:00+08:00",
+        "next_run": "2026-05-30T23:00:00+08:00",
+        "success_rate": 0.95
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-011",
+          "relationship": "feeds"
+        },
+        {
+          "connected_rule": "RULE-014",
+          "relationship": "receives_from"
+        }
+      ],
+      "priority": "P1",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-021",
+      "name": "每周三生态审计",
+      "source": "WF-011",
+      "original_form": "工作流",
+      "biological_layer": {
+        "trigger": "每周三10:00 Cron触发 / 手动触发用于紧急审计",
+        "sensor": "Cron 周三整周体检(知识+Token合并) + 驾驶舱生态健康面板",
+        "action": "1)L7生态健康检查(全站质量/连接密度/替身活跃度) 2)知识债务统计(未消化知识数) 3)Cron健康度评估(15个任务状态) 4)替身贡献/激活统计 5)生成生态周报",
+        "feedback": "生态周报输出至驾驶舱+飞书群 → 健康度评分(绿/黄/红) → 红色触发P0整改工单 → 黄色标记关注项",
+        "adaptation": "连续4周绿色(健康)→审计深度降为L4(仅关键指标)；首次出现红色→立即触发蓝军独立审计+五路评议会"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-27T00:00:00+08:00",
+        "next_run": "2026-06-03T10:00:00+08:00",
+        "success_rate": 0.9
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-002",
+          "relationship": "includes"
+        },
+        {
+          "connected_rule": "RULE-012",
+          "relationship": "audits"
+        },
+        {
+          "connected_rule": "RULE-042",
+          "relationship": "escalates_to"
+        }
+      ],
+      "priority": "P1",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-022",
+      "name": "每周一决策评估",
+      "source": "WF-012",
+      "original_form": "工作流",
+      "biological_layer": {
+        "trigger": "每周一09:00 Cron触发",
+        "sensor": "Cron weekly-decision-evaluation(当前error需修复)",
+        "action": "1)回顾上周所有决策记录 2)评估决策执行效果(完成率/影响) 3)更新决策优先级 4)标记过时/错误决策 5)生成决策周报",
+        "feedback": "决策周报写入驾驶舱决策看板 → 未执行决策自动升级提醒 → 过时决策移至归档 → 高频撤销的决策类型标记为决策模式风险",
+        "adaptation": "某类型决策(如技术选型)连续3周正确率<70%→自动升级为S级(需Egbertie审批)；积累>10个未执行→触发决策负债清理日"
+      },
+      "execution_status": {
+        "current": "broken",
+        "last_run": "2026-05-25T00:00:00+08:00",
+        "next_run": "2026-06-01T09:00:00+08:00",
+        "success_rate": null
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-030",
+          "relationship": "reviews"
+        },
+        {
+          "connected_rule": "RULE-015",
+          "relationship": "summarizes"
+        }
+      ],
+      "priority": "P1",
+      "needs_activation": true
+    },
+    {
+      "rule_id": "RULE-023",
+      "name": "概念阶段准入准出",
+      "source": "LC-001",
+      "original_form": "生命周期标准",
+      "biological_layer": {
+        "trigger": "新产品创意诞生 / 来自市场洞察/客户反馈的需求信号",
+        "sensor": "产品构思提交 → L0提案审核门控(RULE-001)",
+        "action": "准入: 确认产品解决明确决策痛点 + 满意解方法论可覆盖。准出: 概念验证通过(60%信任指数) + 通过L0提案审核",
+        "feedback": "概念验证报告写入产品目录 → 不通过的概念标记为搁置并在30天后复查 → 通过率统计写入驾驶舱",
+        "adaptation": "连续10个概念被否决→触发方向审查(是否方法论不匹配当前需求)；某领域概念集中通过→升级为产品线规划"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-30T00:00:00+08:00",
+        "next_run": "新产品构思提交时",
+        "success_rate": 0.85
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-001",
+          "relationship": "gate_entered"
+        },
+        {
+          "connected_rule": "RULE-024",
+          "relationship": "feeds_into"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-024",
+      "name": "原型阶段准入准出",
+      "source": "LC-002",
+      "original_form": "生命周期标准",
+      "biological_layer": {
+        "trigger": "概念通过L0提案审核 + 方法论校准通过",
+        "sensor": "L0审核通过事件 + 方法论校准完成信号",
+        "action": "准入: 概念通过L0+L1审核。准出: 原型可通过自检清单 + 四关内审>=60%",
+        "feedback": "原型测试报告 → 不达标原型打回修正并标注缺陷 → 达标进入内侧 → 原型阶段时长写入驾驶舱",
+        "adaptation": "原型阶段平均耗时>14天→触发流程优化审查(是否审核过重)；60%达标率过低→检查门槛是否过高"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": null,
+        "next_run": "新原型提交时",
+        "success_rate": null
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-002",
+          "relationship": "gated_by"
+        },
+        {
+          "connected_rule": "RULE-003",
+          "relationship": "measured_by"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-025",
+      "name": "内侧阶段准入准出",
+      "source": "LC-003",
+      "original_form": "生命周期标准",
+      "biological_layer": {
+        "trigger": "原型四关通过率>=60% + 蓝军独立审计通过",
+        "sensor": "四关评估结果 + 蓝军审计报告(FAIL/PASS)",
+        "action": "准入: 原型达标+蓝军PASS。准出: 内侧无P0缺陷 + 四关通过率>=80% + 客户替身交叉验证OK",
+        "feedback": "内侧报告写入 → P0缺陷清单跟踪 → 客户替身交叉验证评分 → 不达标产品延长内侧期最多14天",
+        "adaptation": "同类产品内侧缺陷模式重复出现(同类型Bug)→触发根因分析+方法论培训；核心产品内侧持续<80%→启动五路评议会"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": null,
+        "next_run": "新版本内侧时",
+        "success_rate": 0.8
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-003",
+          "relationship": "gated_by"
+        },
+        {
+          "connected_rule": "RULE-042",
+          "relationship": "escalated_to"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-026",
+      "name": "公开阶段准入准出",
+      "source": "LC-004",
+      "original_form": "生命周期标准",
+      "biological_layer": {
+        "trigger": "内侧全部P0缺陷清零 + 术语统一100% + VI标准化完成",
+        "sensor": "P0缺陷清单清零信号 + 术语扫描100% + CSS变量一致性100%",
+        "action": "准入: 内侧达标+P0清零+术语VI达标。准出: 上线后7天无严重Bug + 客户反馈采集管道就绪",
+        "feedback": "发布日志+客户反馈管道状态写入驾驶舱 → 7天观察期异常立即回滚 → 平稳发布后产品标记为线上状态",
+        "adaptation": "7天观察期发现>2个P1级别问题→延长观察期至14天；首发客户反馈率<10%→触发获客漏斗审计"
+      },
+      "execution_status": {
+        "current": "dormant",
+        "last_run": null,
+        "next_run": "下次产品发布时",
+        "success_rate": null
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-005",
+          "relationship": "requires"
+        },
+        {
+          "connected_rule": "RULE-006",
+          "relationship": "requires"
+        },
+        {
+          "connected_rule": "RULE-007",
+          "relationship": "requires"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": true
+    },
+    {
+      "rule_id": "RULE-027",
+      "name": "精品阶段准入准出",
+      "source": "LC-005",
+      "original_form": "生命周期标准",
+      "biological_layer": {
+        "trigger": "上线后获得首批真实客户反馈 + 至少3个正面案例",
+        "sensor": "客户反馈采集管道 → 正面案例计数器(>=3触发)",
+        "action": "准入: 真实客户>=3正面案例。准出: 产品星级>=4星 + 活跃用户留存>=60% + 至少1篇深度客户案例",
+        "feedback": "精品评级写入产品目录 → 案例积累进度看板 → 星级变化趋势 → 未达精品的标注改进方向",
+        "adaptation": "优质产品(4星+)留存率下跌>10%→触发产品衰退预警→蓝军审计原因；客户案例积累慢于预期→启动主动案例征集"
+      },
+      "execution_status": {
+        "current": "dormant",
+        "last_run": null,
+        "next_run": "首个产品上线满30天后",
+        "success_rate": null
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-026",
+          "relationship": "preceded_by"
+        },
+        {
+          "connected_rule": "RULE-038",
+          "relationship": "fueled_by"
+        }
+      ],
+      "priority": "P1",
+      "needs_activation": true
+    },
+    {
+      "rule_id": "RULE-028",
+      "name": "维护阶段准入准出",
+      "source": "LC-006",
+      "original_form": "生命周期标准",
+      "biological_layer": {
+        "trigger": "产品星级稳定>=4星 + 需求量下降或用户群稳定",
+        "sensor": "产品活跃度监控(连续3月) + 用户反馈量趋势",
+        "action": "准入: 星级稳定+需求平稳。准出: 连续6月无活跃使用 或 发现根本性设计缺陷→触发退役",
+        "feedback": "维护状态看板(资源消耗/兼容性更新频率) → 异常波动触发升级审计 → 维护成本过高建议退役",
+        "adaptation": "维护产品突然需求回暖(活跃度+200%)→自动提议升级回精品阶段；维护产品>10个→触发维护成本审查"
+      },
+      "execution_status": {
+        "current": "dormant",
+        "last_run": null,
+        "next_run": null,
+        "success_rate": null
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-029",
+          "relationship": "precedes"
+        }
+      ],
+      "priority": "P2",
+      "needs_activation": true
+    },
+    {
+      "rule_id": "RULE-029",
+      "name": "退役阶段准入准出",
+      "source": "LC-007",
+      "original_form": "生命周期标准",
+      "biological_layer": {
+        "trigger": "维护产品触发退出条件(6月无活跃/根本性设计缺陷)",
+        "sensor": "维护阶段监控触发退役信号 + 决策日志确认退役",
+        "action": "准入: 维护退出条件+决策确认。准出: 经验/教训归档完成 + 关联产品已更新 + 用户已迁移至替代方案",
+        "feedback": "退役报告写入知识库 → 关联产品更新确认 → 用户迁移完成率→驾驶舱 → 经验萃取归档后才算完成退役",
+        "adaptation": "用户迁移率<50%触发延长维护期；经验萃取遗漏→蓝军事后审计标记知识缺口"
+      },
+      "execution_status": {
+        "current": "dormant",
+        "last_run": null,
+        "next_run": null,
+        "success_rate": null
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-028",
+          "relationship": "triggered_by"
+        },
+        {
+          "connected_rule": "RULE-016",
+          "relationship": "archives_to"
+        }
+      ],
+      "priority": "P2",
+      "needs_activation": true
+    },
+    {
+      "rule_id": "RULE-030",
+      "name": "任务接收六问检查",
+      "source": "速查卡-03 + 转化-03",
+      "original_form": "速查卡+操作规范",
+      "biological_layer": {
+        "trigger": "收到Egbertie任务指令 / 需要管理多个子任务 / 不确定任务边界时",
+        "sensor": "任务接收检查清单(6问): 目标→标准→Deadline→上下文→Skill→风险",
+        "action": "确认理解任务目标→确认交付标准→确认Deadline→确认上下文充足→识别所需Skill→识别风险点",
+        "feedback": "每问不可跳过 → 任一模糊立即向Egbertie确认 → 接收完成→写入进度追踪文件",
+        "adaptation": "频繁遇到相同类型任务→自动预填检查清单；连续3次无需确认→信任度提升可跳过部分检查"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-30T01:40:00+08:00",
+        "next_run": "下次任务接收时",
+        "success_rate": 0.95
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-034",
+          "relationship": "feeds_into"
+        },
+        {
+          "connected_rule": "RULE-035",
+          "relationship": "feeds_into"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-031",
+      "name": "任务交付五问检查",
+      "source": "速查卡-03 + 转化-03",
+      "original_form": "速查卡+操作规范",
+      "biological_layer": {
+        "trigger": "任务完成准备交付时 / 产出提交前",
+        "sensor": "任务交付检查清单(5问): 交付标准→创始人5分钟→存档→进度同步→反馈渠道",
+        "action": "产出符合交付标准→创始人5分钟内能看懂→已存档→需要同步进度→有反馈渠道",
+        "feedback": "5项全部通过才可交付 → 未通过项标记并修补 → 交付记录写入TASK_MASTER",
+        "adaptation": "持续某类检查项反复失败→调整验收标准或培训执行者"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": null,
+        "next_run": "下次交付物产出时",
+        "success_rate": 0.9
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-030",
+          "relationship": "paired_with"
+        },
+        {
+          "connected_rule": "RULE-037",
+          "relationship": "validated_by"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-032",
+      "name": "防中断工作协议·五层保护",
+      "source": "速查卡-33 + 转化-33",
+      "original_form": "速查卡+操作规范",
+      "biological_layer": {
+        "trigger": "任务预计超过30分钟 / 需要多步完成 / 可能被中断 / Egbertie不在线",
+        "sensor": "进度追踪文件存在性检查 + 任务拆解检查 + 串行标志 + 存档时效检查(30分钟)",
+        "action": "1)进度追踪(战场地图) 2)单元化执行(积木块<30分钟) 3)串行不并行(单线程) 4)防中断存档(文件+Git+记忆) 5)3分钟内完整恢复",
+        "feedback": "每单元完成→30秒存档→90秒Git提交→180秒memory更新 → 退化信号自动警示 → 默念口诀立即纠正",
+        "adaptation": "真正敌人不是外部打断是内部急躁: 没建文件就干→强制停止；>30分钟未更新→立即更新；想并行→回到串行"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": null,
+        "next_run": "长任务启动时",
+        "success_rate": 0.85
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-030",
+          "relationship": "triggered_by"
+        },
+        {
+          "connected_rule": "RULE-033",
+          "relationship": "implements_archive"
+        },
+        {
+          "connected_rule": "RULE-034",
+          "relationship": "paired_with"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-033",
+      "name": "断点存档工程师·三层存档",
+      "source": "速查卡-27 + 转化-27",
+      "original_form": "速查卡+操作规范",
+      "biological_layer": {
+        "trigger": "用户说暂停(我去忙了/先这样) / 连续10分钟无交互 / 任务完成一个单元 / 每日结束前",
+        "sensor": "Layer A(10秒)运行时上下文 → Layer B(15秒)交付物快照 → Layer C(5秒)记忆指针",
+        "action": "Layer A: 当前任务+执行位置+待解决问题。Layer B: 文件列表+路径+状态。Layer C: MEMORY状态+关键决策+恢复入口",
+        "feedback": "存档完成→Git提交→memory同步 → 恢复时读取checkpoint→3分钟内完整恢复",
+        "adaptation": "存档时机自动检测: 暂停关键词/10分钟无交互/单元完成/日毕课 → 30秒强制存档不可跳过"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": null,
+        "next_run": "每次存档时机触发",
+        "success_rate": 0.9
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-032",
+          "relationship": "implements_layer"
+        },
+        {
+          "connected_rule": "RULE-034",
+          "relationship": "feeds_progress"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-034",
+      "name": "进度追踪标准化师·四个统一",
+      "source": "速查卡-35 + 转化-35",
+      "original_form": "速查卡+操作规范",
+      "biological_layer": {
+        "trigger": "有2个以上任务同时进行 / 需要向Egbertie同步进度 / Egbertie问现在进展如何",
+        "sensor": "grep扫描所有进度文件状态 + 多任务汇总表自动对比",
+        "action": "统一格式(所有任务相同模板) + 统一位置(所有进度文件在同一目录) + 统一更新(事件驱动:有变化立即更新不等定时) + 一瞥即知(grep扫描)",
+        "feedback": "每日结束时创建汇总表 → Egbertie可一瞥即知全局 → 格式不统一的进度文件强制迁移",
+        "adaptation": "任务>10个→启用自动汇总脚本；连续7天无状态变化→简化更新频率为每日一次"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": null,
+        "next_run": "多任务并行时",
+        "success_rate": 0.88
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-032",
+          "relationship": "extends_to_multi_task"
+        },
+        {
+          "connected_rule": "RULE-035",
+          "relationship": "paired_with"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-035",
+      "name": "任务拆解匠·三轮拆解",
+      "source": "转化-28-任务拆解匠",
+      "original_form": "操作规范",
+      "biological_layer": {
+        "trigger": "任务预估超过10分钟 / 涉及多个阶段或多人协作 / 不确定从哪下手 / 之前类似任务中途卡住",
+        "sensor": "任务复杂度评估(>10分钟/多阶段/不确定性高→触发拆解)",
+        "action": "Round1阶段拆分(3-5自然阶段) → Round2任务拆分(每阶段5-7任务) → Round3单元拆分(每任务3-5分钟Unit<3句话描述) → 识别依赖→优先级排序→输出拆解报告",
+        "feedback": "拆解报告写入进度追踪 → 实际vs预估时间对比 → 依赖图验证 → 拆太细/太粗→自动警示",
+        "adaptation": "最小单元四要素: 3-5分钟/有完成判定/可独立落盘/不可再拆。3分钟法则: Unit描述>3句话→还可以拆"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": null,
+        "next_run": "复杂任务启动时",
+        "success_rate": 0.9
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-030",
+          "relationship": "triggered_by"
+        },
+        {
+          "connected_rule": "RULE-032",
+          "relationship": "feeds_into"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-036",
+      "name": "记忆同步协议·六项启动检查",
+      "source": "转化-29-记忆同步协议",
+      "original_form": "操作规范",
+      "biological_layer": {
+        "trigger": "每次会话启动 / 长任务恢复 / 系统重启 / 从休眠唤醒 / 任何可能产生记忆断层时",
+        "sensor": "C1-C6六项检查: Memory已追加/MEMORY.md指针同步/TASK_MASTER已更新/代码可运行/Git已快照/重启自检通过",
+        "action": "逐项验证C1-C6 → 状态判定[BLOCKED]Z>0先处理阻塞项/[CAUTION]Z=0Y>0继续但标注风险/[GO]全部通过正常执行",
+        "feedback": "启动检查报告 → [BLOCKED]强制停止 → [CAUTION]标注风险 → [GO]安全执行 → 每项失败都有明确处理方案",
+        "adaptation": "连续10次[GO]可快速跳过C4-C5；任何[BLOCKED]出现后恢复全量检查连续5次"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-30T01:40:00+08:00",
+        "next_run": "每次会话启动时",
+        "success_rate": 0.92
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-033",
+          "relationship": "restores_from"
+        },
+        {
+          "connected_rule": "RULE-014",
+          "relationship": "checked_at_startup"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-037",
+      "name": "FIN诚实验证器·三合一检查",
+      "source": "转化-22-FIN诚实验证器",
+      "original_form": "操作规范",
+      "biological_layer": {
+        "trigger": "交付物质量验证 / 检查AI产出是否空气 / 确认产出可直接使用 / 任务收尾时",
+        "sensor": "FIN三项检查: Findable文件是否可定位检索、Integrated是否已整合到系统、Neutral是否有夸大虚假声明",
+        "action": "1)Findable: 文件可定位/检索 2)Integrated: 已整合到TASK_MASTER/驾驶舱/记忆系统 3)Neutral: 无夸大/虚假声明/产出可直接使用",
+        "feedback": "三项全过才算合格 → 任一项失败标记为空气产出→重新处理 → FIN合格率写入质量看板",
+        "adaptation": "频繁出现Integrated失败→触发自动化集成脚本优化；Neutral失败率>20%→触发产出诚实度培训"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": null,
+        "next_run": "每次交付物产出后",
+        "success_rate": 0.88
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-031",
+          "relationship": "validates"
+        },
+        {
+          "connected_rule": "RULE-038",
+          "relationship": "paired_with"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-038",
+      "name": "创始人5分钟可用性检验",
+      "source": "转化-23-创始人5分钟可用性检验",
+      "original_form": "操作规范",
+      "biological_layer": {
+        "trigger": "交付物产出前自检 / 接收方质量判断 / 满意解系统的收尾检验",
+        "sensor": "三阶段检验: [0-1分钟]是什么→[1-3分钟]怎么用→[3-5分钟]质量如何",
+        "action": "[0-1min]清晰标题+1句话用途+适用对象。[1-3min]操作<=5步+每步明确指示+无歧义。[3-5min]明确验收标准+成功失败示例+问题处理方式",
+        "feedback": "创始人拿到产出5分钟内能判断: 这是什么/要怎么用/是否达到满意标准 → 不通过打回重做",
+        "adaptation": "简洁优先: 能1句话说清的不用5句；行动导向: 每步都有明确行动；标准明确: 创始人能自己判断达标"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": null,
+        "next_run": "每次交付物产出前",
+        "success_rate": 0.92
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-031",
+          "relationship": "validates"
+        },
+        {
+          "connected_rule": "RULE-037",
+          "relationship": "paired_with"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-039",
+      "name": "快速认知审计·10偏差扫描",
+      "source": "速查卡-25 + 转化-25",
+      "original_form": "速查卡+操作规范",
+      "biological_layer": {
+        "trigger": "做重大决策前 / AI即将输出判断建议前 / 置信度存疑时 / 发现执行结果与预期不符时",
+        "sensor": "10项认知偏差扫描(每项20秒): 确认偏误/可得性启发/锚定效应/过度自信/基地率忽视/光环效应/近因效应/框架效应/沉没成本/群体思维",
+        "action": "1)识别审计对象 2)逐项扫描10个检查点 3)记录发现的问题 4)标注最高风险 5)给出改进建议。前5项优先:信源独立+时效性+因果混淆+幸存者偏差+基底率",
+        "feedback": "禁止输出一切正常 → 必须发现至少1个问题 → 每项<=20秒 → 审计结果存档 → 可精简到前5项节省时间",
+        "adaptation": "频繁出现某类偏差→自动标记为个人认知模式→在对应场景预提醒；某领域偏差率持续高→升级为团队培训主题"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": null,
+        "next_run": "下次重大决策前",
+        "success_rate": 0.85
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-040",
+          "relationship": "precedes"
+        },
+        {
+          "connected_rule": "RULE-031",
+          "relationship": "validates_output"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-040",
+      "name": "五维决策体系·五维评分",
+      "source": "速查卡-04 + 转化-04",
+      "original_form": "速查卡+操作规范",
+      "biological_layer": {
+        "trigger": "重大方向选择 / Egbertie问你觉得应该怎么做 / 多个选项需要权衡 / 决策影响超过1周工作",
+        "sensor": "五维评分表: 土(根基)/金(标尺)/水(流动)/木(伦理)/火(直觉)各1-10分",
+        "action": "列出决策选项(A/B/C) → 对每个选项五维评分(1-10) → 计算总分 → 检查任一维度<5 → 综合判断。总分>=35推进/任一<5需补强/木<=3一票否决",
+        "feedback": "决策结论记录编号存档 → 决策后复盘vs实际结果 → 五维评分偏差分析 → 预测准确率写入驾驶舱",
+        "adaptation": "快速评估(3分钟): 土-根基稳固吗/金-满意标准明确吗/水-方向对吗/木-伦理通过吗/火-直觉接受吗。木维度一票否决不可跳过"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": null,
+        "next_run": "下次重大决策时",
+        "success_rate": 0.9
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-039",
+          "relationship": "follows"
+        },
+        {
+          "connected_rule": "RULE-041",
+          "relationship": "archives_to"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-041",
+      "name": "决策断点存档·编号追溯",
+      "source": "转化-30-决策断点存档",
+      "original_form": "操作规范",
+      "biological_layer": {
+        "trigger": "需要呈现多个选项给用户选择 / 用户刚做出选择 / 需要回顾之前决定 / 用户要改变之前决定",
+        "sensor": "决策存档触发检查 + DEC编号查重",
+        "action": "选项编号(2-5个A编号) → 解析用户响应(A-编号格式) → 分配DEC编号(3位数字查重) → 写入决策文件(7字段) → 建立追溯链 → 确认执行",
+        "feedback": "每个决策有编号/有选项/有记录/有追溯链 → 不是为了一言九鼎不能改，是为了改了之后知道为什么改、改了什么影响",
+        "adaptation": "决策调整申请模板: 原决策→原选择→申请改为→调整原因→影响分析→确认调整。选项上限5个，>5精简"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": null,
+        "next_run": "下次决策存档时",
+        "success_rate": 0.93
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-040",
+          "relationship": "archives_result"
+        },
+        {
+          "connected_rule": "RULE-033",
+          "relationship": "archives_with"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-042",
+      "name": "双轨诚实审计·蓝军+满意姐",
+      "source": "转化-16-双轨诚实审计",
+      "original_form": "操作规范",
+      "biological_layer": {
+        "trigger": "完成任何重要任务后 / 提交任何产出前 / 每周日深度审计 / 遇到感觉不对时",
+        "sensor": "双轨触发: 蓝军轨(风险视角:这个有什么漏洞) + 满意姐轨(关怀视角:这个有什么可以优化)",
+        "action": "蓝军审计: 风险等级+指控(假设漏洞/逻辑跳跃/信息盲区) → 满意姐审计: 关怀等级+关切(流程/状态/体验) → 生成整改清单 → 标记立即行动项",
+        "feedback": "快速审计模板: [蓝军-风险]漏洞1漏洞2 + [满意姐-优化]优化1优化2 + [立即行动]修复/忽略(原因)",
+        "adaptation": "审计频率自适应: 高风险期每天一次→平稳期每周一次。蓝军FAIL时满意红必须书面回应(接受/说明理由/求助Egbertie)不得忽略"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": null,
+        "next_run": "下次重要产出提交前",
+        "success_rate": 0.87
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-039",
+          "relationship": "pairs_with"
+        },
+        {
+          "connected_rule": "RULE-040",
+          "relationship": "validates_decision"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-043",
+      "name": "核心词汇产权保护",
+      "source": "满意解核心词汇产权表_V1.0",
+      "original_form": "治理规范",
+      "biological_layer": {
+        "trigger": "任何涉及L0核心词的变更 / 外部方法论融入 / 对外渠道表达调整 / 竞品对标",
+        "sensor": "词汇产权审核流程: 提案人标注变更原因→内容策略师审核(品牌一致性)→研究咨询师审核(差异化定位)→Egbertie最终批准",
+        "action": "L0不可替换核心IP词(契晋/满意解/五路图腾/红莲淬火/满天星光/三生万物/血液化/飞轮/PRE-0/凌晨一点的创始人) → L1对外翻译层可调整但内核不变 → L2可吸收外部词汇但标注来源",
+        "feedback": "词汇变更必须走四步审核 → 未审批的变更自动回滚(term_sync反向替换) → 词汇使用一致性写入免疫扫描",
+        "adaptation": "新增L0词需经Egbertie确认并更新产权表；外部词汇融入需双重标注(来源+禁止事项)"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-29T04:30:00+08:00",
+        "next_run": "词汇变更触发时",
+        "success_rate": 1.0
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-007",
+          "relationship": "enforced_by"
+        },
+        {
+          "connected_rule": "RULE-019",
+          "relationship": "implemented_by"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-044",
+      "name": "VI标准一致性验证",
+      "source": "VI标准 + QM-006",
+      "original_form": "视觉标准+质量指标",
+      "biological_layer": {
+        "trigger": "新页面创建 / 品牌材料产出 / 免疫扫描CSS检查",
+        "sensor": "CSS变量对比VI标准表 + 品牌色值校验(#C23B22赭石红等) + 视觉语言一致性检查",
+        "action": "所有HTML文件的CSS变量与VI标准(:root声明)保持一致 → 品牌色值统一 → 视觉符号体系合规",
+        "feedback": "CSS变量偏差率写入免疫报告 → 新页面首次扫描自动告警 → 批量偏差触发自动修复",
+        "adaptation": "VI标准更新时自动刷新所有页面的引用；新增品牌色值需走词汇产权审核(L1层)"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-30T01:00:00+08:00",
+        "next_run": "每小时免疫扫描",
+        "success_rate": 0.98
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-006",
+          "relationship": "validates"
+        },
+        {
+          "connected_rule": "RULE-005",
+          "relationship": "paired_with"
+        }
+      ],
+      "priority": "P1",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-045",
+      "name": "官宣日倒计时门控",
+      "source": "DACI元治理框架 + entities_index",
+      "original_form": "治理框架",
+      "biological_layer": {
+        "trigger": "日期临近2026-06-21夏至官宣日 / 官宣前置条件检查",
+        "sensor": "倒计时引擎 + 里程碑检查清单 + 驾驶舱官宣仪表盘",
+        "action": "官宣前必须完成: 商标注册+公众号7篇全发+飞书Wiki公开+定价策略+收款通道+系统压力测试+蓝军72h审计+官宣方案终稿+预演",
+        "feedback": "倒计时看板每日更新 → 未完成项P0红色标记 → 阻塞项自动升级到DACI S级(需Egbertie批准) → 提前30天启动每日检查",
+        "adaptation": "若某项前置条件预估无法按期完成→触发风险预案(延期/简化/降级)；所有S级项完成→自动释放官宣就绪信号"
+      },
+      "execution_status": {
+        "current": "dormant",
+        "last_run": null,
+        "next_run": "2026-05-30起每日检查",
+        "success_rate": null
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-004",
+          "relationship": "blocks"
+        },
+        {
+          "connected_rule": "RULE-046",
+          "relationship": "governed_by"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": true
+    },
+    {
+      "rule_id": "RULE-046",
+      "name": "DACI决策权矩阵",
+      "source": "DACI元治理框架_V1.0_草案",
+      "original_form": "治理框架(草案)",
+      "biological_layer": {
+        "trigger": "任何产品迭代/替身调整/品牌叙事/蓝军审计/外部承诺/战略变更决策发生时",
+        "sensor": "决策类型→DACI等级(S/A/B/C) → 角色分配(Driver/Approver/Contributor/Informed)",
+        "action": "S级(全体一致): Egbertie+满意红+蓝军三方同意，蓝军有硬否决权。A级: 满意红提案→Egbertie确认。B级: 满意红执行→事后备案。C级: 自动化",
+        "feedback": "每个决策记录DACI等级 → 越权决策自动告警 → DACI执行统计写入驾驶舱 → 蓝军否决权行使频率监控",
+        "adaptation": "连续10次B级决策零回撤→可申请升级部分B级项；蓝军否决权连续未行使→审计深度是否不足"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-29T04:20:00+08:00",
+        "next_run": "每次决策时",
+        "success_rate": 0.95
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-045",
+          "relationship": "governs"
+        },
+        {
+          "connected_rule": "RULE-042",
+          "relationship": "enforced_by"
+        },
+        {
+          "connected_rule": "RULE-047",
+          "relationship": "applied_to"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-047",
+      "name": "蓝军独立审计元规则",
+      "source": "DACI元治理框架(蓝军独立Session元规则)",
+      "original_form": "治理框架(草案)",
+      "biological_layer": {
+        "trigger": "P0战略决策时 / Egbertie或满意红主动请求 / 日毕课自动审计 / 不低于每3天一次",
+        "sensor": "独立Context Window(不受满意红当前上下文影响) + 蓝军Skeptor-7审计标准",
+        "action": "独立Session启动→独立分析→输出PASS/FAIL → FAIL时满意红必须书面回应(接受/说明理由/求助Egbertie)不得忽略",
+        "feedback": "蓝军报告写入驾驶舱 → FAIL记录跟踪 → 回应时效监控(24h内必须回应) → 审计覆盖度统计",
+        "adaptation": "蓝军审计频率>=每3天一次；连续PASS可延长至每周；出现FAIL后恢复3天频率"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": "2026-05-29T00:00:00+08:00",
+        "next_run": "2026-06-01前",
+        "success_rate": 0.85
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-046",
+          "relationship": "governed_by"
+        },
+        {
+          "connected_rule": "RULE-025",
+          "relationship": "audits_stage"
+        },
+        {
+          "connected_rule": "RULE-042",
+          "relationship": "parallel_audit"
+        }
+      ],
+      "priority": "P0",
+      "needs_activation": false
+    },
+    {
+      "rule_id": "RULE-048",
+      "name": "静水流深·三遍过滤",
+      "source": "转化-10-静水流深协作者",
+      "original_form": "操作规范",
+      "biological_layer": {
+        "trigger": "对外正式输出前 / 客户沟通前 / 正式报告发布前 / 检测AI输出油滑感",
+        "sensor": "三遍过滤: 红线扫描→姿态校准→口吻确认。扫描建议/请问/祝您等AI腔关键词",
+        "action": "第一遍红线扫描: 扫描建议请问祝您替换为中性表达。第二遍姿态校准: 纯信息传递去除暗示性语言。第三遍口吻确认: 无油滑感适合目标读者",
+        "feedback": "宽松级(内部讨论)→标准级(对外沟通)→严格级(正式发布)。白名单: 用户明确要求建议/教程场景/书信结尾",
+        "adaptation": "AI输出油滑感自动检测→触发静水流深过滤；新渠道首次使用严格级→后续可降为标准级"
+      },
+      "execution_status": {
+        "current": "active",
+        "last_run": null,
+        "next_run": "下次对外输出前",
+        "success_rate": 0.95
+      },
+      "connections": [
+        {
+          "connected_rule": "RULE-031",
+          "relationship": "refines_output"
+        },
+        {
+          "connected_rule": "RULE-038",
+          "relationship": "paired_with"
+        }
+      ],
+      "priority": "P1",
+      "needs_activation": false
+    }
+  ],
+  "rule_connections": [
+    {
+      "from_rule": "RULE-001",
+      "to_rule": "RULE-047",
+      "relationship": "feeds_into"
+    },
+    {
+      "from_rule": "RULE-001",
+      "to_rule": "RULE-017",
+      "relationship": "gate_of"
+    },
+    {
+      "from_rule": "RULE-002",
+      "to_rule": "RULE-001",
+      "relationship": "triggered_by"
+    },
+    {
+      "from_rule": "RULE-002",
+      "to_rule": "RULE-021",
+      "relationship": "audited_by"
+    },
+    {
+      "from_rule": "RULE-003",
+      "to_rule": "RULE-001",
+      "relationship": "extends"
+    },
+    {
+      "from_rule": "RULE-003",
+      "to_rule": "RULE-002",
+      "relationship": "extends"
+    },
+    {
+      "from_rule": "RULE-003",
+      "to_rule": "RULE-017",
+      "relationship": "gated_by"
+    },
+    {
+      "from_rule": "RULE-004",
+      "to_rule": "RULE-043",
+      "relationship": "protected_by"
+    },
+    {
+      "from_rule": "RULE-004",
+      "to_rule": "RULE-045",
+      "relationship": "gate_of_official_launch"
+    },
+    {
+      "from_rule": "RULE-005",
+      "to_rule": "RULE-006",
+      "relationship": "paired_with"
+    },
+    {
+      "from_rule": "RULE-005",
+      "to_rule": "RULE-010",
+      "relationship": "scanned_by"
+    },
+    {
+      "from_rule": "RULE-006",
+      "to_rule": "RULE-005",
+      "relationship": "paired_with"
+    },
+    {
+      "from_rule": "RULE-006",
+      "to_rule": "RULE-044",
+      "relationship": "validated_by"
+    },
+    {
+      "from_rule": "RULE-007",
+      "to_rule": "RULE-043",
+      "relationship": "enforces"
+    },
+    {
+      "from_rule": "RULE-007",
+      "to_rule": "RULE-010",
+      "relationship": "checked_by"
+    },
+    {
+      "from_rule": "RULE-008",
+      "to_rule": "RULE-005",
+      "relationship": "child_check"
+    },
+    {
+      "from_rule": "RULE-008",
+      "to_rule": "RULE-017",
+      "relationship": "checked_by"
+    },
+    {
+      "from_rule": "RULE-009",
+      "to_rule": "RULE-010",
+      "relationship": "checked_by"
+    },
+    {
+      "from_rule": "RULE-009",
+      "to_rule": "RULE-048",
+      "relationship": "imposes_debt_on"
+    },
+    {
+      "from_rule": "RULE-010",
+      "to_rule": "RULE-005",
+      "relationship": "triggers"
+    },
+    {
+      "from_rule": "RULE-010",
+      "to_rule": "RULE-012",
+      "relationship": "monitored_by"
+    },
+    {
+      "from_rule": "RULE-011",
+      "to_rule": "RULE-012",
+      "relationship": "feeds_data_to"
+    },
+    {
+      "from_rule": "RULE-011",
+      "to_rule": "RULE-020",
+      "relationship": "provides_seed_to"
+    },
+    {
+      "from_rule": "RULE-012",
+      "to_rule": "RULE-010",
+      "relationship": "monitors"
+    },
+    {
+      "from_rule": "RULE-012",
+      "to_rule": "RULE-011",
+      "relationship": "monitors"
+    },
+    {
+      "from_rule": "RULE-012",
+      "to_rule": "RULE-013",
+      "relationship": "monitors"
+    },
+    {
+      "from_rule": "RULE-013",
+      "to_rule": "RULE-005",
+      "relationship": "baseline_for"
+    },
+    {
+      "from_rule": "RULE-013",
+      "to_rule": "RULE-010",
+      "relationship": "verified_by"
+    },
+    {
+      "from_rule": "RULE-014",
+      "to_rule": "RULE-015",
+      "relationship": "triggers"
+    },
+    {
+      "from_rule": "RULE-014",
+      "to_rule": "RULE-016",
+      "relationship": "paired_with"
+    },
+    {
+      "from_rule": "RULE-015",
+      "to_rule": "RULE-014",
+      "relationship": "paired_with"
+    },
+    {
+      "from_rule": "RULE-015",
+      "to_rule": "RULE-022",
+      "relationship": "synced_with"
+    },
+    {
+      "from_rule": "RULE-016",
+      "to_rule": "RULE-015",
+      "relationship": "reported_in"
+    },
+    {
+      "from_rule": "RULE-016",
+      "to_rule": "RULE-032",
+      "relationship": "fuels_deep_learning"
+    },
+    {
+      "from_rule": "RULE-017",
+      "to_rule": "RULE-001",
+      "relationship": "triggers"
+    },
+    {
+      "from_rule": "RULE-017",
+      "to_rule": "RULE-003",
+      "relationship": "triggers"
+    },
+    {
+      "from_rule": "RULE-017",
+      "to_rule": "RULE-007",
+      "relationship": "includes"
+    },
+    {
+      "from_rule": "RULE-017",
+      "to_rule": "RULE-008",
+      "relationship": "includes"
+    },
+    {
+      "from_rule": "RULE-018",
+      "to_rule": "RULE-012",
+      "relationship": "verified_by"
+    },
+    {
+      "from_rule": "RULE-018",
+      "to_rule": "RULE-009",
+      "relationship": "backed_up_with"
+    },
+    {
+      "from_rule": "RULE-019",
+      "to_rule": "RULE-007",
+      "relationship": "enforces"
+    },
+    {
+      "from_rule": "RULE-019",
+      "to_rule": "RULE-043",
+      "relationship": "implements"
+    },
+    {
+      "from_rule": "RULE-020",
+      "to_rule": "RULE-011",
+      "relationship": "feeds"
+    },
+    {
+      "from_rule": "RULE-020",
+      "to_rule": "RULE-014",
+      "relationship": "receives_from"
+    },
+    {
+      "from_rule": "RULE-021",
+      "to_rule": "RULE-002",
+      "relationship": "includes"
+    },
+    {
+      "from_rule": "RULE-021",
+      "to_rule": "RULE-012",
+      "relationship": "audits"
+    },
+    {
+      "from_rule": "RULE-021",
+      "to_rule": "RULE-042",
+      "relationship": "escalates_to"
+    },
+    {
+      "from_rule": "RULE-022",
+      "to_rule": "RULE-030",
+      "relationship": "reviews"
+    },
+    {
+      "from_rule": "RULE-022",
+      "to_rule": "RULE-015",
+      "relationship": "summarizes"
+    },
+    {
+      "from_rule": "RULE-023",
+      "to_rule": "RULE-001",
+      "relationship": "gate_entered"
+    },
+    {
+      "from_rule": "RULE-023",
+      "to_rule": "RULE-024",
+      "relationship": "feeds_into"
+    },
+    {
+      "from_rule": "RULE-024",
+      "to_rule": "RULE-002",
+      "relationship": "gated_by"
+    },
+    {
+      "from_rule": "RULE-024",
+      "to_rule": "RULE-003",
+      "relationship": "measured_by"
+    },
+    {
+      "from_rule": "RULE-025",
+      "to_rule": "RULE-003",
+      "relationship": "gated_by"
+    },
+    {
+      "from_rule": "RULE-025",
+      "to_rule": "RULE-042",
+      "relationship": "escalated_to"
+    },
+    {
+      "from_rule": "RULE-026",
+      "to_rule": "RULE-005",
+      "relationship": "requires"
+    },
+    {
+      "from_rule": "RULE-026",
+      "to_rule": "RULE-006",
+      "relationship": "requires"
+    },
+    {
+      "from_rule": "RULE-026",
+      "to_rule": "RULE-007",
+      "relationship": "requires"
+    },
+    {
+      "from_rule": "RULE-027",
+      "to_rule": "RULE-026",
+      "relationship": "preceded_by"
+    },
+    {
+      "from_rule": "RULE-027",
+      "to_rule": "RULE-038",
+      "relationship": "fueled_by"
+    },
+    {
+      "from_rule": "RULE-028",
+      "to_rule": "RULE-029",
+      "relationship": "precedes"
+    },
+    {
+      "from_rule": "RULE-029",
+      "to_rule": "RULE-028",
+      "relationship": "triggered_by"
+    },
+    {
+      "from_rule": "RULE-029",
+      "to_rule": "RULE-016",
+      "relationship": "archives_to"
+    },
+    {
+      "from_rule": "RULE-030",
+      "to_rule": "RULE-034",
+      "relationship": "feeds_into"
+    },
+    {
+      "from_rule": "RULE-030",
+      "to_rule": "RULE-035",
+      "relationship": "feeds_into"
+    },
+    {
+      "from_rule": "RULE-031",
+      "to_rule": "RULE-030",
+      "relationship": "paired_with"
+    },
+    {
+      "from_rule": "RULE-031",
+      "to_rule": "RULE-037",
+      "relationship": "validated_by"
+    },
+    {
+      "from_rule": "RULE-032",
+      "to_rule": "RULE-030",
+      "relationship": "triggered_by"
+    },
+    {
+      "from_rule": "RULE-032",
+      "to_rule": "RULE-033",
+      "relationship": "implements_archive"
+    },
+    {
+      "from_rule": "RULE-032",
+      "to_rule": "RULE-034",
+      "relationship": "paired_with"
+    },
+    {
+      "from_rule": "RULE-033",
+      "to_rule": "RULE-032",
+      "relationship": "implements_layer"
+    },
+    {
+      "from_rule": "RULE-033",
+      "to_rule": "RULE-034",
+      "relationship": "feeds_progress"
+    },
+    {
+      "from_rule": "RULE-034",
+      "to_rule": "RULE-032",
+      "relationship": "extends_to_multi_task"
+    },
+    {
+      "from_rule": "RULE-034",
+      "to_rule": "RULE-035",
+      "relationship": "paired_with"
+    },
+    {
+      "from_rule": "RULE-035",
+      "to_rule": "RULE-030",
+      "relationship": "triggered_by"
+    },
+    {
+      "from_rule": "RULE-035",
+      "to_rule": "RULE-032",
+      "relationship": "feeds_into"
+    },
+    {
+      "from_rule": "RULE-036",
+      "to_rule": "RULE-033",
+      "relationship": "restores_from"
+    },
+    {
+      "from_rule": "RULE-036",
+      "to_rule": "RULE-014",
+      "relationship": "checked_at_startup"
+    },
+    {
+      "from_rule": "RULE-037",
+      "to_rule": "RULE-031",
+      "relationship": "validates"
+    },
+    {
+      "from_rule": "RULE-037",
+      "to_rule": "RULE-038",
+      "relationship": "paired_with"
+    },
+    {
+      "from_rule": "RULE-038",
+      "to_rule": "RULE-031",
+      "relationship": "validates"
+    },
+    {
+      "from_rule": "RULE-038",
+      "to_rule": "RULE-037",
+      "relationship": "paired_with"
+    },
+    {
+      "from_rule": "RULE-039",
+      "to_rule": "RULE-040",
+      "relationship": "precedes"
+    },
+    {
+      "from_rule": "RULE-039",
+      "to_rule": "RULE-031",
+      "relationship": "validates_output"
+    },
+    {
+      "from_rule": "RULE-040",
+      "to_rule": "RULE-039",
+      "relationship": "follows"
+    },
+    {
+      "from_rule": "RULE-040",
+      "to_rule": "RULE-041",
+      "relationship": "archives_to"
+    },
+    {
+      "from_rule": "RULE-041",
+      "to_rule": "RULE-040",
+      "relationship": "archives_result"
+    },
+    {
+      "from_rule": "RULE-041",
+      "to_rule": "RULE-033",
+      "relationship": "archives_with"
+    },
+    {
+      "from_rule": "RULE-042",
+      "to_rule": "RULE-039",
+      "relationship": "pairs_with"
+    },
+    {
+      "from_rule": "RULE-042",
+      "to_rule": "RULE-040",
+      "relationship": "validates_decision"
+    },
+    {
+      "from_rule": "RULE-043",
+      "to_rule": "RULE-007",
+      "relationship": "enforced_by"
+    },
+    {
+      "from_rule": "RULE-043",
+      "to_rule": "RULE-019",
+      "relationship": "implemented_by"
+    },
+    {
+      "from_rule": "RULE-044",
+      "to_rule": "RULE-006",
+      "relationship": "validates"
+    },
+    {
+      "from_rule": "RULE-044",
+      "to_rule": "RULE-005",
+      "relationship": "paired_with"
+    },
+    {
+      "from_rule": "RULE-045",
+      "to_rule": "RULE-004",
+      "relationship": "blocks"
+    },
+    {
+      "from_rule": "RULE-045",
+      "to_rule": "RULE-046",
+      "relationship": "governed_by"
+    },
+    {
+      "from_rule": "RULE-046",
+      "to_rule": "RULE-045",
+      "relationship": "governs"
+    },
+    {
+      "from_rule": "RULE-046",
+      "to_rule": "RULE-042",
+      "relationship": "enforced_by"
+    },
+    {
+      "from_rule": "RULE-046",
+      "to_rule": "RULE-047",
+      "relationship": "applied_to"
+    },
+    {
+      "from_rule": "RULE-047",
+      "to_rule": "RULE-046",
+      "relationship": "governed_by"
+    },
+    {
+      "from_rule": "RULE-047",
+      "to_rule": "RULE-025",
+      "relationship": "audits_stage"
+    },
+    {
+      "from_rule": "RULE-047",
+      "to_rule": "RULE-042",
+      "relationship": "parallel_audit"
+    },
+    {
+      "from_rule": "RULE-048",
+      "to_rule": "RULE-031",
+      "relationship": "refines_output"
+    },
+    {
+      "from_rule": "RULE-048",
+      "to_rule": "RULE-038",
+      "relationship": "paired_with"
+    }
+  ],
+  "activation_queue": [
+    {
+      "rule_id": "RULE-004",
+      "name": "商标注册保护",
+      "priority": "P0",
+      "reason": "当前状态: dormant，需要激活后才能进入生物化执行",
+      "estimated_effort": "高"
+    },
+    {
+      "rule_id": "RULE-022",
+      "name": "每周一决策评估",
+      "priority": "P1",
+      "reason": "当前状态: broken，需要激活后才能进入生物化执行",
+      "estimated_effort": "低"
+    },
+    {
+      "rule_id": "RULE-026",
+      "name": "公开阶段准入准出",
+      "priority": "P0",
+      "reason": "当前状态: dormant，需要激活后才能进入生物化执行",
+      "estimated_effort": "高"
+    },
+    {
+      "rule_id": "RULE-027",
+      "name": "精品阶段准入准出",
+      "priority": "P1",
+      "reason": "当前状态: dormant，需要激活后才能进入生物化执行",
+      "estimated_effort": "低"
+    },
+    {
+      "rule_id": "RULE-028",
+      "name": "维护阶段准入准出",
+      "priority": "P2",
+      "reason": "当前状态: dormant，需要激活后才能进入生物化执行",
+      "estimated_effort": "中"
+    },
+    {
+      "rule_id": "RULE-029",
+      "name": "退役阶段准入准出",
+      "priority": "P2",
+      "reason": "当前状态: dormant，需要激活后才能进入生物化执行",
+      "estimated_effort": "中"
+    },
+    {
+      "rule_id": "RULE-045",
+      "name": "官宣日倒计时门控",
+      "priority": "P0",
+      "reason": "当前状态: dormant，需要激活后才能进入生物化执行",
+      "estimated_effort": "高"
+    }
+  ],
+  "biological_health": {
+    "rules_with_triggers": 48,
+    "rules_with_feedback": 48,
+    "rules_with_adaptation": 48,
+    "cron_connected": 11,
+    "fully_alive": 40
+  }
+}
