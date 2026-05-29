@@ -18,17 +18,17 @@ body{font-family:-apple-system,"PingFang SC",sans-serif;background:#F5F0E6;color
 .ts{flex:1;min-width:140px;padding:7px 12px;border:1.5px solid #D4C5A0;border-radius:10px;font-size:12px;background:#F5F0E6;outline:none}
 .kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:6px;margin:8px 0}
 .ki{background:#fff;border-radius:10px;padding:10px;text-align:center;border:1px solid #e0d5c8;cursor:pointer}
-.ki:hover{border-color:#C23B22}.ki .v{font-size:22px;font-weight:800;color:#C23B22}.ki .l{font-size:12px;color:#6E6E6E;margin-top:2px}
+.ki:hover{border-color:#C23B22}.ki .v{font-size:22px;font-weight:800;color:#C23B22}.ki .l{font-size:11px;color:#6E6E6E;margin-top:2px}
 .tc{display:flex;gap:3px;flex-wrap:wrap;margin:8px 0}
 .tc-btn{padding:5px 10px;border-radius:14px;border:1px solid #D4C5A0;background:#fff;cursor:pointer;font-size:11px;font-weight:600;white-space:nowrap}
 .tc-btn.on{background:#C23B22;color:#fff;border-color:#C23B22}
 .pn{background:#fff;border-radius:12px;padding:14px;margin:8px 0;border:1px solid #e0d5c8}
 .pn-h{font-size:14px;color:#2A2A2A;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #f0e8d8}
 .sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:6px;margin-bottom:8px}
-.si{background:#F5F0E6;border-radius:8px;padding:10px;text-align:center}.si .v{font-size:20px;font-weight:700;color:#2A2A2A}.si .l{font-size:12px;color:#6E6E6E}
-.tbl{width:100%;border-collapse:collapse;font-size:12px}.tbl th{background:#F5F0E6;color:#2A2A2A;padding:5px 4px;text-align:left;font-size:12px;font-weight:600;border-bottom:2px solid #C23B22}.tbl td{padding:5px 4px;border-bottom:1px solid #f0e8d8;font-size:12px}
+.si{background:#F5F0E6;border-radius:8px;padding:10px;text-align:center}.si .v{font-size:20px;font-weight:700;color:#2A2A2A}.si .l{font-size:9px;color:#6E6E6E}
+.tbl{width:100%;border-collapse:collapse;font-size:10px}.tbl th{background:#F5F0E6;color:#2A2A2A;padding:5px 4px;text-align:left;font-size:11px;font-weight:600;border-bottom:2px solid #C23B22}.tbl td{padding:5px 4px;border-bottom:1px solid #f0e8d8;font-size:12px}
 .dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:3px}.dr{background:#C23B22}.da{background:#B8860B}.dg{background:#3D7A4F}
-.tg{display:inline-block;padding:1px 6px;border-radius:8px;font-size:12px;font-weight:600}.tgr{background:rgba(194,59,34,0.12);color:#C23B22}.tga{background:rgba(184,134,11,0.12);color:#B8860B}.tgg{background:rgba(61,122,79,0.12);color:#3D7A4F}
+.tg{display:inline-block;padding:1px 6px;border-radius:8px;font-size:11px;font-weight:600}.tgr{background:rgba(194,59,34,0.12);color:#C23B22}.tga{background:rgba(184,134,11,0.12);color:#B8860B}.tgg{background:rgba(61,122,79,0.12);color:#3D7A4F}
 .pbar{height:6px;background:#f0e8d8;border-radius:3px;overflow:hidden;flex:1}.pfill{height:100%;background:#C23B22}
 .bl{border-left:3px solid #C23B22}.emp{text-align:center;padding:20px;color:#6E6E6E;font-size:12px}
 </style>
@@ -142,14 +142,14 @@ function renderMC(){
     h+='<div class="si"><div class="v">233</div><div class="l">线上产品</div></div><div class="si"><div class="v">12</div><div class="l">Cron健康</div></div><div class="si"><div class="v">23</div><div class="l">替身就绪</div></div></div></div>';
     if(p0.length>0){h+='<div class="pn bl"><div class="pn-h" style="color:#C23B22">🔴 P0 待办 ('+p0.length+')</div>';p0.slice(0,8).forEach(function(t){h+='<div style="padding:4px 0;font-size:11px;border-bottom:1px solid #f0e8d8">'+t.task+'</div>'});h+='</div>'}
     var md=MLS.filter(function(m){return m.s==='完成'}).length;
-    h+='<div class="pn"><div class="pn-h">🎯 里程碑 ('+md+'/'+MLS.length+')</div><div style="display:flex;align-items:center;gap:8px;font-size:12px"><div class="pbar"><div class="pfill" style="width:'+Math.round(md/MLS.length*100)+'%"></div></div><span>'+Math.round(md/MLS.length*100)+'%</span></div>';
-    MLS.filter(function(m){return m.s!=='完成'}).forEach(function(m){h+='<div style="display:flex;justify-content:space-between;padding:3px 0;font-size:12px;border-bottom:1px solid #f0e8d8"><span>'+m.n+'</span><span><span class="tg '+(m.s==='进行中'?'tga':'tgr')+'">'+m.s+'</span> '+m.d+'</span></div>'});h+='</div>';
+    h+='<div class="pn"><div class="pn-h">🎯 里程碑 ('+md+'/'+MLS.length+')</div><div style="display:flex;align-items:center;gap:8px;font-size:10px"><div class="pbar"><div class="pfill" style="width:'+Math.round(md/MLS.length*100)+'%"></div></div><span>'+Math.round(md/MLS.length*100)+'%</span></div>';
+    MLS.filter(function(m){return m.s!=='完成'}).forEach(function(m){h+='<div style="display:flex;justify-content:space-between;padding:3px 0;font-size:10px;border-bottom:1px solid #f0e8d8"><span>'+m.n+'</span><span><span class="tg '+(m.s==='进行中'?'tga':'tgr')+'">'+m.s+'</span> '+m.d+'</span></div>'});h+='</div>';
   }else if(CT==='tasks'){
     h+='<div class="pn"><div class="pn-h">📋 任务 ('+ts.length+')</div>';
     if(ts.length===0)h+='<div class="emp">暂无任务</div>';else{h+='<table class="tbl"><tr><th>任务</th><th>优先级</th><th>状态</th></tr>';ts.forEach(function(t){h+='<tr><td>'+t.task+'</td><td>'+t.priority+'</td><td><span class="dot '+(t.status.indexOf('完成')>=0?'dg':t.status.indexOf('进行')>=0?'da':'dr')+'"></span>'+t.status+'</td></tr>'});h+='</table>'}h+='</div>';
   }else if(CT==='project'){
     var md=MLS.filter(function(m){return m.s==='完成'}).length;
-    h+='<div class="pn"><div class="pn-h">🗓️ 项目 · 里程碑</div><div style="display:flex;align-items:center;gap:8px;font-size:12px;margin-bottom:8px"><div class="pbar"><div class="pfill" style="width:'+Math.round(md/MLS.length*100)+'%"></div></div><span>'+Math.round(md/MLS.length*100)+'% ('+md+'/'+MLS.length+')</span></div>';
+    h+='<div class="pn"><div class="pn-h">🗓️ 项目 · 里程碑</div><div style="display:flex;align-items:center;gap:8px;font-size:10px;margin-bottom:8px"><div class="pbar"><div class="pfill" style="width:'+Math.round(md/MLS.length*100)+'%"></div></div><span>'+Math.round(md/MLS.length*100)+'% ('+md+'/'+MLS.length+')</span></div>';
     h+='<table class="tbl"><tr><th>里程碑</th><th>截止</th><th>状态</th></tr>'+MLS.map(function(m){return'<tr><td>'+m.n+'</td><td>'+m.d+'</td><td><span class="tg '+(m.s==='完成'?'tgg':m.s==='进行中'?'tga':'tgr')+'">'+m.s+'</span></td></tr>'}).join('')+'</table></div>';
   }else if(CT==='customers'){var cs=DB.cs();h+='<div class="pn"><div class="pn-h">👤 客户 ('+cs.length+')</div>';if(cs.length===0)h+='<div class="emp">暂无</div>';else{h+='<table class="tbl"><tr><th>姓名</th><th>企业</th></tr>'+cs.map(function(c){return'<tr><td>'+c.name+'</td><td>'+(c.company||'')+'</td></tr>'}).join('')+'</table>'}h+='</div>'}
   else if(CT==='products'){var pr=DB.pr();h+='<div class="pn"><div class="pn-h">📦 产品 ('+pr.length+')</div>';if(pr.length===0)h+='<div class="emp">暂无</div>';else{h+='<table class="tbl"><tr><th>名称</th><th>五族</th></tr>'+pr.map(function(p){return'<tr><td>'+p.name+'</td><td>'+(p.family||'')+'</td></tr>'}).join('')+'</table>'}h+='</div>'}
@@ -169,7 +169,7 @@ function searchResults(q){
   (DB.pr()||[]).filter(function(p){return(p.name||'').indexOf(q)>=0}).forEach(function(p){rs.push({ty:'📦',tx:p.name,tb:'products'})});
   MLS.filter(function(m){return m.n.indexOf(q)>=0}).forEach(function(m){rs.push({ty:'🎯',tx:m.n+' '+m.s,tb:'overview'})});
   if(rs.length===0)h+='<div class="emp">未找到匹配</div>';
-  else rs.forEach(function(r){h+='<div onclick="CT=\''+r.tb+'\';renderTabs();renderMC()" style="padding:6px 10px;border-bottom:1px solid #f0e8d8;cursor:pointer;font-size:11px"><span style="font-size:12px;opacity:0.5">'+r.ty+'</span> <b>'+r.tx+'</b></div>'});
+  else rs.forEach(function(r){h+='<div onclick="CT=\''+r.tb+'\';renderTabs();renderMC()" style="padding:6px 10px;border-bottom:1px solid #f0e8d8;cursor:pointer;font-size:11px"><span style="font-size:10px;opacity:0.5">'+r.ty+'</span> <b>'+r.tx+'</b></div>'});
   return h+'</div>';
 }
 </script>
