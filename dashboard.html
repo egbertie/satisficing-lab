@@ -44,6 +44,7 @@ body{font-family:-apple-system,"PingFang SC",sans-serif;background:#F5F0E6;color
 <input type="password" maxlength="1" id="g4"><input type="password" maxlength="1" id="g5">
 </div>
 <p id="ge" style="color:#C23B22;font-size:12px;min-height:18px"></p>
+<p id="gw" style="display:none;background:#fff3e0;color:#B8860B;font-size:11px;padding:8px 10px;border-radius:8px;margin:8px 0;line-height:1.5;text-align:left">⚠️ 浏览器存储不可用，可能是内容拦截器导致。请关闭 Safari 的「内容拦截器」或尝试其他浏览器。</p>
 <button class="gbtn" onclick="gv()">验证 →</button>
 </div></div>
 
@@ -64,6 +65,7 @@ body{font-family:-apple-system,"PingFang SC",sans-serif;background:#F5F0E6;color
 var GH='123654';
 (function(){
   // sessionStorage: 同一会话内免密，关闭浏览器后需重新输入
+  try{sessionStorage.setItem('_t','1');sessionStorage.removeItem('_t')}catch(e){document.getElementById('gw').style.display='block';return}
   if(sessionStorage.getItem('dash_ok')==='1'){init();return}
   document.getElementById('g0').focus();
   document.addEventListener('input',function(e){if(!e.target.closest('.ld'))return;e.target.value=e.target.value.replace(/[^0-9]/g,'');if(e.target.value&&e.target.nextElementSibling)e.target.nextElementSibling.focus()});
