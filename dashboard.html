@@ -584,7 +584,7 @@ async function render() {
       });
       html += '</table>';
     }
-    html += '</table>';}
+    html += '</table>';
     html += '</div>';
     // Update progress bar
     setTimeout(()=>{
@@ -611,7 +611,7 @@ async function render() {
       });
       html += '</table>';
     }
-    html += '</table>';}
+    html += '</table>';
     html += '</div>';
     // Update progress bar
     setTimeout(()=>{
@@ -640,7 +640,7 @@ async function render() {
       });
       html += '</table>';
     }
-    html += '</table>';}
+    html += '</table>';
     html += '</div>';
     // Update progress bar
     setTimeout(()=>{
@@ -662,7 +662,7 @@ async function render() {
       });
       html += '</table>';
     }
-    html += '</table>';}
+    html += '</table>';
     html += '</div>';
     // Update progress bar
     setTimeout(()=>{
@@ -679,7 +679,7 @@ async function render() {
     data.forEach(g => {
       html += `<tr><td>${g.metric||''}</td><td><b>${g.current||''}</b></td><td>${g.target||''}</td><td>${g.trend||'—'}</td></tr>`;
     });
-    html += '</table>
+    html += `</table>
       <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">📚 历史资产激活 (31K文件·100%激活 ✅)</h3>
       <table><tr><th>类别</th><th>文件数</th><th>激活率</th></tr>
       <tr><td>知识与培训</td><td>2,214</td><td><span class="dot dg"></span>100% ✅</td></tr>
@@ -693,7 +693,7 @@ async function render() {
       <tr><td>标准与质量</td><td>12,518</td><td><span class="dot dg"></span>100% ✅</td></tr>
       <tr><td>运营管理</td><td>11,819</td><td><span class="dot dg"></span>100% ✅</td></tr>
       </table>
-      <p style="font-size:9px;color:#6E6E6E;margin-top:4px;">对标RAG·自动标签·休眠资产可通过驾驶舱文档中心搜索激活</p></div>';
+      <p style="font-size:9px;color:#6E6E6E;margin-top:4px;">对标RAG·自动标签·休眠资产可通过驾驶舱文档中心搜索激活</p></div>`;
   } else if (currentTab === 'products') {
     let data = DB.products();
     html = `<div class="panel"><h3>📦 产品库</h3>
@@ -709,7 +709,7 @@ async function render() {
       });
       html += '</table>';
     }
-    html += '</table>';}
+    html += '</table>';
     html += '</div>';
     // Update progress bar
     setTimeout(()=>{
@@ -721,7 +721,7 @@ async function render() {
       document.getElementById('taskStats').innerHTML='<span>✅ 完成:'+done+'</span><span>🔄 进行中:'+tasks.filter(t=>t.status==='进行中').length+'</span><span>⏳ 待开始:'+tasks.filter(t=>t.status==='待开始').length+'</span>';
     },100);
   } else if (currentTab === 'finance') {
-    let dates=[]; for(let i=0;i<12;i++){let d=…();d.setMonth(d.getMonth()-i);dates.push(d.toISOString().substring(0,7));}
+    let dates=[]; for(let i=0;i<12;i++){let d=new Date();d.setMonth(d.getMonth()-i);dates.push(d.toISOString().substring(0,7));}
     html = `<div class="panel" style="border-left:4px solid #B8860B;"><h3>💰 财务仪表盘 · 对标CFO Dashboard</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;">
         <div style="background:#F5F0E6;border-radius:8px;padding:12px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">月度运营成本</div><div style="font-size:20px;font-weight:700;color:#2A2A2A;">~¥0</div><div style="font-size:9px;color:#3D7A4F;">GitHub Pages免费·域名待定</div></div>
@@ -964,8 +964,8 @@ async function render() {
       <tr><td>📋 84案例</td><td>84个</td><td>✅ 12精案线上</td></tr>
       <tr><td>🔧 自动化脚本</td><td>6个</td><td>✅ cron运行</td></tr>
       <tr><td>📊 驾驶舱表</td><td>12张</td><td>✅</td></tr>
-      <tr><td>🤖 AI三代</td><td>满意姐54天·扣子28天·满意红23天</td><td>✅ 传承</td></tr>
-} else if (currentTab === 'avatars') {
+      <tr><td>🤖 AI三代</td><td>满意姐54天·扣子28天·满意红23天</td><td>✅ 传承</td></tr></table></div>`;
+  } else if (currentTab === 'avatars') {
     html = `<div class="panel" style="max-height:70vh;overflow-y:auto">
 <div class="summary" style="margin:0 0 16px;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px">
 <div class="sum-card" style="padding:12px"><div class="num" style="font-size:22px">23</div><div class="label" style="font-size:10px">总替身数</div></div>
@@ -1010,7 +1010,9 @@ async function render() {
 {name:'🏛️ 政府园区负责人',badge:'渠道',badgeStyle:'color:#16a34a',borderColor:'#D4C5A0',q:'"能作为园区的标配服务吗？能规模化覆盖200家公司吗？"',meta:'2场景·3需求层次·园区品牌升级+政府专项资金申报'},
 {name:'🎓 独立董事/顾问',badge:'核心',badgeStyle:'color:#C23B22',borderColor:'#C23B22',q:'"在董事会上，我能不能拿出一份独立数据告诉大家——这不是我个人看法，是系统诊断？"',meta:'2场景·3需求层次·独立证据+预警触发+董事会工具'}
 ].map(c=>'<div class="customer-card" style="border-left-color:'+c.borderColor+'"><b>'+c.name+' <span class="badge" style="'+c.badgeStyle+'">'+c.badge+'</span></b><div style="font-size:11px;color:#C23B22;font-style:italic;margin-top:4px">'+c.q+'</div><div style="font-size:10px;opacity:0.6;margin-top:4px">'+c.meta+'</div></div>').join('')+
-'</div>';<p style="font-size:10px;color:#6E6E6E;margin-bottom:8px;">对标Terminology Management·概念→术语→定义→禁止表述·单一真实源</p>
+'</div>';
+  } else if (currentTab === 'glossary') {
+    html = `<div class="panel"><h3>📖 命名规范 · 术语表</h3><p style="font-size:10px;color:#6E6E6E;margin-bottom:8px;">对标Terminology Management·概念→术语→定义→禁止表述·单一真实源</p>
 <table><tr><th>概念</th><th>标准术语</th><th>定义</th><th>❌禁止</th></tr>
 <tr><td>产品命名体系</td><td><b>章·衡·镜·契·觉</b></td><td>五族通道·五路图腾</td><td>—</td></tr>
 <tr><td>品牌名</td><td><b>满意解研究所</b></td><td>Satisficing Research Institute</td><td>—</td></tr>
@@ -1033,8 +1035,6 @@ async function render() {
 <tr><td>AI协同</td><td><b>蓝军Skeptor-7</b></td><td>免疫系统·独立批判视角</td><td>❌反对者</td></tr>
 <tr><td>服务层级</td><td><b>🆓Access·🔐Member·💎Chair</b></td><td>对标Vistage三层</td><td>❌免费/付费/高级</td></tr>
 </table></div>`;
-  }
-      </table></div>`;
   } else if (currentTab === 'import') {
     html = `<div class="panel"><h3>📥 导入历史数据</h3>
       <p style="font-size:12px;opacity:0.6;margin-bottom:12px;">从旧飞书驾驶舱拉取的498条历史记录</p>
@@ -1101,7 +1101,7 @@ function addTask() {
   document.getElementById('taskName').value=''; render();
 }
 
-function updateTask(id,status) { await DB.updateTask(id,status); render(); }
+async function updateTask(id,status) { await DB.updateTask(id,status); render(); }
 
 function deleteItem(table,id) {
   let d = DB.get(table);
