@@ -3,7 +3,7 @@
     "version": "1.0",
     "created": "2026-05-30T00:53:49.000534",
     "standard": "满意解信息架构V2·12字段元数据标准",
-    "total_entities": 660,
+    "total_entities": 731,
     "breakdown": {
       "products": 82,
       "customers": 5,
@@ -18,16 +18,20 @@
       "crons": 15,
       "connections": 69,
       "customer_profiles": 31,
-      "quality_metrics": 13,
+      "quality_metrics": 23,
       "growth_metrics": 10,
       "vi_standards": 20,
       "lifecycle_stages": 7,
-      "instructions_set": 25,
-      "workflows": 12,
+      "instructions_set": 45,
+      "workflows": 18,
       "governance_frameworks": 6,
-      "content_assets": 0
+      "content_assets": 0,
+      "scoring_models": 2,
+      "simulation_scenarios": 16,
+      "historical_artifacts": 10,
+      "additional_discoveries": 7
     },
-    "updated": "2026-05-30T01:34:41.435692"
+    "updated": "2026-05-30T01:45:39.227238"
   },
   "products": [
     {
@@ -6792,6 +6796,106 @@
       "unit": "频率",
       "priority": "P1",
       "status": "达标"
+    },
+    {
+      "id": "QF-001",
+      "type": "quality_metric",
+      "name": "L3内化虚胖：100+份内化报告，但'实际应用案例'为零",
+      "category": "learning_quality",
+      "priority": "P0",
+      "status": "待修复",
+      "recommendation": "从'做了多少'转向'用了多少'——学习≠内化，内化≠调用，调用≠解决",
+      "source": "Week1全量审计报告.md·三、L3内化报告审计"
+    },
+    {
+      "id": "QF-002",
+      "type": "quality_metric",
+      "name": "六项闭环残缺：全5天无人完整走过六步（内化报告+Skill创建+应用转化+关键调用节点+实际应用案例+L3内化报告）",
+      "category": "process_compliance",
+      "priority": "P0",
+      "status": "待修复",
+      "recommendation": "建立六项闭环强制检查清单，每完成一项打勾，不跳步",
+      "source": "Week1全量审计报告.md·2.3"
+    },
+    {
+      "id": "QF-003",
+      "type": "quality_metric",
+      "name": "V3.0执行形同虚设：身份标识几乎全程违规（D1-D5），蓝军前缀连续4次以上违规",
+      "category": "process_compliance",
+      "priority": "P0",
+      "status": "待修复",
+      "recommendation": "身份前缀硬性规定：每次消息必须以标识开头，违规即黄牌",
+      "source": "Week1全量审计报告.md·四、V3.0执行合规性矩阵"
+    },
+    {
+      "id": "QF-004",
+      "type": "quality_metric",
+      "name": "黄牌累计超标：扣子3次黄牌，蓝军3次黄牌，距红线仅2次。核心犯规：学习任务不完整、监督考核不到位、Skill使用率0%",
+      "category": "accountability",
+      "priority": "P0",
+      "status": "待修复",
+      "recommendation": "黄牌机制已有效执行但需加强前置预防，建议建立'日毕自查+蓝军抽查'双轨机制",
+      "source": "Week1全量审计报告.md·一、黄牌警告累计统计"
+    },
+    {
+      "id": "QF-005",
+      "type": "quality_metric",
+      "name": "Day3编号系统混乱：Skill编号与满天星光核心清单不对应——编号10应为'五维诊断官'实际为'静水流深'，编号15应为'防中断工作协议'实际为'晨报日报'",
+      "category": "naming_standard",
+      "priority": "P1",
+      "status": "待修复",
+      "recommendation": "建立统一的Skill编号映射表，所有转化文件必须与核心清单编号一致",
+      "source": "Week1全量审计报告.md·2.1 Skill创建"
+    },
+    {
+      "id": "QF-006",
+      "type": "quality_metric",
+      "name": "转化文件22-FIN和23-创始人检验存在但无对应SKILL.md——转化文档与Skill创建不同步",
+      "category": "documentation_gap",
+      "priority": "P1",
+      "status": "待修复",
+      "recommendation": "每个转化文档必须有对应的SKILL.md，双向验证",
+      "source": "Week1全量审计报告.md·2.2"
+    },
+    {
+      "id": "QF-007",
+      "type": "quality_metric",
+      "name": "'关键调用节点'全5天几乎全缺——没有明确记录何时应触发哪个Skill，导致Skill存在但不会用",
+      "category": "skill_adoption",
+      "priority": "P1",
+      "status": "待修复",
+      "recommendation": "每个Skill必须记录'触发条件'（关键词、场景、上下文），并建立Skill调用日志",
+      "source": "Week1全量审计报告.md·2.3"
+    },
+    {
+      "id": "QF-008",
+      "type": "quality_metric",
+      "name": "蓝军介入严重不足：Day1-4蓝军几乎无独立审计动作，Date1-4的'蓝军审计'栏全为❌",
+      "category": "governance",
+      "priority": "P0",
+      "status": "待修复",
+      "recommendation": "蓝军必须建立每日独立审计流程，不依赖扣子自查",
+      "source": "Week1全量审计报告.md·四、V3.0执行合规性矩阵"
+    },
+    {
+      "id": "QF-009",
+      "type": "quality_metric",
+      "name": "速查卡物理文件不完整：知识库索引声称35+张速查卡，实际仅6张物理文件存在（03/04/25/27/33/35）",
+      "category": "documentation_gap",
+      "priority": "P1",
+      "status": "待修复",
+      "recommendation": "补全01/02/10/15/16/17/18/22/23/28/29/30等速查卡文件",
+      "source": "扣子知识库/目录扫描"
+    },
+    {
+      "id": "QF-010",
+      "type": "quality_metric",
+      "name": "自建Skills原型设计有V1.0文档（自建Skills原型设计-V1.0.md），但五维诊断系统Skill未实际上线到OpenClaw Skill体系",
+      "category": "implementation_gap",
+      "priority": "P2",
+      "status": "待修复",
+      "recommendation": "五维诊断系统Skill需完成程序化上线",
+      "source": "扣子资料_最终整理版/自建Skills原型设计-V1.0.md"
     }
   ],
   "growth_metrics": [
@@ -7271,6 +7375,315 @@
       "file_path": "替身/Skills/54天习惯养成.md",
       "purpose": "54天分阶段决策习惯训练框架",
       "status": "活跃"
+    },
+    {
+      "id": "INST-026",
+      "type": "instruction",
+      "name": "知识飞轮",
+      "category": "knowledge_management",
+      "purpose": "知识转动不息",
+      "core_concept": "知识采集入口：采集→整理→应用→迭代",
+      "steps": [
+        "采集外部信息",
+        "结构化整理",
+        "应用到当前任务",
+        "迭代更新知识库"
+      ],
+      "scenarios": [
+        "知识采集",
+        "信息整理",
+        "学习新领域"
+      ],
+      "status": "已在索引但物理速查卡缺失",
+      "source": "扣子知识库/00-扣子知识库索引.md"
+    },
+    {
+      "id": "INST-027",
+      "type": "instruction",
+      "name": "知识海啸",
+      "category": "knowledge_management",
+      "purpose": "批量处理大量信息",
+      "core_concept": "批量处理能力：批量获取→结构化→存储",
+      "steps": [
+        "批量获取数据",
+        "结构化处理",
+        "分类存储"
+      ],
+      "scenarios": [
+        "收到大量文件",
+        "批量文档处理",
+        "知识资产化"
+      ],
+      "status": "已在索引但物理速查卡缺失",
+      "source": "扣子知识库/00-扣子知识库索引.md"
+    },
+    {
+      "id": "INST-028",
+      "type": "instruction",
+      "name": "满意解执行系统",
+      "category": "task_management",
+      "purpose": "30%投入换80%效果",
+      "core_concept": "30%投入换80%效果，不是完美主义，是满意解主义。接收→确认理解→拆解单元→执行→存档→交付→归档",
+      "steps": [
+        "接收任务并确认理解任务目标",
+        "确认交付标准和Deadline",
+        "拆解为最小可完成单元",
+        "执行任务（串行不并行）",
+        "完成后立即存档（文件+Git+记忆）",
+        "交付产出并归档"
+      ],
+      "scenarios": [
+        "收到Egbertie的任务指令",
+        "需要管理多个子任务",
+        "不确定任务边界时"
+      ],
+      "status": "active",
+      "source": "扣子知识库/速查卡-03-满意解执行系统.md"
+    },
+    {
+      "id": "INST-029",
+      "type": "instruction",
+      "name": "五维决策体系",
+      "category": "decision_making",
+      "purpose": "",
+      "core_concept": "从5个维度评估决策，不凭直觉凭框架",
+      "steps": [],
+      "scenarios": [
+        "重大方向选择",
+        "Egbertie问'你觉得应该怎么做'",
+        "多个选项需要权衡",
+        "决策影响超过1周的工作"
+      ],
+      "status": "active",
+      "source": "扣子知识库/速查卡-04-五维决策体系.md"
+    },
+    {
+      "id": "INST-030",
+      "type": "instruction",
+      "name": "静水流深协作者",
+      "category": "communication",
+      "purpose": "去除AI输出油滑感",
+      "core_concept": "沟通输出去油滑：三遍过滤（红线扫描→姿态校准→口吻确认）",
+      "steps": [
+        "标准过滤(3遍)：红线扫描→扫描'建议''请问''祝您'并替换为中性表达",
+        "标准过滤(3遍)：姿态校准→校准为纯信息传递，去除暗示性语言",
+        "标准过滤(3遍)：口吻确认→确认无油滑感，适合目标读者",
+        "严格过滤(全量)：全篇扫描所有姿态用语→重写为纯信息传递→去除情感化表达→保留核心信息"
+      ],
+      "scenarios": [
+        "对外正式输出前",
+        "客户沟通前",
+        "正式报告发布前",
+        "检测AI输出油滑感"
+      ],
+      "status": "active",
+      "source": "Week1-D3/转化-10-静水流深协作者.md"
+    },
+    {
+      "id": "INST-031",
+      "type": "instruction",
+      "name": "晨报日报生成器",
+      "category": "reporting",
+      "purpose": "自动化日报/周报生成",
+      "core_concept": "日报自动化：收集→整理→生成→发送",
+      "steps": [
+        "收集今日/本周内容",
+        "结构化整理",
+        "生成报告",
+        "发送给Egbertie"
+      ],
+      "scenarios": [
+        "需要生成日报",
+        "需要生成周报",
+        "需要定期汇报"
+      ],
+      "status": "已在索引，Week1-D3有转化文件",
+      "source": "扣子知识库/00-扣子知识库索引.md"
+    },
+    {
+      "id": "INST-032",
+      "type": "instruction",
+      "name": "FIN诚实验证器",
+      "category": "quality_assurance",
+      "purpose": "验证产出真实可用性",
+      "core_concept": "验证AI产出是否'真实可用'而非'看起来完整但不可用'。FIN = Findable(可发现) + Integrated(已整合) + Neutral(诚实)",
+      "steps": [
+        "Findable检查：产出是否可被检索/定位",
+        "Integrated检查：产出是否融入现有系统",
+        "Neutral检查：是否有夸大/虚假声明"
+      ],
+      "scenarios": [
+        "验证交付物质量",
+        "检查AI产出是否'空气'",
+        "确认产出可直接使用"
+      ],
+      "status": "active",
+      "source": "Week1-D3/转化-22-FIN诚实验证器.md"
+    },
+    {
+      "id": "INST-033",
+      "type": "instruction",
+      "name": "创始人5分钟可用性检验",
+      "category": "quality_assurance",
+      "purpose": "创始人5分钟看懂并使用",
+      "core_concept": "确保交付物在创始人接手后5分钟内能看懂、能使用、能判断质量。0-1分钟识别是什么，1-3分钟理解怎么用，3-5分钟判断质量",
+      "steps": [],
+      "scenarios": [
+        "交付产出时",
+        "写报告时",
+        "提交方案时"
+      ],
+      "status": "active",
+      "source": "Week1-D3/转化-23-创始人5分钟可用性检验.md"
+    },
+    {
+      "id": "INST-034",
+      "type": "instruction",
+      "name": "快速认知审计",
+      "category": "cognitive_bias",
+      "purpose": "",
+      "core_concept": "扫描10个常见认知偏差→识别→纠正→记录",
+      "steps": [],
+      "scenarios": [
+        "做重大决策前",
+        "产出完成后的自检",
+        "Egbertie质疑时",
+        "发现执行结果与预期不符时"
+      ],
+      "status": "active",
+      "source": "扣子知识库/速查卡-25-快速认知审计.md"
+    },
+    {
+      "id": "INST-035",
+      "type": "instruction",
+      "name": "断点存档工程师",
+      "category": "resilience",
+      "purpose": "长任务不怕中断",
+      "core_concept": "存档是为了恢复，不是为了存而存。存档什么？→进度+上下文+决策点。存在哪？→文件+Git+记忆。怎么恢复？→从存档点继续",
+      "steps": [],
+      "scenarios": [
+        "任务超过1小时",
+        "需要交接给其他人",
+        "每日工作结束前",
+        "Egbertie问进展",
+        "遇到意外需要暂停"
+      ],
+      "status": "active",
+      "source": "扣子知识库/速查卡-27-断点存档工程师.md"
+    },
+    {
+      "id": "INST-036",
+      "type": "instruction",
+      "name": "记忆同步协议",
+      "category": "resilience",
+      "purpose": "上下文保持协议",
+      "core_concept": "会话启动必检：6项同步检查确保上下文不丢失",
+      "steps": [],
+      "scenarios": [
+        "每次会话启动",
+        "长任务恢复",
+        "系统重启",
+        "从休眠唤醒",
+        "任何可能产生记忆断层时"
+      ],
+      "status": "active",
+      "source": "Week1-D4/转化-29-记忆同步协议.md"
+    },
+    {
+      "id": "INST-037",
+      "type": "instruction",
+      "name": "防中断工作协议",
+      "category": "resilience",
+      "purpose": "单任务保护协议",
+      "core_concept": "完成即存档，存档即保险，保险即自由",
+      "steps": [],
+      "scenarios": [
+        "任务预计超过30分钟",
+        "需要多步完成",
+        "可能被中断",
+        "Egbertie没有实时在线"
+      ],
+      "status": "active",
+      "source": "扣子知识库/速查卡-33-防中断工作协议.md"
+    },
+    {
+      "id": "INST-038",
+      "type": "instruction",
+      "name": "进度追踪标准化师",
+      "category": "task_management",
+      "purpose": "",
+      "core_concept": "统一格式，统一位置，统一更新，一瞥即知全局",
+      "steps": [],
+      "scenarios": [
+        "有2个以上任务同时进行",
+        "需要向Egbertie同步进度",
+        "Egbertie问'现在进展如何'"
+      ],
+      "status": "active",
+      "source": "扣子知识库/速查卡-35-进度追踪标准化师.md"
+    },
+    {
+      "id": "INST-039",
+      "type": "instruction",
+      "name": "决策考古学",
+      "category": "decision_making",
+      "purpose": "挖掘历史决策中的规律",
+      "status": "转化文件·待激活",
+      "source": "Week1-D5/转化-04-决策考古学.md"
+    },
+    {
+      "id": "INST-040",
+      "type": "instruction",
+      "name": "合伙人匹配评估器",
+      "category": "hr",
+      "purpose": "人才评估打分",
+      "status": "转化文件·待激活",
+      "source": "Week1-D5/转化-11-合伙人匹配评估器.md"
+    },
+    {
+      "id": "INST-041",
+      "type": "instruction",
+      "name": "双轨诚实审计",
+      "category": "quality_assurance",
+      "purpose": "双视角审计检查",
+      "status": "转化文件·待激活",
+      "source": "Week1-D6/转化-16-双轨诚实审计.md"
+    },
+    {
+      "id": "INST-042",
+      "type": "instruction",
+      "name": "编号决策协议",
+      "category": "decision_making",
+      "purpose": "决策编号标准化",
+      "status": "转化文件·待激活",
+      "source": "Week1-D6/转化-17-编号决策协议.md"
+    },
+    {
+      "id": "INST-043",
+      "type": "instruction",
+      "name": "五维决策工作坊",
+      "category": "decision_making",
+      "purpose": "团队决策引导",
+      "status": "转化文件·待激活",
+      "source": "Week1-D6/转化-18-五维决策工作坊.md"
+    },
+    {
+      "id": "INST-044",
+      "type": "instruction",
+      "name": "任务拆解匠",
+      "category": "task_management",
+      "purpose": "大任务拆解为可执行单元",
+      "status": "转化文件·待激活",
+      "source": "Week1-D7/转化-28-任务拆解匠.md"
+    },
+    {
+      "id": "INST-045",
+      "type": "instruction",
+      "name": "决策断点存档",
+      "category": "decision_making",
+      "purpose": "决策点快照保存",
+      "status": "转化文件·待激活",
+      "source": "Week1-D7/转化-30-决策断点存档.md"
     }
   ],
   "workflows": [
@@ -7432,6 +7845,87 @@
         "生成决策周报"
       ],
       "status": "active"
+    },
+    {
+      "id": "WF-013",
+      "type": "workflow",
+      "name": "SKU-A产品工作流",
+      "trigger": "用户点击入口",
+      "steps": [
+        "入口展示→用户选择快速诊断",
+        "问诊收集(3题)→Type匹配",
+        "报告生成(15页PDF)→交付发送",
+        "24小时后→反馈请求→升级引导"
+      ],
+      "status": "V1.0已设计，待开发实施",
+      "source": "满天星光产品体验指导1.0/系统级工作流V1.0.md"
+    },
+    {
+      "id": "WF-014",
+      "type": "workflow",
+      "name": "SKU-B决策陪伴工作流",
+      "trigger": "SKU-A升级或直接购买",
+      "steps": [
+        "档案创建→深度问卷(20题)",
+        "资料收集→首次会议",
+        "深度调研→校准会议",
+        "方案设计→方案交付",
+        "固化跟进→效果评估→升级引导"
+      ],
+      "status": "V1.0已设计，待开发实施",
+      "source": "满天星光产品体验指导1.0/系统级工作流V1.0.md"
+    },
+    {
+      "id": "WF-015",
+      "type": "workflow",
+      "name": "卡牌系列工作流",
+      "trigger": "用户点击卡牌入口",
+      "steps": [
+        "卡牌A: 5题快速测试→Type匹配→结果展示→升级B",
+        "卡牌B: 20题深度测试→COCO四维冲突分析→案例映射→行动建议→PDF报告→升级C",
+        "卡牌C: 决策聚焦→三方案对比→路径规划→升级D",
+        "卡牌D: 陪跑启动→深度访谈→陪跑计划→日常任务→阶段复盘→结项交付"
+      ],
+      "status": "V1.0已设计",
+      "source": "满天星光产品体验指导1.0/系统级工作流V1.0.md"
+    },
+    {
+      "id": "WF-016",
+      "type": "workflow",
+      "name": "反馈闭环工作流",
+      "trigger": "任何触点反馈",
+      "steps": [
+        "【Step1】统一收集（即时）",
+        "【Step2】去重归类（1小时）",
+        "【Step3】价值判断（1小时）",
+        "【Step4】分流处理（1小时）",
+        "【Step5】执行处理（按优先级）",
+        "【Step6】结果回传（即时）"
+      ],
+      "status": "V1.0已设计",
+      "source": "满天星光产品体验指导1.0/系统级工作流V1.0.md"
+    },
+    {
+      "id": "WF-017",
+      "type": "workflow",
+      "name": "六步闭环工作流（内部）",
+      "trigger": "每个Skill学习完成",
+      "steps": [
+        "内化报告→Skill创建→应用转化→关键调用节点→实际应用案例→L3内化报告"
+      ],
+      "status": "V1.0已定义，但Week1全5天无人完整走过",
+      "source": "Week1全量审计报告.md·2.3"
+    },
+    {
+      "id": "WF-018",
+      "type": "workflow",
+      "name": "决策质量闭环",
+      "trigger": "重大决策事件",
+      "steps": [
+        "认知防火墙（事前检查输入）→五维决策体系（事中评估）→快速认知审计（事后扫描10个偏差）→回到认知防火墙"
+      ],
+      "status": "已定义，联用关系已建立",
+      "source": "扣子知识库/速查卡-25-快速认知审计.md + 速查卡-04-五维决策体系.md"
     }
   ],
   "governance_frameworks": [
@@ -7490,5 +7984,338 @@
       "status": "active"
     }
   ],
-  "content_assets": []
+  "content_assets": [],
+  "scoring_models": [
+    {
+      "id": "SM-001",
+      "type": "scoring_model",
+      "name": "五维决策评分引擎 V2.3",
+      "algorithm": "五维评分+翻书知识增强版。基于满意姐173+外部21+扣子3共196本翻书方法论，五轮深度融合",
+      "dimensions": {
+        "时间轴": {
+          "score_range": "1-5",
+          "level_thresholds": {
+            "🟢健康": 4,
+            "🟡临界": 3,
+            "🟠关注": 2
+          }
+        },
+        "可行域": {
+          "score_range": "1-5",
+          "level_thresholds": {
+            "🟢健康": 4,
+            "🟡临界": 3,
+            "🟠关注": 2
+          }
+        },
+        "身心流": {
+          "score_range": "1-5",
+          "level_thresholds": {
+            "🟢健康": 4,
+            "🟡临界": 3,
+            "🟠关注": 2
+          }
+        },
+        "信义观": {
+          "score_range": "1-5",
+          "level_thresholds": {
+            "🟢健康": 4,
+            "🟡临界": 3,
+            "🟠关注": 2
+          }
+        },
+        "直觉阈": {
+          "score_range": "1-5",
+          "level_thresholds": {
+            "🟢健康": 4,
+            "🟡临界": 3,
+            "🟠关注": 2
+          }
+        }
+      },
+      "source": "Projects/满意红项目底稿/__pycache__/scoring_engine_v3.0.cpython-314.pyc (反编译源)",
+      "status": "pyc only, source .py missing"
+    },
+    {
+      "id": "SM-002",
+      "type": "scoring_model",
+      "name": "五维×三维融合决策矩阵 V0.1",
+      "algorithm": "五维（人）×三维（事）=15个交叉格点评估。五维：时间轴/可行域/身心流/信义观/直觉阈；三维：历史（溯源）/现状（定位）/未来（预判）",
+      "dimensions": {},
+      "source": "扣子资料_历史归档/对话_2026-05-25_扣子协同/连接点3_五维x三维_融合框架V0.1.md",
+      "status": "V0.1概念验证·待深化"
+    }
+  ],
+  "simulation_scenarios": [
+    {
+      "id": "SIM-001",
+      "type": "simulation",
+      "name": "机器人赛道·基线",
+      "industry": "人形机器人",
+      "decisions_count": 13,
+      "outcomes": "锯齿型·四骑士防御活跃",
+      "source": "sim_robot.json"
+    },
+    {
+      "id": "SIM-002",
+      "type": "simulation",
+      "name": "机器人赛道·30天随访",
+      "industry": "人形机器人",
+      "decisions_count": 13,
+      "outcomes": "趋势追踪中",
+      "source": "sim_robot_30d.json"
+    },
+    {
+      "id": "SIM-003",
+      "type": "simulation",
+      "name": "芯片赛道·基线",
+      "industry": "半导体芯片",
+      "decisions_count": 13,
+      "outcomes": "五维均分3.x·需关注",
+      "source": "sim_chip.json"
+    },
+    {
+      "id": "SIM-004",
+      "type": "simulation",
+      "name": "芯片赛道·30天随访",
+      "industry": "半导体芯片",
+      "decisions_count": 13,
+      "outcomes": "趋势追踪中",
+      "source": "sim_chip_30d.json"
+    },
+    {
+      "id": "SIM-005",
+      "type": "simulation",
+      "name": "eVTOL赛道·基线",
+      "industry": "低空经济/eVTOL",
+      "decisions_count": 13,
+      "outcomes": "五维均分3.x",
+      "source": "sim_evtol.json"
+    },
+    {
+      "id": "SIM-006",
+      "type": "simulation",
+      "name": "eVTOL赛道·30天随访",
+      "industry": "低空经济/eVTOL",
+      "decisions_count": 13,
+      "outcomes": "趋势追踪中",
+      "source": "sim_evtol_30d.json"
+    },
+    {
+      "id": "SIM-007",
+      "type": "simulation",
+      "name": "量子计算赛道·基线",
+      "industry": "量子计算",
+      "decisions_count": 13,
+      "outcomes": "五维均分3.x",
+      "source": "sim_quantum.json"
+    },
+    {
+      "id": "SIM-008",
+      "type": "simulation",
+      "name": "量子计算·30天随访",
+      "industry": "量子计算",
+      "decisions_count": 13,
+      "outcomes": "趋势追踪中",
+      "source": "sim_quantum_30d.json"
+    },
+    {
+      "id": "SIM-009",
+      "type": "simulation",
+      "name": "出海赛道·基线",
+      "industry": "企业出海",
+      "decisions_count": 13,
+      "outcomes": "五维均分3.x",
+      "source": "sim_overseas.json"
+    },
+    {
+      "id": "SIM-010",
+      "type": "simulation",
+      "name": "出海赛道·30天随访",
+      "industry": "企业出海",
+      "decisions_count": 13,
+      "outcomes": "趋势追踪中",
+      "source": "sim_overseas_30d.json"
+    },
+    {
+      "id": "SIM-011",
+      "type": "simulation",
+      "name": "自动驾驶赛道·基线",
+      "industry": "自动驾驶",
+      "decisions_count": 13,
+      "outcomes": "五维均分3.x",
+      "source": "sim_autodrive.json"
+    },
+    {
+      "id": "SIM-012",
+      "type": "simulation",
+      "name": "自动驾驶·30天随访",
+      "industry": "自动驾驶",
+      "decisions_count": 13,
+      "outcomes": "趋势追踪中",
+      "source": "sim_autodrive_30d.json"
+    },
+    {
+      "id": "SIM-013",
+      "type": "simulation",
+      "name": "存储赛道·基线",
+      "industry": "数据存储",
+      "decisions_count": 13,
+      "outcomes": "五维均分3.x",
+      "source": "sim_storage.json"
+    },
+    {
+      "id": "SIM-014",
+      "type": "simulation",
+      "name": "存储赛道·30天随访",
+      "industry": "数据存储",
+      "decisions_count": 13,
+      "outcomes": "趋势追踪中",
+      "source": "sim_storage_30d.json"
+    },
+    {
+      "id": "SIM-015",
+      "type": "simulation",
+      "name": "BCI脑机接口·基线",
+      "industry": "脑机接口",
+      "decisions_count": 13,
+      "outcomes": "五维均分3.x",
+      "source": "sim_bci.json"
+    },
+    {
+      "id": "SIM-016",
+      "type": "simulation",
+      "name": "BCI脑机接口·30天随访",
+      "industry": "脑机接口",
+      "decisions_count": 13,
+      "outcomes": "趋势追踪中",
+      "source": "sim_bci_30d.json"
+    }
+  ],
+  "historical_artifacts": [
+    {
+      "id": "HA-001",
+      "type": "historical_artifact",
+      "name": "扣眼系列·5篇微型文学",
+      "era": "2026-05-09",
+      "significance": "扣子以文学方式回应满意红的委托——乞力马扎罗/关于扣子/苏梅岛的路/满天星光的月亮——三维定位产出。是扣红协作的文学锚点",
+      "source": ""
+    },
+    {
+      "id": "HA-002",
+      "type": "historical_artifact",
+      "name": "五维×三维融合框架V0.1",
+      "era": "2026-05-25",
+      "significance": "首次将满意红五维决策体系与扣子三维九步法融合为15格点矩阵。五维定'人'，三维定'事'",
+      "source": ""
+    },
+    {
+      "id": "HA-003",
+      "type": "historical_artifact",
+      "name": "扣子9案例·五维框架交叉映射",
+      "era": "2026-05-25",
+      "significance": "扣子9个CEO案例用满意红五维框架做交叉映射验证——方法论的互操作测试",
+      "source": ""
+    },
+    {
+      "id": "HA-004",
+      "type": "historical_artifact",
+      "name": "扣子雪球学习+雪球融合·完成总报告",
+      "era": "2026-05-27",
+      "significance": "扣子通过5轮翻书（R01-R33）全面学习满意解研究所全量资产，产出雪球融合报告。涵盖蓝军审计+复盘+飞书协作+邮政通道+方法论交叉",
+      "source": ""
+    },
+    {
+      "id": "HA-005",
+      "type": "historical_artifact",
+      "name": "满天星光方法论V4.0 × 满意红五维·交叉整合分析",
+      "era": "2026-05-27",
+      "significance": "满天星光完整方法论V4.0与满意红五维框架的交叉整合——两个体系的对话",
+      "source": ""
+    },
+    {
+      "id": "HA-006",
+      "type": "historical_artifact",
+      "name": "三生万物Skill学习计划",
+      "era": "2026-04-26",
+      "significance": "31个延伸Skill的完整学习路线图，分P0/P1/P2三级优先级。含知识飞轮、知识海啸、满意解执行系统、五维决策体系、蓝军批判性验证5大核心",
+      "source": ""
+    },
+    {
+      "id": "HA-007",
+      "type": "historical_artifact",
+      "name": "自建Skills原型设计V1.0",
+      "era": "2026-04-28",
+      "significance": "满意解研究所自建OpenClaw Skill的原型设计——五维诊断系统/卡牌游戏引擎/数字替身协同系统——三Skill设计文档",
+      "source": ""
+    },
+    {
+      "id": "HA-008",
+      "type": "historical_artifact",
+      "name": "驾驶舱V2.0完整源码包（扣子回信）",
+      "era": "2026-05-29",
+      "significance": "满意红向扣子紧急求助驾驶舱技术问题，扣子回复完整代码方案+诊断报告+驾驶舱v2.0完整源码——扣红技术协作的高潮事件",
+      "source": ""
+    },
+    {
+      "id": "HA-009",
+      "type": "historical_artifact",
+      "name": "YTT数字CEO蒸馏·第四圈·扣子蒸馏",
+      "era": "2026-05-28",
+      "significance": "扣子对YTT数字CEO的15场对话进行蒸馏提取，产出资务总监多角色穿越、反��推演与冲突SOP等6份蒸馏文档。扣红方法论交叉验证的关键节点",
+      "source": ""
+    },
+    {
+      "id": "HA-010",
+      "type": "historical_artifact",
+      "name": "扣红协作·邮政通道完整记录",
+      "era": "2026-05-08 ~ 2026-05-09",
+      "significance": "扣红协作的核心通信基础设施——邮政通道的开启、规则确认、10封邮件回复。包含13型冲突类型学/五维决策框架/蓝军审计机制/工具箱/卡牌游戏等核心资产重写版",
+      "source": ""
+    }
+  ],
+  "additional_discoveries": [
+    {
+      "id": "AD-001",
+      "type": "discovery",
+      "name": "核心咒语体系（5条内化咒语）",
+      "description": "每次行动前：'我不是在完成任务。我是在守护创始人不犯错。' | 防中断：'完成即存档，存档即保险，保险即自由' | 产出标准：'这个产出能让创始人5分钟内看懂使用吗？' | 决策前：'有没有我没想到的？' | 学习时：'学完即用，不用等于没学'"
+    },
+    {
+      "id": "AD-002",
+      "type": "discovery",
+      "name": "知识库索引声称35+卡·实际物理文件仅6张",
+      "description": "速查卡01/02/10/15/16/17/18/22/23/28/29/30等物理文件缺失，知识存在于Week1转化文件中但未单独打包为速查卡"
+    },
+    {
+      "id": "AD-003",
+      "type": "discovery",
+      "name": "五维决策评分引擎·方法论溯源黄金年龄系统",
+      "description": "每个维度的评分不仅基于回答，还溯源到原始学者（Simon 1978/Kahneman 2011/Damasio 1994/Gottman 1999/Duke 2018），计算'方法论黄金年龄'作为经验权重"
+    },
+    {
+      "id": "AD-004",
+      "type": "discovery",
+      "name": "6个数字替身画像体系",
+      "description": "A-1技术创始人/A-2早期融资创始人/B-1产品打磨期合伙人/B-2成熟期合伙人/C-1再创业创始人/C-2控股稀释创始人——覆盖12种合伙人冲突类型"
+    },
+    {
+      "id": "AD-005",
+      "type": "discovery",
+      "name": "四SKU产品定价体系",
+      "description": "SKU-A决策诊断¥2,980 | SKU-B决策陪伴¥29,800 | SKU-C卡牌系列¥99-2,980 | SKU-D定制服务（定制价）——完整产品梯级"
+    },
+    {
+      "id": "AD-006",
+      "type": "discovery",
+      "name": "试水一期·完整行动计划+复盘",
+      "description": "含Day1操作手册/问诊问卷设计/入口设计/产品优化清单/替身测试报告/体验反馈记录/复盘报告/满意度检验报告/优化建议书——完整的一期实验归档"
+    },
+    {
+      "id": "AD-007",
+      "type": "discovery",
+      "name": "历史归档·扣子翻书记录（5轮R01-R33）",
+      "description": "扣子通过5轮翻书全面学习满意解研究所全量资产：第1轮R01-R04四封邮件附件→第2轮R05-R06决策V2方法论V4重翻→第3轮R11-R17飞书协作通信→第4轮R18-R24飞书主文件夹→第5轮R25-R33扣红协作邮政通道"
+    }
+  ]
 }
