@@ -60,10 +60,10 @@
     <h2>📊 五维能力雷达</h2>
     <div class="chart-wrap" id="radar-container"></div>
     <div class="controls">
-      <button class="btn active" onclick="setSample('balanced')">均衡型</button>
-      <button class="btn" onclick="setSample('sawtooth')">锯齿型</button>
-      <button class="btn" onclick="setSample('single_peak')">单峰型</button>
-      <button class="btn" onclick="setSample('gap')">缺口型</button>
+      <button class="btn active" onclick="setSample('balanced',this)">均衡型</button>
+      <button class="btn" onclick="setSample('sawtooth',this)">锯齿型</button>
+      <button class="btn" onclick="setSample('single_peak',this)">单峰型</button>
+      <button class="btn" onclick="setSample('gap',this)">缺口型</button>
     </div>
     <div class="mode-tag" id="mode-tag"></div>
   </div>
@@ -274,11 +274,11 @@ function updateAll() {
   updatePattern(currentData);
 }
 
-function setSample(name) {
+function setSample(name, btn) {
   currentSample = name;
   currentData = {...SAMPLES[name]};
   document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+  btn.classList.add('active');
   updateAll();
 }
 

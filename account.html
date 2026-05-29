@@ -61,9 +61,9 @@
 <div class="main">
   <!-- Tabs -->
   <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('profile')">📋 我的</button>
-    <button class="tab-btn" onclick="switchTab('referral')">🎁 转介绍</button>
-    <button class="tab-btn" onclick="switchTab('unlock')">🔓 解锁</button>
+    <button class="tab-btn active" onclick="switchTab('profile',this)">📋 我的</button>
+    <button class="tab-btn" onclick="switchTab('referral',this)">🎁 转介绍</button>
+    <button class="tab-btn" onclick="switchTab('unlock',this)">🔓 解锁</button>
   </div>
 
   <!-- ===== TAB 1: 个人信息 ===== -->
@@ -222,10 +222,10 @@
 
 <script>
 // Tab switching
-function switchTab(name) {
+function switchTab(name, btn) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-  event.target.classList.add('active');
+  btn.classList.add('active');
   document.getElementById('tab-'+name).classList.add('active');
   if (name === 'profile') loadProfile();
   if (name === 'referral') loadReferral();

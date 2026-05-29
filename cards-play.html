@@ -160,8 +160,8 @@
 
   <!-- Mode Selection -->
   <div class="mode-select" id="modeSelect">
-    <button class="mode-btn active" onclick="setMode('solo')">🧑‍💻 单人自查</button>
-    <button class="mode-btn" onclick="setMode('duo')">👥 双人对局</button>
+    <button class="mode-btn active" onclick="setMode('solo',this)">🧑‍💻 单人自查</button>
+    <button class="mode-btn" onclick="setMode('duo',this)">👥 双人对局</button>
   </div>
 
   <!-- Game Board -->
@@ -477,10 +477,10 @@ function selectDeck(el, size) {
   deckSize = size;
 }
 
-function setMode(m) {
+function setMode(m, btn) {
   mode = m;
   document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
+  btn.classList.add('active');
 }
 
 function shuffle(a) {

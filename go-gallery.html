@@ -16,13 +16,13 @@
     <a href="wizard.html" style="font-size:11px;color:var(--sri-red);text-decoration:none">🧭 不知道怎么选？问决策向导</a>
   </div>
   <div class="mode-bar">
-    <button class="filter-btn active" onclick="filter('all')">全部</button>
-    <button class="filter-btn" onclick="filter('tool')">⚙️ 工具</button>
-    <button class="filter-btn" onclick="filter('article')">📖 文章</button>
-    <button class="filter-btn" onclick="filter('card')">🎴 卡片</button>
-    <button class="filter-btn" onclick="filter('theatre')">🎭 剧场</button>
-    <button class="filter-btn" onclick="filter('dashboard')">📊 仪表</button>
-    <button class="filter-btn" onclick="filter('wizard')">🧭 向导</button>
+    <button class="filter-btn active" onclick="filter('all',this)">全部</button>
+    <button class="filter-btn" onclick="filter('tool',this)">⚙️ 工具</button>
+    <button class="filter-btn" onclick="filter('article',this)">📖 文章</button>
+    <button class="filter-btn" onclick="filter('card',this)">🎴 卡片</button>
+    <button class="filter-btn" onclick="filter('theatre',this)">🎭 剧场</button>
+    <button class="filter-btn" onclick="filter('dashboard',this)">📊 仪表</button>
+    <button class="filter-btn" onclick="filter('wizard',this)">🧭 向导</button>
   </div>
   <div class="layer-label" style="text-align:center;font-size:10px;letter-spacing:3px;color:var(--sri-gold);margin:20px 0 10px;"><span style="background:#fff;padding:4px 16px;border:1px solid var(--sri-gold);border-radius:16px;">全部产品 · 按形态浏览</span></div>
 <div class="count-bar" id="countBar"></div>
@@ -79,10 +79,10 @@ const PRODUCTS = [
 
 let activeFilter = 'all';
 
-function filter(type) {
+function filter(type, btn) {
   activeFilter = type;
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
+  btn.classList.add('active');
   render();
 }
 
