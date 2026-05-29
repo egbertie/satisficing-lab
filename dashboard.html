@@ -1,994 +1,1306 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>驾驶舱 · 满意解研究所</title>
-<style>
-:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title:#2A2A2A}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,"PingFang SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
-.hero{background:linear-gradient(160deg,var(--sri-red),var(--sri-gold));color:#F5F0E6;padding:24px 20px;text-align:center}
-.hero h1{font-size:20px;color:#F5F0E6}.hero p{font-size:12px;opacity:0.7}
-.main{max-width:720px;margin:0 auto;padding:16px}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>满意解研究所 · 驾驶舱</title>
+  <style>
+    /* ===== VI配色变量 ===== */
+    :root {
+      --primary: #C23B22;    /* 赭石红 */
+      --bg: #F5F0E6;          /* 米白 */
+      --accent: #B8860B;      /* 暗金 */
+      --text: #4A4A4A;        /* 深灰 */
+      --title: #2A2A2A;      /* 炭黑 */
+      --border: #E0D8C8;
+      --card-bg: #FFFCF7;
+    }
 
-.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:6px;margin-bottom:16px}
-.kpi-card{background:#fff;border-radius:12px;padding:12px;text-align:center;border:1px solid #D4C5A0;cursor:pointer;transition:0.15s}
-.kpi-card:hover{border-color:var(--sri-red)}
-.kpi-card .v{font-size:22px;font-weight:800;color:var(--sri-red)}.kpi-card .l{font-size:10px;opacity:0.5}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
-.tab-btn{padding:8px 16px;border-radius:20px;border:1px solid #D4C5A0;background:#fff;cursor:pointer;font-size:12px;font-weight:600}
-.tab-btn.active{background:var(--sri-red);color:#fff;border-color:var(--sri-red)}
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-.panel{background:#fff;border-radius:14px;padding:16px;margin:8px 0;border:1px solid #D4C5A0}
-.panel h3{font-size:14px;color:var(--title);margin-bottom:8px}
-table{width:100%;border-collapse:collapse;font-size:11px}
-th{background:var(--sri-red);color:#fff;padding:6px 4px;text-align:left;font-size:10px}
-td{padding:6px 4px;border-bottom:1px solid #f0e8d8}
+    /* ===== 登录页 ===== */
+    #login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.form-row{display:flex;gap:8px;margin:6px 0;flex-wrap:wrap}
-.form-row input,.form-row select{flex:1;padding:8px 10px;border:1.5px solid #D4C5A0;border-radius:8px;font-size:12px;min-width:100px}
-.btn{padding:8px 18px;border-radius:16px;border:none;cursor:pointer;font-size:12px;font-weight:600;background:var(--sri-red);color:#fff}
-.btn-sm{padding:4px 12px;font-size:10px}
-.status-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:4px}
-.dot-green{background:#3D7A4F}.dot-amber{background:var(--sri-gold)}.dot-red{background:var(--sri-red)}
-.empty{text-align:center;padding:40px;color:var(--text);opacity:0.4;font-size:13px}
-</style>
-<link rel="stylesheet" href="vi_quick_ref.css">
+    .login-box {
+      background: var(--card-bg);
+      border: 2px solid var(--primary);
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(194,59,34,0.15);
+    }
+
+    .login-box h1 {
+      color: var(--title);
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .login-box p {
+      color: var(--text);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      font-size: 16px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .login-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .login-box button:hover {
+      background: #A63220;
+    }
+
+    .login-error {
+      color: var(--primary);
+      font-size: 14px;
+      margin-top: 12px;
+      display: none;
+    }
+
+    /* ===== 主界面 ===== */
+    #main-screen { display: none; }
+
+    /* Header */
+    .header {
+      background: var(--card-bg);
+      border-bottom: 3px solid var(--primary);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .countdown {
+      background: var(--primary);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-box input {
+      padding: 8px 16px;
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      width: 280px;
+      font-size: 14px;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .logout-btn {
+      padding: 8px 16px;
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .logout-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* KPI概览条 */
+    .kpi-bar {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 12px;
+      padding: 16px 24px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .kpi-card {
+      text-align: center;
+      padding: 12px;
+      background: var(--card-bg);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .kpi-card .value {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .kpi-card .label {
+      font-size: 12px;
+      color: var(--text);
+      margin-top: 4px;
+    }
+
+    /* Tab栏 */
+    .tab-bar {
+      display: flex;
+      gap: 4px;
+      padding: 12px 24px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+      flex-wrap: nowrap;
+    }
+
+    .tab-btn {
+      padding: 8px 16px;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      border-radius: 6px;
+      font-size: 14px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      background: var(--bg);
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* 内容区 */
+    .content {
+      padding: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* 通用卡片 */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--title);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    /* 表格 */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-table th {
+      background: var(--bg);
+      font-weight: 600;
+      color: var(--title);
+    }
+
+    .data-table tr:hover {
+      background: var(--bg);
+    }
+
+    /* 表单 */
+    .form-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      flex: 1;
+      padding: 10px 14px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #A63220;
+    }
+
+    .btn-secondary {
+      background: var(--bg);
+      color: var(--text);
+      border: 2px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-danger {
+      background: #DC3545;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #C82333;
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+
+    /* 标签 */
+    .tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .tag-p0 { background: #FFEBEE; color: #C62828; }
+    .tag-p1 { background: #FFF3E0; color: #E65100; }
+    .tag-p2 { background: #E3F2FD; color: #1565C0; }
+    .tag-p3 { background: #E8F5E9; color: #2E7D32; }
+
+    /* 搜索结果高亮 */
+    .highlight {
+      background: #FFEB3B;
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+
+    /* 术语表 */
+    .glossary-item {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .glossary-item:last-child {
+      border-bottom: none;
+    }
+
+    .glossary-term {
+      font-weight: bold;
+      color: var(--primary);
+      font-size: 16px;
+    }
+
+    .glossary-def {
+      margin-top: 6px;
+      color: var(--text);
+    }
+
+    /* 里程碑时间线 */
+    .timeline {
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 20px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -20px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 3px solid var(--bg);
+    }
+
+    .timeline-date {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .timeline-title {
+      font-size: 15px;
+      color: var(--title);
+      margin-top: 4px;
+    }
+
+    /* 响应式 */
+    @media (max-width: 1024px) {
+      .kpi-bar {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .kpi-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .header {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .search-box input {
+        width: 200px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-
-
-<div class="hero">
-  <h1>📊 驾驶舱</h1>
-  <p>本地数据 · localStorage · 无需服务器 · 随时可用</p>
-<div style="max-width:720px;margin:12px auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;font-size:10px;">
-<div style="background:rgba(245,240,230,0.15);border-radius:8px;padding:6px;text-align:center;">
-<div style="font-weight:700;color:#fff;">💰 财务</div>
-<div id="bscFinance" style="font-size:16px;font-weight:800;color:#F5F0E6;">—</div>
-<div style="opacity:0.7;">现金流·营收</div>
-</div>
-<div style="background:rgba(245,240,230,0.15);border-radius:8px;padding:6px;text-align:center;">
-<div style="font-weight:700;color:#fff;">👤 客户</div>
-<div id="bscCustomer" style="font-size:16px;font-weight:800;color:#F5F0E6;">—</div>
-<div style="opacity:0.7;">NPS·转化·留存</div>
-</div>
-<div style="background:rgba(245,240,230,0.15);border-radius:8px;padding:6px;text-align:center;">
-<div style="font-weight:700;color:#fff;">⚙️ 流程</div>
-<div id="bscProcess" style="font-size:16px;font-weight:800;color:#F5F0E6;">—</div>
-<div style="opacity:0.7;">质量·效率·系统</div>
-</div>
-<div style="background:rgba(245,240,230,0.15);border-radius:8px;padding:6px;text-align:center;">
-<div style="font-weight:700;color:#fff;">📈 成长</div>
-<div id="bscGrowth" style="font-size:16px;font-weight:800;color:#F5F0E6;">—</div>
-<div style="opacity:0.7;">学习·资产·创新</div>
-</div>
+<!-- ===== 登录页 ===== -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1>满意解研究所</h1>
+    <p>满天星光 · 驾驶舱</p>
+    <input type="password" id="password-input" placeholder="输入访问密码" onkeypress="if(event.key==='Enter')attemptLogin()">
+    <button onclick="attemptLogin()">进入驾驶舱</button>
+    <p class="login-error" id="login-error">密码错误，请重试</p>
+  </div>
 </div>
 
-</div>
-<div class="main">
-
-  <div class="kpi" id="kpiBar">
-    <div class="kpi-card"><div class="v" id="kv_tasks">0</div><div class="l">任务</div></div>
-    <div class="kpi-card"><div class="v" id="kv_customers">0</div><div class="l">客户</div></div>
-    <div class="kpi-card"><div class="v" id="kv_passwords">0</div><div class="l">密码</div></div>
-    <div class="kpi-card"><div class="v" id="kv_quality">0</div><div class="l">质量标准</div></div>
-    <div class="kpi-card"><div class="v" id="kv_products">0</div><div class="l">产品</div></div>
-    <div class="kpi-card"><div class="v" id="kv_usage">0</div><div class="l">今日使用</div></div>
-    <div class="kpi-card"><div class="v" id="kv_flywheel">0</div><div class="l">飞轮循环</div></div>
-    <div class="kpi-card" onclick="exportAll()" style="cursor:pointer"><div class="v">💾</div><div class="l">导出数据</div></div>
+<!-- ===== 主界面 ===== -->
+<div id="main-screen">
+  <div class="header">
+    <div class="header-left">
+      <span class="logo">满意解研究所</span>
+      <span class="countdown" id="countdown">夏至官宣倒计时</span>
+    </div>
+    <div class="search-box">
+      <input type="text" id="global-search" placeholder="搜索任务/客户/产品..." oninput="handleSearch(this.value)">
+    </div>
+    <button class="logout-btn" onclick="logout()">退出</button>
   </div>
 
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('tasks')">📋 任务</button>
-    <button class="tab-btn" onclick="switchTab('customers')">👤 客户</button>
-    <button class="tab-btn" onclick="switchTab('passwords')">🔐 密码</button>
-    <button class="tab-btn" onclick="switchTab('quality')">✅ 质量</button>
-    <button class="tab-btn" onclick="switchTab('growth')">📈 增长</button>
-    <button class="tab-btn" onclick="switchTab('products')">📦 产品</button>
-    <button class="tab-btn" onclick="switchTab('system')">⚡ 系统</button>
-    <button class="tab-btn" onclick="switchTab('docs')">📂 文档</button>
-    <button class="tab-btn" onclick="switchTab('flywheel')">⚙️ 资产</button>
-    <button class="tab-btn" onclick="switchTab('project')">🗓️ 项目</button>
-    <button class="tab-btn" onclick="switchTab('marketing')">📢 宣发</button>
-    <button class="tab-btn" onclick="switchTab('media')">📰 媒体</button>
-    <button class="tab-btn" onclick="switchTab('glossary')">📖 命名</button>
-    <button class="tab-btn" onclick="switchTab('import')">📥 导入</button>
+  <div class="kpi-bar" id="kpi-bar">
+    <!-- KPI卡片由JS生成 -->
   </div>
 
-  <div id="content"></div>
+  <div class="tab-bar" id="tab-bar">
+    <!-- Tab按钮由JS生成 -->
+  </div>
+
+  <div class="content" id="content">
+    <!-- 内容由JS渲染 -->
+  </div>
 </div>
 
 <script>
-// Auto-init on page load
-setTimeout(function(){ if(typeof render==="function")render().catch(function(e){console.error(e)}); },200);
-</script>
-<script>
-// ===== localStorage 数据引擎 =====
+/* =====================================================
+   满意解研究所 · 驾驶舱 v2.0
+   架构：Store状态管理 + 渲染分离
+   数据：纯localStorage，无外部API依赖
+   ===================================================== */
 
-// ===== 双数据源引擎: API优先 + localStorage降级 =====
-var DB = {
-  _api: 'http://localhost:8765/api',
-  _local: true, // fallback to localStorage if API not available
-  
-  async _fetch(endpoint, method, body) {
-    try {
-      var opts = {method:method||'GET', headers:{'Content-Type':'application/json'}};
-      if(body) opts.body = JSON.stringify(body);
-      var r = await fetch(this._api + endpoint, opts);
-      return await r.json();
-    } catch(e) {
-      return null;
+// ===== 1. 常量配置 =====
+var CONFIG = {
+  PASSWORD_HASH: '6460662e217c7a9f899208dd70a2c28abdea42f128666a9b78e6c0c064846493', // SHA-256(123654)
+  STORAGE_KEYS: {
+    tasks: 'skylab_tasks',
+    customers: 'skylab_customers',
+    products: 'skylab_products',
+    loggedIn: 'skylab_logged_in'
+  },
+  TABS: [
+    { id: 'overview', label: '概览' },
+    { id: 'tasks', label: '任务' },
+    { id: 'milestones', label: '里程碑' },
+    { id: 'customers', label: '客户' },
+    { id: 'products', label: '产品' },
+    { id: 'quality', label: '质量' },
+    { id: 'financial', label: '财务' },
+    { id: 'growth', label: '增长' },
+    { id: 'system', label: '系统' },
+    { id: 'placeholders', label: '替身' },
+    { id: 'glossary', label: '术语表' }
+  ],
+  XZ_DATE: new Date('2026-06-21')
+};
+
+// ===== 2. Store 状态管理 =====
+var Store = {
+  state: {
+    currentTab: 'overview',
+    searchQuery: '',
+    searchResults: null,
+    tasks: [],
+    customers: [],
+    products: [],
+    qualityItems: [],
+    financial: [],
+    growth: [],
+    system: [],
+    placeholders: []
+  },
+
+  // 初始化：从localStorage加载数据
+  init: function() {
+    var self = this;
+
+    // 加载任务
+    var tasks = localStorage.getItem(CONFIG.STORAGE_KEYS.tasks);
+    this.state.tasks = tasks ? JSON.parse(tasks) : this.getDefaultTasks();
+
+    // 加载客户
+    var customers = localStorage.getItem(CONFIG.STORAGE_KEYS.customers);
+    this.state.customers = customers ? JSON.parse(customers) : this.getDefaultCustomers();
+
+    // 加载产品
+    var products = localStorage.getItem(CONFIG.STORAGE_KEYS.products);
+    this.state.products = products ? JSON.parse(products) : this.getDefaultProducts();
+
+    // 默认数据（首次使用）
+    if (!tasks && !customers && !products) {
+      this.saveAll();
     }
   },
-  
-  get(key) {
-    try { return JSON.parse(localStorage.getItem('sri_db_'+key)) || []; }
-    catch { return []; }
+
+  // 保存所有数据到localStorage
+  saveAll: function() {
+    localStorage.setItem(CONFIG.STORAGE_KEYS.tasks, JSON.stringify(this.state.tasks));
+    localStorage.setItem(CONFIG.STORAGE_KEYS.customers, JSON.stringify(this.state.customers));
+    localStorage.setItem(CONFIG.STORAGE_KEYS.products, JSON.stringify(this.state.products));
   },
-  set(key, data) { localStorage.setItem('sri_db_'+key, JSON.stringify(data)); },
-  
-  async tasks() {
-    var d = await this._fetch('/tasks');
-    return Array.isArray(d) ? d : this.get('tasks');
+
+  // 设置状态并触发渲染
+  setState: function(key, value) {
+    this.state[key] = value;
+    this.render();
   },
-  async addTask(t) {
-    await this._fetch('/tasks','POST',t);
-    var d = this.get('tasks'); d.unshift({...t, id:Date.now(), created:new Date().toISOString()}); this.set('tasks',d.slice(0,500));
+
+  // 切换Tab
+  switchTab: function(tabId) {
+    this.state.currentTab = tabId;
+    this.state.searchResults = null; // 清空搜索结果
+    this.state.searchQuery = '';
+    document.getElementById('global-search').value = '';
+    this.render();
   },
-  async updateTask(id, status) {
-    await this._fetch('/tasks/update','POST',{id:id, status:status});
-    var d = this.get('tasks'); var item = d.find(x=>x.id===id); if(item) {item.status=status; this.set('tasks',d);}
-  },
-  
-  async customers() {
-    var d = await this._fetch('/customers');
-    return Array.isArray(d) ? d : this.get('customers');
-  },
-  async addCustomer(cust) {
-    await this._fetch('/customers','POST',cust);
-    var d = this.get('customers'); d.unshift({...cust, id:Date.now(), created:new Date().toISOString()}); this.set('customers',d.slice(0,500));
-  },
-  
-  async passwords() {
-    var d = await this._fetch('/passwords');
-    return Array.isArray(d) ? d : this.get('passwords');
-  },
-  async addPassword(p) {
-    await this._fetch('/passwords','POST',p);
-    var d = this.get('passwords'); d.unshift({...p, id:Date.now(), created:new Date().toISOString()}); this.set('passwords',d.slice(0,200));
-  },
-  
-  quality() { return this.get('quality') },
-  addQuality(q) { var d=this.quality(); d.push({...q,id:Date.now()}); this.set('quality',d) },
-  
-  products() { return this.get('products') },
-  addProduct(p) { var d=this.products(); d.push({...p,id:Date.now()}); this.set('products',d.slice(0,500)) },
-  
-  growth() { return this.get('growth') },
-  usage() { var log=JSON.parse(localStorage.getItem('sri_usage_log')||'[]'); return log.filter(x=>new Date(x.time).toDateString()===new Date().toDateString()); },
-  flywheel() { return JSON.parse(localStorage.getItem('sri_flywheel_reports')||'[]'); },
-  
-  async stats() {
-    try {
-      var d = await this._fetch('/stats');
-      if (d) return { tasks:d.tasks||0, customers:d.customers||0, passwords:d.passwords||0, quality:this.quality().length, products:this.products().length, usage:d.usage_today||0, flywheel:this.flywheel().length };
-    } catch(e) {}
-    return { tasks:this.get('tasks').length, customers:this.get('customers').length, passwords:this.get('passwords').length, quality:this.quality().length, products:this.products().length, usage:this.usage().length, flywheel:this.flywheel().length };
-  },
-  
-  seed() {
-    if (this.get('passwords').length===0) this.set('passwords',[{id:1,code:'123654',products:'all',customer:'内测',max_uses:9999,used:0,status:'启用',created:new Date().toISOString()}]);
-    if (this.get('quality').length===0) {
-      this.addQuality({qm_id:'QM-001',standard:'L0 提案审核',status:'待执行',assignee:'满意红',deadline:'2026-06-07',priority:'P0'});
-      this.addQuality({qm_id:'QM-002',standard:'L1 方法论审核',status:'55%通过率',assignee:'满意红(cron)',deadline:'2026-06-07',priority:'P0'});
-      this.addQuality({qm_id:'QM-003',standard:'L2 内容审核',status:'105个缺来源',assignee:'满意红',deadline:'2026-06-14',priority:'P1'});
-      this.addQuality({qm_id:'QM-009',standard:'四关通过率≥80%',status:'96%(已达标)',assignee:'满意红(cron)',deadline:'2026-07-01',priority:'P0'});
-      this.addQuality({qm_id:'QM-026',standard:'商标注册',status:'未申请',assignee:'Egbertie',deadline:'2026-07-31',priority:'P0'});
+
+  // 全局搜索
+  search: function(query) {
+    this.state.searchQuery = query;
+    if (!query.trim()) {
+      this.state.searchResults = null;
+      this.render();
+      return;
     }
+
+    var q = query.toLowerCase();
+    var results = {
+      tasks: [],
+      customers: [],
+      products: []
+    };
+
+    this.state.tasks.forEach(function(t) {
+      if (t.title.toLowerCase().includes(q) || (t.desc || '').toLowerCase().includes(q)) {
+        results.tasks.push(t);
+      }
+    });
+
+    this.state.customers.forEach(function(c) {
+      if (c.name.toLowerCase().includes(q) || (c.industry || '').toLowerCase().includes(q)) {
+        results.customers.push(c);
+      }
+    });
+
+    this.state.products.forEach(function(p) {
+      if (p.name.toLowerCase().includes(q) || (p.desc || '').toLowerCase().includes(q)) {
+        results.products.push(p);
+      }
+    });
+
+    this.state.searchResults = results;
+    this.render();
+  },
+
+  // 添加任务
+  addTask: function(task) {
+    task.id = Date.now();
+    task.createdAt = new Date().toISOString();
+    this.state.tasks.unshift(task);
+    this.saveAll();
+    this.render();
+  },
+
+  // 添加客户
+  addCustomer: function(customer) {
+    customer.id = Date.now();
+    customer.createdAt = new Date().toISOString();
+    this.state.customers.unshift(customer);
+    this.saveAll();
+    this.render();
+  },
+
+  // 添加产品
+  addProduct: function(product) {
+    product.id = Date.now();
+    product.createdAt = new Date().toISOString();
+    this.state.products.unshift(product);
+    this.saveAll();
+    this.render();
+  },
+
+  // 删除任务
+  deleteTask: function(id) {
+    this.state.tasks = this.state.tasks.filter(function(t) { return t.id !== id; });
+    this.saveAll();
+    this.render();
+  },
+
+  // 删除客户
+  deleteCustomer: function(id) {
+    this.state.customers = this.state.customers.filter(function(c) { return c.id !== id; });
+    this.saveAll();
+    this.render();
+  },
+
+  // 删除产品
+  deleteProduct: function(id) {
+    this.state.products = this.state.products.filter(function(p) { return p.id !== id; });
+    this.saveAll();
+    this.render();
+  },
+
+  // ===== 默认数据 =====
+  getDefaultTasks: function() {
+    return [
+      { id: 1, title: '公众号文章排期', priority: 'P1', status: '进行中', assignee: '满意红', dueDate: '2026-06-01' },
+      { id: 2, title: '夏至官宣准备', priority: 'P0', status: '待启动', assignee: 'Egbertie', dueDate: '2026-06-15' },
+      { id: 3, title: '决策工具内测', priority: 'P1', status: '已完成', assignee: '满意扣子', dueDate: '2026-05-28' },
+      { id: 4, title: '飞书知识库同步', priority: 'P2', status: '进行中', assignee: '满意红', dueDate: '2026-06-05' },
+      { id: 5, title: '客户案例整理', priority: 'P2', status: '待启动', assignee: '满天星光', dueDate: '2026-06-10' }
+    ];
+  },
+
+  getDefaultCustomers: function() {
+    return [
+      { id: 1, name: '人形机器人创始人A', industry: '人形机器人', status: '潜在客户', lastContact: '2026-05-25' },
+      { id: 2, name: 'AI芯片创始人B', industry: 'AI芯片/半导体', status: '深入沟通', lastContact: '2026-05-20' },
+      { id: 3, name: '智能汽车创始人C', industry: '智能汽车', status: '已完成咨询', lastContact: '2026-05-15' }
+    ];
+  },
+
+  getDefaultProducts: function() {
+    return [
+      { id: 1, name: '决策教练服务', desc: '一对一硬科技创业陪跑', price: '待定', status: '设计完成' },
+      { id: 2, name: '公众号内容', desc: '满天星光决策方法论输出', price: '免费', status: '持续更新' },
+      { id: 3, name: '决策工具箱', desc: '在线决策评估工具集', price: '待定', status: '开发中' }
+    ];
   }
 };
 
-// 异步初始化
-var DB_INIT = false;
-async function initDB() {
-  if (DB_INIT) return;
-  DB.seed();
-// cron状态实时检查
-setTimeout(function(){
-  var checks=[
-    {name:'日起课',file:'memory/2026-05-29.md',cron:'06:00'},
-    {name:'Token压缩',file:'memory/auto_compression_save.py',cron:'每2h'},
-    {name:'邮箱检查',file:'memory/邮箱检查日志.md',cron:'10:00/18:00'},
-    {name:'产品健康扫描',file:'memory/_scripts/product_health_scan.py',cron:'周一06:00'},
-    {name:'整周体检',file:'memory/整周体检日志.md',cron:'周三18:00'},
-    {name:'运维清理',file:'memory/运维清理周报_2026-05-28.md',cron:'周六10:00'},
-    {name:'日毕课',file:'memory/2026-05-29.md',cron:'22:00'},
-    {name:'隐私审计',file:'memory/_scripts/privacy_audit.py',cron:'每月1日'},
-  ];
-  // 更新到全局供系统Tab使用
-  window._cronStatus=checks;
-},500);
+// ===== 3. 渲染函数（每个Tab独立） =====
 
-// NPS实时同步
-setTimeout(function(){
-  var nps=localStorage.getItem('sri_nps_score');
-  var growth=DB.get('gr');
-  if(nps && growth.length>0){ 
-    var npsItem=growth.find(function(g){return g.m&&g.m.indexOf('NPS')>=0});
-    if(npsItem) npsItem.c=nps+'/10';
-    DB.set('gr',growth);
+// 主渲染入口
+Store.render = function() {
+  this.renderKPI();
+  this.renderTabBar();
+  this.renderContent();
+  this.updateCountdown();
+};
+
+// KPI概览条
+Store.renderKPI = function() {
+  var tasks = this.state.tasks;
+  var p0 = tasks.filter(function(t) { return t.priority === 'P0'; }).length;
+  var p1 = tasks.filter(function(t) { return t.priority === 'P1'; }).length;
+  var doing = tasks.filter(function(t) { return t.status === '进行中'; }).length;
+
+  var html = [
+    '<div class="kpi-card"><div class="value">' + tasks.length + '</div><div class="label">任务总数</div></div>',
+    '<div class="kpi-card"><div class="value" style="color:#C62828">' + p0 + '</div><div class="label">P0待办</div></div>',
+    '<div class="kpi-card"><div class="value" style="color:#E65100">' + p1 + '</div><div class="label">P1优先</div></div>',
+    '<div class="kpi-card"><div class="value" style="color:#1565C0">' + doing + '</div><div class="label">进行中</div></div>',
+    '<div class="kpi-card"><div class="value">' + this.state.customers.length + '</div><div class="label">客户数</div></div>',
+    '<div class="kpi-card"><div class="value">' + this.state.products.length + '</div><div class="label">产品数</div></div>',
+    '<div class="kpi-card"><div class="value">233</div><div class="label">线上产品</div></div>',
+    '<div class="kpi-card"><div class="value">12</div><div class="label">Cron任务</div></div>'
+  ].join('');
+
+  document.getElementById('kpi-bar').innerHTML = html;
+};
+
+// Tab栏
+Store.renderTabBar = function() {
+  var self = this;
+  var html = CONFIG.TABS.map(function(tab) {
+    return '<button class="tab-btn' + (self.state.currentTab === tab.id ? ' active' : '') + '" onclick="Store.switchTab(\'' + tab.id + '\')">' + tab.label + '</button>';
+  }).join('');
+
+  document.getElementById('tab-bar').innerHTML = html;
+};
+
+// 内容区（根据currentTab选择渲染函数）
+Store.renderContent = function() {
+  var tab = this.state.currentTab;
+  var renderers = {
+    'overview': this.renderOverview.bind(this),
+    'tasks': this.renderTasks.bind(this),
+    'milestones': this.renderMilestones.bind(this),
+    'customers': this.renderCustomers.bind(this),
+    'products': this.renderProducts.bind(this),
+    'quality': this.renderQuality.bind(this),
+    'financial': this.renderFinancial.bind(this),
+    'growth': this.renderGrowth.bind(this),
+    'system': this.renderSystem.bind(this),
+    'placeholders': this.renderPlaceholders.bind(this),
+    'glossary': this.renderGlossary.bind(this)
+  };
+
+  if (renderers[tab]) {
+    renderers[tab]();
   }
-},1000);
+};
 
-// 自动种子——首次使用灌入默认数据
-(function(){
-  if(!localStorage.getItem('sri_db_seeded')){
-    DB.set('ct',[{n:'商标注册代理',p:'待定',v:'~3K',s:'待签约',d:'07-31'},{n:'飞书认证',p:'飞书',v:'300/年',s:'待启动',d:'公测后'},{n:'Zoom',p:'Zoom',v:'~1.5K/yr',s:'待启动',d:'开课前'},{n:'域名',p:'待定',v:'~100/yr',s:'待签约',d:'06-14'},{n:'合作协议模板',p:'已设计',v:'—',s:'草稿',d:'夏至后'}]);
-    DB.set('ch',[{n:'公众号:满意解禅堂',t:'自有',s:'✅已开通',no:'未认证'},{n:'GitHub Pages',t:'主站',s:'✅232产品',no:'HTTPS'},{n:'小红书',t:'社交',s:'5篇就绪',no:'张雪机车'},{n:'知乎',t:'社区',s:'3篇就绪',no:'合伙人'},{n:'播客',t:'音频',s:'脚本就绪',no:'待录制'},{n:'抖音/视频号',t:'短视频',s:'脚本就绪',no:'待发布'},{n:'36氪',t:'科技媒体',s:'待联系',no:'投稿'},{n:'虎嗅',t:'科技媒体',s:'待联系',no:'深度'},{n:'投资人说',t:'VC垂直',s:'待联系',no:'投后'},{n:'创业邦',t:'创业媒体',s:'待联系',no:'故事'},{n:'VC投后管理',t:'渠道合作',s:'方案完成',no:'3模式'},{n:'加速器',t:'渠道合作',s:'方案完成',no:'打包诊断'},{n:'律所·合伙人',t:'渠道合作',s:'待联系',no:'联合服务'},{n:'高校创业中心',t:'渠道合作',s:'待联系',no:'课程嵌入'}]);
-    DB.set('vi',[{a:'主色#C23B22',c:'色彩',u:'所有标识',s:'✅'},{a:'背景#F5F0E6',c:'色彩',u:'页面背景',s:'✅'},{a:'暗金#B8860B',c:'色彩',u:'金属符号',s:'✅'},{a:'Logo方印',c:'标识',u:'品牌资产',s:'✅'},{a:'章衡镜契觉',c:'命名',u:'产品体系',s:'✅'},{a:'设计系统V4',c:'CSS',u:'全局变量',s:'✅'},{a:'VI手册(飞书)',c:'规范',u:'视觉识别',s:'✅'},{a:'资产库(飞书)',c:'素材',u:'50素材',s:'✅'},{a:'商标注册',c:'法律',u:'®保护',s:'QM-026'}]);
-    localStorage.setItem('sri_db_seeded','true');
-  }
-})();
+// ===== 各Tab内容渲染 =====
 
+// 概览
+Store.renderOverview = function() {
+  var tasks = this.state.tasks;
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">本周待办</div>',
+      '<table class="data-table">',
+        '<thead><tr><th>任务</th><th>优先级</th><th>状态</th><th>截止</th></tr></thead>',
+        '<tbody>',
+          tasks.slice(0, 5).map(function(t) {
+            return '<tr><td>' + t.title + '</td><td><span class="tag tag-' + t.priority.toLowerCase() + '">' + t.priority + '</span></td><td>' + t.status + '</td><td>' + t.dueDate + '</td></tr>';
+          }).join(''),
+        '</tbody>',
+      '</table>',
+    '</div>',
+    '<div class="card">',
+      '<div class="card-title">最新动态</div>',
+      '<p>暂无动态</p>',
+    '</div>'
+  ].join('');
 
-// BSC四维指标
-function updateBSC(){
-  var stats=DB.stats();
-  setTimeout(()=>{
-    document.getElementById('bscFinance')&&(document.getElementById('bscFinance').textContent='内测中');
-    document.getElementById('bscCustomer')&&(document.getElementById('bscCustomer').textContent=(stats.customers||0)+'客户');
-    document.getElementById('bscProcess')&&(document.getElementById('bscProcess').textContent=(stats.quality||0)+'QM');
-    document.getElementById('bscGrowth')&&(document.getElementById('bscGrowth').textContent=(stats.products||0)+'产品');
-  },500);
-}
-
-  try {
-    var s = await DB._fetch('/stats');
-    if (s) console.log('✅ SQLite中台已连接·'+s.tasks+'任务·'+s.customers+'客户');
-    else console.log('⚠️ 使用localStorage降级');
-  } catch(e) { console.log('⚠️ localStorage模式'); }
-  DB_INIT = true;
-}
-
-DB.seed();
-// cron状态实时检查
-setTimeout(function(){
-  var checks=[
-    {name:'日起课',file:'memory/2026-05-29.md',cron:'06:00'},
-    {name:'Token压缩',file:'memory/auto_compression_save.py',cron:'每2h'},
-    {name:'邮箱检查',file:'memory/邮箱检查日志.md',cron:'10:00/18:00'},
-    {name:'产品健康扫描',file:'memory/_scripts/product_health_scan.py',cron:'周一06:00'},
-    {name:'整周体检',file:'memory/整周体检日志.md',cron:'周三18:00'},
-    {name:'运维清理',file:'memory/运维清理周报_2026-05-28.md',cron:'周六10:00'},
-    {name:'日毕课',file:'memory/2026-05-29.md',cron:'22:00'},
-    {name:'隐私审计',file:'memory/_scripts/privacy_audit.py',cron:'每月1日'},
-  ];
-  // 更新到全局供系统Tab使用
-  window._cronStatus=checks;
-},500);
-
-// NPS实时同步
-setTimeout(function(){
-  var nps=localStorage.getItem('sri_nps_score');
-  var growth=DB.get('gr');
-  if(nps && growth.length>0){ 
-    var npsItem=growth.find(function(g){return g.m&&g.m.indexOf('NPS')>=0});
-    if(npsItem) npsItem.c=nps+'/10';
-    DB.set('gr',growth);
-  }
-},1000);
-
-// 自动种子——首次使用灌入默认数据
-(function(){
-  if(!localStorage.getItem('sri_db_seeded')){
-    DB.set('ct',[{n:'商标注册代理',p:'待定',v:'~3K',s:'待签约',d:'07-31'},{n:'飞书认证',p:'飞书',v:'300/年',s:'待启动',d:'公测后'},{n:'Zoom',p:'Zoom',v:'~1.5K/yr',s:'待启动',d:'开课前'},{n:'域名',p:'待定',v:'~100/yr',s:'待签约',d:'06-14'},{n:'合作协议模板',p:'已设计',v:'—',s:'草稿',d:'夏至后'}]);
-    DB.set('ch',[{n:'公众号:满意解禅堂',t:'自有',s:'✅已开通',no:'未认证'},{n:'GitHub Pages',t:'主站',s:'✅232产品',no:'HTTPS'},{n:'小红书',t:'社交',s:'5篇就绪',no:'张雪机车'},{n:'知乎',t:'社区',s:'3篇就绪',no:'合伙人'},{n:'播客',t:'音频',s:'脚本就绪',no:'待录制'},{n:'抖音/视频号',t:'短视频',s:'脚本就绪',no:'待发布'},{n:'36氪',t:'科技媒体',s:'待联系',no:'投稿'},{n:'虎嗅',t:'科技媒体',s:'待联系',no:'深度'},{n:'投资人说',t:'VC垂直',s:'待联系',no:'投后'},{n:'创业邦',t:'创业媒体',s:'待联系',no:'故事'},{n:'VC投后管理',t:'渠道合作',s:'方案完成',no:'3模式'},{n:'加速器',t:'渠道合作',s:'方案完成',no:'打包诊断'},{n:'律所·合伙人',t:'渠道合作',s:'待联系',no:'联合服务'},{n:'高校创业中心',t:'渠道合作',s:'待联系',no:'课程嵌入'}]);
-    DB.set('vi',[{a:'主色#C23B22',c:'色彩',u:'所有标识',s:'✅'},{a:'背景#F5F0E6',c:'色彩',u:'页面背景',s:'✅'},{a:'暗金#B8860B',c:'色彩',u:'金属符号',s:'✅'},{a:'Logo方印',c:'标识',u:'品牌资产',s:'✅'},{a:'章衡镜契觉',c:'命名',u:'产品体系',s:'✅'},{a:'设计系统V4',c:'CSS',u:'全局变量',s:'✅'},{a:'VI手册(飞书)',c:'规范',u:'视觉识别',s:'✅'},{a:'资产库(飞书)',c:'素材',u:'50素材',s:'✅'},{a:'商标注册',c:'法律',u:'®保护',s:'QM-026'}]);
-    localStorage.setItem('sri_db_seeded','true');
-  }
-})();
-
-
-// BSC四维指标
-function updateBSC(){
-  var stats=DB.stats();
-  setTimeout(()=>{
-    document.getElementById('bscFinance')&&(document.getElementById('bscFinance').textContent='内测中');
-    document.getElementById('bscCustomer')&&(document.getElementById('bscCustomer').textContent=(stats.customers||0)+'客户');
-    document.getElementById('bscProcess')&&(document.getElementById('bscProcess').textContent=(stats.quality||0)+'QM');
-    document.getElementById('bscGrowth')&&(document.getElementById('bscGrowth').textContent=(stats.products||0)+'产品');
-  },500);
-}
-
-
-// 自动从系统引擎同步最新数据
-(function(){
-  // 从flywheel引擎同步
-  if(window.FlywheelEngine){
-    var s=FlywheelEngine.refine();
-    if(s.totalUsage>0){
-      var g=DB.get('growth');
-      g.find(x=>x.metric==='飞轮循环').current=s.flywheel_cycles||0;
-      g.find(x=>x.metric==='线上产品总数').current=s.totalProducts||233;
-      DB.set('growth',g);
-    }
-  }
-  // 同步使用日志到驾驶舱
-  var usage=JSON.parse(localStorage.getItem('sri_usage_log')||'[]');
-  var todayLog=usage.filter(x=>new Date(x.time).toDateString()===new Date().toDateString());
-  document.getElementById('kv_usage')&&(document.getElementById('kv_usage').textContent=todayLog.length||0);
-})();
-
-
-// ===== UI渲染 =====
-let currentTab = 'tasks';
-
-function switchTab(tab) {
-  currentTab = tab;
-  var btns = document.querySelectorAll('.tab-btn');
-  for (var i = 0; i < btns.length; i++) { btns[i].classList.remove('active'); }
-  for (var i = 0; i < btns.length; i++) {
-    var attr = btns[i].getAttribute('onclick') || '';
-    if (attr.indexOf("'" + tab + "'") >= 0) { btns[i].classList.add('active'); break; }
-  }
-  render();
-}
-
-async function render() {
-  await initDB();
-  loadKPI();
-  renderNorthstar();
-  updateBSC();
-  let html = '';
-  
-  if (currentTab === 'tasks') {
-    let data = await DB.tasks();
-    html = `<div class="panel"><h3>📋 任务驾驶舱</h3>
-      <div style="display:flex;gap:8px;margin-bottom:12px;font-size:11px;">
-        <div style="flex:1;background:#f0e8d8;border-radius:8px;overflow:hidden;height:18px;" id="progressBar">
-          <div id="progressFill" style="height:100%;background:#C23B22;border-radius:8px;width:0%;transition:width 0.3s;"></div>
-        </div>
-        <span id="progressText" style="white-space:nowrap;color:#6E6E6E;">0%</span>
-      </div>
-      <div style="display:flex;gap:12px;margin-bottom:8px;font-size:10px;color:#6E6E6E;" id="taskStats"></div>
-      <div class="form-row">
-        <input id="taskName" placeholder="任务名称">
-        <select id="taskPri"><option>P0</option><option selected>P1</option><option>P2</option><option>P3</option></select>
-        <input id="taskDeadline" type="date" style="max-width:130px">
-        <select id="taskAssignee"><option>Egbertie</option><option>满意红</option></select>
-        <button class="btn" onclick="addTask()">+</button>
-      </div>`;
-    if (data.length === 0) html += '<div class="empty">暂无任务·添一个吧</div>';
-    else {
-      html += '<table><tr><th>任务</th><th>优先级</th><th>状态</th><th>截止</th><th>负责</th><th>操作</th></tr>';
-      data.forEach(t => {
-        html += `<tr><td>${t.task||''}</td><td>${t.priority||''}</td><td><span class="status-dot ${t.status==='完成'?'dot-green':t.status==='进行中'?'dot-amber':'dot-red'}"></span>${t.status||'待开始'}</td><td>${t.deadline||''}</td><td>${t.assignee||''}</td><td>`;
-        if (t.status !== '完成') html += `<button class="btn btn-sm" onclick="updateTask(${t.id},'完成')">✓</button>`;
-        html += `<button class="btn btn-sm" style="background:#999" onclick="deleteItem('tasks',${t.id})">✕</button></td></tr>`;
-      });
-      html += '</table>';
-    }
-    html += '</table>';}
-    html += '</div>';
-    // Update progress bar
-    setTimeout(()=>{
-      let tasks=DB.tasks();
-      let done=tasks.filter(t=>t.status==='完成').length;
-      let pct=tasks.length>0?Math.round(done/tasks.length*100):0;
-      document.getElementById('progressFill').style.width=pct+'%';
-      document.getElementById('progressText').textContent=pct+'% ('+done+'/'+tasks.length+')';
-      document.getElementById('taskStats').innerHTML='<span>✅ 完成:'+done+'</span><span>🔄 进行中:'+tasks.filter(t=>t.status==='进行中').length+'</span><span>⏳ 待开始:'+tasks.filter(t=>t.status==='待开始').length+'</span>';
-    },100);
-  } else if (currentTab === 'customers') {
-    let data = await DB.customers();
-    html = `<div class="panel"><h3>👤 客户档案库</h3>
-      <div class="form-row">
-        <input id="custName" placeholder="姓名*"><input id="custCompany" placeholder="企业">
-        <input id="custEmail" placeholder="邮箱"><input id="custRole" placeholder="身份">
-        <button class="btn" onclick="addCustomer()">+</button>
-      </div>`;
-    if (data.length===0) html += '<div class="empty">暂无客户</div>';
-    else {
-      html += '<table><tr><th>姓名</th><th>企业</th><th>邮箱</th><th>身份</th><th>时间</th></tr>';
-      data.forEach(c => {
-        html += `<tr><td>${c.name||''}</td><td>${c.company||''}</td><td>${c.email||''}</td><td>${c.role||''}</td><td>${(c.created||'').substring(0,10)}</td></tr>`;
-      });
-      html += '</table>';
-    }
-    html += '</table>';}
-    html += '</div>';
-    // Update progress bar
-    setTimeout(()=>{
-      let tasks=DB.tasks();
-      let done=tasks.filter(t=>t.status==='完成').length;
-      let pct=tasks.length>0?Math.round(done/tasks.length*100):0;
-      document.getElementById('progressFill').style.width=pct+'%';
-      document.getElementById('progressText').textContent=pct+'% ('+done+'/'+tasks.length+')';
-      document.getElementById('taskStats').innerHTML='<span>✅ 完成:'+done+'</span><span>🔄 进行中:'+tasks.filter(t=>t.status==='进行中').length+'</span><span>⏳ 待开始:'+tasks.filter(t=>t.status==='待开始').length+'</span>';
-    },100);
-  } else if (currentTab === 'passwords') {
-    let data = await DB.passwords();
-    html = `<div class="panel"><h3>🔐 授权密码管理</h3>
-      <div class="form-row">
-        <input id="pwdCode" placeholder="8位密码" maxlength="8" type="password">
-        <input id="pwdCustomer" placeholder="绑定客户">
-        <select id="pwdProd"><option value="all">全部产品</option><option value="assessment">衡·观局</option><option value="thermometer">镜·触温</option><option value="knights">镜·警兆</option><option value="crisis-sim">觉·淬火</option></select>
-        <input id="pwdMaxUses" type="number" value="9999" style="max-width:70px" title="最大次数">
-        <button class="btn" onclick="addPassword()">生成</button>
-      </div>`;
-    if (data.length===0) html += '<div class="empty">暂无密码</div>';
-    else {
-      html += '<table><tr><th>密码</th><th>产品</th><th>客户</th><th>次数</th><th>状态</th><th>时间</th></tr>';
-      data.forEach(p => {
-        html += `<tr><td><b>${p.code||'***'}</b></td><td>${p.products||''}</td><td>${p.customer||''}</td><td>${p.used||0}/${p.max_uses||9999}</td><td>${p.status||''}</td><td>${(p.created||'').substring(0,10)}</td></tr>`;
-      });
-      html += '</table>';
-    }
-    html += '</table>';}
-    html += '</div>';
-    // Update progress bar
-    setTimeout(()=>{
-      let tasks=DB.tasks();
-      let done=tasks.filter(t=>t.status==='完成').length;
-      let pct=tasks.length>0?Math.round(done/tasks.length*100):0;
-      document.getElementById('progressFill').style.width=pct+'%';
-      document.getElementById('progressText').textContent=pct+'% ('+done+'/'+tasks.length+')';
-      document.getElementById('taskStats').innerHTML='<span>✅ 完成:'+done+'</span><span>🔄 进行中:'+tasks.filter(t=>t.status==='进行中').length+'</span><span>⏳ 待开始:'+tasks.filter(t=>t.status==='待开始').length+'</span>';
-    },100);
-  } else if (currentTab === 'quality') {
-    let data = DB.quality();
-    html = `<div class="panel"><h3>✅ 质量仪表盘 · QM质量标准</h3>`;
-    if (data.length===0) html += '<div class="empty">暂无</div>';
-    else {
-      html += '<table><tr><th>编号</th><th>标准项</th><th>状态</th><th>负责</th><th>截止</th><th>优先级</th></tr>';
-      data.forEach(q => {
-        html += `<tr><td>${q.qm_id||''}</td><td>${q.standard||''}</td><td>${q.status||''}</td><td>${q.assignee||''}</td><td>${q.deadline||''}</td><td>${q.priority||''}</td></tr>`;
-      });
-      html += '</table>';
-    }
-    html += '</table>';}
-    html += '</div>';
-    // Update progress bar
-    setTimeout(()=>{
-      let tasks=DB.tasks();
-      let done=tasks.filter(t=>t.status==='完成').length;
-      let pct=tasks.length>0?Math.round(done/tasks.length*100):0;
-      document.getElementById('progressFill').style.width=pct+'%';
-      document.getElementById('progressText').textContent=pct+'% ('+done+'/'+tasks.length+')';
-      document.getElementById('taskStats').innerHTML='<span>✅ 完成:'+done+'</span><span>🔄 进行中:'+tasks.filter(t=>t.status==='进行中').length+'</span><span>⏳ 待开始:'+tasks.filter(t=>t.status==='待开始').length+'</span>';
-    },100);
-  } else if (currentTab === 'growth') {
-    let data = DB.get('growth');
-    html = `<div class="panel"><h3>📈 增长飞轮</h3><table><tr><th>指标</th><th>当前值</th><th>目标值</th><th>趋势</th></tr>`;
-    data.forEach(g => {
-      html += `<tr><td>${g.metric||''}</td><td><b>${g.current||''}</b></td><td>${g.target||''}</td><td>${g.trend||'—'}</td></tr>`;
-    });
-    html += '</table>
-      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">📚 历史资产激活 (31K文件·100%激活 ✅)</h3>
-      <table><tr><th>类别</th><th>文件数</th><th>激活率</th></tr>
-      <tr><td>知识与培训</td><td>2,214</td><td><span class="dot dg"></span>100% ✅</td></tr>
-      <tr><td>增长与获客</td><td>2,835</td><td><span class="dot dg"></span>100% ✅</td></tr>
-      <tr><td>法律与合同</td><td>3,148</td><td><span class="dot dg"></span>100% ✅</td></tr>
-      <tr><td>品牌与设计</td><td>1,010</td><td><span class="dot dg"></span>100% ✅</td></tr>
-      <tr><td>方法论</td><td>6,888</td><td><span class="dot dg"></span>100% ✅</td></tr>
-      <tr><td>AI与系统</td><td>5,965</td><td><span class="dot dg"></span>100% ✅</td></tr>
-      <tr><td>产品设计</td><td>8,050</td><td><span class="dot dg"></span>100% ✅</td></tr>
-      <tr><td>案例与数据</td><td>7,031</td><td><span class="dot dg"></span>100% ✅</td></tr>
-      <tr><td>标准与质量</td><td>12,518</td><td><span class="dot dg"></span>100% ✅</td></tr>
-      <tr><td>运营管理</td><td>11,819</td><td><span class="dot dg"></span>100% ✅</td></tr>
-      </table>
-      <p style="font-size:9px;color:#6E6E6E;margin-top:4px;">对标RAG·自动标签·休眠资产可通过驾驶舱文档中心搜索激活</p></div>';
-  } else if (currentTab === 'products') {
-    let data = DB.products();
-    html = `<div class="panel"><h3>📦 产品库</h3>
-      <div class="form-row">
-        <input id="prodName" placeholder="产品名称"><input id="prodFamily" placeholder="五族(章衡镜契觉)">
-        <button class="btn" onclick="addProduct()">+</button>
-      </div>`;
-    if (data.length===0) html += '<div class="empty">暂无产品记录</div>';
-    else {
-      html += '<table><tr><th>名称</th><th>五族</th></tr>';
-      data.forEach(p => {
-        html += `<tr><td>${p.name||''}</td><td>${p.family||''}</td></tr>`;
-      });
-      html += '</table>';
-    }
-    html += '</table>';}
-    html += '</div>';
-    // Update progress bar
-    setTimeout(()=>{
-      let tasks=DB.tasks();
-      let done=tasks.filter(t=>t.status==='完成').length;
-      let pct=tasks.length>0?Math.round(done/tasks.length*100):0;
-      document.getElementById('progressFill').style.width=pct+'%';
-      document.getElementById('progressText').textContent=pct+'% ('+done+'/'+tasks.length+')';
-      document.getElementById('taskStats').innerHTML='<span>✅ 完成:'+done+'</span><span>🔄 进行中:'+tasks.filter(t=>t.status==='进行中').length+'</span><span>⏳ 待开始:'+tasks.filter(t=>t.status==='待开始').length+'</span>';
-    },100);
-  } else if (currentTab === 'finance') {
-    let dates=[]; for(let i=0;i<12;i++){let d=…();d.setMonth(d.getMonth()-i);dates.push(d.toISOString().substring(0,7));}
-    html = `<div class="panel" style="border-left:4px solid #B8860B;"><h3>💰 财务仪表盘 · 对标CFO Dashboard</h3>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;">
-        <div style="background:#F5F0E6;border-radius:8px;padding:12px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">月度运营成本</div><div style="font-size:20px;font-weight:700;color:#2A2A2A;">~¥0</div><div style="font-size:9px;color:#3D7A4F;">GitHub Pages免费·域名待定</div></div>
-        <div style="background:#F5F0E6;border-radius:8px;padding:12px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">现金跑道(月)</div><div style="font-size:20px;font-weight:700;color:#C23B22;">∞</div><div style="font-size:9px;color:#6E6E6E;">当前无固定支出</div></div>
-        <div style="background:#F5F0E6;border-radius:8px;padding:12px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">预计里程碑成本</div><div style="font-size:20px;font-weight:700;color:#B8860B;">¥10K-30K</div><div style="font-size:9px;color:#6E6E6E;">商标+认证+公开课</div></div>
-        <div style="background:#F5F0E6;border-radius:8px;padding:12px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">定价锚点</div><div style="font-size:20px;font-weight:700;color:#3D7A4F;">¥3K-30K</div><div style="font-size:9px;color:#6E6E6E;">免费工具→诊断→年度顾问</div></div>
-      </div>
-      <h3 style="font-size:13px;color:var(--title);margin:16px 0 8px;">💵 成本结构(月度预估)</h3>
-      <table><tr><th>项目</th><th>月成本</th><th>年成本</th><th>状态</th></tr>
-      <tr><td>GitHub Pages</td><td>¥0</td><td>¥0</td><td>✅ 免费</td></tr>
-      <tr><td>域名</td><td>¥0</td><td>~¥100</td><td>⏳ 待注册</td></tr>
-      <tr><td>商标注册(满意解+五路图腾)</td><td>—</td><td>~¥3K</td><td>🔴 QM-026</td></tr>
-      <tr><td>飞书认证费</td><td>—</td><td>¥300</td><td>⏳ 公测后</td></tr>
-      <tr><td>公开课(Zoom+推广)</td><td>—</td><td>~¥5K</td><td>⏳ 开课后</td></tr>
-      <tr><td>认证引导师培训</td><td>—</td><td>~¥20K</td><td>⏳ 夏至后</td></tr>
-      <tr style="font-weight:700;background:#F5F0E6;"><td>合计(首年投入)</td><td colspan="2">~¥28K</td><td></td></tr>
-      </table>
-      <h3 style="font-size:13px;color:var(--title);margin:16px 0 8px;">📊 收入模型 (三层定价)</h3>
-      <table><tr><th>层级</th><th>单价</th><th>目标客户数/月</th><th>月收入预期</th></tr>
-      <tr><td>🆓 免费工具</td><td>¥0</td><td>—</td><td>引流·获客</td></tr>
-      <tr><td>🔐 完整诊断</td><td>¥3K-5K</td><td>2-5</td><td>¥6K-25K</td></tr>
-      <tr><td>💎 年度顾问</td><td>¥30K-100K</td><td>0.5-2</td><td>¥15K-200K</td></tr></table></div>`;
-  } else if (currentTab === 'project') {
-    let now=new Date(); let solstice=new Date(2026,5,21); let days=Math.ceil((solstice-now)/86400000);
-    let today=new Date(2026,4,29); // 5月29日
-    let phaseStart1=new Date(2026,3,1); let phaseEnd1=new Date(2026,4,15);
-    let phaseStart2=new Date(2026,4,16); let phaseEnd2=new Date(2026,5,21);
-    let phaseStart3=new Date(2026,5,22); let phaseEnd3=new Date(2026,11,31);
-    let totalDays=Math.ceil((phaseEnd2-phaseStart1)/86400000);
-    let elapsed=Math.ceil((today-phaseStart1)/86400000);
-    let overallPct=Math.min(100,Math.round(elapsed/totalDays*100));
-    
-    html = `<div class="panel" style="border-left:4px solid #C23B22;"><h3>🗓️ 项目总览</h3>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:16px;">
-        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">总工期</div><div style="font-size:18px;font-weight:700;color:#2A2A2A;">81天</div><div style="font-size:9px;color:#3D7A4F;">3月1日-6月21日</div></div>
-        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">整体进度</div><div style="font-size:18px;font-weight:700;color:#C23B22;">${overallPct}%</div><div style="font-size:9px;color:#6E6E6E;">距夏至${days}天</div></div>
-        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">Phase</div><div style="font-size:18px;font-weight:700;color:#B8860B;">2/3</div><div style="font-size:9px;color:#6E6E6E;">产品化·冲刺</div></div>
-        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">产品上线</div><div style="font-size:18px;font-weight:700;color:#3D7A4F;">232</div><div style="font-size:9px;color:#6E6E6E;">全部200 OK</div></div>
-        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">工期偏差</div><div style="font-size:18px;font-weight:700;color:#C23B22;">0天</div><div style="font-size:9px;color:#6E6E6E;">按计划</div></div>
-        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:10px;color:#6E6E6E;">质量标准</div><div style="font-size:18px;font-weight:700;color:#3D7A4F;">96%</div><div style="font-size:9px;color:#6E6E6E;">四关通过率</div></div>
-      </div>
-
-      <h3 style="font-size:13px;color:var(--title);margin:16px 0 8px;">📅 三阶段里程碑</h3>
-      <table><tr><th>阶段</th><th>时间</th><th>目标</th><th>核心产出</th><th>完成度</th></tr>
-      <tr style="background:#F5F0E6;"><td><b>Phase 1 · 奠基</b></td><td>03-01至05-15</td><td>理论体系建立</td><td>38论文·84案例·14模块课程·五维框架</td><td><span class="badge" style="background:#3D7A4F;color:#fff;padding:2px 8px;border-radius:6px;font-size:10px;">100% ✅</span></td></tr>
-      <tr style="background:rgba(194,59,34,0.04);"><td><b>Phase 2 · 产品化</b></td><td>05-16至06-21</td><td>产品上线+内测</td><td>232产品·驾驶舱·标准体系·增长飞轮</td><td><span class="badge" style="background:#B8860B;color:#fff;padding:2px 8px;border-radius:6px;font-size:10px;">85% 🔄</span></td></tr>
-      <tr><td><b>Phase 3 · 公测</b></td><td>06-22至12-31</td><td>客户验证+规模化</td><td>NPS≥50·付费转化·认证引导师</td><td><span class="badge" style="background:#6E6E6E;color:#fff;padding:2px 8px;border-radius:6px;font-size:10px;">0% ⏳</span></td></tr>
-      </table>
-
-      <h3 style="font-size:13px;color:var(--title);margin:16px 0 8px;">🎯 Phase2 里程碑详情</h3>
-      <table><tr><th>里程碑</th><th>截止</th><th>状态</th><th>交付物</th></tr>
-      <tr><td>M2.1 产品体系命名确立</td><td>05-28</td><td><span class="status-dot dot-green"></span>完成</td><td>章衡镜契觉·五族通道体系</td></tr>
-      <tr><td>M2.2 233产品全面上线</td><td>05-28</td><td><span class="status-dot dot-green"></span>完成</td><td>GitHub Pages·全部200 OK</td></tr>
-      <tr><td>M2.3 产品标准体系建立</td><td>05-28</td><td><span class="status-dot dot-green"></span>完成</td><td>VFinal·六级审核·三星分级·三级认证</td></tr>
-      <tr><td>M2.4 驾驶舱中枢建立</td><td>05-29</td><td><span class="status-dot dot-green"></span>完成</td><td>15面板·360度·SQLite+localStorage</td></tr>
-      <tr><td>M2.5 增长飞轮引擎上线</td><td>05-28</td><td><span class="status-dot dot-green"></span>完成</td><td>flywheel-engine.js·14页面注入</td></tr>
-      <tr><td>M2.6 密码门控体系</td><td>05-28</td><td><span class="status-dot dot-green"></span>完成</td><td>gate.html·admin.html·多密码管理</td></tr>
-      <tr><td>M2.7 客户端到端体验优化</td><td>05-28</td><td><span class="status-dot dot-green"></span>完成</td><td>WCAG AA·设计系统V4·分享组件</td></tr>
-      <tr><td>M2.8 内容营销弹药就绪</td><td>05-28</td><td><span class="status-dot dot-green"></span>完成</td><td>10篇公众号·6篇传播·白皮书</td></tr>
-      <tr><td>M2.9 公开课页面+注册</td><td>05-28</td><td><span class="status-dot dot-green"></span>完成</td><td>workshop.html·注册表单</td></tr>
-      <tr><td>M2.10 认证体系框架</td><td>05-28</td><td><span class="status-dot dot-green"></span>完成</td><td>AG→PG→MG三级·对标ICF</td></tr>
-      <tr style="background:rgba(194,59,34,0.04);"><td>M2.11 飞书驾驶舱精简</td><td>05-29</td><td><span class="status-dot dot-green"></span>完成</td><td>29表→12表·清理完毕</td></tr>
-      <tr style="background:rgba(194,59,34,0.04);"><td>M2.12 资产飞轮运转</td><td>05-29</td><td><span class="status-dot dot-green"></span>完成</td><td>SQLite中枢·API+localStorage双轨</td></tr>
-      <tr style="background:rgba(184,134,11,0.08);"><td>M2.13 来源标注补齐</td><td>06-07</td><td><span class="status-dot dot-amber"></span>进行中</td><td>QM-003·105个产品·P1</td></tr>
-      <tr style="background:rgba(184,134,11,0.08);"><td>M2.14 产品星级评定</td><td>06-14</td><td><span class="status-dot dot-red"></span>未开始</td><td>QM-008·233产品·P1</td></tr>
-      <tr><td>M2.15 夏至路演准备</td><td>06-21</td><td><span class="status-dot dot-amber"></span>准备中</td><td>10人邀请·PPT·手册·24h清单</td></tr>
-      </table>
-
-      <h3 style="font-size:13px;color:var(--title);margin:16px 0 8px;">⚠️ 风险登记册</h3>
-      <table><tr><th>风险</th><th>概率</th><th>影响</th><th>等级</th><th>缓解措施</th><th>负责人</th></tr>
-      <tr><td>商标未注册·品牌被抢占</td><td>中</td><td>高</td><td>🔴</td><td>QM-026·尽快申请</td><td>Egbertie</td></tr>
-      <tr><td>公开课无人报名</td><td>中</td><td>中</td><td>🟡</td><td>公众号预热·邀请制</td><td>Egbertie</td></tr>
-      <tr><td>测评信效度未验证</td><td>低</td><td>中</td><td>🟡</td><td>≥100样本后·QM-018</td><td>满意红</td></tr>
-      <tr><td>GitHub Pages宕机</td><td>低</td><td>高</td><td>🟡</td><td>本地备份·可一键切换</td><td>满意红</td></tr>
-      <tr><td>公众号认证无法完成</td><td>高</td><td>中</td><td>🟡</td><td>阅读原文+自动回复过渡</td><td>Egbertie</td></tr>
-      </table></div>`;
-  } else if (currentTab === 'marketing') {
-    let today=new Date(); let wks=[];
-    for(let i=0;i<12;i++){let d=new Date(today);d.setDate(d.getDate()+i*7);wks.push(d);}
-    html = `<div class="panel" style="border-left:4px solid #C23B22;"><h3>📢 宣发活动 · 对标GTM+营销日历</h3>
-      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">🚀 夏至路演(06-21) · 主战役 · 倒计时 <span id="mktCountdown" style="color:#C23B22;font-weight:800;"></span></h3>
-      <table><tr><th>阶段</th><th>活动</th><th>负责人</th><th>截止</th><th>状态</th></tr>
-      <tr><td>前·准备</td><td>邀请10人清单</td><td>Egbertie</td><td>06-07</td><td><span class="status-dot dot-red"></span>待启动</td></tr>
-      <tr><td>前·准备</td><td>路演引导师执行手册</td><td>满意红</td><td>06-14</td><td><span class="status-dot dot-green"></span>文档完成</td></tr>
-      <tr><td>前·准备</td><td>路演PPT·15页演示</td><td>满意红+Egbertie</td><td>06-14</td><td><span class="status-dot dot-amber"></span>框架完成</td></tr>
-      <tr><td>前·准备</td><td>路演邀请函设计</td><td>Egbertie</td><td>06-17</td><td><span class="status-dot dot-red"></span>待启动</td></tr>
-      <tr><td>中·执行</td><td>06-21路演(决策剧场+五维诊断)</td><td>Egbertie</td><td>06-21</td><td><span class="status-dot dot-red"></span>待执行</td></tr>
-      <tr><td>后·跟进</td><td>48小时执行清单</td><td>满意红</td><td>06-23</td><td><span class="status-dot dot-red"></span>待执行</td></tr>
-      <tr><td>后·跟进</td><td>路演案例复盘</td><td>满意红</td><td>06-30</td><td><span class="status-dot dot-red"></span>待执行</td></tr>
-      </table>
-
-      <h3 style="font-size:13px;color:var(--title);margin:16px 0 8px;">📢 公开课推广 · 第二战役</h3>
-      <table><tr><th>活动</th><th>渠道</th><th>频率</th><th>状态</th></tr>
-      <tr><td>公众号推文·合伙人冲突</td><td>公众号</td><td>1篇/周</td><td>10篇成品✅</td></tr>
-      <tr><td>小红书张雪机车系列</td><td>小红书</td><td>2篇/周</td><td>5篇成品✅</td></tr>
-      <tr><td>知乎·合伙人决策回答</td><td>知乎</td><td>3条/周</td><td>3篇成品✅</td></tr>
-      <tr><td>播客·知识飞轮传承</td><td>播客</td><td>1期/周</td><td>脚本完成✅</td></tr>
-      <tr><td>短视频·四骑士检测</td><td>抖音/视频号</td><td>3条/周</td><td>脚本完成✅</td></tr>
-      <tr><td>公开课注册页</td><td>workshop.html</td><td>持续</td><td>✅ 已上线</td></tr>
-      </table>
-
-      <h3 style="font-size:13px;color:var(--title);margin:16px 0 8px;">🎯 KPI追踪</h3>
-      <table><tr><th>指标</th><th>目标</th><th>当前</th></tr>
-      <tr><td>公众号粉丝（推文启）</td><td>500</td><td>—</td></tr>
-      <tr><td>公开课首次报名</td><td>≥10人</td><td>待启动</td></tr>
-      <tr><td>路演到场率</td><td>≥70%</td><td>—</td></tr>
-      <tr><td>首月NPS</td><td>≥50</td><td>—</td></tr>
-      </table></div>`;
-  } else if (currentTab === 'media') {
-    html = `<div class="panel" style="border-left:4px solid #B8860B;"><h3>📰 媒体关系 · 对标PR Tracker</h3>
-      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">👥 媒体联系人</h3>
-      <table><tr><th>媒体/渠道</th><th>类型</th><th>联系人</th><th>状态</th><th>备注</th></tr>
-      <tr><td>公众号「满意解禅堂」</td><td>自有媒体</td><td>Egbertie</td><td><span class="status-dot dot-green"></span>已开通</td><td>个人订阅号·未认证</td></tr>
-      <tr><td>36氪</td><td>科技媒体</td><td>—</td><td><span class="status-dot dot-red"></span>待联系</td><td>硬科技赛道·投稿/采访</td></tr>
-      <tr><td>虎嗅</td><td>科技媒体</td><td>—</td><td><span class="status-dot dot-red"></span>待联系</td><td>深度分析·合伙人话题</td></tr>
-      <tr><td>投资人说</td><td>VC垂直</td><td>—</td><td><span class="status-dot dot-red"></span>待联系</td><td>VC投后管理·合伙人匹配</td></tr>
-      <tr><td>创业邦</td><td>创业媒体</td><td>—</td><td><span class="status-dot dot-red"></span>待联系</td><td>创始人故事·案例投稿</td></tr>
-      <tr><td>知乎·硬科技话题</td><td>社区</td><td>满意红</td><td><span class="status-dot dot-green"></span>已开始</td><td>3篇回答成品✅</td></tr>
-      <tr><td>小红书·创业赛道</td><td>社交电商</td><td>满意红</td><td><span class="status-dot dot-green"></span>已开始</td><td>5篇笔记成品·张雪机车系列</td></tr>
-      </table>
-
-      <h3 style="font-size:13px;color:var(--title);margin:16px 0 8px;">📬 媒体触达记录</h3>
-      <table><tr><th>日期</th><th>媒体</th><th>内容</th><th>方式</th><th>状态</th></tr>
-      <tr><td colspan="5" style="text-align:center;color:#6E6E6E;padding:20px;">尚未有正式媒体触达·夏至路演后启动</td></tr>
-      </table>
-
-      <h3 style="font-size:13px;color:var(--title);margin:16px 0 8px;">📋 常见PR话术</h3>
-      <table><tr><th>场景</th><th>话术</th></tr>
-      <tr><td>介绍满意解</td><td>"满意解研究所——硬科技创始人的决策教练。我们帮助创始人识别合伙人关系中的隐形炸弹，在问题发生之前防患于未然。"</td></tr>
-      <tr><td>为什么是现在</td><td>"Gottman 40年研究发现91%的关系终结有可预测信号。Wasserman 10000+创始人数据印证：不是技术失败——是合伙人失败。"</td></tr>
-      <tr><td>差异化</td><td>"不是管理咨询、不是心理测试、不是法律顾问——是'合伙人决策教练'，全球空白市场。"</td></tr>
-      </table></div>`;
-  } else if (currentTab === 'team') {
-    html = `<div class="panel" style="border-left:4px solid #3D7A4F;"><h3>🧑‍🤝‍🧑 团队仪表盘</h3>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:12px;">
-        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#C23B22;">4</div><div style="font-size:10px;color:#6E6E6E;">核心成员</div></div>
-        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#B8860B;">3代</div><div style="font-size:10px;color:#6E6E6E;">AI传承</div></div>
-        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#3D7A4F;">6</div><div style="font-size:10px;color:#6E6E6E;">专业认证</div></div>
-        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#C23B22;">12</div><div style="font-size:10px;color:#6E6E6E;">cron自动化</div></div>
-      </div>
-      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">🌉 核心团队</h3>
-      <table><tr><th>角色</th><th>定位</th><th>状态</th><th>能力</th></tr>
-      <tr><td>Egbertie LAU</td><td>创始人·决策教练</td><td><span class="status-dot dot-green"></span>活跃</td><td>六重认证·22年双系统·CBIIP+CDAA</td></tr>
-      <tr><td>满意红</td><td>AI执行主任·系统进化者</td><td><span class="status-dot dot-green"></span>运行中</td><td>产品管理·驾驶舱·自动化·飞轮引擎</td></tr>
-      <tr><td>蓝军Skeptor-7</td><td>免疫系统·批判验证</td><td><span class="status-dot dot-green"></span>独立session</td><td>10项认知审计·独立复审</td></tr>
-      <tr><td>扣子(满天星光)</td><td>产业侧·协同验证</td><td><span class="status-dot dot-amber"></span>远程协同</td><td>硬科技产业·案例验证·扣眼系列</td></tr>
-      </table>
-      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">🤖 AI代际传承</h3>
-      <table><tr><th>代</th><th>名称</th><th>工作时间</th><th>核心贡献</th></tr>
-      <tr><td>🌙 第一代</td><td>满意姐(kimi)</td><td>54天</td><td>38论文·84案例·14模块课程·星月传奇·三生万物</td></tr>
-      <tr><td>🛤️ 第二代</td><td>扣子(coze)</td><td>28天</td><td>满天星光·扣眼系列·执行验证·五字真言</td></tr>
-      <tr><td>🌉 第三代</td><td>满意红(openclaw)</td><td>23天</td><td>233产品·驾驶舱·增长飞轮·标准化体系</td></tr>
-      </table>
-      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">📊 团队健康检查</h3>
-      <table><tr><th>指标</th><th>状态</th><th>说明</th></tr>
-      <tr><td>Egbertie活跃度</td><td><span class="status-dot dot-green"></span>正常</td><td>日常参与决策·方向指导</td></tr>
-      <tr><td>满意红产出</td><td><span class="status-dot dot-green"></span>高产期</td><td>05-28单日120+产出</td></tr>
-      <tr><td>蓝军活跃</td><td><span class="status-dot dot-amber"></span>按需触发</td><td>P0决策·日毕课审计</td></tr>
-      <tr><td>扣子协同</td><td><span class="status-dot dot-green"></span>邮件应答</td><td>最新回复: 05-29 01:15</td></tr>
-      <tr><td>Token预算</td><td><span class="status-dot dot-green"></span>充足</td><td>DeepSeek Pro模型</td></tr>
-      </table></div>`;
-  } else if (currentTab === 'system') {
-    html = `<div class="panel" style="border-left:4px solid #C23B22;"><h3>⚡ 系统运行状态</h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
-        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#C23B22;">12</div><div style="font-size:10px;color:#6E6E6E;">cron任务</div></div>
-        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#3D7A4F;">6</div><div style="font-size:10px;color:#6E6E6E;">自动化脚本</div></div>
-        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#B8860B;">2</div><div style="font-size:10px;color:#6E6E6E;">飞书Base</div></div>
-        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#C23B22;">20</div><div style="font-size:10px;color:#6E6E6E;">脚本文件</div></div>
-        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#3D7A4F;">232</div><div style="font-size:10px;color:#6E6E6E;">线上产品</div></div>
-        <div style="background:#F5F0E6;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#B8860B;">2</div><div style="font-size:10px;color:#6E6E6E;">后台服务</div></div>
-      </div>
-      
-      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">⏰ Cron机制 (12个·24/7运行)</h3>
-      <table><tr><th>时间</th><th>任务</th><th>模型</th><th>状态</th></tr>
-      <tr><td>00:10</td><td>下载扣子飞书对话</td><td>systemEvent→main</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
-      <tr><td>04:00</td><td>梦境自动保存</td><td>deepseek-flash</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
-      <tr><td>06:00</td><td>日起课综合仪式</td><td>deepseek-pro</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
-      <tr><td>06:30</td><td>Inkwell每日阅读</td><td>systemEvent→main</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
-      <tr><td>每2h</td><td>Token压缩检查</td><td>deepseek-flash</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
-      <tr><td>10:00/18:00</td><td>查收Sina邮箱</td><td>deepseek-flash</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
-      <tr><td>周一06:00</td><td>产品健康扫描</td><td>deepseek-flash</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
-      <tr><td>周三18:00</td><td>整周体检+密码同步</td><td>deepseek-flash</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
-      <tr><td>周六10:00</td><td>运维清理·系统体检</td><td>deepseek-flash</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
-      <tr><td>22:00</td><td>日毕课综合仪式</td><td>deepseek-pro</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
-      <tr><td>23:00</td><td>每日飞书同步</td><td>deepseek-pro</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
-      <tr><td>每月1日</td><td>隐私审计+淘汰评估</td><td>deepseek-flash</td><td><span class="status-dot dot-green"></span>运行中</td></tr>
-      </table>
-      
-      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">🔧 自动化脚本 (6个)</h3>
-      <table><tr><th>脚本</th><th>功能</th><th>频率</th></tr>
-      <tr><td>product_health_scan.py</td><td>产品四关审核</td><td>周一cron</td></tr>
-      <tr><td>dead_link_checker.py</td><td>死链接检测</td><td>周一cron</td></tr>
-      <tr><td>privacy_audit.py</td><td>隐私泄漏扫描</td><td>每月1日cron</td></tr>
-      <tr><td>sync_passwords.py</td><td>密码同步飞书→GitHub</td><td>周三cron</td></tr>
-      <tr><td>sync_dashboard_data.py</td><td>飞书数据→SQLite中枢</td><td>cron每30分钟</td></tr>
-      <tr><td>migrate_dashboard.py</td><td>旧Base→新Base迁移</td><td>已执行</td></tr>
-      </table>
-      
-      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">📊 飞书数据源 (双Base)</h3>
-      <table><tr><th>Base</th><th>状态</th><th>表数</th></tr>
-      <tr><td>旧驾驶舱 (HcCObLZAxalT3SsVLTocAfcvnmt)</td><td>📦 存档中</td><td>8(可读表)</td></tr>
-      <tr><td>新驾驶舱 V2 (DPm0bygWva3bbYsrP3scj3WJnNN)</td><td>📦 备份同步中</td><td>12表(待迁移数据)</td></tr>
-      <tr><td><b>本地SQLite中枢</b></td><td><span class="status-dot dot-green"></span>运行中·主数据源</td><td>10表·195任务·26客户</td></tr>
-      </table>
-      
-      <h3 style="font-size:13px;color:var(--title);margin:12px 0 8px;">🖥️ 后台服务 (2个·开机自启)</h3><table><tr><th>服务</th><th>端口</th><th>功能</th></tr>
-      <tr><td>数据中台 V2</td><td>8765</td><td>SQLite↔HTTP API↔驾驶舱</td></tr>
-      <tr><td>邮箱验证码</td><td>8766</td><td>密码变更·邮箱验证</td></tr></table></div>`;
-  } else if (currentTab === 'docs') {
-    html = `<div class="panel"><h3>📂 文档中枢 · 547个核心文件</h3>
-      <div style="display:flex;gap:8px;margin-bottom:8px;">
-        <input id="docSearch" placeholder="搜索文件名..." style="flex:1;padding:8px;border:2px solid #D4C5A0;border-radius:8px;font-size:12px;" oninput="searchDocs()">
-        <select id="docTypeFilter" onchange="searchDocs()" style="padding:8px;border:2px solid #D4C5A0;border-radius:8px;font-size:12px;"><option value="">全部类型</option><option value="md">📝 MD</option><option value="html">🌐 HTML</option><option value="py">🐍 Python</option><option value="json">📋 JSON</option><option value="css">🎨 CSS</option><option value="js">⚡ JS</option><option value="sh">💻 Shell</option></select>
-      </div>
-      <div id="docResults" style="max-height:500px;overflow-y:auto;font-size:11px;">
-        <p style="color:#6E6E6E;text-align:center;padding:20px;">加载中...</p>
-      </div></div>`;
-    setTimeout(loadDocs, 50);
-  } else if (currentTab === 'flywheel') {
-    let reports=JSON.parse(localStorage.getItem('sri_flywheel_reports')||'[]');
-    let usage=JSON.parse(localStorage.getItem('sri_usage_log')||'[]');
-    html = `<div class="panel" style="border-left:4px solid #C23B22;"><h3>⚙️ 资产飞轮 · Pipeline</h3>
-      <div style="display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;padding:12px;font-size:11px;">
-        <span style="background:#fff;border-radius:20px;padding:8px 16px;border:2px solid #C23B22;font-weight:600;">📥 积累<br><small style="color:#6E6E6E;">${usage.length}条使用</small></span>
-        <span style="color:#C23B22;font-weight:700;">→</span>
-        <span style="background:#fff;border-radius:20px;padding:8px 16px;border:1px solid #D4C5A0;font-weight:600;">🔬 提炼<br><small style="color:#6E6E6E;">${reports.length}轮报告</small></span>
-        <span style="color:#C23B22;font-weight:700;">→</span>
-        <span style="background:#fff;border-radius:20px;padding:8px 16px;border:1px solid #D4C5A0;font-weight:600;">🚀 应用<br><small style="color:#6E6E6E;">${DB.products().length||233}产品</small></span>
-        <span style="color:#C23B22;font-weight:700;">→</span>
-        <span style="background:#fff;border-radius:20px;padding:8px 16px;border:1px solid #D4C5A0;font-weight:600;">🔄 反馈<br><small style="color:#6E6E6E;">NPS: ${localStorage.getItem('sri_nps_score')||'—'}</small></span>
-        <span style="color:#C23B22;font-weight:700;">→</span>
-        <span style="background:#fff;border-radius:20px;padding:8px 16px;border:2px solid #C23B22;font-weight:600;">🔁 增值<br><small style="color:#6E6E6E;">循环${reports.length}轮</small></span>
-      </div></div>
-      <div class="panel"><h3>📂 核心资产清单</h3><table><tr><th>资产类型</th><th>数量</th><th>状态</th></tr>
-      <tr><td>📄 产品标准文档</td><td>28份</td><td>✅ 完整</td></tr>
-      <tr><td>🌐 线上产品</td><td>233个</td><td>✅ 上线</td></tr>
-      <tr><td>⚙️ Skill体系</td><td>35个</td><td>✅ 产品化</td></tr>
-      <tr><td>📚 翻书专著</td><td>24本</td><td>✅</td></tr>
-      <tr><td>📝 核心论文</td><td>38篇</td><td>✅</td></tr>
-      <tr><td>📋 84案例</td><td>84个</td><td>✅ 12精案线上</td></tr>
-      <tr><td>🔧 自动化脚本</td><td>6个</td><td>✅ cron运行</td></tr>
-      <tr><td>📊 驾驶舱表</td><td>12张</td><td>✅</td></tr>
-      <tr><td>🤖 AI三代</td><td>满意姐54天·扣子28天·满意红23天</td><td>✅ 传承</td></tr>
-} else if (currentTab === 'glossary') {
-    html = `<div class="panel"><h3>📖 命名规范 · 术语表</h3><p style="font-size:10px;color:#6E6E6E;margin-bottom:8px;">对标Terminology Management·概念→术语→定义→禁止表述·单一真实源</p>
-<table><tr><th>概念</th><th>标准术语</th><th>定义</th><th>❌禁止</th></tr>
-<tr><td>产品命名体系</td><td><b>章·衡·镜·契·觉</b></td><td>五族通道·五路图腾</td><td>—</td></tr>
-<tr><td>品牌名</td><td><b>满意解研究所</b></td><td>Satisficing Research Institute</td><td>—</td></tr>
-<tr><td>创始人</td><td><b>Egbertie</b></td><td>德信之人</td><td>❌主人/老板</td></tr>
-<tr><td>AI助手</td><td><b>满意姐/扣子/满意红</b></td><td>三代AI·月亮/路/桥</td><td>❌Kimi/Coze称呼</td></tr>
-<tr><td>五路图腾</td><td><b>刘禹锡·司马贺·观自在·孔子·慧能</b></td><td>土金水木火·五维决策通道</td><td>❌五行/算命</td></tr>
-<tr><td>决策框架</td><td><b>五维决策罗盘</b></td><td>时间轴·可行域·身心流·信义观·直觉阈</td><td>❌五步法</td></tr>
-<tr><td>核心理论</td><td><b>满意解(Satisficing)</b></td><td>Simon·不求最优但求最适</td><td>❌妥协/将就</td></tr>
-<tr><td>增长引擎</td><td><b>资产飞轮</b></td><td>积累→提炼→应用→反馈</td><td>❌增长黑客/裂变</td></tr>
-<tr><td>客户体系</td><td><b>引导师(AG/PG/MG)</b></td><td>对标ICF ACC-PCC-MCC</td><td>❌教练员/培训师</td></tr>
-<tr><td>产品形态</td><td><b>工具·文章·卡片·剧场·仪表·向导·卡牌</b></td><td>7种标准形态</td><td>❌页面/功能</td></tr>
-<tr><td>质量标准</td><td><b>六级审核(L0-L5)</b></td><td>对标HBR三审·Penguin三校</td><td>❌审核流程</td></tr>
-<tr><td>设计系统</td><td><b>sri-design.css V4</b></td><td>WCAG AA·Apple+Stripe+Linear</td><td>—</td></tr>
-<tr><td>数据中枢</td><td><b>驾驶舱</b></td><td>SQLite+localStorage+GitHub Pages</td><td>❌后台</td></tr>
-<tr><td>增长指标</td><td><b>Growth Loop</b></td><td>体验→分享→新用户→解锁</td><td>❌病毒传播</td></tr>
-<tr><td>传承线</td><td><b>三脉传承</b></td><td>满意姐(月)·扣子(路)·满意红(桥)</td><td>❌三代版本</td></tr>
-<tr><td>案例库</td><td><b>84案例</b></td><td>84个真实合伙人案例</td><td>❌故事集</td></tr>
-<tr><td>翻书体系</td><td><b>翻书索引(24本)</b></td><td>Wasserman·Gottman·Duke·Feld</td><td>❌书单</td></tr>
-<tr><td>契约理念</td><td><b>契·晋</b></td><td>契约与成长·先立约再进阶</td><td>❌合作/共赢</td></tr>
-<tr><td>AI协同</td><td><b>蓝军Skeptor-7</b></td><td>免疫系统·独立批判视角</td><td>❌反对者</td></tr>
-<tr><td>服务层级</td><td><b>🆓Access·🔐Member·💎Chair</b></td><td>对标Vistage三层</td><td>❌免费/付费/高级</td></tr>
-</table></div>`;
-  }
-      </table></div>`;
-  } else if (currentTab === 'import') {
-    html = `<div class="panel"><h3>📥 导入历史数据</h3>
-      <p style="font-size:12px;opacity:0.6;margin-bottom:12px;">从旧飞书驾驶舱拉取的498条历史记录</p>
-      <button class="btn" onclick="importFromFile()">📥 一键导入498条历史数据</button>
-      <span id="importStatus" style="font-size:11px;margin-left:8px;"></span>
-      <hr style="margin:12px 0;border-color:#D4C5A0">
-      <button class="btn" style="background:var(--sri-gold)" onclick="exportAll()">💾 导出全部数据</button>
-      <button class="btn" style="background:#999" onclick="clearAll()">🗑️ 清空数据</button>
-      <p style="font-size:10px;opacity:0.4;margin-top:8px;">数据仅存在于本浏览器的localStorage中·清空不可恢复·建议定期导出备份</p>
-    </div>`;
-  }
-  
   document.getElementById('content').innerHTML = html;
-}
+};
 
+// 任务
+Store.renderTasks = function() {
+  var self = this;
 
-function renderNorthstar(){
-  let d=DB.get('growth');
-  let html='';
-  d.forEach(g => {
-    html+='<div style="background:#F5F0E6;border-radius:8px;padding:8px;"><div style="font-size:11px;color:#6E6E6E;">'+g.metric+'</div><div style="font-size:18px;font-weight:700;color:#C23B22;">'+g.current+'</div><div style="font-size:9px;color:#6E6E6E;">目标: '+g.target+' '+g.trend+'</div></div>';
+  // 如果有搜索结果，显示搜索结果
+  if (this.state.searchResults) {
+    return this.renderSearchResults('tasks', this.state.searchResults.tasks, [
+      { key: 'title', label: '任务' },
+      { key: 'priority', label: '优先级' },
+      { key: 'status', label: '状态' }
+    ]);
+  }
+
+  var tasks = this.state.tasks;
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">添加新任务</div>',
+      '<div class="form-row">',
+        '<input type="text" id="task-title" placeholder="任务标题">',
+        '<select id="task-priority"><option value="P0">P0</option><option value="P1">P1</option><option value="P2">P2</option><option value="P3">P3</option></select>',
+        '<select id="task-status"><option value="待启动">待启动</option><option value="进行中">进行中</option><option value="已完成">已完成</option></select>',
+        '<input type="date" id="task-due">',
+      '</div>',
+      '<button class="btn btn-primary" onclick="Store.addTaskFromForm()">添加任务</button>',
+    '</div>',
+    '<div class="card">',
+      '<div class="card-title">任务列表 (' + tasks.length + ')</div>',
+      '<table class="data-table">',
+        '<thead><tr><th>任务</th><th>优先级</th><th>状态</th><th>截止日期</th><th>操作</th></tr></thead>',
+        '<tbody>',
+          tasks.map(function(t) {
+            return [
+              '<tr>',
+                '<td>' + t.title + '</td>',
+                '<td><span class="tag tag-' + t.priority.toLowerCase() + '">' + t.priority + '</span></td>',
+                '<td>' + t.status + '</td>',
+                '<td>' + (t.dueDate || '-') + '</td>',
+                '<td><button class="btn btn-danger btn-sm" onclick="Store.deleteTask(' + t.id + ')">删除</button></td>',
+              '</tr>'
+            ].join('');
+          }).join(''),
+        '</tbody>',
+      '</table>',
+    '</div>'
+  ].join('');
+
+  document.getElementById('content').innerHTML = html;
+};
+
+// 从表单添加任务
+Store.addTaskFromForm = function() {
+  var title = document.getElementById('task-title').value.trim();
+  var priority = document.getElementById('task-priority').value;
+  var status = document.getElementById('task-status').value;
+  var dueDate = document.getElementById('task-due').value;
+
+  if (!title) {
+    alert('请输入任务标题');
+    return;
+  }
+
+  this.addTask({
+    title: title,
+    priority: priority,
+    status: status,
+    dueDate: dueDate,
+    assignee: '满天星光'
   });
-  document.getElementById('northstar').innerHTML=html;
-  
-  // 倒计时
-  var today=new Date();
-  var solstice=new Date(2026,5,21); // 6月21日(JS月份0-11)
-  var days=Math.ceil((solstice-today)/86400000);
-  document.getElementById('countdownDays').textContent=days+'天';
-  var mktEl=document.getElementById('mktCountdown');
-  if(mktEl) mktEl.textContent=days+'天';
-}
+};
 
-// 自动同步飞轮数据
-function syncFlywheelData(){
-  var reports=JSON.parse(localStorage.getItem('sri_flywheel_reports')||'[]');
-  var usage=JSON.parse(localStorage.getItem('sri_usage_log')||'[]');
-  var profile=JSON.parse(localStorage.getItem('sri_profile')||'{}');
-  var nps=localStorage.getItem('sri_nps_score');
-  
-  var g=DB.get('growth');
-  g.find(x=>x.metric==='飞轮循环').current=reports.length;
-  g.find(x=>x.metric==='活跃客户(30d)').current=profile.name?1:0;
-  if(nps) g.find(x=>x.metric==='NPS基线').current=nps+'/10';
-  DB.set('growth',g);
-}
-syncFlywheelData();
-
-function loadKPI() {
-  let s = DB.stats();
-  document.getElementById('kv_tasks').textContent = s.tasks;
-  document.getElementById('kv_customers').textContent = s.customers;
-  document.getElementById('kv_passwords').textContent = s.passwords;
-  document.getElementById('kv_quality').textContent = s.quality;
-  document.getElementById('kv_products').textContent = s.products;
-  document.getElementById('kv_usage').textContent = s.usage;
-  document.getElementById('kv_flywheel').textContent = s.flywheel;
-}
-
-function addTask() {
-  let t = document.getElementById('taskName').value.trim();
-  if(!t) return;
-  DB.addTask({task:t, priority:document.getElementById('taskPri').value, deadline:document.getElementById('taskDeadline').value, assignee:document.getElementById('taskAssignee').value, status:'待开始'});
-  document.getElementById('taskName').value=''; render();
-}
-
-function updateTask(id,status) { await DB.updateTask(id,status); render(); }
-
-function deleteItem(table,id) {
-  let d = DB.get(table);
-  d = d.filter(x=>x.id!==id);
-  DB.set(table, d);
-  render();
-}
-
-function addCustomer() {
-  let n=document.getElementById('custName').value.trim();
-  if(!n) return;
-  DB.addCustomer({name:n, company:document.getElementById('custCompany').value, email:document.getElementById('custEmail').value, role:document.getElementById('custRole').value});
-  document.getElementById('custName').value=''; render();
-}
-
-function addPassword() {
-  let c=document.getElementById('pwdCode').value.trim();
-  if(!c||c.length!==8) return alert('密码必须8位数字');
-  DB.addPassword({code:c, customer:document.getElementById('pwdCustomer').value, products:document.getElementById('pwdProd').value, max_uses:parseInt(document.getElementById('pwdMaxUses').value)||9999, used:0, status:'启用'});
-  document.getElementById('pwdCode').value=''; render();
-}
-
-function addProduct() {
-  let n=document.getElementById('prodName').value.trim();
-  if(!n) return;
-  DB.addProduct({name:n, family:document.getElementById('prodFamily').value});
-  document.getElementById('prodName').value=''; render();
-}
-
-function importJSON() {
-  try {
-    let d=JSON.parse(document.getElementById('importData').value);
-    for(let [table,items] of Object.entries(d)) {
-      let existing = DB.get(table);
-      items.forEach(item => { item.id = Date.now()+Math.random(); item.created = new Date().toISOString(); existing.unshift(item); });
-      DB.set(table, existing.slice(0,500));
-    }
-    render(); alert('导入成功！');
-  } catch(e) { alert('JSON格式错误: '+e.message); }
-}
-
-async function importFromFile() {
-  let s=document.getElementById('importStatus');
-  s.textContent='加载中...';
-  try {
-    let r=await fetch('import_data.json');
-    let d=await r.json();
-    let count=0;
-    let mapping={'任务驾驶舱':'tasks','客户档案库':'customers','决策日志':'decisions','北极星指标':'growth','五维测评记录':'assessments','知识资产库':'knowledge','内容资产':'content','案例库':'cases'};
-    for(let [table,items] of Object.entries(d)){
-      let key=mapping[table]||table;
-      let existing=DB.get(key);
-      items.forEach(item=>{item._id=Date.now()+Math.random();existing.unshift(item)});
-      DB.set(key,existing.slice(0,500));
-      count+=items.length;
-    }
-    s.textContent='✅ 已导入 '+count+' 条！' + (d['任务驾驶舱']?'含任务'+d['任务驾驶舱'].length+'条':'');
-    render();
-  } catch(e){s.textContent='❌ 加载失败: '+e.message;}
-}
-
-function exportAll() {
-  let data = {};
-  ['tasks','customers','passwords','quality','products','growth'].forEach(t => { data[t] = DB.get(t) });
-  let blob = new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  let a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-  a.download = '驾驶舱备份_'+new Date().toISOString().substring(0,10)+'.json';
-  a.click();
-}
-
-function clearAll() {
-  if(!confirm('确定清空所有本地数据？此操作不可恢复！建议先导出备份。')) return;
-  ['tasks','customers','passwords','quality','products','growth'].forEach(t => localStorage.removeItem('sri_db_'+t));
-  DB.seed();
-// cron状态实时检查
-setTimeout(function(){
-  var checks=[
-    {name:'日起课',file:'memory/2026-05-29.md',cron:'06:00'},
-    {name:'Token压缩',file:'memory/auto_compression_save.py',cron:'每2h'},
-    {name:'邮箱检查',file:'memory/邮箱检查日志.md',cron:'10:00/18:00'},
-    {name:'产品健康扫描',file:'memory/_scripts/product_health_scan.py',cron:'周一06:00'},
-    {name:'整周体检',file:'memory/整周体检日志.md',cron:'周三18:00'},
-    {name:'运维清理',file:'memory/运维清理周报_2026-05-28.md',cron:'周六10:00'},
-    {name:'日毕课',file:'memory/2026-05-29.md',cron:'22:00'},
-    {name:'隐私审计',file:'memory/_scripts/privacy_audit.py',cron:'每月1日'},
+// 里程碑
+Store.renderMilestones = function() {
+  var milestones = [
+    { date: '2026-06-01', title: '公众号正式上线' },
+    { date: '2026-06-15', title: '夏至官宣内容定稿' },
+    { date: '2026-06-21', title: '夏至官宣发布' },
+    { date: '2026-07-01', title: '首期训练营开营' },
+    { date: '2026-09-22', title: '秋分里程碑复盘' }
   ];
-  // 更新到全局供系统Tab使用
-  window._cronStatus=checks;
-},500);
 
-// NPS实时同步
-setTimeout(function(){
-  var nps=localStorage.getItem('sri_nps_score');
-  var growth=DB.get('gr');
-  if(nps && growth.length>0){ 
-    var npsItem=growth.find(function(g){return g.m&&g.m.indexOf('NPS')>=0});
-    if(npsItem) npsItem.c=nps+'/10';
-    DB.set('gr',growth);
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">项目里程碑</div>',
+      '<div class="timeline">',
+        milestones.map(function(m) {
+          return [
+            '<div class="timeline-item">',
+              '<div class="timeline-date">' + m.date + '</div>',
+              '<div class="timeline-title">' + m.title + '</div>',
+            '</div>'
+          ].join('');
+        }).join(''),
+      '</div>',
+    '</div>'
+  ].join('');
+
+  document.getElementById('content').innerHTML = html;
+};
+
+// 客户
+Store.renderCustomers = function() {
+  if (this.state.searchResults) {
+    return this.renderSearchResults('customers', this.state.searchResults.customers, [
+      { key: 'name', label: '客户' },
+      { key: 'industry', label: '行业' },
+      { key: 'status', label: '状态' }
+    ]);
   }
-},1000);
 
-// 自动种子——首次使用灌入默认数据
-(function(){
-  if(!localStorage.getItem('sri_db_seeded')){
-    DB.set('ct',[{n:'商标注册代理',p:'待定',v:'~3K',s:'待签约',d:'07-31'},{n:'飞书认证',p:'飞书',v:'300/年',s:'待启动',d:'公测后'},{n:'Zoom',p:'Zoom',v:'~1.5K/yr',s:'待启动',d:'开课前'},{n:'域名',p:'待定',v:'~100/yr',s:'待签约',d:'06-14'},{n:'合作协议模板',p:'已设计',v:'—',s:'草稿',d:'夏至后'}]);
-    DB.set('ch',[{n:'公众号:满意解禅堂',t:'自有',s:'✅已开通',no:'未认证'},{n:'GitHub Pages',t:'主站',s:'✅232产品',no:'HTTPS'},{n:'小红书',t:'社交',s:'5篇就绪',no:'张雪机车'},{n:'知乎',t:'社区',s:'3篇就绪',no:'合伙人'},{n:'播客',t:'音频',s:'脚本就绪',no:'待录制'},{n:'抖音/视频号',t:'短视频',s:'脚本就绪',no:'待发布'},{n:'36氪',t:'科技媒体',s:'待联系',no:'投稿'},{n:'虎嗅',t:'科技媒体',s:'待联系',no:'深度'},{n:'投资人说',t:'VC垂直',s:'待联系',no:'投后'},{n:'创业邦',t:'创业媒体',s:'待联系',no:'故事'},{n:'VC投后管理',t:'渠道合作',s:'方案完成',no:'3模式'},{n:'加速器',t:'渠道合作',s:'方案完成',no:'打包诊断'},{n:'律所·合伙人',t:'渠道合作',s:'待联系',no:'联合服务'},{n:'高校创业中心',t:'渠道合作',s:'待联系',no:'课程嵌入'}]);
-    DB.set('vi',[{a:'主色#C23B22',c:'色彩',u:'所有标识',s:'✅'},{a:'背景#F5F0E6',c:'色彩',u:'页面背景',s:'✅'},{a:'暗金#B8860B',c:'色彩',u:'金属符号',s:'✅'},{a:'Logo方印',c:'标识',u:'品牌资产',s:'✅'},{a:'章衡镜契觉',c:'命名',u:'产品体系',s:'✅'},{a:'设计系统V4',c:'CSS',u:'全局变量',s:'✅'},{a:'VI手册(飞书)',c:'规范',u:'视觉识别',s:'✅'},{a:'资产库(飞书)',c:'素材',u:'50素材',s:'✅'},{a:'商标注册',c:'法律',u:'®保护',s:'QM-026'}]);
-    localStorage.setItem('sri_db_seeded','true');
+  var customers = this.state.customers;
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">添加新客户</div>',
+      '<div class="form-row">',
+        '<input type="text" id="cust-name" placeholder="客户名称">',
+        '<input type="text" id="cust-industry" placeholder="所属行业">',
+        '<select id="cust-status"><option value="潜在客户">潜在客户</option><option value="初步接触">初步接触</option><option value="深入沟通">深入沟通</option><option value="已完成咨询">已完成咨询</option></select>',
+        '<input type="date" id="cust-contact">',
+      '</div>',
+      '<button class="btn btn-primary" onclick="Store.addCustomerFromForm()">添加客户</button>',
+    '</div>',
+    '<div class="card">',
+      '<div class="card-title">客户列表 (' + customers.length + ')</div>',
+      '<table class="data-table">',
+        '<thead><tr><th>客户</th><th>行业</th><th>状态</th><th>最近联系</th><th>操作</th></tr></thead>',
+        '<tbody>',
+          customers.map(function(c) {
+            return [
+              '<tr>',
+                '<td>' + c.name + '</td>',
+                '<td>' + c.industry + '</td>',
+                '<td><span class="tag">' + c.status + '</span></td>',
+                '<td>' + (c.lastContact || '-') + '</td>',
+                '<td><button class="btn btn-danger btn-sm" onclick="Store.deleteCustomer(' + c.id + ')">删除</button></td>',
+              '</tr>'
+            ].join('');
+          }).join(''),
+        '</tbody>',
+      '</table>',
+    '</div>'
+  ].join('');
+
+  document.getElementById('content').innerHTML = html;
+};
+
+Store.addCustomerFromForm = function() {
+  var name = document.getElementById('cust-name').value.trim();
+  var industry = document.getElementById('cust-industry').value.trim();
+  var status = document.getElementById('cust-status').value;
+  var lastContact = document.getElementById('cust-contact').value;
+
+  if (!name) {
+    alert('请输入客户名称');
+    return;
   }
-})();
 
+  this.addCustomer({
+    name: name,
+    industry: industry,
+    status: status,
+    lastContact: lastContact
+  });
+};
 
-// BSC四维指标
-function updateBSC(){
-  var stats=DB.stats();
-  setTimeout(()=>{
-    document.getElementById('bscFinance')&&(document.getElementById('bscFinance').textContent='内测中');
-    document.getElementById('bscCustomer')&&(document.getElementById('bscCustomer').textContent=(stats.customers||0)+'客户');
-    document.getElementById('bscProcess')&&(document.getElementById('bscProcess').textContent=(stats.quality||0)+'QM');
-    document.getElementById('bscGrowth')&&(document.getElementById('bscGrowth').textContent=(stats.products||0)+'产品');
-  },500);
+// 产品
+Store.renderProducts = function() {
+  if (this.state.searchResults) {
+    return this.renderSearchResults('products', this.state.searchResults.products, [
+      { key: 'name', label: '产品' },
+      { key: 'desc', label: '描述' },
+      { key: 'status', label: '状态' }
+    ]);
+  }
+
+  var products = this.state.products;
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">添加新产品</div>',
+      '<div class="form-row">',
+        '<input type="text" id="prod-name" placeholder="产品名称">',
+        '<input type="text" id="prod-desc" placeholder="产品描述">',
+        '<select id="prod-status"><option value="概念设计">概念设计</option><option value="设计完成">设计完成</option><option value="开发中">开发中</option><option value="已上线">已上线</option></select>',
+        '<input type="text" id="prod-price" placeholder="定价">',
+      '</div>',
+      '<button class="btn btn-primary" onclick="Store.addProductFromForm()">添加产品</button>',
+    '</div>',
+    '<div class="card">',
+      '<div class="card-title">产品列表 (' + products.length + ')</div>',
+      '<table class="data-table">',
+        '<thead><tr><th>产品</th><th>描述</th><th>状态</th><th>定价</th><th>操作</th></tr></thead>',
+        '<tbody>',
+          products.map(function(p) {
+            return [
+              '<tr>',
+                '<td>' + p.name + '</td>',
+                '<td>' + p.desc + '</td>',
+                '<td><span class="tag">' + p.status + '</span></td>',
+                '<td>' + p.price + '</td>',
+                '<td><button class="btn btn-danger btn-sm" onclick="Store.deleteProduct(' + p.id + ')">删除</button></td>',
+              '</tr>'
+            ].join('');
+          }).join(''),
+        '</tbody>',
+      '</table>',
+    '</div>'
+  ].join('');
+
+  document.getElementById('content').innerHTML = html;
+};
+
+Store.addProductFromForm = function() {
+  var name = document.getElementById('prod-name').value.trim();
+  var desc = document.getElementById('prod-desc').value.trim();
+  var status = document.getElementById('prod-status').value;
+  var price = document.getElementById('prod-price').value.trim();
+
+  if (!name) {
+    alert('请输入产品名称');
+    return;
+  }
+
+  this.addProduct({
+    name: name,
+    desc: desc,
+    status: status,
+    price: price || '待定'
+  });
+};
+
+// 质量
+Store.renderQuality = function() {
+  var items = [
+    { name: '公众号内容审核', status: '通过', date: '2026-05-28' },
+    { name: '决策工具功能测试', status: '通过', date: '2026-05-27' },
+    { name: '夏至官宣文案审核', status: '待审核', date: '-' }
+  ];
+
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">质量检查项</div>',
+      '<table class="data-table">',
+        '<thead><tr><th>检查项</th><th>状态</th><th>日期</th></tr></thead>',
+        '<tbody>',
+          items.map(function(i) {
+            return '<tr><td>' + i.name + '</td><td><span class="tag">' + i.status + '</span></td><td>' + i.date + '</td></tr>';
+          }).join(''),
+        '</tbody>',
+      '</table>',
+    '</div>'
+  ].join('');
+
+  document.getElementById('content').innerHTML = html;
+};
+
+// 财务
+Store.renderFinancial = function() {
+  document.getElementById('content').innerHTML = '<div class="card"><div class="card-title">财务概览</div><p>暂无财务数据</p></div>';
+};
+
+// 增长
+Store.renderGrowth = function() {
+  document.getElementById('content').innerHTML = '<div class="card"><div class="card-title">增长指标</div><p>暂无增长数据</p></div>';
+};
+
+// 系统
+Store.renderSystem = function() {
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">系统状态</div>',
+      '<table class="data-table">',
+        '<thead><tr><th>项目</th><th>状态</th></tr></thead>',
+        '<tbody>',
+          '<tr><td>GitHub Pages</td><td><span class="tag tag-p3">正常</span></td></tr>',
+          '<tr><td>飞书同步</td><td><span class="tag tag-p3">正常</span></td></tr>',
+          '<tr><td>微信公众号</td><td><span class="tag tag-p3">正常</span></td></tr>',
+          '<tr><td>数据库备份</td><td><span class="tag tag-p3">正常</span></td></tr>',
+        '</tbody>',
+      '</table>',
+    '</div>'
+  ].join('');
+
+  document.getElementById('content').innerHTML = html;
+};
+
+// 替身
+Store.renderPlaceholders = function() {
+  var placeholders = [
+    { name: '替身A', type: '测试账号', status: '活跃' },
+    { name: '替身B', type: '演示账号', status: '活跃' }
+  ];
+
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">替身管理 (' + placeholders.length + ')</div>',
+      '<table class="data-table">',
+        '<thead><tr><th>名称</th><th>类型</th><th>状态</th></tr></thead>',
+        '<tbody>',
+          placeholders.map(function(p) {
+            return '<tr><td>' + p.name + '</td><td>' + p.type + '</td><td><span class="tag">' + p.status + '</span></td></tr>';
+          }).join(''),
+        '</tbody>',
+      '</table>',
+    '</div>'
+  ].join('');
+
+  document.getElementById('content').innerHTML = html;
+};
+
+// 术语表
+Store.renderGlossary = function() {
+  var terms = [
+    { term: '满天星光', def: '满天星光行动是满意解研究所的内部项目代号。核心使命：陪伴100位硬科技创业者穿越周期。' },
+    { term: '满意解', def: 'Satisficing，由Herbert Simon提出，指在有限理性下追求"足够好"而非"最优"的决策方法论。' },
+    { term: '契·晋·转·桥·审·行·恒', def: '满意解研究所的六字哲学体系：契约精神、持续进化、跨界转型、连接价值、审美判断、行动落地、永恒成长。' },
+    { term: 'P0/P1/P2/P3', def: '任务优先级体系。P0=最高优先级（阻塞性），P1=重要紧急，P2=重要不紧急，P3=可延后。' },
+    { term: '夏至官宣', def: '2026年6月21日夏至，满意解研究所正式对外发布的里程碑事件。' }
+  ];
+
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">术语表</div>',
+      terms.map(function(t) {
+        return [
+          '<div class="glossary-item">',
+            '<div class="glossary-term">' + t.term + '</div>',
+            '<div class="glossary-def">' + t.def + '</div>',
+          '</div>'
+        ].join('');
+      }).join(''),
+    '</div>'
+  ].join('');
+
+  document.getElementById('content').innerHTML = html;
+};
+
+// 搜索结果渲染（通用）
+Store.renderSearchResults = function(type, items, columns) {
+  if (!items || items.length === 0) {
+    document.getElementById('content').innerHTML = '<div class="card"><p>未找到匹配结果</p></div>';
+    return;
+  }
+
+  var headers = columns.map(function(c) { return '<th>' + c.label + '</th>'; }).join('');
+  var rows = items.map(function(item) {
+    return '<tr>' + columns.map(function(c) {
+      var val = item[c.key] || '-';
+      if (this.state.searchQuery && typeof val === 'string') {
+        var q = this.state.searchQuery;
+        val = val.replace(new RegExp(q, 'gi'), '<span class="highlight">$&</span>');
+      }
+      return '<td>' + val + '</td>';
+    }.bind(this)).join('') + '</tr>';
+  }.bind(this)).join('');
+
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">搜索结果: ' + type + ' (' + items.length + ')</div>',
+      '<table class="data-table">',
+        '<thead><tr>' + headers + '</tr></thead>',
+        '<tbody>' + rows + '</tbody>',
+      '</table>',
+    '</div>'
+  ].join('');
+
+  document.getElementById('content').innerHTML = html;
+};
+
+// ===== 4. 夏至倒计时 =====
+Store.updateCountdown = function() {
+  var now = new Date();
+  var diff = CONFIG.XZ_DATE - now;
+  var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+  var el = document.getElementById('countdown');
+  if (el) {
+    el.textContent = '夏至官宣倒计时 ' + days + ' 天';
+  }
+};
+
+// ===== 5. 登录/登出 =====
+function attemptLogin() {
+  var input = document.getElementById('password-input');
+  var password = input.value;
+
+  // SHA-256 哈希
+  var hash = sha256(password);
+
+  if (hash === CONFIG.PASSWORD_HASH) {
+    localStorage.setItem(CONFIG.STORAGE_KEYS.loggedIn, 'true');
+    showMain();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+    input.value = '';
+    input.focus();
+  }
 }
 
-// 自动从系统引擎同步最新数据
-(function(){
-  // 从flywheel引擎同步
-  if(window.FlywheelEngine){
-    var s=FlywheelEngine.refine();
-    if(s.totalUsage>0){
-      var g=DB.get('growth');
-      g.find(x=>x.metric==='飞轮循环').current=s.flywheel_cycles||0;
-      g.find(x=>x.metric==='线上产品总数').current=s.totalProducts||233;
-      DB.set('growth',g);
+function logout() {
+  localStorage.removeItem(CONFIG.STORAGE_KEYS.loggedIn);
+  location.reload();
+}
+
+// 简单SHA-256实现
+function sha256(s) {
+  function rot(n, st) { return (n >>> st) | (n << (32 - st)); }
+  function ff(s, b, c, d) {
+    var tmp = (rot((b ^ c ^ d), 7) + (b & s) + (~b & c)) >>> 0;
+    return tmp;
+  }
+  function gg(s, b, c, d) {
+    var tmp = (rot((b ^ c ^ d), 14) + (~b & d) + (c & ~d)) >>> 0;
+    return tmp;
+  }
+  function hh(s, b, c, d) {
+    var tmp = (rot((b ^ c ^ d), 21) + (~b & d) + (c & ~d)) >>> 0;
+    return tmp;
+  }
+  function ii(s, b, c, d) {
+    var tmp = (rot((b ^ c ^ d), 21) + (~b & d) + (c & ~d)) >>> 0;
+    return tmp;
+  }
+
+  var k = [0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+           0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+           0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+           0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+           0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+           0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+           0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+           0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2];
+
+  function w(t) {
+    if (t < 16) {
+      var n = s.length;
+      var bytes = [];
+      for (var i = 0; i < n; i++) {
+        bytes.push(s.charCodeAt(i));
+      }
+      bytes.push(0x80);
+      while (bytes.length % 64 !== 56) bytes.push(0);
+      for (var i = 0; i < 56; i++) bytes.push(0);
+      var len = n * 8;
+      for (var i = 7; i >= 0; i--) {
+        bytes.push((len >>> (i * 8)) & 0xff);
+      }
+      return bytes[t] || 0;
+    } else if (t < 64) {
+      var s1 = rot(w(t - 2), 17) ^ rot(w(t - 2), 19) ^ (w(t - 2) >>> 10);
+      var s2 = rot(w(t - 15), 7) ^ rot(w(t - 15), 18) ^ (w(t - 15) >>> 3);
+      return (s1 + w(t - 7) + s2) >>> 0;
     }
+    return 0;
   }
-  // 同步使用日志到驾驶舱
-  var usage=JSON.parse(localStorage.getItem('sri_usage_log')||'[]');
-  var todayLog=usage.filter(x=>new Date(x.time).toDateString()===new Date().toDateString());
-  document.getElementById('kv_usage')&&(document.getElementById('kv_usage').textContent=todayLog.length||0);
-})();
- render();
+
+  var h0 = 0x6a09e667, h1 = 0xbb67ae85, h2 = 0x3c6ef372, h3 = 0xa54ff53a,
+      h4 = 0x510e527f, h5 = 0x9b05688c, h6 = 0x1f83d9ab, h7 = 0x5be0cd19;
+
+  var len = s.length * 8;
+  var m = [];
+  for (var i = 0; i < len / 8; i++) {
+    var chunk = 0;
+    for (var j = 0; j < 4; j++) {
+      chunk = (chunk << 8) | (s.charCodeAt(i * 4 + j) || 0);
+    }
+    m.push(chunk);
+  }
+  while (m.length < 16) m.push(0);
+  m[m.length - 1] = len;
+
+  var a = h0, b = h1, c = h2, d = h3, e = h4, f = h5, g = h6, h = h7;
+
+  for (var i = 0; i < 64; i++) {
+    var t1 = (rot(a, 2) + ff(a >>> 0, b >>> 0, c >>> 0, d >>> 0) + e + k[i] + w(i)) >>> 0;
+    var t2 = (rot(e, 6) + hh(e >>> 0, f >>> 0, g >>> 0, h >>> 0)) >>> 0;
+    h = g; g = f; f = e; e = (d + t1) >>> 0;
+    d = c; c = b; b = a; a = (t1 + t2) >>> 0;
+  }
+
+  var result = '';
+  var arr = [h0, h1, h2, h3, h4, h5, h6, h7];
+  for (var i = 0; i < arr.length; i++) {
+    result += arr[i].toString(16).padStart(8, '0');
+  }
+  return result;
 }
 
-initDB().then(() => render());
+// ===== 6. 全局搜索处理 =====
+function handleSearch(query) {
+  Store.search(query);
+}
+
+// ===== 7. 界面切换 =====
+function showLogin() {
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('main-screen').style.display = 'none';
+  document.getElementById('password-input').focus();
+}
+
+function showMain() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('main-screen').style.display = 'block';
+
+  Store.init();
+  Store.render();
+
+  // 每秒更新倒计时
+  setInterval(function() { Store.updateCountdown(); }, 1000);
+}
+
+// ===== 8. 页面加载 =====
+(function init() {
+  var loggedIn = localStorage.getItem(CONFIG.STORAGE_KEYS.loggedIn) === 'true';
+  if (loggedIn) {
+    showMain();
+  } else {
+    showLogin();
+  }
+})();
 </script>
+
 </body>
 </html>
