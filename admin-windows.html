@@ -99,21 +99,276 @@ body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;backgr
   <main class="main" id="main-content"></main>
 </div>
 
+>/div>';
+  h+='<div><h3 style="font-size:.85em;margin-bottom:8px">🔴 待改进 Bottom 10</h3><table class="data-table"><thead><tr><th>#</th><th>产品</th><th>质量</th><th>阶段</th></tr></thead><tbody>';
+  for(var bi=0;bi<Math.min(10,sorted.length);bi++){var bp=sorted[sorted.length-1-bi];h+='<tr><td>'+(bi+1)+'</td><td><b>'+escH(bp.name)+'</b></td><td>'+bp.quality_score+'</td><td>'+LC_LABELS[bp.lifecycle_stage||'L1_原型']+'</td></tr>'}
+  h+='</tbody></table></div></div>';
+
+  // 质量改进建议
+  var lowQuality=prods.filter(function(p){return(p.quality_score||0)<70}).length;
+  var noVI=prods.filter(function(p){return(p.vi_compliance||0)<60}).length;
+  var noContent=prods.filter(function(p){return(p.content_accuracy||0)<60}).length;
+  var noUX=prods.filter(function(p){return(p.ux_rating||0)<40}).length;
+  h+='<div style="margin-top:20px"><h3 style="font-size:.92em;margin-bottom:10px">🔧 改进建议</h3><div class="stat-grid">';
+  h+='<div class="stat-card" style="border-left:4px solid '+LAYER_COLORS.chemical+'"><div class="stat-num">'+lowQuality+'</div><div class="stat-label">综合质量<70</div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+noVI+'</div><div class="stat-label">VI合规<60</div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+noContent+'</div><div class="stat-label">内容准确<60</div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+noUX+'</div><div class="stat-label">UX评级<40</div></div>';
+  h+='</div></div>';
+
+  return h;
+}
+
+/* ================================================================
+   4. 客户档案 · 核心客户+替身画像
+   ================================================================ */
+function rCustomers(){
+  if(!DB)return renderDegrade();
+  var all=(DB.customers||[]).concat(DB.customer_profiles||[]),inds=[];
+  for(var i=0;i<all.length;i++){var ind=all[i].industry;if(ind&&inds.indexOf(ind)<0)inds.push(ind)}
+  var h='<div class="panel-header"><div><h2>👤 客户档案</h2><div class="meta">'+(DB.customers||[]).length+' 核心客户 · '+(DB.customer_profiles||[]).length+' 替身画像</div></div></div>';
+  h+=toolbar('customers','搜索客户/企业...',inds);
+  h+='<table class="data-table" id="tbl-customers"><thead><tr><th onclick="sortPane('customers','id',this)">ID<span class="sort-arrow"></span></th><th onclick="sortPane('customers','name',this)">客户/画像<span class="sort-arrow"></span></th><th onclick="sortPane('customers','industry',this)">行业<span class="sort-arrow"></span></th><th onclick="sortPane('customers','stage',this)">阶段<span class="sort-arrow"></span></th><th>需求/痛点</th><th>决策类型</th></tr></thead><tbody id="tbody-customers"></tbody></table>';
+  rowBuilders.customers=custRow;PANE_DATA.customers=all.slice();
+  setTimeout(function(){fillPaneTable('customers',all,custRow,'无客户数据')},0);
+  return h;
+}
+function custRow(c,idx){
+  var need=String(c.needs||c.needs_summary||((c.pain_points||[]).join(', '))||'—');
+  var h='<tr onclick="toggleDetail('cust-det-'+idx+'')" style="cursor:pointer"><td>'+escH(c.id)+'</td><td><b>'+escH(c.name||c.company||'—')+'</b>'+(c.company?' <span style="font-size:.75em;color:var(--ink-lighter)">('+escH(c.company)+')</span>':'')+'</td><td>'+escH(c.industry||'—')+'</td><td>'+escH(c.stage||'—')+'</td><td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escH(need)+'</td><td>'+escH(c.decision_type||c.role||'—')+'</td></tr>';
+  h+='<tr class="detail-row" id="cust-det-'+idx+'"><td colspan="6"><div class="detail-card">';
+  if(c.needs)h+='<div class="field"><span class="field-label">需求</span><div class="field-value">'+escH(c.needs)+'</div></div>';
+  if(c.pain_points&&c.pain_points.length)h+='<div class="field"><span class="field-label">痛点</span><div class="field-value">'+c.pain_points.map(function(x){return'<span class="tag tag-red">'+escH(x)+'</span>'}).join(' ')+'</div></div>';
+  if(c.description)h+='<div class="field"><span class="field-label">描述</span><div class="field-value">'+escH(c.description)+'</div></div>';
+  return h+'</div></td></tr>';
+}
+
+/* ================================================================
+   5. 任务看板 · 50任务·优先级·状态
+   ================================================================ */
+function rTasks(){
+  if(!DB)return renderDegrade();
+  var tasks=DB.tasks||[],closed=tasks.filter(function(t){return/已完成/.test(t.status||'')}).length,nc=tasks.length-closed;
+  var p0=tasks.filter(function(t){return/P0/.test(t.priority||'')}).length,p1=tasks.filter(function(t){return/P1/.test(t.priority||'')}).length,p2=tasks.filter(function(t){return/P2/.test(t.priority||'')}).length;
+  var h='<div class="panel-header"><div><h2>📋 任务看板</h2><div class="meta">'+tasks.length+' 任务 · '+nc+' 未闭环 · '+closed+' 已完成</div></div></div>';
+  h+='<div class="stat-grid">';
+  h+='<div class="stat-card" style="cursor:pointer" onclick="filterPane('tasks','','P0')"><div class="stat-num">'+p0+'</div><div class="stat-label">🔴 P0·立即</div><div class="stat-bar"><div class="fill fill-red" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card" style="cursor:pointer" onclick="filterPane('tasks','','P1')"><div class="stat-num">'+p1+'</div><div class="stat-label">🟡 P1·本周</div><div class="stat-bar"><div class="fill fill-gold" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card" style="cursor:pointer" onclick="filterPane('tasks','','P2')"><div class="stat-num">'+p2+'</div><div class="stat-label">🟢 P2·两周</div><div class="stat-bar"><div class="fill fill-green" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+nc+'</div><div class="stat-label">⚡ 未闭环</div><div class="stat-bar"><div class="fill fill-warn" style="width:100%"></div></div></div>';
+  h+='</div>';
+  var prios=['P0','P1','P2','✅ 已完成','⏳ 进行中','⬜ 待执行'];h+=toolbar('tasks','搜索任务...',prios);
+  h+='<table class="data-table" id="tbl-tasks"><thead><tr><th onclick="sortPane('tasks','id',this)">ID<span class="sort-arrow"></span></th><th onclick="sortPane('tasks','name',this)">任务名<span class="sort-arrow"></span></th><th onclick="sortPane('tasks','priority',this)">优先级<span class="sort-arrow"></span></th><th onclick="sortPane('tasks','status',this)">状态<span class="sort-arrow"></span></th><th onclick="sortPane('tasks','deadline',this)">截止<span class="sort-arrow"></span></th><th>负责人</th></tr></thead><tbody id="tbody-tasks"></tbody></table>';
+  rowBuilders.tasks=taskRow;PANE_DATA.tasks=tasks.slice();
+  setTimeout(function(){fillPaneTable('tasks',tasks,taskRow,'无任务数据')},0);
+  return h;
+}
+function taskRow(t,idx){
+  var pc=/P0/.test(t.priority||'')?'tag-red':(/P1/.test(t.priority||'')?'tag-gold':'tag-gray');
+  var sc=/已完成/.test(t.status||'')?'tag-green':(/进行中/.test(t.status||'')?'tag-gold':'tag-gray');
+  var h='<tr onclick="toggleDetail('task-det-'+idx+'')" style="cursor:pointer"><td>'+escH(t.id)+'</td><td><b>'+escH(t.name)+'</b></td><td><span class="tag '+pc+'">'+escH(t.priority||'—')+'</span></td><td><span class="tag '+sc+'">'+escH(t.status||'—')+'</span></td><td>'+escH(t.deadline||'—')+'</td><td>'+escH(t.assignee||'—')+'</td></tr>';
+  h+='<tr class="detail-row" id="task-det-'+idx+'"><td colspan="6"><div class="detail-card">';
+  if(t.description)h+='<div class="field"><span class="field-label">描述</span><div class="field-value">'+escH(t.description)+'</div></div>';
+  if(t.source)h+='<div class="field"><span class="field-label">来源</span><div class="field-value">'+escH(t.source)+'</div></div>';
+  return h+'</div></td></tr>';
+}
+
+/* ================================================================
+   6. 决策记录 · 决策链展示
+   ================================================================ */
+function rDecisions(){
+  if(!DB)return renderDegrade();
+  var decs=DB.decisions||[];
+  var h='<div class="panel-header"><div><h2>⚖️ 决策记录</h2><div class="meta">'+decs.length+' 条决策</div></div></div>';
+  h+=toolbar('decisions','搜索决策...',null);
+  h+='<table class="data-table" id="tbl-decisions"><thead><tr><th onclick="sortPane('decisions','id',this)">ID<span class="sort-arrow"></span></th><th onclick="sortPane('decisions','date',this)">日期<span class="sort-arrow"></span></th><th onclick="sortPane('decisions','title',this)">决策<span class="sort-arrow"></span></th><th onclick="sortPane('decisions','confidence',this)">置信度<span class="sort-arrow"></span></th><th>结果</th></tr></thead><tbody id="tbody-decisions"></tbody></table>';
+  rowBuilders.decisions=decRow;PANE_DATA.decisions=decs.slice();
+  setTimeout(function(){fillPaneTable('decisions',decs,decRow,'无决策记录')},0);
+  return h;
+}
+function decRow(d,idx){
+  var h='<tr onclick="toggleDetail('dec-det-'+idx+'')" style="cursor:pointer"><td>'+escH(d.id)+'</td><td>'+escH(d.date)+'</td><td><b>'+escH(d.title)+'</b></td><td>'+(d.confidence?Math.round(d.confidence*100)+'%':'—')+'</td><td>'+escH(d.outcome||'—')+'</td></tr>';
+  h+='<tr class="detail-row" id="dec-det-'+idx+'"><td colspan="5"><div class="detail-card">';
+  if(d.context)h+='<div class="field"><span class="field-label">背景</span><div class="field-value">'+escH(d.context)+'</div></div>';
+  return h+'</div></td></tr>';
+}
+
+/* ================================================================
+   7. 规则引擎 · 48生物规则·四层状态
+   ================================================================ */
+function rRules(){
+  if(!DB)return renderDegrade();
+  var rules=DB.living_rules||[],rs=DB.meta&&DB.meta.living_rules_status?DB.meta.living_rules_status:{};
+  var active=rules.filter(function(r){return r.status==='active'}).length;
+  var dormant=rules.filter(function(r){return r.status==='dormant'}).length;
+  var broken=rules.filter(function(r){return r.status==='broken'}).length;
+  var h='<div class="panel-header"><div><h2>🧬 规则引擎</h2><div class="meta">'+rules.length+' 生物规则 · '+(DB.meta&&DB.meta.biological_health?DB.meta.biological_health.fully_alive:0)+' 全活</div></div></div>';
+  h+='<div class="stat-grid">';
+  h+='<div class="stat-card"><div class="stat-num">'+active+'</div><div class="stat-label">✅ 活跃</div><div class="stat-bar"><div class="fill fill-green" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+dormant+'</div><div class="stat-label">💤 休眠</div><div class="stat-bar"><div class="fill fill-gold" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+broken+'</div><div class="stat-label">🔴 损坏</div><div class="stat-bar"><div class="fill fill-red" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+(rs.active||active)+'</div><div class="stat-label">📊 元数据活跃</div></div>';
+  h+='</div>';
+  h+=toolbar('rules','搜索规则...',['active','dormant','broken']);
+  h+='<table class="data-table" id="tbl-rules"><thead><tr><th onclick="sortPane('rules','id',this)">ID<span class="sort-arrow"></span></th><th onclick="sortPane('rules','name',this)">规则名<span class="sort-arrow"></span></th><th onclick="sortPane('rules','status',this)">状态<span class="sort-arrow"></span></th><th onclick="sortPane('rules','priority',this)">优先级<span class="sort-arrow"></span></th><th>触发条件</th></tr></thead><tbody id="tbody-rules"></tbody></table>';
+  rowBuilders.rules=ruleRow;PANE_DATA.rules=rules.slice();
+  setTimeout(function(){fillPaneTable('rules',rules,ruleRow,'无规则数据')},0);
+  return h;
+}
+function ruleRow(r,idx){
+  var sc=r.status==='active'?'tag-green':(r.status==='dormant'?'tag-gold':'tag-red');
+  var pc=r.priority==='P0'?'tag-red':'tag-gold';
+  var h='<tr onclick="toggleDetail('rule-det-'+idx+'')" style="cursor:pointer"><td>'+escH(r.id)+'</td><td><b>'+escH(r.name)+'</b></td><td><span class="tag '+sc+'">'+escH(r.status||'—')+'</span></td><td><span class="tag '+pc+'">'+escH(r.priority||'—')+'</span></td><td style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escH(r.trigger||'—')+'</td></tr>';
+  h+='<tr class="detail-row" id="rule-det-'+idx+'"><td colspan="5"><div class="detail-card">';
+  if(r.trigger)h+='<div class="field"><span class="field-label">🧬 触发条件</span><div class="field-value">'+escH(r.trigger)+'</div></div>';
+  if(r.feedback)h+='<div class="field"><span class="field-label">🔄 反馈机制</span><div class="field-value">'+escH(r.feedback)+'</div></div>';
+  if(r.adaptation)h+='<div class="field"><span class="field-label">🌱 适应规则</span><div class="field-value">'+escH(r.adaptation)+'</div></div>';
+  return h+'</div></td></tr>';
+}
+
+/* ================================================================
+   8. 免疫系统 · L0-L6七层·历史事件
+   ================================================================ */
+function rImmune(){
+  if(!DB)return renderDegrade();
+  var events=DB.events||[];
+  var layers=[{l:'L0',name:'自身耐受',color:'var(--red)',desc:'识别"自我" vs "非自我"。对自己代码/术语/品牌体系的完整性校验'},{l:'L1',name:'物理屏障',color:'var(--gold)',desc:'防火墙/加密/访问控制。密码门、sessionStorage、HTTPS等'},{l:'L2',name:'先天免疫',color:'var(--gold)',desc:'不依赖既往经历的第一道防线。MD5基线对比、event.target检测'},{l:'L3',name:'炎症隔离',color:'var(--gold)',desc:'发现问题→隔离→修复。术语隔离、分支回滚、断开损坏链接'},{l:'L4',name:'适应性免疫',color:'var(--gold)',desc:'学习历史事件→生成免疫记忆。免疫记忆库、crypto.subtle检测'},{l:'L5',name:'自愈',color:'var(--gold)',desc:'自动修复已识别的损伤。术语自动替换、自动备份恢复'},{l:'L6',name:'反脆弱',color:'var(--green)',desc:'从损伤中变得更强大。每次修复更新免疫规则、新增检测维度'}];
+  var h='<div class="panel-header"><div><h2>🛡️ 免疫系统</h2><div class="meta">L0-L6 七层 · '+events.length+' 个历史事件</div></div></div>';
+  for(var i=0;i<layers.length;i++){
+    var ly=layers[i];
+    h+='<div class="immune-layer '+(i===0?'l0':'')+'"><h4 style="color:'+ly.color+'">'+ly.l+': '+ly.name+'</h4><p>'+ly.desc+'</p></div>';
+  }
+  if(events.length>0){
+    h+='<div style="margin-top:24px"><h3 style="font-size:.95em;margin-bottom:10px">⚡ 历史事件 ('+events.length+'条)</h3>';
+    h+='<table class="data-table" id="tbl-immune"><thead><tr><th>ID</th><th>事件</th><th>严重度</th><th>日期</th><th>修复</th></tr></thead><tbody>';
+    for(var ei=0;ei<events.length;ei++){
+      var e=events[ei],sev=e.severity==='critical'?'tag-red':'tag-gold';
+      h+='<tr onclick="toggleDetail('imm-det-'+ei+'')" style="cursor:pointer"><td>'+escH(e.id)+'</td><td><b>'+escH(e.name)+'</b></td><td><span class="tag '+sev+'">'+escH(e.severity||'—')+'</span></td><td>'+escH(e.date||'—')+'</td><td style="max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escH(e.fix||'—')+'</td></tr>';
+      h+='<tr class="detail-row" id="imm-det-'+ei+'"><td colspan="5"><div class="detail-card">';
+      if(e.description)h+='<div class="field"><span class="field-label">详情</span><div class="field-value">'+escH(e.description)+'</div></div>';
+      if(e.category)h+='<div class="field"><span class="field-label">分类</span><div class="field-value">'+escH(e.category)+'</div></div>';
+      h+='</div></td></tr>';
+    }
+    h+='</tbody></table></div>';
+  }
+  return h;
+}
+
+/* ================================================================
+   9. 考古数据 · 文物·场景·评分模型·发现
+   ================================================================ */
+function rArchaeo(){
+  if(!DB)return renderDegrade();
+  var ha=DB.historical_artifacts||[],sims=DB.simulation_scenarios||[],disc=DB.additional_discoveries||[],scoring=DB.scoring_models||[];
+  var h='<div class="panel-header"><div><h2>🏺 考古数据</h2><div class="meta">'+ha.length+' 历史文物 · '+sims.length+' 模拟场景 · '+scoring.length+' 评分模型 · '+disc.length+' 发现</div></div></div>';
+
+  h+='<div style="margin-bottom:24px"><h3 style="font-size:.95em;margin-bottom:10px">📜 历史文物 ('+ha.length+'件)</h3><table class="data-table" id="tbl-archaeo"><thead><tr><th>ID</th><th>名称</th><th>时代</th><th>意义</th></tr></thead><tbody>';
+  for(var i=0;i<ha.length;i++){
+    var a=ha[i];
+    h+='<tr onclick="toggleDetail('arch-det-'+i+'')" style="cursor:pointer"><td>'+escH(a.id)+'</td><td><b>'+escH(a.name)+'</b></td><td>'+escH(a.era||'—')+'</td><td style="max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escH(a.significance||'—')+'</td></tr>';
+    h+='<tr class="detail-row" id="arch-det-'+i+'"><td colspan="4"><div class="detail-card">';
+    if(a.significance)h+='<div class="field"><span class="field-label">意义</span><div class="field-value">'+escH(a.significance)+'</div></div>';
+    if(a.source)h+='<div class="field"><span class="field-label">来源</span><div class="field-value">'+escH(a.source)+'</div></div>';
+    h+='</div></td></tr>';
+  }
+  h+='</tbody></table></div>';
+
+  if(sims.length>0){
+    h+='<div style="margin-bottom:24px"><h3 style="font-size:.95em;margin-bottom:10px">🎭 模拟场景 ('+sims.length+'个)</h3><table class="data-table"><thead><tr><th>ID</th><th>名称</th><th>行业</th><th>决策数</th><th>结果</th></tr></thead><tbody>';
+    for(var si=0;si<sims.length;si++){var s=sims[si];h+='<tr><td>'+escH(s.id)+'</td><td><b>'+escH(s.name)+'</b></td><td>'+escH(s.industry||'—')+'</td><td>'+s.decisions_count+'</td><td>'+escH(s.outcomes||'—')+'</td></tr>'}
+    h+='</tbody></table></div>';
+  }
+
+  if(scoring.length>0){
+    h+='<div style="margin-bottom:24px"><h3 style="font-size:.95em;margin-bottom:10px">📊 评分模型 ('+scoring.length+'个)</h3><table class="data-table"><thead><tr><th>ID</th><th>名称</th><th>状态</th><th>维度</th></tr></thead><tbody>';
+    for(var mi=0;mi<scoring.length;mi++){var sm=scoring[mi];h+='<tr><td>'+escH(sm.id)+'</td><td><b>'+escH(sm.name)+'</b></td><td><span class="tag tag-gold">'+escH(sm.status||'—')+'</span></td><td>'+escH((sm.dimensions?Object.keys(sm.dimensions).join(', '):'—'))+'</td></tr>'}
+    h+='</tbody></table></div>';
+  }
+
+  if(disc.length>0){
+    h+='<div><h3 style="font-size:.95em;margin-bottom:10px">🔍 额外发现 ('+disc.length+'条)</h3>';
+    for(var di=0;di<disc.length;di++){var dd=disc[di];h+='<div style="margin-bottom:12px;padding:12px;background:var(--card);border:1px solid var(--border);border-radius:8px"><b>'+escH(dd.id)+'</b> '+escH(dd.name)+'<br><span style="font-size:.78em;color:var(--ink-light)">'+escH(dd.description||'')+'</span></div>'}
+    h+='</div>';
+  }
+  return h;
+}
+
+/* ================================================================
+   10. 知识图谱 · 连接类型·权重分布
+   ================================================================ */
+function rGraph(){
+  if(!DB)return renderDegrade();
+  var conns=DB.connections||[],m=DB.meta||{};
+  var verified=m.verified_connections||0,strong=m.strong_connections||0,medium=m.medium_connections||0,weak=m.weak_connections||0;
+  var h='<div class="panel-header"><div><h2>🕸️ 知识图谱</h2><div class="meta">'+m.total_connections+' 连接 · 密度 '+m.knowledge_graph_density+'% · '+verified+' 真实</div></div></div>';
+
+  h+='<div class="graph-stat">';
+  h+='<div class="stat-card"><div class="stat-num">'+verified+'</div><div class="stat-label">✅ 真实连接</div><div class="stat-bar"><div class="fill fill-green" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+strong+'</div><div class="stat-label">💪 强连接(≥0.7)</div><div class="stat-bar"><div class="fill fill-red" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+medium+'</div><div class="stat-label">🤝 中连接(0.5-0.7)</div><div class="stat-bar"><div class="fill fill-gold" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+weak+'</div><div class="stat-label">💬 弱连接(<0.5)</div><div class="stat-bar"><div class="fill fill-warn" style="width:100%"></div></div></div>';
+  h+='</div>';
+
+  var typeMap={};
+  for(var i=0;i<conns.length;i++){var rt=conns[i].relationship_type||'未分类';typeMap[rt]=(typeMap[rt]||0)+1}
+  var types=Object.keys(typeMap).sort(function(a,b){return typeMap[b]-typeMap[a]});
+  h+='<div style="margin-top:20px"><h3 style="font-size:.95em;margin-bottom:10px">🔗 连接类型 (Top 15)</h3><table class="data-table"><thead><tr><th>类型</th><th>数量</th><th>占比</th></tr></thead><tbody>';
+  var shown=Math.min(types.length,15);
+  for(var ti=0;ti<shown;ti++){var t=types[ti],tc=typeMap[t],pct=conns.length?(tc/conns.length*100).toFixed(1):0;h+='<tr><td>'+escH(t)+'</td><td><b>'+tc+'</b></td><td>'+pct+'%</td></tr>'}
+  h+='</tbody></table></div>';
+
+  if(m.auto_rule_connections){h+='<div style="margin-top:20px"><h3 style="font-size:.95em">📋 连接详情</h3><div class="stat-grid"><div class="stat-card"><div class="stat-num">'+m.total_entities+'</div><div class="stat-label">📦 总实体数</div></div><div class="stat-card"><div class="stat-num">'+conns.length+'</div><div class="stat-label">🕸️ 总连接数</div></div><div class="stat-card"><div class="stat-num">'+m.auto_rule_connections+'</div><div class="stat-label">🤖 自动规则连接</div></div><div class="stat-card"><div class="stat-num">'+m.knowledge_graph_density+'%</div><div class="stat-label">📊 图密度</div></div></div></div>'}
+  return h;
+}
+
+/* ================================================================
+   启动
+   ================================================================ */
+(function(){
+  try{if(sessionStorage.getItem('_admin_auth')==='1'){document.getElementById('gate').classList.add('hidden');document.getElementById('app').classList.add('show');initApp()}}catch(e){}
+})();
+</script><script>
+
+  h+='<div><h3 style="font-size:.85em;margin-bottom:8px">🔴 待改进 Bottom 10</h3><table class="data-table"><thead><tr><th>#</th><th>产品</th><th>质量</th><th>阶段</th></tr></thead><tbody>';
+  for(var bi=0;bi<Math.min(10,sorted.length);bi++){var bp=sorted[sorted.length-1-bi];h+='<tr><td>'+(bi+1)+'</td><td><b>'+escH(bp.name)+'</b></td><td>'+bp.quality_score+'</td><td>'+LC_LABELS[bp.lifecycle_stage||'L1_原型']+'</td></tr>'}
+  h+='</tbody></table></div></div>';
+
+  var lowQuality=prods.filter(function(p){return(p.quality_score||0)<70}).length;
+  var noVI=prods.filter(function(p){return(p.vi_compliance||0)<60}).length;
+  var noContent=prods.filter(function(p){return(p.content_accuracy||0)<60}).length;
+  var noUX=prods.filter(function(p){return(p.ux_rating||0)<40}).length;
+  h+='<div style="margin-top:20px"><h3 style="font-size:.92em;margin-bottom:10px">🔧 改进建议</h3><div class="stat-grid">';
+  h+='<div class="stat-card" style="border-left:4px solid '+LAYER_COLORS.chemical+'"><div class="stat-num">'+lowQuality+'</div><div class="stat-label">综合质量<70</div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+noVI+'</div><div class="stat-label">VI合规<60</div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+noContent+'</div><div class="stat-label">内容准确<60</div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+noUX+'</div><div class="stat-label">UX评级<40</div></div>';
+  h+='</div></div>';
+
+  return h;
+}
 <script>
 /* ================================================================
-   核心状态
+   管理后台 v2.0 · 毛细血管级·四层数据穿透
+   物理层·化学层·生物层·心理层 — 全部动态加载
    ================================================================ */
 var DB=null,loadError=false,currentWindow='overview',sortState={key:null,asc:true};
+var LC_LABELS={L0_概念:'💡概念',L1_原型:'🔬原型',L2_内测:'🧪内测',L3_打磨:'✨打磨',L4_精品:'💎精品',L5_维护:'🔄维护',L6_退役:'📦退役'};
+var MAT_LABELS={M0_种子:'🌱种子',M1_萌芽:'🌿萌芽',M2_成型:'🌳成型',M3_成熟:'🍎成熟',M4_标杆:'🏆标杆'};
+var MAT_PCT={M0_种子:10,M1_萌芽:30,M2_成型:60,M3_成熟:85,M4_标杆:100};
+var Q_LABELS={优秀:'🟢',良好:'🟡',待改进:'🟠',不合格:'🔴'};
+var LAYER_COLORS={physical:'#B8860B',chemical:'#C23B22',biological:'#3D7A4F',psychological:'#4A6FA5'};
+
 var WINDOWS=[
-  {id:'overview', label:'🏠 实体总览',icon:'🏠',badgeKey:'meta'},
-  {id:'products', label:'📦 产品目录',icon:'📦',badgeKey:'products'},
-  {id:'customers',label:'👤 客户档案',icon:'👤',badgeKey:'customers'},
-  {id:'tasks',    label:'📋 任务看板',icon:'📋',badgeKey:'tasks'},
-  {id:'decisions',label:'⚖️ 决策记录',icon:'⚖️',badgeKey:'decisions'},
-  {id:'rules',    label:'🧬 规则引擎',icon:'🧬',badgeKey:'living_rules'},
-  {id:'immune',   label:'🛡️ 免疫系统',icon:'🛡️',badgeKey:'events'},
-  {id:'archaeo',  label:'🏺 考古数据',icon:'🏺',badgeKey:'historical_artifacts'},
-  {id:'graph',    label:'🕸️ 知识图谱',icon:'🕸️',badgeKey:'graph'}
+  {id:'overview', label:'🏠 四层仪表盘',icon:'🏠'},
+  {id:'products', label:'📦 产品全生命周期',icon:'📦'},
+  {id:'quality',  label:'✅ 质量管理',icon:'✅'},
+  {id:'customers',label:'👤 客户档案',icon:'👤'},
+  {id:'tasks',    label:'📋 任务看板',icon:'📋'},
+  {id:'decisions',label:'⚖️ 决策记录',icon:'⚖️'},
+  {id:'rules',    label:'🧬 规则引擎',icon:'🧬'},
+  {id:'immune',   label:'🛡️ 免疫系统',icon:'🛡️'},
+  {id:'archaeo',  label:'🏺 考古数据',icon:'🏺'},
+  {id:'graph',    label:'🕸️ 知识图谱',icon:'🕸️'}
 ];
 
 /* ===== 密码门 ===== */
@@ -135,28 +390,13 @@ function initApp(){
   fetch('entities_index.json').then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(function(j){
     DB=j;loadError=false;renderSidebar();switchWindow('overview');
   }).catch(function(err){
-    console.error('加载失败:',err);loadError=true;DB=null;renderSidebar();switchWindow('overview');
+    console.error(err);loadError=true;DB=null;renderSidebar();switchWindow('overview');
   });
 }
 
 /* ===== 侧栏 ===== */
 function renderSidebar(){
-  var h='';for(var i=0;i<WINDOWS.length;i++){var w=WINDOWS[i];var b=getBadge(w);var a=w.id===currentWindow?' active':'';h+='<li class="'+a+'" onclick="switchWindow(\''+w.id+'\', this)"><span>'+w.icon+'</span>'+w.label+(b!==null?'<span class="badge">'+b+'</span>':'')+'</li>'}document.getElementById('sidebar-nav').innerHTML=h;
-}
-function getBadge(w){
-  if(!DB)return w.id==='overview'?'...':null;
-  switch(w.badgeKey){
-    case'meta':return DB.meta?DB.meta.total_entities:null;
-    case'products':return DB.products?DB.products.length:null;
-    case'customers':return DB.customers?DB.customers.length:null;
-    case'tasks':return DB.tasks?DB.tasks.length:null;
-    case'decisions':return DB.decisions?DB.decisions.length:null;
-    case'living_rules':return DB.living_rules?DB.living_rules.length:null;
-    case'events':return DB.events?DB.events.length:null;
-    case'historical_artifacts':return DB.historical_artifacts?DB.historical_artifacts.length:null;
-    case'graph':return DB.meta?DB.meta.knowledge_graph_density+'%':null;
-    default:return null;
-  }
+  var h='';for(var i=0;i<WINDOWS.length;i++){var w=WINDOWS[i];var a=w.id===currentWindow?' active':'';h+='<li class="'+a+'" onclick="switchWindow(\''+w.id+'\', this)"><span>'+w.icon+'</span>'+w.label+'</li>'}document.getElementById('sidebar-nav').innerHTML=h;
 }
 
 /* ===== 窗口切换 ===== */
@@ -174,18 +414,16 @@ function switchWindow(id,li){
 }
 function renderPane(id){
   var d=document.getElementById('win-'+id);if(!d)return;
-  try{switch(id){case'overview':d.innerHTML=rOverview();break;case'products':d.innerHTML=rProducts();break;case'customers':d.innerHTML=rCustomers();break;case'tasks':d.innerHTML=rTasks();break;case'decisions':d.innerHTML=rDecisions();break;case'rules':d.innerHTML=rRules();break;case'immune':d.innerHTML=rImmune();break;case'archaeo':d.innerHTML=rArchaeo();break;case'graph':d.innerHTML=rGraph();break}}catch(e){d.innerHTML='<div class="loading" style="color:var(--red)">渲染错误: '+escH(String(e))+'</div>'}
+  try{switch(id){case'overview':d.innerHTML=rOverview();break;case'products':d.innerHTML=rProducts();break;case'quality':d.innerHTML=rQuality();break;case'customers':d.innerHTML=rCustomers();break;case'tasks':d.innerHTML=rTasks();break;case'decisions':d.innerHTML=rDecisions();break;case'rules':d.innerHTML=rRules();break;case'immune':d.innerHTML=rImmune();break;case'archaeo':d.innerHTML=rArchaeo();break;case'graph':d.innerHTML=rGraph();break}}catch(e){d.innerHTML='<div class="loading" style="color:var(--red)">渲染错误: '+escH(String(e))+'</div>'}
 }
 
-/* ===== 降级 ===== */
-function renderDegrade(){return'<div class="loading"><div class="spinner" style="border-top-color:var(--red)"></div><p style="margin-top:16px;color:var(--red)">⚠️ 数据加载失败</p><p style="font-size:.8em;color:var(--ink-light)">请检查 entities_index.json 路径</p></div>'}
-
-/* ===== 辅助函数 ===== */
+/* ===== 辅助 ===== */
 function escH(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function escA(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function renderDegrade(){return'<div class="loading"><div class="spinner" style="border-top-color:var(--red)"></div><p style="margin-top:16px;color:var(--red)">⚠️ 数据加载失败</p><p style="font-size:.8em;color:var(--ink-light)">请检查 entities_index.json 路径</p></div>'}
 function toolbar(id,ph,filts){
   var h='<div class="panel-toolbar"><input type="text" placeholder="'+ph+'" id="srch-'+id+'" oninput="filterPane(\''+id+'\',this.value)">';
-  if(filts){h+='<select onchange="filterPane(\''+id+'\',document.getElementById(\'srch-'+id+'\').value,this.value)"><option value="">全部</option>';for(var i=0;i<filts.length;i++)h+='<option value="'+escA(filts[i])+'">'+escH(filts[i])+'</option>';h+='</select>'}
+  if(filts){h+='<select id="srch-'+id+'-filt" onchange="filterPane(\''+id+'\',document.getElementById(\'srch-'+id+'\').value,this.value)"><option value="">全部</option>';for(var i=0;i<filts.length;i++)h+='<option value="'+escA(filts[i])+'">'+escH(filts[i])+'</option>';h+='</select>'}
   h+='</div>';return h;
 }
 function toggleDetail(rowId){var r=document.getElementById(rowId);if(r)r.classList.toggle('show')}
@@ -193,17 +431,10 @@ function filterPane(id,text,cat){
   text=(text||'').toLowerCase();var rows=document.querySelectorAll('#tbody-'+id+' tr');
   for(var i=0;i<rows.length;i++){var row=rows[i];if(row.className.indexOf('empty-row')>=0||row.className.indexOf('detail-row')>=0)continue;var m=true;
   if(text&&(row.textContent||'').toLowerCase().indexOf(text)<0)m=false;
-  if(cat&&m){
-    // 支持全量文本匹配（包括生命周期阶段标签 + 族名）
-    var rowText=(row.textContent||'');var tags=row.querySelectorAll('.tag');var cm=false;
-    for(var j=0;j<tags.length;j++){if((tags[j].textContent||'').indexOf(cat)>=0){cm=true;break}}
-    if(!cm&&rowText.indexOf(cat)<0)cm=false;
-    if(!cm)m=false;
-  }
+  if(cat&&m){var rowText=(row.textContent||'');var tags=row.querySelectorAll('.tag');var cm=false;for(var j=0;j<tags.length;j++){if((tags[j].textContent||'').indexOf(cat)>=0){cm=true;break}}if(!cm&&rowText.indexOf(cat)<0)cm=false;if(!cm)m=false}
   row.style.display=m?'':'none';var nx=row.nextElementSibling;if(nx&&nx.className.indexOf('detail-row')>=0)nx.style.display='none'}
 }
 
-/* ===== 排序/填表 ===== */
 var PANE_DATA={};
 function fillPaneTable(id,rows,rowBld,emptyMsg){
   var tbody=document.getElementById('tbody-'+id);if(!tbody)return;
@@ -214,140 +445,230 @@ function sortPane(id,key,th){
   var rows=PANE_DATA[id];if(!rows)return;var asc=sortState.key===key?!sortState.asc:true;sortState={key:key,asc:asc};
   rows.sort(function(a,b){var va=a[key]||'',vb=b[key]||'';if(typeof va==='number')return asc?va-vb:vb-va;va=String(va);vb=String(vb);return asc?va.localeCompare(vb,'zh'):vb.localeCompare(va,'zh')});
   var arrows=document.querySelectorAll('#tbl-'+id+' .sort-arrow');for(var i=0;i<arrows.length;i++)arrows[i].textContent='';
-  th.querySelector('.sort-arrow').textContent=asc?' ▲':' ▼';
+  if(th){var arrow=th.querySelector('.sort-arrow');if(arrow)arrow.textContent=asc?' ▲':' ▼'}
   fillPaneTable(id,rows,getRowBuilder(id),'暂无数据');
 }
 function getRowBuilder(id){return rowBuilders[id]||function(){return''}}
 var rowBuilders={};
+
 /* ================================================================
-   1. 实体总览 · 3994实体按维度分布的可视化
+   1. 四层仪表盘 · 毛细血管级总览
    ================================================================ */
 function rOverview(){
   if(!DB)return renderDegrade();
-  var m=DB.meta,bd=m.breakdown,h='<div class="panel-header"><div><h2>🏠 实体总览</h2><div class="meta">'+m.total_entities+' 实体 · '+Object.keys(bd).length+' 维度 · '+m.product_total+' 产品 · 密度 '+m.knowledge_graph_density+'%</div></div></div>';
-  h+='<div class="stat-grid">';
-  var dims=[{k:'products',l:'产品',i:'📦'},{k:'tasks',l:'任务',i:'📋'},{k:'terms',l:'术语',i:'📖'},{k:'decisions',l:'决策',i:'⚖️'},{k:'customers',l:'客户',i:'👤'},{k:'living_rules',l:'规则',i:'🧬'},{k:'instructions_set',l:'指令',i:'📜'},{k:'workflows',l:'流程',i:'🔁'}];
-  for(var i=0;i<dims.length;i++){var d=dims[i],v=bd[d.k]||0,pct=Math.min(v/m.total_entities*500,100);h+='<div class="stat-card"><div class="stat-num">'+v+'</div><div class="stat-label">'+d.i+' '+d.l+'</div><div class="stat-bar"><div class="fill fill-gold" style="width:'+pct+'%"></div></div></div>'}
+  var m=DB.meta||{},bd=m.breakdown||{},flc=m.four_layer_coverage||{};
+  var h='<div class="panel-header"><div><h2>🏠 毛细血管级·四层仪表盘</h2><div class="meta">'+m.total_entities+' 实体 · '+m.product_total+' 产品 · 密度 '+m.knowledge_graph_density+'% · v'+m.version+'</div></div></div>';
+
+  // 四层覆盖卡片
+  h+='<h3 style="font-size:.92em;margin-bottom:10px">🏗️ 四层覆盖度</h3><div class="graph-stat">';
+  var layers=[{k:'physical',l:'🔩 物理层',d:'实体·元数据·连接'},{k:'chemical',l:'⚗️ 化学层',d:'生命周期·质量·标准'},{k:'biological',l:'🧬 生物层',d:'规则·免疫·反馈'},{k:'psychological',l:'🧠 心理层',d:'画像·场景·决策价值'}];
+  for(var li=0;li<layers.length;li++){
+    var ly=layers[li],lc=flc[ly.k]||{},score=lc.score||0,fill=score>=80?'fill-green':(score>=50?'fill-gold':'fill-red'),color=LAYER_COLORS[ly.k];
+    h+='<div class="stat-card" style="border-left:4px solid '+color+'"><div class="stat-num" style="color:'+color+'">'+score+'%</div><div class="stat-label">'+ly.l+'</div><div style="font-size:.7em;color:var(--ink-lighter);margin-top:2px">'+ly.d+'</div><div class="stat-bar"><div class="fill '+fill+'" style="width:'+score+'%"></div></div></div>';
+  }
   h+='</div>';
-  var dims2=[{k:'documents',l:'文档',i:'📄'},{k:'events',l:'事件',i:'⚡'},{k:'milestones',l:'里程碑',i:'🏁'},{k:'crons',l:'Cron',i:'⏰'},{k:'scripts',l:'脚本',i:'🔧'},{k:'scoring_models',l:'评分模型',i:'📊'},{k:'simulation_scenarios',l:'模拟场景',i:'🎭'},{k:'historical_artifacts',l:'考古',i:'🏺'},{k:'governance_frameworks',l:'治理框架',i:'🏛️'},{k:'vi_standards',l:'VI标准',i:'🎨'},{k:'quality_metrics',l:'质量指标',i:'✅'},{k:'additional_discoveries',l:'发现',i:'🔍'}];
-  h+='<div style="margin-top:16px"><h3 style="font-size:.95em;margin-bottom:10px">📊 全维度分布</h3><table class="data-table"><thead><tr><th>维度</th><th>数量</th><th>占比</th></tr></thead><tbody>';
-  for(var j=0;j<dims2.length;j++){var d2=dims2[j],v2=bd[d2.k]||0,pct2=m.total_entities?(v2/m.total_entities*100).toFixed(1):0;h+='<tr><td>'+d2.i+' '+d2.l+'</td><td><b>'+v2+'</b></td><td>'+pct2+'%</td></tr>'}h+='</tbody></table></div>';
-  // 产品生命周期概览
+
+  // 产品生命周期分布
   if(m.lifecycle_stages){
-    var ls=m.lifecycle_stages,lsKeys=Object.keys(ls).sort(),lsTotal=0;for(var lsk=0;lsk<lsKeys.length;lsk++)lsTotal+=ls[lsKeys[lsk]];
-    h+='<div style="margin-top:20px"><h3 style="font-size:.95em;margin-bottom:10px">📦 产品全生命周期 · '+lsTotal+'件</h3><div class="stat-grid">';
-    var lsLabels={L0_概念:'💡概念',L1_原型:'🔬原型',L2_内测:'🧪内测',L3_打磨:'✨打磨',L4_精品:'💎精品',L5_维护:'🔄维护',L6_退役:'📦退役'};
-    for(var lsi=0;lsi<lsKeys.length;lsi++){var lk=lsKeys[lsi],lv=ls[lk]||0,pct=lsTotal?Math.min(lv/lsTotal*400,100):0;h+='<div class="stat-card"><div class="stat-num">'+lv+'</div><div class="stat-label">'+lsLabels[lk]+'</div><div class="stat-bar"><div class="fill fill-gold" style="width:'+pct+'%"></div></div></div>'}
-    h+='</div></div>';
+    var ls=m.lifecycle_stages,lsOrder=['L0_概念','L1_原型','L2_内测','L3_打磨','L4_精品','L5_维护','L6_退役'];
+    h+='<h3 style="font-size:.92em;margin:16px 0 8px">📦 产品全生命周期 · '+m.product_total+'件</h3><div class="stat-grid">';
+    for(var lsi=0;lsi<lsOrder.length;lsi++){
+      var lk=lsOrder[lsi],lv=ls[lk]||0;
+      if(lv>0)h+='<div class="stat-card" style="cursor:pointer" onclick="switchWindow(\'products\')"><div class="stat-num">'+lv+'</div><div class="stat-label">'+LC_LABELS[lk]+'</div><div class="stat-bar"><div class="fill fill-gold" style="width:'+Math.min(lv/312*500,100)+'%"></div></div></div>';
+    }
+    h+='</div>';
   }
-  // 开发批次
-  if(m.dev_batches){
-    var db=m.dev_batches,dbKeys=Object.keys(db);
-    h+='<div style="margin-top:16px"><h3 style="font-size:.95em;margin-bottom:10px">📅 三波次开发计划</h3><div class="chip-wrap">';
-    for(var dbi=0;dbi<dbKeys.length;dbi++)h+='<div class="chip"><b>'+escH(dbKeys[dbi])+'</b> '+db[dbKeys[dbi]]+'件</div>';
-    h+='</div></div>';
+
+  // 质量四维概览
+  if(m.quality_framework){
+    var prods=DB.products||[],qsTotal=prods.reduce(function(s,p){return s+(p.quality_score||0)},0),qsAvg=prods.length?Math.round(qsTotal/prods.length):0;
+    var dims=['quality_score','vi_compliance','content_accuracy','ux_rating'];
+    var dLabels={quality_score:'🏅综合质量',vi_compliance:'🎨VI合规',content_accuracy:'📝内容准确',ux_rating:'🖱️UX评级'};
+    h+='<h3 style="font-size:.92em;margin:16px 0 8px">✅ 质量总览 · 平均 '+qsAvg+'分</h3><div class="stat-grid">';
+    for(var di=0;di<dims.length;di++){
+      var dk=dims[di],dt=prods.reduce(function(s,p){return s+(p[dk]||0)},0),da=prods.length?Math.round(dt/prods.length):0;
+      var df=da>=85?'fill-green':(da>=70?'fill-gold':(da>=50?'fill-warn':'fill-red'));
+      h+='<div class="stat-card" style="cursor:pointer" onclick="switchWindow(\'quality\')"><div class="stat-num">'+da+'</div><div class="stat-label">'+dLabels[dk]+'</div><div class="stat-bar"><div class="fill '+df+'" style="width:'+da+'%"></div></div></div>';
+    }
+    h+='</div>';
   }
-  if(m.product_families){h+='<div style="margin-top:16px"><h3 style="font-size:.95em;margin-bottom:10px">📦 产品族分布</h3><div class="chip-wrap">';var fk=Object.keys(m.product_families);for(var kc=0;kc<fk.length;kc++)h+='<div class="chip"><b>'+escH(fk[kc])+'</b> '+m.product_families[fk[kc]]+'个</div>';h+='</div></div>'}
-  if(m.living_rules_status){var rs=m.living_rules_status;h+='<div style="margin-top:20px"><h3 style="font-size:.95em">🧬 规则引擎健康度 · 规则数: '+(DB.living_rules||[]).length+'</h3><div class="chip-wrap"><div class="chip"><span class="tag tag-green">活跃 '+rs.active+'</span></div><div class="chip"><span class="tag tag-gold">休眠 '+rs.dormant+'</span></div>';if(rs.broken)h+='<div class="chip"><span class="tag tag-red">损坏 '+rs.broken+'</span></div>';h+='</div></div>'}
-  if(m.biological_health){var bh=m.biological_health;h+='<div style="margin-top:8px;font-size:.78em;color:var(--ink-light)">🔥 全活: '+bh.fully_alive+'/'+bh.rules_with_triggers+' · 触发:'+bh.rules_with_triggers+' · 反馈:'+bh.rules_with_feedback+' · 适应:'+bh.rules_with_adaptation+' · Cron连接:'+bh.cron_connected+'</div>'}
-  if(m.corrections){h+='<div style="margin-top:20px"><h3 style="font-size:.95em">📝 数据修正记录</h3>';for(var c=0;c<m.corrections.length;c++)h+='<div style="font-size:.78em;color:var(--ink-light);padding:4px 0">'+escH(m.corrections[c])+'</div>';h+='</div>'}
+
+  // 规则引擎 + 开发批次
+  if(m.living_rules_status){var rs=m.living_rules_status;h+='<div style="margin-top:16px"><h3 style="font-size:.92em">🧬 规则引擎 · '+(DB.living_rules||[]).length+'条</h3><div class="chip-wrap"><div class="chip"><span class="tag tag-green">活跃 '+rs.active+'</span></div><div class="chip"><span class="tag tag-gold">休眠 '+rs.dormant+'</span></div>';if(rs.broken)h+='<div class="chip"><span class="tag tag-red">损坏 '+rs.broken+'</span></div>';h+='</div>';if(m.biological_health){var bh=m.biological_health;h+='<div style="font-size:.75em;color:var(--ink-light);margin-top:4px">全活: '+bh.fully_alive+'/'+bh.rules_with_triggers+' · 触发:'+bh.rules_with_triggers+' · 反馈:'+bh.rules_with_feedback+' · 适应:'+bh.rules_with_adaptation+' · Cron:'+bh.cron_connected+'</div>'}h+='</div>'}
+  if(m.dev_batches){var db=m.dev_batches,dbKeys=Object.keys(db);h+='<div style="margin-top:12px"><h3 style="font-size:.92em">📅 三波次开发</h3><div class="chip-wrap">';for(var dki=0;dki<dbKeys.length;dki++)h+='<div class="chip"><b>'+escH(dbKeys[dki])+'</b> '+db[dbKeys[dki]]+'件</div>';h+='</div></div>'}
+
+  // 连接统计
+  if(m.total_connections){h+='<div style="margin-top:16px"><h3 style="font-size:.92em">🕸️ 知识图谱</h3><div class="chip-wrap"><div class="chip"><b>总连接</b> '+m.total_connections+'</div><div class="chip"><b>验证</b> '+m.verified_connections+'</div><div class="chip"><b>强</b> '+m.strong_connections+'</div><div class="chip"><b>中</b> '+m.medium_connections+'</div><div class="chip"><b>弱</b> '+m.weak_connections+'</div><div class="chip"><b>密度</b> '+m.knowledge_graph_density+'%</div></div></div>'}
+
   return h;
 }
+
 /* ================================================================
-   2. 产品目录 · 312产品·全生命周期·三波次开发
+   2. 产品全生命周期 · 40字段·四层穿透
    ================================================================ */
-var LC_LABELS={L0_概念:'💡概念',L1_原型:'🔬原型',L2_内测:'🧪内测',L3_打磨:'✨打磨',L4_精品:'💎精品',L5_维护:'🔄维护',L6_退役:'📦退役'};
-var MAT_LABELS={M0_种子:'🌱种子',M1_萌芽:'🌿萌芽',M2_成型:'🌳成型',M3_成熟:'🍎成熟',M4_标杆:'🏆标杆'};
-var MAT_PCT={M0_种子:10,M1_萌芽:30,M2_成型:60,M3_成熟:85,M4_标杆:100};
 function rProducts(){
   if(!DB)return renderDegrade();
-  var prods=DB.products||[],m=DB.meta||{};
-  var ls=m.lifecycle_stages||{},ml=m.maturity_levels||{},batches=m.dev_batches||{};
-  // 生命周期阶段柱状图
+  var prods=DB.products||[],m=DB.meta||{},ls=m.lifecycle_stages||{};
   var stageOrder=['L0_概念','L1_原型','L2_内测','L3_打磨','L4_精品','L5_维护','L6_退役'];
-  var h='<div class="panel-header"><div><h2>📦 产品全生命周期</h2><div class="meta">'+prods.length+' 产品 · 7阶段 · 5级成熟度 · 3波次</div></div></div>';
+
+  var h='<div class="panel-header"><div><h2>📦 产品全生命周期管理</h2><div class="meta">'+prods.length+' 产品 · 7阶段 · 40字段/件 · 四层全覆盖</div></div></div>';
+
+  // 阶段分布柱状图
   h+='<div class="stat-grid">';
   for(var si=0;si<stageOrder.length;si++){
-    var sk=stageOrder[si],sv=ls[sk]||0,fill=sv>0?' fill-gold':'';
+    var sk=stageOrder[si],sv=ls[sk]||0;
     if(sv>0){
-      h+='<div class="stat-card" style="cursor:pointer" onclick="filterPane(\'products\',document.getElementById(\'srch-products\').value,\''+escA(sk)+'\')">';
-      h+='<div class="stat-num">'+sv+'</div><div class="stat-label">'+LC_LABELS[sk]+'</div>';
-      h+='<div class="stat-bar"><div class="fill'+fill+'" style="width:'+Math.min(sv/prods.length*500,100)+'%"></div></div></div>';
+      h+='<div class="stat-card" style="cursor:pointer" onclick="filterPane(\'products\',\'\',\''+escA(LC_LABELS[sk])+'\')"><div class="stat-num">'+sv+'</div><div class="stat-label">'+LC_LABELS[sk]+'</div><div class="stat-bar"><div class="fill fill-gold" style="width:'+Math.min(sv/312*400,100)+'%"></div></div></div>';
     }
   }
   h+='</div>';
-  // 开发时间表
-  h+='<div style="margin:20px 0;padding:16px;background:var(--card);border:1px solid var(--border);border-radius:10px">';
-  h+='<h3 style="font-size:.92em;margin-bottom:12px">📅 三波次开发时间表</h3>';
-  var waves=[{b:'第一波·低垂果实',c:'#C23B22',s:'2026-06-01',e:'2026-06-14',d:14,n:batches['第一波·低垂果实']||0},{b:'第二波·内容精品化',c:'#B8860B',s:'2026-07-01',e:'2026-08-14',d:45,n:batches['第二波·内容精品化']||0},{b:'第三波·精品线+OPS',c:'#3D7A4F',s:'2026-08-01',e:'2026-10-30',d:90,n:batches['第三波·精品线+OPS']||0}];
-  h+='<div style="display:flex;gap:10px;flex-wrap:wrap">';
-  for(var wi=0;wi<waves.length;wi++){
-    var w=waves[wi];
-    h+='<div style="flex:1;min-width:200px;padding:12px;border-left:4px solid '+w.c+';background:var(--warm);border-radius:6px">';
-    h+='<div style="font-weight:700;font-size:.85em">'+(wi+1)+'. '+w.b+'</div>';
-    h+='<div style="font-size:.75em;color:var(--ink-light);margin-top:4px">📅 '+w.s+' → '+w.e+' ('+w.d+'天)</div>';
-    h+='<div style="font-size:2em;font-weight:700;color:'+w.c+';margin-top:6px">'+w.n+'</div>';
-    h+='<div style="font-size:.7em;color:var(--ink-lighter)">件产品</div></div>';
-  }
+
+  // 质量快速筛选
+  h+='<div style="margin:12px 0"><h3 style="font-size:.85em;margin-bottom:6px">🎯 质量维度筛选</h3><div class="chip-wrap">';
+  h+='<div class="chip" style="cursor:pointer" onclick="filterByQuality(85,100)">🟢 优秀 (85-100)</div>';
+  h+='<div class="chip" style="cursor:pointer" onclick="filterByQuality(70,84)">🟡 良好 (70-84)</div>';
+  h+='<div class="chip" style="cursor:pointer" onclick="filterByQuality(50,69)">🟠 待改进 (50-69)</div>';
+  h+='<div class="chip" style="cursor:pointer" onclick="filterByQuality(0,49)">🔴 不合格 (<50)</div>';
+  h+='<div class="chip" style="cursor:pointer;background:var(--warm)" onclick="resetProductFilter()">🔄 显示全部</div>';
   h+='</div></div>';
-  // 成熟度分布
-  h+='<div style="margin-bottom:12px"><h3 style="font-size:.85em;margin-bottom:6px">🎯 成熟度</h3><div class="chip-wrap">';
-  var morder=['M0_种子','M1_萌芽','M2_成型','M3_成熟','M4_标杆'];
-  for(var mi=0;mi<morder.length;mi++){var mk=morder[mi],mv=ml[mk]||0;h+=mv>0?'<div class="chip"><b>'+MAT_LABELS[mk]+'</b> '+mv+'件</div>':''}
-  h+='</div></div>';
+
   // 筛选栏
   var fks=Object.keys(m.product_families||{});
   var stageFilt=stageOrder.map(function(k){return LC_LABELS[k]});
-  h+=toolbar('products','搜索产品名/描述...',fks.concat(stageFilt));
+  var batches=Object.keys(m.dev_batches||{});
+  h+=toolbar('products','搜索产品名/描述...',fks.concat(stageFilt).concat(batches));
+
   // 表格
-  h+='<table class="data-table" id="tbl-products"><thead><tr><th onclick="sortPane(\'products\',\'id\',this)">ID<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'name\',this)">产品名<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'family\',this)">族<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'lifecycle_stage\',this)">生命周期<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'maturity\',this)">成熟度<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'dev_batch\',this)">开发波次<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'dev_deadline\',this)">截止<span class="sort-arrow"></span></th></tr></thead><tbody id="tbody-products"></tbody></table>';
-  rowBuilders.products=prodRow;PANE_DATA.products=prods.slice();setTimeout(function(){fillPaneTable('products',prods,prodRow,'无产品数据')},0);
+  h+='<div style="overflow-x:auto"><table class="data-table" id="tbl-products"><thead><tr>';
+  h+='<th onclick="sortPane(\'products\',\'id\',this)">ID<span class="sort-arrow"></span></th>';
+  h+='<th onclick="sortPane(\'products\',\'name\',this)">产品名<span class="sort-arrow"></span></th>';
+  h+='<th onclick="sortPane(\'products\',\'family\',this)">族<span class="sort-arrow"></span></th>';
+  h+='<th onclick="sortPane(\'products\',\'lifecycle_stage\',this)">生命周期<span class="sort-arrow"></span></th>';
+  h+='<th onclick="sortPane(\'products\',\'quality_score\',this)">质量<span class="sort-arrow"></span></th>';
+  h+='<th onclick="sortPane(\'products\',\'decision_value\',this)">决策价值<span class="sort-arrow"></span></th>';
+  h+='<th onclick="sortPane(\'products\',\'dev_deadline\',this)">截止<span class="sort-arrow"></span></th>';
+  h+='</tr></thead><tbody id="tbody-products"></tbody></table></div>';
+
+  h+='<div id="prod-quality-filter" style="display:none" data-min="0" data-max="100"></div>';
+  rowBuilders.products=prodRowV2;PANE_DATA.products=prods.slice();
+  setTimeout(function(){fillPaneTable('products',prods,prodRowV2,'无产品数据')},0);
   return h;
 }
-function prodRow(p,idx){
-  var ls=p.lifecycle_stage||'L1_原型',ml=p.maturity||'M1_萌芽';
-  var lcTag=ls==='L4_精品'?'tag-green':(ls==='L2_内测'?'tag-gold':(ls==='L1_原型'?'tag-gray':'tag-gray'));
-  var matPct=MAT_PCT[ml]||30,matFill=matPct>=85?'fill-green':(matPct>=60?'fill-gold':'fill-gray');
-  var batch=p.dev_batch||'—',deadline=p.dev_deadline||'—';
-  var h='<tr onclick="toggleDetail(\'prod-det-'+idx+'\')" style="cursor:pointer"><td>'+escH(p.id)+'</td><td><b>'+escH(p.name)+'</b></td><td><span class="tag tag-gray">'+escH(p.family||'—')+'</span></td><td><span class="tag '+lcTag+'">'+LC_LABELS[ls]+'</span></td><td><div style="display:flex;align-items:center;gap:6px"><span style="font-size:.75em">'+MAT_LABELS[ml]+'</span><div class="stat-bar" style="width:60px;margin:0"><div class="fill '+matFill+'" style="width:'+matPct+'%"></div></div></div></td><td><span class="tag tag-gold">'+escH(batch)+'</span></td><td style="font-size:.78em">'+escH(deadline)+'</td></tr>';
+
+function prodRowV2(p,idx){
+  var ls=p.lifecycle_stage||'L1_原型',qs=p.quality_score||0,dv=p.decision_value||0;
+  var lcTag=ls==='L4_精品'?'tag-green':(ls==='L2_内测'?'tag-gold':'tag-gray');
+  var qFill=qs>=85?'fill-green':(qs>=70?'fill-gold':(qs>=50?'fill-warn':'fill-red'));
+  var dvFill=dv>=80?'fill-green':(dv>=60?'fill-gold':'fill-gray');
+  var h='<tr onclick="toggleDetail(\'prod-det-'+idx+'\')" style="cursor:pointer"><td style="font-size:.75em">'+escH(p.id)+'</td><td><b>'+escH(p.name)+'</b></td><td><span class="tag tag-gray">'+escH(p.family||'—')+'</span></td><td><span class="tag '+lcTag+'">'+LC_LABELS[ls]+'</span></td><td><div style="display:flex;align-items:center;gap:4px"><span style="font-size:.75em;font-weight:700">'+qs+'</span><div class="stat-bar" style="width:50px;margin:0"><div class="fill '+qFill+'" style="width:'+qs+'%"></div></div></div></td><td><div style="display:flex;align-items:center;gap:4px"><span style="font-size:.75em;font-weight:700">'+dv+'</span><div class="stat-bar" style="width:50px;margin:0"><div class="fill '+dvFill+'" style="width:'+dv+'%"></div></div></div></td><td style="font-size:.75em">'+escH(p.dev_deadline||'—')+'</td></tr>';
+  // 四层详情展开
   h+='<tr class="detail-row" id="prod-det-'+idx+'"><td colspan="7"><div class="detail-card">';
-  if(p.description)h+='<div class="field"><span class="field-label">描述</span><div class="field-value">'+escH(p.description)+'</div></div>';
-  h+='<div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:8px">';
-  h+='<div class="field" style="min-width:140px"><span class="field-label">分类</span><div class="field-value">'+escH(p.category||'—')+'</div></div>';
-  h+='<div class="field" style="min-width:140px"><span class="field-label">开发开始</span><div class="field-value">'+escH(p.dev_start||'—')+'</div></div>';
-  h+='<div class="field" style="min-width:140px"><span class="field-label">开发周期</span><div class="field-value">'+escH(String(p.dev_days||'—'))+' 天</div></div>';
-  h+='<div class="field" style="min-width:140px"><span class="field-label">来源</span><div class="field-value">'+escH(p.source||'—')+'</div></div>';
+  if(p.description)h+='<div class="field"><span class="field-label">📝 描述</span><div class="field-value">'+escH(p.description)+'</div></div>';
+  h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin-top:10px">';
+  // 物理层
+  h+='<div style="border-left:3px solid '+LAYER_COLORS.physical+';padding:6px 10px;background:var(--warm);border-radius:4px"><div style="font-weight:700;font-size:.75em;color:'+LAYER_COLORS.physical+'">🔩 物理层</div>';
+  h+='<div style="font-size:.73em;margin-top:4px">族: '+escH(p.family||'—')+' · 类别: '+escH(p.category||'—')+'</div>';
+  if(p.url)h+='<div style="font-size:.73em">路径: <code>'+escH(p.url)+'</code></div>';
+  h+='<div style="font-size:.73em">来源: '+escH(p.source||'—')+' · 置信度: '+escH(String(p.confidence||'—'))+'</div></div>';
+  // 化学层
+  h+='<div style="border-left:3px solid '+LAYER_COLORS.chemical+';padding:6px 10px;background:var(--warm);border-radius:4px"><div style="font-weight:700;font-size:.75em;color:'+LAYER_COLORS.chemical+'">⚗️ 化学层</div>';
+  h+='<div style="font-size:.73em;margin-top:4px">质量: '+qs+' · VI: '+(p.vi_compliance||'—')+' · 内容: '+(p.content_accuracy||'—')+' · UX: '+(p.ux_rating||'—')+'</div>';
+  if(p.quality_issues&&p.quality_issues.length)h+='<div style="font-size:.73em">问题: '+p.quality_issues.map(function(x){return'<span class="tag tag-red">'+escH(x)+'</span>'}).join(' ')+'</div>';
+  h+='<div style="font-size:.73em">批次: '+escH(p.dev_batch||'—')+' · '+escH(p.dev_start||'')+' → '+escH(p.dev_deadline||'')+' ('+String(p.dev_days||'—')+'天)</div></div>';
+  // 生物层
+  h+='<div style="border-left:3px solid '+LAYER_COLORS.biological+';padding:6px 10px;background:var(--warm);border-radius:4px"><div style="font-weight:700;font-size:.75em;color:'+LAYER_COLORS.biological+'">🧬 生物层</div>';
+  if(p.trigger_conditions)h+='<div style="font-size:.73em;margin-top:4px">触发: '+escH(p.trigger_conditions)+'</div>';
+  if(p.feedback_loop)h+='<div style="font-size:.73em">反馈: '+escH(p.feedback_loop)+'</div>';
+  if(p.adaptation_rule)h+='<div style="font-size:.73em">适应: '+escH(p.adaptation_rule)+'</div>';
+  if(p.connected_rules&&p.connected_rules.length)h+='<div style="font-size:.73em">关联规则: '+p.connected_rules.map(function(r){return'<span class="tag tag-gold">'+escH(r)+'</span>'}).join(' ')+'</div>';
+  if(p.immune_events&&p.immune_events.length)h+='<div style="font-size:.73em">免疫事件: '+p.immune_events.map(function(e){return'<span class="tag tag-red">'+escH(e)+'</span>'}).join(' ')+'</div></div>';
+  // 心理层
+  h+='<div style="border-left:3px solid '+LAYER_COLORS.psychological+';padding:6px 10px;background:var(--warm);border-radius:4px"><div style="font-weight:700;font-size:.75em;color:'+LAYER_COLORS.psychological+'">🧠 心理层</div>';
+  if(p.audience_persona)h+='<div style="font-size:.73em;margin-top:4px">👤 '+escH(p.audience_persona)+'</div>';
+  if(p.use_scenario)h+='<div style="font-size:.73em">🎬 '+escH(p.use_scenario)+'</div>';
+  if(p.decision_value_desc)h+='<div style="font-size:.73em">💡 决策价值: '+dv+'分 — '+escH(p.decision_value_desc)+'</div>';
+  if(p.pricing_tier)h+='<div style="font-size:.73em">💰 '+escH(p.pricing_tier)+'</div></div>';
   h+='</div>';
-  if(p.url)h+='<div class="field" style="margin-top:8px"><span class="field-label">路径</span><div class="field-value"><code>'+escH(p.url)+'</code></div></div>';
-  if(p.tags&&p.tags.length)h+='<div class="field" style="margin-top:8px"><span class="field-label">标签</span><div class="field-value">'+p.tags.map(function(t){return'<span class="tag tag-gold">'+escH(t)+'</span>'}).join(' ')+'</div></div>';
+  // 元数据
+  h+='<div style="margin-top:10px;font-size:.7em;color:var(--ink-lighter);border-top:1px solid var(--border-subtle);padding-top:8px">';
+  h+='版本: '+escH(p.version||'—')+' · 负责人: '+escH(p.owner||'—')+' · 审核人: '+escH(p.reviewer||'—')+' · 审核日: '+escH(p.review_date||'—')+' · 创建: '+escH(p.created||'—')+' · 更新: '+escH(p.updated||'—')+'</div>';
+  if(p.tags&&p.tags.length)h+='<div style="margin-top:6px">'+p.tags.map(function(t){return'<span class="tag tag-gold">'+escH(t)+'</span>'}).join(' ')+'</div>';
   return h+'</div></td></tr>';
 }
+
+function filterByQuality(min,max){
+  var rows=document.querySelectorAll('#tbody-products tr');
+  for(var i=0;i<rows.length;i++){
+    var row=rows[i];
+    if(row.className.indexOf('empty-row')>=0||row.className.indexOf('detail-row')>=0)continue;
+    var cells=row.querySelectorAll('td');if(cells.length<5)continue;
+    var qsText=cells[4].textContent||'',qs=parseInt(qsText);
+    var show=!isNaN(qs)&&qs>=min&&qs<=max;
+    row.style.display=show?'':'none';
+    var nx=row.nextElementSibling;if(nx&&nx.className.indexOf('detail-row')>=0)nx.style.display='none';
+  }
+}
+function resetProductFilter(){
+  var rows=document.querySelectorAll('#tbody-products tr');
+  for(var i=0;i<rows.length;i++){var row=rows[i];if(row.className.indexOf('detail-row')>=0)continue;row.style.display='';}
+}
+
 /* ================================================================
-   3. 客户档案 · 5客户+31画像·行业标签
+   3. 质量管理 · 四维评分·分布·排行榜
+   ================================================================ */
+function rQuality(){
+  if(!DB)return renderDegrade();
+  var prods=DB.products||[],m=DB.meta||{};
+  var h='<div class="panel-header"><div><h2>✅ 质量管理中心</h2><div class="meta">'+prods.length+' 产品 · 四维评分 · 五级质量</div></div></div>';
+
+  var dims=['quality_score','vi_compliance','content_accuracy','ux_rating'];
+  var dLabels={quality_score:'🏅综合质量',vi_compliance:'🎨VI合规',content_accuracy:'📝内容准确',ux_rating:'🖱️UX评级'};
+  h+='<div class="graph-stat">';
+  for(var di=0;di<dims.length;di++){
+    var dk=dims[di],dt=prods.reduce(function(s,p){return s+(p[dk]||0)},0),da=prods.length?Math.round(dt/prods.length):0;
+    var df=da>=85?'fill-green':(da>=70?'fill-gold':(da>=50?'fill-warn':'fill-red'));
+    h+='<div class="stat-card"><div class="stat-num">'+da+'</div><div class="stat-label">'+dLabels[dk]+'</div><div class="stat-bar"><div class="fill '+df+'" style="width:'+da+'%"></div></div></div>';
+  }
+  h+='</div>';
+
+  var qDist={优秀:0,良好:0,待改进:0,不合格:0};
+  for(var pi=0;pi<prods.length;pi++){var qs=prods[pi].quality_score||0;if(qs>=85)qDist['优秀']++;else if(qs>=70)qDist['良好']++;else if(qs>=50)qDist['待改进']++;else qDist['不合格']++}
+  h+='<div class="stat-grid">';
+  var qColors={优秀:'fill-green',良好:'fill-gold',待改进:'fill-warn',不合格:'fill-red'};
+  for(var qk in qDist){h+='<div class="stat-card"><div class="stat-num">'+qDist[qk]+'</div><div class="stat-label">'+Q_LABELS[qk]+' '+qk+'</div><div class="stat-bar"><div class="fill '+qColors[qk]+'" style="width:'+(qDist[qk]/prods.length*500)+'%"></div></div></div>'}
+  h+='</div>';
+
+  var sorted=prods.slice().sort(function(a,b){return(b.quality_score||0)-(a.quality_score||0)});
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">';
+  h+='<div><h3 style="font-size:.85em;margin-bottom:8px">🏆 质量 Top 10</h3><table class="data-table"><thead><tr><th>#</th><th>产品</th><th>质量</th><th>阶段</th></tr></thead><tbody>';
+  for(var ti=0;ti<Math.min(10,sorted.length);ti++){var tp=sorted[ti];h+='<tr><td>'+(ti+1)+'</td><td><b>'+escH(tp.name)+'</b></td><td>'+tp.quality_score+'</td><td>'+LC_LABELS[tp.lifecycle_stage||'L1_原型']+'</td></tr>'}
+  h+='</tbody></table></div>';
+/* ================================================================
+   4. 客户档案 · 核心客户+替身画像
    ================================================================ */
 function rCustomers(){
   if(!DB)return renderDegrade();
   var all=(DB.customers||[]).concat(DB.customer_profiles||[]),inds=[];
   for(var i=0;i<all.length;i++){var ind=all[i].industry;if(ind&&inds.indexOf(ind)<0)inds.push(ind)}
-  var h='<div class="panel-header"><div><h2>👤 客户档案</h2><div class="meta">'+(DB.customers||[]).length+' 核心客户 · '+(DB.customer_profiles||[]).length+' 画像</div></div></div>';
+  var h='<div class="panel-header"><div><h2>👤 客户档案</h2><div class="meta">'+(DB.customers||[]).length+' 核心客户 · '+(DB.customer_profiles||[]).length+' 替身画像</div></div></div>';
   h+=toolbar('customers','搜索客户/企业...',inds);
   h+='<table class="data-table" id="tbl-customers"><thead><tr><th onclick="sortPane(\'customers\',\'id\',this)">ID<span class="sort-arrow"></span></th><th onclick="sortPane(\'customers\',\'name\',this)">客户/画像<span class="sort-arrow"></span></th><th onclick="sortPane(\'customers\',\'industry\',this)">行业<span class="sort-arrow"></span></th><th onclick="sortPane(\'customers\',\'stage\',this)">阶段<span class="sort-arrow"></span></th><th>需求/痛点</th><th>决策类型</th></tr></thead><tbody id="tbody-customers"></tbody></table>';
-  rowBuilders.customers=custRow;PANE_DATA.customers=all.slice();setTimeout(function(){fillPaneTable('customers',all,custRow,'无客户数据')},0);
+  rowBuilders.customers=custRow;PANE_DATA.customers=all.slice();
+  setTimeout(function(){fillPaneTable('customers',all,custRow,'无客户数据')},0);
   return h;
 }
 function custRow(c,idx){
   var need=String(c.needs||c.needs_summary||((c.pain_points||[]).join(', '))||'—');
   var h='<tr onclick="toggleDetail(\'cust-det-'+idx+'\')" style="cursor:pointer"><td>'+escH(c.id)+'</td><td><b>'+escH(c.name||c.company||'—')+'</b>'+(c.company?' <span style="font-size:.75em;color:var(--ink-lighter)">('+escH(c.company)+')</span>':'')+'</td><td>'+escH(c.industry||'—')+'</td><td>'+escH(c.stage||'—')+'</td><td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escH(need)+'</td><td>'+escH(c.decision_type||c.role||'—')+'</td></tr>';
   h+='<tr class="detail-row" id="cust-det-'+idx+'"><td colspan="6"><div class="detail-card">';
-  if(c.description)h+='<div class="field"><span class="field-label">描述</span><div class="field-value">'+escH(c.description)+'</div></div>';
   if(c.needs)h+='<div class="field"><span class="field-label">需求</span><div class="field-value">'+escH(c.needs)+'</div></div>';
-  if(c.pain_points&&c.pain_points.length)h+='<div class="field"><span class="field-label">痛点</span><div class="field-value">'+c.pain_points.map(function(p){return'<span class="tag tag-red">'+escH(p)+'</span>'}).join(' ')+'</div></div>';
-  if(c.tags&&c.tags.length)h+='<div class="field"><span class="field-label">标签</span><div class="field-value">'+c.tags.map(function(t){return'<span class="tag tag-gray">'+escH(t)+'</span>'}).join(' ')+'</div></div>';
-  if(c.lifetime_value!==undefined)h+='<div class="field"><span class="field-label">LTV</span><div class="field-value">'+c.lifetime_value+'</div></div>';
+  if(c.pain_points&&c.pain_points.length)h+='<div class="field"><span class="field-label">痛点</span><div class="field-value">'+c.pain_points.map(function(x){return'<span class="tag tag-red">'+escH(x)+'</span>'}).join(' ')+'</div></div>';
+  if(c.description)h+='<div class="field"><span class="field-label">描述</span><div class="field-value">'+escH(c.description)+'</div></div>';
   return h+'</div></td></tr>';
 }
+
 /* ================================================================
-   4. 任务看板 · 195任务·P0/P1/P2·未闭环
+   5. 任务看板
    ================================================================ */
 function rTasks(){
   if(!DB)return renderDegrade();
@@ -355,68 +676,38 @@ function rTasks(){
   var p0=tasks.filter(function(t){return/P0/.test(t.priority||'')}).length,p1=tasks.filter(function(t){return/P1/.test(t.priority||'')}).length,p2=tasks.filter(function(t){return/P2/.test(t.priority||'')}).length;
   var h='<div class="panel-header"><div><h2>📋 任务看板</h2><div class="meta">'+tasks.length+' 任务 · '+nc+' 未闭环 · '+closed+' 已完成</div></div></div>';
   h+='<div class="stat-grid">';
-  h+='<div class="stat-card" style="cursor:pointer" onclick="var opts=document.getElementById(\'srch-tasks-filt\');if(opts)opts.value=\'P0\';filterPane(\'tasks\',document.getElementById(\'srch-tasks\').value,\'P0\')"><div class="stat-num">'+p0+'</div><div class="stat-label">🔴 P0·立即</div><div class="stat-bar"><div class="fill fill-red" style="width:100%"></div></div></div>';
-  h+='<div class="stat-card" style="cursor:pointer" onclick="var opts=document.getElementById(\'srch-tasks-filt\');if(opts)opts.value=\'P1\';filterPane(\'tasks\',document.getElementById(\'srch-tasks\').value,\'P1\')"><div class="stat-num">'+p1+'</div><div class="stat-label">🟡 P1·本周</div><div class="stat-bar"><div class="fill fill-gold" style="width:100%"></div></div></div>';
-  h+='<div class="stat-card" style="cursor:pointer" onclick="var opts=document.getElementById(\'srch-tasks-filt\');if(opts)opts.value=\'P2\';filterPane(\'tasks\',document.getElementById(\'srch-tasks\').value,\'P2\')"><div class="stat-num">'+p2+'</div><div class="stat-label">🟢 P2·两周</div><div class="stat-bar"><div class="fill fill-green" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card" style="cursor:pointer" onclick="filterPane(\'tasks\',\'\',\'P0\')"><div class="stat-num">'+p0+'</div><div class="stat-label">🔴 P0·立即</div><div class="stat-bar"><div class="fill fill-red" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card" style="cursor:pointer" onclick="filterPane(\'tasks\',\'\',\'P1\')"><div class="stat-num">'+p1+'</div><div class="stat-label">🟡 P1·本周</div><div class="stat-bar"><div class="fill fill-gold" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card" style="cursor:pointer" onclick="filterPane(\'tasks\',\'\',\'P2\')"><div class="stat-num">'+p2+'</div><div class="stat-label">🟢 P2·两周</div><div class="stat-bar"><div class="fill fill-green" style="width:100%"></div></div></div>';
   h+='<div class="stat-card"><div class="stat-num">'+nc+'</div><div class="stat-label">⚡ 未闭环</div><div class="stat-bar"><div class="fill fill-warn" style="width:100%"></div></div></div>';
   h+='</div>';
-  var prios=['P0·立即','P1·本周','P2·两周','P0','P1','✅ 已完成','⏳ 进行中','⬜ 待执行'];h+=toolbar('tasks','搜索任务...',prios);
+  var prios=['P0','P1','P2','✅ 已完成','⏳ 进行中','⬜ 待执行'];h+=toolbar('tasks','搜索任务...',prios);
   h+='<table class="data-table" id="tbl-tasks"><thead><tr><th onclick="sortPane(\'tasks\',\'id\',this)">ID<span class="sort-arrow"></span></th><th onclick="sortPane(\'tasks\',\'name\',this)">任务名<span class="sort-arrow"></span></th><th onclick="sortPane(\'tasks\',\'priority\',this)">优先级<span class="sort-arrow"></span></th><th onclick="sortPane(\'tasks\',\'status\',this)">状态<span class="sort-arrow"></span></th><th onclick="sortPane(\'tasks\',\'deadline\',this)">截止<span class="sort-arrow"></span></th><th>负责人</th></tr></thead><tbody id="tbody-tasks"></tbody></table>';
-  rowBuilders.tasks=taskRow;PANE_DATA.tasks=tasks.slice();setTimeout(function(){fillPaneTable('tasks',tasks,taskRow,'无任务数据')},0);
+  rowBuilders.tasks=taskRow;PANE_DATA.tasks=tasks.slice();
+  setTimeout(function(){fillPaneTable('tasks',tasks,taskRow,'无任务数据')},0);
   return h;
 }
 function taskRow(t,idx){
-  var pc=t.priority&&/P0/.test(t.priority)?'tag-red':(t.priority&&/P1/.test(t.priority)?'tag-gold':'tag-gray');
+  var pc=/P0/.test(t.priority||'')?'tag-red':(/P1/.test(t.priority||'')?'tag-gold':'tag-gray');
   var sc=/已完成/.test(t.status||'')?'tag-green':(/进行中/.test(t.status||'')?'tag-gold':'tag-gray');
   var h='<tr onclick="toggleDetail(\'task-det-'+idx+'\')" style="cursor:pointer"><td>'+escH(t.id)+'</td><td><b>'+escH(t.name)+'</b></td><td><span class="tag '+pc+'">'+escH(t.priority||'—')+'</span></td><td><span class="tag '+sc+'">'+escH(t.status||'—')+'</span></td><td>'+escH(t.deadline||'—')+'</td><td>'+escH(t.assignee||'—')+'</td></tr>';
   h+='<tr class="detail-row" id="task-det-'+idx+'"><td colspan="6"><div class="detail-card">';
   if(t.description)h+='<div class="field"><span class="field-label">描述</span><div class="field-value">'+escH(t.description)+'</div></div>';
   if(t.source)h+='<div class="field"><span class="field-label">来源</span><div class="field-value">'+escH(t.source)+'</div></div>';
-  if(t.confidence)h+='<div class="field"><span class="field-label">置信度</span><div class="field-value">'+Math.round(t.confidence*100)+'%</div></div>';
   return h+'</div></td></tr>';
 }
+
 /* ================================================================
-   5. 决策记录 · 25决策·6条决策链
+   6. 决策记录
    ================================================================ */
 function rDecisions(){
   if(!DB)return renderDegrade();
   var decs=DB.decisions||[];
-  // Build decision chains from connections
-  var chains=[];
-  if(DB.connections){
-    var fromMap={},toMap={};
-    for(var i=0;i<DB.connections.length;i++){
-      var c=DB.connections[i];
-      if(c.from_entity&&c.from_entity.indexOf('DEC-')===0&&c.to_entity&&c.to_entity.indexOf('DEC-')===0&&c.relationship_type==='决策时间序列'){
-        if(!fromMap[c.from_entity])fromMap[c.from_entity]=[];
-        fromMap[c.from_entity].push(c.to_entity);
-        toMap[c.to_entity]=true;
-      }
-    }
-    var starts=[];
-    for(var k in fromMap){if(!toMap[k])starts.push(k)}
-    for(var si=0;si<starts.length;si++){
-      var chain=[starts[si]],cur=starts[si];
-      while(fromMap[cur]&&fromMap[cur].length>0){cur=fromMap[cur][0];chain.push(cur)}
-      chains.push(chain);
-    }
-  }
-
-  var h='<div class="panel-header"><div><h2>⚖️ 决策记录</h2><div class="meta">'+decs.length+' 条决策 · '+(chains.length>0?chains[0].length:0)+' 条决策链</div></div></div>';
+  var h='<div class="panel-header"><div><h2>⚖️ 决策记录</h2><div class="meta">'+decs.length+' 条决策</div></div></div>';
   h+=toolbar('decisions','搜索决策...',null);
   h+='<table class="data-table" id="tbl-decisions"><thead><tr><th onclick="sortPane(\'decisions\',\'id\',this)">ID<span class="sort-arrow"></span></th><th onclick="sortPane(\'decisions\',\'date\',this)">日期<span class="sort-arrow"></span></th><th onclick="sortPane(\'decisions\',\'title\',this)">决策<span class="sort-arrow"></span></th><th onclick="sortPane(\'decisions\',\'confidence\',this)">置信度<span class="sort-arrow"></span></th><th>结果</th></tr></thead><tbody id="tbody-decisions"></tbody></table>';
-
-  // Show decision chains
-  if(chains.length>0){
-    h+='<div style="margin-top:20px"><h3 style="font-size:.95em;margin-bottom:10px">🔗 决策链 ('+chains[0].length+'条连续)</h3><div class="conn-list">';
-    var chain=chains[0];
-    for(var ci=0;ci<chain.length;ci++){
-      var dname='';for(var di=0;di<decs.length;di++){if(decs[di].id===chain[ci]){dname=decs[di].title;break}}
-      h+='<div class="conn-chip"><span class="edge-type">'+(ci+1)+'</span>'+escH(dname||chain[ci])+'</div>';
-    }
-    h+='</div></div>';
-  }
-  rowBuilders.decisions=decRow;PANE_DATA.decisions=decs.slice();setTimeout(function(){fillPaneTable('decisions',decs,decRow,'无决策记录')},0);
+  rowBuilders.decisions=decRow;PANE_DATA.decisions=decs.slice();
+  setTimeout(function(){fillPaneTable('decisions',decs,decRow,'无决策记录')},0);
   return h;
 }
 function decRow(d,idx){
@@ -425,8 +716,9 @@ function decRow(d,idx){
   if(d.context)h+='<div class="field"><span class="field-label">背景</span><div class="field-value">'+escH(d.context)+'</div></div>';
   return h+'</div></td></tr>';
 }
+
 /* ================================================================
-   6. 规则引擎 · 48生物规则·41活跃/6休眠/1损坏
+   7. 规则引擎
    ================================================================ */
 function rRules(){
   if(!DB)return renderDegrade();
@@ -434,16 +726,18 @@ function rRules(){
   var active=rules.filter(function(r){return r.status==='active'}).length;
   var dormant=rules.filter(function(r){return r.status==='dormant'}).length;
   var broken=rules.filter(function(r){return r.status==='broken'}).length;
-  var h='<div class="panel-header"><div><h2>🧬 规则引擎</h2><div class="meta">'+rules.length+' 生物规则 · '+(DB.meta&&DB.meta.biological_health?DB.meta.biological_health.fully_alive:0)+' 全活</div></div></div>';
+  var bh=DB.meta&&DB.meta.biological_health?DB.meta.biological_health:{};
+  var h='<div class="panel-header"><div><h2>🧬 规则引擎</h2><div class="meta">'+rules.length+' 生物规则 · '+(bh.fully_alive||0)+' 全活 · 触发:'+(bh.rules_with_triggers||0)+' · 反馈:'+(bh.rules_with_feedback||0)+' · 适应:'+(bh.rules_with_adaptation||0)+'</div></div></div>';
   h+='<div class="stat-grid">';
   h+='<div class="stat-card"><div class="stat-num">'+active+'</div><div class="stat-label">✅ 活跃</div><div class="stat-bar"><div class="fill fill-green" style="width:100%"></div></div></div>';
   h+='<div class="stat-card"><div class="stat-num">'+dormant+'</div><div class="stat-label">💤 休眠</div><div class="stat-bar"><div class="fill fill-gold" style="width:100%"></div></div></div>';
   h+='<div class="stat-card"><div class="stat-num">'+broken+'</div><div class="stat-label">🔴 损坏</div><div class="stat-bar"><div class="fill fill-red" style="width:100%"></div></div></div>';
-  h+='<div class="stat-card"><div class="stat-num">'+(rs.active||active)+'</div><div class="stat-label">📊 元数据活跃</div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+(bh.cron_connected||0)+'</div><div class="stat-label">⏰ Cron连接</div></div>';
   h+='</div>';
-  h+=toolbar('rules','搜索规则...',['active','dormant','broken','P0','P1']);
+  h+=toolbar('rules','搜索规则...',['active','dormant','broken']);
   h+='<table class="data-table" id="tbl-rules"><thead><tr><th onclick="sortPane(\'rules\',\'id\',this)">ID<span class="sort-arrow"></span></th><th onclick="sortPane(\'rules\',\'name\',this)">规则名<span class="sort-arrow"></span></th><th onclick="sortPane(\'rules\',\'status\',this)">状态<span class="sort-arrow"></span></th><th onclick="sortPane(\'rules\',\'priority\',this)">优先级<span class="sort-arrow"></span></th><th>触发条件</th></tr></thead><tbody id="tbody-rules"></tbody></table>';
-  rowBuilders.rules=ruleRow;PANE_DATA.rules=rules.slice();setTimeout(function(){fillPaneTable('rules',rules,ruleRow,'无规则数据')},0);
+  rowBuilders.rules=ruleRow;PANE_DATA.rules=rules.slice();
+  setTimeout(function(){fillPaneTable('rules',rules,ruleRow,'无规则数据')},0);
   return h;
 }
 function ruleRow(r,idx){
@@ -451,149 +745,65 @@ function ruleRow(r,idx){
   var pc=r.priority==='P0'?'tag-red':'tag-gold';
   var h='<tr onclick="toggleDetail(\'rule-det-'+idx+'\')" style="cursor:pointer"><td>'+escH(r.id)+'</td><td><b>'+escH(r.name)+'</b></td><td><span class="tag '+sc+'">'+escH(r.status||'—')+'</span></td><td><span class="tag '+pc+'">'+escH(r.priority||'—')+'</span></td><td style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escH(r.trigger||'—')+'</td></tr>';
   h+='<tr class="detail-row" id="rule-det-'+idx+'"><td colspan="5"><div class="detail-card">';
-  if(r.trigger)h+='<div class="field"><span class="field-label">触发条件</span><div class="field-value">'+escH(r.trigger)+'</div></div>';
-  if(r.feedback)h+='<div class="field"><span class="field-label">反馈机制</span><div class="field-value">'+escH(r.feedback)+'</div></div>';
-  if(r.adaptation)h+='<div class="field"><span class="field-label">适应规则</span><div class="field-value">'+escH(r.adaptation)+'</div></div>';
+  if(r.trigger)h+='<div class="field"><span class="field-label">🧬 触发条件</span><div class="field-value">'+escH(r.trigger)+'</div></div>';
+  if(r.feedback)h+='<div class="field"><span class="field-label">🔄 反馈机制</span><div class="field-value">'+escH(r.feedback)+'</div></div>';
+  if(r.adaptation)h+='<div class="field"><span class="field-label">🌱 适应规则</span><div class="field-value">'+escH(r.adaptation)+'</div></div>';
   return h+'</div></td></tr>';
 }
+
 /* ================================================================
-   7. 免疫系统 · L0-L6七层·4个历史事件
+   8. 免疫系统
    ================================================================ */
 function rImmune(){
   if(!DB)return renderDegrade();
   var events=DB.events||[];
-  var layers=[{l:'L0',name:'自身耐受',color:'var(--red)',desc:'识别"自我" vs "非自我"。对自己代码/术语/品牌体系的完整性校验'},{l:'L1',name:'物理屏障',color:'var(--gold)',desc:'防火墙/加密/访问控制。密码门、sessionStorage、HTTPS等'},{l:'L2',name:'先天免疫',color:'var(--gold)',desc:'不依赖既往经历的第一道防线。MD5基线对比、event.target检测'},{l:'L3',name:'炎症隔离',color:'var(--gold)',desc:'发现问题→隔离→修复。术语隔离、分支回滚、断开损坏链接'},{l:'L4',name:'适应性免疫',color:'var(--gold)',desc:'学习历史事件→生成免疫记忆。免疫记忆库、crypto.subtle检测'},{l:'L5',name:'自愈',color:'var(--gold)',desc:'自动修复已识别的损伤。术语自动替换、自动备份恢复'},{l:'L6',name:'反脆弱',color:'var(--green)',desc:'从损伤中变得更强大。每次修复更新免疫规则、新增检测维度'}];
+  var layers=[{l:'L0',name:'自身耐受',color:'var(--red)',desc:'识别"自我" vs "非自我"。对自己代码/术语/品牌体系的完整性校验'},{l:'L1',name:'物理屏障',color:'var(--gold)',desc:'防火墙/加密/访问控制。密码门、sessionStorage、HTTPS'},{l:'L2',name:'先天免疫',color:'var(--gold)',desc:'不依赖既往经历的第一道防线。MD5基线对比、event.target检测'},{l:'L3',name:'炎症隔离',color:'var(--gold)',desc:'发现问题→隔离→修复。术语隔离、分支回滚、断开损坏链接'},{l:'L4',name:'适应性免疫',color:'var(--gold)',desc:'学习历史事件→生成免疫记忆。免疫记忆库'},{l:'L5',name:'自愈',color:'var(--gold)',desc:'自动修复已识别的损伤。术语自动替换、自动备份恢复'},{l:'L6',name:'反脆弱',color:'var(--green)',desc:'从损伤中变得更强大。每次修复更新免疫规则、新增检测维度'}];
   var h='<div class="panel-header"><div><h2>🛡️ 免疫系统</h2><div class="meta">L0-L6 七层 · '+events.length+' 个历史事件</div></div></div>';
-  for(var i=0;i<layers.length;i++){
-    var ly=layers[i];
-    h+='<div class="immune-layer '+(i===0?'l0':'')+'"><h4 style="color:'+ly.color+'">'+ly.l+': '+ly.name+'</h4><p>'+ly.desc+'</p></div>';
-  }
-  // Events table
+  for(var i=0;i<layers.length;i++){var ly=layers[i];h+='<div class="immune-layer '+(i===0?'l0':'')+'"><h4 style="color:'+ly.color+'">'+ly.l+': '+ly.name+'</h4><p>'+ly.desc+'</p></div>'}
   if(events.length>0){
-    h+='<div style="margin-top:24px"><h3 style="font-size:.95em;margin-bottom:10px">⚡ 历史事件 ('+events.length+'条)</h3>';
-    h+='<table class="data-table" id="tbl-immune"><thead><tr><th>ID</th><th>事件</th><th>严重度</th><th>日期</th><th>修复</th></tr></thead><tbody>';
-    for(var ei=0;ei<events.length;ei++){
-      var e=events[ei];
-      var sev=e.severity==='critical'?'tag-red':'tag-gold';
-      h+='<tr onclick="toggleDetail(\'imm-det-'+ei+'\')" style="cursor:pointer"><td>'+escH(e.id)+'</td><td><b>'+escH(e.name)+'</b></td><td><span class="tag '+sev+'">'+escH(e.severity||'—')+'</span></td><td>'+escH(e.date||'—')+'</td><td style="max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escH(e.fix||'—')+'</td></tr>';
-      h+='<tr class="detail-row" id="imm-det-'+ei+'"><td colspan="5"><div class="detail-card">';
-      if(e.description)h+='<div class="field"><span class="field-label">详情</span><div class="field-value">'+escH(e.description)+'</div></div>';
-      if(e.category)h+='<div class="field"><span class="field-label">分类</span><div class="field-value">'+escH(e.category)+'</div></div>';
-      h+='</div></td></tr>';
-    }
+    h+='<div style="margin-top:24px"><h3 style="font-size:.95em;margin-bottom:10px">⚡ 历史事件 ('+events.length+'条)</h3><table class="data-table"><thead><tr><th>ID</th><th>事件</th><th>严重度</th><th>日期</th><th>修复</th></tr></thead><tbody>';
+    for(var ei=0;ei<events.length;ei++){var e=events[ei],sev=e.severity==='critical'?'tag-red':'tag-gold';h+='<tr onclick="toggleDetail(\'imm-det-'+ei+'\')" style="cursor:pointer"><td>'+escH(e.id)+'</td><td><b>'+escH(e.name)+'</b></td><td><span class="tag '+sev+'">'+escH(e.severity||'—')+'</span></td><td>'+escH(e.date||'—')+'</td><td style="max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escH(e.fix||'—')+'</td></tr>';h+='<tr class="detail-row" id="imm-det-'+ei+'"><td colspan="5"><div class="detail-card">';if(e.description)h+='<div class="field"><span class="field-label">详情</span><div class="field-value">'+escH(e.description)+'</div></div>';if(e.category)h+='<div class="field"><span class="field-label">分类</span><div class="field-value">'+escH(e.category)+'</div></div>';h+='</div></td></tr>'}
     h+='</tbody></table></div>';
   }
   return h;
 }
+
 /* ================================================================
-   8. 考古数据 · 35速查卡·20转化工具·16模拟场景
+   9. 考古数据
    ================================================================ */
 function rArchaeo(){
   if(!DB)return renderDegrade();
   var ha=DB.historical_artifacts||[],sims=DB.simulation_scenarios||[],disc=DB.additional_discoveries||[],scoring=DB.scoring_models||[];
-  var h='<div class="panel-header"><div><h2>🏺 考古数据</h2><div class="meta">'+ha.length+' 历史文物 · '+sims.length+' 模拟场景 · '+disc.length+' 发现</div></div></div>';
-
-  // Historical artifacts
-  h+='<div style="margin-bottom:24px"><h3 style="font-size:.95em;margin-bottom:10px">📜 历史文物 ('+ha.length+'件)</h3><table class="data-table" id="tbl-archaeo"><thead><tr><th>ID</th><th>名称</th><th>时代</th><th>意义</th></tr></thead><tbody>';
-  for(var i=0;i<ha.length;i++){
-    var a=ha[i];
-    h+='<tr onclick="toggleDetail(\'arch-det-'+i+'\')" style="cursor:pointer"><td>'+escH(a.id)+'</td><td><b>'+escH(a.name)+'</b></td><td>'+escH(a.era||'—')+'</td><td style="max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escH(a.significance||'—')+'</td></tr>';
-    h+='<tr class="detail-row" id="arch-det-'+i+'"><td colspan="4"><div class="detail-card">';
-    if(a.significance)h+='<div class="field"><span class="field-label">意义</span><div class="field-value">'+escH(a.significance)+'</div></div>';
-    if(a.source)h+='<div class="field"><span class="field-label">来源</span><div class="field-value">'+escH(a.source)+'</div></div>';
-    h+='</div></td></tr>';
-  }
+  var h='<div class="panel-header"><div><h2>🏺 考古数据</h2><div class="meta">'+ha.length+' 历史文物 · '+sims.length+' 模拟场景 · '+scoring.length+' 评分模型 · '+disc.length+' 发现</div></div></div>';
+  h+='<div style="margin-bottom:24px"><h3 style="font-size:.95em;margin-bottom:10px">📜 历史文物 ('+ha.length+'件)</h3><table class="data-table"><thead><tr><th>ID</th><th>名称</th><th>时代</th><th>意义</th></tr></thead><tbody>';
+  for(var i=0;i<ha.length;i++){var a=ha[i];h+='<tr onclick="toggleDetail(\'arch-det-'+i+'\')" style="cursor:pointer"><td>'+escH(a.id)+'</td><td><b>'+escH(a.name)+'</b></td><td>'+escH(a.era||'—')+'</td><td style="max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escH(a.significance||'—')+'</td></tr>';h+='<tr class="detail-row" id="arch-det-'+i+'"><td colspan="4"><div class="detail-card">';if(a.significance)h+='<div class="field"><span class="field-label">意义</span><div class="field-value">'+escH(a.significance)+'</div></div>';if(a.source)h+='<div class="field"><span class="field-label">来源</span><div class="field-value">'+escH(a.source)+'</div></div>';h+='</div></td></tr>'}
   h+='</tbody></table></div>';
-
-  // Simulation scenarios
-  if(sims.length>0){
-    h+='<div style="margin-bottom:24px"><h3 style="font-size:.95em;margin-bottom:10px">🎭 模拟场景 ('+sims.length+'个)</h3><table class="data-table" id="tbl-sims"><thead><tr><th>ID</th><th>名称</th><th>行业</th><th>决策数</th><th>结果</th></tr></thead><tbody>';
-    for(var si=0;si<sims.length;si++){
-      var s=sims[si];
-      h+='<tr><td>'+escH(s.id)+'</td><td><b>'+escH(s.name)+'</b></td><td>'+escH(s.industry||'—')+'</td><td>'+s.decisions_count+'</td><td>'+escH(s.outcomes||'—')+'</td></tr>';
-    }
-    h+='</tbody></table></div>';
-  }
-
-  // Scoring models
-  if(scoring.length>0){
-    h+='<div style="margin-bottom:24px"><h3 style="font-size:.95em;margin-bottom:10px">📊 评分模型 ('+scoring.length+'个)</h3><table class="data-table" id="tbl-scoring"><thead><tr><th>ID</th><th>名称</th><th>状态</th><th>维度</th></tr></thead><tbody>';
-    for(var mi=0;mi<scoring.length;mi++){
-      var sm=scoring[mi];
-      h+='<tr><td>'+escH(sm.id)+'</td><td><b>'+escH(sm.name)+'</b></td><td><span class="tag tag-gold">'+escH(sm.status||'—')+'</span></td><td>'+escH((sm.dimensions?Object.keys(sm.dimensions).join(', '):'—'))+'</td></tr>';
-    }
-    h+='</tbody></table></div>';
-  }
-
-  // Additional discoveries
-  if(disc.length>0){
-    h+='<div><h3 style="font-size:.95em;margin-bottom:10px">🔍 额外发现 ('+disc.length+'条)</h3>';
-    for(var di=0;di<disc.length;di++){
-      var dd=disc[di];
-      h+='<div style="margin-bottom:12px;padding:12px;background:var(--card);border:1px solid var(--border);border-radius:8px"><b>'+escH(dd.id)+'</b> '+escH(dd.name)+'<br><span style="font-size:.78em;color:var(--ink-light)">'+escH(dd.description||'')+'</span></div>';
-    }
-    h+='</div>';
-  }
+  if(sims.length>0){h+='<div style="margin-bottom:24px"><h3 style="font-size:.95em">🎭 模拟场景 ('+sims.length+'个)</h3><table class="data-table"><thead><tr><th>ID</th><th>名称</th><th>行业</th><th>决策数</th><th>结果</th></tr></thead><tbody>';for(var si=0;si<sims.length;si++){var s=sims[si];h+='<tr><td>'+escH(s.id)+'</td><td><b>'+escH(s.name)+'</b></td><td>'+escH(s.industry||'—')+'</td><td>'+s.decisions_count+'</td><td>'+escH(s.outcomes||'—')+'</td></tr>'}h+='</tbody></table></div>'}
+  if(scoring.length>0){h+='<div style="margin-bottom:24px"><h3 style="font-size:.95em">📊 评分模型 ('+scoring.length+'个)</h3><table class="data-table"><thead><tr><th>ID</th><th>名称</th><th>状态</th><th>维度</th></tr></thead><tbody>';for(var mi=0;mi<scoring.length;mi++){var sm=scoring[mi];h+='<tr><td>'+escH(sm.id)+'</td><td><b>'+escH(sm.name)+'</b></td><td><span class="tag tag-gold">'+escH(sm.status||'—')+'</span></td><td>'+escH((sm.dimensions?Object.keys(sm.dimensions).join(', '):'—'))+'</td></tr>'}h+='</tbody></table></div>'}
+  if(disc.length>0){h+='<div><h3 style="font-size:.95em">🔍 额外发现 ('+disc.length+'条)</h3>';for(var di=0;di<disc.length;di++){var dd=disc[di];h+='<div style="margin-bottom:12px;padding:12px;background:var(--card);border:1px solid var(--border);border-radius:8px"><b>'+escH(dd.id)+'</b> '+escH(dd.name)+'<br><span style="font-size:.78em;color:var(--ink-light)">'+escH(dd.description||'')+'</span></div>'}h+='</div>'}
   return h;
 }
+
 /* ================================================================
-   9. 知识图谱 · 1,222真实连接·密度43.9%
+   10. 知识图谱
    ================================================================ */
 function rGraph(){
   if(!DB)return renderDegrade();
-  var m=DB.meta,conns=DB.connections||[];
+  var conns=DB.connections||[],m=DB.meta||{};
   var verified=m.verified_connections||0,strong=m.strong_connections||0,medium=m.medium_connections||0,weak=m.weak_connections||0;
-  var totalEntities=m.total_entities||0;
-
-  var h='<div class="panel-header"><div><h2>🕸️ 知识图谱</h2><div class="meta">'+verified+' 真实连接 · '+conns.length+' 总连接 · 密度 '+m.knowledge_graph_density+'%</div></div></div>';
-
-  // Stats
-  h+='<div class="stat-grid">';
+  var h='<div class="panel-header"><div><h2>🕸️ 知识图谱</h2><div class="meta">'+m.total_connections+' 连接 · 密度 '+m.knowledge_graph_density+'% · '+verified+' 真实</div></div></div>';
+  h+='<div class="graph-stat">';
   h+='<div class="stat-card"><div class="stat-num">'+verified+'</div><div class="stat-label">✅ 真实连接</div><div class="stat-bar"><div class="fill fill-green" style="width:100%"></div></div></div>';
-  h+='<div class="stat-card"><div class="stat-num">'+strong+'</div><div class="stat-label">💪 强连接</div><div class="stat-bar"><div class="fill fill-red" style="width:100%"></div></div></div>';
-  h+='<div class="stat-card"><div class="stat-num">'+medium+'</div><div class="stat-label">🤝 中连接</div><div class="stat-bar"><div class="fill fill-gold" style="width:100%"></div></div></div>';
-  h+='<div class="stat-card"><div class="stat-num">'+weak+'</div><div class="stat-label">💬 弱连接</div><div class="stat-bar"><div class="fill fill-warn" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+strong+'</div><div class="stat-label">💪 强连接 (≥0.7)</div><div class="stat-bar"><div class="fill fill-red" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+medium+'</div><div class="stat-label">🤝 中连接 (0.5-0.7)</div><div class="stat-bar"><div class="fill fill-gold" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+weak+'</div><div class="stat-label">💬 弱连接 (<0.5)</div><div class="stat-bar"><div class="fill fill-warn" style="width:100%"></div></div></div>';
   h+='</div>';
-
-  // Connection type breakdown
-  var typeMap={};
-  for(var i=0;i<conns.length;i++){
-    var rt=conns[i].relationship_type||'未分类';
-    typeMap[rt]=(typeMap[rt]||0)+1;
-  }
+  var typeMap={};for(var i=0;i<conns.length;i++){var rt=conns[i].relationship_type||'未分类';typeMap[rt]=(typeMap[rt]||0)+1}
   var types=Object.keys(typeMap).sort(function(a,b){return typeMap[b]-typeMap[a]});
-
-  h+='<div style="margin-top:20px"><h3 style="font-size:.95em;margin-bottom:10px">🔗 连接类型分布 (Top 15)</h3><table class="data-table"><thead><tr><th>类型</th><th>数量</th><th>占比</th></tr></thead><tbody>';
-  var shown=Math.min(types.length,15);
-  for(var ti=0;ti<shown;ti++){
-    var t=types[ti],tc=typeMap[t],pct=conns.length?(tc/conns.length*100).toFixed(1):0;
-    h+='<tr><td>'+escH(t)+'</td><td><b>'+tc+'</b></td><td>'+pct+'%</td></tr>';
-  }
+  h+='<div style="margin-top:20px"><h3 style="font-size:.95em;margin-bottom:10px">🔗 连接类型 (Top 15)</h3><table class="data-table"><thead><tr><th>类型</th><th>数量</th><th>占比</th></tr></thead><tbody>';
+  for(var ti=0;ti<Math.min(types.length,15);ti++){var t=types[ti],tc=typeMap[t],pct=conns.length?(tc/conns.length*100).toFixed(1):0;h+='<tr><td>'+escH(t)+'</td><td><b>'+tc+'</b></td><td>'+pct+'%</td></tr>'}
   h+='</tbody></table></div>';
-
-  // Additional info
-  if(m.auto_rule_connections){
-    h+='<div style="margin-top:20px"><h3 style="font-size:.95em">📋 连接详情</h3>';
-    h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:10px">';
-    h+='<div class="stat-card"><div class="stat-num">'+totalEntities+'</div><div class="stat-label">📦 总实体数</div></div>';
-    h+='<div class="stat-card"><div class="stat-num">'+conns.length+'</div><div class="stat-label">🕸️ 总连接数</div></div>';
-    h+='<div class="stat-card"><div class="stat-num">'+m.auto_rule_connections+'</div><div class="stat-label">🤖 自动规则连接</div></div>';
-    h+='<div class="stat-card"><div class="stat-num">'+m.knowledge_graph_density+'%</div><div class="stat-label">📊 图密度</div></div>';
-    h+='</div></div>';
-  }
-
-  // Weight distribution
-  var weightMap={};
-  for(var wi=0;wi<conns.length;wi++){
-    var w=conns[wi].weight;if(w!==undefined){var wk=String(w);weightMap[wk]=(weightMap[wk]||0)+1}
-  }
-  var weights=Object.keys(weightMap).sort();
-  if(weights.length>0){
-    h+='<div style="margin-top:20px"><h3 style="font-size:.95em;margin-bottom:10px">⚖️ 权重分布</h3><div class="chip-wrap">';
-    for(var wj=0;wj<weights.length;wj++)h+='<div class="chip"><b>'+weights[wj]+'</b> '+weightMap[weights[wj]]+'条</div>';
-    h+='</div></div>';
-  }
-
+  if(m.auto_rule_connections){h+='<div style="margin-top:20px"><div class="stat-grid"><div class="stat-card"><div class="stat-num">'+m.total_entities+'</div><div class="stat-label">📦 总实体</div></div><div class="stat-card"><div class="stat-num">'+conns.length+'</div><div class="stat-label">🕸️ 连接数</div></div><div class="stat-card"><div class="stat-num">'+m.auto_rule_connections+'</div><div class="stat-label">🤖 自动规则</div></div><div class="stat-card"><div class="stat-num">'+m.knowledge_graph_density+'%</div><div class="stat-label">📊 密度</div></div></div></div>'}
   return h;
 }
 
@@ -603,6 +813,7 @@ function rGraph(){
 (function(){
   try{if(sessionStorage.getItem('_admin_auth')==='1'){document.getElementById('gate').classList.add('hidden');document.getElementById('app').classList.add('show');initApp()}}catch(e){}
 })();
+
 </script>
 </body>
 </html>
