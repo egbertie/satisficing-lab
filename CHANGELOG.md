@@ -1,5 +1,31 @@
 # CHANGELOG
 
+## 🏷️ stable-2026-05-29 — 全站稳定版本封装
+
+> 2026-05-29 23:32 · 8个核心页面统一存档
+
+### 封装清单
+| 页面 | 大小 | 关键特征 |
+|------|------|----------|
+| index.html | 13KB | 首页，术语统一，两翼恢复 |
+| about.html | 9KB | 关于页，三脉修正 |
+| checklist.html | 11KB | 自检清单，VI统一，12源验证 |
+| cases.html | 9KB | 案例库，fil+this模式 |
+| gate.html | 9KB | 密码门，明文比对 |
+| decision-theatre.html | 22KB | 决策剧场，水月观音 |
+| product-catalog.html | 108KB | 产品目录 |
+| dashboard.html | 50KB | 驾驶舱，sessionStorage密码门+降级提示 |
+
+### 关键决策
+- **密码门改用 sessionStorage**：关闭浏览器即清除，每次打开需重新输入，根治跨浏览器缓存不一致
+- **降级提示**：检测到 sessionStorage 不可用时（如 Safari 内容拦截器），密码门显示黄色提示
+- **0 个 event.target**：全站使用 `this` 参数传递模式
+- **0 个 crypto.subtle**：全站明文密码
+- **备份位置**：`site/.bak/stable-2026-05-29/`
+- **Git tag**：`stable-2026-05-29`
+
+---
+
 ## [dashboard] - 2026-05-29
 
 ### v4 (23:00) - 恢复稳定版
