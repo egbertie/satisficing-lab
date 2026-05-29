@@ -140,6 +140,8 @@ if(document.getElementById("gateLayer").style.display==="none"&&typeof loadKPI==
 </script>
 
 <script>
+window._dashErrors=[];window.onerror=function(m,u,l,c,e){window._dashErrors.push({msg:String(m),line:l});var el=document.getElementById("content");if(el)el.innerHTML="<div style=\"background:#fff;border-radius:12px;padding:16px;margin:16px;border:2px solid #C23B22\"><h3 style=\"color:#C23B22\">❌ JS错误</h3><div style=\"font-size:12px\">"+String(m).substring(0,200)+"</div><div style=\"font-size:10px;color:#6E6E6E\">行号:"+l+"</div></div>";return false};
+
 // ===== localStorage 数据引擎 =====
 
 // ===== 双数据源引擎: API优先 + localStorage降级 =====
