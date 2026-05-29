@@ -51,14 +51,14 @@
 
 <div class="main">
   <div class="filter-bar">
-    <button class="filter-btn active" onclick="filter('all')">全部</button>
-    <button class="filter-btn" onclick="filter('股权')">股权分配</button>
-    <button class="filter-btn" onclick="filter('退出')">退出与清算</button>
-    <button class="filter-btn" onclick="filter('控制权')">控制权争夺</button>
-    <button class="filter-btn" onclick="filter('家族')">家族传承</button>
-    <button class="filter-btn" onclick="filter('信任')">信任破裂</button>
-    <button class="filter-btn" onclick="filter('价值观')">价值冲突</button>
-    <button class="filter-btn" onclick="filter('涅槃')">至暗重生</button>
+    <button class="filter-btn active" onclick="filter('all', this)">全部</button>
+    <button class="filter-btn" onclick="filter('股权', this)">股权分配</button>
+    <button class="filter-btn" onclick="filter('退出', this)">退出与清算</button>
+    <button class="filter-btn" onclick="filter('控制权', this)">控制权争夺</button>
+    <button class="filter-btn" onclick="filter('家族', this)">家族传承</button>
+    <button class="filter-btn" onclick="filter('信任', this)">信任破裂</button>
+    <button class="filter-btn" onclick="filter('价值观', this)">价值冲突</button>
+    <button class="filter-btn" onclick="filter('涅槃', this)">至暗重生</button>
   </div>
 
   <div id="caseList"></div>
@@ -121,14 +121,11 @@ const CASES = [
 
 let activeFilter = 'all';
 
-function filter(type) {
+function filter(type, btn) {
   activeFilter = type;
   var btns = document.querySelectorAll('.filter-btn');
   for (var i = 0; i < btns.length; i++) { btns[i].classList.remove('active'); }
-  for (var i = 0; i < btns.length; i++) {
-    var attr = btns[i].getAttribute('onclick') || '';
-    if (attr.indexOf("'" + type + "'") >= 0) { btns[i].classList.add('active'); break; }
-  }
+  btn.classList.add('active');
   renderList();
 }
 
