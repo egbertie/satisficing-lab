@@ -44,7 +44,7 @@ function renderList(){
   var f=AF==='all'?CASES:CASES.filter(function(c){return c.type===AF});
   var h='';
   f.forEach(function(c){
-    h+='<div class="case-card" onclick="show('+c.id+')" style="background:#fff;border-radius:12px;padding:16px 18px;margin:8px 0;border:1px solid #e0d5c8;cursor:pointer"><div style="font-size:15px;font-weight:600;color:#2A2A2A">'+c.name+'</div><div style="font-size:11px;color:#6E6E6E;margin-top:2px">'+c.industry+' · '+c.stage+'</div><div style="margin-top:6px"><span style="display:inline-block;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:600;background:rgba(194,59,34,0.1);color:#C23B22">'+c.type+'</span><span style="display:inline-block;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:600;background:rgba(184,134,11,0.1);color:#B8860B;margin-left:4px">'+c.industry+'</span></div></div>';
+    h+='<div class="case-card" onclick="show('+c.id+')" style="background:#fff;border-radius:12px;padding:16px 18px;margin:8px 0;border:1px solid #e0d5c8;cursor:pointer"><div style="font-size:15px;font-weight:600;color:#2A2A2A">'+c.name+'</div><div style="font-size:13px;color:#6E6E6E;margin-top:2px">'+c.industry+' · '+c.stage+'</div><div style="margin-top:6px"><span style="display:inline-block;padding:2px 8px;border-radius:8px;font-size:12px;font-weight:600;background:rgba(194,59,34,0.1);color:#C23B22">'+c.type+'</span><span style="display:inline-block;padding:2px 8px;border-radius:8px;font-size:12px;font-weight:600;background:rgba(184,134,11,0.1);color:#B8860B;margin-left:4px">'+c.industry+'</span></div></div>';
   });
   document.getElementById('list').innerHTML=h||'<p style="text-align:center;color:#6E6E6E;padding:40px">暂无此类案例</p>';
   document.getElementById('detail').style.display='none';
@@ -52,7 +52,7 @@ function renderList(){
 function show(id){
   var c=CASES.find(function(x){return x.id===id});if(!c)return;
   document.getElementById('list').style.display='none';
-  document.getElementById('detail').innerHTML='<button onclick="back()" style="padding:6px 14px;border-radius:12px;border:1px solid #C23B22;background:#fff;color:#C23B22;cursor:pointer;font-size:12px;margin-bottom:12px">← 返回列表</button><h2 style="font-size:18px;color:#C23B22;margin-bottom:8px">'+c.name+'</h2><div style="font-size:11px;color:#6E6E6E">'+c.industry+' · '+c.stage+'</div><div style="font-size:14px;line-height:1.8;margin:12px 0;padding:12px 16px;background:rgba(194,59,34,0.03);border-radius:10px;border-left:3px solid #C23B22">'+c.narrative+'</div><div style="font-size:13px;color:#B8860B;margin:8px 0">💡 '+c.lesson+'</div><div style="font-size:11px;color:#6E6E6E">📚 '+c.source+'</div>';
+  document.getElementById('detail').innerHTML='<button onclick="back()" style="padding:6px 14px;border-radius:12px;border:1px solid #C23B22;background:#fff;color:#C23B22;cursor:pointer;font-size:12px;margin-bottom:12px">← 返回列表</button><h2 style="font-size:18px;color:#C23B22;margin-bottom:8px">'+c.name+'</h2><div style="font-size:13px;color:#6E6E6E">'+c.industry+' · '+c.stage+'</div><div style="font-size:14px;line-height:1.8;margin:12px 0;padding:12px 16px;background:rgba(194,59,34,0.03);border-radius:10px;border-left:3px solid #C23B22">'+c.narrative+'</div><div style="font-size:13px;color:#B8860B;margin:8px 0">💡 '+c.lesson+'</div><div style="font-size:13px;color:#6E6E6E">📚 '+c.source+'</div>';
   document.getElementById('detail').style.display='block';
 }
 function back(){
