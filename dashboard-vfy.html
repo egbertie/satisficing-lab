@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>引擎验证</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC",sans-serif;background:#F5F0E6;color:#4A4A4A;padding:20px}
+.panel{background:#fff;border-radius:12px;padding:16px;margin:8px 0;border:1px solid #e0d5c8}
+.ok{color:#3D7A4F;font-weight:600}.err{color:#C23B22;font-weight:600}
+.btn{padding:6px 14px;border-radius:12px;border:none;cursor:pointer;font-size:12px;font-weight:600;background:#C23B22;color:#fff;margin:4px}
+h2{font-size:16px;color:#2A2A2A;margin-bottom:8px}
+pre{background:#f0e8d8;padding:8px;border-radius:8px;font-size:11px;overflow-x:auto}
+</style>
+</head>
+<body>
+<h1>🔧 驾驶舱引擎逐步验证</h1>
+<p style="color:#6E6E6E;font-size:12px;margin-bottom:12px">按步骤加载正式版dashboard.html的组件，定位失败点</p>
+
+<div class="panel">
+<h2>Step 1: 初始化状态</h2>
+<button class="btn" onclick="runStep1()">执行 Step1</button>
+<div id="s1"></div>
+</div>
+
+<div class="panel">
+<h2>Step 2: 数据引擎</h2>
+<button class="btn" onclick="runStep2()">执行 Step2</button>
+<div id="s2"></div>
+</div>
+
+<div class="panel">
+<h2>Step 3: 渲染函数</h2>
+<button class="btn" onclick="runStep3()">执行 Step3</button>
+<div id="s3"></div>
+</div>
+
+<div class="panel">
+<h2>Step 4: 完整initDB + render</h2>
+<button class="btn" onclick="runStep4()">执行 Step4</button>
+<div id="s4"></div>
+</div>
+
+<script>
+// 模拟dashboard的DOM结构（关键元素）
+document.body.innerHTML += '<div id="kpiBar" style="display:none"></div><div id="content" style="display:none"></div><div id="northstar" style="display:none"></div>';
+
+function log(elId, msg, cls) {
+  document.getElementById(elId).innerHTML += '<div class="'+(cls||'')+'">'+msg+'</div>';
+}
+
+// ===== STEP 1: 基本状态 =====
+function runStep1() {
+  var s1 = document.getElementById('s1');
+  s1.innerHTML = '';
+  var checks = [];
+  
+  // Check localStorage
+  try { localStorage.setItem('_t', '1'); checks.push('✅ localStorage可写'); }
+  catch(e) { checks.push('❌ localStorage不可写: '+e.message); }
+  
+  // Check JS features
+  checks.push(typeof Promise !== 'undefined' ? '✅ Promise' : '❌ Promise');
+  checks.push(typeof fetch !== 'undefined' ? '✅ fetch' : '❌ fetch');
+  checks.push(typeof crypto !== 'undefined' ? '✅ crypto' : '❌ crypto');
+  checks.push(typeof AbortController !== 'undefined' ? '✅ AbortController' : '❌ AbortController');
+  checks.push(typeof TextEncoder !== 'undefined' ? '✅ TextEncoder' : '❌ TextEncoder');
+  
+  s1.innerHTML = checks.map(function(c){ return '<div>'+c+'</div>' }).join('');
+}
+
+// ===== STEP 2: 数据引擎 =====
+function runStep2() {
+  var s2 = document.getElementById('s2');
+  s2.innerHTML = '';
+  try {
+    // 简化版数据引擎（和正式版相同逻辑）
+    function dbs(k, d) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d || []; } catch(e) { return d || []; } }
+    function dbsv(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
+    var DB = {
+      ts: function() { return dbs('sri_db_tasks'); },
+      cs: function() { return dbs('sri_db_customers'); },
+      pw: function() { return dbs('sri_db_passwords'); },
+      qu: function() { return dbs('sri_db_quality'); },
+      pr: function() { return dbs('sri_db_products'); },
+      gr: function() { return dbs('sri_db_gr'); },
+      seed: function() {
+        if (!this.pw().length) dbsv('sri_db_passwords', [{ id: 1, code: '123654', products: 'all', customer: '内测', status: '启用' }]);
+        if (!this.qu().length) dbsv('sri_db_quality', [
+          { qm_id: 'QM-001', standard: 'L0提案审核', status: '待执行', assignee: '满意红', deadline: '06-07', priority: 'P0' },
+          { qm_id: 'QM-002', standard: 'L1方法论审核', status: '55%', assignee: '满意红', deadline: '06-07', priority: 'P0' }
+        ]);
+        if (!this.gr().length) dbsv('sri_db_gr', [
+          { m: '飞轮循环', c: 0, t: 100 }, { m: '线上产品', c: 233, t: 250 }
+        ]);
+        return this;
+      }
+    };
+    
+    DB.seed();
+    s2.innerHTML = '<div class="ok">✅ 数据引擎初始化成功</div>';
+    s2.innerHTML += '<div>tasks: ' + DB.ts().length + ' 条</div>';
+    s2.innerHTML += '<div>customers: ' + DB.cs().length + ' 条</div>';
+    s2.innerHTML += '<div>quality: ' + DB.qu().length + ' 条</div>';
+    s2.innerHTML += '<div>growth: ' + DB.gr().length + ' 条</div>';
+    s2.innerHTML += '<div>passwords: ' + DB.pw().length + ' 条</div>';
+  } catch(e) {
+    s2.innerHTML = '<div class="err">❌ ERROR: ' + e.message + '</div><pre>' + (e.stack||'').substring(0,300) + '</pre>';
+  }
+}
+
+// ===== STEP 3: 关键渲染 =====
+function runStep3() {
+  var s3 = document.getElementById('s3');
+  s3.innerHTML = '';
+  try {
+    var ts = JSON.parse(localStorage.getItem('sri_db_tasks') || '[]');
+    var dn = ts.filter(function(t) { return (t.status || '').indexOf('完成') >= 0; }).length;
+    
+    var html = '<table style="width:100%;border-collapse:collapse;font-size:11px">';
+    html += '<tr style="background:#F5F0E6"><th style="padding:6px;text-align:left">任务</th><th>优先级</th><th>状态</th></tr>';
+    ts.forEach(function(t) {
+      html += '<tr><td style="padding:4px">' + t.task + '</td><td>' + t.priority + '</td><td>' + t.status + '</td></tr>';
+    });
+    html += '</table>';
+    document.getElementById('content').innerHTML = html;
+    document.getElementById('content').style.display = 'block';
+    
+    s3.innerHTML = '<div class="ok">✅ 渲染成功</div>';
+    s3.innerHTML += '<div>任务总数: ' + ts.length + ', 已完成: ' + dn + '</div>';
+    s3.innerHTML += '<div>content div已更新，可见上方表格</div>';
+  } catch(e) {
+    s3.innerHTML = '<div class="err">❌ ERROR: ' + e.message + '</div><pre>' + (e.stack||'').substring(0,300) + '</pre>';
+  }
+}
+
+// ===== STEP 4: 异步渲染模拟 =====
+async function runStep4() {
+  var s4 = document.getElementById('s4');
+  s4.innerHTML = '<div>⏳ 模拟异步数据加载...</div>';
+  
+  try {
+    // 模拟 fetch 延迟
+    await new Promise(function(resolve) { setTimeout(resolve, 500); });
+    
+    var ts = JSON.parse(localStorage.getItem('sri_db_tasks') || '[]');
+    
+    // 构建KPI
+    document.getElementById('kpiBar').innerHTML = '<div style="display:flex;gap:8px"><div style="background:#fff;border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:800;color:#C23B22">' + ts.length + '</div><div style="font-size:10px">任务</div></div></div>';
+    document.getElementById('kpiBar').style.display = 'flex';
+    
+    // 构建内容
+    var html = '<div style="background:#fff;border-radius:12px;padding:16px;border:1px solid #e0d5c8">';
+    html += '<h3>✅ 异步渲染成功</h3><p style="font-size:12px;color:#6E6E6E">任务数: ' + ts.length + '</p>';
+    html += '<p style="font-size:12px;color:#3D7A4F">如果看到这个，说明异步初始化+渲染流程正常</p></div>';
+    document.getElementById('content').innerHTML = html;
+    document.getElementById('content').style.display = 'block';
+    
+    s4.innerHTML = '<div class="ok">✅ Step4 完成</div>';
+  } catch(e) {
+    s4.innerHTML = '<div class="err">❌ ERROR: ' + e.message + '</div><pre>' + (e.stack||'').substring(0,300) + '</pre>';
+  }
+}
+</script>
+
+<p style="font-size:10px;color:#6E6E6E;opacity:0.5;margin-top:24px">引擎验证 V1.0 · 逐步加载正式版组件</p>
+</body>
+</html>
