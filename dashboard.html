@@ -250,6 +250,13 @@ document.addEventListener('paste',function(e){
 });
 </script>
 
+<div class="tb" style="background:#fff;border-bottom:1px solid #e0d5c8;padding:8px 16px;display:flex;align-items:center;gap:8px;position:sticky;top:0;z-index:100;flex-wrap:wrap">
+<span style="font-weight:700;color:#2A2A2A;font-size:15px;white-space:nowrap">📊 驾驶舱</span>
+<input id="globalSearchBox" placeholder="🔍 全局搜索（任务/客户/产品/里程碑…支持模糊匹配）" oninput="doGlobalSearch()" style="flex:1;min-width:160px;padding:7px 12px;border:1.5px solid #D4C5A0;border-radius:10px;font-size:12px;background:#F5F0E6;outline:none">
+<span style="font-size:11px;color:#6E6E6E;white-space:nowrap">夏至 <b style="color:#C23B22;font-size:15px" id="countdownBadge">23天</b></span>
+<a href="index.html" style="font-size:11px;color:#B8860B;text-decoration:none">← 首页</a>
+</div>
+
 <div class="hero">
   <h1>📊 驾驶舱</h1>
   <p>本地数据 · localStorage · 无需服务器 · 随时可用</p>
@@ -321,9 +328,12 @@ var DB = {
   
   async _fetch(endpoint, method, body) {
     try {
-      var opts = {method:method||'GET', headers:{'Content-Type':'application/json'}};
+      var ctrl = new AbortController();
+      var to = setTimeout(function(){ctrl.abort()},3000);
+      var opts = {method:method||'GET', headers:{'Content-Type':'application/json'}, signal:ctrl.signal};
       if(body) opts.body = JSON.stringify(body);
       var r = await fetch(this._api + endpoint, opts);
+      clearTimeout(to);
       return await r.json();
     } catch(e) {
       return null;
@@ -546,19 +556,43 @@ let currentTab = 'tasks';
 function switchTab(tab) {
   currentTab = tab;
   document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
-  // Find the clicked button via tab attribute
   var btns = document.querySelectorAll('.tab-btn');
   for(var i=0;i<btns.length;i++){
     if(btns[i].getAttribute('onclick') && btns[i].getAttribute('onclick').indexOf("'"+tab+"'")>=0){
-      btns[i].classList.add('active');
-      break;
+      btns[i].classList.add('active');break;
     }
   }
   render().catch(function(e){console.error('render error:',e)});
 }
 
+function doGlobalSearch(){
+  var q = document.getElementById('globalSearchBox').value.trim().toLowerCase();
+  if(!q){ render(); return; }
+  var rs = [];
+  // Search tasks
+  DB.tasks().then(function(ts){
+    ts.filter(function(t){return (t.task||'').toLowerCase().indexOf(q)>=0||(t.priority||'').toLowerCase().indexOf(q)>=0}).forEach(function(t){rs.push({ty:'📋 任务',tx:t.task+' ['+t.priority+'] '+t.status,tab:'tasks'});});
+    // Search customers
+    var cs = DB.get('customers');
+    cs.filter(function(c){return (c.name||'').toLowerCase().indexOf(q)>=0||(c.company||'').toLowerCase().indexOf(q)>=0}).forEach(function(c){rs.push({ty:'👤 客户',tx:c.name+' · '+(c.company||''),tab:'customers'});});
+    // Render
+    var h = '<div class="panel"><h3>🔍 搜索: <b>'+q+'</b></h3>';
+    if(rs.length===0) h += '<div class="empty">未找到匹配结果</div>';
+    else rs.forEach(function(r){h += '<div style="padding:8px 12px;border-bottom:1px solid #f0e8d8;cursor:pointer;font-size:11px" onclick="currentTab=\''+r.tab+'\';render()">'+r.ty+' <b>'+r.tx+'</b> <span style="color:#B8860B;float:right">查看 →</span></div>';});
+    h += '</div>';
+    document.getElementById('content').innerHTML = h;
+  });
+}
+
+function updateCountdown(){
+  var d = Math.ceil((new Date(2026,5,21)-new Date())/86400000);
+  var el = document.getElementById('countdownBadge');
+  if(el) el.textContent = d+'天';
+}
+setInterval(updateCountdown, 60000);
+
 async function render() {
-  try { await initDB(); } catch(e) { console.error("initDB failed:",e); }
+  await initDB();
   loadKPI();
   renderNorthstar();
   updateBSC();
@@ -1252,7 +1286,7 @@ function updateBSC(){
  render();
 }
 
-initDB().then(function(){return render()}).catch(function(e){console.error("Init error:",e);document.getElementById("content").innerHTML='<div class="empty">⚠️ 初始化失败，请检查数据连接<br><small>'+e.message+'</small></div>'});
+initDB().then(() => render());
 </script>
 </body>
 </html>
