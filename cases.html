@@ -1,215 +1,63 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>章·鉴往 | 84案例精选 | 满意解研究所</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>传灯 · 84案例精选 | 满意解研究所</title>
 <style>
-  :root { --sri-red:#C23B22; --sri-gold:#B8860B; --sri-bg:#F5F0E6; --text:#4A4A4A; --title:#2A2A2A; --border:#D4C5A0; }
-  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-  body { font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif; background:var(--sri-bg); color:var(--text); min-height:100vh; }
-  .hero { background:linear-gradient(135deg,var(--sri-red),var(--sri-gold)); color:#F5F0E6; padding:36px 20px 28px; text-align:center; }
-  .hero h1 { font-size:21px; font-weight:700; }
-  .hero p { font-size:12px; opacity:0.85; }
-  .main { max-width:600px; margin:0 auto; padding:16px; }
-  
-  .filter-bar { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px; justify-content:center; }
-  .filter-btn { padding:6px 14px; border-radius:16px; font-size:11px; cursor:pointer; border:1px solid var(--border); background:#fff; }
-  .filter-btn.active { background:var(--sri-red); color:#F5F0E6; border-color:var(--sri-red); }
-
-  .case-card { background:#fff; border-radius:12px; padding:16px; margin-bottom:10px; border-left:4px solid var(--sri-red); cursor:pointer; transition:0.15s; }
-  .case-card:active { background:rgba(194,59,34,0.02); }
-  .case-card .case-name { font-size:15px; font-weight:700; color:var(--title); }
-  .case-card .case-meta { font-size:11px; color:var(--text); opacity:0.6; margin-top:2px; }
-  .case-card .case-tags { margin-top:6px; display:flex; gap:4px; flex-wrap:wrap; }
-  .case-card .tag { padding:2px 8px; border-radius:8px; font-size:10px; }
-  .tag-type { background:rgba(194,59,34,0.08); color:var(--sri-red); }
-  .tag-lesson { background:rgba(184,134,11,0.08); color:var(--sri-gold); }
-
-  .case-detail { display:none; background:#fff; border-radius:14px; padding:24px; border:2px solid var(--sri-red); animation:fadeIn 0.3s; }
-  .case-detail.show { display:block; }
-  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
-  .case-detail h3 { font-size:18px; color:var(--title); margin-bottom:6px; }
-  .case-detail .meta-line { font-size:11px; color:var(--text); opacity:0.5; margin-bottom:12px; }
-  .case-detail .narrative { font-size:14px; line-height:1.9; }
-  .case-detail .lesson-box { background:rgba(194,59,34,0.04); padding:14px; border-radius:8px; margin:12px 0; font-size:13px; line-height:1.7; }
-  .case-detail .lesson-box strong { color:var(--sri-red); }
-
-  .btn { display:inline-block; padding:8px 18px; border-radius:14px; font-size:12px; font-weight:600; cursor:pointer; border:none; text-decoration:none; }
-  .btn-back { background:transparent; border:1.5px solid var(--sri-red); color:var(--sri-red); }
-  .footer { text-align:center; padding:24px 16px 40px; font-size:11px; color:#999; }
-  .footer a { color:var(--sri-red); text-decoration:none; }
+:root{--sr:#C23B22;--sg:#B8860B;--sb:#F5F0E6;--st:#4A4A4A;--sh:#2A2A2A}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC",sans-serif;background:#F5F0E6;color:#4A4A4A;min-height:100vh}
+.container{max-width:800px;margin:0 auto;padding:24px 16px 60px}
+.header{text-align:center;padding:24px 0}
+.header h1{font-size:24px;color:#C23B22}.header p{font-size:13px;color:#6E6E6E;margin-top:4px}
+.filter-bar{display:flex;gap:4px;flex-wrap:wrap;margin:16px 0;justify-content:center}
+.fbtn{padding:6px 12px;border-radius:14px;border:1px solid #D4C5A0;background:#fff;cursor:pointer;font-size:11px;font-weight:600;white-space:nowrap}
+.fbtn.on{background:#C23B22;color:#fff;border-color:#C23B22}
+.case-card{background:#fff;border-radius:12px;padding:16px 18px;margin:8px 0;border:1px solid #e0d5c8;cursor:pointer}
+.case-card:hover{border-color:#C23B22}
+.case-card .name{font-size:15px;font-weight:600;color:#2A2A2A}
+.case-card .meta{font-size:11px;color:#6E6E6E;margin-top:2px}
+.case-card .tags{margin-top:6px}
+.tag{display:inline-block;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:600;margin:1px}
+.tag-type{background:rgba(194,59,34,0.1);color:#C23B22}
+.tag-ind{background:rgba(184,134,11,0.1);color:#B8860B}
+.detail{display:none;animation:fi 0.2s}
+.detail .back-btn{padding:6px 14px;border-radius:12px;border:1px solid #C23B22;background:#fff;color:#C23B22;cursor:pointer;font-size:12px;margin-bottom:12px}
+.detail h2{font-size:18px;color:#C23B22;margin-bottom:8px}
+.detail .narrative{font-size:14px;line-height:1.8;margin:12px 0;padding:12px 16px;background:rgba(194,59,34,0.03);border-radius:10px;border-left:3px solid #C23B22}
+.detail .lesson{font-size:13px;color:#B8860B;margin:8px 0}
+.detail .source{font-size:11px;color:#6E6E6E}
+@keyframes fi{from{opacity:0}to{opacity:1}}
 </style>
-<link rel="stylesheet" href="vi_quick_ref.css">
 </head>
 <body>
+<div class="container">
+<div class="header"><h1>传灯 · 84案例精选</h1><p>每个结论有真实案例</p></div>
 
-<div class="hero">
-  <h1>📜 传灯 · 84案例精选</h1>
-  <p>84个真实案例中精选——每个都是一盏灯</p>
+<div class="filter-bar">
+<button class="fbtn on" onclick="fil('all',this)">全部</button>
+<button class="fbtn" onclick="fil('股权',this)">股权分配</button>
+<button class="fbtn" onclick="fil('退出',this)">退出与清算</button>
+<button class="fbtn" onclick="fil('控制权',this)">控制权争夺</button>
+<button class="fbtn" onclick="fil('家族',this)">家族传承</button>
+<button class="fbtn" onclick="fil('信任',this)">信任破裂</button>
+<button class="fbtn" onclick="fil('价值观',this)">价值冲突</button>
+<button class="fbtn" onclick="fil('涅槃',this)">至暗重生</button>
 </div>
 
-<div class="main">
-  <div class="filter-bar">
-    <button class="filter-btn active" onclick="filter('all', this)">全部</button>
-    <button class="filter-btn" onclick="filter('股权', this)">股权分配</button>
-    <button class="filter-btn" onclick="filter('退出', this)">退出与清算</button>
-    <button class="filter-btn" onclick="filter('控制权', this)">控制权争夺</button>
-    <button class="filter-btn" onclick="filter('家族', this)">家族传承</button>
-    <button class="filter-btn" onclick="filter('信任', this)">信任破裂</button>
-    <button class="filter-btn" onclick="filter('价值观', this)">价值冲突</button>
-    <button class="filter-btn" onclick="filter('涅槃', this)">至暗重生</button>
-  </div>
-
-  <div id="caseList"></div>
-  <div class="case-detail" id="caseDetail"></div>
+<div id="list"></div>
+<div class="detail" id="detail"></div>
 </div>
-
-<div class="footer"><p><a href="go.html">← 返回产品中心</a></p><p style="margin-top:4px;font-size:10px;">满意解研究所 · 传灯·84案例精选 · 满意姐(kimi)案例库遗产</p></div>
 
 <script>
-const CASES = [
-  {id:1, name:'大疆2007·全员离职', type:'涅槃', industry:'硬科技', stage:'天使轮',
-   narrative:'2007年·账面几万·全员离职·只剩出纳。出纳走之前把所有账目整得清清楚楚。李泽湘五层介入：情感→资金→团队→治理→网络。CI从0.72→0.55→0.35。',
-   lesson:'至暗时刻不致命——导师介入+价值坚持=凤凰涅槃。五层介入不是给钱那么简单。',
-   source:'满意姐·V1.5案例脚本'},
-  {id:2, name:'比锐精密·对赌清算', type:'退出', industry:'精密制造', stage:'B轮',
-   narrative:'创始人签了对赌——如果明年收入不达预期80%——两人共同承担无限连带责任。清算前一天才第一次认真看条款。三个月后——对赌触发。五个月后——公司清算。',
-   lesson:'Feld: 估值越高条款越危险。对赌不是'激励'——是'如果你失败，不只是公司失败，是你个人破产。'',
-   source:'满意姐·V1.5案例脚本'},
-  {id:3, name:'云鲸智能·少年的蔑视', type:'信任', industry:'消费硬件', stage:'天使轮',
-   narrative:'26岁·供应链工厂老板当他面说"你一个书生，懂什么供应链？"。300张图纸。李泽湘的第一笔钱。拒绝贴牌——最终百亿独角兽。',
-   lesson:'年轻不是弱点。被别人否定的时候——需要一个说"我相信你"的人。李泽湘对云鲸=李泽湘对大疆。两盏灯。',
-   source:'满意姐·V1.5案例脚本'},
-  {id:4, name:'固高科技·教授创业', type:'控制权', industry:'智能制造', stage:'创立期',
-   narrative:'三位港科大教授联合创业。22年——从实验室到上市。没有内斗、没有退出、没有撕破脸。秘诀：学术治理结构直接平移到了公司治理。',
-   lesson:'Wasserman: 最稳定的创始团队是"多年的同事关系"——不是"刚认识的朋友"。学术团队的治理结构天然适合硬科技公司。',
-   source:'满意姐·V1.5案例脚本'},
-  {id:5, name:'海柔创新·仓储机器人', type:'控制权', industry:'机器人', stage:'A轮',
-   narrative:'五位联创——一位在产品验证后提出"我的贡献被低估了，应该多拿10%"。融资窗口只有一个月。CEO选择先把钱拿进来——然后召开董事会重谈股权。',
-   lesson:'Moyer: 股权不是激励——是记账。但融资窗口中重谈股权是核选项。先把融资关掉再谈公平——顺序不能错。',
-   source:'满意姐·V1.5案例脚本'},
-  {id:6, name:'68Entry·踩雷全景', type:'退出', industry:'跨境电商', stage:'B轮',
-   narrative:'从股权分配到退出——踩了所有的雷。静态50/50→贡献不均→沉默怨恨→危机中互相指责→清算。',
-   lesson:'所有合伙人的失败模式都一样——不是突然崩的。是一步一步——每一次都选了"先不管"。',
-   source:'满意姐·V1.5案例脚本'},
-  {id:7, name:'Wasserman·Zipcar', type:'股权', industry:'共享出行', stage:'创立期',
-   narrative:'一人全职·一人兼职。50/50股权。三年后——全职那位崩溃了——"为什么我天天加班、他周末来看看——股份一样多？"',
-   lesson:'静态分配+贡献不均=定时炸弹。Wasserman: 73%的创始人在首月选择静态分配——因为"先做起来再说"。拖得越久，修正越难。',
-   source:'Wasserman·HBS研究'},
-  {id:8, name:'Gottman·四骑士预测', type:'信任', industry:'通用', stage:'全阶段',
-   narrative:'Gottman花了40年研究夫妻关系——发现可以预测91%的离婚。四个信号：批评→蔑视→防御→冷漠。同样的信号在合伙人关系中同样精准。',
-   lesson:'冷漠是最后一个信号——之前的三个信号都被忽视了。不是突然不想合作了——是吵了太多次、每次都心冷一点。',
-   source:'Gottman·婚姻实验室'},
-  {id:9, name:'Lencioni·决策科技公司', type:'信任', industry:'科技', stage:'全阶段',
-   narrative:'一个从不争吵的团队——表面上"和谐"。但在关键战略决策上集体犯错——因为没有人敢说"我不同意"。五层功能障碍：信任缺失→惧怕冲突→缺乏承诺→逃避责任→无视结果。',
-   lesson:'虚假和谐是第一杀手。不是"关系好才不吵"——是"怕吵所以不说"。Lencioni: 健康的冲突是公开的——"我不是否定你，但我不同意。"',
-   source:'Lencioni·团队五层障碍'},
-  {id:10, name:'Duke·Super Bowl传球', type:'价值观', industry:'体育/通用', stage:'通用',
-   narrative:'Super Bowl最后一球——Wilson传球被拦截——全美国骂这是"史上最差决策"。Duke分析：拦截率仅2%。但所有人用"结果"反推"决策质量"。',
-   lesson:'Resulting陷阱：好的决策可能产生坏的结果，坏的决策可能产生好的结果。复盘不是看结果——是看决策时拥有的信息质量。',
-   source:'Duke·Thinking in Bets'},
-  {id:11, name:'Intel三位一体', type:'控制权', industry:'半导体', stage:'创立期',
-   narrative:'Moore+Noyce+Grove三人分工明确。Moore:技术方向·Noyce:对外形象·Grove:内部执行。CI保持在0.25-0.35。',
-   lesson:'最佳合伙人不是"三个一样的人"——是"三个互补的人"。每人有自己的领域，不越界、不推诿。',
-   source:'满意姐·CBIIP标杆案例'},
-  {id:12, name:'Google三角', type:'控制权', industry:'互联网', stage:'创立期',
-   narrative:'Page专注产品+Sergey专注技术+Schmidt成熟运营。三角稳定——CI保持在0.28-0.30。创始人+职业经理人的黄金组合。',
-   lesson:'Wasserman: 73%的创始人在C轮前被替换。但Google证明：如果创始人有清晰的CEO角色定义——不必替换。',
-   source:'满意姐·CBIIP标杆案例'}
-];
+var CASES=[{id:1,name:'大疆2007·全员离职',type:'涅槃',industry:'硬科技',stage:'天使轮',narrative:'2007年·账面几万·全员离职·只剩出纳。出纳走之前把所有账目整得清清楚楚。李泽湘五层介入：情感→资金→团队→治理→网络。CI从0.72→0.55→0.35。',lesson:'至暗时刻不致命——导师介入+价值坚持=凤凰涅槃。五层介入不是给钱那么简单。',source:'满意姐·V1.5案例脚本'},{id:2,name:'比锐精密·对赌清算',type:'退出',industry:'精密制造',stage:'B轮',narrative:'创始人签了对赌——如果明年收入不达预期80%——两人共同承担无限连带责任。清算前一天才第一次认真看条款。三个月后——对赌触发。五个月后——公司清算。',lesson:'Feld: 估值越高条款越危险。对赌不是激励——是如果你失败，不只是公司失败，是你个人破产。',source:'满意姐·V1.5案例脚本'},{id:3,name:'云鲸智能·少年的蔑视',type:'信任',industry:'消费硬件',stage:'天使轮',narrative:'26岁·供应链工厂老板当他面说"你一个书生，懂什么供应链？"。300张图纸。李泽湘的第一笔钱。拒绝贴牌——最终百亿独角兽。',lesson:'年轻不是弱点。被别人否定的时候——需要一个说"我相信你"的人。',source:'满意姐·V1.5案例脚本'},{id:4,name:'固高科技·教授创业',type:'控制权',industry:'智能制造',stage:'创立期',narrative:'三位港科大教授联合创业。22年——从实验室到上市。没有内斗、没有退出、没有撕破脸。秘诀：学术治理结构直接平移到了公司治理。',lesson:'Wasserman: 最稳定的创始团队是"多年的同事关系"——不是"刚认识的朋友"。',source:'满意姐·V1.5案例脚本'},{id:5,name:'海柔创新·仓储机器人',type:'控制权',industry:'机器人',stage:'A轮',narrative:'五位联创——一位在产品验证后提出"我的贡献被低估了，应该多拿10%"。融资窗口只有一个月。CEO选择先把钱拿进来——然后召开董事会重谈股权。',lesson:'Moyer: 股权不是激励——是记账。融资窗口中重谈股权是核选项。先把融资关掉再谈公平——顺序不能错。',source:'满意姐·V1.5案例脚本'},{id:6,name:'68Entry·踩雷全景',type:'退出',industry:'跨境电商',stage:'B轮',narrative:'从股权分配到退出——踩了所有的雷。静态50/50→贡献不均→沉默怨恨→危机中互相指责→清算。',lesson:'所有合伙人的失败模式都一样——不是突然崩的。是一步一步——每一次都选了"先不管"。',source:'满意姐·V1.5案例脚本'},{id:7,name:'Wasserman·Zipcar',type:'股权',industry:'共享出行',stage:'创立期',narrative:'一人全职·一人兼职。50/50股权。三年后——全职那位崩溃了——"为什么我天天加班、他周末来看看——股份一样多？"',lesson:'静态分配+贡献不均=定时炸弹。73%的创始人在首月选择静态分配——因为"先做起来再说"。拖得越久，修正越难。',source:'Wasserman·HBS研究'},{id:8,name:'Gottman·四骑士预测',type:'信任',industry:'通用',stage:'全阶段',narrative:'Gottman研究了650对夫妻16年。发现四个信号——批评、蔑视、防御、冷漠——能预测91%的关系破裂。合伙人关系遵循完全一样的模式。',lesson:'蔑视是头号杀手——不是"不喜欢"，是"看不起"。关系降级从这里开始。',source:'Gottman·华盛顿大学'},{id:9,name:'Dunford·定位四象限',type:'价值观',industry:'通用',stage:'全阶段',narrative:'"你在哪个世界里是最好的？"——定位不是一句口号。Dunford发现最精准的定位往往在三四个词的交叉处。硬科技+中国+供应链=一个只有你能占的空位。',lesson:'定位不是口号——是"你在哪个世界里是最好的"。硬科技创始人的空位在三四个词的交叉处。',source:'Dunford·Obviously Awesome'},{id:10,name:'Kahneman·噪声',type:'控制权',industry:'通用',stage:'决策中',narrative:'Kahneman实验：让法官在不同的日子里对同一个案件量刑——相差3-8年。不是因为案件不同——是因为法官的状态不同。创始人的决策噪声比法官更大——没有上诉法庭可以纠正。',lesson:'同一个人对同一个问题——在不同日子里答案可能差30%。延时24小时——是最好的噪声过滤器。',source:'Kahneman·2021'},{id:11,name:'Simon·满意解',type:'控制权',industry:'通用',stage:'创立期',narrative:'Herbert Simon在1978年获得诺贝尔经济学奖——因为他证明了一件反直觉的事：最优解不存在。人的认知能力有限、信息有限、时间有限——你需要的是"够好"，不是"完美"。',lesson:'满意解不是妥协——是智慧。有限理性是人类的出厂设置——接受它，设计围绕它的系统。',source:'Simon·1978诺贝尔奖'},{id:12,name:'比锐精密·退出条款缺失',type:'退出',industry:'精密制造',stage:'B轮',narrative:'两位创始人持股约各半。公司发展稳定——但在一次并购谈判中，一位想卖、一位不想卖。没有退出条款、没有买卖协议——僵持了14个月。最终并购方撤回offer。',lesson:'没有退出条款的合伙——就是把"怎么分手"这个问题推到情绪最高点去解决。推到最后——双方都输。',source:'满意姐·V2案例补充'}];
+var AF='all';
 
-let activeFilter = 'all';
-
-function filter(type, btn) {
-  alert('filter called: '+type);
-  activeFilter = type;
-  var btns = document.querySelectorAll('.filter-btn');
-  for (var i = 0; i < btns.length; i++) { btns[i].classList.remove('active'); }
-  btn.classList.add('active');
-  renderList();
-}
-
-function renderList() {
-  let filtered = activeFilter==='all' ? CASES : CASES.filter(c=>c.type===activeFilter);
-  let html = '';
-  filtered.forEach(c => {
-    let typeTag = `<span class="tag tag-type">${c.type}</span>`;
-    let industryTag = `<span class="tag tag-lesson">${c.industry}</span>`;
-    html += `<div class="case-card" onclick="showCase('${c.id}')">
-      <div class="case-name">${c.name}</div>
-      <div class="case-meta">${c.industry} · ${c.stage}</div>
-      <div class="case-tags">${typeTag}${industryTag}</div>
-    </div>`;
-  });
-  document.getElementById('caseList').innerHTML = html;
-  document.getElementById('caseDetail').classList.remove('show');
-}
-
-function showCase(id) {
-  let c = CASES.find(x=>x.id===parseInt(id));
-  let html = `<h3>${c.name}</h3><div class="meta-line">${c.industry} · ${c.stage} · ${c.type}</div>
-  <div class="narrative">${c.narrative}</div>
-  <div class="lesson-box"><strong>💡 学到的：</strong>${c.lesson}</div>
-  <div class="meta-line" style="margin-top:8px;">📚 ${c.source}</div>
-  <button class="btn btn-back" onclick="renderList()">← 返回案例列表</button>`;
-  document.getElementById('caseDetail').innerHTML = html;
-  document.getElementById('caseDetail').classList.add('show');
-  document.getElementById('caseList').innerHTML = '';
-  window.scrollTo(0,0);
-}
-
+function fil(type,btn){AF=type;var bs=document.querySelectorAll('.fbtn');for(var i=0;i<bs.length;i++)bs[i].classList.remove('on');btn.classList.add('on');renderList()}
+function renderList(){var f=AF==='all'?CASES:CASES.filter(function(c){return c.type===AF});var h='';f.forEach(function(c){h+='<div class="case-card" onclick="show('+c.id+')"><div class="name">'+c.name+'</div><div class="meta">'+c.industry+' · '+c.stage+'</div><div class="tags"><span class="tag tag-type">'+c.type+'</span><span class="tag tag-ind">'+c.industry+'</span></div></div>'});document.getElementById('list').innerHTML=h||'<p style="text-align:center;color:#6E6E6E;padding:40px">暂无此类案例</p>';document.getElementById('detail').style.display='none'}
+function show(id){var c=CASES.find(function(x){return x.id===id});if(!c)return;document.getElementById('list').style.display='none';var d=document.getElementById('detail');d.innerHTML='<button class="back-btn" onclick="back()">← 返回列表</button><h2>'+c.name+'</h2><div class="meta">'+c.industry+' · '+c.stage+'</div><div class="narrative">'+c.narrative+'</div><div class="lesson">💡 '+c.lesson+'</div><div class="source">📚 '+c.source+'</div>';d.style.display='block'}
+function back(){document.getElementById('list').style.display='block';document.getElementById('detail').style.display='none'}
 renderList();
 </script>
-
-<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
-  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
-  <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
-    <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
-    <button onclick="showFeedbackText()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">💬</span>有建议</button>
-  </div>
-  <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
-  <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
-  <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
-  <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
-  <p style="font-size:10px;opacity:0.4;margin-top:8px;"><a href="go.html" style="color:inherit;">返回决策通道</a></p>
-</div>
-<script>
-(function(){
-  let page=location.pathname.split('/').pop()||'index';
-  let key='sri_fb_'+page;
-  let data=JSON.parse(localStorage.getItem(key)||'{}');
-  if(data.sent){document.getElementById('fbQuestion').textContent='感谢你的反馈！';document.getElementById('fbActions').style.display='none';}
-  let tally=JSON.parse(localStorage.getItem('sri_fb_tally_'+page)||'{"up":0,"text":0}');
-  if(tally.up+tally.text>0) document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
-  window.submitFeedback=function(type){
-    tally[type]=(tally[type]||0)+1;
-    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
-    data.sent=true;data.type=type;data.time=new Date().toISOString();
-    localStorage.setItem(key,JSON.stringify(data));
-    document.getElementById('fbActions').style.display='none';
-    document.getElementById('fbQuestion').textContent='感谢你的反馈！';
-    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
-  };
-  window.showFeedbackText=function(){
-    document.getElementById('fbText').style.display='block';
-    document.getElementById('fbSubmit').style.display='inline-block';
-  };
-  window.submitFeedbackText=function(){
-    let text=document.getElementById('fbText').value.trim();
-    if(!text)return;
-    tally.text=(tally.text||0)+1;
-    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
-    data.sent=true;data.type='text';data.text=text;data.time=new Date().toISOString();
-    localStorage.setItem(key,JSON.stringify(data));
-    document.getElementById('fbActions').style.display='none';
-    document.getElementById('fbText').style.display='none';
-    document.getElementById('fbSubmit').style.display='none';
-    document.getElementById('fbQuestion').textContent='收到！感谢你的建议。';
-    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
-  };
-})();
-</script>
-
 </body>
 </html>
