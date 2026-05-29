@@ -122,10 +122,12 @@ const CASES = [
 let activeFilter = 'all';
 
 function filter(type, btn) {
+  console.log('filter called:', type, 'btn:', btn);
   activeFilter = type;
   var btns = document.querySelectorAll('.filter-btn');
   for (var i = 0; i < btns.length; i++) { btns[i].classList.remove('active'); }
   btn.classList.add('active');
+  console.log('activeFilter set to:', activeFilter);
   renderList();
 }
 
