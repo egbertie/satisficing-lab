@@ -123,8 +123,12 @@ let activeFilter = 'all';
 
 function filter(type) {
   activeFilter = type;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
+  var btns = document.querySelectorAll('.filter-btn');
+  for (var i = 0; i < btns.length; i++) { btns[i].classList.remove('active'); }
+  for (var i = 0; i < btns.length; i++) {
+    var attr = btns[i].getAttribute('onclick') || '';
+    if (attr.indexOf("'" + type + "'") >= 0) { btns[i].classList.add('active'); break; }
+  }
   renderList();
 }
 

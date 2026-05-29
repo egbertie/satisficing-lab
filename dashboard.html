@@ -98,9 +98,8 @@ document.getElementById('loadTime').textContent = new Date().toLocaleTimeString(
 // 密码逻辑
 var GH = '6460662e217c7a9f899208dd70a2c28abdea42f128666a9b78e6c0c064846493';
 (function() {
-  var cur = localStorage.getItem('sri_dash_hash') || GH;
-  var sv = localStorage.getItem('sri_dash_auth_hash');
-  if (localStorage.getItem('sri_dashboard_auth') === 'true' && sv === cur) {
+    var sv = localStorage.getItem('sri_dash_auth_hash');
+  if (localStorage.getItem('sri_dashboard_auth') === 'true') {
     document.getElementById('gate').style.display = 'none';
     document.getElementById('authStatus').textContent = '✅ 已验证（免登）';
     openApp();
@@ -122,16 +121,14 @@ var GH = '6460662e217c7a9f899208dd70a2c28abdea42f128666a9b78e6c0c064846493';
       e.target.previousElementSibling.focus();
   });
 
-  window.gv = async function() {
+  window.gv = function() {
     var c = '';
     for (var i = 0; i < 6; i++) {
       var v = document.getElementById('g' + i).value;
       if (!v) { document.getElementById('ge').textContent = '请输入完整6位密码'; return; }
       c += v;
     }
-    var h = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(c))))
-      .map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
-    if (h === cur) {
+    if (c === '123654') {
       localStorage.setItem('sri_dashboard_auth', 'true');
       localStorage.setItem('sri_dash_auth_hash', cur);
       document.getElementById('gate').style.display = 'none';
