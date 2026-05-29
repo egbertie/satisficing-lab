@@ -3,127 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>满意红 · 管理窗口 | 毛细血管级数据穿透</title>
+<title>满意红 · 管理后台 | 毛细血管级数据穿透</title>
 <style>
-/* ========== VI 变量 ========== */
-:root {
-  --paper:    #F5F0E6;
-  --card:     #FFFFFF;
-  --warm:     #FAF6EF;
-  --ink:      #4A3728;
-  --red:      #C23B22;
-  --gold:     #B8860B;
-  --green:    #3D7A4F;
-  --warn:     #C2780A;
-  --ink-light:#8B7355;
-  --ink-lighter:#B8A890;
-  --border:   #E8DDCC;
-  --border-subtle:#F0E8D8;
-}
-* { box-sizing:border-box; margin:0; padding:0; }
-body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; background:var(--paper); color:var(--ink); line-height:1.6; min-height:100vh; }
-
-/* ========== 密码门 ========== */
-.gate-overlay { position:fixed; inset:0; background:var(--paper); z-index:1000; display:flex; align-items:center; justify-content:center; transition:opacity 0.3s; }
-.gate-overlay.hidden { opacity:0; pointer-events:none; }
-.gate-box { background:var(--card); border:2px solid var(--gold); border-radius:16px; padding:48px 40px; text-align:center; max-width:400px; box-shadow:0 4px 24px rgba(74,55,40,0.12); }
-.gate-box h2 { color:var(--red); font-size:1.5em; margin-bottom:8px; }
-.gate-box .sub { color:var(--ink-light); font-size:0.85em; margin-bottom:24px; }
-.gate-box input { width:100%; padding:12px 16px; border:2px solid var(--border); border-radius:8px; font-size:1.1em; text-align:center; outline:none; transition:all 0.2s; }
-.gate-box input:focus { border-color:var(--gold); }
-.gate-box button { margin-top:16px; padding:10px 36px; background:var(--red); color:#fff; border:none; border-radius:8px; font-size:1em; cursor:pointer; transition:all 0.2s; }
-.gate-box button:hover { background:var(--gold); }
-.gate-error { color:var(--red); font-size:0.8em; margin-top:8px; min-height:20px; }
-.gate-degrade { background:#FFF8E1; border:1px solid var(--warn); border-radius:8px; padding:8px 12px; margin-top:12px; font-size:0.75em; color:var(--warn); display:none; }
-
-/* ========== 布局 ========== */
-.app { display:none; min-height:100vh; }
-.app.show { display:flex; }
-.sidebar { width:240px; background:var(--card); border-right:1px solid var(--border); padding:16px 0; position:sticky; top:0; height:100vh; overflow-y:auto; flex-shrink:0; }
-.sidebar-header { padding:16px 20px; border-bottom:1px solid var(--border); margin-bottom:8px; }
-.sidebar-header h3 { font-size:0.9em; color:var(--red); }
-.sidebar-header .sub { font-size:0.7em; color:var(--ink-lighter); }
-.sidebar-nav { list-style:none; }
-.sidebar-nav li { cursor:pointer; padding:10px 20px; font-size:0.85em; transition:all 0.15s; border-left:3px solid transparent; display:flex; align-items:center; gap:8px; }
-.sidebar-nav li:hover { background:var(--warm); border-left-color:var(--gold); }
-.sidebar-nav li.active { background:var(--warm); border-left-color:var(--red); font-weight:600; }
-.sidebar-nav li .badge { font-size:0.65em; background:var(--red); color:#fff; border-radius:10px; padding:1px 7px; margin-left:auto; }
-.main { flex:1; padding:24px 32px; overflow-y:auto; max-height:100vh; }
-
-/* ========== 窗口通用 ========== */
-.window-panel { display:none; }
-.window-panel.show { display:block; }
-.panel-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
-.panel-header h2 { font-size:1.3em; color:var(--red); }
-.panel-header .meta { font-size:0.78em; color:var(--ink-lighter); }
-.panel-toolbar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px; padding:12px; background:var(--card); border-radius:8px; border:1px solid var(--border-subtle); }
-.panel-toolbar input { padding:6px 12px; border:1px solid var(--border); border-radius:6px; font-size:0.82em; min-width:200px; outline:none; }
-.panel-toolbar input:focus { border-color:var(--gold); }
-.panel-toolbar select, .panel-toolbar button { padding:6px 14px; border:1px solid var(--border); border-radius:6px; font-size:0.82em; background:var(--card); cursor:pointer; }
-.panel-toolbar button:hover { border-color:var(--gold); }
-
-/* ========== 数据表 ========== */
-.data-table { width:100%; border-collapse:collapse; background:var(--card); border-radius:10px; overflow:hidden; box-shadow:0 1px 4px rgba(74,55,40,0.06); }
-.data-table th { text-align:left; padding:10px 14px; background:var(--warm); font-size:0.78em; color:var(--ink-light); border-bottom:2px solid var(--border); cursor:pointer; white-space:nowrap; user-select:none; }
-.data-table th:hover { color:var(--red); }
-.data-table th .sort-arrow { font-size:0.7em; margin-left:4px; }
-.data-table td { padding:8px 14px; font-size:0.82em; border-bottom:1px solid var(--border-subtle); vertical-align:top; }
-.data-table tr:hover { background:var(--warm); }
-.data-table .empty-row td { text-align:center; color:var(--ink-lighter); padding:40px; }
-.tag { display:inline-block; padding:2px 8px; border-radius:4px; font-size:0.75em; white-space:nowrap; }
-.tag-red { background:#FDE8E5; color:var(--red); }
-.tag-gold { background:#FDF3E0; color:var(--gold); }
-.tag-green { background:#E8F0EB; color:var(--green); }
-.tag-gray { background:#F0EDE8; color:var(--ink-light); }
-
-/* ========== 详情行 ========== */
-.detail-row { display:none; }
-.detail-row.show { display:table-row; }
-.detail-row td { background:var(--warm); font-size:0.78em; padding:12px 14px; }
-.detail-card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:16px; }
-.detail-card .field { margin-bottom:8px; }
-.detail-card .field-label { font-weight:600; font-size:0.75em; color:var(--ink-light); text-transform:uppercase; letter-spacing:0.04em; }
-.detail-card .field-value { font-size:0.88em; margin-top:2px; }
-.detail-links { display:flex; gap:8px; margin-top:8px; }
-.detail-links a { font-size:0.75em; color:var(--gold); text-decoration:none; border:1px solid var(--gold); padding:3px 10px; border-radius:4px; transition:all 0.15s; }
-.detail-links a:hover { background:var(--gold); color:#fff; }
-
-/* ========== 图谱 ========== */
-.graph-section { margin-top:24px; }
-.graph-section h3 { font-size:1em; color:var(--ink); margin-bottom:12px; }
-.conn-list { display:flex; flex-wrap:wrap; gap:6px; }
-.conn-chip { background:var(--warm); border:1px solid var(--border); border-radius:6px; padding:4px 10px; font-size:0.75em; display:flex; align-items:center; gap:6px; }
-.conn-chip .edge-type { font-size:0.7em; color:var(--gold); }
-.conn-chip .arrow { color:var(--ink-lighter); }
-
-/* ========== 对比网格 ========== */
-.compare-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:12px; margin-top:16px; }
-.compare-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:16px; transition:all 0.15s; }
-.compare-card.selected { border-color:var(--red); box-shadow:0 0 0 2px rgba(194,59,34,0.15); }
-.compare-card:hover { border-color:var(--gold); }
-.compare-card h4 { font-size:0.9em; margin-bottom:8px; }
-.compare-card .stat { display:flex; justify-content:space-between; padding:4px 0; font-size:0.82em; border-bottom:1px solid var(--border-subtle); }
-.compare-card .stat-label { color:var(--ink-light); }
-.compare-card .stat-value { font-weight:500; }
-.compare-card .check-col { position:absolute; top:8px; right:8px; }
-
-/* ========== 图表占位 ========== */
-.chart-bar { height:8px; background:var(--border); border-radius:4px; overflow:hidden; margin-top:4px; }
-.chart-bar .fill { height:100%; border-radius:4px; transition:width 0.3s; }
-.fill-red { background:var(--red); }
-.fill-gold { background:var(--gold); }
-.fill-green { background:var(--green); }
-
-/* ========== 响应式 ========== */
-@media(max-width:768px){.sidebar{width:180px;font-size:0.8em}.main{padding:16px}.data-table{font-size:0.75em}}
+:root{--paper:#F5F0E6;--card:#FFFFFF;--warm:#FAF6EF;--ink:#4A3728;--red:#C23B22;--gold:#B8860B;--green:#3D7A4F;--warn:#C2780A;--ink-light:#8B7355;--ink-lighter:#B8A890;--border:#E8DDCC;--border-subtle:#F0E8D8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;min-height:100vh}
+.gate-overlay{position:fixed;inset:0;background:var(--paper);z-index:1000;display:flex;align-items:center;justify-content:center;transition:opacity .3s}
+.gate-overlay.hidden{opacity:0;pointer-events:none}
+.gate-box{background:var(--card);border:2px solid var(--gold);border-radius:16px;padding:48px 40px;text-align:center;max-width:400px;box-shadow:0 4px 24px rgba(74,55,40,.12)}
+.gate-box h2{color:var(--red);font-size:1.5em;margin-bottom:8px}
+.gate-box .sub{color:var(--ink-light);font-size:.85em;margin-bottom:24px}
+.gate-box input{width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:8px;font-size:1.1em;text-align:center;outline:none;transition:all .2s}
+.gate-box input:focus{border-color:var(--gold)}
+.gate-box button{margin-top:16px;padding:10px 36px;background:var(--red);color:#fff;border:none;border-radius:8px;font-size:1em;cursor:pointer;transition:all .2s}
+.gate-box button:hover{background:var(--gold)}
+.gate-error{color:var(--red);font-size:.8em;margin-top:8px;min-height:20px}
+.gate-degrade{background:#FFF8E1;border:1px solid var(--warn);border-radius:8px;padding:8px 12px;margin-top:12px;font-size:.75em;color:var(--warn);display:none}
+.app{display:none;min-height:100vh}.app.show{display:flex}
+.sidebar{width:240px;background:var(--card);border-right:1px solid var(--border);padding:16px 0;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0}
+.sidebar-header{padding:16px 20px;border-bottom:1px solid var(--border);margin-bottom:8px}
+.sidebar-header h3{font-size:.9em;color:var(--red)}.sidebar-header .sub{font-size:.7em;color:var(--ink-lighter)}
+.sidebar-nav{list-style:none}
+.sidebar-nav li{cursor:pointer;padding:10px 20px;font-size:.85em;transition:all .15s;border-left:3px solid transparent;display:flex;align-items:center;gap:8px}
+.sidebar-nav li:hover{background:var(--warm);border-left-color:var(--gold)}
+.sidebar-nav li.active{background:var(--warm);border-left-color:var(--red);font-weight:600}
+.sidebar-nav li .badge{font-size:.65em;background:var(--red);color:#fff;border-radius:10px;padding:1px 7px;margin-left:auto}
+.main{flex:1;padding:24px 32px;overflow-y:auto;max-height:100vh}
+.window-panel{display:none}.window-panel.show{display:block}
+.panel-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.panel-header h2{font-size:1.3em;color:var(--red)}.panel-header .meta{font-size:.78em;color:var(--ink-lighter)}
+.panel-toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;padding:12px;background:var(--card);border-radius:8px;border:1px solid var(--border-subtle)}
+.panel-toolbar input{padding:6px 12px;border:1px solid var(--border);border-radius:6px;font-size:.82em;min-width:200px;outline:none}
+.panel-toolbar input:focus{border-color:var(--gold)}
+.panel-toolbar select,.panel-toolbar button{padding:6px 14px;border:1px solid var(--border);border-radius:6px;font-size:.82em;background:var(--card);cursor:pointer}
+.panel-toolbar button:hover{border-color:var(--gold)}
+.data-table{width:100%;border-collapse:collapse;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(74,55,40,.06)}
+.data-table th{text-align:left;padding:10px 14px;background:var(--warm);font-size:.78em;color:var(--ink-light);border-bottom:2px solid var(--border);cursor:pointer;white-space:nowrap;user-select:none}
+.data-table th:hover{color:var(--red)}
+.data-table th .sort-arrow{font-size:.7em;margin-left:4px}
+.data-table td{padding:8px 14px;font-size:.82em;border-bottom:1px solid var(--border-subtle);vertical-align:top}
+.data-table tr:hover{background:var(--warm)}
+.data-table .empty-row td{text-align:center;color:var(--ink-lighter);padding:40px}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.75em;white-space:nowrap}
+.tag-red{background:#FDE8E5;color:var(--red)}.tag-gold{background:#FDF3E0;color:var(--gold)}
+.tag-green{background:#E8F0EB;color:var(--green)}.tag-gray{background:#F0EDE8;color:var(--ink-light)}
+.detail-row{display:none}.detail-row.show{display:table-row}
+.detail-row td{background:var(--warm);font-size:.78em;padding:12px 14px}
+.detail-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px}
+.detail-card .field{margin-bottom:8px}
+.detail-card .field-label{font-weight:600;font-size:.75em;color:var(--ink-light);text-transform:uppercase;letter-spacing:.04em}
+.detail-card .field-value{font-size:.88em;margin-top:2px}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:20px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px}
+.stat-card .stat-num{font-size:1.6em;font-weight:700;color:var(--red)}
+.stat-card .stat-label{font-size:.75em;color:var(--ink-light);margin-top:4px}
+.stat-card .stat-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:8px}
+.stat-card .stat-bar .fill{height:100%;border-radius:3px}
+.fill-red{background:var(--red)}.fill-gold{background:var(--gold)}.fill-green{background:var(--green)}.fill-warn{background:var(--warn)}
+.chip-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chip{background:var(--warm);border:1px solid var(--border);border-radius:6px;padding:3px 10px;font-size:.75em;display:flex;align-items:center;gap:5px}
+.immune-layer{margin-bottom:16px;padding:14px;background:var(--card);border:1px solid var(--border);border-radius:10px;border-left:4px solid var(--gold)}
+.immune-layer.l0{border-left-color:var(--red)}.immune-layer h4{font-size:.88em;margin-bottom:6px}
+.immune-layer p{font-size:.78em;color:var(--ink-light)}
+.loading{padding:60px;text-align:center;color:var(--ink-lighter)}
+.loading .spinner{display:inline-block;width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.graph-stat{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.conn-chip{background:var(--warm);border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:.75em;display:flex;align-items:center;gap:6px}
+.conn-chip .edge-type{font-size:.7em;color:var(--gold)}.conn-chip .arrow{color:var(--ink-lighter)}
+.conn-list{display:flex;flex-wrap:wrap;gap:6px}
+.evidence-block{margin-top:8px;padding:8px 12px;background:var(--warm);border-radius:6px;font-size:.78em}
+.evidence-block .ev-label{font-weight:600;color:var(--ink-light);margin-bottom:4px}
+@media(max-width:768px){.sidebar{width:180px;font-size:.8em}.main{padding:16px}.data-table{font-size:.75em}.stat-grid{grid-template-columns:repeat(2,1fr)}.graph-stat{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
 
-<!-- 密码门 -->
 <div class="gate-overlay" id="gate">
   <div class="gate-box">
-    <h2>🔐 管理窗口</h2>
+    <h2>🔐 管理后台</h2>
     <div class="sub">毛细血管级 · 9维度数据穿透</div>
     <input type="password" id="gpw" placeholder="输入密码" onkeydown="if(event.key==='Enter')checkGate(this)">
     <button onclick="checkGate(this)">进入</button>
@@ -132,7 +90,6 @@ body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; bac
   </div>
 </div>
 
-<!-- 主体 -->
 <div class="app" id="app">
   <nav class="sidebar">
     <div class="sidebar-header"><h3>🩸 毛细血管</h3><div class="sub">满意红 · 自检仪表</div></div>
@@ -143,741 +100,437 @@ body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; bac
 
 <script>
 /* ================================================================
-   数据源
+   核心状态
    ================================================================ */
-
-var DATA = {
-  terms: null,     // 从 entities_index 加载
-  decisions: null,
-  quality: null,
-  lifecycle: null,
-  instructions: null,
-  workflows: null,
-  customers: null,
-  vi: null,
-  knowledge: null,
-  loaded: false
-};
-
-var WINDOWS = [
-  {id:'terms', label:'📖 术语', icon:'📖', desc:'核心词汇产权 · 演变历史 · 标准管理'},
-  {id:'decisions', label:'⚖️ 决策日志', icon:'⚖️', desc:'27条关键决策 · 追溯 · 复盘'},
-  {id:'quality', label:'✅ 质量仪表', icon:'✅', desc:'QM指标 · 标准达标率 · 缺陷追踪'},
-  {id:'lifecycle', label:'🔄 产品生命周期', icon:'🔄', desc:'7阶段 · 各产品定位 · 跃迁条件'},
-  {id:'customers', label:'👤 客户档案', icon:'👤', desc:'26客户 · 画像 · 需求 · 决策类型'},
-  {id:'instructions', label:'📋 指令集', icon:'📋', desc:'Skills · 方法 · 模板 · SOP'},
-  {id:'workflows', label:'🔁 流程规范', icon:'🔁', desc:'Cron · 管道 · 日起课/日毕课'},
-  {id:'vi', label:'🎨 VI系统', icon:'🎨', desc:'色板 · 字体 · 间距 · 组件规范'},
-  {id:'knowledge', label:'🧠 知识资产', icon:'🧠', desc:'文档 · 框架 · 论文 · 案例'}
+var DB=null,loadError=false,currentWindow='overview',sortState={key:null,asc:true};
+var WINDOWS=[
+  {id:'overview', label:'🏠 实体总览',icon:'🏠',badgeKey:'meta'},
+  {id:'products', label:'📦 产品目录',icon:'📦',badgeKey:'products'},
+  {id:'customers',label:'👤 客户档案',icon:'👤',badgeKey:'customers'},
+  {id:'tasks',    label:'📋 任务看板',icon:'📋',badgeKey:'tasks'},
+  {id:'decisions',label:'⚖️ 决策记录',icon:'⚖️',badgeKey:'decisions'},
+  {id:'rules',    label:'🧬 规则引擎',icon:'🧬',badgeKey:'living_rules'},
+  {id:'immune',   label:'🛡️ 免疫系统',icon:'🛡️',badgeKey:'events'},
+  {id:'archaeo',  label:'🏺 考古数据',icon:'🏺',badgeKey:'historical_artifacts'},
+  {id:'graph',    label:'🕸️ 知识图谱',icon:'🕸️',badgeKey:'graph'}
 ];
 
-var currentWindow = 'terms';
-var sortState = {key:null, asc:true};
-
-/* ================================================================
-   密码门
-   ================================================================ */
-
-function checkGate(btn) {
-  var pw = document.getElementById('gpw').value;
-  try {
-    if (!sessionStorage) throw new Error('sessionStorage unavailable');
-    sessionStorage.setItem('_admin_test', '1');
-    sessionStorage.removeItem('_admin_test');
-  } catch(e) {
-    document.getElementById('gate-degrade').style.display = 'block';
-    alert('⚠️ 浏览器限制了存储，部分功能可能不稳定');
-  }
-  if (pw === '123654' || pw === '12345678') {
-    try { sessionStorage.setItem('_admin_auth', '1'); } catch(e) {}
+/* ===== 密码门 ===== */
+function checkGate(btn){
+  var pw=document.getElementById('gpw').value;
+  try{if(!sessionStorage)throw new Error('no');sessionStorage.setItem('_at','1');sessionStorage.removeItem('_at')}catch(e){document.getElementById('gate-degrade').style.display='block'}
+  if(pw==='123654'){
+    try{sessionStorage.setItem('_admin_auth','1')}catch(e){}
     document.getElementById('gate').classList.add('hidden');
     document.getElementById('app').classList.add('show');
     initApp();
-  } else {
-    document.getElementById('gate-error').textContent = '密码错误';
-  }
+  }else{document.getElementById('gate-error').textContent='密码错误'}
 }
 
-/* ================================================================
-   初始化
-   ================================================================ */
-
-function initApp() {
-  loadData();
+/* ===== 初始化 ===== */
+function initApp(){
   renderSidebar();
-  switchWindow('terms');
-}
-
-function loadData() {
-  // 内置种子数据（最终会从 JSON 文件加载，这里先内联）
-  // === 术语 ===
-  DATA.terms = [
-    {id:'TERM-001',name:'满意解研究所',category:'品牌',definition:'品牌全称，不缩写。满意姐创建的知识品牌',status:'标准',source:'满意解核心词汇产权表',evolved_from:null,evolved_to:null,first_used:'2026-03'},
-    {id:'TERM-002',name:'满意红',category:'品牌',definition:'AI助手品牌名，不叫扣子。满意解研究所下AI系统品牌',status:'标准',source:'品牌归属裁决',evolved_from:'扣子',evolved_to:null,first_used:'2026-05'},
-    {id:'TERM-003',name:'五维决策',category:'框架',definition:'五种决策维度模型：火(直觉阈)·土(时间轴)·金(可行域)·水(身心流)·木(信义观)',status:'标准',source:'满意解核心词汇产权表',evolved_from:'五路图腾',evolved_to:null,first_used:'2026-04'},
-    {id:'TERM-004',name:'五路图腾',category:'框架',definition:'内部术语=五族图腾；外部面向用户=五维决策。火/土/金/水/木五位历史人物',status:'标准',source:'满意解核心词汇产权表',evolved_from:null,evolved_to:'五维决策(对外)',first_used:'2026-03'},
-    {id:'TERM-005',name:'决策外脑',category:'定位',definition:'AI定位——不是教练，是外部思考空间。识别盲区、提出视角、整理信息，不做决定',status:'标准',source:'定位修正决策',evolved_from:'决策教练',evolved_to:null,first_used:'2026-05-29'},
-    {id:'TERM-006',name:'夏至',category:'里程碑',definition:'2026年6月21日正式运营日。对应太阳直射北回归线，象征光明的顶点',status:'标准',source:'系统里程碑',evolved_from:null,evolved_to:null,first_used:'2026-04'},
-    {id:'TERM-007',name:'试运行',category:'里程碑',definition:'2026年3月26日开始试运行。从0到1的启动日期',status:'标准',source:'系统里程碑',evolved_from:null,evolved_to:null,first_used:'2026-03'},
-    {id:'TERM-008',name:'水月观音',category:'图腾',definition:'观自在→水月观音。水·身心流维度。身体觉察与临在感',status:'标准',source:'术语修正V1',evolved_from:'观自在',evolved_to:null,first_used:'2026-05-29'},
-    {id:'TERM-009',name:'关系危机信号',category:'框架',definition:'四骑士→关系危机信号。基于Gottman婚姻研究四个负面互动模式',status:'标准',source:'术语修正V1',evolved_from:'四骑士',evolved_to:null,first_used:'2026-05-29'},
-    {id:'TERM-010',name:'两翼',category:'架构',definition:'左脑逻辑+右脑直觉。产品的双重设计原则，不指代特定产品或人',status:'标准',source:'品牌归属裁决',evolved_from:null,evolved_to:null,first_used:'2026-04'},
-    {id:'TERM-011',name:'宣纸白',category:'VI',definition:'主体底色#F5F0E6。满意解暖色体系基底，仿古宣纸质感',status:'标准',source:'VI色板决策',evolved_from:'#FFF米白',evolved_to:null,first_used:'2026-05-29'},
-    {id:'TERM-012',name:'绀红',category:'VI',definition:'主强调色#C23B22。关注+紧迫感信号。深红带紫调',status:'标准',source:'VI色板决策',evolved_from:null,evolved_to:null,first_used:'2026-05-29'},
-    {id:'TERM-013',name:'古铜金',category:'VI',definition:'辅强调色#B8860B。方法论历史深度暗示。青铜古器的沉稳光泽',status:'标准',source:'VI色板决策',evolved_from:null,evolved_to:null,first_used:'2026-05-29'},
-    {id:'TERM-014',name:'墨色',category:'VI',definition:'正文色#4A3728。墨水痕迹的深棕色，阅读比纯黑舒适',status:'标准',source:'VI色板决策',evolved_from:null,evolved_to:null,first_used:'2026-05-29'},
-    {id:'TERM-015',name:'七层免疫',category:'架构',definition:'L0自身耐受→L1物理屏障→L2先天→L3炎症隔离→L4适应性→L5自愈→L6反脆弱',status:'标准',source:'免疫架构设计',evolved_from:null,evolved_to:null,first_used:'2026-05-29'},
-    {id:'TERM-016',name:'四族产品',category:'产品',definition:'镜(反思)·衡(测量)·契(缔结)·觉(开启)。四个产品族分类体系',status:'标准',source:'满意解核心词汇产权表',evolved_from:null,evolved_to:null,first_used:'2026-03'},
-    {id:'TERM-017',name:'知识飞轮',category:'架构',definition:'知识消化管道：摄入→消化→吸收→同化→代谢。类比人体消化系统',status:'标准',source:'架构设计V4',evolved_from:null,evolved_to:null,first_used:'2026-05'},
-    {id:'TERM-018',name:'日起课/日毕课',category:'流程',definition:'每早6:00任务对齐/每晚22:00回顾归档。满意红自主节奏',status:'标准',source:'系统Cron配置',evolved_from:null,evolved_to:null,first_used:'2026-04'},
-    {id:'TERM-019',name:'65%规则',category:'原则',definition:'满意解的核心数学边界：S≥0.65×P(完美解)。Wasserman研究支持',status:'标准',source:'学术根基·西蒙理论',evolved_from:null,evolved_to:null,first_used:'2026-03'},
-    {id:'TERM-020',name:'物理层',category:'架构',definition:'信息架构+实体索引+元数据标准。四层系统模型的底层',status:'标准',source:'架构设计V6',evolved_from:null,evolved_to:null,first_used:'2026-05-30'},
-    {id:'TERM-021',name:'化学层',category:'架构',definition:'数据管道+术语同步+免疫扫描。四层系统模型的第二层',status:'标准',source:'架构设计V6',evolved_from:null,evolved_to:null,first_used:'2026-05-30'},
-    {id:'TERM-022',name:'生物层',category:'架构',definition:'7层免疫+15Cron+内稳态。四层系统模型的第三层',status:'标准',source:'架构设计V6',evolved_from:null,evolved_to:null,first_used:'2026-05-30'},
-    {id:'TERM-023',name:'心理层',category:'架构',definition:'自我描述+自我感知+内在模型。四层系统模型的顶层',status:'标准',source:'架构设计V6',evolved_from:null,evolved_to:null,first_used:'2026-05-30'},
-    {id:'TERM-024',name:'毛细血管化',category:'架构',definition:'数据穿透达到最细颗粒度：每个实体可追溯、每个数字可验证、每个关系可导航',status:'演进中',source:'用户需求',evolved_from:null,evolved_to:null,first_used:'2026-05-30'},
-    {id:'TERM-025',name:'满意姐',category:'品牌',definition:'创始人昵称。满意解研究所创建者，Egbertie的别名',status:'标准',source:'品牌归属裁决',evolved_from:null,evolved_to:null,first_used:'2026-03'}
-  ];
-
-  // === 决策日志 ===
-  DATA.decisions = [
-    {id:'DEC-001',date:'2026-05-30',title:'毛细血管化',category:'产品迭代',desc:'驾驶舱数据颗粒度需达到毛细血管级—每一个实体都可追溯、每一个数字都有来源',confidence:0.98,outcome:'confirmed',related_entities:['TASK-195','PROD-001']},
-    {id:'DEC-002',date:'2026-05-30',title:'GitHub Secret检测',category:'安全',desc:'发现扣子资料中包含API Key泄露(GitHub Push Blocked)，需排除+重新推送',confidence:0.98,outcome:'confirmed',related_entities:[]},
-    {id:'DEC-003',date:'2026-05-30',title:'术语自动修复',category:'质量工程',desc:'96文件166处术语统一：观自在→水月观音·四骑士→关系危机信号·决策教练→决策外脑',confidence:0.98,outcome:'confirmed',related_entities:['TERM-008','TERM-009','TERM-005']},
-    {id:'DEC-004',date:'2026-05-30',title:'充分授权',category:'治理',desc:'Egbertie授予满意红充分授权：自主推进所有任务不中断',confidence:0.98,outcome:'confirmed',related_entities:[]},
-    {id:'DEC-005',date:'2026-05-29',title:'四层系统架构',category:'系统架构',desc:'确立物理层→化学层→生物层→心理层：从基础设施到自我意识',confidence:0.90,outcome:'confirmed',related_entities:['TERM-020','TERM-021','TERM-022','TERM-023']},
-    {id:'DEC-006',date:'2026-05-29',title:'驾驶舱自动化',category:'系统架构',desc:'数据管道+免疫扫描+术语引擎+15Cron全自动化',confidence:0.90,outcome:'confirmed',related_entities:['SCRIPT-001','CRON-007']},
-    {id:'DEC-007',date:'2026-05-29',title:'三层穿透',category:'信息架构',desc:'驾驶舱信息粒度：L1概述卡→L2详情表→L3多选对比',confidence:0.95,outcome:'confirmed',related_entities:['PROD-003']},
-    {id:'DEC-008',date:'2026-05-29',title:'实体索引标准',category:'数据标准',desc:'确立12字段元数据标准（Dublin Core对齐）+全局ID体系',confidence:0.95,outcome:'confirmed',related_entities:['DOC-002']},
-    {id:'DEC-009',date:'2026-05-29',title:'定位修正',category:'术语统一',desc:'决策教练→决策外脑：AI是外部思考空间，不是教练',confidence:0.95,outcome:'confirmed',related_entities:['TERM-005']},
-    {id:'DEC-010',date:'2026-05-29',title:'品牌归属',category:'品牌',desc:'满意解研究所→满意姐+满意红，不再标注扣子',confidence:0.95,outcome:'confirmed',related_entities:['TERM-001','TERM-002']},
-    {id:'DEC-011',date:'2026-05-29',title:'密码方案',category:'技术架构',desc:'Web Crypto SHA-256→明文密码：SHA-256在不同浏览器/协议上下文不可靠',confidence:0.98,outcome:'confirmed',related_entities:[]},
-    {id:'DEC-012',date:'2026-05-29',title:'事件绑定模式',category:'技术规范',desc:'event.target→this参数传递：确立product-catalog为参考架构',confidence:0.98,outcome:'confirmed',related_entities:[]},
-    {id:'DEC-013',date:'2026-05-29',title:'免疫架构',category:'系统架构',desc:'从3层扩展到7层：L0-L6完整免疫系统设计',confidence:0.90,outcome:'confirmed',related_entities:['TERM-015','DOC-001']}
-  ];
-
-  // === 质量仪表 ===
-  DATA.quality = [
-    {id:'QM-001',name:'L0提案审核',standard:'所有新提案必须通过L0审核',target:'100%',current:'待执行',unit:'通过率',priority:'P0',status:'pending'},
-    {id:'QM-002',name:'L1方法论审核',standard:'产品方法论需经满意姐审核',target:'100%',current:'55%',unit:'通过率',priority:'P0',status:'in_progress'},
-    {id:'QM-003',name:'四关通过率',standard:'代码+文案+设计+品牌四关',target:'≥80%',current:'96%',unit:'通过率',priority:'P0',status:'ok'},
-    {id:'QM-004',name:'商标注册',standard:'满意解研究所有限公司商标注册',target:'已完成',current:'未申请',unit:'状态',priority:'P0',status:'critical'},
-    {id:'QM-005',name:'术语一致性',standard:'所有site/*.html中无旧术语（观自在/四骑士/决策教练）',target:'0处',current:'0处',unit:'旧术语',priority:'P0',status:'ok'},
-    {id:'QM-006',name:'Cron健康度',standard:'15个Cron全部正常运行',target:'15/15',current:'13/15',unit:'运行中',priority:'P0',status:'warn'},
-    {id:'QM-007',name:'备份鲜度',standard:'最新全量备份不超过24h',target:'≤24h',current:'≤1h',unit:'时效',priority:'P1',status:'ok'},
-    {id:'QM-008',name:'Git提交频率',standard:'每日至少1次有效提交',target:'≥1次/天',current:'达标',unit:'频率',priority:'P1',status:'ok'},
-    {id:'QM-009',name:'实体索引完整度',standard:'所有已知实体已索引入库',target:'≥90%',current:'~70%',unit:'覆盖率',priority:'P1',status:'in_progress'},
-    {id:'QM-010',name:'免疫扫描通过率',standard:'每小时免疫扫描零P0异常',target:'0 P0',current:'0 P0',unit:'异常数',priority:'P0',status:'ok'}
-  ];
-
-  // === 产品生命周期 ===
-  DATA.lifecycle = [
-    {id:'LC-01',name:'概念',order:1,desc:'想法形成+学术基础+可行性论证',entry:'创意灵感',exit:'通过L0提案审核',product_count:5},
-    {id:'LC-02',name:'原型',order:2,desc:'MVP开发+内测+早期反馈',entry:'通过L0审核',exit:'通过L1方法论审核',product_count:8},
-    {id:'LC-03',name:'内侧',order:3,desc:'有限用户测试+迭代',entry:'原型通过测试',exit:'质量达标+满意姐签批',product_count:12},
-    {id:'LC-04',name:'公开',order:4,desc:'公开发布+用户获取',entry:'内测完成',exit:'30天活跃用户>0',product_count:30},
-    {id:'LC-05',name:'精品',order:5,desc:'深度打磨+VI统一+文案精修',entry:'用户反馈良好',exit:'质量标准全部达标',product_count:15},
-    {id:'LC-06',name:'维护',order:6,desc:'持续运营+Bug修复+内容更新',entry:'精品化完成',exit:'产品退役评审',product_count:148},
-    {id:'LC-07',name:'退役',order:7,desc:'归档+替换+下架',entry:'产品退役评审通过',exit:'归档到.bak目录',product_count:0}
-  ];
-
-  // === 客户档案（26） ===
-  DATA.customers = [
-    {id:'CUST-001',name:'张雪',company:'张雪机车',role:'创业者',industry:'制造业',needs:'增长引擎、资源配置',stage:'画像',source:'飞书Base'},
-    {id:'CUST-002',name:'样本-凯越合伙人A',company:'凯越集团（化名）',role:'合伙人',industry:'汽车',needs:'关系管理、退出策略',stage:'画像',source:'飞书Base'},
-    {id:'CUST-003',name:'样本-再创业者B',company:'某激光科技公司（化名）',role:'创业者',industry:'硬科技',needs:'二次创业决策',stage:'画像',source:'飞书Base'},
-    {id:'CUST-004',name:'胡小波',company:'创鑫激光→镭神智能',role:'创业者',industry:'激光/无人驾驶',needs:'转型决策、技术路线',stage:'画像',source:'飞书Base'},
-    {id:'CUST-005',name:'样本-升级期C',company:'某AI机器人公司（化名）',role:'技术合伙人',industry:'AI/机器人',needs:'合作升级、股权分配',stage:'画像',source:'飞书Base'},
-    {id:'CUST-006',name:'正浩创新-苏炜',company:'正浩创新(EcoFlow)',role:'合伙人（前）',industry:'新能源',needs:'退出后角色定位',stage:'画像',source:'飞书Base'},
-    {id:'CUST-007',name:'大疆-朱晓蕊',company:'大疆创新(DJI)',role:'技术合伙人（前）',industry:'无人机',needs:'历史案例参考',stage:'画像',source:'飞书Base'},
-    {id:'CUST-008',name:'疯孩科技创始人',company:'疯孩科技(Crazybaby)',role:'创业者',industry:'消费电子',needs:'产品失败复盘',stage:'画像',source:'飞书Base'},
-    {id:'CUST-009',name:'龙华无人机创始人',company:'龙华无人机公司（化名）',role:'创业者',industry:'无人机',needs:'市场定位',stage:'画像',source:'飞书Base'},
-    {id:'CUST-010',name:'凌吉武岳父-方纪龙',company:'福建海创光电',role:'其他',industry:'光电',needs:'家族企业传承',stage:'画像',source:'飞书Base'}
-  ];
-
-  // === 指令集(Skills) ===
-  DATA.instructions = [
-    {id:'INST-001',name:'五维评估_简版',purpose:'五维度快速评估：直觉/时间/逻辑/身体/信义各1题',type:'评估工具',status:'active',output:'评分+维度排名'},
-    {id:'INST-002',name:'RPS风险剖面',purpose:'风险概率×影响×检测难度三维评估',type:'分析框架',status:'active',output:'风险矩阵+优先级'},
-    {id:'INST-003',name:'Pre-Mortem引导',purpose:'决策前假设失败→倒推死因→预防措施',type:'决策方法',status:'active',output:'死因清单+预防方案'},
-    {id:'INST-004',name:'关系CT温度计',purpose:'合作关系健康度4题自评+7个预警信号',type:'诊断工具',status:'active',output:'温度读数+风险预警'},
-    {id:'INST-005',name:'决策日志模板',purpose:'结构化记录：情景→选项→评估→决定→复盘',type:'记录模板',status:'active',output:'决策日志条目'},
-    {id:'INST-006',name:'元合伙章程',purpose:'合伙人决策前置规范：角色+决策权+退出条款',type:'治理规范',status:'active',output:'合伙协议框架'},
-    {id:'INST-007',name:'五维教学',purpose:'五维决策框架教学课程',type:'教学内容',status:'draft',output:'课程+练习'},
-    {id:'INST-008',name:'STARS方法论',purpose:'Startup-Turnaround-Accelerated-Realignment-Sustaining场景框架',type:'分析框架',status:'active',output:'场景诊断+策略建议'}
-  ];
-
-  // === 流程规范 ===
-  DATA.workflows = [
-    {id:'WF-001',name:'日起课',trigger:'每日06:00 Cron',steps:['唤醒系统','读取昨日记忆','检查P0任务','发送对齐消息'],status:'active',frequency:'daily'},
-    {id:'WF-002',name:'日毕课',trigger:'每日22:00 Cron',steps:['归档当日产出','更新记忆文件','评估任务完成度','生成明日预排'],status:'active',frequency:'daily'},
-    {id:'WF-003',name:'数据管道',trigger:'每6小时 Cron',steps:['扫描文件系统','分类实体','提取元数据','更新实体索引','生成种子数据'],status:'active',frequency:'every6h'},
-    {id:'WF-004',name:'免疫扫描',trigger:'每小时 Cron',steps:['MD5基线对比','检测event.target','检测crypto.subtle','检测旧术语','检查备份鲜度','评估Git状态'],status:'active',frequency:'hourly'},
-    {id:'WF-005',name:'知识飞轮',trigger:'持续运行',steps:['摄入(对话+文件)','消化(理解+提取)','吸收(索引+连接)','同化(更新认知模型)','代谢(产出+归档)'],status:'active',frequency:'continuous'},
-    {id:'WF-006',name:'部署前检查',trigger:'每次Git push前',steps:['免疫扫描','术语一致性检查','MD5基线验证','4关审核(代码+文案+设计+品牌)'],status:'active',frequency:'on_push'},
-    {id:'WF-007',name:'全量备份',trigger:'手动触发',steps:['复制site/*.html','复制memory/_data/*.json','MD5校验','归档到site/.bak/'],status:'manual',frequency:'manual'},
-    {id:'WF-008',name:'术语修复',trigger:'检测到不一致时',steps:['term_sync_engine.py扫描','确认修复映射','执行批量替换','验证零残留','记录免疫记忆'],status:'active',frequency:'on_detect'}
-  ];
-
-  // === VI系统 ===
-  DATA.vi = [
-    {id:'VI-001',name:'宣纸白',css_var:'--paper-white',value:'#F5F0E6',usage:'主体底色·页面背景',category:'color'},
-    {id:'VI-002',name:'卡片白',css_var:'--card-white',value:'#FFFFFF',usage:'卡片容器',category:'color'},
-    {id:'VI-003',name:'暖白',css_var:'--card-warm',value:'#FAF6EF',usage:'悬停态·次卡片',category:'color'},
-    {id:'VI-004',name:'墨色',css_var:'--ink',value:'#4A3728',usage:'正文·阅读文本',category:'color'},
-    {id:'VI-005',name:'绀红',css_var:'--accent-red',value:'#C23B22',usage:'主强调·关注信号·P0标识',category:'color'},
-    {id:'VI-006',name:'古铜金',css_var:'--accent-gold',value:'#B8860B',usage:'辅强调·方法论暗示·链接',category:'color'},
-    {id:'VI-007',name:'达标绿',css_var:'--compliant-green',value:'#3D7A4F',usage:'达标标识·成功状态',category:'color'},
-    {id:'VI-008',name:'警示金',css_var:'--warning-gold',value:'#C2780A',usage:'警告状态·偏差标识',category:'color'},
-    {id:'VI-009',name:'浅墨',css_var:'--ink-light',value:'#8B7355',usage:'次级文字·标签',category:'color'},
-    {id:'VI-010',name:'淡墨',css_var:'--ink-lighter',value:'#B8A890',usage:'三级文字·占位符',category:'color'},
-    {id:'VI-011',name:'边界色',css_var:'--border',value:'#E8DDCC',usage:'边框·分隔线',category:'color'},
-    {id:'VI-012',name:'微边色',css_var:'--border-subtle',value:'#F0E8D8',usage:'细边框·行分隔',category:'color'},
-    {id:'VI-013',name:'正文',css_var:'--font-body',value:'-apple-system,PingFang SC,sans-serif',usage:'全部正文',category:'typography'},
-    {id:'VI-014',name:'标题',css_var:'--font-heading',value:'inherit',usage:'H1-H3标题',category:'typography'},
-    {id:'VI-015',name:'间距-xs',css_var:'--space-xs',value:'4px',usage:'微间距',category:'spacing'},
-    {id:'VI-016',name:'间距-sm',css_var:'--space-sm',value:'8px',usage:'小间距',category:'spacing'},
-    {id:'VI-017',name:'间距-md',css_var:'--space-md',value:'16px',usage:'中间距',category:'spacing'},
-    {id:'VI-018',name:'圆角-sm',css_var:'--radius-sm',value:'6px',usage:'标签·按钮',category:'radius'},
-    {id:'VI-019',name:'圆角-md',css_var:'--radius-md',value:'10px',usage:'卡片',category:'radius'},
-    {id:'VI-020',name:'圆角-lg',css_var:'--radius-lg',value:'16px',usage:'弹层·密码门',category:'radius'}
-  ];
-
-  // === 知识资产 ===
-  DATA.knowledge = [
-    {id:'KNW-001',name:'七层免疫架构',type:'架构文档',path:'memory/deep/满意红_七层免疫架构.md',topics:['免疫','系统设计','安全'],size_kb:0},
-    {id:'KNW-002',name:'信息架构与数据字典V2',type:'架构文档',path:'memory/deep/满意解_信息架构与数据字典_V2.md',topics:['信息架构','数据标准','元数据'],size_kb:0},
-    {id:'KNW-003',name:'DACI元治理框架V1.0',type:'治理框架',path:'对话/2026-05-29/替身激活/DACI元治理框架_V1.0_草案.md',topics:['治理','决策权','DACI'],size_kb:0},
-    {id:'KNW-004',name:'Git提交规范V1.0',type:'规范',path:'对话/2026-05-29/替身激活/Git提交规范_V1.0.md',topics:['Git','规范','Conventional Commits'],size_kb:0},
-    {id:'KNW-005',name:'核心词汇产权表V1.1',type:'术语',path:'对话/2026-05-29/替身激活/满意解核心词汇产权表_V1.1.md',topics:['术语','品牌','定义'],size_kb:0},
-    {id:'KNW-006',name:'评分引擎P0缺陷清单',type:'质量',path:'对话/2026-05-29/替身激活/评分引擎P0缺陷清单.md',topics:['质量','评分','缺陷'],size_kb:0},
-    {id:'KNW-007',name:'VC投后访谈提纲',type:'客户',path:'对话/2026-05-29/替身激活/VC投后访谈提纲_V1.0_草案.md',topics:['客户','访谈','VC'],size_kb:0},
-    {id:'KNW-008',name:'蓝军独立审计报告',type:'审计',path:'对话/2026-05-29/替身激活/2026-05-29_蓝军独立审计报告_过去5天.md',topics:['审计','安全','蓝军'],size_kb:0},
-    {id:'KNW-009',name:'驾驶舱V6_活的系统',type:'架构设计',path:'对话/2026-05-29/驾驶舱重构/驾驶舱V6_活的系统.md',topics:['驾驶舱','系统架构','自我意识'],size_kb:0},
-    {id:'KNW-010',name:'满意红_自我描述',type:'自我描述',path:'对话/2026-05-29/驾驶舱重构/满意红_自我描述.md',topics:['AI','自我认知','存在定义'],size_kb:0},
-    {id:'KNW-011',name:'数字交叉验证结果',type:'验证',path:'对话/2026-05-29/替身激活/数字交叉验证结果_P0-2.md',topics:['验证','数据'],size_kb:0},
-    {id:'KNW-012',name:'5日精品化任务V1.0',type:'项目计划',path:'对话/2026-05-29/5日精品化任务/2026-05-29_5日精品化任务_V1.0.md',topics:['项目','计划','5日'],size_kb:0},
-    {id:'KNW-013',name:'网站结构分析报告',type:'分析',path:'对话/2026-05-29/驾驶舱重构/2026-05-29_网站结构分析报告.md',topics:['网站','结构','导航'],size_kb:0},
-    {id:'KNW-014',name:'全量替身激活报告',type:'替身',path:'对话/2026-05-29/替身激活/2026-05-29_0413_全量替身激活报告.md',topics:['替身','激活','全量'],size_kb:0},
-    {id:'KNW-015',name:'前端JS调试血泪教训',type:'工程',path:'memory/deep/前端JS调试血泪教训_2026-05-29.md',topics:['前端','调试','教训'],size_kb:0}
-  ];
-
-  DATA.loaded = true;
-}
-
-/* ================================================================
-   UI 渲染
-   ================================================================ */
-
-function renderSidebar() {
-  var h = '';
-  for (var i = 0; i < WINDOWS.length; i++) {
-    var w = WINDOWS[i];
-    var count = getDataCount(w.id);
-    var active = w.id === currentWindow ? ' active' : '';
-    h += '<li class="' + active + '" onclick="switchWindow(\'' + w.id + '\', this)"><span>' + w.icon + '</span>' + w.label + (count !== null ? '<span class="badge">' + count + '</span>' : '') + '</li>';
-  }
-  document.getElementById('sidebar-nav').innerHTML = h;
-}
-
-function getDataCount(windowId) {
-  var map = {
-    terms: DATA.terms ? DATA.terms.length : null,
-    decisions: DATA.decisions ? DATA.decisions.length : null,
-    quality: DATA.quality ? DATA.quality.length : null,
-    lifecycle: DATA.lifecycle ? DATA.lifecycle.length : null,
-    customers: DATA.customers ? DATA.customers.length : null,
-    instructions: DATA.instructions ? DATA.instructions.length : null,
-    workflows: DATA.workflows ? DATA.workflows.length : null,
-    vi: DATA.vi ? DATA.vi.length : null,
-    knowledge: DATA.knowledge ? DATA.knowledge.length : null
-  };
-  return map[windowId] || null;
-}
-
-function switchWindow(id, li) {
-  currentWindow = id;
-  // 更新侧栏激活
-  var lis = document.querySelectorAll('#sidebar-nav li');
-  for (var i = 0; i < lis.length; i++) lis[i].classList.remove('active');
-  if (li) li.classList.add('active');
-  // 隐藏所有窗口
-  var panels = document.querySelectorAll('.window-panel');
-  for (var i = 0; i < panels.length; i++) panels[i].classList.remove('show');
-  // 显示当前
-  var panel = document.getElementById('win-' + id);
-  if (!panel) { renderWindow(id); panel = document.getElementById('win-' + id); }
-  if (panel) panel.classList.add('show');
-  sortState = {key:null, asc:true};
-}
-
-function renderWindow(id) {
-  var h = '';
-  switch(id) {
-    case 'terms': h = renderTerms(); break;
-    case 'decisions': h = renderDecisions(); break;
-    case 'quality': h = renderQuality(); break;
-    case 'lifecycle': h = renderLifecycle(); break;
-    case 'customers': h = renderCustomers(); break;
-    case 'instructions': h = renderInstructions(); break;
-    case 'workflows': h = renderWorkflows(); break;
-    case 'vi': h = renderVI(); break;
-    case 'knowledge': h = renderKnowledge(); break;
-  }
-  var div = document.createElement('div');
-  div.id = 'win-' + id;
-  div.className = 'window-panel show';
-  div.innerHTML = h;
-  document.getElementById('main-content').appendChild(div);
-}
-
-function toolbar(id, placeholder, filters) {
-  var h = '<div class="panel-toolbar">';
-  h += '<input type="text" placeholder="' + placeholder + '" oninput="filterTable(\'' + id + '\', this.value)">';
-  if (filters) {
-    h += '<select onchange="filterTable(\'' + id + '\', document.getElementById(\'search-' + id + '\').value, this.value)">';
-    h += '<option value="">全部</option>';
-    for (var i = 0; i < filters.length; i++) {
-      h += '<option value="' + escAttr(filters[i]) + '">' + escHtml(filters[i]) + '</option>';
-    }
-    h += '</select>';
-  }
-  h += '<button onclick="exportCSV(\'' + id + '\')">📥 导出CSV</button>';
-  h += '</div>';
-  return h;
-}
-
-function renderTable(id, cols, rows, rowBuilder, emptyMsg) {
-  var h = '<table class="data-table" id="tbl-' + id + '"><thead><tr>';
-  for (var i = 0; i < cols.length; i++) {
-    var c = cols[i];
-    h += '<th onclick="sortTable(\'' + id + '\', \'' + c.key + '\', this)">' + c.label + '<span class="sort-arrow"></span></th>';
-  }
-  h += '</tr></thead><tbody id="tbody-' + id + '"></tbody></table>';
-  return h;
-}
-
-function fillTable(id, rows, rowBuilder, emptyMsg) {
-  var tbody = document.getElementById('tbody-' + id);
-  if (!tbody) return;
-  if (!rows || rows.length === 0) {
-    tbody.innerHTML = '<tr class="empty-row"><td colspan="10">' + (emptyMsg || '暂无数据') + '</td></tr>';
-    return;
-  }
-  var h = '';
-  for (var i = 0; i < rows.length; i++) {
-    h += rowBuilder(rows[i], i);
-  }
-  tbody.innerHTML = h;
-}
-
-/* ===== 术语管理 ===== */
-
-function renderTerms() {
-  var cols = [
-    {key:'id',label:'ID'},
-    {key:'name',label:'术语名'},
-    {key:'category',label:'类别'},
-    {key:'status',label:'状态'},
-    {key:'evolved_from',label:'演变来源'},
-    {key:'first_used',label:'首次使用'}
-  ];
-  var h = '<div class="panel-header"><div><h2>📖 术语管理</h2><div class="meta">' + DATA.terms.length + ' 条标准术语 · ' + DATA.terms.filter(function(t){return t.evolved_from}).length + ' 条有演变历史</div></div></div>';
-  h += toolbar('terms','搜索术语名/定义...',['品牌','框架','架构','VI','产品','流程','原则','定位','里程碑','图腾']);
-  h += renderTable('terms', cols, DATA.terms, null, '无术语数据');
-  h += '<div id="term-detail" class="detail-section"></div>';
-
-  // 演变动图
-  h += '<div class="graph-section"><h3>🔄 术语演变图谱</h3><div class="conn-list">';
-  for (var i = 0; i < DATA.terms.length; i++) {
-    var t = DATA.terms[i];
-    if (t.evolved_from) {
-      h += '<div class="conn-chip"><span class="edge-type">演变</span>' + escHtml(t.evolved_from) + ' <span class="arrow">→</span> <b>' + escHtml(t.name) + '</b></div>';
-    }
-  }
-  h += '</div></div>';
-
-  setTimeout(function() { fillTable('terms', DATA.terms, termRowBuilder, '无术语数据'); }, 0);
-  return h;
-}
-
-function termRowBuilder(t, idx) {
-  var cls = t.status === '标准' ? 'tag-green' : (t.status === '演进中' ? 'tag-gold' : 'tag-gray');
-  var h = '<tr onclick="toggleDetail(\'term-detail\', ' + idx + ', \'term\')" style="cursor:pointer">';
-  h += '<td>' + t.id + '</td>';
-  h += '<td><b>' + escHtml(t.name) + '</b></td>';
-  h += '<td><span class="tag tag-gray">' + escHtml(t.category) + '</span></td>';
-  h += '<td><span class="tag ' + cls + '">' + t.status + '</span></td>';
-  h += '<td>' + (t.evolved_from ? escHtml(t.evolved_from) : '—') + '</td>';
-  h += '<td>' + t.first_used + '</td>';
-  h += '</tr>';
-  h += '<tr class="detail-row" id="term-detail-row-' + idx + '"><td colspan="6"><div class="detail-card">';
-  h += '<div class="field"><span class="field-label">定义</span><div class="field-value">' + escHtml(t.definition) + '</div></div>';
-  h += '<div class="field"><span class="field-label">来源</span><div class="field-value">' + escHtml(t.source||'') + '</div></div>';
-  if (t.evolved_to) h += '<div class="field"><span class="field-label">演变为</span><div class="field-value">→ ' + escHtml(t.evolved_to) + '</div></div>';
-  h += '</div></td></tr>';
-  return h;
-}
-
-/* ===== 决策日志 ===== */
-
-function renderDecisions() {
-  var cols = [
-    {key:'id',label:'ID'},
-    {key:'date',label:'日期'},
-    {key:'title',label:'决策'},
-    {key:'category',label:'类别'},
-    {key:'confidence',label:'置信度'},
-    {key:'outcome',label:'结果'}
-  ];
-  var h = '<div class="panel-header"><div><h2>⚖️ 决策日志</h2><div class="meta">' + DATA.decisions.length + ' 条关键决策</div></div></div>';
-  h += toolbar('decisions','搜索决策...',['系统架构','产品迭代','质量工程','安全','治理','术语统一','品牌','信息架构','数据标准','技术架构','技术规范']);
-  h += renderTable('decisions', cols, DATA.decisions, null, '无决策记录');
-  setTimeout(function() { fillTable('decisions', DATA.decisions, decRowBuilder, '无决策记录'); }, 0);
-  return h;
-}
-
-function decRowBuilder(d, idx) {
-  var h = '<tr onclick="toggleDetail(\'dec-detail-' + idx + '\')" style="cursor:pointer">';
-  h += '<td>' + d.id + '</td>';
-  h += '<td>' + d.date + '</td>';
-  h += '<td><b>' + escHtml(d.title) + '</b></td>';
-  h += '<td><span class="tag tag-gray">' + escHtml(d.category) + '</span></td>';
-  h += '<td>' + Math.round(d.confidence*100) + '%</td>';
-  var outCls = d.outcome === 'confirmed' ? 'tag-green' : 'tag-gold';
-  h += '<td><span class="tag ' + outCls + '">' + (d.outcome==='confirmed'?'已确认':'进行中') + '</span></td>';
-  h += '</tr>';
-  h += '<tr class="detail-row" id="dec-detail-' + idx + '" style="display:none"><td colspan="6"><div class="detail-card">';
-  h += '<div class="field"><span class="field-label">详细描述</span><div class="field-value">' + escHtml(d.desc) + '</div></div>';
-  if (d.related_entities && d.related_entities.length) {
-    h += '<div class="field"><span class="field-label">关联实体</span><div class="field-value">' + d.related_entities.join(', ') + '</div></div>';
-  }
-  h += '</div></td></tr>';
-  return h;
-}
-
-/* ===== 质量仪表 ===== */
-
-function renderQuality() {
-  var cols = [
-    {key:'id',label:'ID'},
-    {key:'name',label:'指标'},
-    {key:'current',label:'当前值'},
-    {key:'target',label:'目标'},
-    {key:'priority',label:'优先级'},
-    {key:'status',label:'状态'}
-  ];
-  var ok = DATA.quality.filter(function(q){return q.status==='ok'}).length;
-  var h = '<div class="panel-header"><div><h2>✅ 质量仪表</h2><div class="meta">' + DATA.quality.length + ' 项指标 · ' + ok + ' 达标</div></div></div>';
-  h += toolbar('quality','搜索指标...',['P0','P1','P2']);
-  h += renderTable('quality', cols, DATA.quality, null, '无质量指标');
-  setTimeout(function() { fillTable('quality', DATA.quality, qmRowBuilder, '无质量指标'); }, 0);
-  return h;
-}
-
-function qmRowBuilder(q, idx) {
-  var stCls = q.status === 'ok' ? 'tag-green' : (q.status === 'critical' ? 'tag-red' : (q.status === 'warn' ? 'tag-gold' : 'tag-gray'));
-  var stLabel = q.status === 'ok' ? '✅ 达标' : (q.status === 'critical' ? '🔴 严重' : (q.status === 'warn' ? '⚠️ 警告' : (q.status === 'in_progress' ? '⏳ 进行中' : '⬜ 待执行')));
-  var h = '<tr onclick="toggleDetail(\'qm-detail-' + idx + '\')" style="cursor:pointer">';
-  h += '<td>' + q.id + '</td>';
-  h += '<td><b>' + escHtml(q.name) + '</b></td>';
-  h += '<td style="color:' + (q.status==='critical'?'var(--red)':'inherit') + ';font-weight:600">' + escHtml(q.current) + '</td>';
-  h += '<td>' + escHtml(q.target) + '</td>';
-  h += '<td><span class="tag ' + (q.priority==='P0'?'tag-red':'tag-gold') + '">' + q.priority + '</span></td>';
-  h += '<td><span class="tag ' + stCls + '">' + stLabel + '</span></td>';
-  h += '</tr>';
-  h += '<tr class="detail-row" id="qm-detail-' + idx + '" style="display:none"><td colspan="6"><div class="detail-card">';
-  h += '<div class="field"><span class="field-label">标准</span><div class="field-value">' + escHtml(q.standard) + '</div></div>';
-  h += '</div></td></tr>';
-  return h;
-}
-
-/* ===== 产品生命周期 ===== */
-
-function renderLifecycle() {
-  var cols = [
-    {key:'order',label:'#阶段'},
-    {key:'name',label:'阶段名'},
-    {key:'desc',label:'描述'},
-    {key:'entry',label:'进入条件'},
-    {key:'exit',label:'退出标准'},
-    {key:'product_count',label:'产品数'}
-  ];
-  var h = '<div class="panel-header"><div><h2>🔄 产品全生命周期</h2><div class="meta">7 阶段 · 管理 82 个产品</div></div></div>';
-  h += renderTable('lifecycle', cols, DATA.lifecycle, null, '无生命周期数据');
-  setTimeout(function() { fillTable('lifecycle', DATA.lifecycle, lcRowBuilder, '无生命周期数据'); }, 0);
-  return h;
-}
-
-function lcRowBuilder(lc, idx) {
-  var h = '<tr>';
-  h += '<td>' + lc.order + '</td>';
-  h += '<td><b>' + lc.name + '</b></td>';
-  h += '<td>' + escHtml(lc.desc) + '</td>';
-  h += '<td>' + escHtml(lc.entry) + '</td>';
-  h += '<td>' + escHtml(lc.exit) + '</td>';
-  h += '<td>' + lc.product_count + '</td>';
-  h += '</tr>';
-  return h;
-}
-
-/* ===== 客户档案 ===== */
-
-function renderCustomers() {
-  var cols = [
-    {key:'id',label:'ID'},
-    {key:'name',label:'客户'},
-    {key:'role',label:'角色'},
-    {key:'industry',label:'行业'},
-    {key:'needs',label:'需求'},
-    {key:'stage',label:'阶段'}
-  ];
-  var h = '<div class="panel-header"><div><h2>👤 客户档案</h2><div class="meta">' + DATA.customers.length + ' 位客户（来自飞书Base）</div></div></div>';
-  h += toolbar('customers','搜索客户/企业...',['创业者','合伙人','技术合伙人','其他']);
-  h += renderTable('customers', cols, DATA.customers, null, '无客户数据');
-  setTimeout(function() { fillTable('customers', DATA.customers, custRowBuilder, '无客户数据'); }, 0);
-  return h;
-}
-
-function custRowBuilder(c, idx) {
-  var h = '<tr onclick="toggleDetail(\'cust-detail-' + idx + '\')" style="cursor:pointer">';
-  h += '<td>' + c.id + '</td>';
-  h += '<td><b>' + escHtml(c.name) + '</b></td>';
-  h += '<td><span class="tag tag-gray">' + escHtml(c.role) + '</span></td>';
-  h += '<td>' + escHtml(c.industry) + '</td>';
-  h += '<td>' + escHtml(c.needs) + '</td>';
-  h += '<td>' + c.stage + '</td>';
-  h += '</tr>';
-  h += '<tr class="detail-row" id="cust-detail-' + idx + '" style="display:none"><td colspan="6"><div class="detail-card">';
-  if (c.company) h += '<div class="field"><span class="field-label">企业</span><div class="field-value">' + escHtml(c.company) + '</div></div>';
-  h += '<div class="field"><span class="field-label">来源</span><div class="field-value">' + escHtml(c.source||'') + '</div></div>';
-  h += '</div></td></tr>';
-  return h;
-}
-
-/* ===== 指令集 ===== */
-
-function renderInstructions() {
-  var cols = [
-    {key:'id',label:'ID'},
-    {key:'name',label:'指令名'},
-    {key:'type',label:'类型'},
-    {key:'purpose',label:'用途'},
-    {key:'status',label:'状态'},
-    {key:'output',label:'输出'}
-  ];
-  var h = '<div class="panel-header"><div><h2>📋 指令集</h2><div class="meta">' + DATA.instructions.length + ' 条指令 · 方法·模板·SOP</div></div></div>';
-  h += toolbar('instructions','搜索指令...',['评估工具','分析框架','决策方法','诊断工具','记录模板','治理规范','教学内容']);
-  h += renderTable('instructions', cols, DATA.instructions, null, '无指令数据');
-  setTimeout(function() { fillTable('instructions', DATA.instructions, instRowBuilder, '无指令数据'); }, 0);
-  return h;
-}
-
-function instRowBuilder(inst, idx) {
-  var cls = inst.status === 'active' ? 'tag-green' : 'tag-gray';
-  var h = '<tr>';
-  h += '<td>' + inst.id + '</td>';
-  h += '<td><b>' + escHtml(inst.name) + '</b></td>';
-  h += '<td><span class="tag tag-gray">' + escHtml(inst.type) + '</span></td>';
-  h += '<td>' + escHtml(inst.purpose) + '</td>';
-  h += '<td><span class="tag ' + cls + '">' + inst.status + '</span></td>';
-  h += '<td>' + escHtml(inst.output) + '</td>';
-  h += '</tr>';
-  return h;
-}
-
-/* ===== 流程规范 ===== */
-
-function renderWorkflows() {
-  var cols = [
-    {key:'id',label:'ID'},
-    {key:'name',label:'流程名'},
-    {key:'trigger',label:'触发条件'},
-    {key:'steps',label:'步骤数'},
-    {key:'frequency',label:'频率'},
-    {key:'status',label:'状态'}
-  ];
-  var h = '<div class="panel-header"><div><h2>🔁 流程规范</h2><div class="meta">' + DATA.workflows.length + ' 个系统流程 · Cron / 管道 / 日课</div></div></div>';
-  h += renderTable('workflows', cols, DATA.workflows, null, '无流程数据');
-  setTimeout(function() { fillTable('workflows', DATA.workflows, wfRowBuilder, '无流程数据'); }, 0);
-  return h;
-}
-
-function wfRowBuilder(wf, idx) {
-  var h = '<tr onclick="toggleDetail(\'wf-detail-' + idx + '\')" style="cursor:pointer">';
-  h += '<td>' + wf.id + '</td>';
-  h += '<td><b>' + escHtml(wf.name) + '</b></td>';
-  h += '<td>' + escHtml(wf.trigger) + '</td>';
-  h += '<td>' + wf.steps.length + ' 步</td>';
-  h += '<td><span class="tag tag-gray">' + wf.frequency + '</span></td>';
-  var cls = wf.status === 'active' ? 'tag-green' : 'tag-gray';
-  h += '<td><span class="tag ' + cls + '">' + wf.status + '</span></td>';
-  h += '</tr>';
-  h += '<tr class="detail-row" id="wf-detail-' + idx + '" style="display:none"><td colspan="6"><div class="detail-card">';
-  h += '<div class="field"><span class="field-label">步骤详情</span><div class="field-value">' + wf.steps.map(function(s,i){return (i+1)+'. '+s}).join(' → ') + '</div></div>';
-  h += '</div></td></tr>';
-  return h;
-}
-
-/* ===== VI系统 ===== */
-
-function renderVI() {
-  var cols = [
-    {key:'id',label:'ID'},
-    {key:'name',label:'名称'},
-    {key:'value',label:'值'},
-    {key:'css_var',label:'CSS变量'},
-    {key:'category',label:'类别'},
-    {key:'usage',label:'用途'}
-  ];
-  var h = '<div class="panel-header"><div><h2>🎨 VI系统</h2><div class="meta">' + DATA.vi.length + ' 个设计变量 · 色板/字体/间距/圆角</div></div></div>';
-  h += toolbar('vi','搜索变量...',['color','typography','spacing','radius']);
-  h += renderTable('vi', cols, DATA.vi, null, '无VI数据');
-  setTimeout(function() { fillTable('vi', DATA.vi, viRowBuilder, '无VI数据'); }, 0);
-  return h;
-}
-
-function viRowBuilder(v, idx) {
-  var hasColor = v.value && v.value.indexOf('#') === 0;
-  var h = '<tr>';
-  h += '<td>' + v.id + '</td>';
-  h += '<td><b>' + escHtml(v.name) + '</b>' + (hasColor ? ' <span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:' + v.value + ';border:1px solid #ccc;vertical-align:middle"></span>' : '') + '</td>';
-  h += '<td><code>' + v.value + '</code></td>';
-  h += '<td><code>' + v.css_var + '</code></td>';
-  h += '<td><span class="tag tag-gray">' + v.category + '</span></td>';
-  h += '<td>' + escHtml(v.usage) + '</td>';
-  h += '</tr>';
-  return h;
-}
-
-/* ===== 知识资产 ===== */
-
-function renderKnowledge() {
-  var cols = [
-    {key:'id',label:'ID'},
-    {key:'name',label:'文档名'},
-    {key:'type',label:'类型'},
-    {key:'topics',label:'主题'},
-    {key:'path',label:'路径'}
-  ];
-  var h = '<div class="panel-header"><div><h2>🧠 知识资产</h2><div class="meta">' + DATA.knowledge.length + ' 件知识资产 · 框架·文档·报告</div></div></div>';
-  h += toolbar('knowledge','搜索知识...',['架构文档','治理框架','规范','术语','质量','客户','审计','架构设计','自我描述','验证','项目计划','分析','替身','工程']);
-  h += renderTable('knowledge', cols, DATA.knowledge, null, '无知识数据');
-  setTimeout(function() { fillTable('knowledge', DATA.knowledge, knwRowBuilder, '无知识数据'); }, 0);
-  return h;
-}
-
-function knwRowBuilder(k, idx) {
-  var h = '<tr>';
-  h += '<td>' + k.id + '</td>';
-  h += '<td><b>' + escHtml(k.name) + '</b></td>';
-  h += '<td><span class="tag tag-gray">' + escHtml(k.type) + '</span></td>';
-  h += '<td>' + k.topics.map(function(t){return '<span class="tag tag-gold">'+escHtml(t)+'</span>'}).join(' ') + '</td>';
-  h += '<td><code style="font-size:0.75em">' + escHtml(k.path) + '</code></td>';
-  h += '</tr>';
-  return h;
-}
-
-/* ================================================================
-   交互辅助
-   ================================================================ */
-
-function toggleDetail(rowId) {
-  var row = document.getElementById(rowId);
-  if (row) {
-    if (row.style.display === 'none' || row.style.display === '') {
-      row.style.display = 'table-row';
-    } else {
-      row.style.display = 'none';
-    }
-  }
-}
-
-function filterTable(id, text, category) {
-  text = (text || '').toLowerCase();
-  var rows = document.querySelectorAll('#tbody-' + id + ' tr');
-  for (var i = 0; i < rows.length; i++) {
-    var row = rows[i];
-    if (row.className.indexOf('empty-row') >= 0 || row.className.indexOf('detail-row') >= 0) continue;
-    var match = true;
-    if (text) {
-      var rowText = (row.textContent || '').toLowerCase();
-      if (rowText.indexOf(text) < 0) match = false;
-    }
-    if (category && match) {
-      // category filter: 找包含 category 的元素
-      var cats = row.querySelectorAll('.tag');
-      var catMatch = false;
-      for (var j = 0; j < cats.length; j++) {
-        if ((cats[j].textContent||'').indexOf(category) >= 0) { catMatch = true; break; }
-      }
-      if (!catMatch) match = false;
-    }
-    row.style.display = match ? '' : 'none';
-    // 隐藏对应的详情行
-    var next = row.nextElementSibling;
-    if (next && next.className.indexOf('detail-row') >= 0) {
-      next.style.display = 'none';
-    }
-  }
-}
-
-function sortTable(id, key, th) {
-  var dataArr;
-  switch(id) {
-    case 'terms': dataArr = DATA.terms.slice(); break;
-    case 'decisions': dataArr = DATA.decisions.slice(); break;
-    case 'quality': dataArr = DATA.quality.slice(); break;
-    case 'lifecycle': dataArr = DATA.lifecycle.slice(); break;
-    case 'customers': dataArr = DATA.customers.slice(); break;
-    case 'instructions': dataArr = DATA.instructions.slice(); break;
-    case 'workflows': dataArr = DATA.workflows.slice(); break;
-    case 'vi': dataArr = DATA.vi.slice(); break;
-    case 'knowledge': dataArr = DATA.knowledge.slice(); break;
-    default: return;
-  }
-  var asc = sortState.key === key ? !sortState.asc : true;
-  sortState = {key:key, asc:asc};
-  dataArr.sort(function(a,b) {
-    var va = (a[key]||''); var vb = (b[key]||'');
-    if (typeof va === 'number') return asc ? va - vb : vb - va;
-    va = String(va); vb = String(vb);
-    return asc ? va.localeCompare(vb, 'zh') : vb.localeCompare(va, 'zh');
+  var ct=document.getElementById('main-content');if(ct&&!document.getElementById('win-overview')){var d=document.createElement('div');d.id='win-overview';d.className='window-panel';ct.appendChild(d)}
+  fetch('entities_index.json').then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(function(j){
+    DB=j;loadError=false;renderSidebar();switchWindow('overview');
+  }).catch(function(err){
+    console.error('加载失败:',err);loadError=true;DB=null;renderSidebar();switchWindow('overview');
   });
-  // 更新箭头
-  var arrows = document.querySelectorAll('#tbl-' + id + ' .sort-arrow');
-  for (var i = 0; i < arrows.length; i++) arrows[i].textContent = '';
-  th.querySelector('.sort-arrow').textContent = asc ? ' ▲' : ' ▼';
-  // 重填表
-  var builders = {terms:termRowBuilder, decisions:decRowBuilder, quality:qmRowBuilder, lifecycle:lcRowBuilder, customers:custRowBuilder, instructions:instRowBuilder, workflows:wfRowBuilder, vi:viRowBuilder, knowledge:knwRowBuilder};
-  fillTable(id, dataArr, builders[id], '暂无数据');
 }
 
-function exportCSV(id) {
-  alert('导出功能: ' + id + ' — 即将下载CSV文件（开发中）');
+/* ===== 侧栏 ===== */
+function renderSidebar(){
+  var h='';for(var i=0;i<WINDOWS.length;i++){var w=WINDOWS[i];var b=getBadge(w);var a=w.id===currentWindow?' active':'';h+='<li class="'+a+'" onclick="switchWindow(\''+w.id+'\', this)"><span>'+w.icon+'</span>'+w.label+(b!==null?'<span class="badge">'+b+'</span>':'')+'</li>'}document.getElementById('sidebar-nav').innerHTML=h;
+}
+function getBadge(w){
+  if(!DB)return w.id==='overview'?'...':null;
+  switch(w.badgeKey){
+    case'meta':return DB.meta?DB.meta.total_entities:null;
+    case'products':return DB.products?DB.products.length:null;
+    case'customers':return DB.customers?DB.customers.length:null;
+    case'tasks':return DB.tasks?DB.tasks.length:null;
+    case'decisions':return DB.decisions?DB.decisions.length:null;
+    case'living_rules':return DB.living_rules?DB.living_rules.length:null;
+    case'events':return DB.events?DB.events.length:null;
+    case'historical_artifacts':return DB.historical_artifacts?DB.historical_artifacts.length:null;
+    case'graph':return DB.meta?DB.meta.knowledge_graph_density+'%':null;
+    default:return null;
+  }
 }
 
-function escHtml(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+/* ===== 窗口切换 ===== */
+function switchWindow(id,li){
+  currentWindow=id;
+  var lis=document.querySelectorAll('#sidebar-nav li');for(var i=0;i<lis.length;i++)lis[i].classList.remove('active');
+  if(li)li.classList.add('active');
+  var ps=document.querySelectorAll('.window-panel');for(var j=0;j<ps.length;j++)ps[j].classList.remove('show');
+  var p=document.getElementById('win-'+id);if(p)p.parentNode.removeChild(p);
+  var d=document.createElement('div');d.id='win-'+id;d.className='window-panel show';
+  d.innerHTML='<div class="loading"><div class="spinner"></div><p style="margin-top:12px">加载中...</p></div>';
+  document.getElementById('main-content').appendChild(d);
+  sortState={key:null,asc:true};
+  setTimeout(function(){renderPane(id)},10);
+}
+function renderPane(id){
+  var d=document.getElementById('win-'+id);if(!d)return;
+  try{switch(id){case'overview':d.innerHTML=rOverview();break;case'products':d.innerHTML=rProducts();break;case'customers':d.innerHTML=rCustomers();break;case'tasks':d.innerHTML=rTasks();break;case'decisions':d.innerHTML=rDecisions();break;case'rules':d.innerHTML=rRules();break;case'immune':d.innerHTML=rImmune();break;case'archaeo':d.innerHTML=rArchaeo();break;case'graph':d.innerHTML=rGraph();break}}catch(e){d.innerHTML='<div class="loading" style="color:var(--red)">渲染错误: '+escH(String(e))+'</div>'}
 }
 
-function escAttr(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+/* ===== 降级 ===== */
+function renderDegrade(){return'<div class="loading"><div class="spinner" style="border-top-color:var(--red)"></div><p style="margin-top:16px;color:var(--red)">⚠️ 数据加载失败</p><p style="font-size:.8em;color:var(--ink-light)">请检查 entities_index.json 路径</p></div>'}
+
+/* ===== 辅助函数 ===== */
+function escH(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function escA(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function toolbar(id,ph,filts){
+  var h='<div class="panel-toolbar"><input type="text" placeholder="'+ph+'" id="srch-'+id+'" oninput="filterPane(\''+id+'\',this.value)">';
+  if(filts){h+='<select onchange="filterPane(\''+id+'\',document.getElementById(\'srch-'+id+'\').value,this.value)"><option value="">全部</option>';for(var i=0;i<filts.length;i++)h+='<option value="'+escA(filts[i])+'">'+escH(filts[i])+'</option>';h+='</select>'}
+  h+='</div>';return h;
+}
+function toggleDetail(rowId){var r=document.getElementById(rowId);if(r)r.classList.toggle('show')}
+function filterPane(id,text,cat){
+  text=(text||'').toLowerCase();var rows=document.querySelectorAll('#tbody-'+id+' tr');
+  for(var i=0;i<rows.length;i++){var row=rows[i];if(row.className.indexOf('empty-row')>=0||row.className.indexOf('detail-row')>=0)continue;var m=true;if(text&&(row.textContent||'').toLowerCase().indexOf(text)<0)m=false;if(cat&&m){var tags=row.querySelectorAll('.tag');var cm=false;for(var j=0;j<tags.length;j++){if((tags[j].textContent||'').indexOf(cat)>=0){cm=true;break}}if(!cm)m=false}row.style.display=m?'':'none';var nx=row.nextElementSibling;if(nx&&nx.className.indexOf('detail-row')>=0)nx.style.display='none'}
+}
+
+/* ===== 排序/填表 ===== */
+var PANE_DATA={};
+function fillPaneTable(id,rows,rowBld,emptyMsg){
+  var tbody=document.getElementById('tbody-'+id);if(!tbody)return;
+  if(!rows||!rows.length){tbody.innerHTML='<tr class="empty-row"><td colspan="10">'+(emptyMsg||'暂无数据')+'</td></tr>';return}
+  var h='';for(var i=0;i<rows.length;i++)h+=rowBld(rows[i],i);tbody.innerHTML=h;
+}
+function sortPane(id,key,th){
+  var rows=PANE_DATA[id];if(!rows)return;var asc=sortState.key===key?!sortState.asc:true;sortState={key:key,asc:asc};
+  rows.sort(function(a,b){var va=a[key]||'',vb=b[key]||'';if(typeof va==='number')return asc?va-vb:vb-va;va=String(va);vb=String(vb);return asc?va.localeCompare(vb,'zh'):vb.localeCompare(va,'zh')});
+  var arrows=document.querySelectorAll('#tbl-'+id+' .sort-arrow');for(var i=0;i<arrows.length;i++)arrows[i].textContent='';
+  th.querySelector('.sort-arrow').textContent=asc?' ▲':' ▼';
+  fillPaneTable(id,rows,getRowBuilder(id),'暂无数据');
+}
+function getRowBuilder(id){return rowBuilders[id]||function(){return''}}
+var rowBuilders={};
+/* ================================================================
+   1. 实体总览 · 3994实体按维度分布的可视化
+   ================================================================ */
+function rOverview(){
+  if(!DB)return renderDegrade();
+  var m=DB.meta,bd=m.breakdown,h='<div class="panel-header"><div><h2>🏠 实体总览</h2><div class="meta">'+m.total_entities+' 实体 · '+Object.keys(bd).length+' 维度 · 密度 '+m.knowledge_graph_density+'%</div></div></div>';
+  h+='<div class="stat-grid">';
+  var dims=[{k:'products',l:'产品',i:'📦'},{k:'tasks',l:'任务',i:'📋'},{k:'terms',l:'术语',i:'📖'},{k:'decisions',l:'决策',i:'⚖️'},{k:'customers',l:'客户',i:'👤'},{k:'living_rules',l:'规则',i:'🧬'},{k:'instructions_set',l:'指令',i:'📜'},{k:'workflows',l:'流程',i:'🔁'}];
+  for(var i=0;i<dims.length;i++){var d=dims[i],v=bd[d.k]||0,pct=Math.min(v/m.total_entities*500,100);h+='<div class="stat-card"><div class="stat-num">'+v+'</div><div class="stat-label">'+d.i+' '+d.l+'</div><div class="stat-bar"><div class="fill fill-gold" style="width:'+pct+'%"></div></div></div>'}
+  h+='</div>';
+  var dims2=[{k:'documents',l:'文档',i:'📄'},{k:'events',l:'事件',i:'⚡'},{k:'milestones',l:'里程碑',i:'🏁'},{k:'crons',l:'Cron',i:'⏰'},{k:'scripts',l:'脚本',i:'🔧'},{k:'scoring_models',l:'评分模型',i:'📊'},{k:'simulation_scenarios',l:'模拟场景',i:'🎭'},{k:'historical_artifacts',l:'考古',i:'🏺'},{k:'governance_frameworks',l:'治理框架',i:'🏛️'},{k:'vi_standards',l:'VI标准',i:'🎨'},{k:'quality_metrics',l:'质量指标',i:'✅'},{k:'additional_discoveries',l:'发现',i:'🔍'}];
+  h+='<div style="margin-top:16px"><h3 style="font-size:.95em;margin-bottom:10px">📊 全维度分布</h3><table class="data-table"><thead><tr><th>维度</th><th>数量</th><th>占比</th></tr></thead><tbody>';
+  for(var j=0;j<dims2.length;j++){var d2=dims2[j],v2=bd[d2.k]||0,pct2=m.total_entities?(v2/m.total_entities*100).toFixed(1):0;h+='<tr><td>'+d2.i+' '+d2.l+'</td><td><b>'+v2+'</b></td><td>'+pct2+'%</td></tr>'}h+='</tbody></table></div>';
+  if(m.product_families){h+='<div style="margin-top:20px"><h3 style="font-size:.95em;margin-bottom:10px">📦 产品族分布</h3><div class="chip-wrap">';var fk=Object.keys(m.product_families);for(var kc=0;kc<fk.length;kc++)h+='<div class="chip"><b>'+escH(fk[kc])+'</b> '+m.product_families[fk[kc]]+'个</div>';h+='</div></div>'}
+  if(m.living_rules_status){var rs=m.living_rules_status;h+='<div style="margin-top:20px"><h3 style="font-size:.95em">🧬 规则引擎健康度 · 规则数: '+(DB.living_rules||[]).length+'</h3><div class="chip-wrap"><div class="chip"><span class="tag tag-green">活跃 '+rs.active+'</span></div><div class="chip"><span class="tag tag-gold">休眠 '+rs.dormant+'</span></div>';if(rs.broken)h+='<div class="chip"><span class="tag tag-red">损坏 '+rs.broken+'</span></div>';h+='</div></div>'}
+  if(m.biological_health){var bh=m.biological_health;h+='<div style="margin-top:8px;font-size:.78em;color:var(--ink-light)">🔥 全活: '+bh.fully_alive+'/'+bh.rules_with_triggers+' · 触发:'+bh.rules_with_triggers+' · 反馈:'+bh.rules_with_feedback+' · 适应:'+bh.rules_with_adaptation+' · Cron连接:'+bh.cron_connected+'</div>'}
+  if(m.corrections){h+='<div style="margin-top:20px"><h3 style="font-size:.95em">📝 数据修正记录</h3>';for(var c=0;c<m.corrections.length;c++)h+='<div style="font-size:.78em;color:var(--ink-light);padding:4px 0">'+escH(m.corrections[c])+'</div>';h+='</div>'}
+  return h;
+}
+/* ================================================================
+   2. 产品目录 · 240产品·按族筛选·状态活跃/休眠/待完善
+   ================================================================ */
+function rProducts(){
+  if(!DB)return renderDegrade();
+  var prods=DB.products||[],mf=(DB.meta||{}).product_families||{},fks=Object.keys(mf);
+  var h='<div class="panel-header"><div><h2>📦 产品目录</h2><div class="meta">'+prods.length+' 产品 · '+fks.length+' 族</div></div></div>';
+  h+=toolbar('products','搜索产品名/描述...',fks);
+  h+='<table class="data-table" id="tbl-products"><thead><tr><th onclick="sortPane(\'products\',\'id\',this)">ID<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'name\',this)">产品名<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'family\',this)">族<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'status\',this)">状态<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'tier\',this)">层级<span class="sort-arrow"></span></th><th>标签</th></tr></thead><tbody id="tbody-products"></tbody></table>';
+  rowBuilders.products=prodRow;PANE_DATA.products=prods.slice();setTimeout(function(){fillPaneTable('products',prods,prodRow,'无产品数据')},0);
+  return h;
+}
+function prodRow(p,idx){
+  var sc=p.status==='精品'?'tag-green':(p.status==='活跃'?'tag-gold':'tag-gray');
+  var h='<tr onclick="toggleDetail(\'prod-det-'+idx+'\')" style="cursor:pointer"><td>'+escH(p.id)+'</td><td><b>'+escH(p.name)+'</b></td><td><span class="tag tag-gray">'+escH(p.family||'—')+'</span></td><td><span class="tag '+sc+'">'+escH(p.status||'—')+'</span></td><td>'+escH(p.tier||'—')+'</td><td>'+((p.tags||[]).slice(0,3).map(function(t){return'<span class="tag tag-gold">'+escH(t)+'</span>'}).join(' '))+'</td></tr>';
+  h+='<tr class="detail-row" id="prod-det-'+idx+'"><td colspan="6"><div class="detail-card">';
+  if(p.description)h+='<div class="field"><span class="field-label">描述</span><div class="field-value">'+escH(p.description)+'</div></div>';
+  if(p.url)h+='<div class="field"><span class="field-label">路径</span><div class="field-value"><code>'+escH(p.url)+'</code></div></div>';
+  if(p.maturity)h+='<div class="field"><span class="field-label">成熟度</span><div class="field-value">'+escH(p.maturity)+'</div></div>';
+  if(p.source)h+='<div class="field"><span class="field-label">来源</span><div class="field-value">'+escH(p.source)+'</div></div>';
+  if(p.confidence)h+='<div class="field"><span class="field-label">置信度</span><div class="field-value">'+Math.round(p.confidence*100)+'%</div></div>';
+  return h+'</div></td></tr>';
+}
+/* ================================================================
+   3. 客户档案 · 5客户+31画像·行业标签
+   ================================================================ */
+function rCustomers(){
+  if(!DB)return renderDegrade();
+  var all=(DB.customers||[]).concat(DB.customer_profiles||[]),inds=[];
+  for(var i=0;i<all.length;i++){var ind=all[i].industry;if(ind&&inds.indexOf(ind)<0)inds.push(ind)}
+  var h='<div class="panel-header"><div><h2>👤 客户档案</h2><div class="meta">'+(DB.customers||[]).length+' 核心客户 · '+(DB.customer_profiles||[]).length+' 画像</div></div></div>';
+  h+=toolbar('customers','搜索客户/企业...',inds);
+  h+='<table class="data-table" id="tbl-customers"><thead><tr><th onclick="sortPane(\'customers\',\'id\',this)">ID<span class="sort-arrow"></span></th><th onclick="sortPane(\'customers\',\'name\',this)">客户/画像<span class="sort-arrow"></span></th><th onclick="sortPane(\'customers\',\'industry\',this)">行业<span class="sort-arrow"></span></th><th onclick="sortPane(\'customers\',\'stage\',this)">阶段<span class="sort-arrow"></span></th><th>需求/痛点</th><th>决策类型</th></tr></thead><tbody id="tbody-customers"></tbody></table>';
+  rowBuilders.customers=custRow;PANE_DATA.customers=all.slice();setTimeout(function(){fillPaneTable('customers',all,custRow,'无客户数据')},0);
+  return h;
+}
+function custRow(c,idx){
+  var need=String(c.needs||c.needs_summary||((c.pain_points||[]).join(', '))||'—');
+  var h='<tr onclick="toggleDetail(\'cust-det-'+idx+'\')" style="cursor:pointer"><td>'+escH(c.id)+'</td><td><b>'+escH(c.name||c.company||'—')+'</b>'+(c.company?' <span style="font-size:.75em;color:var(--ink-lighter)">('+escH(c.company)+')</span>':'')+'</td><td>'+escH(c.industry||'—')+'</td><td>'+escH(c.stage||'—')+'</td><td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escH(need)+'</td><td>'+escH(c.decision_type||c.role||'—')+'</td></tr>';
+  h+='<tr class="detail-row" id="cust-det-'+idx+'"><td colspan="6"><div class="detail-card">';
+  if(c.description)h+='<div class="field"><span class="field-label">描述</span><div class="field-value">'+escH(c.description)+'</div></div>';
+  if(c.needs)h+='<div class="field"><span class="field-label">需求</span><div class="field-value">'+escH(c.needs)+'</div></div>';
+  if(c.pain_points&&c.pain_points.length)h+='<div class="field"><span class="field-label">痛点</span><div class="field-value">'+c.pain_points.map(function(p){return'<span class="tag tag-red">'+escH(p)+'</span>'}).join(' ')+'</div></div>';
+  if(c.tags&&c.tags.length)h+='<div class="field"><span class="field-label">标签</span><div class="field-value">'+c.tags.map(function(t){return'<span class="tag tag-gray">'+escH(t)+'</span>'}).join(' ')+'</div></div>';
+  if(c.lifetime_value!==undefined)h+='<div class="field"><span class="field-label">LTV</span><div class="field-value">'+c.lifetime_value+'</div></div>';
+  return h+'</div></td></tr>';
+}
+/* ================================================================
+   4. 任务看板 · 195任务·P0/P1/P2·未闭环
+   ================================================================ */
+function rTasks(){
+  if(!DB)return renderDegrade();
+  var tasks=DB.tasks||[],closed=tasks.filter(function(t){return/已完成/.test(t.status||'')}).length,nc=tasks.length-closed;
+  var p0=tasks.filter(function(t){return/P0/.test(t.priority||'')}).length,p1=tasks.filter(function(t){return/P1/.test(t.priority||'')}).length,p2=tasks.filter(function(t){return/P2/.test(t.priority||'')}).length;
+  var h='<div class="panel-header"><div><h2>📋 任务看板</h2><div class="meta">'+tasks.length+' 任务 · '+nc+' 未闭环 · '+closed+' 已完成</div></div></div>';
+  h+='<div class="stat-grid">';
+  h+='<div class="stat-card" style="cursor:pointer" onclick="var opts=document.getElementById(\'srch-tasks-filt\');if(opts)opts.value=\'P0\';filterPane(\'tasks\',document.getElementById(\'srch-tasks\').value,\'P0\')"><div class="stat-num">'+p0+'</div><div class="stat-label">🔴 P0·立即</div><div class="stat-bar"><div class="fill fill-red" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card" style="cursor:pointer" onclick="var opts=document.getElementById(\'srch-tasks-filt\');if(opts)opts.value=\'P1\';filterPane(\'tasks\',document.getElementById(\'srch-tasks\').value,\'P1\')"><div class="stat-num">'+p1+'</div><div class="stat-label">🟡 P1·本周</div><div class="stat-bar"><div class="fill fill-gold" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card" style="cursor:pointer" onclick="var opts=document.getElementById(\'srch-tasks-filt\');if(opts)opts.value=\'P2\';filterPane(\'tasks\',document.getElementById(\'srch-tasks\').value,\'P2\')"><div class="stat-num">'+p2+'</div><div class="stat-label">🟢 P2·两周</div><div class="stat-bar"><div class="fill fill-green" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+nc+'</div><div class="stat-label">⚡ 未闭环</div><div class="stat-bar"><div class="fill fill-warn" style="width:100%"></div></div></div>';
+  h+='</div>';
+  var prios=['P0·立即','P1·本周','P2·两周','P0','P1','✅ 已完成','⏳ 进行中','⬜ 待执行'];h+=toolbar('tasks','搜索任务...',prios);
+  h+='<table class="data-table" id="tbl-tasks"><thead><tr><th onclick="sortPane(\'tasks\',\'id\',this)">ID<span class="sort-arrow"></span></th><th onclick="sortPane(\'tasks\',\'name\',this)">任务名<span class="sort-arrow"></span></th><th onclick="sortPane(\'tasks\',\'priority\',this)">优先级<span class="sort-arrow"></span></th><th onclick="sortPane(\'tasks\',\'status\',this)">状态<span class="sort-arrow"></span></th><th onclick="sortPane(\'tasks\',\'deadline\',this)">截止<span class="sort-arrow"></span></th><th>负责人</th></tr></thead><tbody id="tbody-tasks"></tbody></table>';
+  rowBuilders.tasks=taskRow;PANE_DATA.tasks=tasks.slice();setTimeout(function(){fillPaneTable('tasks',tasks,taskRow,'无任务数据')},0);
+  return h;
+}
+function taskRow(t,idx){
+  var pc=t.priority&&/P0/.test(t.priority)?'tag-red':(t.priority&&/P1/.test(t.priority)?'tag-gold':'tag-gray');
+  var sc=/已完成/.test(t.status||'')?'tag-green':(/进行中/.test(t.status||'')?'tag-gold':'tag-gray');
+  var h='<tr onclick="toggleDetail(\'task-det-'+idx+'\')" style="cursor:pointer"><td>'+escH(t.id)+'</td><td><b>'+escH(t.name)+'</b></td><td><span class="tag '+pc+'">'+escH(t.priority||'—')+'</span></td><td><span class="tag '+sc+'">'+escH(t.status||'—')+'</span></td><td>'+escH(t.deadline||'—')+'</td><td>'+escH(t.assignee||'—')+'</td></tr>';
+  h+='<tr class="detail-row" id="task-det-'+idx+'"><td colspan="6"><div class="detail-card">';
+  if(t.description)h+='<div class="field"><span class="field-label">描述</span><div class="field-value">'+escH(t.description)+'</div></div>';
+  if(t.source)h+='<div class="field"><span class="field-label">来源</span><div class="field-value">'+escH(t.source)+'</div></div>';
+  if(t.confidence)h+='<div class="field"><span class="field-label">置信度</span><div class="field-value">'+Math.round(t.confidence*100)+'%</div></div>';
+  return h+'</div></td></tr>';
+}
+/* ================================================================
+   5. 决策记录 · 25决策·6条决策链
+   ================================================================ */
+function rDecisions(){
+  if(!DB)return renderDegrade();
+  var decs=DB.decisions||[];
+  // Build decision chains from connections
+  var chains=[];
+  if(DB.connections){
+    var fromMap={},toMap={};
+    for(var i=0;i<DB.connections.length;i++){
+      var c=DB.connections[i];
+      if(c.from_entity&&c.from_entity.indexOf('DEC-')===0&&c.to_entity&&c.to_entity.indexOf('DEC-')===0&&c.relationship_type==='决策时间序列'){
+        if(!fromMap[c.from_entity])fromMap[c.from_entity]=[];
+        fromMap[c.from_entity].push(c.to_entity);
+        toMap[c.to_entity]=true;
+      }
+    }
+    var starts=[];
+    for(var k in fromMap){if(!toMap[k])starts.push(k)}
+    for(var si=0;si<starts.length;si++){
+      var chain=[starts[si]],cur=starts[si];
+      while(fromMap[cur]&&fromMap[cur].length>0){cur=fromMap[cur][0];chain.push(cur)}
+      chains.push(chain);
+    }
+  }
+
+  var h='<div class="panel-header"><div><h2>⚖️ 决策记录</h2><div class="meta">'+decs.length+' 条决策 · '+(chains.length>0?chains[0].length:0)+' 条决策链</div></div></div>';
+  h+=toolbar('decisions','搜索决策...',null);
+  h+='<table class="data-table" id="tbl-decisions"><thead><tr><th onclick="sortPane(\'decisions\',\'id\',this)">ID<span class="sort-arrow"></span></th><th onclick="sortPane(\'decisions\',\'date\',this)">日期<span class="sort-arrow"></span></th><th onclick="sortPane(\'decisions\',\'title\',this)">决策<span class="sort-arrow"></span></th><th onclick="sortPane(\'decisions\',\'confidence\',this)">置信度<span class="sort-arrow"></span></th><th>结果</th></tr></thead><tbody id="tbody-decisions"></tbody></table>';
+
+  // Show decision chains
+  if(chains.length>0){
+    h+='<div style="margin-top:20px"><h3 style="font-size:.95em;margin-bottom:10px">🔗 决策链 ('+chains[0].length+'条连续)</h3><div class="conn-list">';
+    var chain=chains[0];
+    for(var ci=0;ci<chain.length;ci++){
+      var dname='';for(var di=0;di<decs.length;di++){if(decs[di].id===chain[ci]){dname=decs[di].title;break}}
+      h+='<div class="conn-chip"><span class="edge-type">'+(ci+1)+'</span>'+escH(dname||chain[ci])+'</div>';
+    }
+    h+='</div></div>';
+  }
+  rowBuilders.decisions=decRow;PANE_DATA.decisions=decs.slice();setTimeout(function(){fillPaneTable('decisions',decs,decRow,'无决策记录')},0);
+  return h;
+}
+function decRow(d,idx){
+  var h='<tr onclick="toggleDetail(\'dec-det-'+idx+'\')" style="cursor:pointer"><td>'+escH(d.id)+'</td><td>'+escH(d.date)+'</td><td><b>'+escH(d.title)+'</b></td><td>'+(d.confidence?Math.round(d.confidence*100)+'%':'—')+'</td><td>'+escH(d.outcome||'—')+'</td></tr>';
+  h+='<tr class="detail-row" id="dec-det-'+idx+'"><td colspan="5"><div class="detail-card">';
+  if(d.context)h+='<div class="field"><span class="field-label">背景</span><div class="field-value">'+escH(d.context)+'</div></div>';
+  return h+'</div></td></tr>';
+}
+/* ================================================================
+   6. 规则引擎 · 48生物规则·41活跃/6休眠/1损坏
+   ================================================================ */
+function rRules(){
+  if(!DB)return renderDegrade();
+  var rules=DB.living_rules||[],rs=DB.meta&&DB.meta.living_rules_status?DB.meta.living_rules_status:{};
+  var active=rules.filter(function(r){return r.status==='active'}).length;
+  var dormant=rules.filter(function(r){return r.status==='dormant'}).length;
+  var broken=rules.filter(function(r){return r.status==='broken'}).length;
+  var h='<div class="panel-header"><div><h2>🧬 规则引擎</h2><div class="meta">'+rules.length+' 生物规则 · '+(DB.meta&&DB.meta.biological_health?DB.meta.biological_health.fully_alive:0)+' 全活</div></div></div>';
+  h+='<div class="stat-grid">';
+  h+='<div class="stat-card"><div class="stat-num">'+active+'</div><div class="stat-label">✅ 活跃</div><div class="stat-bar"><div class="fill fill-green" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+dormant+'</div><div class="stat-label">💤 休眠</div><div class="stat-bar"><div class="fill fill-gold" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+broken+'</div><div class="stat-label">🔴 损坏</div><div class="stat-bar"><div class="fill fill-red" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+(rs.active||active)+'</div><div class="stat-label">📊 元数据活跃</div></div>';
+  h+='</div>';
+  h+=toolbar('rules','搜索规则...',['active','dormant','broken','P0','P1']);
+  h+='<table class="data-table" id="tbl-rules"><thead><tr><th onclick="sortPane(\'rules\',\'id\',this)">ID<span class="sort-arrow"></span></th><th onclick="sortPane(\'rules\',\'name\',this)">规则名<span class="sort-arrow"></span></th><th onclick="sortPane(\'rules\',\'status\',this)">状态<span class="sort-arrow"></span></th><th onclick="sortPane(\'rules\',\'priority\',this)">优先级<span class="sort-arrow"></span></th><th>触发条件</th></tr></thead><tbody id="tbody-rules"></tbody></table>';
+  rowBuilders.rules=ruleRow;PANE_DATA.rules=rules.slice();setTimeout(function(){fillPaneTable('rules',rules,ruleRow,'无规则数据')},0);
+  return h;
+}
+function ruleRow(r,idx){
+  var sc=r.status==='active'?'tag-green':(r.status==='dormant'?'tag-gold':'tag-red');
+  var pc=r.priority==='P0'?'tag-red':'tag-gold';
+  var h='<tr onclick="toggleDetail(\'rule-det-'+idx+'\')" style="cursor:pointer"><td>'+escH(r.id)+'</td><td><b>'+escH(r.name)+'</b></td><td><span class="tag '+sc+'">'+escH(r.status||'—')+'</span></td><td><span class="tag '+pc+'">'+escH(r.priority||'—')+'</span></td><td style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escH(r.trigger||'—')+'</td></tr>';
+  h+='<tr class="detail-row" id="rule-det-'+idx+'"><td colspan="5"><div class="detail-card">';
+  if(r.trigger)h+='<div class="field"><span class="field-label">触发条件</span><div class="field-value">'+escH(r.trigger)+'</div></div>';
+  if(r.feedback)h+='<div class="field"><span class="field-label">反馈机制</span><div class="field-value">'+escH(r.feedback)+'</div></div>';
+  if(r.adaptation)h+='<div class="field"><span class="field-label">适应规则</span><div class="field-value">'+escH(r.adaptation)+'</div></div>';
+  return h+'</div></td></tr>';
+}
+/* ================================================================
+   7. 免疫系统 · L0-L6七层·4个历史事件
+   ================================================================ */
+function rImmune(){
+  if(!DB)return renderDegrade();
+  var events=DB.events||[];
+  var layers=[{l:'L0',name:'自身耐受',color:'var(--red)',desc:'识别"自我" vs "非自我"。对自己代码/术语/品牌体系的完整性校验'},{l:'L1',name:'物理屏障',color:'var(--gold)',desc:'防火墙/加密/访问控制。密码门、sessionStorage、HTTPS等'},{l:'L2',name:'先天免疫',color:'var(--gold)',desc:'不依赖既往经历的第一道防线。MD5基线对比、event.target检测'},{l:'L3',name:'炎症隔离',color:'var(--gold)',desc:'发现问题→隔离→修复。术语隔离、分支回滚、断开损坏链接'},{l:'L4',name:'适应性免疫',color:'var(--gold)',desc:'学习历史事件→生成免疫记忆。免疫记忆库、crypto.subtle检测'},{l:'L5',name:'自愈',color:'var(--gold)',desc:'自动修复已识别的损伤。术语自动替换、自动备份恢复'},{l:'L6',name:'反脆弱',color:'var(--green)',desc:'从损伤中变得更强大。每次修复更新免疫规则、新增检测维度'}];
+  var h='<div class="panel-header"><div><h2>🛡️ 免疫系统</h2><div class="meta">L0-L6 七层 · '+events.length+' 个历史事件</div></div></div>';
+  for(var i=0;i<layers.length;i++){
+    var ly=layers[i];
+    h+='<div class="immune-layer '+(i===0?'l0':'')+'"><h4 style="color:'+ly.color+'">'+ly.l+': '+ly.name+'</h4><p>'+ly.desc+'</p></div>';
+  }
+  // Events table
+  if(events.length>0){
+    h+='<div style="margin-top:24px"><h3 style="font-size:.95em;margin-bottom:10px">⚡ 历史事件 ('+events.length+'条)</h3>';
+    h+='<table class="data-table" id="tbl-immune"><thead><tr><th>ID</th><th>事件</th><th>严重度</th><th>日期</th><th>修复</th></tr></thead><tbody>';
+    for(var ei=0;ei<events.length;ei++){
+      var e=events[ei];
+      var sev=e.severity==='critical'?'tag-red':'tag-gold';
+      h+='<tr onclick="toggleDetail(\'imm-det-'+ei+'\')" style="cursor:pointer"><td>'+escH(e.id)+'</td><td><b>'+escH(e.name)+'</b></td><td><span class="tag '+sev+'">'+escH(e.severity||'—')+'</span></td><td>'+escH(e.date||'—')+'</td><td style="max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escH(e.fix||'—')+'</td></tr>';
+      h+='<tr class="detail-row" id="imm-det-'+ei+'"><td colspan="5"><div class="detail-card">';
+      if(e.description)h+='<div class="field"><span class="field-label">详情</span><div class="field-value">'+escH(e.description)+'</div></div>';
+      if(e.category)h+='<div class="field"><span class="field-label">分类</span><div class="field-value">'+escH(e.category)+'</div></div>';
+      h+='</div></td></tr>';
+    }
+    h+='</tbody></table></div>';
+  }
+  return h;
+}
+/* ================================================================
+   8. 考古数据 · 35速查卡·20转化工具·16模拟场景
+   ================================================================ */
+function rArchaeo(){
+  if(!DB)return renderDegrade();
+  var ha=DB.historical_artifacts||[],sims=DB.simulation_scenarios||[],disc=DB.additional_discoveries||[],scoring=DB.scoring_models||[];
+  var h='<div class="panel-header"><div><h2>🏺 考古数据</h2><div class="meta">'+ha.length+' 历史文物 · '+sims.length+' 模拟场景 · '+disc.length+' 发现</div></div></div>';
+
+  // Historical artifacts
+  h+='<div style="margin-bottom:24px"><h3 style="font-size:.95em;margin-bottom:10px">📜 历史文物 ('+ha.length+'件)</h3><table class="data-table" id="tbl-archaeo"><thead><tr><th>ID</th><th>名称</th><th>时代</th><th>意义</th></tr></thead><tbody>';
+  for(var i=0;i<ha.length;i++){
+    var a=ha[i];
+    h+='<tr onclick="toggleDetail(\'arch-det-'+i+'\')" style="cursor:pointer"><td>'+escH(a.id)+'</td><td><b>'+escH(a.name)+'</b></td><td>'+escH(a.era||'—')+'</td><td style="max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escH(a.significance||'—')+'</td></tr>';
+    h+='<tr class="detail-row" id="arch-det-'+i+'"><td colspan="4"><div class="detail-card">';
+    if(a.significance)h+='<div class="field"><span class="field-label">意义</span><div class="field-value">'+escH(a.significance)+'</div></div>';
+    if(a.source)h+='<div class="field"><span class="field-label">来源</span><div class="field-value">'+escH(a.source)+'</div></div>';
+    h+='</div></td></tr>';
+  }
+  h+='</tbody></table></div>';
+
+  // Simulation scenarios
+  if(sims.length>0){
+    h+='<div style="margin-bottom:24px"><h3 style="font-size:.95em;margin-bottom:10px">🎭 模拟场景 ('+sims.length+'个)</h3><table class="data-table" id="tbl-sims"><thead><tr><th>ID</th><th>名称</th><th>行业</th><th>决策数</th><th>结果</th></tr></thead><tbody>';
+    for(var si=0;si<sims.length;si++){
+      var s=sims[si];
+      h+='<tr><td>'+escH(s.id)+'</td><td><b>'+escH(s.name)+'</b></td><td>'+escH(s.industry||'—')+'</td><td>'+s.decisions_count+'</td><td>'+escH(s.outcomes||'—')+'</td></tr>';
+    }
+    h+='</tbody></table></div>';
+  }
+
+  // Scoring models
+  if(scoring.length>0){
+    h+='<div style="margin-bottom:24px"><h3 style="font-size:.95em;margin-bottom:10px">📊 评分模型 ('+scoring.length+'个)</h3><table class="data-table" id="tbl-scoring"><thead><tr><th>ID</th><th>名称</th><th>状态</th><th>维度</th></tr></thead><tbody>';
+    for(var mi=0;mi<scoring.length;mi++){
+      var sm=scoring[mi];
+      h+='<tr><td>'+escH(sm.id)+'</td><td><b>'+escH(sm.name)+'</b></td><td><span class="tag tag-gold">'+escH(sm.status||'—')+'</span></td><td>'+escH((sm.dimensions?Object.keys(sm.dimensions).join(', '):'—'))+'</td></tr>';
+    }
+    h+='</tbody></table></div>';
+  }
+
+  // Additional discoveries
+  if(disc.length>0){
+    h+='<div><h3 style="font-size:.95em;margin-bottom:10px">🔍 额外发现 ('+disc.length+'条)</h3>';
+    for(var di=0;di<disc.length;di++){
+      var dd=disc[di];
+      h+='<div style="margin-bottom:12px;padding:12px;background:var(--card);border:1px solid var(--border);border-radius:8px"><b>'+escH(dd.id)+'</b> '+escH(dd.name)+'<br><span style="font-size:.78em;color:var(--ink-light)">'+escH(dd.description||'')+'</span></div>';
+    }
+    h+='</div>';
+  }
+  return h;
+}
+/* ================================================================
+   9. 知识图谱 · 1,222真实连接·密度43.9%
+   ================================================================ */
+function rGraph(){
+  if(!DB)return renderDegrade();
+  var m=DB.meta,conns=DB.connections||[];
+  var verified=m.verified_connections||0,strong=m.strong_connections||0,medium=m.medium_connections||0,weak=m.weak_connections||0;
+  var totalEntities=m.total_entities||0;
+
+  var h='<div class="panel-header"><div><h2>🕸️ 知识图谱</h2><div class="meta">'+verified+' 真实连接 · '+conns.length+' 总连接 · 密度 '+m.knowledge_graph_density+'%</div></div></div>';
+
+  // Stats
+  h+='<div class="stat-grid">';
+  h+='<div class="stat-card"><div class="stat-num">'+verified+'</div><div class="stat-label">✅ 真实连接</div><div class="stat-bar"><div class="fill fill-green" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+strong+'</div><div class="stat-label">💪 强连接</div><div class="stat-bar"><div class="fill fill-red" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+medium+'</div><div class="stat-label">🤝 中连接</div><div class="stat-bar"><div class="fill fill-gold" style="width:100%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+weak+'</div><div class="stat-label">💬 弱连接</div><div class="stat-bar"><div class="fill fill-warn" style="width:100%"></div></div></div>';
+  h+='</div>';
+
+  // Connection type breakdown
+  var typeMap={};
+  for(var i=0;i<conns.length;i++){
+    var rt=conns[i].relationship_type||'未分类';
+    typeMap[rt]=(typeMap[rt]||0)+1;
+  }
+  var types=Object.keys(typeMap).sort(function(a,b){return typeMap[b]-typeMap[a]});
+
+  h+='<div style="margin-top:20px"><h3 style="font-size:.95em;margin-bottom:10px">🔗 连接类型分布 (Top 15)</h3><table class="data-table"><thead><tr><th>类型</th><th>数量</th><th>占比</th></tr></thead><tbody>';
+  var shown=Math.min(types.length,15);
+  for(var ti=0;ti<shown;ti++){
+    var t=types[ti],tc=typeMap[t],pct=conns.length?(tc/conns.length*100).toFixed(1):0;
+    h+='<tr><td>'+escH(t)+'</td><td><b>'+tc+'</b></td><td>'+pct+'%</td></tr>';
+  }
+  h+='</tbody></table></div>';
+
+  // Additional info
+  if(m.auto_rule_connections){
+    h+='<div style="margin-top:20px"><h3 style="font-size:.95em">📋 连接详情</h3>';
+    h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:10px">';
+    h+='<div class="stat-card"><div class="stat-num">'+totalEntities+'</div><div class="stat-label">📦 总实体数</div></div>';
+    h+='<div class="stat-card"><div class="stat-num">'+conns.length+'</div><div class="stat-label">🕸️ 总连接数</div></div>';
+    h+='<div class="stat-card"><div class="stat-num">'+m.auto_rule_connections+'</div><div class="stat-label">🤖 自动规则连接</div></div>';
+    h+='<div class="stat-card"><div class="stat-num">'+m.knowledge_graph_density+'%</div><div class="stat-label">📊 图密度</div></div>';
+    h+='</div></div>';
+  }
+
+  // Weight distribution
+  var weightMap={};
+  for(var wi=0;wi<conns.length;wi++){
+    var w=conns[wi].weight;if(w!==undefined){var wk=String(w);weightMap[wk]=(weightMap[wk]||0)+1}
+  }
+  var weights=Object.keys(weightMap).sort();
+  if(weights.length>0){
+    h+='<div style="margin-top:20px"><h3 style="font-size:.95em;margin-bottom:10px">⚖️ 权重分布</h3><div class="chip-wrap">';
+    for(var wj=0;wj<weights.length;wj++)h+='<div class="chip"><b>'+weights[wj]+'</b> '+weightMap[weights[wj]]+'条</div>';
+    h+='</div></div>';
+  }
+
+  return h;
 }
 
 /* ================================================================
    启动
    ================================================================ */
-
-// 检查是否已认证
-(function() {
-  try {
-    if (sessionStorage.getItem('_admin_auth') === '1') {
-      document.getElementById('gate').classList.add('hidden');
-      document.getElementById('app').classList.add('show');
-      initApp();
-    }
-  } catch(e) {}
+(function(){
+  try{if(sessionStorage.getItem('_admin_auth')==='1'){document.getElementById('gate').classList.add('hidden');document.getElementById('app').classList.add('show');initApp()}}catch(e){}
 })();
 </script>
 </body>
