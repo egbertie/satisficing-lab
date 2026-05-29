@@ -365,10 +365,11 @@ function buildNav() {
     {id:'tab-tasks', label:'✅ 待办任务 ('+(TSK?TSK.total_open:'?')+')'},
     {id:'tab-health', label:'🫀 健康仪表'},
     {id:'tab-activity', label:'📜 活动日志'},
-    {id:'tab-customers', label:'👥 客户视图'}
+    {id:'tab-customers', label:'👥 客户视图'},
+    {id:'tab-admin', label:'⚙️ 管理后台', ext:true, href:'admin-windows.html'}
   ];
   var h = '';
-  for (var i=0; i<ts.length; i++) h += '<button class="nav-tab" onclick="switchTab(\''+ts[i].id+'\',this)">'+ts[i].label+'</button>';
+  for (var i=0; i<ts.length; i++) { if (ts[i].ext) h += '<a class="nav-tab" href="'+ts[i].href+'" target="_blank" style="text-decoration:none;display:inline-block">'+ts[i].label+' ↗</a>'; else h += '<button class="nav-tab" onclick="switchTab(\''+ts[i].id+'\',this)">'+ts[i].label+'</button>'; }
   document.getElementById('nav-tabs').innerHTML = h;
 }
 

@@ -23,6 +23,7 @@ body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;backgr
 .sidebar{width:240px;background:var(--card);border-right:1px solid var(--border);padding:16px 0;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0}
 .sidebar-header{padding:16px 20px;border-bottom:1px solid var(--border);margin-bottom:8px}
 .sidebar-header h3{font-size:.9em;color:var(--red)}.sidebar-header .sub{font-size:.7em;color:var(--ink-lighter)}
+.sidebar-back{font-size:.78em;color:var(--gold);text-decoration:none;display:flex;align-items:center;gap:4px;padding:4px 20px;transition:color .2s}.sidebar-back:hover{color:var(--red)}
 .sidebar-nav{list-style:none}
 .sidebar-nav li{cursor:pointer;padding:10px 20px;font-size:.85em;transition:all .15s;border-left:3px solid transparent;display:flex;align-items:center;gap:8px}
 .sidebar-nav li:hover{background:var(--warm);border-left-color:var(--gold)}
@@ -92,7 +93,7 @@ body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;backgr
 
 <div class="app" id="app">
   <nav class="sidebar">
-    <div class="sidebar-header"><h3>🩸 毛细血管</h3><div class="sub">满意红 · 自检仪表</div></div>
+    <div class="sidebar-header"><h3>🩸 毛细血管</h3><div class="sub">满意红 · 自检仪表</div></div><div style="padding:4px 20px;margin-bottom:4px"><a href="dashboard-v3.html" class="sidebar-back">◂ 返回驾驶舱</a></div>
     <ul class="sidebar-nav" id="sidebar-nav"></ul>
   </nav>
   <main class="main" id="main-content"></main>
