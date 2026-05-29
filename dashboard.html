@@ -99,6 +99,9 @@ async function gateVerify(){
     localStorage.setItem('sri_dashboard_auth','true');
     localStorage.setItem('sri_dash_auth_hash',valid);
     document.getElementById('gateLayer').style.display='none';
+    // Trigger dashboard render after gate
+    if (typeof render === 'function') { render().catch(function(e){console.error(e)}); }
+    if (typeof loadKPI === 'function') { loadKPI(); }
   } else {
     gateFailCount++;
     localStorage.setItem('sri_gate_fails',gateFailCount);
@@ -315,7 +318,7 @@ document.addEventListener('paste',function(e){
     <button class="tab-btn" onclick="switchTab('import')">📥 导入</button>
   </div>
 
-  <div id="content"></div>
+  <div id="content"><div class="empty">⏳ 加载中…</div></div>
 </div>
 
 <script>
@@ -412,6 +415,8 @@ var DB_INIT = false;
 async function initDB() {
   if (DB_INIT) return;
   DB.seed();
+  DB_INIT = true;
+  // Fetch API in background, don't block rendering
 // cron状态实时检查
 setTimeout(function(){
   var checks=[
@@ -461,23 +466,23 @@ function updateBSC(){
   },500);
 }
 
-  // 从API同步数据→localStorage（API优先，失败保留本地）
-  try {
-    var s = await DB._fetch('/stats');
-    if (s) {
-      console.log('✅ SQLite中台已连接·'+s.tasks+'任务·'+s.customers+'客户');
-      // 尝试拉取完整数据集
-      var t = await DB._fetch('/tasks');
-      if (Array.isArray(t) && t.length > 0) { DB.set('tasks', t.slice(0,500)); console.log('📋 同步'+t.length+'条任务'); }
-      var c = await DB._fetch('/customers');
-      if (Array.isArray(c) && c.length > 0) { DB.set('customers', c.slice(0,500)); console.log('👤 同步'+c.length+'条客户'); }
-      var p = await DB._fetch('/passwords');
-      if (Array.isArray(p) && p.length > 0) { DB.set('passwords', p.slice(0,200)); console.log('🔐 同步'+p.length+'条密码'); }
-    } else {
-      console.log('⚠️ API返回空，使用localStorage');
-    }
-  } catch(e) { console.log('⚠️ API不可达，使用localStorage: '+e.message); }
-  DB_INIT = true;
+  // API sync in background (does NOT block rendering)
+  setTimeout(async function(){
+    try {
+      var s = await DB._fetch('/stats');
+      if (s) {
+        console.log('✅ SQLite中台已连接·'+s.tasks+'任务·'+s.customers+'客户');
+        var t = await DB._fetch('/tasks');
+        if (Array.isArray(t) && t.length > 0) { DB.set('tasks', t.slice(0,500)); console.log('📋 同步'+t.length+'条任务'); }
+        var c = await DB._fetch('/customers');
+        if (Array.isArray(c) && c.length > 0) { DB.set('customers', c.slice(0,500)); console.log('👤 同步'+c.length+'条客户'); }
+        var p = await DB._fetch('/passwords');
+        if (Array.isArray(p) && p.length > 0) { DB.set('passwords', p.slice(0,200)); console.log('🔐 同步'+p.length+'条密码'); }
+        // Re-render with fresh data
+        loadKPI(); renderNorthstar(); updateBSC();
+      }
+    } catch(e) { console.log('⚠️ API不可达'); }
+  },100);
 }
 
 DB.seed();
@@ -592,7 +597,7 @@ function updateCountdown(){
 setInterval(updateCountdown, 60000);
 
 async function render() {
-  await initDB();
+  // initDB runs once at startup; render uses cached localStorage data directly
   loadKPI();
   renderNorthstar();
   updateBSC();
