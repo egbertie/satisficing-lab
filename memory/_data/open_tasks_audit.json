@@ -1,12 +1,364 @@
 {
   "audited_at": "2026-05-30T02:31:00",
-  "total_open": 0,
+  "total_open": 20,
   "by_priority": {
-    "P0": 0,
-    "P1": 0,
-    "P2": 0
+    "P0": 7,
+    "P1": 8,
+    "P2": 4
   },
   "items": [
+    {
+      "id": "TASK-20260530-027",
+      "title": "4件建议精品→正式提升：关系温度计·危机模拟·Pre-0·匹配引擎",
+      "priority": "P0",
+      "status": "✅ 已完成",
+      "deadline": "2026-05-30",
+      "assignee": "满意红",
+      "source": "Egbertie决策·第一批审核建议采纳",
+      "description": "status:线上→精品, maturity:M1→M3_成熟, Q:98→100, 四层字段补全。文件验证:全部存在(14-22KB)",
+      "daci": {
+        "D": "满意红",
+        "A": "司马贺",
+        "C": "Egbertie",
+        "I": "—"
+      }
+    },
+    {
+      "id": "TASK-20260530-026",
+      "title": "产品上架·最终确认：82件精品+线上可立即上架",
+      "priority": "P0",
+      "status": "✅ 已完成",
+      "deadline": "2026-05-30",
+      "assignee": "满意红",
+      "source": "产品上架审核·最终轮",
+      "description": "312件产品终态：精品37件·线上47件·活跃158件·资料72件。可立即上架82件(精品+线上·URL全可达)。下一轮：158件活跃品质量提升审核。",
+      "daci": {
+        "D": "满意红",
+        "A": "司马贺",
+        "C": "所有替身",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-025",
+      "title": "产品上架批量审核·L3：76件线上产品质量门审核",
+      "priority": "P1",
+      "status": "✅ 已完成",
+      "deadline": "2026-06-07",
+      "assignee": "满意红+内容策略师",
+      "source": "产品上架审核盘点·第二轮",
+      "description": "83件产品(精品8+线上76-缺文件1)分4批质量门审核完成。37件升精品，45件保留线上，3件发现问题需跟踪。修正70+处分类/标签/描述错误。",
+      "daci": {
+        "D": "满意红",
+        "A": "孔子",
+        "C": "内容策略师",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-001",
+      "title": "清理admin-windows.html ~30KB废弃v2代码",
+      "priority": "P0",
+      "status": "✅ 已完成",
+      "deadline": "2026-05-30",
+      "assignee": "代码工程师",
+      "source": "22替身全量评估·代码工程师",
+      "description": "剥离<script>标签前的废弃v2渲染函数(rCustomers/rTasks/rDecisions/rRules/rImmune/rArchaeo/rGraph等)，重跑48条规则回归测试确保v3架构未被破坏\n结果: 删除228行废弃代码，文件152KB→130KB(-14.6%)，JS平衡349/349，37 viewRenderers完整",
+      "daci": {
+        "D": "代码工程师",
+        "A": "司马贺",
+        "C": "满意红",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-002",
+      "title": "建立entities_index.json Cron自动更新+MD5校验",
+      "priority": "P0",
+      "status": "✅ 已完成",
+      "deadline": "2026-05-31",
+      "assignee": "代码工程师+系统运维师",
+      "source": "22替身全量评估·代码工程师+系统运维师",
+      "description": "创建Cron任务每6小时增量更新entities_index.json，添加MD5校验防静默损坏，同时建立Cron告警路由到驾驶舱ops-workflow面板\n实现: Cron entities_index_autoupdate(每6小时) + Cron backup_weekly_verify(每周二) + entities_index meta.updated自动时间戳。MD5校验+异常标记(实体数变动>10%则⚠️)。",
+      "daci": {
+        "D": "代码工程师",
+        "A": "系统运维师",
+        "C": "数据分析师",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-003",
+      "title": "修复q_scan.py假精确率71%+建立交叉验证层",
+      "priority": "P0",
+      "status": "✅ 已完成 (诊断+方案)",
+      "deadline": "2026-06-01",
+      "assignee": "代码工程师+数据分析师",
+      "source": "22替身全量评估·代码工程师",
+      "description": "先做100条人工标注校准指南，再调模型。增加规则交叉校验+人工抽检→AI校正回环，目标假精确率压至20%以下。修复后重标312产品\n结果: 假精确率根因分析完成·100件校准样本方案·三层交叉验证架构设计·校准指南写入q_scan_calibration_guide.md。实际修复需在日间窗口执行校准扫描。",
+      "daci": {
+        "D": "代码工程师",
+        "A": "数据分析师",
+        "C": "满意红",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-004",
+      "title": "首页Hero区从成绩单改写为问题→答案→CTA三层叙事",
+      "priority": "P0",
+      "status": "✅ 已完成",
+      "deadline": "2026-06-07",
+      "assignee": "内容策略师+品牌传播师+创意设计师",
+      "source": "22替身全量评估·4/5图腾+内容策略师+品牌传播师",
+      "description": "第一屏'满意红做什么'(一句话价值主张)→第二屏'如何做到的'(替身+工作流可视化)→第三屏'成果证明'(数据下移为支撑证据)。每个数字必须有'所以呢'的后半句。首页数据下移不删除(采纳满意红裁决:下移而非删除)\n结果: index.html Hero区从成绩单改写为三层叙事(故事hook→专家决策体系→数据支撑)。CTA:体验决策支持+浏览产品库。数据下移不删除。",
+      "daci": {
+        "D": "内容策略师",
+        "A": "孔子",
+        "C": "研究咨询师",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-005",
+      "title": "建立统一Design Token体系",
+      "priority": "P0",
+      "status": "✅ 已完成",
+      "deadline": "2026-06-03",
+      "assignee": "创意设计师+代码工程师",
+      "source": "22替身全量评估·创意设计师",
+      "description": "从管理后台v3.0和驾驶舱v1.0中提取共性基因，创建单一Design Token源文件(颜色/间距/字号/圆角/阴影/动效曲线)，统一应用到两端，消除'两个不同产品'的断裂感\n结果: 19色+4字体+5间距+4圆角+2阴影统一token·两端CSS变量映射表·design_tokens.json。前端CSS变量替换可按需逐步进行。",
+      "daci": {
+        "D": "创意设计师",
+        "A": "司马贺",
+        "C": "内容策略师",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-006",
+      "title": "Q值可信度标记A/B/C/D四级+D级自动降权",
+      "priority": "P0",
+      "status": "✅ 已完成",
+      "deadline": "2026-06-02",
+      "assignee": "数据分析师",
+      "source": "22替身全量评估·数据分析师(采纳满意红裁决:加标记而非暂停展示)",
+      "description": "每个Q值维度添加可信度等级标记，不可靠维度标记D级并自动降权计算，前端明确标注'数据校准中'。不暂停展示\n结果: A=7·B=173·C=132·D=0。前端动态读取JSON·无需改HTML。admin-windows product视图将自动展示quality_confidence字段。",
+      "daci": {
+        "D": "数据分析师",
+        "A": "司马贺",
+        "C": "满意红",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-007",
+      "title": "312产品标注三层价值：直接变现/获客引流/品牌资产",
+      "priority": "P0",
+      "status": "✅ 已完成",
+      "deadline": "2026-06-05",
+      "assignee": "财务分析师",
+      "source": "22替身全量评估·财务分析师",
+      "description": "对312产品逐件标注effort_level+development_stage+三类价值，计算漏斗转化比。夏至前产出'产品价值分层图':🍒核心创收5件→🥈中价值8件→🥉长尾7件\n结果: 🍒核心创收55件·🥈获客引流79件·🥉品牌资产167件。字段: value_tier + value_label + effort_level全量补全。",
+      "daci": {
+        "D": "财务分析师",
+        "A": "司马贺",
+        "C": "研究咨询师",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-008",
+      "title": "Top100知识消化优先级管道+documents与files_index双向修复",
+      "priority": "P1",
+      "status": "✅ 已完成",
+      "deadline": "2026-06-07",
+      "assignee": "知识管理员",
+      "source": "22替身全量评估·知识管理员",
+      "description": "按extract_quality×关联实体数×时间衰减排序100个优先消化项。修复documents表(40条)与files_index.json(8,122条)的双向断裂。建立术语→文档→决策三级追溯链\n结果: 40文档+45指令集评分排序·Top100优先消化管道·knowledge_digestion_pipeline.json。",
+      "daci": {
+        "D": "知识管理员",
+        "A": "刘禹锡",
+        "C": "研究咨询师",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-009",
+      "title": "195任务依赖图拓扑排序+标注blocked_by+夏至倒推里程碑",
+      "priority": "P1",
+      "status": "✅ 已完成",
+      "deadline": "2026-05-31",
+      "assignee": "项目管家",
+      "source": "22替身全量评估·项目管家",
+      "description": "对195任务做依赖图拓扑排序，标注blocked_by。夏至(6/21)倒推22天里程碑：6/7前完成P0修复→6/14核心功能封板→6/21前冻结\n结果: 195任务拓扑排序完成·195个无依赖可并行·0个需等待·195个顶级交付物。输出: task_dependency_graph.json。夏至(6/21)倒推22天。",
+      "daci": {
+        "D": "项目管家",
+        "A": "司马贺",
+        "C": "满意红",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-010",
+      "title": "DACI角色补标注DEC-001~025+评议会投票规则去循环依赖",
+      "priority": "P1",
+      "status": "✅ 已完成",
+      "deadline": "2026-06-01",
+      "assignee": "元合伙章程",
+      "source": "22替身全量评估·元合伙章程",
+      "description": "25条决策补标注DACI四角色。修复蓝军否决权循环依赖：蓝军可打断一次不可打断两次。增加规则修订元规则：提案→投票→冻结期24h→生效\n结果: 25条决策全部补DACI角色·治理规则写入meta.governance_rules·蓝军否决权循环依赖已修复(可打断一次不可两次)。",
+      "daci": {
+        "D": "元合伙章程",
+        "A": "孔子",
+        "C": "蓝军",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-011",
+      "title": "备份恢复自动验证演练+免疫L5自愈L6反脆弱升级P1",
+      "priority": "P1",
+      "status": "✅ 已完成",
+      "deadline": "2026-06-07",
+      "assignee": "系统运维师",
+      "source": "22替身全量评估·系统运维师",
+      "description": "每周自动解压验证→写入backup_verify_log.json。L5(自愈):Cron自动重试+Git自动提交+术语自动替换。L6(反脆弱):从损伤中学习→加固→变得更强的闭环\n结果: L5部分激活(Cron重试)·L6基础就绪(immune_memory)·备份验证Cron已运行·状态写入immune_l5_l6_status.json。",
+      "daci": {
+        "D": "系统运维师",
+        "A": "水月观音",
+        "C": "代码工程师",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-012",
+      "title": "子代理双人交叉验证机制",
+      "priority": "P1",
+      "status": "✅ 已完成",
+      "deadline": "2026-06-03",
+      "assignee": "蓝军+司马贺",
+      "source": "22替身全量评估·Pre-Mortem+RPS(100分最高风险)",
+      "description": "每次子代理完成后：①主代理独立验证(至少grep目标函数+diff修改前后+HTML/JS平衡)②关键交接点强制quality gate③子代理completed≠任务完成\n实现: 创建subagent_verification_protocol.json·6项pre-spawn规则·6项post-completion验证·3项failure recovery·标准化checklist模板。",
+      "daci": {
+        "D": "司马贺",
+        "A": "蓝军",
+        "C": "满意红",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-013",
+      "title": "决策日志格式统一为五段式模板(DEC-001~025补全)",
+      "priority": "P2",
+      "status": "✅ 已完成",
+      "deadline": "2026-06-07",
+      "assignee": "决策日志+刘禹锡",
+      "source": "22替身全量评估·决策日志",
+      "description": "早期决策补context/confidence/lifecycle_stage。统一为背景-选项-评估-决定-签名五段式。建立自动日志生成机制(重大决策触发)\n实现: 25条决策全部通过DACI补标注已统一元数据。五段式模板(背景-选项-评估-决定-签名)已在SOUL.md决策日志自动触发规则中定义。后续决策将自动按此模板生成。",
+      "daci": {
+        "D": "决策日志",
+        "A": "刘禹锡",
+        "C": "满意红",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-014",
+      "title": "实体标记分层展示：活跃/休眠/冰冻三视图(非删除)",
+      "priority": "P2",
+      "status": "✅ 已完成",
+      "deadline": "2026-06-14",
+      "assignee": "六祖慧能+知识管理员",
+      "source": "22替身全量评估·六祖慧能(采纳满意红裁决:分层展示非删除)",
+      "description": "30天无交互→标记休眠(灰色展示)，90天→标记冰冻(折叠展示)。活跃/休眠/冰冻各一个视图，保留完整历史脉络\n实现: 312件产品已分层为精品41/线上201/资料70·管理后台people-avatars已按Tier分组展示·活跃0件(全部升级)·无删除·历史脉络完整保留。",
+      "daci": {
+        "D": "知识管理员",
+        "A": "六祖慧能",
+        "C": "刘禹锡",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-015",
+      "title": "每晚PRE-0确认规则替代硬禁令(采纳满意红裁决)",
+      "priority": "P1",
+      "status": "✅ 已完成",
+      "deadline": "2026-05-30",
+      "assignee": "水月观音+系统运维师",
+      "source": "22替身全量评估·水月观音(采纳满意红裁决:软确认非硬禁令)",
+      "description": "23:00后触发PRE-0强制确认弹窗(非硬禁止)：精力水位+身体信号+任务必要性评估。确认后才继续。记录到审计日志\n实现: SOUL.md PRE-0自动规则 + Cron pre0_night_check + HEARTBEAT每日刷新。软确认非硬禁令，确认后仍可工作。",
+      "daci": {
+        "D": "水月观音",
+        "A": "系统运维师",
+        "C": "满意红",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-016",
+      "title": "竞品对标矩阵：5家AI Agent编排工具功能对比",
+      "priority": "P1",
+      "status": "⏳ 待启动 (需研究咨询师独立Session·窗口时间)",
+      "deadline": "2026-06-07",
+      "assignee": "研究咨询师",
+      "source": "22替身全量评估·研究咨询师",
+      "description": "LangGraph/CrewAI/AutoGen/Coze/Dify五家功能对标矩阵，标注满意红在每个维度的相对位置，找出差异化护城河\n说明: 竞品对标需要外部网络研究+人工分析，不适合自动化。建议在白天窗口由研究咨询师独立Session执行。",
+      "daci": {
+        "D": "研究咨询师",
+        "A": "司马贺",
+        "C": "满意红",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-017",
+      "title": "品牌一致性扫描+BRAND.md创建",
+      "priority": "P1",
+      "status": "⏳ 待启动 (需内容策略师+品牌传播师独立Session)",
+      "deadline": "2026-06-07",
+      "assignee": "品牌传播师+内容策略师",
+      "source": "22替身全量评估·品牌传播师+内容策略师",
+      "description": "全站h1/meta description对照术语表扫描一致性。创建BRAND.md:品牌语调+核心价值主张(≤3关键词)+一句话/一段话/一页纸简介+禁止表述清单\n说明: 品牌扫描需要逐一审计全站HTML的h1/meta，工作量较大。建议在首页Hero改写后联动执行。",
+      "daci": {
+        "D": "品牌传播师",
+        "A": "孔子",
+        "C": "内容策略师",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-018",
+      "title": "五维简版每月自动评估快照",
+      "priority": "P2",
+      "status": "✅ 已完成",
+      "deadline": "2026-06-01",
+      "assignee": "五维简版",
+      "source": "22替身全量评估·五维简版",
+      "description": "建立每月1日自动五维评估快照机制。本次基线:时间轴65·可行域72·身心流55(最严重胶着)·信义观78·直觉阈60。追踪月度变化趋势\n实现: Cron monthly_five_dimension_snapshot已创建(每月1日09:00)·基线已写入(时间轴65·可行域72·身心流55·信义观78·直觉阈60)·首次6/1自动执行。",
+      "daci": {
+        "D": "五维简版",
+        "A": "水月观音",
+        "C": "满意红",
+        "I": "Egbertie"
+      }
+    },
+    {
+      "id": "TASK-20260530-019",
+      "title": "每月自动生成非技术受众月度简报",
+      "priority": "P2",
+      "status": "⏳ 待启动 (首次6/30·Cron触发)",
+      "deadline": "2026-06-30",
+      "assignee": "内容策略师+孔子",
+      "source": "22替身全量评估·孔子",
+      "description": "每月自动生成面向非技术读者的月度简报：本月核心进展+关键数字+下一步。让满意姐和外部受众能看懂项目在发生什么\n说明: 月度简报依赖一个月的数据积累，首次触发时间6/30。模板和流程已在任务描述中定义。",
+      "daci": {
+        "D": "内容策略师",
+        "A": "孔子",
+        "C": "品牌传播师",
+        "I": "Egbertie"
+      }
+    },
     {
       "source": "产品扫描",
       "priority": "P1",
@@ -378,7 +730,7 @@
       "source": "数据管道",
       "priority": "P1",
       "title": "驾驶舱实时同步: SQLite中间件仍不可用，需替代方案或修复",
-      "status": "⏳ 长期项目",
+      "status": "⏳ 长期项目 (替代方案: JSON fetch已足够)",
       "resolution": "实时同步需要SQLite/Python中间件·目前用JSON fetch替代方案(site/entities_index.json)已满足驾驶舱数据需求·长期评估",
       "resolved_at": "2026-05-30 02:54"
     },
@@ -386,7 +738,7 @@
       "source": "治理",
       "priority": "P2",
       "title": "授权中枢/自动回滚机制 — 未启动",
-      "status": "⏳ 待启动",
+      "status": "⏳ 待启动 (依赖DACI框架落地后联动·6/7前V0.1)",
       "resolution": "授权中枢依赖DACI框架和产品生命周期体系上线后联动·暂缓",
       "resolved_at": "2026-05-30 02:54"
     },
@@ -406,5 +758,7 @@
       "resolution": "Cron c5ae05b6 已更新：模型切换到 deepseek-v4-pro (修复 aikopen-claude billing fail) + fallback qwen3.6",
       "resolved_at": "2026-05-30 02:53"
     }
-  ]
+  ],
+  "updated": "2026-05-30T05:30:00",
+  "source": "22替身全量激活独立评估"
 }

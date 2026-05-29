@@ -1,0 +1,254 @@
+{
+  "name": "满意解研究所 · Design Token 统一体系",
+  "version": "1.0",
+  "created": "2026-05-30",
+  "standard": "从 admin-windows.html + dashboard-v3.html 提取并统一",
+  "description": "一次定义，两端引用。admin-windows(管理后台)和dashboard-v3(驾驶舱)共用同一Token体系。",
+
+  "colors": {
+    "primary": {
+      "value": "#C23B22",
+      "description": "主色·满意红 — 品牌标识色，CTA按钮、强调文字、重要标记",
+      "aliases": ["--red", "--accent-red"]
+    },
+    "primary-light": {
+      "value": "#FDE8E5",
+      "description": "主色浅底 — 标签背景、高亮区域",
+      "aliases": []
+    },
+    "accent": {
+      "value": "#B8860B",
+      "description": "点缀色·金 — 导航高亮、hover态、次要强调",
+      "aliases": ["--gold", "--accent-gold"]
+    },
+    "accent-light": {
+      "value": "#FDF3E0",
+      "description": "点缀色浅底 — 金色标签背景",
+      "aliases": []
+    },
+    "success": {
+      "value": "#3D7A4F",
+      "description": "成功/正向 — 达标标记、绿色标签",
+      "aliases": ["--green", "--green-ok"]
+    },
+    "success-light": {
+      "value": "#E8F0EB",
+      "description": "成功浅底",
+      "aliases": []
+    },
+    "warning": {
+      "value": "#C2780A",
+      "description": "警告 — 降解提示、临界状态",
+      "aliases": ["--warn", "--amber-warn"]
+    },
+    "warning-light": {
+      "value": "#FFF8E1",
+      "description": "警告浅底 — 降解横幅背景",
+      "aliases": []
+    },
+    "danger": {
+      "value": "#C23B22",
+      "description": "危险/错误 — 同primary(红色复用)",
+      "aliases": ["--red", "--accent-red"]
+    },
+    "bg-paper": {
+      "value": "#F5F0E6",
+      "description": "页面底色·宣纸 — 全局背景",
+      "aliases": ["--paper", "--paper-white"]
+    },
+    "bg-card": {
+      "value": "#FFFFFF",
+      "description": "卡片底色 — 面板、表格、卡片背景",
+      "aliases": ["--card", "--card-white"]
+    },
+    "bg-warm": {
+      "value": "#FAF6EF",
+      "description": "暖卡片底色 — table-header、hover态、次级面板",
+      "aliases": ["--warm", "--card-warm"]
+    },
+    "ink": {
+      "value": "#4A3728",
+      "description": "正文墨色 — 主体文字、标题",
+      "aliases": ["--ink"]
+    },
+    "ink-light": {
+      "value": "#8B7355",
+      "description": "次级墨色 — 标签说明、meta信息",
+      "admin_value": "#8B7355",
+      "dashboard_value": "#7A6958",
+      "note": "两端值略有差异(8B7355 vs 7A6958)，统一为 8B7355",
+      "aliases": ["--ink-light"]
+    },
+    "ink-lighter": {
+      "value": "#B8A890",
+      "description": "提示墨色 — 占位符、空状态、弱信息",
+      "admin_value": "#B8A890",
+      "dashboard_value": "#A89880",
+      "note": "两端值略有差异(B8A890 vs A89880)，统一为 B8A890",
+      "aliases": ["--ink-lighter"]
+    },
+    "border": {
+      "value": "#E8DDCC",
+      "description": "边框色·主 — 表格边框、卡片边框、分割线",
+      "admin_value": "#E8DDCC",
+      "dashboard_value": "#E0D5C8",
+      "note": "两端值略有差异(E8DDCC vs E0D5C8)，统一为 E8DDCC",
+      "aliases": ["--border", "--border-warm"]
+    },
+    "border-subtle": {
+      "value": "#F0E8D8",
+      "description": "边框色·弱 — 次级分割、hover边框",
+      "aliases": ["--border-subtle"]
+    }
+  },
+
+  "spacing": {
+    "xs": {
+      "value": "4px",
+      "description": "极小间距 — icon-gap, badge-padding",
+      "usage": ["gap:4px", "padding:1px 7px"]
+    },
+    "sm": {
+      "value": "8px",
+      "description": "小间距 — 表单项间距、标题下间距",
+      "usage": ["gap:8px", "margin-bottom:8px", "padding:8px 12px"]
+    },
+    "md": {
+      "value": "16px",
+      "description": "中间距 — 卡片padding、区块间距",
+      "usage": ["padding:16px", "margin-bottom:16px", "gap:12px"]
+    },
+    "lg": {
+      "value": "24px",
+      "description": "大间距 — 主区域padding、面板间距",
+      "usage": ["padding:24px 32px", "margin-bottom:24px"]
+    },
+    "xl": {
+      "value": "48px",
+      "description": "超大间距 — Gate登录框padding",
+      "usage": ["padding:48px 40px"]
+    }
+  },
+
+  "typography": {
+    "heading-size": {
+      "value": "1.3em",
+      "description": "标题字号 — panel标题、section标题",
+      "alternatives": {
+        "dashboard-h1": "1.95em (驾驶舱主标题)",
+        "admin-h2": "1.3em (管理面板标题)"
+      },
+      "note": "dashboard主标题较大(1.95em/2.2em)，admin面板标题较小(1.3em)，按场景使用"
+    },
+    "body-size": {
+      "value": "0.82em",
+      "description": "正文字号 — 表格数据、详情信息",
+      "usage": ["font-size:.82em (表格td)", "font-size:.85em (导航项)"]
+    },
+    "caption-size": {
+      "value": "0.75em",
+      "description": "辅助文字 — 标签文字、meta信息、badge",
+      "usage": ["font-size:.75em (stat标签)", "font-size:.78em (meta信息)", "font-size:.65em (badge)"]
+    }
+  },
+
+  "radii": {
+    "sm": {
+      "value": "4px",
+      "description": "小圆角 — 标签、chip、badge",
+      "admin": "border-radius:4px",
+      "dashboard": "border-radius:4px"
+    },
+    "md": {
+      "value": "8px",
+      "description": "中圆角 — 输入框、按钮、toolbar",
+      "admin": "border-radius:8px",
+      "dashboard": "border-radius:8px"
+    },
+    "lg": {
+      "value": "16px",
+      "description": "大圆角 — Gate登录框、大卡片",
+      "admin": "border-radius:16px",
+      "dashboard": "border-radius:12px | 14px | 18px",
+      "note": "admin统一16px，dashboard使用12-18px范围"
+    }
+  },
+
+  "shadows": {
+    "card": {
+      "value": "0 1px 4px rgba(74,55,40,0.06)",
+      "description": "卡片阴影 — 表格、普通卡片",
+      "aliases": ["--shadow-subtle"]
+    },
+    "modal": {
+      "value": "0 4px 24px rgba(74,55,40,0.12)",
+      "description": "模态阴影 — Gate登录框",
+      "admin": "box-shadow:0 4px 24px rgba(74,55,40,.12)",
+      "dashboard": "box-shadow: 0 20px 60px rgba(74,55,40,0.2)",
+      "note": "dashboard overlay阴影更重，可视场景选择"
+    }
+  },
+
+  "css_variable_mapping": {
+    "description": "两端CSS变量的映射表，便于统一迁移",
+    "mappings": [
+      {
+        "target": "admin-windows.html",
+        "current_vars": [
+          "--paper → colors.bg-paper",
+          "--card → colors.bg-card",
+          "--warm → colors.bg-warm",
+          "--ink → colors.ink",
+          "--red → colors.primary",
+          "--gold → colors.accent",
+          "--green → colors.success",
+          "--warn → colors.warning",
+          "--ink-light → colors.ink-light",
+          "--ink-lighter → colors.ink-lighter",
+          "--border → colors.border",
+          "--border-subtle → colors.border-subtle"
+        ],
+        "new_vars": {
+          "colors": "--c-primary, --c-accent, --c-success, --c-warning, --c-danger, --c-bg-paper, --c-bg-card, --c-bg-warm, --c-ink, --c-ink-light, --c-ink-lighter, --c-border, --c-border-subtle",
+          "spacing": "--sp-xs, --sp-sm, --sp-md, --sp-lg, --sp-xl",
+          "typography": "--t-heading, --t-body, --t-caption",
+          "radii": "--r-sm, --r-md, --r-lg",
+          "shadows": "--sh-card, --sh-modal"
+        }
+      },
+      {
+        "target": "dashboard-v3.html",
+        "current_vars": [
+          "--paper-white → colors.bg-paper",
+          "--card-white → colors.bg-card",
+          "--card-warm → colors.bg-warm",
+          "--ink → colors.ink",
+          "--accent-red → colors.primary",
+          "--accent-gold → colors.accent",
+          "--border-warm → colors.border",
+          "--green-ok → colors.success",
+          "--amber-warn → colors.warning",
+          "--ink-light → colors.ink-light",
+          "--ink-lighter → colors.ink-lighter",
+          "--shadow-subtle → shadows.card",
+          "--shadow-medium → shadows.modal"
+        ],
+        "new_vars": {
+          "colors": "--c-primary, --c-accent, --c-success, --c-warning, --c-danger, --c-bg-paper, --c-bg-card, --c-bg-warm, --c-ink, --c-ink-light, --c-ink-lighter, --c-border, --c-border-subtle",
+          "spacing": "--sp-xs, --sp-sm, --sp-md, --sp-lg, --sp-xl",
+          "typography": "--t-heading, --t-body, --t-caption",
+          "radii": "--r-sm, --r-md, --r-lg",
+          "shadows": "--sh-card, --sh-modal"
+        }
+      }
+    ]
+  },
+
+  "implementation_snippets": {
+    "css_root": ":root {\n  /* Colors */\n  --c-primary: #C23B22;\n  --c-primary-light: #FDE8E5;\n  --c-accent: #B8860B;\n  --c-accent-light: #FDF3E0;\n  --c-success: #3D7A4F;\n  --c-success-light: #E8F0EB;\n  --c-warning: #C2780A;\n  --c-warning-light: #FFF8E1;\n  --c-danger: #C23B22;\n  --c-bg-paper: #F5F0E6;\n  --c-bg-card: #FFFFFF;\n  --c-bg-warm: #FAF6EF;\n  --c-ink: #4A3728;\n  --c-ink-light: #8B7355;\n  --c-ink-lighter: #B8A890;\n  --c-border: #E8DDCC;\n  --c-border-subtle: #F0E8D8;\n  /* Spacing */\n  --sp-xs: 4px;\n  --sp-sm: 8px;\n  --sp-md: 16px;\n  --sp-lg: 24px;\n  --sp-xl: 48px;\n  /* Typography */\n  --t-heading: 1.3em;\n  --t-body: 0.82em;\n  --t-caption: 0.75em;\n  /* Radii */\n  --r-sm: 4px;\n  --r-md: 8px;\n  --r-lg: 16px;\n  /* Shadows */\n  --sh-card: 0 1px 4px rgba(74,55,40,0.06);\n  --sh-modal: 0 4px 24px rgba(74,55,40,0.12);\n}",
+
+    "admin_windows_replacements": "/* 替换前: */\n--paper → --c-bg-paper\n--card → --c-bg-card\n--warm → --c-bg-warm\n--ink → --c-ink\n--red → --c-primary\n--gold → --c-accent\n--green → --c-success\n--warn → --c-warning\n--ink-light → --c-ink-light\n--ink-lighter → --c-ink-lighter\n--border → --c-border\n--border-subtle → --c-border-subtle\n/* 可直接全局搜索替换，12处替换即可 */",
+
+    "dashboard_v3_replacements": "/* 替换前: */\n--paper-white → --c-bg-paper\n--card-white → --c-bg-card\n--card-warm → --c-bg-warm\n--ink → --c-ink\n--accent-red → --c-primary\n--accent-gold → --c-accent\n--border-warm → --c-border\n--green-ok → --c-success\n--amber-warn → --c-warning\n--ink-light → --c-ink-light\n--ink-lighter → --c-ink-lighter\n--shadow-subtle → --sh-card\n--shadow-medium → --sh-modal\n/* 可直接全局搜索替换，13处替换即可 */"
+  }
+}
