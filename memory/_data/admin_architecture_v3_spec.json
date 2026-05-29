@@ -1,0 +1,120 @@
+{
+  "version": "3.0",
+  "designed_at": "2026-05-30T03:33:00",
+  "principle": "管理后台是驾驶舱的二层核心基石——驾驶舱看全局·管理后台管细节·双向穿透·数据统一",
+
+  "navigation": {
+    "type": "二级折叠侧栏",
+    "features": ["折叠/展开", "子模块计数badge", "面包屑导航", "快捷键搜索"],
+    "structure": [
+      {
+        "id": "strategy", "label": "📊 战略仪表盘", "icon": "📊",
+        "children": [
+          {"id": "strategy-kpi", "label": "KPI仪表盘", "desc": "核心指标实时监控"},
+          {"id": "strategy-map", "label": "战略地图", "desc": "BSC四视角联动"},
+          {"id": "strategy-milestone", "label": "里程碑看板", "desc": "时间线·关键事件"},
+          {"id": "strategy-risk", "label": "风险雷达", "desc": "识别·评级·应对"}
+        ]
+      },
+      {
+        "id": "product", "label": "📦 产品全生命周期", "icon": "📦",
+        "children": [
+          {"id": "product-overview", "label": "产品总览", "desc": "312产品·7阶段·8族"},
+          {"id": "product-pipeline", "label": "研发管道", "desc": "概念→原型→内测→打磨→精品"},
+          {"id": "product-quality", "label": "质量中心", "desc": "四维评分·审计·改进"},
+          {"id": "product-release", "label": "版本与发布", "desc": "版本历史·变更·部署"}
+        ]
+      },
+      {
+        "id": "customer", "label": "👤 客户关系", "icon": "👤",
+        "children": [
+          {"id": "customer-360", "label": "客户360", "desc": "档案·画像·决策风格"},
+          {"id": "customer-pipeline", "label": "销售管道", "desc": "线索→商机→提案→签约"},
+          {"id": "customer-delivery", "label": "交付与满意度", "desc": "项目·反馈·NPS"},
+          {"id": "customer-success", "label": "客户成功", "desc": "续约·增购·案例"}
+        ]
+      },
+      {
+        "id": "finance", "label": "💰 财务与定价", "icon": "💰",
+        "children": [
+          {"id": "finance-overview", "label": "收入仪表盘", "desc": "收入·成本·利润"},
+          {"id": "finance-pricing", "label": "产品定价", "desc": "SKU·折扣·许可"},
+          {"id": "finance-cost", "label": "成本跟踪", "desc": "开发·运营·销售"},
+          {"id": "finance-budget", "label": "预算与预测", "desc": "预算vs实际·滚动预测"}
+        ]
+      },
+      {
+        "id": "knowledge", "label": "🧬 知识资产", "icon": "🧬",
+        "children": [
+          {"id": "knowledge-graph", "label": "知识图谱", "desc": "实体·连接·密度"},
+          {"id": "knowledge-content", "label": "内容生命周期", "desc": "创建·审核·发布·归档"},
+          {"id": "knowledge-term", "label": "术语管理", "desc": "词汇产权·映射·一致性"},
+          {"id": "knowledge-learn", "label": "学习与培训", "desc": "课程·认证·技能矩阵"}
+        ]
+      },
+      {
+        "id": "ops", "label": "⚙️ 运营与流程", "icon": "⚙️",
+        "children": [
+          {"id": "ops-tasks", "label": "任务看板", "desc": "P0-P3·状态·截止"},
+          {"id": "ops-decisions", "label": "决策记录", "desc": "日志·链条·结果"},
+          {"id": "ops-cron", "label": "自动化引擎", "desc": "Cron·触发·执行日志"},
+          {"id": "ops-workflow", "label": "流程管理", "desc": "工作流·审批·SOP"}
+        ]
+      },
+      {
+        "id": "governance", "label": "🛡️ 免疫与治理", "icon": "🛡️",
+        "children": [
+          {"id": "gov-immune", "label": "免疫系统", "desc": "L0-L6七层·事件"},
+          {"id": "gov-rules", "label": "规则引擎", "desc": "48规则·激活·反馈"},
+          {"id": "gov-quality-gate", "label": "质量门禁", "desc": "代码·内容·设计·数据"},
+          {"id": "gov-compliance", "label": "合规与审计", "desc": "隐私·安全·许可"}
+        ]
+      },
+      {
+        "id": "archaeology", "label": "🏺 考古与洞察", "icon": "🏺",
+        "children": [
+          {"id": "arch-timeline", "label": "时间线", "desc": "105天·6阶段·19关键时刻"},
+          {"id": "arch-artifacts", "label": "历史文物", "desc": "35件·来源·意义"},
+          {"id": "arch-simulations", "label": "模拟与场景", "desc": "16场景·30天随访"},
+          {"id": "arch-insights", "label": "发现与洞察", "desc": "趋势·模式·异常"}
+        ]
+      },
+      {
+        "id": "people", "label": "👥 组织与人", "icon": "👥",
+        "children": [
+          {"id": "people-avatars", "label": "替身管理", "desc": "激活·休眠·唤醒"},
+          {"id": "people-experts", "label": "专家团", "desc": "角色·专长·可用性"},
+          {"id": "people-council", "label": "五路评议会", "desc": "图腾·编排·决议"},
+          {"id": "people-network", "label": "协作者网络", "desc": "关系图·协同效率"}
+        ]
+      }
+    ]
+  },
+
+  "dashboard_synergy": {
+    "驾驶舱→管理后台": "驾驶舱每个指标卡点击 → 跳转到管理后台对应二级视图",
+    "管理后台→驾驶舱": "侧栏顶部'返回驾驶舱'链接·面包屑可回溯",
+    "数据统一源": "两者共用 site/entities_index.json · 同一 fetch · 同一缓存策略",
+    "映射": {
+      "产品规模": "product-overview",
+      "知识图谱密度": "knowledge-graph",
+      "数据完整度": "strategy-kpi",
+      "规则健康度": "gov-rules",
+      "Cron活跃数": "ops-cron"
+    }
+  },
+
+  "three_tier_standard": {
+    "L1_总览卡": {"content": "核心指标数字 + 趋势微图 + 预警色 + 点击跳转", "size": "4-6 cards per row"},
+    "L2_列表视图": {"content": "可排序/筛选/分页的明细表 + 统计卡片", "size": "全宽表格"},
+    "L3_详情抽屉": {"content": "四层完整字段 + 关联实体 + 时间线 + 操作按钮", "size": "侧边抽屉or展开行"},
+    "rule": "L1默认展示·L2点击进入·L3点击行展开"
+  },
+
+  "four_layer_per_module": {
+    "物理层": "id·name·description·type·family·category·url·tags·source",
+    "化学层": "lifecycle_stage·maturity·quality_score·quality_issues·vi_compliance·content_accuracy·ux_rating·dev_batch·dev_deadline",
+    "生物层": "trigger_conditions·feedback_loop·adaptation_rule·connected_rules·immune_events·cron_jobs",
+    "心理层": "audience_persona·use_scenario·pricing_tier·decision_value·decision_value_desc·self_description·strategic_intent"
+  }
+}
