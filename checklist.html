@@ -1,115 +1,155 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<link rel="stylesheet" href="vi_quick_ref.css">
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>衡·校尺 | 决策自检清单 | 满意解研究所</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>衡·校尺 | 决策自检清单 | 满意解研究所</title>
+<link rel="stylesheet" href="vi_quick_ref.css">
 <style>
-body{font-family:-apple-system,sans-serif;max-width:680px;margin:40px auto;padding:20px;line-height:1.8;color:#2A2A2A}
-h1{text-align:center;font-size:22px}
-h2{border-bottom:2px solid #D4C5A0;padding-bottom:4px;font-size:16px;margin-top:28px}
-.subtitle{text-align:center;font-size:12px;color:#4A4A4A;margin-bottom:24px}
-.checklist{list-style:none;padding:0}
-.checklist li{padding:6px 0;border-bottom:1px solid #F5F0E6}
-.verify{font-size:10px;color:#4A4A4A;margin-left:4px}
-table{width:100%;border-collapse:collapse;margin:12px 0}
-td,th{padding:6px 8px;border:1px solid #D4C5A0;font-size:13px}
-th{background:#F5F0E6}
-.red{color:#C23B22;font-weight:bold}
-.orange{color:#B8860B}
-.green{color:#B8860B}
-.footer{text-align:center;font-size:11px;color:#4A4A4A;margin-top:40px;border-top:1px solid #D4C5A0;padding-top:16px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:#F5F0E6;color:#4A4A4A;line-height:1.8;min-height:100vh}
+.container{max-width:680px;margin:0 auto;padding:32px 20px 80px}
+.header{text-align:center;padding:24px 0}
+.header h1{font-size:24px;color:#C23B22;margin-bottom:4px}
+.header .sub{font-size:13px;color:#4A4A4A;opacity:0.7}
+.step{margin:28px 0}
+.step h2{font-size:18px;color:#C23B22;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #D4C5A0}
+.step h2 .num{font-size:14px;color:#B8860B;margin-right:8px}
+.check-item{display:flex;gap:8px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #f0e8d8}
+.check-item input[type="checkbox"]{margin-top:4px;accent-color:#C23B22;width:18px;height:18px}
+.check-item .ci-text{font-size:14px;flex:1}
+.check-item .ci-note{font-size:12px;color:#6E6E6E;margin-top:2px}
+.score-row{display:flex;gap:8px;align-items:center;padding:8px 0}
+.score-row input{width:48px;padding:6px 8px;border:1.5px solid #D4C5A0;border-radius:8px;text-align:center;font-size:14px;background:#fff}
+.score-row input:focus{border-color:#C23B22;outline:none}
+.legend{margin:16px 0}
+.legend li{font-size:13px;padding:4px 0;list-style:none}
+.legend li::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px}
+.legend .l1::before{background:#C23B22}
+.legend .l2::before{background:#B8860B}
+.legend .l3::before{background:#3D7A4F}
+.action-box{background:#fff;border:1px solid #D4C5A0;border-radius:12px;padding:16px 20px;margin:8px 0}
+.action-box.urgent{border-left:3px solid #C23B22}
+.action-box.caution{border-left:3px solid #B8860B}
+.action-box.safe{border-left:3px solid #3D7A4F}
+.action-box h4{font-size:14px;color:#2A2A2A;margin-bottom:4px}
+.action-box p{font-size:13px;color:#4A4A4A}
+.table-wrap{overflow-x:auto;margin:12px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{background:#C23B22;color:#F5F0E6;padding:10px 8px;text-align:left;font-size:12px;font-weight:500}
+.tbl td{padding:10px 8px;border-bottom:1px solid #e0d5c8;background:#fff}
+.quote{border-left:3px solid #C23B22;padding:8px 16px;margin:12px 0;font-size:13px;color:#6E6E6E;font-style:italic}
+.footer{text-align:center;padding:32px 0;font-size:11px;color:#4A4A4A;border-top:1px solid #D4C5A0;margin-top:40px;opacity:0.6}
 @media print{body{font-size:11px}}
 </style></head>
-<script>
-// 授权验证 - 满意解研究所
-(function(){
-  // Public pages - no auth needed
-  var publicPages = ['go.html','index.html','about.html','privacy.html','terms.html','symbols.html',
-    'creation.html','stars.html','roots.html','wulu.html','qijin.html','wings.html','eyes.html',
-    '54days.html','fails.html','liang.html','treasure.html','farewell.html',
-    'cases.html','tracks.html','lineage.html','whitepaper.html','quotes.html',
-    'flywheel.html','fw-','bluearmy.html','opensource.html','hibernate.html','life.html','newcomer.html',
-    'duanwei.html','bigrich.html','game-','blood-','media-','skill-','university.html',
-    'report-demo.html','radar.html','chemical-report.html','proposal.html','gate.html',
-    'miniapp-preview.html','cards.html'];
-  
-  var page = window.location.pathname.split('/').pop();
-  
-  // Check if this is a public page
-  for (var i=0; i<publicPages.length; i++) {
-    if (page === publicPages[i] || (publicPages[i].endsWith('-') && page.startsWith(publicPages[i]))) {
-      return; // Public page - no auth needed
-    }
-  }
-  
-  // Protected page - check auth
-  var auth = JSON.parse(localStorage.getItem('sri_auth') || '{}');
-  if (!auth.valid || new Date().getTime() >= auth.expires) {
-    // Not authenticated - redirect to gate
-    var target = page;
-    var productName = page.replace('.html','');
-    window.location.href = 'gate.html?to=' + encodeURIComponent(target) + '&p=' + encodeURIComponent(productName);
-  }
-})();
-</script>
+<body><div class="container">
 
-<body>
-# 合伙人决策前自检清单 · 11源验证版<br><br>> <b>满意解研究所<b> · 硬科技转化的合伙人匹配决策教练  <br>> 基于196本翻书·11个独立来源的交叉验证  <br>> 打印此清单，在做任何重大合伙人决策前，花20分钟走一遍<br><br>---<br><br><h2>第一步：状态校准（2分钟）<br><br>在做任何判断之前，先问自己：<br><br><input type=checkbox> 我现在是清醒的，还是被情绪推着走？<br><input type=checkbox> 我上一次完整睡眠是几小时前？<br><input type=checkbox> 如果24小时后重新做这个判断，答案会一样吗？<br><br>> 如果任何一项不确定——先停。人在疲劳和情绪状态下做出的判断，噪声最大（Kahneman·2021）。<br><br>---<br><br><h2>第二步：五维快速自检（5分钟）<br><br>每个维度，给自己打个分（1=完全没把握，5=非常稳固）：<br><br>| # | 维度 | 校准问题 | 1-5分 | 验证密度 |<br>|:--|:--|:--|:--:|:--|<br>| 1 | <b>时间轴<b> | "五年后，我会怎么看待今天的决定？" | <input type=text size=3> | [9源验证] |<br>| 2 | <b>可行域<b> | "我的'够用就好'底线在哪里？" | <input type=text size=3> | [10源验证] |<br>| 3 | <b>身心流<b> | "我的身体在告诉我什么？" | <input type=text size=3> | [3源验证] |<br>| 4 | <b>信义观<b> | "看看这个人在钱和原则之间，会怎么选？" | <input type=text size=3> | [9源验证] |<br>| 5 | <b>直觉阈<b> | "关键时刻，我敢不敢信任自己的直觉？" | <input type=text size=3> | [5源验证] |<br><br><b>分数解读<b>：<br><li>任何维度 ≤ 2.0 → 🔴 立即停止推进。启动蓝军独立审计。<br><li>任何维度 ≤ 3.0 → 🟠 建立补偿机制（协议/退出条款/第三方）后再推进。<br><li>全部 ≥ 4.0 → 🟢 可推进。但继续下面的检查。<br><br>> 每个维度旁的[验证密度] = 该维度被几个独立来源同时验证。数字越高，分数越可信。身心流是最弱的维度(仅3源)——在这个维度上的判断最容易出错。<br><br>---<br><br><h2>第三步：四骑士预警（3分钟）<br><br>以下四个信号，诚实回答：<br><br><input type=checkbox> <b>批评<b>: "我最近对他的评价，是从'这件事没做好'慢慢滑向了'他就是不行'吗？"<br><input type=checkbox> <b>蔑视<b>: "我有没有在心里产生过'你看他那样'的想法？"<br>    → 如果有，这是Gottman发现的头号关系破裂预测信号（91%准确率）。不是"不喜欢"——是"看不起"。关系降级已经开始。<br><input type=checkbox> <b>防御<b>: "在最近的争议中，我有没有每次都找外部原因——而不是承认我的那部分？"<br><input type=checkbox> <b>冷漠<b>: "我们之间有没有一个话题，已经不聊了——因为聊也没用？"<br>    → 如果有，这是Lencioni金字塔第二层的"惧怕冲突"。不是关系好——是冲突转入地下。<br><br>---<br><br><h2>第四步：金字塔定位（2分钟）<br><br>你们现在最脆弱的层级是哪一层？诚实回答：<br><br><input type=checkbox> <b>第1层·信任<b>: "你敢在合伙人面前承认自己不懂什么吗？"<br><input type=checkbox> <b>第2层·冲突<b>: "上次你们为项目方向激烈辩论是什么时候？"<br><input type=checkbox> <b>第3层·承诺<b>: "不吵就同意——是真的同意，还是放弃抵抗？"<br><input type=checkbox> <b>第4层·问责<b>: "你敢跟合伙人说'你这次做得不够好'吗？"<br><input type=checkbox> <b>第5层·结果<b>: "你们上次因为方向分歧各自为政是什么时候？"<br><br>> 最脆弱的那一层——就是你们现在最需要修的地方。底层不修，上层永远塌。<br><br>---<br><br><h2>第五步：决策行动分级（3分钟）<br><br>根据以上结果，选择对应的行动：<br><br><input type=checkbox> 🔴 <b>战略不可逆<b>（任何维度≤2.0或四骑士≥2个活跃）<br>  → pre_delivery_gate全6步 + 蓝军独立审计 + 不要今天做决定<br><br><input type=checkbox> 🟠 <b>战略可逆<b>（任何维度≤3.0或金字塔第1-2层）<br>  → pre_delivery_gate步1-4 + 24小时延时复核 + 和合伙人一起做这份清单<br><br><input type=checkbox> 🟡 <b>运营不可逆<b>（整体3-4分但有一个维度偏低）<br>  → 聚焦最弱维度做深度对话 + 建立该维度的补偿机制<br><br><input type=checkbox> 🟢 <b>运营可逆<b>（全部≥4.0·四骑士无活跃·金字塔第5层以上）<br>  → 标准流程·可自主推进·但做好定期追踪<br><br>---<br><br><h2>第六步：延时复核（等待24小时）<br><br><input type=checkbox> 明天的这个时候，重新打开这份清单。<br><input type=checkbox> 如果任何一个答案变了——不是"昨天填错了"。是"昨天的状态影响了昨天的判断"（occasion noise·Kahneman）。<br><input type=checkbox> 变化的答案——就是你的噪声信号。关注它。<br><br>---<br><br><h2>这份清单背后的11个独立验证来源<br><br>你的每个判断，不是"我觉得"——是被以下11个互不相识的研究者，用不同方法，在不同领域，各自独立验证的：<br><br>| 来源 | 验证了什么 |<br>|:--|:--|<br>| <b>Simon<b>(1978诺贝尔) | 最优解不存在——你需要满意解 |<br>| <b>Kahneman<b>(2002诺贝尔) | 你的快思考经常骗你——需要慢思考验证 |<br>| <b>Wasserman<b>(HBS·10,000+创始人) | 73%在最乐观时签下最不可逆的协议 |<br>| <b>Gottman<b>(华盛顿大学·16年·91%准确率) | 蔑视是关系解体的头号杀手 |<br>| <b>Duke<b>(世界扑克冠军) | 不要用结果反推决策——Super Bowl传球拦截率仅2% |<br>| <b>Lencioni<b>(组织行为学) | 所有团队问题的根——没人敢说真话 |<br>| <b>Feld<b>(VC交易圣经) | 估值越高条款越危险 |<br>| <b>Moyer<b>(Slicing Pie) | 股权不是激励——是记账 |<br>| <b>Dunford<b>(定位专家) | 定位不是口号——是"你在哪个世界里是最好的" |<br>| <b>满意姐<b>(满意解研究所) | 五路图腾·让西方决策科学在中国创业者手中可操作 |<br>| <b>扣子<b>(满天星光) | 8赛道产业验证·关键因子是乘不是加 |<br><br>---<br><br><b>满意解研究所 · 硬科技转化的合伙人匹配决策教练<b><br><b>夏至日(06-21)正式官宣 · 关注我们<b><br><b>契·晋·转·桥·审·行·恒<b><br>
-
-<div style="text-align:center;padding:24px;font-size:12px;color:#4A4A4A;border-top:1px solid #D4C5A0;margin-top:32px;">
-  <p>满意解研究所 · MANYIJIE · Satisficing Research Institute</p>
-  <p>火承土印 · 满意之解</p>
+<div class="header">
+  <h1>合伙人决策前自检清单</h1>
+  <p class="sub">12源验证 · 20分钟走完 · 打印可用</p>
 </div>
 
-<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
-  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
-  <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
-    <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
-    <button onclick="showFeedbackText()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">💬</span>有建议</button>
+<div class="step">
+  <h2><span class="num">第一步</span>状态校准</h2>
+  <p class="quote">在做任何判断之前，先问自己。如果任何一项不确定——先停。人在疲劳和情绪状态下做出的判断，噪声最大。</p>
+  <div class="check-item"><input type="checkbox"><span class="ci-text">我现在是清醒的，还是被情绪推着走？</span></div>
+  <div class="check-item"><input type="checkbox"><span class="ci-text">我上一次完整睡眠是几小时前？</span></div>
+  <div class="check-item"><input type="checkbox"><span class="ci-text">如果24小时后重新做这个判断，答案会一样吗？</span></div>
+</div>
+
+<div class="step">
+  <h2><span class="num">第二步</span>五维快速自检</h2>
+  <p style="font-size:13px;color:#6E6E6E;margin-bottom:12px">每个维度打分（1=完全没把握，5=非常稳固）</p>
+  <div class="table-wrap">
+  <table class="tbl">
+    <tr><th>#</th><th>维度</th><th>校准问题</th><th style="width:60px">1-5分</th></tr>
+    <tr><td>1</td><td><b>时间轴</b></td><td>"五年后，我会怎么看待今天的决定？"</td><td><input type="text" size="3" style="width:48px;padding:4px;border:1.5px solid #D4C5A0;border-radius:6px;text-align:center"></td></tr>
+    <tr><td>2</td><td><b>可行域</b></td><td>"我的'够用就好'底线在哪里？"</td><td><input type="text" size="3" style="width:48px;padding:4px;border:1.5px solid #D4C5A0;border-radius:6px;text-align:center"></td></tr>
+    <tr><td>3</td><td><b>身心流</b></td><td>"我的身体在告诉我什么？"</td><td><input type="text" size="3" style="width:48px;padding:4px;border:1.5px solid #D4C5A0;border-radius:6px;text-align:center"></td></tr>
+    <tr><td>4</td><td><b>信义观</b></td><td>"钱和原则之间，他会怎么选？"</td><td><input type="text" size="3" style="width:48px;padding:4px;border:1.5px solid #D4C5A0;border-radius:6px;text-align:center"></td></tr>
+    <tr><td>5</td><td><b>直觉阈</b></td><td>"关键时刻，我敢不敢信任自己的直觉？"</td><td><input type="text" size="3" style="width:48px;padding:4px;border:1.5px solid #D4C5A0;border-radius:6px;text-align:center"></td></tr>
+  </table>
   </div>
-  <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
-  <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
-  <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
-  <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
-  <p style="font-size:10px;opacity:0.4;margin-top:8px;"><a href="go.html" style="color:inherit;">返回决策通道</a></p>
+  <div class="legend">
+    <li class="l1">任何维度 ≤ 2.0 → 🔴 立即停止。启动蓝军独立审计</li>
+    <li class="l2">任何维度 ≤ 3.0 → 🟠 建立补偿机制（协议/退出条款/第三方）后再推进</li>
+    <li class="l3">全部 ≥ 4.0 → 🟢 可推进。继续下面的检查</li>
+  </div>
 </div>
-<script>
-(function(){
-  let page=location.pathname.split('/').pop()||'index';
-  let key='sri_fb_'+page;
-  let data=JSON.parse(localStorage.getItem(key)||'{}');
-  if(data.sent){document.getElementById('fbQuestion').textContent='感谢你的反馈！';document.getElementById('fbActions').style.display='none';}
-  let tally=JSON.parse(localStorage.getItem('sri_fb_tally_'+page)||'{"up":0,"text":0}');
-  if(tally.up+tally.text>0) document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
-  window.submitFeedback=function(type){
-    tally[type]=(tally[type]||0)+1;
-    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
-    data.sent=true;data.type=type;data.time=new Date().toISOString();
-    localStorage.setItem(key,JSON.stringify(data));
-    document.getElementById('fbActions').style.display='none';
-    document.getElementById('fbQuestion').textContent='感谢你的反馈！';
-    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
-  };
-  window.showFeedbackText=function(){
-    document.getElementById('fbText').style.display='block';
-    document.getElementById('fbSubmit').style.display='inline-block';
-  };
-  window.submitFeedbackText=function(){
-    let text=document.getElementById('fbText').value.trim();
-    if(!text)return;
-    tally.text=(tally.text||0)+1;
-    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
-    data.sent=true;data.type='text';data.text=text;data.time=new Date().toISOString();
-    localStorage.setItem(key,JSON.stringify(data));
-    document.getElementById('fbActions').style.display='none';
-    document.getElementById('fbText').style.display='none';
-    document.getElementById('fbSubmit').style.display='none';
-    document.getElementById('fbQuestion').textContent='收到！感谢你的建议。';
-    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
-  };
-})();
-</script>
 
-</body>
+<div class="step">
+  <h2><span class="num">第三步</span>关系危机信号</h2>
+  <p class="quote">以下四个信号，诚实回答。Gottman 16年研究发现，这些信号预测关系破裂的准确率为91%。</p>
+  <div class="check-item"><input type="checkbox"><span class="ci-text"><b>批评</b>：我最近对他的评价，是从"这件事没做好"慢慢滑向了"他就是不行"吗？</span></div>
+  <div class="check-item"><input type="checkbox"><span class="ci-text"><b>蔑视</b>：我有没有在心里产生过"你看他那样"的想法？</span></div>
+  <div class="check-item" style="background:rgba(194,59,34,0.03)"><span class="ci-text" style="font-size:12px;color:#C23B22">→ 如果有，这是Gottman发现的头号关系破裂预测信号。不是"不喜欢"——是"看不起"。关系降级已经开始。</span></div>
+  <div class="check-item"><input type="checkbox"><span class="ci-text"><b>防御</b>：在最近的争议中，我有没有每次都找外部原因？</span></div>
+  <div class="check-item"><input type="checkbox"><span class="ci-text"><b>冷漠</b>：我们之间有没有一个话题，已经不聊了——因为聊也没用？</span></div>
+</div>
+
+<div class="step">
+  <h2><span class="num">第四步</span>金字塔定位</h2>
+  <p style="font-size:13px;color:#6E6E6E;margin-bottom:12px">你们现在最脆弱的层级是哪一层？最脆弱的那一层——就是最需要修的地方。</p>
+  <div class="check-item"><input type="checkbox"><span class="ci-text"><b>第1层·信任</b>：你敢在合伙人面前承认自己不懂什么吗？</span></div>
+  <div class="check-item"><input type="checkbox"><span class="ci-text"><b>第2层·冲突</b>：上次你们为项目方向激烈辩论是什么时候？</span></div>
+  <div class="check-item"><input type="checkbox"><span class="ci-text"><b>第3层·承诺</b>：不吵就同意——是真的同意，还是放弃抵抗？</span></div>
+  <div class="check-item"><input type="checkbox"><span class="ci-text"><b>第4层·问责</b>：你敢跟合伙人说"你这次做得不够好"吗？</span></div>
+  <div class="check-item"><input type="checkbox"><span class="ci-text"><b>第5层·结果</b>：你们上次因为方向分歧各自为政是什么时候？</span></div>
+</div>
+
+<div class="step">
+  <h2><span class="num">第五步</span>决策行动分级</h2>
+  <div class="action-box urgent">
+    <h4>🔴 战略不可逆</h4>
+    <p>任何维度≤2.0 或 关系危机信号≥2个活跃 → 全流程审核 + 蓝军独立审计 + 不要今天做决定</p>
+  </div>
+  <div class="action-box caution">
+    <h4>🟠 战略可逆</h4>
+    <p>任何维度≤3.0 或 金字塔第1-2层 → 24小时延时复核 + 和合伙人一起做这份清单</p>
+  </div>
+  <div class="action-box caution">
+    <h4>🟡 运营不可逆</h4>
+    <p>整体3-4分但有一个维度偏低 → 聚焦最弱维度做深度对话</p>
+  </div>
+  <div class="action-box safe">
+    <h4>🟢 运营可逆</h4>
+    <p>全部≥4.0 · 无活跃危机信号 · 金字塔第5层以上 → 标准流程可自主推进</p>
+  </div>
+</div>
+
+<div class="step">
+  <h2><span class="num">第六步</span>延时复核</h2>
+  <div class="check-item"><input type="checkbox"><span class="ci-text">明天的这个时候，重新打开这份清单</span></div>
+  <div class="check-item"><input type="checkbox"><span class="ci-text">如果任何一个答案变了——不是"昨天填错了"，是"昨天的状态影响了昨天的判断"</span></div>
+  <div class="check-item"><input type="checkbox"><span class="ci-text">变化的答案——就是你的噪声信号。关注它</span></div>
+</div>
+
+<div class="step">
+  <h2><span class="num">研究支撑</span>12个独立来源</h2>
+  <div class="table-wrap">
+  <table class="tbl">
+    <tr><th>来源</th><th>验证了什么</th></tr>
+    <tr><td><b>Simon</b> (1978诺贝尔)</td><td>最优解不存在——你需要满意解</td></tr>
+    <tr><td><b>Kahneman</b> (2002诺贝尔)</td><td>你的快思考经常骗你——需要慢思考验证</td></tr>
+    <tr><td><b>Wasserman</b> (10,000+创始人)</td><td>73%在最乐观时签下最不可逆的协议</td></tr>
+    <tr><td><b>Gottman</b> (16年研究)</td><td>蔑视是关系解体的头号杀手·91%准确率</td></tr>
+    <tr><td><b>Duke</b> (世界扑克冠军)</td><td>不要用结果反推决策质量</td></tr>
+    <tr><td><b>Lencioni</b> (组织行为学)</td><td>所有团队问题的根——没人敢说真话</td></tr>
+    <tr><td><b>Feld</b> (VC交易圣经)</td><td>估值越高条款越危险</td></tr>
+    <tr><td><b>Moyer</b> (Slicing Pie)</td><td>股权不是激励——是记账</td></tr>
+    <tr><td><b>Dunford</b> (定位专家)</td><td>定位不是口号——是"你在哪个世界里是最好的"</td></tr>
+    <tr><td><b>Damasio</b> (神经科学)</td><td>身体在决策前就已经在投票</td></tr>
+    <tr><td><b>Klein</b> (RPD模型)</td><td>专家直觉不是魔法——是模式识别</td></tr>
+    <tr><td><b>满意解研究所</b></td><td>五维决策框架·84案例实证·让西方决策科学可操作</td></tr>
+  </table>
+  </div>
+</div>
+
+<div class="footer">
+  <p>满意解研究所 · 硬科技创始人合伙人匹配决策外脑</p>
+  <p style="margin-top:4px">夏至（6月21日）正式运营</p>
+  <p style="margin-top:12px"><a href="go.html" style="color:#C23B22;text-decoration:none">← 返回决策通道</a></p>
+</div>
+
+</div></body>
 </html>
