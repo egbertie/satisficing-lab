@@ -2,7 +2,70 @@
 
 ## 🏷️ stable-2026-05-29 — 全站稳定版本封装
 
-> 2026-05-29 23:32 · 8个核心页面统一存档
+> 2026-05-29 23:42 · **248个HTML文件全量存档** · 39个导航可达页面 · MD5双重验证
+
+### 封装范围
+- **site/ 全量**：248 个 HTML 文件，MD5 100% 一致验证通过
+- **导航可达页面**：39 个 (从 index.html BFS 遍历完整链接图谱)
+- **备份位置**：`site/.bak/stable-2026-05-29-full/` (248 f)
+- **Git tag**：`stable-2026-05-29`
+
+### 导航链路图谱 (39页)
+```
+index.html (入口)
+├── about.html        → chemical-report, decision-theatre, go
+├── assessment.html    → thermometer, privacy, terms, knights, account
+├── cards-play.html    → assessment, thermometer, rps
+├── checklist.html     → go
+├── chemical-report    → decision-theatre, assessment
+├── decision-theatre   → assessment, chemical-report
+├── go.html (导航中枢) → guide, account, certification, go-gallery, about,
+│                        assessment, thermometer, crisis-sim, knights,
+│                        workshop, fulldiag, rps, slicing-pie, checklist,
+│                        pre0, knights-cards, quotes, match, metapartner,
+│                        exit-guide, creation, roots, cases, deep-gottman,
+│                        product-catalog, flywheel, dashboard, privacy
+├── privacy/terms/symbols → index, go
+├── radar.html         → assessment, chemical-report
+├── cases.html         → (案例库, 从零重写)
+├── dashboard.html     → index (驾驶舱, sessionStorage密码门)
+├── product-catalog    → go (产品目录, 108KB)
+├── knights.html       → thermometer, assessment, account
+├── fulldiag.html      → assessment
+├── match.html         → metapartner, assessment
+├── pre0.html          → assessment, crisis-sim
+├── crisis-sim.html    → go
+├── workshop.html      → go
+├── certification.html → go
+├── creation.html      → stars
+├── stars.html         → creation, roots
+├── roots.html         → assessment
+├── flywheel.html      → dashboard
+├── deep-gottman.html  → go
+├── exit-guide.html    → assessment, crisis-sim
+├── go-gallery.html    → wizard
+├── wizard.html        → go
+├── guide.html         → go
+├── quotes.html        → go
+├── rps.html           → go
+├── slicing-pie.html   → go
+├── metapartner.html   → go
+├── thermometer.html   → knights, account
+├── account.html       → go
+└── report-demo.html   → chemical-report
+```
+
+### 质量门禁
+- ✅ 0 个 `event.target`（全站 `this` 参数传递）
+- ✅ 0 个 `crypto.subtle` / SHA-256（全站明文）
+- ✅ sessionStorage 密码门 + 降级提示
+- ✅ 248/248 MD5 备份一致
+
+---
+
+### 早期记录
+
+> 2026-05-29 23:32 · 8个核心页面统一存档（已被上方全量覆盖）
 
 ### 封装清单
 | 页面 | 大小 | 关键特征 |
