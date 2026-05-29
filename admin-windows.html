@@ -191,14 +191,23 @@ function toolbar(id,ph,filts){
 function toggleDetail(rowId){var r=document.getElementById(rowId);if(r)r.classList.toggle('show')}
 function filterPane(id,text,cat){
   text=(text||'').toLowerCase();var rows=document.querySelectorAll('#tbody-'+id+' tr');
-  for(var i=0;i<rows.length;i++){var row=rows[i];if(row.className.indexOf('empty-row')>=0||row.className.indexOf('detail-row')>=0)continue;var m=true;if(text&&(row.textContent||'').toLowerCase().indexOf(text)<0)m=false;if(cat&&m){var tags=row.querySelectorAll('.tag');var cm=false;for(var j=0;j<tags.length;j++){if((tags[j].textContent||'').indexOf(cat)>=0){cm=true;break}}if(!cm)m=false}row.style.display=m?'':'none';var nx=row.nextElementSibling;if(nx&&nx.className.indexOf('detail-row')>=0)nx.style.display='none'}
+  for(var i=0;i<rows.length;i++){var row=rows[i];if(row.className.indexOf('empty-row')>=0||row.className.indexOf('detail-row')>=0)continue;var m=true;
+  if(text&&(row.textContent||'').toLowerCase().indexOf(text)<0)m=false;
+  if(cat&&m){
+    // 支持全量文本匹配（包括生命周期阶段标签 + 族名）
+    var rowText=(row.textContent||'');var tags=row.querySelectorAll('.tag');var cm=false;
+    for(var j=0;j<tags.length;j++){if((tags[j].textContent||'').indexOf(cat)>=0){cm=true;break}}
+    if(!cm&&rowText.indexOf(cat)<0)cm=false;
+    if(!cm)m=false;
+  }
+  row.style.display=m?'':'none';var nx=row.nextElementSibling;if(nx&&nx.className.indexOf('detail-row')>=0)nx.style.display='none'}
 }
 
 /* ===== 排序/填表 ===== */
 var PANE_DATA={};
 function fillPaneTable(id,rows,rowBld,emptyMsg){
   var tbody=document.getElementById('tbody-'+id);if(!tbody)return;
-  if(!rows||!rows.length){tbody.innerHTML='<tr class="empty-row"><td colspan="10">'+(emptyMsg||'暂无数据')+'</td></tr>';return}
+  if(!rows||!rows.length){tbody.innerHTML='<tr class="empty-row"><td colspan="12">'+(emptyMsg||'暂无数据')+'</td></tr>';return}
   var h='';for(var i=0;i<rows.length;i++)h+=rowBld(rows[i],i);tbody.innerHTML=h;
 }
 function sortPane(id,key,th){
@@ -215,7 +224,7 @@ var rowBuilders={};
    ================================================================ */
 function rOverview(){
   if(!DB)return renderDegrade();
-  var m=DB.meta,bd=m.breakdown,h='<div class="panel-header"><div><h2>🏠 实体总览</h2><div class="meta">'+m.total_entities+' 实体 · '+Object.keys(bd).length+' 维度 · 密度 '+m.knowledge_graph_density+'%</div></div></div>';
+  var m=DB.meta,bd=m.breakdown,h='<div class="panel-header"><div><h2>🏠 实体总览</h2><div class="meta">'+m.total_entities+' 实体 · '+Object.keys(bd).length+' 维度 · '+m.product_total+' 产品 · 密度 '+m.knowledge_graph_density+'%</div></div></div>';
   h+='<div class="stat-grid">';
   var dims=[{k:'products',l:'产品',i:'📦'},{k:'tasks',l:'任务',i:'📋'},{k:'terms',l:'术语',i:'📖'},{k:'decisions',l:'决策',i:'⚖️'},{k:'customers',l:'客户',i:'👤'},{k:'living_rules',l:'规则',i:'🧬'},{k:'instructions_set',l:'指令',i:'📜'},{k:'workflows',l:'流程',i:'🔁'}];
   for(var i=0;i<dims.length;i++){var d=dims[i],v=bd[d.k]||0,pct=Math.min(v/m.total_entities*500,100);h+='<div class="stat-card"><div class="stat-num">'+v+'</div><div class="stat-label">'+d.i+' '+d.l+'</div><div class="stat-bar"><div class="fill fill-gold" style="width:'+pct+'%"></div></div></div>'}
@@ -223,33 +232,94 @@ function rOverview(){
   var dims2=[{k:'documents',l:'文档',i:'📄'},{k:'events',l:'事件',i:'⚡'},{k:'milestones',l:'里程碑',i:'🏁'},{k:'crons',l:'Cron',i:'⏰'},{k:'scripts',l:'脚本',i:'🔧'},{k:'scoring_models',l:'评分模型',i:'📊'},{k:'simulation_scenarios',l:'模拟场景',i:'🎭'},{k:'historical_artifacts',l:'考古',i:'🏺'},{k:'governance_frameworks',l:'治理框架',i:'🏛️'},{k:'vi_standards',l:'VI标准',i:'🎨'},{k:'quality_metrics',l:'质量指标',i:'✅'},{k:'additional_discoveries',l:'发现',i:'🔍'}];
   h+='<div style="margin-top:16px"><h3 style="font-size:.95em;margin-bottom:10px">📊 全维度分布</h3><table class="data-table"><thead><tr><th>维度</th><th>数量</th><th>占比</th></tr></thead><tbody>';
   for(var j=0;j<dims2.length;j++){var d2=dims2[j],v2=bd[d2.k]||0,pct2=m.total_entities?(v2/m.total_entities*100).toFixed(1):0;h+='<tr><td>'+d2.i+' '+d2.l+'</td><td><b>'+v2+'</b></td><td>'+pct2+'%</td></tr>'}h+='</tbody></table></div>';
-  if(m.product_families){h+='<div style="margin-top:20px"><h3 style="font-size:.95em;margin-bottom:10px">📦 产品族分布</h3><div class="chip-wrap">';var fk=Object.keys(m.product_families);for(var kc=0;kc<fk.length;kc++)h+='<div class="chip"><b>'+escH(fk[kc])+'</b> '+m.product_families[fk[kc]]+'个</div>';h+='</div></div>'}
+  // 产品生命周期概览
+  if(m.lifecycle_stages){
+    var ls=m.lifecycle_stages,lsKeys=Object.keys(ls).sort(),lsTotal=0;for(var lsk=0;lsk<lsKeys.length;lsk++)lsTotal+=ls[lsKeys[lsk]];
+    h+='<div style="margin-top:20px"><h3 style="font-size:.95em;margin-bottom:10px">📦 产品全生命周期 · '+lsTotal+'件</h3><div class="stat-grid">';
+    var lsLabels={L0_概念:'💡概念',L1_原型:'🔬原型',L2_内测:'🧪内测',L3_打磨:'✨打磨',L4_精品:'💎精品',L5_维护:'🔄维护',L6_退役:'📦退役'};
+    for(var lsi=0;lsi<lsKeys.length;lsi++){var lk=lsKeys[lsi],lv=ls[lk]||0,pct=lsTotal?Math.min(lv/lsTotal*400,100):0;h+='<div class="stat-card"><div class="stat-num">'+lv+'</div><div class="stat-label">'+lsLabels[lk]+'</div><div class="stat-bar"><div class="fill fill-gold" style="width:'+pct+'%"></div></div></div>'}
+    h+='</div></div>';
+  }
+  // 开发批次
+  if(m.dev_batches){
+    var db=m.dev_batches,dbKeys=Object.keys(db);
+    h+='<div style="margin-top:16px"><h3 style="font-size:.95em;margin-bottom:10px">📅 三波次开发计划</h3><div class="chip-wrap">';
+    for(var dbi=0;dbi<dbKeys.length;dbi++)h+='<div class="chip"><b>'+escH(dbKeys[dbi])+'</b> '+db[dbKeys[dbi]]+'件</div>';
+    h+='</div></div>';
+  }
+  if(m.product_families){h+='<div style="margin-top:16px"><h3 style="font-size:.95em;margin-bottom:10px">📦 产品族分布</h3><div class="chip-wrap">';var fk=Object.keys(m.product_families);for(var kc=0;kc<fk.length;kc++)h+='<div class="chip"><b>'+escH(fk[kc])+'</b> '+m.product_families[fk[kc]]+'个</div>';h+='</div></div>'}
   if(m.living_rules_status){var rs=m.living_rules_status;h+='<div style="margin-top:20px"><h3 style="font-size:.95em">🧬 规则引擎健康度 · 规则数: '+(DB.living_rules||[]).length+'</h3><div class="chip-wrap"><div class="chip"><span class="tag tag-green">活跃 '+rs.active+'</span></div><div class="chip"><span class="tag tag-gold">休眠 '+rs.dormant+'</span></div>';if(rs.broken)h+='<div class="chip"><span class="tag tag-red">损坏 '+rs.broken+'</span></div>';h+='</div></div>'}
   if(m.biological_health){var bh=m.biological_health;h+='<div style="margin-top:8px;font-size:.78em;color:var(--ink-light)">🔥 全活: '+bh.fully_alive+'/'+bh.rules_with_triggers+' · 触发:'+bh.rules_with_triggers+' · 反馈:'+bh.rules_with_feedback+' · 适应:'+bh.rules_with_adaptation+' · Cron连接:'+bh.cron_connected+'</div>'}
   if(m.corrections){h+='<div style="margin-top:20px"><h3 style="font-size:.95em">📝 数据修正记录</h3>';for(var c=0;c<m.corrections.length;c++)h+='<div style="font-size:.78em;color:var(--ink-light);padding:4px 0">'+escH(m.corrections[c])+'</div>';h+='</div>'}
   return h;
 }
 /* ================================================================
-   2. 产品目录 · 240产品·按族筛选·状态活跃/休眠/待完善
+   2. 产品目录 · 312产品·全生命周期·三波次开发
    ================================================================ */
+var LC_LABELS={L0_概念:'💡概念',L1_原型:'🔬原型',L2_内测:'🧪内测',L3_打磨:'✨打磨',L4_精品:'💎精品',L5_维护:'🔄维护',L6_退役:'📦退役'};
+var MAT_LABELS={M0_种子:'🌱种子',M1_萌芽:'🌿萌芽',M2_成型:'🌳成型',M3_成熟:'🍎成熟',M4_标杆:'🏆标杆'};
+var MAT_PCT={M0_种子:10,M1_萌芽:30,M2_成型:60,M3_成熟:85,M4_标杆:100};
 function rProducts(){
   if(!DB)return renderDegrade();
-  var prods=DB.products||[],mf=(DB.meta||{}).product_families||{},fks=Object.keys(mf);
-  var h='<div class="panel-header"><div><h2>📦 产品目录</h2><div class="meta">'+prods.length+' 产品 · '+fks.length+' 族</div></div></div>';
-  h+=toolbar('products','搜索产品名/描述...',fks);
-  h+='<table class="data-table" id="tbl-products"><thead><tr><th onclick="sortPane(\'products\',\'id\',this)">ID<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'name\',this)">产品名<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'family\',this)">族<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'status\',this)">状态<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'tier\',this)">层级<span class="sort-arrow"></span></th><th>标签</th></tr></thead><tbody id="tbody-products"></tbody></table>';
+  var prods=DB.products||[],m=DB.meta||{};
+  var ls=m.lifecycle_stages||{},ml=m.maturity_levels||{},batches=m.dev_batches||{};
+  // 生命周期阶段柱状图
+  var stageOrder=['L0_概念','L1_原型','L2_内测','L3_打磨','L4_精品','L5_维护','L6_退役'];
+  var h='<div class="panel-header"><div><h2>📦 产品全生命周期</h2><div class="meta">'+prods.length+' 产品 · 7阶段 · 5级成熟度 · 3波次</div></div></div>';
+  h+='<div class="stat-grid">';
+  for(var si=0;si<stageOrder.length;si++){
+    var sk=stageOrder[si],sv=ls[sk]||0,fill=sv>0?' fill-gold':'';
+    if(sv>0){
+      h+='<div class="stat-card" style="cursor:pointer" onclick="filterPane(\'products\',document.getElementById(\'srch-products\').value,\''+escA(sk)+'\')">';
+      h+='<div class="stat-num">'+sv+'</div><div class="stat-label">'+LC_LABELS[sk]+'</div>';
+      h+='<div class="stat-bar"><div class="fill'+fill+'" style="width:'+Math.min(sv/prods.length*500,100)+'%"></div></div></div>';
+    }
+  }
+  h+='</div>';
+  // 开发时间表
+  h+='<div style="margin:20px 0;padding:16px;background:var(--card);border:1px solid var(--border);border-radius:10px">';
+  h+='<h3 style="font-size:.92em;margin-bottom:12px">📅 三波次开发时间表</h3>';
+  var waves=[{b:'第一波·低垂果实',c:'#C23B22',s:'2026-06-01',e:'2026-06-14',d:14,n:batches['第一波·低垂果实']||0},{b:'第二波·内容精品化',c:'#B8860B',s:'2026-07-01',e:'2026-08-14',d:45,n:batches['第二波·内容精品化']||0},{b:'第三波·精品线+OPS',c:'#3D7A4F',s:'2026-08-01',e:'2026-10-30',d:90,n:batches['第三波·精品线+OPS']||0}];
+  h+='<div style="display:flex;gap:10px;flex-wrap:wrap">';
+  for(var wi=0;wi<waves.length;wi++){
+    var w=waves[wi];
+    h+='<div style="flex:1;min-width:200px;padding:12px;border-left:4px solid '+w.c+';background:var(--warm);border-radius:6px">';
+    h+='<div style="font-weight:700;font-size:.85em">'+(wi+1)+'. '+w.b+'</div>';
+    h+='<div style="font-size:.75em;color:var(--ink-light);margin-top:4px">📅 '+w.s+' → '+w.e+' ('+w.d+'天)</div>';
+    h+='<div style="font-size:2em;font-weight:700;color:'+w.c+';margin-top:6px">'+w.n+'</div>';
+    h+='<div style="font-size:.7em;color:var(--ink-lighter)">件产品</div></div>';
+  }
+  h+='</div></div>';
+  // 成熟度分布
+  h+='<div style="margin-bottom:12px"><h3 style="font-size:.85em;margin-bottom:6px">🎯 成熟度</h3><div class="chip-wrap">';
+  var morder=['M0_种子','M1_萌芽','M2_成型','M3_成熟','M4_标杆'];
+  for(var mi=0;mi<morder.length;mi++){var mk=morder[mi],mv=ml[mk]||0;h+=mv>0?'<div class="chip"><b>'+MAT_LABELS[mk]+'</b> '+mv+'件</div>':''}
+  h+='</div></div>';
+  // 筛选栏
+  var fks=Object.keys(m.product_families||{});
+  var stageFilt=stageOrder.map(function(k){return LC_LABELS[k]});
+  h+=toolbar('products','搜索产品名/描述...',fks.concat(stageFilt));
+  // 表格
+  h+='<table class="data-table" id="tbl-products"><thead><tr><th onclick="sortPane(\'products\',\'id\',this)">ID<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'name\',this)">产品名<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'family\',this)">族<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'lifecycle_stage\',this)">生命周期<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'maturity\',this)">成熟度<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'dev_batch\',this)">开发波次<span class="sort-arrow"></span></th><th onclick="sortPane(\'products\',\'dev_deadline\',this)">截止<span class="sort-arrow"></span></th></tr></thead><tbody id="tbody-products"></tbody></table>';
   rowBuilders.products=prodRow;PANE_DATA.products=prods.slice();setTimeout(function(){fillPaneTable('products',prods,prodRow,'无产品数据')},0);
   return h;
 }
 function prodRow(p,idx){
-  var sc=p.status==='精品'?'tag-green':(p.status==='活跃'?'tag-gold':'tag-gray');
-  var h='<tr onclick="toggleDetail(\'prod-det-'+idx+'\')" style="cursor:pointer"><td>'+escH(p.id)+'</td><td><b>'+escH(p.name)+'</b></td><td><span class="tag tag-gray">'+escH(p.family||'—')+'</span></td><td><span class="tag '+sc+'">'+escH(p.status||'—')+'</span></td><td>'+escH(p.tier||'—')+'</td><td>'+((p.tags||[]).slice(0,3).map(function(t){return'<span class="tag tag-gold">'+escH(t)+'</span>'}).join(' '))+'</td></tr>';
-  h+='<tr class="detail-row" id="prod-det-'+idx+'"><td colspan="6"><div class="detail-card">';
+  var ls=p.lifecycle_stage||'L1_原型',ml=p.maturity||'M1_萌芽';
+  var lcTag=ls==='L4_精品'?'tag-green':(ls==='L2_内测'?'tag-gold':(ls==='L1_原型'?'tag-gray':'tag-gray'));
+  var matPct=MAT_PCT[ml]||30,matFill=matPct>=85?'fill-green':(matPct>=60?'fill-gold':'fill-gray');
+  var batch=p.dev_batch||'—',deadline=p.dev_deadline||'—';
+  var h='<tr onclick="toggleDetail(\'prod-det-'+idx+'\')" style="cursor:pointer"><td>'+escH(p.id)+'</td><td><b>'+escH(p.name)+'</b></td><td><span class="tag tag-gray">'+escH(p.family||'—')+'</span></td><td><span class="tag '+lcTag+'">'+LC_LABELS[ls]+'</span></td><td><div style="display:flex;align-items:center;gap:6px"><span style="font-size:.75em">'+MAT_LABELS[ml]+'</span><div class="stat-bar" style="width:60px;margin:0"><div class="fill '+matFill+'" style="width:'+matPct+'%"></div></div></div></td><td><span class="tag tag-gold">'+escH(batch)+'</span></td><td style="font-size:.78em">'+escH(deadline)+'</td></tr>';
+  h+='<tr class="detail-row" id="prod-det-'+idx+'"><td colspan="7"><div class="detail-card">';
   if(p.description)h+='<div class="field"><span class="field-label">描述</span><div class="field-value">'+escH(p.description)+'</div></div>';
-  if(p.url)h+='<div class="field"><span class="field-label">路径</span><div class="field-value"><code>'+escH(p.url)+'</code></div></div>';
-  if(p.maturity)h+='<div class="field"><span class="field-label">成熟度</span><div class="field-value">'+escH(p.maturity)+'</div></div>';
-  if(p.source)h+='<div class="field"><span class="field-label">来源</span><div class="field-value">'+escH(p.source)+'</div></div>';
-  if(p.confidence)h+='<div class="field"><span class="field-label">置信度</span><div class="field-value">'+Math.round(p.confidence*100)+'%</div></div>';
+  h+='<div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:8px">';
+  h+='<div class="field" style="min-width:140px"><span class="field-label">分类</span><div class="field-value">'+escH(p.category||'—')+'</div></div>';
+  h+='<div class="field" style="min-width:140px"><span class="field-label">开发开始</span><div class="field-value">'+escH(p.dev_start||'—')+'</div></div>';
+  h+='<div class="field" style="min-width:140px"><span class="field-label">开发周期</span><div class="field-value">'+escH(String(p.dev_days||'—'))+' 天</div></div>';
+  h+='<div class="field" style="min-width:140px"><span class="field-label">来源</span><div class="field-value">'+escH(p.source||'—')+'</div></div>';
+  h+='</div>';
+  if(p.url)h+='<div class="field" style="margin-top:8px"><span class="field-label">路径</span><div class="field-value"><code>'+escH(p.url)+'</code></div></div>';
+  if(p.tags&&p.tags.length)h+='<div class="field" style="margin-top:8px"><span class="field-label">标签</span><div class="field-value">'+p.tags.map(function(t){return'<span class="tag tag-gold">'+escH(t)+'</span>'}).join(' ')+'</div></div>';
   return h+'</div></td></tr>';
 }
 /* ================================================================
