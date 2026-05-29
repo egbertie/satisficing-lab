@@ -1,965 +1,255 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>满意解研究所 · 驾驶舱</title>
-  <style>
-    /* ===== VI配色变量 ===== */
-    :root {
-      --primary: #C23B22;
-      --bg: #F5F0E6;
-      --accent: #B8860B;
-      --text: #4A4A4A;
-      --title: #2A2A2A;
-      --border: #E0D8C8;
-      --card-bg: #FFFCF7;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>驾驶舱最小验证版</title>
+<link rel="stylesheet" href="vi_quick_ref.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC",sans-serif;background:#F5F0E6;color:#4A4A4A;min-height:100vh;padding:20px}
+.gate{position:fixed;top:0;left:0;width:100%;height:100%;background:#F5F0E6;z-index:9999;display:flex;align-items:center;justify-content:center}
+.gb{background:#fff;border-radius:20px;padding:36px 28px;max-width:360px;width:90%;text-align:center;border:2px solid #C23B22}
+.gb input{width:42px;height:52px;border:2px solid #D4C5A0;border-radius:10px;text-align:center;font-size:22px;font-weight:700;font-family:monospace;background:#F5F0E6}
+.gd{display:flex;gap:6px;justify-content:center;margin:12px 0}
+.btn{width:100%;padding:12px;border:none;border-radius:12px;background:#C23B22;color:#fff;font-size:14px;font-weight:600;cursor:pointer}
+.app{display:none;max-width:600px;margin:0 auto}
+.tab{display:flex;gap:4px;margin:10px 0}
+.tab button{padding:8px 16px;border-radius:16px;border:1px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px}
+.tab button.on{background:#C23B22;color:#fff;border-color:#C23B22}
+.panel{background:#fff;border-radius:12px;padding:16px;margin:8px 0;border:1px solid #e0d5c8}
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+.ki{background:#fff;border-radius:10px;padding:10px;text-align:center;border:1px solid #e0d5c8;cursor:pointer}
+.ki:hover{border-color:#C23B22}.ki .v{font-size:22px;font-weight:800;color:#C23B22}.ki .l{font-size:9px;color:#6E6E6E;margin-top:2px}.ki .s{font-size:8px;color:#B8860B}
+.tc-btn{padding:6px 11px;border-radius:14px;border:1px solid #D4C5A0;background:#fff;cursor:pointer;font-size:11px;font-weight:600;white-space:nowrap}
+.tc-btn.on{background:#C23B22;color:#fff;border-color:#C23B22}
+.pn{background:#fff;border-radius:12px;padding:14px;margin:8px 0;border:1px solid #e0d5c8}
+.pn-h{font-size:14px;color:#2A2A2A;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #f0e8d8}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-bottom:10px}
+.si{background:#F5F0E6;border-radius:8px;padding:10px;text-align:center}.si .v{font-size:20px;font-weight:700;color:#2A2A2A}.si .l{font-size:9px;color:#6E6E6E}
+.pbar{height:6px;background:#f0e8d8;border-radius:3px;overflow:hidden;flex:1}.pfill{height:100%;background:#C23B22}
+.tbl{width:100%;border-collapse:collapse;font-size:10px}.tbl th{background:#F5F0E6;color:#2A2A2A;padding:5px 4px;text-align:left;font-size:9px;font-weight:600;border-bottom:2px solid #C23B22}.tbl td{padding:5px 4px;border-bottom:1px solid #f0e8d8;font-size:9px}
+.dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:3px}.dr{background:#C23B22}.da{background:#B8860B}.dg{background:#3D7A4F}
+.tg{display:inline-block;padding:1px 6px;border-radius:8px;font-size:9px;font-weight:600;margin:1px}.tgr{background:rgba(194,59,34,0.12);color:#C23B22}.tga{background:rgba(184,134,11,0.12);color:#B8860B}.tgg{background:rgba(61,122,79,0.12);color:#3D7A4F}
+.fr{display:flex;gap:5px;margin:6px 0;flex-wrap:wrap}.fr input,.fr select{flex:1;padding:5px 7px;border:1.5px solid #D4C5A0;border-radius:8px;font-size:10px;min-width:70px;background:#fff}
+.btn{padding:5px 12px;border-radius:10px;border:none;cursor:pointer;font-size:10px;font-weight:600;background:#C23B22;color:#fff}
+.emp{text-align:center;padding:30px;color:#6E6E6E;opacity:0.5;font-size:12px}
+.bl{border-left:3px solid #C23B22}
+.sr{padding:7px 10px;border-bottom:1px solid #f0e8d8;cursor:pointer;display:flex;gap:6px;align-items:center;font-size:11px}.sr .st{font-size:10px;opacity:0.5;min-width:30px}.sr .sa{font-size:9px;color:#B8860B;margin-left:auto}
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    #login-screen {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .login-box {
-      background: var(--card-bg);
-      border: 2px solid var(--primary);
-      border-radius: 12px;
-      padding: 40px;
-      text-align: center;
-      box-shadow: 0 8px 32px rgba(194,59,34,0.15);
-      max-width: 400px;
-      width: 90%;
-    }
-
-    .login-box h1 {
-      color: var(--title);
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-
-    .login-box p {
-      color: var(--text);
-      font-size: 14px;
-      margin-bottom: 24px;
-    }
-
-    .login-box input {
-      width: 100%;
-      padding: 12px 16px;
-      border: 2px solid var(--border);
-      border-radius: 8px;
-      font-size: 16px;
-      margin-bottom: 16px;
-      text-align: center;
-    }
-
-    .login-box input:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-
-    .login-box button {
-      width: 100%;
-      padding: 12px;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .login-box button:hover {
-      background: #A63220;
-    }
-
-    .login-error {
-      color: var(--primary);
-      font-size: 14px;
-      margin-top: 12px;
-      display: none;
-    }
-
-    #main-screen { display: none; }
-
-    .header {
-      background: var(--card-bg);
-      border-bottom: 3px solid var(--primary);
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .logo {
-      font-size: 20px;
-      font-weight: bold;
-      color: var(--primary);
-    }
-
-    .countdown {
-      background: var(--primary);
-      color: white;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 13px;
-    }
-
-    .search-box {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .search-box input {
-      padding: 8px 16px;
-      border: 2px solid var(--border);
-      border-radius: 20px;
-      width: 280px;
-      font-size: 14px;
-    }
-
-    .search-box input:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-
-    .logout-btn {
-      padding: 8px 16px;
-      background: transparent;
-      border: 2px solid var(--primary);
-      color: var(--primary);
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .logout-btn:hover {
-      background: var(--primary);
-      color: white;
-    }
-
-    .kpi-bar {
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
-      gap: 12px;
-      padding: 16px 24px;
-      background: white;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .kpi-card {
-      text-align: center;
-      padding: 12px;
-      background: var(--card-bg);
-      border-radius: 8px;
-      border: 1px solid var(--border);
-    }
-
-    .kpi-card .value {
-      font-size: 24px;
-      font-weight: bold;
-      color: var(--primary);
-    }
-
-    .kpi-card .label {
-      font-size: 12px;
-      color: var(--text);
-      margin-top: 4px;
-    }
-
-    .tab-bar {
-      display: flex;
-      gap: 4px;
-      padding: 12px 24px;
-      background: white;
-      border-bottom: 1px solid var(--border);
-      overflow-x: auto;
-    }
-
-    .tab-btn {
-      padding: 8px 16px;
-      border: none;
-      background: transparent;
-      color: var(--text);
-      cursor: pointer;
-      border-radius: 6px;
-      font-size: 14px;
-      white-space: nowrap;
-      transition: all 0.2s;
-    }
-
-    .tab-btn:hover {
-      background: var(--bg);
-    }
-
-    .tab-btn.active {
-      background: var(--primary);
-      color: white;
-    }
-
-    .content {
-      padding: 24px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    .card-title {
-      font-size: 18px;
-      font-weight: bold;
-      color: var(--title);
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid var(--accent);
-    }
-
-    .data-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .data-table th,
-    .data-table td {
-      padding: 12px;
-      text-align: left;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .data-table th {
-      background: var(--bg);
-      font-weight: 600;
-      color: var(--title);
-    }
-
-    .data-table tr:hover {
-      background: var(--bg);
-    }
-
-    .form-row {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-    }
-
-    .form-row input,
-    .form-row select {
-      flex: 1;
-      min-width: 120px;
-      padding: 10px 14px;
-      border: 2px solid var(--border);
-      border-radius: 8px;
-      font-size: 14px;
-    }
-
-    .form-row input:focus,
-    .form-row select:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-
-    .btn {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: all 0.2s;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: #A63220;
-    }
-
-    .btn-danger {
-      background: #DC3545;
-      color: white;
-    }
-
-    .btn-danger:hover {
-      background: #C82333;
-    }
-
-    .btn-sm {
-      padding: 6px 12px;
-      font-size: 12px;
-    }
-
-    .tag {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 12px;
-      background: var(--bg);
-      color: var(--text);
-    }
-
-    .tag-p0 { background: #FFEBEE; color: #C62828; }
-    .tag-p1 { background: #FFF3E0; color: #E65100; }
-    .tag-p2 { background: #E3F2FD; color: #1565C0; }
-    .tag-p3 { background: #E8F5E9; color: #2E7D32; }
-
-    .highlight {
-      background: #FFEB3B;
-      padding: 0 2px;
-      border-radius: 2px;
-    }
-
-    .glossary-item {
-      padding: 16px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .glossary-item:last-child {
-      border-bottom: none;
-    }
-
-    .glossary-term {
-      font-weight: bold;
-      color: var(--primary);
-      font-size: 16px;
-    }
-
-    .glossary-def {
-      margin-top: 6px;
-      color: var(--text);
-    }
-
-    .timeline {
-      position: relative;
-      padding-left: 24px;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 8px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--border);
-    }
-
-    .timeline-item {
-      position: relative;
-      padding-bottom: 20px;
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -20px;
-      top: 6px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--primary);
-      border: 3px solid var(--bg);
-    }
-
-    .timeline-date {
-      font-size: 13px;
-      color: var(--accent);
-      font-weight: bold;
-    }
-
-    .timeline-title {
-      font-size: 15px;
-      color: var(--title);
-      margin-top: 4px;
-    }
-
-    @media (max-width: 1024px) {
-      .kpi-bar { grid-template-columns: repeat(4, 1fr); }
-    }
-
-    @media (max-width: 768px) {
-      .kpi-bar { grid-template-columns: repeat(2, 1fr); }
-      .header { flex-direction: column; gap: 12px; }
-      .search-box input { width: 200px; }
-    }
-  </style>
+</style>
 </head>
 <body>
 
-<div id="login-screen">
-  <div class="login-box">
-    <h1>满意解研究所</h1>
-    <p>满天星光 · 驾驶舱</p>
-    <input type="password" id="password-input" placeholder="输入访问密码">
-    <button id="login-btn">进入驾驶舱</button>
-    <p class="login-error" id="login-error">密码错误，请重试</p>
-  </div>
+<div class="gate" id="gate">
+<div class="gb">
+<h2 style="font-size:18px;color:#2A2A2A;margin-bottom:8px">驾驶舱 · 最小验证</h2>
+<p style="font-size:12px;color:#6E6E6E;margin-bottom:14px">输入密码 123654</p>
+<div class="gd">
+<input type="password" maxlength="1" id="g0"><input type="password" maxlength="1" id="g1">
+<input type="password" maxlength="1" id="g2"><input type="password" maxlength="1" id="g3">
+<input type="password" maxlength="1" id="g4"><input type="password" maxlength="1" id="g5">
+</div>
+<p id="ge" style="color:#C23B22;font-size:12px;min-height:18px"></p>
+<button class="btn" onclick="gv()">验证</button>
+</div></div>
+
+<div class="app" id="app">
+<h1 style="font-size:20px;color:#2A2A2A">📊 驾驶舱 · 最小验证版</h1>
+<p style="color:#6E6E6E;font-size:12px;margin:8px 0" id="diag">诊断信息...</p>
+
+<div class="tab">
+<button class="on" onclick="st('a')">Tab A</button>
+<button onclick="st('b')">Tab B</button>
+<button onclick="st('c')">Tab C</button>
 </div>
 
-<div id="main-screen">
-  <div class="header">
-    <div class="header-left">
-      <span class="logo">满意解研究所</span>
-      <span class="countdown" id="countdown">夏至官宣倒计时</span>
-    </div>
-    <div class="search-box">
-      <input type="text" id="global-search" placeholder="搜索任务/客户/产品...">
-    </div>
-    <button class="logout-btn" id="logout-btn">退出</button>
-  </div>
+<div class="panel" id="content" style="min-height:200px">
+<p>点击上方tab或切换试试</p>
+</div>
 
-  <div class="kpi-bar" id="kpi-bar"></div>
-  <div class="tab-bar" id="tab-bar"></div>
-  <div class="content" id="content"></div>
+<hr style="margin:16px 0;border-color:#e0d5c8">
+<h3 style="font-size:14px;color:#2A2A2A">🔧 localStorage测试</h3>
+<div class="panel">
+<p style="font-size:12px;margin:4px 0"><b>localStorage 可写:</b> <span id="lsWrite" style="color:#C23B22">测试中...</span></p>
+<p style="font-size:12px;margin:4px 0"><b>localStorage 可读:</b> <span id="lsRead" style="color:#C23B22">测试中...</span></p>
+<p style="font-size:12px;margin:4px 0"><b>密码验证状态:</b> <span id="authStatus" style="color:#C23B22">测试中...</span></p>
+<p style="font-size:12px;margin:4px 0"><b>JS引擎:</b> <span id="jsEng" style="color:#3D7A4F">✅ 正在运行</span></p>
+<p style="font-size:12px;margin:4px 0"><b>页面加载时间:</b> <span id="loadTime">—</span></p>
+</div>
 </div>
 
 <script>
-// ===== 1. 配置 =====
-var CONFIG = {
-  PASSWORD: '123654',  // 直接明文存储，简化验证
-  STORAGE_KEYS: {
-    tasks: 'skylab_tasks',
-    customers: 'skylab_customers',
-    products: 'skylab_products',
-    loggedIn: 'skylab_logged_in'
-  },
-  TABS: [
-    { id: 'overview', label: '概览' },
-    { id: 'tasks', label: '任务' },
-    { id: 'milestones', label: '里程碑' },
-    { id: 'customers', label: '客户' },
-    { id: 'products', label: '产品' },
-    { id: 'quality', label: '质量' },
-    { id: 'financial', label: '财务' },
-    { id: 'growth', label: '增长' },
-    { id: 'system', label: '系统' },
-    { id: 'placeholders', label: '替身' },
-    { id: 'glossary', label: '术语表' }
-  ],
-  XZ_DATE: new Date('2026-06-21')
-};
+// 诊断记录
+var diag = [];
+function log(msg) { diag.push(new Date().toLocaleTimeString() + ' ' + msg); document.getElementById('diag').textContent = diag.join(' | '); }
 
-// ===== 2. Store =====
-var Store = {
-  state: {
-    currentTab: 'overview',
-    searchQuery: '',
-    searchResults: null,
-    tasks: [],
-    customers: [],
-    products: []
-  },
+log('JS引擎启动');
 
-  init: function() {
-    var tasks = localStorage.getItem(CONFIG.STORAGE_KEYS.tasks);
-    var customers = localStorage.getItem(CONFIG.STORAGE_KEYS.customers);
-    var products = localStorage.getItem(CONFIG.STORAGE_KEYS.products);
+// localStorage 测试
+try { localStorage.setItem('_dash_test_', 'ok'); document.getElementById('lsWrite').textContent = '✅ 可写'; log('LS写入OK'); }
+catch(e) { document.getElementById('lsWrite').textContent = '❌ 不可写: '+e.message; log('LS写入FAIL'); }
 
-    this.state.tasks = tasks ? JSON.parse(tasks) : this.getDefaultTasks();
-    this.state.customers = customers ? JSON.parse(customers) : this.getDefaultCustomers();
-    this.state.products = products ? JSON.parse(products) : this.getDefaultProducts();
+try { var v = localStorage.getItem('_dash_test_'); document.getElementById('lsRead').textContent = v==='ok'?'✅ 可读':'❌ 值不匹配'; log('LS读取: '+v); }
+catch(e) { document.getElementById('lsRead').textContent = '❌ 不可读'; log('LS读取FAIL'); }
 
-    if (!tasks && !customers && !products) {
-      this.saveAll();
-    }
-  },
+document.getElementById('loadTime').textContent = new Date().toLocaleTimeString();
 
-  saveAll: function() {
-    localStorage.setItem(CONFIG.STORAGE_KEYS.tasks, JSON.stringify(this.state.tasks));
-    localStorage.setItem(CONFIG.STORAGE_KEYS.customers, JSON.stringify(this.state.customers));
-    localStorage.setItem(CONFIG.STORAGE_KEYS.products, JSON.stringify(this.state.products));
-  },
-
-  setState: function(key, value) {
-    this.state[key] = value;
-    this.render();
-  },
-
-  switchTab: function(tabId) {
-    this.state.currentTab = tabId;
-    this.state.searchResults = null;
-    this.state.searchQuery = '';
-    document.getElementById('global-search').value = '';
-    this.render();
-  },
-
-  search: function(query) {
-    this.state.searchQuery = query;
-    if (!query.trim()) {
-      this.state.searchResults = null;
-      this.render();
-      return;
-    }
-
-    var q = query.toLowerCase();
-    var results = { tasks: [], customers: [], products: [] };
-
-    this.state.tasks.forEach(function(t) {
-      if ((t.title + '').toLowerCase().includes(q) || (t.desc || '').toLowerCase().includes(q)) {
-        results.tasks.push(t);
-      }
-    });
-
-    this.state.customers.forEach(function(c) {
-      if ((c.name + '').toLowerCase().includes(q) || (c.industry || '').toLowerCase().includes(q)) {
-        results.customers.push(c);
-      }
-    });
-
-    this.state.products.forEach(function(p) {
-      if ((p.name + '').toLowerCase().includes(q) || (p.desc || '').toLowerCase().includes(q)) {
-        results.products.push(p);
-      }
-    });
-
-    this.state.searchResults = results;
-    this.render();
-  },
-
-  addTask: function(task) {
-    task.id = Date.now();
-    task.createdAt = new Date().toISOString();
-    this.state.tasks.unshift(task);
-    this.saveAll();
-    this.render();
-  },
-
-  addCustomer: function(customer) {
-    customer.id = Date.now();
-    customer.createdAt = new Date().toISOString();
-    this.state.customers.unshift(customer);
-    this.saveAll();
-    this.render();
-  },
-
-  addProduct: function(product) {
-    product.id = Date.now();
-    product.createdAt = new Date().toISOString();
-    this.state.products.unshift(product);
-    this.saveAll();
-    this.render();
-  },
-
-  deleteTask: function(id) {
-    this.state.tasks = this.state.tasks.filter(function(t) { return t.id !== id; });
-    this.saveAll();
-    this.render();
-  },
-
-  deleteCustomer: function(id) {
-    this.state.customers = this.state.customers.filter(function(c) { return c.id !== id; });
-    this.saveAll();
-    this.render();
-  },
-
-  deleteProduct: function(id) {
-    this.state.products = this.state.products.filter(function(p) { return p.id !== id; });
-    this.saveAll();
-    this.render();
-  },
-
-  getDefaultTasks: function() {
-    return [
-      { id: 1, title: '公众号文章排期', priority: 'P1', status: '进行中', dueDate: '2026-06-01' },
-      { id: 2, title: '夏至官宣准备', priority: 'P0', status: '待启动', dueDate: '2026-06-15' },
-      { id: 3, title: '决策工具内测', priority: 'P1', status: '已完成', dueDate: '2026-05-28' },
-      { id: 4, title: '飞书知识库同步', priority: 'P2', status: '进行中', dueDate: '2026-06-05' },
-      { id: 5, title: '客户案例整理', priority: 'P2', status: '待启动', dueDate: '2026-06-10' }
-    ];
-  },
-
-  getDefaultCustomers: function() {
-    return [
-      { id: 1, name: '人形机器人创始人A', industry: '人形机器人', status: '潜在客户' },
-      { id: 2, name: 'AI芯片创始人B', industry: 'AI芯片/半导体', status: '深入沟通' },
-      { id: 3, name: '智能汽车创始人C', industry: '智能汽车', status: '已完成咨询' }
-    ];
-  },
-
-  getDefaultProducts: function() {
-    return [
-      { id: 1, name: '决策教练服务', desc: '一对一硬科技创业陪跑', status: '设计完成' },
-      { id: 2, name: '公众号内容', desc: '满天星光决策方法论输出', status: '持续更新' },
-      { id: 3, name: '决策工具箱', desc: '在线决策评估工具集', status: '开发中' }
-    ];
-  }
-};
-
-// ===== 3. 渲染 =====
-Store.render = function() {
-  this.renderKPI();
-  this.renderTabBar();
-  this.renderContent();
-  this.updateCountdown();
-};
-
-Store.renderKPI = function() {
-  var tasks = this.state.tasks;
-  var p0 = tasks.filter(function(t) { return t.priority === 'P0'; }).length;
-  var p1 = tasks.filter(function(t) { return t.priority === 'P1'; }).length;
-  var doing = tasks.filter(function(t) { return t.status === '进行中'; }).length;
-
-  document.getElementById('kpi-bar').innerHTML =
-    '<div class="kpi-card"><div class="value">' + tasks.length + '</div><div class="label">任务总数</div></div>' +
-    '<div class="kpi-card"><div class="value" style="color:#C62828">' + p0 + '</div><div class="label">P0待办</div></div>' +
-    '<div class="kpi-card"><div class="value" style="color:#E65100">' + p1 + '</div><div class="label">P1优先</div></div>' +
-    '<div class="kpi-card"><div class="value" style="color:#1565C0">' + doing + '</div><div class="label">进行中</div></div>' +
-    '<div class="kpi-card"><div class="value">' + this.state.customers.length + '</div><div class="label">客户数</div></div>' +
-    '<div class="kpi-card"><div class="value">' + this.state.products.length + '</div><div class="label">产品数</div></div>' +
-    '<div class="kpi-card"><div class="value">233</div><div class="label">线上产品</div></div>' +
-    '<div class="kpi-card"><div class="value">12</div><div class="label">Cron任务</div></div>';
-};
-
-Store.renderTabBar = function() {
-  var self = this;
-  document.getElementById('tab-bar').innerHTML = CONFIG.TABS.map(function(tab) {
-    return '<button class="tab-btn' + (self.state.currentTab === tab.id ? ' active' : '') + '" data-tab="' + tab.id + '">' + tab.label + '</button>';
-  }).join('');
-
-  // 事件绑定
-  var btns = document.querySelectorAll('.tab-btn');
-  for (var i = 0; i < btns.length; i++) {
-    btns[i].onclick = (function(tabId) {
-      return function() { self.switchTab(tabId); };
-    })(tab.id);
-  }
-};
-
-Store.renderContent = function() {
-  var tab = this.state.currentTab;
-  var renderers = {
-    'overview': this.renderOverview,
-    'tasks': this.renderTasks,
-    'milestones': this.renderMilestones,
-    'customers': this.renderCustomers,
-    'products': this.renderProducts,
-    'quality': this.renderQuality,
-    'financial': this.renderFinancial,
-    'growth': this.renderGrowth,
-    'system': this.renderSystem,
-    'placeholders': this.renderPlaceholders,
-    'glossary': this.renderGlossary
-  };
-
-  if (renderers[tab]) {
-    renderers[tab].call(this);
-  }
-};
-
-Store.renderOverview = function() {
-  var tasks = this.state.tasks.slice(0, 5);
-  var html = '<div class="card"><div class="card-title">本周待办</div><table class="data-table"><thead><tr><th>任务</th><th>优先级</th><th>状态</th><th>截止</th></tr></thead><tbody>';
-  tasks.forEach(function(t) {
-    html += '<tr><td>' + t.title + '</td><td><span class="tag tag-' + t.priority.toLowerCase() + '">' + t.priority + '</span></td><td>' + t.status + '</td><td>' + (t.dueDate || '-') + '</td></tr>';
-  });
-  html += '</tbody></table></div><div class="card"><div class="card-title">最新动态</div><p>暂无动态</p></div>';
-  document.getElementById('content').innerHTML = html;
-};
-
-Store.renderTasks = function() {
-  var self = this;
-  if (this.state.searchResults) {
-    return this.renderSearchResults(this.state.searchResults.tasks, ['title', 'priority', 'status']);
-  }
-
-  var tasks = this.state.tasks;
-  var html = '<div class="card"><div class="card-title">添加新任务</div><div class="form-row">' +
-    '<input type="text" id="task-title" placeholder="任务标题">' +
-    '<select id="task-priority"><option value="P0">P0</option><option value="P1">P1</option><option value="P2">P2</option><option value="P3">P3</option></select>' +
-    '<select id="task-status"><option value="待启动">待启动</option><option value="进行中">进行中</option><option value="已完成">已完成</option></select>' +
-    '<input type="date" id="task-due"></div>' +
-    '<button class="btn btn-primary" id="add-task-btn">添加任务</button></div>' +
-
-    '<div class="card"><div class="card-title">任务列表 (' + tasks.length + ')</div><table class="data-table"><thead><tr><th>任务</th><th>优先级</th><th>状态</th><th>截止</th><th>操作</th></tr></thead><tbody>';
-
-  tasks.forEach(function(t) {
-    html += '<tr><td>' + t.title + '</td><td><span class="tag tag-' + t.priority.toLowerCase() + '">' + t.priority + '</span></td><td>' + t.status + '</td><td>' + (t.dueDate || '-') + '</td><td><button class="btn btn-danger btn-sm" data-delete="task" data-id="' + t.id + '">删除</button></td></tr>';
-  });
-
-  html += '</tbody></table></div>';
-  document.getElementById('content').innerHTML = html;
-
-  // 绑定事件
-  document.getElementById('add-task-btn').onclick = function() {
-    var title = document.getElementById('task-title').value.trim();
-    var priority = document.getElementById('task-priority').value;
-    var status = document.getElementById('task-status').value;
-    var dueDate = document.getElementById('task-due').value;
-    if (!title) { alert('请输入任务标题'); return; }
-    self.addTask({ title: title, priority: priority, status: status, dueDate: dueDate });
-  };
-
-  document.querySelectorAll('[data-delete="task"]').forEach(function(btn) {
-    btn.onclick = function() { self.deleteTask(parseInt(this.dataset.id)); };
-  });
-};
-
-Store.renderMilestones = function() {
-  var milestones = [
-    { date: '2026-06-01', title: '公众号正式上线' },
-    { date: '2026-06-15', title: '夏至官宣内容定稿' },
-    { date: '2026-06-21', title: '夏至官宣发布' },
-    { date: '2026-07-01', title: '首期训练营开营' },
-    { date: '2026-09-22', title: '秋分里程碑复盘' }
-  ];
-
-  var html = '<div class="card"><div class="card-title">项目里程碑</div><div class="timeline">';
-  milestones.forEach(function(m) {
-    html += '<div class="timeline-item"><div class="timeline-date">' + m.date + '</div><div class="timeline-title">' + m.title + '</div></div>';
-  });
-  html += '</div></div>';
-  document.getElementById('content').innerHTML = html;
-};
-
-Store.renderCustomers = function() {
-  var self = this;
-  if (this.state.searchResults) {
-    return this.renderSearchResults(this.state.searchResults.customers, ['name', 'industry', 'status']);
-  }
-
-  var customers = this.state.customers;
-  var html = '<div class="card"><div class="card-title">添加新客户</div><div class="form-row">' +
-    '<input type="text" id="cust-name" placeholder="客户名称">' +
-    '<input type="text" id="cust-industry" placeholder="所属行业">' +
-    '<select id="cust-status"><option value="潜在客户">潜在客户</option><option value="初步接触">初步接触</option><option value="深入沟通">深入沟通</option><option value="已完成咨询">已完成咨询</option></select></div>' +
-    '<button class="btn btn-primary" id="add-cust-btn">添加客户</button></div>' +
-
-    '<div class="card"><div class="card-title">客户列表 (' + customers.length + ')</div><table class="data-table"><thead><tr><th>客户</th><th>行业</th><th>状态</th><th>操作</th></tr></thead><tbody>';
-
-  customers.forEach(function(c) {
-    html += '<tr><td>' + c.name + '</td><td>' + c.industry + '</td><td><span class="tag">' + c.status + '</span></td><td><button class="btn btn-danger btn-sm" data-delete="customer" data-id="' + c.id + '">删除</button></td></tr>';
-  });
-
-  html += '</tbody></table></div>';
-  document.getElementById('content').innerHTML = html;
-
-  document.getElementById('add-cust-btn').onclick = function() {
-    var name = document.getElementById('cust-name').value.trim();
-    var industry = document.getElementById('cust-industry').value.trim();
-    var status = document.getElementById('cust-status').value;
-    if (!name) { alert('请输入客户名称'); return; }
-    self.addCustomer({ name: name, industry: industry, status: status });
-  };
-
-  document.querySelectorAll('[data-delete="customer"]').forEach(function(btn) {
-    btn.onclick = function() { self.deleteCustomer(parseInt(this.dataset.id)); };
-  });
-};
-
-Store.renderProducts = function() {
-  var self = this;
-  if (this.state.searchResults) {
-    return this.renderSearchResults(this.state.searchResults.products, ['name', 'desc', 'status']);
-  }
-
-  var products = this.state.products;
-  var html = '<div class="card"><div class="card-title">添加新产品</div><div class="form-row">' +
-    '<input type="text" id="prod-name" placeholder="产品名称">' +
-    '<input type="text" id="prod-desc" placeholder="产品描述">' +
-    '<select id="prod-status"><option value="概念设计">概念设计</option><option value="设计完成">设计完成</option><option value="开发中">开发中</option><option value="已上线">已上线</option></select></div>' +
-    '<button class="btn btn-primary" id="add-prod-btn">添加产品</button></div>' +
-
-    '<div class="card"><div class="card-title">产品列表 (' + products.length + ')</div><table class="data-table"><thead><tr><th>产品</th><th>描述</th><th>状态</th><th>操作</th></tr></thead><tbody>';
-
-  products.forEach(function(p) {
-    html += '<tr><td>' + p.name + '</td><td>' + p.desc + '</td><td><span class="tag">' + p.status + '</span></td><td><button class="btn btn-danger btn-sm" data-delete="product" data-id="' + p.id + '">删除</button></td></tr>';
-  });
-
-  html += '</tbody></table></div>';
-  document.getElementById('content').innerHTML = html;
-
-  document.getElementById('add-prod-btn').onclick = function() {
-    var name = document.getElementById('prod-name').value.trim();
-    var desc = document.getElementById('prod-desc').value.trim();
-    var status = document.getElementById('prod-status').value;
-    if (!name) { alert('请输入产品名称'); return; }
-    self.addProduct({ name: name, desc: desc, status: status });
-  };
-
-  document.querySelectorAll('[data-delete="product"]').forEach(function(btn) {
-    btn.onclick = function() { self.deleteProduct(parseInt(this.dataset.id)); };
-  });
-};
-
-Store.renderSearchResults = function(items, columns) {
-  if (!items || items.length === 0) {
-    document.getElementById('content').innerHTML = '<div class="card"><p>未找到匹配结果</p></div>';
+// 密码逻辑
+var GH = '6460662e217c7a9f899208dd70a2c28abdea42f128666a9b78e6c0c064846493';
+(function() {
+  var cur = localStorage.getItem('sri_dash_hash') || GH;
+  var sv = localStorage.getItem('sri_dash_auth_hash');
+  if (localStorage.getItem('sri_dashboard_auth') === 'true' && sv === cur) {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('authStatus').textContent = '✅ 已验证（免登）';
+    openApp();
     return;
   }
+  document.getElementById('authStatus').textContent = '⏳ 未验证';
+  document.getElementById('g0').focus();
 
-  var html = '<div class="card"><div class="card-title">搜索结果 (' + items.length + ')</div><table class="data-table"><thead><tr>';
-  columns.forEach(function(c) { html += '<th>' + c + '</th>'; });
-  html += '</tr></thead><tbody>';
-
-  var q = this.state.searchQuery || '';
-  items.forEach(function(item) {
-    html += '<tr>';
-    columns.forEach(function(c) {
-      var val = item[c] || '-';
-      if (q && typeof val === 'string') {
-        val = val.replace(new RegExp('(' + q + ')', 'gi'), '<span class="highlight">$1</span>');
-      }
-      html += '<td>' + val + '</td>';
-    });
-    html += '</tr>';
+  // 键盘导航
+  document.addEventListener('input', function(e) {
+    if (!e.target.closest('.gd')) return;
+    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    if (e.target.value && e.target.nextElementSibling && e.target.nextElementSibling.tagName === 'INPUT')
+      e.target.nextElementSibling.focus();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (!e.target.closest('.gd')) return;
+    if (e.key === 'Backspace' && !e.target.value && e.target.previousElementSibling && e.target.previousElementSibling.tagName === 'INPUT')
+      e.target.previousElementSibling.focus();
   });
 
-  html += '</tbody></table></div>';
-  document.getElementById('content').innerHTML = html;
-};
-
-Store.renderQuality = function() {
-  var items = [
-    { name: '公众号内容审核', status: '通过', date: '2026-05-28' },
-    { name: '决策工具功能测试', status: '通过', date: '2026-05-27' },
-    { name: '夏至官宣文案审核', status: '待审核', date: '-' }
-  ];
-
-  var html = '<div class="card"><div class="card-title">质量检查项</div><table class="data-table"><thead><tr><th>检查项</th><th>状态</th><th>日期</th></tr></thead><tbody>';
-  items.forEach(function(i) {
-    html += '<tr><td>' + i.name + '</td><td><span class="tag">' + i.status + '</span></td><td>' + i.date + '</td></tr>';
-  });
-  html += '</tbody></table></div>';
-  document.getElementById('content').innerHTML = html;
-};
-
-Store.renderFinancial = function() {
-  document.getElementById('content').innerHTML = '<div class="card"><div class="card-title">财务概览</div><p>暂无财务数据</p></div>';
-};
-
-Store.renderGrowth = function() {
-  document.getElementById('content').innerHTML = '<div class="card"><div class="card-title">增长指标</div><p>暂无增长数据</p></div>';
-};
-
-Store.renderSystem = function() {
-  var html = '<div class="card"><div class="card-title">系统状态</div><table class="data-table"><thead><tr><th>项目</th><th>状态</th></tr></thead><tbody>' +
-    '<tr><td>GitHub Pages</td><td><span class="tag tag-p3">正常</span></td></tr>' +
-    '<tr><td>飞书同步</td><td><span class="tag tag-p3">正常</span></td></tr>' +
-    '<tr><td>微信公众号</td><td><span class="tag tag-p3">正常</span></td></tr>' +
-    '<tr><td>数据库备份</td><td><span class="tag tag-p3">正常</span></td></tr>' +
-    '</tbody></table></div>';
-  document.getElementById('content').innerHTML = html;
-};
-
-Store.renderPlaceholders = function() {
-  var placeholders = [
-    { name: '替身A', type: '测试账号', status: '活跃' },
-    { name: '替身B', type: '演示账号', status: '活跃' }
-  ];
-
-  var html = '<div class="card"><div class="card-title">替身管理 (' + placeholders.length + ')</div><table class="data-table"><thead><tr><th>名称</th><th>类型</th><th>状态</th></tr></thead><tbody>';
-  placeholders.forEach(function(p) {
-    html += '<tr><td>' + p.name + '</td><td>' + p.type + '</td><td><span class="tag">' + p.status + '</span></td></tr>';
-  });
-  html += '</tbody></table></div>';
-  document.getElementById('content').innerHTML = html;
-};
-
-Store.renderGlossary = function() {
-  var terms = [
-    { term: '满天星光', def: '满天星光行动是满意解研究所的内部项目代号。核心使命：陪伴100位硬科技创业者穿越周期。' },
-    { term: '满意解', def: 'Satisficing，由Herbert Simon提出，指在有限理性下追求"足够好"而非"最优"的决策方法论。' },
-    { term: '契·晋·转·桥·审·行·恒', def: '满意解研究所的六字哲学体系：契约精神、持续进化、跨界转型、连接价值、审美判断、行动落地、永恒成长。' },
-    { term: 'P0/P1/P2/P3', def: '任务优先级体系。P0=最高优先级（阻塞性），P1=重要紧急，P2=重要不紧急，P3=可延后。' },
-    { term: '夏至官宣', def: '2026年6月21日夏至，满意解研究所正式对外发布的里程碑事件。' }
-  ];
-
-  var html = '<div class="card"><div class="card-title">术语表</div>';
-  terms.forEach(function(t) {
-    html += '<div class="glossary-item"><div class="glossary-term">' + t.term + '</div><div class="glossary-def">' + t.def + '</div></div>';
-  });
-  html += '</div>';
-  document.getElementById('content').innerHTML = html;
-};
-
-Store.updateCountdown = function() {
-  var diff = CONFIG.XZ_DATE - new Date();
-  var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  var el = document.getElementById('countdown');
-  if (el) el.textContent = '夏至官宣倒计时 ' + days + ' 天';
-};
-
-// ===== 4. 事件绑定 =====
-function initEvents() {
-  // 登录
-  document.getElementById('login-btn').onclick = function() {
-    var password = document.getElementById('password-input').value;
-    if (password === CONFIG.PASSWORD) {
-      localStorage.setItem(CONFIG.STORAGE_KEYS.loggedIn, 'true');
-      showMain();
+  window.gv = async function() {
+    var c = '';
+    for (var i = 0; i < 6; i++) {
+      var v = document.getElementById('g' + i).value;
+      if (!v) { document.getElementById('ge').textContent = '请输入完整6位密码'; return; }
+      c += v;
+    }
+    var h = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(c))))
+      .map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+    if (h === cur) {
+      localStorage.setItem('sri_dashboard_auth', 'true');
+      localStorage.setItem('sri_dash_auth_hash', cur);
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('authStatus').textContent = '✅ 刚刚验证通过';
+      openApp();
     } else {
-      document.getElementById('login-error').style.display = 'block';
-      document.getElementById('password-input').value = '';
-      document.getElementById('password-input').focus();
+      document.getElementById('ge').textContent = '密码错误';
     }
   };
-
-  // 回车登录
-  document.getElementById('password-input').onkeypress = function(e) {
-    if (e.key === 'Enter') {
-      document.getElementById('login-btn').click();
-    }
-  };
-
-  // 搜索
-  document.getElementById('global-search').oninput = function() {
-    Store.search(this.value);
-  };
-
-  // 登出
-  document.getElementById('logout-btn').onclick = function() {
-    localStorage.removeItem(CONFIG.STORAGE_KEYS.loggedIn);
-    location.reload();
-  };
-}
-
-function showMain() {
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('main-screen').style.display = 'block';
-  Store.init();
-  Store.render();
-  setInterval(function() { Store.updateCountdown(); }, 1000);
-}
-
-// ===== 5. 启动 =====
-(function() {
-  initEvents();
-  if (localStorage.getItem(CONFIG.STORAGE_KEYS.loggedIn) === 'true') {
-    showMain();
-  }
 })();
-</script>
 
+// Tab切换
+function st(id) {
+  log('Tab切换: ' + id);
+  var btns = document.querySelectorAll('.tab button');
+  btns.forEach(function(b) { b.classList.remove('on'); });
+  // 找对应按钮
+  var map = { a: 0, b: 1, c: 2 };
+  if (btns[map[id]]) btns[map[id]].classList.add('on');
+  document.getElementById('content').innerHTML = '<h3 style="font-size:15px;color:#2A2A2A">✅ Tab ' + id.toUpperCase() + ' 已切换</h3><p style="font-size:12px;color:#6E6E6E;margin-top:8px">时间戳: ' + new Date().toLocaleTimeString() + '</p><p style="font-size:12px;color:#C23B22;margin-top:4px">切换成功！JS和DOM都正常工作。</p>';
+}
+
+// 打开应用
+
+// ===== DATA ENGINE =====
+var DB={
+  ts:function(){try{var v=localStorage.getItem("dash_tasks");return v?JSON.parse(v):[]}catch(e){return[]}},
+  cs:function(){try{var v=localStorage.getItem("dash_customers");return v?JSON.parse(v):[]}catch(e){return[]}},
+  pr:function(){try{var v=localStorage.getItem("dash_products");return v?JSON.parse(v):[]}catch(e){return[]}},
+  qu:function(){try{var v=localStorage.getItem("dash_quality");return v?JSON.parse(v):[]}catch(e){return[]}},
+  gr:function(){try{var v=localStorage.getItem("dash_growth");return v?JSON.parse(v):[]}catch(e){return[]}},
+  seed:function(){
+    if(!this.qu().length)localStorage.setItem("dash_quality",JSON.stringify([{qm_id:"QM-001",standard:"L0提案审核",status:"待执行",priority:"P0"},{qm_id:"QM-002",standard:"L1方法论审核",status:"55%",priority:"P0"},{qm_id:"QM-009",standard:"四关通过率>=80%",status:"96%",priority:"P0"},{qm_id:"QM-026",standard:"商标注册",status:"未申请",priority:"P0"}]));
+    if(!this.gr().length)localStorage.setItem("dash_growth",JSON.stringify([{m:"飞轮循环",c:0,t:100},{m:"线上产品",c:233,t:250},{m:"活跃客户30d",c:0,t:10},{m:"NPS",c:"—",t:">=50"}]));
+  }
+};
+
+var S={tab:"overview",q:""};
+var TABS=[{id:"overview",l:"🏠 概览"},{id:"tasks",l:"📋 任务"},{id:"project",l:"🗓️ 项目"},{id:"customers",l:"👤 客户"},{id:"products",l:"📦 产品"},{id:"quality",l:"✅ 质量"},{id:"finance",l:"💰 财务"},{id:"growth",l:"📈 增长"},{id:"system",l:"⚡ 系统"},{id:"avatars",l:"🎭 替身"},{id:"glossary",l:"📖 术语"}];
+var MLS=[{n:"产品命名体系",d:"05-28",s:"完成"},{n:"233产品上线",d:"05-28",s:"完成"},{n:"产品标准体系",d:"05-28",s:"完成"},{n:"驾驶舱中枢",d:"05-29",s:"完成"},{n:"增长飞轮引擎",d:"05-28",s:"完成"},{n:"密码门控体系",d:"05-28",s:"完成"},{n:"内容弹药就绪",d:"05-28",s:"完成"},{n:"飞书驾驶舱精简",d:"05-29",s:"完成"},{n:"资产飞轮运转",d:"05-29",s:"完成"},{n:"来源标注补齐",d:"06-07",s:"进行中"},{n:"产品星级评定",d:"06-14",s:"待开始"},{n:"夏至路演准备",d:"06-21",s:"进行中"}];
+
+function rt(){var h="";TABS.forEach(function(t){h+='<button class="tc-btn'+(S.tab===t.id?' on':'')+'" onclick="st(\''+t.id+'\')">'+t.l+'</button>'});document.getElementById("tabs").innerHTML=h}
+function st(id){S.tab=id;S.q="";var gs=document.getElementById("gs");if(gs)gs.value="";rt();rk();rc()}
+
+function rk(){
+  var ts=DB.ts(),dn=ts.filter(function(t){return(t.status||"").indexOf("完成")>=0}).length;
+  var p0=ts.filter(function(t){return(t.priority||"").indexOf("P0")>=0&&(t.status||"").indexOf("完成")<0}).length;
+  var h='<div class="ki" onclick="st(\'tasks\')"><div class="v">'+ts.length+'</div><div class="l">📋 任务</div><div class="s">✅'+dn+'</div></div>';
+  h+='<div class="ki" onclick="st(\'tasks\')"><div class="v" style="color:'+(p0>0?'#C23B22':'#3D7A4F')+'">'+p0+'</div><div class="l">🔴 P0</div></div>';
+  h+='<div class="ki" onclick="st(\'customers\')"><div class="v">'+DB.cs().length+'</div><div class="l">👤 客户</div></div>';
+  h+='<div class="ki" onclick="st(\'products\')"><div class="v">'+DB.pr().length+'</div><div class="l">📦 产品</div></div>';
+  h+='<div class="ki" onclick="st(\'quality\')"><div class="v">'+DB.qu().length+'</div><div class="l">✅ 质量</div></div>';
+  h+='<div class="ki"><div class="v">233</div><div class="l">🌐 线上</div></div>';
+  h+='<div class="ki"><div class="v">12</div><div class="l">⚡ Cron</div></div>';
+  h+='<div class="ki" onclick="st(\'avatars\')"><div class="v">23</div><div class="l">🎭 替身</div></div>';
+  document.getElementById("kpi").innerHTML=h;
+}
+
+function sch(){var gs=document.getElementById("gs");S.q=gs?gs.value.trim().toLowerCase():"";rt();rc()}
+function flt(arr,fs,q){if(!q)return arr;return(arr||[]).filter(function(i){return fs.some(function(f){var v=i[f];return v&&String(v).toLowerCase().indexOf(q)>=0})})}
+
+function rc(){
+  var h="",q=S.q,ts=DB.ts(),dn=ts.filter(function(t){return(t.status||"").indexOf("完成")>=0}).length;
+  var p0=ts.filter(function(t){return(t.priority||"").indexOf("P0")>=0&&(t.status||"").indexOf("完成")<0});
+  var d=Math.ceil((new Date(2026,5,21)-new Date())/86400000);
+  
+  if(q){
+    h+='<div class="pn"><div class="pn-h">🔍 搜索: <b>'+q+'</b></div>';
+    var rs=[];
+    flt(DB.ts(),["task","priority","status"],q).forEach(function(t){rs.push({ty:"📋",tx:t.task+" ["+t.priority+"] "+t.status,tb:"tasks"})});
+    flt(DB.cs(),["name","company"],q).forEach(function(c){rs.push({ty:"👤",tx:c.name+" "+(c.company||""),tb:"customers"})});
+    flt(DB.pr(),["name","family"],q).forEach(function(p){rs.push({ty:"📦",tx:p.name,tb:"products"})});
+    MLS.forEach(function(m){if(m.n.indexOf(q)>=0)rs.push({ty:"🎯",tx:m.n+" "+m.s,tb:"overview"})});
+    if(rs.length===0)h+='<div class="emp">未找到匹配</div>';
+    else rs.forEach(function(r){h+='<div class="sr" onclick="st(\''+r.tb+'\')"><span class="st">'+r.ty+'</span><span>'+r.tx+'</span><span class="sa">查看 →</span></div>'});
+    h+='</div>';
+  }else if(S.tab==="overview"){
+    var pct=ts.length>0?Math.round(dn/ts.length*100):0;
+    h+='<div class="pn"><div class="pn-h">📊 概览 · 夏至 <b style="color:#C23B22;font-size:18px">'+d+'天</b></div><div class="sg"><div class="si"><div class="v">'+pct+'%</div><div class="l">完成率</div></div><div class="si"><div class="v" style="color:'+(p0.length>0?'#C23B22':'#3D7A4F')+'">'+p0.length+'</div><div class="l">🔴 P0</div></div><div class="si"><div class="v">233</div><div class="l">线上产品</div></div><div class="si"><div class="v">12</div><div class="l">Cron健康</div></div><div class="si"><div class="v">23</div><div class="l">替身就绪</div></div></div></div>';
+    if(p0.length>0){h+='<div class="pn bl"><div class="pn-h" style="color:#C23B22">🔴 P0 紧急 ('+p0.length+')</div>';p0.slice(0,8).forEach(function(t){h+='<div style="padding:4px 0;border-bottom:1px solid #f0e8d8;font-size:11px">'+t.task+'</div>'});h+='</div>'}
+    var md=MLS.filter(function(m){return m.s==="完成"}).length;
+    h+='<div class="pn"><div class="pn-h">🎯 里程碑 ('+md+'/'+MLS.length+')</div><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:10px"><div class="pbar"><div class="pfill" style="width:'+Math.round(md/MLS.length*100)+'%"></div></div><span>'+Math.round(md/MLS.length*100)+'%</span></div>';
+    MLS.filter(function(m){return m.s!=="完成"}).forEach(function(m){h+='<div style="display:flex;justify-content:space-between;padding:3px 0;font-size:10px;border-bottom:1px solid #f0e8d8"><span>'+m.n+'</span><span><span class="tg '+(m.s==="进行中"?"tga":"tgr")+'">'+m.s+'</span> '+m.d+'</span></div>'});h+='</div>';
+  }else if(S.tab==="tasks"){
+    h+='<div class="pn"><div class="pn-h">📋 任务 ('+ts.length+')</div><div class="fr"><input id="tn" placeholder="任务名"><select id="tp"><option>P0</option><option selected>P1</option><option>P2</option></select><button class="btn" onclick="addT()">+</button></div>';
+    if(ts.length===0)h+='<div class="emp">暂无任务</div>';else{h+='<table class="tbl"><tr><th>任务</th><th>P</th><th>状态</th></tr>';ts.forEach(function(t){h+='<tr><td>'+t.task+'</td><td>'+t.priority+'</td><td><span class="dot '+(t.status.indexOf("完成")>=0?"dg":t.status.indexOf("进行")>=0?"da":"dr")+'"></span>'+t.status+'</td></tr>'});h+='</table>'}h+='</div>';
+  }else if(S.tab==="project"){
+    var md=MLS.filter(function(m){return m.s==="完成"}).length;
+    h+='<div class="pn"><div class="pn-h">🗓️ 项目</div><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:10px"><div class="pbar"><div class="pfill" style="width:'+Math.round(md/MLS.length*100)+'%"></div></div><span>'+Math.round(md/MLS.length*100)+'%</span></div><table class="tbl"><tr><th>里程碑</th><th>截止</th><th>状态</th></tr>'+MLS.map(function(m){return"<tr><td>"+m.n+"</td><td>"+m.d+"</td><td><span class=\"tg "+(m.s==="完成"?"tgg":m.s==="进行中"?"tga":"tgr")+"\">"+m.s+"</span></td></tr>"}).join("")+'</table></div>';
+  }else if(S.tab==="customers"){var cs=DB.cs();h+='<div class="pn"><div class="pn-h">👤 客户 ('+cs.length+')</div><div class="fr"><input id="cn" placeholder="姓名"><input id="cc" placeholder="企业"><button class="btn" onclick="addC()">+</button></div>';if(cs.length===0)h+='<div class="emp">暂无</div>';else{h+='<table class="tbl"><tr><th>姓名</th><th>企业</th></tr>';cs.forEach(function(c){h+='<tr><td>'+c.name+'</td><td>'+(c.company||"")+'</td></tr>'});h+='</table>'}h+='</div>'}
+  else if(S.tab==="products"){var pr=DB.pr();h+='<div class="pn"><div class="pn-h">📦 产品 ('+pr.length+')</div><div class="fr"><input id="pn" placeholder="产品名"><input id="pf" placeholder="五族"><button class="btn" onclick="addP()">+</button></div>';if(pr.length===0)h+='<div class="emp">暂无</div>';else{h+='<table class="tbl"><tr><th>名称</th><th>五族</th></tr>';pr.forEach(function(p){h+='<tr><td>'+p.name+'</td><td>'+(p.family||"")+'</td></tr>'});h+='</table>'}h+='</div>'}
+  else if(S.tab==="quality"){var qu=DB.qu();h+='<div class="pn"><div class="pn-h">✅ 质量标准 ('+qu.length+')</div>';if(qu.length===0)h+='<div class="emp">暂无</div>';else{h+='<table class="tbl"><tr><th>编号</th><th>标准</th><th>状态</th></tr>';qu.forEach(function(q){h+='<tr><td>'+q.qm_id+'</td><td>'+q.standard+'</td><td>'+q.status+'</td></tr>'});h+='</table>'}h+='</div>'}
+  else if(S.tab==="finance"){h+='<div class="pn"><div class="pn-h">💰 财务</div><div class="sg"><div class="si"><div class="v">~¥0</div><div class="l">月成本</div></div><div class="si"><div class="v">¥10-30K</div><div class="l">里程碑成本</div></div></div><table class="tbl" style="margin-top:12px"><tr><th>项目</th><th>年成本</th></tr><tr><td>GitHub Pages</td><td>¥0</td></tr><tr><td>商标注册</td><td>~¥3K</td></tr><tr><td>飞书认证</td><td>¥300</td></tr></table></div>'}
+  else if(S.tab==="growth"){var g=DB.gr();h+='<div class="pn"><div class="pn-h">📈 增长</div>';if(g.length===0)h+='<div class="emp">暂无</div>';else{h+='<table class="tbl"><tr><th>指标</th><th>当前</th><th>目标</th></tr>';g.forEach(function(x){h+='<tr><td>'+x.m+'</td><td><b>'+x.c+'</b></td><td>'+x.t+'</td></tr>'});h+='</table>'}h+='</div>'}
+  else if(S.tab==="system"){h+='<div class="pn"><div class="pn-h">⚡ 系统</div><div class="sg"><div class="si"><div class="v">12</div><div class="l">Cron</div></div><div class="si"><div class="v">6</div><div class="l">脚本</div></div><div class="si"><div class="v">233</div><div class="l">线上</div></div></div><table class="tbl" style="margin-top:12px"><tr><th>任务</th></tr><tr><td>06:00 日起课</td></tr><tr><td>22:00 日毕课</td></tr><tr><td>23:00 飞书同步</td></tr></table></div>'}
+  else if(S.tab==="avatars"){h+='<div class="pn"><div class="pn-h">🎭 替身</div><div class="sg"><div class="si"><div class="v">23</div><div class="l">总数</div></div><div class="si"><div class="v">5</div><div class="l">层级</div></div></div><table class="tbl" style="margin-top:12px"><tr><th>名称</th><th>维度</th></tr><tr><td>🪨 刘禹锡</td><td>土·时间轴</td></tr><tr><td>🪙 司马贺</td><td>金·可行域</td></tr><tr><td>💧 水月观音</td><td>水·身心流</td></tr><tr><td>🪵 孔子</td><td>木·信义观</td></tr><tr><td>🔥 六祖慧能</td><td>火·直觉阈</td></tr></table></div>'}
+  else if(S.tab==="glossary"){h+='<div class="pn"><div class="pn-h">📖 术语</div><table class="tbl"><tr><th>概念</th><th>术语</th></tr><tr><td>产品体系</td><td>章·衡·镜·契·觉</td></tr><tr><td>品牌名</td><td>满意解研究所</td></tr><tr><td>创始人</td><td>Egbertie</td></tr><tr><td>决策框架</td><td>五维决策</td></tr><tr><td>核心理论</td><td>满意解</td></tr></table></div>'}
+  document.getElementById("mc").innerHTML=h;
+}
+
+function addT(){var n=document.getElementById("tn").value.trim();if(!n)return;var ts=DB.ts();ts.unshift({id:Date.now(),task:n,priority:document.getElementById("tp").value,status:"待开始"});localStorage.setItem("dash_tasks",JSON.stringify(ts.slice(0,500)));rt();rk();rc()}
+function addC(){var n=document.getElementById("cn").value.trim();if(!n)return;var cs=DB.cs();cs.unshift({id:Date.now(),name:n,company:document.getElementById("cc").value});localStorage.setItem("dash_customers",JSON.stringify(cs.slice(0,500)));rt();rk();rc()}
+function addP(){var n=document.getElementById("pn").value.trim();if(!n)return;var pr=DB.pr();pr.unshift({id:Date.now(),name:n,family:document.getElementById("pf").value});localStorage.setItem("dash_products",JSON.stringify(pr.slice(0,500)));rt();rk();rc()}
+
+function openApp() {
+  document.getElementById('app').style.display = 'block';
+  document.getElementById('app').style.maxWidth = '1100px';
+  document.getElementById('app').style.margin = '0 auto';
+  document.getElementById('app').style.padding = '0 14px 60px';
+  
+  // Rebuild content
+  document.getElementById('app').innerHTML = '<div style="background:#fff;border-bottom:1px solid #e0d5c8;padding:10px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100"><span style="font-weight:700;color:#2A2A2A;font-size:15px">📊 驾驶舱</span><input id="gs" placeholder="🔍 全局搜索" oninput="sch()" style="flex:1;min-width:140px;padding:7px 12px;border:1.5px solid #D4C5A0;border-radius:10px;font-size:12px;background:#F5F0E6;outline:none"><span id="cd" style="font-size:11px;color:#6E6E6E;white-space:nowrap">夏至 <b style="color:#C23B22;font-size:15px">—</b></span><a href="index.html" style="font-size:11px;color:#B8860B;text-decoration:none">← 首页</a></div><div id="kpi" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:6px;margin:10px 0"></div><div id="tabs" style="display:flex;gap:4px;flex-wrap:wrap;margin:10px 0"></div><div id="mc"></div>';
+  
+  DB.seed();
+  var d = Math.ceil((new Date(2026,5,21)-new Date())/86400000);
+  document.getElementById('cd').innerHTML = '夏至 <b>'+d+'天</b>';
+  rt(); rk(); rc();
+}
+</script>
 </body>
 </html>
