@@ -328,8 +328,12 @@ let currentTab = 'tasks';
 
 function switchTab(tab) {
   currentTab = tab;
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) { btns[i].classList.remove('active'); }
+  for (var i = 0; i < btns.length; i++) {
+    var attr = btns[i].getAttribute('onclick') || '';
+    if (attr.indexOf("'" + tab + "'") >= 0) { btns[i].classList.add('active'); break; }
+  }
   render();
 }
 
