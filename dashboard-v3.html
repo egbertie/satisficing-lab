@@ -276,6 +276,14 @@ body {
 }
 .footer .quote { font-style: italic; margin-top: 6px; color: var(--ink-light); }
 
+/* === 快捷操作区 === */
+.quick-actions { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px; padding:12px 0; border-bottom:1px solid var(--border-subtle); }
+.quick-actions button { font-size:0.78em; padding:6px 14px; border-radius:8px; border:1px solid var(--border-subtle); background:var(--card); color:var(--ink); cursor:pointer; transition:all 0.15s; white-space:nowrap; }
+.quick-actions button:hover { border-color:var(--gold); color:var(--red); background:var(--card-alt); }
+/* 来源标注 */
+.gauge-source,.ov-source { font-size:0.68em; color:var(--ink-lighter); margin-top:6px; padding-top:6px; border-top:1px dashed var(--border-subtle); display:none; }
+.gauge-card.expanded .gauge-source,.overview-card.expanded .ov-source { display:block; }
+
 /* ========== 按钮工具 ========== */
 .btn-outline {
   background: var(--card-white); border: 1px solid var(--accent-gold);
@@ -321,9 +329,16 @@ body {
     <div class="countdown" id="countdown"></div>
   </div>
 
-  <!-- L0 · 生命体征条 -->
-  <div class="section-title">🫀 生命体征</div>
+  <!-- L0 · 生命体征 + 快捷入口 -->
+  <div class="section-title">🫀 生命体征 <span style="font-size:0.7em;color:var(--ink-lighter);font-weight:400;">· 每30分钟自动更新</span></div>
   <div class="vitals-bar" id="vitals-bar"></div>
+  <div class="quick-actions">
+    <button onclick="location.href='gate.html'" title="密码生成与管理">🔐 密码管理</button>
+    <button onclick="window.open('memory/_data/entities_index.json','_blank')" title="查看完整实体索引">📋 实体索引</button>
+    <button onclick="window.open('memory/deep/满意解_信息架构与数据字典_V2.md','_blank')" title="信息架构与数据字典">📖 数据字典</button>
+    <button onclick="window.open('https://egbertie.github.io/satisficing-lab/dashboard.html','_blank')" title="驾驶舱V1(原始版)">📊 V1面板</button>
+    <button onclick="window.open('https://egbertie.github.io/satisficing-lab/go.html','_blank')" title="产品导航">🧭 产品地图</button>
+  </div>
 
   <!-- L1 · 内稳态仪表 -->
   <div class="section-title">📊 内稳态仪表</div>
@@ -535,12 +550,14 @@ function renderGauges() {
     }
     var valStr = g.value + g.unit;
     var statusText = g.compliant ? '✅ 达标' : '⚠️ ' + g.note;
-    h += '<div class="gauge-card ' + cls + '">';
+    var srcText = g.source || (g.id==='product_count'?'扫描 site/ 目录':g.id==='customer_count'?'替身/客户/*.md':g.id==='file_scan_rate'?'data_init_pipeline.py':g.id==='cron_health'?'Cron系统API':g.id==='data_completeness'?'实体索引v1.0':g.id==='decision_backlog'?'驾驶舱PN列表':g.id==='last_full_sync'?'GitHub推送日志':'系统评估');
+    h += '<div class="gauge-card ' + cls + '" onclick="this.classList.toggle(\'expanded\')" title="点击查看数据来源">';
     h += '<div class="gauge-icon">' + g.icon + '</div>';
     h += '<div class="gauge-name">' + g.name + ' <span>目标: ' + g.target + '</span></div>';
     h += '<div class="gauge-value">' + valStr + '</div>';
     h += '<div class="gauge-bar-outer"><div class="gauge-bar-inner" style="width:' + pct + '%"></div></div>';
     h += '<div class="gauge-status">' + statusText + '</div>';
+    h += '<div class="gauge-source">📎 来源: ' + srcText + ' · ' + (g.updated||'实时') + '</div>';
     h += '</div>';
   }
   document.getElementById('gauges-grid').innerHTML = h;
@@ -577,7 +594,7 @@ function renderOverview() {
 
   // 数据完整度
   var dc = HO[4].value;
-  h += '<div class="overview-card"><div class="ov-number">' + dc + '<span style="font-size:0.5em;opacity:0.6">%</span></div><div class="ov-label">🧩 数据完整度</div><div class="ov-sub">我还在学习看清自己</div></div>';
+  h += '<div class="overview-card" onclick="this.classList.toggle(\'expanded\')" title="点击查看来源"><div class="ov-number">' + dc + '<span style="font-size:0.5em;opacity:0.6">%</span></div><div class="ov-label">🧩 数据完整度</div><div class="ov-sub">我还在学习看清自己</div><div class="ov-source">📎 entity_index.json · 54/15606实体</div></div>';
 
   // 产品均尺寸
   h += '<div class="overview-card"><div class="ov-number">' + avgSize + '<span style="font-size:0.5em;opacity:0.6">KB</span></div><div class="ov-label">📐 产品均尺寸</div><div class="ov-sub">总计 ' + Math.round(totalSize / 1024 * 10) / 10 + 'KB</div></div>';
