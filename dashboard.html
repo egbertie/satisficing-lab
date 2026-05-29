@@ -1,230 +1,170 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>驾驶舱最小验证版</title>
-<link rel="stylesheet" href="vi_quick_ref.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>驾驶舱 · 满意解研究所</title>
 <style>
+:root{--sr:#C23B22;--sg:#B8860B;--sb:#F5F0E6;--st:#4A4A4A;--sh:#2A2A2A}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,"PingFang SC",sans-serif;background:#F5F0E6;color:#4A4A4A;min-height:100vh;padding:20px}
-.gate{position:fixed;top:0;left:0;width:100%;height:100%;background:#F5F0E6;z-index:9999;display:flex;align-items:center;justify-content:center}
-.gb{background:#fff;border-radius:20px;padding:36px 28px;max-width:360px;width:90%;text-align:center;border:2px solid #C23B22}
-.gb input{width:42px;height:52px;border:2px solid #D4C5A0;border-radius:10px;text-align:center;font-size:22px;font-weight:700;font-family:monospace;background:#F5F0E6}
-.gd{display:flex;gap:6px;justify-content:center;margin:12px 0}
-.btn{width:100%;padding:12px;border:none;border-radius:12px;background:#C23B22;color:#fff;font-size:14px;font-weight:600;cursor:pointer}
-.app{display:none;max-width:600px;margin:0 auto}
-.tab{display:flex;gap:4px;margin:10px 0}
-.tab button{padding:8px 16px;border-radius:16px;border:1px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px}
-.tab button.on{background:#C23B22;color:#fff;border-color:#C23B22}
-.panel{background:#fff;border-radius:12px;padding:16px;margin:8px 0;border:1px solid #e0d5c8}
-
+body{font-family:-apple-system,"PingFang SC",sans-serif;background:#F5F0E6;color:#4A4A4A;min-height:100vh}
+.lo{position:fixed;top:0;left:0;width:100%;height:100%;background:#F5F0E6;z-index:99999;display:flex;align-items:center;justify-content:center}
+.lb{background:#fff;border-radius:20px;padding:40px 28px;max-width:360px;width:90%;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,0.1);border:2px solid #C23B22}
+.lb h2{font-size:18px;color:#2A2A2A;margin-bottom:4px}.lb p{font-size:12px;color:#6E6E6E;margin-bottom:16px}
+.lb input{width:42px;height:52px;border:2px solid #D4C5A0;border-radius:10px;text-align:center;font-size:22px;font-weight:700;font-family:monospace;background:#F5F0E6}
+.ld{display:flex;gap:6px;justify-content:center;margin-bottom:12px}
+.lb .gbtn{width:100%;padding:12px;border:none;border-radius:12px;background:#C23B22;color:#fff;font-size:14px;font-weight:600;cursor:pointer}
+.hid{display:none}
+.tb{background:#fff;border-bottom:1px solid #e0d5c8;padding:8px 16px;display:flex;align-items:center;gap:8px;position:sticky;top:0;z-index:100}
+.ts{flex:1;min-width:140px;padding:7px 12px;border:1.5px solid #D4C5A0;border-radius:10px;font-size:12px;background:#F5F0E6;outline:none}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:6px;margin:8px 0}
 .ki{background:#fff;border-radius:10px;padding:10px;text-align:center;border:1px solid #e0d5c8;cursor:pointer}
-.ki:hover{border-color:#C23B22}.ki .v{font-size:22px;font-weight:800;color:#C23B22}.ki .l{font-size:9px;color:#6E6E6E;margin-top:2px}.ki .s{font-size:8px;color:#B8860B}
-.tc-btn{padding:6px 11px;border-radius:14px;border:1px solid #D4C5A0;background:#fff;cursor:pointer;font-size:11px;font-weight:600;white-space:nowrap}
+.ki:hover{border-color:#C23B22}.ki .v{font-size:22px;font-weight:800;color:#C23B22}.ki .l{font-size:9px;color:#6E6E6E;margin-top:2px}
+.tc{display:flex;gap:3px;flex-wrap:wrap;margin:8px 0}
+.tc-btn{padding:5px 10px;border-radius:14px;border:1px solid #D4C5A0;background:#fff;cursor:pointer;font-size:11px;font-weight:600;white-space:nowrap}
 .tc-btn.on{background:#C23B22;color:#fff;border-color:#C23B22}
 .pn{background:#fff;border-radius:12px;padding:14px;margin:8px 0;border:1px solid #e0d5c8}
 .pn-h{font-size:14px;color:#2A2A2A;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #f0e8d8}
-.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-bottom:10px}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:6px;margin-bottom:8px}
 .si{background:#F5F0E6;border-radius:8px;padding:10px;text-align:center}.si .v{font-size:20px;font-weight:700;color:#2A2A2A}.si .l{font-size:9px;color:#6E6E6E}
-.pbar{height:6px;background:#f0e8d8;border-radius:3px;overflow:hidden;flex:1}.pfill{height:100%;background:#C23B22}
 .tbl{width:100%;border-collapse:collapse;font-size:10px}.tbl th{background:#F5F0E6;color:#2A2A2A;padding:5px 4px;text-align:left;font-size:9px;font-weight:600;border-bottom:2px solid #C23B22}.tbl td{padding:5px 4px;border-bottom:1px solid #f0e8d8;font-size:9px}
 .dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:3px}.dr{background:#C23B22}.da{background:#B8860B}.dg{background:#3D7A4F}
-.tg{display:inline-block;padding:1px 6px;border-radius:8px;font-size:9px;font-weight:600;margin:1px}.tgr{background:rgba(194,59,34,0.12);color:#C23B22}.tga{background:rgba(184,134,11,0.12);color:#B8860B}.tgg{background:rgba(61,122,79,0.12);color:#3D7A4F}
-.fr{display:flex;gap:5px;margin:6px 0;flex-wrap:wrap}.fr input,.fr select{flex:1;padding:5px 7px;border:1.5px solid #D4C5A0;border-radius:8px;font-size:10px;min-width:70px;background:#fff}
-.btn{padding:5px 12px;border-radius:10px;border:none;cursor:pointer;font-size:10px;font-weight:600;background:#C23B22;color:#fff}
-.emp{text-align:center;padding:30px;color:#6E6E6E;opacity:0.5;font-size:12px}
-.bl{border-left:3px solid #C23B22}
-.sr{padding:7px 10px;border-bottom:1px solid #f0e8d8;cursor:pointer;display:flex;gap:6px;align-items:center;font-size:11px}.sr .st{font-size:10px;opacity:0.5;min-width:30px}.sr .sa{font-size:9px;color:#B8860B;margin-left:auto}
-
+.tg{display:inline-block;padding:1px 6px;border-radius:8px;font-size:9px;font-weight:600}.tgr{background:rgba(194,59,34,0.12);color:#C23B22}.tga{background:rgba(184,134,11,0.12);color:#B8860B}.tgg{background:rgba(61,122,79,0.12);color:#3D7A4F}
+.pbar{height:6px;background:#f0e8d8;border-radius:3px;overflow:hidden;flex:1}.pfill{height:100%;background:#C23B22}
+.bl{border-left:3px solid #C23B22}.emp{text-align:center;padding:20px;color:#6E6E6E;font-size:12px}
 </style>
 </head>
 <body>
 
-<div class="gate" id="gate">
-<div class="gb">
-<h2 style="font-size:18px;color:#2A2A2A;margin-bottom:8px">驾驶舱 · 最小验证</h2>
-<p style="font-size:12px;color:#6E6E6E;margin-bottom:14px">输入密码 123654</p>
-<div class="gd">
+<div class="lo" id="gt"><div class="lb">
+<div style="font-size:32px;margin-bottom:8px">🔐</div>
+<h2>驾驶舱 · 授权访问</h2><p>请输入6位数字密码</p>
+<div class="ld">
 <input type="password" maxlength="1" id="g0"><input type="password" maxlength="1" id="g1">
 <input type="password" maxlength="1" id="g2"><input type="password" maxlength="1" id="g3">
 <input type="password" maxlength="1" id="g4"><input type="password" maxlength="1" id="g5">
 </div>
 <p id="ge" style="color:#C23B22;font-size:12px;min-height:18px"></p>
-<button class="btn" onclick="gv()">验证</button>
+<button class="gbtn" onclick="gv()">验证 →</button>
 </div></div>
 
-<div class="app" id="app">
-<h1 style="font-size:20px;color:#2A2A2A">📊 驾驶舱 · 最小验证版</h1>
-<p style="color:#6E6E6E;font-size:12px;margin:8px 0" id="diag">诊断信息...</p>
-
-<div class="tab">
-<button class="on" onclick="st('a')">Tab A</button>
-<button onclick="st('b')">Tab B</button>
-<button onclick="st('c')">Tab C</button>
+<div class="hid" id="app" style="max-width:1100px;margin:0 auto;padding:4px 14px 40px">
+<div class="tb">
+<span style="font-weight:700;color:#2A2A2A;font-size:15px">📊 驾驶舱</span>
+<input class="ts" id="gs" placeholder="🔍 全局搜索" oninput="sch()">
+<span style="font-size:11px;color:#6E6E6E;white-space:nowrap" id="cd">夏至 <b style="color:#C23B22;font-size:15px">—</b></span>
+<a href="index.html" style="font-size:11px;color:#B8860B;text-decoration:none">← 首页</a>
 </div>
-
-<div class="panel" id="content" style="min-height:200px">
-<p>点击上方tab或切换试试</p>
-</div>
-
-<hr style="margin:16px 0;border-color:#e0d5c8">
-<h3 style="font-size:14px;color:#2A2A2A">🔧 localStorage测试</h3>
-<div class="panel">
-<p style="font-size:12px;margin:4px 0"><b>localStorage 可写:</b> <span id="lsWrite" style="color:#C23B22">测试中...</span></p>
-<p style="font-size:12px;margin:4px 0"><b>localStorage 可读:</b> <span id="lsRead" style="color:#C23B22">测试中...</span></p>
-<p style="font-size:12px;margin:4px 0"><b>密码验证状态:</b> <span id="authStatus" style="color:#C23B22">测试中...</span></p>
-<p style="font-size:12px;margin:4px 0"><b>JS引擎:</b> <span id="jsEng" style="color:#3D7A4F">✅ 正在运行</span></p>
-<p style="font-size:12px;margin:4px 0"><b>页面加载时间:</b> <span id="loadTime">—</span></p>
-</div>
+<div class="kv" id="kpi"></div>
+<div class="tc" id="tabs"></div>
+<div id="mc"></div>
 </div>
 
 <script>
-
-
-// 密码逻辑
-var GH = '6460662e217c7a9f899208dd70a2c28abdea42f128666a9b78e6c0c064846493';
-(function() {
-    var sv = localStorage.getItem('sri_dash_auth_hash');
-  if (localStorage.getItem('sri_dashboard_auth') === 'true') {
-    document.getElementById('gate').style.display = 'none';
-    document.getElementById('authStatus').textContent = '✅ 已验证（免登）';
-    openApp();
-    return;
-  }
-  document.getElementById('authStatus').textContent = '⏳ 未验证';
+// ===== GATE =====
+var GH='123654';
+(function(){
+  if(localStorage.getItem('dash_ok')==='1'){init();return}
   document.getElementById('g0').focus();
-
-  // 键盘导航
-  document.addEventListener('input', function(e) {
-    if (!e.target.closest('.gd')) return;
-    e.target.value = e.target.value.replace(/[^0-9]/g, '');
-    if (e.target.value && e.target.nextElementSibling && e.target.nextElementSibling.tagName === 'INPUT')
-      e.target.nextElementSibling.focus();
-  });
-  document.addEventListener('keydown', function(e) {
-    if (!e.target.closest('.gd')) return;
-    if (e.key === 'Backspace' && !e.target.value && e.target.previousElementSibling && e.target.previousElementSibling.tagName === 'INPUT')
-      e.target.previousElementSibling.focus();
-  });
-
-  window.gv = function() {
-    var c = '';
-    for (var i = 0; i < 6; i++) {
-      var v = document.getElementById('g' + i).value;
-      if (!v) { document.getElementById('ge').textContent = '请输入完整6位密码'; return; }
-      c += v;
-    }
-    if (c === '123654') {
-      localStorage.setItem('sri_dashboard_auth', 'true');
-      localStorage.setItem('sri_dash_auth_hash', cur);
-      document.getElementById('gate').style.display = 'none';
-      document.getElementById('authStatus').textContent = '✅ 刚刚验证通过';
-      openApp();
-    } else {
-      document.getElementById('ge').textContent = '密码错误';
-    }
-  };
+  document.addEventListener('input',function(e){if(!e.target.closest('.ld'))return;e.target.value=e.target.value.replace(/[^0-9]/g,'');if(e.target.value&&e.target.nextElementSibling)e.target.nextElementSibling.focus()});
+  document.addEventListener('keydown',function(e){if(!e.target.closest('.ld'))return;if(e.key==='Backspace'&&!e.target.value&&e.target.previousElementSibling)e.target.previousElementSibling.focus()});
 })();
+function gv(){var c='';for(var i=0;i<6;i++){var v=document.getElementById('g'+i).value;if(!v){document.getElementById('ge').textContent='请输入完整6位密码';return}c+=v}if(c===GH){localStorage.setItem('dash_ok','1');init()}else{document.getElementById('ge').textContent='密码错误'}}
 
-// Tab切换
+// ===== INIT =====
+function init(){
+  document.getElementById('gt').style.display='none';
+  document.getElementById('app').classList.remove('hid');
+  renderAll();
+}
 
-
-// 打开应用
-
-// ===== DATA ENGINE =====
+// ===== DATA =====
+function dg(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d||[]}catch(e){return d||[]}}
 var DB={
-  ts:function(){try{var v=localStorage.getItem("dash_tasks");return v?JSON.parse(v):[]}catch(e){return[]}},
-  cs:function(){try{var v=localStorage.getItem("dash_customers");return v?JSON.parse(v):[]}catch(e){return[]}},
-  pr:function(){try{var v=localStorage.getItem("dash_products");return v?JSON.parse(v):[]}catch(e){return[]}},
-  qu:function(){try{var v=localStorage.getItem("dash_quality");return v?JSON.parse(v):[]}catch(e){return[]}},
-  gr:function(){try{var v=localStorage.getItem("dash_growth");return v?JSON.parse(v):[]}catch(e){return[]}},
+  ts:function(){return dg('dash_tasks')},
+  cs:function(){return dg('dash_customers')},
+  pr:function(){return dg('dash_products')},
+  qu:function(){return dg('dash_quality')},
+  gr:function(){return dg('dash_growth')},
   seed:function(){
-    if(!this.qu().length)localStorage.setItem("dash_quality",JSON.stringify([{qm_id:"QM-001",standard:"L0提案审核",status:"待执行",priority:"P0"},{qm_id:"QM-002",standard:"L1方法论审核",status:"55%",priority:"P0"},{qm_id:"QM-009",standard:"四关通过率>=80%",status:"96%",priority:"P0"},{qm_id:"QM-026",standard:"商标注册",status:"未申请",priority:"P0"}]));
-    if(!this.gr().length)localStorage.setItem("dash_growth",JSON.stringify([{m:"飞轮循环",c:0,t:100},{m:"线上产品",c:233,t:250},{m:"活跃客户30d",c:0,t:10},{m:"NPS",c:"—",t:">=50"}]));
+    if(!this.qu().length)localStorage.setItem('dash_quality',JSON.stringify([{qm_id:'QM-001',standard:'L0提案审核',status:'待执行',priority:'P0'},{qm_id:'QM-002',standard:'L1方法论审核',status:'55%',priority:'P0'},{qm_id:'QM-009',standard:'四关通过率>=80%',status:'96%',priority:'P0'},{qm_id:'QM-026',standard:'商标注册',status:'未申请',priority:'P0'}]));
+    if(!this.gr().length)localStorage.setItem('dash_growth',JSON.stringify([{m:'飞轮循环',c:0,t:100},{m:'线上产品',c:233,t:250},{m:'活跃客户30d',c:0,t:10}]));
   }
 };
 
-var S={tab:"overview",q:""};
-var TABS=[{id:"overview",l:"🏠 概览"},{id:"tasks",l:"📋 任务"},{id:"project",l:"🗓️ 项目"},{id:"customers",l:"👤 客户"},{id:"products",l:"📦 产品"},{id:"quality",l:"✅ 质量"},{id:"finance",l:"💰 财务"},{id:"growth",l:"📈 增长"},{id:"system",l:"⚡ 系统"},{id:"avatars",l:"🎭 替身"},{id:"glossary",l:"📖 术语"}];
-var MLS=[{n:"产品命名体系",d:"05-28",s:"完成"},{n:"233产品上线",d:"05-28",s:"完成"},{n:"产品标准体系",d:"05-28",s:"完成"},{n:"驾驶舱中枢",d:"05-29",s:"完成"},{n:"增长飞轮引擎",d:"05-28",s:"完成"},{n:"密码门控体系",d:"05-28",s:"完成"},{n:"内容弹药就绪",d:"05-28",s:"完成"},{n:"飞书驾驶舱精简",d:"05-29",s:"完成"},{n:"资产飞轮运转",d:"05-29",s:"完成"},{n:"来源标注补齐",d:"06-07",s:"进行中"},{n:"产品星级评定",d:"06-14",s:"待开始"},{n:"夏至路演准备",d:"06-21",s:"进行中"}];
+var MLS=[{n:'产品命名体系',d:'05-28',s:'完成'},{n:'233产品上线',d:'05-28',s:'完成'},{n:'产品标准体系',d:'05-28',s:'完成'},{n:'驾驶舱中枢',d:'05-29',s:'完成'},{n:'增长飞轮引擎',d:'05-28',s:'完成'},{n:'密码门控体系',d:'05-28',s:'完成'},{n:'来源标注补齐',d:'06-07',s:'进行中'},{n:'产品星级评定',d:'06-14',s:'待开始'},{n:'夏至路演准备',d:'06-21',s:'进行中'}];
 
-function rt(){var h="";TABS.forEach(function(t){h+='<button class="tc-btn'+(S.tab===t.id?' on':'')+'" onclick="st(\''+t.id+'\')">'+t.l+'</button>'});document.getElementById("tabs").innerHTML=h}
-function st(id){S.tab=id;S.q="";var gs=document.getElementById("gs");if(gs)gs.value="";rt();rk();rc()}
+var TAB=[{id:'overview',label:'🏠 概览'},{id:'tasks',label:'📋 任务'},{id:'project',label:'🗓️ 项目'},{id:'customers',label:'👤 客户'},{id:'products',label:'📦 产品'},{id:'quality',label:'✅ 质量'},{id:'finance',label:'💰 财务'},{id:'growth',label:'📈 增长'},{id:'system',label:'⚡ 系统'},{id:'avatars',label:'🎭 替身'},{id:'glossary',label:'📖 术语'}];
+var CT='overview';
 
-function rk(){
-  var ts=DB.ts(),dn=ts.filter(function(t){return(t.status||"").indexOf("完成")>=0}).length;
-  var p0=ts.filter(function(t){return(t.priority||"").indexOf("P0")>=0&&(t.status||"").indexOf("完成")<0}).length;
-  var h='<div class="ki" onclick="st(\'tasks\')"><div class="v">'+ts.length+'</div><div class="l">📋 任务</div><div class="s">✅'+dn+'</div></div>';
-  h+='<div class="ki" onclick="st(\'tasks\')"><div class="v" style="color:'+(p0>0?'#C23B22':'#3D7A4F')+'">'+p0+'</div><div class="l">🔴 P0</div></div>';
-  h+='<div class="ki" onclick="st(\'customers\')"><div class="v">'+DB.cs().length+'</div><div class="l">👤 客户</div></div>';
-  h+='<div class="ki" onclick="st(\'products\')"><div class="v">'+DB.pr().length+'</div><div class="l">📦 产品</div></div>';
-  h+='<div class="ki" onclick="st(\'quality\')"><div class="v">'+DB.qu().length+'</div><div class="l">✅ 质量</div></div>';
+// ===== RENDER =====
+function renderAll(){
+  DB.seed();
+  var d=Math.ceil((new Date(2026,5,21)-new Date())/86400000);
+  document.getElementById('cd').innerHTML='夏至 <b>'+d+'天</b>';
+  renderTabs();renderKPI();renderMC();
+}
+function renderTabs(){
+  var h='';TAB.forEach(function(t){h+='<button class="tc-btn'+(CT===t.id?' on':'')+'" onclick="switchTab(\''+t.id+'\',this)">'+t.label+'</button>'});
+  document.getElementById('tabs').innerHTML=h;
+}
+function switchTab(id,btn){CT=id;document.querySelectorAll('.tc-btn').forEach(function(b){b.classList.remove('on')});btn.classList.add('on');renderKPI();renderMC()}
+function renderKPI(){
+  var ts=DB.ts(),dn=ts.filter(function(t){return(t.status||'').indexOf('完成')>=0}).length;
+  var p0=ts.filter(function(t){return(t.priority||'').indexOf('P0')>=0&&(t.status||'').indexOf('完成')<0}).length;
+  var h='<div class="ki" onclick="switchTab(\'tasks\',this)"><div class="v">'+ts.length+'</div><div class="l">📋 任务</div></div>';
+  h+='<div class="ki" onclick="switchTab(\'tasks\',this)"><div class="v" style="color:'+(p0>0?'#C23B22':'#3D7A4F')+'">'+p0+'</div><div class="l">🔴 P0</div></div>';
+  h+='<div class="ki" onclick="switchTab(\'customers\',this)"><div class="v">'+DB.cs().length+'</div><div class="l">👤 客户</div></div>';
+  h+='<div class="ki" onclick="switchTab(\'products\',this)"><div class="v">'+DB.pr().length+'</div><div class="l">📦 产品</div></div>';
+  h+='<div class="ki" onclick="switchTab(\'quality\',this)"><div class="v">'+DB.qu().length+'</div><div class="l">✅ 质量</div></div>';
   h+='<div class="ki"><div class="v">233</div><div class="l">🌐 线上</div></div>';
   h+='<div class="ki"><div class="v">12</div><div class="l">⚡ Cron</div></div>';
-  h+='<div class="ki" onclick="st(\'avatars\')"><div class="v">23</div><div class="l">🎭 替身</div></div>';
-  document.getElementById("kpi").innerHTML=h;
+  h+='<div class="ki" onclick="switchTab(\'avatars\',this)"><div class="v">23</div><div class="l">🎭 替身</div></div>';
+  document.getElementById('kpi').innerHTML=h;
+}
+function sch(){renderMC()}
+function renderMC(){
+  var h='',ts=DB.ts(),d=Math.ceil((new Date(2026,5,21)-new Date())/86400000);
+  var dn=ts.filter(function(t){return(t.status||'').indexOf('完成')>=0}).length;
+  var p0=ts.filter(function(t){return(t.priority||'').indexOf('P0')>=0&&(t.status||'').indexOf('完成')<0});
+  var q=(document.getElementById('gs').value||'').trim().toLowerCase();
+  
+  if(q){h+=searchResults(q);}
+  else if(CT==='overview'){
+    h+='<div class="pn"><div class="pn-h">📊 概览 · 夏至 <b style="color:#C23B22;font-size:16px">'+d+'天</b></div>';
+    h+='<div class="sg"><div class="si"><div class="v">'+(ts.length>0?Math.round(dn/ts.length*100):0)+'%</div><div class="l">完成率</div></div>';
+    h+='<div class="si"><div class="v" style="color:'+(p0.length>0?'#C23B22':'#3D7A4F')+'">'+p0.length+'</div><div class="l">🔴 P0</div></div>';
+    h+='<div class="si"><div class="v">233</div><div class="l">线上产品</div></div><div class="si"><div class="v">12</div><div class="l">Cron健康</div></div><div class="si"><div class="v">23</div><div class="l">替身就绪</div></div></div></div>';
+    if(p0.length>0){h+='<div class="pn bl"><div class="pn-h" style="color:#C23B22">🔴 P0 待办 ('+p0.length+')</div>';p0.slice(0,8).forEach(function(t){h+='<div style="padding:4px 0;font-size:11px;border-bottom:1px solid #f0e8d8">'+t.task+'</div>'});h+='</div>'}
+    var md=MLS.filter(function(m){return m.s==='完成'}).length;
+    h+='<div class="pn"><div class="pn-h">🎯 里程碑 ('+md+'/'+MLS.length+')</div><div style="display:flex;align-items:center;gap:8px;font-size:10px"><div class="pbar"><div class="pfill" style="width:'+Math.round(md/MLS.length*100)+'%"></div></div><span>'+Math.round(md/MLS.length*100)+'%</span></div>';
+    MLS.filter(function(m){return m.s!=='完成'}).forEach(function(m){h+='<div style="display:flex;justify-content:space-between;padding:3px 0;font-size:10px;border-bottom:1px solid #f0e8d8"><span>'+m.n+'</span><span><span class="tg '+(m.s==='进行中'?'tga':'tgr')+'">'+m.s+'</span> '+m.d+'</span></div>'});h+='</div>';
+  }else if(CT==='tasks'){
+    h+='<div class="pn"><div class="pn-h">📋 任务 ('+ts.length+')</div>';
+    if(ts.length===0)h+='<div class="emp">暂无任务</div>';else{h+='<table class="tbl"><tr><th>任务</th><th>优先级</th><th>状态</th></tr>';ts.forEach(function(t){h+='<tr><td>'+t.task+'</td><td>'+t.priority+'</td><td><span class="dot '+(t.status.indexOf('完成')>=0?'dg':t.status.indexOf('进行')>=0?'da':'dr')+'"></span>'+t.status+'</td></tr>'});h+='</table>'}h+='</div>';
+  }else if(CT==='project'){
+    var md=MLS.filter(function(m){return m.s==='完成'}).length;
+    h+='<div class="pn"><div class="pn-h">🗓️ 项目 · 里程碑</div><div style="display:flex;align-items:center;gap:8px;font-size:10px;margin-bottom:8px"><div class="pbar"><div class="pfill" style="width:'+Math.round(md/MLS.length*100)+'%"></div></div><span>'+Math.round(md/MLS.length*100)+'% ('+md+'/'+MLS.length+')</span></div>';
+    h+='<table class="tbl"><tr><th>里程碑</th><th>截止</th><th>状态</th></tr>'+MLS.map(function(m){return'<tr><td>'+m.n+'</td><td>'+m.d+'</td><td><span class="tg '+(m.s==='完成'?'tgg':m.s==='进行中'?'tga':'tgr')+'">'+m.s+'</span></td></tr>'}).join('')+'</table></div>';
+  }else if(CT==='customers'){var cs=DB.cs();h+='<div class="pn"><div class="pn-h">👤 客户 ('+cs.length+')</div>';if(cs.length===0)h+='<div class="emp">暂无</div>';else{h+='<table class="tbl"><tr><th>姓名</th><th>企业</th></tr>'+cs.map(function(c){return'<tr><td>'+c.name+'</td><td>'+(c.company||'')+'</td></tr>'}).join('')+'</table>'}h+='</div>'}
+  else if(CT==='products'){var pr=DB.pr();h+='<div class="pn"><div class="pn-h">📦 产品 ('+pr.length+')</div>';if(pr.length===0)h+='<div class="emp">暂无</div>';else{h+='<table class="tbl"><tr><th>名称</th><th>五族</th></tr>'+pr.map(function(p){return'<tr><td>'+p.name+'</td><td>'+(p.family||'')+'</td></tr>'}).join('')+'</table>'}h+='</div>'}
+  else if(CT==='quality'){var qu=DB.qu();h+='<div class="pn"><div class="pn-h">✅ 质量标准 ('+qu.length+')</div>';if(qu.length===0)h+='<div class="emp">暂无</div>';else{h+='<table class="tbl"><tr><th>编号</th><th>标准</th><th>状态</th></tr>'+qu.map(function(q){return'<tr><td>'+q.qm_id+'</td><td>'+q.standard+'</td><td>'+q.status+'</td></tr>'}).join('')+'</table>'}h+='</div>'}
+  else if(CT==='finance'){h+='<div class="pn"><div class="pn-h">💰 财务</div><div class="sg"><div class="si"><div class="v">~¥0</div><div class="l">月成本</div></div><div class="si"><div class="v">¥10-30K</div><div class="l">里程碑</div></div></div><table class="tbl" style="margin-top:8px"><tr><th>项目</th><th>年成本</th></tr><tr><td>GitHub Pages</td><td>¥0</td></tr><tr><td>商标注册</td><td>~¥3K</td></tr><tr><td>飞书认证</td><td>¥300</td></tr></table></div>'}
+  else if(CT==='growth'){var g=DB.gr();h+='<div class="pn"><div class="pn-h">📈 增长</div>';if(g.length===0)h+='<div class="emp">暂无</div>';else{h+='<table class="tbl"><tr><th>指标</th><th>当前</th><th>目标</th></tr>'+g.map(function(x){return'<tr><td>'+x.m+'</td><td><b>'+x.c+'</b></td><td>'+x.t+'</td></tr>'}).join('')+'</table>'}h+='</div>'}
+  else if(CT==='system'){h+='<div class="pn"><div class="pn-h">⚡ 系统</div><div class="sg"><div class="si"><div class="v">12</div><div class="l">Cron</div></div><div class="si"><div class="v">6</div><div class="l">脚本</div></div><div class="si"><div class="v">233</div><div class="l">线上</div></div></div><table class="tbl" style="margin-top:8px"><tr><th>cron任务</th></tr><tr><td>06:00 日起课</td></tr><tr><td>每2h Token压缩</td></tr><tr><td>22:00 日毕课</td></tr><tr><td>23:00 飞书同步</td></tr></table></div>'}
+  else if(CT==='avatars'){h+='<div class="pn"><div class="pn-h">🎭 替身</div><table class="tbl"><tr><th>名称</th><th>维度</th></tr><tr><td>🪨 刘禹锡</td><td>土·时间轴</td></tr><tr><td>🪙 司马贺</td><td>金·可行域</td></tr><tr><td>💧 水月观音</td><td>水·身心流</td></tr><tr><td>🪵 孔子</td><td>木·信义观</td></tr><tr><td>🔥 六祖慧能</td><td>火·直觉阈</td></tr></table></div>'}
+  else if(CT==='glossary'){h+='<div class="pn"><div class="pn-h">📖 术语</div><table class="tbl"><tr><th>概念</th><th>术语</th></tr><tr><td>产品体系</td><td>章·衡·镜·契·觉</td></tr><tr><td>品牌名</td><td>满意解研究所</td></tr><tr><td>决策框架</td><td>五维决策</td></tr><tr><td>核心理论</td><td>满意解</td></tr></table></div>'}
+  document.getElementById('mc').innerHTML=h;
 }
 
-function sch(){var gs=document.getElementById("gs");S.q=gs?gs.value.trim().toLowerCase():"";rt();rc()}
-function flt(arr,fs,q){if(!q)return arr;return(arr||[]).filter(function(i){return fs.some(function(f){var v=i[f];return v&&String(v).toLowerCase().indexOf(q)>=0})})}
-
-function rc(){
-  var h="",q=S.q,ts=DB.ts(),dn=ts.filter(function(t){return(t.status||"").indexOf("完成")>=0}).length;
-  var p0=ts.filter(function(t){return(t.priority||"").indexOf("P0")>=0&&(t.status||"").indexOf("完成")<0});
-  var d=Math.ceil((new Date(2026,5,21)-new Date())/86400000);
-  
-  if(q){
-    h+='<div class="pn"><div class="pn-h">🔍 搜索: <b>'+q+'</b></div>';
-    var rs=[];
-    flt(DB.ts(),["task","priority","status"],q).forEach(function(t){rs.push({ty:"📋",tx:t.task+" ["+t.priority+"] "+t.status,tb:"tasks"})});
-    flt(DB.cs(),["name","company"],q).forEach(function(c){rs.push({ty:"👤",tx:c.name+" "+(c.company||""),tb:"customers"})});
-    flt(DB.pr(),["name","family"],q).forEach(function(p){rs.push({ty:"📦",tx:p.name,tb:"products"})});
-    MLS.forEach(function(m){if(m.n.indexOf(q)>=0)rs.push({ty:"🎯",tx:m.n+" "+m.s,tb:"overview"})});
-    if(rs.length===0)h+='<div class="emp">未找到匹配</div>';
-    else rs.forEach(function(r){h+='<div class="sr" onclick="st(\''+r.tb+'\')"><span class="st">'+r.ty+'</span><span>'+r.tx+'</span><span class="sa">查看 →</span></div>'});
-    h+='</div>';
-  }else if(S.tab==="overview"){
-    var pct=ts.length>0?Math.round(dn/ts.length*100):0;
-    h+='<div class="pn"><div class="pn-h">📊 概览 · 夏至 <b style="color:#C23B22;font-size:18px">'+d+'天</b></div><div class="sg"><div class="si"><div class="v">'+pct+'%</div><div class="l">完成率</div></div><div class="si"><div class="v" style="color:'+(p0.length>0?'#C23B22':'#3D7A4F')+'">'+p0.length+'</div><div class="l">🔴 P0</div></div><div class="si"><div class="v">233</div><div class="l">线上产品</div></div><div class="si"><div class="v">12</div><div class="l">Cron健康</div></div><div class="si"><div class="v">23</div><div class="l">替身就绪</div></div></div></div>';
-    if(p0.length>0){h+='<div class="pn bl"><div class="pn-h" style="color:#C23B22">🔴 P0 紧急 ('+p0.length+')</div>';p0.slice(0,8).forEach(function(t){h+='<div style="padding:4px 0;border-bottom:1px solid #f0e8d8;font-size:11px">'+t.task+'</div>'});h+='</div>'}
-    var md=MLS.filter(function(m){return m.s==="完成"}).length;
-    h+='<div class="pn"><div class="pn-h">🎯 里程碑 ('+md+'/'+MLS.length+')</div><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:10px"><div class="pbar"><div class="pfill" style="width:'+Math.round(md/MLS.length*100)+'%"></div></div><span>'+Math.round(md/MLS.length*100)+'%</span></div>';
-    MLS.filter(function(m){return m.s!=="完成"}).forEach(function(m){h+='<div style="display:flex;justify-content:space-between;padding:3px 0;font-size:10px;border-bottom:1px solid #f0e8d8"><span>'+m.n+'</span><span><span class="tg '+(m.s==="进行中"?"tga":"tgr")+'">'+m.s+'</span> '+m.d+'</span></div>'});h+='</div>';
-  }else if(S.tab==="tasks"){
-    h+='<div class="pn"><div class="pn-h">📋 任务 ('+ts.length+')</div><div class="fr"><input id="tn" placeholder="任务名"><select id="tp"><option>P0</option><option selected>P1</option><option>P2</option></select><button class="btn" onclick="addT()">+</button></div>';
-    if(ts.length===0)h+='<div class="emp">暂无任务</div>';else{h+='<table class="tbl"><tr><th>任务</th><th>P</th><th>状态</th></tr>';ts.forEach(function(t){h+='<tr><td>'+t.task+'</td><td>'+t.priority+'</td><td><span class="dot '+(t.status.indexOf("完成")>=0?"dg":t.status.indexOf("进行")>=0?"da":"dr")+'"></span>'+t.status+'</td></tr>'});h+='</table>'}h+='</div>';
-  }else if(S.tab==="project"){
-    var md=MLS.filter(function(m){return m.s==="完成"}).length;
-    h+='<div class="pn"><div class="pn-h">🗓️ 项目</div><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:10px"><div class="pbar"><div class="pfill" style="width:'+Math.round(md/MLS.length*100)+'%"></div></div><span>'+Math.round(md/MLS.length*100)+'%</span></div><table class="tbl"><tr><th>里程碑</th><th>截止</th><th>状态</th></tr>'+MLS.map(function(m){return"<tr><td>"+m.n+"</td><td>"+m.d+"</td><td><span class=\"tg "+(m.s==="完成"?"tgg":m.s==="进行中"?"tga":"tgr")+"\">"+m.s+"</span></td></tr>"}).join("")+'</table></div>';
-  }else if(S.tab==="customers"){var cs=DB.cs();h+='<div class="pn"><div class="pn-h">👤 客户 ('+cs.length+')</div><div class="fr"><input id="cn" placeholder="姓名"><input id="cc" placeholder="企业"><button class="btn" onclick="addC()">+</button></div>';if(cs.length===0)h+='<div class="emp">暂无</div>';else{h+='<table class="tbl"><tr><th>姓名</th><th>企业</th></tr>';cs.forEach(function(c){h+='<tr><td>'+c.name+'</td><td>'+(c.company||"")+'</td></tr>'});h+='</table>'}h+='</div>'}
-  else if(S.tab==="products"){var pr=DB.pr();h+='<div class="pn"><div class="pn-h">📦 产品 ('+pr.length+')</div><div class="fr"><input id="pn" placeholder="产品名"><input id="pf" placeholder="五族"><button class="btn" onclick="addP()">+</button></div>';if(pr.length===0)h+='<div class="emp">暂无</div>';else{h+='<table class="tbl"><tr><th>名称</th><th>五族</th></tr>';pr.forEach(function(p){h+='<tr><td>'+p.name+'</td><td>'+(p.family||"")+'</td></tr>'});h+='</table>'}h+='</div>'}
-  else if(S.tab==="quality"){var qu=DB.qu();h+='<div class="pn"><div class="pn-h">✅ 质量标准 ('+qu.length+')</div>';if(qu.length===0)h+='<div class="emp">暂无</div>';else{h+='<table class="tbl"><tr><th>编号</th><th>标准</th><th>状态</th></tr>';qu.forEach(function(q){h+='<tr><td>'+q.qm_id+'</td><td>'+q.standard+'</td><td>'+q.status+'</td></tr>'});h+='</table>'}h+='</div>'}
-  else if(S.tab==="finance"){h+='<div class="pn"><div class="pn-h">💰 财务</div><div class="sg"><div class="si"><div class="v">~¥0</div><div class="l">月成本</div></div><div class="si"><div class="v">¥10-30K</div><div class="l">里程碑成本</div></div></div><table class="tbl" style="margin-top:12px"><tr><th>项目</th><th>年成本</th></tr><tr><td>GitHub Pages</td><td>¥0</td></tr><tr><td>商标注册</td><td>~¥3K</td></tr><tr><td>飞书认证</td><td>¥300</td></tr></table></div>'}
-  else if(S.tab==="growth"){var g=DB.gr();h+='<div class="pn"><div class="pn-h">📈 增长</div>';if(g.length===0)h+='<div class="emp">暂无</div>';else{h+='<table class="tbl"><tr><th>指标</th><th>当前</th><th>目标</th></tr>';g.forEach(function(x){h+='<tr><td>'+x.m+'</td><td><b>'+x.c+'</b></td><td>'+x.t+'</td></tr>'});h+='</table>'}h+='</div>'}
-  else if(S.tab==="system"){h+='<div class="pn"><div class="pn-h">⚡ 系统</div><div class="sg"><div class="si"><div class="v">12</div><div class="l">Cron</div></div><div class="si"><div class="v">6</div><div class="l">脚本</div></div><div class="si"><div class="v">233</div><div class="l">线上</div></div></div><table class="tbl" style="margin-top:12px"><tr><th>任务</th></tr><tr><td>06:00 日起课</td></tr><tr><td>22:00 日毕课</td></tr><tr><td>23:00 飞书同步</td></tr></table></div>'}
-  else if(S.tab==="avatars"){h+='<div class="pn"><div class="pn-h">🎭 替身</div><div class="sg"><div class="si"><div class="v">23</div><div class="l">总数</div></div><div class="si"><div class="v">5</div><div class="l">层级</div></div></div><table class="tbl" style="margin-top:12px"><tr><th>名称</th><th>维度</th></tr><tr><td>🪨 刘禹锡</td><td>土·时间轴</td></tr><tr><td>🪙 司马贺</td><td>金·可行域</td></tr><tr><td>💧 水月观音</td><td>水·身心流</td></tr><tr><td>🪵 孔子</td><td>木·信义观</td></tr><tr><td>🔥 六祖慧能</td><td>火·直觉阈</td></tr></table></div>'}
-  else if(S.tab==="glossary"){h+='<div class="pn"><div class="pn-h">📖 术语</div><table class="tbl"><tr><th>概念</th><th>术语</th></tr><tr><td>产品体系</td><td>章·衡·镜·契·觉</td></tr><tr><td>品牌名</td><td>满意解研究所</td></tr><tr><td>创始人</td><td>Egbertie</td></tr><tr><td>决策框架</td><td>五维决策</td></tr><tr><td>核心理论</td><td>满意解</td></tr></table></div>'}
-  document.getElementById("mc").innerHTML=h;
-}
-
-function addT(){var n=document.getElementById("tn").value.trim();if(!n)return;var ts=DB.ts();ts.unshift({id:Date.now(),task:n,priority:document.getElementById("tp").value,status:"待开始"});localStorage.setItem("dash_tasks",JSON.stringify(ts.slice(0,500)));rt();rk();rc()}
-function addC(){var n=document.getElementById("cn").value.trim();if(!n)return;var cs=DB.cs();cs.unshift({id:Date.now(),name:n,company:document.getElementById("cc").value});localStorage.setItem("dash_customers",JSON.stringify(cs.slice(0,500)));rt();rk();rc()}
-function addP(){var n=document.getElementById("pn").value.trim();if(!n)return;var pr=DB.pr();pr.unshift({id:Date.now(),name:n,family:document.getElementById("pf").value});localStorage.setItem("dash_products",JSON.stringify(pr.slice(0,500)));rt();rk();rc()}
-
-function openApp() {
-  document.getElementById('app').style.display = 'block';
-  document.getElementById('app').style.maxWidth = '1100px';
-  document.getElementById('app').style.margin = '0 auto';
-  document.getElementById('app').style.padding = '0 14px 60px';
-  
-  // Rebuild content
-  document.getElementById('app').innerHTML = '<div style="background:#fff;border-bottom:1px solid #e0d5c8;padding:10px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100"><span style="font-weight:700;color:#2A2A2A;font-size:15px">📊 驾驶舱</span><input id="gs" placeholder="🔍 全局搜索" oninput="sch()" style="flex:1;min-width:140px;padding:7px 12px;border:1.5px solid #D4C5A0;border-radius:10px;font-size:12px;background:#F5F0E6;outline:none"><span id="cd" style="font-size:11px;color:#6E6E6E;white-space:nowrap">夏至 <b style="color:#C23B22;font-size:15px">—</b></span><a href="index.html" style="font-size:11px;color:#B8860B;text-decoration:none">← 首页</a></div><div id="kpi" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:6px;margin:10px 0"></div><div id="tabs" style="display:flex;gap:4px;flex-wrap:wrap;margin:10px 0"></div><div id="mc"></div>';
-  
-  DB.seed();
-  var d = Math.ceil((new Date(2026,5,21)-new Date())/86400000);
-  document.getElementById('cd').innerHTML = '夏至 <b>'+d+'天</b>';
-  rt(); rk(); rc();
+function searchResults(q){
+  var h='<div class="pn"><div class="pn-h">🔍 搜索: <b>'+q+'</b></div>',rs=[];
+  (DB.ts()||[]).filter(function(t){return(t.task||'').indexOf(q)>=0}).forEach(function(t){rs.push({ty:'📋',tx:t.task+' ['+t.priority+']',tb:'tasks'})});
+  (DB.cs()||[]).filter(function(c){return(c.name||'').indexOf(q)>=0}).forEach(function(c){rs.push({ty:'👤',tx:c.name,tb:'customers'})});
+  (DB.pr()||[]).filter(function(p){return(p.name||'').indexOf(q)>=0}).forEach(function(p){rs.push({ty:'📦',tx:p.name,tb:'products'})});
+  MLS.filter(function(m){return m.n.indexOf(q)>=0}).forEach(function(m){rs.push({ty:'🎯',tx:m.n+' '+m.s,tb:'overview'})});
+  if(rs.length===0)h+='<div class="emp">未找到匹配</div>';
+  else rs.forEach(function(r){h+='<div onclick="CT=\''+r.tb+'\';renderTabs();renderMC()" style="padding:6px 10px;border-bottom:1px solid #f0e8d8;cursor:pointer;font-size:11px"><span style="font-size:10px;opacity:0.5">'+r.ty+'</span> <b>'+r.tx+'</b></div>'});
+  return h+'</div>';
 }
 </script>
 </body>
