@@ -151,7 +151,7 @@ class PortalHandler(SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
-    def _get_portal_html(self, redirect_to: str = 'index.html') -> str:
+    def _get_portal_html(self, redirect_to: str = 'dashboard-v3.html') -> str:
         """生成门户页面HTML"""
         return f'''<!DOCTYPE html>
 <html lang="zh-CN">
@@ -248,7 +248,7 @@ function unlock() {{
 
             if pw == PASSWORD:
                 token = make_session_token(self._get_client_ip())
-                redirect = params.get('r', ['/index.html'])[0]
+                redirect = params.get('r', ['/dashboard-v3.html'])[0]
                 body = 'ok'
                 self.send_response(200)
                 self.send_header('Content-Type', 'text/plain; charset=utf-8')
@@ -576,9 +576,12 @@ hr {{ border:none; border-top:1px solid var(--border); margin:2em 0; }}
         # 根目录 → 门户
         if path == '/' or path == '':
             if self._check_auth():
-                self._serve_file('index.html')
+                # 已认证 → 直接跳转dashboard
+                self.send_response(302)
+                self.send_header('Location', '/dashboard-v3.html')
+                self.end_headers()
             else:
-                self._serve_password_gate('/index.html')
+                self._serve_password_gate('/dashboard-v3.html')
             return
 
         # 密码门保护所有页面（排除静态资源和登录接口）
