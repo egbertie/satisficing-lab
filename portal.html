@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>满意红</title>
 <style>
 :root {
@@ -19,10 +19,11 @@ body {
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans SC",sans-serif;
   background:var(--bg); color:var(--ink); min-height:100vh;
   display:flex; align-items:center; justify-content:center;
+  -webkit-tap-highlight-color:transparent;
 }
 #gate {
   display:flex; flex-direction:column; align-items:center;
-  padding:40px 20px;
+  padding:32px 20px; max-width:320px; width:100%;
 }
 #gate .logo {
   width:88px; height:88px; background:var(--accent-red);
@@ -34,19 +35,24 @@ body {
 #gate h1 { font-size:1.6em; margin-bottom:4px; }
 #gate .subtitle { color:var(--ink-light); font-size:0.9em; margin-bottom:28px; }
 #gate input {
-  width:260px; padding:12px 16px; border:1px solid var(--border);
+  width:100%; padding:12px 16px; border:1px solid var(--border);
   border-radius:8px; background:#fff; color:var(--ink);
-  font-size:1em; outline:none; text-align:center;
+  font-size:1em; outline:none; text-align:center; -webkit-appearance:none;
   margin-bottom:14px; transition:border 0.2s;
 }
 #gate input:focus { border-color:var(--accent-gold); }
 #gate button {
-  padding:10px 40px; background:var(--accent-red); color:#fff;
+  width:100%; padding:12px; background:var(--accent-red); color:#fff;
   border:none; border-radius:8px; font-size:1em; cursor:pointer;
-  font-weight:500; transition:opacity 0.2s;
+  font-weight:500; transition:opacity 0.2s; -webkit-appearance:none;
 }
-#gate button:hover { opacity:0.85; }
+#gate button:active { opacity:0.8; }
 #gate .hint { color:var(--ink-lighter); font-size:0.8em; margin-top:14px; }
+#gate .notice {
+  margin-top:24px; padding:10px 14px; background:rgba(184,134,11,0.08);
+  border:1px solid rgba(184,134,11,0.2); border-radius:6px;
+  font-size:0.72em; color:var(--ink-light); text-align:center; line-height:1.5;
+}
 </style>
 </head>
 <body>
@@ -55,24 +61,28 @@ body {
   <div class="logo">红</div>
   <h1>满意红</h1>
   <p class="subtitle">知识体系</p>
-  <input type="password" id="pw" placeholder="输入通行码" autofocus
+  <input type="password" id="pw" placeholder="输入通行码" inputmode="numeric" autofocus
     onkeydown="if(event.key==='Enter')unlock()">
   <button onclick="unlock()">进入</button>
   <p class="hint">请输入通行码以继续</p>
+  <div class="notice">首次加载约需3-5秒<br>需等待 GitHub Pages 渲染</div>
 </div>
 
 <script>
 var PASS = '123654';
+var DASHBOARD = 'https://htmlpreview.github.io/?https://raw.githubusercontent.com/egbertie/satisficing-lab/main/dashboard-v3.html';
+
 (function(){
-  var saved = localStorage.getItem('portal_unlocked');
-  if (saved && (Date.now() - parseInt(saved) < 86400000)) {
-    window.location.href = 'dashboard-v3.html';
+  if (localStorage.getItem('portal_unlocked') &&
+      Date.now() - parseInt(localStorage.getItem('portal_unlocked')) < 86400000) {
+    window.location.href = DASHBOARD;
   }
 })();
+
 function unlock() {
   if (document.getElementById('pw').value === PASS) {
     localStorage.setItem('portal_unlocked', Date.now());
-    window.location.href = 'dashboard-v3.html';
+    window.location.href = DASHBOARD;
   } else {
     var inp = document.getElementById('pw');
     inp.value = ''; inp.style.borderColor = 'var(--accent-red)';
