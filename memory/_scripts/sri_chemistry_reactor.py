@@ -889,6 +889,372 @@ def reaction_dissipative_structure(data):
 # ============================================================
 # 主反应: 九链齐发
 # ============================================================
+
+# ============================================================
+# 深化学 · 第三轮 (链19-28) 多维反应空间
+# ============================================================
+
+# --- 维度1: 产品变种 (同分异构·对映异构·构象异构) ---
+
+# 链19: 同分异构体 — 相同指纹·不同产品形态
+def reaction_isomer(data):
+    """相同化学指纹=同分异构体(比如诊断类·量化工具型)=可互为替代品"""
+    now = datetime.now(timezone.utc)
+    products = [p for p in data.get('products', [])
+                if isinstance(p, dict) and p.get('status') not in ('已下架', '资料·归入知识库')
+                and p.get('fingerprint')]
+    
+    # 按指纹分组
+    by_fp = defaultdict(list)
+    for p in products:
+        by_fp[p.get('fingerprint', '')].append(p)
+    
+    isomers_found = 0
+    for fp, group in by_fp.items():
+        if len(group) < 2:
+            continue
+        # 同分异构体: 相同指纹=相同功能·不同文件名
+        best = max(group, key=lambda p: p.get('sri_score', 0))
+        for p in group:
+            if p != best:
+                p['isomer_of'] = best.get('id', '?')
+                p['isomer_score_diff'] = round(best.get('sri_score', 0) - p.get('sri_score', 0), 1)
+                # 标记: 可被替代
+                if p.get('sri_score', 0) < best.get('sri_score', 0) * 0.7:
+                    p['isomer_status'] = 'replaceable'
+        isomers_found += 1
+    
+    data['meta']['isomers'] = {
+        'reacted_at': now.isoformat(),
+        'isomer_groups': isomers_found,
+        'principle': '同指纹=同分异构体·可互相替代·低分自动标记replaceable'
+    }
+    return isomers_found
+
+
+# 链20: 对映异构 — 镜像产品(功能互补但不可替代)
+def reaction_enantiomer(data):
+    """两个产品互为镜像(互补但不可替代): 如诊断工具vs方案工具"""
+    now = datetime.now(timezone.utc)
+    products = [p for p in data.get('products', [])
+                if isinstance(p, dict) and p.get('status') not in ('已下架', '资料·归入知识库')
+                and p.get('jtbd_category')]
+    
+    enantiomer_pairs = []
+    # 互补JTBD对: diagnose↔decide, grow↔sustain
+    mirror_map = {'diagnose': 'decide', 'decide': 'diagnose', 'grow': 'sustain', 'sustain': 'grow'}
+    
+    connections = data.get('connections', [])
+    for p1 in products:
+        mirror_cat = mirror_map.get(p1.get('jtbd_category', ''))
+        if not mirror_cat:
+            continue
+        # 找镜像产品(通过连接)
+        for conn in connections:
+            if isinstance(conn, dict) and conn.get('source_id') == p1.get('id', ''):
+                target = next((p for p in products if p.get('id') == conn.get('target_id', '')), None)
+                if target and target.get('jtbd_category') == mirror_cat:
+                    enantiomer_pairs.append((p1, target))
+                    p1['enantiomer_of'] = target.get('id')
+                    target['enantiomer_of'] = p1.get('id')
+                    break
+    
+    data['meta']['enantiomers'] = {
+        'reacted_at': now.isoformat(),
+        'mirror_pairs': len(enantiomer_pairs),
+        'principle': '互补JTBD=对映异构·镜像不可替代·但联合使用1+1>2'
+    }
+    return len(enantiomer_pairs)
+
+
+# 链21: 构象异构 — 同一产品在不同评分态下的多种构象
+def reaction_conformer(data):
+    """产品的评分历史形成构象异构体(同一产品·不同时刻的不同评分态)"""
+    now = datetime.now(timezone.utc)
+    cl = data.get('meta', {}).get('change_log', [])
+    products = data.get('products', [])
+    
+    conformers = 0
+    for p in products:
+        if not isinstance(p, dict):
+            continue
+        pid = p.get('id', '')
+        # 查评分变更历史
+        score_changes = [c for c in cl if isinstance(c, dict) 
+                        and c.get('entity_id') == pid 
+                        and c.get('field') in ('sri_score', 'quality_score', 'llm_rating')]
+        if len(score_changes) >= 3:
+            # 有多重构象: 记录评分轨迹
+            old_scores = [c.get('old_value') for c in score_changes[-5:]]
+            new_scores = [c.get('new_value') for c in score_changes[-5:]]
+            p['conformer_states'] = {
+                'history_count': len(score_changes),
+                'score_range': [min(float(s) for s in old_scores + new_scores if s),
+                               max(float(s) for s in old_scores + new_scores if s)],
+                'current_conformer': new_scores[-1] if new_scores else p.get('sri_score')
+            }
+            conformers += 1
+    
+    data['meta']['conformers'] = {
+        'reacted_at': now.isoformat(),
+        'products_with_conformers': conformers,
+        'principle': '同一产品·不同时刻·不同评分态=构象异构体'
+    }
+    return conformers
+
+
+# --- 维度2: 反应方向 (可逆·平行·连串) ---
+
+# 链22: 可逆反应 — 产品评分可以来回变化
+def reaction_reversible(data):
+    """评分可升可降·建立可逆反应平衡常数"""
+    now = datetime.now(timezone.utc)
+    cl = data.get('meta', {}).get('change_log', [])
+    
+    # 找有升有降的产品 (可逆反应)
+    reversibles = defaultdict(list)
+    for c in cl[-200:]:
+        if isinstance(c, dict) and c.get('field') in ('sri_score', 'quality_score'):
+            reversibles[c.get('entity_id')].append(c)
+    
+    reversible_count = 0
+    for pid, changes in reversibles.items():
+        ups = sum(1 for c in changes if float(c.get('new_value', 0)) > float(c.get('old_value', 0)))
+        downs = sum(1 for c in changes if float(c.get('new_value', 0)) < float(c.get('old_value', 0)))
+        if ups > 0 and downs > 0:
+            # 可逆反应: K = [上升次数]/[下降次数]
+            for p in data.get('products', []):
+                if p.get('id') == pid:
+                    p['reversible_constant'] = round(ups / max(1, downs), 2)
+                    p['reaction_direction'] = 'forward' if ups > downs else ('reverse' if downs > ups else 'equilibrium')
+            reversible_count += 1
+    
+    data['meta']['reversible'] = {
+        'reacted_at': now.isoformat(),
+        'reversible_products': reversible_count,
+        'principle': '评分可升可降=可逆反应·K=[上升]/[下降]'
+    }
+    return reversible_count
+
+
+# 链23: 平行反应 — 同一产品同时产生多个效果
+def reaction_parallel(data):
+    """一个产品的改善同时影响评分·催化剂·产品流·包装层"""
+    now = datetime.now(timezone.utc)
+    products = [p for p in data.get('products', []) if isinstance(p, dict)]
+    
+    # 统计有多少产品同时在多条链中产生效应
+    parallel_count = 0
+    for p in products:
+        effects = 0
+        if p.get('is_catalyst'): effects += 1
+        if p.get('positioning'): effects += 1
+        if p.get('fingerprint'): effects += 1
+        if p.get('cluster_id'): effects += 1
+        if p.get('roi'): effects += 1
+        if p.get('flow_priority'): effects += 1
+        if effects >= 4:
+            p['parallel_reactions'] = effects
+            p['parallel_product'] = True
+            parallel_count += 1
+    
+    data['meta']['parallel'] = {
+        'reacted_at': now.isoformat(),
+        'parallel_products': parallel_count,
+        'principle': '一个产品多效应=平行反应·A→B1+B2+B3+...'
+    }
+    return parallel_count
+
+
+# 链24: 连串反应 — 产品A改进→产品B改进→产品C改进的级联
+def reaction_serial(data):
+    """评分提升沿着连接传播的多步连锁"""
+    now = datetime.now(timezone.utc)
+    products = data.get('products', [])
+    connections = data.get('connections', [])
+    
+    # 构建连接图: 找最长传播链
+    graph = defaultdict(list)
+    for conn in connections:
+        if isinstance(conn, dict):
+            graph[conn.get('source_id', '')].append(conn.get('target_id', ''))
+    
+    # 用BFS找最长传播路径
+    max_chain = 0
+    for p in products:
+        pid = p.get('id', '')
+        visited = set()
+        queue = [(pid, 0)]
+        while queue:
+            node, depth = queue.pop(0)
+            if node in visited: continue
+            visited.add(node)
+            for nxt in graph.get(node, []):
+                queue.append((nxt, depth + 1))
+            max_chain = max(max_chain, depth)
+    
+    data['meta']['serial'] = {
+        'reacted_at': now.isoformat(),
+        'longest_chain': max_chain,
+        'principle': '连接图最长传播路径=' + str(max_chain) + '步连串反应'
+    }
+    return max_chain
+
+
+# --- 维度3: 反应条件 (pH·温度·压力) ---
+
+# 链25: pH效应 — 系统健康度影响全反应速率
+def reaction_ph(data):
+    """系统健康分=pH值·酸性(低健康)=反应慢·碱性(高健康)=反应快"""
+    now = datetime.now(timezone.utc)
+    oh = data.get('meta', {}).get('orchestration_health', {})
+    health = oh.get('health_score', 100)
+    
+    # pH映射: health 0-60=酸性·60-80=中性·80-100=碱性
+    if health < 60:
+        ph_speed = 0.5  # 酸性环境·反应缓慢
+        ph_label = 'acidic'
+    elif health < 80:
+        ph_speed = 0.8  # 中性
+        ph_label = 'neutral'
+    else:
+        ph_speed = 1.0  # 碱性环境·反应加速
+        ph_label = 'alkaline'
+    
+    # pH影响全局反应速率
+    data['meta']['ph'] = {
+        'reacted_at': now.isoformat(),
+        'ph_value': round(health / 100 * 14, 1),
+        'environment': ph_label,
+        'reaction_speed_multiplier': ph_speed,
+        'principle': '健康分=pH值·酸性慢·碱性快'
+    }
+    return ph_speed
+
+
+# 链26: 温度效应 — 客户活跃度加速化学反应
+def reaction_temperature(data):
+    """产品被使用/评价的频率=温度·温度高=反应剧烈"""
+    now = datetime.now(timezone.utc)
+    cogs = data.get('cognition_events', [])
+    cl = data.get('meta', {}).get('change_log', [])
+    
+    # 温度 = 认知事件频率 / 时间跨度
+    if len(cogs) >= 2:
+        timestamps = []
+        for c in cogs:
+            if isinstance(c, dict) and c.get('timestamp'):
+                try:
+                    timestamps.append(datetime.fromisoformat(c['timestamp']))
+                except:
+                    pass
+        if len(timestamps) >= 2:
+            span_days = max(1, (max(timestamps) - min(timestamps)).days)
+            events_per_day = len(timestamps) / span_days
+        else:
+            events_per_day = 0
+    else:
+        events_per_day = 0
+    
+    # 温度映射
+    if events_per_day > 5:
+        temp = 'hot'
+        multiplier = 1.5
+    elif events_per_day > 1:
+        temp = 'warm'
+        multiplier = 1.0
+    elif events_per_day > 0:
+        temp = 'cool'
+        multiplier = 0.7
+    else:
+        temp = 'cold'
+        multiplier = 0.5
+    
+    data['meta']['temperature'] = {
+        'reacted_at': now.isoformat(),
+        'events_per_day': round(events_per_day, 2),
+        'temperature': temp,
+        'reaction_rate_multiplier': multiplier,
+        'principle': '认知事件频率=温度·热快冷慢'
+    }
+    return multiplier
+
+
+# 链27: 压力效应 — 产品流密度影响转化率
+def reaction_pressure(data):
+    """产品流中的产品密度=压力·高压=高转化率但低质量"""
+    now = datetime.now(timezone.utc)
+    products = [p for p in data.get('products', [])
+                if isinstance(p, dict) and p.get('status') not in ('已下架', '资料·归入知识库')]
+    clusters = data.get('clusters', [])
+    
+    if not clusters:
+        pressure = 0.5
+    else:
+        # 压力 = 平均簇大小 · 簇数量 / 有效产品数
+        avg_cluster_size = sum(c.get('size', 0) for c in clusters) / max(1, len(clusters))
+        pressure = min(2.0, avg_cluster_size * len(clusters) / max(1, len(products)))
+    
+    if pressure > 1.5:
+        state = 'high'
+        quality_risk = 'warning'  # 高压=可能的低质量
+    elif pressure > 0.8:
+        state = 'normal'
+        quality_risk = 'ok'
+    else:
+        state = 'low'
+        quality_risk = 'underutilized'
+    
+    data['meta']['pressure'] = {
+        'reacted_at': now.isoformat(),
+        'pressure': round(pressure, 2),
+        'state': state,
+        'quality_risk': quality_risk,
+        'principle': '产品流密度=压力·高压高转化但可能低质'
+    }
+    return pressure
+
+
+# --- 维度4: 反应剂量 ---
+
+# 链28: 剂量效应 — 不同剂量的养料产生不同强度的结晶
+def reaction_dosage(data):
+    """养料数量=反应剂量·低剂量=微弱信号·中剂量=建议·高剂量=强制改进"""
+    now = datetime.now(timezone.utc)
+    nourishment = data.get('meta', {}).get('nourishment', {})
+    total = nourishment.get('total_items', 0)
+    
+    # 剂量映射
+    if total >= 30:
+        dose = 'therapeutic'  # 治疗剂量
+        action = '强制审查相关产品'
+        urgency = 'high'
+    elif total >= 15:
+        dose = 'effective'     # 有效剂量
+        action = '建议优化相关产品'
+        urgency = 'medium'
+    elif total >= 5:
+        dose = 'threshold'     # 阈值剂量
+        action = '标记关注·等待更多数据'
+        urgency = 'low'
+    else:
+        dose = 'subthreshold'  # 亚阈值
+        action = '积累中·暂不反应'
+        urgency = 'none'
+    
+    data['meta']['dosage'] = {
+        'reacted_at': now.isoformat(),
+        'total_items': total,
+        'dose_level': dose,
+        'required_for_therapeutic': 30,
+        'action': action,
+        'urgency': urgency,
+        'principle': '养料数量=反应剂量·亚阈值<5<阈值<15<有效<30<治疗'
+    }
+    return total
+
+
+
 def react(dry_run=False):
     """执行全部九条化学反应链"""
     now = datetime.now(timezone.utc)
@@ -922,6 +1288,17 @@ def react(dry_run=False):
         ('superposition', '量子态叠加', reaction_superposition),
         ('symmetry', '对称破缺', reaction_symmetry_breaking),
         ('dissipative', '耗散结构', reaction_dissipative_structure),
+        # --- 深化学第三轮 ---
+        ('isomer', '同分异构体', reaction_isomer),
+        ('enantiomer', '对映异构', reaction_enantiomer),
+        ('conformer', '构象异构', reaction_conformer),
+        ('reversible', '可逆反应', reaction_reversible),
+        ('parallel', '平行反应', reaction_parallel),
+        ('serial', '连串反应', reaction_serial),
+        ('ph', 'pH效应', reaction_ph),
+        ('temperature', '温度效应', reaction_temperature),
+        ('pressure', '压力效应', reaction_pressure),
+        ('dosage', '剂量效应', reaction_dosage),
     ]
     
     for chain_id, chain_name, chain_func in chains:
