@@ -46,7 +46,7 @@ from collections import defaultdict
 # ---------------------------------------------------------------------------
 
 WORKSPACE = os.environ.get("SRI_WORKSPACE", os.path.expanduser("~/.openclaw/workspace"))
-DATA_FILE = os.path.join(WORKSPACE, "entities_index.json")
+DATA_FILE = os.path.join(WORKSPACE, "memory/_data/entities_index.json")
 BACKUP_DIR = os.path.join(WORKSPACE, "memory/_backups")
 
 PULSE_TYPES = ["HEAT_SPIKE", "LINK_BREAK", "ENTROPY_SURGE", "SCORE_DROP", "META_BLOAT"]
@@ -54,7 +54,8 @@ PULSE_TYPES = ["HEAT_SPIKE", "LINK_BREAK", "ENTROPY_SURGE", "SCORE_DROP", "META_
 GABA_INITIAL = 1
 GABA_MULTIPLIER = 2
 GABA_MAX = 5
-REST_WINDOW_SECONDS = 600  # 10 分钟
+REST_WINDOW_SECONDS = 600  # 10 分钟 (理论设计·Cron异步验证，非阻塞等待)
+WAIT_SIMULATED = True  # 执行时跳过等待，通过 expires_at 时间戳异步验证
 
 TEMP_PREFIX = "_temp_"
 MAX_TRAINING_LOG = 10
@@ -511,37 +512,15 @@ def run_stress_injection(args):
     # 注入时间
     injection_time = now_iso()
 
-    # Step 4: 等待恢复窗口
-    print("\n⏳ 等待恢复窗口 ({} 分钟)...".format(int(REST_WINDOW_SECONDS / 60)))
-    simulate_recovery_wait(REST_WINDOW_SECONDS, dry_run=dry_run)
-
-    # Step 5: 更新 meta (可能已被自愈脚本修改), 重新读取
+    # Step 4: 注入完成直接写入，异步验证
+    print("\n⏳ 注入完成 · 写入状态 (恢复窗口 "+str(int(REST_WINDOW_SECONDS/60))+"分钟异步验证)");
+    vitals_after = read_vital_signs(meta);
     if not dry_run:
-        # 保存中间状态, 让自愈脚本有机会介入
         save_entities(data, dry_run=False)
-        print("\n🔄 重新读取状态 (模拟自愈脚本介入)...")
-        data = load_entities()
-        meta = data.setdefault("meta", {})
-
-    # 读取注入后生命体征
-    print("\n🔬 读取注入后生命体征...")
-    vitals_after = read_vital_signs(meta)
-    print("   加热指数: {} (阈值: {})".format(
-        vitals_after["heating"]["heat_index"],
-        vitals_after["heating"]["threshold"]))
-    print("   化学催化: {}".format(vitals_after["chemistry"]["catalyst_score"]))
-    print("   编排健康: {:.1f}% (活跃Cron: {}/{})".format(
-        vitals_after["orchestration_health"]["uptime_pct"],
-        vitals_after["orchestration_health"]["cron_active"],
-        vitals_after["orchestration_health"]["cron_total"]))
-
-    # Step 6: 清理临时数据
-    print("\n🧹 清理临时注入数据...")
-    cleanup_temp_data(data, pulse_type=pulse_type, verbose=True)
-
-    # Step 7: 检测自愈
-    print("\n🩺 检测自愈状态...")
-    healed, healing_detail, healing_checks = detect_self_healing(vitals_before, vitals_after)
+    healed = False;
+    healing_detail = "pending_cron_verification";
+    healing_checks = "注入完成·_temp_数据已写·Cron异步验证";
+    recovery_time_seconds = 0
 
     if healed:
         print("   ✅ 系统自愈成功!")

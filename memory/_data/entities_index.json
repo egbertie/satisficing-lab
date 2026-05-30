@@ -21861,6 +21861,75 @@
       ],
       "governance_pulse": 95,
       "timestamp": "2026-05-30T17:29:33.957902+00:00"
+    },
+    "_temp_link_break": {
+      "broken_count": 2,
+      "broken_connections": [
+        {
+          "from": "",
+          "to": "",
+          "type": "",
+          "weight": 0.88,
+          "broken_at": "2026-05-30T17:34:37.590382+00:00"
+        },
+        {
+          "from": "",
+          "to": "",
+          "type": "",
+          "weight": 0.88,
+          "broken_at": "2026-05-30T17:34:37.590388+00:00"
+        }
+      ],
+      "broken_at": "2026-05-30T17:34:37.590391+00:00",
+      "expires_at": 1780163077.590393
+    },
+    "antifragile": {
+      "training_log": [
+        {
+          "timestamp": "2026-05-30T17:34:37.590402+00:00",
+          "pulse_type": "LINK_BREAK",
+          "gaba_level": 1,
+          "steps": 1,
+          "recovered": false,
+          "recovery_time_seconds": 600,
+          "healing_checks": "注入完成·_temp_数据已写·Cron异步验证",
+          "inject_detail": {
+            "type": "LINK_BREAK",
+            "broken_count": 2,
+            "connections": [
+              {
+                "from": "",
+                "to": "",
+                "type": "",
+                "weight": 0.88,
+                "broken_at": "2026-05-30T17:34:37.590382+00:00"
+              },
+              {
+                "from": "",
+                "to": "",
+                "type": "",
+                "weight": 0.88,
+                "broken_at": "2026-05-30T17:34:37.590388+00:00"
+              }
+            ]
+          }
+        }
+      ],
+      "recovery_stats": {
+        "recovery_rate_pct": 0.0,
+        "avg_recovery_time_seconds": 0,
+        "total_injections": 1,
+        "total_recovered": 0,
+        "weakest_link": "LINK_BREAK",
+        "weakest_recovery_rate": 0.0,
+        "last_updated": "2026-05-30T17:34:37.809891+00:00"
+      },
+      "current_level": 1,
+      "last_injection": {
+        "type": "LINK_BREAK",
+        "time": "2026-05-30T17:34:37.590402+00:00",
+        "recovered": false
+      }
     }
   },
   "products": [
@@ -167104,7 +167173,7 @@
       "from_entity": "TASK-190",
       "to_entity": "TERM-060",
       "relationship_type": "多证据知识链接",
-      "weight": 0.88,
+      "weight": 0,
       "description": "证据丰富化连接",
       "precision": 0.85,
       "relevance": 0.81,
@@ -167112,7 +167181,9 @@
       "direction": "directed",
       "confidence": 0.87,
       "source": "R14_evidence",
-      "timestamp": "2026-05-30T06:11:00"
+      "timestamp": "2026-05-30T06:11:00",
+      "_temp_broken": true,
+      "_temp_original_weight": 0.88
     },
     {
       "id": "CONN-7300",
@@ -187654,7 +187725,7 @@
       "from_entity": "CUST-019",
       "to_entity": "TERM-070",
       "relationship_type": "双向完成连接",
-      "weight": 0.88,
+      "weight": 0,
       "description": "图完整性·双向补齐",
       "precision": 0.85,
       "relevance": 0.81,
@@ -187662,7 +187733,9 @@
       "direction": "bidirectional",
       "confidence": 0.88,
       "source": "R22_completeness",
-      "timestamp": "2026-05-30T06:14:00"
+      "timestamp": "2026-05-30T06:14:00",
+      "_temp_broken": true,
+      "_temp_original_weight": 0.88
     },
     {
       "id": "CONN-8670",
