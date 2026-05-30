@@ -1,0 +1,1956 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理者视角帮助手册 · 满意解研究所 SRI</title>
+<style>
+/* ===== SRI Design System v4.0 · Warm Color VI ===== */
+:root {
+  --sri-red: #C23B22;
+  --sri-red-dark: #A12F1A;
+  --sri-red-light: rgba(194,59,34,0.06);
+  --sri-red-glass: rgba(194,59,34,0.08);
+  --sri-gold: #8B6914;
+  --sri-gold-light: rgba(139,105,20,0.06);
+  --sri-gold-glass: rgba(139,105,20,0.08);
+  --sri-bg: #F5F0E6;
+  --sri-bg-warm: #F0EBDF;
+  --text: #4D4D4D;
+  --text-muted: #6E6E6E;
+  --text-light: #8A8A8A;
+  --title: #2A2A2A;
+  --border: #C5B99A;
+  --border-light: rgba(197,185,154,0.25);
+  --white: #FFFEF9;
+  --green: #3D7A4F;
+  --green-light: rgba(61,122,79,0.08);
+  --amber: #C88A2D;
+  --amber-light: rgba(200,138,45,0.08);
+  --blue: #3B6F8A;
+  --blue-light: rgba(59,111,138,0.08);
+
+  --sp-3xs: 4px;
+  --sp-2xs: 6px;
+  --sp-xs: 8px;
+  --sp-sm: 12px;
+  --sp-md: 20px;
+  --sp-lg: 28px;
+  --sp-xl: 36px;
+  --sp-2xl: 48px;
+  --sp-3xl: 64px;
+  --sp-4xl: 80px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 999px;
+
+  --font-stack: -apple-system, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "SF Mono", "Fira Code", "JetBrains Mono", "Menlo", "Consolas", monospace;
+
+  --text-caption: 13px;
+  --text-small: 14px;
+  --text-body: 16px;
+  --text-subhead: 18px;
+  --text-headline: 22px;
+  --text-display: 28px;
+
+  --lh-normal: 1.6;
+  --lh-relaxed: 1.75;
+  --lh-tight: 1.35;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.03);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+  --shadow-elevated: 0 2px 10px rgba(0,0,0,0.05), 0 1px 4px rgba(0,0,0,0.03);
+  --shadow-sticky: 0 2px 12px rgba(0,0,0,0.06);
+  --ease-out: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  font-size: var(--text-body);
+}
+body {
+  font-family: var(--font-stack);
+  background: var(--sri-bg);
+  color: var(--text);
+  font-size: var(--text-body);
+  line-height: var(--lh-normal);
+  min-height: 100vh;
+}
+
+/* ===== Typography ===== */
+h1 { font-size: var(--text-display); font-weight: 800; color: var(--title); margin-bottom: var(--sp-sm); letter-spacing: -0.02em; }
+h2 { font-size: var(--text-headline); font-weight: 700; color: var(--title); margin: var(--sp-2xl) 0 var(--sp-md); padding-top: var(--sp-md); border-top: 1px solid var(--border-light); }
+h2:first-of-type { border-top: none; margin-top: 0; }
+h3 { font-size: var(--text-subhead); font-weight: 700; color: var(--title); margin: var(--sp-lg) 0 var(--sp-sm); }
+h4 { font-size: 17px; font-weight: 700; color: var(--title); margin: var(--sp-md) 0 var(--sp-xs); }
+p { margin-bottom: var(--sp-sm); color: var(--text); }
+a { color: var(--sri-red); text-decoration: none; transition: all var(--ease-out); }
+a:hover { opacity: 0.8; }
+strong { color: var(--title); font-weight: 700; }
+em { color: var(--text-muted); }
+
+::selection { background: rgba(194,59,34,0.12); color: var(--title); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ===== Layout ===== */
+.wrapper {
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* ===== Sidebar Nav ===== */
+.sidebar {
+  width: 280px;
+  min-width: 280px;
+  background: var(--white);
+  border-right: 1px solid var(--border-light);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: var(--sp-lg) var(--sp-md);
+  z-index: 100;
+  box-shadow: var(--shadow-sticky);
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  padding-bottom: var(--sp-lg);
+  margin-bottom: var(--sp-lg);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.sidebar-logo .logo-icon {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--sri-red), var(--sri-gold));
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  color: #F5F0E6; font-weight: 800; font-size: 18px;
+  flex-shrink: 0;
+}
+
+.sidebar-logo .logo-text {
+  font-size: 16px; font-weight: 700; color: var(--title); line-height: var(--lh-tight);
+}
+
+.sidebar-logo .logo-text span {
+  display: block; font-size: var(--text-caption); color: var(--text-muted); font-weight: 400;
+}
+
+.nav-section-title {
+  font-size: var(--text-caption);
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: var(--sp-sm) 0 var(--sp-xs);
+  margin-top: var(--sp-md);
+}
+
+.nav-section-title:first-of-type { margin-top: 0; }
+
+.nav-link {
+  display: block;
+  padding: 7px 10px;
+  margin: 1px 0;
+  font-size: var(--text-small);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  transition: all var(--ease-out);
+  line-height: var(--lh-tight);
+}
+
+.nav-link:hover {
+  background: var(--sri-red-light);
+  color: var(--sri-red);
+}
+
+.nav-link.active {
+  background: var(--sri-red-glass);
+  color: var(--sri-red);
+  font-weight: 600;
+}
+
+.nav-link.sub {
+  padding-left: 22px;
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+}
+
+/* ===== Main Content ===== */
+.main {
+  flex: 1;
+  padding: var(--sp-2xl) var(--sp-3xl);
+  max-width: 1100px;
+  min-width: 0;
+}
+
+/* ===== Hero ===== */
+.hero {
+  background: linear-gradient(160deg, var(--sri-red) 0%, #B24528 35%, var(--sri-gold) 100%);
+  color: #F5F0E6;
+  padding: var(--sp-3xl) var(--sp-2xl);
+  border-radius: var(--radius-xl);
+  margin-bottom: var(--sp-2xl);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(194,59,34,0.15);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle at 30% 60%, rgba(245,240,230,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #F5F0E6;
+  margin-bottom: var(--sp-sm);
+}
+
+.hero p {
+  color: rgba(245,240,230,0.92);
+  font-size: var(--text-subhead);
+  margin: 0;
+  max-width: 700px;
+}
+
+.hero-meta {
+  display: flex;
+  gap: var(--sp-lg);
+  margin-top: var(--sp-md);
+  flex-wrap: wrap;
+}
+
+.hero-meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-xs);
+  font-size: var(--text-small);
+  color: rgba(245,240,230,0.8);
+}
+
+/* ===== Cards ===== */
+.card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+  margin-bottom: var(--sp-md);
+}
+
+.card-sm {
+  padding: var(--sp-md);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--sp-md);
+  margin-bottom: var(--sp-lg);
+}
+
+.card-grid-2 { grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); }
+.card-grid-3 { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+
+/* ===== Badges ===== */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  line-height: 1.5;
+}
+.badge-red { background: var(--sri-red-light); color: var(--sri-red); }
+.badge-gold { background: var(--sri-gold-light); color: var(--sri-gold); }
+.badge-green { background: var(--green-light); color: var(--green); }
+.badge-amber { background: var(--amber-light); color: var(--amber); }
+.badge-blue { background: var(--blue-light); color: var(--blue); }
+
+/* ===== Info Boxes ===== */
+.info-box {
+  padding: var(--sp-md);
+  border-radius: var(--radius-md);
+  margin: var(--sp-md) 0;
+  font-size: var(--text-small);
+  line-height: var(--lh-normal);
+}
+
+.info-box-red {
+  background: var(--sri-red-light);
+  border-left: 3px solid var(--sri-red);
+  color: var(--sri-red-dark);
+}
+
+.info-box-gold {
+  background: var(--sri-gold-glass);
+  border-left: 3px solid var(--sri-gold);
+}
+
+.info-box-green {
+  background: var(--green-light);
+  border-left: 3px solid var(--green);
+}
+
+.info-box-blue {
+  background: var(--blue-light);
+  border-left: 3px solid var(--blue);
+}
+
+.info-box-amber {
+  background: var(--amber-light);
+  border-left: 3px solid var(--amber);
+}
+
+/* ===== Architecture Diagram ===== */
+.arch-diagram {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  padding: var(--sp-lg);
+  margin: var(--sp-lg) 0;
+  box-shadow: var(--shadow-card);
+  overflow-x: auto;
+}
+
+.arch-layer {
+  display: flex;
+  align-items: center;
+  padding: var(--sp-md);
+  margin: var(--sp-xs) 0;
+  border-radius: var(--radius-md);
+  gap: var(--sp-md);
+  position: relative;
+}
+
+.arch-layer-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+  width: 48px; height: 48px;
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+}
+
+.arch-layer-content { flex: 1; }
+.arch-layer-content h4 { margin: 0 0 2px; font-size: var(--text-body); }
+.arch-layer-content p { margin: 0; font-size: var(--text-small); color: var(--text-muted); }
+
+.arch-layer-front { background: linear-gradient(135deg, rgba(194,59,34,0.06), rgba(194,59,34,0.02)); border: 1px solid rgba(194,59,34,0.12); }
+.arch-layer-front .arch-layer-icon { background: var(--sri-red-light); }
+.arch-layer-data { background: linear-gradient(135deg, rgba(139,105,20,0.08), rgba(139,105,20,0.02)); border: 1px solid rgba(139,105,20,0.15); }
+.arch-layer-data .arch-layer-icon { background: var(--sri-gold-light); }
+.arch-layer-script { background: linear-gradient(135deg, rgba(59,111,138,0.08), rgba(59,111,138,0.02)); border: 1px solid rgba(59,111,138,0.15); }
+.arch-layer-script .arch-layer-icon { background: var(--blue-light); }
+.arch-layer-cron { background: linear-gradient(135deg, rgba(61,122,79,0.08), rgba(61,122,79,0.02)); border: 1px solid rgba(61,122,79,0.15); }
+.arch-layer-cron .arch-layer-icon { background: var(--green-light); }
+
+.arch-arrow {
+  text-align: center;
+  color: var(--border);
+  font-size: 20px;
+  line-height: 1;
+  padding: var(--sp-xs) 0;
+  letter-spacing: 2px;
+}
+
+.arch-three-col {
+  display: flex;
+  gap: var(--sp-sm);
+  flex-wrap: wrap;
+}
+
+.arch-col {
+  flex: 1;
+  min-width: 180px;
+  background: rgba(194,59,34,0.04);
+  border-radius: var(--radius-md);
+  padding: var(--sp-sm) var(--sp-md);
+  text-align: center;
+  border: 1px dashed rgba(194,59,34,0.15);
+}
+
+.arch-col .icon { font-size: 28px; margin-bottom: 4px; }
+.arch-col h5 { font-size: var(--text-small); font-weight: 700; color: var(--title); margin: 0 0 2px; }
+.arch-col p { font-size: var(--text-caption); color: var(--text-muted); margin: 0; }
+
+/* ===== Flow Diagram ===== */
+.flow-row {
+  display: flex; gap: var(--sp-xs); align-items: center; flex-wrap: wrap;
+  padding: var(--sp-sm) 0; font-size: var(--text-small);
+}
+
+.flow-step {
+  background: var(--sri-red-light);
+  color: var(--sri-red);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: var(--text-caption);
+  white-space: nowrap;
+}
+
+.flow-arrow { color: var(--border); font-size: var(--text-small); }
+
+/* ===== Table Styles ===== */
+.table-wrap {
+  overflow-x: auto;
+  margin: var(--sp-md) 0;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-small);
+  background: var(--white);
+}
+
+thead { background: var(--sri-bg-warm); }
+
+th {
+  padding: 12px 14px;
+  text-align: left;
+  font-weight: 700;
+  color: var(--title);
+  font-size: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  border-bottom: 2px solid var(--border);
+}
+
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: top;
+  line-height: var(--lh-normal);
+}
+
+tr:hover td { background: var(--sri-red-light); }
+tr:last-child td { border-bottom: none; }
+
+/* ===== Code Blocks ===== */
+code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  background: var(--sri-bg-warm);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: var(--sri-red-dark);
+  border: 1px solid var(--border-light);
+}
+
+pre {
+  background: var(--sri-bg-warm);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: var(--sp-md);
+  overflow-x: auto;
+  margin: var(--sp-md) 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text);
+  font-size: inherit;
+}
+
+/* ===== Cycle Diagram ===== */
+.cycle-diagram {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+  margin: var(--sp-lg) 0;
+}
+
+.cycle-layer {
+  padding: var(--sp-md);
+  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+}
+
+.cycle-micro {
+  background: rgba(61,122,79,0.04);
+  border-color: rgba(61,122,79,0.2);
+}
+.cycle-mid {
+  background: rgba(200,138,45,0.04);
+  border-color: rgba(200,138,45,0.2);
+}
+.cycle-macro {
+  background: rgba(194,59,34,0.04);
+  border-color: rgba(194,59,34,0.2);
+}
+
+.cycle-layer h4 { margin: 0 0 var(--sp-xs); display: flex; align-items: center; gap: var(--sp-xs); }
+.cycle-layer p { font-size: var(--text-small); margin: 0; }
+
+/* ===== Timeline ===== */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+  margin: var(--sp-lg) 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+
+.timeline-item {
+  position: relative;
+  padding: var(--sp-sm) 0 var(--sp-lg);
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--sri-red);
+  border: 2px solid var(--sri-bg);
+}
+
+.timeline-phase {
+  font-size: var(--text-caption);
+  font-weight: 700;
+  color: var(--sri-red);
+  margin-bottom: 2px;
+}
+
+.timeline-title {
+  font-weight: 700;
+  color: var(--title);
+  font-size: var(--text-body);
+  margin-bottom: 2px;
+}
+
+.timeline-desc {
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ===== Scenario Box ===== */
+.scenario-box {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  padding: var(--sp-lg);
+  margin-bottom: var(--sp-md);
+  box-shadow: var(--shadow-card);
+}
+
+.scenario-box h4 {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-xs);
+  margin-bottom: var(--sp-sm);
+  padding-bottom: var(--sp-sm);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.scenario-steps {
+  counter-reset: step;
+  list-style: none;
+}
+
+.scenario-steps li {
+  counter-increment: step;
+  padding: 8px 0 8px 36px;
+  position: relative;
+  font-size: var(--text-small);
+  line-height: var(--lh-normal);
+  border-left: 1px dashed var(--border-light);
+  margin-left: 12px;
+}
+
+.scenario-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: -14px;
+  top: 8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--sri-red-light);
+  color: var(--sri-red);
+  font-size: var(--text-caption);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--white);
+}
+
+.scenario-steps li:last-child { border-left-color: transparent; }
+
+/* ===== Stats Bar ===== */
+.stats-bar {
+  display: flex;
+  gap: var(--sp-md);
+  flex-wrap: wrap;
+  margin: var(--sp-lg) 0;
+}
+
+.stat-item {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: var(--sp-md);
+  border: 1px solid var(--border-light);
+  min-width: 140px;
+  flex: 1;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--sri-red);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+}
+
+/* ===== Quote ===== */
+.quote {
+  padding: var(--sp-md) var(--sp-lg);
+  border-left: 3px solid var(--sri-red);
+  color: var(--sri-red);
+  background: var(--sri-red-light);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-style: italic;
+  margin: var(--sp-md) 0;
+  font-size: var(--text-small);
+}
+
+/* ===== Utility ===== */
+.text-center { text-align: center; }
+.text-muted { color: var(--text-muted); font-size: var(--text-small); }
+.text-caption { font-size: var(--text-caption); color: var(--text-muted); }
+.mt-sm { margin-top: var(--sp-sm); }
+.mt-md { margin-top: var(--sp-md); }
+.mt-lg { margin-top: var(--sp-lg); }
+.mb-sm { margin-bottom: var(--sp-sm); }
+.mb-md { margin-bottom: var(--sp-md); }
+.mb-lg { margin-bottom: var(--sp-lg); }
+
+/* ===== Footer ===== */
+.footer {
+  text-align: center;
+  padding: var(--sp-2xl) var(--sp-lg);
+  color: var(--text-muted);
+  font-size: var(--text-caption);
+  border-top: 1px solid var(--border-light);
+  margin-top: var(--sp-3xl);
+}
+
+.footer p { color: var(--text-muted); font-size: var(--text-caption); margin: 2px 0; }
+
+/* ===== Animations ===== */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.animate-in { animation: fadeUp 0.5s var(--ease-out) both; }
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+
+/* ===== Back to Top ===== */
+.back-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--sri-red);
+  color: #F5F0E6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 2px 12px rgba(194,59,34,0.25);
+  text-decoration: none;
+  z-index: 200;
+  transition: all var(--ease-out);
+}
+
+.back-to-top:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 16px rgba(194,59,34,0.3);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 240px;
+    min-width: 240px;
+  }
+  .main {
+    padding: var(--sp-lg) var(--sp-xl);
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    position: relative;
+    padding: var(--sp-md);
+    border-right: none;
+    border-bottom: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .sidebar-logo {
+    padding-bottom: var(--sp-sm);
+    margin-bottom: var(--sp-sm);
+  }
+
+  .nav-links-wrap {
+    display: none;
+  }
+
+  .main {
+    padding: var(--sp-lg) var(--sp-md);
+  }
+
+  .hero {
+    padding: var(--sp-xl) var(--sp-lg);
+    border-radius: var(--radius-lg);
+  }
+
+  .hero h1 { font-size: 24px; }
+
+  .card-grid,
+  .card-grid-2,
+  .card-grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .arch-three-col {
+    flex-direction: column;
+  }
+
+  .stats-bar {
+    flex-direction: column;
+  }
+
+  pre {
+    font-size: 12px;
+    padding: var(--sp-sm);
+  }
+
+  table {
+    font-size: var(--text-caption);
+  }
+
+  th, td {
+    padding: 8px 10px;
+  }
+}
+
+@media print {
+  .sidebar { display: none; }
+  .back-to-top { display: none; }
+  .main { max-width: 100%; padding: 0; }
+  body { font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- ===== Sidebar ===== -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">S</div>
+      <div class="logo-text">
+        满意解研究所<span>SRI · 管理者手册</span>
+      </div>
+    </div>
+
+    <div class="nav-links-wrap">
+      <div class="nav-section-title">概述</div>
+      <a href="#intro" class="nav-link">手册说明</a>
+      <a href="#arch" class="nav-link">系统架构</a>
+
+      <div class="nav-section-title">核心系统</div>
+      <a href="#data-layer" class="nav-link">数据层</a>
+      <a href="#script-layer" class="nav-link">脚本层 (18个)</a>
+      <a href="#cron" class="nav-link">Cron 调度 (36条)</a>
+      <a href="#cycles" class="nav-link">三层闭环架构</a>
+
+      <div class="nav-section-title">运维操作</div>
+      <a href="#ops" class="nav-link">运维操作指南</a>
+      <a href="#scenarios" class="nav-link">常见运维场景</a>
+
+      <div class="nav-section-title">参考</div>
+      <a href="#timeline" class="nav-link">研发历程</a>
+      <a href="#glossary" class="nav-link">术语速查</a>
+    </div>
+  </nav>
+
+  <!-- ===== Main ===== -->
+  <main class="main">
+
+    <!-- ===== Hero ===== -->
+    <section class="hero animate-in" id="top">
+      <h1>⚙️ 管理者视角 · 运维参考手册</h1>
+      <p>面向系统管理员与运营者：系统架构全景、脚本详解、Cron调度、运维操作与故障排除</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">📅 版本 v1.0 · 2026-05-31</div>
+        <div class="hero-meta-item">📐 18脚本 · 36条Cron · 315产品</div>
+        <div class="hero-meta-item">🏷️ 满意解研究所 SRI</div>
+      </div>
+    </section>
+
+    <!-- ===== 1. 手册说明 ===== -->
+    <h2 id="intro">📖 手册说明</h2>
+
+    <div class="card animate-in delay-1">
+      <p>本手册是 <strong>SRI（满意解研究所）知识资产管理系统的运维参考文档</strong>。它面向系统管理员、运维工程师和运营负责人，详细描述了系统从架构到执行的每一个层面。</p>
+      <p class="mb-sm">阅读本手册的读者应具备：</p>
+      <ul style="padding-left: 20px; font-size: var(--text-small);">
+        <li>基本的 Linux/macOS 命令行操作能力</li>
+        <li>Python 3 脚本的基本阅读能力</li>
+        <li>对 Cron 定时任务的基本了解</li>
+        <li>JSON 数据格式的基本理解</li>
+      </ul>
+    </div>
+
+    <div class="info-box info-box-red mt-md">
+      <strong>⚠️ 重要提示：</strong>本手册描述的脚本均位于 <code>memory/_scripts/</code> 目录下。所有脚本的操作对象是 <code>memory/_data/entities_index.json</code>（单一数据源）。请在执行任何手动操作前，确保已备份该文件。
+    </div>
+
+    <!-- ===== 2. 系统架构全景 ===== -->
+    <h2 id="arch">🏗️ 系统架构全景</h2>
+
+    <div class="arch-diagram animate-in delay-1">
+      <!-- Layer 1: Frontend -->
+      <div class="arch-layer arch-layer-front">
+        <div class="arch-layer-icon">🖥️</div>
+        <div class="arch-layer-content">
+          <h4>前端层 · 三层界面</h4>
+          <p>驾驶舱 (Pilot View) · 管理窗口 (Engineer View) · 产品目录 (Catalog)</p>
+          <div class="arch-three-col mt-sm">
+            <div class="arch-col">
+              <div class="icon">🧭</div>
+              <h5>驾驶舱 Dashboard</h5>
+              <p>仪表台 · 全景监控 · Pilot View</p>
+            </div>
+            <div class="arch-col">
+              <div class="icon">⚙️</div>
+              <h5>管理窗口 Admin</h5>
+              <p>控制室 · 系统管理 · Engineer View</p>
+            </div>
+            <div class="arch-col">
+              <div class="icon">📦</div>
+              <h5>产品目录 Catalog</h5>
+              <p>货架 · 产品展示 · 客户入口</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-arrow">↓ ↑ &nbsp;自动 fetch → 呈现最新数据 &nbsp;↓ ↑</div>
+
+      <!-- Layer 2: Data -->
+      <div class="arch-layer arch-layer-data">
+        <div class="arch-layer-icon">📊</div>
+        <div class="arch-layer-content">
+          <h4>数据层 · 单一数据源</h4>
+          <p><code>entities_index.json</code> — 126个meta键 · 315产品 · 12,556连接 · 31城市</p>
+        </div>
+      </div>
+
+      <div class="arch-arrow">↓ ↑ &nbsp;Cron触发写入 · 前端自动读取 &nbsp;↓ ↑</div>
+
+      <!-- Layer 3: Script -->
+      <div class="arch-layer arch-layer-script">
+        <div class="arch-layer-icon">⚙️</div>
+        <div class="arch-layer-content">
+          <h4>脚本层 · 18个Python引擎</h4>
+          <p>核心引擎 (2) · 化学引擎 (3) · 产品管理 (5) · 养料供给 (3) · 控制论 (4) · 诊断 (1)</p>
+        </div>
+      </div>
+
+      <div class="arch-arrow">↓ ↑ &nbsp;定时驱动调度 &nbsp;↓ ↑</div>
+
+      <!-- Layer 4: Cron -->
+      <div class="arch-layer arch-layer-cron">
+        <div class="arch-layer-icon">⏰</div>
+        <div class="arch-layer-content">
+          <h4>调度层 · 36条Cron定时任务</h4>
+          <p>飞轮类 (14) · 基础运维 (10) · 定期深度检查 (12)</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📐 三大入口的分工</h3>
+
+    <div class="card-grid animate-in delay-2">
+      <div class="card">
+        <h4>🧭 驾驶舱 <span class="badge badge-red">Pilot View</span></h4>
+        <p>系统状态的一站式仪表台。展示飞轮健康、化学热力、编排器状态、产品覆盖率等关键指标的实时快照。相当于飞机的驾驶舱仪表盘——一眼看到全局。</p>
+        <p class="text-caption">入口：<code>dashboard.html</code></p>
+      </div>
+      <div class="card">
+        <h4>⚙️ 管理窗口 <span class="badge badge-gold">Engineer View</span></h4>
+        <p>系统管理控制室。可以查看每个脚本的执行日志、编排器健康仪表盘、化学反应状态、控制论指标。适合进行深度排查和手动干预。</p>
+        <p class="text-caption">入口：<code>admin-windows.html</code> / <code>admin.html</code></p>
+      </div>
+      <div class="card">
+        <h4>📦 产品目录 <span class="badge badge-green">Catalog</span></h4>
+        <p>面向最终用户的产品货架。展示经过生命周期管理和质量评分的活跃产品。客户从这里发现和消费知识产品。</p>
+        <p class="text-caption">入口：<code>product-catalog.html</code></p>
+      </div>
+    </div>
+
+    <h3>📊 数据流向</h3>
+
+    <div class="flow-row mb-md">
+      <span class="flow-step">采集</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">加工</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">呈现</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">反馈</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">自调控</span>
+    </div>
+
+    <div class="card">
+      <table>
+        <thead><tr><th>阶段</th><th>触发者</th><th>执行者</th><th>产出</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>采集</strong></td>
+            <td>Cron / 手动</td>
+            <td>scanner · collector</td>
+            <td>新实体记录 · 养料批次</td>
+          </tr>
+          <tr>
+            <td><strong>加工</strong></td>
+            <td>Cron 链式</td>
+            <td>flywheel · reactor · orchestrator</td>
+            <td>meta更新 · 评分 · 化学反应</td>
+          </tr>
+          <tr>
+            <td><strong>呈现</strong></td>
+            <td>用户访问</td>
+            <td>HTML fetch</td>
+            <td>驾驶舱 · 管理窗口 · 产品目录</td>
+          </tr>
+          <tr>
+            <td><strong>反馈</strong></td>
+            <td>自动检测</td>
+            <td>consistency · bottleneck</td>
+            <td>异常报告 · 约束识别</td>
+          </tr>
+          <tr>
+            <td><strong>自调控</strong></td>
+            <td>自动触发</td>
+            <td>healer · governor · autocalibration</td>
+            <td>自动修复 · 参数调谐 · 漂移校正</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ===== 3. Data Layer ===== -->
+    <h2 id="data-layer">📊 数据层详解</h2>
+
+    <div class="stats-bar animate-in delay-1">
+      <div class="stat-item">
+        <div class="stat-value">126</div>
+        <div class="stat-label">meta键</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">315</div>
+        <div class="stat-label">产品</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">12,556</div>
+        <div class="stat-label">连接</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">31</div>
+        <div class="stat-label">城市</div>
+      </div>
+    </div>
+
+    <h3>🗄️ entities_index.json · 单一数据源</h3>
+
+    <div class="card animate-in delay-1">
+      <p><code>memory/_data/entities_index.json</code> 是整个系统的 <strong>唯一持久化数据源 (Single Source of Truth)</strong>。所有脚本读取它、加工它、写回它。前端页面通过读取它来展示一切。</p>
+
+      <h4 class="mt-md">顶层结构</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>键名</th><th>类型</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td><code>meta</code></td><td>dict (126键)</td><td>系统元数据——飞轮状态、化学指标、控制论参数、健康评分等</td></tr>
+            <tr><td><code>products</code></td><td>array (315项)</td><td>所有产品实体</td></tr>
+            <tr><td><code>customers</code></td><td>array</td><td>客户档案</td></tr>
+            <tr><td><code>connections</code></td><td>array (12,556项)</td><td>实体间关系边</td></tr>
+            <tr><td><code>cities</code></td><td>array (31项)</td><td>城市节点</td></tr>
+            <tr><td><code>tasks</code></td><td>array</td><td>任务记录</td></tr>
+            <tr><td><code>documents</code></td><td>array</td><td>文档/知识资产</td></tr>
+            <tr><td><code>scripts</code></td><td>array</td><td>脚本注册</td></tr>
+            <tr><td><code>crons</code></td><td>array</td><td>Cron任务注册</td></tr>
+            <tr><td><code>lifecycle_stages</code></td><td>dict</td><td>Stage-Gate生命周期阶段定义</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3>🔑 关键meta区域</h3>
+
+    <div class="card-grid card-grid-2 animate-in delay-2">
+      <div class="card card-sm">
+        <h4>🔥 heating</h4>
+        <p>化学热力追踪指标。记录60条反应链的当前活化能、反应速率和热力状态。</p>
+        <p><span class="badge badge-red">实时</span> <span class="badge badge-amber">阈值敏感</span></p>
+      </div>
+      <div class="card card-sm">
+        <h4>⚗️ chemistry</h4>
+        <p>化学反应引擎的状态快照。包括当前活跃反应、中间产物、催化剂分布。</p>
+        <p><span class="badge badge-amber">周期性</span></p>
+      </div>
+      <div class="card card-sm">
+        <h4>🔄 perpetual_control</h4>
+        <p>永续自调控系统的设定点集合和调控轨迹。第二阶控制论的核心。</p>
+        <p><span class="badge badge-green">自维持</span></p>
+      </div>
+      <div class="card card-sm">
+        <h4>🧠 llm_stats</h4>
+        <p>LLM批量评分的统计数据：覆盖率、评分分布、替身参与度。</p>
+        <p><span class="badge badge-blue">增长跟踪</span></p>
+      </div>
+      <div class="card card-sm">
+        <h4>💓 orchestration_health</h4>
+        <p>15环节编排器的健康仪表盘。每个环节的熔断状态、成功率、延迟。</p>
+        <p><span class="badge badge-red">告警关键</span></p>
+      </div>
+      <div class="card card-sm">
+        <h4>🌀 flywheel</h4>
+        <p>飞轮引擎的工作状态：scan·stale·rerank·llm·health 五环节最新执行记录。</p>
+        <p><span class="badge badge-green">引擎核心</span></p>
+      </div>
+      <div class="card card-sm">
+        <h4>🏛️ vsm_system5</h4>
+        <p>VSM System 5 策略身份审计结果。治理健康分、身份一致性。</p>
+        <p><span class="badge badge-blue">战略层</span></p>
+      </div>
+      <div class="card card-sm">
+        <h4>👁️ second_order</h4>
+        <p>二阶观察者的6维空间观测数据：观察偏差、盲点检测、自我模型。</p>
+        <p><span class="badge badge-gold">元认知</span></p>
+      </div>
+      <div class="card card-sm">
+        <h4>🎚️ autocalibration</h4>
+        <p>自校准引擎的设定点调谐记录和漂移检测日志。</p>
+        <p><span class="badge badge-green">自适应</span></p>
+      </div>
+      <div class="card card-sm">
+        <h4>💪 antifragile</h4>
+        <p>反脆弱训练记录：GABA阶梯进程、5种脉冲注入历史、系统恢复力评分。</p>
+        <p><span class="badge badge-red">压力测试</span></p>
+      </div>
+    </div>
+
+    <h3>🔄 数据更新机制</h3>
+    <div class="card animate-in delay-3">
+      <div class="flow-row">
+        <span class="flow-step">Cron 定时触发</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">Python 脚本执行</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">读取 entities_index.json</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">执行分析/加工/修复</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">增量更新 meta 区域</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">写回 entities_index.json</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">前端下次 fetch 自动呈现</span>
+      </div>
+      <p class="text-caption mt-sm">所有更新均为增量写入（追加 change_log），不覆盖历史记录。遵循事件溯源 (Event Sourcing) 原则。</p>
+    </div>
+
+    <!-- ===== 4. Script Layer ===== -->
+    <h2 id="script-layer">⚙️ 脚本层 · 18个Python引擎</h2>
+
+    <p class="mb-lg">所有脚本位于 <code>memory/_scripts/</code> 目录下。按功能域分为六大类别。每个脚本可独立运行（<code>python3 script.py --save</code>），也可由编排器统一调度。</p>
+
+    <!-- 4.1 Core Engines -->
+    <h3>🔥 核心引擎 (2) <span class="badge badge-red">飞轮心脏</span></h3>
+
+    <div class="card animate-in delay-1">
+      <h4>1. sri_knowledge_flywheel.py <span class="badge badge-red">飞轮主引擎</span></h4>
+      <div class="table-wrap mt-sm">
+        <table>
+          <thead><tr><th style="width:80px">维度</th><th>详情</th></tr></thead>
+          <tbody>
+            <tr><td><strong>职责</strong></td><td>知识资产飞轮的五层循环引擎：扫描新增文件 → 检测过时实体 → 重新排序 → LLM评分缺口 → 健康自检</td></tr>
+            <tr><td><strong>输入</strong></td><td><code>entities_index.json</code>、扫描路径 (<code>site/</code> 和 <code>memory/</code>)</td></tr>
+            <tr><td><strong>输出</strong></td><td>更新 entities_index.json 的 <code>meta.flywheel</code> 区域；追加 change_log</td></tr>
+            <tr><td><strong>五循环</strong></td><td><code>scan()</code> 扫描新文件 → <code>stale()</code> 检测过时(>7天) → <code>rerank()</code> 重排序 → <code>llm()</code> LLM缺口补齐 → <code>health()</code> 飞轮健康自检</td></tr>
+            <tr><td><strong>Cron</strong></td><td>每4小时触发一次（扫描/健康自检/LLM缺口各有独立Cron）</td></tr>
+            <tr><td><strong>容量设计</strong></td><td>Phase 0: 单JSON单进程 → Phase 1: 分片JSON多进程 → Phase 2: Bitable后端API → Phase 3: 独立后端 + 脚本演化为orchestrator</td></tr>
+            <tr><td><strong>健壮性</strong></td><td>每个方法独立 fitness function；事件溯源(change_log)；不依赖外部服务；绞杀者模式演进</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card animate-in delay-1">
+      <h4>2. sri_orchestrator.py <span class="badge badge-red">闭环编排引擎</span></h4>
+      <div class="table-wrap mt-sm">
+        <table>
+          <thead><tr><th style="width:80px">维度</th><th>详情</th></tr></thead>
+          <tbody>
+            <tr><td><strong>职责</strong></td><td>15环节闭环编排：将扫描、检测、修复、评分、化学反应、控制论、反脆弱等环节串行为一个完整的大循环</td></tr>
+            <tr><td><strong>输入</strong></td><td><code>entities_index.json</code> + 各个子脚本的调用</td></tr>
+            <tr><td><strong>输出</strong></td><td>更新 <code>meta.orchestration_health</code>；每个环节的健康分、熔断状态、成功率</td></tr>
+            <tr><td><strong>三大机制</strong></td><td><strong>Circuit Breaker:</strong> 任一步骤连续失败3次 → 熔断 → 跳过该环节继续<br><strong>Bulkhead:</strong> 每个环节独立timeout和错误计数<br><strong>Graceful Degradation:</strong> 一个环节熔断不影响其他</td></tr>
+            <tr><td><strong>15环节</strong></td><td>文件扫描 → 过时检测 → 一致性检查 → 自动修复 → 养料采集 → 质量门禁 → 标准迭代 → 产品审计 → 生命周期管理 → 组合优化 → 化学引擎 → 化学调控 → VSM审计 → 二阶观察 → 自校准 → 反脆弱训练 → 永续控制</td></tr>
+            <tr><td><strong>Cron</strong></td><td>每6小时触发一次完整编排</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 4.2 Chemistry Engines -->
+    <h3>⚗️ 化学引擎 (3) <span class="badge badge-gold">化学反应层</span></h3>
+
+    <div class="card animate-in delay-1">
+      <h4>3. sri_chemistry_reactor.py <span class="badge badge-gold">化学反应引擎</span></h4>
+      <div class="table-wrap mt-sm">
+        <table>
+          <thead><tr><th style="width:80px">维度</th><th>详情</th></tr></thead>
+          <tbody>
+            <tr><td><strong>职责</strong></td><td>实现60条化学反应链。把产品从被动管理的「物理状态」转化为主动演化的「化学状态」——产品之间产生催化、抑制、合成、裂解等动态关系</td></tr>
+            <tr><td><strong>输入</strong></td><td>产品列表、连接图、heating状态</td></tr>
+            <tr><td><strong>输出</strong></td><td>更新 <code>meta.chemistry</code>：反应链状态、热力追踪、活化能、催化剂分布</td></tr>
+            <tr><td><strong>核心概念</strong></td><td><strong>活化能:</strong> 产品被「激活」所需的最低能量阈值<br><strong>催化剂:</strong> 加速反应的产品/事件<br><strong>热力追踪:</strong> 每条反应链的实时温度和反应速率<br><strong>60链:</strong> 9条基础反应链 × 多维度组合</td></tr>
+            <tr><td><strong>Cron</strong></td><td>每2小时触发</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card animate-in delay-1">
+      <h4>4. sri_chemical_governor.py <span class="badge badge-gold">化学调控引擎</span></h4>
+      <div class="table-wrap mt-sm">
+        <table>
+          <thead><tr><th style="width:80px">维度</th><th>详情</th></tr></thead>
+          <tbody>
+            <tr><td><strong>职责</strong></td><td>给60条反应链加上负反馈机制。不是增加更多反应链——是给已有的链加上调控、自清理和自休眠能力</td></tr>
+            <tr><td><strong>输入</strong></td><td>化学反应引擎的输出 + heating快照</td></tr>
+            <tr><td><strong>输出</strong></td><td>热力过高的链自动降温；低活性链标记休眠；清理反应副产物</td></tr>
+            <tr><td><strong>核心功能</strong></td><td><strong>负反馈:</strong> 检测到热力过高 → 降低活化能注入<br><strong>自清理:</strong> 清除已完成/冗余反应链<br><strong>自休眠:</strong> 持续低活性的链自动休眠（保留，不删除）</td></tr>
+            <tr><td><strong>Cron</strong></td><td>每2小时触发（与reactor交替）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card animate-in delay-1">
+      <h4>5. sri_perpetual_control.py <span class="badge badge-gold">永续自调控</span></h4>
+      <div class="table-wrap mt-sm">
+        <table>
+          <thead><tr><th style="width:80px">维度</th><th>详情</th></tr></thead>
+          <tbody>
+            <tr><td><strong>职责</strong></td><td>基于第二阶控制论，实现无需人工干预的永续自调控。系统观察自身、调整自身、学习自身。</td></tr>
+            <tr><td><strong>输入</strong></td><td>所有meta区域的当前快照</td></tr>
+            <tr><td><strong>输出</strong></td><td>更新 <code>meta.perpetual_control</code>：设定点集合、调控轨迹、自评报告</td></tr>
+            <tr><td><strong>核心原理</strong></td><td>系统不仅观察环境（第一阶），也观察自己的观察方式（第二阶）。通过二阶反馈实现真正的自适应——不依赖外部规则。</td></tr>
+            <tr><td><strong>Cron</strong></td><td>每8小时触发</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 4.3 Product Management -->
+    <h3>📦 产品管理 (5) <span class="badge badge-green">产品生命周期</span></h3>
+
+    <div class="card animate-in delay-1">
+      <h4>6. sri_product_scanner.py <span class="badge badge-green">产品扫描器</span></h4>
+      <div class="table-wrap mt-sm">
+        <table>
+          <thead><tr><th style="width:80px">维度</th><th>详情</th></tr></thead>
+          <tbody>
+            <tr><td><strong>职责</strong></td><td>扫描 <code>site/</code> 下所有HTML产品文件，执行6维度物理质量审计。检出236项产品指标。</td></tr>
+            <tr><td><strong>输入</strong></td><td>site/ 目录下的HTML文件</td></tr>
+            <tr><td><strong>输出</strong></td><td>产品质量评分、完整性报告、元数据提取结果</td></tr>
+            <tr><td><strong>6维度</strong></td><td>元数据完整性 · HTML结构规范 · 内容充实度 · 链接有效性 · 设计一致性 · SEO就绪度</td></tr>
+            <tr><td><strong>Cron</strong></td><td>每4小时触发</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card animate-in delay-1">
+      <h4>7. sri_consistency_checker.py <span class="badge badge-green">一致性检查器</span></h4>
+      <div class="table-wrap mt-sm">
+        <table>
+          <thead><tr><th style="width:80px">维度</th><th>详情</th></tr></thead>
+          <tbody>
+            <tr><td><strong>职责</strong></td><td>自动检测实体索引中的4类不一致：重复产品、孤立节点、断链、字段不一致</td></tr>
+            <tr><td><strong>输入</strong></td><td>entities_index.json 全量数据</td></tr>
+            <tr><td><strong>输出</strong></td><td>异常报告：46项异常检出（典型值）</td></tr>
+            <tr><td><strong>4维度</strong></td><td>重复检测 · 断链检测 · 字段一致性 · 孤立节点检测</td></tr>
+            <tr><td><strong>Cron</strong></td><td>每4小时触发</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card animate-in delay-1">
+      <h4>8. sri_auto_healer.py <span class="badge badge-green">自动修复器</span></h4>
+      <div class="table-wrap mt-sm">
+        <table>
+          <thead><tr><th style="width:80px">维度</th><th>详情</th></tr></thead>
+          <tbody>
+            <tr><td><strong>职责</strong></td><td>基于飞轮检测结果，自动执行5种修复操作</td></tr>
+            <tr><td><strong>输入</strong></td><td>consistency_checker的异常报告 + 飞轮扫描结果</td></tr>
+            <tr><td><strong>输出</strong></td><td>修复后的 entities_index.json + 修复日志</td></tr>
+            <tr><td><strong>5种修复</strong></td><td>①补充缺失meta ②修复断链 ③标记/合并重复 ④字段补全 ⑤一致性补齐</td></tr>
+            <tr><td><strong>Cron</strong></td><td>每4小时触发（跟在consistency_checker之后）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card animate-in delay-1">
+      <h4>9. sri_portfolio_rationalizer.py <span class="badge badge-green">产品组合优化</span></h4>
+      <div class="table-wrap mt-sm">
+        <table>
+          <thead><tr><th style="width:80px">维度</th><th>详情</th></tr></thead>
+          <tbody>
+            <tr><td><strong>职责</strong></td><td>基于JTBD (Jobs-to-be-Done) 客户视角，重构产品体系：将315个产品精简为172个核心产品，143个归档/下架</td></tr>
+            <tr><td><strong>输入</strong></td><td>全部产品列表 + 客户JTBD需求映射</td></tr>
+            <tr><td><strong>输出</strong></td><td>产品金字塔结构：核心层·增长层·探索层·归档层</td></tr>
+            <tr><td><strong>成果</strong></td><td>315 → 172 精简率 45.4%</td></tr>
+            <tr><td><strong>Cron</strong></td><td>每周触发</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card animate-in delay-1">
+      <h4>10. sri_lifecycle_manager.py <span class="badge badge-green">生命周期管理</span></h4>
+      <div class="table-wrap mt-sm">
+        <table>
+          <thead><tr><th style="width:80px">维度</th><th>详情</th></tr></thead>
+          <tbody>
+            <tr><td><strong>职责</strong></td><td>基于Stage-Gate理念，自动管理每个产品的全生命周期：孵化→成长→成熟→衰退→归档</td></tr>
+            <tr><td><strong>输入</strong></td><td>产品评分 · 活跃度 · 客户反馈 · 更新时间</td></tr>
+            <tr><td><strong>输出</strong></td><td>自动晋升/降级/归档决策；更新 <code>meta.lifecycle_stages</code></td></tr>
+            <tr><td><strong>Stage-Gate</strong></td><td>每个阶段有明确的准入/退出条件（Gate）。产品必须满足Gate条件才能晋级到下阶段。不满足则降级或保持。</td></tr>
+            <tr><td><strong>Cron</strong></td><td>每天触发</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 4.4 Nourishment -->
+    <h3>🌱 养料供给 (3) <span class="badge badge-blue">知识输入</span></h3>
+
+    <div class="card animate-in delay-1">
+      <h4>11. sri_nourishment_collector.py <span class="badge badge-blue">养料采集</span></h4>
+      <div class="table-wrap mt-sm">
+        <table>
+          <thead><tr><th style="width:80px">维度</th><th>详情</th></tr></thead>
+          <tbody>
+            <tr><td><strong>职责</strong></td><td>基于CODE框架 (Capture→Organize→Distill→Express)，从5大领域采集最新知识养料</td></tr>
+            <tr><td><strong>输入</strong></td><td>50+关键词搜索 · 5领域(战略·组织·产品·市场·技术)</td></tr>
+            <tr><td><strong>输出</strong></td><td>养料批次JSON；每个批次包含来源、摘要、相关性初评</td></tr>
+            <tr><td><strong>5领域</strong></td><td>战略管理 · 组织发展 · 产品创新 · 市场营销 · 技术趋势</td></tr>
+            <tr><td><strong>Cron</strong></td><td>每6小时触发</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card animate-in delay-1">
+      <h4>12. sri_quality_gate.py <span class="badge badge-blue">质量门禁</span></h4>
+      <div class="table-wrap mt-sm">
+        <table>
+          <thead><tr><th style="width:80px">维度</th><th>详情</th></tr></thead>
+          <tbody>
+            <tr><td><strong>职责</strong></td><td>对每条摄入的知识养料执行三道质量检查</td></tr>
+            <tr><td><strong>输入</strong></td><td>养料采集批次</td></tr>
+            <tr><td><strong>输出</strong></td><td>通过/拒绝 + 质量评分 + 拒绝原因</td></tr>
+            <tr><td><strong>三道关卡</strong></td><td>①<strong>相关性:</strong> 与现有产品/知识的匹配度<br>②<strong>新鲜度:</strong> 信息发布时间和更新频率<br>③<strong>权威度:</strong> 来源可信度和引用网络</td></tr>
+            <tr><td><strong>Cron</strong></td><td>每6小时触发（紧跟collector）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card animate-in delay-1">
+      <h4>13. sri_standards_iterator.py <span class="badge badge-blue">标准迭代</span></h4>
+      <div class="table-wrap mt-sm">
+        <table>
+          <thead><tr><th style="width:80px">维度</th><th>详情</th></tr></thead>
+          <tbody>
+            <tr><td><strong>职责</strong></td><td>基于新摄入的养料批次，检测现有标准与行业最佳实践的差距，生成标准更新提案</td></tr>
+            <tr><td><strong>输入</strong></td><td>养料批次 + 现有标准定义</td></tr>
+            <tr><td><strong>输出</strong></td><td>差距报告 + 标准更新提案（需人工审核）</td></tr>
+            <tr><td><strong>Cron</strong></td><td>每12小时触发</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 4.5 Cybernetics -->
+    <h3>🧠 控制论四层 (4) <span class="badge badge-amber">元治理</span></h3>
+
+    <div class="card animate-in delay-1">
+      <h4>14. sri_vsm_system5.py <span class="badge badge-amber">VSM System 5</span></h4>
+      <div class="table-wrap mt-sm">
+        <table>
+          <thead><tr><th style="width:80px">维度</th><th>详情</th></tr></thead>
+          <tbody>
+            <tr><td><strong>职责</strong></td><td>基于Viable System Model (VSM)，对系统进行策略/身份层治理审计</td></tr>
+            <tr><td><strong>输入</strong></td><td>系统元数据 + 产品体系 + 飞轮状态</td></tr>
+            <tr><td><strong>输出</strong></td><td><code>meta.vsm_system5</code>：治理健康分、身份一致性、策略偏差</td></tr>
+            <tr><td><strong>System 5</strong></td><td>VSM模型的最高层——负责战略方向、身份定义和终极治理。回答"我们是谁"和"我们要去哪里"。</td></tr>
+            <tr><td><strong>Cron</strong></td><td>每12小时触发</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card animate-in delay-1">
+      <h4>15. sri_second_order_observer.py <span class="badge badge-amber">二阶观察者</span></h4>
+      <div class="table-wrap mt-sm">
+        <table>
+          <thead><tr><th style="width:80px">维度</th><th>详情</th></tr></thead>
+          <tbody>
+            <tr><td><strong>职责</strong></td><td>观察飞轮自身如何观察。构建飞轮的自我模型——不只看"看到了什么"，还看"怎么看"</td></tr>
+            <tr><td><strong>输入</strong></td><td>飞轮扫描日志 + 编排器执行记录 + meta快照</td></tr>
+            <tr><td><strong>输出</strong></td><td><code>meta.second_order</code>：6维空间观测数据、观察偏差、盲点检测</td></tr>
+            <tr><td><strong>6维空间</strong></td><td>时间维度 · 空间维度 · 语义维度 · 关系维度 · 价值维度 · 盲点维度</td></tr>
+            <tr><td><strong>Cron</strong></td><td>每12小时触发</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card animate-in delay-1">
+      <h4>16. sri_autocalibration.py <span class="badge badge-amber">自校准引擎</span></h4>
+      <div class="table-wrap mt-sm">
+        <table>
+          <thead><tr><th style="width:80px">维度</th><th>详情</th></tr></thead>
+          <tbody>
+            <tr><td><strong>职责</strong></td><td>动态调谐系统设定点 + 漂移检测 + 周期性重校准。确保系统的"指针"始终对准真实状态。</td></tr>
+            <tr><td><strong>输入</strong></td><td>所有meta区域的时序数据</td></tr>
+            <tr><td><strong>输出</strong></td><td><code>meta.autocalibration</code>：设定点更新、漂移量、校准日志</td></tr>
+            <tr><td><strong>核心机制</strong></td><td><strong>设定点调谐:</strong> 根据环境变化调整阈值（如stale阈值、热力上限）<br><strong>漂移检测:</strong> 监控指标偏移趋势<br><strong>周期性重校准:</strong> 定期用基准数据重新校准所有指标</td></tr>
+            <tr><td><strong>Cron</strong></td><td>每12小时触发</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card animate-in delay-1">
+      <h4>17. sri_antifragile_stressor.py <span class="badge badge-amber">反脆弱应激源</span></h4>
+      <div class="table-wrap mt-sm">
+        <table>
+          <thead><tr><th style="width:80px">维度</th><th>详情</th></tr></thead>
+          <tbody>
+            <tr><td><strong>职责</strong></td><td>注入可控压力脉冲，测试系统恢复力。通过5种压力脉冲训练系统的反脆弱性。遵循GABA阶梯原则：从小剂量开始，逐步增加压力强度。</td></tr>
+<tr><td><strong>5种脉冲</strong></td><td>①数据注入脉冲：批量注入测试数据<br>②断链脉冲：随机断开N条连接<br>③时效脉冲：批量标记过时<br>④负载脉冲：增加并发任务<br>⑤结构脉冲：随机重组部分产品</td></tr>
+<tr><td><strong>GABA阶梯</strong></td><td>小剂量开始：每次小幅增量 → 观察恢复 → 如成功则提升剂量 → 如失败则降低剂量并记录</td></tr>
+<tr><td><strong>Cron</strong></td><td>每24小时触发（GABA阶梯自动调控频率）</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- 4.6 Diagnostics -->
+<h3>🔬 诊断引擎 (1) <span class="badge badge-red">瓶颈突破</span></h3>
+
+<div class="card animate-in delay-1">
+<h4>18. sri_bottleneck_breaker.py <span class="badge badge-red">约束突破引擎</span></h4>
+<div class="table-wrap mt-sm">
+<table>
+<thead><tr><th style="width:80px">维度</th><th>详情</th></tr></thead>
+<tbody>
+<tr><td><strong>职责</strong></td><td>基于Goldratt约束理论(TOC: Theory of Constraints)五步法，识别系统瓶颈并提出突破方案</td></tr>
+<tr><td><strong>输入</strong></td><td>编排器健康报告 + 所有脚本的执行时序和延迟数据</td></tr>
+<tr><td><strong>输出</strong></td><td>瓶颈识别报告 + 突破建议</td></tr>
+<tr><td><strong>TOC五步法</strong></td><td>①识别瓶颈(Identify) → ②挖尽瓶颈(Exploit) → ③迁就瓶颈(Subordinate) → ④突破瓶颈(Elevate) → ⑤重复(Repeat)</td></tr>
+<tr><td><strong>Cron</strong></td><td>每周触发</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<!-- ===== 5. Cron Scheduling ===== -->
+<h2 id="cron">⏰ Cron调度 · 36条定时任务</h2>
+
+<div class="card animate-in delay-1">
+<p>所有Cron任务按功能和频率分为三大类。下表为完整任务清单。</p>
+</div>
+
+<h3>🌀 飞轮类 (14条) <span class="badge badge-red">核心业务</span></h3>
+
+<div class="table-wrap animate-in delay-1">
+<table>
+<thead><tr><th style="width:30px">#</th><th>任务名</th><th>触发脚本</th><th>频率</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>文件扫描</td><td><code>sri_knowledge_flywheel.py scan</code></td><td><span class="badge badge-green">每4h</span></td><td>扫描 site/ memory/ 新增文件</td></tr>
+<tr><td>2</td><td>健康自检</td><td><code>sri_knowledge_flywheel.py health</code></td><td><span class="badge badge-green">每4h</span></td><td>飞轮健康指标自检</td></tr>
+<tr><td>3</td><td>LLM缺口</td><td><code>sri_knowledge_flywheel.py llm</code></td><td><span class="badge badge-blue">每8h</span></td><td>LLM评分缺口检测与补齐</td></tr>
+<tr><td>4</td><td>日报生成</td><td><code>sri_knowledge_flywheel.py daily</code></td><td><span class="badge badge-gold">每天</span></td><td>生成飞轮日报摘要</td></tr>
+<tr><td>5</td><td>产品质量</td><td><code>sri_product_scanner.py</code></td><td><span class="badge badge-green">每4h</span></td><td>6维度HTML产品扫描</td></tr>
+<tr><td>6</td><td>一致性检查</td><td><code>sri_consistency_checker.py</code></td><td><span class="badge badge-green">每4h</span></td><td>4维度实体一致性审计</td></tr>
+<tr><td>7</td><td>自动修复</td><td><code>sri_auto_healer.py</code></td><td><span class="badge badge-green">每4h</span></td><td>5种自动修复操作</td></tr>
+<tr><td>8</td><td>养料采集</td><td><code>sri_nourishment_collector.py</code></td><td><span class="badge badge-blue">每6h</span></td><td>5领域知识养料采集</td></tr>
+<tr><td>9</td><td>质量门禁</td><td><code>sri_quality_gate.py</code></td><td><span class="badge badge-blue">每6h</span></td><td>三道关卡过滤养料</td></tr>
+<tr><td>10</td><td>编排器</td><td><code>sri_orchestrator.py</code></td><td><span class="badge badge-blue">每6h</span></td><td>15环节完整编排</td></tr>
+<tr><td>11</td><td>永续控制</td><td><code>sri_perpetual_control.py</code></td><td><span class="badge badge-blue">每8h</span></td><td>二阶控制论永续调控</td></tr>
+<tr><td>12</td><td>VSM审计</td><td><code>sri_vsm_system5.py</code></td><td><span class="badge badge-blue">每12h</span></td><td>策略身份治理审计</td></tr>
+<tr><td>13</td><td>二阶观察</td><td><code>sri_second_order_observer.py</code></td><td><span class="badge badge-blue">每12h</span></td><td>6维空间观察偏差检测</td></tr>
+<tr><td>14</td><td>自校准</td><td><code>sri_autocalibration.py</code></td><td><span class="badge badge-blue">每12h</span></td><td>设定点调谐与漂移检测</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>🧰 基础运维 (10条) <span class="badge badge-gold">系统维护</span></h3>
+
+<div class="table-wrap animate-in delay-2">
+<table>
+<thead><tr><th style="width:30px">#</th><th>任务名</th><th>频率</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>15</td><td>免疫自检</td><td><span class="badge badge-green">每4h</span></td><td>系统异常模式匹配与免疫响应</td></tr>
+<tr><td>16</td><td>Token压缩</td><td><span class="badge badge-green">每4h</span></td><td>过长的change_log和meta文本自动压缩</td></tr>
+<tr><td>17</td><td>梦境保存</td><td><span class="badge badge-gold">每天</span></td><td>系统关键状态快照归档(dream_layers)</td></tr>
+<tr><td>18</td><td>日起课</td><td><span class="badge badge-gold">每天</span></td><td>每日启动健康检查和学习总结</td></tr>
+<tr><td>19</td><td>实体索引更新</td><td><span class="badge badge-green">每4h</span></td><td>全局实体索引重建与优化</td></tr>
+<tr><td>20</td><td>知识图谱密度</td><td><span class="badge badge-blue">每8h</span></td><td>计算并更新knowledge_graph_density指标</td></tr>
+<tr><td>21</td><td>反脆弱训练</td><td><span class="badge badge-gold">每天</span></td><td><code>sri_antifragile_stressor.py</code> GABA阶梯脉冲注入</td></tr>
+<tr><td>22</td><td>化学调控</td><td><span class="badge badge-green">每2h</span></td><td><code>sri_chemical_governor.py</code> 负反馈与自清理</td></tr>
+<tr><td>23</td><td>化学引擎</td><td><span class="badge badge-green">每2h</span></td><td><code>sri_chemistry_reactor.py</code> 60链反应</td></tr>
+<tr><td>24</td><td>标准迭代</td><td><span class="badge badge-blue">每12h</span></td><td><code>sri_standards_iterator.py</code> 标准差距检测</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>📋 定期深度检查 (12条) <span class="badge badge-blue">深度维护</span></h3>
+
+<div class="table-wrap animate-in delay-3">
+<table>
+<thead><tr><th style="width:30px">#</th><th>任务名</th><th>频率</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>25</td><td>产品组合优化</td><td><span class="badge badge-amber">每周</span></td><td><code>sri_portfolio_rationalizer.py</code> 产品精简</td></tr>
+<tr><td>26</td><td>约束突破分析</td><td><span class="badge badge-amber">每周</span></td><td><code>sri_bottleneck_breaker.py</code> TOC瓶颈识别</td></tr>
+<tr><td>27</td><td>生命周期审查</td><td><span class="badge badge-amber">每周</span></td><td>全量产品生命周期阶段审查</td></tr>
+<tr><td>28</td><td>质量框架更新</td><td><span class="badge badge-amber">每周</span></td><td>quality_framework参数调优</td></tr>
+<tr><td>29</td><td>客户档案审计</td><td><span class="badge badge-amber">每两周</span></td><td>客户数据完整性和活跃度</td></tr>
+<tr><td>30</td><td>城市节点审计</td><td><span class="badge badge-amber">每两周</span></td><td>31城市节点连接健康</td></tr>
+<tr><td>31</td><td>养料源审查</td><td><span class="badge badge-amber">每两周</span></td><td>养料采集源质量和覆盖范围</td></tr>
+<tr><td>32</td><td>全量数据备份</td><td><span class="badge badge-red">每月</span></td><td>entities_index.json 完整备份到 .bak/</td></tr>
+<tr><td>33</td><td>深度一致性审计</td><td><span class="badge badge-red">每月</span></td><td>比日常checker更深入的全量扫描</td></tr>
+<tr><td>34</td><td>架构演进评估</td><td><span class="badge badge-red">每月</span></td><td>容量规划：是否需要从Phase 0升级到Phase 1</td></tr>
+<tr><td>35</td><td>LLM覆盖率报告</td><td><span class="badge badge-red">每月</span></td><td>LLM评分覆盖率趋势和提升计划</td></tr>
+<tr><td>36</td><td>系统健康年报</td><td><span class="badge badge-red">每月</span></td><td>生成月度综合健康报告</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="info-box info-box-gold mt-lg">
+<strong>⏱️ Cron时间分布策略：</strong>飞轮类和基础运维任务均匀分布在一天中，避免集中在整点触发。定期深度检查安排在凌晨低负载时段（02:00-04:00）。
+</div>
+
+
+<!-- ===== 6. Three-Layer Cycle Architecture ===== -->
+<h2 id="cycles">🔄 三层闭环架构</h2>
+
+<div class="card animate-in delay-1">
+<p>SRI系统的自愈和自调控能力通过三层闭环实现。每一层有独立的故障域和恢复机制。</p>
+</div>
+
+<div class="cycle-diagram animate-in delay-1">
+<div class="cycle-layer cycle-micro">
+<h4>🟢 微循环 <span class="badge badge-green">毛细血管</span></h4>
+<p><strong>范围：</strong>每个Python脚本内部的 <code>try/except</code> 块<br>
+<strong>机制：</strong>单次执行失败 → 记录错误日志 → 返回fallback结果（不中断整个脚本）<br>
+<strong>示例：</strong>flywheel扫描某个文件失败 → 跳过该文件 → 继续扫描下一个<br>
+<strong>保护：</strong>每个方法有独立的fitness function；异常不影响其他方法</p>
+</div>
+
+<div class="cycle-layer cycle-mid">
+<h4>🟡 中循环 <span class="badge badge-amber">血管</span></h4>
+<p><strong>范围：</strong>独立脚本级别的自愈和异常隔离<br>
+<strong>机制：</strong>脚本执行失败 → 独立自愈逻辑 → 异常隔离（不传播到其他脚本）→ 优雅降级<br>
+<strong>示例：</strong>consistency_checker失败 → auto_healer使用上次缓存结果 → 等待下一轮重新检测<br>
+<strong>保护：</strong>Bulkhead模式：每个脚本有独立的错误计数和恢复窗口</p>
+</div>
+
+<div class="cycle-layer cycle-macro">
+<h4>🔴 大循环 <span class="badge badge-red">大动脉</span></h4>
+<p><strong>范围：</strong>15环节编排器全局控制<br>
+<strong>机制：</strong>编排器串行调度 → Circuit Breaker（连续3次失败熔断）→ 跳过故障环节继续 → 全局健康分汇总<br>
+<strong>15环节链路：</strong>文件扫描 → 过时检测 → 一致性检查 → 自动修复 → 养料采集 → 质量门禁 → 标准迭代 → 产品审计 → 生命周期管理 → 组合优化 → 化学引擎 → 化学调控 → VSM审计 → 二阶观察 → 自校准 → 反脆弱训练 → 永续控制<br>
+<strong>保护：</strong>每个环节独立timeout；全局健康分低于阈值时触发告警</p>
+</div>
+</div>
+
+<div class="info-box info-box-red mt-md">
+<strong>🔴 大循环熔断规则：</strong>任何环节连续3次执行失败 → Circuit Breaker 打开（熔断）→ 该环节在接下来3个调度周期中被跳过 → 3个周期后自动尝试恢复（半开状态）→ 成功则关闭熔断器，失败则继续保持熔断。
+</div>
+
+<!-- ===== 7. Operations Guide ===== -->
+<h2 id="ops">🔧 运维操作指南</h2>
+
+<h3>▶️ 手动运行脚本</h3>
+
+<div class="card animate-in delay-1">
+<p>所有脚本均支持独立运行。标准命令格式：</p>
+<pre><code>cd ~/.openclaw/workspace
+python3 memory/_scripts/sri_XXX.py --save</code></pre>
+
+<h4 class="mt-md">常用手动运行场景</h4>
+<div class="table-wrap mt-sm">
+<table>
+<thead><tr><th>场景</th><th>命令</th><th>说明</th></tr></thead>
+<tbody>
+<tr>
+<td>立即扫描新文件</td>
+<td><code>python3 memory/_scripts/sri_knowledge_flywheel.py --save --scan-only</code></td>
+<td>只执行scan环节</td>
+</tr>
+<tr>
+<td>触发生命周期管理</td>
+<td><code>python3 memory/_scripts/sri_lifecycle_manager.py --save</code></td>
+<td>全量产品生命周期审查</td>
+</tr>
+<tr>
+<td>手动修复一致性</td>
+<td><code>python3 memory/_scripts/sri_auto_healer.py --save --force</code></td>
+<td>强制执行所有5种修复</td>
+</tr>
+<tr>
+<td>完整编排运行</td>
+<td><code>python3 memory/_scripts/sri_orchestrator.py --save --full</code></td>
+<td>15环节完整执行</td>
+</tr>
+<tr>
+<td>反脆弱训练</td>
+<td><code>python3 memory/_scripts/sri_antifragile_stressor.py --save --level=2</code></td>
+<td>指定GABA阶梯级别</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="info-box info-box-red mt-sm">
+<strong>⚠️ 注意：</strong>手动运行带有 <code>--save</code> 参数将直接修改 <code>entities_index.json</code>。建议先运行 <code>--dry-run</code> 预览效果。
+</div>
+</div>
+
+<h3>📊 查看系统状态</h3>
+
+<div class="card animate-in delay-2">
+<p><strong>方式一：驾驶舱（推荐）</strong><br>
+打开 <code>dashboard.html</code>，在「化学与控制」面板查看实时指标。包含飞轮健康、编排器状态、化学热力、LLM覆盖率等。</p>
+
+<p class="mt-md"><strong>方式二：管理窗口</strong><br>
+打开 <code>admin-windows.html</code> 或 <code>admin.html</code>，查看每个脚本的详细执行日志和编排器健康仪表盘。</p>
+
+<p class="mt-md"><strong>方式三：命令行快速检查</strong></p>
+<pre><code># 查看编排器健康
+python3 -c "
+import json
+with open('memory/_data/entities_index.json') as f:
+    d = json.load(f)
+print(json.dumps(d['meta'].get('orchestration_health', {}), indent=2, ensure_ascii=False))
+"
+
+# 查看飞轮状态
+python3 -c "
+import json
+with open('memory/_data/entities_index.json') as f:
+    d = json.load(f)
+fw = d['meta'].get('flywheel', {})
+print(json.dumps(fw, indent=2, ensure_ascii=False))
+"
+
+# 查看化学热力
+python3 -c "
+import json
+with open('memory/_data/entities_index.json') as f:
+    d = json.load(f)
+print(json.dumps(d['meta'].get('heating', {}), indent=2, ensure_ascii=False))
+"</code></pre>
+</div>
+
+<h3>🩺 处理异常</h3>
+
+<div class="card animate-in delay-3">
+<ol class="scenario-steps">
+<li><strong>查看编排器健康：</strong>打开管理窗口或运行编排器健康查询命令，找到健康分低于阈值的环节</li>
+<li><strong>定位故障环节：</strong>查看每个环节的成功率、最近错误日志、熔断状态</li>
+<li><strong>判断故障类型：</strong>
+<ul style="padding-left:20px;margin-top:4px;">
+<li>数据问题（如文件缺失）→ 可手动补充数据</li>
+<li>逻辑问题（如脚本bug）→ 查看错误traceback</li>
+<li>资源问题（如超时）→ 增加timeout或优化脚本</li>
+</ul>
+</li>
+<li><strong>选择修复方式：</strong>
+<ul style="padding-left:20px;margin-top:4px;">
+<li>等待自愈：系统会在下一调度周期自动重试</li>
+<li>手动修复：运行对应脚本的 <code>--save</code> 命令</li>
+<li>重置熔断器：修改 <code>meta.orchestration_health</code> 中对应环节的熔断计数</li>
+</ul>
+</li>
+<li><strong>验证恢复：</strong>等待下一轮编排器运行或手动触发，确认环节健康分回升</li>
+</ol>
+</div>
+
+<h3>🧠 发起LLM批量评分</h3>
+
+<div class="card animate-in delay-1">
+<p>通过子代理 (sub-agent) spawn 机制发起LLM批量评分。不直接调用API，而是通过Agent框架的sub-agent能力并行处理。</p>
+
+<pre><code># 在Agent对话中发起
+"对 products 中评分低于3分且超过7天未更新的产品，发起LLM批量评分。使用5个替身各评25个产品。"
+
+# 或直接运行飞轮的llm环节
+python3 memory/_scripts/sri_knowledge_flywheel.py --save --llm-only</code></pre>
+
+<div class="info-box info-box-blue mt-sm">
+<strong>📈 LLM评分进度：</strong>覆盖率从 8.7%（Phase 6之前）提升到 20.3%（Phase 7完成）。目标：50%覆盖率。
+</div>
+</div>
+
+<h3>💾 备份与恢复</h3>
+
+<div class="card animate-in delay-2">
+<h4>手动备份</h4>
+<pre><code># 备份 entities_index.json
+cp memory/_data/entities_index.json .bak/entities_index_$(date +%Y%m%d_%H%M%S).json
+
+# 备份整个 _data 目录
+cp -r memory/_data .bak/_data_$(date +%Y%m%d)</code></pre>
+
+<h4 class="mt-md">恢复操作</h4>
+<pre><code># 从备份恢复
+cp .bak/entities_index_YYYYMMDD_HHMMSS.json memory/_data/entities_index.json
+
+# 验证恢复结果
+python3 memory/_scripts/sri_knowledge_flywheel.py --save --health-only</code></pre>
+
+<h4 class="mt-md">自动备份</h4>
+<p>Cron任务 #32（每月）自动执行全量备份到 <code>.bak/</code> 目录。历史快照可在 <code>.bak/</code> 找到。</p>
+
+<div class="info-box info-box-red mt-sm">
+<strong>⚠️ 恢复前务必：</strong>先备份当前版本。恢复后运行健康检查确认数据完整性。
+</div>
+</div>
+
+
+<!-- ===== 8. Common Scenarios ===== -->
+<h2 id="scenarios">🆘 常见运维场景</h2>
+
+<!-- Scenario 1 -->
+<div class="scenario-box animate-in delay-1">
+<h4>🚨 场景一：编排器报警了怎么办</h4>
+<ol class="scenario-steps">
+<li><strong>查看健康仪表盘：</strong>打开 <code>admin-windows.html</code> → 编排器健康面板，找到红色/黄色标记的环节</li>
+<li><strong>分类处理：</strong>
+<ul style="padding-left:20px;margin-top:4px;">
+<li><strong>熔断状态：</strong>该环节已连续失败3次。检查错误日志 → 修复根因 → 等待自动恢复（3个周期后自动尝试）或手动重置熔断器</li>
+<li><strong>成功率骤降：</strong>环节还在运行但成功率下降。查看该脚本的输出日志，可能存在数据质量问题</li>
+<li><strong>超时频发：</strong>环节耗时超过timeout。检查数据量是否过大或是否有死循环</li>
+</ul>
+</li>
+<li><strong>快速修复命令：</strong>
+<pre><code># 手动重置特定环节的熔断器（以consistency为例）
+python3 -c "
+import json
+with open('memory/_data/entities_index.json') as f:
+    d = json.load(f)
+oh = d['meta']['orchestration_health']
+for step in oh.get('steps', []):
+    if 'consistency' in step.get('name', ''):
+        step['failures'] = 0
+        step['breaker_open'] = False
+with open('memory/_data/entities_index.json', 'w') as f:
+    json.dump(d, f, indent=2, ensure_ascii=False)
+print('Circuit breaker reset for consistency')
+"</code></pre></li>
+<li><strong>等待下一轮编排验证：</strong>Cron每6小时触发，或手动运行 <code>python3 memory/_scripts/sri_orchestrator.py --save</code></li>
+</ol>
+</div>
+
+<!-- Scenario 2 -->
+<div class="scenario-box animate-in delay-1">
+<h4>🔥 场景二：化学热力过高怎么办</h4>
+<ol class="scenario-steps">
+<li><strong>确认症状：</strong>驾驶舱「化学与控制」面板显示heating指标异常升高，或 <code>meta.heating</code> 中多条链超过安全阈值</li>
+<li><strong>查看具体热力分布：</strong>
+<pre><code>python3 -c "
+import json
+with open('memory/_data/entities_index.json') as f:
+    d = json.load(f)
+h = d['meta']['heating']
+for chain, temp in h.get('chain_temps', {}).items():
+    if temp > h.get('safe_threshold', 70):
+        print(f'⚠️ {chain}: {temp}°C')
+"</code></pre></li>
+<li><strong>降温措施：</strong>
+<ul style="padding-left:20px;margin-top:4px;">
+<li><strong>自动降温：</strong>化学调控引擎 (chemical_governor) 每2小时自动执行负反馈降温</li>
+<li><strong>手动触发：</strong><code>python3 memory/_scripts/sri_chemical_governor.py --save --force-cool</code></li>
+<li><strong>降低阈值：</strong>调整 <code>meta.heating.safe_threshold</code> 暂时降低触发线</li>
+</ul>
+</li>
+<li><strong>根因分析：</strong>热力过高通常源于短期内大量新产品/连接注入。检查最近的产品扫描结果</li>
+</ol>
+</div>
+
+<!-- Scenario 3 -->
+<div class="scenario-box animate-in delay-2">
+<h4>⏱️ 场景三：Cron任务超时了怎么排查</h4>
+<ol class="scenario-steps">
+<li><strong>查看超时日志：</strong>
+<pre><code># 从 entities_index.json 检查超时记录
+python3 -c "
+import json,sys
+d=json.load(open('memory/_data/entities_index.json'))
+oh=d['meta'].get('orchestration_health',{})
+for s in oh.get('steps',[]):
+    if s.get('last_duration',0) > s.get('timeout',300):
+        print(f'{s[\"name\"]}: {s[\"last_duration\"]}s (timeout={s[\"timeout\"]}s)')
+"</code></pre></li>
+<li><strong>判断原因：</strong>
+<ul style="padding-left:20px;margin-top:4px;">
+<li>数据膨胀：entities_index.json 过大 → 考虑升级到Phase 1（分片JSON）</li>
+<li>死循环：脚本逻辑问题 → 检查最新代码变更</li>
+<li>网络问题：养料采集依赖外部 → 检查网络连通性</li>
+</ul>
+</li>
+<li><strong>临时方案：</strong>增加该脚本的timeout值 → 修改Cron调度间隔 → 或暂时跳过该任务</li>
+</ol>
+</div>
+
+<!-- Scenario 4 -->
+<div class="scenario-box animate-in delay-2">
+<h4>📈 场景四：产品评分覆盖率太低怎么提升</h4>
+<ol class="scenario-steps">
+<li><strong>查看当前覆盖率：</strong>
+<pre><code>python3 -c "
+import json
+with open('memory/_data/entities_index.json') as f:
+    d = json.load(f)
+llm = d['meta'].get('llm_stats', {})
+print(f'覆盖率: {llm.get(\"coverage_pct\", 0)}%')
+print(f'已评分: {llm.get(\"scored_count\", 0)} / {llm.get(\"total_products\", 0)}')
+"</code></pre></li>
+<li><strong>发起批量评分：</strong>通过子代理spawn机制，让5个替身各评25个产品</li>
+<li><strong>优先评分策略：</strong>
+<ul style="padding-left:20px;margin-top:4px;">
+<li>优先评分活跃产品（最近30天有更新）</li>
+<li>优先评分核心层产品（portfolio_rationalizer识别的172核心）</li>
+<li>避免评分已归档产品</li>
+</ul>
+</li>
+<li><strong>监控进度：</strong>查看 <code>meta.llm_stats</code> 中的评分进度和替身参与度</li>
+</ol>
+</div>
+
+<!-- Scenario 5 -->
+<div class="scenario-box animate-in delay-3">
+<h4>💾 场景五：备份和恢复操作</h4>
+<ol class="scenario-steps">
+<li><strong>日常备份：</strong>依赖Cron #32（每月全量备份）。如需更频繁备份：
+<pre><code>cp memory/_data/entities_index.json .bak/entities_index_$(date +%Y%m%d_%H%M%S).json</code></pre></li>
+<li><strong>灾难恢复：</strong>
+<pre><code># 1. 确认损坏
+python3 -c "import json; json.load(open('memory/_data/entities_index.json'))"
+# 2. 列出可用备份
+ls -lt .bak/entities_index_*.json | head -5
+# 3. 恢复最新健康备份
+cp .bak/entities_index_YYYYMMDD_HHMMSS.json memory/_data/entities_index.json
+# 4. 验证恢复
+python3 memory/_scripts/sri_knowledge_flywheel.py --save --health-only</code></pre></li>
+<li><strong>部分恢复：</strong>如果只损坏了某个meta区域，可以从备份中提取对应键值手动合并</li>
+</ol>
+</div>
+
+
+<!-- ===== 9. Timeline ===== -->
+<h2 id="timeline">📜 研发历程</h2>
+
+<div class="card animate-in delay-1">
+<p>SRI知识资产管理系统从2025年底至今，经历了8个Phase的持续演进。以下是完整时间线。</p>
+</div>
+
+<div class="timeline animate-in delay-1">
+
+<div class="timeline-item">
+<div class="timeline-phase">Phase 0</div>
+<div class="timeline-title">R1–R5 · 物理层面基础搭建</div>
+<p class="timeline-desc">城市节点建立（31城）· 客户档案 · 知识管道铺设 · 五层数据流设计 · 31个替身角色创建</p>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-phase">Phase 1</div>
+<div class="timeline-title">R6–R8 · 飞轮自动化</div>
+<p class="timeline-desc">文件自动扫描 · 过时检测 · 一致性检查 · 自动修复引擎 · Cron调度框架搭建</p>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-phase">Phase 2</div>
+<div class="timeline-title">R9 · 产品体系重构</div>
+<p class="timeline-desc">315→172产品精简 · JTBD分类体系 · 产品金字塔结构（核心·增长·探索·归档）</p>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-phase">Phase 3</div>
+<div class="timeline-title">R10 · 养料供给体系</div>
+<p class="timeline-desc">8层养料处理流水线 · CODE框架采集 · 质量门禁（3道关卡）· 标准迭代引擎</p>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-phase">Phase 4</div>
+<div class="timeline-title">R11 · 闭环健康架构</div>
+<p class="timeline-desc">10环节编排器 → 15环节(v2.0) · Circuit Breaker · Bulkhead · 根因分析 · 优雅降级 · 全局健康分</p>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-phase">Phase 5</div>
+<div class="timeline-title">R12–R16 · 化学层面</div>
+<p class="timeline-desc">60链化学反应引擎 · 热力追踪 · 活化能与催化剂 · 化学调控负反馈 · 自清理 · 自休眠</p>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-phase">Phase 6</div>
+<div class="timeline-title">R17–R18 · 控制论层面</div>
+<p class="timeline-desc">VSM System 5 策略治理 · 二阶观察者（6维空间）· 反脆弱训练（GABA阶梯·5种脉冲）· 自校准引擎 · 永续自调控</p>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-phase">Phase 7</div>
+<div class="timeline-title">R19–R20 · LLM大规模评分突破</div>
+<p class="timeline-desc">5替身×25产品并行评分 · 覆盖率 8.7% → 20.3% · 子代理spawn机制 · 评分质量验证</p>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-phase">Phase 8</div>
+<div class="timeline-title">R21 · 三层可视化联动</div>
+<p class="timeline-desc">驾驶舱·管理窗口·产品目录三层界面联动 · 管理者帮助手册 · 完整运维文档体系</p>
+</div>
+
+</div>
+
+<!-- ===== 10. Glossary ===== -->
+<h2 id="glossary">📚 术语速查</h2>
+
+<div class="table-wrap animate-in delay-1">
+<table>
+<thead><tr><th style="width:160px">术语</th><th>定义</th></tr></thead>
+<tbody>
+<tr><td><strong>SRI</strong></td><td>满意解研究所 (Satisfactory Resolution Institute)。整个系统的组织身份。</td></tr>
+<tr><td><strong>飞轮 (Flywheel)</strong></td><td>五层循环引擎：scan → stale → rerank → llm → health。系统的心脏。</td></tr>
+<tr><td><strong>编排器 (Orchestrator)</strong></td><td>15环节闭环编排引擎。负责串行调度所有子系统并管理熔断。</td></tr>
+<tr><td><strong>化学反应 (Chemistry)</strong></td><td>产品之间的动态关系：催化、抑制、合成、裂解。60条反应链。</td></tr>
+<tr><td><strong>热力 (Heating)</strong></td><td>化学反应链的活跃程度指标。过热时需要化学调控降温。</td></tr>
+<tr><td><strong>活化能 (Activation Energy)</strong></td><td>产品被"激活"所需的最低能量阈值。</td></tr>
+<tr><td><strong>催化剂 (Catalyst)</strong></td><td>加速反应但不被消耗的产品/事件。</td></tr>
+<tr><td><strong>VSM</strong></td><td>Viable System Model（可行系统模型）。Stafford Beer的组织控制论模型。</td></tr>
+<tr><td><strong>System 5</strong></td><td>VSM的最高层——负责战略方向、身份定义和终极治理。</td></tr>
+<tr><td><strong>二阶观察 (Second-Order)</strong></td><td>控制论概念：不仅观察系统，还观察系统如何观察。构建自我模型。</td></tr>
+<tr><td><strong>永续控制 (Perpetual Control)</strong></td><td>基于二阶控制论的自调控系统。不需要外部干预即可维持稳定。</td></tr>
+<tr><td><strong>反脆弱 (Antifragile)</strong></td><td>Nassim Taleb概念：系统不仅抗压，还能从压力中获益变强。</td></tr>
+<tr><td><strong>GABA阶梯</strong></td><td>反脆弱训练中的渐进式压力递增策略。</td></tr>
+<tr><td><strong>Circuit Breaker</strong></td><td>熔断器模式。连续失败N次后自动跳过该环节。</td></tr>
+<tr><td><strong>Bulkhead</strong></td><td>舱壁隔离模式。每个环节有独立的错误域。</td></tr>
+<tr><td><strong>JTBD</strong></td><td>Jobs-to-be-Done。客户视角的产品分类框架。</td></tr>
+<tr><td><strong>Stage-Gate</strong></td><td>产品生命周期管理模型。每个阶段有准入/退出条件。</td></tr>
+<tr><td><strong>CODE</strong></td><td>Capture→Organize→Distill→Express。Tiago Forte的知识管理框架。</td></tr>
+<tr><td><strong>TOC</strong></td><td>Theory of Constraints（约束理论）。Goldratt的瓶颈管理五步法。</td></tr>
+<tr><td><strong>养料 (Nourishment)</strong></td><td>从外部采集的知识原材料。经质量门禁过滤后注入系统。</td></tr>
+<tr><td><strong>实体 (Entity)</strong></td><td>系统中的基本数据单元：产品、客户、文档、任务等。</td></tr>
+<tr><td><strong>连接 (Connection)</strong></td><td>实体之间的关系边。当前12,556条。</td></tr>
+<tr><td><strong>替身 (Avatar)</strong></td><td>31个角色化的AI代理。用于LLM批量评分等场景。</td></tr>
+<tr><td><strong>设定点 (Set Point)</strong></td><td>自校准系统中的目标值。</td></tr>
+<tr><td><strong>漂移 (Drift)</strong></td><td>系统指标偏离目标值的趋势。</td></tr>
+<tr><td><strong>事件溯源 (Event Sourcing)</strong></td><td>每次写入追加change_log而非覆盖。</td></tr>
+<tr><td><strong>绞杀者模式 (Strangler Fig)</strong></td><td>演进式架构：在旧系统旁构建新功能，逐步替换。</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="info-box info-box-blue mt-lg">
+<strong>💡 更多参考：</strong>完整的设计原理、架构决策和演进规划，请参阅项目中的 <code>AGENTS.md</code>、<code>MEMORY.md</code> 和各脚本文件头部的详细注释。
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+<p>满意解研究所 SRI · 管理者视角运维参考手册</p>
+<p>版本 v1.0 · 2026-05-31 · 18脚本 · 36条Cron · 315产品</p>
+<p class="mt-sm">本文档为纯HTML+CSS，无需JavaScript，支持桌面和移动端阅读</p>
+</footer>
+
+<a href="#top" class="back-to-top" title="返回顶部">↑</a>
+
+</main>
+</div>
+
+</body>
+</html>

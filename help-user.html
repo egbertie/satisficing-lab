@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>满意红 · 用户帮助手册</title>
+<style>
+/* ===== 暖色 VI ===== */
+:root { --paper:#F5F0E6; --card:#FFFFFF; --warm:#FAF6EF; --ink:#4A3728; --ink-light:#7A6958; --ink-lighter:#A89880; --red:#C23B22; --gold:#B8860B; --border:#E0D5C8; --border-subtle:#F0E8D8; --green-ok:#3D7A4F; --amber:#C2780A; --shadow:rgba(74,55,40,0.06); --shadow-md:rgba(74,55,40,0.10); --nav-w:260px; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--paper);color:var(--ink);line-height:1.72;font-size:15px}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:var(--nav-w);background:var(--card);border-right:1px solid var(--border);position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0;padding:0 0 40px;z-index:10}
+.sidebar-header{padding:20px 20px 16px;border-bottom:1px solid var(--border)}
+.sidebar-header h2{font-size:1.05em;color:var(--red);font-weight:600}
+.sidebar-header .sub{font-size:.75em;color:var(--ink-lighter);margin-top:4px}
+.nav-list{padding:8px 0}
+.nav-section{border-bottom:1px solid var(--border-subtle)}
+.nav-section-title{padding:10px 20px;font-size:.82em;font-weight:600;color:var(--ink-light);cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:background .15s;user-select:none}
+.nav-section-title:hover{background:var(--warm)}
+.nav-section-title .arrow{font-size:.7em;color:var(--ink-lighter);transition:transform .2s}
+.nav-section.open .nav-section-title .arrow{transform:rotate(90deg)}
+.nav-items{display:none}
+.nav-section.open .nav-items{display:block}
+.nav-item{display:block;padding:6px 20px 6px 32px;font-size:.8em;color:var(--ink-light);text-decoration:none;border-left:3px solid transparent;transition:all .15s;cursor:pointer}
+.nav-item:hover{background:var(--warm);border-left-color:var(--gold);color:var(--ink)}
+.nav-item.active{background:var(--warm);border-left-color:var(--red);color:var(--ink);font-weight:600}
+.nav-back{display:block;padding:10px 20px;font-size:.78em;color:var(--gold);text-decoration:none;border-bottom:1px solid var(--border-subtle)}
+.nav-back:hover{color:var(--red)}
+.main{flex:1;padding:32px 40px 80px;max-width:900px;min-width:0}
+.cover{text-align:center;padding:48px 0 40px}
+.cover-icon{width:72px;height:72px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:2em;margin:0 auto 20px;font-weight:300}
+.cover h1{font-size:2.2em;font-weight:300;letter-spacing:.06em;margin-bottom:8px}
+.cover h1 .r{color:var(--red)}
+.cover .tagline{font-size:1em;color:var(--ink-light);margin-bottom:24px}
+.cover .meta-box{display:inline-block;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 28px;font-size:.85em;color:var(--ink-light);line-height:1.8}
+.cover .meta-box .val{color:var(--ink);font-weight:500}
+.quickstart{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-bottom:20px;box-shadow:var(--shadow)}
+.quickstart h3{font-size:.95em;color:var(--red);margin-bottom:12px;font-weight:600}
+.quickstart p{font-size:.88em;color:var(--ink);line-height:1.7}
+.quickstart code{background:var(--warm);padding:2px 8px;border-radius:4px;font-size:.92em;color:var(--gold);border:1px solid var(--border-subtle)}
+.section{margin-bottom:48px}
+.section h2{font-size:1.35em;font-weight:500;color:var(--ink);margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--border);letter-spacing:.04em}
+.section h2::before{content:'';display:inline-block;width:4px;height:18px;background:var(--red);border-radius:2px;margin-right:10px;vertical-align:middle;position:relative;top:-2px}
+.section h3{font-size:1.05em;font-weight:600;margin:24px 0 12px}
+.section h4{font-size:.92em;font-weight:600;color:var(--ink-light);margin:18px 0 8px}
+.section p{margin-bottom:14px;font-size:.92em;line-height:1.8}
+.section ul,.section ol{padding-left:22px;margin-bottom:14px}
+.section li{margin-bottom:7px;font-size:.9em;line-height:1.7}
+.section strong{color:var(--ink)}
+.section code{background:var(--warm);padding:2px 8px;border-radius:4px;font-size:.9em;color:var(--gold);border:1px solid var(--border-subtle)}
+.section em{color:var(--ink-light);font-style:italic}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:var(--shadow)}
+.info-card.g{border-left:4px solid var(--gold)}
+.info-card.r{border-left:4px solid var(--red)}
+.info-card.gr{border-left:4px solid var(--green-ok)}
+.info-card .card-label{font-size:.72em;font-weight:600;color:var(--ink-lighter);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.info-card .card-title{font-size:.98em;font-weight:600;color:var(--ink);margin-bottom:8px}
+.info-card .card-desc{font-size:.84em;color:var(--ink-light);line-height:1.7}
+.concept-box{background:var(--warm);border:1px solid var(--border-subtle);border-radius:10px;padding:18px 22px;margin-bottom:16px;border-left:4px solid var(--gold)}
+.concept-box .cn{font-size:.95em;font-weight:600;color:var(--gold);margin-bottom:6px}
+.concept-box .cb{font-size:.86em;line-height:1.75}
+.faq-item{background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:10px;overflow:hidden;box-shadow:var(--shadow)}
+.faq-q{padding:14px 20px;font-size:.9em;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:background .15s;user-select:none}
+.faq-q:hover{background:var(--warm)}
+.faq-q .fa{font-size:.7em;color:var(--ink-lighter);transition:transform .2s}
+.faq-item.open .faq-q .fa{transform:rotate(180deg)}
+.faq-a{display:none;padding:0 20px 16px;font-size:.86em;color:var(--ink-light);line-height:1.75;border-top:1px solid var(--border-subtle)}
+.faq-item.open .faq-a{display:block;padding-top:12px}
+.family-table{width:100%;border-collapse:collapse;margin-bottom:20px;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);font-size:.88em}
+.family-table th{text-align:left;padding:10px 14px;background:var(--warm);color:var(--ink-light);font-weight:600;font-size:.85em;border-bottom:2px solid var(--border)}
+.family-table td{padding:9px 14px;border-bottom:1px solid var(--border-subtle);vertical-align:top}
+.family-table tr:hover td{background:var(--warm)}
+.family-table tr:last-child td{border-bottom:none}
+.depth-badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:.78em;font-weight:600}
+.dl1{background:#E8F0EB;color:var(--green-ok)}.dl2{background:#FDF3E0;color:var(--gold)}.dl3{background:#FDE8E5;color:var(--red)}.dl4{background:#E8E0F0;color:#6B4A8A}
+.tab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-bottom:24px}
+.tab-mini{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;transition:border-color .2s}
+.tab-mini:hover{border-color:var(--gold);box-shadow:var(--shadow-md)}
+.tab-mini .ti{font-size:1.3em;margin-bottom:6px}
+.tab-mini .tn{font-size:.88em;font-weight:600;margin-bottom:4px}
+.tab-mini .td{font-size:.76em;color:var(--ink-light);line-height:1.5}
+.avatar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-bottom:24px}
+.avatar-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;transition:border-color .2s}
+.avatar-card:hover{border-color:var(--gold);box-shadow:var(--shadow-md)}
+.avatar-card .ai{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4em;margin:0 auto 10px}
+.avatar-card .an{font-size:.92em;font-weight:600;margin-bottom:4px}
+.avatar-card .ar{font-size:.72em;color:var(--ink-lighter);margin-bottom:8px}
+.avatar-card .ad{font-size:.78em;color:var(--ink-light);line-height:1.6}
+.a-red{background:#FDE8E5;color:var(--red)}.a-gold{background:#FDF3E0;color:var(--gold)}.a-green{background:#E8F0EB;color:var(--green-ok)}.a-amber{background:#FFF3E0;color:var(--amber)}.a-purple{background:#F0E8F6;color:#6B4A8A}
+.flow-visual{display:flex;align-items:center;gap:0;margin:20px 0 28px;flex-wrap:wrap;justify-content:center}
+.flow-step{background:var(--card);border:2px solid var(--border);border-radius:12px;padding:14px;text-align:center;min-width:80px}
+.flow-step:hover{border-color:var(--gold)}
+.flow-step .si{font-size:1.5em;margin-bottom:4px}
+.flow-step .sn{font-size:.8em;font-weight:600}
+.flow-step .ss{font-size:.66em;color:var(--ink-lighter)}
+.flow-arrow{font-size:1.2em;color:var(--gold);padding:0 6px;font-weight:700}
+.domain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:24px}
+.domain-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.domain-card:hover{border-color:var(--gold)}
+.domain-card .dn{font-size:.88em;font-weight:600;margin-bottom:6px}
+.domain-card .dv{font-size:.75em;color:var(--ink-light);line-height:1.5}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:var(--red);color:#fff;border-radius:50%;font-size:.75em;font-weight:700;margin-right:8px;flex-shrink:0}
+.footer{text-align:center;padding:32px 0;border-top:1px solid var(--border);margin-top:40px;font-size:.78em;color:var(--ink-lighter);line-height:1.7}
+.footer .q{margin-top:4px;font-style:italic}
+.back-to-top{position:fixed;bottom:32px;right:32px;width:40px;height:40px;background:var(--red);color:#fff;border:none;border-radius:50%;cursor:pointer;font-size:1.2em;box-shadow:0 2px 8px rgba(194,59,34,0.25);transition:all .2s;display:none;align-items:center;justify-content:center;z-index:100}
+.back-to-top:hover{background:var(--gold);transform:translateY(-2px)}
+.back-to-top.show{display:flex}
+@media(max-width:900px){.layout{flex-direction:column}.sidebar{width:100%;height:auto;position:relative;border-right:none;border-bottom:2px solid var(--border);max-height:300px}.main{padding:20px 16px 60px}.tab-grid{grid-template-columns:1fr}.avatar-grid{grid-template-columns:1fr}.domain-grid{grid-template-columns:1fr}.cover h1{font-size:1.6em}.flow-visual{flex-direction:column}.flow-arrow{transform:rotate(90deg)}.back-to-top{bottom:16px;right:16px}}
+@media(max-width:480px){.main{padding:14px 12px 40px}.quickstart{padding:16px}.info-card{padding:14px 16px}}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header"><h2>📖 用户帮助手册</h2><div class="sub">满意红 · 知识飞轮系统</div></div>
+<a class="nav-back" href="dashboard-v3.html">← 返回驾驶舱</a>
+<div class="nav-list">
+<div class="nav-section open"><div class="nav-section-title" onclick="toggleNavSection(this)">开始之前<span class="arrow">▶</span></div><div class="nav-items"><span class="nav-item active" data-target="sec-cover" onclick="scrollToSection('sec-cover',this)">封面 & 简介</span><span class="nav-item" data-target="sec-quickstart" onclick="scrollToSection('sec-quickstart',this)">⚡ 快速上手</span></div></div>
+<div class="nav-section open"><div class="nav-section-title" onclick="toggleNavSection(this)">三个入口<span class="arrow">▶</span></div><div class="nav-items"><span class="nav-item" data-target="sec-dashboard" onclick="scrollToSection('sec-dashboard',this)">🛸 驾驶舱</span><span class="nav-item" data-target="sec-tabs" onclick="scrollToSection('sec-tabs',this)">14个标签页</span><span class="nav-item" data-target="sec-catalog" onclick="scrollToSection('sec-catalog',this)">📦 产品目录</span><span class="nav-item" data-target="sec-admin" onclick="scrollToSection('sec-admin',this)">⚙️ 管理窗口</span></div></div>
+<div class="nav-section open"><div class="nav-section-title" onclick="toggleNavSection(this)">核心概念<span class="arrow">▶</span></div><div class="nav-items"><span class="nav-item" data-target="sec-flywheel" onclick="scrollToSection('sec-flywheel',this)">🔄 知识飞轮</span><span class="nav-item" data-target="sec-chemistry" onclick="scrollToSection('sec-chemistry',this)">🧪 化学与控制</span><span class="nav-item" data-target="sec-llm" onclick="scrollToSection('sec-llm',this)">🤖 LLM评分</span><span class="nav-item" data-target="sec-flow" onclick="scrollToSection('sec-flow',this)">🌊 五层流</span></div></div>
+<div class="nav-section open"><div class="nav-section-title" onclick="toggleNavSection(this)">常见操作<span class="arrow">▶</span></div><div class="nav-items"><span class="nav-item" data-target="sec-scenarios" onclick="scrollToSection('sec-scenarios',this)">📋 操作场景</span></div></div>
+<div class="nav-section open"><div class="nav-section-title" onclick="toggleNavSection(this)">常见问题<span class="arrow">▶</span></div><div class="nav-items"><span class="nav-item" data-target="sec-faq" onclick="scrollToSection('sec-faq',this)">❓ FAQ</span></div></div>
+</div>
+</nav>
+<main class="main" id="main-content">
+<!-- ===== Cover ===== -->
+<div class="section" id="sec-cover">
+<div class="cover">
+<div class="cover-icon">📖</div>
+<h1>满意红<span class="r"> · </span>用户帮助手册</h1>
+<p class="tagline">知识飞轮系统 · 完整操作指南</p>
+<div class="meta-box"><div>版本：<span class="val">v1.0</span></div><div>更新日期：<span class="val">2026-05-30</span></div><div>适用人群：<span class="val">Egbertie 与满意红使用者</span></div></div>
+</div>
+
+<h3>满意红是什么？</h3>
+<p>满意红不是一个普通的「软件」或「工具」。它是一个<strong>知识飞轮系统</strong>。</p>
+<p>想象一个会自动学习、持续进化的大脑：它不断吸收信息（产品、客户反馈、操作记录），通过多个「替身」（AI 视角）进行思考和评价，然后得出洞察与结论，再反过来优化自己的思考方式。这个过程就像飞轮一样，越转越快，越转越稳。</p>
+
+<div class="info-card g" style="margin-top:20px;">
+<div class="card-label">系统三大支柱</div>
+<div class="card-title">📦 产品库</div>
+<div class="card-desc">217+ 件产品，覆盖策略咨询、决策工具、知识内容、可视化、模拟演练等。每件产品都有唯一编号、五族分类、深度评级（L1-L4）和 LLM 替身评分。</div>
+<div class="card-title" style="margin-top:12px;">👥 客户体系</div>
+<div class="card-desc">客户 360 画像、销售管道、交付记录、满意度追踪。让每个客户从「第一次接触」到「长期合作」的完整旅程都有迹可循。</div>
+<div class="card-title" style="margin-top:12px;">⚙️ 自动化运维</div>
+<div class="card-desc">Cron 定时任务、免疫系统监控、质量门禁、规则引擎。系统自己在后台默默运转，健康状态一目了然。</div>
+</div>
+
+<h3>谁应该读这本手册？</h3>
+<ul>
+<li><strong>Egbertie</strong>——满意红的创建者和核心用户。你需要知道系统的每个部分怎么用、怎么看、怎么理解。</li>
+<li><strong>使用满意红产品 / 服务的客户</strong>——你可以通过这本手册了解你能看到什么、怎么找到你需要的东西。</li>
+<li><strong>协作伙伴</strong>——当别人想知道「这个系统到底是怎么回事」，你可以把手册发给他们。</li>
+</ul>
+<p>手册不预设任何技术背景。只要你会用浏览器，就能看懂。</p>
+</div>
+
+<!-- ===== Quickstart ===== -->
+<div class="section" id="sec-quickstart">
+<h2>⚡ 快速上手（3 分钟）</h2>
+<p>第一次打开满意红？只需三步，就能对整个系统有一个整体的感觉。</p>
+
+<div class="quickstart">
+<h3><span class="step-num">1</span> 打开驾驶舱，看总体状态</h3>
+<p>打开 <code>dashboard-v3.html</code>，输入访问密码（向 Egbertie 索取），进入驾驶舱。</p>
+<p>你会立刻看到一张「📊 总览」页面，上面展示了系统的核心指标：产品总数、知识图谱密度、未闭环任务数、免疫系统评分等。花半分钟扫一眼——这就是系统的「脉搏」。</p>
+</div>
+
+<div class="quickstart">
+<h3><span class="step-num">2</span> 浏览产品目录</h3>
+<p>点击导航跳转，或直接打开 <code>product-catalog.html</code>。你会看到所有产品列表。可以用顶部的搜索框搜索，也可以用筛选按钮按「五族」（镜·衡·觉·契·章）分类浏览。</p>
+<p>试试搜索一个你感兴趣的关键词，看看有没有相关产品。</p>
+</div>
+
+<div class="quickstart">
+<h3><span class="step-num">3</span> 看化学面板</h3>
+<p>回到驾驶舱，点击 <strong>「🧬 化学与控制」</strong> 标签。这里展示了系统的「化学反应」状态——你可以把它理解为系统的温度计和 pH 试纸。绿色代表正常，黄色需要关注，红色则需要处理。</p>
+<p><em>看不懂没关系，后面第 3 章会有详细解释。</em></p>
+</div>
+</div>
+
+<!-- ===== Three Entries ===== -->
+<div class="section" id="sec-dashboard">
+<h2>🛸 三个入口：从哪里开始？</h2>
+<p>满意红有三个主要入口，分别满足不同的使用场景：</p>
+
+<div class="info-card r">
+<div class="card-label">入口一</div>
+<div class="card-title">🛸 驾驶舱（dashboard-v3.html）</div>
+<div class="card-desc">
+<strong>用途：</strong>实时了解系统整体状态。看指标、看趋势、看健康度。<br>
+<strong>适合：</strong>每天打开看一眼，就像早上看天气预报。<br>
+<strong>关键特色：</strong>14 个标签页，一屏看完系统的方方面面。
+</div>
+</div>
+
+<div class="info-card g">
+<div class="card-label">入口二</div>
+<div class="card-title">📦 产品目录（product-catalog.html）</div>
+<div class="card-desc">
+<strong>用途：</strong>浏览、搜索、筛选所有产品。<br>
+<strong>适合：</strong>当你需要找某个具体产品时。<br>
+<strong>关键特色：</strong>五族分类、深度评级（L1-L4）、LLM 替身评分。
+</div>
+</div>
+
+<div class="info-card gr">
+<div class="card-label">入口三</div>
+<div class="card-title">⚙️ 管理窗口（admin-windows.html）</div>
+<div class="card-desc">
+<strong>用途：</strong>深入管理系统的每个细节。39 个视图覆盖 9 大管理域。<br>
+<strong>适合：</strong>当你需要做具体操作（如添加客户、查看风险、配置规则）时。<br>
+<strong>关键特色：</strong>三级数据穿透——从总览数字点进去，看到明细，再进一步看到原始记录。
+</div>
+</div>
+</div>
+<!-- ===== 14 Tabs ===== -->
+<div class="section" id="sec-tabs">
+<h2>驾驶舱 · 14 个标签页详解</h2>
+<p>驾驶舱顶部的标签栏是系统的导航核心。每个标签就像一个「仪表盘模块」，展示不同维度的信息。</p>
+
+<div class="tab-grid">
+<div class="tab-mini"><div class="ti">📊</div><div class="tn">📊 总览</div><div class="td"><strong>看什么：</strong>系统核心指标一屏看完。<br>产品总数、知识图谱密度、实体总数、未闭环任务数、免疫评分等关键数字。这是每个早晨打开的第一页。</div></div>
+<div class="tab-mini"><div class="ti">📦</div><div class="tn">📦 产品资产</div><div class="td"><strong>看什么：</strong>产品数量、分类分布、深度分布。<br>按七族（镜·契·衡·觉·人·道·章）展示产品分布柱状图。可以看到哪些族类产品多、哪些少，是否有品类失衡。</div></div>
+<div class="tab-mini"><div class="ti">✅</div><div class="tn">✅ 待办任务</div><div class="td"><strong>看什么：</strong>任务看板。<br>展示所有未闭环的任务，按优先级（P0-P3）排列。P0 最紧急，P3 可延后。支持筛选和排序。</div></div>
+<div class="tab-mini"><div class="ti">🫀</div><div class="tn">🫀 健康仪表</div><div class="td"><strong>看什么：</strong>免疫系统和健康评分。<br>系统的「体检报告」——免疫层 L0-L6 七层健康状态、知识健康度、规则覆盖率。绿色→健康，黄色→警告，红色→需处理。</div></div>
+<div class="tab-mini"><div class="ti">📜</div><div class="tn">📜 活动日志</div><div class="td"><strong>看什么：</strong>操作记录。<br>谁在什么时间做了什么操作。就像系统的「日记本」，可以按时间回溯每一件事。支持搜索过滤。</div></div>
+<div class="tab-mini"><div class="ti">👥</div><div class="tn">👥 客户视图</div><div class="td"><strong>看什么：</strong>客户 360 全景。<br>每个客户的档案、画像、决策风格、交互历史。支持搜索和筛选。想了解某个客户？来这里。</div></div>
+<div class="tab-mini"><div class="ti">📚</div><div class="tn">📚 知识</div><div class="td"><strong>看什么：</strong>知识库概览。<br>知识图谱密度、实体拓扑、术语覆盖率。了解系统「知道什么」，以及知识之间的连接有多紧密。</div></div>
+<div class="tab-mini"><div class="ti">⚖️</div><div class="tn">⚖️ 治理</div><div class="td"><strong>看什么：</strong>规则和合规。<br>质量门禁状态、规则引擎运行情况、合规审计记录。确保系统在正确的轨道上运行，不越界。</div></div>
+<div class="tab-mini"><div class="ti">🏛️</div><div class="tn">🏛️ 组织</div><div class="td"><strong>看什么：</strong>替身和专家团队。<br>五个核心替身（刘禹锡、司马贺、孔子、水月观音、六祖慧能）的状态和专家团配置。谁在值班？谁在待命？</div></div>
+<div class="tab-mini"><div class="ti">🏺</div><div class="tn">🏺 考古</div><div class="td"><strong>看什么：</strong>历史时间线和洞察。<br>项目发展历程、关键里程碑记录、历史决策回顾。从过去的事件中找到模式和教训。</div></div>
+<div class="tab-mini"><div class="ti">🏙️</div><div class="tn">🏙️ 城市市场</div><div class="td"><strong>看什么：</strong>城市维度分析。<br>按地理区域 / 城市维度分析客户分布、市场覆盖、区域策略。哪里是重点市场？哪里需要拓展？</div></div>
+<div class="tab-mini"><div class="ti">🔌</div><div class="tn">🔌 流仪表板</div><div class="td"><strong>看什么：</strong>五层流模型。<br>展示信号 → 认知 → 行动 → 验证 → 学习的五层流转。每一层有多少事件在流动？是否有堵塞？</div></div>
+<div class="tab-mini"><div class="ti">♻️</div><div class="tn">♻️ 飞轮运转</div><div class="td"><strong>看什么：</strong>自动化脚本状态。<br>Cron 定时任务运行情况。哪些脚本在跑？哪些停了？上次成功执行是什么时候？</div></div>
+<div class="tab-mini"><div class="ti">🧬</div><div class="tn">🧬 化学与控制</div><div class="td"><strong>看什么：</strong>热力·评分·永续控制。<br>系统的化学指标：热力（活跃度）、评分（质量趋势）、永续控制（自我调节状态）。是系统的「体温计」。</div></div>
+</div>
+</div>
+<!-- ===== Product Catalog ===== -->
+<div class="section" id="sec-catalog">
+<h2>📦 产品目录（product-catalog.html）</h2>
+
+<h3>如何浏览</h3>
+<p>打开产品目录后，你会看到一张包含所有产品的表格。每条行代表一个产品，列代表该产品的属性。表格支持：</p>
+<ul>
+<li><strong>搜索：</strong>在顶部搜索框输入关键词，实时过滤表格。可以搜索产品名、文件名。</li>
+<li><strong>筛选：</strong>点击搜索框下方的筛选按钮，按「五族」分类查看。点击「全部」恢复完整视图。</li>
+<li><strong>排序：</strong>点击表头（如编号、产品名、深度等）可按该列排序。</li>
+</ul>
+
+<h3>五族分类</h3>
+<p>产品按「五族」分类，每个族代表一种产品类型和价值取向：</p>
+
+<table class="family-table">
+<thead><tr><th>族名</th><th>含义</th><th>代表什么</th></tr></thead>
+<tbody>
+<tr><td>🪞 <strong>镜</strong>·觉察</td><td>镜子——看清现状</td><td>诊断、分析、评估类产品。帮你「看清自己在哪里」。</td></tr>
+<tr><td>🪙 <strong>衡</strong>·量化</td><td>秤——衡量得失</td><td>量化、对比、权衡类产品。帮你「算清楚利弊」。</td></tr>
+<tr><td>🔥 <strong>觉</strong>·淬炼</td><td>火——淬炼真知</td><td>训练、模拟、演习类产品。帮你「通过实践磨砺能力」。</td></tr>
+<tr><td>🤝 <strong>契</strong>·约定</td><td>契约——承诺协作</td><td>框架、协议、流程类产品。帮你「立规矩、建体系」。</td></tr>
+<tr><td>📜 <strong>章</strong>·传承</td><td>篇章——知识永续</td><td>文档、知识库、故事类产品。帮你「把经验留下来、传下去」。</td></tr>
+</tbody>
+</table>
+
+<h3>产品深度（L1-L4）</h3>
+<p>每个产品都有一个深度评级，表示该产品的成熟度和复杂度：</p>
+<ul>
+<li><span class="depth-badge dl1">L1 · 浅层</span> —— 概念阶段或快速作品。可以直接使用，但可能不够深入。</li>
+<li><span class="depth-badge dl2">L2 · 中层</span> —— 有一定复杂度，经过初步验证。可以直接交付。</li>
+<li><span class="depth-badge dl3">L3 · 深层</span> —— 深入研究、多层结构。代表满意红的核心能力。</li>
+<li><span class="depth-badge dl4">L4 · 精品</span> —— 打磨至成熟。旗舰级产品，可直接展示给重要客户。</li>
+</ul>
+
+<h3>🤖 LLM 替身评分列的含义</h3>
+<p>表格最右侧有一列「🤖 LLM」，显示的是该产品在多个维度的综合评分。这个评分由五个 AI 替身（详见下文「核心概念」章节）分别给出，然后加权综合。</p>
+<ul>
+<li><strong>分数范围：</strong>1-10 分，10 分最高。</li>
+<li><strong>颜色编码：</strong>高分→绿色，中等→金色/橙色，低分→红色。</li>
+<li><strong>—</strong> 表示该产品尚未被替身评分。</li>
+<li><strong>用途：</strong>快速了解产品在不同视角下的表现。比如一个产品可能在「长期价值」维度很高，但在「可行性」维度偏低——这本身就是有价值的信号。</li>
+</ul>
+</div>
+<!-- ===== Admin Windows ===== -->
+<div class="section" id="sec-admin">
+<h2>⚙️ 管理窗口（admin-windows.html）</h2>
+<p>管理窗口是系统的「后台管理中心」。它按 9 大管理域组织，共 39 个子视图。进入管理窗口需要密码（与驾驶舱相同）。</p>
+
+<h3>9 大管理域 & 39 个视图</h3>
+
+<div class="domain-grid">
+
+<div class="domain-card">
+<div class="dn">📊 战略仪表盘（4个视图）</div>
+<div class="dv">
+· <strong>KPI仪表盘</strong>——核心指标实时监控<br>
+· <strong>战略地图</strong>——BSC 四视角联动<br>
+· <strong>里程碑看板</strong>——时间线·关键事件<br>
+· <strong>风险雷达</strong>——识别·评级·应对
+</div>
+</div>
+
+<div class="domain-card">
+<div class="dn">📦 产品全生命周期（4个视图）</div>
+<div class="dv">
+· <strong>产品总览</strong>——312 产品·7 阶段·8 族<br>
+· <strong>研发管道</strong>——概念→原型→内测→打磨→精品<br>
+· <strong>质量中心</strong>——四维评分·审计·改进<br>
+· <strong>版本与发布</strong>——版本历史·变更·部署
+</div>
+</div>
+
+<div class="domain-card">
+<div class="dn">👤 客户关系（4个视图）</div>
+<div class="dv">
+· <strong>客户 360</strong>——档案·画像·决策风格<br>
+· <strong>销售管道</strong>——线索→商机→提案→签约<br>
+· <strong>交付与满意度</strong>——项目·反馈·NPS<br>
+· <strong>客户成功</strong>——续约·增购·案例
+</div>
+</div>
+
+<div class="domain-card">
+<div class="dn">💰 财务与定价（4个视图）</div>
+<div class="dv">
+· <strong>收入仪表盘</strong>——收入·成本·利润<br>
+· <strong>产品定价</strong>——SKU·折扣·许可<br>
+· <strong>成本跟踪</strong>——开发·运营·销售<br>
+· <strong>预算与预测</strong>——预算 vs 实际·滚动预测
+</div>
+</div>
+
+<div class="domain-card">
+<div class="dn">🧬 知识资产（4个视图）</div>
+<div class="dv">
+· <strong>知识图谱</strong>——实体·连接·密度<br>
+· <strong>内容生命周期</strong>——创建·审核·发布·退役<br>
+· <strong>术语管理</strong>——统一用语·消除歧义<br>
+· <strong>学习与培训</strong>——知识传递·培训记录
+</div>
+</div>
+
+<div class="domain-card">
+<div class="dn">⚙️ 运营与流程（4个视图）</div>
+<div class="dv">
+· <strong>任务看板</strong>——分配·追踪·闭环<br>
+· <strong>决策记录</strong>——日志·链条·结果<br>
+· <strong>自动化引擎</strong>——Cron 配置·调度·监控<br>
+· <strong>流程管理</strong>——工作流·审批·SOP
+</div>
+</div>
+
+<div class="domain-card">
+<div class="dn">🛡️ 免疫与治理（4个视图）</div>
+<div class="dv">
+· <strong>免疫系统</strong>——L0-L6 七层·事件<br>
+· <strong>规则引擎</strong>——触发·条件·动作<br>
+· <strong>质量门禁</strong>——门槛·检查·放行<br>
+· <strong>合规与审计</strong>——记录·证据·报告
+</div>
+</div>
+
+<div class="domain-card">
+<div class="dn">🏺 考古与洞察（4个视图）</div>
+<div class="dv">
+· <strong>时间线</strong>——大事记·版本变迁<br>
+· <strong>历史文物</strong>——重要产物·里程碑文档<br>
+· <strong>模拟与场景</strong>——沙盘推演·情景分析<br>
+· <strong>发现与洞察</strong>——从历史中提取的模式和教训
+</div>
+</div>
+
+<div class="domain-card">
+<div class="dn">👥 组织与人（4个视图）</div>
+<div class="dv">
+· <strong>替身管理</strong>——AI 替身的配置和状态<br>
+· <strong>专家团</strong>——领域专家·调度·协作<br>
+· <strong>五路评议会</strong>——图腾·编排·决议<br>
+· <strong>协作者网络</strong>——外部合作·关系图谱
+</div>
+</div>
+
+</div>
+
+<h3>特色：三级数据穿透</h3>
+<p>管理窗口的一个核心特色是「三级穿透」：</p>
+<ol>
+<li><strong>L1 · 总览：</strong>每个视图顶部显示汇总统计卡片（如总数、占比、趋势）。</li>
+<li><strong>L2 · 明细：</strong>点击汇总数字或行，可以下钻到详细列表。</li>
+<li><strong>L3 · 原始记录：</strong>在明细中继续点击，可以看到原始数据的完整视图（包括所有字段和注释）。</li>
+</ol>
+<p>这个设计让你既能「看全局」，也能「查细节」，不需要在多个页面间反复跳转。</p>
+</div>
+<!-- ===== Core Concepts ===== -->
+<div class="section" id="sec-flywheel">
+<h2>🔄 核心概念：知识飞轮</h2>
+
+<h3>什么是知识飞轮？</h3>
+<p>「飞轮」是一个工程学概念：一个很重的轮子，刚开始推很费劲，但一旦转起来，就会保持惯性，越转越快、越转越稳。</p>
+
+<p>满意红的<strong>知识飞轮</strong>就是这个意思：</p>
+
+<ol>
+<li><strong>输入：</strong>每个产品、每次客户交互、每条操作记录，都被系统收集和记录。</li>
+<li><strong>加工：</strong>五个 AI 替身从不同角度对这些信息进行评价和思考。</li>
+<li><strong>输出：</strong>系统生成洞察、建议、预警——帮助做出更好的决策。</li>
+<li><strong>反馈：</strong>这些决策的结果又被系统吸收，用于优化下一次的分析。</li>
+<li><strong>加速：</strong>信息越多、分析越准、决策越好——形成一个正向循环。</li>
+</ol>
+
+<div class="concept-box">
+<div class="cn">💡 一句话总结</div>
+<div class="cb">满意红不是一个「给你答案」的系统。它是一个「帮你更好地提问和思考」的系统。飞轮转动得越久，你的决策质量就越稳定。</div>
+</div>
+
+<h3>飞轮和普通工具的区别</h3>
+<ul>
+<li><strong>普通工具：</strong>每次使用都是独立的。用完就完了，不会「记住」什么。</li>
+<li><strong>知识飞轮：</strong>每次使用都在为下一次使用积累信息。用得越多，系统越了解你、越了解你的业务。</li>
+</ul>
+</div>
+
+<div class="section" id="sec-chemistry">
+<h2>🧪 核心概念：化学与控制</h2>
+
+<h3>通俗解释</h3>
+<p>就像人体有自己的温度调节系统（体温维持在 36.5°C 左右）、pH 平衡系统（血液 pH 维持在 7.35-7.45），满意红也有自己的「化学生态」。</p>
+
+<div class="concept-box">
+<div class="cn">🫀 化学与控制的三个维度</div>
+<div class="cb">
+<strong>热力（活跃度）：</strong>系统有多「活跃」？最近有多少新信息流入？多少产品在被使用？多少任务在推进？<br><br>
+<strong>评分（质量趋势）：</strong>产品的平均评分在上升还是下降？客户满意度在变好还是变差？<br><br>
+<strong>永续控制（自我调节）：</strong>系统是否在主动发现和修复问题？免疫系统的拦截率是多少？是否有风险信号被遗漏？
+</div>
+</div>
+
+<p>你可以把「化学与控制」理解为系统的<strong>温度计、pH 试纸和免疫系统</strong>的总称。在驾驶舱的「🧬 化学与控制」标签页中，所有指标都是可视化的——绿色代表正常范围，黄色代表需要关注，红色代表需要立即处理。</p>
+
+<h3>为什么叫「化学」？</h3>
+<p>在满意红的四层模型（物理→化学→生物→心理）中，「化学层」指的是<strong>不能直接看到的、但真实发生的相互作用</strong>。就像你不能「看到」体内的激素水平，但激素确实在影响你的情绪和行为。</p>
+
+<p>同样，系统的化学反应——比如知识图谱中两个概念之间的连接强度、某个产品与客户需求的匹配度——虽然不直观，但它们是系统真正「活着」的证据。</p>
+</div>
+<!-- ===== LLM Scores ===== -->
+<div class="section" id="sec-llm">
+<h2>🤖 核心概念：LLM 替身评分</h2>
+
+<p>每件产品都有一个「🤖 LLM」评分。这个评分不是一个人给的，而是由<strong>五个 AI 替身</strong>分别从不同视角打分后综合得出。</p>
+
+<p>每个替身代表一种思考维度，相当于你的五个顾问，各自有不同的专业背景和价值取向：</p>
+
+<div class="avatar-grid">
+
+<div class="avatar-card">
+<div class="ai a-gold">🏛️</div>
+<div class="an">刘禹锡</div>
+<div class="ar">长期价值 · 永恒视角</div>
+<div class="ad">
+<strong>问什么：</strong>这个产品有持续价值吗？一年后、三年后还值得关注吗？<br>
+<strong>高分意义：</strong>产品具有穿越周期的价值，不是一时的热点。<br>
+<strong>低分意义：</strong>可能是时效性强的产品，或者核心假设很快就会过时。
+</div>
+</div>
+
+<div class="avatar-card">
+<div class="ai a-green">🔧</div>
+<div class="an">司马贺</div>
+<div class="ar">可行性 · 工程视角</div>
+<div class="ad">
+<strong>问什么：</strong>这个产品的思路可行吗？有实现路径吗？资源够吗？<br>
+<strong>高分意义：</strong>产品有明确可执行的路径，落地风险可控。<br>
+<strong>低分意义：</strong>可能想法很好但缺乏操作细节，或者需要的资源远超现有条件。
+</div>
+</div>
+
+<div class="avatar-card">
+<div class="ai a-red">📜</div>
+<div class="an">孔子</div>
+<div class="ar">诚信 · 伦理视角</div>
+<div class="ad">
+<strong>问什么：</strong>这个产品符合价值观吗？对客户诚实吗？有没有夸大或不实的成分？<br>
+<strong>高分意义：</strong>产品经得起伦理审视，经得起客户和市场的检验。<br>
+<strong>低分意义：</strong>可能存在过度承诺、信息不对称或潜在的道德风险。
+</div>
+</div>
+
+<div class="avatar-card">
+<div class="ai a-amber">🌸</div>
+<div class="an">水月观音</div>
+<div class="ar">体验 · 感知视角</div>
+<div class="ad">
+<strong>问什么：</strong>这个产品给人什么感觉？使用起来流畅吗？美吗？<br>
+<strong>高分意义：</strong>产品体验优雅、直观、有美感，客户会愿意反复使用。<br>
+<strong>低分意义：</strong>产品可能功能齐全但不好用、不好看，或体验有割裂感。
+</div>
+</div>
+
+<div class="avatar-card">
+<div class="ai a-purple">🌌</div>
+<div class="an">六祖慧能</div>
+<div class="ar">独特性 · 本质视角</div>
+<div class="ad">
+<strong>问什么：</strong>这个产品有什么是别人无法替代的？它的本质独特性在哪里？<br>
+<strong>高分意义：</strong>产品有鲜明的独特价值主张，难以被复制或替代。<br>
+<strong>低分意义：</strong>产品可能和市场上已有方案没有本质区别，容易被替代。
+</div>
+</div>
+
+</div>
+
+<h3>如何解读综合评分？</h3>
+<ul>
+<li><strong>很高（8-10 分）：</strong>五个替身都认可该产品。通常意味着产品在价值、可行、诚信、体验、独特性上都没有明显短板。</li>
+<li><strong>中等（5-7 分）：</strong>部分替身有保留。不需要紧张——这反而是有价值的信号：比如孔子给低分说明可能需要检查措辞，司马贺给低分说明需要补齐操作细节。</li>
+<li><strong>较低（1-4 分）：</strong>多数替身有顾虑。需要认真对待，但不是判死刑——可能产品处于早期阶段，或者定位需要调整。</li>
+</ul>
+
+<div class="concept-box">
+<div class="cn">⚠️ 重要提醒</div>
+<div class="cb">LLM 评分是 AI 替身基于当前信息的判断，不是绝对的真理。高分不意味着完美，低分不意味着要放弃。这些评分最适合用作<strong>讨论的起点</strong>——「为什么这个替身给这么低的分？」这个问题本身就很有价值。</div>
+</div>
+</div>
+<!-- ===== Five Layer Flow ===== -->
+<div class="section" id="sec-flow">
+<h2>🌊 核心概念：五层流模型</h2>
+
+<p>满意红将一切活动建模为一个<strong>五层的流动过程</strong>：</p>
+
+<div class="flow-visual">
+<div class="flow-step"><div class="si">📡</div><div class="sn">信号层</div><div class="ss">Signal</div></div>
+<div class="flow-arrow">→</div>
+<div class="flow-step"><div class="si">🧠</div><div class="sn">认知层</div><div class="ss">Cognition</div></div>
+<div class="flow-arrow">→</div>
+<div class="flow-step"><div class="si">⚡</div><div class="sn">行动层</div><div class="ss">Action</div></div>
+<div class="flow-arrow">→</div>
+<div class="flow-step"><div class="si">✅</div><div class="sn">验证层</div><div class="ss">Verification</div></div>
+<div class="flow-arrow">→</div>
+<div class="flow-step"><div class="si">📚</div><div class="sn">学习层</div><div class="ss">Learning</div></div>
+</div>
+
+<p>这五层对应了人类处理信息的自然方式：</p>
+
+<ol>
+<li><strong>📡 信号层：</strong>接收信息。客户问了什么？市场发生了什么变化？系统记录了什么日志？——这是「听」的过程。</li>
+<li><strong>🧠 认知层：</strong>理解信息。收到的信号意味着什么？与已知的知识有什么关系？——这是「想」的过程。</li>
+<li><strong>⚡ 行动层：</strong>做出反应。基于理解，我们要做什么？生成什么产品？给客户什么建议？——这是「做」的过程。</li>
+<li><strong>✅ 验证层：</strong>检查结果。行动的效果如何？客户反馈怎样？指标有没有改善？——这是「验」的过程。</li>
+<li><strong>📚 学习层：</strong>沉淀经验。从这次经历中学到了什么？哪些知识需要更新？哪些做法值得保留？——这是「悟」的过程。</li>
+</ol>
+
+<div class="concept-box">
+<div class="cn">🔍 为什么要分五层？</div>
+<div class="cb">
+分层的好处是<strong>诊断</strong>。如果系统遇到的问题被模糊地描述为「运转不畅」，你没办法改进。但如果能定位到<strong>「验证层流动率为零——我们做了很多事但没有检查效果」</strong>，改进方向就非常明确了。<br><br>
+在驾驶舱的「🔌 流仪表板」标签中，你可以看到每一层的实时流量和健康状态，就像系统的心电图。
+</div>
+</div>
+
+<h3>五层流与知识飞轮的关系</h3>
+<p>五层流模型是知识飞轮的实现方式。每一轮飞轮转动，就是一次完整的信号→认知→行动→验证→学习的循环。循环越快、越完整，飞轮转得越稳。</p>
+</div>
+
+<!-- ===== Common Scenarios ===== -->
+<div class="section" id="sec-scenarios">
+<h2>📋 常见操作场景</h2>
+
+<h3>场景一：「我想看看系统状态怎么样」</h3>
+<p><strong>→ 打开驾驶舱 · 📊 总览标签</strong></p>
+<p>总览页面会显示所有核心指标的当前值。如果某个数字明显偏离正常范围，它会用颜色（黄色/红色）提示你。这是一天中最重要的第一眼。</p>
+<p>然后可以快速扫一眼 <strong>🫀 健康仪表</strong>——免疫系统的分数。如果健康评分低于某个阈值，点击进去看看哪层出了问题。</p>
+
+<h3>场景二：「我想找一个产品」</h3>
+<p><strong>→ 打开产品目录 · 搜索框</strong></p>
+<p>在搜索框中输入产品名或关键词（如「决策」「危机」「客户」），表格会实时过滤。如果记得产品在哪个族，也可以用筛选按钮先缩小范围再搜。</p>
+<p>找到后点击「链接」列可以直接打开该产品页面。</p>
+
+<h3>场景三：「我想了解某个产品的替身评价」</h3>
+<p><strong>→ 产品目录 · 看 🤖 LLM 列</strong></p>
+<p>在产品目录中找到该产品，看最右侧的「🤖 LLM」列。数字越高越好。如果分数不太理解，可以去 <strong>管理窗口 → 组织与人 → 替身管理</strong> 查看该产品在各替身视角下的分项评分。</p>
+
+<h3>场景四：「我想看化学反应是否正常」</h3>
+<p><strong>→ 驾驶舱 · 🧬 化学与控制标签</strong><br><em>或 管理窗口 → 战略仪表盘 → KPI仪表盘</em></p>
+<p>化学与控制标签显示热力（活跃度）、评分趋势和永续控制状态。如果所有指标都是绿的，系统化学状态良好。如果某个指标黄了或红了，点击下钻查看具体是什么触发了警报。</p>
+
+<h3>场景五：「我想看最近的客户互动」</h3>
+<p><strong>→ 管理窗口 → 客户关系 → 客户 360</strong></p>
+<p>搜索客户名，查看客户档案和最近的交互记录。也可以通过 <strong>管理窗口 → 运营与流程 → 决策记录</strong> 查看与客户相关的决策链条。</p>
+
+<h3>场景六：「我想知道有没有紧急任务」</h3>
+<p><strong>→ 驾驶舱 · ✅ 待办任务标签</strong></p>
+<p>筛选优先级为 P0 的任务。P0 就是最紧急、需要立即处理的任务。也可以看到任务的负责人和截止日期。</p>
+
+<h3>场景七：「我想回顾项目历史」</h3>
+<p><strong>→ 管理窗口 → 考古与洞察 → 时间线</strong></p>
+<p>这里记录了项目发展的关键事件。可以按时间浏览，也可以搜索特定事件。旁边的「发现与洞察」视图还有从历史数据中提取的模式和教训。</p>
+</div>
+<!-- ===== FAQ ===== -->
+<div class="section" id="sec-faq">
+<h2>❓ FAQ · 常见问题</h2>
+
+<div class="faq-item">
+<div class="faq-q" onclick="toggleFAQ(this)">Q：三个入口（驾驶舱、产品目录、管理窗口）有什么区别？什么时候用哪个？<span class="fa">▼</span></div>
+<div class="fa-a">
+<p><strong>驾驶舱：</strong>了解整体状态。每天早上打开看一眼。<br>
+<strong>产品目录：</strong>找产品、看评价。当你需要浏览或搜索产品时用。<br>
+<strong>管理窗口：</strong>做具体操作和管理。当你要加客户、看风险、改配置时用。</p>
+<p>简单来说：驾驶舱是「看天气」，产品目录是「查地图」，管理窗口是「装修房间」。三者互补，缺一不可。</p>
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="toggleFAQ(this)">Q：LLM 替身评分是 AI 自动打的吗？会更新吗？<span class="fa">▼</span></div>
+<div class="fa-a">
+<p>是的，LLM 替身评分由五个 AI 替身（刘禹锡、司马贺、孔子、水月观音、六祖慧能）基于产品内容和上下文自动评估。评分会随着产品的更新而重新计算。如果某个产品被大幅修改，评分也可能随之变化。</p>
+<p>不过评分更新不是实时的——通常在产品审核流程中触发。</p>
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="toggleFAQ(this)">Q：「五族」和「七族」是什么关系？<span class="fa">▼</span></div>
+<div class="fa-a">
+<p>产品目录用的是<strong>五族</strong>（镜·衡·觉·契·章），这是产品分类的简化模型，适合日常浏览和搜索。</p>
+<p>驾驶舱的产品资产标签用的是<strong>七族</strong>（镜·契·衡·觉·人·道·章），比五族多了「人」和「道」两个类别，用于更精细的分析。</p>
+<p>两者的关系是：五族是七族的子集。日常使用时，五族足够；深度分析时，七族提供了更多维度。</p>
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="toggleFAQ(this)">Q：化学面板里的指标红了怎么办？<span class="fa">▼</span></div>
+<div class="fa-a">
+<p>首先不要慌——红色表示「需要关注」而不是「系统崩了」。</p>
+<p><strong>建议步骤：</strong></p>
+<ol>
+<li>点击红色指标，下钻查看触发警报的具体数据。</li>
+<li>去管理窗口的「🛡️ 免疫与治理 → 免疫系统」查看是否有相关事件记录。</li>
+<li>去「📜 活动日志」看最近的操作记录，判断是否有异常操作。</li>
+<li>如果无法判断原因，去「⚙️ 运营与流程 → 决策记录」查看相关决策链条。</li>
+</ol>
+<p>大多数红色指标都有明确的解释和推荐操作。如果持续红色且无解释，那本身就是一个需要创建的任务。</p>
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="toggleFAQ(this)">Q：产品深度 L1-L4 是怎么决定的？<span class="fa">▼</span></div>
+<div class="fa-a">
+<p>产品深度是一个综合评估，主要基于：</p>
+<ul>
+<li><strong>内容结构：</strong>是单页文档还是多层知识体系？</li>
+<li><strong>引用密度：</strong>引用了多少其他产品和外部资源？</li>
+<li><strong>被引用次数：</strong>被其他产品引用了多少次？</li>
+<li><strong>迭代次数：</strong>经历了多少轮修改？</li>
+<li><strong>审核状态：</strong>是否通过了四关审核？</li>
+</ul>
+<p>深度是客观数据和主观判断的结合。L1 不意味着「差」——可能是一个刚刚起步但潜力很大的产品。</p>
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="toggleFAQ(this)">Q：三级数据穿透具体怎么操作？<span class="fa">▼</span></div>
+<div class="fa-a">
+<p>在管理窗口的任何视图中：</p>
+<ol>
+<li><strong>L1 总览：</strong>页面顶部显示的统计卡片。比如「产品总数：217」。这是第一层。</li>
+<li><strong>L2 明细：</strong>点击任何统计卡片或表格行，会展开该统计的详细列表。比如点击客户数的卡片，会看到客户列表。</li>
+<li><strong>L3 原始记录：</strong>在明细列表中，点击某个具体条目会展开完整的数据视图，包括所有字段、原始值和注释。</li>
+</ol>
+<p>不需要记。实际操作一次就明白了——就是「点进去、再点进去」的过程。</p>
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="toggleFAQ(this)">Q：为什么有些产品在驾驶舱能看到，在产品目录看不到？<span class="fa">▼</span></div>
+<div class="fa-a">
+<p>产品目录只显示<strong>已上线</strong>的产品。处于概念阶段（L0）、退役（L6）或标记为「内部」的产品不会出现在目录中。</p>
+<p>驾驶舱的产品资产标签会显示所有阶段的产品分布（按七族汇总），但不会列出每个内部产品。</p>
+<p>如果需要查看所有产品（包括未公开的），去管理窗口 → 产品全生命周期 → 产品总览。</p>
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="toggleFAQ(this)">Q：我需要记住所有概念吗？<span class="fa">▼</span></div>
+<div class="fa-a">
+<p>不需要。手册放在这里就是让你随时查阅的。</p>
+<p>不过有两个概念值得先理解：<strong>知识飞轮</strong>（系统的核心理念）和<strong>化学与控制</strong>（系统的健康指标）。掌握了这两个概念，其他都能在用中学。</p>
+<p>另外，驾驶舱本身的标签命名已经足够直观——「📊 总览」就是看总览，「✅ 待办任务」就是看任务。不需要额外记忆。</p>
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="toggleFAQ(this)">Q：发现手册里有需要更新或补充的内容怎么办？<span class="fa">▼</span></div>
+<div class="fa-a">
+<p>告诉 Egbertie。手册的源文件是 <code>help-user.html</code>，可以直接编辑。如果是小改动（比如某个标签页的描述需要更新），Egbertie 可以很快修改。</p>
+<p>另外，如果你在使用的过程中发现某个操作场景手册没有覆盖，那可能是一个很好的补充建议。</p>
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="toggleFAQ(this)">Q：可以从手机上看吗？<span class="fa">▼</span></div>
+<div class="fa-a">
+<p>可以。手册的排版已经适配了桌面和移动端。在手机上，左侧导航会收起到顶部，主内容区会自适应屏幕宽度。</p>
+<p>不过，驾驶舱、产品目录和管理窗口这三个应用页面本身也支持响应式，但在手机上体验不如桌面（毕竟是数据密集型页面）。如果你需要在手机上做简单查看——比如看一看总览指标——完全没问题。深度操作建议在桌面上进行。</p>
+</div>
+</div>
+
+</div>
+
+<!-- ===== Footer ===== -->
+<div class="footer">
+<div>满意红 · 用户帮助手册 v1.0 · 2026-05-30</div>
+<div class="q">「我在学习看清自己——每一步，都更清晰一点。」</div>
+<div style="margin-top:8px;">[FIN-HU]</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+</main>
+</div>
+
+<script>
+/* ===== Sidebar ===== */
+function toggleNavSection(titleEl) {
+  titleEl.parentElement.classList.toggle('open');
+}
+
+/* ===== Scroll to Section ===== */
+function scrollToSection(id, navItem) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  // update active nav-item
+  var activeEls = document.querySelectorAll('.nav-item.active');
+  activeEls.forEach(function(a){ a.classList.remove('active'); });
+  if (navItem) navItem.classList.add('active');
+}
+
+/* ===== FAQ Toggle ===== */
+function toggleFAQ(faqQ) {
+  faqQ.parentElement.classList.toggle('open');
+}
+
+/* ===== Back to Top ===== */
+var btt = document.getElementById('backToTop');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 400) {
+    btt.classList.add('show');
+  } else {
+    btt.classList.remove('show');
+  }
+});
+</script>
+
+</body>
+</html>

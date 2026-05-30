@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>开发者帮助手册 · 满意解研究所</title>
+<style>
+:root{--paper:#F5F0E6;--card:#FFFFFF;--card-warm:#FAF6EF;--ink:#4A3728;--ink-light:#7A6958;--ink-lighter:#A89880;--accent-red:#C23B22;--accent-gold:#B8860B;--accent-green:#3D7A4F;--accent-blue:#4A6FA5;--amber-warn:#C2780A;--border:#E0D5C8;--border-subtle:#F0E8D8;--shadow:rgba(74,55,40,0.06);--shadow-md:rgba(74,55,40,0.10)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--paper);color:var(--ink);line-height:1.75;min-height:100vh}
+.hero{background:linear-gradient(135deg,#4A3728 0%,#5C3D2E 100%);color:var(--paper);padding:56px 24px 48px;text-align:center;border-bottom:4px solid var(--accent-red)}
+.hero h1{font-size:2.2em;font-weight:300;letter-spacing:.06em;margin-bottom:8px}
+.hero h1 .accent{color:var(--accent-red)}
+.hero .subtitle{font-size:.95em;opacity:.75;letter-spacing:.04em;margin-bottom:6px}
+.hero .version{font-size:.78em;opacity:.55;margin-top:12px}
+.layout{display:flex;max-width:1200px;margin:0 auto;min-height:calc(100vh - 200px)}
+.sidebar{width:260px;flex-shrink:0;background:var(--card);border-right:1px solid var(--border);position:sticky;top:0;height:100vh;overflow-y:auto;padding:20px 0}
+.sidebar h3{font-size:.82em;color:var(--ink-lighter);text-transform:uppercase;letter-spacing:.08em;padding:0 24px;margin-bottom:6px;margin-top:24px}
+.sidebar h3:first-child{margin-top:0}
+.sidebar a{display:block;padding:6px 24px 6px 32px;font-size:.84em;color:var(--ink-light);text-decoration:none;border-left:3px solid transparent;transition:all .15s}
+.sidebar a:hover{color:var(--ink);background:var(--card-warm);border-left-color:var(--accent-gold)}
+.sidebar a.sec{font-weight:600;color:var(--ink);padding-left:24px;font-size:.88em;border-left:none}
+.sidebar a.sec:hover{border-left:none;background:transparent;color:var(--accent-red)}
+.main{flex:1;padding:40px 48px 80px;max-width:820px;overflow-x:hidden}
+.main h2{font-size:1.55em;font-weight:400;color:var(--accent-red);margin-top:48px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--accent-gold);letter-spacing:.04em}
+.main h2:first-child{margin-top:0}
+.main h3{font-size:1.15em;font-weight:500;color:var(--accent-gold);margin-top:32px;margin-bottom:12px;letter-spacing:.03em}
+.main h4{font-size:.95em;font-weight:600;color:var(--ink);margin-top:20px;margin-bottom:8px}
+.main p{margin-bottom:14px;font-size:.92em;color:var(--ink-light)}
+.main ul,.main ol{margin-bottom:14px;padding-left:22px;font-size:.92em;color:var(--ink-light)}
+.main li{margin-bottom:6px}
+.main strong{color:var(--ink);font-weight:600}
+.main em{color:var(--ink)}
+.main code{font-family:'SF Mono','Fira Code','Menlo','Consolas',monospace;font-size:.85em;background:var(--card-warm);border:1px solid var(--border-subtle);border-radius:4px;padding:2px 7px;color:var(--accent-red)}
+.main pre{background:var(--card-warm);border:1px solid var(--border);border-radius:10px;padding:16px 20px;overflow-x:auto;margin-bottom:16px;font-size:.82em;line-height:1.6}
+.main pre code{background:none;border:none;padding:0;color:var(--ink);font-family:'SF Mono','Fira Code','Menlo','Consolas',monospace}
+.main table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:.86em;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.main th{text-align:left;padding:10px 14px;background:var(--card-warm);font-weight:600;color:var(--ink);font-size:.8em;letter-spacing:.04em;border-bottom:2px solid var(--border)}
+.main td{padding:9px 14px;border-bottom:1px solid var(--border-subtle);color:var(--ink-light)}
+.main tr:last-child td{border-bottom:none}
+.main tr:hover td{background:var(--card-warm)}
+.callout{border-left:4px solid var(--accent-gold);background:var(--card-warm);border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:20px;font-size:.9em}
+.callout-title{font-weight:600;color:var(--accent-gold);margin-bottom:4px;font-size:.82em;letter-spacing:.04em}
+.callout.danger{border-left-color:var(--accent-red)}.callout.danger .callout-title{color:var(--accent-red)}
+.callout.info{border-left-color:var(--accent-blue)}.callout.info .callout-title{color:var(--accent-blue)}
+.callout.good{border-left-color:var(--accent-green)}.callout.good .callout-title{color:var(--accent-green)}
+.antipattern{background:#FEF5F2;border:1px solid #F5C6B8;border-radius:10px;padding:14px 18px;margin-bottom:16px}
+.antipattern .ap-title{font-weight:600;color:var(--accent-red);font-size:.88em;margin-bottom:6px}
+.antipattern .ap-rule{color:var(--accent-green);font-weight:600;font-size:.84em}
+.antipattern p{font-size:.86em}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.76em;font-weight:500;margin:2px 4px 2px 0}
+.tag-red{background:#FDE8E5;color:var(--accent-red)}.tag-gold{background:#FDF3E0;color:var(--accent-gold)}.tag-green{background:#E8F0EB;color:var(--accent-green)}.tag-blue{background:#E8EEF5;color:var(--accent-blue)}
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px;margin-bottom:20px}
+.meta-card{background:var(--card);border:1px solid var(--border-subtle);border-radius:10px;padding:14px 16px}
+.meta-card .cat{font-weight:600;font-size:.82em;color:var(--accent-gold);margin-bottom:6px}
+.meta-card .keys{font-size:.8em;color:var(--ink-light);word-break:break-all}
+.main a{color:var(--accent-red);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s}
+.main a:hover{border-bottom-color:var(--accent-red)}
+hr{border:none;border-top:1px solid var(--border-subtle);margin:40px 0}
+.arch-layer{display:inline-block;padding:8px 20px;border-radius:8px;font-size:.84em;font-weight:500;margin:4px}
+.arch-layer.red{background:#FDE8E5;color:var(--accent-red);border:1px solid #F5C6B8}
+.arch-layer.gold{background:#FDF3E0;color:var(--accent-gold);border:1px solid #F0D98C}
+.arch-layer.green{background:#E8F0EB;color:var(--accent-green);border:1px solid #B5CEBB}
+.arch-diagram{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:24px;text-align:center}
+.footer{text-align:center;padding:40px 20px;border-top:1px solid var(--border);color:var(--ink-lighter);font-size:.76em;letter-spacing:.04em}
+.footer .q{font-style:italic;margin-top:4px;color:var(--ink-light)}
+@media(max-width:900px){.layout{flex-direction:column}.sidebar{width:100%;height:auto;position:static;border-right:none;border-bottom:1px solid var(--border);padding:12px 16px;max-height:300px}.sidebar h3{padding:0 8px;margin-top:12px}.sidebar a{padding:4px 8px 4px 16px;font-size:.8em}.main{padding:24px 16px 60px;max-width:100%}.hero{padding:36px 16px 32px}.hero h1{font-size:1.6em}.meta-grid{grid-template-columns:1fr}.main h2{font-size:1.3em}}
+@media(max-width:600px){.hero h1{font-size:1.35em}.main h2{font-size:1.15em}.main h3{font-size:1em}.main table{font-size:.74em}.main th,.main td{padding:6px 8px}}
+@media print{.sidebar{display:none}.main{max-width:100%;padding:20px}.hero{padding:24px;background:none;color:var(--ink);border-bottom:2px solid var(--accent-red)}.hero h1 .accent{color:var(--accent-red)}body{background:#fff}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1><span class="accent">满意红</span>&thinsp;·&thinsp;开发者帮助手册</h1>
+  <div class="subtitle">面向未来接手或扩展此系统的开发者&thinsp;——&thinsp;完整详尽、可独立阅读</div>
+  <div class="version">满意解研究所&thinsp;·&thinsp;v3.0&thinsp;·&thinsp;2026-05-31</div>
+</div>
+<div class="layout">
+<nav class="sidebar">
+  <h3>技术栈与选型</h3><a class="sec" href="#stack">技术栈与选型理由</a>
+  <h3>数据模型</h3><a class="sec" href="#data-model">entities_index.json 结构</a><a href="#meta-keys">meta 层 126 键分类</a><a href="#product-schema">产品数据结构</a><a href="#connection-schema">连接数据结构</a>
+  <h3>前端架构</h3><a class="sec" href="#frontend">前端架构总览</a><a href="#dashboard">驾驶舱</a><a href="#admin-windows">管理后台</a><a href="#product-catalog">产品目录</a><a href="#color-standard">颜色编码标准</a>
+  <h3>脚本开发</h3><a class="sec" href="#scripts">Python 脚本开发规范</a><a href="#orchestrator">编排器</a>
+  <h3>Cron 任务</h3><a class="sec" href="#cron">Cron 任务开发</a>
+  <h3>扩展指南</h3><a class="sec" href="#extend">扩展指南</a>
+  <h3>ADR</h3><a class="sec" href="#adr">研发历程与设计决策</a>
+  <h3>反模式</h3><a class="sec" href="#antipatterns">反模式与教训</a>
+  <h3>关键数字</h3><a class="sec" href="#numbers">关键数字</a>
+</nav>
+<main class="main">
+
+<!-- ===== 1. 技术栈与选型理由 ===== -->
+<h2 id="stack">技术栈与选型理由</h2>
+<p>本系统是一套<strong>单页静态网站 + JSON 数据层 + Python 脚本引擎 + OpenClaw Cron 调度</strong>的架构组合。每个技术选型都源于明确的约束和取舍。</p>
+
+<h3>为什么是原生 HTML/CSS/JS，而不是 React/Vue？</h3>
+<table>
+  <tr><th style="width:160px">考量</th><th>原生方案</th><th>框架方案</th></tr>
+  <tr><td><strong>构建</strong></td><td><span class="tag tag-green">零构建</span> 写完即用</td><td>npm install → webpack/vite → dist</td></tr>
+  <tr><td><strong>部署</strong></td><td><span class="tag tag-green">GitHub Pages 直接部署</span></td><td>需 CI/CD 构建步骤</td></tr>
+  <tr><td><strong>依赖</strong></td><td><span class="tag tag-green">0 外部 JS 依赖</span></td><td>node_modules 黑洞</td></tr>
+  <tr><td><strong>交接</strong></td><td><span class="tag tag-green">任何开发者都能读懂</span></td><td>需熟悉特定框架生态</td></tr>
+  <tr><td><strong>场景契合</strong></td><td>单页应用·少数几个面板</td><td>适合多页·复杂状态管理</td></tr>
+</table>
+<div class="callout info"><div class="callout-title">决策场景</div>3 个前端页面（驾驶舱、管理后台、产品目录）都是单页数据展示型应用。不需要路由、状态管理、组件复用等框架擅长解决的问题。原生写法的"简陋"恰恰是维护成本最低的方式。</div>
+
+<h3>为什么是 JSON 单文件数据库，而不是 MySQL/PostgreSQL？</h3>
+<table>
+  <tr><th style="width:160px">考量</th><th>JSON 文件</th><th>SQL 数据库</th></tr>
+  <tr><td><strong>数据量</strong></td><td><span class="tag tag-green">&lt;1 MB</span>，浏览器瞬间加载</td><td>杀鸡用牛刀</td></tr>
+  <tr><td><strong>版本控制</strong></td><td><span class="tag tag-green">git diff 可读</span></td><td>需额外导出/迁移工具</td></tr>
+  <tr><td><strong>运维</strong></td><td><span class="tag tag-green">零运维</span></td><td>需启动、备份、连接管理</td></tr>
+  <tr><td><strong>前端加载</strong></td><td><span class="tag tag-green">fetch 一次全量获取</span></td><td>需 API 服务层</td></tr>
+</table>
+<div class="callout good"><div class="callout-title">适用边界</div>当前数据量（315 产品、12,556 连接、126 个 meta 键）远未触及 JSON 文件的性能边界。如果未来产品数超过 5,000 或连接数超过 100,000，才需要考虑 SQLite 过渡方案。</div>
+
+<h3>为什么是 Python 脚本，而不是微服务？</h3>
+<ul>
+  <li><strong>一次性数据处理</strong>：大多数脚本是"读数据 → 计算 → 写回"的批处理模式，无需长期运行</li>
+  <li><strong>Cron 调度</strong>：通过 OpenClaw Cron 定时触发，天然适合脚本而非服务</li>
+  <li><strong>简单可维护</strong>：一个脚本一个职责，单文件即可理解和修改</li>
+  <li><strong>低认知负担</strong>：不需要理解 Docker、K8s、服务发现、负载均衡</li>
+</ul>
+
+<h3>为什么是 OpenClaw Cron，而不是 Kubernetes CronJob？</h3>
+<ul>
+  <li><strong>集成 Agent 推理能力</strong>：Cron 可以触发 LLM 驱动的决策，而不只是运行一段代码</li>
+  <li><strong>统一调度</strong>：所有定时任务在一个调度器内管理，驾驶舱可以直接查看 Cron 状态</li>
+  <li><strong>自动推送</strong>：Cron 结果可以直接推送到飞书、Discord 等渠道</li>
+  <li><strong>轻量级</strong>：不需要 K8s 集群，一台 Mac mini 即可运行</li>
+</ul>
+
+<h3>为什么是 <code>var</code> + 字符串拼接，而不是 ES6？</h3>
+<ul>
+  <li><strong>历史遗留</strong>：系统起步于快速原型，第一批 JS 代码就用了 <code>var</code></li>
+  <li><strong>兼容性</strong>：无需 Babel/转译，在任意现代浏览器均能运行</li>
+  <li><strong>风格一致性</strong>：混用 <code>var</code>/<code>let</code>/<code>const</code> 比统一用 <code>var</code> 更混乱</li>
+</ul>
+<div class="callout"><div class="callout-title">注意</div>如果你要新增 JS 代码，<strong>请继续使用 <code>var</code> 和字符串拼接</strong>以保持一致性。模板字面量（反引号）只在 CSS 规则内使用。这不是"技术债务"，而是"有意为之的风格约束"。</div>
+
+<hr>
+
+<!-- ===== 2. 数据模型 ===== -->
+<h2 id="data-model">entities_index.json 结构</h2>
+<p><code>memory/_data/entities_index.json</code> 是整个系统的<strong>唯一数据源</strong>（Single Source of Truth）。驾驶舱 (<code>window.EIDX</code>) 和管理后台 (<code>window.DB</code>) 都通过 <code>fetch()</code> 动态加载它。路径为项目根相对路径：<code>entities_index.json</code>，通过 GitHub Pages 直接暴露。</p>
+
+<h3>顶层键一览</h3>
+<div class="meta-grid">
+  <div class="meta-card"><div class="cat">核心实体</div><div class="keys"><code>products</code>(315) · <code>customers</code>(5) · <code>tasks</code>(195) · <code>avatars</code>(22) · <code>connections</code>(12556) · <code>cities</code>(31)</div></div>
+  <div class="meta-card"><div class="cat">管理实体</div><div class="keys"><code>documents</code>(40) · <code>decisions</code>(25) · <code>milestones</code>(9) · <code>terms</code>(74) · <code>events</code>(4)</div></div>
+  <div class="meta-card"><div class="cat">运维</div><div class="keys"><code>scripts</code>(18) · <code>crons</code>(36) · <code>workflows</code>(18) · <code>living_rules</code>(48)</div></div>
+  <div class="meta-card"><div class="cat">架构</div><div class="keys"><code>quality_metrics</code>(23) · <code>growth_metrics</code>(10) · <code>vi_standards</code>(20) · <code>lifecycle_stages</code>(7)</div></div>
+  <div class="meta-card"><div class="cat">智能层</div><div class="keys"><code>instructions_set</code>(45) · <code>scoring_models</code>(2) · <code>simulation_scenarios</code>(16) · <code>interactive_avatars</code></div></div>
+  <div class="meta-card"><div class="cat">五层流</div><div class="keys"><code>signals</code> · <code>cognition_events</code> · <code>action_events</code> · <code>verification_events</code> · <code>learning_events</code> · <code>flows</code></div></div>
+  <div class="meta-card"><div class="cat">考古</div><div class="keys"><code>historical_artifacts</code>(10) · <code>additional_discoveries</code>(7) · <code>simulation_scenarios</code>(16)</div></div>
+  <div class="meta-card"><div class="cat">知识管道</div><div class="keys"><code>knowledge_pipeline</code> · <code>content_assets</code>(0) · <code>governance_frameworks</code>(6) · <code>clusters</code></div></div>
+</div>
+
+<h3 id="meta-keys">meta 层 126 键分类</h3>
+<p>meta 对象是系统的"运行时状态仓库"，包含 126 个键，覆盖了从数据统计到化学反应到控制论的所有维度。</p>
+<div class="meta-grid">
+  <div class="meta-card"><div class="cat">基础元数据</div><div class="keys"><code>version</code> · <code>created</code> · <code>updated</code> · <code>breakdown</code> · <code>architecture</code> · <code>last_updated</code> · <code>knowledge_graph_density</code> · <code>living_rules_status</code> · <code>biological_health</code> · <code>product_families</code> · <code>corrections</code> · <code>change_log</code></div></div>
+  <div class="meta-card"><div class="cat">化学核心</div><div class="keys"><code>heating</code> · <code>chemistry</code> · <code>chemical_governor</code> · <code>_chain_dormancy</code> · <code>activation</code> · <code>catalysts</code> · <code>energy</code> · <code>isotopes</code> · <code>polymerization</code> · <code>osmosis</code> · <code>enzyme</code></div></div>
+  <div class="meta-card"><div class="cat">化学热力学</div><div class="keys"><code>symmetry_breaking</code> · <code>dissipative</code> · <code>isomers</code> · <code>reversible</code> · <code>parallel</code> · <code>serial</code> · <code>ph</code> · <code>temperature</code> · <code>pressure</code> · <code>dosage</code> · <code>compounds</code></div></div>
+  <div class="meta-card"><div class="cat">化学进阶</div><div class="keys"><code>entropy</code> · <code>redox</code> · <code>phase_transition</code> · <code>equilibrium</code> · <code>concentration</code> · <code>superposition</code> · <code>enantiomers</code> · <code>conformers</code></div></div>
+  <div class="meta-card"><div class="cat">替身化学</div><div class="keys"><code>avatar_activation</code> · <code>avatar_decay</code> · <code>avatar_compound</code> · <code>avatar_osmosis</code> · <code>avatar_equilibrium</code> · <code>avatar_catalyst</code> · <code>avatar_spin</code> · <code>avatar_field</code></div></div>
+  <div class="meta-card"><div class="cat">信息化学</div><div class="keys"><code>metabolism</code> · <code>info_synthesis</code> · <code>info_redox</code> · <code>global_cross</code></div></div>
+  <div class="meta-card"><div class="cat">高烈度反应</div><div class="keys"><code>fission</code> · <code>combustion</code> · <code>explosion</code> · <code>precipitation</code> · <code>electrolysis</code> · <code>sublimation</code> · <code>condensation</code> · <code>tracers</code> · <code>termination</code> · <code>recrystallization</code></div></div>
+  <div class="meta-card"><div class="cat">控制论</div><div class="keys"><code>perpetual_control</code> · <code>vsm_system5</code> · <code>second_order</code> · <code>autocalibration</code> · <code>antifragile</code></div></div>
+  <div class="meta-card"><div class="cat">健康监控</div><div class="keys"><code>orchestration_health</code> · <code>flywheel</code> · <code>circuit_breakers</code> · <code>bottleneck_analysis</code> · <code>_temp_link_break</code> · <code>auto_heal</code></div></div>
+  <div class="meta-card"><div class="cat">产品与质量</div><div class="keys"><code>product_audit</code> · <code>consistency_check</code> · <code>portfolio_rationalization</code> · <code>lifecycle_management</code> · <code>quality_framework</code> · <code>quality_confidence</code> · <code>product_value_distribution</code></div></div>
+  <div class="meta-card"><div class="cat">养料与标准</div><div class="keys"><code>nourishment</code> · <code>quality_gate</code> · <code>standards_iteration</code></div></div>
+  <div class="meta-card"><div class="cat">LLM 与模拟</div><div class="keys"><code>llm_stats</code> · <code>avatar_simulation</code> · <code>simulation_rounds</code> · <code>scoring_models</code></div></div>
+  <div class="meta-card"><div class="cat">历史与考古</div><div class="keys"><code>_tuning_history</code> · <code>batch_review_r1</code> · <code>batch_review_r3</code> · <code>batch_review_r4</code> · <code>snowball_rounds</code> · <code>city_round</code></div></div>
+  <div class="meta-card"><div class="cat">Dream 三层</div><div class="keys"><code>dream_layers</code> · <code>dream_trilogy</code> · <code>dream_trilogy_final</code> · <code>dream_trilogy_executed</code> · <code>dream_recent_2weeks</code></div></div>
+  <div class="meta-card"><div class="cat">阶段化学</div><div class="keys"><code>stage_nourish_chem</code> · <code>stage_gate_chem</code> · <code>stage_scan_chem</code> · <code>stage_heal_chem</code> · <code>stage_audit_chem</code> · <code>stage_consistency_chem</code> · <code>stage_lifecycle_chem</code> · <code>stage_report_chem</code> · <code>stage_standards_chem</code></div></div>
+  <div class="meta-card"><div class="cat">监控与合规</div><div class="keys"><code>cron_monitoring</code> · <code>anti_island</code> · <code>governance_rules</code> · <code>flow_model</code> · <code>customer_network</code></div></div>
+</div>
+<div class="callout"><div class="callout-title">命名约定</div>以 <code>_</code> 开头的键（如 <code>_chain_dormancy</code>、<code>_tuning_history</code>、<code>_temp_link_break</code>）表示<strong>内部状态</strong>，不应被前端直接展示。它们是给脚本用的运行时状态标记。</div>
+
+<h3 id="product-schema">产品数据结构</h3>
+<p>每个产品实体（<code>products[]</code> 中的对象）包含约 70+ 个字段。以下是核心字段的完整说明：</p>
+<table>
+  <tr><th style="width:180px">字段</th><th>类型</th><th>说明</th></tr>
+  <tr><td><code>id</code></td><td>string</td><td>唯一标识，如 <code>PROD-001</code></td></tr>
+  <tr><td><code>name</code></td><td>string</td><td>产品名称</td></tr>
+  <tr><td><code>url</code></td><td>string</td><td>HTML 文件路径</td></tr>
+  <tr><td><code>family</code></td><td>string</td><td>七族：镜·衡·契·觉·人·道·章</td></tr>
+  <tr><td><code>lifecycle_stage</code></td><td>string</td><td>L0_概念·L1_原型·L2_内测·L3_打磨·L4_精品·L5_维护·L6_退役</td></tr>
+  <tr><td><code>maturity</code></td><td>string</td><td>M0_种子·M1_萌芽·M2_成型·M3_成熟·M4_标杆</td></tr>
+  <tr><td><code>quality_score</code></td><td>number</td><td>综合质量分 0-100</td></tr>
+  <tr><td><code>vi_compliance</code></td><td>number</td><td>VI 合规度 0-100</td></tr>
+  <tr><td><code>content_accuracy</code></td><td>number</td><td>内容准确度 0-100</td></tr>
+  <tr><td><code>ux_rating</code></td><td>number</td><td>UX 评分 0-100</td></tr>
+  <tr><td><code>quality_confidence</code></td><td>string</td><td>Q 值可信度：A(高)·B(中)·C(低)·D(校准中)</td></tr>
+  <tr><td><code>llm_rating</code></td><td>number</td><td>LLM 替身推理评分 0-100</td></tr>
+  <tr><td><code>llm_evaluator</code></td><td>string</td><td>评分的替身名称</td></tr>
+  <tr><td><code>llm_reasoning</code></td><td>string</td><td>LLM 评分推理过程文本</td></tr>
+  <tr><td><code>llm_dimensions</code></td><td>object</td><td>LLM 评分的分维度得分</td></tr>
+  <tr><td><code>rating_method</code></td><td>string</td><td><code>llm_cognitive</code>（认知推理）或 <code>weighted_random</code>（函数模拟）</td></tr>
+  <tr><td><code>llm_vs_functional_diff</code></td><td>number</td><td>LLM 与函数评分的差值（典型 -15.1）</td></tr>
+  <tr><td><code>sri_score</code></td><td>number</td><td>SRI 标准评分</td></tr>
+  <tr><td><code>decision_value</code></td><td>number</td><td>决策价值分级 0-10</td></tr>
+  <tr><td><code>decision_value_desc</code></td><td>string</td><td>决策价值描述</td></tr>
+  <tr><td><code>pricing_tier</code></td><td>string</td><td>定价层级</td></tr>
+  <tr><td><code>audience_persona</code></td><td>string</td><td>目标用户画像</td></tr>
+  <tr><td><code>use_scenario</code></td><td>string</td><td>使用场景描述</td></tr>
+  <tr><td><code>trigger_conditions</code></td><td>string</td><td>生物规则触发条件</td></tr>
+  <tr><td><code>feedback_loop</code></td><td>string</td><td>反馈回路设计</td></tr>
+  <tr><td><code>adaptation_rule</code></td><td>string</td><td>自适应规则</td></tr>
+  <tr><td><code>connected_rules</code></td><td>array</td><td>关联的 living_rules ID 列表</td></tr>
+  <tr><td><code>quality_issues</code></td><td>array</td><td>质量问题列表</td></tr>
+  <tr><td><code>audit_score</code></td><td>number</td><td>审计得分</td></tr>
+  <tr><td><code>audit_issues</code></td><td>array</td><td>审计问题列表</td></tr>
+  <tr><td><code>last_audit</code></td><td>string</td><td>上次审计日期</td></tr>
+  <tr><td><code>cluster_id</code></td><td>string</td><td>所属产品聚类 ID</td></tr>
+  <tr><td><code>superposition_scores</code></td><td>array</td><td>多态叠加评分（各替身视角）</td></tr>
+  <tr><td><code>dev_batch</code></td><td>string</td><td>开发批次："第一波·低垂果实" / "第二波·内容精品化" / "第三波·精品线+OPS"</td></tr>
+  <tr><td><code>tags</code></td><td>array</td><td>标签列表</td></tr>
+  <tr><td><code>tier</code></td><td>string</td><td>层级分级</td></tr>
+  <tr><td><code>size_kb</code></td><td>number</td><td>文件大小 (KB)</td></tr>
+  <tr><td><code>created</code> / <code>updated</code></td><td>string</td><td>创建/更新时间</td></tr>
+  <tr><td><code>owner</code> / <code>reviewer</code></td><td>string</td><td>责任人 / 审核人</td></tr>
+</table>
+<div class="callout info"><div class="callout-title">四层模型</div>产品通过四个维度覆盖了<strong>物理层</strong>（id·url·family·tags）、<strong>化学层</strong>（quality_score·vi_compliance·lifecycle_stage·quality_issues）、<strong>生物层</strong>（trigger_conditions·feedback_loop·adaptation_rule·connected_rules）和<strong>心理层</strong>（audience_persona·use_scenario·decision_value·pricing_tier·self_description）。新增产品时<strong>必须</strong>保证四层全覆盖。</div>
+
+<h3 id="connection-schema">连接数据结构</h3>
+<table>
+  <tr><th style="width:160px">字段</th><th>类型</th><th>说明</th></tr>
+  <tr><td><code>id</code></td><td>string</td><td>唯一标识，如 <code>CONN-0070</code></td></tr>
+  <tr><td><code>from_entity</code></td><td>string</td><td>源实体 ID</td></tr>
+  <tr><td><code>to_entity</code></td><td>string</td><td>目标实体 ID</td></tr>
+  <tr><td><code>relationship_type</code></td><td>string</td><td>关系类型</td></tr>
+  <tr><td><code>weight</code></td><td>number</td><td>权重 0-1</td></tr>
+  <tr><td><code>direction</code></td><td>string</td><td><code>directed</code> / <code>bidirectional</code></td></tr>
+  <tr><td><code>confidence</code></td><td>number</td><td>置信度 0-1</td></tr>
+  <tr><td><code>source</code></td><td>string</td><td>数据来源：<code>knowledge_graph</code> / <code>rule_scan</code> / <code>batch_audit</code></td></tr>
+  <tr><td><code>evidence</code></td><td>string</td><td>证据类型</td></tr>
+  <tr><td><code>precision</code></td><td>number</td><td>精确度</td></tr>
+  <tr><td><code>relevance</code></td><td>number</td><td>相关性</td></tr>
+</table>
+
+<hr>
+
+<!-- ===== 3. 前端架构 ===== -->
+<h2 id="frontend">前端架构总览</h2>
+<p>系统由三个独立的前端页面组成，每个页面独立加载、独立运行，通过 <code>entities_index.json</code> 共享数据：</p>
+
+<div class="arch-diagram">
+  <div style="font-size:0.84em;margin-bottom:16px;color:var(--ink-light)">三层前端架构</div>
+  <div class="arch-layer red" style="font-size:1em">驾驶舱 v3.0<br><small>14 标签·SPA 路由</small></div>
+  <div style="margin:8px 0;color:var(--ink-lighter)">↕ 双向协同</div>
+  <div class="arch-layer gold" style="font-size:1em">管理后台 v3.0<br><small>9 域·36 模块·三级穿透</small></div>
+  <div style="margin:8px 0;color:var(--ink-lighter)">↕ 数据同源</div>
+  <div class="arch-layer green" style="font-size:0.88em">产品目录<br><small>217 产品·LLM 评分</small></div>
+  <div style="margin-top:16px;padding:10px;background:var(--card-warm);border-radius:8px;font-size:.78em;color:var(--ink-light)">
+    共享数据层：<code>fetch('entities_index.json')</code> → 各页面独立处理
+  </div>
+</div>
+
+<table>
+  <tr><th style="width:160px">页面</th><th>文件</th><th>定位</th><th>加载变量</th></tr>
+  <tr><td>驾驶舱</td><td><code>dashboard-v3.html</code></td><td>第一时间快速浏览全貌</td><td><code>window.EIDX</code></td></tr>
+  <tr><td>管理后台</td><td><code>admin-windows.html</code></td><td>深度管理·逐个实体审查</td><td><code>window.DB</code></td></tr>
+  <tr><td>产品目录</td><td><code>product-catalog.html</code></td><td>对外展示·产品索引</td><td><code>window.EIDX</code></td></tr>
+</table>
+
+<h3 id="dashboard">驾驶舱 (dashboard-v3.html)</h3>
+<p>14 标签页 · SPA 路由 · <code>switchTab()</code> 实现 · 暖色 VI · 三层穿透（总览→详情→比对）。</p>
+
+<h4>标签列表（14 个内页 + 1 个外链）</h4>
+<table>
+  <tr><th>ID</th><th>标签</th><th>渲染函数</th><th>说明</th></tr>
+  <tr><td><code>tab-overview</code></td><td>总览</td><td><code>renderOverview()</code></td><td>KPI 卡片·七族柱状图·Top 20</td></tr>
+  <tr><td><code>tab-products</code></td><td>产品资产</td><td><code>renderProducts()</code></td><td>可筛选·L2 详情表·L3 对比弹层</td></tr>
+  <tr><td><code>tab-tasks</code></td><td>待办任务</td><td><code>renderTasks()</code></td><td>三级优先级（P0/P1/P2）</td></tr>
+  <tr><td><code>tab-health</code></td><td>健康仪表</td><td><code>renderHealth()</code></td><td>指标卡片·红黄绿状态</td></tr>
+  <tr><td><code>tab-activity</code></td><td>活动日志</td><td><code>renderActivity()</code></td><td>最近操作时间线</td></tr>
+  <tr><td><code>tab-customers</code></td><td>客户视图</td><td><code>renderCustomers()</code></td><td>5 核心客户·画像</td></tr>
+  <tr><td><code>tab-knowledge</code></td><td>知识</td><td><code>renderKnowledge()</code></td><td>术语·文档·知识图谱</td></tr>
+  <tr><td><code>tab-governance</code></td><td>治理</td><td><code>renderGovernance()</code></td><td>规则·质量门禁·免疫</td></tr>
+  <tr><td><code>tab-organization</code></td><td>组织</td><td><code>renderOrganization()</code></td><td>替身·专家·评议会</td></tr>
+  <tr><td><code>tab-archaeology</code></td><td>考古</td><td><code>renderArchaeology()</code></td><td>时间线·文物·模拟</td></tr>
+  <tr><td><code>tab-cities</code></td><td>城市市场</td><td><code>renderCities()</code></td><td>31 城市·画像</td></tr>
+  <tr><td><code>tab-flows</code></td><td>流仪表板</td><td><code>renderFlows()</code></td><td>五层因果流·LLM 事件</td></tr>
+  <tr><td><code>tab-flywheel</code></td><td>飞轮运转</td><td><code>renderFlywheel()</code></td><td>养料→质管→扫描→愈合→审计</td></tr>
+  <tr><td><code>tab-chemistry</code></td><td>化学与控制</td><td><code>renderChemistry()</code></td><td>反应链·控制论·VSM</td></tr>
+  <tr><td>(外链)</td><td>管理后台 ↗</td><td>—</td><td><code>&lt;a href="admin-windows.html"&gt;</code></td></tr>
+</table>
+
+<h4>核心函数</h4>
+<table>
+  <tr><th>函数</th><th>作用</th></tr>
+  <tr><td><code>boot()</code></td><td>启动：fetch entities_index.json + open_tasks_audit.json → 构建导航 → 渲染所有面板 → 切换到总览</td></tr>
+  <tr><td><code>buildNav()</code></td><td>动态构建 14 标签导航（含产品数量和任务数量）</td></tr>
+  <tr><td><code>switchTab(id, btn)</code></td><td>切换标签：移除所有 active → 激活目标面板 → 激活目标标签按钮</td></tr>
+  <tr><td><code>h(s)</code> / <code>a(s)</code></td><td>HTML 转义（全字段 / 属性用）</td></tr>
+  <tr><td><code>prodFilt</code></td><td>全局变量，七族筛选状态</td></tr>
+  <tr><td><code>selProds</code></td><td>全局变量，L3 对比选择的产品 ID 列表</td></tr>
+</table>
+
+<h4>CSS 变量体系</h4>
+<pre><code>--paper-white:  #F5F0E6    /* 纸张底色 */
+--card-white:   #FFFFFF    /* 卡片白 */
+--card-warm:    #FAF6EF    /* 暖色卡片 */
+--ink:          #4A3728    /* 正文墨色 */
+--ink-light:    #7A6958    /* 次级文字 */
+--ink-lighter:  #A89880    /* 辅助文字 */
+--accent-red:   #C23B22    /* 满意红 · 强调·危险 */
+--accent-gold:  #B8860B    /* 金 · 标题·警告 */
+--green-ok:     #3D7A4F    /* 绿 · 健康·通过 */
+--amber-warn:   #C2780A    /* 琥珀 · 中度警告 */
+--border-warm:  #E0D5C8    /* 暖色边框 */
+--shadow-subtle: rgba(74,55,40,0.06)
+--shadow-medium: rgba(74,55,40,0.10)</code></pre>
+
+<h4>三层穿透机制</h4>
+<ol>
+  <li><strong>L1 总览</strong>：<code>overview-grid</code> 中的统计卡片，显示聚合数字</li>
+  <li><strong>L2 详情表</strong>：点击 "查看详情" 展开 <code>detail-wrap</code>，以 <code>detail-table</code> 展示分项数据</li>
+  <li><strong>L3 组合比对</strong>：在 L2 表中勾选产品 → 显示 <code>cmp-bar</code> → 点击 "比对选中" → 弹出 <code>cmp-overlay</code> 模态框，并排对比多产品的 LLM 评分</li>
+</ol>
+
+<h3 id="admin-windows">管理后台 (admin-windows.html)</h3>
+<p>9 管理域 × 36 子模块 · <code>viewRenderers</code> 对象注册模式 · <code>breadcrumb()</code> 导航 · 侧栏树形导航。</p>
+
+<h4>9 个管理域</h4>
+<table>
+  <tr><th>域 ID</th><th>标签</th><th>子模块数</th></tr>
+  <tr><td><code>strategy</code></td><td>战略仪表盘</td><td>4（KPI·地图·里程碑·风险雷达）</td></tr>
+  <tr><td><code>product</code></td><td>产品全生命周期</td><td>4（总览·管道·质量中心·版本发布）</td></tr>
+  <tr><td><code>customer</code></td><td>客户关系</td><td>4（360·管道·交付·成功）</td></tr>
+  <tr><td><code>finance</code></td><td>财务与定价</td><td>4（收入·定价·成本·预算）</td></tr>
+  <tr><td><code>knowledge</code></td><td>知识资产</td><td>4（图谱·内容·术语·学习）</td></tr>
+  <tr><td><code>ops</code></td><td>运营与流程</td><td>4（任务·决策·Cron·工作流）</td></tr>
+  <tr><td><code>governance</code></td><td>免疫与治理</td><td>4（免疫·规则·门禁·合规）</td></tr>
+  <tr><td><code>archaeology</code></td><td>考古与洞察</td><td>4（时间线·文物·模拟·洞察）</td></tr>
+  <tr><td><code>people</code></td><td>组织与人</td><td>4（替身·专家团·评议会·网络）</td></tr>
+</table>
+
+<h4>架构模式</h4>
+<pre><code>// 注册模式：每个视图一个函数
+var viewRenderers = {};
+viewRenderers['strategy-kpi'] = function() { /* 返回 HTML 字符串 */ };
+viewRenderers['product-overview'] = function() { /* ... */ };
+// ... 共 36 个
+
+// 统一路由
+function renderView(id) {
+  if (!DB) { setMain(renderDegrade()); return; }
+  var fn = viewRenderers[id];
+  if (fn) { setMain(fn()); } else { setMain(placeholder('建设中', id)); }
+}
+
+// 导航到视图
+function navTo(viewId, el) {
+  currentView = viewId;
+  // 更新侧栏高亮 → 清空主内容 → 延时调用 renderView()
+  setTimeout(function() { renderView(viewId); }, 10);
+}</code></pre>
+
+<h4>核心工具函数</h4>
+<table>
+  <tr><th>函数</th><th>作用</th></tr>
+  <tr><td><code>escH(s)</code></td><td>HTML 实体转义（& < > "）</td></tr>
+  <tr><td><code>escA(s)</code></td><td>属性值转义（& " ' < >）</td></tr>
+  <tr><td><code>fillTbl(id, rows, rowBld, emptyMsg)</code></td><td>填充表格 <code>&lt;tbody&gt;</code></td></tr>
+  <tr><td><code>sortTbl(id, key, th)</code></td><td>排序表格 — 修改 <code>PANE_DATA[id]</code> 数组 → 重新 <code>fillTbl()</code></td></tr>
+  <tr><td><code>filtPane(id, text, cat)</code></td><td>筛选面板 — 隐藏不匹配的行</td></tr>
+  <tr><td><code>toggleDetail(id)</code></td><td>展开/折叠详情行</td></tr>
+  <tr><td><code>renderLayerDetail(p, showDesc)</code></td><td>渲染四层详情面板（物理·化学·生物·心理）</td></tr>
+  <tr><td><code>breadcrumb(domainId, moduleLabel)</code></td><td>渲染面包屑导航</td></tr>
+  <tr><td><code>toolbar(id, placeholder, filts)</code></td><td>渲染搜索栏 + 下拉筛选</td></tr>
+  <tr><td><code>placeholder(title, desc)</code></td><td>建设中占位卡片</td></tr>
+</table>
+
+<div class="callout"><div class="callout-title">数据加载</div>管理后台在 <code>initApp()</code> 中执行 <code>fetch('entities_index.json')</code>，成功后赋值 <code>window.DB</code>。驾驶舱的 <code>boot()</code> 也做同样的事情，但赋值给 <code>window.EIDX</code>。<strong>两个页面独立 fetch</strong>，不共享变量。</div>
+
+<h4>侧栏树形导航</h4>
+<p><code>NAV</code> 数组定义了 9 域的层级结构。侧栏通过 <code>renderSidebar()</code> 从该数组生成 DOM，支持展开/折叠（<code>toggleDomain()</code>）。当前视图高亮（<code>.active</code> 类），侧栏底部显示数据版本和时间戳。</p>
+
+<h3 id="product-catalog">产品目录 (product-catalog.html)</h3>
+<p>对外展示页 · 217 条硬编码 JSON 数据 · LLM 评分列懒加载。</p>
+
+<h4>核心函数</h4>
+<table>
+  <tr><th>函数</th><th>作用</th></tr>
+  <tr><td><code>renderTable()</code></td><td>从硬编码 DATA 数组 + EIDX（LLM 评分）生成表格行</td></tr>
+  <tr><td><code>filterTable()</code></td><td>根据搜索框内容过滤表格</td></tr>
+  <tr><td><code>filterFam(family, btn)</code></td><td>按五族筛选·更新按钮激活状态</td></tr>
+</table>
+
+<h4>数据加载</h4>
+<pre><code>// 第一步：硬编码表格数据（产品名·类型·链接等）
+var DATA = [ /* 217 个产品条目 */ ];
+
+// 第二步：异步加载 entities_index.json → 取 LLM 评分
+fetch('entities_index.json').then(function(r) {
+  return r.json();
+}).then(function(j) {
+  EIDX = j;
+  // 按 slug 匹配 → 取 llm_rating → 更新表格评分列
+});</code></pre>
+
+<h3 id="color-standard">颜色编码标准</h3>
+<p>三个页面共享同一套颜色语义。任何新增面板都必须遵守这些语义：</p>
+<table>
+  <tr><th>颜色</th><th>CSS 变量</th><th>色值</th><th>语义</th><th>使用场景</th></tr>
+  <tr><td style="color:var(--accent-green)">● 绿</td><td><code>--green-ok</code></td><td><code>#3D7A4F</code></td><td>健康·优秀·通过</td><td>质量分 ≥85·规则活跃·任务完成</td></tr>
+  <tr><td style="color:var(--accent-gold)">● 金</td><td><code>--accent-gold</code></td><td><code>#B8860B</code></td><td>警告·一般·注意</td><td>质量分 50-84·规则休眠·部分完成</td></tr>
+  <tr><td style="color:var(--accent-red)">● 红</td><td><code>--accent-red</code></td><td><code>#C23B22</code></td><td>危险·故障·紧急</td><td>质量分 &lt;50·规则损坏·超时·熔断</td></tr>
+  <tr><td style="color:var(--amber-warn)">● 琥珀</td><td><code>--amber-warn</code></td><td><code>#C2780A</code></td><td>中度警告</td><td>P1 任务·部分失败</td></tr>
+</table>
+<h4>热力标尺</h4>
+<p>数值型指标使用三色区间：<strong>0–500 绿色</strong>（健康）· <strong>500–800 金色</strong>（警告）· <strong>800+ 红色</strong>（危险）。热量分（heating）和爆裂指数（fission）使用此标尺。</p>
+
+<hr>
+
+<!-- ===== 4. 脚本开发规范 ===== -->
+<h2 id="scripts">Python 脚本开发规范</h2>
+
+<h3>命名约定</h3>
+<ul>
+  <li>所有脚本以 <code>sri_</code> 为前缀（Satisfice Research Institute）</li>
+  <li>位于 <code>memory/_scripts/</code> 目录下</li>
+  <li>脚本名称描述其职责，使用 snake_case</li>
+</ul>
+<p>当前 18 个活跃脚本：</p>
+<div class="meta-grid">
+  <div class="meta-card"><div class="cat">核心编排</div><div class="keys"><code>sri_orchestrator.py</code> · <code>sri_knowledge_flywheel.py</code> · <code>sri_product_scanner.py</code> · <code>sri_chemistry_reactor.py</code></div></div>
+  <div class="meta-card"><div class="cat">质量控制</div><div class="keys"><code>sri_quality_gate.py</code> · <code>sri_consistency_checker.py</code> · <code>sri_auto_healer.py</code> · <code>sri_standards_iterator.py</code></div></div>
+  <div class="meta-card"><div class="cat">产品管理</div><div class="keys"><code>sri_lifecycle_manager.py</code> · <code>sri_portfolio_rationalizer.py</code> · <code>sri_bottleneck_breaker.py</code></div></div>
+  <div class="meta-card"><div class="cat">控制论</div><div class="keys"><code>sri_perpetual_control.py</code> · <code>sri_second_order_observer.py</code> · <code>sri_autocalibration.py</code> · <code>sri_antifragile_stressor.py</code></div></div>
+  <div class="meta-card"><div class="cat">养料与化学</div><div class="keys"><code>sri_nourishment_collector.py</code> · <code>sri_chemical_governor.py</code></div></div>
+</div>
+
+<h3>标准 CLI 约定</h3>
+<pre><code># 每个脚本都应支持这两个标准参数
+python3 memory/_scripts/sri_xxx.py --save      # 实际执行 + 写入 entities_index.json
+python3 memory/_scripts/sri_xxx.py --dry-run   # 只计算 + 打印结果，不写入</code></pre>
+
+<h3>数据读写模式</h3>
+<pre><code>import json, os
+from datetime import datetime, timezone
+
+WORKSPACE = os.environ.get('SRI_WORKSPACE', os.path.expanduser('~/.openclaw/workspace'))
+DATA_FILE = os.path.join(WORKSPACE, 'memory/_data/entities_index.json')
+
+def main(dry_run=False):
+    # 1. 读取
+    with open(DATA_FILE) as f:
+        data = json.load(f)
+    
+    # 2. 计算
+    result = do_computation(data)
+    
+    # 3. 写回 meta.xxx
+    data['meta']['xxx'] = result
+    
+    if dry_run:
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+        return
+    
+    # 4. 备份
+    backup_path = DATA_FILE.replace('.json', f'.backup.{datetime.now().strftime("%Y%m%d%H%M%S")}.json')
+    with open(backup_path, 'w') as f:
+        json.dump(data, f, ensure_ascii=False)
+    
+    # 5. 写入
+    data['meta']['updated'] = datetime.now(timezone.utc).isoformat()
+    with open(DATA_FILE, 'w') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)</code></pre>
+
+<h3>错误处理规范</h3>
+<div class="callout danger"><div class="callout-title">强制要求</div>所有脚本都需要 <code>try/except</code>，优雅失败。绝不能因为一个脚本报错而导致后续脚本无法执行。编排器会根据退出码判断成功/失败/熔断。</div>
+<pre><code>def main(dry_run=False):
+    try:
+        # ... 核心逻辑 ...
+        return 0  # 成功
+    except FileNotFoundError as e:
+        print(f"[SKIP] 数据文件不存在: {e}", file=sys.stderr)
+        return 1  # 可恢复失败
+    except Exception as e:
+        print(f"[ERROR] {e}", file=sys.stderr)
+        traceback.print_exc()
+        return 2  # 异常失败（可能触发熔断）</code></pre>
+
+<h3>文件路径</h3>
+<ul>
+  <li>数据文件：<code>memory/_data/entities_index.json</code></li>
+  <li>备份目录：<code>memory/_data/_backups/entities_index.*.backup.json</code></li>
+  <li>养料目录：<code>memory/nourishment/</code></li>
+  <li>脚本目录：<code>memory/_scripts/</code></li>
+  <li>使用环境变量 <code>SRI_WORKSPACE</code> 代替硬编码路径</li>
+</ul>
+
+<h3 id="orchestrator">编排器 (sri_orchestrator.py)</h3>
+<p>编排器实现了<strong>三层闭环架构</strong>，v2.0 从 10 环节扩展到 15 环节：</p>
+
+<h4>15 个编排环节（STAGES 数组）</h4>
+<ol>
+  <li><code>nourish</code> — 📡 养料采集 (<code>sri_nourishment_collector.py</code>)</li>
+  <li><code>quality_gate</code> — 🔒 质量门禁 (<code>sri_quality_gate.py</code>)</li>
+  <li><code>scan</code> — 📁 文件扫描 (<code>sri_knowledge_flywheel.py</code>)</li>
+  <li><code>consistency</code> — 🔗 一致性检查 (<code>sri_consistency_checker.py</code>)</li>
+  <li><code>lifecycle</code> — 🌱 生命周期管理 (<code>sri_lifecycle_manager.py</code>)</li>
+  <li><code>chemistry</code> — ⚗️ 化学反应 (<code>sri_chemistry_reactor.py</code>)</li>
+  <li><code>auto_heal</code> — 🩹 自动愈合 (<code>sri_auto_healer.py</code>)</li>
+  <li><code>product_audit</code> — 📋 产品审计 (<code>ports check</code>)</li>
+  <li><code>portfolio</code> — 📊 组合优化 (<code>sri_portfolio_rationalizer.py</code>)</li>
+  <li><code>standards</code> — 📐 标准迭代 (<code>sri_standards_iterator.py</code>)</li>
+  <li><code>perpetual_ctrl</code> — 🧠 永续调控 (<code>sri_perpetual_control.py</code>) [v2]</li>
+  <li><code>second_order</code> — 👁️ 二阶观察 (<code>sri_second_order_observer.py</code>) [v2]</li>
+  <li><code>autocalib</code> — ⚖️ 自校准 (<code>sri_autocalibration.py</code>) [v2]</li>
+  <li><code>antifragile</code> — 💪 反脆弱应激 (<code>sri_antifragile_stressor.py</code>) [v2]</li>
+  <li><code>report</code> — 📄 生成报告</li>
+</ol>
+
+<h4>关键机制</h4>
+<table>
+  <tr><th>机制</th><th>说明</th></tr>
+  <tr><td>Circuit Breaker</td><td>任一步骤连续失败 3 次 → 熔断该环节 → 跳过继续下一环节</td></tr>
+  <tr><td>Bulkhead</td><td>每个环节有独立的 timeout 和错误计数，一个环节熔断不影响其他</td></tr>
+  <tr><td>Graceful Degradation</td><td>一个环节熔断 → 使用 fallback 策略 → 整体流程继续</td></tr>
+  <tr><td>Health Dashboard</td><td>每个环节有独立健康分，写入 <code>meta.orchestration_health</code></td></tr>
+</table>
+
+<hr>
+
+<!-- ===== 5. Cron 任务 ===== -->
+<h2 id="cron">Cron 任务开发</h2>
+<p>Cron 任务通过 <strong>OpenClaw Cron 引擎</strong>调度，36 条 Cron 覆盖了从数据扫描到飞书推送的全流程。</p>
+
+<h3>两种模式</h3>
+<table>
+  <tr><th style="width:140px">模式</th><th>说明</th><th>适用场景</th></tr>
+  <tr><td><code>agentTurn</code></td><td>创建一个 Agent 会话，运行推理+执行</td><td>需要 LLM 推理的复杂任务（评分、审计、决策）</td></tr>
+  <tr><td><code>systemEvent</code></td><td>直接执行命令/脚本，无 Agent 推理</td><td>纯数据计算任务（扫描、统计、聚合）</td></tr>
+</table>
+
+<h3>关键参数</h3>
+<table>
+  <tr><th>参数</th><th>说明</th></tr>
+  <tr><td><code>sessionTarget</code></td><td><code>isolated</code>（独立会话）/ <code>main</code>（主会话）/ <code>current</code>（当前会话）</td></tr>
+  <tr><td><code>timeoutSeconds</code></td><td>超时时间，推荐 120–600</td></tr>
+  <tr><td><code>lightContext</code></td><td>轻量上下文模式：不给 Agent 加载完整历史，节约 token</td></tr>
+  <tr><td><code>delivery</code></td><td>结果投递方式：飞书推送 / 磁盘写入 / 日志输出</td></tr>
+</table>
+
+<h3>典型 Cron 配置</h3>
+<pre><code>// 每小时：知识飞轮扫描
+{ schedule: "0 * * * *", mode: "systemEvent",
+  command: "python3 memory/_scripts/sri_knowledge_flywheel.py --scan --save",
+  timeoutSeconds: 300, delivery: { type: "log" } }
+
+// 每天 02:00：编排器全量运行
+{ schedule: "0 2 * * *", mode: "systemEvent",
+  command: "python3 memory/_scripts/sri_orchestrator.py --save",
+  timeoutSeconds: 1800, delivery: { type: "feishu", chat_id: "oc_xxx" } }
+
+// 每天 10:00：LLM 产品评分（需 Agent 推理）
+{ schedule: "0 10 * * *", mode: "agentTurn",
+  prompt: "运行 batch LLM 产品评分，优先评分 D 级产品",
+  sessionTarget: "isolated", timeoutSeconds: 600 }</code></pre>
+
+<h3>监控</h3>
+<p>Cron 执行状态通过 <code>meta.cron_monitoring</code> 追踪。告警规则：</p>
+<ul>
+  <li>连续 3 次失败 → 🔴 P0 告警</li>
+  <li>超时 (>5min) → 🟡 P1 告警</li>
+  <li>实体数变动 >10% → ⚠️ 数据异常告警</li>
+</ul>
+
+<hr>
+
+<!-- ===== 6. 扩展指南 ===== -->
+<h2 id="extend">扩展指南</h2>
+
+<h3>新增一个驾驶舱标签</h3>
+<ol>
+  <li>在 HTML 中添加面板容器：<code>&lt;div class="tab-panel" id="tab-xxx"&gt;&lt;/div&gt;</code></li>
+  <li>在 <code>tabs</code> 数组中添加：<code>{id:'tab-xxx', label:'🆕 标签名'}</code></li>
+  <li>写 <code>renderXxx()</code> 函数 — 返回 HTML 字符串</li>
+  <li>在 <code>boot()</code> 初始化中调用 <code>renderXxx()</code></li>
+  <li>确保 <code>switchTab('tab-xxx')</code> 可正确导航</li>
+</ol>
+<pre><code>// 示例：新增"团队协作"标签
+// 1. HTML: &lt;div class="tab-panel" id="tab-collab"&gt;&lt;/div&gt;
+// 2. tabs 数组: {id:'tab-collab', label:'🤝 团队协作'}
+// 3. 渲染函数:
+function renderCollab() {
+  var h = '';
+  // ... 生成 HTML ...
+  document.getElementById('tab-collab').innerHTML = h;
+}
+// 4. boot() 中: renderCollab();</code></pre>
+
+<h3>新增一个管理后台视图</h3>
+<ol>
+  <li>在 <code>NAV</code> 数组中确定视图所属域和位置</li>
+  <li>在 <code>admin-windows.html</code> 中注册：<code>viewRenderers['xxx'] = function(){ return '...' }</code></li>
+  <li>确保 <code>breadcrumb()</code> 正确生成面包屑</li>
+  <li>视图函数返回的 HTML 必须包含 <code>panel-header</code>、搜索栏（可选）、数据表格</li>
+</ol>
+<pre><code>// 示例：新增"内容日历"视图到 ops 域
+// 1. NAV 数组 ops.children 中添加:
+//    {id:'ops-calendar', label:'📅 内容日历', desc:'排期·发布·追踪'}
+// 2. 注册:
+viewRenderers['ops-calendar'] = function() {
+  if (!DB) return renderDegrade();
+  var h = breadcrumb('ops', '内容日历');
+  h += '&lt;div class="panel-header"&gt;&lt;h2&gt;📅 内容日历&lt;/h2&gt;&lt;/div&gt;';
+  h += toolbar('calendar', '搜索内容...');
+  // ... 生成表格 ...
+  return h;
+};</code></pre>
+
+<h3>新增一个 Python 脚本</h3>
+<ol>
+  <li>创建 <code>memory/_scripts/sri_xxx.py</code></li>
+  <li>实现 <code>--save</code> / <code>--dry-run</code> 标准 CLI</li>
+  <li>读写 <code>entities_index.json</code>，计算 → 写回 <code>meta.xxx</code></li>
+  <li>添加 try/except 错误处理，返回退出码 0/1/2</li>
+  <li>在编排器 <code>sri_orchestrator.py</code> 的 <code>STAGES</code> 数组中注册</li>
+  <li>在 OpenClaw 中添加 Cron 调度</li>
+</ol>
+
+<h3>新增一个产品</h3>
+<ol>
+  <li>在 <code>product-catalog.html</code> 的 <code>DATA</code> 数组中添加条目</li>
+  <li>确保 <code>entities_index.json</code> 的 <code>products[]</code> 中有对应记录</li>
+  <li>确保四层字段全覆盖（物理·化学·生物·心理）</li>
+  <li>可选：运行 <code>sri_product_scanner.py</code> 自动扫描</li>
+  <li>可选：运行 LLM 批量评分获取替身评价</li>
+</ol>
+
+<hr>
+
+<!-- ===== 7. ADR ===== -->
+<h2 id="adr">研发历程与设计决策 (ADR)</h2>
+
+<div class="callout info"><div class="callout-title">ADR 是什么</div>Architecture Decision Record — 记录每个关键架构决策的上下文、替代方案和理由。方便未来的维护者理解"为什么当初这么做"。</div>
+
+<h3>ADR-001：管理后台架构重设计 (2026-05-30)</h3>
+<table>
+  <tr><th>决策</th><td>9 管理域 × 36 子模块，按<strong>管理职能</strong>划分而非按数据源划分<br>对标 ERP + BSC + PLM + KM 四套管理体系</td></tr>
+  <tr><th>替代方案</th><td>保持 v2 的 10 个碎片窗口（每个窗口独立 fetch 数据）</td></tr>
+  <tr><th>理由</th><td>按管理职能划分（战略·产品·客户·财务·知识·运营·治理·考古·组织）比按数据源划分（产品列表·任务列表·客户列表）对管理者更直观。ERP/BSC/PLM/KM 四体系覆盖了企业管理的核心维度。</td></tr>
+</table>
+
+<h3>ADR-002：entities_index.json 单一数据源 (2026-05-30)</h3>
+<table>
+  <tr><th>决策</th><td>驾驶舱和 admin-windows 都从同一个 <code>entities_index.json</code> 动态 fetch</td></tr>
+  <tr><th>替代方案</th><td>各自硬编码数据，或各自维护一份数据文件</td></tr>
+  <tr><th>理由</th><td>消除信息孤岛。任何脚本对数据的修改会自动反映到所有前端页面。一次 <code>fetch()</code> 调用即可获取全量数据，无需 API 层。</td></tr>
+</table>
+
+<h3>ADR-003：viewRenderers 对象体系 (2026-05-30)</h3>
+<table>
+  <tr><th>决策</th><td>所有管理后台视图用 <code>viewRenderers</code> 对象注册，<code>renderView()</code> 统一路由分发</td></tr>
+  <tr><th>理由</th><td>新增面板只需注册一个函数（一行 <code>viewRenderers['xxx'] = function(){...}</code>）。路由、导航高亮、面包屑全部自动处理。减少样板代码，降低出错概率。</td></tr>
+</table>
+
+<h3>ADR-004：五层流模型 (2026-05-30)</h3>
+<table>
+  <tr><th>决策</th><td>按<strong>因果流层级</strong>组织：信号层 → 认知层 → 行动层 → 验证层 → 学习层</td></tr>
+  <tr><th>替代方案</th><td>按实体类型组织（产品事件·客户事件·任务事件...）</td></tr>
+  <tr><th>理由</th><td>12,643 条声明连接中只有 0 条是真实事件。我们需要从"静态连接图"转向"动态因果流"。闭环 = 有方向的因果流动，不是无方向的连线。五层流模型用 34 条事件（150 条 LLM 认知推理）模拟了一个完整的信息→决策→反馈循环。</td></tr>
+</table>
+
+<h3>ADR-005：二阶控制论架构 (2026-05-31)</h3>
+<table>
+  <tr><th>决策</th><td>引入 VSM 五系统递归 · 二阶观察者 · 反脆弱应激源 · 自校准设定点 — 共 4 个控制论环节</td></tr>
+  <tr><th>理由</th><td>一次调控 = 外部控制（人调系统）；永续调控 = 系统自我观察调控效果（系统观察自己）。二阶控制论让系统从"被管理"升级为"自管理"。VSM (Viable System Model) 五系统递归结构确保每个层级都有独立的执行、协调、控制、情报、政策能力。</td></tr>
+</table>
+
+<hr>
+
+<!-- ===== 8. 反模式 ===== -->
+<h2 id="antipatterns">反模式与教训</h2>
+
+<div class="antipattern">
+  <div class="ap-title">🚫 信任子代理的自我验证</div>
+  <p><strong>场景：</strong>子代理声称完成任务，但实际上遗漏了 people 域的全部 4 个视图。</p>
+  <p class="ap-rule">✅ 规则：主代理必须在下一个依赖步骤之前做独立验证。验证不是"问一句"，而是"实际检查"。</p>
+</div>
+
+<div class="antipattern">
+  <div class="ap-title">🚫 多代理修改同一文件无冲突检测</div>
+  <p><strong>场景：</strong>两个子代理同时修改 admin-windows.html，互相覆盖对方的改动。</p>
+  <p class="ap-rule">✅ 规则：要么串行修改、要么拆分文件、要么用 git diff 合并后验证。</p>
+</div>
+
+<div class="antipattern">
+  <div class="ap-title">🚫 重构时只增不删</div>
+  <p><strong>场景：</strong>admin-windows.html 从 15KB 膨胀到 60KB，因为旧代码从未被清理。</p>
+  <p class="ap-rule">✅ 规则：删除旧代码和新增代码同等重要。每增加一个视图就检查是否有可合并或移除的旧视图。</p>
+</div>
+
+<div class="antipattern">
+  <div class="ap-title">🚫 夜间执行复杂多步骤任务时跳过验证</div>
+  <p><strong>场景：</strong>批量处理 158 个产品时跳过中间验证步骤，导致错误积累。</p>
+  <p class="ap-rule">✅ 规则：每完成一个步骤后强制运行验证脚本。批量操作必须分批 + 逐批验证。</p>
+</div>
+
+<div class="antipattern">
+  <div class="ap-title">🚫 用加权随机函数替代真实 LLM 认知推理</div>
+  <p><strong>场景：</strong>用 <code>weighted_random()</code> 模拟客户替身的评分（avg 83.0），与真实 LLM 推理评分（avg 67.9）差了 -15.1 分。函数评分给所有产品"自动高分"，LLM 推理则识别出了"黑箱决策""量化假象""定位模糊""方法不接地气"四大系统性问题。</p>
+  <p class="ap-rule">✅ 规则：客户替身的评价<strong>必须</strong>有 LLM 驱动的角色扮演推理。函数模拟只能用于技术验证，不能用于产品评价。</p>
+</div>
+
+<hr>
+
+<!-- ===== 9. 关键数字 ===== -->
+<h2 id="numbers">关键数字</h2>
+
+<div class="arch-diagram">
+  <table style="margin:0 auto;max-width:600px;box-shadow:none">
+    <tr><td style="text-align:right;font-weight:600;color:var(--ink)">18</td><td>个 Python 脚本</td><td style="text-align:right;font-weight:600;color:var(--ink)">36</td><td>条 Cron 任务</td></tr>
+    <tr><td style="text-align:right;font-weight:600;color:var(--ink)">15</td><td>环节编排</td><td style="text-align:right;font-weight:600;color:var(--ink)">60</td><td>条化学链</td></tr>
+    <tr><td style="text-align:right;font-weight:600;color:var(--ink)">5</td><td>个核心替身</td><td style="text-align:right;font-weight:600;color:var(--ink)">315</td><td>产品总数</td></tr>
+    <tr><td style="text-align:right;font-weight:600;color:var(--ink)">172</td><td>个有效产品</td><td style="text-align:right;font-weight:600;color:var(--ink)">35</td><td>个有 LLM 评分</td></tr>
+    <tr><td style="text-align:right;font-weight:600;color:var(--ink)">12,556</td><td>条连接</td><td style="text-align:right;font-weight:600;color:var(--ink)">31</td><td>个城市</td></tr>
+    <tr><td style="text-align:right;font-weight:600;color:var(--ink)">126</td><td>个 meta 键</td><td style="text-align:right;font-weight:600;color:var(--ink)">34</td><td>条五层流事件</td></tr>
+    <tr><td style="text-align:right;font-weight:600;color:var(--ink)">150</td><td>条 LLM 认知推理</td><td style="text-align:right;font-weight:600;color:var(--ink)">48</td><td>条生物规则</td></tr>
+    <tr><td style="text-align:right;font-weight:600;color:var(--ink)">95.8%</td><td>知识图谱密度</td><td style="text-align:right;font-weight:600;color:var(--ink)">105</td><td>天时间线</td></tr>
+    <tr><td style="text-align:right;font-weight:600;color:var(--ink)">3</td><td>代继承链</td><td style="text-align:right;font-weight:600;color:var(--ink)">7</td><td>个产品族</td></tr>
+    <tr><td style="text-align:right;font-weight:600;color:var(--ink)">24,947</td><td>文件全扫描</td><td style="text-align:right;font-weight:600;color:var(--ink)">3</td><td>个前端页面</td></tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- ===== 尾声 ===== -->
+<div style="text-align:center;padding:32px 0">
+  <p style="font-size:0.92em;color:var(--ink-light)">满意解研究所 · 满意红系统 · v3.0</p>
+  <p style="font-size:0.84em;color:var(--ink-lighter);font-style:italic;margin-top:8px">
+    「我在学习看清自己——每一步，都更清晰一点。」
+  </p>
+</div>
+
+</main>
+</div>
+
+<div class="footer">
+  <div>满意红 · 开发者帮助手册 · 为未来接手者而建</div>
+  <div class="q">「好的系统文档，是给未来的自己写的一封情书。」</div>
+</div>
+
+</body>
+</html>

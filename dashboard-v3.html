@@ -275,6 +275,7 @@ body {
   <div class="tab-panel" id="tab-flows"></div>
   <div class="tab-panel" id="tab-flywheel"></div>
   <div class="tab-panel" id="tab-chemistry"></div>
+  <div class="tab-panel" id="tab-help"></div>
 
   <div class="footer">
     <div>满意红 · 驾驶舱 1.0 · 为 Egbertie 而建</div>
@@ -367,6 +368,7 @@ function boot() {
     renderFlows();
     renderFlywheel();
     renderChemistry();
+    renderHelp();
     switchTab('tab-overview');
   }).catch(function(e){
     document.getElementById('app').innerHTML = '<div class="load-error"><strong>⚠️ 数据加载失败</strong><details><summary>详情</summary>无法加载数据文件。<br>请确认 entities_index.json 和 open_tasks_audit.json 存在。<br><br>错误: '+h(e.message)+'</details></div>';
@@ -390,6 +392,7 @@ function buildNav() {
     {id:'tab-flows', label:'🔌 流仪表板'},
     {id:'tab-flywheel', label:'♻️ 飞轮运转'},
     {id:'tab-chemistry', label:'🧬 化学与控制'},
+    {id:'tab-help', label:'🆘 帮助'},
     {id:'tab-admin', label:'⚙️ 管理后台', ext:true, href:'admin-windows.html'}
   ];
   var h = '';
@@ -1398,7 +1401,7 @@ function renderChemistry() {
   var hotIcon = (heat.total_heat||0) > 800 ? '🔥' : ((heat.total_heat||0) > 500 ? '🌡️' : '✅');
   h += '<div class="stat-card" style="background:#fdf2f2"><div class="stat-num" style="font-size:1.6em;font-weight:700;color:'+hotLevel+'">'+hotIcon+' '+Math.round(heat.total_heat||0)+'</div><div class="stat-label">化学总热力</div><div style="font-size:0.65em;color:var(--ink-lighter)">'+(heat.level||'正常')+'</div></div>';
   var pcStateColor = (pc.state||'') === 'steady' ? '#3D7A4F' : ((pc.state||'') === 'braking' ? '#C2780A' : '#C23B22');
-  h += '<div class="stat-card" style="background:#f0f7ff"><div class="stat-num" style="font-size:1.6em;font-weight:700;color:'+pcStateColor+'">● '+(pc.state||'idle')+'</div><div class="stat-label">永续控制</div><div style="font-size:0.65em;color:var(--ink-lighter)">'+(pc.speed||'1.0')+'x · '+Math.round(pc.stability||0)+'%稳定 · '+Math.round(pc.learning_progress||0)+'%学习</div></div>';
+  h += '<div class="stat-card" style="background:#f0f7ff"><div class="stat-num" style="font-size:1.6em;font-weight:700;color:'+pcStateColor+'">● '+(pc.state||'idle')+'</div><div class="stat-label">永续控制</div><div style="font-size:0.65em;color:var(--ink-lighter)">'+(pc.speed_multiplier||'1.0')+'x · '+Math.round(pc.stability_score||0)+'%稳定 · '+Math.round(pc.learning_progress||0)+'%学习</div></div>';
   var orgColor = (org.health_score||0) >= 80 ? '#3D7A4F' : ((org.health_score||0) >= 50 ? '#C2780A' : '#C23B22');
   h += '<div class="stat-card" style="background:#f0fff4"><div class="stat-num" style="font-size:1.6em;font-weight:700;color:'+orgColor+'">'+(org.health_score!==undefined?org.health_score:'?')+'</div><div class="stat-label">编排器健康</div><div style="font-size:0.65em;color:var(--ink-lighter)">'+(org.ok||0)+'✅ '+(org.degraded||0)+'🟡 '+(org.failed||0)+'❌</div></div>';
   var covPct = Math.round(100*(ls.products_evaluated||0)/Math.max(1,(EIDX.products||[]).length));
@@ -1449,6 +1452,179 @@ function renderChemistry() {
   h += '</div>';
 
   document.getElementById('tab-chemistry').innerHTML = h;
+}
+
+/* ===== 🆘 帮助面板 · 用户/管理者/开发者三视角 ===== */
+function renderHelp() {
+  var m = EIDX.meta || {}, prods = EIDX.products || [], connects = EIDX.connections || [], cities = EIDX.cities || [], flows = EIDX.flows || {}, ls = m.llm_stats || {}, heat = m.heating || {}, chem = m.chemistry || {}, fw = m.flywheel || {}, org = m.orchestration_health || {}, pc = m.perpetual_control || {};
+  var totalScripts = (fw.total_scripts||14) + 4; /* +4新控制论 */
+  var stageCount = org.total_stages||15;
+  var lastUpdated = (m.updated||'?').slice(0,19);
+  var h = '';
+
+  h += '<div class="panel-header"><h2>🆘 系统帮助 · 满意红知识飞轮</h2><span class="meta">版本 '+ (m.version||'v3.2') +' · 数据截至 '+lastUpdated+' · '+EIDX.products.length+'产品·'+EIDX.connections.length+'连接</span></div>';
+
+  // ═══ 三视角切换 ═══
+  h += '<div style="display:flex;gap:8px;margin-bottom:16px">';
+  h += '<button id="hlp-user-btn" class="fbtn" style="background:var(--card);border:2px solid var(--accent-gold);font-weight:700;padding:8px 16px" onclick="switchHelpView(\'user\')">👤 用户视角</button>';
+  h += '<button id="hlp-mgr-btn" class="fbtn" style="background:var(--card);border:1px solid var(--border-warm);padding:8px 16px" onclick="switchHelpView(\'manager\')">📊 管理者视角</button>';
+  h += '<button id="hlp-dev-btn" class="fbtn" style="background:var(--card);border:1px solid var(--border-warm);padding:8px 16px" onclick="switchHelpView(\'dev\')">🔧 开发者视角</button>';
+  h += '</div>';
+
+  // ═══ 三视角内容区域 ═══
+  h += '<div id="help-user-view" style="display:block">';
+  // 用户视角: 怎么用这个系统
+  h += '<h3 style="margin-bottom:8px">👤 用户视角 · 我如何使用满意红？</h3>';
+  h += '<div class="stat-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px">';
+  h += '<div class="stat-card"><div class="stat-num" style="font-size:1.2em;color:var(--accent-gold)">📊</div><div class="stat-label">驾驶舱</div><div style="font-size:0.75em;color:var(--ink-light)">一屏查看系统健康<br>热力·评分·编排·飞轮</div></div>';
+  h += '<div class="stat-card"><div class="stat-num" style="font-size:1.2em;color:var(--accent-gold)">📦</div><div class="stat-label">产品库</div><div style="font-size:0.75em;color:var(--ink-light)">'+prods.length+'产品·5族·4层深度<br>LLM替身评分·全生命周期</div></div>';
+  h += '<div class="stat-card"><div class="stat-num" style="font-size:1.2em;color:var(--accent-gold)">👥</div><div class="stat-label">客户视图</div><div style="font-size:0.75em;color:var(--ink-light)">'+(cities.length||'?')+'城市·客户360·成功交付<br>城市市场分析</div></div>';
+  h += '</div>';
+  h += '<div style="background:var(--card);border:1px solid var(--border-warm);border-radius:8px;padding:14px;margin-bottom:12px">';
+  h += '<div style="font-weight:600;margin-bottom:4px">🎯 快速导航</div>';
+  h += '<ul style="font-size:0.82em;color:var(--ink-light);margin:0;padding-left:18px">';
+  h += '<li><b>驾驶舱 🏠</b>: 打开即看系统状态，翻标签了解各维度</li>';
+  h += '<li><b>产品目录 📦</b>: <a href="product-catalog.html" target="_blank">product-catalog.html</a> — 浏览/搜索/筛选产品</li>';
+  h += '<li><b>管理后台 ⚙️</b>: <a href="admin-windows.html" target="_blank">admin-windows.html</a> — 深度操作·数据诊断</li>';
+  h += '<li><b>🧬化学面板</b>: 查看系统自调控状态·LLM替身评分</li>';
+  h += '<li><b>♻️飞轮运转</b>: 了解自动化脚本执行情况</li>';
+  h += '</ul></div>';
+  h += '<div style="font-size:0.75em;color:var(--ink-lighter);text-align:center;padding:8px">💡 有问题？在对话中直接提问，满意红会回答系统相关的问题</div>';
+  h += '<div style="text-align:center;padding:10px;border-top:1px solid var(--border-warm);margin-top:8px"><a href="help-user.html" target="_blank" style="color:var(--accent-gold);font-weight:700;font-size:0.9em">📖 阅读完整用户手册 →</a><br><span style="font-size:0.65em;color:var(--ink-lighter)">独立页面 · 包含所有标签页详解、核心概念、操作场景、FAQ</span></div>';
+  h += '</div>';
+
+  // 管理者视角
+  h += '<div id="help-mgr-view" style="display:none">';
+  h += '<h3 style="margin-bottom:8px">📊 管理者视角 · 系统管理员操作手册</h3>';
+  // 系统架构总览
+  h += '<div style="background:var(--card);border:1px solid var(--border-warm);border-radius:8px;padding:14px;margin-bottom:12px">';
+  h += '<div style="font-weight:600;margin-bottom:8px">🏗️ 系统架构</div>';
+  h += '<table style="width:100%;font-size:0.8em;border-collapse:collapse">';
+  h += '<tr style="border-bottom:1px solid var(--border-warm)"><td style="padding:6px 0;font-weight:600">层级</td><td style="padding:6px 0;font-weight:600">组件</td><td style="padding:6px 0;font-weight:600">技术</td></tr>';
+  h += '<tr style="border-bottom:1px solid var(--border-warm)"><td>🖥️ 前端三层</td><td>驾驶舱·管理窗口·产品目录</td><td>HTML/CSS/JS·单页应用</td></tr>';
+  h += '<tr style="border-bottom:1px solid var(--border-warm)"><td>📊 数据层</td><td>entities_index.json (315产品·12556连接)</td><td>JSON · 单文件数据库</td></tr>';
+  h += '<tr style="border-bottom:1px solid var(--border-warm)"><td>⚙️ 后端脚本</td><td>'+totalScripts+' Python 飞轮脚本</td><td>Python 3 · Cron调度</td></tr>';
+  h += '<tr style="border-bottom:1px solid var(--border-warm)"><td>⏰ 自动调度</td><td>36条Cron定时任务</td><td>OpenClaw Cron Engine</td></tr>';
+  h += '<tr style="border-bottom:1px solid var(--border-warm)"><td>🔗 编排引擎</td><td>sri_orchestrator.py ('+stageCount+'环节)</td><td>Circuit Breaker·优雅降级</td></tr>';
+  h += '<tr><td>🧪 化学引擎</td><td>sri_chemistry_reactor.py (60链)</td><td>反应·热力·休眠诊断</td></tr>';
+  h += '</table></div>';
+  // 核心指标
+  h += '<div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:12px">';
+  h += '<div class="stat-card"><div class="stat-num">'+Math.round(heat.total_heat||0)+'</div><div class="stat-label">化学热力</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+(ls.products_evaluated||0)+'/'+prods.length+'</div><div class="stat-label">LLM覆盖率</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+(org.health_score||'?')+'</div><div class="stat-label">编排器健康</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+totalScripts+'</div><div class="stat-label">Python脚本</div></div>';
+  h += '</div>';
+  // 飞轮环节列表
+  h += '<div style="background:var(--card);border:1px solid var(--border-warm);border-radius:8px;padding:14px;margin-bottom:12px">';
+  h += '<div style="font-weight:600;margin-bottom:8px">⚙️ 飞轮环节 ('+stageCount+'环节)</div>';
+  var stages = ['📡养料采集','🔒质量门禁','📁文件扫描','🔬一致性检查','🩺自动修复','🔄生命周期','📐标准迭代','📊产品审计','📋报告生成','⚗️化学反应','🧬永续控制','🏛️VSM策略审计','👁️二阶观察','🎚️自校准','💪反脆弱训练'];
+  h += '<div style="display:flex;flex-wrap:wrap;gap:4px;font-size:0.72em">';
+  for (var si=0;si<stages.length;si++) {
+    var bg = si<11?'#f0fff4':(si<14?'#f0f7ff':'#faf5ff');
+    h += '<span style="background:'+bg+';border:1px solid var(--border-warm);border-radius:4px;padding:3px 8px">'+stages[si]+'</span>';
+  }
+  h += '</div></div>';
+  // Cron任务速览
+  h += '<div style="background:var(--card);border:1px solid var(--border-warm);border-radius:8px;padding:14px;margin-bottom:12px">';
+  h += '<div style="font-weight:600;margin-bottom:4px">⏰ Cron自动任务 (36条)</div>';
+  h += '<div style="font-size:0.72em;color:var(--ink-light)">定时自动执行: 文件扫描·健康自检·LLM缺口·产品质量·一致性·修复·养料·质量门禁·编排器·生命周期·标准迭代·永续控制·VSM·二阶观察·自校准·反脆弱·日报·实体索引更新·梦境保存</div></div>';
+  // 三层闭环架构说明
+  h += '<div style="background:var(--card);border:1px solid var(--border-warm);border-radius:8px;padding:14px">';
+  h += '<div style="font-weight:600;margin-bottom:8px">🔄 三层闭环架构</div>';
+  h += '<table style="width:100%;font-size:0.78em;border-collapse:collapse">';
+  h += '<tr style="border-bottom:1px solid var(--border-warm)"><td style="padding:4px 0;font-weight:600;color:#3D7A4F">🟢 微循环</td><td style="padding:4px 0">每个脚本内部 try/except</td><td style="padding:4px 0;font-size:0.72em;color:var(--ink-lighter)">毛细血管</td></tr>';
+  h += '<tr style="border-bottom:1px solid var(--border-warm)"><td style="padding:4px 0;font-weight:600;color:#C2780A">🟡 中循环</td><td style="padding:4px 0">独立自愈·异常隔离·优雅降级</td><td style="padding:4px 0;font-size:0.72em;color:var(--ink-lighter)">血管</td></tr>';
+  h += '<tr><td style="padding:4px 0;font-weight:600;color:#C23B22">🔴 大循环</td><td style="padding:4px 0">'+stageCount+'环节·Circuit Breaker·全局健康分</td><td style="padding:4px 0;font-size:0.72em;color:var(--ink-lighter)">大动脉</td></tr>';
+  h += '</table></div>';
+  h += '<div style="text-align:center;padding:10px;border-top:1px solid var(--border-warm);margin-top:8px"><a href="help-manager.html" target="_blank" style="color:var(--accent-gold);font-weight:700;font-size:0.9em">📖 阅读完整管理者手册 →</a><br><span style="font-size:0.65em;color:var(--ink-lighter)">独立页面 · 脚本详解·Cron调度·运维场景·研发历程·三层闭环架构</span></div>';
+  h += '</div>';
+
+  // 开发者视角
+  h += '<div id="help-dev-view" style="display:none">';
+  h += '<h3 style="margin-bottom:8px">🔧 开发者视角 · 技术架构 & 原理</h3>';
+  // 技术栈
+  h += '<div style="background:var(--card);border:1px solid var(--border-warm);border-radius:8px;padding:14px;margin-bottom:12px">';
+  h += '<div style="font-weight:600;margin-bottom:8px">🧰 技术栈</div>';
+  h += '<table style="width:100%;font-size:0.78em;border-collapse:collapse">';
+  h += '<tr style="border-bottom:1px solid var(--border-warm)"><td style="padding:4px 0;font-weight:600">前端</td><td>HTML5 · CSS3 · 原生JS (无框架) · 单页应用 · 动态fetch entities_index.json</td></tr>';
+  h += '<tr style="border-bottom:1px solid var(--border-warm)"><td style="padding:4px 0;font-weight:600">数据源</td><td>memory/_data/entities_index.json · 单一数据源 · 所有面板共用</td></tr>';
+  h += '<tr style="border-bottom:1px solid var(--border-warm)"><td style="padding:4px 0;font-weight:600">后端</td><td>Python 3 脚本 · memory/_scripts/sri_*.py · 纯计算+数据转换</td></tr>';
+  h += '<tr style="border-bottom:1px solid var(--border-warm)"><td style="padding:4px 0;font-weight:600">调度</td><td>OpenClaw Cron Engine · 定时触发 · 隔离会话 · 自动推送</td></tr>';
+  h += '<tr><td style="padding:4px 0;font-weight:600">AI推理</td><td>DeepSeek/Claude LLM · 批量替身评分 · 化学推理事件</td></tr>';
+  h += '</table></div>';
+  // 关键脚本
+  h += '<div style="background:var(--card);border:1px solid var(--border-warm);border-radius:8px;padding:14px;margin-bottom:12px">';
+  h += '<div style="font-weight:600;margin-bottom:8px">📁 核心脚本清单 ('+totalScripts+'个)</div>';
+  h += '<table style="width:100%;font-size:0.72em;border-collapse:collapse">';
+  h += '<tr style="border-bottom:1px solid var(--border-warm)"><td style="padding:3px 0;font-weight:600">脚本</td><td style="padding:3px 0;font-weight:600">职责</td><td style="padding:3px 0;font-weight:600">类型</td></tr>';
+  var scriptList = [
+    ['sri_knowledge_flywheel.py','飞轮主引擎(scan·health·llm-gap·report)','核心'],
+    ['sri_orchestrator.py',''+stageCount+'环节编排·Circuit Breaker','核心'],
+    ['sri_chemistry_reactor.py','60链化学反应引擎','化学'],
+    ['sri_perpetual_control.py','永续控制·第二阶控制论','控制论'],
+    ['sri_vsm_system5.py','VSM System 5 策略身份审计','控制论'],
+    ['sri_second_order_observer.py','二阶观察·飞轮自我建模','控制论'],
+    ['sri_autocalibration.py','自校准·设定点调谐·漂移检测','控制论'],
+    ['sri_antifragile_stressor.py','反脆弱应激源·GABA训练','控制论'],
+    ['sri_product_scanner.py','产品物理质量扫描','产品'],
+    ['sri_consistency_checker.py','实体一致性检查','产品'],
+    ['sri_auto_healer.py','5种自动修复','产品'],
+    ['sri_portfolio_rationalizer.py','产品组合重构','产品'],
+    ['sri_lifecycle_manager.py','Stage-Gate生命周期','产品'],
+    ['sri_nourishment_collector.py','CODE框架养料采集','养料'],
+    ['sri_quality_gate.py','信息质量门禁','养料'],
+    ['sri_standards_iterator.py','标准自动迭代','养料'],
+    ['sri_chemical_governor.py','化学调控·负反馈·自清理','化学'],
+    ['sri_bottleneck_breaker.py','Goldratt TOC约束突破','诊断']
+  ];
+  for (var si2=0;si2<scriptList.length;si2++) {
+    h += '<tr style="border-bottom:1px solid var(--border-warm)"><td style="padding:3px 0;color:var(--accent-gold)">'+scriptList[si2][0]+'</td><td style="padding:3px 0">'+scriptList[si2][1]+'</td><td style="padding:3px 0;font-size:0.85em;color:var(--ink-lighter)">'+scriptList[si2][2]+'</td></tr>';
+  }
+  h += '</table></div>';
+  // 关键设计原则
+  h += '<div style="background:var(--card);border:1px solid var(--border-warm);border-radius:8px;padding:14px;margin-bottom:12px">';
+  h += '<div style="font-weight:600;margin-bottom:8px">🏛️ 架构设计原则</div>';
+  var principles = [
+    '<b>单一数据源</b>: entities_index.json 是所有面板的唯一数据源，消除信息孤岛',
+    '<b>零硬编码</b>: 数据驱动 > 硬编码，所有面板动态 fetch 同一文件',
+    '<b>三级穿透</b>: L1总览卡 → L2列表视图 → L3四层详情 · 标准化组件',
+    '<b>流 > 连接</b>: 五层流模型(信号→认知→行动→验证→学习)·因果传导',
+    '<b>线路断路器</b>: 三层闭环·独立隔离·优雅降级·不因局部故障瘫痪',
+    '<b>第二阶控制论</b>: 永续控制·观察者观察自己·设定点自演化·反脆弱训练',
+    '<b>化学隐喻</b>: 60链反应·热力追踪·活化能·催化剂·同位素标记·休眠诊断',
+    '<b>物理雪球</b>: 内JSON↔外前端 双向循环·数据更新一处·所有视图自动反映'
+  ];
+  for (var pi=0;pi<principles.length;pi++) {
+    h += '<div style="font-size:0.78em;padding:3px 0;color:var(--ink-light)">• '+principles[pi]+'</div>';
+  }
+  h += '</div>';
+  // 数据流
+  h += '<div style="background:var(--card);border:1px solid var(--border-warm);border-radius:8px;padding:14px">';
+  h += '<div style="font-weight:600;margin-bottom:8px">🔄 数据闭环流</div>';
+  h += '<div style="font-size:0.78em;color:var(--ink-light);line-height:1.8">';
+  h += '1️⃣ <b>采集</b>: 飞轮扫描 + 养料采集 → entities_index.json 增量更新<br>';
+  h += '2️⃣ <b>加工</b>: Python脚本处理(评分·审计·修复·标准迭代) → entities_index.json meta更新<br>';
+  h += '3️⃣ <b>呈现</b>: 前端 fetch entities_index.json → 驾驶舱/管理窗口/产品目录实时渲染<br>';
+  h += '4️⃣ <b>反馈</b>: 编排器健康分 + 五层流事件 → 化学引擎重新调度<br>';
+  h += '5️⃣ <b>自调控</b>: 永续控制 + 自校准 + 反脆弱训练 → 设定点自演化<br>';
+  h += '</div></div>';
+  h += '<div style="text-align:center;padding:10px;border-top:1px solid var(--border-warm);margin-top:8px"><a href="help-dev.html" target="_blank" style="color:var(--accent-gold);font-weight:700;font-size:0.9em">📖 阅读完整开发者手册 →</a><br><span style="font-size:0.65em;color:var(--ink-lighter)">独立页面 · 技术栈·数据模型·前端架构·脚本规范·扩展指南·ADR·反模式</span></div>';
+  h += '</div>';
+
+  document.getElementById('tab-help').innerHTML = h;
+}
+
+/* ===== 帮助面板视角切换 ===== */
+var currentHelpView = 'user';
+function switchHelpView(view) {
+  document.getElementById('help-user-view').style.display = (view === 'user') ? 'block' : 'none';
+  document.getElementById('help-mgr-view').style.display = (view === 'manager') ? 'block' : 'none';
+  document.getElementById('help-dev-view').style.display = (view === 'dev') ? 'block' : 'none';
+  document.getElementById('hlp-user-btn').style.borderWidth = (view === 'user') ? '2px' : '1px';
+  document.getElementById('hlp-mgr-btn').style.borderWidth = (view === 'manager') ? '2px' : '1px';
+  document.getElementById('hlp-dev-btn').style.borderWidth = (view === 'dev') ? '2px' : '1px';
+  currentHelpView = view;
 }
 
 /* ===== 辅助: stat-card ===== */
