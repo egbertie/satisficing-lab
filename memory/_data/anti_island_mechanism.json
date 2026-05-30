@@ -1,0 +1,142 @@
+{
+  "name": "满意红·反孤岛机制 V1.0",
+  "created": "2026-05-30T05:40:00",
+  "principle": "不依赖人盯，靠自动化发现+任务化追踪+验证闭环",
+  "layers": {
+    "L1_detect": {
+      "name": "自动发现层",
+      "description": "持续扫描项目状态，发现任何形式的'孤岛'",
+      "mechanisms": [
+        {
+          "id": "DETECT-001",
+          "name": "产品-索引一致性扫描",
+          "trigger": "每6小时 (entities_index_autoupdate Cron)",
+          "what": "扫描 site/ 目录新增/删除的 HTML 文件 → 与 entities_index.products[].url 对比",
+          "alert_if": "site/中有HTML文件但不在entities_index中 (遗漏) → 或 entities_index中的url指向不存在的文件 (死链)",
+          "action": "自动生成 TASK → 标注P1 → 通知满意红"
+        },
+        {
+          "id": "DETECT-002",
+          "name": "元数据腐烂检测",
+          "trigger": "每6小时",
+          "what": "检查所有实体的updated/last_modified时间戳",
+          "alert_if": "任何实体超过7天未更新 → 标记为'可能腐烂'",
+          "action": "生成审查清单 → 标注P2"
+        },
+        {
+          "id": "DETECT-003",
+          "name": "任务僵尸检测",
+          "trigger": "每天 (HEARTBEAT morning check)",
+          "what": "扫描 open_tasks_audit.json 中status为'待执行'且deadline已过的任务",
+          "alert_if": "存在过期未执行任务 > 3条",
+          "action": "自动升级优先级 → 通知满意红"
+        },
+        {
+          "id": "DETECT-004",
+          "name": "知识消化管道检测",
+          "trigger": "每周",
+          "what": "检查 knowledge_digestion_pipeline.json 中Top20的消化进度",
+          "alert_if": "连续2周消化进度为0",
+          "action": "生成推动任务"
+        },
+        {
+          "id": "DETECT-005",
+          "name": "Cron健康检测",
+          "trigger": "每天",
+          "what": "检查所有Cron的最后执行时间",
+          "alert_if": "任何Cron超过预期周期2倍未执行",
+          "action": "P0告警"
+        }
+      ]
+    },
+    "L2_alert": {
+      "name": "告警路由层",
+      "description": "发现问题后，路由到正确的角色和面板",
+      "routes": {
+        "产品遗漏/死链": {
+          "channel": "驾驶舱 + admin-windows",
+          "assignee": "满意红",
+          "priority": "P1"
+        },
+        "元数据腐烂": {
+          "channel": "HEARTBEAT",
+          "assignee": "知识管理员",
+          "priority": "P2"
+        },
+        "任务僵尸": {
+          "channel": "HEARTBEAT",
+          "assignee": "项目管家",
+          "priority": "P0"
+        },
+        "知识未消化": {
+          "channel": "HEARTBEAT",
+          "assignee": "知识管理员",
+          "priority": "P2"
+        },
+        "Cron失效": {
+          "channel": "feishu + HEARTBEAT",
+          "assignee": "系统运维师",
+          "priority": "P0"
+        }
+      }
+    },
+    "L3_task": {
+      "name": "任务化追踪层",
+      "description": "告警自动转为可追踪的任务",
+      "rules": [
+        "每个告警 → 自动写入 open_tasks_audit.json",
+        "自动分配ID(TASK-YYYYMMDD-NNN)·优先级·负责人·截止日期",
+        "任务状态变化 → 自动更新entities_index对应实体的状态",
+        "P0任务24h未闭环 → 自动升级告警"
+      ]
+    },
+    "L4_verify": {
+      "name": "闭环验证层",
+      "description": "任务完成后不是终点，验证问题是否真正解决",
+      "verification_points": [
+        "产品遗漏修复 → 重新扫描 site/ ↔ entities_index 一致性",
+        "元数据更新 → 检查updated时间戳是否刷新",
+        "Cron修复 → 等待下一个执行周期确认成功",
+        "知识消化 → 检查digestion_pipeline中状态字段变更"
+      ],
+      "auto_close_rule": "验证通过 → 自动标记任务为 ✅已完成。验证失败 → 任务重新打开。"
+    }
+  },
+  "dashboard_integration": {
+    "driving_cockpit": {
+      "already_shows": [
+        "产品总数",
+        "Cron健康度",
+        "任务积压",
+        "生物规则率"
+      ],
+      "should_add": [
+        "反孤岛健康分 (0-100): 产品一致性% + 元数据新鲜度% + 任务闭环率% + Cron存活率%",
+        "上次全量一致性扫描时间",
+        "待处理孤岛数"
+      ]
+    },
+    "admin_windows": {
+      "already_shows": [
+        "产品总览",
+        "任务看板",
+        "Cron管理",
+        "免疫系统"
+      ],
+      "should_add": [
+        "ops-workflow面板: 展示反孤岛机制运行状态",
+        "product-quality面板: 新增'索引一致性'指标"
+      ]
+    },
+    "heartbeat": {
+      "already_does": [
+        "每日刷新专家团队上下文",
+        "检查P0任务"
+      ],
+      "should_add": [
+        "每日运行反孤岛检测(5项)",
+        "生成'孤岛日报': 新发现的遗漏·腐烂项·僵尸任务·死链"
+      ]
+    }
+  }
+}
