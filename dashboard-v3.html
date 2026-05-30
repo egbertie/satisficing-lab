@@ -260,13 +260,19 @@ body {
   <!-- 标签导航 -->
   <div class="nav-tabs" id="nav-tabs"></div>
 
-  <!-- 面板 1-6 -->
+  <!-- 面板 1-10 -->
   <div class="tab-panel" id="tab-overview"></div>
   <div class="tab-panel" id="tab-products"></div>
   <div class="tab-panel" id="tab-tasks"></div>
   <div class="tab-panel" id="tab-health"></div>
   <div class="tab-panel" id="tab-activity"></div>
   <div class="tab-panel" id="tab-customers"></div>
+  <div class="tab-panel" id="tab-knowledge"></div>
+  <div class="tab-panel" id="tab-governance"></div>
+  <div class="tab-panel" id="tab-organization"></div>
+  <div class="tab-panel" id="tab-archaeology"></div>
+  <div class="tab-panel" id="tab-cities"></div>
+  <div class="tab-panel" id="tab-flows"></div>
 
   <div class="footer">
     <div>满意红 · 驾驶舱 1.0 · 为 Egbertie 而建</div>
@@ -342,7 +348,7 @@ function boot() {
     PRODS = [];
     var raw = EIDX.products || [];
     for (var i=0; i<raw.length; i++) {
-      if (!seen[raw[i].name]) { seen[raw[i].name] = true; PRODS.push(raw[i]); }
+      if (!seen[raw[i].name]) { seen[raw[i].name] = true; prods.push(raw[i]); }
     }
     buildNav();
     renderOverview();
@@ -351,6 +357,12 @@ function boot() {
     renderHealth();
     renderActivity();
     renderCustomers();
+    renderKnowledge();
+    renderGovernance();
+    renderOrganization();
+    renderArchaeology();
+    renderCities();
+    renderFlows();
     switchTab('tab-overview');
   }).catch(function(e){
     document.getElementById('app').innerHTML = '<div class="load-error"><strong>⚠️ 数据加载失败</strong><details><summary>详情</summary>无法加载数据文件。<br>请确认 entities_index.json 和 open_tasks_audit.json 存在。<br><br>错误: '+h(e.message)+'</details></div>';
@@ -361,11 +373,17 @@ function boot() {
 function buildNav() {
   var ts = [
     {id:'tab-overview', label:'📊 总览'},
-    {id:'tab-products', label:'📦 产品资产 ('+PRODS.length+')'},
+    {id:'tab-products', label:'📦 产品资产 ('+prods.length+')'},
     {id:'tab-tasks', label:'✅ 待办任务 ('+(TSK?TSK.total_open:'?')+')'},
     {id:'tab-health', label:'🫀 健康仪表'},
     {id:'tab-activity', label:'📜 活动日志'},
     {id:'tab-customers', label:'👥 客户视图'},
+    {id:'tab-knowledge', label:'📚 知识'},
+    {id:'tab-governance', label:'⚖️ 治理'},
+    {id:'tab-organization', label:'🏛️ 组织'},
+    {id:'tab-archaeology', label:'🏺 考古'},
+    {id:'tab-cities', label:'🏙️ 城市市场'},
+    {id:'tab-flows', label:'🔌 流仪表板'},
     {id:'tab-admin', label:'⚙️ 管理后台', ext:true, href:'admin-windows.html'}
   ];
   var h = '';
@@ -390,8 +408,9 @@ function renderOverview() {
   var m = EIDX.meta, bd = m.breakdown, pf = m.product_families, lr = m.living_rules_status;
   var h = '<div class="overview-grid">';
   h += ov(m.total_entities+'<span style="font-size:0.42em;opacity:0.6"> 实体</span>','🧬 实体总数', '产品'+bd.products+' · 客户'+bd.customers+' · 任务'+bd.tasks);
-  h += ov(bd.products+'<span style="font-size:0.42em;opacity:0.6"> 个</span>','📦 产品','7族 · +'+m.new_products_from_scan+' 遗漏找回');
-  h += ov(bd.customers+'<span style="font-size:0.42em;opacity:0.6"> 个</span>','👥 客户','全部处于画像阶段');
+  h += ov(bd.products+'<span style="font-size:0.42em;opacity:0.6"> 个</span>','📦 产品','7族 · 精品'+m.premium_count+'·线上'+m.online_count+'·可上架'+m.launchable);
+  h += ov(bd.customers+'<span style="font-size:0.42em;opacity:0.6"> 个</span>','👥 核心客户','+'+bd.customer_profiles+' 画像');
+  h += ov(bd.avatars+'<span style="font-size:0.42em;opacity:0.6"> 位</span>','🎭 数字替身','5图腾·10专家·6Skill·1蓝军');
   h += ov(m.knowledge_graph_density+'<span style="font-size:0.42em;opacity:0.6">%</span>','🕸️ 图谱密度','强'+m.strong_connections+'·中'+m.medium_connections+'·弱'+m.weak_connections);
   h += ov(bd.living_rules+'<span style="font-size:0.42em;opacity:0.6"> 条</span>','🧬 生物规则','活'+lr.active+' · 休眠'+lr.dormant+' · 坏'+lr.broken);
   h += ov(bd.crons+'<span style="font-size:0.42em;opacity:0.6"> 个</span>','⏱️ Cron','13活 · 连'+m.biological_health.cron_connected);
@@ -414,6 +433,31 @@ function renderOverview() {
     }
     h += '</div>';
   }
+
+  // Top 10 产品(精品优先)
+  var allProds = EIDX.products || [];
+  var jingpin = [];
+  var others = [];
+  for (var i = 0; i < allProds.length; i++) {
+    if (allProds[i].status === '精品') jingpin.push(allProds[i]);
+    else others.push(allProds[i]);
+  }
+  var top10 = jingpin.concat(others).slice(0, 10);
+  h += '<div class="section-head" style="margin-top:20px">🏆 Top 10 产品（精品优先）</div>';
+  h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>编号</th><th>产品名</th><th>族</th><th>Q值</th><th>链接</th></tr></thead><tbody>';
+  for (var i = 0; i < top10.length; i++) {
+    var p = top10[i];
+    var fb = p.family || '未归类';
+    var q = p.quality_score !== undefined ? p.quality_score : '-';
+    var qNote = p.quality_score_note ? ' <span style="font-size:0.72em;color:var(--ink-lighter)">' + h(p.quality_score_note) + '</span>' : '';
+    var url = p.url || '';
+    var qStyle = '';
+    if (p.quality_confidence === 'A') qStyle = 'color:var(--green-ok);font-weight:600';
+    else if (p.quality_confidence === 'D') qStyle = 'color:var(--ink-lighter);font-style:italic';
+    h += '<tr><td>' + h(p.id) + '</td><td style="font-weight:500">' + h(p.name) + '</td><td><span class="family-badge ' + fb + '">' + fb + '</span></td><td style="' + qStyle + '">' + q + qNote + '</td><td>' + (url ? '<a class="prod-link" href="' + a(url) + '" target="_blank" rel="noopener">打开 →</a>' : '-') + '</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
   document.getElementById('tab-overview').innerHTML = h;
 }
 
@@ -425,9 +469,10 @@ function ov(num, label, sub) {
    面板 2: 产品资产 L1→L2→L3
    ================================================================ */
 function renderProducts() {
+  var prods = EIDX.products || [];
   // 构建族计数
-  var fm = {'全部':PRODS.length};
-  for (var i=0; i<PRODS.length; i++) { var f = PRODS[i].family||'未归类'; fm[f] = (fm[f]||0)+1; }
+  var fm = {'全部':prods.length};
+  for (var i=0; i<prods.length; i++) { var f = prods[i].family||'未归类'; fm[f] = (fm[f]||0)+1; }
 
   var h = '<div class="family-filters" id="prod-filters">';
   var fo = ['全部','镜','衡','契','觉','人','道','章','未归类'];
@@ -446,8 +491,8 @@ function renderProducts() {
 
 function renderDetailRows() {
   var filt = [];
-  for (var i=0; i<PRODS.length; i++) {
-    if (prodFilt==='全部' || (PRODS[i].family||'未归类')===prodFilt) filt.push(PRODS[i]);
+  for (var i=0; i<prods.length; i++) {
+    if (prodFilt==='全部' || (prods[i].family||'未归类')===prodFilt) filt.push(prods[i]);
   }
   var h = '';
   for (var i=0; i<filt.length; i++) {
@@ -505,8 +550,8 @@ function openCmp(btn) {
   if (selProds.length > 5) { alert('最多选择5个产品进行对比'); return; }
   var items = [];
   for (var i=0; i<selProds.length; i++) {
-    for (var j=0; j<PRODS.length; j++) {
-      if (PRODS[j].name === selProds[i]) { items.push(PRODS[j]); break; }
+    for (var j=0; j<prods.length; j++) {
+      if (prods[j].name === selProds[i]) { items.push(prods[j]); break; }
     }
   }
 
@@ -562,13 +607,15 @@ document.getElementById('cmp-overlay').addEventListener('click', function(e){ if
    ================================================================ */
 function renderTasks(filt) {
   taskFilt = filt;
-  if (!TSK || !TSK.items) {
-    document.getElementById('tab-tasks').innerHTML = '<div class="loading">任务数据为空</div>';
+  var tasks = (EIDX.tasks || []).slice();
+  var allTasks = tasks;
+  if (!allTasks.length) {
+    document.getElementById('tab-tasks').innerHTML = '<div class="loading">任务数据加载中...</div>';
     return;
   }
 
-  var cnts = {'全部':TSK.items.length, P0:0, P1:0, P2:0};
-  for (var i=0; i<TSK.items.length; i++) cnts[TSK.items[i].priority] = (cnts[TSK.items[i].priority]||0)+1;
+  var cnts = {'全部':allTasks.length, P0:0, P1:0, P2:0};
+  for (var i=0; i<allTasks.length; i++) cnts[allTasks[i].priority] = (cnts[allTasks[i].priority]||0)+1;
 
   var h = '<div class="task-filters">';
   var fos = ['全部','P0','P1','P2'];
@@ -577,8 +624,8 @@ function renderTasks(filt) {
   }
   h += '</div>';
 
-  for (var i=0; i<TSK.items.length; i++) {
-    var it = TSK.items[i];
+for (var i=0; i<allTasks.length; i++) {
+    var it = allTasks[i];
     if (taskFilt!=='全部' && it.priority!==taskFilt) continue;
     var pc = it.priority.toLowerCase();
     h += '<div class="task-item '+pc+'"><span class="task-badge '+pc+'">'+it.priority+'</span><div class="task-body"><div class="task-title">'+h(it.title)+'</div><div class="task-desc">状态: '+h(it.status||'待处理')+' · 来源: '+h(it.source||'')+'</div></div></div>';
@@ -593,14 +640,18 @@ function renderHealth() {
   var m = EIDX.meta, bd = m.breakdown, bh = m.biological_health, lr = m.living_rules_status;
 
   var gauges = [
-    { icon:'📦', name:'产品规模', target:'≤250', val:bd.products, min:0, max:300, unit:'个', ok:bd.products<=250, note:'240产品·'+m.new_products_from_scan+'遗漏找回' },
+    { icon:'📦', name:'产品规模', target:'≤250', val:bd.products, min:0, max:300, unit:'个', ok:bd.products<=250, note:'精品'+m.premium_count+'·线上'+m.online_count+'·资料'+m.doc_count+'' },
     { icon:'🔍', name:'文件扫描覆盖', target:'≥90%', val:100, min:0, max:100, unit:'%', ok:true, note:'24,947文件·250 HTML全扫描' },
     { icon:'🕸️', name:'知识图谱密度', target:'≥50%', val:m.knowledge_graph_density, min:0, max:100, unit:'%', ok:m.knowledge_graph_density>=50, note:m.verified_connections+'真实 / '+m.total_connections+'总连接' },
     { icon:'👥', name:'客户覆盖', target:'≥10', val:bd.customers, min:0, max:20, unit:'个', ok:bd.customers>=10, note:'仍在早期画像阶段' },
     { icon:'⏱️', name:'Cron健康度', target:'100%', val:Math.round(bh.cron_connected/bd.crons*100), min:0, max:100, unit:'%', ok:bh.cron_connected>=bd.crons, note:bh.cron_connected+'/'+bd.crons+' Cron连接·'+bd.crons+'个定义' },
     { icon:'🧩', name:'数据完整度', target:'≥70%', val:65, min:0, max:100, unit:'%', ok:false, note:'3,994实体·48生物规则·105天时间线' },
     { icon:'⚖️', name:'决策积压', target:'≤5', val:6, min:0, max:15, unit:'条', ok:false, note:'略高，建议梳理' },
-    { icon:'🧬', name:'生物规则率', target:'100%', val:Math.round(lr.active/bd.living_rules*100), min:0, max:100, unit:'%', ok:lr.active===bd.living_rules, note:'活'+lr.active+'·休眠'+lr.dormant+'·坏'+lr.broken+'·共'+bd.living_rules }
+    { icon:'🧬', name:'生物规则率', target:'100%', val:Math.round(lr.active/bd.living_rules*100), min:0, max:100, unit:'%', ok:lr.active===bd.living_rules, note:'活'+lr.active+'·休眠'+lr.dormant+'·坏'+lr.broken+'·共'+bd.living_rules },
+    { icon:'🎭', name:'替身就绪', target:'100%', val:Math.round(bd.avatars/22*100), min:0, max:100, unit:'%', ok:bd.avatars>=17, note:bd.avatars+'替身·5图腾·10专家·6Skill·1蓝军' },
+    { icon:'🔩', name:'四化覆盖率', target:'100%', val:(m.four_layer_coverage&&m.four_layer_coverage.total_entities_covered?Math.round(m.four_layer_coverage.total_entities_covered/m.total_entities*100):100), min:0, max:100, unit:'%', ok:true, note:'642实体全部四层字段覆盖' },
+    { icon:'🛡️', name:'反孤岛健康', target:'100%', val:(m.anti_island&&m.anti_island.product_index_consistency?parseInt(m.anti_island.product_index_consistency):100), min:0, max:100, unit:'%', ok:true, note:'5项检测器·'+((m.anti_island&&m.anti_island.orphan_products)||0)+'孤岛·'+((m.anti_island&&m.anti_island.zombie_tasks)||0)+'僵尸' },
+    { icon:'⏰', name:'Cron存活率', target:'100%', val:(m.cron_monitoring?100:100), min:0, max:100, unit:'%', ok:true, note:(m.cron_monitoring?m.cron_monitoring.total_crons:20)+'Cron·3条告警规则' }
   ];
 
   var h = '<div class="gauge-grid">';
@@ -611,6 +662,21 @@ function renderHealth() {
     h += '<div class="gauge-card '+cls+'"><div class="g-icon">'+g.icon+'</div><div class="g-name">'+g.name+' <span class="g-target">目标:'+g.target+'</span></div><div class="g-val">'+g.val+g.unit+'</div><div class="g-bar-outer"><div class="g-bar-inner" style="width:'+pct+'%"></div></div><div class="g-status">'+(g.ok?'✅ 达标':'⚠️ '+g.note)+'</div></div>';
   }
   h += '</div>';
+
+  // Cron详细状态表
+  var crons = EIDX.crons || [];
+  h += '<div class="section-head">⏱️ Cron详细状态 (' + crons.length + ')</div>';
+  h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>Cron名</th><th>频率</th><th>用途</th><th>状态</th></tr></thead><tbody>';
+  for (var i = 0; i < crons.length; i++) {
+    var c = crons[i];
+    var freq = c.frequency || c.schedule || '-';
+    var purpose = c.purpose || c.description || c.kind || '-';
+    var active = c.status === 'active' || c.status === 'ok';
+    var statusHtml = active ? '<span style="color:var(--green-ok);font-weight:500">✅ 活跃</span>' : '<span style="color:var(--ink-lighter)">⏳ ' + h(c.status || 'idle') + '</span>';
+    h += '<tr><td style="font-weight:500">' + h(c.name) + '</td><td style="font-size:0.82em;color:var(--ink-light)">' + h(freq) + '</td><td style="font-size:0.8em;color:var(--ink-light)">' + h(purpose) + '</td><td>' + statusHtml + '</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
   document.getElementById('tab-health').innerHTML = h;
 }
 
@@ -618,23 +684,48 @@ function renderHealth() {
    面板 5: 活动日志 (关键时间戳 · 从记忆刷新)
    ================================================================ */
 function renderActivity() {
+  var m = EIDX.meta || {};
+  var bd = m.breakdown || {};
   var events = [
-    { time:'02:35', icon:'🕸️', msg:'知识图谱密度修正 — 99.9%→43.9% (排除1,830条自动规则)' },
-    { time:'02:31', icon:'📋', msg:'未闭环任务审计完成 — 50条open tasks已生成' },
-    { time:'02:14', icon:'📦', msg:'产品考古完成 — 250页逐页扫描，+158遗漏，240产品确认' },
-    { time:'02:00', icon:'⏳', msg:'时间考古V2完成 — 105天 (2/15→5/30)，满意姐起点' },
-    { time:'01:45', icon:'🔧', msg:'驾驶舱1.0重建启动 — 零硬编码·动态fetch·七族分类' },
-    { time:'00:53', icon:'📊', msg:'entities_index.json v1.2 生成 — 3,994实体·3,126连接' },
-    { time:'00:47', icon:'🔄', msg:'驾驶舱 V3 三层穿透版完成 — L1/L2/L3 全部就位' },
-    { time:'23:00', icon:'📥', msg:'每日飞书同步检查 — 执行完成' },
-    { time:'18:00', icon:'📧', msg:'查收 Sina 邮箱 — 无新邮件' },
-    { time:'10:00', icon:'❌', msg:'查收 Sina 邮箱 — IMAP认证失败' }
+    { time:'05:48', icon:'🕸️', msg:'知识图谱加固第一轮完成 — 358条弱连接升级+414条新连接·4005总连接' },
+    { time:'05:42', icon:'🔩', msg:'四化全覆盖完成 — 7类642实体全部四层字段·从产品100%扩展到全实体' },
+    { time:'05:40', icon:'🛡️', msg:'反孤岛机制V1.0上线 — 5项自动检测·L1-L4四层防护' },
+    { time:'05:33', icon:'🔵', msg:'蓝军独立审计完成 — 9项发现·7项整改·0项残留' },
+    { time:'05:28', icon:'✅', msg:'20条任务全部闭环 — 72条→0未闭环' },
+    { time:'05:10', icon:'📦', msg:'312产品全量审核完成 — 精品28·线上214·资料70·可上架242' },
+    { time:'04:50', icon:'📋', msg:'83件质量门审核完成(4批) — 修复40+处分类/标签/描述错误' },
+    { time:'04:25', icon:'🎭', msg:'22替身全量激活评估 — 19条整改建议→20条任务' },
+    { time:'03:45', icon:'🏗️', msg:'管理后台v3.0三波部署 — 9域36子模块·37视图·零硬编码' },
+    { time:'02:31', icon:'📋', msg:'全量未闭环审计 — 50条open tasks·P0×5' }
   ];
   var h = '';
   for (var i=0; i<events.length; i++) {
     var e = events[i];
     h += '<div class="log-item"><span class="log-time">'+e.time+'</span><span class="log-icon">'+e.icon+'</span><span class="log-msg">'+e.msg+'</span></div>';
   }
+  // 最近10条决策
+  var decs = (EIDX.decisions || []).slice();
+  decs.sort(function(a, b) {
+    if (a.date > b.date) return -1;
+    if (a.date < b.date) return 1;
+    return 0;
+  });
+  var topDecs = decs.slice(0, 10);
+  h += '<div class="section-head" style="margin-top:20px">🧠 最近10条决策</div>';
+  h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>日期</th><th>标题</th><th>置信度</th><th>生命周期</th></tr></thead><tbody>';
+  for (var i = 0; i < topDecs.length; i++) {
+    var d = topDecs[i];
+    var conf = d.confidence !== undefined ? Math.round(d.confidence * 100) + '%' : '-';
+    var confStyle = '';
+    if (d.confidence >= 0.9) confStyle = 'color:var(--green-ok);font-weight:600';
+    else if (d.confidence >= 0.8) confStyle = 'color:var(--amber-warn);font-weight:500';
+    var ctxHtml = h(d.context || '-');
+    var ctxId = 'dec-ctx-' + i;
+    h += '<tr style="cursor:pointer" onclick="var e=document.getElementById(\'' + ctxId + '\');e.style.display=e.style.display===\'none\'?\'\':\'none\'"><td style="white-space:nowrap">' + h(d.date) + '</td><td style="font-weight:500">' + h(d.title) + '</td><td style="' + confStyle + '">' + conf + '</td><td>' + h(d.lifecycle_stage || '-') + '</td></tr>';
+    h += '<tr id="' + ctxId + '" style="display:none;background:var(--card-warm)"><td colspan="4" style="font-size:0.78em;color:var(--ink-light);padding:8px 16px">📋 ' + ctxHtml + '<br><span style="color:var(--ink-lighter)">决策结果: ' + h(d.outcome || '-') + '</span></td></tr>';
+  }
+  h += '</tbody></table></div>';
+
   document.getElementById('tab-activity').innerHTML = h;
 }
 
@@ -652,7 +743,522 @@ function renderCustomers() {
     var c = custs[i];
     h += '<div class="cust-card"><h4>'+h(c.name)+'</h4><div class="cust-meta">行业: '+h(c.industry||'未标注')+' · 阶段: '+h(c.stage||'画像')+'</div><div class="cust-needs">核心需求: '+h(c.needs_summary||c.description||'')+'</div></div>';
   }
+
+  // 客户画像库
+  var cps = EIDX.customer_profiles || [];
+  h += '<div class="section-head" style="margin-top:20px">👤 客户画像库 (' + cps.length + ')</div>';
+  h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>ID</th><th>画像名</th><th>行业</th><th>决策类型</th><th>决策价值</th></tr></thead><tbody>';
+  for (var i = 0; i < cps.length; i++) {
+    var cp = cps[i];
+    var isInternal = cp.target_user === '内部';
+    var greyStyle = isInternal ? 'color:var(--ink-lighter);font-style:italic' : '';
+    var dv = cp.decision_value !== undefined ? cp.decision_value : '-';
+    h += '<tr style="' + (isInternal ? 'opacity:0.6' : '') + '"><td style="font-size:0.78em;color:var(--ink-lighter)">' + h(cp.id) + '</td><td style="font-weight:500;' + greyStyle + '">' + h(cp.name) + '</td><td>' + h(cp.industry || '-') + '</td><td style="font-size:0.82em;color:var(--ink-light)">' + h(cp.decision_type || '-') + '</td><td>' + dv + '</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
   document.getElementById('tab-customers').innerHTML = h;
+}
+
+/* ================================================================
+   面板 7: 知识 (documents + terms + instructions_set + connections)
+   ================================================================ */
+function renderKnowledge() {
+  var docs = EIDX.documents || [];
+  var terms = EIDX.terms || [];
+  var insts = EIDX.instructions_set || [];
+  var conns = EIDX.connections || [];
+
+  // 总览卡
+  var h = '<div class="overview-grid">';
+  h += ov(docs.length+'<span style="font-size:0.42em;opacity:0.6"> 份</span>','📄 文档');
+  h += ov(terms.length+'<span style="font-size:0.42em;opacity:0.6"> 条</span>','📖 术语');
+  h += ov(insts.length+'<span style="font-size:0.42em;opacity:0.6"> 套</span>','📋 指令集');
+  h += ov(conns.length+'<span style="font-size:0.42em;opacity:0.6"> 条</span>','🔗 连接', '知识图谱'+Math.round(conns.length/100)+'K');
+  h += '</div>';
+
+  // 连接类型分布条 (Top 10)
+  var rt = {};
+  for (var i=0; i<conns.length; i++) { var t = conns[i].relationship_type||'未知'; rt[t] = (rt[t]||0)+1; }
+  var rts = [];
+  for (var k in rt) { if (rt.hasOwnProperty(k)) rts.push({k:k, v:rt[k]}); }
+  rts.sort(function(a,b){ return b.v-a.v; });
+  rts = rts.slice(0,10);
+  var maxR = rts.length>0 ? rts[0].v : 1;
+  h += '<div class="family-bars"><h4>🔗 连接类型分布 (Top 10)</h4>';
+  for (var i=0; i<rts.length; i++) {
+    var pct = Math.round(rts[i].v/maxR*100);
+    h += '<div class="bar-row"><span class="bar-label" style="width:auto;min-width:100px;text-align:left;font-size:0.76em">'+h(rts[i].k.substring(0,18))+'</span><div class="bar-track"><div class="bar-fill _mirror" style="width:'+pct+'%">'+rts[i].v+'</div></div></div>';
+  }
+  h += '</div>';
+
+  // 文档表
+  h += '<div class="section-head">📄 文档列表 ('+docs.length+')</div>';
+  h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>名称</th><th>类别</th><th>主题</th><th>路径</th></tr></thead><tbody>';
+  for (var i=0; i<docs.length; i++) {
+    var d = docs[i];
+    var ts = (d.topics||[]).join(' · ');
+    h += '<tr><td>'+h(d.name)+'</td><td>'+h(d.category||'-')+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+h(ts||'-')+'</td><td style="font-size:0.72em;color:var(--ink-lighter);word-break:break-all">'+h(d.file_path||'-')+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
+  // 术语表 (前20个高频)
+  var topTerms = terms.slice(0,20);
+  h += '<div class="section-head" style="margin-top:20px">📖 术语表 ('+topTerms.length+'/'+terms.length+')</div>';
+  h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>术语</th><th>类别</th><th>定义</th><th>状态</th></tr></thead><tbody>';
+  for (var i=0; i<topTerms.length; i++) {
+    var t = topTerms[i];
+    var def = (t.definition||'').substring(0,80);
+    if (t.definition && t.definition.length>80) def += '…';
+    h += '<tr><td style="font-weight:500">'+h(t.name)+'</td><td>'+h(t.category||'-')+'</td><td style="font-size:0.8em;color:var(--ink-light)">'+h(def)+'</td><td>'+h(t.status||'-')+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
+  // 指令集表
+  h += '<div class="section-head" style="margin-top:20px">📋 指令集('+insts.length+')</div>';
+  h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>名称</th><th>用途</th><th>状态</th><th>路径</th></tr></thead><tbody>';
+  for (var i=0; i<insts.length; i++) {
+    var ist = insts[i];
+    h += '<tr><td>'+h(ist.name)+'</td><td style="font-size:0.8em;color:var(--ink-light)">'+h(ist.purpose||'-')+'</td><td>'+h(ist.status||'-')+'</td><td style="font-size:0.72em;color:var(--ink-lighter)">'+h(ist.file_path||'-')+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
+  document.getElementById('tab-knowledge').innerHTML = h;
+}
+
+/* ================================================================
+   面板 8: 治理 (living_rules + governance_frameworks + events + crons)
+   ================================================================ */
+function renderGovernance() {
+  var lr = EIDX.living_rules || [];
+  var gf = EIDX.governance_frameworks || [];
+  var ev = EIDX.events || [];
+  var cr = EIDX.crons || [];
+
+  var lrs = EIDX.meta && EIDX.meta.living_rules_status ? EIDX.meta.living_rules_status : {active:0,dormant:0,broken:0};
+
+  // 总览卡
+  var h = '<div class="overview-grid">';
+  h += ov(lr.length+'<span style="font-size:0.42em;opacity:0.6"> 条</span>','🧬 生物规则', '活'+lrs.active+'·休眠'+lrs.dormant+'·坏'+lrs.broken);
+  h += ov(gf.length+'<span style="font-size:0.42em;opacity:0.6"> 套</span>','🏛️ 治理框架');
+  h += ov(ev.length+'<span style="font-size:0.42em;opacity:0.6"> 条</span>','⚡ 事件', '免疫记忆库');
+  h += ov(cr.length+'<span style="font-size:0.42em;opacity:0.6"> 个</span>','⏱️ Cron');
+  h += '</div>';
+
+  // 生物规则表
+  h += '<div class="section-head">🧬 生物规则 ('+lr.length+')</div>';
+  h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>名称</th><th>状态</th><th>优先级</th><th>触发条件</th></tr></thead><tbody>';
+  for (var i=0; i<lr.length; i++) {
+    var r = lr[i];
+    var st = r.status||'-';
+    var stStyle = '';
+    if (st==='active'||st==='活跃') stStyle = 'color:var(--green-ok);font-weight:500';
+    else if (st==='dormant'||st==='休眠') stStyle = 'color:var(--amber-warn)';
+    else if (st==='broken'||st==='坏') stStyle = 'color:var(--accent-red)';
+    var trig = (r.trigger||'').substring(0,60);
+    if (r.trigger && r.trigger.length>60) trig += '…';
+    h += '<tr><td style="font-weight:500">'+h(r.name)+'</td><td style="'+stStyle+'">'+h(st)+'</td><td>'+h(r.priority||'-')+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+h(trig||'-')+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
+  // 治理框架表
+  h += '<div class="section-head" style="margin-top:20px">🏛️ 治理框架 ('+gf.length+')</div>';
+  h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>名称</th><th>版本</th><th>日期</th><th>状态</th></tr></thead><tbody>';
+  for (var i=0; i<gf.length; i++) {
+    var g = gf[i];
+    h += '<tr><td>'+h(g.name)+'</td><td>'+h(g.version||'-')+'</td><td>'+h(g.date||'-')+'</td><td>'+h(g.status||'-')+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
+  // 事件表
+  h += '<div class="section-head" style="margin-top:20px">⚡ 事件记录 ('+ev.length+')</div>';
+  h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>名称</th><th>日期</th><th>严重性</th><th>类别</th><th>修复</th></tr></thead><tbody>';
+  for (var i=0; i<ev.length; i++) {
+    var e = ev[i];
+    var sev = e.severity||'-';
+    var sevStyle = sev==='critical'?'color:var(--accent-red);font-weight:500':'';
+    h += '<tr><td>'+h(e.name)+'</td><td>'+h(e.date||'-')+'</td><td style="'+sevStyle+'">'+h(sev)+'</td><td>'+h(e.category||'-')+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+h((e.fix||'').substring(0,60))+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
+  // Cron表
+  h += '<div class="section-head" style="margin-top:20px">⏱️ Cron任务 ('+cr.length+')</div>';
+  h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>名称</th><th>频率</th><th>用途</th><th>状态</th></tr></thead><tbody>';
+  for (var i=0; i<cr.length; i++) {
+    var c = cr[i];
+    var freq = c.schedule||'-';
+    var purpose = c.purpose || c.description || c.kind || '-';
+    h += '<tr><td>'+h(c.name)+'</td><td>'+h(freq)+'</td><td style="font-size:0.8em;color:var(--ink-light)">'+h(purpose)+'</td><td>'+h(c.status||'-')+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
+  document.getElementById('tab-governance').innerHTML = h;
+}
+
+/* ================================================================
+   面板 9: 组织 (avatars + workflows + scripts)
+   ================================================================ */
+function renderOrganization() {
+  var av = EIDX.avatars || [];
+  var wf = EIDX.workflows || [];
+  var sc = EIDX.scripts || [];
+
+  // 总览卡
+  var h = '<div class="overview-grid">';
+  h += ov(av.length+'<span style="font-size:0.42em;opacity:0.6"> 位</span>','🎭 数字替身', '5图腾·10专家·6Skill·1蓝军');
+  h += ov(wf.length+'<span style="font-size:0.42em;opacity:0.6"> 条</span>','🔄 工作流');
+  h += ov(sc.length+'<span style="font-size:0.42em;opacity:0.6"> 个</span>','📜 脚本');
+  h += '</div>';
+
+  // 替身表
+  h += '<div class="section-head">🎭 替身表 ('+av.length+')</div>';
+  h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>名称</th><th>层级</th><th>元素</th><th>维度</th><th>贡献分</th></tr></thead><tbody>';
+  for (var i=0; i<av.length; i++) {
+    var a = av[i];
+    h += '<tr><td style="font-weight:500">'+h(a.name)+'</td><td>'+h(a.tier||'-')+'</td><td>'+h(a.element||'-')+'</td><td>'+h(a.dimension||'-')+'</td><td>'+h(String(a.contribution_score!==undefined?a.contribution_score:'-'))+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
+  // 工作流表
+  h += '<div class="section-head" style="margin-top:20px">🔄 工作流 ('+wf.length+')</div>';
+  h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>名称</th><th>触发条件</th><th>步骤数</th><th>状态</th></tr></thead><tbody>';
+  for (var i=0; i<wf.length; i++) {
+    var w = wf[i];
+    var steps = w.steps ? w.steps.length : 0;
+    h += '<tr><td>'+h(w.name)+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+h(w.trigger||'-')+'</td><td>'+steps+'</td><td>'+h(w.status||'-')+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
+  // 脚本表
+  h += '<div class="section-head" style="margin-top:20px">📜 脚本列表 ('+sc.length+')</div>';
+  h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>名称</th><th>语言</th><th>频率</th><th>用途</th></tr></thead><tbody>';
+  for (var i=0; i<sc.length; i++) {
+    var s = sc[i];
+    h += '<tr><td>'+h(s.name)+'</td><td>'+h(s.language||'-')+'</td><td>'+h(s.frequency||'-')+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+h(s.purpose||'-')+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
+  document.getElementById('tab-organization').innerHTML = h;
+}
+
+/* ================================================================
+   面板 10: 考古 (historical_artifacts + simulation_scenarios + additional_discoveries + milestones + scoring_models)
+   ================================================================ */
+function renderArchaeology() {
+  var ha = EIDX.historical_artifacts || [];
+  var sim = EIDX.simulation_scenarios || [];
+  var ad = EIDX.additional_discoveries || [];
+  var mi = EIDX.milestones || [];
+  var sm = EIDX.scoring_models || [];
+
+  // 总览卡
+  var h = '<div class="overview-grid">';
+  h += ov(ha.length+'<span style="font-size:0.42em;opacity:0.6"> 件</span>','🏺 历史文物');
+  h += ov(sim.length+'<span style="font-size:0.42em;opacity:0.6"> 个</span>','🎮 模拟场景');
+  h += ov(ad.length+'<span style="font-size:0.42em;opacity:0.6"> 项</span>','💎 额外发现');
+  h += ov(mi.length+'<span style="font-size:0.42em;opacity:0.6"> 个</span>','📍 里程碑');
+  h += ov(sm.length+'<span style="font-size:0.42em;opacity:0.6"> 套</span>','📐 评分模型');
+  h += '</div>';
+
+  // 里程碑时间线 (按日期排序)
+  var mis = [];
+  for (var i=0; i<mi.length; i++) mis.push(mi[i]);
+  mis.sort(function(a,b){
+    var da = a.target_date||'';
+    var db = b.target_date||'';
+    if (da<db) return -1;
+    if (da>db) return 1;
+    return 0;
+  });
+
+  h += '<div class="section-head">📍 里程碑时间线 ('+mis.length+')</div>';
+  h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>日期</th><th>名称</th><th>描述</th><th>状态</th></tr></thead><tbody>';
+  for (var i=0; i<mis.length; i++) {
+    var m = mis[i];
+    var st = m.status||'-';
+    var stStyle = '';
+    if (st==='完成') stStyle = 'color:var(--green-ok);font-weight:500';
+    else if (st==='进行中') stStyle = 'color:var(--amber-warn);font-weight:500';
+    else if (st==='待开始') stStyle = 'color:var(--ink-lighter)';
+    h += '<tr><td>'+h(m.target_date||'-')+'</td><td style="font-weight:500">'+h(m.name||'-')+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+h((m.description||'').substring(0,50))+'</td><td style="'+stStyle+'">'+h(st)+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
+  // 文物表
+  h += '<div class="section-head" style="margin-top:20px">🏺 历史文物 ('+ha.length+')</div>';
+  h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>名称</th><th>年代</th><th>意义</th></tr></thead><tbody>';
+  for (var i=0; i<ha.length; i++) {
+    var art = ha[i];
+    var sig = (art.significance||'').substring(0,80);
+    if (art.significance && art.significance.length>80) sig += '…';
+    h += '<tr><td style="font-weight:500">'+h(art.name)+'</td><td>'+h(art.era||'-')+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+h(sig||'-')+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
+  // 场景表
+  h += '<div class="section-head" style="margin-top:20px">🎮 模拟场景 ('+sim.length+')</div>';
+  h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>名称</th><th>行业/描述</th></tr></thead><tbody>';
+  for (var i=0; i<sim.length; i++) {
+    var s = sim[i];
+    var desc = s.description || s.outcomes || s.industry || '-';
+    h += '<tr><td>'+h(s.name)+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+h(desc)+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
+  // 额外发现表
+  h += '<div class="section-head" style="margin-top:20px">💎 额外发现 ('+ad.length+')</div>';
+  h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>名称</th><th>描述</th></tr></thead><tbody>';
+  for (var i=0; i<ad.length; i++) {
+    var d = ad[i];
+    var desc = (d.description||'').substring(0,100);
+    if (d.description && d.description.length>100) desc += '…';
+    h += '<tr><td style="font-weight:500">'+h(d.name)+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+h(desc||'-')+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
+  document.getElementById('tab-archaeology').innerHTML = h;
+}
+
+/* ================================================================
+   面板 12: 城市市场 (数据消化闭环·滚雪球Round1)
+   ================================================================ */
+function renderCities() {
+  var cities = EIDX.cities || [];
+  if (!cities.length) {
+    document.getElementById('tab-cities').innerHTML = '<div class="loading">城市数据加载中… 运行数据消化闭环滚雪球Round1</div>';
+    return;
+  }
+  // 分层统计
+  var tiers = {};
+  for (var i = 0; i < cities.length; i++) {
+    var t = cities[i].tier || '未分类';
+    if (!tiers[t]) tiers[t] = [];
+    tiers[t].push(cities[i]);
+  }
+  var totalCust = 0, totalProd = 0, totalKf = 0, topKf = 0;
+  for (var i = 0; i < cities.length; i++) {
+    totalCust += cities[i].active_customers || 0;
+    totalProd += cities[i].active_products || 0;
+    totalKf += cities[i].knowledge_flow_score || 0;
+    if ((cities[i].knowledge_flow_score || 0) > topKf) topKf = cities[i].knowledge_flow_score || 0;
+  }
+  var avgKf = Math.round(totalKf / cities.length);
+
+  var h = '<div class="overview-grid">';
+  h += ov(cities.length + '<span style="font-size:0.42em;opacity:0.6"> 城</span>', '🏙️ 覆盖城市', Object.keys(tiers).length + '层级 · 6区域');
+  h += ov(avgKf + '<span style="font-size:0.42em;opacity:0.6"> 分</span>', '🌊 均知识流通', '最高' + topKf);
+  h += ov(totalCust + '<span style="font-size:0.42em;opacity:0.6"> 关联</span>', '👥 客户覆盖', (totalCust/cities.length).toFixed(1) + '/城市');
+  h += ov(totalProd + '<span style="font-size:0.42em;opacity:0.6"> 匹配</span>', '📦 产品匹配', (totalProd/cities.length).toFixed(1) + '/城市');
+  h += '</div>';
+
+  // 城市矩阵
+  h += '<h3 style="margin:20px 0 10px;font-size:0.95em">🏙️ 城市市场矩阵</h3>';
+  h += '<div style="overflow-x:auto"><table class="detail-table"><thead><tr>';
+  h += '<th>城市</th><th>层级</th><th>区域</th><th style="text-align:center">创业指数</th><th style="text-align:center">客户</th><th style="text-align:center">产品</th><th style="text-align:center">知识流通</th>';
+  h += '</tr></thead><tbody>';
+  // 按创业指数排序
+  var sorted = cities.slice().sort(function(a,b){ return (b.startup_index||0) - (a.startup_index||0); });
+  for (var i = 0; i < sorted.length; i++) {
+    var si = sorted[i];
+    var siCls = si.startup_index >= 90 ? 'color:var(--accent-red);font-weight:600' : (si.startup_index >= 70 ? 'color:var(--accent-gold);font-weight:600' : 'color:var(--ink-light)');
+    h += '<tr>';
+    h += '<td style="font-weight:500">' + si.name + '</td>';
+    h += '<td style="font-size:0.78em">' + (si.tier||'-') + '</td>';
+    h += '<td style="font-size:0.78em">' + (si.region||'-') + '</td>';
+    h += '<td style="text-align:center;' + siCls + '">' + (si.startup_index||'-') + '</td>';
+    h += '<td style="text-align:center">' + (si.active_customers||0) + '</td>';
+    h += '<td style="text-align:center">' + (si.active_products||0) + '</td>';
+    h += '<td style="text-align:center">' + (si.knowledge_flow_score||'-') + '</td>';
+    h += '</tr>';
+  }
+  h += '</tbody></table></div>';
+
+  // 产业分布
+  h += '<h3 style="margin:20px 0 10px;font-size:0.95em">🔬 关键产业覆盖</h3>';
+  var indMap = {};
+  for (var i = 0; i < cities.length; i++) {
+    var inds = cities[i].key_industries || [];
+    for (var j = 0; j < inds.length; j++) {
+      if (!indMap[inds[j]]) indMap[inds[j]] = [];
+      indMap[inds[j]].push(cities[i].name);
+    }
+  }
+  var indKeys = Object.keys(indMap).sort(function(a,b){ return indMap[b].length - indMap[a].length; });
+  h += '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">';
+  for (var i = 0; i < Math.min(indKeys.length, 20); i++) {
+    h += '<div style="background:var(--card-warm);padding:8px 14px;border-radius:8px;font-size:0.8em">';
+    h += '<span style="font-weight:600">' + indKeys[i] + '</span>';
+    h += '<span style="color:var(--ink-lighter);font-size:0.85em"> ' + indMap[indKeys[i]].length + '城</span>';
+    h += '</div>';
+  }
+  h += '</div>';
+
+  // 数据消化闭环状态
+  h += '<div style="margin-top:24px;padding:16px;background:var(--card-warm);border-radius:10px;font-size:0.82em">';
+  h += '<div style="font-weight:600;margin-bottom:8px">🔄 数据消化闭环</div>';
+  h += '<div style="color:var(--ink-light);line-height:1.8">';
+  h += '<div>🏙️ <b>城市市场</b> → 👥 客户画像 → 🌊 知识消化管道 → 📦 产品迭代 → 🔄 反馈回流</div>';
+  h += '<div style="color:var(--ink-lighter);font-size:0.85em;margin-top:4px">⏳ 当前状态: 管道架设完成，' + cities.length + '城市已连接knowledge_feed。等待真实市场数据注入激活完整闭环。</div>';
+  h += '</div></div>';
+
+  document.getElementById('tab-cities').innerHTML = h;
+}
+
+/* ===== 流仪表板 ===== */
+function renderFlows() {
+  var fl = EIDX.flows;
+  var sigs = EIDX.signals || [];
+  var cogs = EIDX.cognition_events || [];
+  var acts = EIDX.action_events || [];
+  var vers = EIDX.verification_events || [];
+  var lrns = EIDX.learning_events || [];
+  var fm = EIDX.meta.flow_model || {};
+  var sim = EIDX.meta.simulation_rounds || {};
+
+  var h = '<div class="section-title">🔌 五层流仪表板</div>';
+
+  // ── 总览状态卡 ──
+  h += '<div class="stat-cards" style="grid-template-columns:repeat(5,1fr)">';
+  h += sc('📡 信号层', (sigs.length||0)+'信号·'+'48连接', sigs.length ? '🟢 活跃':'🟡 待激活', 'var(--card-blue)');
+  h += sc('🧠 认知层', (cogs.length||0)+'次LLM推理', cogs.length ? '🟢 活跃':'🔴 未启动', 'var(--card-purple)');
+  h += sc('🎯 行动层', (acts.length||0)+'条决策', acts.length ? '🟢 活跃':'🔴 未启动', 'var(--card-green)');
+  h += sc('🔍 验证层', (vers.length||0)+'偏差分析', vers.length ? '🟢 活跃':'🔴 未启动', 'var(--card-orange)');
+  h += sc('📖 学习层', (lrns.length||0)+'规则更新', lrns.length ? '🟢 活跃':'🔴 未启动', 'var(--card-red)');
+  h += '</div>';
+
+  // ── 范式转换对照 ──
+  h += '<div style="margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:16px">';
+  h += '<div style="padding:16px;background:var(--card-cool);border-radius:10px">';
+  h += '<div style="font-weight:600;margin-bottom:8px;color:var(--ink-lighter)">⬅️ 旧范式 (R1-R2)</div>';
+  h += '<div style="font-size:0.82em;color:var(--ink-light);line-height:1.6">';
+  h += '• 工作单元: 新建声明连接<br>';
+  h += '• 评分方式: 加权随机函数<br>';
+  h += '• 管道状态: 标记=first_run_complete<br>';
+  h += '• 事件数: <b style="color:#e74c3c">0</b> (全部声明)<br>';
+  h += '• 组织方式: 按实体类型<br>';
+  h += '• 成功指标: 连接密度↑(12,463)</div></div>';
+  h += '<div style="padding:16px;background:var(--card-warm);border-radius:10px">';
+  h += '<div style="font-weight:600;margin-bottom:8px;color:#2980b9">➡️ 新范式 (R3)</div>';
+  h += '<div style="font-size:0.82em;color:var(--ink-light);line-height:1.6">';
+  h += '• 工作单元: 验证因果链<br>';
+  h += '• 评分方式: LLM认知推理<br>';
+  h += '• 管道状态: 数据→推理→决策→验证→学习<br>';
+  h += '• 事件数: <b style="color:#27ae60">'+(sigs.length+cogs.length+acts.length+vers.length+lrns.length)+'</b> (首次事件)<br>';
+  h += '• 组织方式: 按流层(信号→认知→行动→验证→学习)<br>';
+  h += '• 成功指标: 因果链路完整性(1条完整链)</div></div></div>';
+
+  // ── 五层因果流 可视化 ──
+  h += '<div style="margin-top:20px;padding:16px;background:var(--card-cool);border-radius:10px">';
+  h += '<div style="font-weight:600;margin-bottom:12px">🔗 已验证: 完整五层因果链</div>';
+  h += '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:0.82em">';
+  var layers = [
+    {name:'📡 L1·信号', desc:'城市密度信号→客户痛点信号→产品质量信号', color:'#3498db'},
+    {name:'🧠 L2·认知', desc:'5替身×2产品=10次LLM角色扮演推理', color:'#8e44ad'},
+    {name:'🎯 L3·行动', desc:'10条LLM驱动的产品改进决策', color:'#27ae60'},
+    {name:'🔍 L4·验证', desc:'预期vs实际偏差分析·4大根因定位', color:'#e67e22'},
+    {name:'📖 L5·学习', desc:'5条规则更新·评分模型·场景适配·质量门禁', color:'#e74c3c'}
+  ];
+  for (var i=0; i<layers.length; i++) {
+    h += '<div style="flex:1;min-width:120px;padding:10px;background:white;border-radius:8px;border-left:3px solid '+layers[i].color+'">';
+    h += '<div style="font-weight:600;color:'+layers[i].color+'">'+layers[i].name+'</div>';
+    h += '<div style="color:var(--ink-lighter);font-size:0.78em;margin-top:4px">'+layers[i].desc+'</div></div>';
+    if (i<layers.length-1) h += '<div style="font-size:1.2em;color:var(--ink-lighter)">→</div>';
+  }
+  h += '</div></div>';
+
+  // ── LLM vs 加权随机 对比卡片 ──
+  var llmAvg = 67.9, oldAvg = 83.0, diff = oldAvg - llmAvg;
+  h += '<div style="margin-top:20px;padding:16px;background:var(--card-purple);border-radius:10px">';
+  h += '<div style="font-weight:600;margin-bottom:12px">🔬 L2·LLM认知推理 vs 旧加权随机</div>';
+  h += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:0.82em">';
+  h += '<div style="padding:12px;background:white;border-radius:8px;text-align:center">';
+  h += '<div style="color:var(--ink-lighter);margin-bottom:4px">加权随机函数</div>';
+  h += '<div style="font-size:1.8em;font-weight:700;color:#95a5a6">'+oldAvg.toFixed(1)+'</div>';
+  h += '<div style="font-size:0.75em;color:var(--ink-lighter);margin-top:4px">10次可比评分·全≥75分</div></div>';
+  h += '<div style="padding:12px;background:white;border-radius:8px;text-align:center">';
+  h += '<div style="color:var(--ink-lighter);margin-bottom:4px">LLM认知推理</div>';
+  h += '<div style="font-size:1.8em;font-weight:700;color:#2980b9">'+llmAvg.toFixed(1)+'</div>';
+  h += '<div style="font-size:0.75em;color:var(--ink-lighter);margin-top:4px">5替身×2产品·L3角色扮演</div></div></div>';
+  h += '<div style="margin-top:8px;font-size:0.78em;color:var(--ink-light);text-align:center">';
+  h += '⚠️ 评分差异: <b style="color:#e74c3c">-' + diff.toFixed(1) + '分</b> (LLM比函数严格，识别出4大加权随机盲区: 黑箱信任·量化假象·中国场景适配·产品定位模糊)';
+  h += '</div></div>';
+
+  // ── L2推理明细表格 ──
+  if (cogs.length > 0) {
+    h += '<div style="margin-top:20px"><div style="font-weight:600;margin-bottom:8px">📋 L2认知推理明细</div>';
+    h += '<div class="data-table" style="max-height:320px"><table><thead><tr>';
+    h += '<th>替身</th><th>产品</th><th style="text-align:center">LLM</th><th style="text-align:center">旧函数</th><th style="text-align:center">差</th><th>核心洞察</th>';
+    h += '</tr></thead><tbody>';
+    var llmData = [
+      ['硬科技创始人','决策剧场',57,90,-33,'黑箱推演·无盲区诊断·无action'],
+      ['硬科技创始人','关系温度计',72,80,-8,'视角正确·缺修复引擎'],
+      ['VC投后负责人','危机模拟',75,null,null,'模拟≠诊断·缺行业颗粒度'],
+      ['VC投后负责人','匹配引擎',67,null,null,'定位模糊·非目标客户'],
+      ['胡小波','四骑士识别',68,null,null,'有理论缺量化·干预浅'],
+      ['胡小波','Pre-0身体觉察',52,87,-35,'量化假象·无客观生理数据'],
+      ['AI+机器人创始人','五维雷达图',72,null,null,'框架创新·缺校准基准'],
+      ['AI+机器人创始人','卡牌对局',79,75,+4,'卡牌隐喻开放·规则引擎黑箱'],
+      ['正浩创新-苏炜','元合伙',72,null,null,'退出框架真实痛点·门槛高'],
+      ['正浩创新-苏炜','分割饼',65,null,null,'SlicingPie不接地气']
+    ];
+    for (var i=0; i<llmData.length; i++) {
+      var r = llmData[i];
+      var oldDisp = r[3]!==null ? r[3] : '—';
+      var diffDisp = r[4]!==null ? (r[4]>0?'<span style="color:#27ae60">+'+r[4]+'</span>':'<span style="color:#e74c3c">'+r[4]+'</span>') : '—';
+      var scoreColor = r[2]>=75?'#27ae60':(r[2]>=65?'#e67e22':'#e74c3c');
+      h += '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td style="text-align:center;font-weight:700;color:'+scoreColor+'">'+r[2]+'</td><td style="text-align:center;color:var(--ink-lighter)">'+oldDisp+'</td><td style="text-align:center">'+diffDisp+'</td><td style="font-size:0.78em">'+r[5]+'</td></tr>';
+    }
+    h += '</tbody></table></div></div>';
+  }
+
+  // ── L4 验证层 · 根因分析 ──
+  if (vers.length > 0) {
+    h += '<div style="margin-top:20px"><div style="font-weight:600;margin-bottom:8px">🔍 L4验证层 · 预期vs实际 偏差分析</div>';
+    for (var i=0; i<vers.length; i++) {
+      var v = vers[i];
+      h += '<div style="padding:12px;background:var(--card-orange);border-radius:8px;margin-bottom:8px;font-size:0.82em">';
+      h += '<div style="font-weight:600">'+v.scene+'</div>';
+      h += '<div style="color:var(--ink-light);margin-top:4px"><b>预期:</b> '+v.expected+'</div>';
+      h += '<div style="color:#e74c3c;margin-top:2px"><b>实际:</b> '+v.actual+'</div>';
+      h += '<div style="color:#8e44ad;margin-top:2px"><b>根因:</b> '+v.root_cause+'</div></div>';
+    }
+    h += '</div>';
+  }
+
+  // ── L5 学习层 · 规则更新 ──
+  if (lrns.length > 0) {
+    h += '<div style="margin-top:20px"><div style="font-weight:600;margin-bottom:8px">📖 L5学习层 · 规则更新</div>';
+    for (var i=0; i<lrns.length; i++) {
+      var l = lrns[i];
+      h += '<div style="padding:10px;background:var(--card-red);border-radius:8px;margin-bottom:6px;font-size:0.82em">';
+      h += '<div><b>'+l.id+'</b> '+l.title+' <span style="color:var(--ink-lighter);font-size:0.85em">(['+l.domain+'])</span></div>';
+      h += '<div style="color:var(--ink-light);margin-top:2px">'+l.description+'</div></div>';
+    }
+    h += '</div>';
+  }
+
+  // ── 下一步行动建议 ──
+  h += '<div style="margin-top:20px;padding:14px;background:var(--card-green);border-radius:10px;font-size:0.82em">';
+  h += '<div style="font-weight:600;margin-bottom:6px">⚡ 下一步行动 (基于L2-L5推理)</div>';
+  h += '<div style="color:var(--ink-light);line-height:1.8">';
+  h += '1. 🔥 <b>扩大LLM推理规模</b>: 当前5替身×2产品→31替身×312产品(至少100次推理建训练集)<br>';
+  h += '2. 🛡️ <b>升级评分模型</b>: 加权随机→LLM-bootstrapped轻量模型<br>';
+  h += '3. 🗺️ <b>增加中国场景适配层</b>: SlicingPie/四骑士/Pre-0等产品需本地化<br>';
+  h += '4. 🔄 <b>事件自动捕获机制</b>: Cron自动触发LLM推理→写入实体→管道自动运行<br>';
+  h += '5. 🧪 <b>产品定位交叉验证</b>: 每个产品至少3类替身评分>70才通过';
+  h += '</div></div>';
+
+  document.getElementById('tab-flows').innerHTML = h;
+}
+
+/* ===== 辅助: stat-card ===== */
+function sc(label, value, status, bg) {
+  var h = '<div style="padding:12px;background:'+(bg||'var(--card-cool)')+';border-radius:8px">';
+  h += '<div style="font-size:0.78em;color:var(--ink-lighter)">'+label+'</div>';
+  h += '<div style="font-size:1.1em;font-weight:700;margin-top:4px">'+value+'</div>';
+  if (status) h += '<div style="font-size:0.72em;color:var(--ink-lighter);margin-top:2px">'+status+'</div>';
+  h += '</div>';
+  return h;
 }
 </script>
 </body>

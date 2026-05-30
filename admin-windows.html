@@ -324,6 +324,50 @@ function rGraph(){
 /* ================================================================
    启动
    ================================================================ */
+/* ===== LLM决策建议引擎 ===== */
+viewRenderers['llm-decisions']=function(){
+  var prods=DB.products||[],cogs=DB.cognition_events||[],acts=DB.action_events||[],vers=DB.verification_events||[],lrns=DB.learning_events||[];
+  var h=breadcrumb('ops','LLM决策建议')+'<div class="panel-header"><div><h2>🔮 LLM决策建议引擎</h2><div class="meta">基于6替身×17产品LLM认知推理 · 自动生成产品改进优先级</div></div></div>';
+  var withLLM=[],withoutLLM=[];
+  for(var i=0;i<prods.length;i++){
+    if(prods[i].llm_rating) withLLM.push(prods[i]);
+    else withoutLLM.push(prods[i]);
+  }
+  withLLM.sort(function(a,b){return a.llm_rating-b.llm_rating});
+  h+='<div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px">';
+  h+='<div class="stat-card" style="background:#fef9e7"><div class="stat-num" style="color:#e67e22">'+withLLM.length+'</div><div class="stat-label">已LLM评价</div></div>';
+  h+='<div class="stat-card" style="background:#fdedec"><div class="stat-num" style="color:#e74c3c">'+withoutLLM.length+'</div><div class="stat-label">待LLM评价</div></div>';
+  h+='<div class="stat-card" style="background:#ebdef0"><div class="stat-num" style="color:#8e44ad">'+(vers.length||0)+'</div><div class="stat-label">偏差分析条</div></div>';
+  h+='<div class="stat-card" style="background:#d5f5e3"><div class="stat-num" style="color:#27ae60">'+(lrns.length||0)+'</div><div class="stat-label">规则更新条</div></div>';
+  h+='</div>';
+  h+='<div style="font-weight:600;margin-bottom:8px">🔥 产品改进优先级 (LLM评分低→高=紧急度最大)</div>';
+  h+='<table class="data-table" style="width:100%;font-size:.82em"><thead><tr><th style="width:36px">#</th><th>产品</th><th style="width:60px">LLM</th><th style="width:60px">偏差</th><th>核心问题</th><th>建议行动</th></tr></thead><tbody>';
+  for(var i=0;i<withLLM.length;i++){
+    var p=withLLM[i];
+    var a=actionMap[p.name]||{action:'待LLM推理后生成',priority:'P2',urgency:'低'};
+    var sc=p.llm_rating>=75?'#27ae60':(p.llm_rating>=65?'#e67e22':'#e74c3c');
+    var diff=p.llm_vs_functional_diff,dd='',dc='';
+    if(typeof diff==='number'){dd=(diff>0?'+':'')+diff;dc=diff<-15?'#e74c3c':(diff<-5?'#e67e22':'#27ae60');}
+    else {dd='N/A';dc='var(--ink-lighter)';}
+    var uc=a.urgency==='紧急'?'#e74c3c':(a.urgency==='高'?'#e67e22':(a.urgency==='中'?'#8e44ad':'#27ae60'));
+    h+='<tr><td style="text-align:center;font-weight:700">'+(i+1)+'</td><td><b>'+escH(p.name)+'</b></td>';
+    h+='<td style="text-align:center;font-weight:700;color:'+sc+'">'+p.llm_rating+'</td>';
+    h+='<td style="text-align:center;color:'+dc+';font-size:.78em">'+dd+'</td>';
+    h+='<td style="font-size:.78em">'+escH(p.llm_reasoning||'—')+'</td>';
+    h+='<td style="font-size:.75em"><span style="padding:2px 6px;border-radius:3px;background:'+uc+';color:white;font-weight:600">'+a.priority+'</span> '+escH(a.action)+'</td></tr>';
+  }
+  h+='</tbody></table>';
+  if(withoutLLM.length>0){
+    h+='<div style="margin-top:20px;font-weight:600;margin-bottom:8px">⏳ 待LLM评价产品 ('+withoutLLM.length+'个)</div>';
+    h+='<div style="padding:12px;background:#fdf2e9;border-radius:8px;font-size:.78em;color:var(--ink-light)">';
+    h+='这些产品的quality_score来自加权随机函数，尚未经过L3替身LLM认知推理验证。<br>';
+    h+='<b>建议</b>: 用Cron批量触发替身的LLM推理。<br>';
+    h+='预估需评: '+(withoutLLM.filter(function(p){return p.lifecycle_stage==='LC-005'}).length)+'个精品 + '+(withoutLLM.filter(function(p){return p.lifecycle_stage==='LC-004'}).length)+'个打磨期';
+    h+='</div>';
+  }
+  return h;
+};
+
 (function(){
   try{if(sessionStorage.getItem('_admin_auth')==='1'){document.getElementById('gate').classList.add('hidden');document.getElementById('app').classList.add('show');initApp()}}catch(e){}
 })();
@@ -1335,6 +1379,50 @@ viewRenderers['people-network']=function(){return breadcrumb('people','协作者
 /* ================================================================
    启动
    ================================================================ */
+/* ===== LLM决策建议引擎 ===== */
+viewRenderers['llm-decisions']=function(){
+  var prods=DB.products||[],cogs=DB.cognition_events||[],acts=DB.action_events||[],vers=DB.verification_events||[],lrns=DB.learning_events||[];
+  var h=breadcrumb('ops','LLM决策建议')+'<div class="panel-header"><div><h2>🔮 LLM决策建议引擎</h2><div class="meta">基于6替身×17产品LLM认知推理 · 自动生成产品改进优先级</div></div></div>';
+  var withLLM=[],withoutLLM=[];
+  for(var i=0;i<prods.length;i++){
+    if(prods[i].llm_rating) withLLM.push(prods[i]);
+    else withoutLLM.push(prods[i]);
+  }
+  withLLM.sort(function(a,b){return a.llm_rating-b.llm_rating});
+  h+='<div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px">';
+  h+='<div class="stat-card" style="background:#fef9e7"><div class="stat-num" style="color:#e67e22">'+withLLM.length+'</div><div class="stat-label">已LLM评价</div></div>';
+  h+='<div class="stat-card" style="background:#fdedec"><div class="stat-num" style="color:#e74c3c">'+withoutLLM.length+'</div><div class="stat-label">待LLM评价</div></div>';
+  h+='<div class="stat-card" style="background:#ebdef0"><div class="stat-num" style="color:#8e44ad">'+(vers.length||0)+'</div><div class="stat-label">偏差分析条</div></div>';
+  h+='<div class="stat-card" style="background:#d5f5e3"><div class="stat-num" style="color:#27ae60">'+(lrns.length||0)+'</div><div class="stat-label">规则更新条</div></div>';
+  h+='</div>';
+  h+='<div style="font-weight:600;margin-bottom:8px">🔥 产品改进优先级 (LLM评分低→高=紧急度最大)</div>';
+  h+='<table class="data-table" style="width:100%;font-size:.82em"><thead><tr><th style="width:36px">#</th><th>产品</th><th style="width:60px">LLM</th><th style="width:60px">偏差</th><th>核心问题</th><th>建议行动</th></tr></thead><tbody>';
+  for(var i=0;i<withLLM.length;i++){
+    var p=withLLM[i];
+    var a=actionMap[p.name]||{action:'待LLM推理后生成',priority:'P2',urgency:'低'};
+    var sc=p.llm_rating>=75?'#27ae60':(p.llm_rating>=65?'#e67e22':'#e74c3c');
+    var diff=p.llm_vs_functional_diff,dd='',dc='';
+    if(typeof diff==='number'){dd=(diff>0?'+':'')+diff;dc=diff<-15?'#e74c3c':(diff<-5?'#e67e22':'#27ae60');}
+    else {dd='N/A';dc='var(--ink-lighter)';}
+    var uc=a.urgency==='紧急'?'#e74c3c':(a.urgency==='高'?'#e67e22':(a.urgency==='中'?'#8e44ad':'#27ae60'));
+    h+='<tr><td style="text-align:center;font-weight:700">'+(i+1)+'</td><td><b>'+escH(p.name)+'</b></td>';
+    h+='<td style="text-align:center;font-weight:700;color:'+sc+'">'+p.llm_rating+'</td>';
+    h+='<td style="text-align:center;color:'+dc+';font-size:.78em">'+dd+'</td>';
+    h+='<td style="font-size:.78em">'+escH(p.llm_reasoning||'—')+'</td>';
+    h+='<td style="font-size:.75em"><span style="padding:2px 6px;border-radius:3px;background:'+uc+';color:white;font-weight:600">'+a.priority+'</span> '+escH(a.action)+'</td></tr>';
+  }
+  h+='</tbody></table>';
+  if(withoutLLM.length>0){
+    h+='<div style="margin-top:20px;font-weight:600;margin-bottom:8px">⏳ 待LLM评价产品 ('+withoutLLM.length+'个)</div>';
+    h+='<div style="padding:12px;background:#fdf2e9;border-radius:8px;font-size:.78em;color:var(--ink-light)">';
+    h+='这些产品的quality_score来自加权随机函数，尚未经过L3替身LLM认知推理验证。<br>';
+    h+='<b>建议</b>: 用Cron批量触发替身的LLM推理。<br>';
+    h+='预估需评: '+(withoutLLM.filter(function(p){return p.lifecycle_stage==='LC-005'}).length)+'个精品 + '+(withoutLLM.filter(function(p){return p.lifecycle_stage==='LC-004'}).length)+'个打磨期';
+    h+='</div>';
+  }
+  return h;
+};
+
 (function(){
   try{if(sessionStorage.getItem('_admin_auth')==='1'){document.getElementById('gate').classList.add('hidden');document.getElementById('app').classList.add('show');initApp()}}catch(e){}
 })();
