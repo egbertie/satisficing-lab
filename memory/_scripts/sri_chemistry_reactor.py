@@ -508,6 +508,384 @@ def reaction_energy_conservation(data):
     return tracked
 
 
+
+# ============================================================
+# 深化学 · 第二轮 (链10-18)
+# ============================================================
+
+# 链10: 同位素标记 — 产品指纹生成
+def reaction_isotope_label(data):
+    """为每个产品生成独有的化学指纹·让产品之间能识别同类"""
+    now = datetime.now(timezone.utc)
+    products = [p for p in data.get('products', [])
+                if isinstance(p, dict) and p.get('status') not in ('已下架', '资料·归入知识库')]
+    
+    labeled = 0
+    for p in products:
+        if p.get('fingerprint'):
+            continue
+        
+        # 指纹 = 族 + JTBD + 产品类型 + 评分档位 + 包装层完整度
+        score_tier = 'A' if p.get('sri_score', 0) >= 80 else ('B' if p.get('sri_score', 0) >= 65 else 'C')
+        packaging = 'P' if p.get('positioning') else 'N'
+        
+        fingerprint = '{}-{}-{}-{}{}'.format(
+            p.get('family', '?')[0] if p.get('family') else '?',
+            (p.get('jtbd_category', '?') or '?')[0],
+            (p.get('product_type', '?') or '?')[0],
+            score_tier, packaging
+        )
+        p['fingerprint'] = fingerprint
+        p['labeled_at'] = now.isoformat()
+        labeled += 1
+    
+    data['meta']['isotopes'] = {
+        'reacted_at': now.isoformat(),
+        'products_labeled': labeled,
+        'principle': '每个产品有独一无二的化学指纹·可被同类自动识别'
+    }
+    return labeled
+
+
+# 链11: 氧化还原 — 同类产品评分竞争·胜者氧化败者
+def reaction_redox(data):
+    """同族产品互相竞争·高分产品氧化低分产品(自动降权)"""
+    now = datetime.now(timezone.utc)
+    products = [p for p in data.get('products', [])
+                if isinstance(p, dict) and p.get('status') not in ('已下架', '资料·归入知识库')
+                and p.get('family')]
+    
+    # 按族分组
+    by_family = defaultdict(list)
+    for p in products:
+        by_family[p.get('family', '')].append(p)
+    
+    redoxed = 0
+    for family, group in by_family.items():
+        if len(group) < 2:
+            continue
+        # 按评分排序
+        group.sort(key=lambda p: p.get('sri_score', 0), reverse=True)
+        
+        # 族内最高分 = 还原剂(保持高分)
+        # 族内最低分 = 氧化产物(被降权)
+        top = group[0]
+        bottom = group[-1]
+        
+        if top.get('sri_score', 0) - bottom.get('sri_score', 0) > 15:
+            # 显著竞争: 低分被氧化
+            old_score = bottom.get('sri_score', 0)
+            bottom['sri_score'] = max(40, old_score - 5)  # 被氧化降5分
+            bottom['redox_state'] = 'oxidized'
+            bottom['oxidized_by'] = top.get('id', '?')
+            bottom['oxidized_at'] = now.isoformat()
+            redoxed += 1
+    
+    data['meta']['redox'] = {
+        'reacted_at': now.isoformat(),
+        'products_oxidized': redoxed,
+        'principle': '同族评分竞争·高分胜者天然压制低分·形成自然淘汰'
+    }
+    return redoxed
+
+
+# 链12: 聚合反应 — 产品自然聚类为产品簇
+def reaction_polymerization(data):
+    """基于指纹+评分+连接, 产品自动聚合成产品簇"""
+    now = datetime.now(timezone.utc)
+    products = [p for p in data.get('products', [])
+                if isinstance(p, dict) and p.get('status') not in ('已下架', '资料·归入知识库')
+                and p.get('fingerprint')]
+    
+    # 按指纹前缀聚类 (族+JTBD两层)
+    clusters = defaultdict(list)
+    for p in products:
+        fp = p.get('fingerprint', '')
+        if len(fp) >= 2:
+            key = fp[:2]  # 前两位: 族+JTBD
+            clusters[key].append(p)
+    
+    # 为每个簇命名和评分
+    polymerized = 0
+    cluster_map = {}
+    for key, members in clusters.items():
+        if len(members) >= 2:
+            avg_score = sum(p.get('sri_score', 0) for p in members) / len(members)
+            cluster_id = 'CLUSTER-{:02d}'.format(len(cluster_map) + 1)
+            cluster_map[cluster_id] = {
+                'id': cluster_id,
+                'key': key,
+                'size': len(members),
+                'avg_score': round(avg_score, 1),
+                'products': [p.get('id') for p in members],
+                'product_names': [p.get('name', '')[:20] for p in members[:5]]
+            }
+            for p in members:
+                p['cluster_id'] = cluster_id
+                p['cluster_avg_score'] = round(avg_score, 1)
+            polymerized += 1
+    
+    data['clusters'] = list(cluster_map.values())
+    data['meta']['polymerization'] = {
+        'reacted_at': now.isoformat(),
+        'clusters_formed': polymerized,
+        'total_clustered_products': sum(c['size'] for c in cluster_map.values()),
+        'principle': '产品按指纹自然聚类·无需手动分类'
+    }
+    return polymerized
+
+
+# 链13: 相变 — 产品簇质量突破临界点·整簇状态跃迁
+def reaction_phase_transition(data):
+    """产品簇平均分突破临界点→整簇发生相变(生命周期集体跃迁)"""
+    now = datetime.now(timezone.utc)
+    clusters = data.get('clusters', [])
+    
+    transitions = 0
+    for cluster in clusters:
+        products = [p for p in data.get('products', [])
+                    if isinstance(p, dict) and p.get('cluster_id') == cluster['id']]
+        
+        avg_score = cluster.get('avg_score', 0)
+        
+        # 临界点判断
+        if avg_score >= 80 and any(p.get('lifecycle_stage') != 'LC-005' for p in products):
+            # 相变: 整簇精品化
+            for p in products:
+                if p.get('lifecycle_stage') != 'LC-005':
+                    p['lifecycle_stage'] = 'LC-005'
+                    p['phase_transitioned_at'] = now.isoformat()
+                    transitions += 1
+        
+        elif avg_score < 55:
+            # 相变: 整簇降级
+            for p in products:
+                if p.get('lifecycle_stage') not in ('LC-006', 'LC-007'):
+                    p['lifecycle_stage'] = 'LC-006'
+                    p['phase_transitioned_at'] = now.isoformat()
+                    transitions += 1
+    
+    data['meta']['phase_transition'] = {
+        'reacted_at': now.isoformat(),
+        'products_transitioned': transitions,
+        'principle': '产品簇突破质量临界点→整簇状态相变·集体跃迁'
+    }
+    return transitions
+
+
+# 链14: 渗透压 — 高评分簇的知识向外扩散
+def reaction_osmosis(data):
+    """高评分产品簇的"浓度"通过连接向外渗透·拉高低分产品基线"""
+    now = datetime.now(timezone.utc)
+    clusters = data.get('clusters', [])
+    products = data.get('products', [])
+    connections = data.get('connections', [])
+    
+    # 找高浓度簇
+    high_clusters = [c for c in clusters if c.get('avg_score', 0) >= 75]
+    if not high_clusters:
+        data['meta']['osmosis'] = {'reacted_at': now.isoformat(), 'products_osmosed': 0}
+        return 0
+    
+    # 找低分产品
+    low_products = [p for p in products
+                    if isinstance(p, dict) and p.get('sri_score', 0) < 65
+                    and p.get('status') not in ('已下架', '资料·归入知识库')]
+    
+    osmosed = 0
+    for lp in low_products:
+        lp_id = lp.get('id', '')
+        # 检查是否被高浓度簇连接
+        for conn in connections:
+            if isinstance(conn, dict) and conn.get('target_id') == lp_id:
+                source_id = conn.get('source_id', '')
+                # 源是否在高浓度簇中
+                in_high = any(source_id in c.get('products', []) for c in high_clusters)
+                if in_high:
+                    # 渗透: 低分产品加 buff (最高+5)
+                    old = lp.get('sri_score', 0)
+                    lp['sri_score'] = min(100, old + 3)
+                    lp['osmosis_buff'] = True
+                    lp['osmosis_source'] = source_id
+                    lp['osmosis_at'] = now.isoformat()
+                    osmosed += 1
+                    break
+    
+    data['meta']['osmosis'] = {
+        'reacted_at': now.isoformat(),
+        'products_osmosed': osmosed,
+        'high_clusters': len(high_clusters),
+        'principle': '高质量产品簇通过连接向低分产品扩散·拉高整体基线'
+    }
+    return osmosed
+
+
+# 链15: 酶催化 — 编排器作为生物酶降低全系统活化能
+def reaction_enzyme(data):
+    """编排器(酶)降低每个环节的失败率·加速全局反应"""
+    now = datetime.now(timezone.utc)
+    
+    # 检查编排器执行历史
+    oh = data.get('meta', {}).get('orchestration_health', {})
+    cb = data.get('meta', {}).get('circuit_breakers', {})
+    
+    # 酶活性 = 最近健康分 / 断路器稳定性
+    health_score = oh.get('health_score', 100)
+    open_breakers = sum(1 for b in cb.values() if isinstance(b, dict) and b.get('state') == 'open')
+    
+    enzyme_activity = round(health_score / 100 * (1 - open_breakers / max(1, len(cb))), 2)
+    
+    # 酶活性高 → 加速全系统: 提高所有产品的 flow_priority
+    if enzyme_activity > 0.8:
+        accelerated = 0
+        products = [p for p in data.get('products', [])
+                    if isinstance(p, dict) and p.get('status') not in ('已下架', '资料·归入知识库')]
+        for p in products:
+            if p.get('flow_priority') == 'deferred':
+                p['flow_priority'] = 'normal'
+                accelerated += 1
+    else:
+        accelerated = 0
+    
+    data['meta']['enzyme'] = {
+        'reacted_at': now.isoformat(),
+        'enzyme_activity': enzyme_activity,
+        'open_breakers': open_breakers,
+        'products_accelerated': accelerated,
+        'principle': '编排器是全局酶·健康分高=酶活性强·加速所有反应'
+    }
+    return enzyme_activity
+
+
+# 链16: 量子态叠加 — 替身评分不取平均·保留分歧
+def reaction_superposition(data):
+    """多个替身对同一产品的评分保留为量子叠加态·不是平均值"""
+    now = datetime.now(timezone.utc)
+    cogs = data.get('cognition_events', [])
+    products = data.get('products', [])
+    
+    # 按产品分组替身评分
+    by_product = defaultdict(list)
+    for c in cogs:
+        if isinstance(c, dict) and c.get('entity_id') and c.get('score'):
+            by_product[c['entity_id']].append({
+                'evaluator': c.get('evaluator', '?'),
+                'score': c['score']
+            })
+    
+    superposed = 0
+    for p in products:
+        pid = p.get('id', '')
+        if pid not in by_product:
+            continue
+        scores = by_product[pid]
+        if len(scores) < 2:
+            continue
+        
+        # 不取平均·保留分歧
+        score_list = [s['score'] for s in scores]
+        avg_s = sum(score_list) / len(score_list)
+        min_s = min(score_list)
+        max_s = max(score_list)
+        spread = max_s - min_s
+        
+        p['superposition_scores'] = {
+            'evaluators': [s['evaluator'] for s in scores],
+            'scores': score_list,
+            'spread': spread,
+            'consensus': 'high' if spread <= 10 else ('medium' if spread <= 20 else 'divergent'),
+            'principle': '保留替身之间的分歧·不坍缩为单一点估计'
+        }
+        superposed += 1
+    
+    data['meta']['superposition'] = {
+        'reacted_at': now.isoformat(),
+        'products_superposed': superposed,
+        'principle': '替身评分保留为量子态叠加·分歧本身就是信息'
+    }
+    return superposed
+
+
+# 链17: 自发对称破缺 — 无外部输入时自然涌现优势产品
+def reaction_symmetry_breaking(data):
+    """当系统没有外部干预时·评分自然收敛·优势产品涌现"""
+    now = datetime.now(timezone.utc)
+    products = [p for p in data.get('products', [])
+                if isinstance(p, dict) and p.get('status') not in ('已下架', '资料·归入知识库')
+                and p.get('sri_score')]
+    
+    if not products:
+        return 0
+    
+    # 评分自然分布
+    scores = [p.get('sri_score', 0) for p in products]
+    avg_score = sum(scores) / len(scores)
+    
+    # 自然涌现的"优势产品": 评分 > avg + 15 (自然对称破缺)
+    elites = [p for p in products if p.get('sri_score', 0) >= avg_score + 15]
+    for p in elites:
+        p['emergent_elite'] = True
+        p['emerged_at'] = now.isoformat()
+    
+    # 自然涌现的"长尾产品": 评分 < avg - 15
+    tail = [p for p in products if p.get('sri_score', 0) <= avg_score - 15]
+    for p in tail:
+        p['emergent_tail'] = True
+    
+    data['meta']['symmetry_breaking'] = {
+        'reacted_at': now.isoformat(),
+        'avg_score': round(avg_score, 1),
+        'elites_emerged': len(elites),
+        'tail_products': len(tail),
+        'elite_names': [p.get('name', '?')[:20] for p in elites[:5]],
+        'principle': '没有人为指定·评分自然分布涌现优势和长尾'
+    }
+    return len(elites)
+
+
+# 链18: 耗散结构 — 信息输入→有序输出·维持远离平衡态
+def reaction_dissipative_structure(data):
+    """飞轮系统作为开放耗散结构·通过信息输入维持有序"""
+    now = datetime.now(timezone.utc)
+    
+    # 输入: 养料批次 + 文件扫描 + LLM评价 + Cron执行
+    nourishment = data.get('meta', {}).get('nourishment', {})
+    scan_runs = data.get('meta', {}).get('flywheel', {}).get('total_runs', 0)
+    cog_count = len(data.get('cognition_events', []))
+    
+    energy_input = (
+        nourishment.get('total_items', 0) * 0.1 +
+        scan_runs * 0.5 +
+        cog_count * 1.0
+    )
+    
+    # 输出: 产品流 + 评分 + 包装层 + 修复
+    products = [p for p in data.get('products', [])
+                if isinstance(p, dict) and p.get('status') not in ('已下架', '资料·归入知识库')]
+    with_packaging = sum(1 for p in products if p.get('positioning'))
+    with_catalyst = sum(1 for p in products if p.get('is_catalyst'))
+    
+    energy_output = (
+        with_packaging * 0.2 +
+        with_catalyst * 1.0 +
+        data.get('meta', {}).get('entropy', {}).get('products_revived', 0) * 0.3
+    )
+    
+    # 有序度 = 输出/输入 · 1.0 = 平衡 · >1.0 = 负熵(自组织)
+    order_parameter = round(energy_output / max(1, energy_input), 2)
+    
+    data['meta']['dissipative'] = {
+        'reacted_at': now.isoformat(),
+        'energy_input': round(energy_input, 1),
+        'energy_output': round(energy_output, 1),
+        'order_parameter': order_parameter,
+        'state': 'self_organizing' if order_parameter > 1.0 else 'dissipating',
+        'principle': '开放系统通过信息输入输出维持有序·order>1=自组织'
+    }
+    return order_parameter
+
+
+
 # ============================================================
 # 主反应: 九链齐发
 # ============================================================
@@ -534,6 +912,16 @@ def react(dry_run=False):
         ('entropy', '熵增逆转', reaction_reverse_entropy),
         ('catalyst', '催化剂', reaction_catalyst),
         ('energy', '能量守恒', reaction_energy_conservation),
+        # --- 深化学第二轮 ---
+        ('isotope', '同位素标记', reaction_isotope_label),
+        ('redox', '氧化还原', reaction_redox),
+        ('polymerization', '聚合反应', reaction_polymerization),
+        ('phase', '相变', reaction_phase_transition),
+        ('osmosis', '渗透压', reaction_osmosis),
+        ('enzyme', '酶催化', reaction_enzyme),
+        ('superposition', '量子态叠加', reaction_superposition),
+        ('symmetry', '对称破缺', reaction_symmetry_breaking),
+        ('dissipative', '耗散结构', reaction_dissipative_structure),
     ]
     
     for chain_id, chain_name, chain_func in chains:
