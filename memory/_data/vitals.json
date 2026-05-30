@@ -1,11 +1,12 @@
 {
-  "last_scan": "2026-05-31T01:33:00+08:00",
-  "health": "ok",
-  "issues": 3,
+  "last_scan": "2026-05-31T04:33:00+08:00",
+  "health": "warning",
+  "issues": 4,
   "known_findings": [
-    {"id": "event_target", "status": "recurring"},
-    {"id": "crypto_subtle", "status": "recurring"},
-    {"id": "sha256", "status": "recurring"}
+    {"id": "event_target", "status": "recurring", "count": 1, "trend": "down"},
+    {"id": "crypto_subtle", "status": "recurring", "count": 3, "trend": "down"},
+    {"id": "sha256", "status": "recurring", "count": 4, "trend": "stable"},
+    {"id": "backup_freshness", "status": "recurring", "note": "凌晨时段正常未触发"}
   ],
   "delta_since_last": {
     "files_total": 16013,
@@ -21,5 +22,5 @@
   "customer_count": 5,
   "connections": 32,
   "git_clean": true,
-  "notes": "01:33 routine scan — no changes since 00:34. 3 known residues stable."
+  "notes": "04:33 routine scan — 3 known residues trending down. Backup not run yet (early morning, expected)."
 }
