@@ -223,3 +223,62 @@
 - 🟢 质量扫描正常（18:33 执行）
 - 🟢 实体索引重建完成（18:20, 17:59, 16:44）
 - 🟢 3个已知编码残留（event_target, crypto_subtle, sha256）— 非关键
+
+---
+
+## 扫描: 2026-05-31 06:34 CST
+
+**管道版本:** data_init_pipeline.py V1.0
+
+### 扫描摘要
+- **总文件数:** 15,579（-434 / 自 00:34）
+- **可扫描文本文件:** 15,097（-457）
+- **元数据处理:** 824 个（仅首批，相对少）
+- **产品发现:** 0 个（⚠️ pipeline分类逻辑异常→已修复，从 entities_index 恢复 315）
+- **客户发现:** 5 个（稳定）
+- **知识连接:** 14 条（-18 自上次）
+
+### 🚨 主要异常: files_index.json 分类丢失
+本次运行中 Stage 2 对 824 个文件提取了元数据分类，但写入 files_index.json 时**所有条目丢失 category 字段**。每个条目仅含: path, name, ext, size, modified, scannable。
+
+**影响:**
+- Stage 3（构建驾驶舱种子数据）无法分类 → 输出 0 产品
+- entities_index.json 仍完好（315 产品、5 客户）
+- **已修复：** dashboard_seed_v2.json 已从 entities_index 重建
+
+### 文件数量下降说明 (16,013 → 15,579)
+- .bak 目录可能已清理或新增排除规则
+- 实际工作区（排除 node_modules/.git/__pycache__/.bak）≈ 15,993
+- 管道额外排除 ~414 个文件（Archives等）
+
+### 自上次扫描（00:34）以来的变更
+**1,218 个文件在最近 6h 内变更（含大量备份/索引重建）:**
+
+| 文件 | 时间 | 类型 |
+|------|------|------|
+| memory/2026-05-31.md | 06:34 | 📝 当天记忆日志 |
+| entities_index backup (×3) | 06:32 | 🔄 批量索引备份（~8.4MB） |
+| .bak/sk-*.html (批量) | 06:32 | 🔄 备份目录批量文件 |
+| memory/nourishment/batch_*.json | ~06:32 | 📄 滋养批次数据 |
+| memory/_data/files_index.json | 06:34 | 🔄 重建（15579条，无分类字段） |
+| memory/_data/dashboard_seed_v2.json | 06:34 | 🔄 重建（已修复为315产品） |
+| memory/_data/knowledge_graph_edges.json | 06:34 | 🔄 知识图谱更新（14条） |
+
+### 分类分布（从 entities_index 获取）
+| 类别 | 数量 |
+|------|------|
+| **产品（entity索引）** | **315** |
+| 客户画像 | 5 |
+| 知识图谱连接 | 14 |
+
+### 种子数据状态（已修复）
+- **产品页面:** 315 个（从 entities_index 恢复）
+- **客户画像:** 5 个（稳定）
+- **知识图谱:** 14 条文件间共享标签连接
+
+### 关注项
+- 🚨 **files_index.json 分类字段丢失** — 建议检查 pipeline Stage 2 写入逻辑，可能字段映射错误或写入前数据清空
+- 🚨 **dashboard_seed 0 产品** — 已从 entities_index 恢复，但 root cause 需修复
+- 📉 **知识连接 32→14** — KG 重建次数比上次少，可能因 Stage 2 处理文件较少（824）
+- 🟢 3个已知编码残留（event_target, crypto_subtle, sha256）— 持续稳定
+- 🟡 .bak/Archives 目录排除规则是否合理？建议明确定义

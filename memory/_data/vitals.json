@@ -1,26 +1,28 @@
 {
-  "last_scan": "2026-05-31T04:33:00+08:00",
+  "last_scan": "2026-05-31T06:34:00+08:00",
   "health": "warning",
-  "issues": 4,
+  "issues": 3,
   "known_findings": [
     {"id": "event_target", "status": "recurring", "count": 1, "trend": "down"},
     {"id": "crypto_subtle", "status": "recurring", "count": 3, "trend": "down"},
     {"id": "sha256", "status": "recurring", "count": 4, "trend": "stable"},
-    {"id": "backup_freshness", "status": "recurring", "note": "凌晨时段正常未触发"}
+    {"id": "backup_freshness", "status": "recurring", "note": "凌晨时段正常未触发"},
+    {"id": "files_index_no_category", "status": "new", "severity": "high", "note": "files_index.json 所有条目丢失 category 字段，需修复 pipeline Stage 2 写入逻辑"}
   ],
   "delta_since_last": {
-    "files_total": 16013,
+    "files_total": 15579,
     "files_changed": 0,
     "new_products": 0,
     "new_customers": 0,
     "new_conversations": 0,
-    "new_connections": 0,
+    "new_connections": -18,
     "new_scripts": 0,
     "entities_reindexed": false
   },
-  "product_count": 85,
+  "product_count": 315,
   "customer_count": 5,
-  "connections": 32,
+  "connections": 14,
   "git_clean": true,
-  "notes": "04:33 routine scan — 3 known residues trending down. Backup not run yet (early morning, expected)."
+  "notes": "06:34 scan — critical: files_index.json lost all category fields. Dashboard seed rebuilt from entities_index (0→315 products restored). KG edges regenerated at 14 (was 32).",
+  "fix_applied": "dashboard_seed_v2.json rebuilt from entities_index.json — 315 products restored"
 }
