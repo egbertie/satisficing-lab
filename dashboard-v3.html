@@ -312,27 +312,11 @@ var prodFilt = '全部';
 var detailOn = false;
 var taskFilt = '全部';
 
-/* ===== 密码门 ===== */
-function unlock(btn) {
-  var v = document.getElementById('pw').value.trim();
-  if (v === PASS) {
-    sessionStorage.setItem('sri_d1', '1');
-    document.getElementById('gate').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    boot();
-  } else {
-    btn.textContent = '✗ 再试'; btn.style.background = '#8A5030';
-    document.getElementById('pw').value = '';
-    setTimeout(function(){ btn.textContent = '进入'; btn.style.background = ''; }, 1200);
-  }
-}
-
+/* ===== 密码门 — 已移除（直接进入） ===== */
 (function(){
-  if (sessionStorage.getItem('sri_d1') === '1') {
-    document.getElementById('gate').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    boot();
-  }
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  boot();
 })();
 
 /* ===== 工具 ===== */

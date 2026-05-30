@@ -165,12 +165,12 @@ function sortTbl(id,key,th){
 }
 var rowBuilders={};
 
-/* ===== 密码门 ===== */
-function checkGate(btn){
-  var pw=document.getElementById('gpw').value;
-  try{if(!sessionStorage)throw new Error('no');sessionStorage.setItem('_at','1');sessionStorage.removeItem('_at')}catch(e){document.getElementById('gate-degrade').style.display='block'}
-  if(pw==='123654'){try{sessionStorage.setItem('_admin_auth','1')}catch(e){}document.getElementById('gate').classList.add('hidden');document.getElementById('app').classList.add('show');initApp()}else{document.getElementById('gate-error').textContent='密码错误'}
-}
+/* ===== 密码门 — 已移除（直接进入） ===== */
+(function(){
+  document.getElementById('gate').classList.add('hidden');
+  document.getElementById('app').classList.add('show');
+  initApp();
+})();
 
 /* ===== 初始化 ===== */
 function initApp(){
@@ -811,7 +811,7 @@ viewRenderers['chemistry-llm']=function(){
    启动
    ================================================================ */
 (function(){
-  try{if(sessionStorage.getItem('_admin_auth')==='1'){document.getElementById('gate').classList.add('hidden');document.getElementById('app').classList.add('show');initApp()}}catch(e){}
+  // 无密码直接启动（已在 checkGate 移除后的 IIFE 中执行 initApp）
 })();
 </div>
 </script>
