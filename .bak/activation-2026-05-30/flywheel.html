@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>资产飞轮 · 满意解研究所</title>
+<link rel="stylesheet" href="sri-design.css">
+<style>
+  .main{max-width:620px;margin:0 auto;padding:var(--sp-md)}
+  .hero{background:linear-gradient(160deg,var(--title),var(--sri-gold));padding:var(--sp-2xl) var(--sp-lg);text-align:center;color:#F5F0E6}
+  .hero h1{color:#F5F0E6;font-size:22px}
+  .hero p{font-size:13px;opacity:0.8}
+
+  /* 飞轮可视化 */
+  .flywheel-viz{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;padding:var(--sp-lg);font-size:12px}
+  .fw-ring{background:#fff;border-radius:50%;width:70px;height:70px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:10px;font-weight:600;color:var(--title);border:2px solid var(--border);line-height:1.4}
+  .fw-ring.active{border-color:var(--sri-red);border-width:3px}
+  .fw-ring .fw-icon{font-size:18px;display:block}
+  .fw-arrow{color:var(--sri-red);font-weight:700;font-size:16px}
+
+  .kpi-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:6px;margin:var(--sp-md) 0}
+  .kpi{background:#fff;border-radius:var(--radius-lg);padding:12px;text-align:center;border:1px solid var(--border-light)}
+  .kpi .val{font-size:20px;font-weight:800;color:var(--sri-red)}
+  .kpi .lbl{font-size:10px;color:var(--text-muted);margin-top:2px}
+
+  .asset-table{background:#fff;border-radius:var(--radius-lg);padding:var(--sp-md);margin:var(--sp-sm) 0}
+  .asset-table h4{font-size:14px;color:var(--title);margin-bottom:8px}
+  .asset-row{display:flex;align-items:center;gap:8px;padding:8px 0;font-size:12px;border-bottom:1px solid var(--border-light)}
+  .asset-row:last-child{border-bottom:none}
+  .asset-row .ar-icon{font-size:16px;min-width:24px}
+  .asset-row .ar-name{font-weight:600;color:var(--title);min-width:80px}
+  .asset-row .ar-desc{color:var(--text-muted);flex:1;font-size:11px}
+  .asset-row .ar-status{font-size:11px}
+  .status-live{color:#3D7A4F;font-weight:600}.status-pending{color:var(--sri-gold)}.status-plan{color:var(--text-muted)}
+</style>
+<link rel="stylesheet" href="vi_quick_ref.css">
+
+<script src="gate-check.js"></script>
+</head>
+<body>
+<div class="hero">
+  <h1>⚙️ 资产飞轮</h1>
+  <p>五元飞轮: Prompt → Workflow → Case → Skill → Memory</p>
+</div>
+
+<div class="main">
+
+  <!-- 四层飞轮可视化 -->
+  <div style="text-align:center;padding:var(--sp-md);">
+    <div class="flywheel-viz">
+      <div class="fw-ring active"><span class="fw-icon">📥</span>积累</div>
+      <span class="fw-arrow">→</span>
+      <div class="fw-ring active"><span class="fw-icon">🔬</span>提炼</div>
+      <span class="fw-arrow">→</span>
+      <div class="fw-ring active"><span class="fw-icon">🚀</span>应用</div>
+      <span class="fw-arrow">→</span>
+      <div class="fw-ring active"><span class="fw-icon">🔄</span>反馈</div>
+      <span class="fw-arrow">→</span>
+      <div class="fw-ring active"><span class="fw-icon">📥</span>再积累</div>
+    </div>
+  </div>
+
+  <!-- 实时KPI -->
+  <div class="kpi-bar">
+    <div class="kpi"><div class="val" id="kpiProducts">233</div><div class="lbl">知识产品</div></div>
+    <div class="kpi"><div class="val" id="kpiUsers">0</div><div class="lbl">使用记录</div></div>
+    <div class="kpi"><div class="val" id="kpiFeedback">0</div><div class="lbl">反馈收集</div></div>
+    <div class="kpi"><div class="val" id="kpiShares">0</div><div class="lbl">分享次数</div></div>
+    <div class="kpi"><div class="val" id="kpiNPS">—</div><div class="lbl">NPS基线</div></div>
+  </div>
+
+  <!-- 积累层 -->
+  <div class="asset-table">
+    <h4>📥 积累层 · 每条使用行为自动入库</h4>
+    <div class="asset-row"><span class="ar-icon">🧪</span><span class="ar-name">使用日志</span><span class="ar-desc">7工具使用自动记录时间戳到localStorage</span><span class="ar-status status-live">✅ 运行中</span></div>
+    <div class="asset-row"><span class="ar-icon">📊</span><span class="ar-name">测评数据</span><span class="ar-desc">五维评分·CI指数·四骑士自检结果</span><span class="ar-status status-live">✅ 运行中</span></div>
+    <div class="asset-row"><span class="ar-icon">👤</span><span class="ar-name">客户注册</span><span class="ar-desc">姓名·企业·赛道·阶段 → 客户档案库</span><span class="ar-status status-live">✅ 运行中</span></div>
+    <div class="asset-row"><span class="ar-icon">📤</span><span class="ar-name">分享归因</span><span class="ar-desc">ref参数追踪·转介绍计数</span><span class="ar-status status-live">✅ 运行中</span></div>
+    <div class="asset-row"><span class="ar-icon">⭐</span><span class="ar-name">NPS反馈</span><span class="ar-desc">使用3工具后自动0-10评分</span><span class="ar-status status-live">✅ 运行中</span></div>
+    <div class="asset-row"><span class="ar-icon">💬</span><span class="ar-name">👍💬反馈</span><span class="ar-desc">每页底部·181页注入</span><span class="ar-status status-live">✅ 运行中</span></div>
+  </div>
+
+  <!-- 提炼层 -->
+  <div class="asset-table">
+    <h4>🔥 产品热度 (实时)</h4>
+    <div id="heatmapContent"><div class="asset-row"><span class="ar-icon">⏳</span><span class="ar-name">等待数据</span><span class="ar-desc">使用后自动显示</span></div></div>
+  </div>
+
+  <div class="asset-table">
+    <h4>🔬 提炼层 · 数据→洞察→产品迭代</h4>
+    <div class="asset-row"><span class="ar-icon">📈</span><span class="ar-name">信效度</span><span class="ar-desc">≥100样本后重测信度+内部一致性分析</span><span class="ar-status status-pending">⏳ 待数据</span></div>
+    <div class="asset-row"><span class="ar-icon">🔥</span><span class="ar-name">产品热度</span><span class="ar-desc">使用频率排名→优先升级/淘汰方向</span><span class="ar-status status-plan">待汇总</span></div>
+    <div class="asset-row"><span class="ar-icon">🔄</span><span class="ar-name">K-factor</span><span class="ar-desc">分享归因→计算病毒传播系数</span><span class="ar-status status-plan">待计算</span></div>
+  </div>
+
+  <!-- 应用层 -->
+  <div class="asset-table">
+    <h4>🎯 自动推荐动作 (飞轮引擎)</h4>
+    <div id="actionsContent"><div class="asset-row"><span class="ar-icon">⏳</span><span class="ar-name">等待触发</span><span class="ar-desc">首次使用后自动生成</span></div></div>
+  </div>
+
+  <div class="asset-table">
+    <h4>🚀 应用层 · 洞察→产品迭代·新方法论</h4>
+    <div class="asset-row"><span class="ar-icon">🆕</span><span class="ar-name">新工具</span><span class="ar-desc">基于高频使用模式→补全新工具</span><span class="ar-status status-pending">⏳ 待数据驱动</span></div>
+    <div class="asset-row"><span class="ar-icon">📝</span><span class="ar-name">新案例</span><span class="ar-desc">用户反馈→提炼为新方法论案例</span><span class="ar-status status-pending">⏳ 待积累</span></div>
+    <div class="asset-row"><span class="ar-icon">🎓</span><span class="ar-name">新课程</span><span class="ar-desc">高频需求→设计新课</span><span class="ar-status status-pending">⏳ 待需求</span></div>
+  </div>
+
+  <!-- 反馈层 -->
+  <div class="asset-table">
+    <h4>🔄 反馈层 · 闭环→飞轮加速</h4>
+    <div class="asset-row"><span class="ar-icon">📢</span><span class="ar-name">客户改进</span><span class="ar-desc">低分NPS→主动联系→改进→告知客户</span><span class="ar-status status-live">✅</span></div>
+    <div class="asset-row"><span class="ar-icon">🔁</span><span class="ar-name">30天重测</span><span class="ar-desc">自动提醒→回访→新数据→追踪Δ</span><span class="ar-status status-live">✅ 运行中</span></div>
+    <div class="asset-row"><span class="ar-icon">🌟</span><span class="ar-name">转介绍</span><span class="ar-desc">分享→新用户→双方受益→再分享</span><span class="ar-status status-live">✅ 运行中</span></div>
+  </div>
+
+  <div style="text-align:center;padding:var(--sp-lg);font-size:11px;color:var(--text-muted);">
+    <strong style="color:var(--sri-red);">五元飞轮</strong>: 每次用户使用同时更新Prompt/Workflow/Case/Skill/Memory<br>
+    对标: 满意姐五元资产飞轮方案V1.0 · 54天·836文件·从混乱到知识图谱<br>
+    <a href="dashboard.html">← 驾驶舱</a> · <a href="go.html">← 决策通道</a>
+  </div>
+</div>
+
+
+<script src="flywheel-engine.js"></script>
+<script>
+(function(){
+  // 首次运行引擎
+  FlywheelEngine.spin();
+  
+  // 从引擎读取实时数据
+  let summary = FlywheelEngine.refine();
+  let reports = JSON.parse(localStorage.getItem('sri_flywheel_reports') || '[]');
+  let lastReport = reports.length > 0 ? reports[reports.length-1] : null;
+  
+  document.getElementById('kpiUsers').textContent = summary.totalUsage || 0;
+  document.getElementById('kpiFeedback').textContent = summary.feedbackCount || 0;
+  document.getElementById('kpiShares').textContent = summary.totalShares || 0;
+  document.getElementById('kpiNPS').textContent = summary.nps !== null ? summary.nps+'/10' : '—';
+  
+  // 产品热度
+  let heatHtml = '';
+  if (summary.topProducts && summary.topProducts.length > 0) {
+    summary.topProducts.forEach(p => {
+      heatHtml += '<div class="asset-row"><span class="ar-icon">🔥</span><span class="ar-name">'+p.page+'</span><span class="ar-desc">'+p.hits+' 次访问</span></div>';
+    });
+  } else {
+    heatHtml = '<div class="asset-row"><span class="ar-icon">📥</span><span class="ar-name">等待数据</span><span class="ar-desc">页面访问自动记录·每10次触发提炼</span></div>';
+  }
+  document.getElementById('heatmapContent').innerHTML = heatHtml;
+  
+  // 飞轮循环
+  document.getElementById('cycleCount').textContent = FlywheelEngine.getCycleCount();
+  
+  // K-factor
+  document.getElementById('kfactor').textContent = summary.kFactor || '—';
+  document.getElementById('activeClients').textContent = summary.activeClients30d || '0';
+  document.getElementById('totalClients').textContent = summary.totalClients || '0';
+  
+  // Last report
+  if (lastReport && lastReport.actions) {
+    let actionHtml = '';
+    lastReport.actions.forEach(a => {
+      actionHtml += '<div class="asset-row"><span class="ar-icon">🎯</span><span class="ar-name">'+a.type+'</span><span class="ar-desc">'+a.message+'</span></div>';
+    });
+    document.getElementById('actionsContent').innerHTML = actionHtml || '<div class="asset-row"><span class="ar-icon">⏳</span><span class="ar-name">等待触发</span><span class="ar-desc">使用10次后自动生成</span></div>';
+  }
+})();
+</script>
+</body>
+</html>

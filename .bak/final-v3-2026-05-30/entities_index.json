@@ -1,0 +1,910 @@
+{
+  "meta": {
+    "version": "1.0",
+    "created": "2026-05-30T00:53:49.000534",
+    "standard": "满意解信息架构V2·12字段元数据标准",
+    "total_entities": 54,
+    "breakdown": {
+      "products": 30,
+      "customers": 5,
+      "avatars": 6,
+      "milestones": 9,
+      "events": 4,
+      "tasks": 0,
+      "documents": 0,
+      "decisions": 0,
+      "terms": 0,
+      "scripts": 0,
+      "crons": 0,
+      "connections": 0
+    }
+  },
+  "products": [
+    {
+      "id": "PROD-001",
+      "type": "product",
+      "name": "决策剧场",
+      "description": "五维决策场景模拟工具——角色扮演+场景卡+实时评分反馈",
+      "family": "镜",
+      "status": "精品",
+      "url": "site/decision-theatre.html",
+      "maturity": "精品",
+      "tags": [
+        "决策",
+        "场景模拟",
+        "角色扮演"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-002",
+      "type": "product",
+      "name": "衡·观局测评",
+      "description": "五维快速自评入口——28题简版问卷→评分→结果→CTAs",
+      "family": "衡",
+      "status": "精品",
+      "url": "site/assessment.html",
+      "maturity": "精品",
+      "tags": [
+        "测评",
+        "五维决策",
+        "自评"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-003",
+      "type": "product",
+      "name": "化学报告",
+      "description": "五维测评完整报告——雷达图+深度分析+行动建议",
+      "family": "衡",
+      "status": "精品",
+      "url": "site/chemical-report.html",
+      "maturity": "精品",
+      "tags": [
+        "报告",
+        "雷达图",
+        "诊断"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-004",
+      "type": "product",
+      "name": "卡牌对局",
+      "description": "合伙人决策卡牌线上版——单人自查+双人对局",
+      "family": "镜",
+      "status": "精品",
+      "url": "site/cards-play.html",
+      "maturity": "精品",
+      "tags": [
+        "卡牌",
+        "对局",
+        "合伙人"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-005",
+      "type": "product",
+      "name": "产品目录",
+      "description": "全产品矩阵导航——五族分类+筛选+搜索",
+      "family": "契",
+      "status": "精品",
+      "url": "site/product-catalog.html",
+      "maturity": "精品",
+      "tags": [
+        "产品",
+        "导航",
+        "目录"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-006",
+      "type": "product",
+      "name": "自检清单",
+      "description": "满意解决策行动分级自检——12源验证+VI统一",
+      "family": "衡",
+      "status": "精品",
+      "url": "site/checklist.html",
+      "maturity": "精品",
+      "tags": [
+        "自检",
+        "质量",
+        "清单"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-007",
+      "type": "product",
+      "name": "五维雷达图",
+      "description": "五维度可视化雷达图——拖拽+预设样本+对比",
+      "family": "衡",
+      "status": "线上",
+      "url": "site/radar.html",
+      "maturity": "线上",
+      "tags": [
+        "雷达图",
+        "可视化",
+        "五维"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-008",
+      "type": "product",
+      "name": "关系温度计",
+      "description": "合作关系健康度检测——4题自评+风险预警",
+      "family": "衡",
+      "status": "线上",
+      "url": "site/thermometer.html",
+      "maturity": "线上",
+      "tags": [
+        "温度计",
+        "关系",
+        "诊断"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-009",
+      "type": "product",
+      "name": "危机模拟",
+      "description": "决策危机场景模拟——角色代入+压力测试",
+      "family": "镜",
+      "status": "线上",
+      "url": "site/crisis-sim.html",
+      "maturity": "线上",
+      "tags": [
+        "危机",
+        "模拟",
+        "压力测试"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-010",
+      "type": "product",
+      "name": "Pre-0身体觉察",
+      "description": "决策前身体觉察——身体的智慧先于头脑的判断",
+      "family": "镜",
+      "status": "线上",
+      "url": "site/pre0.html",
+      "maturity": "线上",
+      "tags": [
+        "身体觉察",
+        "直觉",
+        "决策前置"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-011",
+      "type": "product",
+      "name": "四骑士识别",
+      "description": "关系危机信号识别——基于Gottman四骑士理论",
+      "family": "镜",
+      "status": "线上",
+      "url": "site/knights.html",
+      "maturity": "线上",
+      "tags": [
+        "关系危机",
+        "识别",
+        "Gottman"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-012",
+      "type": "product",
+      "name": "骑士卡牌",
+      "description": "关系危机信号卡牌版——识别+应对策略",
+      "family": "镜",
+      "status": "线上",
+      "url": "site/knights-cards.html",
+      "maturity": "线上",
+      "tags": [
+        "卡牌",
+        "关系危机"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-013",
+      "type": "product",
+      "name": "匹配引擎",
+      "description": "合伙人匹配评估——五维兼容度分析",
+      "family": "镜",
+      "status": "线上",
+      "url": "site/match.html",
+      "maturity": "线上",
+      "tags": [
+        "匹配",
+        "合伙人",
+        "兼容度"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-014",
+      "type": "product",
+      "name": "元合伙",
+      "description": "元合伙章程——合伙人协议框架+治理机制",
+      "family": "镜",
+      "status": "线上",
+      "url": "site/metapartner.html",
+      "maturity": "线上",
+      "tags": [
+        "合伙",
+        "章程",
+        "治理"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-015",
+      "type": "product",
+      "name": "分割饼",
+      "description": "动态股权分配——Slicing Pie方法论",
+      "family": "镜",
+      "status": "线上",
+      "url": "site/slicing-pie.html",
+      "maturity": "线上",
+      "tags": [
+        "股权",
+        "分配",
+        "动态"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-016",
+      "type": "product",
+      "name": "RPS风险剖面",
+      "description": "风险剖面评估——多维度风险识别+评分",
+      "family": "镜",
+      "status": "线上",
+      "url": "site/rps.html",
+      "maturity": "线上",
+      "tags": [
+        "风险",
+        "剖面",
+        "评估"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-017",
+      "type": "product",
+      "name": "案例库",
+      "description": "决策案例库——12个案例+按类型筛选",
+      "family": "契",
+      "status": "线上",
+      "url": "site/cases.html",
+      "maturity": "线上",
+      "tags": [
+        "案例",
+        "筛选",
+        "学习"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-018",
+      "type": "product",
+      "name": "案例集群",
+      "description": "案例聚类分析——多案例交叉对比",
+      "family": "契",
+      "status": "线上",
+      "url": "site/cases-cluster.html",
+      "maturity": "线上",
+      "tags": [
+        "案例",
+        "聚类",
+        "对比"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-019",
+      "type": "product",
+      "name": "创造工坊",
+      "description": "内容创作工坊——模板+工作流+发布",
+      "family": "契",
+      "status": "线上",
+      "url": "site/creation.html",
+      "maturity": "线上",
+      "tags": [
+        "创作",
+        "内容",
+        "工作流"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-020",
+      "type": "product",
+      "name": "星光方法论",
+      "description": "星光方法论——系统化思维框架",
+      "family": "契",
+      "status": "线上",
+      "url": "site/stars-method.html",
+      "maturity": "线上",
+      "tags": [
+        "方法论",
+        "系统思维"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-021",
+      "type": "product",
+      "name": "星光体系",
+      "description": "星光体系总览——架构+模块+关联",
+      "family": "契",
+      "status": "线上",
+      "url": "site/stars.html",
+      "maturity": "线上",
+      "tags": [
+        "体系",
+        "架构"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-022",
+      "type": "product",
+      "name": "根脉溯源",
+      "description": "理论根脉溯源——满意解研究所的学术根基",
+      "family": "契",
+      "status": "线上",
+      "url": "site/roots.html",
+      "maturity": "线上",
+      "tags": [
+        "理论",
+        "溯源",
+        "学术"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-023",
+      "type": "product",
+      "name": "驾驶舱V1",
+      "description": "管理驾驶舱V1——11Tab·飞书数据·只读展示",
+      "family": "觉",
+      "status": "线上",
+      "url": "site/dashboard.html",
+      "maturity": "线上",
+      "tags": [
+        "驾驶舱",
+        "管理",
+        "数据"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-024",
+      "type": "product",
+      "name": "驾驶舱V3",
+      "description": "管理驾驶舱V3——活体视图·自我报告·三层穿透",
+      "family": "觉",
+      "status": "线上",
+      "url": "site/dashboard-v3.html",
+      "maturity": "线上",
+      "tags": [
+        "驾驶舱",
+        "自我报告",
+        "活体"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-025",
+      "type": "product",
+      "name": "飞轮引擎",
+      "description": "知识飞轮引擎——自动化知识循环",
+      "family": "觉",
+      "status": "线上",
+      "url": "site/flywheel.html",
+      "maturity": "线上",
+      "tags": [
+        "飞轮",
+        "自动化",
+        "知识"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-026",
+      "type": "product",
+      "name": "知识飞轮v1",
+      "description": "知识飞轮概念页——飞轮理论可视化",
+      "family": "觉",
+      "status": "线上",
+      "url": "site/knowledge-flywheel-v1.html",
+      "maturity": "线上",
+      "tags": [
+        "飞轮",
+        "理论"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-027",
+      "type": "product",
+      "name": "退出指南",
+      "description": "退出策略指南——创业退出路径+时机评估",
+      "family": "觉",
+      "status": "线上",
+      "url": "site/exit-guide.html",
+      "maturity": "线上",
+      "tags": [
+        "退出",
+        "指南",
+        "策略"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-028",
+      "type": "product",
+      "name": "工作坊",
+      "description": "决策工作坊——引导流程+工具包",
+      "family": "觉",
+      "status": "线上",
+      "url": "site/workshop.html",
+      "maturity": "线上",
+      "tags": [
+        "工作坊",
+        "引导",
+        "工具"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-029",
+      "type": "product",
+      "name": "向导",
+      "description": "产品向导——智能推荐+路径引导",
+      "family": "觉",
+      "status": "线上",
+      "url": "site/wizard.html",
+      "maturity": "线上",
+      "tags": [
+        "向导",
+        "推荐"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    },
+    {
+      "id": "PROD-030",
+      "type": "product",
+      "name": "引导页",
+      "description": "新手指引——满意解研究所产品地图",
+      "family": "觉",
+      "status": "线上",
+      "url": "site/guide.html",
+      "maturity": "线上",
+      "tags": [
+        "引导",
+        "新手"
+      ],
+      "tier": "L1公开",
+      "source": "文件系统扫描",
+      "confidence": 0.98,
+      "size_kb": 0
+    }
+  ],
+  "customers": [
+    {
+      "id": "CUST-001",
+      "type": "customer",
+      "name": "硬科技创始人",
+      "description": "硬科技创始人客户替身——凌晨一点的决策支持",
+      "industry": "硬科技",
+      "stage": "画像",
+      "needs_summary": "凌晨一点的决策支持",
+      "tags": [
+        "硬科技",
+        "创始人",
+        "决策"
+      ],
+      "source": "替身/客户/*.md",
+      "confidence": 0.95,
+      "lifetime_value": 0
+    },
+    {
+      "id": "CUST-002",
+      "type": "customer",
+      "name": "VC投后负责人",
+      "description": "VC投后负责人客户替身——投后诊断+退出策略",
+      "industry": "风险投资",
+      "stage": "画像",
+      "needs_summary": "投后诊断+退出策略",
+      "tags": [
+        "VC",
+        "投后",
+        "退出"
+      ],
+      "source": "替身/客户/*.md",
+      "confidence": 0.95,
+      "lifetime_value": 0
+    },
+    {
+      "id": "CUST-003",
+      "type": "customer",
+      "name": "律所合伙人",
+      "description": "律所合伙人客户替身——协议嵌入+风险防火墙",
+      "industry": "法律服务",
+      "stage": "画像",
+      "needs_summary": "协议嵌入+风险防火墙",
+      "tags": [
+        "法律",
+        "合伙人",
+        "合规"
+      ],
+      "source": "替身/客户/*.md",
+      "confidence": 0.95,
+      "lifetime_value": 0
+    },
+    {
+      "id": "CUST-004",
+      "type": "customer",
+      "name": "政府园区负责人",
+      "description": "政府园区负责人客户替身——企业诊断+政策匹配",
+      "industry": "公共管理",
+      "stage": "画像",
+      "needs_summary": "企业诊断+政策匹配",
+      "tags": [
+        "政府",
+        "园区",
+        "招商"
+      ],
+      "source": "替身/客户/*.md",
+      "confidence": 0.95,
+      "lifetime_value": 0
+    },
+    {
+      "id": "CUST-005",
+      "type": "customer",
+      "name": "独立董事/顾问",
+      "description": "独立董事/顾问客户替身——独立数据+预警触发",
+      "industry": "咨询",
+      "stage": "画像",
+      "needs_summary": "独立数据+预警触发",
+      "tags": [
+        "独立董事",
+        "顾问",
+        "预警"
+      ],
+      "source": "替身/客户/*.md",
+      "confidence": 0.95,
+      "lifetime_value": 0
+    }
+  ],
+  "tasks": [],
+  "avatars": [
+    {
+      "id": "AVAT-001",
+      "type": "avatar",
+      "name": "刘禹锡",
+      "description": "五年后回头看，今天这个决定还成立吗？",
+      "tier": "L0图腾",
+      "element": "土",
+      "dimension": "时间轴",
+      "status": "活跃",
+      "activation_count": 0,
+      "contribution_score": 0,
+      "source": "memory/数字替身驾驶舱.json",
+      "confidence": 0.95
+    },
+    {
+      "id": "AVAT-002",
+      "type": "avatar",
+      "name": "司马贺",
+      "description": "在有限信息下，能找到的最满意解是什么？",
+      "tier": "L0图腾",
+      "element": "金",
+      "dimension": "可行域",
+      "status": "活跃",
+      "activation_count": 0,
+      "contribution_score": 0,
+      "source": "memory/数字替身驾驶舱.json",
+      "confidence": 0.95
+    },
+    {
+      "id": "AVAT-003",
+      "type": "avatar",
+      "name": "水月观音",
+      "description": "你的身体在告诉你什么？",
+      "tier": "L0图腾",
+      "element": "水",
+      "dimension": "身心流",
+      "status": "活跃",
+      "activation_count": 0,
+      "contribution_score": 0,
+      "source": "memory/数字替身驾驶舱.json",
+      "confidence": 0.95
+    },
+    {
+      "id": "AVAT-004",
+      "type": "avatar",
+      "name": "孔子",
+      "description": "这个决策对得起你的承诺吗？",
+      "tier": "L0图腾",
+      "element": "木",
+      "dimension": "信义观",
+      "status": "活跃",
+      "activation_count": 0,
+      "contribution_score": 0,
+      "source": "memory/数字替身驾驶舱.json",
+      "confidence": 0.95
+    },
+    {
+      "id": "AVAT-005",
+      "type": "avatar",
+      "name": "六祖慧能",
+      "description": "抛开一切分析，你的直觉说什么？",
+      "tier": "L0图腾",
+      "element": "火",
+      "dimension": "直觉阈",
+      "status": "活跃",
+      "activation_count": 0,
+      "contribution_score": 0,
+      "source": "memory/数字替身驾驶舱.json",
+      "confidence": 0.95
+    },
+    {
+      "id": "AVAT-006",
+      "type": "avatar",
+      "name": "蓝军Skeptor-7",
+      "description": "你的假设里，有哪些是你选择性忽略的？",
+      "tier": "L3独立审计",
+      "element": null,
+      "dimension": null,
+      "status": "活跃",
+      "activation_count": 0,
+      "contribution_score": 0,
+      "source": "memory/数字替身驾驶舱.json",
+      "confidence": 0.95
+    }
+  ],
+  "documents": [],
+  "decisions": [],
+  "milestones": [
+    {
+      "id": "MILE-001",
+      "type": "milestone",
+      "name": "产品命名体系",
+      "description": "里程碑: 产品命名体系",
+      "target_date": "2026-05-28",
+      "status": "完成",
+      "source": "dashboard.html MLS数据",
+      "confidence": 0.95
+    },
+    {
+      "id": "MILE-002",
+      "type": "milestone",
+      "name": "233产品上线",
+      "description": "里程碑: 233产品上线",
+      "target_date": "2026-05-28",
+      "status": "完成",
+      "source": "dashboard.html MLS数据",
+      "confidence": 0.95
+    },
+    {
+      "id": "MILE-003",
+      "type": "milestone",
+      "name": "产品标准体系",
+      "description": "里程碑: 产品标准体系",
+      "target_date": "2026-05-28",
+      "status": "完成",
+      "source": "dashboard.html MLS数据",
+      "confidence": 0.95
+    },
+    {
+      "id": "MILE-004",
+      "type": "milestone",
+      "name": "驾驶舱中枢",
+      "description": "里程碑: 驾驶舱中枢",
+      "target_date": "2026-05-29",
+      "status": "完成",
+      "source": "dashboard.html MLS数据",
+      "confidence": 0.95
+    },
+    {
+      "id": "MILE-005",
+      "type": "milestone",
+      "name": "增长飞轮引擎",
+      "description": "里程碑: 增长飞轮引擎",
+      "target_date": "2026-05-28",
+      "status": "完成",
+      "source": "dashboard.html MLS数据",
+      "confidence": 0.95
+    },
+    {
+      "id": "MILE-006",
+      "type": "milestone",
+      "name": "密码门控体系",
+      "description": "里程碑: 密码门控体系",
+      "target_date": "2026-05-28",
+      "status": "完成",
+      "source": "dashboard.html MLS数据",
+      "confidence": 0.95
+    },
+    {
+      "id": "MILE-007",
+      "type": "milestone",
+      "name": "来源标注补齐",
+      "description": "里程碑: 来源标注补齐",
+      "target_date": "2026-06-07",
+      "status": "进行中",
+      "source": "dashboard.html MLS数据",
+      "confidence": 0.95
+    },
+    {
+      "id": "MILE-008",
+      "type": "milestone",
+      "name": "产品星级评定",
+      "description": "里程碑: 产品星级评定",
+      "target_date": "2026-06-14",
+      "status": "待开始",
+      "source": "dashboard.html MLS数据",
+      "confidence": 0.95
+    },
+    {
+      "id": "MILE-009",
+      "type": "milestone",
+      "name": "夏至路演准备",
+      "description": "里程碑: 夏至路演准备",
+      "target_date": "2026-06-21",
+      "status": "进行中",
+      "source": "dashboard.html MLS数据",
+      "confidence": 0.95
+    }
+  ],
+  "terms": [],
+  "events": [
+    {
+      "id": "EVT-001",
+      "type": "event",
+      "name": "event.target 全局变量不可靠",
+      "description": "Chrome/Safari现代版不支持event隐式全局变量",
+      "fix": "修复: this参数传递模式",
+      "date": "2026-05-28",
+      "severity": "critical",
+      "category": "browser_compatibility",
+      "source": "免疫记忆库",
+      "confidence": 1.0
+    },
+    {
+      "id": "EVT-002",
+      "type": "event",
+      "name": "crypto.subtle SHA-256静默失败",
+      "description": "Web Crypto API在GitHub Pages HTTPS中静默失败",
+      "fix": "修复: 内部工具改用明文密码",
+      "date": "2026-05-29",
+      "severity": "critical",
+      "category": "browser_compatibility",
+      "source": "免疫记忆库",
+      "confidence": 1.0
+    },
+    {
+      "id": "EVT-003",
+      "type": "event",
+      "name": "Safari内容拦截器阻断存储",
+      "description": "Safari Content Blockers阻断Web Storage API",
+      "fix": "修复: 存储可用性探测+降级提示",
+      "date": "2026-05-29",
+      "severity": "medium",
+      "category": "browser_compatibility",
+      "source": "免疫记忆库",
+      "confidence": 1.0
+    },
+    {
+      "id": "EVT-004",
+      "type": "event",
+      "name": "字体全局替换破坏布局",
+      "description": "全局replace把布局CSS的font-size也改了",
+      "fix": "修复: 精确CSS选择器",
+      "date": "2026-05-29",
+      "severity": "medium",
+      "category": "code_quality",
+      "source": "免疫记忆库",
+      "confidence": 1.0
+    }
+  ],
+  "scripts": [],
+  "crons": [],
+  "connections": []
+}

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>密码生成器 · 驾驶舱 · 满意解研究所</title>
+<style>
+  :root { --sri-red:#C23B22; --sri-gold:#B8860B; --sri-bg:#F5F0E6; --text:#4A4A4A; --title:#2A2A2A; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif; background:var(--sri-bg); color:var(--text); min-height:100vh; }
+  .header { background:linear-gradient(135deg,var(--title),var(--sri-gold)); color:#F5F0E6; padding:24px 20px; text-align:center; }
+  .header h1 { font-size:20px; } .header p { font-size:12px; opacity:0.8; }
+  .main { max-width:600px; margin:0 auto; padding:16px; }
+
+  .card { background:#fff; border-radius:14px; padding:20px; margin-bottom:14px; border:1px solid #D4C5A0; }
+  .card h3 { font-size:15px; color:var(--title); margin-bottom:10px; }
+  
+  .field { margin-bottom:12px; }
+  .field label { display:block; font-size:12px; font-weight:600; color:var(--title); margin-bottom:4px; }
+  .field input,.field select { width:100%; padding:10px 12px; border:1.5px solid #D4C5A0; border-radius:10px; font-size:14px; background:#fff; }
+  .field input:focus,.field select:focus { border-color:var(--sri-red); outline:none; }
+  .hint { font-size:10px; opacity:0.5; margin-top:2px; }
+
+  .product-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin:8px 0; }
+  .product-chip { padding:8px 12px; border:1.5px solid #D4C5A0; border-radius:10px; cursor:pointer; font-size:12px; text-align:center; transition:0.15s; background:#fff; }
+  .product-chip.selected { border-color:var(--sri-red); background:rgba(194,59,34,0.05); color:var(--sri-red); font-weight:600; }
+
+  .result-card { background:#fff; border-radius:14px; padding:24px; border:2px solid #4A8C5C; text-align:center; display:none; margin-top:16px; }
+  .result-card.show { display:block; }
+  .result-code { font-size:32px; font-weight:800; letter-spacing:4px; color:var(--title); font-family:monospace; margin:12px 0; }
+  .result-info { font-size:13px; line-height:1.8; color:var(--text); }
+  .copy-btn { padding:10px 28px; background:var(--sri-red); color:#fff; border:none; border-radius:20px; font-size:14px; font-weight:600; cursor:pointer; margin:8px; }
+
+  .history { margin-top:16px; }
+  .history-item { display:flex; justify-content:space-between; align-items:center; padding:8px 12px; background:#fff; border-radius:8px; margin:4px 0; font-size:12px; border:1px solid #f0e8d8; }
+  .history-code { font-weight:700; font-family:monospace; color:var(--sri-red); }
+  
+  .btn { padding:12px 28px; border-radius:20px; font-size:14px; font-weight:600; cursor:pointer; border:none; }
+  .btn-primary { background:var(--sri-red); color:#F5F0E6; }
+  .btn-outline { background:transparent; border:1.5px solid var(--sri-red); color:var(--sri-red); }
+  .btn-danger { background:transparent; border:1.5px solid #999; color:#999; font-size:11px; }
+</style>
+<link rel="stylesheet" href="vi_quick_ref.css">
+</head>
+<body>
+<div class="header">
+  <h1>🔐 密码生成器</h1>
+  <p>驾驶舱 · 生成授权密码 · 满意解研究所</p>
+</div>
+
+<div class="main">
+  <div class="card">
+    <h3>📦 选择产品</h3>
+    <p style="font-size:11px;opacity:0.5;margin-bottom:8px;">点击选择要授权的产品（可多选）</p>
+    <div class="product-grid" id="productGrid">
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>⚙️ 密码设置</h3>
+    <div class="field">
+      <label>密码生成方式</label>
+      <select id="genMode" onchange="toggleGenMode()">
+        <option value="auto">自动生成（8位随机数字）</option>
+        <option value="custom">自定义密码</option>
+      </select>
+    </div>
+    <div class="field" id="customField" style="display:none;">
+      <label>自定义密码</label>
+      <input type="text" id="customCode" maxlength="8" placeholder="8位数字">
+    </div>
+    <div class="field">
+      <label>绑定客户（选填）</label>
+      <input type="text" id="customer" placeholder="客户姓名/企业/备注">
+      <div class="hint">用于追踪密码分发给了谁</div>
+    </div>
+    <div class="field">
+      <label>有效期至</label>
+      <input type="date" id="expireDate">
+      <div class="hint">留空则不限期</div>
+    </div>
+    <div class="field">
+      <label>最大使用次数</label>
+      <input type="number" id="maxUses" value="9999" min="1">
+      <div class="hint">当前测试阶段设为9999（不限次数）</div>
+    </div>
+  </div>
+
+  <div style="text-align:center;">
+    <button class="btn btn-primary" onclick="generatePassword()">🔐 生成密码</button>
+  </div>
+
+  <div class="result-card" id="resultCard">
+    <h3>✅ 密码已生成</h3>
+    <div class="result-code" id="resultCode"></div>
+    <div class="result-info" id="resultInfo"></div>
+    <button class="copy-btn" onclick="copyCode()">📋 复制密码</button>
+    <button class="btn btn-outline" style="font-size:12px;" onclick="downloadConfig()">💾 下载配置JSON</button>
+  </div>
+
+  <div class="card" style="margin-top:24px;">
+    <h3>📋 生成历史</h3>
+    <div id="historyList">
+      <p style="font-size:11px;opacity:0.4;text-align:center;">暂无记录</p>
+    </div>
+    <button class="btn-danger" onclick="clearHistory()" style="margin-top:8px;">清除历史</button>
+  </div>
+</div>
+
+<script>
+// Product definitions
+const PRODUCTS = [
+  {id:'assessment', name:'衡·观局', desc:'五维快速自评', cat:'衡·测评'},
+  {id:'fulldiag', name:'衡·测渊', desc:'五维完整诊断', cat:'衡·测评'},
+  {id:'rps', name:'衡·探底', desc:'RPS风险剖面', cat:'衡·测评'},
+  {id:'slicing-pie', name:'衡·分利', desc:'SlicingPie贡献', cat:'衡·测评'},
+  {id:'checklist', name:'衡·校尺', desc:'自检清单', cat:'衡·测评'},
+  {id:'thermometer', name:'镜·触温', desc:'关系温度计', cat:'镜·觉察'},
+  {id:'knights', name:'镜·警兆', desc:'四骑士自检', cat:'镜·觉察'},
+  {id:'pre0', name:'镜·回身', desc:'PRE-0锚定', cat:'镜·觉察'},
+  {id:'crisis-sim', name:'觉·淬火', desc:'危机模拟器', cat:'觉·淬炼'},
+  {id:'cards-play', name:'觉·卡牌', desc:'决策卡牌', cat:'觉·淬炼'},
+  {id:'decision-theatre', name:'觉·入幕', desc:'决策剧场', cat:'觉·淬炼'},
+  {id:'match', name:'契·择伴', desc:'合伙人匹配', cat:'契·约定'},
+  {id:'metapartner', name:'契·立盟', desc:'元合伙章程', cat:'契·约定'},
+  {id:'exit-guide', name:'契·善别', desc:'退出指南', cat:'契·约定'},
+];
+
+// Render product grid
+let grid = document.getElementById('productGrid');
+let catNames = {};
+PRODUCTS.forEach(p => {
+  if (!catNames[p.cat]) {
+    catNames[p.cat] = true;
+    grid.innerHTML += `<div style="grid-column:1/-1;font-size:11px;font-weight:600;color:var(--sri-gold);margin-top:8px;">${p.cat}</div>`;
+  }
+  grid.innerHTML += `<div class="product-chip" data-pid="${p.id}" onclick="toggleProduct(this)">${p.name}<br><span style="font-size:10px;opacity:0.5;">${p.desc}</span></div>`;
+});
+grid.innerHTML += `<div class="product-chip" data-pid="all" onclick="selectAll(this)" style="background:var(--sri-bg);font-weight:600;">全部产品</div>`;
+
+function toggleProduct(el) {
+  el.classList.toggle('selected');
+  document.querySelector('[data-pid="all"]').classList.remove('selected');
+}
+
+function selectAll(el) {
+  let allSelected = el.classList.contains('selected');
+  el.classList.toggle('selected');
+  document.querySelectorAll('.product-chip:not([data-pid="all"])').forEach(chip => {
+    allSelected ? chip.classList.remove('selected') : chip.classList.add('selected');
+  });
+}
+
+function toggleGenMode() {
+  let mode = document.getElementById('genMode').value;
+  document.getElementById('customField').style.display = mode === 'custom' ? 'block' : 'none';
+}
+
+function generatePassword() {
+  let selected = [];
+  document.querySelectorAll('.product-chip:not([data-pid="all"]).selected').forEach(chip => {
+    selected.push(chip.dataset.pid);
+  });
+
+  let allSelected = document.querySelector('[data-pid="all"]').classList.contains('selected');
+  let products = allSelected ? ['all'] : (selected.length > 0 ? selected : null);
+
+  if (!products) {
+    alert('请至少选择一个产品，或选择"全部产品"');
+    return;
+  }
+
+  // Generate or use custom code
+  let mode = document.getElementById('genMode').value;
+  let code;
+  if (mode === 'custom') {
+    code = document.getElementById('customCode').value.trim();
+    if (!/^\d{8}$/.test(code)) {
+      alert('自定义密码必须为8位数字');
+      return;
+    }
+  } else {
+    code = '';
+    for (let i=0; i<8; i++) code += Math.floor(Math.random() * 10);
+  }
+
+  let customer = document.getElementById('customer').value.trim() || '未指定';
+  let expireDate = document.getElementById('expireDate').value;
+  let maxUses = parseInt(document.getElementById('maxUses').value) || 9999;
+
+  // Hash
+  crypto.subtle.digest('SHA-256', new TextEncoder().encode(code)).then(hashBuffer => {
+    let hashHex = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+
+    let config = {
+      code: code,
+      hash: hashHex,
+      products: products,
+      customer: customer,
+      expires: expireDate || '2027-12-31',
+      maxUses: maxUses,
+      note: `${customer} · ${products.length>3?(products.length+'个产品'):products.join(',')}`,
+      generated: new Date().toISOString()
+    };
+
+    // Save to localStorage history
+    let history = JSON.parse(localStorage.getItem('sri_passwords_config') || '[]');
+    history.unshift(config);
+    if (history.length > 50) history = history.slice(0, 50);
+    localStorage.setItem('sri_passwords_config', JSON.stringify(history));
+
+    // Show result
+    document.getElementById('resultCode').textContent = code;
+    document.getElementById('resultInfo').innerHTML = `
+      产品：${allSelected?'全部':selected.map(p=>PRODUCTS.find(x=>x.id===p)?.name||p).join(' · ')}<br>
+      客户：${customer}<br>
+      有效期：${expireDate||'不限期'}<br>
+      最大次数：${maxUses}<br>
+      <span style="font-size:10px;opacity:0.5;">SHA256: ${hashHex.substring(0,16)}...</span>
+    `;
+    document.getElementById('resultCard').classList.add('show');
+    document.getElementById('resultCard').scrollIntoView({behavior:'smooth'});
+
+    renderHistory();
+  });
+}
+
+function copyCode() {
+  let code = document.getElementById('resultCode').textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    let btn = document.querySelector('.copy-btn');
+    btn.textContent = '✅ 已复制！';
+    setTimeout(() => { btn.textContent = '📋 复制密码'; }, 2000);
+  });
+}
+
+function downloadConfig() {
+  let history = JSON.parse(localStorage.getItem('sri_passwords_config') || '[]');
+  if (history.length === 0) return;
+  let config = history[0];
+  let json = JSON.stringify({
+    passwords: history.map(c => ({
+      code: c.code,
+      products: c.products,
+      customer: c.customer,
+      expires: c.expires,
+      maxUses: c.maxUses,
+      note: c.note,
+      generated: c.generated
+    }))
+  }, null, 2);
+  let blob = new Blob([json], {type:'application/json'});
+  let a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `密码配置_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+}
+
+function renderHistory() {
+  let history = JSON.parse(localStorage.getItem('sri_passwords_config') || '[]');
+  if (history.length === 0) {
+    document.getElementById('historyList').innerHTML = '<p style="font-size:11px;opacity:0.4;text-align:center;">暂无记录</p>';
+    return;
+  }
+  let html = '';
+  history.slice(0, 20).forEach(c => {
+    let prods = c.products[0]==='all'?'全部':c.products.length+'个';
+    html += `<div class="history-item"><span><span class="history-code">${c.code}</span> · ${c.customer||''} · ${prods}</span><span style="opacity:0.5;font-size:10px;">${new Date(c.generated).toLocaleDateString('zh-CN')}</span></div>`;
+  });
+  document.getElementById('historyList').innerHTML = html;
+}
+
+function clearHistory() {
+  if (confirm('确定清除所有生成历史？')) {
+    localStorage.removeItem('sri_passwords_config');
+    renderHistory();
+  }
+}
+
+renderHistory();
+</script>
+<div style="max-width:600px;margin:0 auto;padding:12px 16px;font-size:14px;font-weight:500;">
+  <a href="go.html" style="color:#C23B22;text-decoration:none;display:inline-flex;align-items:center;gap:4px;">← 返回决策通道</a>
+  <span style="float:right;font-size:12px;color:#6E6E6E;">满意解研究所</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>满意解研究所 · 驾驶舱</title>
+  <style>
+    /* ===== VI配色变量 ===== */
+    :root {
+      --primary: #C23B22;    /* 赭石红 */
+      --bg: #F5F0E6;          /* 米白 */
+      --accent: #B8860B;      /* 暗金 */
+      --text: #4A4A4A;        /* 深灰 */
+      --title: #2A2A2A;      /* 炭黑 */
+      --border: #E0D8C8;
+      --card-bg: #FFFCF7;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ===== 登录页 ===== */
+    #login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-box {
+      background: var(--card-bg);
+      border: 2px solid var(--primary);
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(194,59,34,0.15);
+    }
+
+    .login-box h1 {
+      color: var(--title);
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .login-box p {
+      color: var(--text);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      font-size: 16px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .login-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .login-box button:hover {
+      background: #A63220;
+    }
+
+    .login-error {
+      color: var(--primary);
+      font-size: 14px;
+      margin-top: 12px;
+      display: none;
+    }
+
+    /* ===== 主界面 ===== */
+    #main-screen { display: none; }
+
+    /* Header */
+    .header {
+      background: var(--card-bg);
+      border-bottom: 3px solid var(--primary);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .countdown {
+      background: var(--primary);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-box input {
+      padding: 8px 16px;
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      width: 280px;
+      font-size: 14px;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .logout-btn {
+      padding: 8px 16px;
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .logout-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* KPI概览条 */
+    .kpi-bar {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 12px;
+      padding: 16px 24px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .kpi-card {
+      text-align: center;
+      padding: 12px;
+      background: var(--card-bg);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .kpi-card .value {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .kpi-card .label {
+      font-size: 12px;
+      color: var(--text);
+      margin-top: 4px;
+    }
+
+    /* Tab栏 */
+    .tab-bar {
+      display: flex;
+      gap: 4px;
+      padding: 12px 24px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+      flex-wrap: nowrap;
+    }
+
+    .tab-btn {
+      padding: 8px 16px;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      border-radius: 6px;
+      font-size: 14px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      background: var(--bg);
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* 内容区 */
+    .content {
+      padding: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* 通用卡片 */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--title);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    /* 表格 */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-table th {
+      background: var(--bg);
+      font-weight: 600;
+      color: var(--title);
+    }
+
+    .data-table tr:hover {
+      background: var(--bg);
+    }
+
+    /* 表单 */
+    .form-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      flex: 1;
+      padding: 10px 14px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #A63220;
+    }
+
+    .btn-secondary {
+      background: var(--bg);
+      color: var(--text);
+      border: 2px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-danger {
+      background: #DC3545;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #C82333;
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+
+    /* 标签 */
+    .tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .tag-p0 { background: #FFEBEE; color: #C62828; }
+    .tag-p1 { background: #FFF3E0; color: #E65100; }
+    .tag-p2 { background: #E3F2FD; color: #1565C0; }
+    .tag-p3 { background: #E8F5E9; color: #2E7D32; }
+
+    /* 搜索结果高亮 */
+    .highlight {
+      background: #FFEB3B;
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+
+    /* 术语表 */
+    .glossary-item {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .glossary-item:last-child {
+      border-bottom: none;
+    }
+
+    .glossary-term {
+      font-weight: bold;
+      color: var(--primary);
+      font-size: 16px;
+    }
+
+    .glossary-def {
+      margin-top: 6px;
+      color: var(--text);
+    }
+
+    /* 里程碑时间线 */
+    .timeline {
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 20px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -20px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 3px solid var(--bg);
+    }
+
+    .timeline-date {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .timeline-title {
+      font-size: 15px;
+      color: var(--title);
+      margin-top: 4px;
+    }
+
+    /* 响应式 */
+    @media (max-width: 1024px) {
+      .kpi-bar {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .kpi-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .header {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .search-box input {
+        width: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== 登录页 ===== -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1>满意解研究所</h1>
+    <p>满天星光 · 驾驶舱</p>
+    <input type="password" id="password-input" placeholder="输入访问密码" onkeypress="if(event.key==='Enter')attemptLogin()">
+    <button onclick="attemptLogin()">进入驾驶舱</button>
+    <p class="login-error" id="login-error">密码错误，请重试</p>
+  </div>
+</div>
+
+<!-- ===== 主界面 ===== -->
+<div id="main-screen">
+  <div class="header">
+    <div class="header-left">
+      <span class="logo">满意解研究所</span>
+      <span class="countdown" id="countdown">夏至官宣倒计时</span>
+    </div>
+    <div class="search-box">
+      <input type="text" id="global-search" placeholder="搜索任务/客户/产品..." oninput="handleSearch(this.value)">
+    </div>
+    <button class="logout-btn" onclick="logout()">退出</button>
+  </div>
+
+  <div class="kpi-bar" id="kpi-bar">
+    <!-- KPI卡片由JS生成 -->
+  </div>
+
+  <div class="tab-bar" id="tab-bar">
+    <!-- Tab按钮由JS生成 -->
+  </div>
+
+  <div class="content" id="content">
+    <!-- 内容由JS渲染 -->
+  </div>
+</div>
+
+<script>
+/* =====================================================
+   满意解研究所 · 驾驶舱 v2.0
+   架构：Store状态管理 + 渲染分离
+   数据：纯localStorage，无外部API依赖
+   ===================================================== */
+
+// ===== 1. 常量配置 =====
+var CONFIG = {
+  PASSWORD_HASH: '6460662e217c7a9f899208dd70a2c28abdea42f128666a9b78e6c0c064846493', // SHA-256(123654)
+  STORAGE_KEYS: {
+    tasks: 'skylab_tasks',
+    customers: 'skylab_customers',
+    products: 'skylab_products',
+    loggedIn: 'skylab_logged_in'
+  },
+  TABS: [
+    { id: 'overview', label: '概览' },
+    { id: 'tasks', label: '任务' },
+    { id: 'milestones', label: '里程碑' },
+    { id: 'customers', label: '客户' },
+    { id: 'products', label: '产品' },
+    { id: 'quality', label: '质量' },
+    { id: 'financial', label: '财务' },
+    { id: 'growth', label: '增长' },
+    { id: 'system', label: '系统' },
+    { id: 'placeholders', label: '替身' },
+    { id: 'glossary', label: '术语表' }
+  ],
+  XZ_DATE: new Date('2026-06-21')
+};
+
+// ===== 2. Store 状态管理 =====
+var Store = {
+  state: {
+    currentTab: 'overview',
+    searchQuery: '',
+    searchResults: null,
+    tasks: [],
+    customers: [],
+    products: [],
+    qualityItems: [],
+    financial: [],
+    growth: [],
+    system: [],
+    placeholders: []
+  },
+
+  // 初始化：从localStorage加载数据
+  init: function() {
+    var self = this;
+
+    // 加载任务
+    var tasks = localStorage.getItem(CONFIG.STORAGE_KEYS.tasks);
+    this.state.tasks = tasks ? JSON.parse(tasks) : this.getDefaultTasks();
+
+    // 加载客户
+    var customers = localStorage.getItem(CONFIG.STORAGE_KEYS.customers);
+    this.state.customers = customers ? JSON.parse(customers) : this.getDefaultCustomers();
+
+    // 加载产品
+    var products = localStorage.getItem(CONFIG.STORAGE_KEYS.products);
+    this.state.products = products ? JSON.parse(products) : this.getDefaultProducts();
+
+    // 默认数据（首次使用）
+    if (!tasks && !customers && !products) {
+      this.saveAll();
+    }
+  },
+
+  // 保存所有数据到localStorage
+  saveAll: function() {
+    localStorage.setItem(CONFIG.STORAGE_KEYS.tasks, JSON.stringify(this.state.tasks));
+    localStorage.setItem(CONFIG.STORAGE_KEYS.customers, JSON.stringify(this.state.customers));
+    localStorage.setItem(CONFIG.STORAGE_KEYS.products, JSON.stringify(this.state.products));
+  },
+
+  // 设置状态并触发渲染
+  setState: function(key, value) {
+    this.state[key] = value;
+    this.render();
+  },
+
+  // 切换Tab
+  switchTab: function(tabId) {
+    this.state.currentTab = tabId;
+    this.state.searchResults = null; // 清空搜索结果
+    this.state.searchQuery = '';
+    document.getElementById('global-search').value = '';
+    this.render();
+  },
+
+  // 全局搜索
+  search: function(query) {
+    this.state.searchQuery = query;
+    if (!query.trim()) {
+      this.state.searchResults = null;
+      this.render();
+      return;
+    }
+
+    var q = query.toLowerCase();
+    var results = {
+      tasks: [],
+      customers: [],
+      products: []
+    };
+
+    this.state.tasks.forEach(function(t) {
+      if (t.title.toLowerCase().includes(q) || (t.desc || '').toLowerCase().includes(q)) {
+        results.tasks.push(t);
+      }
+    });
+
+    this.state.customers.forEach(function(c) {
+      if (c.name.toLowerCase().includes(q) || (c.industry || '').toLowerCase().includes(q)) {
+        results.customers.push(c);
+      }
+    });
+
+    this.state.products.forEach(function(p) {
+      if (p.name.toLowerCase().includes(q) || (p.desc || '').toLowerCase().includes(q)) {
+        results.products.push(p);
+      }
+    });
+
+    this.state.searchResults = results;
+    this.render();
+  },
+
+  // 添加任务
+  addTask: function(task) {
+    task.id = Date.now();
+    task.createdAt = new Date().toISOString();
+    this.state.tasks.unshift(task);
+    this.saveAll();
+    this.render();
+  },
+
+  // 添加客户
+  addCustomer: function(customer) {
+    customer.id = Date.now();
+    customer.createdAt = new Date().toISOString();
+    this.state.customers.unshift(customer);
+    this.saveAll();
+    this.render();
+  },
+
+  // 添加产品
+  addProduct: function(product) {
+    product.id = Date.now();
+    product.createdAt = new Date().toISOString();
+    this.state.products.unshift(product);
+    this.saveAll();
+    this.render();
+  },
+
+  // 删除任务
+  deleteTask: function(id) {
+    this.state.tasks = this.state.tasks.filter(function(t) { return t.id !== id; });
+    this.saveAll();
+    this.render();
+  },
+
+  // 删除客户
+  deleteCustomer: function(id) {
+    this.state.customers = this.state.customers.filter(function(c) { return c.id !== id; });
+    this.saveAll();
+    this.render();
+  },
+
+  // 删除产品
+  deleteProduct: function(id) {
+    this.state.products = this.state.products.filter(function(p) { return p.id !== id; });
+    this.saveAll();
+    this.render();
+  },
+
+  // ===== 默认数据 =====
+  getDefaultTasks: function() {
+    return [
+      { id: 1, title: '公众号文章排期', priority: 'P1', status: '进行中', assignee: '满意红', dueDate: '2026-06-01' },
+      { id: 2, title: '夏至官宣准备', priority: 'P0', status: '待启动', assignee: 'Egbertie', dueDate: '2026-06-15' },
+      { id: 3, title: '决策工具内测', priority: 'P1', status: '已完成', assignee: '满意扣子', dueDate: '2026-05-28' },
+      { id: 4, title: '飞书知识库同步', priority: 'P2', status: '进行中', assignee: '满意红', dueDate: '2026-06-05' },
+      { id: 5, title: '客户案例整理', priority: 'P2', status: '待启动', assignee: '满天星光', dueDate: '2026-06-10' }
+    ];
+  },
+
+  getDefaultCustomers: function() {
+    return [
+      { id: 1, name: '人形机器人创始人A', industry: '人形机器人', status: '潜在客户', lastContact: '2026-05-25' },
+      { id: 2, name: 'AI芯片创始人B', industry: 'AI芯片/半导体', status: '深入沟通', lastContact: '2026-05-20' },
+      { id: 3, name: '智能汽车创始人C', industry: '智能汽车', status: '已完成咨询', lastContact: '2026-05-15' }
+    ];
+  },
+
+  getDefaultProducts: function() {
+    return [
+      { id: 1, name: '决策教练服务', desc: '一对一硬科技创业陪跑', price: '待定', status: '设计完成' },
+      { id: 2, name: '公众号内容', desc: '满天星光决策方法论输出', price: '免费', status: '持续更新' },
+      { id: 3, name: '决策工具箱', desc: '在线决策评估工具集', price: '待定', status: '开发中' }
+    ];
+  }
+};
+
+// ===== 3. 渲染函数（每个Tab独立） =====
+
+// 主渲染入口
+Store.render = function() {
+  this.renderKPI();
+  this.renderTabBar();
+  this.renderContent();
+  this.updateCountdown();
+};
+
+// KPI概览条
+Store.renderKPI = function() {
+  var tasks = this.state.tasks;
+  var p0 = tasks.filter(function(t) { return t.priority === 'P0'; }).length;
+  var p1 = tasks.filter(function(t) { return t.priority === 'P1'; }).length;
+  var doing = tasks.filter(function(t) { return t.status === '进行中'; }).length;
+
+  var html = [
+    '<div class="kpi-card"><div class="value">' + tasks.length + '</div><div class="label">任务总数</div></div>',
+    '<div class="kpi-card"><div class="value" style="color:#C62828">' + p0 + '</div><div class="label">P0待办</div></div>',
+    '<div class="kpi-card"><div class="value" style="color:#E65100">' + p1 + '</div><div class="label">P1优先</div></div>',
+    '<div class="kpi-card"><div class="value" style="color:#1565C0">' + doing + '</div><div class="label">进行中</div></div>',
+    '<div class="kpi-card"><div class="value">' + this.state.customers.length + '</div><div class="label">客户数</div></div>',
+    '<div class="kpi-card"><div class="value">' + this.state.products.length + '</div><div class="label">产品数</div></div>',
+    '<div class="kpi-card"><div class="value">233</div><div class="label">线上产品</div></div>',
+    '<div class="kpi-card"><div class="value">12</div><div class="label">Cron任务</div></div>'
+  ].join('');
+
+  document.getElementById('kpi-bar').innerHTML = html;
+};
+
+// Tab栏
+Store.renderTabBar = function() {
+  var self = this;
+  var html = CONFIG.TABS.map(function(tab) {
+    return '<button class="tab-btn' + (self.state.currentTab === tab.id ? ' active' : '') + '" onclick="Store.switchTab(\'' + tab.id + '\')">' + tab.label + '</button>';
+  }).join('');
+
+  document.getElementById('tab-bar').innerHTML = html;
+};
+
+// 内容区（根据currentTab选择渲染函数）
+Store.renderContent = function() {
+  var tab = this.state.currentTab;
+  var renderers = {
+    'overview': this.renderOverview.bind(this),
+    'tasks': this.renderTasks.bind(this),
+    'milestones': this.renderMilestones.bind(this),
+    'customers': this.renderCustomers.bind(this),
+    'products': this.renderProducts.bind(this),
+    'quality': this.renderQuality.bind(this),
+    'financial': this.renderFinancial.bind(this),
+    'growth': this.renderGrowth.bind(this),
+    'system': this.renderSystem.bind(this),
+    'placeholders': this.renderPlaceholders.bind(this),
+    'glossary': this.renderGlossary.bind(this)
+  };
+
+  if (renderers[tab]) {
+    renderers[tab]();
+  }
+};
+
+// ===== 各Tab内容渲染 =====
+
+// 概览
+Store.renderOverview = function() {
+  var tasks = this.state.tasks;
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">本周待办</div>',
+      '<table class="data-table">',
+        '<thead><tr><th>任务</th><th>优先级</th><th>状态</th><th>截止</th></tr></thead>',
+        '<tbody>',
+          tasks.slice(0, 5).map(function(t) {
+            return '<tr><td>' + t.title + '</td><td><span class="tag tag-' + t.priority.toLowerCase() + '">' + t.priority + '</span></td><td>' + t.status + '</td><td>' + t.dueDate + '</td></tr>';
+          }).join(''),
+        '</tbody>',
+      '</table>',
+    '</div>',
+    '<div class="card">',
+      '<div class="card-title">最新动态</div>',
+      '<p>暂无动态</p>',
+    '</div>'
+  ].join('');
+
+  document.getElementById('content').innerHTML = html;
+};
+
+// 任务
+Store.renderTasks = function() {
+  var self = this;
+
+  // 如果有搜索结果，显示搜索结果
+  if (this.state.searchResults) {
+    return this.renderSearchResults('tasks', this.state.searchResults.tasks, [
+      { key: 'title', label: '任务' },
+      { key: 'priority', label: '优先级' },
+      { key: 'status', label: '状态' }
+    ]);
+  }
+
+  var tasks = this.state.tasks;
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">添加新任务</div>',
+      '<div class="form-row">',
+        '<input type="text" id="task-title" placeholder="任务标题">',
+        '<select id="task-priority"><option value="P0">P0</option><option value="P1">P1</option><option value="P2">P2</option><option value="P3">P3</option></select>',
+        '<select id="task-status"><option value="待启动">待启动</option><option value="进行中">进行中</option><option value="已完成">已完成</option></select>',
+        '<input type="date" id="task-due">',
+      '</div>',
+      '<button class="btn btn-primary" onclick="Store.addTaskFromForm()">添加任务</button>',
+    '</div>',
+    '<div class="card">',
+      '<div class="card-title">任务列表 (' + tasks.length + ')</div>',
+      '<table class="data-table">',
+        '<thead><tr><th>任务</th><th>优先级</th><th>状态</th><th>截止日期</th><th>操作</th></tr></thead>',
+        '<tbody>',
+          tasks.map(function(t) {
+            return [
+              '<tr>',
+                '<td>' + t.title + '</td>',
+                '<td><span class="tag tag-' + t.priority.toLowerCase() + '">' + t.priority + '</span></td>',
+                '<td>' + t.status + '</td>',
+                '<td>' + (t.dueDate || '-') + '</td>',
+                '<td><button class="btn btn-danger btn-sm" onclick="Store.deleteTask(' + t.id + ')">删除</button></td>',
+              '</tr>'
+            ].join('');
+          }).join(''),
+        '</tbody>',
+      '</table>',
+    '</div>'
+  ].join('');
+
+  document.getElementById('content').innerHTML = html;
+};
+
+// 从表单添加任务
+Store.addTaskFromForm = function() {
+  var title = document.getElementById('task-title').value.trim();
+  var priority = document.getElementById('task-priority').value;
+  var status = document.getElementById('task-status').value;
+  var dueDate = document.getElementById('task-due').value;
+
+  if (!title) {
+    alert('请输入任务标题');
+    return;
+  }
+
+  this.addTask({
+    title: title,
+    priority: priority,
+    status: status,
+    dueDate: dueDate,
+    assignee: '满天星光'
+  });
+};
+
+// 里程碑
+Store.renderMilestones = function() {
+  var milestones = [
+    { date: '2026-06-01', title: '公众号正式上线' },
+    { date: '2026-06-15', title: '夏至官宣内容定稿' },
+    { date: '2026-06-21', title: '夏至官宣发布' },
+    { date: '2026-07-01', title: '首期训练营开营' },
+    { date: '2026-09-22', title: '秋分里程碑复盘' }
+  ];
+
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">项目里程碑</div>',
+      '<div class="timeline">',
+        milestones.map(function(m) {
+          return [
+            '<div class="timeline-item">',
+              '<div class="timeline-date">' + m.date + '</div>',
+              '<div class="timeline-title">' + m.title + '</div>',
+            '</div>'
+          ].join('');
+        }).join(''),
+      '</div>',
+    '</div>'
+  ].join('');
+
+  document.getElementById('content').innerHTML = html;
+};
+
+// 客户
+Store.renderCustomers = function() {
+  if (this.state.searchResults) {
+    return this.renderSearchResults('customers', this.state.searchResults.customers, [
+      { key: 'name', label: '客户' },
+      { key: 'industry', label: '行业' },
+      { key: 'status', label: '状态' }
+    ]);
+  }
+
+  var customers = this.state.customers;
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">添加新客户</div>',
+      '<div class="form-row">',
+        '<input type="text" id="cust-name" placeholder="客户名称">',
+        '<input type="text" id="cust-industry" placeholder="所属行业">',
+        '<select id="cust-status"><option value="潜在客户">潜在客户</option><option value="初步接触">初步接触</option><option value="深入沟通">深入沟通</option><option value="已完成咨询">已完成咨询</option></select>',
+        '<input type="date" id="cust-contact">',
+      '</div>',
+      '<button class="btn btn-primary" onclick="Store.addCustomerFromForm()">添加客户</button>',
+    '</div>',
+    '<div class="card">',
+      '<div class="card-title">客户列表 (' + customers.length + ')</div>',
+      '<table class="data-table">',
+        '<thead><tr><th>客户</th><th>行业</th><th>状态</th><th>最近联系</th><th>操作</th></tr></thead>',
+        '<tbody>',
+          customers.map(function(c) {
+            return [
+              '<tr>',
+                '<td>' + c.name + '</td>',
+                '<td>' + c.industry + '</td>',
+                '<td><span class="tag">' + c.status + '</span></td>',
+                '<td>' + (c.lastContact || '-') + '</td>',
+                '<td><button class="btn btn-danger btn-sm" onclick="Store.deleteCustomer(' + c.id + ')">删除</button></td>',
+              '</tr>'
+            ].join('');
+          }).join(''),
+        '</tbody>',
+      '</table>',
+    '</div>'
+  ].join('');
+
+  document.getElementById('content').innerHTML = html;
+};
+
+Store.addCustomerFromForm = function() {
+  var name = document.getElementById('cust-name').value.trim();
+  var industry = document.getElementById('cust-industry').value.trim();
+  var status = document.getElementById('cust-status').value;
+  var lastContact = document.getElementById('cust-contact').value;
+
+  if (!name) {
+    alert('请输入客户名称');
+    return;
+  }
+
+  this.addCustomer({
+    name: name,
+    industry: industry,
+    status: status,
+    lastContact: lastContact
+  });
+};
+
+// 产品
+Store.renderProducts = function() {
+  if (this.state.searchResults) {
+    return this.renderSearchResults('products', this.state.searchResults.products, [
+      { key: 'name', label: '产品' },
+      { key: 'desc', label: '描述' },
+      { key: 'status', label: '状态' }
+    ]);
+  }
+
+  var products = this.state.products;
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">添加新产品</div>',
+      '<div class="form-row">',
+        '<input type="text" id="prod-name" placeholder="产品名称">',
+        '<input type="text" id="prod-desc" placeholder="产品描述">',
+        '<select id="prod-status"><option value="概念设计">概念设计</option><option value="设计完成">设计完成</option><option value="开发中">开发中</option><option value="已上线">已上线</option></select>',
+        '<input type="text" id="prod-price" placeholder="定价">',
+      '</div>',
+      '<button class="btn btn-primary" onclick="Store.addProductFromForm()">添加产品</button>',
+    '</div>',
+    '<div class="card">',
+      '<div class="card-title">产品列表 (' + products.length + ')</div>',
+      '<table class="data-table">',
+        '<thead><tr><th>产品</th><th>描述</th><th>状态</th><th>定价</th><th>操作</th></tr></thead>',
+        '<tbody>',
+          products.map(function(p) {
+            return [
+              '<tr>',
+                '<td>' + p.name + '</td>',
+                '<td>' + p.desc + '</td>',
+                '<td><span class="tag">' + p.status + '</span></td>',
+                '<td>' + p.price + '</td>',
+                '<td><button class="btn btn-danger btn-sm" onclick="Store.deleteProduct(' + p.id + ')">删除</button></td>',
+              '</tr>'
+            ].join('');
+          }).join(''),
+        '</tbody>',
+      '</table>',
+    '</div>'
+  ].join('');
+
+  document.getElementById('content').innerHTML = html;
+};
+
+Store.addProductFromForm = function() {
+  var name = document.getElementById('prod-name').value.trim();
+  var desc = document.getElementById('prod-desc').value.trim();
+  var status = document.getElementById('prod-status').value;
+  var price = document.getElementById('prod-price').value.trim();
+
+  if (!name) {
+    alert('请输入产品名称');
+    return;
+  }
+
+  this.addProduct({
+    name: name,
+    desc: desc,
+    status: status,
+    price: price || '待定'
+  });
+};
+
+// 质量
+Store.renderQuality = function() {
+  var items = [
+    { name: '公众号内容审核', status: '通过', date: '2026-05-28' },
+    { name: '决策工具功能测试', status: '通过', date: '2026-05-27' },
+    { name: '夏至官宣文案审核', status: '待审核', date: '-' }
+  ];
+
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">质量检查项</div>',
+      '<table class="data-table">',
+        '<thead><tr><th>检查项</th><th>状态</th><th>日期</th></tr></thead>',
+        '<tbody>',
+          items.map(function(i) {
+            return '<tr><td>' + i.name + '</td><td><span class="tag">' + i.status + '</span></td><td>' + i.date + '</td></tr>';
+          }).join(''),
+        '</tbody>',
+      '</table>',
+    '</div>'
+  ].join('');
+
+  document.getElementById('content').innerHTML = html;
+};
+
+// 财务
+Store.renderFinancial = function() {
+  document.getElementById('content').innerHTML = '<div class="card"><div class="card-title">财务概览</div><p>暂无财务数据</p></div>';
+};
+
+// 增长
+Store.renderGrowth = function() {
+  document.getElementById('content').innerHTML = '<div class="card"><div class="card-title">增长指标</div><p>暂无增长数据</p></div>';
+};
+
+// 系统
+Store.renderSystem = function() {
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">系统状态</div>',
+      '<table class="data-table">',
+        '<thead><tr><th>项目</th><th>状态</th></tr></thead>',
+        '<tbody>',
+          '<tr><td>GitHub Pages</td><td><span class="tag tag-p3">正常</span></td></tr>',
+          '<tr><td>飞书同步</td><td><span class="tag tag-p3">正常</span></td></tr>',
+          '<tr><td>微信公众号</td><td><span class="tag tag-p3">正常</span></td></tr>',
+          '<tr><td>数据库备份</td><td><span class="tag tag-p3">正常</span></td></tr>',
+        '</tbody>',
+      '</table>',
+    '</div>'
+  ].join('');
+
+  document.getElementById('content').innerHTML = html;
+};
+
+// 替身
+Store.renderPlaceholders = function() {
+  var placeholders = [
+    { name: '替身A', type: '测试账号', status: '活跃' },
+    { name: '替身B', type: '演示账号', status: '活跃' }
+  ];
+
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">替身管理 (' + placeholders.length + ')</div>',
+      '<table class="data-table">',
+        '<thead><tr><th>名称</th><th>类型</th><th>状态</th></tr></thead>',
+        '<tbody>',
+          placeholders.map(function(p) {
+            return '<tr><td>' + p.name + '</td><td>' + p.type + '</td><td><span class="tag">' + p.status + '</span></td></tr>';
+          }).join(''),
+        '</tbody>',
+      '</table>',
+    '</div>'
+  ].join('');
+
+  document.getElementById('content').innerHTML = html;
+};
+
+// 术语表
+Store.renderGlossary = function() {
+  var terms = [
+    { term: '满天星光', def: '满天星光行动是满意解研究所的内部项目代号。核心使命：陪伴100位硬科技创业者穿越周期。' },
+    { term: '满意解', def: 'Satisficing，由Herbert Simon提出，指在有限理性下追求"足够好"而非"最优"的决策方法论。' },
+    { term: '契·晋·转·桥·审·行·恒', def: '满意解研究所的六字哲学体系：契约精神、持续进化、跨界转型、连接价值、审美判断、行动落地、永恒成长。' },
+    { term: 'P0/P1/P2/P3', def: '任务优先级体系。P0=最高优先级（阻塞性），P1=重要紧急，P2=重要不紧急，P3=可延后。' },
+    { term: '夏至官宣', def: '2026年6月21日夏至，满意解研究所正式对外发布的里程碑事件。' }
+  ];
+
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">术语表</div>',
+      terms.map(function(t) {
+        return [
+          '<div class="glossary-item">',
+            '<div class="glossary-term">' + t.term + '</div>',
+            '<div class="glossary-def">' + t.def + '</div>',
+          '</div>'
+        ].join('');
+      }).join(''),
+    '</div>'
+  ].join('');
+
+  document.getElementById('content').innerHTML = html;
+};
+
+// 搜索结果渲染（通用）
+Store.renderSearchResults = function(type, items, columns) {
+  if (!items || items.length === 0) {
+    document.getElementById('content').innerHTML = '<div class="card"><p>未找到匹配结果</p></div>';
+    return;
+  }
+
+  var headers = columns.map(function(c) { return '<th>' + c.label + '</th>'; }).join('');
+  var rows = items.map(function(item) {
+    return '<tr>' + columns.map(function(c) {
+      var val = item[c.key] || '-';
+      if (this.state.searchQuery && typeof val === 'string') {
+        var q = this.state.searchQuery;
+        val = val.replace(new RegExp(q, 'gi'), '<span class="highlight">$&</span>');
+      }
+      return '<td>' + val + '</td>';
+    }.bind(this)).join('') + '</tr>';
+  }.bind(this)).join('');
+
+  var html = [
+    '<div class="card">',
+      '<div class="card-title">搜索结果: ' + type + ' (' + items.length + ')</div>',
+      '<table class="data-table">',
+        '<thead><tr>' + headers + '</tr></thead>',
+        '<tbody>' + rows + '</tbody>',
+      '</table>',
+    '</div>'
+  ].join('');
+
+  document.getElementById('content').innerHTML = html;
+};
+
+// ===== 4. 夏至倒计时 =====
+Store.updateCountdown = function() {
+  var now = new Date();
+  var diff = CONFIG.XZ_DATE - now;
+  var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+  var el = document.getElementById('countdown');
+  if (el) {
+    el.textContent = '夏至官宣倒计时 ' + days + ' 天';
+  }
+};
+
+// ===== 5. 登录/登出 =====
+function attemptLogin() {
+  var input = document.getElementById('password-input');
+  var password = input.value;
+  console.log('attemptLogin called, pw length:', password.length);
+  // SHA-256 哈希
+  var hash = sha256(password);
+  console.log('SHA256 result:', hash);
+  console.log('Expected:', CONFIG.PASSWORD_HASH);
+  console.log('Match:', hash === CONFIG.PASSWORD_HASH);
+
+  if (hash === CONFIG.PASSWORD_HASH) {
+    localStorage.setItem(CONFIG.STORAGE_KEYS.loggedIn, 'true');
+    showMain();
+  } else {
+    console.log('Login FAILED - hash mismatch'); document.getElementById('login-error').style.display = 'block';
+    input.value = '';
+    input.focus();
+  }
+}
+
+function logout() {
+  localStorage.removeItem(CONFIG.STORAGE_KEYS.loggedIn);
+  location.reload();
+}
+
+// 简单SHA-256实现
+function sha256(s) {
+  function rot(n, st) { return (n >>> st) | (n << (32 - st)); }
+  function ff(s, b, c, d) {
+    var tmp = (rot((b ^ c ^ d), 7) + (b & s) + (~b & c)) >>> 0;
+    return tmp;
+  }
+  function gg(s, b, c, d) {
+    var tmp = (rot((b ^ c ^ d), 14) + (~b & d) + (c & ~d)) >>> 0;
+    return tmp;
+  }
+  function hh(s, b, c, d) {
+    var tmp = (rot((b ^ c ^ d), 21) + (~b & d) + (c & ~d)) >>> 0;
+    return tmp;
+  }
+  function ii(s, b, c, d) {
+    var tmp = (rot((b ^ c ^ d), 21) + (~b & d) + (c & ~d)) >>> 0;
+    return tmp;
+  }
+
+  var k = [0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+           0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+           0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+           0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+           0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+           0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+           0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+           0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2];
+
+  function w(t) {
+    if (t < 16) {
+      var n = s.length;
+      var bytes = [];
+      for (var i = 0; i < n; i++) {
+        bytes.push(s.charCodeAt(i));
+      }
+      bytes.push(0x80);
+      while (bytes.length % 64 !== 56) bytes.push(0);
+      for (var i = 0; i < 56; i++) bytes.push(0);
+      var len = n * 8;
+      for (var i = 7; i >= 0; i--) {
+        bytes.push((len >>> (i * 8)) & 0xff);
+      }
+      return bytes[t] || 0;
+    } else if (t < 64) {
+      var s1 = rot(w(t - 2), 17) ^ rot(w(t - 2), 19) ^ (w(t - 2) >>> 10);
+      var s2 = rot(w(t - 15), 7) ^ rot(w(t - 15), 18) ^ (w(t - 15) >>> 3);
+      return (s1 + w(t - 7) + s2) >>> 0;
+    }
+    return 0;
+  }
+
+  var h0 = 0x6a09e667, h1 = 0xbb67ae85, h2 = 0x3c6ef372, h3 = 0xa54ff53a,
+      h4 = 0x510e527f, h5 = 0x9b05688c, h6 = 0x1f83d9ab, h7 = 0x5be0cd19;
+
+  var len = s.length * 8;
+  var m = [];
+  for (var i = 0; i < len / 8; i++) {
+    var chunk = 0;
+    for (var j = 0; j < 4; j++) {
+      chunk = (chunk << 8) | (s.charCodeAt(i * 4 + j) || 0);
+    }
+    m.push(chunk);
+  }
+  while (m.length < 16) m.push(0);
+  m[m.length - 1] = len;
+
+  var a = h0, b = h1, c = h2, d = h3, e = h4, f = h5, g = h6, h = h7;
+
+  for (var i = 0; i < 64; i++) {
+    var t1 = (rot(a, 2) + ff(a >>> 0, b >>> 0, c >>> 0, d >>> 0) + e + k[i] + w(i)) >>> 0;
+    var t2 = (rot(e, 6) + hh(e >>> 0, f >>> 0, g >>> 0, h >>> 0)) >>> 0;
+    h = g; g = f; f = e; e = (d + t1) >>> 0;
+    d = c; c = b; b = a; a = (t1 + t2) >>> 0;
+  }
+
+  var result = '';
+  var arr = [h0, h1, h2, h3, h4, h5, h6, h7];
+  for (var i = 0; i < arr.length; i++) {
+    result += arr[i].toString(16).padStart(8, '0');
+  }
+  return result;
+}
+
+// ===== 6. 全局搜索处理 =====
+function handleSearch(query) {
+  Store.search(query);
+}
+
+// ===== 7. 界面切换 =====
+function showLogin() {
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('main-screen').style.display = 'none';
+  document.getElementById('password-input').focus();
+}
+
+function showMain() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('main-screen').style.display = 'block';
+
+  Store.init();
+  Store.render();
+
+  // 每秒更新倒计时
+  setInterval(function() { Store.updateCountdown(); }, 1000);
+}
+
+// ===== 8. 页面加载 =====
+(function init() {
+  console.log('Init - loggedIn:', localStorage.getItem(CONFIG.STORAGE_KEYS.loggedIn)); var loggedIn = localStorage.getItem(CONFIG.STORAGE_KEYS.loggedIn) === 'true';
+  if (loggedIn) {
+    showMain();
+  } else {
+    showLogin();
+  }
+})();
+</script>
+
+</body>
+</html>

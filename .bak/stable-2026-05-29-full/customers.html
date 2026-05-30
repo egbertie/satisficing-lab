@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>客户数据面板 · 内部 · 满意解研究所</title>
+<style>
+  :root { --sri-red:#C23B22; --sri-gold:#B8860B; --sri-bg:#F5F0E6; --text:#4A4A4A; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,sans-serif; background:var(--sri-bg); color:var(--text); padding:20px; }
+  h1 { color:var(--sri-red); margin-bottom:16px; }
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-bottom:20px; }
+  .stat-card { background:#fff; border-radius:12px; padding:16px; text-align:center; border:1px solid #D4C5A0; }
+  .stat-card .num { font-size:28px; font-weight:700; color:var(--sri-red); }
+  .stat-card .label { font-size:11px; opacity:0.7; }
+  table { width:100%; background:#fff; border-radius:12px; overflow:hidden; border-collapse:collapse; }
+  th { background:var(--sri-red); color:#fff; padding:10px; font-size:12px; text-align:left; }
+  td { padding:8px 10px; border-bottom:1px solid #f0e8d8; font-size:12px; }
+  .tag { display:inline-block; padding:1px 6px; border-radius:8px; font-size:10px; background:rgba(194,59,34,0.08); color:var(--sri-red); margin:1px; }
+  .btn { padding:8px 18px; border-radius:16px; background:var(--sri-red); color:#fff; border:none; cursor:pointer; font-size:13px; margin:4px; }
+  .empty { text-align:center; padding:40px; opacity:0.5; }
+</style>
+<link rel="stylesheet" href="vi_quick_ref.css">
+</head>
+<body>
+<h1>📊 客户数据面板（本地）</h1>
+<div class="stats" id="stats"></div>
+<div id="tableArea"></div>
+<div style="margin-top:16px;">
+  <button class="btn" onclick="exportCSV()">导出CSV</button>
+  <button class="btn" onclick="exportJSON()">导出JSON</button>
+  <button class="btn" onclick="clearData()">清除本地数据</button>
+</div>
+<p style="font-size:10px;opacity:0.4;margin-top:16px;">数据存储在浏览器localStorage中 · 仅供内部使用 · 后续将对接飞书Base自动同步</p>
+
+<script>
+(function(){
+  const db = JSON.parse(localStorage.getItem('sri_customer_db') || '{}');
+  const customers = Object.values(db);
+  
+  // Stats
+  let totalCustomers = customers.length;
+  let ceoCount = customers.filter(c=>c.role?.includes('CEO')||c.role?.includes('创始人')).length;
+  let hardtech = customers.filter(c=>c.industry?.includes('硬科技')||c.industry?.includes('半导体')).length;
+  let earlyStage = customers.filter(c=>c.stage?.includes('天使')||c.stage?.includes('未融资')).length;
+  
+  document.getElementById('stats').innerHTML = `
+    <div class="stat-card"><div class="num">${totalCustomers}</div><div class="label">注册客户</div></div>
+    <div class="stat-card"><div class="num">${ceoCount}</div><div class="label">创始人/CEO</div></div>
+    <div class="stat-card"><div class="num">${hardtech}</div><div class="label">硬科技赛道</div></div>
+    <div class="stat-card"><div class="num">${earlyStage}</div><div class="label">早期项目</div></div>
+  `;
+
+  // Table
+  if (customers.length === 0) {
+    document.getElementById('tableArea').innerHTML = '<div class="empty">暂无客户数据<br>客户注册后将自动出现在这里</div>';
+    return;
+  }
+  
+  let html = '<table><tr><th>姓名</th><th>企业</th><th>角色</th><th>行业</th><th>阶段</th><th>标签</th><th>注册时间</th></tr>';
+  customers.sort((a,b)=>new Date(b.registered)-new Date(a.registered)).forEach(c => {
+    let tags = (c.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('');
+    html += `<tr><td>${c.name||''}</td><td>${c.company||''}</td><td>${c.role||''}</td><td>${c.industry||''}</td><td>${c.stage||''}</td><td>${tags}</td><td>${new Date(c.registered).toLocaleDateString('zh-CN')}</td></tr>`;
+  });
+  html += '</table>';
+  document.getElementById('tableArea').innerHTML = html;
+
+  window.exportCSV = function() {
+    let csv = '姓名,企业,邮箱,角色,行业,阶段,关注方向,标签,注册时间,客户ID\n';
+    customers.forEach(c => {
+      csv += `"${c.name||''}","${c.company||''}","${c.email||''}","${c.role||''}","${c.industry||''}","${c.stage||''}","${c.concern||''}","${(c.tags||[]).join(';')}","${c.registered||''}","${c.customerId||''}"\n`;
+    });
+    let blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8'});
+    let a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = '客户数据_'+new Date().toISOString().slice(0,10)+'.csv'; a.click();
+  };
+  
+  window.exportJSON = function() {
+    let blob = new Blob([JSON.stringify(customers,null,2)], {type:'application/json'});
+    let a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = '客户数据_'+new Date().toISOString().slice(0,10)+'.json'; a.click();
+  };
+
+  window.clearData = function() {
+    if (confirm('确定清除所有本地客户数据？此操作不可撤销。')) {
+      localStorage.removeItem('sri_customer_db');
+      localStorage.removeItem('sri_customers');
+      location.reload();
+    }
+  };
+})();
+</script>
+<div style="max-width:600px;margin:0 auto;padding:12px 16px;font-size:14px;font-weight:500;">
+  <a href="go.html" style="color:#C23B22;text-decoration:none;display:inline-flex;align-items:center;gap:4px;">← 返回决策通道</a>
+  <span style="float:right;font-size:12px;color:#6E6E6E;">满意解研究所</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>觉·淬火 | 危机决策模拟器 | 满意解研究所</title>
+<style>
+  :root { --sri-red:#C23B22; --sri-gold:#B8860B; --sri-bg:#F5F0E6; --text:#4A4A4A; --title:#2A2A2A; }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif; background:var(--sri-bg); color:var(--text); min-height:100vh; }
+  .hero { background:var(--title); color:#F5F0E6; padding:36px 20px 28px; text-align:center; }
+  .hero h1 { font-size:22px; font-weight:700; }
+  .hero p { font-size:13px; opacity:0.85; margin-top:4px; }
+  .main { max-width:520px; margin:0 auto; padding:16px; }
+
+  .timer-bar { height:5px; background:var(--border); border-radius:3px; margin-bottom:20px; overflow:hidden; position:sticky; top:0; z-index:5; }
+  .timer-fill { height:100%; background:var(--sri-red); transition:width 1s linear; width:100%; }
+  .timer-fill.warning { background:var(--sri-gold); }
+  .timer-fill.danger { background:var(--sri-red); animation:pulse 0.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+  .scene { display:none; background:#fff; border-radius:14px; padding:24px; border:2px solid var(--sri-red); animation:fadeIn 0.3s; }
+  .scene.active { display:block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+  .scene-num { font-size:11px; color:var(--sri-gold); letter-spacing:2px; margin-bottom:8px; }
+  .scene-title { font-size:18px; font-weight:700; color:var(--title); margin-bottom:8px; }
+  .scene-body { font-size:14px; line-height:1.8; margin:16px 0; }
+  .scene-body .stress { color:var(--sri-red); font-weight:600; }
+  .scene-data { font-size:12px; color:var(--text); background:rgba(194,59,34,0.04); padding:12px; border-radius:8px; margin:12px 0; }
+
+  .choices { display:flex; flex-direction:column; gap:8px; margin:16px 0; }
+  .choice-btn { padding:12px 14px; border:1.5px solid var(--border); border-radius:10px; font-size:13px; background:#fff; cursor:pointer; text-align:left; transition:0.15s; }
+  .choice-btn:active { border-color:var(--sri-red); background:rgba(194,59,34,0.04); }
+
+  .result-box { text-align:center; padding:20px 0; }
+  .result-box h3 { font-size:20px; color:var(--title); margin-bottom:8px; }
+  .result-box .verdict { font-size:16px; font-weight:700; padding:10px 24px; border-radius:12px; display:inline-block; margin:8px 0; }
+  .verdict-good { background:rgba(74,140,92,0.12); color:#4A8C5C; }
+  .verdict-mid { background:rgba(184,134,11,0.12); color:#B8860B; }
+  .verdict-bad { background:rgba(194,59,34,0.12); color:var(--sri-red); }
+  .debrief { text-align:left; font-size:13px; line-height:1.7; margin-top:16px; padding:14px; background:rgba(194,59,34,0.04); border-radius:8px; }
+  .debrief .source { font-size:10px; opacity:0.6; margin-top:6px; }
+
+  .btn { display:inline-block; padding:12px 28px; border-radius:20px; font-size:14px; font-weight:600; cursor:pointer; border:none; }
+  .btn-primary { background:var(--sri-red); color:#F5F0E6; }
+  .btn-outline { background:transparent; border:1.5px solid var(--sri-red); color:var(--sri-red); }
+  .footer { text-align:center; padding:24px 16px 40px; font-size:11px; color:#999; }
+  .footer a { color:var(--sri-red); text-decoration:none; }
+</style>
+<link rel="stylesheet" href="vi_quick_ref.css">
+</head>
+<script>
+// 授权验证 - 满意解研究所
+(function(){
+  // Public pages - no auth needed
+  var publicPages = ['go.html','index.html','about.html','privacy.html','terms.html','symbols.html',
+    'creation.html','stars.html','roots.html','wulu.html','qijin.html','wings.html','eyes.html',
+    '54days.html','fails.html','liang.html','treasure.html','farewell.html',
+    'cases.html','tracks.html','lineage.html','whitepaper.html','quotes.html',
+    'flywheel.html','fw-','bluearmy.html','opensource.html','hibernate.html','life.html','newcomer.html',
+    'duanwei.html','bigrich.html','game-','blood-','media-','skill-','university.html',
+    'report-demo.html','radar.html','chemical-report.html','proposal.html','gate.html',
+    'miniapp-preview.html','cards.html'];
+  
+  var page = window.location.pathname.split('/').pop();
+  
+  // Check if this is a public page
+  for (var i=0; i<publicPages.length; i++) {
+    if (page === publicPages[i] || (publicPages[i].endsWith('-') && page.startsWith(publicPages[i]))) {
+      return; // Public page - no auth needed
+    }
+  }
+  
+  // Protected page - check auth
+  var auth = JSON.parse(localStorage.getItem('sri_auth') || '{}');
+  if (!auth.valid || new Date().getTime() >= auth.expires) {
+    // Not authenticated - redirect to gate
+    var target = page;
+    var productName = page.replace('.html','');
+    window.location.href = 'gate.html?to=' + encodeURIComponent(target) + '&p=' + encodeURIComponent(productName);
+  }
+})();
+</script>
+
+<body>
+
+<div class="hero">
+  <h1>🔥 危机决策模拟器</h1>
+  <p>熔炉 · 在安全的地方，做最难的决定</p>
+</div>
+
+<div class="main">
+  <div class="timer-bar" id="timerBar"><div class="timer-fill" id="timerFill"></div></div>
+
+  <!-- Scene 1 -->
+  <div class="scene active" id="s1">
+    <div class="scene-num">场景一 · 融资窗口</div>
+    <div class="scene-title">48小时决定</div>
+    <div class="scene-body">
+      <p>投资人给了48小时窗口。估值比预期低了30%，但带了<span class="stress">对赌条款</span>。</p>
+      <p>你的合伙人坚持先签——"钱先到手，以后的事以后说。"</p>
+      <p>你看了一眼对赌条件：<span class="stress">如果明年收入不达预期的80%，你们两人共同承担无限连带责任</span>。</p>
+      <p>你有60秒。投资人在等回复。合伙人在看你。</p>
+    </div>
+    <div class="scene-data">📊 时间压力评分: 9/10 · 对赌风险: 极高 · 信息完整度: 40%</div>
+    <div class="choices">
+      <button class="choice-btn" onclick="decide('s1','A')">A. 签——现金是命，先活着</button>
+      <button class="choice-btn" onclick="decide('s1','B')">B. 拒——对赌是陷阱，继续找其他投资人</button>
+      <button class="choice-btn" onclick="decide('s1','C')">C. 要求24小时延期——连夜做敏感性分析，明早给答复</button>
+    </div>
+  </div>
+
+  <!-- Scene 2 -->
+  <div class="scene" id="s2">
+    <div class="scene-num">场景二 · 核心人出走</div>
+    <div class="scene-title">CTO递了辞职信</div>
+    <div class="scene-body">
+      <p>CTO递了辞职信。他和你共事了四年。信里说"太累了，想休息"。</p>
+      <p>但你知道真正的原因：他和你合伙人在技术路线上有<span class="stress">无法调和的分歧</span>。你不是CTO技术背景——你判断不了谁对。</p>
+      <p>CTO有公司<span class="stress">15%的股权</span>。vesting还剩一年。竞对已经在挖他。</p>
+    </div>
+    <div class="scene-data">📊 团队风险: 8/10 · 股权风险: 高位 · 竞对威胁: 活跃</div>
+    <div class="choices">
+      <button class="choice-btn" onclick="decide('s2','A')">A. 挽留——加薪+重新讨论技术方向</button>
+      <button class="choice-btn" onclick="decide('s2','B')">B. 放他走——但加速vesting，避免股权纠纷</button>
+      <button class="choice-btn" onclick="decide('s2','C')">C. 先不回应——和合伙人私下讨论，明天再找CTO谈</button>
+    </div>
+  </div>
+
+  <!-- Scene 3 -->
+  <div class="scene" id="s3">
+    <div class="scene-num">场景三 · 媒体危机</div>
+    <div class="scene-title">负面报道刚发出来了</div>
+    <div class="scene-body">
+      <p>一篇行业深度报道刚刚发出：质疑你们的技术路线"可能走不通"。引用了三个"匿名前员工"的说法。</p>
+      <p>你的手机在震——投资人、客户、团队成员。你的合伙人在群里说："<span class="stress">我早说过这条路不对。</span>"</p>
+      <p>你知道技术路线是对的。但你不知道怎么在30分钟内让所有人相信。</p>
+    </div>
+    <div class="scene-data">📊 声誉风险: 9/10 · 团队分裂信号: 触发 · 时间压力: 极高</div>
+    <div class="choices">
+      <button class="choice-btn" onclick="decide('s3','A')">A. 立刻发声明——用数据反驳每一个质疑点</button>
+      <button class="choice-btn" onclick="decide('s3','B')">B. 沉默——先内部对齐，统一口径后再回应</button>
+      <button class="choice-btn" onclick="decide('s3','C')">C. 先和合伙人谈——如果他真的觉得路线不对，我们需要先解决这个</button>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div class="scene" id="result">
+    <div class="result-box">
+      <h3 id="resultTitle">熔炉完成</h3>
+      <div class="verdict" id="resultVerdict"></div>
+      <div class="debrief" id="resultDebrief"></div>
+      <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="restart()">再练一次</button>
+        <button class="btn btn-outline" onclick="window.location.href='assessment.html'">做完整测评</button>
+        <button class="btn btn-outline" onclick="window.location.href='exit-guide.html'">退出决策指南</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p><a href="go.html">← 返回产品中心</a></p>
+  <p style="margin-top:12px;">满意解研究所 · 危机决策模拟器·熔炉</p>
+</div>
+
+<script>
+const scenes = {
+  s1: {title:"融资窗口", verdict:{A:{text:"你选了现金——但Feld说过：'估值越高条款越危险'。对赌的无限连带责任意味着——不是公司失败了，是你个人破产。", level:"bad"},B:{text:"你拒绝了——但你还没找到替代方案。机会窗口不会等你。", level:"mid"},C:{text:"你在压力下选择了减速——这是Duke说的'审慎决策'。24小时不会让你损失什么，但会让你的决定有数据支撑。", level:"good"}}, insight:"Feld·Venture Deals: 决策在信息不完整时——关键是创造信息。C方案让你从40%信息度提升到70%。", source:"Feld·Venture Deals, Duke·决策质量"},
+  s2: {title:"核心人出走", verdict:{A:{text:"加薪可能只是延缓3个月。路线之争不解决——他会再走的。", level:"mid"},B:{text:"果断放人避免了长期纠缠。但四年战友——你们没有告别对话吗？", level:"mid"},C:{text:"你没有当场反应——你需要的是先了解合伙人的看法。Gottman说：危机时刻第一个动作不是解决——是理解。", level:"good"}}, insight:"Gottman·四骑士: 离职信后面往往不是工作量——是'我觉得我的声音不再被听见了'。", source:"Gottman, Lencioni·核心人才"},
+  s3: {title:"媒体危机", verdict:{A:{text:"你回了——但你合伙人在媒体上拆你台。你先解决内部再对外。", level:"mid"},B:{text:"沉默是对的——但你的合伙人在群里的那句话需要被处理。不只是媒体的问题。", level:"mid"},C:{text:"你看到了根因——不是媒体质疑，是合伙人在质疑。先对齐内部，再回应外部。一致性比速度重要。", level:"good"}}, insight:"Duke·求真实: 危机的第一响应不是'解释'——是'谁是队友'。如果你发现队友在背后开火——先解决这个问题。", source:"Duke·求真实, 危机公关"},
+};
+
+let answers = {};
+function decide(scene, choice) {
+  answers[scene] = choice;
+  document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active'));
+  
+  let nextMap = {s1:'s2', s2:'s3', s3:'result'};
+  let next = nextMap[scene];
+  
+  if (next === 'result') {
+    showResult();
+  } else {
+    document.getElementById(next).classList.add('active');
+    // Timer for next scene
+    if (next === 's2') startTimer(60);
+    if (next === 's3') startTimer(90);
+  }
+}
+
+function showResult() {
+  let sceneKeys = ['s1','s2','s3'];
+  let good=0, mid=0, bad=0;
+  let report = '';
+  sceneKeys.forEach(key => {
+    let ch = answers[key];
+    let s = scenes[key];
+    let v = s.verdict[ch];
+    if (v.level === 'good') good++;
+    else if (v.level === 'mid') mid++;
+    else bad++;
+    report += `<p style="margin:8px 0;font-size:13px;"><strong>${s.title}:</strong> ${ch}. ${v.text}</p>`;
+  });
+  
+  let cls = good>=2 ? 'verdict-good' : (good>=1 ? 'verdict-mid' : 'verdict-bad');
+  let label = good>=2 ? '🟢 决策质量：良好' : (good>=1 ? '🟡 决策质量：可改进' : '🔴 决策质量：需警惕');
+  
+  document.getElementById('resultTitle').textContent = '熔炉评估';
+  document.getElementById('resultVerdict').textContent = label;
+  document.getElementById('resultVerdict').className = 'verdict ' + cls;
+  document.getElementById('resultDebrief').innerHTML = report + 
+    '<p style="margin-top:12px;font-weight:600;">📚 关键洞察</p>' +
+    '<p>危机时的第一本能往往不是最好的决策。熔炉的价值不是'选对了'——是让你在安全的地方'选错了'之后知道为什么错。</p>' +
+    '<p>Duke: 不要用结果反推决策质量。要看你做决定时拥有的信息质量。</p>' +
+    '<p class="source">来源: Duke·决策质量, Feld·高压决策, Gottman·危机沟通</p>';
+  
+  document.getElementById('result').classList.add('active');
+}
+
+function startTimer(seconds) {
+  let bar = document.getElementById('timerFill');
+  bar.style.transition = 'none';
+  bar.style.width = '100%';
+  bar.className = 'timer-fill';
+  setTimeout(() => {
+    bar.style.transition = `width ${seconds}s linear`;
+    bar.style.width = '0%';
+    setTimeout(() => bar.classList.add('warning'), seconds*500);
+    setTimeout(() => bar.classList.add('danger'), seconds*800);
+  }, 50);
+}
+
+function restart() {
+  answers = {};
+  document.getElementById('timerFill').style.transition = 'none';
+  document.getElementById('timerFill').style.width = '100%';
+  document.getElementById('timerFill').className = 'timer-fill';
+  document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s1').classList.add('active');
+}
+</script>
+
+<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
+  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
+  <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
+    <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
+    <button onclick="showFeedbackText()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">💬</span>有建议</button>
+  </div>
+  <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
+  <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
+  <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
+  <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
+  <p style="font-size:10px;opacity:0.4;margin-top:8px;"><a href="go.html" style="color:inherit;">返回决策通道</a></p>
+</div>
+<script>
+(function(){
+  let page=location.pathname.split('/').pop()||'index';
+  let key='sri_fb_'+page;
+  let data=JSON.parse(localStorage.getItem(key)||'{}');
+  if(data.sent){document.getElementById('fbQuestion').textContent='感谢你的反馈！';document.getElementById('fbActions').style.display='none';}
+  let tally=JSON.parse(localStorage.getItem('sri_fb_tally_'+page)||'{"up":0,"text":0}');
+  if(tally.up+tally.text>0) document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  window.submitFeedback=function(type){
+    tally[type]=(tally[type]||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type=type;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbQuestion').textContent='感谢你的反馈！';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+  window.showFeedbackText=function(){
+    document.getElementById('fbText').style.display='block';
+    document.getElementById('fbSubmit').style.display='inline-block';
+  };
+  window.submitFeedbackText=function(){
+    let text=document.getElementById('fbText').value.trim();
+    if(!text)return;
+    tally.text=(tally.text||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type='text';data.text=text;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbText').style.display='none';
+    document.getElementById('fbSubmit').style.display='none';
+    document.getElementById('fbQuestion').textContent='收到！感谢你的建议。';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+})();
+</script>
+
+
+<script>
+(function(){
+  var toolName = location.pathname.split('/').pop().replace('.html','');
+  localStorage.setItem('sri_last_use_'+toolName, Date.now().toString());
+})();
+</script>
+<script src="flywheel-engine.js"></script>
+</body>
+</html>

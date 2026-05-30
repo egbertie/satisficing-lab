@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>觉·入幕 | 决策剧场 | 满意解研究所</title>
+<link rel="stylesheet" href="vi_quick_ref.css">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root { --brand: #C23B22; --gold: #B8860B; --bg: #F5F0E6; --text: #2A2A2A; --muted: #4A4A4A; }
+  body { font-family: -apple-system, "PingFang SC", "Noto Sans SC", serif; background: var(--bg); color: var(--text); min-height:100vh; }
+  .container { max-width: 680px; margin:0 auto; padding:24px 20px 80px; }
+  
+  .scene { display:none; animation: fadeIn 0.6s ease; }
+  .scene.active { display:block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+  
+  .scene-card { background:var(--bg); border:1px solid var(--gold); border-radius:20px; padding:32px 24px; margin-bottom:20px; text-align:center; }
+  .scene-card .scene-num { font-size:13px; color:var(--gold); letter-spacing:2px; margin-bottom:12px; }
+  .scene-card .scene-title { font-size:22px; font-weight:700; color:var(--brand); margin-bottom:8px; line-height:1.4; }
+  .scene-card .scene-quote { font-size:15px; color:var(--muted); font-style:italic; line-height:1.8; margin:20px 0; padding:0 12px; border-left:3px solid var(--brand); text-align:left; }
+  .scene-card .scene-body { font-size:15px; color:var(--text); line-height:2; text-align:left; margin:24px 0; }
+  .scene-card .scene-body .highlight { color:var(--brand); font-weight:600; }
+  .scene-card .scene-data { font-size:13px; color:var(--muted); margin:16px 0; line-height:1.8; text-align:left; background:#C23B2204; padding:16px; border-radius:12px; }
+  
+  .choices { display:flex; flex-direction:column; gap:10px; margin:24px 0; }
+  .choice { background:var(--bg); border:2px solid var(--gold); border-radius:14px; padding:16px 20px; font-size:15px; cursor:pointer; text-align:left; transition:all 0.2s; color:var(--text); }
+  .choice:hover { border-color:var(--brand); background:#C23B2204; }
+  .choice .letter { color:var(--brand); font-weight:700; margin-right:10px; }
+  
+  .btn { display:inline-block; background:var(--brand); color:var(--bg); padding:14px 40px; border-radius:14px; font-size:15px; font-weight:600; cursor:pointer; border:none; margin-top:16px; transition:all 0.2s; }
+  .btn:hover { opacity:0.9; }
+  .btn-secondary { background:transparent; color:var(--brand); border:2px solid var(--brand); }
+  
+  .nav { text-align:center; margin-top:24px; }
+  
+  .body-check { text-align:center; padding:40px 0; }
+  .body-check h3 { font-size:18px; color:var(--brand); margin-bottom:20px; }
+  .body-check .signal { display:inline-block; margin:0 12px; }
+  .body-check .signal .emoji { font-size:40px; }
+  .body-check .signal .lbl { font-size:12px; color:var(--muted); margin-top:4px; }
+  
+  .footer { text-align:center; padding:40px 0; color:var(--muted); font-size:12px; }
+  .footer a { color:var(--brand); }
+</style>
+
+<script src="gate-check.js"></script>
+</head>
+<script>
+// 授权验证 - 满意解研究所
+(function(){
+  // Public pages - no auth needed
+  var publicPages = ['go.html','index.html','about.html','privacy.html','terms.html','symbols.html',
+    'creation.html','stars.html','roots.html','wulu.html','qijin.html','wings.html','eyes.html',
+    '54days.html','fails.html','liang.html','treasure.html','farewell.html',
+    'cases.html','tracks.html','lineage.html','whitepaper.html','quotes.html',
+    'flywheel.html','fw-','bluearmy.html','opensource.html','hibernate.html','life.html','newcomer.html',
+    'duanwei.html','bigrich.html','game-','blood-','media-','skill-','university.html',
+    'report-demo.html','radar.html','chemical-report.html','proposal.html','gate.html',
+    'miniapp-preview.html','cards.html'];
+  
+  var page = window.location.pathname.split('/').pop();
+  
+  // Check if this is a public page
+  for (var i=0; i<publicPages.length; i++) {
+    if (page === publicPages[i] || (publicPages[i].endsWith('-') && page.startsWith(publicPages[i]))) {
+      return; // Public page - no auth needed
+    }
+  }
+  
+  // Protected page - check auth
+  var auth = JSON.parse(localStorage.getItem('sri_auth') || '{}');
+  if (!auth.valid || new Date().getTime() >= auth.expires) {
+    // Not authenticated - redirect to gate
+    var target = page;
+    var productName = page.replace('.html','');
+    window.location.href = 'gate.html?to=' + encodeURIComponent(target) + '&p=' + encodeURIComponent(productName);
+  }
+})();
+</script>
+
+<body>
+<div class="container">
+
+<!-- ======== 场景一：七个月 ======== -->
+<div class="scene active" id="scene1">
+  <div class="scene-card">
+    <div class="scene-num">场景一 · 临界区</div>
+    <div class="scene-title">数据桥已就绪</div>
+    <div class="scene-quote">"做完诊断后，你的数据会自动填充到这些场景中——你的CI值、你的关系危机信号信号、你的股权健康度。不再是demo数据，是你自己的诊断结果。"</div>
+    <div class="scene-body">
+      <p>当前为<span class="highlight">演示模式</span>。当你完成<a href="assessment.html" style="color:var(--brand)">五维决策测评</a>后，你的诊断数据将驱动以下场景：</p>
+      <p style="margin-top:12px">• 你的<span class="highlight">CI临界指数</span>将取代demo的0.46<br>• 你的<span class="highlight">关系危机信号信号</span>将决定场景中合伙人的具体对话模式<br>• 你的<span class="highlight">股权健康度</span>将决定场景分岔的权重</p>
+    </div>
+    <div class="scene-data">
+      📊 示例: CI=0.464🟡 · 距临界点约7月 · 关系危机信号🟠批评🟡蔑视🟠防御🟡冷漠<br>
+      📋 股权健康: 0.39🔴 · 结构高危<br>
+      💡 完成测评后 → 刷新此页面 → 你的数据自动替换 demo
+    </div>
+    <div class="choices">
+      <div class="choice" onclick="nextScene(2,'A')"><span class="letter">A.</span> 立刻启动深度沟通——先把"虚假和谐"打破</div>
+      <div class="choice" onclick="nextScene(2,'B')"><span class="letter">B.</span> 先修复股权结构——不解决根因，沟通只是创可贴</div>
+      <div class="choice" onclick="nextScene(2,'C')"><span class="letter">C.</span> 再观察一个月——也许只是阶段性压力</div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:12px;text-align:center">✋ 做选择前·察觉你的身体: 手心·心跳·胃部·在投票了(水月观音·PRE-0)</p>
+  </div>
+</div>
+
+<!-- ======== 场景二：分岔口 ======== -->
+<div class="scene" id="scene2">
+  <div class="scene-card">
+    <div class="scene-num" id="scene2-num">场景二 · 你的选择</div>
+    <div class="scene-title" id="scene2-title"></div>
+    <div class="scene-body" id="scene2-body"></div>
+    <div class="scene-data" id="scene2-data"></div>
+    <div class="nav">
+      <button class="btn" onclick="goToBodyCheck()">继续 → 身体觉察</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======== 身体觉察 ======== -->
+<div class="scene" id="bodyCheck">
+  <div class="scene-card">
+    <div class="scene-num">中场 · 身体觉察</div>
+    <div class="scene-title">你的身体在投票</div>
+    <div class="scene-quote">"人在临界区最危险的不是看错数据——是身体已经知道答案，但脑子还在跟自己辩论。"</div>
+    <div class="body-check">
+      <h3>现在，感受一下——</h3>
+      <div class="signal"><div class="emoji">✋</div><div class="lbl">手心温度<br>暖还是凉？</div></div>
+      <div class="signal"><div class="emoji">❤️</div><div class="lbl">心跳<br>快还是慢？</div></div>
+      <div class="signal"><div class="emoji">🫃</div><div class="lbl">胃部<br>松还是紧？</div></div>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:20px">Damasio发现: 身体在决策前就已经在投票。如果手心凉+心跳快+胃部紧——你的身体比你的大脑早6-12个月知道这个合伙关系正在走向解体。</p>
+    <p style="font-size:11px;color:var(--muted);margin-top:8px">PRE-0 · 预期性躯体标记 · Damasio 2024</p>
+    <div class="nav">
+      <button class="btn" onclick="goToFinal()">继续 → 最后场景</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======== 场景三：终场 ======== -->
+<div class="scene" id="scene3">
+  <div class="scene-card">
+    <div class="scene-num">终场 · 你走之后</div>
+    <div class="scene-title">你走之后</div>
+    <div class="scene-quote">"数据是左脑的。卡牌是右脑的。身体觉察是连接两个脑的桥。现在——你知道了你的七个月、你的矛盾、你的身体在说什么。接下来不是看报告。是做一个决定。"</div>
+    <div class="scene-body">
+      <p style="text-align:center;font-size:18px;color:var(--brand);font-weight:600;">
+        矛盾热力图：三个矛盾<br>两个互相确认的信号<br>四条建议——先止血再调理
+      </p>
+      <p style="text-align:center;margin-top:20px">
+        <a href="chemical-report.html" style="color:var(--brand);font-weight:600;">→ 查看完整数据报告（左脑版）</a>
+      </p>
+      <p style="font-size:13px;color:var(--muted);margin-top:12px;text-align:center">5年后回头看——你今天的选择A/B/C·会是你欣慰的还是懊悔的? (刘禹锡·土·价值回响)</p>
+      <p style="text-align:center;margin-top:12px">
+        <span style="font-size:13px;color:var(--gold);">⏳ V4.0追踪引擎: 30天后回来重测——看你的CI变化了多少。基线CI=0.464</span>
+      </p>
+    </div>
+    <div style="text-align:center;margin-top:24px">
+      <button class="btn" onclick="goToScene4()">→ 看更多真实案例</button>
+      <button class="btn" style="background:transparent" onclick="restart()">重新走一次</button>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  <p>满意解研究所 · 硬科技创始人合伙人匹配决策外脑</p>
+  <p>左脑+右脑 = 完整决策 <span style="font-size:10px;background:#C23B22;color:#F5F0E6;padding:2px 8px;border-radius:8px;margin-left:6px">右翼·直觉体验</span></p>
+  <p style="font-size:12px;color:var(--muted);margin-top:4px"><a href="chemical-report.html" style="color:var(--gold)">← 切换到左翼·化学报告（逻辑诊断）</a> | 两翼同等权重·50%数据+50%体验</p>
+  <p style="margin-top:16px;font-size:13px;color:var(--gold);">📝 米白即纸——写下你现在最想对合伙人说的一句话</p>
+  <textarea id="userNote" style="width:100%;max-width:400px;height:60px;background:var(--bg);border:1px solid var(--gold);border-radius:12px;padding:12px;font-size:14px;color:var(--text);resize:none;font-family:inherit" placeholder="我想说..."></textarea>
+  <p style="font-size:10px;color:var(--muted);margin-top:4px">你在纸上的话不会被保存或发送·这只是你决策前的一个停顿</p>
+  <p style="margin-top:8px;font-size:10px;color:var(--muted)">五路图腾: ▲刘禹锡(土)·◇司马贺(金)·◎水月观音(水)·⊕孔子(木)·🔥慧能(火) | 五维决策·符合同一密码体系</p>
+  <p><a href="index.html">← 返回首页</a></p>
+</div>
+
+<!-- ======== 场景四: 云鲸少年 ======== -->
+<div class="scene" id="scene4">
+  <div class="scene-card">
+    <div class="scene-num">场景四 · 右翼直觉通道</div>
+    <div class="scene-title">🐋 云鲸少年</div>
+    <div class="scene-quote">"26岁。被行业前辈当面说：'你一个书生，懂什么供应链？'李泽湘说：'我相信你的梦想。'拒绝贴牌——最终百亿独角兽。"</div>
+    <div class="scene-body">
+      <p>云鲸智能创始人张峻彬，26岁创业。第一次见供应链工厂老板时，对方上下打量了他一眼说：<span class="highlight">"你一个书生，懂什么供应链？"</span></p>
+      <p>他没有反驳。他回去画了<span class="highlight">300张图纸</span>。</p>
+      <p>李泽湘（大疆天使投资人）给了他第一笔钱——不是因为BP有多好，是他说了一句：<span class="highlight">"我不想做贴牌。我想做中国人自己的扫地机器人品牌。"</span></p>
+      <p style="margin-top:12px">当全世界都在说"你太年轻"的时候——你需要的是一个说"我相信你"的人。</p>
+    </div>
+    <div class="scene-data">
+      📊 CI区间: 0.30-0.55 · 蔑视信号触发<br>
+      💡 启示: 年轻不是弱点·直觉有导师验证就是武器<br>
+      ⚠️ 如果你的合伙人在用"你太年轻"否定你的方向——那不是年龄的问题。那是尊重的问题。
+    </div>
+    <div class="nav">
+      <button class="btn" onclick="goToScene5()">继续 → 大疆涅槃</button>
+      <button class="btn" style="background:transparent" onclick="restart()">重新开始</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======== 场景五: 大疆涅槃 ======== -->
+<div class="scene" id="scene5">
+  <div class="scene-card">
+    <div class="scene-num">场景五 · 终章</div>
+    <div class="scene-title">🔥 大疆涅槃</div>
+    <div class="scene-quote">"2007年·账面几万·全员离职·只剩出纳。李泽湘五层介入。CI从0.72→0.55→0.35。至暗时刻不致命——导师介入+价值坚持=凤凰涅槃。"</div>
+    <div class="scene-body">
+      <p>2007年的大疆。账上只有几万块钱。团队成员陆续离开——最后一位离开的是财务，走之前把所有账目整理得清清楚楚。</p>
+      <p>李泽湘做了五件事——不是给钱那么简单：</p>
+      <p style="margin-top:8px">① <span class="highlight">情感层</span>："你的技术方向是对的"——先给确定性<br>
+      ② <span class="highlight">资金层</span>：天使投资——给活下去的时间<br>
+      ③ <span class="highlight">团队层</span>：引入哈工大校友——补组织短板<br>
+      ④ <span class="highlight">治理层</span>：参与董事会——让决策有结构<br>
+      ⑤ <span class="highlight">网络层</span>：接入深圳硬件生态——让供应链可触达</p>
+      <p style="margin-top:12px">大疆的CI从0.72（危重区）一路降到0.35（稳定区）。汪滔后来说：<span class="highlight">"最难的时候不是没钱——是没人相信你。李老师是第一个。"</span></p>
+    </div>
+    <div class="scene-data">
+      📊 CI轨迹: 0.72🔴→0.55🟡→0.35🟢<br>
+      💡 不是"自己扛"——是"找到那个相信你的人"<br>
+      🎯 满意解研究所的角色——就是那个"五层介入"的外部教练
+    </div>
+    <div style="text-align:center;margin-top:24px">
+      <p style="font-size:14px;color:var(--gold);margin-bottom:16px;">现在——你的七个月还剩多少？</p>
+      <a class="btn" href="assessment.html" style="font-size:15px;padding:14px 36px;">🎯 开始你的五维自评</a>
+      <p style="margin-top:12px;"><button class="btn" style="background:transparent" onclick="restart()">重新走一遍</button></p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+let userChoice = '';
+const outcomes = {
+  'A': {
+    title: '你选择了直面',
+    body: '<p>你拿起电话。约了明天上午九点的咖啡。</p><p>你知道这场对话不会轻松。Gottman的数据告诉你——如果对话从<span class="highlight">批评</span>开始，有94%的概率以争吵结束。你决定用Gentle Start Up: "我感觉___，我需要___。"</p><p>大疆的汪滔没有打那通电话。所有人都走了之后，出纳是最后一个留下来的。你不会等到只剩出纳。</p>',
+    data: '💡 启动了Gottman解毒流程·Gentle Start Up<br>📊 修复沟通→CI可能降至0.35以下<br>⚠️ 但如果不修复股权结构·沟通改善只是延缓'
+  },
+  'B': {
+    title: '你选择了先止血',
+    body: '<p>你打开电脑，重新看了一遍创始人的股权协议。Vesting条款写在第4页，但你已经三年没翻开过这份文件了。</p><p>Moyer的公式在你脑中闪过: <span class="highlight">每个人的股权 = 贡献(公平市场价值-已获报酬) / 总下注</span>。你算了一下差距——超过30%。</p><p>比锐精密的创始人是在清算前一天才第一次认真看对赌条款的。你不是他。</p>',
+    data: '💡 启动了SlicingPie公平度校准<br>📊 股权健康评分0.39→目标0.55+(修复Vesting)<br>⚠️ 但结构修复需要沟通配合·否则被误解为"你在质疑我的价值"'
+  },
+  'C': {
+    title: '你选择了等待',
+    body: '<p>你告诉自己"也许只是阶段性压力"。</p><p>比锐精密的创始人也是这么想的。三个月后——对赌触发。五个月后——公司清算。</p><p>临界慢化的信号: 决策速度变慢·情绪恢复变慢·小事引发的连锁反应变多。<span class="highlight">你刚才会议上那场"每个人都在说话但没人真的在听"的对话——就是第一个信号。</span></p>',
+    data: '⚠️ CI从0.464→下一个数据点可能更高<br>📊 临界慢化三问——你的回答是什么？<br>💡 下次再选择等待的时候——\"七个月\"已经过去了'
+  }
+};
+
+function nextScene(num, choice) {
+  userChoice = choice;
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+  const s = document.getElementById('scene2');
+  s.classList.add('active');
+  const o = outcomes[choice];
+  document.getElementById('scene2-num').textContent = '场景二 · 分岔口';
+  document.getElementById('scene2-title').textContent = o.title;
+  document.getElementById('scene2-body').innerHTML = o.body;
+  document.getElementById('scene2-data').innerHTML = o.data;
+}
+
+function goToBodyCheck() {
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+  document.getElementById('bodyCheck').classList.add('active');
+}
+
+function goToFinal() {
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+  document.getElementById('scene3').classList.add('active');
+}
+
+function goToScene4() {
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+  document.getElementById('scene4')?.classList.add('active');
+}
+function goToScene5() {
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+  document.getElementById('scene5')?.classList.add('active');
+}
+function restart() {
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+  document.getElementById('scene1').classList.add('active');
+  userChoice = '';
+}
+</script>
+
+<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
+  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
+  <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
+    <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
+    <button onclick="showFeedbackText()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">💬</span>有建议</button>
+  </div>
+  <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
+  <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
+  <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
+  <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
+  <p style="font-size:10px;opacity:0.4;margin-top:8px;"><a href="go.html" style="color:inherit;">返回决策通道</a></p>
+</div>
+<script>
+(function(){
+  let page=location.pathname.split('/').pop()||'index';
+  let key='sri_fb_'+page;
+  let data=JSON.parse(localStorage.getItem(key)||'{}');
+  if(data.sent){document.getElementById('fbQuestion').textContent='感谢你的反馈！';document.getElementById('fbActions').style.display='none';}
+  let tally=JSON.parse(localStorage.getItem('sri_fb_tally_'+page)||'{"up":0,"text":0}');
+  if(tally.up+tally.text>0) document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  window.submitFeedback=function(type){
+    tally[type]=(tally[type]||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type=type;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbQuestion').textContent='感谢你的反馈！';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+  window.showFeedbackText=function(){
+    document.getElementById('fbText').style.display='block';
+    document.getElementById('fbSubmit').style.display='inline-block';
+  };
+  window.submitFeedbackText=function(){
+    let text=document.getElementById('fbText').value.trim();
+    if(!text)return;
+    tally.text=(tally.text||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type='text';data.text=text;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbText').style.display='none';
+    document.getElementById('fbSubmit').style.display='none';
+    document.getElementById('fbQuestion').textContent='收到！感谢你的建议。';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+})();
+</script>
+
+<p style="text-align:center;font-size:10px;opacity:0.5;padding:10px;">📚 基于38篇研究论文与84个真实案例 · Duke·Gottman·Lencioni理论支撑</p>
+</body>
+</html>

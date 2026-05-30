@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>衡镜·验方 | 完整诊断报告 | 满意解研究所</title>
+<link rel="stylesheet" href="vi_quick_ref.css">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --c1: #C23B22; --bg: #F5F0E6; --card: #F5F0E6;
+    --brand: #C23B22; --gold: #B8860B; --text: #2A2A2A; --muted: #4A4A4A;
+  }
+  body { font-family: -apple-system, "PingFang SC", "Noto Sans SC", sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  .container { max-width: 680px; margin: 0 auto; padding: 32px 20px 80px; }
+  
+  .header { text-align: center; padding: 40px 0 24px; }
+  .header h1 { font-size: 22px; font-weight: 700; color: var(--brand); margin-bottom: 8px; }
+  .header .sub { font-size: 13px; color: var(--muted); }
+  .header .badge { display: inline-block; background: var(--brand); color: var(--bg); font-size: 11px; padding: 3px 10px; border-radius: 12px; margin-top: 8px; }
+  
+  .card { background: var(--card); border: 1px solid var(--gold); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+  .card h3 { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+  .card h3 .icon { font-size: 24px; }
+  .card p { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 12px; }
+  
+  .score-row { display: flex; gap: 12px; margin: 16px 0; }
+  .score-box { flex: 1; background: var(--bg); border-radius: 12px; padding: 16px; text-align: center; border: 1px solid var(--gold); }
+  .score-box .num { font-size: 28px; font-weight: 700; color: var(--brand); }
+  .score-box .lbl { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  
+  .bar-wrap { background: #D4C5A0; height: 6px; border-radius: 3px; margin: 8px 0 16px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--brand); border-radius: 3px; transition: width 0.6s; }
+  
+  .metric { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #D4C5A0; }
+  .metric:last-child { border-bottom: none; }
+  .metric .name { font-size: 14px; font-weight: 600; }
+  .metric .val { font-size: 15px; font-weight: 700; color: var(--brand); }
+  .metric .desc { font-size: 11px; color: var(--muted); }
+  
+  .warning { background: #C23B2208; border-left: 4px solid var(--brand); padding: 14px 18px; border-radius: 0 12px 12px 0; margin: 16px 0; }
+  .warning p { font-size: 13px; margin: 0; }
+  .warning strong { color: var(--brand); }
+  
+  .chain { padding: 8px 0; }
+  .chain .item { font-size: 13px; color: var(--muted); padding: 6px 0; }
+  .chain .item .arrow { color: var(--brand); margin: 0 6px; }
+  
+  .antidote { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+  .antidote .a-card { background: var(--bg); border-radius: 10px; padding: 14px; border: 1px solid var(--gold); }
+  .antidote .a-card .signal { font-size: 12px; font-weight: 600; color: var(--brand); }
+  .antidote .a-card .fix { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+  
+  .footer { text-align: center; padding: 40px 0; color: var(--muted); font-size: 12px; line-height: 1.8; }
+  .footer a { color: var(--brand); }
+  
+  .demo-tag { font-size: 10px; background: var(--gold); color: var(--bg); padding: 2px 8px; border-radius: 8px; margin-left: 8px; vertical-align: middle; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="hero">
+  <h1>合伙人关系健康度报告</h1>
+  <p class="sub">基于五维决策测评·11源交叉验证·化学融合增强</p>
+  <span class="badge">满意解研究所 · Satisficing Research Institute</span>
+  <span class="demo-tag">DEMO</span>
+  <span style="font-size:10px;background:#B8860B;color:#F5F0E6;padding:2px 8px;border-radius:8px;margin-left:6px">左翼·逻辑诊断</span>
+  <p style="font-size:12px;color:var(--muted);margin-top:8px"><a href="decision-theatre.html" style="color:var(--brand)">→ 切换到右翼·决策剧场（直觉体验）</a> | 两翼同等权重·50%数据+50%体验</p>
+  <p style="font-size:11px;color:var(--gold);margin-top:6px">📋 当前为演示数据。完成<a href="assessment.html" style="color:var(--brand)">五维决策测评</a>后，此页面将基于你的真实诊断结果动态生成。已支持5个赛道模拟数据验证。</p>
+  <p style="font-size:10px;color:var(--muted);margin-top:2px">⏳ 即将推出: 个性化干预方案(¥499)·关系宪章·30天追踪(¥99/月)·V4.0持续追踪引擎已就绪</p>
+</div>
+
+<!-- 🔥 矛盾热力图: 八个产物互相碰撞的结果 -->
+<div class="card" style="border-color: #C23B22; border-width: 2px; background: linear-gradient(135deg,#F5F0E6,#C23B2204);">
+  <h3><span class="icon">🔥</span> 矛盾热力图</h3>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:16px">八个独立指标在同一个烧瓶里互相碰撞后——暴露了3个独立指标不会显示的矛盾。</p>
+  
+  <!-- 矛盾1: CI×股权 → 修正临界点 -->
+  <div class="warning">
+    <p><strong>矛盾① · 时间悖论</strong></p>
+    <p style="margin-top:6px">CI说"离临界点约7个月"，股权健康仅0.39🔴加速了衰退。修正实际窗口: 约<strong>4个月</strong>(而非7个月)——股权缺陷让衰退速度加快1.7倍。</p>
+  </div>
+  
+  <!-- 矛盾2: DQI×MRI → 信任悖论 -->
+  <div class="warning" style="margin-top:12px">
+    <p><strong>矛盾② · 信任悖论</strong></p>
+    <p style="margin-top:6px">DQI显示0.67🟡"中等"，但引擎可靠性MRI仅0.70。修正DQI区间: <strong>0.47-0.87</strong>——"中等"这个判断本身可能偏差达±30%。</p>
+  </div>
+  
+  <!-- 矛盾3: 建议冲突 -->
+  <div class="warning" style="margin-top:12px">
+    <p><strong>矛盾③ · 建议分裂</strong></p>
+    <p style="margin-top:6px">四条建议指向不同方向。优先级: ①修复股权(🔴紧急) ②启动Gentle Start Up(🟠本周) ③监控临界慢化(🟡持续) ④积累直觉经验(🟢长期)——<strong>先止血再调理</strong>。</p>
+  </div>
+  
+  <!-- 互相确认的 -->
+  <div style="font-size:13px;color:var(--muted);margin-top:16px">
+    <p>✅ <strong>互相确认</strong> (这些信号可靠度高):</p>
+    <p style="margin-left:16px">四骑士🟠🟡🟠🟡 + 五行连锁5条 → 关系系统确实在临界区</p>
+    <p style="margin-left:16px">贴现率🟢 + 股权🔴 → 长期还行但是建立在崩塌边缘的结构上</p>
+  </div>
+  <div style="font-size:13px;color:var(--muted);margin-top:8px">
+    <p>⚠️ <strong>互相否定</strong> (这些信号有矛盾——不要独立相信任何一个):</p>
+    <p style="margin-left:16px">CI🟡("7个月") vs 股权🔴("结构高危") → 实际窗口更短</p>
+    <p style="margin-left:16px">DQI🟡("中等") vs MRI🟡("引擎可信70%") → "中等"的置信度不足</p>
+  </div>
+  
+  <p style="font-size:11px;color:var(--gold);margin-top:12px">🔥 沸腾产物·八个独立指标放入同一烧瓶后产生的矛盾洞察——任何一个单一指标无法给出</p>
+  <p style="font-size:11px;color:var(--muted);margin-top:4px">✋ 读到此处·察觉身体: 手心暖还是凉? 心跳快还是慢? 胃松还是紧? (观自在·PRE-0)</p>
+</div>
+
+<!-- C5: 相变临界点预测 -->
+<div class="card">
+  <h3><span class="icon">🌡️</span> 关系相变临界指数 (CI)</h3>
+  <div class="score-row">
+    <div class="score-box">
+      <div class="num">0.46</div>
+      <div class="lbl">临界指数</div>
+    </div>
+    <div class="score-box">
+      <div class="num">🟡</div>
+      <div class="lbl">临界区(显现期)</div>
+    </div>
+    <div class="score-box">
+      <div class="num">~7月</div>
+      <div class="lbl">距临界点</div>
+    </div>
+  </div>
+  <div class="bar-wrap"><div class="bar-fill" style="width:46%; background:linear-gradient(90deg,#B8860B,#C23B22)"></div></div>
+  <p>涨落开始放大·需监控临界慢化信号。参考: 大疆2007年CI≈0.7时导师介入→存活。比锐精密CI持续上升到0.85→3个月内清算。</p>
+  <div class="warning">
+    <p><strong>⚠️ 临界慢化检测三问:</strong></p>
+    <p>① 最近一次分歧，多久才回到正常沟通？</p>
+    <p>② 一件小事引发的连锁反应比以前多了吗？</p>
+    <p>③ 最近的决策速度比以前快了还是慢了？</p>
+  </div>
+  <p style="font-size:11px;color:var(--muted)">化学产物C5·复杂系统相变理论 × Gottman四骑士 × 三阶段两节点</p>
+</div>
+
+<!-- C2: 决策质量双引擎 DQI -->
+<div class="card">
+  <h3><span class="icon">📊</span> 决策质量指数 (DQI)</h3>
+  <div class="score-row">
+    <div class="score-box">
+      <div class="num">0.67</div>
+      <div class="lbl">DQI</div>
+    </div>
+    <div class="score-box">
+      <div class="num">🟡</div>
+      <div class="lbl">中等质量</div>
+    </div>
+  </div>
+  <div class="metric"><span class="name">偏差引擎(维度分差)</span><span class="val">0.45</span></div>
+  <div class="metric"><span class="name">噪声引擎(验证密度σ)</span><span class="val">0.229</span></div>
+  <!-- DQI双仪表盘 -->
+  <div style="display:flex;gap:16px;margin-top:12px">
+    <div style="flex:1;text-align:center">
+      <div style="width:80px;height:40px;background:linear-gradient(90deg,#B8860B,#C23B22);border-radius:20px;margin:0 auto;position:relative;overflow:visible">
+        <div style="position:absolute;left:45%;top:-8px;width:3px;height:56px;background:var(--text);border-radius:2px;transform:rotate(-10deg)"></div>
+      </div>
+      <div style="font-size:10px;color:var(--muted);margin-top:4px">偏差: 0.45</div>
+      <div style="font-size:9px;color:var(--muted)">合理范围</div>
+    </div>
+    <div style="flex:1;text-align:center">
+      <div style="width:80px;height:40px;background:linear-gradient(90deg,#B8860B,#C23B22);border-radius:20px;margin:0 auto;position:relative;overflow:visible">
+        <div style="position:absolute;left:25%;top:-8px;width:3px;height:56px;background:var(--text);border-radius:2px;transform:rotate(5deg)"></div>
+      </div>
+      <div style="font-size:10px;color:var(--muted);margin-top:4px">噪声: 0.229</div>
+      <div style="font-size:9px;color:var(--muted)">低噪声</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:var(--muted);margin-top:8px">建议: 偏差或噪声中某一项偏高——针对性校准后再决定</div>
+  <p style="font-size:11px;color:var(--muted);margin-top:8px">化学产物C2·Kahneman噪声 × 交叉验证矩阵 × Duke Resulting</p>
+</div>
+
+<!-- Gottman解毒方案 + 四骑士 -->
+<div class="card">
+  <h3><span class="icon">🛡️</span> 四骑士信号检测 & 解毒方案</h3>
+  <div class="antidote">
+    <div class="a-card">
+      <div class="signal">🟠 批评信号</div>
+      <div class="fix">解毒: 用"我感觉___，我需要___"代替"你总是___"<br>方太每日晨读——先内省后表达</div>
+    </div>
+    <div class="a-card">
+      <div class="signal">🟡 蔑视信号</div>
+      <div class="fix">解毒: 找出对方3个值得感谢的行为，当面表达<br>儒商全员身股·感恩文化制度化</div>
+    </div>
+    <div class="a-card">
+      <div class="signal">🟠 防御信号</div>
+      <div class="fix">解毒: 先承认"我有责任的部分是___"，再讨论对方<br>方太ABC错误分类·先认错后改进</div>
+    </div>
+    <div class="a-card">
+      <div class="signal">🟡 冷漠信号</div>
+      <div class="fix">解毒: "我需要20分钟冷静一下，然后继续谈"<br>比锐教训: 冷漠=沉默地分手</div>
+    </div>
+  </div>
+  <p style="font-size:11px;color:var(--muted)">化学产物·Gottman四骑士(91%预测率) × 方太儒道 × 比锐精密</p>
+  <p style="font-size:12px;color:var(--brand);margin-top:8px"><strong>Gottman的发现: 69%的冲突是不可解的——但这意味着31%是可解的。你们在哪31%中？</strong></p>
+  <p style="font-size:11px;color:var(--muted);margin-top:4px">解毒顺序(孔子·B4): 1⃣ 冷漠→先暂停(观自在) 2⃣ 蔑视→建立欣赏文化 3⃣ 防御→承担责任 4⃣ 批评→Gentle Start Up</p>
+</div>
+
+<!-- TI信任指数 -->
+<div class="card">
+  <h3><span class="icon">🤝</span> 信任指数 (TI)</h3>
+  <div class="score-row">
+    <div class="score-box">
+      <div class="num">0.62</div>
+      <div class="lbl">TI</div>
+    </div>
+    <div class="score-box">
+      <div class="num">🟡</div>
+      <div class="lbl">中等信任</div>
+    </div>
+  </div>
+  <div class="bar-wrap"><div class="bar-fill" style="width:62%;background:linear-gradient(90deg,#B8860B,#C23B22)"></div></div>
+  <p style="font-size:13px;color:var(--muted);">合成: 四骑士反比(信义观得分·Gottman信号) + Carta2025数据(股权健康) + Vesting完整性</p>
+  <div class="metric"><span class="name">能力信任</span><span class="val">0.68</span><span class="desc"> · 创始人三力评估</span></div>
+  <div class="metric"><span class="name">善意信任</span><span class="val">0.55</span><span class="desc"> · Gottman信号·四骑士反比</span></div>
+  <div class="metric"><span class="name">制度信任</span><span class="val">0.63</span><span class="desc"> · Vesting·决策机制·退出预案</span></div>
+  <p style="font-size:12px;color:var(--muted);margin-top:8px">信任三维: 能力信任(Carta+三力)·善意信任(Gottman四骑士反比)·制度信任(Vesting+决策+退出)</p>
+  <p style="font-size:11px;color:var(--muted);margin-top:4px">信任指数TI·Gottman反比+信义观+Carta·30天重测追踪</p>
+</div>
+
+<!-- E5: 时间贴现率 -->
+<div class="card">
+  <h3><span class="icon">⏳</span> 时间贴现校准</h3>
+  <div class="score-row">
+    <div class="score-box">
+      <div class="num">34%</div>
+      <div class="lbl">个人贴现率/年</div>
+    </div>
+    <div class="score-box">
+      <div class="num">🟢</div>
+      <div class="lbl">长期视角健康</div>
+    </div>
+  </div>
+  <p>5年后的100万·你现在感觉只值<strong>23万</strong>——你高估了"现在"77%。参考: 普通创业者贴现率50-100%·大疆2007: 40%初始股权→5年后稀释至5%</p>
+  <p style="font-size:11px;color:var(--muted)">化学产物E5·双曲贴现 × 晋卦文化 × Carta2025</p>
+</div>
+
+<!-- E2: MRI 引擎可靠性 -->
+<div class="card">
+  <h3><span class="icon">🔬</span> 评估引擎自身可靠性 (MRI)</h3>
+  <div class="score-row">
+    <div class="score-box">
+      <div class="num">0.70</div>
+      <div class="lbl">MRI</div>
+    </div>
+    <div class="score-box">
+      <div class="num">🟡</div>
+      <div class="lbl">可靠但需验证</div>
+    </div>
+  </div>
+  <div class="metric"><span class="name">源覆盖率</span><span class="val">1.00</span></div>
+  <div class="metric"><span class="name">同行审议比</span><span class="val">0.38</span></div>
+  <div class="metric"><span class="name">内部一致性</span><span class="val">0.93</span></div>
+  <div class="warning"><p><strong>⚠️ 引擎尚未在真实案例中验证——不应将本报告作为唯一决策依据</strong></p></div>
+  <p style="font-size:11px;color:var(--muted)">化学产物E2·元认知自指涉 × Metacognitive AI(MDPI 2025)</p>
+</div>
+
+<!-- E7: 五行生克审核连锁 -->
+<div class="card">
+  <h3><span class="icon">🔗</span> 五行生克审核连锁反应</h3>
+  <p style="font-size:13px;color:var(--muted);">五路图腾按照五行因果链依次审核·以下为实际触发的连锁:</p>
+  <div class="chain">
+    <div class="item">🟢 刘禹锡(土)·贴现率34% → 健康·快速通过 → 司马贺</div>
+    <div class="item">⚡ 司马贺(金)·克: 金→木·孔子·"方法不可靠"→伦理判断需重审</div>
+    <div class="item">⚡ 司马贺(金)·生: 金→水·观自在·不确定性在身体信号中有反映?</div>
+    <div class="item">⚡ 孔子(木)·克: 木→金·司马贺·相变风险是否被方法论低估?</div>
+    <div class="item">⚡ 孔子(木)·生: 木→火·慧能·伦理风险是否被直觉预感到?</div>
+  </div>
+  <p style="font-size:13px;color:var(--brand);margin-top:12px"><strong>体系行为: 独立审核遮蔽的矛盾·连锁反应让矛盾暴露</strong></p>
+  <p style="font-size:11px;color:var(--muted)">化学产物E7·五行生克 × 复杂适应系统·相变涌现</p>
+</div>
+
+<!-- 股权健康评分 -->
+<div class="card">
+  <h3><span class="icon">📋</span> 股权健康评分 & 深度审核链</h3>
+  <div class="score-row">
+    <div class="score-box">
+      <div class="num">0.39</div>
+      <div class="lbl">健康评分</div>
+    </div>
+    <div class="score-box">
+      <div class="num">🔴</div>
+      <div class="lbl">高危</div>
+    </div>
+  </div>
+  <div class="metric"><span class="name">L1·动机(Rich vs King)</span><span class="val">⚠️ 未明确</span></div>
+  <div class="metric"><span class="name">L2·公平(SlicingPie差距)</span><span class="val">⚠️ 未知</span></div>
+  <div class="metric"><span class="name">L3·陷阱(条款风险)</span><span class="val">⚠️ 未审查</span></div>
+  <p style="font-size:12px;color:var(--muted)">大疆2007(无对赌→存活) vs 比锐精密(对赌回购→致命)·Carta2025: 45%四年分手率</p>
+  <p style="font-size:11px;color:var(--muted)">化学产物·股健康评分 + E17审核深度三层链</p>
+</div>
+
+<!-- 直觉可信度 -->
+<div class="card">
+  <h3><span class="icon">🎯</span> 直觉可信度区间</h3>
+  <div class="score-row">
+    <div class="score-box">
+      <div class="num">RPD L1</div>
+      <div class="lbl">简单匹配</div>
+    </div>
+    <div class="score-box">
+      <div class="num">IQ 0.2</div>
+      <div class="lbl">低可信度</div>
+    </div>
+  </div>
+  <p>你的直觉目前主要是Level 1(简单匹配)——需要积累100+次相关决策经验才能升级到Level 2(诊断)。建议: 在达到L2之前，重大决策使用五维评分而非直觉。</p>
+  <p style="font-size:12px;color:var(--muted)">案例: 李泽湘270+案例→直觉"拒绝贴牌"→正确·比锐无经验→双线作战→失败</p>
+  <p style="font-size:11px;color:var(--muted)">化学产物E4·Klein RPD × 专家-新手边界动力学</p>
+</div>
+
+<!-- V4.0追踪·30天重测预告 -->
+<div class="card">
+  <h3><span class="icon">📈</span> V4.0持续追踪 · 关系健康变化曲线</h3>
+  <div class="score-row">
+    <div class="score-box">
+      <div class="num">30天</div>
+      <div class="lbl">下次重测</div>
+    </div>
+    <div class="score-box">
+      <div class="num">基线</div>
+      <div class="lbl">CI=0.464</div>
+    </div>
+  </div>
+  <p style="font-size:13px;color:var(--muted);">30天后重新测评——你将在页面上看到一张完整的变化曲线。基线和随访两个时间点的数据自动对比。时间轴·可行域·身心流·信义观·直觉阈，每一项的变化方向（↑↓→）一目了然。30天、90天、年度——三次数据点形成一条曲线，你能看到你的关系在好转还是在恶化。</p>
+  <p style="font-size:11px;color:var(--gold);margin-top:8px">⏳ V4.0追踪引擎已就绪·首次30天重测时自动激活变化曲线</p>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>满意解研究所 · Satisficing Research Institute</p>
+  <p>深圳鼎玉家族传承管理有限公司（法人主体）</p>
+  <p>硬科技转化的合伙人匹配决策教练</p>
+  <p style="margin-top:12px">本报告由五维决策评分引擎V3.0生成 · 7独立学术源×4内部建构源</p>
+  <p>11源交叉验证 · 6化学产物增强 · 五行生克连锁审核</p>
+  <p style="margin-top:8px;font-size:11px;color:var(--muted)">CBIIP标杆案例: Intel三位一体(CI 0.25-0.35)·Google三角(CI 0.28-0.30)·大疆涅槃(CI 0.72→0.35)</p>
+  <p style="margin-top:8px;font-size:10px;color:var(--muted)">五维分标识: 时间轴▲(土·刘禹锡) | 可行域◇(金·司马贺) | 身心流◎(水·观自在) | 信义观⊕(木·孔子) | 直觉阈🔥(火·慧能)</p>
+  <p style="margin-top:4px;font-size:10px;color:var(--gold)">✅ 5赛道模拟验证·8赛道风险参数已集成·赛道专属调整因子在诊断中自动应用</p>
+  <p style="margin-top:8px">⚠️ 本报告为演示版本(DEMO)·不构成投资/法律/财务建议</p>
+  <p><a href="https://egbertie.github.io/satisficing-lab/">← 返回首页</a></p>
+  <p style="margin-top:16px;font-size:13px;color:var(--gold);">📝 米白即纸——你看到了数据，现在写下对合伙关系的理解</p>
+  <textarea id="userInsight" style="width:100%;max-width:400px;height:60px;background:var(--bg);border:1px solid var(--gold);border-radius:12px;padding:12px;font-size:14px;color:var(--text);resize:none;font-family:inherit" placeholder="这组矛盾报告让我意识到..."></textarea>
+  <p style="font-size:10px;color:var(--muted);margin-top:4px">你在纸上的话不会被保存·这是你的诊断·你的笔·你的纸</p>
+</div>
+
+</div>
+<script>
+// Parse scores from URL hash (set by assessment.html)
+try {
+  const hash = window.location.hash.substring(1);
+  if (hash) {
+    const scores = JSON.parse(decodeURIComponent(hash));
+    const dims = {t:'时间轴',d:'可行域',b:'身心流',x:'信义观',z:'直觉阈'};
+    const dimLabels = {t:'T_时间轴',d:'D_可行域',b:'B_身心流',x:'X_信义观',z:'Z_直觉阈'};
+    
+    // Update all score displays on the page
+    Object.entries(scores).forEach(([key,val]) => {
+      if (key === 'stage') return;
+      const numVal = parseFloat(val);
+      // Find and update score boxes and bar fills
+      document.querySelectorAll('.score-box .num').forEach(el => {
+        if (el.textContent.trim() === '—' || !isNaN(parseFloat(el.textContent))) {
+          const parentText = el.parentElement?.textContent || '';
+          if (parentText.includes(dims[key]) || parentText.includes(dimLabels[key])) {
+            el.textContent = numVal.toFixed(1);
+          }
+        }
+      });
+      // Update bar fills
+      document.querySelectorAll('.bar-fill').forEach(el => {
+        const parentText = el.closest('.metric')?.textContent || el.closest('.card')?.textContent || '';
+        if (parentText.includes(dims[key]) || parentText.includes(dimLabels[key])) {
+          el.style.width = (numVal * 20) + '%';
+        }
+      });
+    });
+
+    // Show banner that report is personalized
+    const badge = document.querySelector('.badge');
+    if (badge) {
+      badge.textContent = '🟢 基于你的真实评分生成 · ' + new Date().toLocaleDateString('zh-CN');
+      badge.style.background = '#4A8C5C';
+    }
+    
+    // Update stage if available
+    if (scores.stage) {
+      document.querySelectorAll('.header .sub').forEach(el => {
+        el.textContent += ' · 阶段: ' + scores.stage;
+      });
+    }
+  }
+} catch(e) {
+  console.log('No scores in URL — showing demo data');
+}
+</script>
+
+<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
+  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
+  <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
+    <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
+    <button onclick="showFeedbackText()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">💬</span>有建议</button>
+  </div>
+  <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
+  <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
+  <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
+  <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
+  <p style="font-size:10px;opacity:0.4;margin-top:8px;"><a href="go.html" style="color:inherit;">返回决策通道</a></p>
+</div>
+<script>
+(function(){
+  let page=location.pathname.split('/').pop()||'index';
+  let key='sri_fb_'+page;
+  let data=JSON.parse(localStorage.getItem(key)||'{}');
+  if(data.sent){document.getElementById('fbQuestion').textContent='感谢你的反馈！';document.getElementById('fbActions').style.display='none';}
+  let tally=JSON.parse(localStorage.getItem('sri_fb_tally_'+page)||'{"up":0,"text":0}');
+  if(tally.up+tally.text>0) document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  window.submitFeedback=function(type){
+    tally[type]=(tally[type]||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type=type;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbQuestion').textContent='感谢你的反馈！';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+  window.showFeedbackText=function(){
+    document.getElementById('fbText').style.display='block';
+    document.getElementById('fbSubmit').style.display='inline-block';
+  };
+  window.submitFeedbackText=function(){
+    let text=document.getElementById('fbText').value.trim();
+    if(!text)return;
+    tally.text=(tally.text||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type='text';data.text=text;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbText').style.display='none';
+    document.getElementById('fbSubmit').style.display='none';
+    document.getElementById('fbQuestion').textContent='收到！感谢你的建议。';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+})();
+</script>
+
+</body>
+</html>

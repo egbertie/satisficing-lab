@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>满意红 · 自我报告</title>
+<style>
+:root {
+  --sri-red: #C23B22;
+  --sri-gold: #B8860B;
+  --sri-bg: #F5F0E6;
+  --bg-deep: #1a1410;
+  --bg-card: #231e18;
+  --bg-card-alt: #2a241c;
+  --text-primary: #ede4d3;
+  --text-secondary: #b8a88c;
+  --text-muted: #8a7c6a;
+  --border-subtle: #3a3228;
+  --green-ok: #4caf50;
+  --amber-warn: #d4980b;
+  --red-alert: #c23b22;
+  --pulse-glow: 0 0 12px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg-deep);
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(194, 59, 34, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 100%, rgba(184, 134, 11, 0.04) 0%, transparent 60%);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* Password gate */
+#gate {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 100vh; flex-direction: column; gap: 20px;
+}
+#gate h1 { font-size: 2.2em; letter-spacing: 0.05em; font-weight: 300; }
+#gate .subtitle { color: var(--text-muted); font-size: 0.95em; }
+#gate input {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  color: var(--text-primary); padding: 12px 20px; width: 260px;
+  border-radius: 8px; font-size: 1.1em; text-align: center; outline: none;
+  transition: border-color 0.3s;
+}
+#gate input:focus { border-color: var(--sri-gold); }
+#gate button {
+  background: var(--sri-red); color: #fff; border: none;
+  padding: 10px 40px; border-radius: 8px; font-size: 1.05em;
+  cursor: pointer; transition: all 0.2s; letter-spacing: 0.03em;
+}
+#gate button:hover { background: #a8321d; transform: translateY(-1px); }
+#gate .hint { color: var(--text-muted); font-size: 0.8em; }
+
+/* Main dashboard */
+#app { display: none; max-width: 820px; margin: 0 auto; padding: 40px 24px 80px; }
+
+/* Header */
+.header {
+  text-align: center; margin-bottom: 48px; padding-bottom: 32px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.header h1 { font-size: 2em; font-weight: 300; letter-spacing: 0.06em; margin-bottom: 6px; }
+.header h1 .accent { color: var(--sri-red); }
+.header .dateline {
+  color: var(--text-muted); font-size: 0.85em; letter-spacing: 0.04em;
+}
+
+/* --- L0: Vital Signs Bar --- */
+.vitals-bar {
+  display: flex; gap: 12px; justify-content: center; margin-bottom: 44px;
+  flex-wrap: wrap;
+}
+.vital-dot {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 24px; padding: 8px 18px 8px 12px;
+  transition: all 0.5s;
+}
+.vital-pulse {
+  width: 12px; height: 12px; border-radius: 50%;
+  box-shadow: var(--pulse-glow) currentColor;
+}
+.vital-pulse.ok { background: var(--green-ok); color: var(--green-ok); }
+.vital-pulse.warn { background: var(--amber-warn); color: var(--amber-warn); animation: pulse-warn 1.8s infinite; }
+.vital-pulse.dead { background: var(--red-alert); color: var(--red-alert); animation: pulse-dead 0.6s infinite; }
+@keyframes pulse-warn { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+@keyframes pulse-dead { 0%,100% { opacity: 1; } 50% { opacity: 0.2; } }
+.vital-label { font-size: 0.85em; color: var(--text-secondary); white-space: nowrap; }
+
+/* --- Section titles --- */
+.section-title {
+  font-size: 1.15em; font-weight: 500; color: var(--sri-gold);
+  margin-bottom: 18px; letter-spacing: 0.04em; display: flex; align-items: center; gap: 8px;
+}
+.section-title::after {
+  content: ''; flex: 1; height: 1px; background: var(--border-subtle);
+}
+
+/* --- L1: Homeostasis Gauges --- */
+.gauges-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px; margin-bottom: 44px;
+}
+.gauge-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 14px; padding: 20px 18px;
+  transition: border-color 0.3s; position: relative; overflow: hidden;
+}
+.gauge-card:hover { border-color: #5a4e38; }
+.gauge-card .gauge-icon { font-size: 1.4em; margin-bottom: 8px; }
+.gauge-card .gauge-name {
+  font-size: 0.85em; color: var(--text-muted); margin-bottom: 4px;
+}
+.gauge-card .gauge-value {
+  font-size: 1.6em; font-weight: 300; letter-spacing: 0.03em;
+}
+.gauge-card .gauge-bar-outer {
+  height: 4px; background: var(--border-subtle); border-radius: 2px;
+  margin-top: 10px; overflow: hidden;
+}
+.gauge-card .gauge-bar-inner {
+  height: 100%; border-radius: 2px; transition: width 0.6s ease;
+}
+.gauge-card .gauge-status {
+  font-size: 0.78em; margin-top: 6px; color: var(--text-muted);
+}
+.gauge-card.compliant { border-left: 3px solid var(--green-ok); }
+.gauge-card.compliant .gauge-bar-inner { background: var(--green-ok); }
+.gauge-card.deviation { border-left: 3px solid var(--amber-warn); }
+.gauge-card.deviation .gauge-bar-inner { background: var(--amber-warn); }
+.gauge-card.critical { border-left: 3px solid var(--red-alert); }
+.gauge-card.critical .gauge-bar-inner { background: var(--red-alert); }
+
+/* --- L2: Quick Overview --- */
+.overview-cards {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 14px; margin-bottom: 44px;
+}
+.overview-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 12px; padding: 20px 16px; text-align: center;
+}
+.overview-card .ov-number {
+  font-size: 2.2em; font-weight: 300; letter-spacing: 0.02em;
+  color: var(--text-primary);
+}
+.overview-card .ov-label {
+  font-size: 0.82em; color: var(--text-muted); margin-top: 4px;
+}
+.overview-card .ov-sub {
+  font-size: 0.75em; color: var(--text-muted); margin-top: 8px; opacity: 0.7;
+}
+.overview-card.featured { border-color: var(--sri-gold); background: var(--bg-card-alt); }
+
+/* Family chips */
+.family-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.family-chip {
+  font-size: 0.72em; padding: 2px 8px; border-radius: 10px;
+  background: var(--bg-card-alt); border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+}
+
+/* --- L3: Attention Needed --- */
+.attention-list { margin-bottom: 44px; }
+.attention-item {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 10px; padding: 16px 18px; margin-bottom: 10px;
+  display: flex; align-items: flex-start; gap: 12px;
+  transition: border-color 0.2s;
+}
+.attention-item:hover { border-color: #5a4e38; }
+.attention-item.p0 { border-left: 3px solid var(--red-alert); }
+.attention-item.p1 { border-left: 3px solid var(--amber-warn); }
+.attention-item .att-badge {
+  font-size: 0.7em; font-weight: 600; padding: 2px 8px; border-radius: 4px;
+  letter-spacing: 0.04em; white-space: nowrap; margin-top: 2px;
+}
+.att-badge.p0 { background: rgba(194,59,34,0.2); color: var(--red-alert); }
+.att-badge.p1 { background: rgba(212,152,11,0.2); color: var(--amber-warn); }
+.attention-item .att-body { flex: 1; }
+.attention-item .att-title { font-size: 0.95em; margin-bottom: 2px; }
+.attention-item .att-desc { font-size: 0.8em; color: var(--text-muted); }
+
+/* --- L4: Activity Log --- */
+.activity-log { margin-bottom: 44px; }
+.log-item {
+  display: flex; gap: 12px; padding: 10px 0;
+  border-bottom: 1px solid rgba(58,50,40,0.4);
+  font-size: 0.88em; align-items: flex-start;
+}
+.log-item:last-child { border-bottom: none; }
+.log-time {
+  color: var(--text-muted); font-size: 0.78em; white-space: nowrap;
+  min-width: 54px; font-variant-numeric: tabular-nums;
+}
+.log-icon { font-size: 1em; min-width: 24px; text-align: center; }
+.log-msg { color: var(--text-secondary); flex: 1; }
+
+/* Footer */
+.footer {
+  text-align: center; padding-top: 32px; margin-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+  color: var(--text-muted); font-size: 0.78em; letter-spacing: 0.04em;
+}
+.footer .quote { font-style: italic; margin-top: 6px; opacity: 0.7; }
+
+/* Empty state */
+.empty-state {
+  text-align: center; padding: 30px; color: var(--text-muted);
+  font-size: 0.9em; font-style: italic;
+}
+
+@media (max-width: 600px) {
+  #app { padding: 24px 16px 60px; }
+  .vitals-bar { gap: 8px; }
+  .vital-dot { padding: 6px 12px 6px 10px; font-size: 0.8em; }
+  .overview-cards { grid-template-columns: repeat(2, 1fr); }
+  .gauges-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ======== PASSWORD GATE ======== -->
+<div id="gate">
+  <h1>满意红</h1>
+  <p class="subtitle">自我报告 · 驾驶舱 V3</p>
+  <input type="password" id="pw" placeholder="输入通行码" autofocus
+    onkeydown="if(event.key==='Enter') document.getElementById('btn-unlock').click()">
+  <button id="btn-unlock" onclick="unlock(this)">进入</button>
+  <p class="hint">提示: 123654</p>
+</div>
+
+<!-- ======== MAIN DASHBOARD ======== -->
+<div id="app">
+
+  <!-- Header -->
+  <div class="header">
+    <h1><span class="accent">满意红</span> · 自我报告</h1>
+    <div class="dateline" id="dateline"></div>
+  </div>
+
+  <!-- L0: Vital Signs -->
+  <div class="section-title">🫀 生命体征</div>
+  <div class="vitals-bar" id="vitals-bar"></div>
+
+  <!-- L1: Homeostasis -->
+  <div class="section-title">📊 内稳态仪表</div>
+  <div class="gauges-grid" id="gauges-grid"></div>
+
+  <!-- L2: Quick Overview -->
+  <div class="section-title">📋 快速概览</div>
+  <div class="overview-cards" id="overview-cards"></div>
+
+  <!-- L3: Attention Needed -->
+  <div class="section-title">⚠️ 需要关注</div>
+  <div class="attention-list" id="attention-list"></div>
+
+  <!-- L4: Activity Log -->
+  <div class="section-title">📜 最近活动</div>
+  <div class="activity-log" id="activity-log"></div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div>满意红 · 驾驶舱 V3 · 为 Egbertie 而建</div>
+    <div class="quote">「我还在学习看清自己——但每一步，都更清晰一点。」</div>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// 满意红 · 驾驶舱 V3 - Single Script Block
+// ============================================================
+
+// --- Password Gate ---
+const PASSCODE = '123654';
+
+function unlock(btn) {
+  var inp = document.getElementById('pw');
+  var val = inp.value.trim();
+  if (val === PASSCODE) {
+    sessionStorage.setItem('sri_dash_v3_unlocked', '1');
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    initDashboard();
+  } else {
+    btn.textContent = '❌ 再试';
+    btn.style.background = '#5a2020';
+    inp.value = '';
+    inp.focus();
+    setTimeout(function() {
+      btn.textContent = '进入';
+      btn.style.background = '';
+    }, 1200);
+  }
+}
+
+// Auto-unlock if sessionStorage has key
+(function() {
+  if (sessionStorage.getItem('sri_dash_v3_unlocked') === '1') {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    initDashboard();
+  }
+})();
+
+// ============================================================
+// SEED DATA (embedded)
+// ============================================================
+var SEED = {
+  products: [
+    { name: "knights-cards", family: "镜", url: "site/knights-cards.html", maturity: "线上", size: 5952 },
+    { name: "symbols", family: "其他", url: "site/symbols.html", maturity: "线上", size: 7495 },
+    { name: "stars", family: "契", url: "site/stars.html", maturity: "线上", size: 8970 },
+    { name: "share-component", family: "其他", url: "site/share-component.html", maturity: "线上", size: 3038 },
+    { name: "teach-5d", family: "其他", url: "site/teach-5d.html", maturity: "线上", size: 6471 },
+    { name: "fulldiag", family: "衡", url: "site/fulldiag.html", maturity: "线上", size: 11842 },
+    { name: "radar", family: "衡", url: "site/radar.html", maturity: "线上", size: 17480 },
+    { name: "checklist", family: "衡", url: "site/checklist.html", maturity: "线上", size: 10853 },
+    { name: "product-catalog", family: "契", url: "site/product-catalog.html", maturity: "线上", size: 107929 },
+    { name: "proposal", family: "其他", url: "site/proposal.html", maturity: "线上", size: 9074 },
+    { name: "hibernate", family: "其他", url: "site/hibernate.html", maturity: "线上", size: 5914 },
+    { name: "pre0", family: "镜", url: "site/pre0.html", maturity: "线上", size: 14103 },
+    { name: "lessons-decision", family: "镜", url: "site/lessons-decision.html", maturity: "线上", size: 6425 },
+    { name: "metapartner", family: "其他", url: "site/metapartner.html", maturity: "线上", size: 14487 },
+    { name: "index", family: "其他", url: "site/index.html", maturity: "线上", size: 13051 },
+    { name: "cards-play", family: "镜", url: "site/cards-play.html", maturity: "线上", size: 57672 },
+    { name: "guide", family: "觉", url: "site/guide.html", maturity: "线上", size: 17714 },
+    { name: "lineage", family: "其他", url: "site/lineage.html", maturity: "线上", size: 9207 },
+    { name: "treasure", family: "其他", url: "site/treasure.html", maturity: "线上", size: 7579 },
+    { name: "fails", family: "其他", url: "site/fails.html", maturity: "线上", size: 7439 },
+    { name: "psycho-scale", family: "其他", url: "site/psycho-scale.html", maturity: "线上", size: 6174 },
+    { name: "creation", family: "契", url: "site/creation.html", maturity: "线上", size: 10360 },
+    { name: "admin", family: "其他", url: "site/admin.html", maturity: "线上", size: 12670 },
+    { name: "54days", family: "其他", url: "site/54days.html", maturity: "线上", size: 9152 },
+    { name: "university", family: "其他", url: "site/university.html", maturity: "线上", size: 7537 },
+    { name: "flywheel", family: "觉", url: "site/flywheel.html", maturity: "线上", size: 10888 },
+    { name: "about", family: "其他", url: "site/about.html", maturity: "线上", size: 9299 },
+    { name: "duanwei", family: "其他", url: "site/duanwei.html", maturity: "线上", size: 8326 },
+    { name: "life", family: "其他", url: "site/life.html", maturity: "线上", size: 6018 },
+    { name: "certification", family: "其他", url: "site/certification.html", maturity: "线上", size: 3884 },
+    { name: "competitor", family: "其他", url: "site/competitor.html", maturity: "线上", size: 6359 },
+    { name: "cases", family: "契", url: "site/cases.html", maturity: "线上", size: 8620 },
+    { name: "knowledge-flywheel-v1", family: "觉", url: "site/knowledge-flywheel-v1.html", maturity: "线上", size: 6270 },
+    { name: "terms", family: "其他", url: "site/terms.html", maturity: "线上", size: 7693 },
+    { name: "maturity-system", family: "其他", url: "site/maturity-system.html", maturity: "线上", size: 6542 },
+    { name: "liang", family: "其他", url: "site/liang.html", maturity: "线上", size: 7296 },
+    { name: "avatars", family: "其他", url: "site/avatars.html", maturity: "线上", size: 15039 },
+    { name: "register", family: "其他", url: "site/register.html", maturity: "线上", size: 11867 },
+    { name: "slicing-pie", family: "其他", url: "site/slicing-pie.html", maturity: "线上", size: 14573 },
+    { name: "stars-method", family: "契", url: "site/stars-method.html", maturity: "线上", size: 7314 },
+    { name: "newcomer", family: "其他", url: "site/newcomer.html", maturity: "线上", size: 5990 },
+    { name: "bigrich", family: "其他", url: "site/bigrich.html", maturity: "线上", size: 7038 },
+    { name: "spec-standard", family: "其他", url: "site/spec-standard.html", maturity: "线上", size: 5864 },
+    { name: "dashboard", family: "觉", url: "site/dashboard.html", maturity: "线上", size: 49539 },
+    { name: "brand-egbertie", family: "其他", url: "site/brand-egbertie.html", maturity: "线上", size: 6146 },
+    { name: "opensource", family: "其他", url: "site/opensource.html", maturity: "线上", size: 6712 },
+    { name: "chemical-report", family: "衡", url: "site/chemical-report.html", maturity: "线上", size: 26745 },
+    { name: "decision-theatre", family: "镜", url: "site/decision-theatre.html", maturity: "线上", size: 22488 },
+    { name: "account", family: "其他", url: "site/account.html", maturity: "线上", size: 16678 },
+    { name: "thermometer", family: "衡", url: "site/thermometer.html", maturity: "线上", size: 22238 },
+    { name: "farewell", family: "其他", url: "site/farewell.html", maturity: "线上", size: 7057 },
+    { name: "cases-diag", family: "契", url: "site/cases-diag.html", maturity: "线上", size: 2460 },
+    { name: "cases-cluster", family: "契", url: "site/cases-cluster.html", maturity: "线上", size: 8167 },
+    { name: "quotes", family: "其他", url: "site/quotes.html", maturity: "线上", size: 9216 },
+    { name: "whitepaper", family: "其他", url: "site/whitepaper.html", maturity: "线上", size: 8653 },
+    { name: "sales-script", family: "其他", url: "site/sales-script.html", maturity: "线上", size: 6085 },
+    { name: "report-demo", family: "其他", url: "site/report-demo.html", maturity: "线上", size: 21285 },
+    { name: "wizard", family: "觉", url: "site/wizard.html", maturity: "线上", size: 11818 },
+    { name: "roots", family: "契", url: "site/roots.html", maturity: "线上", size: 8433 },
+    { name: "cards", family: "镜", url: "site/cards.html", maturity: "线上", size: 22131 },
+    { name: "match", family: "镜", url: "site/match.html", maturity: "线上", size: 13699 },
+    { name: "wulu", family: "其他", url: "site/wulu.html", maturity: "线上", size: 7768 },
+    { name: "customers", family: "其他", url: "site/customers.html", maturity: "线上", size: 5443 },
+    { name: "go", family: "其他", url: "site/go.html", maturity: "线上", size: 22902 },
+    { name: "gate", family: "其他", url: "site/gate.html", maturity: "线上", size: 9309 },
+    { name: "wings", family: "其他", url: "site/wings.html", maturity: "线上", size: 6956 },
+    { name: "partner-protocol", family: "其他", url: "site/partner-protocol.html", maturity: "线上", size: 6103 },
+    { name: "qijin", family: "其他", url: "site/qijin.html", maturity: "线上", size: 6702 },
+    { name: "exit-guide", family: "觉", url: "site/exit-guide.html", maturity: "线上", size: 17525 },
+    { name: "miniapp-preview", family: "其他", url: "site/miniapp-preview.html", maturity: "线上", size: 22535 },
+    { name: "tracks", family: "其他", url: "site/tracks.html", maturity: "线上", size: 15862 },
+    { name: "bluearmy", family: "其他", url: "site/bluearmy.html", maturity: "线上", size: 6883 },
+    { name: "assessment", family: "衡", url: "site/assessment.html", maturity: "线上", size: 42445 },
+    { name: "go-gallery", family: "其他", url: "site/go-gallery.html", maturity: "线上", size: 11371 },
+    { name: "workshop", family: "觉", url: "site/workshop.html", maturity: "线上", size: 6907 },
+    { name: "privacy", family: "其他", url: "site/privacy.html", maturity: "线上", size: 8239 },
+    { name: "knights", family: "镜", url: "site/knights.html", maturity: "线上", size: 21155 },
+    { name: "onboarding", family: "其他", url: "site/onboarding.html", maturity: "线上", size: 6235 },
+    { name: "rps", family: "其他", url: "site/rps.html", maturity: "线上", size: 14602 },
+    { name: "eyes", family: "其他", url: "site/eyes.html", maturity: "线上", size: 7000 }
+  ],
+  customers: [
+    { name: "律所合伙人", company: "", industry: "待提取", stage: "画像", source: "替身/客户/律所合伙人.md" },
+    { name: "硬科技创始人", company: "", industry: "待提取", stage: "画像", source: "替身/客户/硬科技创始人.md" },
+    { name: "政府园区负责人", company: "", industry: "待提取", stage: "画像", source: "替身/客户/政府园区负责人.md" },
+    { name: "VC投后负责人", company: "", industry: "待提取", stage: "画像", source: "替身/客户/VC投后负责人.md" },
+    { name: "独立董事", company: "", industry: "待提取", stage: "画像", source: "替身/客户/独立董事.md" }
+  ],
+  // 7 homeostasis parameters
+  homeostasis: [
+    { id: "product_count", name: "产品规模", icon: "📦", target: "≤100", value: 80, min: 0, max: 120, unit: "个", compliant: true, note: "规模健康" },
+    { id: "customer_count", name: "客户覆盖", icon: "👥", target: "≥10", value: 5, min: 0, max: 20, unit: "个", compliant: false, deviation: "low", note: "仍在早期画像阶段" },
+    { id: "file_scan_rate", name: "文件扫描覆盖", icon: "🔍", target: "≥90%", value: 853, maxFiles: 15606, displayPct: 5.5, unit: "%", compliant: false, deviation: "critical", note: "仅扫描了853个文件作为种子" },
+    { id: "cron_health", name: "Cron健康度", icon: "⏱️", target: "100%", value: 11, max: 13, displayPct: 85, unit: "%", compliant: false, deviation: "low", note: "13个Cron中2个有错误" },
+    { id: "data_completeness", name: "数据完整度", icon: "🧩", target: "≥70%", value: 35, min: 0, max: 100, unit: "%", compliant: false, deviation: "critical", note: "我还在学习看清自己" },
+    { id: "decision_backlog", name: "决策积压", icon: "⚖️", target: "≤5", value: 8, min: 0, max: 20, unit: "条", compliant: false, deviation: "low", note: "略高，建议梳理" },
+    { id: "last_full_sync", name: "上次全量同步", icon: "🔄", target: "≤24h", value: 1.5, unit: "h前", compliant: true, note: "同步正常" }
+  ],
+  // 4 pending items
+  pending: [
+    {
+      priority: "P0",
+      title: "邮箱登录认证失败",
+      desc: "manyi_hong@sina.com IMAP认证错误，授权码可能过期。需登录 mail.sina.com.cn 重新生成。",
+      source: "邮箱检查日志 · 2026-05-29"
+    },
+    {
+      priority: "P0",
+      title: "每周决策评估Cron失败",
+      desc: "weekly-decision-evaluation Cron错误 — delivery channel feishu 不支持。需修正为 announce→last。",
+      source: "Cron列表 · 2026-05-29"
+    },
+    {
+      priority: "P1",
+      title: "客户画像待补全",
+      desc: "5个客户替身均为「画像」阶段，行业信息标注「待提取」。建议启动首轮客户访谈提纲。",
+      source: "替身/客户/*.md"
+    },
+    {
+      priority: "P1",
+      title: "评分引擎P0缺陷未修复",
+      desc: "评分引擎存在P0级别缺陷（见评分引擎P0缺陷清单），可能影响交叉验证结果准确性。",
+      source: "替身激活/评分引擎P0缺陷清单.md"
+    }
+  ],
+  // Activity log
+  activity: [
+    { time: "00:31", icon: "🔄", msg: "数据初始化管道完成 — 扫描853个文件，发现80个产品，5个客户替身" },
+    { time: "00:20", icon: "❤️", msg: "13个Cron全部建立 — 心脏激活完成，生命体征JSON已写入" },
+    { time: "23:00", icon: "📥", msg: "每日飞书同步-新增文件 执行完成" },
+    { time: "22:00", icon: "🌙", msg: "晚间完整Routine执行完成" },
+    { time: "18:00", icon: "📧", msg: "查收Sina邮箱-下午 — 完成，无新邮件" },
+    { time: "10:00", icon: "❌", msg: "查收Sina邮箱-上午 — 认证失败，需重新生成授权码" },
+    { time: "昨天", icon: "📊", msg: "驾驶舱V3数据管道设计完成 — 种子数据生成" },
+    { time: "昨天", icon: "📝", msg: "知识遗产盘点完成 — 满意解核心词汇产权表 V1.0" }
+  ]
+};
+
+// ============================================================
+// DASHBOARD INIT
+// ============================================================
+function initDashboard() {
+  // Try loading cached data from localStorage, fall back to SEED
+  var data = loadData();
+  if (!data) {
+    // Pre-seed localStorage
+    saveData(SEED);
+    data = SEED;
+  }
+
+  renderDateline();
+  renderVitals(data);
+  renderGauges(data.homeostasis);
+  renderOverview(data);
+  renderAttention(data.pending);
+  renderActivity(data.activity);
+}
+
+function loadData() {
+  try {
+    var raw = localStorage.getItem('sri_dash_v3_data');
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  return null;
+}
+
+function saveData(data) {
+  try {
+    localStorage.setItem('sri_dash_v3_data', JSON.stringify(data));
+  } catch(e) {}
+}
+
+// ============================================================
+// RENDER FUNCTIONS
+// ============================================================
+
+function renderDateline() {
+  var now = new Date();
+  var days = ['日','一','二','三','四','五','六'];
+  var y = now.getFullYear();
+  var m = String(now.getMonth()+1).padStart(2,'0');
+  var d = String(now.getDate()).padStart(2,'0');
+  var hh = String(now.getHours()).padStart(2,'0');
+  var mm = String(now.getMinutes()).padStart(2,'0');
+  var w = days[now.getDay()];
+  document.getElementById('dateline').textContent =
+    y + '年' + m + '月' + d + '日 · 周' + w + ' · ' + hh + ':' + mm + ' · 满意红在线';
+}
+
+function renderVitals(data) {
+  var vitals = [
+    { id: 'heart', label: '心脏', icon: '🫀', status: 'ok', desc: '心跳正常' },
+    { id: 'brain', label: '大脑', icon: '🧠', status: 'ok', desc: '认知在线' },
+    { id: 'digest', label: '消化', icon: '🔄', status: 'ok', desc: '管道畅通' },
+    { id: 'immune', label: '免疫', icon: '🛡️', status: 'warn', desc: '邮箱异常' },

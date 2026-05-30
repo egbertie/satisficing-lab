@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>契·善别 | 退出决策指南 | 满意解研究所</title>
+<style>
+  :root { --sri-red:#C23B22; --sri-gold:#B8860B; --sri-bg:#F5F0E6; --text:#4A4A4A; --title:#2A2A2A; }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif; background:var(--sri-bg); color:var(--text); min-height:100vh; }
+  .hero { background:linear-gradient(135deg,var(--sri-red),var(--sri-gold)); color:#F5F0E6; padding:36px 20px 28px; text-align:center; }
+  .hero h1 { font-size:22px; font-weight:700; }
+  .hero p { font-size:13px; opacity:0.9; margin-top:4px; }
+  .main { max-width:520px; margin:0 auto; padding:16px; }
+  
+  .step { background:#fff; border-radius:14px; padding:24px; margin-bottom:12px; border-left:4px solid var(--sri-red); }
+  .step.active { border-color:var(--sri-red); }
+  .step.done { border-color:var(--sri-gold); opacity:0.85; }
+  .step h3 { font-size:16px; color:var(--title); margin-bottom:8px; }
+  .step p { font-size:13px; line-height:1.7; }
+
+  .scale { display:flex; gap:8px; margin:12px 0; flex-wrap:wrap; }
+  .scale-btn { padding:8px 16px; border:1.5px solid var(--border); border-radius:20px; font-size:13px; cursor:pointer; background:#fff; }
+  .scale-btn.chosen { border-color:var(--sri-red); background:rgba(194,59,34,0.04); color:var(--sri-red); font-weight:600; }
+
+  .checklist { list-style:none; padding:0; }
+  .checklist li { padding:8px 0; font-size:13px; display:flex; align-items:flex-start; gap:8px; cursor:pointer; }
+  .checklist li .box { min-width:20px; height:20px; border:1.5px solid var(--border); border-radius:4px; margin-top:1px; }
+  .checklist li.checked .box { background:var(--sri-red); border-color:var(--sri-red); position:relative; }
+  .checklist li.checked .box::after { content:'✓'; color:#fff; font-size:13px; position:absolute; top:-2px; left:3px; }
+
+  .result { display:none; background:#fff; border-radius:14px; padding:24px; border:2px solid var(--sri-red); text-align:center; margin-top:16px; }
+  .result.show { display:block; }
+  .result h2 { color:var(--title); margin-bottom:12px; }
+  .gauge { display:flex; justify-content:center; gap:20px; margin:16px 0; }
+  .gauge-item { text-align:center; }
+  .gauge-val { font-size:28px; font-weight:700; }
+  .gauge-label { font-size:11px; opacity:0.7; }
+
+  .btn { display:inline-block; padding:12px 28px; border-radius:20px; font-size:14px; font-weight:600; cursor:pointer; border:none; text-decoration:none; margin:4px; }
+  .btn-primary { background:var(--sri-red); color:#F5F0E6; }
+  .btn-outline { background:transparent; border:1.5px solid var(--sri-red); color:var(--sri-red); }
+  .footer { text-align:center; padding:24px 16px 40px; font-size:11px; color:#999; }
+  .footer a { color:var(--sri-red); text-decoration:none; }
+</style>
+<link rel="stylesheet" href="vi_quick_ref.css">
+</head>
+<script>
+// 授权验证 - 满意解研究所
+(function(){
+  // Public pages - no auth needed
+  var publicPages = ['go.html','index.html','about.html','privacy.html','terms.html','symbols.html',
+    'creation.html','stars.html','roots.html','wulu.html','qijin.html','wings.html','eyes.html',
+    '54days.html','fails.html','liang.html','treasure.html','farewell.html',
+    'cases.html','tracks.html','lineage.html','whitepaper.html','quotes.html',
+    'flywheel.html','fw-','bluearmy.html','opensource.html','hibernate.html','life.html','newcomer.html',
+    'duanwei.html','bigrich.html','game-','blood-','media-','skill-','university.html',
+    'report-demo.html','radar.html','chemical-report.html','proposal.html','gate.html',
+    'miniapp-preview.html','cards.html'];
+  
+  var page = window.location.pathname.split('/').pop();
+  
+  // Check if this is a public page
+  for (var i=0; i<publicPages.length; i++) {
+    if (page === publicPages[i] || (publicPages[i].endsWith('-') && page.startsWith(publicPages[i]))) {
+      return; // Public page - no auth needed
+    }
+  }
+  
+  // Protected page - check auth
+  var auth = JSON.parse(localStorage.getItem('sri_auth') || '{}');
+  if (!auth.valid || new Date().getTime() >= auth.expires) {
+    // Not authenticated - redirect to gate
+    var target = page;
+    var productName = page.replace('.html','');
+    window.location.href = 'gate.html?to=' + encodeURIComponent(target) + '&p=' + encodeURIComponent(productName);
+  }
+})();
+</script>
+
+<body>
+
+<div class="hero">
+  <h1>🧭 退出决策指南</h1>
+  <p>指南针 · 不是劝你留或走——是帮你看清真相</p>
+</div>
+
+<div class="main">
+
+  <!-- Step 1: 财务 -->
+  <div class="step active" id="step1">
+    <h3>第一步：财务评估</h3>
+    <p>如果你现在退出——你的经济状况能支撑多久？</p>
+    <div class="scale">
+      <button class="scale-btn" onclick="choose('s1','A',this)">不到3个月</button>
+      <button class="scale-btn" onclick="choose('s1','B',this)">3-6个月</button>
+      <button class="scale-btn" onclick="choose('s1','C',this)">6-12个月</button>
+      <button class="scale-btn" onclick="choose('s1','D',this)">1年以上</button>
+    </div>
+    <p style="font-size:11px;opacity:0.6;margin-top:8px;">不是问你"想不想退出"——是先看清退出的底线。如果你撑不过3个月，你的退出决策本质上不是在"退出"——是在"换工作"。</p>
+  </div>
+
+  <!-- Step 2: 关系 -->
+  <div class="step" id="step2">
+    <h3>第二步：关系评估</h3>
+    <p>你和合伙人的关系处于哪个状态？</p>
+    <p style="font-size:12px;margin-bottom:8px;">逐条检查——打勾的越多，越需要正视：</p>
+    <ul class="checklist">
+      <li onclick="toggleCheck(this)"><span class="box"></span>开会变成了"走过场"——没人真的在讨论</li>
+      <li onclick="toggleCheck(this)"><span class="box"></span>你发现自己在回避某个话题——每次看到就想绕</li>
+      <li onclick="toggleCheck(this)"><span class="box"></span>你不再能说出他最近在做什么——信息流动停止了</li>
+      <li onclick="toggleCheck(this)"><span class="box"></span>你在心里想过"如果他不在了，事情会怎样"</li>
+      <li onclick="toggleCheck(this)"><span class="box"></span>他对你的态度从"合作"变成了"容忍"</li>
+    </ul>
+    <p style="font-size:11px;opacity:0.6;margin-top:8px;">Gottman: 5条中3条——你已经在"冷漠"阶段。冷漠是四骑士的最后一步。</p>
+  </div>
+
+  <!-- Step 3: 法律 -->
+  <div class="step" id="step3">
+    <h3>第三步：协议梳理</h3>
+    <p>你手上的协议写了什么——你真的看过吗？</p>
+    <ul class="checklist">
+      <li onclick="toggleCheck(this)"><span class="box"></span>Vesting条款——你的股权是否完全归属</li>
+      <li onclick="toggleCheck(this)"><span class="box"></span>竞业限制——退出后多久不能做同类业务</li>
+      <li onclick="toggleCheck(this)"><span class="box"></span>回购条款——谁来买你的股份、按什么价格</li>
+      <li onclick="toggleCheck(this)"><span class="box"></span>Drag-along/Tag-along——如果公司被收购，你有什么权力</li>
+      <li onclick="toggleCheck(this)"><span class="box"></span>离职后IP归属——你还能带走什么</li>
+    </ul>
+    <p style="font-size:11px;opacity:0.6;margin-top:8px;">Feld: 大多数创始人在签协议时没想过退出——等到退出那天才发现自己签了什么。你如果5条都不清楚——先找律师弄清楚再谈退出。</p>
+  </div>
+
+  <!-- Step 4: 未来 -->
+  <div class="step" id="step4">
+    <h3>第四步：未来推演</h3>
+    <p>一年后——两种可能。你选哪一个，哪个就更可能发生。</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;">
+      <div style="padding:14px;background:rgba(194,59,34,0.04);border-radius:10px;text-align:center;cursor:pointer;" onclick="chooseFuture('stay',this)">
+        <div style="font-size:20px;">🏗️</div>
+        <div style="font-weight:600;font-size:13px;margin:4px 0;">留下来</div>
+        <div style="font-size:11px;">解决了你们之间的核心问题</div>
+      </div>
+      <div style="padding:14px;background:rgba(194,59,34,0.04);border-radius:10px;text-align:center;cursor:pointer;" onclick="chooseFuture('leave',this)">
+        <div style="font-size:20px;">🏃</div>
+        <div style="font-weight:600;font-size:13px;margin:4px 0;">离开</div>
+        <div style="font-size:11px;">开始了一段新的旅程</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:16px;">
+    <button class="btn btn-primary" onclick="showGuide()">查看我的退出画像</button>
+  </div>
+
+  <div class="result" id="guideResult">
+    <h2>🧭 你的退出画像</h2>
+    <div class="gauge">
+      <div class="gauge-item"><div class="gauge-val" id="gFinance">—</div><div class="gauge-label">财务安全度</div></div>
+      <div class="gauge-item"><div class="gauge-val" id="gRel">—</div><div class="gauge-label">关系信号数</div></div>
+      <div class="gauge-item"><div class="gauge-val" id="gLegal">—</div><div class="gauge-label">协议知晓度</div></div>
+    </div>
+    <div id="guideVerdict" style="font-size:14px;line-height:1.7;margin:16px 0;"></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:16px;">
+      <a class="btn btn-primary" href="assessment.html">做完整五维诊断</a>
+      <a class="btn btn-outline" href="crisis-sim.html">危机模拟器</a>
+      <button class="btn btn-outline" onclick="resetAll()">重新评估</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p><a href="go.html">← 返回产品中心</a></p>
+  <p style="margin-top:6px;font-size:10px;color:var(--sri-red);">⚠️ 本工具仅供参考·不构成法律或财务建议·重大决策请咨询专业顾问</p>
+  <p style="margin-top:12px;">满意解研究所 · 退出决策指南·指南针</p>
+</div>
+
+<script>
+let answers = {s1:null, future:null};
+let relChecks = 0, legalChecks = 0;
+
+function choose(step, val, el) {
+  answers[step] = val;
+  el.parentElement.querySelectorAll('.scale-btn').forEach(b=>b.classList.remove('chosen'));
+  el.classList.add('chosen');
+  document.getElementById('step2').classList.add('active');
+}
+
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+  if (el.closest('#step2')) relChecks = document.querySelectorAll('#step2 .checked').length;
+  if (el.closest('#step3')) legalChecks = document.querySelectorAll('#step3 .checked').length;
+}
+
+function chooseFuture(val, el) {
+  answers.future = val;
+  el.parentElement.querySelectorAll('div').forEach(d=>d.style.border='');
+  el.style.border = '2px solid var(--sri-red)';
+}
+
+function showGuide() {
+  if (!answers.s1 && !answers.future && relChecks===0) {
+    alert('请至少完成一步评估');
+    return;
+  }
+  
+  let fMap = {'A':3, 'B':6, 'C':9, 'D':12};
+  let fScore = fMap[answers.s1] || 0;
+  
+  document.getElementById('gFinance').textContent = answers.s1 ? (fScore + '个月') : '—';
+  document.getElementById('gFinance').style.color = fScore>=9 ? '#4A8C5C' : fScore>=6 ? '#B8860B' : 'var(--sri-red)';
+  
+  document.getElementById('gRel').textContent = relChecks + '/5';
+  document.getElementById('gRel').style.color = relChecks<=1 ? '#4A8C5C' : relChecks<=3 ? '#B8860B' : 'var(--sri-red)';
+  
+  let legalKnown = 5 - legalChecks; // assumption: checking means "I know this"
+  document.getElementById('gLegal').textContent = legalKnown + '/5';
+  document.getElementById('gLegal').style.color = legalKnown>=4 ? '#4A8C5C' : legalKnown>=2 ? '#B8860B' : 'var(--sri-red)';
+  
+  let verdict = '<p>你的退出画像显示：</p><ul>';
+  if (fScore < 6) verdict += '<li><strong style="color:var(--sri-red)">财务缓冲不足</strong>——你的退出选择受限于经济压力。建议先延长财务跑道，再做退出决策。</li>';
+  else verdict += '<li><strong style="color:#4A8C5C">财务缓冲充足</strong>——你可以在不焦虑的情况下做出退出决定。</li>';
+  
+  if (relChecks >= 3) verdict += '<li><strong style="color:var(--sri-red)">关系信号强烈</strong>——多条Gottman四骑士指标被触发。建议认真坐下来谈一次。</li>';
+  else if (relChecks >= 1) verdict += '<li><strong style="color:#B8860B">关系有信号</strong>——需要关注，但还没到危机级别。</li>';
+  else verdict += '<li>关系无明显危险信号。</li>';
+  
+  if (legalKnown < 3) verdict += '<li><strong style="color:var(--sri-red)">协议理解不足</strong>——在退出之前，你至少需要搞清楚vesting、竞业和回购。找律师。</li>';
+  else verdict += '<li>协议知晓度良好——你知道自己签了什么。</li>';
+  
+  verdict += '</ul>';
+  if (answers.future === 'leave') verdict += '<p style="margin-top:12px;font-weight:600;">你偏向了离开。这不是结论——是信号。把这份指南作为你和合伙人对话的起点。</p>';
+  else verdict += '<p style="margin-top:12px;font-weight:600;">你偏向了留下。前提是：你们愿意面对指南中指出的问题。</p>';
+  
+  document.getElementById('guideVerdict').innerHTML = verdict;
+  document.getElementById('guideResult').classList.add('show');
+}
+
+function resetAll() {
+  answers = {s1:null,future:null};
+  relChecks = 0; legalChecks = 0;
+  document.querySelectorAll('.scale-btn').forEach(b=>b.classList.remove('chosen'));
+  document.querySelectorAll('.checklist li').forEach(l=>l.classList.remove('checked'));
+  document.getElementById('guideResult').classList.remove('show');
+  window.scrollTo(0,0);
+}
+</script>
+
+<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
+  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
+  <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
+    <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
+    <button onclick="showFeedbackText()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">💬</span>有建议</button>
+  </div>
+  <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
+  <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
+  <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
+  <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
+  <p style="font-size:10px;opacity:0.4;margin-top:8px;"><a href="go.html" style="color:inherit;">返回决策通道</a></p>
+</div>
+<script>
+(function(){
+  let page=location.pathname.split('/').pop()||'index';
+  let key='sri_fb_'+page;
+  let data=JSON.parse(localStorage.getItem(key)||'{}');
+  if(data.sent){document.getElementById('fbQuestion').textContent='感谢你的反馈！';document.getElementById('fbActions').style.display='none';}
+  let tally=JSON.parse(localStorage.getItem('sri_fb_tally_'+page)||'{"up":0,"text":0}');
+  if(tally.up+tally.text>0) document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  window.submitFeedback=function(type){
+    tally[type]=(tally[type]||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type=type;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbQuestion').textContent='感谢你的反馈！';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+  window.showFeedbackText=function(){
+    document.getElementById('fbText').style.display='block';
+    document.getElementById('fbSubmit').style.display='inline-block';
+  };
+  window.submitFeedbackText=function(){
+    let text=document.getElementById('fbText').value.trim();
+    if(!text)return;
+    tally.text=(tally.text||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type='text';data.text=text;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbText').style.display='none';
+    document.getElementById('fbSubmit').style.display='none';
+    document.getElementById('fbQuestion').textContent='收到！感谢你的建议。';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+})();
+</script>
+
+<script src="flywheel-engine.js"></script>
+</body>
+</html>
