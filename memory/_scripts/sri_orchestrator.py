@@ -219,7 +219,7 @@ def orchestrate_health_cycle(dry_run=False):
                 cb.total_calls = state.get('calls', 0)
                 cb.total_success = state.get('success', 0)
                 breakers[sid] = cb
-        except:
+        except (json.JSONDecodeError, KeyError, ValueError):
             pass
     
     # 执行所有环节

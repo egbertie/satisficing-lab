@@ -81,7 +81,7 @@ def score_quality(item):
             if days_ago > 7:
                 issues.append('数据{}天前·可能过时'.format(days_ago))
                 is_fresh = False
-        except:
+        except (ValueError, TypeError):
             pass
     
     # 3. 权威度评分

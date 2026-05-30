@@ -48,7 +48,7 @@ def load_recent_nourishment(days=7):
             with open(fpath, 'r') as f:
                 batch = json.load(f)
             items.extend(batch.get('items', []))
-        except:
+        except (json.JSONDecodeError, IOError):
             pass
     return items
 
