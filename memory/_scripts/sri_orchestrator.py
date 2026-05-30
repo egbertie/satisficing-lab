@@ -119,6 +119,15 @@ STAGES = [
         'weight': 1.0,
         'fallback': '跳过·保留上次反应状态',
     },
+    {
+        'id': 'governor',
+        'label': '🧬 化学调控',
+        'script': 'sri_chemical_governor.py',
+        'timeout': 60,
+        'breaker_threshold': 5,
+        'weight': 1.5,
+        'fallback': '跳过·保留上次调控状态',
+    },
 ]
 
 

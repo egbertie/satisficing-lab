@@ -2,8 +2,6 @@
   "meta": {
     "version": "3.0",
     "created": "2026-05-30T00:53:49.000534",
-    "standard": "满意解信息架构V2·12字段元数据标准",
-    "total_entities": 4087,
     "breakdown": {
       "products": 312,
       "customers": 5,
@@ -34,7 +32,6 @@
     },
     "updated": "2026-05-30T06:29:00+08:00",
     "knowledge_graph_density": 95.8,
-    "total_connections": 10039,
     "living_rules_status": {
       "active": 41,
       "dormant": 6,
@@ -57,41 +54,9 @@
       "人": 14,
       "道": 2
     },
-    "scan_notes": [
-      "草稿待完善: dashboard-clean.html - 驾驶舱 · 满意解研究所",
-      "草稿待完善: dashboard-kozi-debug.html - 满意解研究所 · 驾驶舱",
-      "草稿待完善: dashboard-local.html - 本地驾驶舱 · 满意解研究所",
-      "草稿待完善: dashboard-min.html - 驾驶舱最小验证版",
-      "草稿待完善: dashboard-vfy.html - 引擎验证",
-      "草稿待完善: miniapp-preview.html - 满意解研究所·小程序预览",
-      "草稿待完善: report-demo.html - 衡镜·诊书 | 完整报告示例 | 满意解研究所",
-      "草稿待完善: test-4knights.html - 📝 关系危机信号·自测练习 | 满意解研究所",
-      "草稿待完善: test-premortem.html - 📝 Pre-Mortem·练习 | 满意解研究所",
-      "草稿待完善: test-slicing.html - 📝 SlicingPie·计算练习 | 满意解研究所",
-      "废弃需清理: dashboard-v2.html - 驾驶舱 · 满意解研究所",
-      "废弃需清理: dashboard.html - 驾驶舱 · 满意解研究所",
-      "注意: cases.html 和 cases-diag.html 标题相同(案例库诊断)，疑似重复",
-      "注意: skill-archaeo.html 和 sk-4-archaeo.html 内容高度重叠",
-      "注意: 41个 sk-*/skill-* 页面均为Skill产品说明，此前可能未被计入产品",
-      "注意: 26个 ops-*.html 运营产品页面，此前可能未被计入产品",
-      "注意: 7个 dialogue-*.html 对话实录页面，此前可能未被计入产品",
-      "注意: 7个 wx-*.html 公众号内容页面，此前可能未被计入产品",
-      "注意: 3个 kouyan-*.html 扣眼产品页面，此前可能未被计入产品",
-      "注意: 4个 prod-*.html 产品开发白皮书页面，此前可能未被计入产品",
-      "注意: 10个游戏化产品(game-*/cards/bigrich/decision-theatre)，此前可能未被计入产品",
-      "注意: 6个 track-*.html 赛道产品，此前可能未被计入产品",
-      "注意: 14个 deep-*.html 深度文章产品，此前可能未被计入产品",
-      "注意: 3个 crisis-*.html 危机产品，此前可能未被计入产品",
-      "注意: proposal.html + sales-script.html 咨询产品，此前可能未被计入产品",
-      "注意: dashboard-v3.html 为产品(自我报告V3)，不应归类为废弃驾驶舱"
-    ],
     "new_products_from_scan": 158,
     "knowledge_graph_density_note": "Round3加固后: 强1599+中2404=4003/4110=97.4%",
-    "verified_connections": 4739,
     "auto_rule_connections": 1830,
-    "strong_connections": 9722,
-    "medium_connections": 211,
-    "weak_connections": 0,
     "corrections": [
       "2026-05-30: 知识图谱密度99.9%→43.9%",
       "2026-05-30: +158遗漏产品(250页逐页扫描)",
@@ -112,7 +77,6 @@
       "第三波·精品线+OPS": 16,
       "第二波·内容精品化": 43
     },
-    "product_total": 312,
     "quality_framework": {
       "dimensions": [
         "quality_score",
@@ -162,7 +126,6 @@
       ]
     },
     "architecture": "v3.0 · 9管理域·36子模块·三级穿透·四层全覆盖",
-    "synergy": "驾驶舱看全局→管理后台管细节→双向穿透→数据统一源",
     "batch_review_r1": {
       "timestamp": "2026-05-30T04:50:00",
       "step1_l1_url_missing": 33,
@@ -172,7 +135,6 @@
       "tags_remaining_missing": 0,
       "target_user_remaining_missing": 0
     },
-    "quality_gate_batch4": "2026-05-30 batch4 reaudit: 16 products corrected, 15 promoted",
     "batch_review_r3": {
       "timestamp": "2026-05-30T05:10:00",
       "reviewed": "PROD-040 to PROD-059 (20 products)",
@@ -203,10 +165,6 @@
       "step4_jingpin_candidates": 0,
       "jingpin_candidate_ids": []
     },
-    "launchable": 242,
-    "premium_count": 28,
-    "online_count": 214,
-    "doc_count": 70,
     "product_value_distribution": {
       "direct": 55,
       "acquisition": 79,
@@ -224,7 +182,6 @@
       "B": 90,
       "A": 152
     },
-    "q_confidence_note": "A=高可信(实测)·B=中可信(实测为主)·C=低可信(部分推断)·D=模板推断(待校准)",
     "quality_confidence": {
       "added": "2026-05-30T05:25:00",
       "version": "1.0",
@@ -254,7 +211,6 @@
       "dashboard": "驾驶舱 Cron健康度面板 + admin-windows ops-cron视图",
       "note": "Cron执行成功率监控依赖Cron自身日志·建议在heartbeat中增加Cron健康检查"
     },
-    "deploy_note": "URLs normalized to GitHub Pages root relative format",
     "anti_island": {
       "mechanism": "V1.0",
       "last_consistency_scan": "2026-05-30T05:40:00",
@@ -264,13 +220,7 @@
       "dead_links": 0,
       "zombie_tasks": 0
     },
-    "relation_types_count": 128,
-    "bidirectional_count": 229,
-    "nucleus_count": 212,
-    "deduplicated": 525,
-    "final_deduplication_pass": 530,
     "snowball_rounds": 33,
-    "snowball_completed_at": "2026-05-30T06:17:00+08:00",
     "dream_layers": {
       "L2_deep": 0,
       "L3_lucid": 0,
@@ -16452,30 +16402,6 @@
       "products_activated": 0,
       "total_products": 172
     },
-    "concentration": {
-      "reacted_at": "2026-05-30T15:55:37.989361+00:00",
-      "avg_score": 81.9,
-      "max_score": 87.5,
-      "min_score": 74.0,
-      "high_concentration": 0,
-      "low_concentration": 0,
-      "products_deferred": 0
-    },
-    "equilibrium": {
-      "status": "insufficient_data",
-      "reacted_at": "2026-05-30T15:55:37.989548+00:00"
-    },
-    "compounds": {
-      "reacted_at": "2026-05-30T15:55:37.989561+00:00",
-      "weak_products": 0,
-      "compound_candidates": 0,
-      "top_compounds": []
-    },
-    "entropy": {
-      "reacted_at": "2026-05-30T15:55:37.989617+00:00",
-      "products_revived": 0,
-      "principle": "注入能量→逆转熵增→从critical恢复至healthy"
-    },
     "catalysts": {
       "reacted_at": "2026-05-30T15:55:37.989687+00:00",
       "catalyst_products": 13,
@@ -16835,21 +16761,11 @@
       "products_labeled": 0,
       "principle": "每个产品有独一无二的化学指纹·可被同类自动识别"
     },
-    "redox": {
-      "reacted_at": "2026-05-30T15:55:37.998946+00:00",
-      "products_oxidized": 0,
-      "principle": "同族评分竞争·高分胜者天然压制低分·形成自然淘汰"
-    },
     "polymerization": {
       "reacted_at": "2026-05-30T15:55:37.999055+00:00",
       "clusters_formed": 6,
       "total_clustered_products": 171,
       "principle": "产品按指纹自然聚类·无需手动分类"
-    },
-    "phase_transition": {
-      "reacted_at": "2026-05-30T15:55:37.999267+00:00",
-      "products_transitioned": 0,
-      "principle": "产品簇突破质量临界点→整簇状态相变·集体跃迁"
     },
     "osmosis": {
       "reacted_at": "2026-05-30T15:55:37.999480+00:00",
@@ -16863,11 +16779,6 @@
       "open_breakers": 0,
       "products_accelerated": 0,
       "principle": "编排器是全局酶·健康分高=酶活性强·加速所有反应"
-    },
-    "superposition": {
-      "reacted_at": "2026-05-30T15:55:37.999579+00:00",
-      "products_superposed": 0,
-      "principle": "替身评分保留为量子态叠加·分歧本身就是信息"
     },
     "symmetry_breaking": {
       "reacted_at": "2026-05-30T15:55:37.999617+00:00",
@@ -16890,16 +16801,6 @@
       "isomer_groups": 10,
       "principle": "同指纹=同分异构体·可互相替代·低分自动标记replaceable"
     },
-    "enantiomers": {
-      "reacted_at": "2026-05-30T15:55:37.999985+00:00",
-      "mirror_pairs": 0,
-      "principle": "互补JTBD=对映异构·镜像不可替代·但联合使用1+1>2"
-    },
-    "conformers": {
-      "reacted_at": "2026-05-30T15:55:38.198940+00:00",
-      "products_with_conformers": 0,
-      "principle": "同一产品·不同时刻·不同评分态=构象异构体"
-    },
     "reversible": {
       "reacted_at": "2026-05-30T15:55:38.214053+00:00",
       "reversible_products": 0,
@@ -16909,11 +16810,6 @@
       "reacted_at": "2026-05-30T15:55:38.214084+00:00",
       "parallel_products": 172,
       "principle": "一个产品多效应=平行反应·A→B1+B2+B3+..."
-    },
-    "serial": {
-      "reacted_at": "2026-05-30T15:55:38.214263+00:00",
-      "longest_chain": 0,
-      "principle": "连接图最长传播路径=0步连串反应"
     },
     "ph": {
       "reacted_at": "2026-05-30T15:55:38.215914+00:00",
@@ -16952,45 +16848,12 @@
       "inert": 22,
       "principle": "替身活跃度=化学活性·惰性替身需活化能"
     },
-    "avatar_compound": {
-      "reacted_at": "2026-05-30T15:55:38.216036+00:00",
-      "compounds_formed": 0,
-      "principle": "替身分歧≠噪音·化合=新视角·15+分差触发"
-    },
-    "avatar_osmosis": {
-      "reacted_at": "2026-05-30T15:55:38.216043+00:00",
-      "principle": "需要≥2替身的数据"
-    },
-    "avatar_equilibrium": {
-      "reacted_at": "2026-05-30T15:55:38.216049+00:00",
-      "equilibrium_point": 70,
-      "stabilizers": 0,
-      "disruptors": 0,
-      "principle": "替身评分向均衡点收敛·新替身加入=平衡移动"
-    },
-    "avatar_catalyst": {
-      "reacted_at": "2026-05-30T15:55:38.216064+00:00",
-      "catalysts": 0,
-      "principle": "评价精准的替身=高效催化剂·加速产品流质量"
-    },
-    "avatar_spin": {
-      "reacted_at": "2026-05-30T15:55:38.216072+00:00",
-      "spins_assigned": 0,
-      "principle": "替身评分一致性=自旋态·up=可靠·down=需校准"
-    },
     "avatar_decay": {
       "reacted_at": "2026-05-30T15:55:38.216079+00:00",
       "active_avatars": 0,
       "decayed": 22,
       "half_life_days": 30,
       "principle": "不使用=衰变·半衰期30天"
-    },
-    "avatar_field": {
-      "reacted_at": "2026-05-30T15:55:38.216126+00:00",
-      "products_in_field": 0,
-      "total_avatars": 22,
-      "active_in_field": 0,
-      "principle": "替身=评分向量场维度·产品在场中被多维度定位"
     },
     "metabolism": {
       "reacted_at": "2026-05-30T15:55:38.216181+00:00",
@@ -17024,12 +16887,6 @@
       ],
       "principle": "A源信息+B源信息=新化合物·跨源化合增强洞见"
     },
-    "info_redox": {
-      "reacted_at": "2026-05-30T15:55:38.216650+00:00",
-      "documents_aged": 0,
-      "total_documents": 74,
-      "principle": "新信息氧化旧信息·保持知识新鲜度"
-    },
     "stage_nourish_chem": {
       "reacted_at": "2026-05-30T15:55:38.216677+00:00",
       "batches": 4,
@@ -17046,38 +16903,12 @@
       "efficiency": "high",
       "principle": "门禁选择性=化学过滤效率·太高=过严·太低=过宽"
     },
-    "stage_scan_chem": {
-      "reacted_at": "2026-05-30T15:55:38.216695+00:00",
-      "discovery_rate": 0,
-      "scan_runs": 0,
-      "principle": "扫描发现率=新反应物产生速率"
-    },
-    "stage_consistency_chem": {
-      "reacted_at": "2026-05-30T15:55:38.216700+00:00",
-      "total_issues": 46,
-      "issue_types": 2,
-      "trend": "improving",
-      "principle": "一致性问题=化学反应中的副产物·越少越纯"
-    },
     "stage_heal_chem": {
       "reacted_at": "2026-05-30T15:55:38.216704+00:00",
       "recent_fixes": 70,
       "heal_runs": 4,
       "yield_rate": 17.5,
       "principle": "修复成功率=化学反应产率·高=高效催化剂"
-    },
-    "stage_lifecycle_chem": {
-      "reacted_at": "2026-05-30T15:55:38.216710+00:00",
-      "conversions": 0,
-      "promoted": 0,
-      "demoted": 0,
-      "principle": "LC迁移=化学转化率·promoted=正向·demoted=逆向"
-    },
-    "stage_standards_chem": {
-      "reacted_at": "2026-05-30T15:55:38.216715+00:00",
-      "proposals": 6,
-      "rate_constant": 0.8571428571428571,
-      "principle": "标准迭代率=反应速率常数k·k越大反应越快"
     },
     "stage_audit_chem": {
       "reacted_at": "2026-05-30T15:55:38.216718+00:00",
@@ -17202,29 +17033,10 @@
       "sediment_ids": [],
       "principle": "评分<40·无连接·无包装=天然沉淀·不再参与流动"
     },
-    "electrolysis": {
-      "reacted_at": "2026-05-30T15:55:38.220044+00:00",
-      "electrolyzed": 0,
-      "principle": "化合可逆·电解拆分回原始组分"
-    },
     "sublimation": {
       "reacted_at": "2026-05-30T15:55:38.220073+00:00",
       "sublimated_pages": 10,
       "principle": "固态知识→气态扩散·通过连接渗透到全局"
-    },
-    "condensation": {
-      "reacted_at": "2026-05-30T15:55:38.220146+00:00",
-      "fragments": 0,
-      "new_concepts": 0,
-      "suggestions": [],
-      "principle": "分散知识碎片→冷凝→新产品概念·熵降到一定程度自然有序"
-    },
-    "tracers": {
-      "reacted_at": "2026-05-30T15:55:38.220187+00:00",
-      "tracers_deployed": 6,
-      "bottlenecks_found": 0,
-      "bottlenecks": [],
-      "principle": "高活性产品=放射性示踪·追踪流中瓶颈"
     },
     "termination": {
       "reacted_at": "2026-05-30T15:55:38.227298+00:00",
@@ -17237,6 +17049,60 @@
       "new_crystal_seeds": 0,
       "crystals": [],
       "principle": "终止≠死亡·核心洞察提取→再结晶→新产品种子"
+    },
+    "_chain_dormancy": {
+      "crystallize": 1,
+      "activate": 1,
+      "gradient": 1,
+      "chain": 1,
+      "equilibrium": 1,
+      "compound": 1,
+      "entropy": 1,
+      "isotope": 1,
+      "redox": 1,
+      "phase": 1,
+      "osmosis": 1,
+      "superposition": 1,
+      "symmetry": 1,
+      "enantiomer": 1,
+      "conformer": 1,
+      "reversible": 1,
+      "serial": 1,
+      "avatar_activation": 1,
+      "avatar_compound": 1,
+      "avatar_osmosis": 1,
+      "avatar_catalyst": 1,
+      "avatar_spin": 1,
+      "avatar_field": 1,
+      "info_redox": 1,
+      "stage_scan": 1,
+      "stage_lifecycle": 1,
+      "fission": 1,
+      "combustion": 1,
+      "explosion": 1,
+      "precipitation": 1,
+      "electrolysis": 1,
+      "condensation": 1,
+      "tracer": 1,
+      "termination": 1,
+      "recrystallization": 1
+    },
+    "chemical_governor": {
+      "executed_at": "2026-05-30T15:58:49.946531+00:00",
+      "state": "critical",
+      "setpoint": "200-500 heat",
+      "current_heat": 1007.7,
+      "speed_multiplier": 0.3,
+      "actions": {
+        "pruned": 23,
+        "damped": 1,
+        "dormant": 0,
+        "cleaned": 24
+      },
+      "active_chains": 25,
+      "dormant_chains": 0,
+      "meta_keys_before": 93,
+      "principle": "不追求更多链·追求精确调控·精益化学·控制论闭环"
     }
   },
   "products": [
