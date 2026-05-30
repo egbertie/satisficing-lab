@@ -2,7 +2,6 @@
   "version": "2.0.0",
   "name": "SRI 产品审核标准体系",
   "principle": "对标国际标准·按产品形态差异化·自动可计算·版本可演化",
-
   "foundations": {
     "SUS": {
       "name": "System Usability Scale",
@@ -10,11 +9,31 @@
       "description": "10题Likert量表·衡量主观可用性·0-100分·基准68分=平均",
       "mapping": "映射到 SRI 六维中的'可用度'维度",
       "benchmarks": {
-        "A_grade": {"min": 80.3, "percentile": 90, "label": "excellent"},
-        "B_grade": {"min": 74, "percentile": 70, "label": "good"},
-        "C_grade": {"min": 68, "percentile": 50, "label": "okay/average"},
-        "D_grade": {"min": 51, "percentile": 30, "label": "poor"},
-        "F_grade": {"min": 0, "percentile": 0, "label": "unacceptable"}
+        "A_grade": {
+          "min": 80.3,
+          "percentile": 90,
+          "label": "excellent"
+        },
+        "B_grade": {
+          "min": 74,
+          "percentile": 70,
+          "label": "good"
+        },
+        "C_grade": {
+          "min": 68,
+          "percentile": 50,
+          "label": "okay/average"
+        },
+        "D_grade": {
+          "min": 51,
+          "percentile": 30,
+          "label": "poor"
+        },
+        "F_grade": {
+          "min": 0,
+          "percentile": 0,
+          "label": "unacceptable"
+        }
       }
     },
     "HEART": {
@@ -29,7 +48,6 @@
       "mapping": "对应 SRI 完整度+可用度+清晰度"
     }
   },
-
   "sri_six_dimensions": {
     "completeness": {
       "label": "🔩 完整度",
@@ -44,7 +62,13 @@
         "0": "空页面或错误页面"
       },
       "auto_detectable": true,
-      "auto_fields": ["broken_links_count", "missing_pages", "file_size", "has_title", "has_h1"]
+      "auto_fields": [
+        "broken_links_count",
+        "missing_pages",
+        "file_size",
+        "has_title",
+        "has_h1"
+      ]
     },
     "usability": {
       "label": "🧩 可用度",
@@ -59,11 +83,15 @@
         "0": "无法使用"
       },
       "auto_detectable": false,
-      "requires": ["user_testing", "llm_avatar_evaluation", "click_path_analysis"]
+      "requires": [
+        "user_testing",
+        "llm_avatar_evaluation",
+        "click_path_analysis"
+      ]
     },
     "clarity": {
       "label": "🔍 清晰度",
-      "weight": 0.20,
+      "weight": 0.2,
       "description": "一句话价值主张·meta描述·信息架构·5秒测试",
       "scoring": {
         "100": "5秒通·全部信息一目了然·分层清晰",
@@ -74,7 +102,13 @@
         "0": "完全无法理解"
       },
       "auto_detectable": true,
-      "auto_fields": ["has_meta_description", "has_value_proposition", "has_h1", "text_length", "cn_ratio"]
+      "auto_fields": [
+        "has_meta_description",
+        "has_value_proposition",
+        "has_h1",
+        "text_length",
+        "cn_ratio"
+      ]
     },
     "aesthetics": {
       "label": "🎨 美学度",
@@ -89,11 +123,15 @@
         "0": "无视觉设计"
       },
       "auto_detectable": true,
-      "auto_fields": ["inline_styles_count", "has_stylesheet", "style_tags_count"]
+      "auto_fields": [
+        "inline_styles_count",
+        "has_stylesheet",
+        "style_tags_count"
+      ]
     },
     "uniqueness": {
       "label": "💡 独特性",
-      "weight": 0.10,
+      "weight": 0.1,
       "description": "不可替代的洞察·差异化·竞品做不到的",
       "scoring": {
         "100": "独一无二的洞察·无替代品",
@@ -104,7 +142,10 @@
         "0": "完全同质化"
       },
       "auto_detectable": false,
-      "requires": ["llm_avatar_evaluation", "competitive_analysis"]
+      "requires": [
+        "llm_avatar_evaluation",
+        "competitive_analysis"
+      ]
     },
     "maintainability": {
       "label": "🔄 可维护度",
@@ -119,74 +160,234 @@
         "0": "已废弃"
       },
       "auto_detectable": true,
-      "auto_fields": ["days_since_update", "auto_registered", "has_script_srcs"]
+      "auto_fields": [
+        "days_since_update",
+        "auto_registered",
+        "has_script_srcs"
+      ]
     }
   },
-
   "product_types": {
     "diagnostic_tool": {
       "label": "诊断工具",
-      "weight_override": {"usability": 0.30, "completeness": 0.20, "uniqueness": 0.15},
-      "examples": ["决策剧场", "四骑士识别", "Pre-0身体觉察", "危机模拟"],
+      "weight_override": {
+        "usability": 0.3,
+        "completeness": 0.2,
+        "uniqueness": 0.15
+      },
+      "examples": [
+        "决策剧场",
+        "四骑士识别",
+        "Pre-0身体觉察",
+        "危机模拟"
+      ],
       "benchmarks": {
-        "competitive": ["The Predictive Index", "Culture Amp", "15Five", "Officevibe"],
+        "competitive": [
+          "The Predictive Index",
+          "Culture Amp",
+          "15Five",
+          "Officevibe"
+        ],
         "min_sus_target": 70
       }
     },
     "quantitative_tool": {
       "label": "量化工具",
-      "weight_override": {"completeness": 0.30, "usability": 0.20, "uniqueness": 0.15},
-      "examples": ["五维雷达图", "关系温度计", "分割饼", "FIN诚实验证器"],
+      "weight_override": {
+        "completeness": 0.3,
+        "usability": 0.2,
+        "uniqueness": 0.15
+      },
+      "examples": [
+        "五维雷达图",
+        "关系温度计",
+        "分割饼",
+        "FIN诚实验证器"
+      ],
       "benchmarks": {
-        "competitive": ["Radical Candor assessments", "TINYpulse", "Lattice"],
+        "competitive": [
+          "Radical Candor assessments",
+          "TINYpulse",
+          "Lattice"
+        ],
         "min_sus_target": 68
       }
     },
     "simulation_game": {
       "label": "模拟/游戏",
-      "weight_override": {"usability": 0.30, "aesthetics": 0.20, "uniqueness": 0.20},
-      "examples": ["卡牌对局", "决策剧场", "退出仪式"],
+      "weight_override": {
+        "usability": 0.3,
+        "aesthetics": 0.2,
+        "uniqueness": 0.2
+      },
+      "examples": [
+        "卡牌对局",
+        "决策剧场",
+        "退出仪式"
+      ],
       "benchmarks": {
-        "competitive": ["Miro workshops", "Gamestorming tools", "Scenario planning tools"],
+        "competitive": [
+          "Miro workshops",
+          "Gamestorming tools",
+          "Scenario planning tools"
+        ],
         "min_sus_target": 75
       }
     },
     "knowledge_page": {
       "label": "知识页面",
-      "weight_override": {"clarity": 0.30, "completeness": 0.25, "aesthetics": 0.15},
-      "examples": ["案例库", "星光方法论", "关于我们", "量化体系"],
+      "weight_override": {
+        "clarity": 0.3,
+        "completeness": 0.25,
+        "aesthetics": 0.15
+      },
+      "examples": [
+        "案例库",
+        "星光方法论",
+        "关于我们",
+        "量化体系"
+      ],
       "benchmarks": {
-        "competitive": ["First Round Review", "a16z content", "Stratechery"],
+        "competitive": [
+          "First Round Review",
+          "a16z content",
+          "Stratechery"
+        ],
         "min_sus_target": 65
       }
     },
     "infrastructure": {
       "label": "基础设施",
-      "weight_override": {"completeness": 0.30, "maintainability": 0.20, "usability": 0.15},
-      "examples": ["驾驶舱", "管理后台", "产品库"],
+      "weight_override": {
+        "completeness": 0.3,
+        "maintainability": 0.2,
+        "usability": 0.15
+      },
+      "examples": [
+        "驾驶舱",
+        "管理后台",
+        "产品库"
+      ],
       "benchmarks": {
-        "competitive": ["Retool", "Airplane", "Notion databases"],
+        "competitive": [
+          "Retool",
+          "Airplane",
+          "Notion databases"
+        ],
         "min_sus_target": 72
       }
     },
     "simple_tool": {
       "label": "简单工具",
-      "weight_override": {"usability": 0.40, "completeness": 0.25, "maintainability": 0.10},
-      "examples": ["密码生成器", "自检清单", "模板"],
+      "weight_override": {
+        "usability": 0.4,
+        "completeness": 0.25,
+        "maintainability": 0.1
+      },
+      "examples": [
+        "密码生成器",
+        "自检清单",
+        "模板"
+      ],
       "benchmarks": {
-        "competitive": ["各种在线工具"],
+        "competitive": [
+          "各种在线工具"
+        ],
         "min_sus_target": 75
       }
     }
   },
-
   "lifecycle_stages": {
-    "LC-001": {"label": "概念期", "gate": "概念评审", "min_score": 0, "auto_promotion": false},
-    "LC-002": {"label": "开发中", "gate": "原型评审", "min_score": 0, "auto_promotion": false},
-    "LC-003": {"label": "内测期", "gate": "alpha评审", "min_score": 50, "auto_promotion": true},
-    "LC-004": {"label": "打磨期", "gate": "质量门禁", "min_score": 70, "auto_promotion": true},
-    "LC-005": {"label": "精品期", "gate": "精品审计", "min_score": 80, "auto_promotion": true},
-    "LC-006": {"label": "维护期", "gate": "活性检查", "min_score": 60, "auto_demotion": true},
-    "LC-007": {"label": "归档期", "gate": "日落审批", "min_score": 0, "auto_demotion": true}
+    "LC-001": {
+      "label": "概念期",
+      "gate": "概念评审",
+      "min_score": 0,
+      "auto_promotion": false
+    },
+    "LC-002": {
+      "label": "开发中",
+      "gate": "原型评审",
+      "min_score": 0,
+      "auto_promotion": false
+    },
+    "LC-003": {
+      "label": "内测期",
+      "gate": "alpha评审",
+      "min_score": 50,
+      "auto_promotion": true
+    },
+    "LC-004": {
+      "label": "打磨期",
+      "gate": "质量门禁",
+      "min_score": 70,
+      "auto_promotion": true
+    },
+    "LC-005": {
+      "label": "精品期",
+      "gate": "精品审计",
+      "min_score": 80,
+      "auto_promotion": true
+    },
+    "LC-006": {
+      "label": "维护期",
+      "gate": "活性检查",
+      "min_score": 60,
+      "auto_demotion": true
+    },
+    "LC-007": {
+      "label": "归档期",
+      "gate": "日落审批",
+      "min_score": 0,
+      "auto_demotion": true
+    }
+  },
+  "product_packaging": {
+    "version": "1.0",
+    "principle": "每个面向客户的产品需要有完整的包装层，让客户一眼就知道这是什么、适合谁、要多久、能得到什么",
+    "required_fields": [
+      {
+        "field": "positioning",
+        "label": "一句话定位",
+        "example": "3分钟诊断你的合伙人关系健康度",
+        "max_chars": 30
+      },
+      {
+        "field": "scenario",
+        "label": "适用场景",
+        "example": "当你隐隐觉得合伙人关系不对劲但说不清时",
+        "max_chars": 50
+      },
+      {
+        "field": "who_for",
+        "label": "目标用户",
+        "example": "创始团队2-5人·合作>3个月·有摩擦但未爆发"
+      },
+      {
+        "field": "prerequisites",
+        "label": "前置条件",
+        "example": "需要你和至少一位合伙人共同完成"
+      },
+      {
+        "field": "time_estimate",
+        "label": "预计时间",
+        "example": "首次使用约10分钟·每周随访2分钟"
+      },
+      {
+        "field": "outcome",
+        "label": "你会得到什么",
+        "example": "一份Gottman方法基准的关系健康报告+3条具体建议"
+      },
+      {
+        "field": "not_for",
+        "label": "不适合的场景",
+        "example": "已决定拆伙·法律纠纷·单方面使用"
+      },
+      {
+        "field": "next_step",
+        "label": "完成后推荐",
+        "example": "「元合伙」- 基于诊断结果制定新的合作协议"
+      }
+    ],
+    "auto_generate": "LLM 替身基于产品描述自动生成包装层字段·人工审核后上线"
   }
 }

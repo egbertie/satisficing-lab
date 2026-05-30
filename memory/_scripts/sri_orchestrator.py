@@ -176,12 +176,16 @@ def run_stage_standalone(script_name, extra_args=None):
         raise FileNotFoundError('Script not found: {}'.format(script_path))
     
     cmd = ['python3', script_path]
-    if extra_args:
-        cmd.extend(extra_args)
-    # 各脚本参数名不同: 统一用 --save 兼容，不支持的脚本用默认
-    # flywheel 用子命令: all/scan/health/report
-    # auto_healer 用 --limit 默认
-    # 其余 script 直接用默认 (无参数=执行)
+    # 各脚本参数名不同，需要适配
+    if 'flywheel' in script_name:
+        cmd.append('all')
+    elif 'auto_healer' in script_name:
+        cmd.extend(['--limit', '30'])
+    elif 'product_scanner' in script_name:
+        cmd.append('--save')
+    elif 'quality_gate' in script_name or 'nourishment' in script_name or 'consistency' in script_name or 'lifecycle' in script_name or 'standards' in script_name:
+        cmd.append('--save')
+    # portfolio_rationalizer 和 orchestrator 不需要参数
     
     result = subprocess.run(cmd, capture_output=True, text=True, timeout=120, cwd=WORKSPACE)
     if result.returncode != 0:
