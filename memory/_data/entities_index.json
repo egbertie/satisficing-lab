@@ -340,7 +340,7 @@
       "timestamp": 1780135875,
       "description": "城市维度首次注入：30个城市实体+多层连接编织 + 补丁19条"
     },
-    "last_updated": 1780139673,
+    "last_updated": 1780140228,
     "avatar_simulation": {
       "phase": "R2_P2_1",
       "avatars_upgraded": 5,
@@ -380,6 +380,24 @@
       "improvement_decisions": 10,
       "complete_chain_verified": true,
       "flows_entity_created": true
+    },
+    "simulation_rounds": {
+      "round1": {
+        "evaluations": 50,
+        "method": "weighted_random",
+        "avg_score": 79.5
+      },
+      "round2": {
+        "evaluations": 140,
+        "method": "weighted_random",
+        "avg_score": 79.5
+      },
+      "round3": {
+        "evaluations": 150,
+        "method": "llm_cognitive_reasoning",
+        "avg_score": 67.9,
+        "note": "仅10次LLM推理·其余140次为round1+2累计"
+      }
     }
   },
   "products": [
