@@ -603,6 +603,183 @@ viewRenderers['people-council']=function(){return breadcrumb('people','五路评
 viewRenderers['people-network']=function(){return breadcrumb('people','协作者网络')+placeholder('协作者网络','扣子·满意姐·满意红·蓝军 · 关系图谱可视化建设中')};
 
 /* ================================================================
+   10 化学层专属视图
+   ================================================================ */
+
+/* ── chemistry-overview: 化学总览 ── */
+viewRenderers['chemistry-overview']=function(){
+  var meta=DB.meta||{};
+  var chem=meta.chemistry||{};
+  var h=breadcrumb('governance','化学总览');
+  h+='<div class="panel-header"><div><h2>⚗️ 化学总览</h2><div class="meta">热力值 · 活链死链 · 60链热力图</div></div></div>';
+
+  // 第一行: 热力值 + 活链/死链
+  h+='<div class="graph-stat">';
+  var heat=chem.heat_value;
+  var heatVal=(heat!=null)?heat:'—';
+  var heatPct=(heat!=null)?Math.min(heat,100):0;
+  h+='<div class="stat-card"><div class="stat-num">'+heatVal+'</div><div class="stat-label">🔥 化学热力值</div><div class="stat-bar"><div class="fill fill-red" style="width:'+heatPct+'%"></div></div></div>';
+
+  var liveLinks=chem.live_links;
+  var deadLinks=chem.dead_links;
+  var liveVal=(liveLinks!=null)?liveLinks:'—';
+  var deadVal=(deadLinks!=null)?deadLinks:'—';
+  var totalLinks=(liveLinks!=null&&deadLinks!=null)?(liveLinks+deadLinks):null;
+  var livePct=(totalLinks!=null&&totalLinks>0)?Math.round(liveLinks/totalLinks*100):0;
+  var deadPct=(totalLinks!=null&&totalLinks>0)?Math.round(deadLinks/totalLinks*100):0;
+  h+='<div class="stat-card"><div class="stat-num">'+liveVal+' / '+deadVal+'</div><div class="stat-label">🔗 活链 / 死链</div><div class="stat-bar" style="display:flex"><div class="fill fill-green" style="width:'+livePct+'%"></div><div class="fill fill-red" style="width:'+deadPct+'%"></div></div></div>';
+
+  var density=chem.graph_density;
+  var densityVal=(density!=null)?density+'%':'—%';
+  var densityPct=(density!=null)?density:0;
+  h+='<div class="stat-card"><div class="stat-num">'+densityVal+'</div><div class="stat-label">🕸️ 图谱密度</div><div class="stat-bar"><div class="fill fill-gold" style="width:'+densityPct+'%"></div></div></div>';
+
+  var hotness=chem.hotness_level;
+  var hotnessLabel=hotness||'—';
+  var hotnessColor='fill-gold';
+  if(hotness==='高')hotnessColor='fill-red';
+  else if(hotness==='中')hotnessColor='fill-gold';
+  else if(hotness==='低')hotnessColor='fill-green';
+  h+='<div class="stat-card"><div class="stat-num">'+hotnessLabel+'</div><div class="stat-label">🌡️ 热力等级</div><div class="stat-bar"><div class="fill '+hotnessColor+'" style="width:100%"></div></div></div>';
+  h+='</div>';
+
+  // 60链热力图
+  var heatmap=chem.heatmap_60;
+  h+='<h3 style="font-size:.92em;margin:16px 0 8px">🔥 60链热力图</h3>';
+  if(heatmap&&heatmap.length){
+    h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px;margin-bottom:16px">';
+    for(var i=0;i<heatmap.length;i++){
+      var hm=heatmap[i];
+      var name=hm.name||hm.label||hm.id||('链#'+(i+1));
+      var val=hm.value!=null?hm.value:hm.score!=null?hm.score:null;
+      var intensity='fill-gold';
+      if(val!=null){
+        if(val>=80)intensity='fill-red';
+        else if(val>=50)intensity='fill-gold';
+        else intensity='fill-green';
+      }
+      var barW=(val!=null)?val:0;
+      h+='<div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 10px">';
+      h+='<div style="font-size:.72em;color:var(--ink-light);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+escH(name)+'</div>';
+      h+='<div style="font-size:1em;font-weight:700;color:var(--ink)">'+((val!=null)?val:'—')+'</div>';
+      h+='<div style="height:4px;background:var(--border);border-radius:2px;margin-top:3px;overflow:hidden"><div class="'+intensity+'" style="height:100%;width:'+Math.min(barW,100)+'%;border-radius:2px"></div></div>';
+      h+='</div>';
+    }
+    h+='</div>';
+  }else{
+    h+='<div class="placeholder-card"><div class="ph-icon">📊</div><div class="ph-title">热力图数据待加载</div><div class="ph-desc">60链化学热力图将在数据完善后展示</div></div>';
+  }
+
+  // 附加指标
+  var extras=chem.extras||chem.additional||[];
+  if(extras.length){
+    h+='<h3 style="font-size:.88em;margin:14px 0 8px">📋 附加指标</h3><div class="chip-wrap">';
+    for(var ei=0;ei<extras.length;ei++){
+      h+='<div class="chip">'+escH(extras[ei])+'</div>';
+    }
+    h+='</div>';
+  }
+  return h;
+};
+
+/* ── chemistry-llm: LLM替身评分 ── */
+viewRenderers['chemistry-llm']=function(){
+  var meta=DB.meta||{};
+  var stats=meta.llm_stats||{};
+  var h=breadcrumb('governance','LLM替身评分');
+  h+='<div class="panel-header"><div><h2>🤖 LLM替身评分</h2><div class="meta">评分分布 · 替身排行榜 · 最佳最差</div></div></div>';
+
+  // 评分分布
+  var dist=stats.score_distribution||{};
+  var distKeys=Object.keys(dist);
+  if(distKeys.length){
+    h+='<h3 style="font-size:.92em;margin-bottom:8px">📊 评分分布</h3>';
+    h+='<div class="stat-grid">';
+    for(var dk=0;dk<distKeys.length;dk++){
+      var dkv=distKeys[dk];
+      var dvv=dist[dkv];
+      var dBar=Math.min((dvv||0)/10*100,100);
+      var dColor='fill-gold';
+      if(parseFloat(dkv)>=80)dColor='fill-green';
+      else if(parseFloat(dkv)>=60)dColor='fill-gold';
+      else if(parseFloat(dkv)>=40)dColor='fill-warn';
+      else dColor='fill-red';
+      h+='<div class="stat-card"><div class="stat-num">'+dvv+'</div><div class="stat-label">≥'+dkv+'分</div><div class="stat-bar"><div class="fill '+dColor+'" style="width:'+dBar+'%"></div></div></div>';
+    }
+    h+='</div>';
+  }
+
+  // 替身排行榜
+  var ranking=stats.ranking||stats.leaderboard||[];
+  if(ranking.length){
+    h+='<h3 style="font-size:.92em;margin:16px 0 8px">🏆 替身排行榜</h3>';
+    h+='<table class="data-table"><thead><tr><th>#</th><th>替身</th><th>综合评分</th><th>响应速度</th><th>准确度</th><th>风格匹配</th></tr></thead><tbody>';
+    for(var ri=0;ri<ranking.length;ri++){
+      var r=ranking[ri];
+      var rName=r.name||r.avatar||r.id||('替身#'+(ri+1));
+      var rScore=r.score!=null?r.score:r.overall_score!=null?r.overall_score:r.rating!=null?r.rating:'—';
+      var rSpeed=r.speed||r.response_speed||r.latency||'—';
+      var rAcc=r.accuracy||r.precision||r.correctness||'—';
+      var rStyle=r.style_match||r.style||r.tone_match||'—';
+      var rankClass='';
+      if(ri===0)rankClass=' style="color:var(--gold);font-weight:700"';
+      else if(ri===1)rankClass=' style="color:var(--ink-light);font-weight:600"';
+      h+='<tr'+rankClass+'><td>'+(ri+1)+'</td><td><b>'+escH(rName)+'</b></td><td>'+rScore+'</td><td>'+escH(rSpeed)+'</td><td>'+escH(rAcc)+'</td><td>'+escH(rStyle)+'</td></tr>';
+    }
+    h+='</tbody></table>';
+  }
+
+  // 最佳 / 最差
+  var best=stats.best||stats.top||null;
+  var worst=stats.worst||stats.bottom||null;
+  if(best||worst){
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px">';
+    if(best){
+      var bestName=best.name||best.avatar||best.id||'—';
+      var bestScore=best.score!=null?best.score:best.overall_score!=null?best.overall_score:'—';
+      var bestReason=best.reason||best.note||best.comment||'';
+      h+='<div style="background:var(--card);border:2px solid var(--gold);border-radius:10px;padding:16px"><h4 style="color:var(--gold);margin-bottom:6px">🥇 最佳替身</h4>';
+      h+='<div style="font-size:1.2em;font-weight:700">'+escH(bestName)+'</div>';
+      h+='<div style="font-size:2em;font-weight:700;color:var(--gold);margin:4px 0">'+bestScore+'</div>';
+      if(bestReason)h+='<div style="font-size:.76em;color:var(--ink-light)">'+escH(bestReason)+'</div>';
+      h+='</div>';
+    }
+    if(worst){
+      var worstName=worst.name||worst.avatar||worst.id||'—';
+      var worstScore=worst.score!=null?worst.score:worst.overall_score!=null?worst.overall_score:'—';
+      var worstReason=worst.reason||worst.note||worst.comment||'';
+      h+='<div style="background:var(--card);border:2px solid var(--red);border-radius:10px;padding:16px"><h4 style="color:var(--red);margin-bottom:6px">🔻 最差替身</h4>';
+      h+='<div style="font-size:1.2em;font-weight:700">'+escH(worstName)+'</div>';
+      h+='<div style="font-size:2em;font-weight:700;color:var(--red);margin:4px 0">'+worstScore+'</div>';
+      if(worstReason)h+='<div style="font-size:.76em;color:var(--ink-light)">'+escH(worstReason)+'</div>';
+      h+='</div>';
+    }
+    h+='</div>';
+  }
+
+  // 无数据兜底
+  if(!distKeys.length&&!ranking.length&&!(best||worst)){
+    h+='<div class="placeholder-card"><div class="ph-icon">🤖</div><div class="ph-title">LLM替身评分数待加载</div><div class="ph-desc">评分分布、替身排行榜、最佳最差将在数据完善后展示</div></div>';
+  }
+
+  // 额外统计摘要
+  var totalAvatars=stats.total_avatars||stats.total||stats.count||null;
+  var avgScore=stats.average_score||stats.avg||stats.mean||null;
+  if(totalAvatars!=null||avgScore!=null){
+    h+='<div class="graph-stat" style="margin-top:16px">';
+    if(totalAvatars!=null)h+='<div class="stat-card"><div class="stat-num">'+totalAvatars+'</div><div class="stat-label">📊 评价替身总数</div></div>';
+    if(avgScore!=null)h+='<div class="stat-card"><div class="stat-num">'+avgScore+'</div><div class="stat-label">📈 平均评分</div></div>';
+    var median=stats.median||stats.median_score||null;
+    if(median!=null)h+='<div class="stat-card"><div class="stat-num">'+median+'</div><div class="stat-label">📐 中位数评分</div></div>';
+    var stddev=stats.stddev||stats.standard_deviation||null;
+    if(stddev!=null)h+='<div class="stat-card"><div class="stat-num">'+stddev+'</div><div class="stat-label">📏 标准差</div></div>';
+    h+='</div>';
+  }
+
+  return h;
+};
+
+/* ================================================================
    启动
    ================================================================ */
 (function(){
