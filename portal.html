@@ -69,26 +69,19 @@ body {
 </div>
 
 <script>
-var PASS = '123654';
 var DASHBOARD = 'https://htmlpreview.github.io/?https://raw.githubusercontent.com/egbertie/satisficing-lab/main/dashboard-v3.html';
 
 (function(){
-  if (localStorage.getItem('portal_unlocked') &&
-      Date.now() - parseInt(localStorage.getItem('portal_unlocked')) < 86400000) {
+  // 24小时内访问过，直接跳过
+  if (localStorage.getItem('portal_visited') &&
+      Date.now() - parseInt(localStorage.getItem('portal_visited')) < 86400000) {
     window.location.href = DASHBOARD;
   }
 })();
 
 function unlock() {
-  if (document.getElementById('pw').value === PASS) {
-    localStorage.setItem('portal_unlocked', Date.now());
-    window.location.href = DASHBOARD;
-  } else {
-    var inp = document.getElementById('pw');
-    inp.value = ''; inp.style.borderColor = 'var(--accent-red)';
-    inp.placeholder = '通行码错误';
-    setTimeout(function(){ inp.style.borderColor = ''; inp.placeholder = '输入通行码'; }, 1500);
-  }
+  localStorage.setItem('portal_visited', Date.now());
+  window.location.href = DASHBOARD;
 }
 </script>
 </body>

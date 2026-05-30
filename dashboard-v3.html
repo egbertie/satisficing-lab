@@ -329,12 +329,24 @@ function setDate() {
     n.getFullYear()+'年'+(n.getMonth()+1)+'月'+n.getDate()+'日 · 周'+w[n.getDay()]+' · '+String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');
 }
 
+/* ===== 数据文件基础路径 (自动适配 本地/GitHub/htmlpreview) ===== */
+function dataBase() {
+  // 本地 localhost:8765 / htmlpreview 代理 / GitHub Pages
+  if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') return '';
+  if (location.hostname === 'htmlpreview.github.io') {
+    // htmlpreview 下 fetch 相对路径不可用，用 absolute raw URL
+    return 'https://raw.githubusercontent.com/egbertie/satisficing-lab/main/';
+  }
+  return '';
+}
+
 /* ===== 启动: fetch JSON → 渲染 ===== */
 function boot() {
   setDate();
+  var base = dataBase();
   Promise.all([
-    fetch('entities_index.json').then(function(r){ if(!r.ok) throw Error('HTTP '+r.status); return r.json(); }),
-    fetch('open_tasks_audit.json').then(function(r){ if(!r.ok) throw Error('HTTP '+r.status); return r.json(); })
+    fetch(base + 'entities_index.json').then(function(r){ if(!r.ok) throw Error('HTTP '+r.status); return r.json(); }),
+    fetch(base + 'open_tasks_audit.json').then(function(r){ if(!r.ok) throw Error('HTTP '+r.status); return r.json(); })
   ]).then(function(arr){
     EIDX = arr[0]; TSK = arr[1];
     // 去重产品
