@@ -467,6 +467,26 @@ def cycle_health_audit(data):
             'size_mb': json_size_mb,
             'detail': 'JSON超过15MB，建议分片'
         })
+
+    # 3.5. 触发自动修复 (低风险操作)
+    heal_fixes = 0
+    try:
+        healer_path = os.path.join(WORKSPACE, 'memory/_scripts/sri_auto_healer.py')
+        if os.path.exists(healer_path):
+            result = __import__('subprocess').run(
+                ['python3', healer_path, '--limit', '30'],
+                capture_output=True, text=True, timeout=120, cwd=WORKSPACE)
+            import re as _re
+            m = _re.search(r'([0-9]+) 个修复', result.stdout)
+            heal_fixes = int(m.group(1)) if m else 0
+    except Exception:
+        pass
+    if heal_fixes > 0:
+        events.append({
+            'type': 'auto_heal',
+            'fixes': heal_fixes,
+            'timestamp': now.isoformat()
+        })
     
     # 4. 更新 meta.flywheel
     fw = data['meta']['flywheel']
