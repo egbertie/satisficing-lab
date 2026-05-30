@@ -326,14 +326,29 @@ function unlock() {{
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>📁 {url_path} - 满意红</title>
 <style>
-:root {{ --bg:#F5F0E6; --ink:#4A3728; --link:#C23B22; --border:#E0D5C0; }}
+:root {{ --bg:#F5F0E6; --ink:#4A3728; --link:#C23B22; --border:#E0D5C0; --accent:#B8860B; }}
 body {{ font-family:-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;
   background:var(--bg); color:var(--ink); max-width:800px; margin:0 auto; padding:20px; }}
 a {{ color:var(--link); text-decoration:none; }}
 a:hover {{ text-decoration:underline; }}
-.breadcrumb {{ color:#8B7355; font-size:0.9em; margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid var(--border); }}
+.breadcrumb {{ color:#8B7355; font-size:0.9em; margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid var(--border); }}
+.search-box {{ display:flex; gap:8px; margin-bottom:20px; }}
+.search-box input {{
+  flex:1; padding:10px 14px; border:1px solid var(--border); border-radius:8px;
+  font-size:0.95em; outline:none; background:#fff; color:var(--ink);
+  transition:border 0.2s;
+}}
+.search-box input:focus {{ border-color:var(--accent); }}
+.search-box button {{
+  padding:10px 16px; background:var(--accent); color:#fff; border:none;
+  border-radius:8px; font-size:0.9em; cursor:pointer; white-space:nowrap;
+}}
+.search-box button:hover {{ opacity:0.85; }}
+.search-info {{ font-size:0.85em; color:#8B7355; margin-bottom:14px; display:none; }}
+.search-info.show {{ display:block; }}
 table {{ width:100%; border-collapse:collapse; }}
 td {{ padding:8px 4px; border-bottom:1px solid var(--border); }}
+tr.hidden {{ display:none; }}
 tr:hover {{ background:rgba(184,134,11,0.06); }}
 h2 {{ margin-bottom:16px; }}
 .footer {{ margin-top:30px; padding-top:12px; border-top:1px solid var(--border); color:#B8A898; font-size:0.75em; text-align:center; }}
@@ -342,10 +357,37 @@ h2 {{ margin-bottom:16px; }}
 <body>
 <h2>📁 目录浏览</h2>
 <div class="breadcrumb">{breadcrumb}</div>
-<table>
+<div class="search-box">
+  <input type="text" id="search" placeholder="🔍 搜索文件或目录..." autofocus
+    oninput="doSearch()" onkeydown="if(event.key==='Escape'){{this.value='';doSearch();}}">
+  <button onclick="document.getElementById('search').value='';doSearch();">清除</button>
+</div>
+<div class="search-info" id="info"></div>
+<table id="fileTable">
 {items_html}
 </table>
 <div class="footer">满意红 · 本地服务 · {time.strftime('%Y-%m-%d %H:%M')}</div>
+<script>
+function doSearch() {{
+  var q = document.getElementById('search').value.toLowerCase().trim();
+  var rows = document.querySelectorAll('#fileTable tr');
+  var total = 0, shown = 0;
+  rows.forEach(function(r) {{
+    var name = r.textContent.toLowerCase();
+    if (!q) {{ r.classList.remove('hidden'); shown++; }}
+    else if (name.includes(q)) {{ r.classList.remove('hidden'); shown++; }}
+    else {{ r.classList.add('hidden'); }}
+    total++;
+  }});
+  var info = document.getElementById('info');
+  if (q) {{
+    info.className = 'search-info show';
+    info.textContent = '找到 ' + shown + ' / ' + total + ' 个项目';
+  }} else {{
+    info.className = 'search-info';
+  }}
+}}
+</script>
 </body>
 </html>'''
         body = html.encode('utf-8')
