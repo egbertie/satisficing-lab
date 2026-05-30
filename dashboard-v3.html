@@ -1387,96 +1387,66 @@ function renderFlywheel() {
 
 /* ===== 化学与控制 ===== */
 function renderChemistry() {
-  var m = EIDX.meta || {}, chem = m.chemistry || {}, results = chem.results || {}, heat = m.heating || {}, pc = m.perpetual_control || {}, org = m.orchestration_health || {};
-  var h = '<div class="panel-header"><h2>🧬 化学与控制 · 系统自调控状态</h2><span class="meta">热力'+Math.round(heat.total_heat||0)+' · 调控'+Math.round(pc.total_runs||0)+'次</span></div>';
+  var m = EIDX.meta || {}, chem = m.chemistry || {}, heat = m.heating || {}, pc = m.perpetual_control || {}, org = m.orchestration_health || {};
+  var ls = m.llm_stats || {}, dist = ls.distribution || {};
+  var h = '<!-- ⏱️ 驾驶舱=仪表台(Pilot View)·只读快照 · 详细视图→管理窗口' + (EIDX.meta.orchestration_health && EIDX.meta.orchestration_health.timestamp ? EIDX.meta.orchestration_health.timestamp.slice(0,19) : '') + '-->';
+  h += '<div class="panel-header"><h2>🧬 化学与控制 · 一屏快照</h2><span class="meta" style="font-size:0.7em;color:var(--ink-lighter)">⏱️ 驾驶舱=仪表台·只读快照 · 详情→<a href="admin-windows.html" target="_blank" style="color:var(--accent-gold)">管理窗口</a></span></div>';
 
-  // ── 第一行: 核心指标 ──
+  // ═══ 第一行: 核心指标4卡 ═══
   h += '<div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px">';
-  var hotLevel = (heat.total_heat||0) > 800 ? '#e74c3c' : ((heat.total_heat||0) > 500 ? '#e67e22' : '#27ae60');
-  h += '<div class="stat-card" style="background:#fdf2f2"><div class="stat-num" style="font-size:1.6em;font-weight:700;color:'+hotLevel+'">'+Math.round(heat.total_heat||0)+'</div><div class="stat-label">化学总热力</div><div style="font-size:0.65em;color:var(--ink-lighter)">'+(heat.level||'?')+'</div></div>';
-  h += '<div class="stat-card" style="background:#f0f7ff"><div class="stat-num" style="font-size:1.6em;font-weight:700">'+(pc.total_runs||0)+'</div><div class="stat-label">永续调控</div><div style="font-size:0.65em;color:var(--ink-lighter)">State:'+(pc.state||'?')+' · '+Math.round(pc.stability||0)+'%稳定</div></div>';
-  h += '<div class="stat-card" style="background:#f0fff4"><div class="stat-num" style="font-size:1.6em;font-weight:700">'+(org.health_score||'?')+'</div><div class="stat-label">编排器健康</div><div style="font-size:0.65em;color:var(--ink-lighter)">'+(org.ok||0)+'✅ '+(org.degraded||0)+'🟡 '+(org.failed||0)+'❌</div></div>';
-  h += '<div class="stat-card" style="background:#faf5ff"><div class="stat-num" style="font-size:1.6em;font-weight:700">'+Math.round(pc.learning_progress||0)+'%</div><div class="stat-label">学习进度</div><div style="font-size:0.65em;color:var(--ink-lighter)">'+Math.round(pc.total_runs||0)+'次观测积累</div></div>';
+  var hotLevel = (heat.total_heat||0) > 800 ? '#C23B22' : ((heat.total_heat||0) > 500 ? '#C2780A' : '#3D7A4F');
+  var hotIcon = (heat.total_heat||0) > 800 ? '🔥' : ((heat.total_heat||0) > 500 ? '🌡️' : '✅');
+  h += '<div class="stat-card" style="background:#fdf2f2"><div class="stat-num" style="font-size:1.6em;font-weight:700;color:'+hotLevel+'">'+hotIcon+' '+Math.round(heat.total_heat||0)+'</div><div class="stat-label">化学总热力</div><div style="font-size:0.65em;color:var(--ink-lighter)">'+(heat.level||'正常')+'</div></div>';
+  var pcStateColor = (pc.state||'') === 'steady' ? '#3D7A4F' : ((pc.state||'') === 'braking' ? '#C2780A' : '#C23B22');
+  h += '<div class="stat-card" style="background:#f0f7ff"><div class="stat-num" style="font-size:1.6em;font-weight:700;color:'+pcStateColor+'">● '+(pc.state||'idle')+'</div><div class="stat-label">永续控制</div><div style="font-size:0.65em;color:var(--ink-lighter)">'+(pc.speed||'1.0')+'x · '+Math.round(pc.stability||0)+'%稳定 · '+Math.round(pc.learning_progress||0)+'%学习</div></div>';
+  var orgColor = (org.health_score||0) >= 80 ? '#3D7A4F' : ((org.health_score||0) >= 50 ? '#C2780A' : '#C23B22');
+  h += '<div class="stat-card" style="background:#f0fff4"><div class="stat-num" style="font-size:1.6em;font-weight:700;color:'+orgColor+'">'+(org.health_score!==undefined?org.health_score:'?')+'</div><div class="stat-label">编排器健康</div><div style="font-size:0.65em;color:var(--ink-lighter)">'+(org.ok||0)+'✅ '+(org.degraded||0)+'🟡 '+(org.failed||0)+'❌</div></div>';
+  var covPct = Math.round(100*(ls.products_evaluated||0)/Math.max(1,(EIDX.products||[]).length));
+  var covColor = covPct >= 30 ? '#3D7A4F' : (covPct >= 15 ? '#C2780A' : '#C23B22');
+  h += '<div class="stat-card" style="background:#faf5ff"><div class="stat-num" style="font-size:1.6em;font-weight:700;color:'+covColor+'">'+covPct+'%</div><div class="stat-label">LLM评分覆盖</div><div style="font-size:0.65em;color:var(--ink-lighter)">'+(ls.products_evaluated||0)+'/'+(EIDX.products||[]).length+'产品 · 均分'+(ls.llm_avg!==undefined?ls.llm_avg:'?')+'</div></div>';
   h += '</div>';
 
-  // ── 第二行: LLM评分分布 ──
-  var ls = m.llm_stats || {}, dist = ls.distribution || {};
-  h += '<div style="font-weight:600;margin-bottom:8px">📊 LLM替身评分分布 ('+ (ls.products_evaluated||0) +'产品/'+ (ls.total_cogs||0) +'条 · 均分'+ (ls.llm_avg||'?') +')</div>';
+  // ═══ 第二行: LLM评分分布5档 ═══
+  h += '<div style="font-weight:600;margin-bottom:8px">📊 LLM替身评分分布 · '+(ls.total_cogs||0)+'条认知事件</div>';
   h += '<div class="stat-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:16px">';
   var distKeys = ['优秀(≥85)','良好(75-84)','一般(65-74)','待改进(50-64)','不合格(<50)'];
-  var distColors = ['#27ae60','#2ecc71','#f39c12','#e67e22','#e74c3c'];
+  var distColors = ['#3D7A4F','#6AAD75','#C2780A','#B8860B','#C23B22'];
   for (var i=0;i<distKeys.length;i++) {
-    var v = dist[distKeys[i]] || 0, pct = Math.round(100*v/Math.max(1,(ls.total_cogs||1)));
-    h += '<div class="stat-card" style="text-align:center"><div class="stat-num" style="font-size:1.6em;font-weight:700;color:'+distColors[i]+'">'+v+'</div><div class="stat-label">'+distKeys[i]+'</div><div style="font-size:0.65em;color:var(--ink-lighter)">'+pct+'%</div></div>';
+    var v = dist[distKeys[i]] || 0;
+    h += '<div class="stat-card" style="text-align:center"><div class="stat-num" style="font-size:1.4em;font-weight:700;color:'+distColors[i]+'">'+v+'</div><div class="stat-label" style="font-size:0.7em">'+distKeys[i]+'</div></div>';
   }
   h += '</div>';
 
-  // ── 第三行: 化学链活性热力图 ──
-  h += '<div style="font-weight:600;margin-bottom:8px">🧪 60条化学反应链活性</div>';
-  var chainCats = [
-    {name:'基础反应', keys:['parallel','serial','ph','temperature','pressure','dosage']},
-    {name:'分子化学', keys:['crystallize','activate','gradient','chain','equilibrium','compound','reverse_entropy','catalyst','energy_conservation','isotope_label','redox','polymerization','phase','osmosis','enzyme','superposition','symmetry','dissipative','isomer','enantiomer','conformer','reversible']},
-    {name:'替身化学', keys:['avatar_activation','avatar_compound','avatar_osmosis','avatar_balance','avatar_catalyst','avatar_spin','avatar_decay','avatar_field']},
-    {name:'信息化学', keys:['info_metabolism','info_synthesis','info_oxidation']},
-    {name:'环节化学', keys:['nourish_chem','gate_chem','scan_chem','consistency_chem','heal_chem','lifecycle_chem','standard_chem','audit_chem','report_chem']},
-    {name:'高烈度', keys:['fission','combustion','explosion','precipitation','electrolysis','sublimation','condensation','tracer','termination','recrystallize']}
-  ];
-  h += '<table class="data-table" style="width:100%;font-size:0.78em"><thead><tr><th>类别</th><th style="width:100px">活/总</th><th>状态栏</th></tr></thead><tbody>';
-  for (var ci=0;ci<chainCats.length;ci++) {
-    var cat = chainCats[ci], catAlive = 0, catTotal = 0;
-    for (var ki=0;ki<cat.keys.length;ki++) {
-      var r = results[cat.keys[ki]];
-      if (r && typeof r.effect !== 'undefined') { catTotal++; if (r.effect > 0) catAlive++; }
-    }
-    var ratio = catTotal>0 ? Math.round(100*catAlive/catTotal) : 0;
-    var barColor = ratio>=70 ? '#27ae60' : (ratio>=30 ? '#f39c12' : '#e74c3c');
-    h += '<tr><td>'+cat.name+'</td><td style="text-align:center;font-weight:700;color:'+barColor+'">'+catAlive+'/'+catTotal+'</td>';
-    h += '<td><div style="display:flex;gap:2px;height:12px;border-radius:2px;overflow:hidden;background:#f0f0f0">';
-    for (var ki=0;ki<cat.keys.length;ki++) {
-      var r2 = results[cat.keys[ki]];
-      var cellColor = (r2 && r2.effect > 0) ? barColor : '#e0e0e0';
-      h += '<div style="flex:1;background:'+cellColor+'" title="'+cat.keys[ki]+':'+(r2?r2.effect:0)+'"></div>';
-    }
-    h += '</div></td></tr>';
-  }
-  h += '</tbody></table>';
-
-  // ── 第四行: 替身评分排行榜 (Top10) ──
+  // ═══ 第三行: 活链速览+评分极值+替身Top5 ═══
+  h += '<div class="stat-grid" style="grid-template-columns:1fr 1fr 1fr;margin-bottom:16px">';
+  // 活链速览
+  var results = chem.results || {}, aliveCount = 0, totalCount = 0;
+  for (var rk in results) { if (results[rk] && typeof results[rk].effect!=='undefined') { totalCount++; if (results[rk].effect>0) aliveCount++; } }
+  var aliveRatio = totalCount>0 ? Math.round(100*aliveCount/totalCount) : 0;
+  var aliveColor = aliveRatio>=50 ? '#3D7A4F' : (aliveRatio>=25 ? '#C2780A' : '#C23B22');
+  h += '<div class="stat-card" style="text-align:center;background:#fdf8f0"><div class="stat-num" style="font-size:1.3em;font-weight:700;color:'+aliveColor+'">'+aliveCount+'/'+totalCount+' ('+aliveRatio+'%)</div><div class="stat-label">化学链活性</div><div style="font-size:0.65em;color:var(--ink-lighter)">高烈度链全休眠=产品池健康✅</div></div>';
+  // 评分极值
+  var best = ls.best || {}, worst = ls.worst || {};
+  h += '<div class="stat-card" style="text-align:center;background:#f8fdf8"><div style="font-size:0.75em;color:var(--ink-lighter);margin-bottom:2px">🏆 评分极值</div>';
+  h += '<div style="font-size:0.9em;font-weight:700;color:#3D7A4F">⬆ '+(best.name||'?')+' · '+(best.score||'?')+'分</div>';
+  h += '<div style="font-size:0.9em;font-weight:700;color:#C23B22">⬇ '+(worst.name||'?')+' · '+(worst.score||'?')+'分</div></div>';
+  // 替身Top5精简
   var ar = ls.avatar_rankings || {};
   var arList = [];
   for (var k in ar) arList.push({name:k, avg:ar[k]});
   arList.sort(function(a,b){return b.avg - a.avg});
-  if (arList.length > 0) {
-    h += '<div style="font-weight:600;margin-top:16px;margin-bottom:8px">👤 替身严格度排名</div>';
-    h += '<table class="data-table" style="width:100%;font-size:0.78em"><thead><tr><th>替身</th><th style="width:60px">均分</th><th style="width:120px">严格度</th></tr></thead><tbody>';
-    for (var i=0;i<Math.min(arList.length,10);i++) {
-      var barW = Math.round(arList[i].avg/100*120);
-      h += '<tr><td>'+arList[i].name+'</td><td style="text-align:center;font-weight:700">'+arList[i].avg+'</td><td><div style="width:'+barW+'px;height:10px;background:#27ae60;border-radius:3px"></div></td></tr>';
-    }
-    h += '</tbody></table>';
+  h += '<div class="stat-card" style="font-size:0.75em;background:#f8f4f8"><div style="font-weight:600;margin-bottom:4px">👤 替身Top5</div>';
+  for (var i=0;i<Math.min(arList.length,5);i++) {
+    var medal = i===0?'🥇':(i===1?'🥈':(i===2?'🥉':(i+1)));
+    h += '<div style="display:flex;justify-content:space-between;padding:1px 0"><span>'+medal+' '+arList[i].name+'</span><span style="font-weight:700">'+arList[i].avg+'</span></div>';
   }
+  h += '</div>';
+  h += '</div>';
 
-  // ── 最佳/最差 ──
-  var best = ls.best || {}, worst = ls.worst || {};
-  if (best.name) {
-    h += '<div style="font-weight:600;margin-top:16px;margin-bottom:8px">🏆 评分极值</div>';
-    h += '<div class="stat-grid" style="grid-template-columns:repeat(2,1fr)">';
-    h += '<div class="stat-card" style="background:#d5f5e3"><div style="font-size:0.8em;font-weight:600">⬆️ 最高: '+best.name+'</div><div>'+best.score+'分 · '+best.avatar+'</div></div>';
-    h += '<div class="stat-card" style="background:#fdedec"><div style="font-size:0.8em;font-weight:600">⬇️ 最低: '+worst.name+'</div><div>'+worst.score+'分 · '+worst.avatar+'</div></div>';
-    h += '</div>';
-  }
-
-  // ── 永续控制快照 ──
-  if (pc.total_runs) {
-    h += '<div style="font-weight:600;margin-top:16px;margin-bottom:8px">🎛️ 永续化学控制 · 第二阶</div>';
-    h += '<table class="data-table" style="width:100%;font-size:0.75em"><thead><tr><th>指标</th><th>值</th><th>含义</th></tr></thead><tbody>';
-    h += '<tr><td>状态</td><td><b>'+(pc.state||'?')+'</b></td><td>'+(pc.description||'')+'</td></tr>';
-    h += '<tr><td>调控速率</td><td><b>'+(pc.speed||'1.0')+'x</b></td><td>负载响应 (1.0正常·<1降速·>1加速)</td></tr>';
-    h += '<tr><td>设定点</td><td><b>'+(pc.setpoint_low||'?')+' - '+(pc.setpoint_high||'?')+'</b></td><td>目标热力窗口 (第二阶自演化)</td></tr>';
-    h += '<tr><td>历史趋势</td><td><b>'+(pc.tuning_history?'过去'+pc.tuning_history.length+'次':'?')+'</b></td><td>设定点自适应学习</td></tr>';
-    h += '<tr><td>反脆弱</td><td><b>'+(pc.antifragile_level||0)+'</b></td><td>GABA阶梯式扰动训练</td></tr>';
-    h += '</tbody></table>';
-  }
+  // ═══ 底部: 行动链接 ═══
+  h += '<div style="text-align:center;padding:16px;border-top:1px solid var(--border-warm);margin-top:8px;font-size:0.78em;color:var(--ink-lighter)">';
+  h += '📋 需要详细分析？打开 <a href="admin-windows.html" target="_blank" style="color:var(--accent-gold);font-weight:600">管理窗口 ⚙️</a> → 查看 chemistry-overview（60链热力图）· chemistry-llm（完整替身排名）· 各域视图';
+  h += '</div>';
 
   document.getElementById('tab-chemistry').innerHTML = h;
 }

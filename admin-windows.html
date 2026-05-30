@@ -606,79 +606,107 @@ viewRenderers['people-network']=function(){return breadcrumb('people','协作者
    10 化学层专属视图
    ================================================================ */
 
-/* ── chemistry-overview: 化学总览 ── */
+/* ── chemistry-overview: 化学总览 (数据源: meta.heating + meta.chemistry + meta.perpetual_control) ── */
 viewRenderers['chemistry-overview']=function(){
-  var meta=DB.meta||{};
-  var chem=meta.chemistry||{};
+  var meta=DB.meta||{}, chem=meta.chemistry||{}, results=chem.results||{}, heat=meta.heating||{}, pc=meta.perpetual_control||{}, org=meta.orchestration_health||{};
   var h=breadcrumb('governance','化学总览');
-  h+='<div class="panel-header"><div><h2>⚗️ 化学总览</h2><div class="meta">热力值 · 活链死链 · 60链热力图</div></div></div>';
+  h+='<div class="panel-header"><div><h2>⚗️ 化学总览 · 控制室视图</h2><div class="meta">从 entities_index.json 实时读取 · 最后一次反应: '+(chem.last_reacted||'?').slice(0,19)+'</div></div></div>';
 
-  // 第一行: 热力值 + 活链/死链
+  // ═══ 第一行: 核心指标 4 卡 (真实数据) ═══
   h+='<div class="graph-stat">';
-  var heat=chem.heat_value;
-  var heatVal=(heat!=null)?heat:'—';
-  var heatPct=(heat!=null)?Math.min(heat,100):0;
-  h+='<div class="stat-card"><div class="stat-num">'+heatVal+'</div><div class="stat-label">🔥 化学热力值</div><div class="stat-bar"><div class="fill fill-red" style="width:'+heatPct+'%"></div></div></div>';
+  var th=Math.round(heat.total_heat||0);
+  var hotColor=th>800?'fill-red':(th>500?'fill-gold':'fill-green');
+  var hotPct=Math.min(Math.round(th/12),100);
+  h+='<div class="stat-card"><div class="stat-num">'+th+'</div><div class="stat-label">🔥 化学总热力</div><div class="stat-bar"><div class="fill '+hotColor+'" style="width:'+hotPct+'%"></div></div><div style="font-size:0.65em;color:var(--ink-light)">'+(heat.temperature_grade||'?')+' · '+Math.round(heat.heat_sources||0)+'热源</div></div>';
 
-  var liveLinks=chem.live_links;
-  var deadLinks=chem.dead_links;
-  var liveVal=(liveLinks!=null)?liveLinks:'—';
-  var deadVal=(deadLinks!=null)?deadLinks:'—';
-  var totalLinks=(liveLinks!=null&&deadLinks!=null)?(liveLinks+deadLinks):null;
-  var livePct=(totalLinks!=null&&totalLinks>0)?Math.round(liveLinks/totalLinks*100):0;
-  var deadPct=(totalLinks!=null&&totalLinks>0)?Math.round(deadLinks/totalLinks*100):0;
-  h+='<div class="stat-card"><div class="stat-num">'+liveVal+' / '+deadVal+'</div><div class="stat-label">🔗 活链 / 死链</div><div class="stat-bar" style="display:flex"><div class="fill fill-green" style="width:'+livePct+'%"></div><div class="fill fill-red" style="width:'+deadPct+'%"></div></div></div>';
+  var alive=0,totalReacts=0;
+  for(var rk in results){if(results[rk]&&typeof results[rk].effect!=='undefined'){totalReacts++;if(results[rk].effect>0)alive++;}}
+  var alivePct=totalReacts>0?Math.round(100*alive/totalReacts):0, dead=totalReacts-alive;
+  var aliveColor=alivePct>=50?'fill-green':(alivePct>=25?'fill-gold':'fill-red');
+  h+='<div class="stat-card"><div class="stat-num">'+alive+' / '+dead+'</div><div class="stat-label">🧪 活链 / 死链</div><div class="stat-bar" style="display:flex"><div class="fill '+aliveColor+'" style="width:'+alivePct+'%"></div><div class="fill fill-red" style="width:'+(100-alivePct)+'%"></div></div><div style="font-size:0.65em;color:var(--ink-light)">'+(chem.total_reactions||0)+'总链 · '+alivePct+'%活跃</div></div>';
 
-  var density=chem.graph_density;
-  var densityVal=(density!=null)?density+'%':'—%';
-  var densityPct=(density!=null)?density:0;
-  h+='<div class="stat-card"><div class="stat-num">'+densityVal+'</div><div class="stat-label">🕸️ 图谱密度</div><div class="stat-bar"><div class="fill fill-gold" style="width:'+densityPct+'%"></div></div></div>';
+  var hs=org.health_score!=null?org.health_score:'?';
+  var hsColor=hs>=80?'fill-green':(hs>=50?'fill-gold':'fill-red');
+  h+='<div class="stat-card"><div class="stat-num">'+hs+'</div><div class="stat-label">🫀 编排器</div><div class="stat-bar"><div class="fill '+hsColor+'" style="width:'+Math.min(hs,100)+'%"></div></div><div style="font-size:0.65em;color:var(--ink-light)">'+(org.ok||0)+'✅ '+(org.degraded||0)+'🟡 '+(org.failed||0)+'❌ · '+(org.total_stages||'?')+'环节</div></div>';
 
-  var hotness=chem.hotness_level;
-  var hotnessLabel=hotness||'—';
-  var hotnessColor='fill-gold';
-  if(hotness==='高')hotnessColor='fill-red';
-  else if(hotness==='中')hotnessColor='fill-gold';
-  else if(hotness==='低')hotnessColor='fill-green';
-  h+='<div class="stat-card"><div class="stat-num">'+hotnessLabel+'</div><div class="stat-label">🌡️ 热力等级</div><div class="stat-bar"><div class="fill '+hotnessColor+'" style="width:100%"></div></div></div>';
+  var pcState=pc.state||'idle', pcSpeed=pc.speed||'1.0', pcLearn=Math.round(pc.learning_progress||0);
+  var pcColor=pcState==='steady'?'fill-green':(pcState==='braking'?'fill-gold':'fill-red');
+  h+='<div class="stat-card"><div class="stat-num">'+pcState+'</div><div class="stat-label">🎛️ 永续控制</div><div class="stat-bar"><div class="fill '+pcColor+'" style="width:'+Math.min(pcLearn,100)+'%"></div></div><div style="font-size:0.65em;color:var(--ink-light)">'+pcSpeed+'x · '+Math.round(pc.stability||0)+'%稳定 · '+pcLearn+'%学习</div></div>';
   h+='</div>';
 
-  // 60链热力图
-  var heatmap=chem.heatmap_60;
-  h+='<h3 style="font-size:.92em;margin:16px 0 8px">🔥 60链热力图</h3>';
-  if(heatmap&&heatmap.length){
-    h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px;margin-bottom:16px">';
-    for(var i=0;i<heatmap.length;i++){
-      var hm=heatmap[i];
-      var name=hm.name||hm.label||hm.id||('链#'+(i+1));
-      var val=hm.value!=null?hm.value:hm.score!=null?hm.score:null;
-      var intensity='fill-gold';
-      if(val!=null){
-        if(val>=80)intensity='fill-red';
-        else if(val>=50)intensity='fill-gold';
-        else intensity='fill-green';
+  // ═══ 第二行: 60链热力图 (分类折叠) ═══
+  h+='<h3 style="font-size:1em;margin:16px 0 8px">🧬 60条化学反应链 · 完整热力图 <span style="font-size:0.65em;color:var(--ink-lighter)">(驾驶舱精简版→仅一屏快照)</span></h3>';
+  var chainCats=[
+    {name:'基础反应',keys:['parallel','serial','ph','temperature','pressure','dosage']},
+    {name:'分子化学',keys:['crystallize','activate','gradient','chain','equilibrium','compound','entropy','catalyst','energy','isotope','redox','polymerization','phase','osmosis','enzyme','superposition','symmetry','dissipative','isomer','enantiomer','conformer','reversible']},
+    {name:'替身化学',keys:['avatar_activation','avatar_compound','avatar_osmosis','avatar_equilibrium','avatar_catalyst','avatar_spin','avatar_decay','avatar_field']},
+    {name:'信息化学',keys:['metabolism','info_synthesis','info_redox']},
+    {name:'环节化学',keys:['nourish_chem','gate_chem','scan_chem','consistency_chem','heal_chem','lifecycle_chem','standards_chem','audit_chem','report_chem']},
+    {name:'高烈度',keys:['fission','combustion','explosion','precipitation','electrolysis','sublimation','condensation','tracers','termination','recrystallization']}
+  ];
+  // 先把 all chain keys flatten 出来做id映射
+  var prefixMap={};
+  for(var ci=0;ci<chainCats.length;ci++){
+    for(var ki=0;ki<chainCats[ci].keys.length;ki++){
+      prefixMap[chainCats[ci].keys[ki]]=true;
+    }
+  }
+  // 看 meta 下面有哪些是直接挂在 meta.xxx (如 meta.crystallize) 而不仅是 meta.chemistry.results.crystallize
+  for(var ci2=0;ci2<chainCats.length;ci2++){
+    var cat=chainCats[ci2];
+    var catAlive=0,catTotal=cat.keys.length;
+    h+='<details style="margin-bottom:12px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 14px">';
+    h+='<summary style="font-weight:700;cursor:pointer;font-size:0.92em">'+cat.name+' <span style="color:var(--ink-lighter);font-weight:400;font-size:0.85em">('+cat.keys.length+'链)</span></summary>';
+    h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:4px;margin-top:8px">';
+    for(var ki=0;ki<cat.keys.length;ki++){
+      var k=cat.keys[ki];
+      var r=results[k];
+      var eff=(r&&typeof r.effect!=='undefined')?r.effect:null;
+      if(eff!==null && eff>0) catAlive++;
+      var cellBg='#f5f5f5';
+      if(eff!==null){
+        if(eff>=50)cellBg='#c0392b';
+        else if(eff>=20)cellBg='#e67e22';
+        else if(eff>=10)cellBg='#f39c12';
+        else if(eff>0)cellBg='#27ae60';
+        else cellBg='#e0ddd5';
       }
-      var barW=(val!=null)?val:0;
-      h+='<div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 10px">';
-      h+='<div style="font-size:.72em;color:var(--ink-light);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+escH(name)+'</div>';
-      h+='<div style="font-size:1em;font-weight:700;color:var(--ink)">'+((val!=null)?val:'—')+'</div>';
-      h+='<div style="height:4px;background:var(--border);border-radius:2px;margin-top:3px;overflow:hidden"><div class="'+intensity+'" style="height:100%;width:'+Math.min(barW,100)+'%;border-radius:2px"></div></div>';
-      h+='</div>';
+      var rName=(r&&r.name)?r.name:k;
+      h+='<div style="background:'+cellBg+';color:'+(eff!==null&&eff>0?'#fff':'var(--ink-light)')+';border-radius:6px;padding:6px 8px;font-size:0.7em;font-weight:600;text-align:center" title="'+escH(rName)+': '+(eff!=null?eff:'无数据')+'">'+rName+'<br><span style="font-size:1.4em">'+(eff!=null?eff:'—')+'</span></div>';
     }
     h+='</div>';
-  }else{
-    h+='<div class="placeholder-card"><div class="ph-icon">📊</div><div class="ph-title">热力图数据待加载</div><div class="ph-desc">60链化学热力图将在数据完善后展示</div></div>';
+    var catRatio=Math.round(100*catAlive/catTotal);
+    var catDot=catRatio>=50?'🟢':(catRatio>=25?'🟡':'🔴');
+    h+='<div style="font-size:0.72em;color:var(--ink-lighter);margin-top:6px">'+catDot+' '+catAlive+'/'+catTotal+' 活跃 ('+catRatio+'%)</div>';
+    h+='</details>';
   }
 
-  // 附加指标
-  var extras=chem.extras||chem.additional||[];
-  if(extras.length){
-    h+='<h3 style="font-size:.88em;margin:14px 0 8px">📋 附加指标</h3><div class="chip-wrap">';
-    for(var ei=0;ei<extras.length;ei++){
-      h+='<div class="chip">'+escH(extras[ei])+'</div>';
+  // ═══ 第三行: 休眠链诊断 ═══
+  var dormancy=meta._chain_dormancy||{};
+  var dormCount=0;
+  for(var dk in dormancy){if(dormancy[dk]&&dormancy[dk].reason)dormCount++;}
+  if(dormCount>0){
+    h+='<h3 style="font-size:1em;margin:16px 0 8px">💤 休眠链诊断 ('+dormCount+'条)</h3>';
+    h+='<table class="data-table" style="width:100%;font-size:0.75em"><thead><tr><th>链</th><th>原因</th><th>建议</th></tr></thead><tbody>';
+    for(var dk in dormancy){
+      var d=dormancy[dk];
+      if(!d||!d.reason)continue;
+      h+='<tr><td>'+escH(dk)+'</td><td>'+escH(d.reason)+'</td><td>'+(d.suggestion?escH(d.suggestion):'—')+'</td></tr>';
     }
+    h+='</tbody></table>';
+  }
+
+  // ═══ 溶解/调谐统计 ═══
+  var gov=meta.chemical_governor||{};
+  if(gov.dissolved||gov.cleaned||gov.reduced){
+    h+='<h3 style="font-size:1em;margin:16px 0 8px">🧹 化学调控统计</h3>';
+    h+='<div class="stat-grid" style="grid-template-columns:repeat(3,1fr)">';
+    h+='<div class="stat-card"><div class="stat-num">'+(gov.dissolved||0)+'</div><div class="stat-label">过期键清理</div></div>';
+    h+='<div class="stat-card"><div class="stat-num">'+(gov.cleaned||0)+'</div><div class="stat-label">冗余键移除</div></div>';
+    h+='<div class="stat-card"><div class="stat-num">'+(gov.reduced||'?')+'</div><div class="stat-label">meta精简至</div></div>';
     h+='</div>';
   }
+
   return h;
 };
 
