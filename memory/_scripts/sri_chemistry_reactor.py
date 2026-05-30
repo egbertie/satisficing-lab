@@ -1255,6 +1255,334 @@ def reaction_dosage(data):
 
 
 
+
+# ============================================================
+# 深化学 · 第四轮 (链29-36) 替身化学反应
+# ============================================================
+
+# 链29: 替身活化 — 未使用的替身被激活进入反应容器
+def reaction_avatar_activation(data):
+    """替身评分活跃度=化学活性·未活跃替身=惰性气体·需要激活"""
+    now = datetime.now(timezone.utc)
+    avatars = data.get('avatars', [])
+    
+    activated = 0
+    for a in avatars:
+        if not isinstance(a, dict):
+            continue
+        # 激活计数
+        if not a.get('activation_count'):
+            a['activation_count'] = 0
+        if not a.get('chemistry_state'):
+            a['chemistry_state'] = 'inert'  # 惰性状态
+            if a.get('quality_score', 0) > 0:
+                a['chemistry_state'] = 'active'
+                activated += 1
+        if not a.get('catalyst_power'):
+            a['catalyst_power'] = a.get('quality_score', 50) / 100
+    
+    data['meta']['avatar_activation'] = {
+        'reacted_at': now.isoformat(),
+        'total': len(avatars),
+        'activated': activated,
+        'inert': len(avatars) - activated,
+        'principle': '替身活跃度=化学活性·惰性替身需活化能'
+    }
+    return activated
+
+
+# 链30: 替身化合物 — 两个替身的认知融合产生新视角
+def reaction_avatar_compound(data):
+    """两个替身对同一产品的分歧观点·化合产生第三种观点"""
+    now = datetime.now(timezone.utc)
+    cogs = data.get('cognition_events', [])
+    
+    # 按产品分组替身评分
+    by_product = defaultdict(list)
+    for c in cogs:
+        if isinstance(c, dict) and c.get('entity_id') and c.get('evaluator') and c.get('score'):
+            by_product[c['entity_id']].append(c)
+    
+    compounds = 0
+    for pid, evals in by_product.items():
+        if len(evals) < 2:
+            continue
+        # 找评分差距最大的两个替身
+        evals.sort(key=lambda e: e.get('score', 0))
+        low = evals[0]
+        high = evals[-1]
+        spread = high.get('score', 0) - low.get('score', 0)
+        
+        if spread > 15:
+            # 分歧足够大→化合反应产生合成观点
+            synthesis = {
+                'product_id': pid,
+                'avatar_low': low.get('evaluator', '?'),
+                'avatar_high': high.get('evaluator', '?'),
+                'low_score': low.get('score'),
+                'high_score': high.get('score'),
+                'spread': spread,
+                'synthesis_score': round((low.get('score', 0) + high.get('score', 0)) / 2, 1),
+                'synthesis_insight': '高分替身关注{}·低分替身关注{}·综合=平衡视角'.format(
+                    '长期价值' if high.get('score', 0) > 70 else '可行性',
+                    '风险' if low.get('score', 0) < 60 else '细节'),
+                'compound_at': now.isoformat()
+            }
+            # 附加到产品上
+            for p in data.get('products', []):
+                if p.get('id') == pid:
+                    p.setdefault('avatar_compound_views', [])
+                    p['avatar_compound_views'].append(synthesis)
+            compounds += 1
+    
+    data['meta']['avatar_compound'] = {
+        'reacted_at': now.isoformat(),
+        'compounds_formed': compounds,
+        'principle': '替身分歧≠噪音·化合=新视角·15+分差触发'
+    }
+    return compounds
+
+
+# 链31: 替身渗透压 — 严厉替身拉低全局·宽容替身拉高全局
+def reaction_avatar_osmosis(data):
+    """替身之间存在评分渗透压——严厉→宽容形成压力梯度"""
+    now = datetime.now(timezone.utc)
+    avatars = data.get('avatars', [])
+    cogs = data.get('cognition_events', [])
+    
+    # 每个替身的评分倾向
+    avatar_scores = defaultdict(list)
+    for c in cogs:
+        if isinstance(c, dict) and c.get('evaluator') and c.get('score'):
+            avatar_scores[c['evaluator']].append(c['score'])
+    
+    if len(avatar_scores) < 2:
+        data['meta']['avatar_osmosis'] = {'reacted_at': now.isoformat(), 'principle': '需要≥2替身的数据'}
+        return 0
+    
+    # 计算替身间渗透压
+    av_biases = {}
+    for av, scores in avatar_scores.items():
+        av_biases[av] = {
+            'avg': round(sum(scores) / len(scores), 1),
+            'count': len(scores),
+            'strictness': 'strict' if sum(scores) / len(scores) < 68 else ('lenient' if sum(scores) / len(scores) > 78 else 'balanced')
+        }
+    
+    # 找到最严和最宽容的替身
+    strictest = min(av_biases.items(), key=lambda x: x[1]['avg'])
+    lenient = max(av_biases.items(), key=lambda x: x[1]['avg'])
+    
+    pressure = round(lenient[1]['avg'] - strictest[1]['avg'], 1)
+    
+    # 渗透效果: 在替身实体上标记
+    for a in avatars:
+        if a.get('name') in av_biases:
+            a['avatar_bias'] = av_biases[a['name']]['strictness']
+            a['osmotic_pressure_from'] = strictest[0] if a['name'] != strictest[0] else lenient[0]
+    
+    data['meta']['avatar_osmosis'] = {
+        'reacted_at': now.isoformat(),
+        'strictest': strictest[0],
+        'strictest_avg': strictest[1]['avg'],
+        'lenient': lenient[0],
+        'lenient_avg': lenient[1]['avg'],
+        'pressure_gradient': pressure,
+        'principle': '最严{}与最宽容{}形成{}分渗透压·驱动评分收敛'.format(strictest[0], lenient[0], pressure)
+    }
+    return pressure
+
+
+# 链32: 替身平衡 — 替身评分形成动态均衡点(Le Chatelier原理)
+def reaction_avatar_equilibrium(data):
+    """如果新替身加入·平衡移动·评分重新校准"""
+    now = datetime.now(timezone.utc)
+    avatars = data.get('avatars', [])
+    cogs = data.get('cognition_events', [])
+    
+    avatar_scores = defaultdict(list)
+    for c in cogs:
+        if isinstance(c, dict) and c.get('evaluator') and c.get('score'):
+            avatar_scores[c['evaluator']].append(c['score'])
+    
+    # 当前平衡点
+    all_scores = [s for scores in avatar_scores.values() for s in scores]
+    equilibrium_point = sum(all_scores) / len(all_scores) if all_scores else 70
+    
+    # 替身偏离平衡的距离
+    for a in avatars:
+        name = a.get('name', '')
+        if name in avatar_scores:
+            avg = sum(avatar_scores[name]) / len(avatar_scores[name])
+            a['equilibrium_delta'] = round(avg - equilibrium_point, 1)
+            # >0=偏宽, <0=偏严
+            a['equilibrium_role'] = 'stabilizer' if abs(avg - equilibrium_point) < 8 else 'disruptor'
+    
+    data['meta']['avatar_equilibrium'] = {
+        'reacted_at': now.isoformat(),
+        'equilibrium_point': round(equilibrium_point, 1),
+        'stabilizers': sum(1 for a in avatars if a.get('equilibrium_role') == 'stabilizer'),
+        'disruptors': sum(1 for a in avatars if a.get('equilibrium_role') == 'disruptor'),
+        'principle': '替身评分向均衡点收敛·新替身加入=平衡移动'
+    }
+    return equilibrium_point
+
+
+# 链33: 替身催化剂 — 精准替身评分=高催化效率
+def reaction_avatar_catalyst(data):
+    """替身的评价越精准(偏差越小)→催化效率越高→加速产品流"""
+    now = datetime.now(timezone.utc)
+    avatars = data.get('avatars', [])
+    cogs = data.get('cognition_events', [])
+    
+    avatar_scores = defaultdict(list)
+    for c in cogs:
+        if isinstance(c, dict) and c.get('evaluator') and c.get('score'):
+            avatar_scores[c['evaluator']].append(c['score'])
+    
+    catalyst_count = 0
+    for a in avatars:
+        name = a.get('name', '')
+        if name in avatar_scores:
+            scores = avatar_scores[name]
+            avg = sum(scores) / len(scores)
+            # 标准差越小=评价越稳定=催化效率越高
+            std = (sum((s - avg) ** 2 for s in scores) / len(scores)) ** 0.5
+            # 催化效率 = 评分数 / (1 + 标准差)
+            eff = round(len(scores) / (1 + std), 2)
+            a['catalytic_efficiency'] = eff
+            if eff > 0.5:
+                a['chemistry_state'] = 'catalyst'
+                catalyst_count += 1
+    
+    data['meta']['avatar_catalyst'] = {
+        'reacted_at': now.isoformat(),
+        'catalysts': catalyst_count,
+        'principle': '评价精准的替身=高效催化剂·加速产品流质量'
+    }
+    return catalyst_count
+
+
+# 链34: 替身同位旋 — 替身之间互相评分(元评价)
+def reaction_avatar_spin(data):
+    """替身不仅评产品·也评其他替身的评价质量·形成自旋网络"""
+    now = datetime.now(timezone.utc)
+    avatars = data.get('avatars', [])
+    cogs = data.get('cognition_events', [])
+    
+    # 简化的元评价: 替身评分的方差=该替身的"自旋态"
+    avatar_scores = defaultdict(list)
+    for c in cogs:
+        if isinstance(c, dict) and c.get('evaluator') and c.get('score'):
+            avatar_scores[c['evaluator']].append(c['score'])
+    
+    spin_count = 0
+    for a in avatars:
+        name = a.get('name', '')
+        if name in avatar_scores and len(avatar_scores[name]) >= 2:
+            scores = avatar_scores[name]
+            avg = sum(scores) / len(scores)
+            std = (sum((s - avg) ** 2 for s in scores) / len(scores)) ** 0.5
+            
+            # 自旋态: 标准差决定
+            if std < 5:
+                spin = 'up'     # 一致性强·高可靠
+            elif std < 10:
+                spin = 'mixed'  # 有波动
+            else:
+                spin = 'down'   # 不一致·低可靠
+            
+            a['spin_state'] = spin
+            a['spin_std'] = round(std, 1)
+            spin_count += 1
+    
+    data['meta']['avatar_spin'] = {
+        'reacted_at': now.isoformat(),
+        'spins_assigned': spin_count,
+        'principle': '替身评分一致性=自旋态·up=可靠·down=需校准'
+    }
+    return spin_count
+
+
+# 链35: 替身衰变 — 长期不使用的替身活性衰减
+def reaction_avatar_decay(data):
+    """替身长期不被激活→放射性衰变→活性半衰期下降"""
+    now = datetime.now(timezone.utc)
+    avatars = data.get('avatars', [])
+    cogs = data.get('cognition_events', [])
+    
+    # 找最近一次被使用的替身
+    active_avatars = set()
+    for c in cogs:
+        if isinstance(c, dict) and c.get('evaluator'):
+            active_avatars.add(c['evaluator'])
+    
+    half_life_days = 30  # 替身活跃半衰期
+    decayed = 0
+    
+    for a in avatars:
+        name = a.get('name', '')
+        if name in active_avatars:
+            continue
+        
+        # 未激活替身: 计算衰减
+        quality = a.get('quality_score', 50)
+        # 每30天衰减50%
+        decay_factor = 0.5 ** (1 / half_life_days)
+        a['quality_score'] = round(quality * decay_factor, 1)
+        a['decayed'] = True
+        a['decay_at'] = now.isoformat()
+        decayed += 1
+    
+    data['meta']['avatar_decay'] = {
+        'reacted_at': now.isoformat(),
+        'active_avatars': len(active_avatars),
+        'decayed': decayed,
+        'half_life_days': half_life_days,
+        'principle': '不使用=衰变·半衰期30天'
+    }
+    return decayed
+
+
+# 链36: 替身全局场 — 所有替身形成一个评分场·影响每个产品的评分
+def reaction_avatar_field(data):
+    """31替身构成评分向量场·每个产品在新的替身评分后·重新计算在场中的位置"""
+    now = datetime.now(timezone.utc)
+    avatars = data.get('avatars', [])
+    cogs = data.get('cognition_events', [])
+    products = [p for p in data.get('products', [])
+                if isinstance(p, dict) and p.get('status') not in ('已下架', '资料·归入知识库')]
+    
+    # 构建评分场: 每个替身=场的维度
+    avatar_by_product = defaultdict(dict)
+    for c in cogs:
+        if isinstance(c, dict) and c.get('entity_id') and c.get('evaluator') and c.get('score'):
+            avatar_by_product[c['entity_id']][c['evaluator']] = c['score']
+    
+    field_strength = 0
+    for p in products:
+        pid = p.get('id', '')
+        if pid in avatar_by_product:
+            scores = list(avatar_by_product[pid].values())
+            # 场强 = 评分数 · 评分方差
+            avg = sum(scores) / len(scores)
+            variance = sum((s - avg) ** 2 for s in scores) / len(scores) if len(scores) > 1 else 0
+            p['avatar_field_strength'] = round(len(scores) * (1 / (1 + variance)), 2)
+            p['avatar_field_dimensions'] = len(scores)
+            field_strength += 1
+    
+    data['meta']['avatar_field'] = {
+        'reacted_at': now.isoformat(),
+        'products_in_field': field_strength,
+        'total_avatars': len(avatars),
+        'active_in_field': len(set(c.get('evaluator') for c in cogs if isinstance(c, dict) and c.get('evaluator'))),
+        'principle': '替身=评分向量场维度·产品在场中被多维度定位'
+    }
+    return field_strength
+
+
+
+
 def react(dry_run=False):
     """执行全部九条化学反应链"""
     now = datetime.now(timezone.utc)
@@ -1299,6 +1627,15 @@ def react(dry_run=False):
         ('temperature', '温度效应', reaction_temperature),
         ('pressure', '压力效应', reaction_pressure),
         ('dosage', '剂量效应', reaction_dosage),
+        # --- 深化学第四轮·替身反应 ---
+        ('avatar_activation', '替身活化', reaction_avatar_activation),
+        ('avatar_compound', '替身化合物', reaction_avatar_compound),
+        ('avatar_osmosis', '替身渗透压', reaction_avatar_osmosis),
+        ('avatar_equilibrium', '替身平衡', reaction_avatar_equilibrium),
+        ('avatar_catalyst', '替身催化剂', reaction_avatar_catalyst),
+        ('avatar_spin', '替身同位旋', reaction_avatar_spin),
+        ('avatar_decay', '替身衰变', reaction_avatar_decay),
+        ('avatar_field', '替身全局场', reaction_avatar_field),
     ]
     
     for chain_id, chain_name, chain_func in chains:
