@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>镜·警兆 | 四骑士自检 | 满意解研究所</title>
-  <meta name="description" content="满意解研究所 · 镜·警兆 | 四骑士自检 | 满意解研究所">
+<title>镜·警兆 | 关系危机信号自检 | 满意解研究所</title>
 <style>
   :root { --sri-red:#C23B22; --sri-gold:#B8860B; --sri-bg:#F5F0E6; --text:#4A4A4A; --title:#2A2A2A; --border:#D4C5A0; }
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -83,10 +82,10 @@
 </script>
 
 <body>
-<div class="hero"><h1>🪞 镜·警兆</h1><p>Gottman四骑士·合伙人关系预警</p></div>
+<div class="hero"><h1>🪞 镜·警兆</h1><p>Gottman关系危机信号·合伙人关系预警</p></div>
 <div class="main">
   <div class="intro">
-    <h3>四骑士是什么？</h3>
+    <h3>关系危机信号是什么？</h3>
     <p>Gottman花了40年研究关系解体——发现可以预测91%的离婚率。<strong>同样的四个信号，在合伙人关系中同样精准。</strong></p>
     <p style="margin-top:8px;">它们出现的顺序是：<strong>批评→蔑视→防御→冷漠</strong>。每往前走一步，修复就越难。大部分人感知到问题的时候——已经走到第三步了。</p>
   </div>
@@ -119,7 +118,7 @@
   </div>
 
   <div class="knight" onclick="toggleKnight(this)" id="k4">
-    <div class="k-header"><span class="k-icon">💤</span><div><div class="k-name">第四骑士：冷漠</div><div class="k-desc">不是沉默——是不再觉得对方值得回应</div></div></div>
+    <div class="k-header"><span class="k-icon">💤</span><div><div class="k-name">第关系危机信号：冷漠</div><div class="k-desc">不是沉默——是不再觉得对方值得回应</div></div></div>
     <div class="k-check">
       <div class="check-item" onclick="event.stopPropagation();toggleCheck(this)"><span class="check-box"></span>我们不再争论了——因为我觉得争论也没有用</div>
       <div class="check-item" onclick="event.stopPropagation();toggleCheck(this)"><span class="check-box"></span>我已经一个星期没有主动找他/她说话</div>
@@ -133,7 +132,7 @@
   </div>
   <div class="result" id="resultBox"></div>
 </div>
-<div class="footer"><p><a href="go.html">← 返回决策通道</a></p><p style="margin-top:4px;font-size:10px;">满意解研究所 · 镜·警兆 · 水族·观自在·Gottman四骑士</p></div>
+<div class="footer"><p><a href="go.html">← 返回决策通道</a></p><p style="margin-top:4px;font-size:10px;">满意解研究所 · 镜·警兆 · 水族·水月观音·Gottman关系危机信号</p></div>
 
 <script>
 function toggleKnight(el) { el.classList.toggle('active'); }
@@ -160,12 +159,12 @@ function showResult() {
     <div style="background:#D4C5A0;height:4px;border-radius:2px;margin-top:2px;"><div style="background:${counts[i]>=2?'var(--sri-red)':'var(--sri-gold)'};height:100%;width:${pct}%;border-radius:2px;transition:width 0.5s;"></div></div></div>`;
   }
 
-  let html = `<h2>预警报告</h2><div class="level-badge ${className}">${levelText}</div><p style="font-size:13px;">Gottman四骑士信号：共 ${total}/12 个信号触发</p>
-  <p style="font-size:13px;margin-top:8px;">${totals>=9?'你需要认真面对。四骑士的每一步都会让修复更难。这些信号不是今天才出现的——你只是今天才正视它们。':total>=5?'有一些值得关注的信号。好消息是：你看到了。大多数人走到冷漠那一步才回头。':"你们的合伙关系目前没有严重的四骑士信号。但Gottman说：不是'没有信号'——是'今天没有'。保持觉察比任何工具都重要。"}</p>
+  let html = `<h2>预警报告</h2><div class="level-badge ${className}">${levelText}</div><p style="font-size:13px;">Gottman关系危机信号信号：共 ${total}/12 个信号触发</p>
+  <p style="font-size:13px;margin-top:8px;">${totals>=9?'你需要认真面对。关系危机信号的每一步都会让修复更难。这些信号不是今天才出现的——你只是今天才正视它们。':total>=5?'有一些值得关注的信号。好消息是：你看到了。大多数人走到冷漠那一步才回头。':"你们的合伙关系目前没有严重的关系危机信号信号。但Gottman说：不是'没有信号'——是'今天没有'。保持觉察比任何工具都重要。"}</p>
   ${knightBars}
   <p style="margin-top:12px;font-size:13px;color:var(--sri-red);font-weight:600;">最需关注的：${knightNames[maxKnight]}</p>
   <p style="font-size:12px;color:var(--text);">${knightWords[maxKnight]}</p>
-  <p style="margin-top:12px;font-size:10px;opacity:0.5;">Gottman·婚姻实验室·四骑士预测模型（91%准确率）</p>
+  <p style="margin-top:12px;font-size:10px;opacity:0.5;">Gottman·婚姻实验室·关系危机信号预测模型（91%准确率）</p>
   <div style="margin-top:16px;"><a class="btn btn-primary" href="thermometer.html">去做温度计</a> <a class="btn btn-outline" href="assessment.html">做五维自评</a></div>`;
   
   document.getElementById('resultBox').innerHTML = html;
@@ -241,7 +240,7 @@ function resetAll() {
 <div style="margin-top:16px;padding-top:16px;border-top:1px solid #D4C5A0;display:flex;flex-direction:column;gap:8px;">
 <p style="font-size:12px;color:#6E6E6E;text-align:center;">下一步</p>
 <a href="thermometer.html" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#F5F0E6;border-radius:10px;text-decoration:none;color:#4A4A4A;font-size:13px;"><span style="font-size:20px;">🌡️</span><span style="font-weight:700;color:#2A2A2A;">关系温度计</span> · 30秒测信任度</a>
-<a href="knights.html" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#F5F0E6;border-radius:10px;text-decoration:none;color:#4A4A4A;font-size:13px;"><span style="font-size:20px;">⚠️</span><span style="font-weight:700;color:#2A2A2A;">四骑士自检</span> · 1分钟看预警</a>
+<a href="knights.html" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#F5F0E6;border-radius:10px;text-decoration:none;color:#4A4A4A;font-size:13px;"><span style="font-size:20px;">⚠️</span><span style="font-weight:700;color:#2A2A2A;">关系危机信号自检</span> · 1分钟看预警</a>
 <a href="cards-play.html?deck=7" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#F5F0E6;border-radius:10px;text-decoration:none;color:#4A4A4A;font-size:13px;"><span style="font-size:20px;">🎴</span><span style="font-weight:700;color:#2A2A2A;">决策卡牌</span> · 场景模拟练习</a>
 <a href="account.html" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#F5F0E6;border-radius:10px;text-decoration:none;color:#4A4A4A;font-size:13px;"><span style="font-size:20px;">👤</span><span style="font-weight:700;color:#2A2A2A;">注册账户</span> · 解锁更多 + 追踪进度</a>
 </div></div></div>

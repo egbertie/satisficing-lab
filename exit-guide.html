@@ -113,7 +113,7 @@
       <li onclick="toggleCheck(this)"><span class="box"></span>你在心里想过"如果他不在了，事情会怎样"</li>
       <li onclick="toggleCheck(this)"><span class="box"></span>他对你的态度从"合作"变成了"容忍"</li>
     </ul>
-    <p style="font-size:11px;opacity:0.6;margin-top:8px;">Gottman: 5条中3条——你已经在"冷漠"阶段。冷漠是四骑士的最后一步。</p>
+    <p style="font-size:11px;opacity:0.6;margin-top:8px;">Gottman: 5条中3条——你已经在"冷漠"阶段。冷漠是关系危机信号的最后一步。</p>
   </div>
 
   <!-- Step 3: 法律 -->
@@ -220,7 +220,7 @@ function showGuide() {
   if (fScore < 6) verdict += '<li><strong style="color:var(--sri-red)">财务缓冲不足</strong>——你的退出选择受限于经济压力。建议先延长财务跑道，再做退出决策。</li>';
   else verdict += '<li><strong style="color:#4A8C5C">财务缓冲充足</strong>——你可以在不焦虑的情况下做出退出决定。</li>';
   
-  if (relChecks >= 3) verdict += '<li><strong style="color:var(--sri-red)">关系信号强烈</strong>——多条Gottman四骑士指标被触发。建议认真坐下来谈一次。</li>';
+  if (relChecks >= 3) verdict += '<li><strong style="color:var(--sri-red)">关系信号强烈</strong>——多条Gottman关系危机信号指标被触发。建议认真坐下来谈一次。</li>';
   else if (relChecks >= 1) verdict += '<li><strong style="color:#B8860B">关系有信号</strong>——需要关注，但还没到危机级别。</li>';
   else verdict += '<li>关系无明显危险信号。</li>';
   
