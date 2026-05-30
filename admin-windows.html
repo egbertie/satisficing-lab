@@ -629,9 +629,9 @@ viewRenderers['chemistry-overview']=function(){
   var hsColor=hs>=80?'fill-green':(hs>=50?'fill-gold':'fill-red');
   h+='<div class="stat-card"><div class="stat-num">'+hs+'</div><div class="stat-label">🫀 编排器</div><div class="stat-bar"><div class="fill '+hsColor+'" style="width:'+Math.min(hs,100)+'%"></div></div><div style="font-size:0.65em;color:var(--ink-light)">'+(org.ok||0)+'✅ '+(org.degraded||0)+'🟡 '+(org.failed||0)+'❌ · '+(org.total_stages||'?')+'环节</div></div>';
 
-  var pcState=pc.state||'idle', pcSpeed=pc.speed||'1.0', pcLearn=Math.round(pc.learning_progress||0);
-  var pcColor=pcState==='steady'?'fill-green':(pcState==='braking'?'fill-gold':'fill-red');
-  h+='<div class="stat-card"><div class="stat-num">'+pcState+'</div><div class="stat-label">🎛️ 永续控制</div><div class="stat-bar"><div class="fill '+pcColor+'" style="width:'+Math.min(pcLearn,100)+'%"></div></div><div style="font-size:0.65em;color:var(--ink-light)">'+pcSpeed+'x · '+Math.round(pc.stability||0)+'%稳定 · '+pcLearn+'%学习</div></div>';
+  var pcState=pc.state||'idle', pcSpeed=pc.speed_multiplier||'1.0', pcLearn=Math.round(pc.learning_progress||0);
+  var pcStable=Math.round(pc.stability_score||0);
+  h+='<div class="stat-card"><div class="stat-num">'+pcState+'</div><div class="stat-label">🎛️ 永续控制</div><div class="stat-bar"><div class="fill '+pcColor+'" style="width:'+Math.min(pcLearn,100)+'%"></div></div><div style="font-size:0.65em;color:var(--ink-light)">'+pcSpeed+'x · '+pcStable+'%稳定 · '+pcLearn+'%学习</div></div>';
   h+='</div>';
 
   // ═══ 第二行: 60链热力图 (分类折叠) ═══

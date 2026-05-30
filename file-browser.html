@@ -28,6 +28,34 @@ body {
 a { color:var(--accent-gold); text-decoration:none; }
 a:hover { text-decoration:underline; }
 
+/* === GATE (password) === */
+#gate {
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  background:var(--bg); display:flex; flex-direction:column;
+  align-items:center; justify-content:center; z-index:10000;
+}
+#gate .gate-logo {
+  width:72px; height:72px; background:var(--accent-red);
+  color:#fff; border-radius:16px; display:flex;
+  align-items:center; justify-content:center;
+  font-size:36px; font-weight:700; margin-bottom:16px;
+}
+#gate h1 { font-size:1.5em; color:var(--ink); margin-bottom:4px; }
+#gate .subtitle { color:var(--ink-light); font-size:0.88em; margin-bottom:24px; }
+#gate input {
+  width:240px; padding:10px 14px; border:1px solid var(--border);
+  border-radius:6px; background:var(--paper-white);
+  color:var(--ink); font-size:1em; outline:none; text-align:center;
+  margin-bottom:12px; transition:border-color 0.2s;
+}
+#gate input:focus { border-color:var(--accent-gold); }
+#gate button {
+  padding:8px 32px; background:var(--accent-red); color:#fff;
+  border:none; border-radius:6px; font-size:0.95em; cursor:pointer;
+}
+#gate button:hover { opacity:0.85; }
+#gate .hint { color:var(--ink-lighter); font-size:0.82em; margin-top:12px; }
+
 /* === LOADING === */
 #loading {
   position:fixed; top:0; left:0; width:100%; height:100%;
@@ -171,8 +199,18 @@ a:hover { text-decoration:underline; }
 </head>
 <body>
 
+<!-- ========== 密码门 ========== -->
+<div id="gate">
+  <div class="gate-logo">红</div>
+  <h1>满意红</h1>
+  <p class="subtitle">仓库文件浏览器</p>
+  <input type="password" id="pw" placeholder="输入通行码" autofocus onkeydown="if(event.key==='Enter')unlock(document.getElementById('btn-unlock'))">
+  <button id="btn-unlock" onclick="unlock(this)">进入</button>
+  <p class="hint">请输入通行码以继续</p>
+</div>
+
 <!-- LOADING -->
-<div id="loading">
+<div id="loading" style="display:none">
   <div class="spinner"></div>
   <p>正在加载仓库文件树...</p>
 </div>
@@ -211,6 +249,36 @@ a:hover { text-decoration:underline; }
 </div>
 
 <script>
+// ============================================================
+//  PASSWORD GATE
+// ============================================================
+var PASS = '123654';
+(function(){
+  var saved = localStorage.getItem('fb_unlocked');
+  var t = saved ? parseInt(saved) : 0;
+  if (saved && (Date.now() - t < 86400000)) { // 24h session
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('loading').style.display = 'flex';
+    init();
+  } else {
+    localStorage.removeItem('fb_unlocked');
+  }
+})();
+function unlock(btn) {
+  var pw = document.getElementById('pw').value;
+  if (pw === PASS) {
+    localStorage.setItem('fb_unlocked', Date.now());
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('loading').style.display = 'flex';
+    init();
+  } else {
+    var inp = document.getElementById('pw');
+    inp.value = '';
+    inp.style.borderColor = 'var(--accent-red)';
+    inp.placeholder = '通行码错误，请重试';
+    setTimeout(function(){ inp.style.borderColor = ''; inp.placeholder = '输入通行码'; }, 1500);
+  }
+}
 // ============================================================
 //  CONFIG
 // ============================================================
@@ -772,7 +840,9 @@ function updateStatus(msg) {
 // ============================================================
 //  INIT
 // ============================================================
-loadTree();
+function init() {
+  loadTree();
+}
 </script>
 </body>
 </html>
