@@ -1,0 +1,79 @@
+{
+  "version": "1.0.0",
+  "name": "SRI 知识养料供给体系 (Nourishment Pipeline)",
+  "principle": "信息→知识→科研→产品→客户→体验 八层循环迭代",
+  "based_on": {
+    "CODE": "Tiago Forte·Capture/Organize/Distill/Express",
+    "AI_Scientist": "Nature 2026·端到端自动化研究管道",
+    "CI_Automation": "竞品情报自动化·Crayon/Klue模式",
+    "SECI": "Nonaka·知识创造螺旋"
+  },
+  "layers": [
+    {
+      "id": "L0_ingest",
+      "label": "📡 信息采集",
+      "description": "多渠道自动化采集外部信息",
+      "sources": ["Inkwell RSS(90+博客)", "GitHub Trending", "HackerNews", "arXiv cs.HC", "飞书消息", "竞品网站监控"],
+      "cron": "每日06:00 采集+去重"
+    },
+    {
+      "id": "L1_filter",
+      "label": "🔍 信息过滤",
+      "description": "相关性评分·去噪·分类",
+      "criteria": ["与满意红领域相关(创始/合伙/组织/决策)", "信息质量(来源权威性)", "新颖度(是否新知识)", "可操作度(能否驱动产品)"],
+      "auto": "LLM 快速评分 0-100·过滤<60·每日20-50条产出"
+    },
+    {
+      "id": "L2_summarize",
+      "label": "📝 知识提炼",
+      "description": "自动摘要·关键概念提取·结构化笔记",
+      "output": "每条信息→300字摘要+5关键概念+3行动建议",
+      "auto": "LLM 摘要生成·写入 memory/nourishment/ 目录"
+    },
+    {
+      "id": "L3_connect",
+      "label": "🔗 知识关联",
+      "description": "新知识→现有知识图谱连接·实体关联·缺口识别",
+      "output": "自动更新 entities_index 连接·标记新概念·识别知识缺口",
+      "auto": "飞轮引擎 scan() 处理"
+    },
+    {
+      "id": "L4_insight",
+      "label": "💡 研究洞察",
+      "description": "跨信息源模式识别·趋势分析·假设生成",
+      "output": "周度/月度研究报告·竞品对标·方法论更新建议",
+      "auto": "每周一09:00 生成 SRI 研究周报"
+    },
+    {
+      "id": "L5_productize",
+      "label": "🛠️ 产品转化",
+      "description": "研究洞察→产品改进建议·新产品质量门禁更新",
+      "output": "自动生成产品改进PRD·标准迭代建议·新产品概念",
+      "auto": "LLM替身从研究报告中提取·写入 entities_index.insights"
+    },
+    {
+      "id": "L6_deliver",
+      "label": "👤 客户交付",
+      "description": "更新后的产品→客户可见·产品流自动重排",
+      "output": "产品库自动更新·推荐流重排·客户通知",
+      "auto": "产品流引擎 rerank() 触发"
+    },
+    {
+      "id": "L7_feedback",
+      "label": "🔄 体验反馈",
+      "description": "客户使用数据→体验评分→发现新问题",
+      "output": "NPS·完成率·新问题标记→触发 L0 新一轮采集",
+      "auto": "客户数据收集(Phase 2)"
+    }
+  ],
+  "automation_status": {
+    "L0_ingest": "🟡 部分(有 RSS，缺 GitHub/arXiv/竞品)",
+    "L1_filter": "❌ 缺失",
+    "L2_summarize": "❌ 缺失",
+    "L3_connect": "❌ 缺失",
+    "L4_insight": "❌ 缺失",
+    "L5_productize": "❌ 缺失",
+    "L6_deliver": "✅ 已有(产品流重排)",
+    "L7_feedback": "❌ 缺失(需客户)"
+  }
+}
