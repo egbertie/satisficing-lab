@@ -273,6 +273,7 @@ body {
   <div class="tab-panel" id="tab-archaeology"></div>
   <div class="tab-panel" id="tab-cities"></div>
   <div class="tab-panel" id="tab-flows"></div>
+  <div class="tab-panel" id="tab-flywheel"></div>
 
   <div class="footer">
     <div>满意红 · 驾驶舱 1.0 · 为 Egbertie 而建</div>
@@ -363,6 +364,7 @@ function boot() {
     renderArchaeology();
     renderCities();
     renderFlows();
+    renderFlywheel();
     switchTab('tab-overview');
   }).catch(function(e){
     document.getElementById('app').innerHTML = '<div class="load-error"><strong>⚠️ 数据加载失败</strong><details><summary>详情</summary>无法加载数据文件。<br>请确认 entities_index.json 和 open_tasks_audit.json 存在。<br><br>错误: '+h(e.message)+'</details></div>';
@@ -384,6 +386,7 @@ function buildNav() {
     {id:'tab-archaeology', label:'🏺 考古'},
     {id:'tab-cities', label:'🏙️ 城市市场'},
     {id:'tab-flows', label:'🔌 流仪表板'},
+    {id:'tab-flywheel', label:'♻️ 飞轮运转'},
     {id:'tab-admin', label:'⚙️ 管理后台', ext:true, href:'admin-windows.html'}
   ];
   var h = '';
@@ -1249,6 +1252,69 @@ function renderFlows() {
   h += '</div></div>';
 
   document.getElementById('tab-flows').innerHTML = h;
+}
+
+/* ===== 飞轮运转台 ===== */
+function renderFlywheel() {
+  var m = EIDX.meta || {}, fw = m.flywheel || {}, ha = fw.health_audit_report || {}, cap = fw.capacity || {}, lyrs = ha.flow_layers || {};
+  var h = '<div class="panel-header"><h2>♻️ 知识资产飞轮 · 自动运转状态</h2><span class="meta" id="fw-meta"></span></div>';
+  h += '<div class="stat-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:16px">';
+  var cycles = [
+    {id:'scan',name:'①知识流入',desc:'文件→实体',key:'scan'},
+    {id:'stale',name:'②新鲜度',desc:'腐烂检测',key:'stale'},
+    {id:'rerank',name:'③产品流',desc:'评分重排',key:'rerank'},
+    {id:'llm',name:'④LLM感知',desc:'评分缺口',key:'llm'},
+    {id:'health',name:'⑤健康自检',desc:'五层验证',key:'health'}
+  ];
+  for (var i=0;i<cycles.length;i++) {
+    var c=cycles[i];
+    h += '<div class="stat-card" style="background:var(--card-cool)"><div style="font-size:0.75em;color:var(--ink-lighter)">'+c.name+'</div><div style="font-weight:700;margin-top:4px;font-size:0.85em">'+c.desc+'</div><div style="font-size:0.65em;margin-top:4px" id="fw-'+c.id+'">—</div></div>';
+  }
+  h += '</div>';
+
+  h += '<div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px">';
+  h += '<div class="stat-card" style="background:'+ (cap.rating==='green'?'#d5f5e3':'#fdedec') +'"><div class="stat-num" style="font-size:1.6em;font-weight:700;color:'+ (cap.rating==='green'?'#27ae60':'#e74c3c') +'">Phase '+ (cap.phase||0) +'</div><div class="stat-label">规模阶段</div><div style="font-size:0.65em;color:var(--ink-lighter)">容量·'+ (cap.rating||'?') +'</div></div>';
+  h += '<div class="stat-card"><div class="stat-num" style="font-size:1.6em;font-weight:700">'+ (cap.json_size_mb||'?') +'MB</div><div class="stat-label">JSON大小</div><div style="font-size:0.65em;color:var(--ink-lighter)">阈值15MB分片</div></div>';
+  h += '<div class="stat-card"><div class="stat-num" style="font-size:1.6em;font-weight:700">'+ (fw.total_runs||0) +'</div><div class="stat-label">总运行次数</div><div style="font-size:0.65em;color:var(--ink-lighter)">'+ (fw.last_run_elapsed_ms||'?') +'ms/次</div></div>';
+  h += '<div class="stat-card"><div class="stat-num" style="font-size:1.6em;font-weight:700">'+ (m.change_log?m.change_log.length:0) +'</div><div class="stat-label">事件溯源</div><div style="font-size:0.65em;color:var(--ink-lighter)">变更日志条</div></div>';
+  h += '</div>';
+
+  h += '<div style="font-weight:600;margin-bottom:8px">🔍 五层流完整性</div>';
+  h += '<table class="data-table" style="width:100%;font-size:0.82em"><thead><tr><th>层级</th><th>名称</th><th style="width:80px">事件数</th><th style="width:80px">状态</th></tr></thead><tbody>';
+  var ln=['L1 信号','L2 认知','L3 行动','L4 验证','L5 学习'], lk=['L1_signals','L2_cognition','L3_actions','L4_verification','L5_learning'];
+  for (var i=0;i<ln.length;i++) {
+    var v=lyrs[lk[i]]||0, s=v>0?'✅':'⚠️', c=v>0?'#27ae60':'#e74c3c';
+    h += '<tr><td>L'+(i+1)+'</td><td>'+ln[i]+'</td><td style="text-align:center">'+v+'</td><td style="text-align:center;color:'+c+'">'+s+'</td></tr>';
+  }
+  h += '</tbody></table>';
+
+  // 最近运行
+  var rr = fw.recent_runs || [];
+  if (rr.length > 0) {
+    h += '<div style="font-weight:600;margin-top:16px;margin-bottom:8px">📋 最近运行记录</div>';
+    h += '<table class="data-table" style="width:100%;font-size:0.78em"><thead><tr><th>#</th><th>时间</th><th>循环</th><th>事件</th><th>耗时</th></tr></thead><tbody>';
+    for (var i=0;i<Math.min(rr.length,10);i++) {
+      var r=rr[i], ts=r.timestamp?r.timestamp.slice(0,19):'?';
+      h += '<tr><td>'+r.run_id+'</td><td>'+ts+'</td><td>'+ (r.cycle||'all') +'</td><td style="text-align:center">'+r.events_count+'</td><td style="text-align:center">'+r.elapsed_ms+'ms</td></tr>';
+    }
+    h += '</tbody></table>';
+  }
+
+  // 告警
+  var alerts = fw.alerts || [];
+  if (alerts.length > 0) {
+    h += '<div style="margin-top:16px;padding:12px;background:#fdedec;border-radius:8px"><b style="color:#e74c3c">⚠️ '+alerts.length+' 条告警</b>';
+    for (var i=0;i<Math.min(alerts.length,5);i++) {
+      h += '<div style="font-size:0.75em;margin-top:4px">['+ (alerts[i].severity||'?') +'] '+ (alerts[i].type||'?') +': '+ (alerts[i].detail||'') +'</div>';
+    }
+    h += '</div>';
+  }
+
+  // 更新循环状态
+  var metaEl = document.getElementById('fw-meta');
+  if (metaEl) metaEl.textContent = '最后更新: ' + (fw.last_run||'未运行').slice(0,19) + (fw.total_runs?' · 第'+fw.total_runs+'次':'') + (ha.timestamp?' · 健康检查: '+ha.timestamp.slice(0,19):'');
+
+  document.getElementById('tab-flywheel').innerHTML = h;
 }
 
 /* ===== 辅助: stat-card ===== */
