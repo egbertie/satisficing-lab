@@ -30,7 +30,7 @@
       "additional_discoveries": 7,
       "living_rules": 48
     },
-    "updated": "2026-05-30T06:29:00+08:00",
+    "updated": "2026-05-31T00:06:00+08:00",
     "knowledge_graph_density": 95.8,
     "living_rules_status": {
       "active": 41,
@@ -290,7 +290,7 @@
       "timestamp": 1780135875,
       "description": "城市维度首次注入：30个城市实体+多层连接编织 + 补丁19条"
     },
-    "last_updated": 1780141466,
+    "last_updated": 1780157423,
     "avatar_simulation": {
       "phase": "R2_P2_1",
       "avatars_upgraded": 5,
@@ -310,7 +310,28 @@
       "products_sim_rated": 10,
       "products_tested": 28,
       "all_pipelines_active": true,
-      "l3_avatars": 5
+      "l3_avatars": 5,
+      "sri_avatars_round": {
+        "avatars": 5,
+        "products_evaluated": 5,
+        "total_cogs": 25,
+        "avg_score": 69.4,
+        "timestamp": 1780157423,
+        "description": "SRI 5替身(刘禹锡/司马贺/水月观音/孔子/六祖慧能) × 5产品 首次LLM认知评分"
+      },
+      "sri_round3": {
+        "products": 5,
+        "evaluations": 25,
+        "avatars": [
+          "刘禹锡",
+          "司马贺",
+          "水月观音",
+          "孔子",
+          "六祖慧能"
+        ],
+        "method": "SRI_LLM_cognitive_reasoning",
+        "timestamp": 1780157463
+      }
     },
     "customer_network": {
       "total_connections": 185,
@@ -324,14 +345,19 @@
       "key_paths_timestamped": 15,
       "timestamp": 1780139362,
       "paradigm": "declaration_to_event",
-      "round": 3,
-      "llm_evaluations": 10,
+      "round": 4,
+      "llm_evaluations": 35,
       "llm_vs_functional_avg_diff": -18.0,
       "improvement_decisions": 10,
       "complete_chain_verified": true,
       "flows_entity_created": true,
-      "llm_calibrated_products": 17,
-      "calibration_timestamp": 1780141381
+      "llm_calibrated_products": 22,
+      "calibration_timestamp": 1780157423,
+      "sri_llm_round3": {
+        "evaluations": 25,
+        "products": 5,
+        "timestamp": 1780157463
+      }
     },
     "simulation_rounds": {
       "round1": {
@@ -351,41 +377,57 @@
         "note": "仅10次LLM推理·其余140次为round1+2累计"
       },
       "round4_products": 7,
-      "round4_evaluations": 35
+      "round4_evaluations": 35,
+      "round5_sri": {
+        "products": 5,
+        "evaluations": 25,
+        "method": "SRI_LLM_5_avatar_cognition",
+        "avatars": [
+          "刘禹锡",
+          "司马贺",
+          "水月观音",
+          "孔子",
+          "六祖慧能"
+        ],
+        "timestamp": 1780157463
+      }
     },
     "llm_stats": {
-      "llm_avg": 70.9,
-      "old_avg": 87.4,
-      "diff": 16.5,
-      "total_evaluated": 17,
-      "total_cogs": 45,
+      "llm_avg": 74.3,
+      "total_evaluated": 29,
+      "total_cogs": 120,
+      "products_evaluated": 29,
+      "coverage_pct": 15.7,
       "distribution": {
-        "优秀(≥85)": 1,
-        "良好(75-84)": 5,
-        "一般(65-74)": 9,
-        "待改进(50-64)": 2,
-        "不合格(<50)": 0
+        "优秀(≥85)": 18,
+        "良好(75-84)": 48,
+        "一般(65-74)": 36,
+        "待改进(50-64)": 16,
+        "不合格(<50)": 2
       },
       "avatar_rankings": {
-        "硬科技创始人": 64.5,
-        "苏炜": 73.0,
-        "AI+机器人创始人": 79.7,
-        "VC投后负责人": 71.0,
-        "胡小波": 60.0,
-        "正浩创新-苏炜": 68.5
+        "硬科技创始人": 72.7,
+        "VC投后负责人": 76.0,
+        "胡小波": 61.2,
+        "AI+机器人创始人": 81.0,
+        "正浩创新-苏炜": 68.5,
+        "苏炜": 72.6,
+        "刘禹锡": 76.0,
+        "司马贺": 76.7,
+        "水月观音": 75.6,
+        "孔子": 74.7,
+        "六祖慧能": 73.7
       },
       "best": {
-        "name": "宝藏库",
-        "score": 88,
+        "name": "章·五路",
+        "score": 92,
         "avatar": "AI+机器人创始人"
       },
       "worst": {
-        "name": "Pre-0身体觉察",
-        "score": 52,
-        "avatar": "胡小波"
-      },
-      "products_evaluated": 17,
-      "last_rerank": "2026-05-30T15:20:13.178853+00:00"
+        "name": "引导页",
+        "score": 45,
+        "avatar": "六祖慧能"
+      }
     },
     "flywheel": {
       "version": "1.2",
@@ -16398,46 +16440,46 @@
       ]
     },
     "activation": {
-      "reacted_at": "2026-05-30T15:55:37.989221+00:00",
+      "reacted_at": "2026-05-30T16:38:14.468863+00:00",
       "products_activated": 0,
       "total_products": 172
     },
     "catalysts": {
-      "reacted_at": "2026-05-30T15:55:37.989687+00:00",
-      "catalyst_products": 13,
+      "reacted_at": "2026-05-30T16:38:14.469452+00:00",
+      "catalyst_products": 24,
       "products_accelerated": 0,
       "top_catalysts": [
         {
+          "id": "PROD-057",
+          "name": "大富翁",
+          "power": 84.1
+        },
+        {
+          "id": "PROD-054",
+          "name": "数字替身",
+          "power": 83.4
+        },
+        {
+          "id": "PROD-013",
+          "name": "匹配引擎",
+          "power": 80.8
+        },
+        {
           "id": "PROD-040",
           "name": "宝藏库",
-          "power": 86.5
+          "power": 80.4
         },
         {
-          "id": "PROD-004",
-          "name": "卡牌对局",
-          "power": 82.0
-        },
-        {
-          "id": "PROD-002",
-          "name": "衡·观局测评",
-          "power": 80.9
-        },
-        {
-          "id": "PROD-005",
-          "name": "产品目录",
-          "power": 79.8
-        },
-        {
-          "id": "PROD-009",
-          "name": "危机模拟",
-          "power": 79.0
+          "id": "PROD-058",
+          "name": "规范标准",
+          "power": 79.6
         }
       ]
     },
     "energy": {
-      "reacted_at": "2026-05-30T15:55:37.998568+00:00",
+      "reacted_at": "2026-05-30T16:38:14.480505+00:00",
       "products_tracked": 172,
-      "avg_roi": 0.66,
+      "avg_roi": 0.68,
       "energy_alerts": 1,
       "worst_roi": [
         {
@@ -16451,7 +16493,7 @@
       ]
     },
     "chemistry": {
-      "last_reacted": "2026-05-30T15:55:37.875854+00:00",
+      "last_reacted": "2026-05-30T16:38:14.356949+00:00",
       "total_reactions": 59,
       "results": {
         "crystallize": {
@@ -16492,7 +16534,7 @@
         "catalyst": {
           "name": "催化剂",
           "status": "ok",
-          "effect": 13
+          "effect": 24
         },
         "energy": {
           "name": "能量守恒",
@@ -16532,7 +16574,7 @@
         "superposition": {
           "name": "量子态叠加",
           "status": "ok",
-          "effect": 0
+          "effect": 22
         },
         "symmetry": {
           "name": "对称破缺",
@@ -16542,7 +16584,7 @@
         "dissipative": {
           "name": "耗散结构",
           "status": "ok",
-          "effect": 0.96
+          "effect": 0.47
         },
         "isomer": {
           "name": "同分异构体",
@@ -16652,7 +16694,7 @@
         "stage_nourish": {
           "name": "养料环节化学",
           "status": "ok",
-          "effect": 2.0754612696817647
+          "effect": 1.5166371034827637
         },
         "stage_gate": {
           "name": "门禁环节化学",
@@ -16702,7 +16744,7 @@
         "heating": {
           "name": "启发热",
           "status": "ok",
-          "effect": 1007.6999999999999
+          "effect": 1028.6999999999998
         },
         "fission": {
           "name": "链式裂变",
@@ -16732,7 +16774,7 @@
         "sublimation": {
           "name": "升华反应",
           "status": "ok",
-          "effect": 10
+          "effect": 0
         },
         "condensation": {
           "name": "冷凝反应",
@@ -16757,31 +16799,31 @@
       }
     },
     "isotopes": {
-      "reacted_at": "2026-05-30T15:55:37.998889+00:00",
+      "reacted_at": "2026-05-30T16:38:14.480991+00:00",
       "products_labeled": 0,
       "principle": "每个产品有独一无二的化学指纹·可被同类自动识别"
     },
     "polymerization": {
-      "reacted_at": "2026-05-30T15:55:37.999055+00:00",
+      "reacted_at": "2026-05-30T16:38:14.481171+00:00",
       "clusters_formed": 6,
       "total_clustered_products": 171,
       "principle": "产品按指纹自然聚类·无需手动分类"
     },
     "osmosis": {
-      "reacted_at": "2026-05-30T15:55:37.999480+00:00",
+      "reacted_at": "2026-05-30T16:38:14.481626+00:00",
       "products_osmosed": 0,
       "high_clusters": 6,
       "principle": "高质量产品簇通过连接向低分产品扩散·拉高整体基线"
     },
     "enzyme": {
-      "reacted_at": "2026-05-30T15:55:37.999525+00:00",
+      "reacted_at": "2026-05-30T16:38:14.481670+00:00",
       "enzyme_activity": 1.0,
       "open_breakers": 0,
       "products_accelerated": 0,
       "principle": "编排器是全局酶·健康分高=酶活性强·加速所有反应"
     },
     "symmetry_breaking": {
-      "reacted_at": "2026-05-30T15:55:37.999617+00:00",
+      "reacted_at": "2026-05-30T16:38:14.481861+00:00",
       "avg_score": 81.9,
       "elites_emerged": 0,
       "tail_products": 0,
@@ -16789,51 +16831,51 @@
       "principle": "没有人为指定·评分自然分布涌现优势和长尾"
     },
     "dissipative": {
-      "reacted_at": "2026-05-30T15:55:37.999704+00:00",
-      "energy_input": 49.5,
-      "energy_output": 47.4,
-      "order_parameter": 0.96,
+      "reacted_at": "2026-05-30T16:38:14.481950+00:00",
+      "energy_input": 124.5,
+      "energy_output": 58.4,
+      "order_parameter": 0.47,
       "state": "dissipating",
       "principle": "开放系统通过信息输入输出维持有序·order>1=自组织"
     },
     "isomers": {
-      "reacted_at": "2026-05-30T15:55:37.999771+00:00",
+      "reacted_at": "2026-05-30T16:38:14.482023+00:00",
       "isomer_groups": 10,
       "principle": "同指纹=同分异构体·可互相替代·低分自动标记replaceable"
     },
     "reversible": {
-      "reacted_at": "2026-05-30T15:55:38.214053+00:00",
+      "reacted_at": "2026-05-30T16:38:14.687651+00:00",
       "reversible_products": 0,
       "principle": "评分可升可降=可逆反应·K=[上升]/[下降]"
     },
     "parallel": {
-      "reacted_at": "2026-05-30T15:55:38.214084+00:00",
+      "reacted_at": "2026-05-30T16:38:14.687683+00:00",
       "parallel_products": 172,
       "principle": "一个产品多效应=平行反应·A→B1+B2+B3+..."
     },
     "ph": {
-      "reacted_at": "2026-05-30T15:55:38.215914+00:00",
+      "reacted_at": "2026-05-30T16:38:14.689712+00:00",
       "ph_value": 14.0,
       "environment": "alkaline",
       "reaction_speed_multiplier": 1.0,
       "principle": "健康分=pH值·酸性慢·碱性快"
     },
     "temperature": {
-      "reacted_at": "2026-05-30T15:55:38.215925+00:00",
+      "reacted_at": "2026-05-30T16:38:14.689722+00:00",
       "events_per_day": 0,
       "temperature": "cold",
       "reaction_rate_multiplier": 0.5,
       "principle": "认知事件频率=温度·热快冷慢"
     },
     "pressure": {
-      "reacted_at": "2026-05-30T15:55:38.215951+00:00",
+      "reacted_at": "2026-05-30T16:38:14.689770+00:00",
       "pressure": 0.99,
       "state": "normal",
       "quality_risk": "ok",
       "principle": "产品流密度=压力·高压高转化但可能低质"
     },
     "dosage": {
-      "reacted_at": "2026-05-30T15:55:38.216020+00:00",
+      "reacted_at": "2026-05-30T16:38:14.689840+00:00",
       "total_items": 20,
       "dose_level": "effective",
       "required_for_therapeutic": 30,
@@ -16842,21 +16884,21 @@
       "principle": "养料数量=反应剂量·亚阈值<5<阈值<15<有效<30<治疗"
     },
     "avatar_activation": {
-      "reacted_at": "2026-05-30T15:55:38.216025+00:00",
+      "reacted_at": "2026-05-30T16:38:14.689845+00:00",
       "total": 22,
       "activated": 0,
       "inert": 22,
       "principle": "替身活跃度=化学活性·惰性替身需活化能"
     },
     "avatar_decay": {
-      "reacted_at": "2026-05-30T15:55:38.216079+00:00",
+      "reacted_at": "2026-05-30T16:38:14.689932+00:00",
       "active_avatars": 0,
       "decayed": 22,
       "half_life_days": 30,
       "principle": "不使用=衰变·半衰期30天"
     },
     "metabolism": {
-      "reacted_at": "2026-05-30T15:55:38.216181+00:00",
+      "reacted_at": "2026-05-30T16:38:14.690055+00:00",
       "ingested": 20,
       "digested": 5,
       "excreted": 0,
@@ -16865,7 +16907,7 @@
       "principle": "信息新陈代谢=摄入→过滤→吸收→排泄·低质丢弃"
     },
     "info_synthesis": {
-      "reacted_at": "2026-05-30T15:55:38.216188+00:00",
+      "reacted_at": "2026-05-30T16:38:14.690061+00:00",
       "cross_source_syntheses": 2,
       "syntheses": [
         {
@@ -16874,7 +16916,7 @@
           "source_b": "文档库",
           "items_count": 12,
           "synthesis_strength": 0.2,
-          "synthesized_at": "2026-05-30T15:55:38.216188+00:00"
+          "synthesized_at": "2026-05-30T16:38:14.690061+00:00"
         },
         {
           "domain": "知识与学习",
@@ -16882,21 +16924,21 @@
           "source_b": "文档库",
           "items_count": 20,
           "synthesis_strength": 0.2,
-          "synthesized_at": "2026-05-30T15:55:38.216188+00:00"
+          "synthesized_at": "2026-05-30T16:38:14.690061+00:00"
         }
       ],
       "principle": "A源信息+B源信息=新化合物·跨源化合增强洞见"
     },
     "stage_nourish_chem": {
-      "reacted_at": "2026-05-30T15:55:38.216677+00:00",
+      "reacted_at": "2026-05-30T16:38:14.690565+00:00",
       "batches": 4,
-      "growth_rate": 2.08,
+      "growth_rate": 1.52,
       "concentration": 0.4,
       "state": "active",
       "principle": "养料环节=反应物浓度源·增长率=反应速率"
     },
     "stage_gate_chem": {
-      "reacted_at": "2026-05-30T15:55:38.216690+00:00",
+      "reacted_at": "2026-05-30T16:38:14.690577+00:00",
       "selectivity": 1.0,
       "passed": 5,
       "rejected": 0,
@@ -16904,27 +16946,27 @@
       "principle": "门禁选择性=化学过滤效率·太高=过严·太低=过宽"
     },
     "stage_heal_chem": {
-      "reacted_at": "2026-05-30T15:55:38.216704+00:00",
+      "reacted_at": "2026-05-30T16:38:14.690593+00:00",
       "recent_fixes": 70,
       "heal_runs": 4,
       "yield_rate": 17.5,
       "principle": "修复成功率=化学反应产率·高=高效催化剂"
     },
     "stage_audit_chem": {
-      "reacted_at": "2026-05-30T15:55:38.216718+00:00",
+      "reacted_at": "2026-05-30T16:38:14.690606+00:00",
       "avg_score": 90.9,
       "under60": 0,
       "purity": 0.91,
       "principle": "审计均分=产物纯度·越高越纯"
     },
     "stage_report_chem": {
-      "reacted_at": "2026-05-30T15:55:38.216721+00:00",
+      "reacted_at": "2026-05-30T16:38:14.690610+00:00",
       "signal_density": 11.6,
       "recent_reports": 5,
       "principle": "报告事件密度=化学信号强度"
     },
     "global_cross": {
-      "reacted_at": "2026-05-30T15:55:38.216726+00:00",
+      "reacted_at": "2026-05-30T16:38:14.690615+00:00",
       "cross_edges": 12,
       "cycles_detected": 3,
       "matrix": [
@@ -17004,47 +17046,47 @@
       "principle": "环节间交叉反应=化学网络·12条边组成反应图"
     },
     "heating": {
-      "reacted_at": "2026-05-30T15:55:38.216734+00:00",
-      "total_heat": 1007.7,
+      "reacted_at": "2026-05-30T16:38:14.690623+00:00",
+      "total_heat": 1028.7,
       "heat_sources": 16,
       "temperature_grade": "hot",
       "principle": "全部反应的总热量=系统活性指标·热=活跃·冷=沉寂"
     },
     "fission": {
-      "reacted_at": "2026-05-30T15:55:38.216835+00:00",
+      "reacted_at": "2026-05-30T16:38:14.690731+00:00",
       "fission_sources": 3,
       "fission_products": 0,
       "avg_boost": 0,
       "principle": "一个评分变化→沿图裂变→触发下游自动重评·链式反应"
     },
     "combustion": {
-      "reacted_at": "2026-05-30T15:55:38.219722+00:00",
+      "reacted_at": "2026-05-30T16:38:14.694161+00:00",
       "fuel_burned": 0
     },
     "explosion": {
-      "reacted_at": "2026-05-30T15:55:38.219784+00:00",
+      "reacted_at": "2026-05-30T16:38:14.694290+00:00",
       "clusters_exploded": 0,
       "products_boosted": 0,
       "principle": "产品簇质量突破=爆炸·全簇瞬间提升"
     },
     "precipitation": {
-      "reacted_at": "2026-05-30T15:55:38.219997+00:00",
+      "reacted_at": "2026-05-30T16:38:14.694524+00:00",
       "sediments": 0,
       "sediment_ids": [],
       "principle": "评分<40·无连接·无包装=天然沉淀·不再参与流动"
     },
     "sublimation": {
-      "reacted_at": "2026-05-30T15:55:38.220073+00:00",
-      "sublimated_pages": 10,
+      "reacted_at": "2026-05-30T16:38:14.694596+00:00",
+      "sublimated_pages": 0,
       "principle": "固态知识→气态扩散·通过连接渗透到全局"
     },
     "termination": {
-      "reacted_at": "2026-05-30T15:55:38.227298+00:00",
+      "reacted_at": "2026-05-30T16:38:14.701673+00:00",
       "terminated": 0,
       "principle": "死胡同产品=链终止·不再投入能量·资源重新分配"
     },
     "recrystallization": {
-      "reacted_at": "2026-05-30T15:55:38.227376+00:00",
+      "reacted_at": "2026-05-30T16:38:14.701761+00:00",
       "source_products": 0,
       "new_crystal_seeds": 0,
       "crystals": [],
@@ -17138,6 +17180,144 @@
         "estimated_chains_to_activate": 8,
         "batch_count": 5
       }
+    },
+    "concentration": {
+      "reacted_at": "2026-05-30T16:38:14.469055+00:00",
+      "avg_score": 81.9,
+      "max_score": 87.5,
+      "min_score": 74.0,
+      "high_concentration": 0,
+      "low_concentration": 0,
+      "products_deferred": 0
+    },
+    "equilibrium": {
+      "status": "insufficient_data",
+      "reacted_at": "2026-05-30T16:38:14.469269+00:00"
+    },
+    "compounds": {
+      "reacted_at": "2026-05-30T16:38:14.469290+00:00",
+      "weak_products": 0,
+      "compound_candidates": 0,
+      "top_compounds": []
+    },
+    "entropy": {
+      "reacted_at": "2026-05-30T16:38:14.469367+00:00",
+      "products_revived": 0,
+      "principle": "注入能量→逆转熵增→从critical恢复至healthy"
+    },
+    "redox": {
+      "reacted_at": "2026-05-30T16:38:14.481053+00:00",
+      "products_oxidized": 0,
+      "principle": "同族评分竞争·高分胜者天然压制低分·形成自然淘汰"
+    },
+    "phase_transition": {
+      "reacted_at": "2026-05-30T16:38:14.481381+00:00",
+      "products_transitioned": 0,
+      "principle": "产品簇突破质量临界点→整簇状态相变·集体跃迁"
+    },
+    "superposition": {
+      "reacted_at": "2026-05-30T16:38:14.481729+00:00",
+      "products_superposed": 22,
+      "principle": "替身评分保留为量子态叠加·分歧本身就是信息"
+    },
+    "enantiomers": {
+      "reacted_at": "2026-05-30T16:38:14.482234+00:00",
+      "mirror_pairs": 0,
+      "principle": "互补JTBD=对映异构·镜像不可替代·但联合使用1+1>2"
+    },
+    "conformers": {
+      "reacted_at": "2026-05-30T16:38:14.672723+00:00",
+      "products_with_conformers": 0,
+      "principle": "同一产品·不同时刻·不同评分态=构象异构体"
+    },
+    "serial": {
+      "reacted_at": "2026-05-30T16:38:14.687866+00:00",
+      "longest_chain": 0,
+      "principle": "连接图最长传播路径=0步连串反应"
+    },
+    "avatar_compound": {
+      "reacted_at": "2026-05-30T16:38:14.689864+00:00",
+      "compounds_formed": 0,
+      "principle": "替身分歧≠噪音·化合=新视角·15+分差触发"
+    },
+    "avatar_osmosis": {
+      "reacted_at": "2026-05-30T16:38:14.689880+00:00",
+      "principle": "需要≥2替身的数据"
+    },
+    "avatar_equilibrium": {
+      "reacted_at": "2026-05-30T16:38:14.689890+00:00",
+      "equilibrium_point": 70,
+      "stabilizers": 0,
+      "disruptors": 0,
+      "principle": "替身评分向均衡点收敛·新替身加入=平衡移动"
+    },
+    "avatar_catalyst": {
+      "reacted_at": "2026-05-30T16:38:14.689910+00:00",
+      "catalysts": 0,
+      "principle": "评价精准的替身=高效催化剂·加速产品流质量"
+    },
+    "avatar_spin": {
+      "reacted_at": "2026-05-30T16:38:14.689922+00:00",
+      "spins_assigned": 0,
+      "principle": "替身评分一致性=自旋态·up=可靠·down=需校准"
+    },
+    "avatar_field": {
+      "reacted_at": "2026-05-30T16:38:14.689982+00:00",
+      "products_in_field": 0,
+      "total_avatars": 22,
+      "active_in_field": 0,
+      "principle": "替身=评分向量场维度·产品在场中被多维度定位"
+    },
+    "info_redox": {
+      "reacted_at": "2026-05-30T16:38:14.690531+00:00",
+      "documents_aged": 0,
+      "total_documents": 74,
+      "principle": "新信息氧化旧信息·保持知识新鲜度"
+    },
+    "stage_scan_chem": {
+      "reacted_at": "2026-05-30T16:38:14.690582+00:00",
+      "discovery_rate": 0,
+      "scan_runs": 0,
+      "principle": "扫描发现率=新反应物产生速率"
+    },
+    "stage_consistency_chem": {
+      "reacted_at": "2026-05-30T16:38:14.690589+00:00",
+      "total_issues": 46,
+      "issue_types": 2,
+      "trend": "improving",
+      "principle": "一致性问题=化学反应中的副产物·越少越纯"
+    },
+    "stage_lifecycle_chem": {
+      "reacted_at": "2026-05-30T16:38:14.690600+00:00",
+      "conversions": 0,
+      "promoted": 0,
+      "demoted": 0,
+      "principle": "LC迁移=化学转化率·promoted=正向·demoted=逆向"
+    },
+    "stage_standards_chem": {
+      "reacted_at": "2026-05-30T16:38:14.690604+00:00",
+      "proposals": 6,
+      "rate_constant": 0.8571428571428571,
+      "principle": "标准迭代率=反应速率常数k·k越大反应越快"
+    },
+    "electrolysis": {
+      "reacted_at": "2026-05-30T16:38:14.694574+00:00",
+      "electrolyzed": 0,
+      "principle": "化合可逆·电解拆分回原始组分"
+    },
+    "condensation": {
+      "reacted_at": "2026-05-30T16:38:14.694639+00:00",
+      "fragments": 0,
+      "new_concepts": 0,
+      "suggestions": [],
+      "principle": "分散知识碎片→冷凝→新产品概念·熵降到一定程度自然有序"
+    },
+    "tracers": {
+      "reacted_at": "2026-05-30T16:38:14.694683+00:00",
+      "tracers_deployed": 12,
+      "bottlenecks_found": 0,
+      "bottlenecks": [],
+      "principle": "高活性产品=放射性示踪·追踪流中瓶颈"
     }
   },
   "products": [
@@ -17206,8 +17386,8 @@
       "simulated_at": 1780137837,
       "simulation_round": 1,
       "quality_source": "simulation_round1",
-      "llm_rating": 57,
-      "llm_evaluator": "硬科技创始人",
+      "llm_rating": 76.2,
+      "llm_evaluator": "5核心替身(刘禹锡/司马贺/水月观音/孔子/六祖慧能)",
       "llm_reasoning": "黑箱推演·无盲区诊断·无action",
       "llm_dimensions": "逻辑65/操作40/知识55/简洁70/创新55",
       "rating_method": "llm_cognitive_reasoning",
@@ -17244,7 +17424,38 @@
       "cluster_id": "CLUSTER-01",
       "cluster_avg_score": 80.0,
       "parallel_reactions": 4,
-      "parallel_product": true
+      "parallel_product": true,
+      "llm_avg_of_5": 80.0,
+      "llm_sri_round3": true,
+      "llm_sri_ratings": {
+        "刘禹锡": 79,
+        "司马贺": 77,
+        "水月观音": 81,
+        "孔子": 75,
+        "六祖慧能": 88
+      },
+      "llm_sri_timestamp": 1780157463,
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          57,
+          79,
+          77,
+          81,
+          75,
+          88
+        ],
+        "spread": 31,
+        "consensus": "divergent",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-002",
@@ -17307,8 +17518,8 @@
       "simulated_at": 1780137837,
       "simulation_round": 1,
       "quality_source": "simulation_round1",
-      "llm_rating": 80,
-      "llm_evaluator": "苏炜",
+      "llm_rating": 73.2,
+      "llm_evaluator": "5核心替身(刘禹锡/司马贺/水月观音/孔子/六祖慧能)",
       "llm_reasoning": "最务实产品·10分钟换雷达图。缺维度依据+行业对标",
       "llm_dimensions": "实用性26/30 数据准确性20/25 政策合规19/20 实施便捷度10/15 行业适配度5/10",
       "llm_intent": 7,
@@ -17339,7 +17550,7 @@
       "revive_count": 1,
       "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
       "is_catalyst": true,
-      "catalyst_power": 80.9,
+      "catalyst_power": 77.5,
       "energy_in": 5,
       "energy_out": 5.3,
       "roi": 1.06,
@@ -17350,7 +17561,26 @@
       "isomer_of": "PROD-066",
       "isomer_score_diff": 2.4,
       "parallel_reactions": 5,
-      "parallel_product": true
+      "parallel_product": true,
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          72,
+          78,
+          58,
+          78,
+          80
+        ],
+        "spread": 22,
+        "consensus": "divergent",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-003",
@@ -17488,12 +17718,12 @@
       "simulated_at": 1780137837,
       "simulation_round": 1,
       "quality_source": "simulation_round1",
-      "llm_rating": 79,
-      "llm_evaluator": "AI+机器人创始人",
+      "llm_rating": 72.5,
+      "llm_evaluator": "5核心替身(刘禹锡/司马贺/水月观音/孔子/六祖慧能)",
       "llm_reasoning": "卡牌隐喻开放·规则引擎透明度为零",
       "llm_dimensions": "创新88/架构78/扩展82/速度72/学习75",
-      "rating_method": "llm_cognitive_reasoning",
-      "llm_vs_functional_diff": -2,
+      "rating_method": "LLM_roleplay_cognition_r5",
+      "llm_vs_functional_diff": -9.6,
       "source_file": "site/cards-play.html",
       "health": "healthy",
       "days_since_update": "unknown",
@@ -17519,7 +17749,7 @@
       "revive_count": 1,
       "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
       "is_catalyst": true,
-      "catalyst_power": 82.0,
+      "catalyst_power": 78.75,
       "energy_in": 5,
       "energy_out": 5.3,
       "roi": 1.07,
@@ -17530,7 +17760,28 @@
       "isomer_of": "PROD-012",
       "isomer_score_diff": 1.0,
       "parallel_reactions": 5,
-      "parallel_product": true
+      "parallel_product": true,
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          79,
+          70,
+          72,
+          73,
+          75,
+          66
+        ],
+        "spread": 13,
+        "consensus": "medium",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-005",
@@ -17597,8 +17848,8 @@
       "simulated_at": 1780137837,
       "simulation_round": 1,
       "quality_source": "simulation_round1",
-      "llm_rating": 78,
-      "llm_evaluator": "苏炜",
+      "llm_rating": 77.0,
+      "llm_evaluator": "5核心替身(刘禹锡/司马贺/水月观音/孔子/六祖慧能)",
       "llm_reasoning": "312产品臃肿·团队最多用30个。需冷热分层+最近使用场景",
       "llm_dimensions": "实用性27/30 数据准确性22/25 政策合规20/20 实施便捷度6/15 行业适配度3/10",
       "llm_intent": 6,
@@ -17626,7 +17877,7 @@
       "revive_count": 1,
       "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
       "is_catalyst": true,
-      "catalyst_power": 79.75,
+      "catalyst_power": 79.25,
       "energy_in": 4,
       "energy_out": 5.3,
       "roi": 1.33,
@@ -17637,7 +17888,26 @@
       "isomer_of": "PROD-017",
       "isomer_score_diff": 2.8,
       "parallel_reactions": 5,
-      "parallel_product": true
+      "parallel_product": true,
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          85,
+          72,
+          68,
+          82,
+          78
+        ],
+        "spread": 17,
+        "consensus": "medium",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-006",
@@ -17876,8 +18146,8 @@
       "simulated_at": 1780137837,
       "simulation_round": 1,
       "quality_source": "simulation_round1",
-      "llm_rating": 72,
-      "llm_evaluator": "硬科技创始人",
+      "llm_rating": 80.8,
+      "llm_evaluator": "5核心替身(刘禹锡/司马贺/水月观音/孔子/六祖慧能)",
       "llm_reasoning": "视角正确·缺修复引擎·测量可能破坏关系",
       "llm_dimensions": "逻辑78/操作65/知识75/简洁80/创新60",
       "rating_method": "llm_cognitive_reasoning",
@@ -17908,7 +18178,7 @@
       "revive_count": 1,
       "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
       "is_catalyst": true,
-      "catalyst_power": 75.05,
+      "catalyst_power": 79.44999999999999,
       "energy_in": 6,
       "energy_out": 5.3,
       "roi": 0.88,
@@ -17919,7 +18189,38 @@
       "isomer_of": "PROD-007",
       "isomer_score_diff": 0.0,
       "parallel_reactions": 5,
-      "parallel_product": true
+      "parallel_product": true,
+      "llm_avg_of_5": 82.6,
+      "llm_sri_round3": true,
+      "llm_sri_ratings": {
+        "刘禹锡": 79,
+        "司马贺": 83,
+        "水月观音": 91,
+        "孔子": 80,
+        "六祖慧能": 80
+      },
+      "llm_sri_timestamp": 1780157463,
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          72,
+          79,
+          83,
+          91,
+          80,
+          80
+        ],
+        "spread": 19,
+        "consensus": "medium",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-009",
@@ -18379,15 +18680,47 @@
       "revived_at": "2026-05-30T15:37:11.339759+00:00",
       "revive_count": 1,
       "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
-      "energy_in": 4,
-      "energy_out": 2.3,
-      "roi": 0.57,
+      "energy_in": 6,
+      "energy_out": 5.3,
+      "roi": 0.88,
       "fingerprint": "镜-d-d-BP",
       "labeled_at": "2026-05-30T15:42:10.016615+00:00",
       "cluster_id": "CLUSTER-01",
       "cluster_avg_score": 80.0,
-      "parallel_reactions": 4,
-      "parallel_product": true
+      "parallel_reactions": 5,
+      "parallel_product": true,
+      "llm_rating": 83.2,
+      "llm_avg_of_5": 83.2,
+      "llm_sri_round3": true,
+      "llm_sri_ratings": {
+        "刘禹锡": 84,
+        "司马贺": 79,
+        "水月观音": 86,
+        "孔子": 80,
+        "六祖慧能": 87
+      },
+      "llm_sri_timestamp": 1780157463,
+      "is_catalyst": true,
+      "catalyst_power": 80.85,
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          84,
+          79,
+          86,
+          80,
+          87
+        ],
+        "spread": 8,
+        "consensus": "high",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-014",
@@ -19068,17 +19401,54 @@
       "revived_at": "2026-05-30T15:37:11.339759+00:00",
       "revive_count": 1,
       "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
-      "energy_in": 3,
-      "energy_out": 2.3,
-      "roi": 0.77,
+      "energy_in": 5,
+      "energy_out": 5.3,
+      "roi": 1.06,
       "fingerprint": "契-d-q-AP",
       "labeled_at": "2026-05-30T15:42:10.016615+00:00",
       "cluster_id": "CLUSTER-03",
       "cluster_avg_score": 82.7,
       "isomer_of": "PROD-017",
       "isomer_score_diff": 4.3,
-      "parallel_reactions": 4,
-      "parallel_product": true
+      "parallel_reactions": 5,
+      "parallel_product": true,
+      "llm_rating": 74.6,
+      "llm_rated_by": [
+        "刘禹锡",
+        "司马贺",
+        "水月观音",
+        "孔子",
+        "六祖慧能"
+      ],
+      "llm_rated_at": 1780157423,
+      "llm_avatar_scores": {
+        "刘禹锡": 80,
+        "司马贺": 75,
+        "水月观音": 72,
+        "孔子": 74,
+        "六祖慧能": 72
+      },
+      "is_catalyst": true,
+      "catalyst_power": 77.3,
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          80,
+          75,
+          72,
+          74,
+          72
+        ],
+        "spread": 8,
+        "consensus": "high",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-021",
@@ -19259,17 +19629,54 @@
       "revived_at": "2026-05-30T15:37:11.339759+00:00",
       "revive_count": 1,
       "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
-      "energy_in": 3,
-      "energy_out": 2.3,
-      "roi": 0.77,
+      "energy_in": 5,
+      "energy_out": 5.3,
+      "roi": 1.06,
       "fingerprint": "契-d-q-AP",
       "labeled_at": "2026-05-30T15:42:10.016615+00:00",
       "cluster_id": "CLUSTER-03",
       "cluster_avg_score": 82.7,
       "isomer_of": "PROD-017",
       "isomer_score_diff": 3.8,
-      "parallel_reactions": 4,
-      "parallel_product": true
+      "parallel_reactions": 5,
+      "parallel_product": true,
+      "llm_rating": 75.4,
+      "llm_rated_by": [
+        "刘禹锡",
+        "司马贺",
+        "水月观音",
+        "孔子",
+        "六祖慧能"
+      ],
+      "llm_rated_at": 1780157423,
+      "llm_avatar_scores": {
+        "刘禹锡": 82,
+        "司马贺": 72,
+        "水月观音": 68,
+        "孔子": 70,
+        "六祖慧能": 85
+      },
+      "is_catalyst": true,
+      "catalyst_power": 77.95,
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          82,
+          72,
+          68,
+          70,
+          85
+        ],
+        "spread": 17,
+        "consensus": "medium",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-023",
@@ -19334,8 +19741,8 @@
       "simulated_round": 2,
       "simulated_at": 1780138387,
       "quality_source": "simulation_round2",
-      "llm_rating": 68,
-      "llm_evaluator": "苏炜",
+      "llm_rating": 70.2,
+      "llm_evaluator": "5核心替身(刘禹锡/司马贺/水月观音/孔子/六祖慧能)",
       "llm_reasoning": "V1=没验证不买。全动态加载≠产品价值。先跑demo",
       "llm_dimensions": "实用性22/30 数据准确性17/25 政策合规18/20 实施便捷度7/15 行业适配度4/10",
       "llm_intent": 4,
@@ -19372,7 +19779,26 @@
       "isomer_of": "PROD-025",
       "isomer_score_diff": 5.2,
       "parallel_reactions": 4,
-      "parallel_product": true
+      "parallel_product": true,
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          65,
+          70,
+          62,
+          86,
+          68
+        ],
+        "spread": 24,
+        "consensus": "divergent",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-024",
@@ -19456,9 +19882,9 @@
       "revived_at": "2026-05-30T15:37:11.339759+00:00",
       "revive_count": 1,
       "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
-      "energy_in": 2,
+      "energy_in": 4,
       "energy_out": 2.2,
-      "roi": 1.12,
+      "roi": 0.56,
       "fingerprint": "觉-g-i-BP",
       "labeled_at": "2026-05-30T15:42:10.016615+00:00",
       "cluster_id": "CLUSTER-05",
@@ -19466,7 +19892,37 @@
       "isomer_of": "PROD-025",
       "isomer_score_diff": 4.8,
       "parallel_reactions": 4,
-      "parallel_product": true
+      "parallel_product": true,
+      "llm_rating": 79.8,
+      "llm_avg_of_5": 79.8,
+      "llm_sri_round3": true,
+      "llm_sri_ratings": {
+        "刘禹锡": 78,
+        "司马贺": 82,
+        "水月观音": 84,
+        "孔子": 71,
+        "六祖慧能": 84
+      },
+      "llm_sri_timestamp": 1780157463,
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          78,
+          82,
+          84,
+          71,
+          84
+        ],
+        "spread": 13,
+        "consensus": "medium",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-025",
@@ -19646,17 +20102,49 @@
       "revived_at": "2026-05-30T15:37:11.339759+00:00",
       "revive_count": 1,
       "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
-      "energy_in": 3,
-      "energy_out": 2.3,
-      "roi": 0.75,
+      "energy_in": 5,
+      "energy_out": 5.3,
+      "roi": 1.05,
       "fingerprint": "觉-g-i-BP",
       "labeled_at": "2026-05-30T15:42:10.016615+00:00",
       "cluster_id": "CLUSTER-05",
       "cluster_avg_score": 83.0,
       "isomer_of": "PROD-025",
       "isomer_score_diff": 3.2,
-      "parallel_reactions": 4,
-      "parallel_product": true
+      "parallel_reactions": 5,
+      "parallel_product": true,
+      "llm_rating": 80.2,
+      "llm_avg_of_5": 80.2,
+      "llm_sri_round3": true,
+      "llm_sri_ratings": {
+        "刘禹锡": 78,
+        "司马贺": 77,
+        "水月观音": 84,
+        "孔子": 76,
+        "六祖慧能": 86
+      },
+      "llm_sri_timestamp": 1780157463,
+      "is_catalyst": true,
+      "catalyst_power": 78.1,
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          78,
+          77,
+          84,
+          76,
+          86
+        ],
+        "spread": 10,
+        "consensus": "high",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-027",
@@ -19745,17 +20233,54 @@
       "revived_at": "2026-05-30T15:37:11.339759+00:00",
       "revive_count": 1,
       "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
-      "energy_in": 3,
-      "energy_out": 2.3,
-      "roi": 0.76,
+      "energy_in": 5,
+      "energy_out": 5.3,
+      "roi": 1.06,
       "fingerprint": "觉-g-s-BP",
       "labeled_at": "2026-05-30T15:42:10.016615+00:00",
       "cluster_id": "CLUSTER-05",
       "cluster_avg_score": 83.0,
       "isomer_of": "PROD-030",
       "isomer_score_diff": 0.5,
-      "parallel_reactions": 4,
-      "parallel_product": true
+      "parallel_reactions": 5,
+      "parallel_product": true,
+      "llm_rating": 67.2,
+      "llm_rated_by": [
+        "刘禹锡",
+        "司马贺",
+        "水月观音",
+        "孔子",
+        "六祖慧能"
+      ],
+      "llm_rated_at": 1780157423,
+      "llm_avatar_scores": {
+        "刘禹锡": 78,
+        "司马贺": 65,
+        "水月观音": 55,
+        "孔子": 58,
+        "六祖慧能": 80
+      },
+      "is_catalyst": true,
+      "catalyst_power": 73.1,
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          78,
+          65,
+          55,
+          58,
+          80
+        ],
+        "spread": 25,
+        "consensus": "divergent",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-028",
@@ -19932,17 +20457,54 @@
       "revived_at": "2026-05-30T15:37:11.339759+00:00",
       "revive_count": 1,
       "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
-      "energy_in": 3,
-      "energy_out": 2.3,
-      "roi": 0.76,
+      "energy_in": 5,
+      "energy_out": 5.3,
+      "roi": 1.06,
       "fingerprint": "觉-g-s-BP",
       "labeled_at": "2026-05-30T15:42:10.016615+00:00",
       "cluster_id": "CLUSTER-05",
       "cluster_avg_score": 83.0,
       "isomer_of": "PROD-030",
       "isomer_score_diff": 0.5,
-      "parallel_reactions": 4,
-      "parallel_product": true
+      "parallel_reactions": 5,
+      "parallel_product": true,
+      "llm_rating": 65.0,
+      "llm_rated_by": [
+        "刘禹锡",
+        "司马贺",
+        "水月观音",
+        "孔子",
+        "六祖慧能"
+      ],
+      "llm_rated_at": 1780157423,
+      "llm_avatar_scores": {
+        "刘禹锡": 60,
+        "司马贺": 70,
+        "水月观音": 74,
+        "孔子": 66,
+        "六祖慧能": 55
+      },
+      "is_catalyst": true,
+      "catalyst_power": 72.0,
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          60,
+          70,
+          74,
+          66,
+          55
+        ],
+        "spread": 19,
+        "consensus": "medium",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-030",
@@ -20028,15 +20590,52 @@
       "revived_at": "2026-05-30T15:37:11.339759+00:00",
       "revive_count": 1,
       "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
-      "energy_in": 3,
-      "energy_out": 2.3,
-      "roi": 0.77,
+      "energy_in": 5,
+      "energy_out": 5.3,
+      "roi": 1.06,
       "fingerprint": "觉-g-s-BP",
       "labeled_at": "2026-05-30T15:42:10.016615+00:00",
       "cluster_id": "CLUSTER-05",
       "cluster_avg_score": 83.0,
-      "parallel_reactions": 4,
-      "parallel_product": true
+      "parallel_reactions": 5,
+      "parallel_product": true,
+      "llm_rating": 65.0,
+      "llm_rated_by": [
+        "刘禹锡",
+        "司马贺",
+        "水月观音",
+        "孔子",
+        "六祖慧能"
+      ],
+      "llm_rated_at": 1780157423,
+      "llm_avatar_scores": {
+        "刘禹锡": 62,
+        "司马贺": 68,
+        "水月观音": 78,
+        "孔子": 72,
+        "六祖慧能": 45
+      },
+      "is_catalyst": true,
+      "catalyst_power": 72.25,
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          62,
+          68,
+          78,
+          72,
+          45
+        ],
+        "spread": 33,
+        "consensus": "divergent",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-031",
@@ -20892,8 +21491,8 @@
       "quality_confidence_detail": "{\"grade\": \"A\", \"reason\": \"三维度全部达标: vi_compliance≥85, content_accuracy≥80, ux_rating≥80\", \"calibration_status\": \"已校准\", \"audited_by\": \"蓝军·Skeptor-7 (review_date: 2026-06-15)\"}",
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
-      "llm_rating": 88,
-      "llm_evaluator": "AI+机器人创始人",
+      "llm_rating": 75.8,
+      "llm_evaluator": "5核心替身(刘禹锡/司马贺/水月观音/孔子/六祖慧能)",
       "llm_reasoning": "连接主义知识观vs SECI模型范式跃迁。缺知识新鲜度+连接熵·三产品边界",
       "llm_dimensions": "方法论创新85 系统架构优雅90 可扩展性86 落地速度80 学习资源95",
       "llm_intent": 9,
@@ -20924,7 +21523,7 @@
       "revive_count": 1,
       "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
       "is_catalyst": true,
-      "catalyst_power": 86.55,
+      "catalyst_power": 80.44999999999999,
       "energy_in": 5,
       "energy_out": 5.4,
       "roi": 1.07,
@@ -20936,7 +21535,26 @@
       "parallel_product": true,
       "sublimated": true,
       "knowledge_diffusion_radius": 8.5,
-      "sublimated_at": "2026-05-30T15:55:38.220073+00:00"
+      "sublimated_at": "2026-05-30T15:55:38.220073+00:00",
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          75,
+          84,
+          62,
+          70,
+          88
+        ],
+        "spread": 26,
+        "consensus": "divergent",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-041",
@@ -21119,17 +21737,42 @@
       "revived_at": "2026-05-30T15:37:11.339759+00:00",
       "revive_count": 1,
       "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
-      "energy_in": 3,
-      "energy_out": 2.3,
-      "roi": 0.78,
+      "energy_in": 5,
+      "energy_out": 5.3,
+      "roi": 1.07,
       "fingerprint": "衡-d-d-AP",
       "labeled_at": "2026-05-30T15:42:10.016615+00:00",
       "cluster_id": "CLUSTER-02",
       "cluster_avg_score": 81.1,
       "isomer_of": "PROD-066",
       "isomer_score_diff": 1.0,
-      "parallel_reactions": 4,
-      "parallel_product": true
+      "parallel_reactions": 5,
+      "parallel_product": true,
+      "llm_rating": 67.2,
+      "llm_evaluator": "5核心替身(刘禹锡/司马贺/水月观音/孔子/六祖慧能)",
+      "rating_method": "LLM_roleplay_cognition_r5",
+      "llm_vs_functional_diff": -11.6,
+      "is_catalyst": true,
+      "catalyst_power": 75.2,
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          68,
+          82,
+          60,
+          74,
+          52
+        ],
+        "spread": 30,
+        "consensus": "divergent",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-043",
@@ -21466,8 +22109,8 @@
       "quality_confidence_detail": "{\"grade\": \"A\", \"reason\": \"三维度全部达标: vi_compliance≥85, content_accuracy≥80, ux_rating≥80\", \"calibration_status\": \"已校准\", \"audited_by\": \"蓝军·Skeptor-7 (review_date: 2026-06-15)\"}",
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
-      "llm_rating": 75,
-      "llm_evaluator": "苏炜",
+      "llm_rating": 75.8,
+      "llm_evaluator": "5核心替身(刘禹锡/司马贺/水月观音/孔子/六祖慧能)",
       "llm_reasoning": "招人加分·加搞砸过什么+减少理念增加案例",
       "llm_dimensions": "实用性21/30 数据准确性19/25 政策合规20/20 实施便捷度10/15 行业适配度5/10",
       "llm_intent": 6,
@@ -21495,7 +22138,7 @@
       "revive_count": 1,
       "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
       "is_catalyst": true,
-      "catalyst_power": 77.25,
+      "catalyst_power": 77.65,
       "energy_in": 4,
       "energy_out": 5.3,
       "roi": 1.32,
@@ -21505,7 +22148,26 @@
       "parallel_product": true,
       "sublimated": true,
       "knowledge_diffusion_radius": 8.0,
-      "sublimated_at": "2026-05-30T15:55:38.220073+00:00"
+      "sublimated_at": "2026-05-30T15:55:38.220073+00:00",
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          80,
+          85,
+          55,
+          84,
+          75
+        ],
+        "spread": 30,
+        "consensus": "divergent",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-047",
@@ -22236,17 +22898,42 @@
       "revived_at": "2026-05-30T15:37:11.339759+00:00",
       "revive_count": 1,
       "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
-      "energy_in": 3,
-      "energy_out": 2.4,
-      "roi": 0.79,
+      "energy_in": 5,
+      "energy_out": 5.4,
+      "roi": 1.07,
       "fingerprint": "觉-g-s-AP",
       "labeled_at": "2026-05-30T15:42:10.016615+00:00",
       "cluster_id": "CLUSTER-05",
       "cluster_avg_score": 83.0,
       "isomer_of": "PROD-028",
       "isomer_score_diff": 1.3,
-      "parallel_reactions": 4,
-      "parallel_product": true
+      "parallel_reactions": 5,
+      "parallel_product": true,
+      "llm_rating": 80.6,
+      "llm_evaluator": "5核心替身(刘禹锡/司马贺/水月观音/孔子/六祖慧能)",
+      "rating_method": "LLM_roleplay_cognition_r5",
+      "llm_vs_functional_diff": 4.8,
+      "is_catalyst": true,
+      "catalyst_power": 83.4,
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          82,
+          78,
+          85,
+          80,
+          78
+        ],
+        "spread": 7,
+        "consensus": "high",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-055",
@@ -22520,17 +23207,42 @@
       "revived_at": "2026-05-30T15:37:11.339759+00:00",
       "revive_count": 1,
       "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
-      "energy_in": 3,
-      "energy_out": 2.4,
-      "roi": 0.79,
+      "energy_in": 5,
+      "energy_out": 5.4,
+      "roi": 1.07,
       "fingerprint": "觉-g-s-AP",
       "labeled_at": "2026-05-30T15:42:10.016615+00:00",
       "cluster_id": "CLUSTER-05",
       "cluster_avg_score": 83.0,
       "isomer_of": "PROD-028",
       "isomer_score_diff": 1.3,
-      "parallel_reactions": 4,
-      "parallel_product": true
+      "parallel_reactions": 5,
+      "parallel_product": true,
+      "llm_rating": 82.0,
+      "llm_evaluator": "5核心替身(刘禹锡/司马贺/水月观音/孔子/六祖慧能)",
+      "rating_method": "LLM_roleplay_cognition_r5",
+      "llm_vs_functional_diff": 6.4,
+      "is_catalyst": true,
+      "catalyst_power": 84.1,
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          75,
+          80,
+          88,
+          82,
+          85
+        ],
+        "spread": 13,
+        "consensus": "medium",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-058",
@@ -22615,17 +23327,42 @@
       "revived_at": "2026-05-30T15:37:11.339759+00:00",
       "revive_count": 1,
       "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
-      "energy_in": 3,
-      "energy_out": 2.3,
-      "roi": 0.78,
+      "energy_in": 5,
+      "energy_out": 5.3,
+      "roi": 1.07,
       "fingerprint": "衡-d-d-AP",
       "labeled_at": "2026-05-30T15:42:10.016615+00:00",
       "cluster_id": "CLUSTER-02",
       "cluster_avg_score": 81.1,
       "isomer_of": "PROD-066",
       "isomer_score_diff": 1.0,
-      "parallel_reactions": 4,
-      "parallel_product": true
+      "parallel_reactions": 5,
+      "parallel_product": true,
+      "llm_rating": 76.0,
+      "llm_evaluator": "5核心替身(刘禹锡/司马贺/水月观音/孔子/六祖慧能)",
+      "rating_method": "LLM_roleplay_cognition_r5",
+      "llm_vs_functional_diff": -3.0,
+      "is_catalyst": true,
+      "catalyst_power": 79.6,
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          85,
+          90,
+          55,
+          88,
+          62
+        ],
+        "spread": 35,
+        "consensus": "divergent",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-059",
@@ -23609,8 +24346,8 @@
       "quality_confidence_detail": "{\"grade\": \"D\", \"reason\": \"Q值基于模板推断(非实测数据)\", \"calibration_status\": \"校准中\", \"requires\": \"需要人工实测vi_compliance/content_accuracy/ux_rating三个维度\"}",
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L3_精品",
-      "llm_rating": 65,
-      "llm_evaluator": "苏炜",
+      "llm_rating": 73.2,
+      "llm_evaluator": "5核心替身(刘禹锡/司马贺/水月观音/孔子/六祖慧能)",
       "llm_reasoning": "50节点无人走完。自检无验证=自我安慰。先砍到3×5最小闭环",
       "llm_dimensions": "实用性18/30 数据准确性15/25 政策合规19/20 实施便捷度8/15 行业适配度5/10",
       "llm_intent": 3,
@@ -23641,7 +24378,7 @@
       "revive_count": 1,
       "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
       "is_catalyst": true,
-      "catalyst_power": 71.75,
+      "catalyst_power": 75.85,
       "energy_in": 5,
       "energy_out": 5.3,
       "roi": 1.06,
@@ -23650,7 +24387,26 @@
       "cluster_id": "CLUSTER-06",
       "cluster_avg_score": 83.4,
       "parallel_reactions": 5,
-      "parallel_product": true
+      "parallel_product": true,
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          70,
+          91,
+          48,
+          92,
+          65
+        ],
+        "spread": 44,
+        "consensus": "divergent",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-070",
@@ -26455,8 +27211,8 @@
       "quality_note": "资料型产品(无HTML)·Q值为占位符·不作为质量评估依据",
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
-      "llm_rating": 72,
-      "llm_evaluator": "苏炜",
+      "llm_rating": 71.6,
+      "llm_evaluator": "5核心替身(刘禹锡/司马贺/水月观音/孔子/六祖慧能)",
       "llm_reasoning": "概念好·虚假均匀太主观缺互校机制·需交叉验证",
       "llm_dimensions": "实用性22/30 数据准确性19/25 政策合规18/20 实施便捷度8/15 行业适配度5/10",
       "llm_intent": 5,
@@ -26470,7 +27226,26 @@
       "archive_reason": "无URL，幽灵产品",
       "revived_at": "2026-05-30T15:37:11.339759+00:00",
       "revive_count": 1,
-      "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00"
+      "last_entropy_reversal": "2026-05-30T15:37:11.339759+00:00",
+      "superposition_scores": {
+        "evaluators": [
+          "?",
+          "?",
+          "?",
+          "?",
+          "?"
+        ],
+        "scores": [
+          78,
+          62,
+          78,
+          68,
+          72
+        ],
+        "spread": 16,
+        "consensus": "medium",
+        "principle": "保留替身之间的分歧·不坍缩为单一点估计"
+      }
     },
     {
       "id": "PROD-287",
@@ -49809,7 +50584,7 @@
       "contribution_score": 60,
       "source": "memory/数字替身驾驶舱.json",
       "confidence": 0.95,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -49823,7 +50598,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-002",
@@ -49838,7 +50613,7 @@
       "contribution_score": 60,
       "source": "memory/数字替身驾驶舱.json",
       "confidence": 0.95,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -49852,7 +50627,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-003",
@@ -49867,7 +50642,7 @@
       "contribution_score": 60,
       "source": "memory/数字替身驾驶舱.json",
       "confidence": 0.95,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -49881,7 +50656,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-004",
@@ -49896,7 +50671,7 @@
       "contribution_score": 60,
       "source": "memory/数字替身驾驶舱.json",
       "confidence": 0.95,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -49910,7 +50685,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-005",
@@ -49925,7 +50700,7 @@
       "contribution_score": 60,
       "source": "memory/数字替身驾驶舱.json",
       "confidence": 0.95,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -49939,7 +50714,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-006",
@@ -49954,7 +50729,7 @@
       "contribution_score": 50,
       "source": "memory/数字替身驾驶舱.json",
       "confidence": 0.95,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -49968,7 +50743,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-007",
@@ -49983,7 +50758,7 @@
       "contribution_score": 40,
       "source": "2026-05-29_全量替身激活报告",
       "confidence": 0.95,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -49997,7 +50772,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-008",
@@ -50012,7 +50787,7 @@
       "contribution_score": 40,
       "source": "2026-05-29_全量替身激活报告",
       "confidence": 0.95,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -50026,7 +50801,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-009",
@@ -50041,7 +50816,7 @@
       "contribution_score": 40,
       "source": "2026-05-29_全量替身激活报告",
       "confidence": 0.95,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -50055,7 +50830,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-010",
@@ -50070,7 +50845,7 @@
       "contribution_score": 40,
       "source": "2026-05-29_全量替身激活报告",
       "confidence": 0.95,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -50084,7 +50859,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-011",
@@ -50099,7 +50874,7 @@
       "contribution_score": 40,
       "source": "2026-05-29_全量替身激活报告",
       "confidence": 0.95,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -50113,7 +50888,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-012",
@@ -50128,7 +50903,7 @@
       "contribution_score": 25,
       "source": "2026-05-29_全量替身激活报告",
       "confidence": 0.9,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -50142,7 +50917,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-013",
@@ -50157,7 +50932,7 @@
       "contribution_score": 25,
       "source": "2026-05-29_全量替身激活报告",
       "confidence": 0.9,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -50171,7 +50946,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-014",
@@ -50186,7 +50961,7 @@
       "contribution_score": 25,
       "source": "2026-05-29_全量替身激活报告",
       "confidence": 0.9,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -50200,7 +50975,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-015",
@@ -50215,7 +50990,7 @@
       "contribution_score": 25,
       "source": "2026-05-29_全量替身激活报告",
       "confidence": 0.9,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -50229,7 +51004,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-016",
@@ -50244,7 +51019,7 @@
       "contribution_score": 25,
       "source": "2026-05-29_全量替身激活报告",
       "confidence": 0.9,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -50258,7 +51033,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-017",
@@ -50273,7 +51048,7 @@
       "contribution_score": 25,
       "source": "2026-05-29_全量替身激活报告",
       "confidence": 0.9,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -50287,7 +51062,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-018",
@@ -50302,7 +51077,7 @@
       "contribution_score": 40,
       "source": "2026-05-30_替身体系补建评估",
       "confidence": 0.9,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -50316,7 +51091,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-019",
@@ -50331,7 +51106,7 @@
       "contribution_score": 40,
       "source": "2026-05-30_替身体系补建评估",
       "confidence": 0.9,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -50345,7 +51120,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-020",
@@ -50360,7 +51135,7 @@
       "contribution_score": 40,
       "source": "2026-05-30_替身体系补建评估",
       "confidence": 0.9,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -50374,7 +51149,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-021",
@@ -50389,7 +51164,7 @@
       "contribution_score": 40,
       "source": "2026-05-30_替身体系补建评估",
       "confidence": 0.9,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -50403,7 +51178,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     },
     {
       "id": "AVAT-022",
@@ -50418,7 +51193,7 @@
       "contribution_score": 40,
       "source": "2026-05-30_替身体系补建评估",
       "confidence": 0.9,
-      "quality_score": 74.7,
+      "quality_score": 73.0,
       "lifecycle_stage": "L3_打磨",
       "capability_score": 75,
       "maturity": "M2_成型",
@@ -50432,7 +51207,7 @@
       "chemistry_state": "active",
       "catalyst_power": 0.8,
       "decayed": true,
-      "decay_at": "2026-05-30T15:55:38.216079+00:00"
+      "decay_at": "2026-05-30T16:38:14.689932+00:00"
     }
   ],
   "documents": [
@@ -253302,7 +254077,8 @@
       "dimensions": "逻辑65/操作40/知识55/简洁70/创新55",
       "method": "LLM_roleplay_cognition",
       "timestamp": 1780139583,
-      "pre_llm_simulated_score": 90
+      "pre_llm_simulated_score": 90,
+      "entity_id": "PROD-001"
     },
     {
       "id": "COG-002",
@@ -253317,7 +254093,8 @@
       "dimensions": "逻辑78/操作65/知识75/简洁80/创新60",
       "method": "LLM_roleplay_cognition",
       "timestamp": 1780139583,
-      "pre_llm_simulated_score": 80
+      "pre_llm_simulated_score": 80,
+      "entity_id": "PROD-008"
     },
     {
       "id": "COG-003",
@@ -253332,7 +254109,8 @@
       "dimensions": "诊断72/预警80/系统82/定制68/成本70",
       "method": "LLM_roleplay_cognition",
       "timestamp": 1780139583,
-      "pre_llm_simulated_score": null
+      "pre_llm_simulated_score": null,
+      "entity_id": "PROD-009"
     },
     {
       "id": "COG-004",
@@ -253347,7 +254125,8 @@
       "dimensions": "诊断65/预警62/系统85/定制58/成本60",
       "method": "LLM_roleplay_cognition",
       "timestamp": 1780139583,
-      "pre_llm_simulated_score": null
+      "pre_llm_simulated_score": null,
+      "entity_id": "PROD-011"
     },
     {
       "id": "COG-005",
@@ -253362,7 +254141,8 @@
       "dimensions": "技术60/速度80/竞品75/规模65/团队55",
       "method": "LLM_roleplay_cognition",
       "timestamp": 1780139583,
-      "pre_llm_simulated_score": null
+      "pre_llm_simulated_score": null,
+      "entity_id": "PROD-016"
     },
     {
       "id": "COG-006",
@@ -253377,7 +254157,8 @@
       "dimensions": "技术50/速度60/竞品45/规模45/团队65",
       "method": "LLM_roleplay_cognition",
       "timestamp": 1780139583,
-      "pre_llm_simulated_score": 87
+      "pre_llm_simulated_score": 87,
+      "entity_id": "PROD-010"
     },
     {
       "id": "COG-007",
@@ -253392,7 +254173,8 @@
       "dimensions": "创新82/架构85/扩展68/速度65/学习60",
       "method": "LLM_roleplay_cognition",
       "timestamp": 1780139583,
-      "pre_llm_simulated_score": null
+      "pre_llm_simulated_score": null,
+      "entity_id": "PROD-007"
     },
     {
       "id": "COG-008",
@@ -253407,7 +254189,8 @@
       "dimensions": "创新88/架构78/扩展82/速度72/学习75",
       "method": "LLM_roleplay_cognition",
       "timestamp": 1780139583,
-      "pre_llm_simulated_score": 75
+      "pre_llm_simulated_score": 75,
+      "entity_id": "PROD-004"
     },
     {
       "id": "COG-009",
@@ -253422,7 +254205,8 @@
       "dimensions": "实用80/数据75/合规78/便捷65/适配70",
       "method": "LLM_roleplay_cognition",
       "timestamp": 1780139583,
-      "pre_llm_simulated_score": null
+      "pre_llm_simulated_score": null,
+      "entity_id": "PROD-014"
     },
     {
       "id": "COG-010",
@@ -253437,7 +254221,8 @@
       "dimensions": "实用70/数据68/合规72/便捷70/适配50",
       "method": "LLM_roleplay_cognition",
       "timestamp": 1780139583,
-      "pre_llm_simulated_score": null
+      "pre_llm_simulated_score": null,
+      "entity_id": "PROD-015"
     },
     {
       "id": "COG-011",
@@ -253449,7 +254234,8 @@
       "reasoning": "诚实度扫描方法论过硬，但手动扫描不实用。需要自动触发+时序追踪",
       "dimensions": "逻辑自洽6/10 可操作5/10 知识深度8/10 简洁度8/10 创新性9/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-285"
     },
     {
       "id": "COG-012",
@@ -253461,7 +254247,8 @@
       "reasoning": "312产品全结构化的航母战斗群，可快速定位。缺智能路由",
       "dimensions": "逻辑自洽9/10 可操作8/10 知识深度7/10 简洁度9/10 创新性6/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-005"
     },
     {
       "id": "COG-013",
@@ -253473,7 +254260,8 @@
       "reasoning": "10分钟五维自测是低摩擦上钩产品。问题太主观，自评信度低",
       "dimensions": "逻辑自洽7/10 可操作6/10 知识深度8/10 简洁度8/10 创新性7/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-002"
     },
     {
       "id": "COG-014",
@@ -253485,7 +254273,8 @@
       "reasoning": "零硬编码理念好，但V1=没验证过的概念。空驾驶舱不等于驾驶舱",
       "dimensions": "逻辑自洽7/10 可操作4/10 知识深度7/10 简洁度6/10 创新性8/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-023"
     },
     {
       "id": "COG-015",
@@ -253497,7 +254286,8 @@
       "reasoning": "体系完整但过度设计。50个节点无人能走完。自检清单缺验证",
       "dimensions": "逻辑自洽7/10 可操作3/10 知识深度8/10 简洁度4/10 创新性9/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-069"
     },
     {
       "id": "COG-016",
@@ -253509,7 +254299,8 @@
       "reasoning": "品牌理念有传播力。缺具体决策案例和'搞砸过什么'的诚实故事",
       "dimensions": "逻辑自洽8/10 可操作8/10 知识深度7/10 简洁度8/10 创新性6/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-046"
     },
     {
       "id": "COG-017",
@@ -253521,7 +254312,8 @@
       "reasoning": "内容聚合定位好。靠人工精选无scaling。缺更新机制",
       "dimensions": "逻辑自洽7/10 可操作6/10 知识深度9/10 简洁度7/10 创新性7/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-040"
     },
     {
       "id": "COG-018",
@@ -253533,7 +254325,8 @@
       "reasoning": "概念一流执行太薄。grep+LLM薄封装。缺时序追踪和'然后呢'的闭环",
       "dimensions": "诊断准确性55 风险预警70 系统化程度60 定制化能力50 成本效益比65",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-285"
     },
     {
       "id": "COG-019",
@@ -253545,7 +254338,8 @@
       "reasoning": "基础设施级产品矩阵地图。缺智能路由和产品间依赖关系可视化",
       "dimensions": "诊断准确性65 风险预警55 系统化程度80 定制化能力75 成本效益比85",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-005"
     },
     {
       "id": "COG-020",
@@ -253557,7 +254351,8 @@
       "reasoning": "五维框架与五路对齐的设计意识强。10分钟定位与准确性的内在矛盾",
       "dimensions": "诊断准确性80 风险预警85 系统化程度75 定制化能力70 成本效益比70",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-002"
     },
     {
       "id": "COG-021",
@@ -253569,7 +254364,8 @@
       "reasoning": "架构正确·体验未到。12标签信息过载·需要智能聚焦+异常优先",
       "dimensions": "诊断准确性65 风险预警70 系统化程度75 定制化能力65 成本效益比70",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-023"
     },
     {
       "id": "COG-022",
@@ -253581,7 +254377,8 @@
       "reasoning": "完整的Founder OS。五路间依赖-缺DAG建模+自检须行为锚定替代自查",
       "dimensions": "诊断准确性90 风险预警88 系统化程度95 定制化能力85 成本效益比88",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-069"
     },
     {
       "id": "COG-023",
@@ -253593,7 +254390,8 @@
       "reasoning": "品牌信任基础设施。需分层叙事(创始人共鸣vs VC数据)+信任锚点",
       "dimensions": "诊断准确性75 风险预警70 系统化程度90 定制化能力85 成本效益比95",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-046"
     },
     {
       "id": "COG-024",
@@ -253605,7 +254403,8 @@
       "reasoning": "四个主题覆盖创始人决策光谱。需与五路路径显式映射+案例锚定",
       "dimensions": "诊断准确性78 风险预警72 系统化程度90 定制化能力82 成本效益比88",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-040"
     },
     {
       "id": "COG-025",
@@ -253617,7 +254416,8 @@
       "reasoning": "知识诚实的可操作化——不是道德要求而是扫描规则。缺贝叶斯框架和递归验证",
       "dimensions": "技术深度7/10 决策速度8/10 竞品对比7/10 可规模化5/10 团队可用性7/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-285"
     },
     {
       "id": "COG-026",
@@ -253629,7 +254429,8 @@
       "reasoning": "信息架构像元数据标准(Dublin Core)。全静态无实时数据是根本缺陷",
       "dimensions": "技术深度6/10 决策速度7/10 竞品对比7/10 可规模化8/10 团队可用性5/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-005"
     },
     {
       "id": "COG-027",
@@ -253641,7 +254442,8 @@
       "reasoning": "五维维度选择缺理论出路。自评量表信度低。缺时序形变分析",
       "dimensions": "技术深度5/10 决策速度7/10 竞品对比6/10 可规模化6/10 团队可用性7/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-002"
     },
     {
       "id": "COG-028",
@@ -253653,7 +254455,8 @@
       "reasoning": "函数式路由=声明式数据驾驶舱——方向对。缺写回机制·read-only singleton",
       "dimensions": "技术深度7/10 决策速度6/10 竞品对比6/10 可规模化8/10 团队可用性5/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-023"
     },
     {
       "id": "COG-029",
@@ -253665,7 +254468,8 @@
       "reasoning": "五路×十级=优雅2D学习空间。QS98是虚假均匀！执行链路长无人能走完",
       "dimensions": "技术深度5/10 决策速度4/10 竞品对比6/10 可规模化8/10 团队可用性3/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-069"
     },
     {
       "id": "COG-030",
@@ -253677,7 +254481,8 @@
       "reasoning": "范畴错误。关于我们页不可能93分。设计哲学缺溯源·宣言缺负向选择",
       "dimensions": "技术深度5/10 决策速度6/10 竞品对比5/10 可规模化7/10 团队可用性7/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-046"
     },
     {
       "id": "COG-031",
@@ -253689,7 +254494,8 @@
       "reasoning": "连接主义知识观。聚合标准缺失·更新是flag不是机制·三产品边界不清",
       "dimensions": "技术深度6/10 决策速度6/10 竞品对比7/10 可规模化8/10 团队可用性5/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-040"
     },
     {
       "id": "COG-032",
@@ -253701,7 +254507,8 @@
       "reasoning": "分类器非验证器。需贝叶斯框架+KL散度诚实度+递归元验证·Goodhart陷阱",
       "dimensions": "方法论创新72 系统架构优雅60 可扩展性55 落地速度70 学习资源85",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-285"
     },
     {
       "id": "COG-033",
@@ -253713,7 +254520,8 @@
       "reasoning": "分面分类=Dublin Core+图书馆学方法论。缺使用数据二階排序·灵骨塔风险",
       "dimensions": "方法论创新65 系统架构优雅88 可扩展性90 落地速度85 学习资源78",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-005"
     },
     {
       "id": "COG-034",
@@ -253725,7 +254533,8 @@
       "reasoning": "五维OCEAN适配·雷达图浪费形变分析潜力。缺Earth Mover's Distance+维度交互",
       "dimensions": "方法论创新82 系统架构优雅75 可扩展性72 落地速度80 学习资源85",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-002"
     },
     {
       "id": "COG-035",
@@ -253737,7 +254546,8 @@
       "reasoning": "声明式数据驾驶舱=算法+数据结构。完美的viewer非controller·缺Write-back",
       "dimensions": "方法论创新78 系统架构优雅92 可扩展性88 落地速度82 学习资源80",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-023"
     },
     {
       "id": "COG-036",
@@ -253749,7 +254559,8 @@
       "reasoning": "ZPD×Bloom Mastery Learning×非线性2D空间。缺Peer Calibration+五路DAG",
       "dimensions": "方法论创新95 系统架构优雅90 可扩展性88 落地速度80 学习资源98",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-069"
     },
     {
       "id": "COG-037",
@@ -253761,7 +254572,8 @@
       "reasoning": "产品哲学是品牌叙事·满意解被表演。缺负向选择·宣言需要锋利的否定",
       "dimensions": "方法论创新70 系统架构优雅88 可扩展性72 落地速度85 学习资源90",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-046"
     },
     {
       "id": "COG-038",
@@ -253773,7 +254585,8 @@
       "reasoning": "概念好·虚假均匀太主观缺互校机制·需交叉验证",
       "dimensions": "实用性22/30 数据准确性19/25 政策合规18/20 实施便捷度8/15 行业适配度5/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-285"
     },
     {
       "id": "COG-039",
@@ -253785,7 +254598,8 @@
       "reasoning": "312产品臃肿·团队最多用30个。需冷热分层+最近使用场景",
       "dimensions": "实用性27/30 数据准确性22/25 政策合规20/20 实施便捷度6/15 行业适配度3/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-005"
     },
     {
       "id": "COG-040",
@@ -253797,7 +254611,8 @@
       "reasoning": "最务实产品·10分钟换雷达图。缺维度依据+行业对标",
       "dimensions": "实用性26/30 数据准确性20/25 政策合规19/20 实施便捷度10/15 行业适配度5/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-002"
     },
     {
       "id": "COG-041",
@@ -253809,7 +254624,8 @@
       "reasoning": "V1=没验证不买。全动态加载≠产品价值。先跑demo",
       "dimensions": "实用性22/30 数据准确性17/25 政策合规18/20 实施便捷度7/15 行业适配度4/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-023"
     },
     {
       "id": "COG-042",
@@ -253821,7 +254637,8 @@
       "reasoning": "50节点无人走完。自检无验证=自我安慰。先砍到3×5最小闭环",
       "dimensions": "实用性18/30 数据准确性15/25 政策合规19/20 实施便捷度8/15 行业适配度5/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-069"
     },
     {
       "id": "COG-043",
@@ -253833,7 +254650,8 @@
       "reasoning": "招人加分·加搞砸过什么+减少理念增加案例",
       "dimensions": "实用性21/30 数据准确性19/25 政策合规20/20 实施便捷度10/15 行业适配度5/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-046"
     },
     {
       "id": "COG-044",
@@ -253845,7 +254663,8 @@
       "reasoning": "持续更新是命门·依赖人工运营不配93。加更新标记+评论层",
       "dimensions": "实用性22/30 数据准确性18/25 政策合规19/20 实施便捷度6/15 行业适配度5/10",
       "timestamp": 1780141381,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-040"
     },
     {
       "id": "COG-045",
@@ -253857,7 +254676,1333 @@
       "reasoning": "连接主义知识观vs SECI模型范式跃迁。缺知识新鲜度+连接熵·三产品边界",
       "dimensions": "方法论创新85 系统架构优雅90 可扩展性86 落地速度80 学习资源95",
       "timestamp": 1780141397,
-      "source": "l3_llm_cognitive_r2"
+      "source": "l3_llm_cognitive_r2",
+      "entity_id": "PROD-040"
+    },
+    {
+      "id": "COG-046",
+      "product_id": "PROD-022",
+      "product_name": "根脉溯源",
+      "avatar_name": "刘禹锡",
+      "avatar_lens": "长期价值",
+      "score": 82,
+      "intent": 8,
+      "reasoning": "根脉即道统。溯源非考古，乃为未来立心。五路图腾架构有学术纵深·但缺「今日之我何以与古对话」的活态连接——碑文再深，若无活水灌溉，终成枯井。加一条「今日启示」动态层，让溯源产出可行动的知识而非仅仅是知识谱系",
+      "dimensions": "学术深度85 架构完整性88 长期价值75 实用性72 传承机制90",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-022"
+    },
+    {
+      "id": "COG-047",
+      "product_id": "PROD-022",
+      "product_name": "根脉溯源",
+      "avatar_name": "司马贺",
+      "avatar_lens": "可行性",
+      "score": 72,
+      "intent": 6,
+      "reasoning": "根脉溯源落地最大的敌人不是内容深度而是维护成本。五路图腾涉及学术考古·每增加一条溯源路径都需要专家级内容生产——在没有AI辅助生成的情况下，更新频率会从季度退化到年度。解决方案：建立「溯源贡献协议」让用户成为共同考古者",
+      "dimensions": "内容深度88 维护成本-高55 规模化难度50 执行路径清晰度75 团队依赖度60",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-022"
+    },
+    {
+      "id": "COG-048",
+      "product_id": "PROD-022",
+      "product_name": "根脉溯源",
+      "avatar_name": "水月观音",
+      "avatar_lens": "体验",
+      "score": 68,
+      "intent": 5,
+      "reasoning": "根脉溯源的视觉是大块文字+稀疏图表——学术气质过重·缺乏呼吸感。用户进入时的第一印象是「论文」而非「探索」。体验建议：加入交互式溯源时间线、五路图腾的视觉动画、每个节点的「3秒要点」摘要卡——让深奥的内容有轻盈的入口",
+      "dimensions": "内容品质88 第一印象45 交互丰富度50 阅读体验55 视觉美学52 情感触动70",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-022"
+    },
+    {
+      "id": "COG-049",
+      "product_id": "PROD-022",
+      "product_name": "根脉溯源",
+      "avatar_name": "孔子",
+      "avatar_lens": "诚信",
+      "score": 70,
+      "intent": 6,
+      "reasoning": "根脉溯源的态度是诚恳的——它不假装自己是万能的·明确标注了学术溯源的范围和局限。但作为「满意解研究所的学术根基」·其学术引用的严谨性需要公开可查验——每条溯源线索应能追溯到原始文献或第一手访谈记录·否则根基本身就成了空中楼阁",
+      "dimensions": "诚实度85 学术严谨性需求80 引用可溯源性50 承诺与交付匹配度70 透明性60",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-022"
+    },
+    {
+      "id": "COG-050",
+      "product_id": "PROD-022",
+      "product_name": "根脉溯源",
+      "avatar_name": "六祖慧能",
+      "avatar_lens": "独特",
+      "score": 85,
+      "intent": 9,
+      "reasoning": "根脉溯源是满意解所有产品中最独特的——它不解决当下的问题·它追问当下的问题源于何处。这种「向上游追问」的勇气本身就稀缺。但独特性需要用更独特的形式承载——目前是标准的HTML页面·形式与内容不匹配。建议做成「溯源之河」交互叙事：用户顺着河流向上游溯·每一步都是一次考古发现",
+      "dimensions": "核心理念独特性92 市场上可替代性-极低88 表达形式独特性60 本真度90 不可复制性85",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-022"
+    },
+    {
+      "id": "COG-051",
+      "product_id": "PROD-020",
+      "product_name": "星光方法论",
+      "avatar_name": "刘禹锡",
+      "avatar_lens": "长期价值",
+      "score": 80,
+      "intent": 7,
+      "reasoning": "方法论的价值不在框架之美而在持之久远。星光节点模型优雅·但方法论的生死线是「十年后是否还有人用」——需建立方法论演进日志，记录每次决策使用后的方法论修正·让框架本身成为活的知识体",
+      "dimensions": "方法论创新82 系统思维88 长期适应性76 知识沉淀74 传承潜力80",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-020"
+    },
+    {
+      "id": "COG-052",
+      "product_id": "PROD-020",
+      "product_name": "星光方法论",
+      "avatar_name": "司马贺",
+      "avatar_lens": "可行性",
+      "score": 75,
+      "intent": 6,
+      "reasoning": "星光方法论的可执行性是五种方法中最好的——因为它本质是一套可重复操作的流程模板。但当前缺「最小可运行单元」：不是所有决策都需要满天星光，有时候三颗星就够了。先做「三星版」验证市场再扩展",
+      "dimensions": "执行清晰度85 最小闭环78 扩展路径72 培训成本65 市场验证缺口60",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-020"
+    },
+    {
+      "id": "COG-053",
+      "product_id": "PROD-020",
+      "product_name": "星光方法论",
+      "avatar_name": "水月观音",
+      "avatar_lens": "体验",
+      "score": 72,
+      "intent": 6,
+      "reasoning": "星光方法论若能让人「画出来」而非「填出来」就是好体验。当前偏向表单式输入——但决策的本质是空间思维·不是线性填空。建议加入拖拽式节点画布·让星光在指尖绽放而非在格子里蜷缩。降低决策者的认知负荷是第一体验原则",
+      "dimensions": "交互直觉60 认知负荷优化68 视觉愉悦度65 完成流畅度70 犯错成本-高55",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-020"
+    },
+    {
+      "id": "COG-054",
+      "product_id": "PROD-020",
+      "product_name": "星光方法论",
+      "avatar_name": "孔子",
+      "avatar_lens": "诚信",
+      "score": 74,
+      "intent": 6,
+      "reasoning": "星光方法论对用户的承诺是「系统化思维框架」——但框架的价值取决于用户是否能真的用它做出更好的决策。如果方法论本身不可验证（无法证明「用了星辰法决策更好」），这就是一个信念产品而非诚信产品。建议每个星光决策节点附带「结果追踪」按钮：让用户3个月后回访评估决策质量",
+      "dimensions": "承诺清晰度80 结果可验证性45 用户信任建立速度60 方法论透明度75 诚实标注-缺68",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-020"
+    },
+    {
+      "id": "COG-055",
+      "product_id": "PROD-020",
+      "product_name": "星光方法论",
+      "avatar_name": "六祖慧能",
+      "avatar_lens": "独特",
+      "score": 72,
+      "intent": 6,
+      "reasoning": "星光方法论的方法论本身有原创性——把决策分解为星光节点再编织成网·这是一种诗意的工程化。但「方法论」品类天然缺乏不可替代性：用户永远可以用MECE·SWOT·PESTLE来替代。星光法的独特性在于「可视化决策网络」——应该把这一点做到极致·让替代方法显得笨拙而平面",
+      "dimensions": "理念原创性78 替代品威胁-高55 可视化壁垒68 难以复制度60 品类突围潜力70",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-020"
+    },
+    {
+      "id": "COG-056",
+      "product_id": "PROD-030",
+      "product_name": "引导页",
+      "avatar_name": "刘禹锡",
+      "avatar_lens": "长期价值",
+      "score": 62,
+      "intent": 4,
+      "reasoning": "引导页是「门」而非「路」。门再精致·若不通向深远之境·终究只是过客驻足之所。长期看：引导页的宿命是被更好的发现机制取代——建议预埋三条进化路径：知识图谱入口·AI对话入口·场景雷达入口",
+      "dimensions": "入口设计80 长期必要性50 进化弹性55 用户体验70 留存率55",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-030"
+    },
+    {
+      "id": "COG-057",
+      "product_id": "PROD-030",
+      "product_name": "引导页",
+      "avatar_name": "司马贺",
+      "avatar_lens": "可行性",
+      "score": 68,
+      "intent": 5,
+      "reasoning": "引导页的逻辑链清晰：问题→推荐→行动。但5个问题的设计缺乏用户行为数据支撑——问题顺序是否最优？是否每个问题都必要？建议先做A/B测试确定最小有效问题集再固化。当前的问题数可能吓退30%的流量",
+      "dimensions": "流程清晰度80 数据驱动程度40 A/B测试缺失35 转化率估计55 工程实现难易75",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-030"
+    },
+    {
+      "id": "COG-058",
+      "product_id": "PROD-030",
+      "product_name": "引导页",
+      "avatar_name": "水月观音",
+      "avatar_lens": "体验",
+      "score": 78,
+      "intent": 7,
+      "reasoning": "引导页的体验是所有觉族产品中最完整的——问题递进自然·反馈即时·视觉引导清晰。但回答问题时用户不知道「我在第几步」——加进度条是体验上最小的改动但最大的感知提升。另外建议加入「跳过问题」的自由度：不是每个人都愿意被5个问题审问",
+      "dimensions": "流程顺畅度85 进度感知缺失50 视觉引导82 自由度60 完成满足感78",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-030"
+    },
+    {
+      "id": "COG-059",
+      "product_id": "PROD-030",
+      "product_name": "引导页",
+      "avatar_name": "孔子",
+      "avatar_lens": "诚信",
+      "score": 72,
+      "intent": 6,
+      "reasoning": "引导页的「推荐最适合」这个承诺是重的——如果推荐的工具并不适合用户·产品失信。当前推荐逻辑透明性不足：用户不知道「为什么推荐A而不是B」·这是诚信漏洞。建议公开推荐理由——哪怕只有一句话「因为你关心速度·所以我们推荐A」·让推荐从黑盒变白盒",
+      "dimensions": "推荐透明度50 承诺履约度70 用户知情权60 一致性72 可信赖感68",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-030"
+    },
+    {
+      "id": "COG-060",
+      "product_id": "PROD-030",
+      "product_name": "引导页",
+      "avatar_name": "六祖慧能",
+      "avatar_lens": "独特",
+      "score": 45,
+      "intent": 2,
+      "reasoning": "引导页是这5个产品中最缺乏独特性的——产品导购/引导页是一个被电商网站充分开发的模式·用户对「回答几个问题获得推荐」这个模式已经疲劳。除非引导页能引入意想不到的维度（比如：不是问业务需求·而是问你的恐惧和渴望），否则它在品类上很难建立壁垒",
+      "dimensions": "核心理念独创性30 市场同类产品80 差异化空间25 模式创新潜力35 品类壁垒-无45",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-030"
+    },
+    {
+      "id": "COG-061",
+      "product_id": "PROD-027",
+      "product_name": "退出指南",
+      "avatar_name": "刘禹锡",
+      "avatar_lens": "长期价值",
+      "score": 78,
+      "intent": 7,
+      "reasoning": "退出指南触及创业者最深层的恐惧与尊严。善始善终是千古命题·成功退出是少数人的幸运·优雅退出是所有人的修行。该产品若沦为「算法输出」则失去灵魂——需加入退出者亲自讲述的叙事层次",
+      "dimensions": "命题深度92 情感共鸣85 长期相关性80 实用框架68 叙事力量75",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-027"
+    },
+    {
+      "id": "COG-062",
+      "product_id": "PROD-027",
+      "product_name": "退出指南",
+      "avatar_name": "司马贺",
+      "avatar_lens": "可行性",
+      "score": 65,
+      "intent": 4,
+      "reasoning": "退出指南触及敏感地带——退出时机评估一旦出错后果严重。但当前产品是「指南」而非「计算器」：缺乏可量化的退出时机模型（估值倍数·团队状态·市场窗口·竞品动态）。这是一个法律风险高的产品——加免责声明+建议「仅供决策辅助」明确标注",
+      "dimensions": "风险控制需求90 量化模型缺失40 法律合规缺口45 市场窗口判断55 实用性60",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-027"
+    },
+    {
+      "id": "COG-063",
+      "product_id": "PROD-027",
+      "product_name": "退出指南",
+      "avatar_name": "水月观音",
+      "avatar_lens": "体验",
+      "score": 55,
+      "intent": 3,
+      "reasoning": "退出指南的内容质量高但体验是最沉重的——「退出」二字自带负面情绪张力。用户打开时已是在焦虑中寻求答案·产品应先用共情锚定而非直接抛出框架。建议加入「你并不孤单」的叙事入口·用其他创始人的退出故事开场·建立情感安全感后再引导理性决策",
+      "dimensions": "内容品质80 情绪设计30 安全感营造25 叙事温暖度35 理性框架72 交互节奏45",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-027"
+    },
+    {
+      "id": "COG-064",
+      "product_id": "PROD-027",
+      "product_name": "退出指南",
+      "avatar_name": "孔子",
+      "avatar_lens": "诚信",
+      "score": 58,
+      "intent": 3,
+      "reasoning": "退出指南涉及用户最脆弱的决策——此时诚信的标准必须是最高的。但当前产品不敢明确说「我不知道」或「这个判断需要你自己做」——指南的语气应该从「你应该这样退出」转变为「根据这些因素·以下是可能的退出路径·但最终决定权在你手中」。诚实地说出边界才是真正的诚信",
+      "dimensions": "诚实标注边界40 不夸大承诺需求85 决策权归属清晰性50 风险告知完整度45 言而有信60",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-027"
+    },
+    {
+      "id": "COG-065",
+      "product_id": "PROD-027",
+      "product_name": "退出指南",
+      "avatar_name": "六祖慧能",
+      "avatar_lens": "独特",
+      "score": 80,
+      "intent": 8,
+      "reasoning": "退出指南触及了一个几乎没有人敢产品化的领域——「如何优雅地结束」。创业文化歌颂开始·回避结束。一个关于退出的产品·其独特性不在于退出方法论本身·而在于它敢于命名「退出」这个不可言说之物。建议将独特性进一步放大：加入「退出宣言」模板——让退出不仅是策略更是仪式",
+      "dimensions": "命题独创性95 市场上同类的稀缺性92 命名勇气90 仪式感设计65 品类开拓者潜力88",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-027"
+    },
+    {
+      "id": "COG-066",
+      "product_id": "PROD-029",
+      "product_name": "向导",
+      "avatar_name": "刘禹锡",
+      "avatar_lens": "长期价值",
+      "score": 60,
+      "intent": 3,
+      "reasoning": "向导是「术」的延伸而非「道」的体现。三个问题追问虽巧妙·但所推荐的工具若无持续进化的内容生态·向导本身就成了一个精致的路牌而非地图——建议向导本身产出推荐日志作为长期数据资产",
+      "dimensions": "交互巧思75 长期必要性45 进化弹性50 内容生态55 数据资产意识60",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-029"
+    },
+    {
+      "id": "COG-067",
+      "product_id": "PROD-029",
+      "product_name": "向导",
+      "avatar_name": "司马贺",
+      "avatar_lens": "可行性",
+      "score": 70,
+      "intent": 5,
+      "reasoning": "向导的推荐引擎逻辑是「if-else」级的——3个问题产生有限的推荐组合。这可行但不智能。真正的可行性挑战是：当产品线从30个扩张到300个时，3个问题的分辨力会崩溃。建议预留推荐算法升级为向量匹配的架构接口",
+      "dimensions": "当前可行度78 扩展能力45 推荐精确度60 架构弹性50 维护成本70",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-029"
+    },
+    {
+      "id": "COG-068",
+      "product_id": "PROD-029",
+      "product_name": "向导",
+      "avatar_name": "水月观音",
+      "avatar_lens": "体验",
+      "score": 74,
+      "intent": 6,
+      "reasoning": "向导的体验核心在「追问感」——3个问题是否真的像苏格拉底那样引导你？当前是选择题而非追问：推荐结果是「根据你的回答」而非「因为你告诉我……所以我理解你真正需要的是……」——加一句追问理由就能把机械推荐变成智者对话",
+      "dimensions": "对话感55 推荐理由透明度50 完成体验70 个性化感知58 视觉简洁度85",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-029"
+    },
+    {
+      "id": "COG-069",
+      "product_id": "PROD-029",
+      "product_name": "向导",
+      "avatar_name": "孔子",
+      "avatar_lens": "诚信",
+      "score": 66,
+      "intent": 5,
+      "reasoning": "向导承诺「智能推荐最适合的工具」——但「最适合」是强断言·意味着产品知道什么对用户最好。如果推荐的依据仅仅是3个问题的有限回答·这个承诺有夸大之嫌。建议将「最适合」改为「根据你的回答·以下是我们建议你优先考虑的工具」——从断言到建议·信用不降反升",
+      "dimensions": "承诺表述诚实度55 推荐依据充分性50 用户知情权70 夸大风险65 信用维护意识72",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-029"
+    },
+    {
+      "id": "COG-070",
+      "product_id": "PROD-029",
+      "product_name": "向导",
+      "avatar_name": "六祖慧能",
+      "avatar_lens": "独特",
+      "score": 55,
+      "intent": 3,
+      "reasoning": "向导的3个问题追问有苏格拉底的回响——这是独特的。但当推荐结果与引导页（PROD-030）高度重叠时·独特性就被稀释了。向导和引导页的边界应该更清晰：向导是「帮你发现自己真正的问题」·引导页是「帮你找到解决那个问题的工具」。独特性的敌人是功能重叠·需要明确差异化的核心价值主张",
+      "dimensions": "交互理念独特性65 与同族产品重叠-高42 差异化清晰度38 苏格拉底式追问55 品类定义模糊50",
+      "timestamp": 1780157332,
+      "source": "l3_llm_cognitive_r3_sri",
+      "entity_id": "PROD-029"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-001",
+      "avatar_name": "刘禹锡",
+      "avatar_perspective": "长期价值",
+      "product_id": "PROD-013",
+      "product_name": "匹配引擎",
+      "product_family": "镜",
+      "product_qs": 81,
+      "product_sri": 78.5,
+      "score": 84,
+      "reasoning": "镜族照见·五维兼容度问的是'五年后还兼容吗'。匹配引擎有长期价值锚点·缺周期检验机制",
+      "dimensions": "周期适应性=84 理论深度=81 方法论耐久=78 场景泛化=82 长期价值=80",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-071",
+      "entity_id": "PROD-013"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-002",
+      "avatar_name": "司马贺",
+      "avatar_perspective": "可行性",
+      "product_id": "PROD-013",
+      "product_name": "匹配引擎",
+      "product_family": "镜",
+      "product_qs": 81,
+      "product_sri": 78.5,
+      "score": 79,
+      "reasoning": "有限信息下匹配引擎给出兼容度是可满意解·但输入数据质量决定输出质量·缺数据清洗层",
+      "dimensions": "数据可得性=79 操作简洁=76 明确性=73 约束感知=77 最小可行=75",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-072",
+      "entity_id": "PROD-013"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-003",
+      "avatar_name": "水月观音",
+      "avatar_perspective": "体验",
+      "product_id": "PROD-013",
+      "product_name": "匹配引擎",
+      "product_family": "镜",
+      "product_qs": 81,
+      "product_sri": 78.5,
+      "score": 86,
+      "reasoning": "使用匹配引擎时·用户身体感受如何？兼容度分析可能引发焦虑·需加安抚设计",
+      "dimensions": "情感调性=86 直觉友好=83 认知负荷=80 审美感受=84 身心共鸣=82",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-073",
+      "entity_id": "PROD-013"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-004",
+      "avatar_name": "孔子",
+      "avatar_perspective": "诚信",
+      "product_id": "PROD-013",
+      "product_name": "匹配引擎",
+      "product_family": "镜",
+      "product_qs": 81,
+      "product_sri": 78.5,
+      "score": 80,
+      "reasoning": "匹配引擎承诺'五维兼容度'·承诺兑现了吗？维度定义需公开·否则失信于用户",
+      "dimensions": "承诺一致=80 言实匹配=77 透明度=74 可验证=78 德性=76",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-074",
+      "entity_id": "PROD-013"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-005",
+      "avatar_name": "六祖慧能",
+      "avatar_perspective": "独特",
+      "product_id": "PROD-013",
+      "product_name": "匹配引擎",
+      "product_family": "镜",
+      "product_qs": 81,
+      "product_sri": 78.5,
+      "score": 87,
+      "reasoning": "匹配引擎直指人心·兼容度不是算出来的·是照出来的。镜族本色·但少了禅意",
+      "dimensions": "独特灵魂=87 直觉穿透=84 减法勇气=81 不可替代=85 禅机=83",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-075",
+      "entity_id": "PROD-013"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-001",
+      "avatar_name": "刘禹锡",
+      "avatar_perspective": "长期价值",
+      "product_id": "PROD-008",
+      "product_name": "关系温度计",
+      "product_family": "衡",
+      "product_qs": 80,
+      "product_sri": 78.1,
+      "score": 79,
+      "reasoning": "温度计是瞬时测量·长期关系需要多次测量趋势。4题自评不够·建议加时间序列对比",
+      "dimensions": "周期适应性=79 理论深度=76 方法论耐久=73 场景泛化=77 长期价值=75",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-076",
+      "entity_id": "PROD-008"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-002",
+      "avatar_name": "司马贺",
+      "avatar_perspective": "可行性",
+      "product_id": "PROD-008",
+      "product_name": "关系温度计",
+      "product_family": "衡",
+      "product_qs": 80,
+      "product_sri": 78.1,
+      "score": 83,
+      "reasoning": "4题自评满足简洁性原则·但风险预警需更多信号源。当前是最小可行解·可行",
+      "dimensions": "数据可得性=83 操作简洁=80 明确性=77 约束感知=81 最小可行=79",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-077",
+      "entity_id": "PROD-008"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-003",
+      "avatar_name": "水月观音",
+      "avatar_perspective": "体验",
+      "product_id": "PROD-008",
+      "product_name": "关系温度计",
+      "product_family": "衡",
+      "product_qs": 80,
+      "product_sri": 78.1,
+      "score": 91,
+      "reasoning": "4题轻量·体验顺畅。温度计隐喻好·但'风险预警'用词重·可能让用户紧张",
+      "dimensions": "情感调性=91 直觉友好=88 认知负荷=85 审美感受=89 身心共鸣=87",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-078",
+      "entity_id": "PROD-008"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-004",
+      "avatar_name": "孔子",
+      "avatar_perspective": "诚信",
+      "product_id": "PROD-008",
+      "product_name": "关系温度计",
+      "product_family": "衡",
+      "product_qs": 80,
+      "product_sri": 78.1,
+      "score": 80,
+      "reasoning": "温度计言'健康度检测'·但4题能否测出真健康？承诺与兑现之间有落差·需加效度说明",
+      "dimensions": "承诺一致=80 言实匹配=77 透明度=74 可验证=78 德性=76",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-079",
+      "entity_id": "PROD-008"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-005",
+      "avatar_name": "六祖慧能",
+      "avatar_perspective": "独特",
+      "product_id": "PROD-008",
+      "product_name": "关系温度计",
+      "product_family": "衡",
+      "product_qs": 80,
+      "product_sri": 78.1,
+      "score": 80,
+      "reasoning": "温度计是算法·关系是人心。4题量化的不是关系·是你的焦虑·直面焦虑即是疗愈",
+      "dimensions": "独特灵魂=80 直觉穿透=77 减法勇气=74 不可替代=78 禅机=76",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-080",
+      "entity_id": "PROD-008"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-001",
+      "avatar_name": "刘禹锡",
+      "avatar_perspective": "长期价值",
+      "product_id": "PROD-026",
+      "product_name": "知识飞轮v1",
+      "product_family": "觉",
+      "product_qs": 77,
+      "product_sri": 77.8,
+      "score": 78,
+      "reasoning": "知识飞轮理论美·但v1阶段复利效应未验证。理论可穿越周期·需实证闭环",
+      "dimensions": "周期适应性=78 理论深度=75 方法论耐久=72 场景泛化=76 长期价值=74",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-081",
+      "entity_id": "PROD-026"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-002",
+      "avatar_name": "司马贺",
+      "avatar_perspective": "可行性",
+      "product_id": "PROD-026",
+      "product_name": "知识飞轮v1",
+      "product_family": "觉",
+      "product_qs": 77,
+      "product_sri": 77.8,
+      "score": 77,
+      "reasoning": "飞轮理论作为启发式工具可行·但v1缺少可操作步骤。理论→实践需翻译层",
+      "dimensions": "数据可得性=77 操作简洁=74 明确性=71 约束感知=75 最小可行=73",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-082",
+      "entity_id": "PROD-026"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-003",
+      "avatar_name": "水月观音",
+      "avatar_perspective": "体验",
+      "product_id": "PROD-026",
+      "product_name": "知识飞轮v1",
+      "product_family": "觉",
+      "product_qs": 77,
+      "product_sri": 77.8,
+      "score": 84,
+      "reasoning": "飞轮可视化体验需更直观·理论概念需拆解为可感知的小循环。学习曲线偏陡",
+      "dimensions": "情感调性=84 直觉友好=81 认知负荷=78 审美感受=82 身心共鸣=80",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-083",
+      "entity_id": "PROD-026"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-004",
+      "avatar_name": "孔子",
+      "avatar_perspective": "诚信",
+      "product_id": "PROD-026",
+      "product_name": "知识飞轮v1",
+      "product_family": "觉",
+      "product_qs": 77,
+      "product_sri": 77.8,
+      "score": 76,
+      "reasoning": "知识飞轮承诺'复利效应'·v1阶段兑现了吗？理论美但言过其实则失信·建议降调承诺",
+      "dimensions": "承诺一致=76 言实匹配=73 透明度=70 可验证=74 德性=72",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-084",
+      "entity_id": "PROD-026"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-005",
+      "avatar_name": "六祖慧能",
+      "avatar_perspective": "独特",
+      "product_id": "PROD-026",
+      "product_name": "知识飞轮v1",
+      "product_family": "觉",
+      "product_qs": 77,
+      "product_sri": 77.8,
+      "score": 86,
+      "reasoning": "飞轮理论是顿悟后的渐修·v1给了框架·但真正的飞轮在用户心里·不在页面上",
+      "dimensions": "独特灵魂=86 直觉穿透=83 减法勇气=80 不可替代=84 禅机=82",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-085",
+      "entity_id": "PROD-026"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-001",
+      "avatar_name": "刘禹锡",
+      "avatar_perspective": "长期价值",
+      "product_id": "PROD-024",
+      "product_name": "驾驶舱V3",
+      "product_family": "觉",
+      "product_qs": 93,
+      "product_sri": 77.2,
+      "score": 78,
+      "reasoning": "驾驶舱活体视图是长期监控的雏形·但三层穿透当前数据层浅。建议加历史回溯",
+      "dimensions": "周期适应性=78 理论深度=75 方法论耐久=72 场景泛化=76 长期价值=74",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-086",
+      "entity_id": "PROD-024"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-002",
+      "avatar_name": "司马贺",
+      "avatar_perspective": "可行性",
+      "product_id": "PROD-024",
+      "product_name": "驾驶舱V3",
+      "product_family": "觉",
+      "product_qs": 93,
+      "product_sri": 77.2,
+      "score": 82,
+      "reasoning": "驾驶舱V3功能复杂度超过qs=93暗示的成熟度。活体视图概念好·落地需简化",
+      "dimensions": "数据可得性=82 操作简洁=79 明确性=76 约束感知=80 最小可行=78",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-087",
+      "entity_id": "PROD-024"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-003",
+      "avatar_name": "水月观音",
+      "avatar_perspective": "体验",
+      "product_id": "PROD-024",
+      "product_name": "驾驶舱V3",
+      "product_family": "觉",
+      "product_qs": 93,
+      "product_sri": 77.2,
+      "score": 84,
+      "reasoning": "驾驶舱活体视图给人的第一感是'被监控'而非'被赋能'。建议重新设计情感基调",
+      "dimensions": "情感调性=84 直觉友好=81 认知负荷=78 审美感受=82 身心共鸣=80",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-088",
+      "entity_id": "PROD-024"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-004",
+      "avatar_name": "孔子",
+      "avatar_perspective": "诚信",
+      "product_id": "PROD-024",
+      "product_name": "驾驶舱V3",
+      "product_family": "觉",
+      "product_qs": 93,
+      "product_sri": 77.2,
+      "score": 71,
+      "reasoning": "驾驶舱qs=93但实际体验与承诺差距大。德不配位·必有灾殃·建议重新校准qs",
+      "dimensions": "承诺一致=71 言实匹配=68 透明度=65 可验证=69 德性=67",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-089",
+      "entity_id": "PROD-024"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-005",
+      "avatar_name": "六祖慧能",
+      "avatar_perspective": "独特",
+      "product_id": "PROD-024",
+      "product_name": "驾驶舱V3",
+      "product_family": "觉",
+      "product_qs": 93,
+      "product_sri": 77.2,
+      "score": 84,
+      "reasoning": "驾驶舱三层穿透·直观看是监控·转念看是如来。活体视图是'照见'而非'监视'",
+      "dimensions": "独特灵魂=84 直觉穿透=81 减法勇气=78 不可替代=82 禅机=80",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-090",
+      "entity_id": "PROD-024"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-001",
+      "avatar_name": "刘禹锡",
+      "avatar_perspective": "长期价值",
+      "product_id": "PROD-001",
+      "product_name": "决策剧场",
+      "product_family": "镜",
+      "product_qs": 81,
+      "product_sri": 76.9,
+      "score": 79,
+      "reasoning": "决策剧场场景模拟·五年后这些场景还在吗？角色扮演长期价值在方法论而非剧本",
+      "dimensions": "周期适应性=79 理论深度=76 方法论耐久=73 场景泛化=77 长期价值=75",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-091",
+      "entity_id": "PROD-001"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-002",
+      "avatar_name": "司马贺",
+      "avatar_perspective": "可行性",
+      "product_id": "PROD-001",
+      "product_name": "决策剧场",
+      "product_family": "镜",
+      "product_qs": 81,
+      "product_sri": 76.9,
+      "score": 77,
+      "reasoning": "五维场景模拟在有限资源下是满意解·角色扮演+反馈闭环完整。操作成本偏高",
+      "dimensions": "数据可得性=77 操作简洁=74 明确性=71 约束感知=75 最小可行=73",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-092",
+      "entity_id": "PROD-001"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-003",
+      "avatar_name": "水月观音",
+      "avatar_perspective": "体验",
+      "product_id": "PROD-001",
+      "product_name": "决策剧场",
+      "product_family": "镜",
+      "product_qs": 81,
+      "product_sri": 76.9,
+      "score": 81,
+      "reasoning": "决策剧场角色扮演体验有沉浸感·但评分反馈触发防御心理。建议先共情再评分",
+      "dimensions": "情感调性=81 直觉友好=78 认知负荷=75 审美感受=79 身心共鸣=77",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-093",
+      "entity_id": "PROD-001"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-004",
+      "avatar_name": "孔子",
+      "avatar_perspective": "诚信",
+      "product_id": "PROD-001",
+      "product_name": "决策剧场",
+      "product_family": "镜",
+      "product_qs": 81,
+      "product_sri": 76.9,
+      "score": 75,
+      "reasoning": "决策剧场承诺'五维场景模拟'·但内容准确性仅54%·言不符实。君子先行其言而后从之",
+      "dimensions": "承诺一致=75 言实匹配=72 透明度=69 可验证=73 德性=71",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-094",
+      "entity_id": "PROD-001"
+    },
+    {
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AVAT-005",
+      "avatar_name": "六祖慧能",
+      "avatar_perspective": "独特",
+      "product_id": "PROD-001",
+      "product_name": "决策剧场",
+      "product_family": "镜",
+      "product_qs": 81,
+      "product_sri": 76.9,
+      "score": 88,
+      "reasoning": "决策剧场角色扮演·戴上他人面具方见自己。五维场景是镜·不是尺·不须执着分数",
+      "dimensions": "独特灵魂=88 直觉穿透=85 减法勇气=82 不可替代=86 禅机=84",
+      "method": "SRI_LLM_roleplay_cognition",
+      "source": "l3_sri_cognitive_r3",
+      "timestamp": 1780157463,
+      "id": "COG-095",
+      "entity_id": "PROD-001"
+    },
+    {
+      "id": "COG-096",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-001",
+      "avatar_name": "刘禹锡",
+      "avatar_element": "时间/土",
+      "product_id": "PROD-054",
+      "product_name": "数字替身",
+      "score": 82,
+      "reasoning": "数字替身是AI时代的身份映射，五年后AI交互更成熟·替身概念不会消失反而更刚需。但纯工程视角偏多·少了生命叙事厚度。",
+      "dimensions": "长期价值85 抗衰减80 需求刚性90 叙事深度70 身份锚定85",
+      "suggestion": "融入生命故事线——让替身不仅是工具映射·更是时间维度上的自我叠加",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 75.8,
+      "entity_id": "PROD-054"
+    },
+    {
+      "id": "COG-097",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-002",
+      "avatar_name": "司马贺",
+      "avatar_element": "可行/金",
+      "product_id": "PROD-054",
+      "product_name": "数字替身",
+      "score": 78,
+      "reasoning": "数字替身概念清晰·四重定位(月亮/路/桥/钉)有结构·但落地场景仍模糊——客户什么时候会主动用替身？决策链不完整。",
+      "dimensions": "概念清晰90 落地路径65 用户触发70 决策闭环60 实用密度85",
+      "suggestion": "给每个替身一个'what now'按钮——触发下一步具体行动·而非停留在角色展示",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 75.8,
+      "entity_id": "PROD-054"
+    },
+    {
+      "id": "COG-098",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-003",
+      "avatar_name": "水月观音",
+      "avatar_element": "身心/水",
+      "product_id": "PROD-054",
+      "product_name": "数字替身",
+      "score": 85,
+      "reasoning": "数字替身概念的视觉想象空间大·'月亮/路/桥/钉'四重隐喻有诗意·但实际页面呈现的是列表而非有机体——形式和内容不匹配。",
+      "dimensions": "诗意想象90 视觉表达55 情感共鸣80 概念美感95 体感温度75",
+      "suggestion": "用可视化角色矩阵替代表格——让替身之间形成可视化的引力场",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 75.8,
+      "entity_id": "PROD-054"
+    },
+    {
+      "id": "COG-099",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-004",
+      "avatar_name": "孔子",
+      "avatar_element": "信义/木",
+      "product_id": "PROD-054",
+      "product_name": "数字替身",
+      "score": 80,
+      "reasoning": "数字替身承诺帮助客户认识自己·这是君子之道'知人者智自知者明'的数字化。但替身是否会引导偏见？吾未见替身有自反性也。",
+      "dimensions": "价值正念90 隐私保护85 诚实度75 无偏见设计70 用户赋能80",
+      "suggestion": "每个替身增加'这个角色也可能不适合你'的坦诚提示",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 75.8,
+      "entity_id": "PROD-054"
+    },
+    {
+      "id": "COG-100",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-005",
+      "avatar_name": "六祖慧能",
+      "avatar_element": "直觉/火",
+      "product_id": "PROD-054",
+      "product_name": "数字替身",
+      "score": 78,
+      "reasoning": "数字替身试图外化自我·但'我'本不可定义。精彩的不是替身矩阵的结构·而是用户在看到替身后的那一刻'啊原来我是这样'的顿悟。矩阵太整·少了一点禅意。",
+      "dimensions": "概念突破85 范式跃迁70 顿悟潜力82 独特性60 灵性维度75",
+      "suggestion": "不要让替身回答'我是谁'·让替身问'你以为你是谁'——翻转才有顿悟",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 75.8,
+      "entity_id": "PROD-054"
+    },
+    {
+      "id": "COG-101",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-001",
+      "avatar_name": "刘禹锡",
+      "avatar_element": "时间/土",
+      "product_id": "PROD-057",
+      "product_name": "大富翁",
+      "score": 75,
+      "reasoning": "桌游形式易过时·但合伙人决策冲突的深层需求长青。关键在于能否从娱乐玩具进化成决策工具·否则五年后只剩怀旧。",
+      "dimensions": "需求长青90 形式抗衰60 场景复用80 社会价值70 代际穿透75",
+      "suggestion": "建立数字永久版+AI复盘引擎·让一局游戏变成可追溯的决策日志",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 75.6,
+      "entity_id": "PROD-057"
+    },
+    {
+      "id": "COG-102",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-002",
+      "avatar_name": "司马贺",
+      "avatar_element": "可行/金",
+      "product_id": "PROD-057",
+      "product_name": "大富翁",
+      "score": 80,
+      "reasoning": "满意解大富翁是有限理性理论的完美载体·承诺vs行动冲突机制设计精妙。作为前置破冰工具的价值被低估。",
+      "dimensions": "理论契合95 游戏性80 决策启发性85 复杂度控制70 复用价值75",
+      "suggestion": "缩短单局时长至20分钟·加即时复盘卡片·让每一局都有takeaway",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 75.6,
+      "entity_id": "PROD-057"
+    },
+    {
+      "id": "COG-103",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-003",
+      "avatar_name": "水月观音",
+      "avatar_element": "身心/水",
+      "product_id": "PROD-057",
+      "product_name": "大富翁",
+      "score": 88,
+      "reasoning": "桌游的形式本身就有触觉温度·承诺vs行动冲突在棋盘上展开非常有戏剧性。玩家会记住'那次我背叛了承诺'的瞬间。",
+      "dimensions": "触觉体验90 游戏戏剧性92 情感记忆85 社交温度88 美感设计85",
+      "suggestion": "设计一套精美实体卡牌+木制棋子·数字版的冰冷无法替代实物触感",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 75.6,
+      "entity_id": "PROD-057"
+    },
+    {
+      "id": "COG-104",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-004",
+      "avatar_name": "孔子",
+      "avatar_element": "信义/木",
+      "product_id": "PROD-057",
+      "product_name": "大富翁",
+      "score": 82,
+      "reasoning": "以游戏照见承诺与行动的裂缝·劝善规过·合乎讽喻传统。但需防止'游戏归游戏·现实归现实'的脱节。",
+      "dimensions": "教化意义85 诚实度80 游戏伦理78 行为转化75 反思强度88",
+      "suggestion": "游戏结束后自动生成'你的承诺-行动一致性报告'并匿名对比统计",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 75.6,
+      "entity_id": "PROD-057"
+    },
+    {
+      "id": "COG-105",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-005",
+      "avatar_name": "六祖慧能",
+      "avatar_element": "直觉/火",
+      "product_id": "PROD-057",
+      "product_name": "大富翁",
+      "score": 85,
+      "reasoning": "桌游为法·却无定法。'承诺vs行动'的二元对立正是迷悟之间的张力。一局棋里见自性·此产品有悟道潜质。",
+      "dimensions": "迷悟张力90 自性照见88 形式突破78 顿悟触发82 独特视角87",
+      "suggestion": "增加'反规则卡'——可以打破任何规则一次·让学生教老师",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 75.6,
+      "entity_id": "PROD-057"
+    },
+    {
+      "id": "COG-106",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-001",
+      "avatar_name": "刘禹锡",
+      "avatar_element": "时间/土",
+      "product_id": "PROD-004",
+      "product_name": "卡牌对局",
+      "score": 70,
+      "reasoning": "卡牌对局是诊断工具·但框架固定后边际价值递减。五年后可能被更智能的AI对话替代·除非形成方法论生态。",
+      "dimensions": "长期需求75 技术护城河55 框架扩展70 用户复购80 进化潜力70",
+      "suggestion": "构建卡牌模板市场——允许用户自创卡牌·形成社区驱动的诊断宇宙",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 80.8,
+      "entity_id": "PROD-004"
+    },
+    {
+      "id": "COG-107",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-002",
+      "avatar_name": "司马贺",
+      "avatar_element": "可行/金",
+      "product_id": "PROD-004",
+      "product_name": "卡牌对局",
+      "score": 72,
+      "reasoning": "单人自查模式有实用价值·双人对局需要双方都懂框架·使用门槛偏高。产品形态对非技术用户不够友好。",
+      "dimensions": "单人价值85 双人门槛50 诊断有效性75 操作简洁70 场景适用80",
+      "suggestion": "增加AI裁判模式——单人也能获得对局体验·降低双人协调成本",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 80.8,
+      "entity_id": "PROD-004"
+    },
+    {
+      "id": "COG-108",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-003",
+      "avatar_name": "水月观音",
+      "avatar_element": "身心/水",
+      "product_id": "PROD-004",
+      "product_name": "卡牌对局",
+      "score": 73,
+      "reasoning": "卡牌本身有收藏美感·但对局界面偏工具化·少了仪式感。诊断是一个亲密行为·界面应该让用户感到被理解而非被分析。",
+      "dimensions": "卡牌美感82 对局仪式65 情感安全70 界面温度68 互动流畅80",
+      "suggestion": "加入温暖色调主题+诊断后暖心结语·让卡牌不仅是工具也是镜子",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 80.8,
+      "entity_id": "PROD-004"
+    },
+    {
+      "id": "COG-109",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-004",
+      "avatar_name": "孔子",
+      "avatar_element": "信义/木",
+      "product_id": "PROD-004",
+      "product_name": "卡牌对局",
+      "score": 75,
+      "reasoning": "诊断合伙人关系是可敬的意图·但诊断是否有边界？有些关系问题不适合被工具化。子曰'不可与言而与之言·失言'。",
+      "dimensions": "善意意图90 诊断边界70 隐私尊重80 干预适度65 结果善意75",
+      "suggestion": "增加'我可以不答'卡牌·尊重被诊断者的选择权",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 80.8,
+      "entity_id": "PROD-004"
+    },
+    {
+      "id": "COG-110",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-005",
+      "avatar_name": "六祖慧能",
+      "avatar_element": "直觉/火",
+      "product_id": "PROD-004",
+      "product_name": "卡牌对局",
+      "score": 66,
+      "reasoning": "卡牌是相·诊断是执着。如果用户对局后还在纠结分数·那这个产品制造了更多分别心而非解脱。",
+      "dimensions": "形式新颖70 执念风险55 觉知触发68 分别心加重50 突破性60",
+      "suggestion": "去掉分数排名·改为'你发现了什么模式'的自由书写空间",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 80.8,
+      "entity_id": "PROD-004"
+    },
+    {
+      "id": "COG-111",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-001",
+      "avatar_name": "刘禹锡",
+      "avatar_element": "时间/土",
+      "product_id": "PROD-042",
+      "product_name": "心理量表",
+      "score": 68,
+      "reasoning": "量表工具是静态快照·五年后AI动态追踪才是主流。测评维度不会消失·但呈现方式必然被颠覆。",
+      "dimensions": "需求基础85 方法演进60 数据积累80 差异化65 时间价值50",
+      "suggestion": "从量表→动态心理画像·每次决策事件自动更新·形成持续成长曲线",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 78.8,
+      "entity_id": "PROD-042"
+    },
+    {
+      "id": "COG-112",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-002",
+      "avatar_name": "司马贺",
+      "avatar_element": "可行/金",
+      "product_id": "PROD-042",
+      "product_name": "心理量表",
+      "score": 82,
+      "reasoning": "5大测评维度覆盖合理·报告生成自动化降低使用成本。作为决策前量化参考工具·比直觉判断可靠得多。",
+      "dimensions": "维度设计90 自动化程度85 决策辅助80 可操作性70 低成本执行85",
+      "suggestion": "打通与企业微信/飞书的集成·让测评结果直接进入合伙人工作流",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 78.8,
+      "entity_id": "PROD-042"
+    },
+    {
+      "id": "COG-113",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-003",
+      "avatar_name": "水月观音",
+      "avatar_element": "身心/水",
+      "product_id": "PROD-042",
+      "product_name": "心理量表",
+      "score": 60,
+      "reasoning": "量表本质上是考试·考试带来焦虑。即使结果准确·用户在填表过程感受到的是被审视而非被关怀。",
+      "dimensions": "结果价值80 过程体验45 文案温度55 视觉舒适60 情感安全60",
+      "suggestion": "改量表为'心路旅行'对话式测评·用故事化提问替代Likert量表",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 78.8,
+      "entity_id": "PROD-042"
+    },
+    {
+      "id": "COG-114",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-004",
+      "avatar_name": "孔子",
+      "avatar_element": "信义/木",
+      "product_id": "PROD-042",
+      "product_name": "心理量表",
+      "score": 74,
+      "reasoning": "量化人心本身有违仁的本意·但若以辅助自知为目的·则有工具之善。关键在结果如何呈现——是贴标签还是开启对话。",
+      "dimensions": "辅助自知85 标签风险60 结果善意70 隐私保护80 对话开放性75",
+      "suggestion": "每个维度分数配一段'这不是你的全部'温馨提示·避免标签固化",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 78.8,
+      "entity_id": "PROD-042"
+    },
+    {
+      "id": "COG-115",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-005",
+      "avatar_name": "六祖慧能",
+      "avatar_element": "直觉/火",
+      "product_id": "PROD-042",
+      "product_name": "心理量表",
+      "score": 52,
+      "reasoning": "量表量的是相·不是性。五维标签是新的牢笼。最担心的是用户拿着分数说'我就是这样的人'——本来无一物·何处惹尘埃。",
+      "dimensions": "量化执念40 标签牢笼35 自性遮蔽45 工具突破60 觉知辅助55",
+      "suggestion": "每做完一个维度·先让用户写'我的感受'再显示分数·让体验先于标签",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 78.8,
+      "entity_id": "PROD-042"
+    },
+    {
+      "id": "COG-116",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-001",
+      "avatar_name": "刘禹锡",
+      "avatar_element": "时间/土",
+      "product_id": "PROD-058",
+      "product_name": "规范标准",
+      "score": 85,
+      "reasoning": "规范是基础设施·写好规范的规范更是元工具。十年后仍可引用·但需要版本演化机制和实操案例库。",
+      "dimensions": "基础设施性95 版本演化80 社区采纳85 学习曲线75 可参考性90",
+      "suggestion": "增加示例库+反模式集·让规范从'应该怎样'变成'这样写才好看'",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 79.0,
+      "entity_id": "PROD-058"
+    },
+    {
+      "id": "COG-117",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-002",
+      "avatar_name": "司马贺",
+      "avatar_element": "可行/金",
+      "product_id": "PROD-058",
+      "product_name": "规范标准",
+      "score": 90,
+      "reasoning": "开发者十要素+客户八要素的框架极其实用·对标Reforge Product Brief增加了信任锚。落地即用的标准化工具书。",
+      "dimensions": "实用框架95 行业对标90 执行指引85 模板化程度90 全员可读性90",
+      "suggestion": "制作Notion模板+飞书模板一键导入·降低首次使用摩擦",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 79.0,
+      "entity_id": "PROD-058"
+    },
+    {
+      "id": "COG-118",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-003",
+      "avatar_name": "水月观音",
+      "avatar_element": "身心/水",
+      "product_id": "PROD-058",
+      "product_name": "规范标准",
+      "score": 55,
+      "reasoning": "规范文档天生冰冷·像说明书而非邀请函。优秀的规范应该像好的菜谱——让人想立刻下厨而非望而生畏。",
+      "dimensions": "内容价值88 呈现温度45 阅读愉悦50 视觉节奏55 入门热情40",
+      "suggestion": "在每个规范要素旁配'好的例子vs坏的例子'彩色对比卡·让规范变得可感",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 79.0,
+      "entity_id": "PROD-058"
+    },
+    {
+      "id": "COG-119",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-004",
+      "avatar_name": "孔子",
+      "avatar_element": "信义/木",
+      "product_id": "PROD-058",
+      "product_name": "规范标准",
+      "score": 88,
+      "reasoning": "立规矩以利人·非以困人。规范标准若以降低用户理解成本为本·则善莫大焉。十八要素结构化·让人各行其道而不逾矩。",
+      "dimensions": "利他性92 约束适度88 透明公正85 传承价值90 君子之风86",
+      "suggestion": "规范开篇写'此规范为助你而非困你·跳过有理即可'——减少教条感",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 79.0,
+      "entity_id": "PROD-058"
+    },
+    {
+      "id": "COG-120",
+      "type": "cognition_event",
+      "layer": "L2",
+      "avatar_id": "AV-005",
+      "avatar_name": "六祖慧能",
+      "avatar_element": "直觉/火",
+      "product_id": "PROD-058",
+      "product_name": "规范标准",
+      "score": 62,
+      "reasoning": "规范是筏·渡河即弃。十八要素是好的筏子·但执着于规范本身就是新的'法执'。好的规范应该让人最后忘掉规范。",
+      "dimensions": "渡河价值85 法执风险50 自由空间55 创造性约束60 化繁为简75",
+      "suggestion": "在规范末尾写'当你不再需要查规范时·说明你已经掌握了'",
+      "method": "LLM_roleplay_cognition",
+      "source": "l3_llm_cognitive_r5",
+      "timestamp": 1780157554,
+      "pre_llm_simulated_score": 79.0,
+      "entity_id": "PROD-058"
     }
   ],
   "action_events": [

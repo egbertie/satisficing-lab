@@ -8,11 +8,19 @@
     "strength": 1
   },
   {
+    "source": "memory/_scripts/q_scan.py",
+    "target": "site/memory/_scripts/q_scan.py",
+    "shared_tags": [
+      "if tag in WEAK_EVIDENCE_TAGS:"
+    ],
+    "strength": 1
+  },
+  {
     "source": "memory/_scripts/data_init_pipeline.py",
     "target": "site/memory/_scripts/data_init_pipeline.py",
     "shared_tags": [
-      "meta['tags'] = [t.strip() for t in tags[0].split('",
-      "')[:10]]"
+      "')[:10]]",
+      "meta['tags'] = [t.strip() for t in tags[0].split('"
     ],
     "strength": 2
   },
@@ -93,11 +101,19 @@
     "strength": 1
   },
   {
+    "source": "site/memory/_scripts/q_scan.py",
+    "target": "memory/_scripts/q_scan.py",
+    "shared_tags": [
+      "if tag in WEAK_EVIDENCE_TAGS:"
+    ],
+    "strength": 1
+  },
+  {
     "source": "site/memory/_scripts/data_init_pipeline.py",
     "target": "memory/_scripts/data_init_pipeline.py",
     "shared_tags": [
-      "meta['tags'] = [t.strip() for t in tags[0].split('",
-      "')[:10]]"
+      "')[:10]]",
+      "meta['tags'] = [t.strip() for t in tags[0].split('"
     ],
     "strength": 2
   },
@@ -173,9 +189,9 @@
     "source": "扣子资料_最终整理版/试水一期/入口设计方案.md",
     "target": "扣子资料_最终整理版/试水一期/OP-ENT-001-入口设计方案.md",
     "shared_tags": [
-      "\"开始诊断\"",
+      "\"1\"]",
       "[\"合伙人诊断\"",
-      "\"1\"]"
+      "\"开始诊断\""
     ],
     "strength": 3
   },
@@ -183,9 +199,9 @@
     "source": "扣子资料_最终整理版/试水一期/入口设计方案.md",
     "target": "扣子资料_最终整理版/试水一期/操作手册V1.0.md",
     "shared_tags": [
-      "\"开始诊断\"",
+      "\"1\"]",
       "[\"合伙人诊断\"",
-      "\"1\"]"
+      "\"开始诊断\""
     ],
     "strength": 3
   },
@@ -193,9 +209,9 @@
     "source": "扣子资料_最终整理版/试水一期/入口设计方案.md",
     "target": "扣子资料_最终整理版/试水一期/Day1操作说明书.md",
     "shared_tags": [
-      "\"开始诊断\"",
+      "\"1\"]",
       "[\"合伙人诊断\"",
-      "\"1\"]"
+      "\"开始诊断\""
     ],
     "strength": 3
   },
@@ -203,9 +219,9 @@
     "source": "扣子资料_最终整理版/试水一期/OP-ENT-001-入口设计方案.md",
     "target": "扣子资料_最终整理版/试水一期/入口设计方案.md",
     "shared_tags": [
-      "\"开始诊断\"",
+      "\"1\"]",
       "[\"合伙人诊断\"",
-      "\"1\"]"
+      "\"开始诊断\""
     ],
     "strength": 3
   },
@@ -213,9 +229,9 @@
     "source": "扣子资料_最终整理版/试水一期/OP-ENT-001-入口设计方案.md",
     "target": "扣子资料_最终整理版/试水一期/操作手册V1.0.md",
     "shared_tags": [
-      "\"开始诊断\"",
+      "\"1\"]",
       "[\"合伙人诊断\"",
-      "\"1\"]"
+      "\"开始诊断\""
     ],
     "strength": 3
   },
@@ -223,9 +239,9 @@
     "source": "扣子资料_最终整理版/试水一期/OP-ENT-001-入口设计方案.md",
     "target": "扣子资料_最终整理版/试水一期/Day1操作说明书.md",
     "shared_tags": [
-      "\"开始诊断\"",
+      "\"1\"]",
       "[\"合伙人诊断\"",
-      "\"1\"]"
+      "\"开始诊断\""
     ],
     "strength": 3
   },
@@ -233,9 +249,9 @@
     "source": "扣子资料_最终整理版/试水一期/操作手册V1.0.md",
     "target": "扣子资料_最终整理版/试水一期/入口设计方案.md",
     "shared_tags": [
-      "\"开始诊断\"",
+      "\"1\"]",
       "[\"合伙人诊断\"",
-      "\"1\"]"
+      "\"开始诊断\""
     ],
     "strength": 3
   },
@@ -243,9 +259,9 @@
     "source": "扣子资料_最终整理版/试水一期/操作手册V1.0.md",
     "target": "扣子资料_最终整理版/试水一期/OP-ENT-001-入口设计方案.md",
     "shared_tags": [
-      "\"开始诊断\"",
+      "\"1\"]",
       "[\"合伙人诊断\"",
-      "\"1\"]"
+      "\"开始诊断\""
     ],
     "strength": 3
   },
@@ -253,9 +269,9 @@
     "source": "扣子资料_最终整理版/试水一期/操作手册V1.0.md",
     "target": "扣子资料_最终整理版/试水一期/Day1操作说明书.md",
     "shared_tags": [
-      "\"开始诊断\"",
+      "\"1\"]",
       "[\"合伙人诊断\"",
-      "\"1\"]"
+      "\"开始诊断\""
     ],
     "strength": 3
   },
@@ -263,9 +279,9 @@
     "source": "扣子资料_最终整理版/试水一期/Day1操作说明书.md",
     "target": "扣子资料_最终整理版/试水一期/入口设计方案.md",
     "shared_tags": [
-      "\"开始诊断\"",
+      "\"1\"]",
       "[\"合伙人诊断\"",
-      "\"1\"]"
+      "\"开始诊断\""
     ],
     "strength": 3
   },
@@ -273,9 +289,9 @@
     "source": "扣子资料_最终整理版/试水一期/Day1操作说明书.md",
     "target": "扣子资料_最终整理版/试水一期/OP-ENT-001-入口设计方案.md",
     "shared_tags": [
-      "\"开始诊断\"",
+      "\"1\"]",
       "[\"合伙人诊断\"",
-      "\"1\"]"
+      "\"开始诊断\""
     ],
     "strength": 3
   },
@@ -283,9 +299,9 @@
     "source": "扣子资料_最终整理版/试水一期/Day1操作说明书.md",
     "target": "扣子资料_最终整理版/试水一期/操作手册V1.0.md",
     "shared_tags": [
-      "\"开始诊断\"",
+      "\"1\"]",
       "[\"合伙人诊断\"",
-      "\"1\"]"
+      "\"开始诊断\""
     ],
     "strength": 3
   }
