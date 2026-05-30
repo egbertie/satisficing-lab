@@ -573,22 +573,11 @@ hr {{ border:none; border-top:1px solid var(--border); margin:2em 0; }}
             self.send_error(403, "Forbidden")
             return
 
-        # 根目录 → 门户
+        # 根目录 → 直接跳转dashboard
         if path == '/' or path == '':
-            if self._check_auth():
-                # 已认证 → 直接跳转dashboard
-                self.send_response(302)
-                self.send_header('Location', '/dashboard-v3.html')
-                self.end_headers()
-            else:
-                self._serve_password_gate('/dashboard-v3.html')
-            return
-
-        # 密码门保护所有页面（排除静态资源和登录接口）
-        is_protected = path.endswith('.html') or path.endswith('/')
-        is_static = any(path.endswith(ext) for ext in ['.css', '.js', '.png', '.jpg', '.svg', '.ico', '.woff2'])
-        if is_protected and not is_static and not self._check_auth():
-            self._serve_password_gate(path)
+            self.send_response(302)
+            self.send_header('Location', '/dashboard-v3.html')
+            self.end_headers()
             return
 
         # 目录 → 目录浏览
