@@ -1288,6 +1288,30 @@ function renderFlywheel() {
   }
   h += '</tbody></table>';
 
+  // 产品审计
+  var pa = m.product_audit || {};
+  if (pa.avg_score) {
+    h += '<div style="font-weight:600;margin-top:16px;margin-bottom:8px">📋 产品物理质量审计 ('+(pa.total_scanned||0)+'产品)</div>';
+    h += '<div class="stat-grid" style="grid-template-columns:repeat(4,1fr)">';
+    h += '<div class="stat-card"><div class="stat-num" style="font-size:1.4em;font-weight:700">'+pa.avg_score+'</div><div class="stat-label">平均分</div></div>';
+    h += '<div class="stat-card"><div class="stat-num" style="font-size:1.4em;font-weight:700;color:'+(pa.products_under_60?'#e74c3c':'#27ae60')+'">'+ (pa.products_under_60||'0') +'</div><div class="stat-label"><60分</div></div>';
+    h += '<div class="stat-card"><div class="stat-num" style="font-size:1.4em;font-weight:700;color:'+(pa.products_under_40?'#e74c3c':'#27ae60')+'">'+ (pa.products_under_40||'0') +'</div><div class="stat-label"><40分</div></div>';
+    h += '<div class="stat-card"><div class="stat-num" style="font-size:1.4em;font-weight:700">'+ (pa.total_issues||'0') +'</div><div class="stat-label">总问题</div></div>';
+    h += '</div>';
+  }
+
+  // 一致性检查
+  var cc = m.consistency_check || {};
+  if (cc.by_type) {
+    h += '<div style="font-weight:600;margin-top:12px;margin-bottom:8px">🔬 实体一致性 ('+ (cc.total_issues||0) +'异常)</div>';
+    var ccItems = [];
+    for (var k in cc.by_type) ccItems.push({k:k, v:cc.by_type[k]});
+    ccItems.sort(function(a,b){return b.v - a.v});
+    h += '<table class="data-table" style="width:100%;font-size:0.75em"><thead><tr><th>类型</th><th style="width:60px">数量</th></tr></thead><tbody>';
+    for (var i=0;i<Math.min(ccItems.length,6);i++) h += '<tr><td>'+ccItems[i].k+'</td><td style="text-align:center;font-weight:700;color:'+(ccItems[i].v>0?'#e74c3c':'#27ae60')+'">'+ccItems[i].v+'</td></tr>';
+    h += '</tbody></table>';
+  }
+
   // 最近运行
   var rr = fw.recent_runs || [];
   if (rr.length > 0) {
