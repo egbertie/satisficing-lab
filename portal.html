@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>满意红 · 入口</title>
+<title>满意红</title>
 <style>
 :root {
   --bg: #F5F0E6;
@@ -12,7 +12,6 @@
   --ink-lighter: #B8A898;
   --accent-red: #C23B22;
   --accent-gold: #B8860B;
-  --accent-green: #2B7A4B;
   --border: #E0D5C0;
 }
 * { box-sizing:border-box; margin:0; padding:0; }
@@ -21,8 +20,6 @@ body {
   background:var(--bg); color:var(--ink); min-height:100vh;
   display:flex; align-items:center; justify-content:center;
 }
-
-/* 密码门 */
 #gate {
   display:flex; flex-direction:column; align-items:center;
   padding:40px 20px;
@@ -50,194 +47,39 @@ body {
 }
 #gate button:hover { opacity:0.85; }
 #gate .hint { color:var(--ink-lighter); font-size:0.8em; margin-top:14px; }
-
-/* 门户 */
-#portal {
-  max-width:640px; width:90%; padding:40px 0; display:none;
-}
-#portal .logo { text-align:center; margin-bottom:8px; }
-#portal .logo span {
-  display:inline-block; width:64px; height:64px; background:var(--accent-red);
-  color:#fff; border-radius:14px; font-size:32px; font-weight:700;
-  line-height:64px; text-align:center; margin-bottom:8px;
-}
-#portal h1 { text-align:center; font-size:1.5em; margin-bottom:4px; }
-#portal .subtitle { text-align:center; color:var(--ink-light); font-size:0.88em; margin-bottom:36px; }
-
-.portal-grid { display:flex; flex-direction:column; gap:14px; }
-.portal-section { }
-.portal-section h3 {
-  font-size:0.78em; color:var(--ink-lighter); text-transform:uppercase;
-  letter-spacing:0.1em; margin-bottom:10px; padding-bottom:6px;
-  border-bottom:1px solid var(--border);
-}
-.portal-card {
-  display:flex; align-items:center; padding:14px 18px;
-  background:#fff; border:1px solid var(--border); border-radius:10px;
-  text-decoration:none; color:var(--ink); transition:all 0.15s;
-  margin-bottom:8px;
-}
-.portal-card:hover {
-  border-color:var(--accent-gold);
-  box-shadow: 0 2px 12px rgba(184,134,11,0.1);
-  transform:translateY(-1px);
-}
-.portal-card .pc-emoji { font-size:1.6em; margin-right:14px; width:40px; text-align:center; flex-shrink:0; }
-.portal-card .pc-info { flex:1; }
-.portal-card .pc-name { font-weight:600; font-size:1.02em; }
-.portal-card .pc-desc { color:var(--ink-light); font-size:0.82em; margin-top:2px; }
-.portal-card .pc-tag {
-  font-size:0.7em; padding:2px 8px; border-radius:10px; white-space:nowrap; flex-shrink:0;
-}
-.tag-local { background:#F0E8D8; color:var(--ink-light); }
-.tag-web { background:#E8F0E8; color:var(--accent-green); }
-
-.footer {
-  text-align:center; margin-top:32px; padding-top:20px;
-  border-top:1px solid var(--border);
-  color:var(--ink-lighter); font-size:0.75em;
-}
-
-@media (max-width:480px) {
-  #portal { padding:20px 0; }
-  .portal-card { padding:12px 14px; }
-  .portal-card .pc-emoji { font-size:1.3em; margin-right:10px; }
-}
 </style>
 </head>
 <body>
 
-<!-- ========== 密码门 ========== -->
 <div id="gate">
   <div class="logo">红</div>
   <h1>满意红</h1>
-  <p class="subtitle">知识体系入口</p>
+  <p class="subtitle">知识体系</p>
   <input type="password" id="pw" placeholder="输入通行码" autofocus
     onkeydown="if(event.key==='Enter')unlock()">
   <button onclick="unlock()">进入</button>
   <p class="hint">请输入通行码以继续</p>
 </div>
 
-<!-- ========== 门户 ========== -->
-<div id="portal">
-  <div class="logo"><span>红</span></div>
-  <h1>满意红 · 知识体系</h1>
-  <p class="subtitle">时刻: <span id="now"></span> · 为 Egbertie 而建</p>
-
-  <div class="portal-grid">
-
-    <!-- 核心看板 -->
-    <div class="portal-section">
-      <h3>📊 核心看板</h3>
-      <a href="dashboard-v3.html" class="portal-card">
-        <span class="pc-emoji">📊</span>
-        <div class="pc-info">
-          <div class="pc-name">驾驶舱</div>
-          <div class="pc-desc">14标签活体视图 · 总览/化学/城市/产品/流</div>
-        </div>
-      </a>
-      <a href="admin-windows.html" class="portal-card">
-        <span class="pc-emoji">⚙️</span>
-        <div class="pc-info">
-          <div class="pc-name">管理后台</div>
-          <div class="pc-desc">9域36模块 · 44视图 · 数据管理</div>
-        </div>
-      </a>
-      <a href="product-catalog.html" class="portal-card">
-        <span class="pc-emoji">📦</span>
-        <div class="pc-info">
-          <div class="pc-name">产品目录</div>
-          <div class="pc-desc">312产品·4级评分·5维标准</div>
-        </div>
-      </a>
-    </div>
-
-    <!-- 文件管理 -->
-    <div class="portal-section">
-      <h3>📁 文件管理</h3>
-      <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/egbertie/satisficing-lab/main/file-browser.html" class="portal-card" target="_blank">
-        <span class="pc-emoji">☁️</span>
-        <div class="pc-info">
-          <div class="pc-name">远程文件浏览器</div>
-          <div class="pc-desc">GitHub仓库文件 · 随时随地访问</div>
-        </div>
-        <span class="pc-tag tag-web">Web</span>
-      </a>
-      <a href="http://localhost:8765" class="portal-card" target="_blank">
-        <span class="pc-emoji">🏠</span>
-        <div class="pc-info">
-          <div class="pc-name">本地文件浏览器</div>
-          <div class="pc-desc">Mac mini 实时文件 · 局域网访问</div>
-        </div>
-        <span class="pc-tag tag-local">本地</span>
-      </a>
-    </div>
-
-    <!-- 帮助 -->
-    <div class="portal-section">
-      <h3>📖 帮助与文档</h3>
-      <a href="help-user.html" class="portal-card">
-        <span class="pc-emoji">👤</span>
-        <div class="pc-info">
-          <div class="pc-name">用户手册</div>
-          <div class="pc-desc">系统功能使用指南</div>
-        </div>
-      </a>
-      <a href="help-manager.html" class="portal-card">
-        <span class="pc-emoji">👔</span>
-        <div class="pc-info">
-          <div class="pc-name">管理者手册</div>
-          <div class="pc-desc">架构·决策·治理</div>
-        </div>
-      </a>
-      <a href="help-dev.html" class="portal-card">
-        <span class="pc-emoji">🔧</span>
-        <div class="pc-info">
-          <div class="pc-name">开发者手册</div>
-          <div class="pc-desc">技术架构·ADR·API</div>
-        </div>
-      </a>
-    </div>
-
-  </div>
-
-  <div class="footer">
-    满意红 · 驾驶舱 1.0 · v4 portal · 零硬编码 · 全动态加载<br>
-    <span style="opacity:0.5">所有子页面使用相同通行码</span>
-  </div>
-</div>
-
 <script>
 var PASS = '123654';
 (function(){
   var saved = localStorage.getItem('portal_unlocked');
-  var t = saved ? parseInt(saved) : 0;
-  if (saved && (Date.now() - t < 86400000)) {
-    document.getElementById('gate').style.display = 'none';
-    document.getElementById('portal').style.display = 'block';
+  if (saved && (Date.now() - parseInt(saved) < 86400000)) {
+    window.location.href = 'dashboard-v3.html';
   }
 })();
-
 function unlock() {
-  var pw = document.getElementById('pw').value;
-  if (pw === PASS) {
+  if (document.getElementById('pw').value === PASS) {
     localStorage.setItem('portal_unlocked', Date.now());
-    document.getElementById('gate').style.display = 'none';
-    document.getElementById('portal').style.display = 'block';
+    window.location.href = 'dashboard-v3.html';
   } else {
     var inp = document.getElementById('pw');
-    inp.value = '';
-    inp.style.borderColor = 'var(--accent-red)';
+    inp.value = ''; inp.style.borderColor = 'var(--accent-red)';
     inp.placeholder = '通行码错误';
     setTimeout(function(){ inp.style.borderColor = ''; inp.placeholder = '输入通行码'; }, 1500);
   }
 }
-
-// 显示当前时间
-document.getElementById('now').textContent = new Date().toLocaleString('zh-CN', {
-  timeZone:'Asia/Shanghai', year:'numeric', month:'2-digit', day:'2-digit',
-  hour:'2-digit', minute:'2-digit'
-});
 </script>
 </body>
 </html>
