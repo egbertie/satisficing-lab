@@ -6,10 +6,12 @@ SRI 闭环健康编排引擎 v1.0
 
 🟢 微循环(毛细血管): 每个脚本内部的 try/except + fallback
 🟡 中循环(血管):     每个环节独立自愈 + 异常隔离 + 优雅降级
-🔴 大循环(大动脉):   10个环节串行 + circuit breaker + 全局健康分
+🔴 大循环(大动脉):   15个环节串行 + circuit breaker + 全局健康分
 
 被飞轮引擎 flywheel 的 run() 调用。
 替代原有的一串顺序调用，改为分层编排。
+
+v2.0 (2026-05-31): +4控制论环节(VSM·二阶观察·自校准·反脆弱) 10→15环节
 
 架构原则:
 - Circuit Breaker: 任一步骤连续失败3次 → 熔断该环节 → 跳过继续下一环节
@@ -123,10 +125,51 @@ STAGES = [
         'id': 'governor',
         'label': '🧬 永续控制',
         'script': 'sri_perpetual_control.py',
+        'extra_args': ['--save'],
         'timeout': 60,
         'breaker_threshold': 5,
         'weight': 1.5,
         'fallback': '跳过·保留上次调控状态',
+    },
+    {
+        'id': 'vsm_policy',
+        'label': '🏛️ VSM策略审计',
+        'script': 'sri_vsm_system5.py',
+        'extra_args': ['--save'],
+        'timeout': 90,
+        'breaker_threshold': 3,
+        'weight': 0.8,
+        'fallback': '跳过·保留上次策略审计结果',
+    },
+    {
+        'id': 'second_order',
+        'label': '👁️ 二阶观察',
+        'script': 'sri_second_order_observer.py',
+        'extra_args': ['--save'],
+        'timeout': 90,
+        'breaker_threshold': 3,
+        'weight': 1.0,
+        'fallback': '跳过·保留上次观察结果',
+    },
+    {
+        'id': 'autocalibrate',
+        'label': '🎚️ 自校准',
+        'script': 'sri_autocalibration.py',
+        'extra_args': ['--save'],
+        'timeout': 60,
+        'breaker_threshold': 3,
+        'weight': 0.6,
+        'fallback': '跳过·保留上次校准设定点',
+    },
+    {
+        'id': 'antifragile',
+        'label': '💪 反脆弱训练',
+        'script': 'sri_antifragile_stressor.py',
+        'extra_args': ['--save'],
+        'timeout': 120,
+        'breaker_threshold': 2,
+        'weight': 0.4,
+        'fallback': '跳过·保留上次训练状态',
     },
 ]
 

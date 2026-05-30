@@ -182,6 +182,12 @@ def run_perpetual_control(dry_run=False):
         'principle': '第二阶控制论·系统观察自己的调控·调整设定点·反脆弱训练'
     }
     
+    # 同时写入两处以确保前端兼容: chemical_governor(旧) + perpetual_control(新)
+    meta['perpetual_control'] = meta['chemical_governor']
+    # 合并前次关键字段
+    if meta.get('perpetual_control'):
+        meta['perpetual_control']['antifragile_level'] = meta['chemical_governor'].get('learning_progress', 0)
+    
     if not dry_run:
         with open(DATA_FILE, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
