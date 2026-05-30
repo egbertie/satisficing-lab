@@ -110,6 +110,15 @@ STAGES = [
         'weight': 0.2,
         'fallback': '生成简化报告',
     },
+    {
+        'id': 'chemistry',
+        'label': '⚗️ 化学反应',
+        'script': 'sri_chemistry_reactor.py',
+        'timeout': 120,
+        'breaker_threshold': 3,
+        'weight': 1.0,
+        'fallback': '跳过·保留上次反应状态',
+    },
 ]
 
 
