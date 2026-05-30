@@ -14214,7 +14214,130 @@
         },
         "total_fixes": 60
       }
-    ]
+    ],
+    "portfolio_rationalization": {
+      "executed_at": "2026-05-30T14:46:00.382218+00:00",
+      "version": "2.0",
+      "total_before": 315,
+      "total_after": 172,
+      "killed": 76,
+      "combined": 67,
+      "merged": 0,
+      "taxonomy": {
+        "version": "2.0",
+        "name": "满意红产品分类体系 (客户视角)",
+        "principle": "按客户想解决的问题分类，而非内部族名",
+        "categories": {
+          "diagnose": {
+            "label": "🔍 看清问题",
+            "description": "当你隐隐觉得不对但说不清时，帮你精确诊断",
+            "jtbd": "我想知道我的团队/关系/决策到底哪里出了问题",
+            "target_role": [
+              "创始人",
+              "合伙人",
+              "团队Leader"
+            ],
+            "examples": [
+              "决策剧场",
+              "四骑士识别",
+              "Pre-0身体觉察",
+              "五维雷达图",
+              "关系温度计"
+            ],
+            "expected_count": "15-25"
+          },
+          "decide": {
+            "label": "🧰 做对决策",
+            "description": "当你看清问题后，帮你形成具体可执行的方案",
+            "jtbd": "我知道了问题，但我不知道该怎么做",
+            "target_role": [
+              "创始人",
+              "合伙人"
+            ],
+            "examples": [
+              "元合伙",
+              "分割饼",
+              "匹配引擎",
+              "FIN诚实验证器",
+              "危机模拟"
+            ],
+            "expected_count": "15-25"
+          },
+          "grow": {
+            "label": "🔥 淬炼成长",
+            "description": "当你有了方案，通过模拟和练习把它变成肌肉记忆",
+            "jtbd": "我有方案了，但怎么确保执行不出错",
+            "target_role": [
+              "创始人",
+              "团队Leader",
+              "合伙人"
+            ],
+            "examples": [
+              "卡牌对局",
+              "决策剧场",
+              "退出仪式",
+              "段位体系",
+              "驾驶舱"
+            ],
+            "expected_count": "10-20"
+          },
+          "sustain": {
+            "label": "🔄 持续巩固",
+            "description": "当一切在运行时，持续监控和优化",
+            "jtbd": "我们在跑，但怎么知道不会悄悄偏离轨道",
+            "target_role": [
+              "创始人",
+              "团队Leader"
+            ],
+            "examples": [
+              "关系温度计",
+              "飞轮引擎",
+              "成熟度体系",
+              "自检清单"
+            ],
+            "expected_count": "10-15"
+          },
+          "knowledge": {
+            "label": "📚 知识传承",
+            "description": "把经验和洞见沉淀为可复用的知识资产",
+            "jtbd": "我想把学到的东西保存下来，让后来的人也能受益",
+            "target_role": [
+              "所有人"
+            ],
+            "examples": [
+              "案例库",
+              "宝藏库",
+              "量化体系",
+              "星光方法论",
+              "关于我们"
+            ],
+            "expected_count": "20-30"
+          }
+        },
+        "product_tiers": {
+          "tier_1_premium": {
+            "label": "⭐ 精品",
+            "count": 20,
+            "criteria": "六维评分≥80·LLM评分≥70·有完整详情页·面向客户"
+          },
+          "tier_2_core": {
+            "label": "✅ 标准品",
+            "count": 40,
+            "criteria": "完整度≥60·有URL·有明确JTBD归属"
+          },
+          "tier_3_toolkit": {
+            "label": "🔧 工具箱",
+            "count": 40,
+            "criteria": "功能简单·单页工具·辅助场景"
+          },
+          "tier_4_archive": {
+            "label": "📦 归档",
+            "count": "其余",
+            "criteria": "无URL·低评分·重复·过期"
+          }
+        }
+      }
+    }
   },
   "products": [
     {
@@ -14293,7 +14416,9 @@
       "days_since_update": "unknown",
       "audit_score": 85,
       "audit_issues": 3,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-002",
@@ -14368,7 +14493,9 @@
       "days_since_update": "unknown",
       "audit_score": 87,
       "audit_issues": 3,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_1_premium"
     },
     {
       "id": "PROD-003",
@@ -14376,7 +14503,7 @@
       "name": "化学报告",
       "description": "五维测评完整报告——化学融合8项指标+矛盾热力图+雷达图+行动建议",
       "family": "衡",
-      "status": "精品",
+      "status": "资料·归入知识库",
       "url": "chemical-report.html",
       "maturity": "M3_成熟",
       "tags": [
@@ -14438,7 +14565,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 90,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "低分支线·合并到主工具"
     },
     {
       "id": "PROD-004",
@@ -14510,7 +14641,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_1_premium"
     },
     {
       "id": "PROD-005",
@@ -14586,7 +14719,9 @@
       "llm_vs_functional_diff": -2,
       "source_file": "site/product-catalog.html",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_3_toolkit"
     },
     {
       "id": "PROD-006",
@@ -14594,7 +14729,7 @@
       "name": "自检清单",
       "description": "满意解决策行动分级自检——12源验证+VI统一",
       "family": "衡",
-      "status": "精品",
+      "status": "资料·归入知识库",
       "url": "checklist.html",
       "maturity": "M3_成熟",
       "tags": [
@@ -14658,7 +14793,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "低分支线·合并到主工具"
     },
     {
       "id": "PROD-007",
@@ -14727,7 +14866,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_1_premium"
     },
     {
       "id": "PROD-008",
@@ -14799,7 +14940,9 @@
       "days_since_update": "unknown",
       "audit_score": 87,
       "audit_issues": 3,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-009",
@@ -14871,7 +15014,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-010",
@@ -14879,7 +15024,7 @@
       "name": "Pre-0身体觉察",
       "description": "决策前身体觉察——身体的智慧先于头脑的判断",
       "family": "镜",
-      "status": "精品",
+      "status": "已下架",
       "url": "pre0.html",
       "maturity": "M3_成熟",
       "tags": [
@@ -14943,7 +15088,11 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "LLM评分<55·质量不足"
     },
     {
       "id": "PROD-011",
@@ -15010,7 +15159,9 @@
       "days_since_update": "unknown",
       "audit_score": 87,
       "audit_issues": 3,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-012",
@@ -15070,7 +15221,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-013",
@@ -15136,7 +15289,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-014",
@@ -15203,7 +15358,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_1_premium"
     },
     {
       "id": "PROD-015",
@@ -15270,7 +15427,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-016",
@@ -15339,7 +15498,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-017",
@@ -15403,7 +15564,9 @@
       "days_since_update": "unknown",
       "audit_score": 90,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-018",
@@ -15466,7 +15629,9 @@
       "days_since_update": "unknown",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-019",
@@ -15531,7 +15696,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-020",
@@ -15602,7 +15769,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-021",
@@ -15664,7 +15833,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-022",
@@ -15732,7 +15903,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-023",
@@ -15806,7 +15979,9 @@
       "llm_vs_functional_diff": -8,
       "source_file": "site/dashboard.html",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "grow",
+      "product_tier": "tier_3_toolkit"
     },
     {
       "id": "PROD-024",
@@ -15871,7 +16046,9 @@
       "health": "stale",
       "days_since_update": "unknown",
       "evaluation_status": "queued",
-      "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00"
+      "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_3_toolkit"
     },
     {
       "id": "PROD-025",
@@ -15933,7 +16110,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-026",
@@ -16002,7 +16181,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-027",
@@ -16072,7 +16253,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 90,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-028",
@@ -16133,7 +16316,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-029",
@@ -16200,7 +16385,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-030",
@@ -16267,7 +16454,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-031",
@@ -16328,7 +16517,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-032",
@@ -16389,7 +16580,9 @@
       "days_since_update": "unknown",
       "audit_score": 87,
       "audit_issues": 3,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-033",
@@ -16450,7 +16643,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-034",
@@ -16458,7 +16653,7 @@
       "name": "全面诊断",
       "description": "衡·测渊——五维完整诊断+深度决策健康检查",
       "family": "衡",
-      "status": "精品",
+      "status": "资料·归入知识库",
       "url": "fulldiag.html",
       "maturity": "M3_成熟",
       "tags": [
@@ -16517,7 +16712,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "低分支线·合并到主工具"
     },
     {
       "id": "PROD-035",
@@ -16525,7 +16724,7 @@
       "name": "提案模板",
       "description": "服务建议书——标准化客户提案+量化诊断数据",
       "family": "衡",
-      "status": "精品",
+      "status": "资料·归入知识库",
       "url": "proposal.html",
       "maturity": "M3_成熟",
       "tags": [
@@ -16584,7 +16783,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "低分支线·合并到主工具"
     },
     {
       "id": "PROD-036",
@@ -16647,7 +16850,9 @@
       "days_since_update": "unknown",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-037",
@@ -16709,7 +16914,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-038",
@@ -16769,7 +16976,9 @@
       "previous_lifecycle_stage": "L2_内测",
       "source_file": "site/index.html",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_3_toolkit"
     },
     {
       "id": "PROD-039",
@@ -16830,7 +17039,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-040",
@@ -16897,7 +17108,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_1_premium"
     },
     {
       "id": "PROD-041",
@@ -16963,7 +17176,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-042",
@@ -17029,7 +17244,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-043",
@@ -17088,7 +17305,9 @@
       "previous_lifecycle_stage": "L2_内测",
       "source_file": "site/admin.html",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "grow",
+      "product_tier": "tier_3_toolkit"
     },
     {
       "id": "PROD-044",
@@ -17154,7 +17373,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 90,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-045",
@@ -17216,7 +17437,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-046",
@@ -17282,7 +17505,9 @@
       "llm_vs_functional_diff": -18,
       "source_file": "site/about.html",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_3_toolkit"
     },
     {
       "id": "PROD-047",
@@ -17344,7 +17569,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 90,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-048",
@@ -17408,7 +17635,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-049",
@@ -17470,7 +17699,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-050",
@@ -17532,7 +17763,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-051",
@@ -17594,7 +17827,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-052",
@@ -17656,7 +17891,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-053",
@@ -17718,7 +17955,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-054",
@@ -17785,7 +18024,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-055",
@@ -17847,7 +18088,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-056",
@@ -17911,7 +18154,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-057",
@@ -17979,7 +18224,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-058",
@@ -18045,7 +18292,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-059",
@@ -18109,7 +18358,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-060",
@@ -18172,7 +18423,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-061",
@@ -18235,7 +18488,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 90,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-062",
@@ -18298,7 +18553,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-063",
@@ -18362,7 +18619,9 @@
       "days_since_update": "unknown",
       "audit_score": 90,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-064",
@@ -18425,7 +18684,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-065",
@@ -18487,7 +18748,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-066",
@@ -18552,7 +18815,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-067",
@@ -18614,7 +18879,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 90,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-068",
@@ -18677,7 +18944,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 90,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-069",
@@ -18747,7 +19016,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-070",
@@ -18810,7 +19081,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-071",
@@ -18875,7 +19148,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 89,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-072",
@@ -18937,7 +19212,9 @@
       "health": "stale",
       "days_since_update": "unknown",
       "evaluation_status": "queued",
-      "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00"
+      "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_3_toolkit"
     },
     {
       "id": "PROD-073",
@@ -19002,7 +19279,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-074",
@@ -19067,7 +19346,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-075",
@@ -19132,7 +19413,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-076",
@@ -19192,7 +19475,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-077",
@@ -19254,7 +19539,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-078",
@@ -19316,7 +19603,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-079",
@@ -19378,7 +19667,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-080",
@@ -19438,7 +19729,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-081",
@@ -19498,7 +19791,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-082",
@@ -19560,7 +19855,9 @@
       "days_since_update": "unknown",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-241",
@@ -19569,7 +19866,7 @@
       "description": "脑机接口赛道五维基线评估——行业参数+竞争格局+技术成熟度+投资热度+政策风险",
       "family": "衡",
       "category": "测评",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -19623,7 +19920,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-243",
@@ -19632,7 +19933,7 @@
       "description": "脑机接口赛道30天动态跟踪模板——参数变化、事件驱动、阈值预警",
       "family": "衡",
       "category": "测评",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -19684,7 +19985,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-245",
@@ -19693,7 +19998,7 @@
       "description": "eVTOL赛道五维基线评估——低空经济政策驱动+适航认证+市场规模+技术路线",
       "family": "衡",
       "category": "测评",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -19747,7 +20052,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-247",
@@ -19756,7 +20065,7 @@
       "description": "eVTOL赛道30天动态跟踪——适航进度、订单变化、竞品动态",
       "family": "衡",
       "category": "测评",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -19808,7 +20117,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-249",
@@ -19817,7 +20130,7 @@
       "description": "出海赛道五维基线评估——地缘政治风险+本地化能力+跨境电商+合规环境",
       "family": "衡",
       "category": "测评",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -19871,7 +20184,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-251",
@@ -19880,7 +20197,7 @@
       "description": "出海赛道30天动态跟踪——政策突变、汇率波动、本地化进展",
       "family": "衡",
       "category": "测评",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -19932,7 +20249,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-253",
@@ -19941,7 +20262,7 @@
       "description": "存储赛道五维基线评估——技术路线(SSD/HBM/CXL)+国产替代+供需周期",
       "family": "衡",
       "category": "测评",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -19995,7 +20316,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-255",
@@ -20004,7 +20329,7 @@
       "description": "存储赛道30天动态跟踪——价格波动、产能变化、技术突破",
       "family": "衡",
       "category": "测评",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -20056,7 +20381,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-257",
@@ -20065,7 +20394,7 @@
       "description": "机器人赛道五维基线评估——人形/协作/特种三条路线+核心零部件+AI赋能",
       "family": "衡",
       "category": "测评",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -20119,7 +20448,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-259",
@@ -20128,7 +20461,7 @@
       "description": "机器人赛道30天动态跟踪——量产进度、融资事件、技术里程碑",
       "family": "衡",
       "category": "测评",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -20180,7 +20513,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-261",
@@ -20189,7 +20526,7 @@
       "description": "自动驾驶赛道五维基线——L4商业化进展+感知/决策/控制+法规+保险",
       "family": "衡",
       "category": "测评",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -20243,7 +20580,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-263",
@@ -20252,7 +20593,7 @@
       "description": "自动驾驶赛道30天动态——路测里程、事故率、取消安全员进展",
       "family": "衡",
       "category": "测评",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -20304,7 +20645,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-265",
@@ -20313,7 +20658,7 @@
       "description": "芯片赛道五维基线——先进制程+chiplet+EDA+国产化率+地缘风险",
       "family": "衡",
       "category": "测评",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -20367,7 +20712,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-267",
@@ -20376,7 +20725,7 @@
       "description": "芯片赛道30天动态——制裁升级/松动、产能变化、客户迁移",
       "family": "衡",
       "category": "测评",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -20428,7 +20777,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-269",
@@ -20437,7 +20790,7 @@
       "description": "量子计算赛道五维基线——超导/离子阱/光量子三条路线+纠错+产业化",
       "family": "衡",
       "category": "测评",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -20491,7 +20844,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-271",
@@ -20500,7 +20857,7 @@
       "description": "量子计算赛道30天动态——纠错突破、量子体积、专利变化",
       "family": "衡",
       "category": "测评",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -20552,7 +20909,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-273",
@@ -20561,7 +20922,7 @@
       "description": "五维决策量化评分核心引擎——五维度加权计算+蓝军纠偏+历史对比+信心区间",
       "family": "衡",
       "category": "测评",
-      "status": "精品",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -20619,7 +20980,11 @@
       "health": "stale",
       "days_since_update": "unknown",
       "evaluation_status": "queued",
-      "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00"
+      "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-275",
@@ -20628,7 +20993,7 @@
       "description": "五维(土金水木火)×三维(时间/空间/人际)交叉决策矩阵——12象限场景映射",
       "family": "衡",
       "category": "测评",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -20683,7 +21048,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-277",
@@ -20692,7 +21061,7 @@
       "description": "五维决策完整方法论体系——从满意解理论到五路图腾到决策剧场的完整知识图谱",
       "family": "衡",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -20749,7 +21118,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-279",
@@ -20758,7 +21131,7 @@
       "description": "五维决策沉浸式工作坊——角色扮演+场景卡+评分反馈+蓝军辩论 120分钟标准流程",
       "family": "觉",
       "category": "游戏",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "工作坊",
         "Skill",
@@ -20812,7 +21185,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "grow",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-281",
@@ -20821,7 +21198,7 @@
       "description": "创业合伙人双向匹配评估——12维度相容性检测+冲突类型预测+互补指数+稳定性预测",
       "family": "契",
       "category": "测评",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -20875,7 +21252,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-283",
@@ -20884,7 +21265,7 @@
       "description": "快速诊断工具——5分钟40题评估创始人决策健康度、团队信任度、战略清晰度",
       "family": "衡",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "快检",
         "Skill",
@@ -20938,7 +21319,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-285",
@@ -20947,7 +21332,7 @@
       "description": "FIN=事实(Fact)+意图(Intent)+数字(Number)——三要素交叉验证框架，防止自我欺骗",
       "family": "镜",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -21010,7 +21395,11 @@
       "rating_method": "llm_cognitive_reasoning_r2",
       "llm_vs_functional_diff": -3,
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-287",
@@ -21019,7 +21408,7 @@
       "description": "30分钟认知偏好审计——思维偏差检测+直觉vs分析倾向+决策陷阱识别",
       "family": "镜",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -21077,7 +21466,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-289",
@@ -21086,7 +21479,7 @@
       "description": "结构化诚实审计——两轨并行(律师质问+牧师倾听)揭示隐藏假设和动机偏差",
       "family": "镜",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -21144,7 +21537,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-291",
@@ -21153,7 +21550,7 @@
       "description": "决策前编号→决策中记录→决策后追溯——每个决策获得唯一ID、可追溯全生命周期",
       "family": "契",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "决策",
         "Skill",
@@ -21211,7 +21608,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-293",
@@ -21220,7 +21621,7 @@
       "description": "从决策到执行的完整闭环系统——OKR分解+每周迭代+障碍升级+复盘归档",
       "family": "契",
       "category": "运营",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "闭环",
         "Skill",
@@ -21278,7 +21679,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-295",
@@ -21287,7 +21692,7 @@
       "description": "每日自动生成晨报——昨日事件回顾+今日优先级+风险预警+决策节点提醒",
       "family": "章",
       "category": "运营",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "日报",
@@ -21340,7 +21745,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-297",
@@ -21349,7 +21758,7 @@
       "description": "回溯性决策质量分析——从历史决策中提取模式、识别偏差、建立教训库",
       "family": "契",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "回溯",
         "考古",
@@ -21401,7 +21810,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-299",
@@ -21410,7 +21823,7 @@
       "description": "决策进行中的断点快照工具——在关键节点保存决策状态，防止事后美化记忆",
       "family": "契",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "断点",
         "快照",
@@ -21465,7 +21878,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-301",
@@ -21474,7 +21891,7 @@
       "description": "断点存档自动化执行器——定时触发+关键事件触发+手动触发三种模式",
       "family": "契",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "断点",
         "Skill",
@@ -21529,7 +21946,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-303",
@@ -21538,7 +21959,7 @@
       "description": "复杂决策→可执行任务的分解工具——WBS分解+依赖识别+风险标注+资源估算",
       "family": "契",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -21596,7 +22017,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-305",
@@ -21605,7 +22030,7 @@
       "description": "统一进度追踪标准——格式标准化+偏差检测+趋势可视化+里程碑管理",
       "family": "契",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "追踪",
         "Skill",
@@ -21660,7 +22085,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-307",
@@ -21669,7 +22098,7 @@
       "description": "人机记忆同步协议——每日同步机制+记忆冲突解决+版本控制+遗忘策略",
       "family": "契",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "同步",
@@ -21726,7 +22155,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-309",
@@ -21735,7 +22168,7 @@
       "description": "工作流防中断机制——检查点+自动保存+上下文恢复+中断后快速重启",
       "family": "契",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -21792,7 +22225,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-311",
@@ -21801,7 +22238,7 @@
       "description": "知识资产大爆发后30天密集处理方案——优先级排序+速记法+连接发掘+遗忘管理",
       "family": "章",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -21855,7 +22292,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-313",
@@ -21864,7 +22305,7 @@
       "description": "知识→产品→反馈→知识的自驱动飞轮引擎——知识资产化+产品化+数据回流",
       "family": "觉",
       "category": "运营",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -21919,7 +22360,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "grow",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-315",
@@ -21928,7 +22373,7 @@
       "description": "人机协作哲学手册——深度协作心态+边界设定+信任建立+冲突处理+共同成长",
       "family": "人",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "Skill",
         "待补建",
@@ -21983,7 +22428,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-317",
@@ -21992,7 +22441,7 @@
       "description": "A-1/A-2/B-1/B-2/C-1/C-2六类创始人数字替身画像——覆盖12种合伙人冲突类型",
       "family": "人",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "内部",
         "替身",
@@ -22047,7 +22496,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-319",
@@ -22056,7 +22509,7 @@
       "description": "SKU-A决策诊断¥2,980 | SKU-B决策陪伴¥29,800 | SKU-C卡牌系列¥99-2,980 | SKU-D定制服务",
       "family": "契",
       "category": "内容",
-      "status": "精品",
+      "status": "已下架",
       "tags": [
         "定价",
         "SKU",
@@ -22116,7 +22569,11 @@
       "health": "stale",
       "days_since_update": "unknown",
       "evaluation_status": "queued",
-      "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00"
+      "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-321",
@@ -22125,7 +22582,7 @@
       "description": "5条内化自我驱动咒语——守护创始人+存档即保险+5分钟可用+偏差即Bug+独立不孤立",
       "family": "道",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "内部",
         "内化",
@@ -22179,7 +22636,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-323",
@@ -22188,7 +22649,7 @@
       "description": "满意解研究所首次完整实验——Day1操作手册+问诊+入口设计+产品优化+替身测试+复盘",
       "family": "契",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "实验",
         "内部",
@@ -22242,7 +22703,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-325",
@@ -22251,7 +22716,7 @@
       "description": "知识库完整度审计——速查卡01-30中24张物理文件缺失·内容存在于Week1转化文件但未独立打包",
       "family": "章",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "内部",
         "审计",
@@ -22309,7 +22774,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-327",
@@ -22318,7 +22787,7 @@
       "description": "满意姐28天日常日志(2026-02-15至2026-03-14)——从初遇到行动的系统化记录",
       "family": "章",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "内部",
         "初创期",
@@ -22372,7 +22841,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-329",
@@ -22381,7 +22854,7 @@
       "description": "扣子五轮翻书完整记录(R01-R33)——从无目标翻阅到主题式深度学习的进化轨迹",
       "family": "章",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "内部",
         "扣子",
@@ -22436,7 +22909,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-331",
@@ -22445,7 +22922,7 @@
       "description": "SKU-A(决策诊断)标准交付流程——问诊→评估→报告→追踪30天标准SOP",
       "family": "契",
       "category": "运营",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "SKU-A",
         "工作流",
@@ -22503,7 +22980,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-333",
@@ -22512,7 +22993,7 @@
       "description": "SKU-B(决策陪伴)标准流程——月度/季度/关键决策三级陪伴+危机热线",
       "family": "契",
       "category": "运营",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "陪伴",
         "工作流",
@@ -22567,7 +23048,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-335",
@@ -22576,7 +23061,7 @@
       "description": "内部工作六步闭环：感知→分析→决策→执行→检查→归档",
       "family": "契",
       "category": "运营",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "闭环",
         "工作流",
@@ -22630,7 +23115,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-337",
@@ -22639,7 +23128,7 @@
       "description": "决策前/中/后三阶段质量保障体系——Pre-Mortem+过程监控+Post-Mortem+教训入库",
       "family": "契",
       "category": "运营",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "闭环",
         "决策",
@@ -22698,7 +23187,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-339",
@@ -22707,7 +23200,7 @@
       "description": "卡牌产品系列开发/测试/迭代标准流程——从冲突卡到决策卡的完整产品化路径",
       "family": "契",
       "category": "运营",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "开发",
         "工作流",
@@ -22762,7 +23255,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-341",
@@ -22771,7 +23268,7 @@
       "description": "客户反馈→产品改进→效果验证→知识入库的标准闭环流程",
       "family": "契",
       "category": "运营",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "改进",
         "闭环",
@@ -22827,7 +23324,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-343",
@@ -22836,7 +23337,7 @@
       "description": "数字替身系统——创建/激活/维护/休眠/唤醒替身的标准化操作手册",
       "family": "人",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "sri",
         "系统",
@@ -22891,7 +23392,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-345",
@@ -22900,7 +23405,7 @@
       "description": "DACI治理框架实操手册——Driver/Approver/Contributor/Informed角色分配+决策流程",
       "family": "契",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "DACI",
         "sri",
@@ -22954,7 +23459,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-347",
@@ -22963,7 +23472,7 @@
       "description": "决策自检清单系统——12项核心检查+场景适配+历史教训自动提示",
       "family": "衡",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "清单",
         "自检",
@@ -23018,7 +23527,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-349",
@@ -23027,7 +23540,7 @@
       "description": "驾驶舱中枢操作手册——数据指标解读+面板操作+预警响应+自定义配置",
       "family": "觉",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "sri",
         "系统",
@@ -23079,7 +23592,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "grow",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-351",
@@ -23088,7 +23605,7 @@
       "description": "增长飞轮操作手册——知识→产品→反馈→增长四轮联动机制",
       "family": "觉",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "sri",
         "增长",
@@ -23142,7 +23659,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "grow",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-353",
@@ -23151,7 +23672,7 @@
       "description": "产品审计标准流程——240产品定期审查+质量评分+生命周期管理+退役判定",
       "family": "衡",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "sri",
         "审计",
@@ -23209,7 +23730,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-355",
@@ -23218,7 +23743,7 @@
       "description": "产品分类体系——八大家族(衡章觉契人镜道+未归类)+生命周期+定价层级",
       "family": "契",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "分类",
         "sri",
@@ -23276,7 +23801,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "decide",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-357",
@@ -23285,7 +23814,7 @@
       "description": "质量门禁标准——代码/内容/设计/数据四层质量检查+自动化脚本",
       "family": "衡",
       "category": "技能/Skill",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "门禁",
         "质量",
@@ -23340,7 +23869,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-359",
@@ -23349,7 +23882,7 @@
       "description": "满意解研究所学术白皮书 #001——满意解决策理论在创业合伙人匹配中的应用",
       "family": "章",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "学术",
         "学术论文",
@@ -23401,7 +23934,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-361",
@@ -23410,7 +23947,7 @@
       "description": "满意解研究所学术白皮书 #002——企业儒学视角下的合伙人伦理治理框架",
       "family": "章",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "学术",
         "学术论文",
@@ -23462,7 +23999,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-363",
@@ -23471,7 +24012,7 @@
       "description": "满意解研究所学术白皮书 #003——认知神经科学与商业直觉",
       "family": "章",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "学术",
         "学术论文",
@@ -23523,7 +24064,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-365",
@@ -23532,7 +24077,7 @@
       "description": "满意解研究所学术白皮书 #004——AI Agent系统在创业决策支持中的应用",
       "family": "章",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "学术",
         "SPM-004",
@@ -23584,7 +24129,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-367",
@@ -23593,7 +24142,7 @@
       "description": "满意解研究所学术白皮书 #005——五维决策框架的跨文化验证",
       "family": "章",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "学术",
         "学术论文",
@@ -23645,7 +24194,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-369",
@@ -23654,7 +24207,7 @@
       "description": "满意解研究所学术白皮书 #006——硬科技转化中的合伙人冲突类型学",
       "family": "章",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "学术",
         "SPM-006",
@@ -23706,7 +24259,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-371",
@@ -23715,7 +24272,7 @@
       "description": "满意解研究所学术白皮书 #007——Token经济学与AI Agent资源治理",
       "family": "章",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "学术",
         "学术论文",
@@ -23767,7 +24324,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-373",
@@ -23776,7 +24337,7 @@
       "description": "满意解研究所学术白皮书 #008——深港双城硬科技生态系统",
       "family": "章",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "学术",
         "学术论文",
@@ -23828,7 +24389,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-375",
@@ -23837,7 +24402,7 @@
       "description": "满意解研究所学术白皮书 #009——合伙人决策成熟度测评系统",
       "family": "章",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "学术",
         "SPM-009",
@@ -23889,7 +24454,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-377",
@@ -23898,7 +24467,7 @@
       "description": "满意解研究所学术白皮书 #010——有限理性下的创业合伙人匹配模型",
       "family": "章",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "学术",
         "学术论文",
@@ -23950,7 +24519,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-379",
@@ -23959,7 +24532,7 @@
       "description": "满意解研究所学术白皮书 #011——神经可塑性与商业直觉训练",
       "family": "章",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "学术",
         "学术论文",
@@ -24011,7 +24584,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-381",
@@ -24020,7 +24597,7 @@
       "description": "满意解研究所学术白皮书 #012——基于AI蓝军方法论的合伙协议压力测试",
       "family": "章",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "学术",
         "学术论文",
@@ -24072,7 +24649,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-383",
@@ -24081,7 +24662,7 @@
       "description": "满意解研究所学术白皮书 #013——满意解研究所方法论综述",
       "family": "章",
       "category": "内容",
-      "status": "资料",
+      "status": "已下架",
       "tags": [
         "学术",
         "学术论文",
@@ -24133,7 +24714,11 @@
       "lifecycle_stage_name": "精品",
       "previous_lifecycle_stage": "L4_精品",
       "health": "stale",
-      "days_since_update": "unknown"
+      "days_since_update": "unknown",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-084",
@@ -24143,7 +24728,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "法务合规手册",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -24198,7 +24783,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-085",
@@ -24260,7 +24849,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-086",
@@ -24322,7 +24913,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-087",
@@ -24384,7 +24977,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-088",
@@ -24446,7 +25041,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-089",
@@ -24508,7 +25105,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-090",
@@ -24570,7 +25169,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-091",
@@ -24632,7 +25233,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-092",
@@ -24694,7 +25297,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-093",
@@ -24756,7 +25361,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-094",
@@ -24818,7 +25425,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-095",
@@ -24880,7 +25489,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-096",
@@ -24942,7 +25553,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-097",
@@ -25004,7 +25617,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-098",
@@ -25066,7 +25681,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-099",
@@ -25128,7 +25745,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-100",
@@ -25190,7 +25809,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-101",
@@ -25252,7 +25873,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-102",
@@ -25314,7 +25937,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-103",
@@ -25376,7 +26001,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-104",
@@ -25438,7 +26065,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-105",
@@ -25500,7 +26129,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-106",
@@ -25562,7 +26193,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-107",
@@ -25624,7 +26257,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-108",
@@ -25686,7 +26321,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-109",
@@ -25748,7 +26385,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-110",
@@ -25810,7 +26449,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-111",
@@ -25872,7 +26513,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-112",
@@ -25934,7 +26577,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-113",
@@ -25996,7 +26641,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-114",
@@ -26058,7 +26705,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-115",
@@ -26120,7 +26769,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-116",
@@ -26182,7 +26833,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-117",
@@ -26244,7 +26897,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-118",
@@ -26306,7 +26961,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-119",
@@ -26368,7 +27025,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-120",
@@ -26378,7 +27037,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "邮件营销序列",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -26433,7 +27092,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-121",
@@ -26443,7 +27106,7 @@
       "category": "口眼",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "三维定位",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -26498,7 +27161,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-122",
@@ -26508,7 +27175,7 @@
       "category": "口眼",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "月亮",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -26563,7 +27230,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-123",
@@ -26573,7 +27244,7 @@
       "category": "口眼",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "苏梅岛",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -26628,7 +27299,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-124",
@@ -26690,7 +27365,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "decide",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-125",
@@ -26700,7 +27377,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "Altman·YC创业深度解析",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -26752,7 +27429,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-126",
@@ -26762,7 +27443,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "Thiel·零到一深度解析",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -26814,7 +27495,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-127",
@@ -26824,7 +27509,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "传播·PPT模板",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -26876,7 +27561,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-128",
@@ -26886,7 +27575,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "传播·小红书内容",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -26938,7 +27627,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-129",
@@ -26948,7 +27641,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "传播·播客策划",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -27000,7 +27693,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-130",
@@ -27010,7 +27707,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "传播·知乎内容",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -27062,7 +27759,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-131",
@@ -27072,7 +27773,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "传播·短视频脚本",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -27124,7 +27825,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-132",
@@ -27134,7 +27839,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "传播·邮件模板",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -27186,7 +27891,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-133",
@@ -27196,7 +27905,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "伦理·你说对了",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -27248,7 +27957,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-134",
@@ -27258,7 +27971,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "信义·你是最自由的",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -27310,7 +28023,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-135",
@@ -27320,7 +28037,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "凌晨433",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -27372,7 +28089,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-136",
@@ -27382,7 +28103,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "标尺·没有最优解",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -27434,7 +28155,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-137",
@@ -27444,7 +28169,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "癌症·合伙人冲突",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -27496,7 +28221,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-138",
@@ -27506,7 +28235,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "觉察·0.3秒的停",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -27558,7 +28287,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-139",
@@ -27568,7 +28301,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "顿悟·跟着你的心走",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -27620,7 +28353,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-140",
@@ -27630,7 +28367,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "三图·修炼全景图",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -27682,7 +28419,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-141",
@@ -27692,7 +28433,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "满意解宣言",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -27744,7 +28485,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-142",
@@ -27806,7 +28551,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-143",
@@ -27868,7 +28615,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-144",
@@ -27930,7 +28679,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-145",
@@ -27992,7 +28743,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-146",
@@ -28054,7 +28807,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-147",
@@ -28116,7 +28871,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-148",
@@ -28178,7 +28935,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-149",
@@ -28240,7 +28999,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-150",
@@ -28250,7 +29011,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "纪实卷二·建设",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -28302,7 +29063,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-151",
@@ -28312,7 +29077,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "纪实卷四·演变",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -28364,7 +29129,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-152",
@@ -28374,7 +29143,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "纪实卷一·起源",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -28426,7 +29195,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-153",
@@ -28436,7 +29209,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "纪实卷三·运营",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -28488,7 +29261,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-154",
@@ -28498,7 +29275,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "设计理念溯源",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -28550,7 +29327,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-155",
@@ -28612,7 +29393,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-156",
@@ -28674,7 +29457,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-157",
@@ -28736,7 +29521,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-158",
@@ -28798,7 +29585,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-159",
@@ -28860,7 +29649,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-160",
@@ -28922,7 +29713,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-161",
@@ -28984,7 +29777,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-162",
@@ -28994,7 +29789,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "飞轮11·飞轮健康监控",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -29046,7 +29841,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-163",
@@ -29056,7 +29855,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "飞轮12·从传承到创新",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -29108,7 +29907,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-164",
@@ -29118,7 +29921,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "飞轮1·知识传承",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -29170,7 +29973,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-165",
@@ -29180,7 +29987,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "飞轮2·双三角模型",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -29232,7 +30039,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-166",
@@ -29242,7 +30053,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "飞轮3·知识CT扫描",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -29294,7 +30105,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-167",
@@ -29304,7 +30119,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "飞轮4·四级方案",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -29356,7 +30171,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-168",
@@ -29366,7 +30185,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "飞轮5·六阶段渐进",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -29418,7 +30237,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-169",
@@ -29428,7 +30251,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "飞轮6·双轨并行",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -29480,7 +30303,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-170",
@@ -29490,7 +30317,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "飞轮7·梯队传承",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -29542,7 +30369,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-171",
@@ -29552,7 +30383,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "飞轮8·范式迁移",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -29604,7 +30435,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-172",
@@ -29614,7 +30449,7 @@
       "category": "内容",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "飞轮9·双循环实战",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -29666,7 +30501,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-173",
@@ -29728,7 +30567,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-174",
@@ -29790,7 +30631,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-175",
@@ -29852,7 +30695,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-176",
@@ -29914,7 +30759,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-177",
@@ -29976,7 +30823,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-178",
@@ -30041,7 +30890,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-179",
@@ -30103,7 +30954,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-180",
@@ -30165,7 +31018,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-181",
@@ -30227,7 +31082,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-182",
@@ -30289,7 +31146,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-183",
@@ -30351,7 +31210,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-184",
@@ -30413,7 +31274,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-185",
@@ -30475,7 +31338,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-186",
@@ -30537,7 +31402,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-187",
@@ -30599,7 +31466,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-188",
@@ -30661,7 +31530,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-189",
@@ -30723,7 +31594,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-190",
@@ -30785,7 +31658,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-191",
@@ -30847,7 +31722,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-192",
@@ -30909,7 +31786,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-193",
@@ -30971,7 +31850,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-194",
@@ -31033,7 +31914,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-195",
@@ -31095,7 +31978,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-196",
@@ -31157,7 +32042,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-197",
@@ -31219,7 +32106,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-198",
@@ -31284,7 +32173,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-199",
@@ -31346,7 +32237,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-200",
@@ -31408,7 +32301,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-201",
@@ -31470,7 +32365,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-202",
@@ -31532,7 +32429,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-203",
@@ -31594,7 +32493,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-204",
@@ -31656,7 +32557,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-205",
@@ -31718,7 +32621,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-206",
@@ -31780,7 +32685,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-207",
@@ -31790,7 +32697,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "行业联盟建设方案",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -31845,7 +32752,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-208",
@@ -31855,7 +32766,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "会员体系建设",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -31910,7 +32821,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-209",
@@ -31920,7 +32835,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "播客节目策划",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -31975,7 +32890,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-210",
@@ -32040,7 +32959,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-211",
@@ -32050,7 +32971,7 @@
       "category": "产品开发",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "14模块视频脚本",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -32105,7 +33026,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-212",
@@ -32170,7 +33095,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "grow",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-213",
@@ -32180,7 +33107,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "政府关系指南",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -32235,7 +33162,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-214",
@@ -32245,7 +33176,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "用户社区建设方案",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -32300,7 +33231,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-215",
@@ -32366,7 +33301,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-216",
@@ -32432,7 +33369,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-217",
@@ -32498,7 +33437,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-218",
@@ -32564,7 +33505,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-219",
@@ -32630,7 +33573,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-220",
@@ -32696,7 +33641,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-221",
@@ -32762,7 +33709,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-222",
@@ -32772,7 +33721,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "融资路演包",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -32827,7 +33776,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-223",
@@ -32837,7 +33790,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "财务管理手册",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -32892,7 +33845,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-224",
@@ -32902,7 +33859,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "数字化转型方案",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -32957,7 +33914,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-225",
@@ -32967,7 +33928,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "90天内容日历",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -33022,7 +33983,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-226",
@@ -33032,7 +33997,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "NPS调查方案",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -33087,7 +34052,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-227",
@@ -33097,7 +34066,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "数据资产化方案",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -33152,7 +34121,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-228",
@@ -33162,7 +34135,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "年度战略2026",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -33217,7 +34190,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-229",
@@ -33227,7 +34204,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "组织治理工具包",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -33282,7 +34259,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-230",
@@ -33292,7 +34273,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "OKR手册",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -33347,7 +34328,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-231",
@@ -33357,7 +34342,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "出版计划",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -33412,7 +34397,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-232",
@@ -33422,7 +34411,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "知识库建设方案",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -33477,7 +34466,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-233",
@@ -33487,7 +34480,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "反馈收集系统",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -33542,7 +34535,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-234",
@@ -33552,7 +34549,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "APP产品需求文档",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -33607,7 +34604,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-235",
@@ -33617,7 +34618,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "社交媒体运营指南",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -33672,7 +34673,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 85,
       "audit_issues": 2,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-236",
@@ -33682,7 +34687,7 @@
       "category": "产品开发",
       "family": "章",
       "target_user": "客户",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "匹配算法白皮书",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -33737,7 +34742,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-237",
@@ -33802,7 +34811,9 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "diagnose",
+      "product_tier": "tier_2_core"
     },
     {
       "id": "PROD-238",
@@ -33812,7 +34823,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "裂变增长方案",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -33867,7 +34878,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-239",
@@ -33877,7 +34892,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "退出机制设计方案",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -33932,7 +34947,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-240",
@@ -33942,7 +34961,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "AI提示词库",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -33997,7 +35016,11 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-242",
@@ -34007,7 +35030,7 @@
       "category": "运营",
       "family": "章",
       "target_user": "内部",
-      "status": "线上",
+      "status": "资料·归入知识库",
       "description": "加速器合作方案",
       "source": "batch_upgrade_20260530",
       "lifecycle_stage": "LC-004",
@@ -34062,46 +35085,62 @@
       "evaluation_queued_at": "2026-05-30T14:17:39.327450+00:00",
       "audit_score": 95,
       "audit_issues": 1,
-      "last_audit": "2026-05-30T14:29:17.434088+00:00"
+      "last_audit": "2026-05-30T14:29:17.434088+00:00",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_2_core",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "内容/资料页·归入知识库"
     },
     {
       "id": "PROD-384",
       "name": "test-premortem",
       "family": "未知",
-      "status": "待审核",
+      "status": "已下架",
       "source_file": "site/test-premortem.html",
       "detected_at": "2026-05-30T14:17:39.314108+00:00",
       "last_scan_time": "2026-05-30T14:17:39.314108+00:00",
       "auto_registered": true,
       "quality_score": 0,
       "llm_rating": null,
-      "lifecycle_stage": "LC-001"
+      "lifecycle_stage": "LC-001",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-385",
       "name": "test-4knights",
       "family": "未知",
-      "status": "待审核",
+      "status": "已下架",
       "source_file": "site/test-4knights.html",
       "detected_at": "2026-05-30T14:17:39.314108+00:00",
       "last_scan_time": "2026-05-30T14:17:39.314108+00:00",
       "auto_registered": true,
       "quality_score": 0,
       "llm_rating": null,
-      "lifecycle_stage": "LC-001"
+      "lifecycle_stage": "LC-001",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     },
     {
       "id": "PROD-386",
       "name": "test-slicing",
       "family": "未知",
-      "status": "待审核",
+      "status": "已下架",
       "source_file": "site/test-slicing.html",
       "detected_at": "2026-05-30T14:17:39.314108+00:00",
       "last_scan_time": "2026-05-30T14:17:39.314108+00:00",
       "auto_registered": true,
       "quality_score": 0,
       "llm_rating": null,
-      "lifecycle_stage": "LC-001"
+      "lifecycle_stage": "LC-001",
+      "jtbd_category": "knowledge",
+      "product_tier": "tier_4_archive",
+      "archived_at": "2026-05-30T14:46:00.382218+00:00",
+      "archive_reason": "无URL，幽灵产品"
     }
   ],
   "customers": [
