@@ -121,8 +121,8 @@ STAGES = [
     },
     {
         'id': 'governor',
-        'label': '🧬 化学调控',
-        'script': 'sri_chemical_governor.py',
+        'label': '🧬 永续控制',
+        'script': 'sri_perpetual_control.py',
         'timeout': 60,
         'breaker_threshold': 5,
         'weight': 1.5,

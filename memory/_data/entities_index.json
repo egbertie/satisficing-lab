@@ -17088,22 +17088,41 @@
       "recrystallization": 1
     },
     "chemical_governor": {
-      "executed_at": "2026-05-30T15:58:49.946531+00:00",
-      "state": "critical",
-      "setpoint": "200-500 heat",
+      "version": "2.0",
+      "executed_at": "2026-05-30T16:01:09.258612+00:00",
+      "state": "braking",
       "current_heat": 1007.7,
+      "setpoint": "200-500",
       "speed_multiplier": 0.3,
-      "actions": {
-        "pruned": 23,
-        "damped": 1,
-        "dormant": 0,
-        "cleaned": 24
-      },
-      "active_chains": 25,
-      "dormant_chains": 0,
-      "meta_keys_before": 93,
-      "principle": "不追求更多链·追求精确调控·精益化学·控制论闭环"
-    }
+      "effect": "neutral",
+      "learning": "积累数据中",
+      "strategy": "稳态运行",
+      "heat_delta": 0.0,
+      "stability_score": 100,
+      "learning_progress": 5,
+      "total_runs": 1,
+      "principle": "第二阶控制论·系统观察自己的调控·调整设定点·反脆弱训练"
+    },
+    "_tuning_history": [
+      {
+        "run": 1,
+        "timestamp": "2026-05-30T16:01:09.258612+00:00",
+        "state": "braking",
+        "speed": 0.3,
+        "heat_before": 1007.7,
+        "heat_after": 1007.7,
+        "heat_delta": 0.0,
+        "setpoint_low": 200,
+        "setpoint_high": 500,
+        "effect": "neutral",
+        "learning": "积累数据中",
+        "strategy": "稳态运行",
+        "health_score": 100.0,
+        "stability_score": 100,
+        "learning_progress": 5,
+        "perturbation": 0
+      }
+    ]
   },
   "products": [
     {
