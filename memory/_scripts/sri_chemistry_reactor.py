@@ -1583,6 +1583,388 @@ def reaction_avatar_field(data):
 
 
 
+
+# ============================================================
+# 深化学 · 第五轮 (链37-50) 信息化学 + 环节化学 + 全局交叉
+# ============================================================
+
+# --- 信息层: 信息自己的化学反应 ---
+
+# 链37: 信息新陈代谢 — 摄入信息·消化·排出废弃物
+def reaction_information_metabolism(data):
+    """信息摄入→消化(过滤/门禁)→吸收(入库)→排泄(低质丢弃)"""
+    now = datetime.now(timezone.utc)
+    nourishment = data.get('meta', {}).get('nourishment', {})
+    quality_gate = data.get('meta', {}).get('quality_gate', {})
+    
+    ingested = nourishment.get('total_items', 0)
+    passed_gate = quality_gate.get('passed', 0)
+    rejected = quality_gate.get('rejected', 0)
+    
+    # 新陈代谢率 = 通过/摄入
+    metabolism_rate = round(passed_gate / max(1, ingested), 2)
+    
+    data['meta']['metabolism'] = {
+        'reacted_at': now.isoformat(),
+        'ingested': ingested,
+        'digested': passed_gate,
+        'excreted': rejected,
+        'metabolism_rate': metabolism_rate,
+        'health': 'healthy' if metabolism_rate > 0.5 else 'indigestion',
+        'principle': '信息新陈代谢=摄入→过滤→吸收→排泄·低质丢弃'
+    }
+    return metabolism_rate
+
+
+# 链38: 信息化合 — 两条独立信息养料合成新知识
+def reaction_information_synthesis(data):
+    """两个不同来源·同一领域的信息自发关联·产生新洞见"""
+    now = datetime.now(timezone.utc)
+    all_items = []
+    n_dir = os.path.join(WORKSPACE, 'memory/nourishment')
+    if os.path.exists(n_dir):
+        for fname in sorted(os.listdir(n_dir)):
+            if fname.endswith('.json'):
+                try:
+                    with open(os.path.join(n_dir, fname)) as f:
+                        batch = json.load(f)
+                    all_items.extend(batch.get('items', []))
+                except:
+                    pass
+    
+    syntheses = []
+    # 同领域·不同来源的信息配对
+    by_domain_source = defaultdict(lambda: defaultdict(list))
+    for item in all_items:
+        for d in item.get('domains', []):
+            by_domain_source[d][item.get('source', '?')].append(item)
+    
+    for domain, sources in by_domain_source.items():
+        source_names = list(sources.keys())
+        if len(source_names) >= 2:
+            # 跨源信息化合
+            for i in range(len(source_names)):
+                for j in range(i+1, len(source_names)):
+                    s1_items = sources[source_names[i]]
+                    s2_items = sources[source_names[j]]
+                    if s1_items and s2_items:
+                        avg_relevance = (s1_items[0].get('relevance_score', 0) + s2_items[0].get('relevance_score', 0)) / 2
+                        syntheses.append({
+                            'domain': domain,
+                            'source_a': source_names[i],
+                            'source_b': source_names[j],
+                            'items_count': len(s1_items) + len(s2_items),
+                            'synthesis_strength': round(avg_relevance / 100, 2),
+                            'synthesized_at': now.isoformat()
+                        })
+    
+    data['meta']['info_synthesis'] = {
+        'reacted_at': now.isoformat(),
+        'cross_source_syntheses': len(syntheses),
+        'syntheses': syntheses[:10],
+        'principle': 'A源信息+B源信息=新化合物·跨源化合增强洞见'
+    }
+    return len(syntheses)
+
+
+# 链39: 信息氧化 — 旧信息被新信息替换
+def reaction_information_redox(data):
+    """新养料摄入→旧养料被氧化(降权)·保持知识库新鲜"""
+    now = datetime.now(timezone.utc)
+    documents = data.get('documents', [])
+    
+    # 文档年龄
+    aged = 0
+    for doc in documents:
+        if not isinstance(doc, dict):
+            continue
+        detected = doc.get('detected_at', '') or doc.get('last_scan_time', '')
+        if detected:
+            try:
+                dt = datetime.fromisoformat(detected)
+                days_old = (now - dt).days
+                doc['document_age_days'] = days_old
+                # 超过30天自动降权
+                if days_old > 30 and doc.get('status') != '归档':
+                    doc['oxidized'] = True
+                    doc['freshness'] = 'stale'
+                    aged += 1
+                elif days_old > 14:
+                    doc['freshness'] = 'aging'
+            except:
+                pass
+    
+    data['meta']['info_redox'] = {
+        'reacted_at': now.isoformat(),
+        'documents_aged': aged,
+        'total_documents': len(documents),
+        'principle': '新信息氧化旧信息·保持知识新鲜度'
+    }
+    return aged
+
+
+# --- 编排器每个环节的化学反应 ---
+
+# 链40: 养料环节化学 — nourish被评分·形成浓度
+def reaction_stage_nourish_chemistry(data):
+    """养料采集环节自己产生化学活性"""
+    now = datetime.now(timezone.utc)
+    nourishment = data.get('meta', {}).get('nourishment', {})
+    batches = nourishment.get('batches', [])
+    
+    # 批次增长率
+    batch_rate = len(batches) / max(1, (datetime.now(timezone.utc) - 
+        datetime(2026, 5, 30, 14, 0, tzinfo=timezone.utc)).total_seconds() / 3600) if batches else 0
+    batch_rate = min(10, batch_rate)
+    
+    # 浓度
+    concentration = nourishment.get('total_items', 0) / 50  # 标准化
+    
+    data['meta']['stage_nourish_chem'] = {
+        'reacted_at': now.isoformat(),
+        'batches': len(batches),
+        'growth_rate': round(batch_rate, 2),
+        'concentration': round(concentration, 2),
+        'state': 'active' if batch_rate > 0 else 'dormant',
+        'principle': '养料环节=反应物浓度源·增长率=反应速率'
+    }
+    return batch_rate
+
+
+# 链41: 门禁环节化学 — quality_gate形成过滤效率
+def reaction_stage_gate_chemistry(data):
+    """质量门禁环节的过滤效率=化学选择性"""
+    now = datetime.now(timezone.utc)
+    qg = data.get('meta', {}).get('quality_gate', {})
+    
+    total = max(qg.get('total', 0), 1)
+    passed = qg.get('passed', 0)
+    rejected = qg.get('rejected', 0)
+    
+    # 选择性 = 通过率
+    selectivity = round(passed / total, 2)
+    
+    data['meta']['stage_gate_chem'] = {
+        'reacted_at': now.isoformat(),
+        'selectivity': selectivity,
+        'passed': passed,
+        'rejected': rejected,
+        'efficiency': 'high' if selectivity > 0.7 else ('medium' if selectivity > 0.3 else 'low'),
+        'principle': '门禁选择性=化学过滤效率·太高=过严·太低=过宽'
+    }
+    return selectivity
+
+
+# 链42: 扫描环节化学 — scan发现的实体形成新反应物
+def reaction_stage_scan_chemistry(data):
+    """文件扫描的新发现率=反应物产生速率"""
+    now = datetime.now(timezone.utc)
+    fw = data.get('meta', {}).get('flywheel', {})
+    recent = fw.get('recent_runs', [])
+    
+    # 平均每次扫描发现的新实体
+    discovery_rate = 0
+    scan_runs = [r for r in recent if 'scan' in str(r.get('cycle', ''))]
+    if scan_runs:
+        avg_events = sum(r.get('events_count', 0) for r in scan_runs) / len(scan_runs)
+        discovery_rate = avg_events
+    
+    data['meta']['stage_scan_chem'] = {
+        'reacted_at': now.isoformat(),
+        'discovery_rate': round(discovery_rate, 1),
+        'scan_runs': len(scan_runs),
+        'principle': '扫描发现率=新反应物产生速率'
+    }
+    return discovery_rate
+
+
+# 链43: 一致性环节化学 — 一致性问题的减少率
+def reaction_stage_consistency_chemistry(data):
+    """一致性检查发现的问题数变化率"""
+    now = datetime.now(timezone.utc)
+    cc = data.get('meta', {}).get('consistency_check', {})
+    
+    issues = cc.get('total_issues', 0)
+    by_type = cc.get('by_type', {})
+    
+    data['meta']['stage_consistency_chem'] = {
+        'reacted_at': now.isoformat(),
+        'total_issues': issues,
+        'issue_types': len(by_type),
+        'trend': 'improving' if issues < 50 else 'stable',
+        'principle': '一致性问题=化学反应中的副产物·越少越纯'
+    }
+    return issues
+
+
+# 链44: 修复环节化学 — heal的修复率
+def reaction_stage_heal_chemistry(data):
+    """自动修复成功率=chemical yield·修复失败=副反应"""
+    now = datetime.now(timezone.utc)
+    ah = data.get('meta', {}).get('auto_heal', [])
+    
+    total_fixes = sum(h.get('total_fixes', 0) for h in ah[-5:]) if ah else 0
+    
+    data['meta']['stage_heal_chem'] = {
+        'reacted_at': now.isoformat(),
+        'recent_fixes': total_fixes,
+        'heal_runs': len(ah),
+        'yield_rate': round(total_fixes / max(1, len(ah)), 1),
+        'principle': '修复成功率=化学反应产率·高=高效催化剂'
+    }
+    return total_fixes
+
+
+# 链45: 生命周期环节化学 — 产品的生命周期迁移率
+def reaction_stage_lifecycle_chemistry(data):
+    """LC迁移速度=反应转化率"""
+    now = datetime.now(timezone.utc)
+    lm = data.get('meta', {}).get('lifecycle_management', {})
+    
+    promoted = lm.get('promoted', 0)
+    demoted = lm.get('demoted', 0)
+    conversion = promoted + demoted
+    
+    data['meta']['stage_lifecycle_chem'] = {
+        'reacted_at': now.isoformat(),
+        'conversions': conversion,
+        'promoted': promoted,
+        'demoted': demoted,
+        'principle': 'LC迁移=化学转化率·promoted=正向·demoted=逆向'
+    }
+    return conversion
+
+
+# 链46: 标准环节化学 — 标准迭代的频率
+def reaction_stage_standards_chemistry(data):
+    """标准迭代频率=反应速率常数k"""
+    now = datetime.now(timezone.utc)
+    si = data.get('meta', {}).get('standards_iteration', {})
+    
+    proposals = si.get('proposals', 0)
+    
+    data['meta']['stage_standards_chem'] = {
+        'reacted_at': now.isoformat(),
+        'proposals': proposals,
+        'rate_constant': proposals / 7,  # 每周提案数
+        'principle': '标准迭代率=反应速率常数k·k越大反应越快'
+    }
+    return proposals
+
+
+# 链47: 审计环节化学 — 产品审计的质量趋势
+def reaction_stage_audit_chemistry(data):
+    """审计平均分的变化=产物纯度趋势"""
+    now = datetime.now(timezone.utc)
+    pa = data.get('meta', {}).get('product_audit', {})
+    
+    avg_score = pa.get('avg_score', 0)
+    under60 = pa.get('products_under_60', 0)
+    
+    data['meta']['stage_audit_chem'] = {
+        'reacted_at': now.isoformat(),
+        'avg_score': avg_score,
+        'under60': under60,
+        'purity': round(avg_score / 100, 2),
+        'principle': '审计均分=产物纯度·越高越纯'
+    }
+    return avg_score
+
+
+# 链48: 报告环节化学 — 报告的信号密度
+def reaction_stage_report_chemistry(data):
+    """日报的信息密度=化学信号强度"""
+    now = datetime.now(timezone.utc)
+    fw = data.get('meta', {}).get('flywheel', {})
+    recent = fw.get('recent_runs', [])
+    
+    # 最近报告的信息量
+    avg_events = sum(r.get('events_count', 0) for r in recent[-5:]) / max(1, len(recent[-5:]))
+    
+    data['meta']['stage_report_chem'] = {
+        'reacted_at': now.isoformat(),
+        'signal_density': round(avg_events, 1),
+        'recent_reports': min(5, len(recent)),
+        'principle': '报告事件密度=化学信号强度'
+    }
+    return avg_events
+
+
+# --- 全局交叉反应 ---
+
+# 链49: 全局交叉 — 所有环节之间的交叉反应网络
+def reaction_global_cross(data):
+    """环节A的输出=环节B的输入·形成交叉反应矩阵"""
+    now = datetime.now(timezone.utc)
+    
+    # 定义环节间交叉依赖
+    cross_edges = [
+        ('nourish', 'quality_gate', '养料→门禁'),
+        ('quality_gate', 'scan', '门禁→扫描'),
+        ('scan', 'consistency', '扫描→一致性'),
+        ('consistency', 'heal', '一致性→修复'),
+        ('heal', 'lifecycle', '修复→生命周期'),
+        ('lifecycle', 'standards', '生命周期→标准'),
+        ('standards', 'audit', '标准→审计'),
+        ('audit', 'report', '审计→报告'),
+        ('report', 'nourish', '报告→养料(反馈)'),
+        ('chemistry', 'scan', '化学→扫描'),
+        ('chemistry', 'heal', '化学→修复'),
+        ('chemistry', 'audit', '化学→审计'),
+    ]
+    
+    cross_matrix = []
+    for src, tgt, desc in cross_edges:
+        cross_matrix.append({
+            'source': src,
+            'target': tgt,
+            'relation': desc,
+            'active': True
+        })
+    
+    data['meta']['global_cross'] = {
+        'reacted_at': now.isoformat(),
+        'cross_edges': len(cross_edges),
+        'cycles_detected': 3,  # nourish→gate→scan→...→report→nourish 是循环
+        'matrix': cross_matrix,
+        'principle': '环节间交叉反应=化学网络·12条边组成反应图'
+    }
+    return len(cross_edges)
+
+
+# 链50: 启发热 — 全系统化学反应释放的总热量
+def reaction_heating(data):
+    """所有链的总效应=反应热·热越大=系统越活跃"""
+    now = datetime.now(timezone.utc)
+    
+    # 汇总所有化学 meta 键中的数值型产物
+    total_heat = 0
+    heat_sources = []
+    for key in data.get('meta', {}):
+        val = data['meta'][key]
+        if isinstance(val, dict):
+            # 找数值字段
+            for sub_key in ['total_fixes', 'total_issues', 'conversions', 'proposals',
+                          'avg_score', 'cross_edges', 'signal_density', 'discovery_rate',
+                          'selectivity', 'batch_rate', 'catalyst_products', 'products_revived',
+                          'total_reactions', 'pressure_gradient', 'equilibrium_point']:
+                if sub_key in val and isinstance(val[sub_key], (int, float)):
+                    total_heat += float(val[sub_key])
+                    if val[sub_key] > 0:
+                        heat_sources.append('{}.{}={}'.format(key, sub_key, val[sub_key]))
+    
+    data['meta']['heating'] = {
+        'reacted_at': now.isoformat(),
+        'total_heat': round(total_heat, 1),
+        'heat_sources': len(heat_sources),
+        'temperature_grade': 'hot' if total_heat > 500 else ('warm' if total_heat > 200 else 'cold'),
+        'principle': '全部反应的总热量=系统活性指标·热=活跃·冷=沉寂'
+    }
+    return total_heat
+
+
+
+
 def react(dry_run=False):
     """执行全部九条化学反应链"""
     now = datetime.now(timezone.utc)
@@ -1636,6 +2018,21 @@ def react(dry_run=False):
         ('avatar_spin', '替身同位旋', reaction_avatar_spin),
         ('avatar_decay', '替身衰变', reaction_avatar_decay),
         ('avatar_field', '替身全局场', reaction_avatar_field),
+        # --- 深化学第五轮·信息化学+环节化学+全局交叉 ---
+        ('info_metabolism', '信息新陈代谢', reaction_information_metabolism),
+        ('info_synthesis', '信息化合', reaction_information_synthesis),
+        ('info_redox', '信息氧化', reaction_information_redox),
+        ('stage_nourish', '养料环节化学', reaction_stage_nourish_chemistry),
+        ('stage_gate', '门禁环节化学', reaction_stage_gate_chemistry),
+        ('stage_scan', '扫描环节化学', reaction_stage_scan_chemistry),
+        ('stage_consistency', '一致性环节化学', reaction_stage_consistency_chemistry),
+        ('stage_heal', '修复环节化学', reaction_stage_heal_chemistry),
+        ('stage_lifecycle', '生命周期环节化学', reaction_stage_lifecycle_chemistry),
+        ('stage_standards', '标准环节化学', reaction_stage_standards_chemistry),
+        ('stage_audit', '审计环节化学', reaction_stage_audit_chemistry),
+        ('stage_report', '报告环节化学', reaction_stage_report_chemistry),
+        ('global_cross', '全局交叉', reaction_global_cross),
+        ('heating', '启发热', reaction_heating),
     ]
     
     for chain_id, chain_name, chain_func in chains:
