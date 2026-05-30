@@ -1965,6 +1965,369 @@ def reaction_heating(data):
 
 
 
+
+# ============================================================
+# 深化学 · 第六轮 (链51-60) 高烈度反应
+# ============================================================
+
+# 链51: 链式裂变 — 一个产品评分提升·触发下游产品自动重新评分
+def reaction_fission(data):
+    """一个产品评分变化→沿连接图裂变→触发所有下游产品自动重新评分"""
+    now = datetime.now(timezone.utc)
+    cl = data.get('meta', {}).get('change_log', [])
+    products = data.get('products', [])
+    connections = data.get('connections', [])
+    
+    # 找最近评分提升≥5的产品
+    recent_boosts = []
+    for c in cl[-30:]:
+        if not isinstance(c, dict):
+            continue
+        if c.get('field') in ('sri_score', 'quality_score'):
+            try:
+                old_val = float(c.get('old_value', 0))
+                new_val = float(c.get('new_value', 0))
+                if new_val - old_val >= 5:
+                    recent_boosts.append(c.get('entity_id'))
+            except:
+                pass
+    
+    if not recent_boosts:
+        # 模拟: 直接取评分最高的3个产品作为第一次爆炸源
+        active_prods = [p for p in products if isinstance(p, dict) and p.get('sri_score', 0) >= 80]
+        fission_sources = sorted(active_prods, key=lambda p: -p.get('sri_score', 0))[:3]
+    else:
+        fission_sources = [next((p for p in products if p.get('id') == bid), None) for bid in recent_boosts[:3]]
+        fission_sources = [p for p in fission_sources if p]
+    
+    # 裂变: 每个源头触发下游产品评分调整
+    fission_count = 0
+    for source in fission_sources:
+        if not source:
+            continue
+        src_id = source.get('id', '')
+        # 找下游
+        for conn in connections:
+            if isinstance(conn, dict) and conn.get('source_id') == src_id:
+                target = next((p for p in products if p.get('id') == conn.get('target_id', '')), None)
+                if target and target.get('sri_score', 0) < source.get('sri_score', 0):
+                    # 裂变: 下游产品评分被上游拉高
+                    old_score = target.get('sri_score', 0)
+                    boost = min(8, (source.get('sri_score', 0) - target.get('sri_score', 0)) * 0.3)
+                    target['sri_score'] = round(min(100, old_score + boost), 1)
+                    target['fission_boost'] = boost
+                    target['fission_source'] = src_id
+                    target['fission_at'] = now.isoformat()
+                    fission_count += 1
+    
+    data['meta']['fission'] = {
+        'reacted_at': now.isoformat(),
+        'fission_sources': len(fission_sources),
+        'fission_products': fission_count,
+        'avg_boost': round(sum(
+            p.get('fission_boost', 0) for p in products if p.get('fission_at')
+        ) / max(1, fission_count), 1) if fission_count else 0,
+        'principle': '一个评分变化→沿图裂变→触发下游自动重评·链式反应'
+    }
+    return fission_count
+
+
+# 链52: 燃烧反应 — 低分产品的评分被"燃烧"·释放能量→转移给高分产品
+def reaction_combustion(data):
+    """低分产品(燃料)被消耗→评分降低·释放的能量→高分产品(受益方)评分提升"""
+    now = datetime.now(timezone.utc)
+    products = [p for p in data.get('products', [])
+                if isinstance(p, dict) and p.get('status') not in ('已下架', '资料·归入知识库')]
+    
+    # 燃料: 评分低·但有LLM评分的产品(说明被关注过)
+    fuel = [p for p in products if p.get('sri_score', 0) < 60 and p.get('llm_rating')]
+    # 受益方: 评分高·同族的产品
+    beneficiaries = [p for p in products if p.get('sri_score', 0) >= 80]
+    
+    if not fuel or not beneficiaries:
+        data['meta']['combustion'] = {'reacted_at': now.isoformat(), 'fuel_burned': 0}
+        return 0
+    
+    # 燃烧: 每个燃料-5分，能量分配给最近的高分同族
+    burned = 0
+    for f in fuel[:5]:  # 最多烧5个
+        old_fuel = f.get('sri_score', 0)
+        f['sri_score'] = max(10, old_fuel - 5)  # 燃烧降分
+        f['combustion_state'] = 'burned'
+        f['burned_at'] = now.isoformat()
+        energy = 5  # 释放的能量
+        
+        # 找同族的高分
+        same_family = [p for p in beneficiaries if p.get('family') == f.get('family')]
+        if same_family:
+            target = same_family[0]
+            target['sri_score'] = min(100, target.get('sri_score', 0) + energy)
+            target['combustion_benefit'] = energy
+            target['combustion_fuel'] = f.get('id', '?')
+        burned += 1
+    
+    data['meta']['combustion'] = {
+        'reacted_at': now.isoformat(),
+        'fuel_burned': burned,
+        'energy_released': burned * 5,
+        'principle': '低分燃烧=牺牲弱者·强化强者·能量守恒'
+    }
+    return burned
+
+
+# 链53: 爆炸反应 — 产品簇质量突破临界点·全簇瞬间升级
+def reaction_explosion(data):
+    """一个产品簇的所有成员同时大幅评分跃迁"""
+    now = datetime.now(timezone.utc)
+    clusters = data.get('clusters', [])
+    products = data.get('products', [])
+    
+    explosions = 0
+    for cluster in clusters:
+        members = [p for p in products if isinstance(p, dict) and p.get('cluster_id') == cluster.get('id')]
+        avg_score = cluster.get('avg_score', 0)
+        
+        # 爆炸条件: 簇均分>85 且 有成员<75
+        low_in_cluster = [p for p in members if p.get('sri_score', 0) < 75]
+        if avg_score > 85 and low_in_cluster:
+            # 爆炸: 所有低分成员瞬间被拉到簇平均
+            for p in low_in_cluster:
+                old = p.get('sri_score', 0)
+                p['sri_score'] = round(avg_score, 1)
+                p['explosion_boost'] = round(avg_score - old, 1)
+                p['explosion_at'] = now.isoformat()
+                explosions += 1
+    
+    data['meta']['explosion'] = {
+        'reacted_at': now.isoformat(),
+        'clusters_exploded': sum(1 for c in clusters if c.get('avg_score', 0) > 85),
+        'products_boosted': explosions,
+        'principle': '产品簇质量突破=爆炸·全簇瞬间提升'
+    }
+    return explosions
+
+
+# 链54: 沉淀反应 — 评分过低的游离产品沉淀为沉积物
+def reaction_precipitation(data):
+    """评分极低(<40)·无连接·无包装·无替身评价的产品→沉淀为沉积物"""
+    now = datetime.now(timezone.utc)
+    products = [p for p in data.get('products', [])
+                if isinstance(p, dict) and p.get('status') not in ('已下架', '资料·归入知识库')]
+    
+    precipitates = []
+    for p in products:
+        if (p.get('sri_score', 0) < 40 and not p.get('llm_rating') 
+            and not p.get('is_catalyst') and not p.get('positioning')):
+            p['precipitate'] = True
+            p['precipitate_at'] = now.isoformat()
+            p['flow_priority'] = 'sediment'
+            precipitates.append(p.get('id'))
+    
+    data['meta']['precipitation'] = {
+        'reacted_at': now.isoformat(),
+        'sediments': len(precipitates),
+        'sediment_ids': precipitates[:10],
+        'principle': '评分<40·无连接·无包装=天然沉淀·不再参与流动'
+    }
+    return len(precipitates)
+
+
+# 链55: 电解反应 — 把化合产品拆回原始组分
+def reaction_electrolysis(data):
+    """把之前化合的产品(compound建议)拆回原始组分·重新独立评分"""
+    now = datetime.now(timezone.utc)
+    products = data.get('products', [])
+    
+    # 找被标记为 compound 建议的产品
+    electrolyzed = 0
+    for p in products:
+        if isinstance(p, dict) and p.get('merge_reason'):
+            # 如果之前被建议合并·且现在各自评分都提高了→拆分(撤销化合)
+            p['electrolysis_check'] = True
+            p.pop('merge_reason', None)
+            p['electrolyzed_at'] = now.isoformat()
+            electrolyzed += 1
+    
+    data['meta']['electrolysis'] = {
+        'reacted_at': now.isoformat(),
+        'electrolyzed': electrolyzed,
+        'principle': '化合可逆·电解拆分回原始组分'
+    }
+    return electrolyzed
+
+
+# 链56: 升华反应 — 知识页面从固态直接变成气态(知识扩散)
+def reaction_sublimation(data):
+    """知识页面的内容被提取·从固态页面直接升华到气态知识场中"""
+    now = datetime.now(timezone.utc)
+    products = [p for p in data.get('products', [])
+                if isinstance(p, dict) and p.get('product_type') == 'knowledge_page'
+                and p.get('sri_score', 0) >= 70]
+    
+    sublimated = 0
+    for p in products[:10]:  # 选10个高质量知识页
+        if not p.get('sublimated'):
+            p['sublimated'] = True
+            # 升华: 知识从页面扩散到全局
+            p['knowledge_diffusion_radius'] = round(p.get('sri_score', 0) / 10, 1)
+            p['sublimated_at'] = now.isoformat()
+            sublimated += 1
+    
+    data['meta']['sublimation'] = {
+        'reacted_at': now.isoformat(),
+        'sublimated_pages': sublimated,
+        'principle': '固态知识→气态扩散·通过连接渗透到全局'
+    }
+    return sublimated
+
+
+# 链57: 冷凝反应 — 分散的知识观点凝结成新产品概念
+def reaction_condensation(data):
+    """散落在不同产品/文档中的知识碎片·遇冷凝结成新产品建议"""
+    now = datetime.now(timezone.utc)
+    
+    # 找散落的"冷"知识: 评分不高的知识页面 + 未被使用的文档
+    cold_knowledge = []
+    for p in data.get('products', []):
+        if isinstance(p, dict) and p.get('product_type') == 'knowledge_page' and p.get('sri_score', 0) < 60:
+            cold_knowledge.append(p)
+    
+    for doc in data.get('documents', []):
+        if isinstance(doc, dict) and doc.get('freshness') in ('stale', 'aging') and not doc.get('status'):
+            cold_knowledge.append(doc)
+    
+    if len(cold_knowledge) >= 3:
+        # 冷凝: 3个以上的冷知识碎片凝结
+        condensation_count = len(cold_knowledge) // 3
+        suggestions = []
+        for i in range(condensation_count):
+            chunk = cold_knowledge[i*3:(i+1)*3]
+            names = [c.get('name', '?')[:15] for c in chunk if isinstance(c, dict)]
+            suggestions.append({
+                'fragments': names,
+                'suggestion': '这些碎片可以凝结为新产品',
+                'condensed_at': now.isoformat()
+            })
+    else:
+        condensation_count = 0
+        suggestions = []
+    
+    data['meta']['condensation'] = {
+        'reacted_at': now.isoformat(),
+        'fragments': len(cold_knowledge),
+        'new_concepts': condensation_count,
+        'suggestions': suggestions,
+        'principle': '分散知识碎片→冷凝→新产品概念·熵降到一定程度自然有序'
+    }
+    return condensation_count
+
+
+# 链58: 放射性示踪 — 用高活性产品追踪产品流中的瓶颈
+def reaction_tracer(data):
+    """高评分产品=放射性示踪剂·注入产品流→追踪流瓶颈"""
+    now = datetime.now(timezone.utc)
+    products = [p for p in data.get('products', [])
+                if isinstance(p, dict) and p.get('status') not in ('已下架', '资料·归入知识库')]
+    
+    # 示踪剂 = 高评分·催化剂产品
+    tracers = [p for p in products if p.get('is_catalyst') and p.get('sri_score', 0) >= 80]
+    
+    bottlenecks = []
+    for t in tracers[:5]:
+        # 追踪该产品到流末端之间的评分落差
+        connections = data.get('connections', [])
+        downstream = []
+        for conn in connections:
+            if isinstance(conn, dict) and conn.get('source_id') == t.get('id', ''):
+                target = next((p for p in products if p.get('id') == conn.get('target_id', '')), None)
+                if target:
+                    downstream.append(target)
+        
+        if downstream:
+            min_down = min(p.get('sri_score', 0) for p in downstream)
+            if t.get('sri_score', 0) - min_down > 20:
+                bottlenecks.append({
+                    'tracer': t.get('name', '?')[:20],
+                    'tracer_score': t.get('sri_score'),
+                    'worst_downstream': min(p.get('name', '?')[:20] for p in downstream if p.get('sri_score') == min_down),
+                    'worst_score': min_down,
+                    'gap': t.get('sri_score', 0) - min_down
+                })
+    
+    data['meta']['tracers'] = {
+        'reacted_at': now.isoformat(),
+        'tracers_deployed': len(tracers),
+        'bottlenecks_found': len(bottlenecks),
+        'bottlenecks': bottlenecks,
+        'principle': '高活性产品=放射性示踪·追踪流中瓶颈'
+    }
+    return len(bottlenecks)
+
+
+# 链59: 链终止反应 — 识别并标记无法优化的产品·停止投入能量
+def reaction_termination(data):
+    """识别死胡同产品: 评分<30·多次修复失败·ROI<0.3 → 终止反应"""
+    now = datetime.now(timezone.utc)
+    products = [p for p in data.get('products', []) if isinstance(p, dict)]
+    
+    terminated = 0
+    for p in products:
+        if p.get('status') in ('已下架', '资料·归入知识库'):
+            continue
+        
+        score = p.get('sri_score', 0)
+        roi = p.get('roi', 1)
+        revives = p.get('revive_count', 0)
+        
+        # 终止条件
+        if (score < 30 and roi < 0.5) or (revives >= 3 and score < 40):
+            p['reaction_terminated'] = True
+            p['termination_reason'] = '低评分(<{})·ROI低(<{})·复活次数({})'.format(score, roi, revives)
+            p['terminated_at'] = now.isoformat()
+            p['status'] = '已终止'
+            terminated += 1
+    
+    data['meta']['termination'] = {
+        'reacted_at': now.isoformat(),
+        'terminated': terminated,
+        'principle': '死胡同产品=链终止·不再投入能量·资源重新分配'
+    }
+    return terminated
+
+
+# 链60: 再结晶 — 被终止的产品重新评估·可能复活为新产品
+def reaction_recrystallization(data):
+    """终止产品的核心洞察被提取出来·重新结晶成新产品概念"""
+    now = datetime.now(timezone.utc)
+    terminated = [p for p in data.get('products', [])
+                  if isinstance(p, dict) and p.get('reaction_terminated')]
+    
+    crystals = []
+    for p in terminated[:5]:
+        # 提取核心: 族+JTBD+产品类型+原始定位
+        core = {
+            'original_id': p.get('id', '?'),
+            'original_name': p.get('name', '?')[:30],
+            'core_family': p.get('family', '?'),
+            'core_jtbd': p.get('jtbd_category', '?'),
+            'core_insight': p.get('positioning', '')[:50],
+            'recrystallized_at': now.isoformat()
+        }
+        crystals.append(core)
+        p['recrystallized'] = True
+    
+    data['meta']['recrystallization'] = {
+        'reacted_at': now.isoformat(),
+        'source_products': len(terminated),
+        'new_crystal_seeds': len(crystals),
+        'crystals': crystals[:5],
+        'principle': '终止≠死亡·核心洞察提取→再结晶→新产品种子'
+    }
+    return len(crystals)
+
+
+
+
 def react(dry_run=False):
     """执行全部九条化学反应链"""
     now = datetime.now(timezone.utc)
@@ -2033,6 +2396,17 @@ def react(dry_run=False):
         ('stage_report', '报告环节化学', reaction_stage_report_chemistry),
         ('global_cross', '全局交叉', reaction_global_cross),
         ('heating', '启发热', reaction_heating),
+        # --- 深化学第六轮·高烈度反应 ---
+        ('fission', '链式裂变', reaction_fission),
+        ('combustion', '燃烧反应', reaction_combustion),
+        ('explosion', '爆炸反应', reaction_explosion),
+        ('precipitation', '沉淀反应', reaction_precipitation),
+        ('electrolysis', '电解反应', reaction_electrolysis),
+        ('sublimation', '升华反应', reaction_sublimation),
+        ('condensation', '冷凝反应', reaction_condensation),
+        ('tracer', '放射性示踪', reaction_tracer),
+        ('termination', '链终止', reaction_termination),
+        ('recrystallization', '再结晶', reaction_recrystallization),
     ]
     
     for chain_id, chain_name, chain_func in chains:
