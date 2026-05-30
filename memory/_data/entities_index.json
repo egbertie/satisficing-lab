@@ -340,7 +340,7 @@
       "timestamp": 1780135875,
       "description": "城市维度首次注入：30个城市实体+多层连接编织 + 补丁19条"
     },
-    "last_updated": 1780140794,
+    "last_updated": 1780141466,
     "avatar_simulation": {
       "phase": "R2_P2_1",
       "avatars_upgraded": 5,
@@ -380,8 +380,8 @@
       "improvement_decisions": 10,
       "complete_chain_verified": true,
       "flows_entity_created": true,
-      "llm_calibrated_products": 10,
-      "calibration_timestamp": 1780140794
+      "llm_calibrated_products": 17,
+      "calibration_timestamp": 1780141381
     },
     "simulation_rounds": {
       "round1": {
@@ -399,6 +399,40 @@
         "method": "llm_cognitive_reasoning",
         "avg_score": 67.9,
         "note": "仅10次LLM推理·其余140次为round1+2累计"
+      },
+      "round4_products": 7,
+      "round4_evaluations": 35
+    },
+    "llm_stats": {
+      "llm_avg": 70.9,
+      "old_avg": 87.4,
+      "diff": 16.5,
+      "total_evaluated": 17,
+      "total_cogs": 45,
+      "distribution": {
+        "优秀(≥85)": 1,
+        "良好(75-84)": 5,
+        "一般(65-74)": 9,
+        "待改进(50-64)": 2,
+        "不合格(<50)": 0
+      },
+      "avatar_rankings": {
+        "硬科技创始人": 64.5,
+        "苏炜": 73.0,
+        "AI+机器人创始人": 79.7,
+        "VC投后负责人": 71.0,
+        "胡小波": 60.0,
+        "正浩创新-苏炜": 68.5
+      },
+      "best": {
+        "name": "宝藏库",
+        "score": 88,
+        "avatar": "AI+机器人创始人"
+      },
+      "worst": {
+        "name": "Pre-0身体觉察",
+        "score": 52,
+        "avatar": "胡小波"
       }
     }
   },
@@ -535,7 +569,14 @@
       "simulated_by": 5,
       "simulated_at": 1780137837,
       "simulation_round": 1,
-      "quality_source": "simulation_round1"
+      "quality_source": "simulation_round1",
+      "llm_rating": 80,
+      "llm_evaluator": "苏炜",
+      "llm_reasoning": "最务实产品·10分钟换雷达图。缺维度依据+行业对标",
+      "llm_dimensions": "实用性26/30 数据准确性20/25 政策合规19/20 实施便捷度10/15 行业适配度5/10",
+      "llm_intent": 7,
+      "rating_method": "llm_cognitive_reasoning_r2",
+      "llm_vs_functional_diff": 0
     },
     {
       "id": "PROD-003",
@@ -729,7 +770,14 @@
       "simulated_by": 5,
       "simulated_at": 1780137837,
       "simulation_round": 1,
-      "quality_source": "simulation_round1"
+      "quality_source": "simulation_round1",
+      "llm_rating": 78,
+      "llm_evaluator": "苏炜",
+      "llm_reasoning": "312产品臃肿·团队最多用30个。需冷热分层+最近使用场景",
+      "llm_dimensions": "实用性27/30 数据准确性22/25 政策合规20/20 实施便捷度6/15 行业适配度3/10",
+      "llm_intent": 6,
+      "rating_method": "llm_cognitive_reasoning_r2",
+      "llm_vs_functional_diff": -2
     },
     {
       "id": "PROD-006",
@@ -1831,7 +1879,14 @@
       "simulated_by": 5,
       "simulated_round": 2,
       "simulated_at": 1780138387,
-      "quality_source": "simulation_round2"
+      "quality_source": "simulation_round2",
+      "llm_rating": 68,
+      "llm_evaluator": "苏炜",
+      "llm_reasoning": "V1=没验证不买。全动态加载≠产品价值。先跑demo",
+      "llm_dimensions": "实用性22/30 数据准确性17/25 政策合规18/20 实施便捷度7/15 行业适配度4/10",
+      "llm_intent": 4,
+      "rating_method": "llm_cognitive_reasoning_r2",
+      "llm_vs_functional_diff": -8
     },
     {
       "id": "PROD-024",
@@ -2805,7 +2860,14 @@
       "quality_confidence": "A",
       "quality_confidence_detail": "{\"grade\": \"A\", \"reason\": \"三维度全部达标: vi_compliance≥85, content_accuracy≥80, ux_rating≥80\", \"calibration_status\": \"已校准\", \"audited_by\": \"蓝军·Skeptor-7 (review_date: 2026-06-15)\"}",
       "lifecycle_stage_name": "精品",
-      "previous_lifecycle_stage": "L4_精品"
+      "previous_lifecycle_stage": "L4_精品",
+      "llm_rating": 88,
+      "llm_evaluator": "AI+机器人创始人",
+      "llm_reasoning": "连接主义知识观vs SECI模型范式跃迁。缺知识新鲜度+连接熵·三产品边界",
+      "llm_dimensions": "方法论创新85 系统架构优雅90 可扩展性86 落地速度80 学习资源95",
+      "llm_intent": 9,
+      "rating_method": "llm_cognitive_reasoning_r2",
+      "llm_vs_functional_diff": -5
     },
     {
       "id": "PROD-041",
@@ -3145,7 +3207,14 @@
       "quality_confidence": "A",
       "quality_confidence_detail": "{\"grade\": \"A\", \"reason\": \"三维度全部达标: vi_compliance≥85, content_accuracy≥80, ux_rating≥80\", \"calibration_status\": \"已校准\", \"audited_by\": \"蓝军·Skeptor-7 (review_date: 2026-06-15)\"}",
       "lifecycle_stage_name": "精品",
-      "previous_lifecycle_stage": "L4_精品"
+      "previous_lifecycle_stage": "L4_精品",
+      "llm_rating": 75,
+      "llm_evaluator": "苏炜",
+      "llm_reasoning": "招人加分·加搞砸过什么+减少理念增加案例",
+      "llm_dimensions": "实用性21/30 数据准确性19/25 政策合规20/20 实施便捷度10/15 行业适配度5/10",
+      "llm_intent": 6,
+      "rating_method": "llm_cognitive_reasoning_r2",
+      "llm_vs_functional_diff": -18
     },
     {
       "id": "PROD-047",
@@ -4423,7 +4492,14 @@
       "quality_score_note": "(校准中)",
       "quality_confidence_detail": "{\"grade\": \"D\", \"reason\": \"Q值基于模板推断(非实测数据)\", \"calibration_status\": \"校准中\", \"requires\": \"需要人工实测vi_compliance/content_accuracy/ux_rating三个维度\"}",
       "lifecycle_stage_name": "精品",
-      "previous_lifecycle_stage": "L3_精品"
+      "previous_lifecycle_stage": "L3_精品",
+      "llm_rating": 65,
+      "llm_evaluator": "苏炜",
+      "llm_reasoning": "50节点无人走完。自检无验证=自我安慰。先砍到3×5最小闭环",
+      "llm_dimensions": "实用性18/30 数据准确性15/25 政策合规19/20 实施便捷度8/15 行业适配度5/10",
+      "llm_intent": 3,
+      "rating_method": "llm_cognitive_reasoning_r2",
+      "llm_vs_functional_diff": -33
     },
     {
       "id": "PROD-070",
@@ -6544,7 +6620,14 @@
       "quality_confidence_detail": "{\"grade\": \"B\", \"reason\": \"vi_compliance≥70, content_accuracy≥70\", \"calibration_status\": \"部分校准\", \"improvement_areas\": []}",
       "quality_note": "资料型产品(无HTML)·Q值为占位符·不作为质量评估依据",
       "lifecycle_stage_name": "精品",
-      "previous_lifecycle_stage": "L4_精品"
+      "previous_lifecycle_stage": "L4_精品",
+      "llm_rating": 72,
+      "llm_evaluator": "苏炜",
+      "llm_reasoning": "概念好·虚假均匀太主观缺互校机制·需交叉验证",
+      "llm_dimensions": "实用性22/30 数据准确性19/25 政策合规18/20 实施便捷度8/15 行业适配度5/10",
+      "llm_intent": 5,
+      "rating_method": "llm_cognitive_reasoning_r2",
+      "llm_vs_functional_diff": -3
     },
     {
       "id": "PROD-287",
@@ -227388,6 +227471,426 @@
       "method": "LLM_roleplay_cognition",
       "timestamp": 1780139583,
       "pre_llm_simulated_score": null
+    },
+    {
+      "id": "COG-011",
+      "product_id": "PROD-285",
+      "product_name": "FIN诚实验证器",
+      "avatar_name": "硬科技创始人",
+      "score": 78,
+      "intent": 7,
+      "reasoning": "诚实度扫描方法论过硬，但手动扫描不实用。需要自动触发+时序追踪",
+      "dimensions": "逻辑自洽6/10 可操作5/10 知识深度8/10 简洁度8/10 创新性9/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-012",
+      "product_id": "PROD-005",
+      "product_name": "产品目录",
+      "avatar_name": "硬科技创始人",
+      "score": 85,
+      "intent": 9,
+      "reasoning": "312产品全结构化的航母战斗群，可快速定位。缺智能路由",
+      "dimensions": "逻辑自洽9/10 可操作8/10 知识深度7/10 简洁度9/10 创新性6/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-013",
+      "product_id": "PROD-002",
+      "product_name": "衡·观局测评",
+      "avatar_name": "硬科技创始人",
+      "score": 72,
+      "intent": 6,
+      "reasoning": "10分钟五维自测是低摩擦上钩产品。问题太主观，自评信度低",
+      "dimensions": "逻辑自洽7/10 可操作6/10 知识深度8/10 简洁度8/10 创新性7/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-014",
+      "product_id": "PROD-023",
+      "product_name": "驾驶舱V1",
+      "avatar_name": "硬科技创始人",
+      "score": 65,
+      "intent": 5,
+      "reasoning": "零硬编码理念好，但V1=没验证过的概念。空驾驶舱不等于驾驶舱",
+      "dimensions": "逻辑自洽7/10 可操作4/10 知识深度7/10 简洁度6/10 创新性8/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-015",
+      "product_id": "PROD-069",
+      "product_name": "章·五路",
+      "avatar_name": "硬科技创始人",
+      "score": 70,
+      "intent": 5,
+      "reasoning": "体系完整但过度设计。50个节点无人能走完。自检清单缺验证",
+      "dimensions": "逻辑自洽7/10 可操作3/10 知识深度8/10 简洁度4/10 创新性9/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-016",
+      "product_id": "PROD-046",
+      "product_name": "关于我们",
+      "avatar_name": "硬科技创始人",
+      "score": 80,
+      "intent": 8,
+      "reasoning": "品牌理念有传播力。缺具体决策案例和'搞砸过什么'的诚实故事",
+      "dimensions": "逻辑自洽8/10 可操作8/10 知识深度7/10 简洁度8/10 创新性6/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-017",
+      "product_id": "PROD-040",
+      "product_name": "宝藏库",
+      "avatar_name": "硬科技创始人",
+      "score": 75,
+      "intent": 7,
+      "reasoning": "内容聚合定位好。靠人工精选无scaling。缺更新机制",
+      "dimensions": "逻辑自洽7/10 可操作6/10 知识深度9/10 简洁度7/10 创新性7/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-018",
+      "product_id": "PROD-285",
+      "product_name": "FIN诚实验证器",
+      "avatar_name": "VC投后负责人",
+      "score": 62,
+      "intent": 5,
+      "reasoning": "概念一流执行太薄。grep+LLM薄封装。缺时序追踪和'然后呢'的闭环",
+      "dimensions": "诊断准确性55 风险预警70 系统化程度60 定制化能力50 成本效益比65",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-019",
+      "product_id": "PROD-005",
+      "product_name": "产品目录",
+      "avatar_name": "VC投后负责人",
+      "score": 72,
+      "intent": 7,
+      "reasoning": "基础设施级产品矩阵地图。缺智能路由和产品间依赖关系可视化",
+      "dimensions": "诊断准确性65 风险预警55 系统化程度80 定制化能力75 成本效益比85",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-020",
+      "product_id": "PROD-002",
+      "product_name": "衡·观局测评",
+      "avatar_name": "VC投后负责人",
+      "score": 78,
+      "intent": 7.5,
+      "reasoning": "五维框架与五路对齐的设计意识强。10分钟定位与准确性的内在矛盾",
+      "dimensions": "诊断准确性80 风险预警85 系统化程度75 定制化能力70 成本效益比70",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-021",
+      "product_id": "PROD-023",
+      "product_name": "驾驶舱V1",
+      "avatar_name": "VC投后负责人",
+      "score": 70,
+      "intent": 6,
+      "reasoning": "架构正确·体验未到。12标签信息过载·需要智能聚焦+异常优先",
+      "dimensions": "诊断准确性65 风险预警70 系统化程度75 定制化能力65 成本效益比70",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-022",
+      "product_id": "PROD-069",
+      "product_name": "章·五路",
+      "avatar_name": "VC投后负责人",
+      "score": 91,
+      "intent": 9,
+      "reasoning": "完整的Founder OS。五路间依赖-缺DAG建模+自检须行为锚定替代自查",
+      "dimensions": "诊断准确性90 风险预警88 系统化程度95 定制化能力85 成本效益比88",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-023",
+      "product_id": "PROD-046",
+      "product_name": "关于我们",
+      "avatar_name": "VC投后负责人",
+      "score": 85,
+      "intent": 8,
+      "reasoning": "品牌信任基础设施。需分层叙事(创始人共鸣vs VC数据)+信任锚点",
+      "dimensions": "诊断准确性75 风险预警70 系统化程度90 定制化能力85 成本效益比95",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-024",
+      "product_id": "PROD-040",
+      "product_name": "宝藏库",
+      "avatar_name": "VC投后负责人",
+      "score": 84,
+      "intent": 8,
+      "reasoning": "四个主题覆盖创始人决策光谱。需与五路路径显式映射+案例锚定",
+      "dimensions": "诊断准确性78 风险预警72 系统化程度90 定制化能力82 成本效益比88",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-025",
+      "product_id": "PROD-285",
+      "product_name": "FIN诚实验证器",
+      "avatar_name": "胡小波",
+      "score": 78,
+      "intent": 7,
+      "reasoning": "知识诚实的可操作化——不是道德要求而是扫描规则。缺贝叶斯框架和递归验证",
+      "dimensions": "技术深度7/10 决策速度8/10 竞品对比7/10 可规模化5/10 团队可用性7/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-026",
+      "product_id": "PROD-005",
+      "product_name": "产品目录",
+      "avatar_name": "胡小波",
+      "score": 68,
+      "intent": 6,
+      "reasoning": "信息架构像元数据标准(Dublin Core)。全静态无实时数据是根本缺陷",
+      "dimensions": "技术深度6/10 决策速度7/10 竞品对比7/10 可规模化8/10 团队可用性5/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-027",
+      "product_id": "PROD-002",
+      "product_name": "衡·观局测评",
+      "avatar_name": "胡小波",
+      "score": 58,
+      "intent": 5,
+      "reasoning": "五维维度选择缺理论出路。自评量表信度低。缺时序形变分析",
+      "dimensions": "技术深度5/10 决策速度7/10 竞品对比6/10 可规模化6/10 团队可用性7/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-028",
+      "product_id": "PROD-023",
+      "product_name": "驾驶舱V1",
+      "avatar_name": "胡小波",
+      "score": 62,
+      "intent": 5,
+      "reasoning": "函数式路由=声明式数据驾驶舱——方向对。缺写回机制·read-only singleton",
+      "dimensions": "技术深度7/10 决策速度6/10 竞品对比6/10 可规模化8/10 团队可用性5/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-029",
+      "product_id": "PROD-069",
+      "product_name": "章·五路",
+      "avatar_name": "胡小波",
+      "score": 48,
+      "intent": 4,
+      "reasoning": "五路×十级=优雅2D学习空间。QS98是虚假均匀！执行链路长无人能走完",
+      "dimensions": "技术深度5/10 决策速度4/10 竞品对比6/10 可规模化8/10 团队可用性3/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-030",
+      "product_id": "PROD-046",
+      "product_name": "关于我们",
+      "avatar_name": "胡小波",
+      "score": 55,
+      "intent": 5,
+      "reasoning": "范畴错误。关于我们页不可能93分。设计哲学缺溯源·宣言缺负向选择",
+      "dimensions": "技术深度5/10 决策速度6/10 竞品对比5/10 可规模化7/10 团队可用性7/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-031",
+      "product_id": "PROD-040",
+      "product_name": "宝藏库",
+      "avatar_name": "胡小波",
+      "score": 62,
+      "intent": 6,
+      "reasoning": "连接主义知识观。聚合标准缺失·更新是flag不是机制·三产品边界不清",
+      "dimensions": "技术深度6/10 决策速度6/10 竞品对比7/10 可规模化8/10 团队可用性5/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-032",
+      "product_id": "PROD-285",
+      "product_name": "FIN诚实验证器",
+      "avatar_name": "AI+机器人创始人",
+      "score": 68,
+      "intent": 6,
+      "reasoning": "分类器非验证器。需贝叶斯框架+KL散度诚实度+递归元验证·Goodhart陷阱",
+      "dimensions": "方法论创新72 系统架构优雅60 可扩展性55 落地速度70 学习资源85",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-033",
+      "product_id": "PROD-005",
+      "product_name": "产品目录",
+      "avatar_name": "AI+机器人创始人",
+      "score": 82,
+      "intent": 9,
+      "reasoning": "分面分类=Dublin Core+图书馆学方法论。缺使用数据二階排序·灵骨塔风险",
+      "dimensions": "方法论创新65 系统架构优雅88 可扩展性90 落地速度85 学习资源78",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-034",
+      "product_id": "PROD-002",
+      "product_name": "衡·观局测评",
+      "avatar_name": "AI+机器人创始人",
+      "score": 78,
+      "intent": 7,
+      "reasoning": "五维OCEAN适配·雷达图浪费形变分析潜力。缺Earth Mover's Distance+维度交互",
+      "dimensions": "方法论创新82 系统架构优雅75 可扩展性72 落地速度80 学习资源85",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-035",
+      "product_id": "PROD-023",
+      "product_name": "驾驶舱V1",
+      "avatar_name": "AI+机器人创始人",
+      "score": 86,
+      "intent": 9,
+      "reasoning": "声明式数据驾驶舱=算法+数据结构。完美的viewer非controller·缺Write-back",
+      "dimensions": "方法论创新78 系统架构优雅92 可扩展性88 落地速度82 学习资源80",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-036",
+      "product_id": "PROD-069",
+      "product_name": "章·五路",
+      "avatar_name": "AI+机器人创始人",
+      "score": 92,
+      "intent": 10,
+      "reasoning": "ZPD×Bloom Mastery Learning×非线性2D空间。缺Peer Calibration+五路DAG",
+      "dimensions": "方法论创新95 系统架构优雅90 可扩展性88 落地速度80 学习资源98",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-037",
+      "product_id": "PROD-046",
+      "product_name": "关于我们",
+      "avatar_name": "AI+机器人创始人",
+      "score": 84,
+      "intent": 8,
+      "reasoning": "产品哲学是品牌叙事·满意解被表演。缺负向选择·宣言需要锋利的否定",
+      "dimensions": "方法论创新70 系统架构优雅88 可扩展性72 落地速度85 学习资源90",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-038",
+      "product_id": "PROD-285",
+      "product_name": "FIN诚实验证器",
+      "avatar_name": "苏炜",
+      "score": 72,
+      "intent": 5,
+      "reasoning": "概念好·虚假均匀太主观缺互校机制·需交叉验证",
+      "dimensions": "实用性22/30 数据准确性19/25 政策合规18/20 实施便捷度8/15 行业适配度5/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-039",
+      "product_id": "PROD-005",
+      "product_name": "产品目录",
+      "avatar_name": "苏炜",
+      "score": 78,
+      "intent": 6,
+      "reasoning": "312产品臃肿·团队最多用30个。需冷热分层+最近使用场景",
+      "dimensions": "实用性27/30 数据准确性22/25 政策合规20/20 实施便捷度6/15 行业适配度3/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-040",
+      "product_id": "PROD-002",
+      "product_name": "衡·观局测评",
+      "avatar_name": "苏炜",
+      "score": 80,
+      "intent": 7,
+      "reasoning": "最务实产品·10分钟换雷达图。缺维度依据+行业对标",
+      "dimensions": "实用性26/30 数据准确性20/25 政策合规19/20 实施便捷度10/15 行业适配度5/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-041",
+      "product_id": "PROD-023",
+      "product_name": "驾驶舱V1",
+      "avatar_name": "苏炜",
+      "score": 68,
+      "intent": 4,
+      "reasoning": "V1=没验证不买。全动态加载≠产品价值。先跑demo",
+      "dimensions": "实用性22/30 数据准确性17/25 政策合规18/20 实施便捷度7/15 行业适配度4/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-042",
+      "product_id": "PROD-069",
+      "product_name": "章·五路",
+      "avatar_name": "苏炜",
+      "score": 65,
+      "intent": 3,
+      "reasoning": "50节点无人走完。自检无验证=自我安慰。先砍到3×5最小闭环",
+      "dimensions": "实用性18/30 数据准确性15/25 政策合规19/20 实施便捷度8/15 行业适配度5/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-043",
+      "product_id": "PROD-046",
+      "product_name": "关于我们",
+      "avatar_name": "苏炜",
+      "score": 75,
+      "intent": 6,
+      "reasoning": "招人加分·加搞砸过什么+减少理念增加案例",
+      "dimensions": "实用性21/30 数据准确性19/25 政策合规20/20 实施便捷度10/15 行业适配度5/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-044",
+      "product_id": "PROD-040",
+      "product_name": "宝藏库",
+      "avatar_name": "苏炜",
+      "score": 70,
+      "intent": 5,
+      "reasoning": "持续更新是命门·依赖人工运营不配93。加更新标记+评论层",
+      "dimensions": "实用性22/30 数据准确性18/25 政策合规19/20 实施便捷度6/15 行业适配度5/10",
+      "timestamp": 1780141381,
+      "source": "l3_llm_cognitive_r2"
+    },
+    {
+      "id": "COG-045",
+      "product_id": "PROD-040",
+      "product_name": "宝藏库",
+      "avatar_name": "AI+机器人创始人",
+      "score": 88,
+      "intent": 9,
+      "reasoning": "连接主义知识观vs SECI模型范式跃迁。缺知识新鲜度+连接熵·三产品边界",
+      "dimensions": "方法论创新85 系统架构优雅90 可扩展性86 落地速度80 学习资源95",
+      "timestamp": 1780141397,
+      "source": "l3_llm_cognitive_r2"
     }
   ],
   "action_events": [
