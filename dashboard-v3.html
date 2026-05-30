@@ -1335,6 +1335,24 @@ function renderFlywheel() {
     h += '</div>';
   }
 
+  // 编排器健康
+  var oh = m.orchestration_health || {};
+  if (oh.health_score !== undefined) {
+    var healthColor = oh.health_score >= 90 ? '#27ae60' : (oh.health_score >= 60 ? '#e67e22' : '#e74c3c');
+    var healthIcon = oh.health_score >= 90 ? '🟢' : (oh.health_score >= 60 ? '🟡' : '🔴');
+    h += '<div style="font-weight:600;margin-top:12px;margin-bottom:8px">'+healthIcon+' 编排器健康 ('+oh.health_score+'/100·'+oh.checked_at.slice(0,19)+')</div>';
+    h += '<div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:4px">';
+    var stages = oh.stages || [];
+    for (var i=0;i<stages.length;i++) {
+      var s = stages[i];
+      var bg = s.status==='ok'?'#d5f5e3':(s.status==='degraded'?'#fef9e7':'#fdedec');
+      var icon = s.status==='ok'?'✅':(s.status==='degraded'?'🟡':'❌');
+      h += '<span style="padding:2px 6px;border-radius:3px;background:'+bg+';font-size:0.65em" title="'+s.label+'('+s.status+')">'+icon+'</span>';
+    }
+    h += '</div>';
+    h += '<div style="font-size:0.65em;color:var(--ink-lighter);margin-bottom:8px">'+oh.ok+'✅ '+(oh.degraded||0)+'🟡 '+(oh.failed||0)+'❌ · 断路器: 每个环节独立保护</div>';
+  }
+
   // 最近运行
   var rr = fw.recent_runs || [];
   if (rr.length > 0) {
