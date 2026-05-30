@@ -481,7 +481,29 @@ def cycle_health_audit(data):
     }
     fw['alerts'] = alerts
     
-    # 5. 更新容量评级
+    # 5. 实体一致性检查 (从 entities_index meta 读取)
+    cc = data.get('meta', {}).get('consistency_check', {})
+    cc_issues = cc.get('total_issues', 0)
+    if cc_issues > 0:
+        alerts.append({
+            'type': 'consistency_issues',
+            'severity': 'warning',
+            'detail': '{} 个一致性异常 (重复·孤儿·缺失·冲突)'.format(cc_issues),
+            'by_type': cc.get('by_type', {})
+        })
+    
+    # 6. 产品审计检查
+    pa = data.get('meta', {}).get('product_audit', {})
+    pa_avg = pa.get('avg_score', 0)
+    pa_under60 = pa.get('products_under_60', 0)
+    if pa_under60 > 0:
+        alerts.append({
+            'type': 'low_quality_products',
+            'severity': 'info',
+            'detail': '{} 个产品审计分<60'.format(pa_under60)
+        })
+    
+    # 7. 更新容量评级
     if json_size_mb < 10:
         fw['capacity']['rating'] = 'green'
     elif json_size_mb < 15:
@@ -498,6 +520,9 @@ def cycle_health_audit(data):
         'json_size_mb': json_size_mb,
         'alerts': len(alerts),
         'capacity_rating': fw['capacity']['rating'],
+        'consistency_issues': cc_issues,
+        'product_audit_avg': pa_avg,
+        'product_audit_under60': pa_under60,
         'timestamp': now.isoformat()
     })
     
