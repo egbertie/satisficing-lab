@@ -1,0 +1,192 @@
+{
+  "version": "2.0.0",
+  "name": "SRI 产品审核标准体系",
+  "principle": "对标国际标准·按产品形态差异化·自动可计算·版本可演化",
+
+  "foundations": {
+    "SUS": {
+      "name": "System Usability Scale",
+      "origin": "John Brooke, 1986",
+      "description": "10题Likert量表·衡量主观可用性·0-100分·基准68分=平均",
+      "mapping": "映射到 SRI 六维中的'可用度'维度",
+      "benchmarks": {
+        "A_grade": {"min": 80.3, "percentile": 90, "label": "excellent"},
+        "B_grade": {"min": 74, "percentile": 70, "label": "good"},
+        "C_grade": {"min": 68, "percentile": 50, "label": "okay/average"},
+        "D_grade": {"min": 51, "percentile": 30, "label": "poor"},
+        "F_grade": {"min": 0, "percentile": 0, "label": "unacceptable"}
+      }
+    },
+    "HEART": {
+      "name": "Google HEART Framework",
+      "description": "Happiness·Engagement·Adoption·Retention·Task Success",
+      "mapping": "映射到产品生命周期不同阶段",
+      "note": "客户数据缺失阶段·使用替身LLM模拟评分替代"
+    },
+    "ISO_9241": {
+      "name": "ISO 9241-11:2018 Usability",
+      "description": "有效性·效率·满意度",
+      "mapping": "对应 SRI 完整度+可用度+清晰度"
+    }
+  },
+
+  "sri_six_dimensions": {
+    "completeness": {
+      "label": "🔩 完整度",
+      "weight": 0.25,
+      "description": "功能完整·核心路径闭环·无断链·无缺失页面",
+      "scoring": {
+        "100": "功能100%完整·所有子页面存在·所有链接可达",
+        "80": "核心功能完整·1-2个次要链接断裂",
+        "60": "核心功能基本可用·3-5个断裂或缺失",
+        "40": "核心功能部分缺失·关键链接断裂",
+        "20": "大量缺失·功能不完整",
+        "0": "空页面或错误页面"
+      },
+      "auto_detectable": true,
+      "auto_fields": ["broken_links_count", "missing_pages", "file_size", "has_title", "has_h1"]
+    },
+    "usability": {
+      "label": "🧩 可用度",
+      "weight": 0.25,
+      "description": "SUS对标·3秒理解·3步完成·0卡顿",
+      "scoring": {
+        "100": "SUS等效≥80·零摩擦·3步完成核心任务",
+        "80": "SUS等效70-79·流程顺畅·小障碍",
+        "60": "SUS等效60-69·可用但偶有困惑",
+        "40": "SUS等效50-59·明显障碍·需要学习",
+        "20": "SUS等效<50·严重可用性问题",
+        "0": "无法使用"
+      },
+      "auto_detectable": false,
+      "requires": ["user_testing", "llm_avatar_evaluation", "click_path_analysis"]
+    },
+    "clarity": {
+      "label": "🔍 清晰度",
+      "weight": 0.20,
+      "description": "一句话价值主张·meta描述·信息架构·5秒测试",
+      "scoring": {
+        "100": "5秒通·全部信息一目了然·分层清晰",
+        "80": "5秒理解核心·细节需1分钟",
+        "60": "需要阅读才能理解·价值主张不够直白",
+        "40": "需要猜测功能和场景",
+        "20": "客户不知道这是什么",
+        "0": "完全无法理解"
+      },
+      "auto_detectable": true,
+      "auto_fields": ["has_meta_description", "has_value_proposition", "has_h1", "text_length", "cn_ratio"]
+    },
+    "aesthetics": {
+      "label": "🎨 美学度",
+      "weight": 0.15,
+      "description": "视觉一致性·色彩系统·排版层级·无视觉噪音",
+      "scoring": {
+        "100": "设计精美·色彩和谐·留白恰当",
+        "80": "视觉整洁·有设计感",
+        "60": "基本整洁·样式一致·无重大视觉问题",
+        "40": "有样式问题·内联样式过多·排版混乱",
+        "20": "明显的设计缺陷·视觉噪音",
+        "0": "无视觉设计"
+      },
+      "auto_detectable": true,
+      "auto_fields": ["inline_styles_count", "has_stylesheet", "style_tags_count"]
+    },
+    "uniqueness": {
+      "label": "💡 独特性",
+      "weight": 0.10,
+      "description": "不可替代的洞察·差异化·竞品做不到的",
+      "scoring": {
+        "100": "独一无二的洞察·无替代品",
+        "80": "有明显差异化·行业内独特",
+        "60": "有特色但非不可替代",
+        "40": "同类产品众多·无明显差异",
+        "20": "纯复制品·无独特价值",
+        "0": "完全同质化"
+      },
+      "auto_detectable": false,
+      "requires": ["llm_avatar_evaluation", "competitive_analysis"]
+    },
+    "maintainability": {
+      "label": "🔄 可维护度",
+      "weight": 0.05,
+      "description": "更新频率·依赖复杂度·更新成本",
+      "scoring": {
+        "100": "零依赖·单文件·自动更新·无需人工",
+        "80": "少依赖·可自动扫描·按需更新",
+        "60": "有依赖·需要定期手动更新",
+        "40": "依赖复杂·更新困难",
+        "20": "几乎无法维护",
+        "0": "已废弃"
+      },
+      "auto_detectable": true,
+      "auto_fields": ["days_since_update", "auto_registered", "has_script_srcs"]
+    }
+  },
+
+  "product_types": {
+    "diagnostic_tool": {
+      "label": "诊断工具",
+      "weight_override": {"usability": 0.30, "completeness": 0.20, "uniqueness": 0.15},
+      "examples": ["决策剧场", "四骑士识别", "Pre-0身体觉察", "危机模拟"],
+      "benchmarks": {
+        "competitive": ["The Predictive Index", "Culture Amp", "15Five", "Officevibe"],
+        "min_sus_target": 70
+      }
+    },
+    "quantitative_tool": {
+      "label": "量化工具",
+      "weight_override": {"completeness": 0.30, "usability": 0.20, "uniqueness": 0.15},
+      "examples": ["五维雷达图", "关系温度计", "分割饼", "FIN诚实验证器"],
+      "benchmarks": {
+        "competitive": ["Radical Candor assessments", "TINYpulse", "Lattice"],
+        "min_sus_target": 68
+      }
+    },
+    "simulation_game": {
+      "label": "模拟/游戏",
+      "weight_override": {"usability": 0.30, "aesthetics": 0.20, "uniqueness": 0.20},
+      "examples": ["卡牌对局", "决策剧场", "退出仪式"],
+      "benchmarks": {
+        "competitive": ["Miro workshops", "Gamestorming tools", "Scenario planning tools"],
+        "min_sus_target": 75
+      }
+    },
+    "knowledge_page": {
+      "label": "知识页面",
+      "weight_override": {"clarity": 0.30, "completeness": 0.25, "aesthetics": 0.15},
+      "examples": ["案例库", "星光方法论", "关于我们", "量化体系"],
+      "benchmarks": {
+        "competitive": ["First Round Review", "a16z content", "Stratechery"],
+        "min_sus_target": 65
+      }
+    },
+    "infrastructure": {
+      "label": "基础设施",
+      "weight_override": {"completeness": 0.30, "maintainability": 0.20, "usability": 0.15},
+      "examples": ["驾驶舱", "管理后台", "产品库"],
+      "benchmarks": {
+        "competitive": ["Retool", "Airplane", "Notion databases"],
+        "min_sus_target": 72
+      }
+    },
+    "simple_tool": {
+      "label": "简单工具",
+      "weight_override": {"usability": 0.40, "completeness": 0.25, "maintainability": 0.10},
+      "examples": ["密码生成器", "自检清单", "模板"],
+      "benchmarks": {
+        "competitive": ["各种在线工具"],
+        "min_sus_target": 75
+      }
+    }
+  },
+
+  "lifecycle_stages": {
+    "LC-001": {"label": "概念期", "gate": "概念评审", "min_score": 0, "auto_promotion": false},
+    "LC-002": {"label": "开发中", "gate": "原型评审", "min_score": 0, "auto_promotion": false},
+    "LC-003": {"label": "内测期", "gate": "alpha评审", "min_score": 50, "auto_promotion": true},
+    "LC-004": {"label": "打磨期", "gate": "质量门禁", "min_score": 70, "auto_promotion": true},
+    "LC-005": {"label": "精品期", "gate": "精品审计", "min_score": 80, "auto_promotion": true},
+    "LC-006": {"label": "维护期", "gate": "活性检查", "min_score": 60, "auto_demotion": true},
+    "LC-007": {"label": "归档期", "gate": "日落审批", "min_score": 0, "auto_demotion": true}
+  }
+}
