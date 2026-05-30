@@ -1312,6 +1312,29 @@ function renderFlywheel() {
     h += '</tbody></table>';
   }
 
+  // 产品组合重构
+  var pr = m.portfolio_rationalization || {};
+  if (pr.total_before) {
+    h += '<div style="font-weight:600;margin-top:12px;margin-bottom:8px">📊 产品组合 (重构 '+pr.version+'·'+(pr.total_before||0)+'→'+(pr.total_after||0)+'有效)</div>';
+    h += '<div class="stat-grid" style="grid-template-columns:repeat(4,1fr)">';
+    h += '<div class="stat-card" style="background:#d5f5e3"><div class="stat-num" style="font-weight:700">'+ (pr.total_after||0) +'</div><div class="stat-label">有效产品</div></div>';
+    h += '<div class="stat-card" style="background:#fdedec"><div class="stat-num" style="font-weight:700;color:#e74c3c">'+ (pr.killed||0) +'</div><div class="stat-label">已下架</div></div>';
+    h += '<div class="stat-card" style="background:#fef9e7"><div class="stat-num" style="font-weight:700;color:#e67e22">'+ (pr.combined||0) +'</div><div class="stat-label">归入知识库</div></div>';
+    h += '<div class="stat-card" style="background:#ebdef0"><div class="stat-num" style="font-weight:700">'+ (pr.merged||0) +'</div><div class="stat-label">待合并</div></div>';
+    h += '</div>';
+  }
+
+  // 生命周期
+  var lm = m.lifecycle_management || {};
+  if (lm.promoted || lm.demoted) {
+    h += '<div style="font-weight:600;margin-top:12px;margin-bottom:8px">🔄 生命周期 (标准 '+ (lm.standards_version||'?') +'·'+(lm.promoted+lm.demoted+lm.archived||0)+'变更)</div>';
+    h += '<div class="stat-grid" style="grid-template-columns:repeat(3,1fr)">';
+    h += '<div class="stat-card" style="background:#d5f5e3"><div class="stat-num" style="font-weight:700;color:#27ae60">⬆️ '+ (lm.promoted||0) +'</div><div class="stat-label">晋升</div></div>';
+    h += '<div class="stat-card" style="background:#fdedec"><div class="stat-num" style="font-weight:700;color:#e74c3c">⬇️ '+ (lm.demoted||0) +'</div><div class="stat-label">降级</div></div>';
+    h += '<div class="stat-card" style="background:#fef9e7"><div class="stat-num" style="font-weight:700">📦 '+ (lm.archived||0) +'</div><div class="stat-label">归档</div></div>';
+    h += '</div>';
+  }
+
   // 最近运行
   var rr = fw.recent_runs || [];
   if (rr.length > 0) {
