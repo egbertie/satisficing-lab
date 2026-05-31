@@ -7,7 +7,7 @@
       "customers": 5,
       "tasks": 195,
       "avatars": 22,
-      "documents": 75,
+      "documents": 96,
       "decisions": 35,
       "milestones": 9,
       "terms": 74,
@@ -30,15 +30,22 @@
       "additional_discoveries": 7,
       "living_rules": 48,
       "cities": 31,
-      "knowledge_pipelines": 5
+      "knowledge_pipeline": 5,
+      "interactive_avatars": 5,
+      "signals": 4,
+      "cognition_events": 150,
+      "action_events": 10,
+      "verification_events": 5,
+      "learning_events": 5,
+      "clusters": 6
     },
-    "updated": "2026-05-31T16:57:31.431901+08:00",
+    "updated": "2026-05-31T16:44:01.717620+08:00",
     "knowledge_graph_density": 100.0,
     "living_rules_status": {
       "active": 41,
       "dormant": 6,
       "broken": 1,
-      "total": 48
+      "never_activated": 0
     },
     "biological_health": {
       "rules_with_triggers": 48,
@@ -48,17 +55,17 @@
       "fully_alive": 40
     },
     "product_families": {
-      "镜": 12,
-      "衡": 102,
-      "契": 34,
       "章": 112,
+      "衡": 102,
       "觉": 36,
+      "契": 34,
       "人": 14,
-      "道": 2,
-      "未知": 3
+      "镜": 12,
+      "未知": 3,
+      "道": 2
     },
     "new_products_from_scan": 158,
-    "knowledge_graph_density_note": "强12549+中5=12554/12556=100.0% (auto-updated 2026-05-31 10:43)",
+    "knowledge_graph_density_note": "强12456+中98=12554/12556=100.0% (auto-updated 2026-05-31 16:41)",
     "auto_rule_connections": 1830,
     "corrections": [
       "2026-05-30: 知识图谱密度99.9%→43.9%",
@@ -117,23 +124,7 @@
       "events": "✅ 本次补全",
       "avatars": "✅ 本次补全",
       "total_entities_covered": 1010,
-      "updated": "2026-05-30T20:45:54.853Z",
-      "physical": {
-        "score": 0,
-        "entities": 0
-      },
-      "chemical": {
-        "score": 0,
-        "entities": 0
-      },
-      "biological": {
-        "score": 0,
-        "entities": 0
-      },
-      "psychological": {
-        "score": 0,
-        "entities": 0
-      }
+      "updated": "2026-05-30T20:45:54.853Z"
     },
     "metadata_layer": {
       "score": 100,
@@ -225,7 +216,7 @@
     },
     "anti_island": {
       "mechanism": "V1.0",
-      "last_consistency_scan": "2026-05-31T02:43:10.391666+00:00",
+      "last_consistency_scan": "2026-05-31T02:43:10.979988+00:00",
       "product_index_consistency": "100%",
       "active_detectors": 5,
       "orphan_products": 0,
@@ -302,7 +293,7 @@
       "timestamp": 1780135875,
       "description": "城市维度首次注入：30个城市实体+多层连接编织 + 补丁19条"
     },
-    "last_updated": 1780157423,
+    "last_updated": 1780217041,
     "avatar_simulation": {
       "phase": "R2_P2_1",
       "avatars_upgraded": 5,
@@ -494,8 +485,8 @@
     },
     "flywheel": {
       "version": "1.2",
-      "last_run": "2026-05-30T16:47:54.159609+00:00",
-      "total_runs": 6,
+      "last_run": "2026-05-31T04:04:19.570324+00:00",
+      "total_runs": 7,
       "cycles": {
         "ingestion": {
           "status": "idle",
@@ -541,7 +532,7 @@
         "json_load_threshold_ms": 5000,
         "rating": "green"
       },
-      "last_health_audit": "2026-05-31T02:43:50.850035+00:00",
+      "last_health_audit": "2026-05-31T02:43:51.203556+00:00",
       "health_audit_report": {
         "flow_layers": {
           "L1_signals": 4,
@@ -554,10 +545,18 @@
         "broken_links": 0,
         "json_size_mb": 7.9,
         "alerts": 0,
-        "timestamp": "2026-05-31T02:43:50.850038+00:00"
+        "timestamp": "2026-05-31T02:43:51.203559+00:00"
       },
-      "last_run_elapsed_ms": 559,
+      "last_run_elapsed_ms": 115,
       "recent_runs": [
+        {
+          "run_id": 7,
+          "timestamp": "2026-05-31T04:04:19.570324+00:00",
+          "cycle": "scan",
+          "events_count": 28,
+          "elapsed_ms": 115,
+          "dry_run": false
+        },
         {
           "run_id": 6,
           "timestamp": "2026-05-30T16:47:54.159609+00:00",
@@ -14049,6 +14048,258 @@
         "trigger": "freshness_check",
         "source": "cycle_2",
         "cycle": null
+      },
+      {
+        "id": "CHG-1121",
+        "timestamp": "2026-05-31T04:04:19.579942+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-076",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/deep/2026-05-31.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1122",
+        "timestamp": "2026-05-31T04:04:19.580704+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-077",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/daily/2026-05-29.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1123",
+        "timestamp": "2026-05-31T04:04:19.580792+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-078",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/daily/2026-05-31.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1124",
+        "timestamp": "2026-05-31T04:04:19.580883+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-079",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/daily/2026-05-30.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1125",
+        "timestamp": "2026-05-31T04:04:19.581013+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-080",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/rem/2026-05-31.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1126",
+        "timestamp": "2026-05-31T04:04:19.581158+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-081",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/ops_logs/Token压缩日志.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1127",
+        "timestamp": "2026-05-31T04:04:19.581249+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-082",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/ops_logs/运维清理周报_2026-05-30.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1128",
+        "timestamp": "2026-05-31T04:04:19.581340+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-083",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/ops_logs/飞书同步日志.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1129",
+        "timestamp": "2026-05-31T04:04:19.581430+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-084",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/ops_logs/扣子同步日志.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1130",
+        "timestamp": "2026-05-31T04:04:19.581514+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-085",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/ops_logs/邮箱检查日志.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1131",
+        "timestamp": "2026-05-31T04:04:19.581670+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-086",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/light/2026-05-31.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1132",
+        "timestamp": "2026-05-31T04:04:19.581996+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-087",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/reports/2026-05-30_avatar_simulation_report.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1133",
+        "timestamp": "2026-05-31T04:04:19.582089+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-088",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/reports/2026-05-31_filesystem_audit.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1134",
+        "timestamp": "2026-05-31T04:04:19.582178+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-089",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/reports/2026-05-30_snowball_final_report.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1135",
+        "timestamp": "2026-05-31T04:04:19.582270+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-090",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/reports/2026-05-30_full_honest_audit.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1136",
+        "timestamp": "2026-05-31T04:04:19.582361+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-091",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/reports/2026-05-30_avatar_simulation_plan.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1137",
+        "timestamp": "2026-05-31T04:04:19.582453+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-092",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/reports/2026-05-30_admin_v3_report.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1138",
+        "timestamp": "2026-05-31T04:04:19.582547+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-093",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/reports/2026-05-30_honest_audit.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1139",
+        "timestamp": "2026-05-31T04:04:19.582645+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-094",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/reports/2026-05-30_city_round1_report.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1140",
+        "timestamp": "2026-05-31T04:04:19.582744+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-095",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/reports/2026-05-30_lessons_learned.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
+      },
+      {
+        "id": "CHG-1141",
+        "timestamp": "2026-05-31T04:04:19.582842+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-096",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/reports/2026-05-30_round3_paradigm_shift.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
+        "cycle": null
       }
     ],
     "product_audit": {
@@ -22180,196 +22431,7 @@
           "未知: 0→3"
         ]
       }
-    ],
-    "total_entities": 13242,
-    "premium_count": 21,
-    "online_count": 151,
-    "launchable": 240,
-    "strong_connections": 826,
-    "medium_connections": 11728,
-    "weak_connections": 2,
-    "flywheel_cycles": 5,
-    "first_run_count": 0,
-    "customer_stages": {
-      "发现": 5,
-      "评估": 0,
-      "尝试": 0,
-      "深入": 0,
-      "共契": 0,
-      "total": 5
-    },
-    "customer_journey_updated": "2026-05-31T12:49:08.406426+08:00",
-    "product_stage_matrix": {
-      "发现": [
-        "assessment",
-        "index.html"
-      ],
-      "评估": [
-        "radar",
-        "checklist",
-        "chemical-report"
-      ],
-      "尝试": [
-        "cards-play",
-        "decision-theatre",
-        "slicing-pie",
-        "fulldiag"
-      ],
-      "深入": [
-        "chemical-report",
-        "exit-guide",
-        "deep-slicing",
-        "deep-wasserman",
-        "match",
-        "metapartner"
-      ],
-      "共契": [
-        "cases",
-        "creation",
-        "whitepaper",
-        "university",
-        "proposal"
-      ]
-    },
-    "customer_management_v3": {
-      "version": "3.0",
-      "updated_at": "2026-05-31T13:04:17.446145+08:00",
-      "total_individual_flows": 5,
-      "health_model_dimensions": 5,
-      "warning_rules": 5,
-      "automation_rules": 5,
-      "active_alerts": 1,
-      "healthy_customers": 0,
-      "attention_customers": 4,
-      "at_risk_customers": 1,
-      "critical_customers": 0
-    },
-    "product_management_v4": {
-      "version": "4.0",
-      "philosophy": "客户视角的产品分层 × 阶段性解锁",
-      "updated_at": "2026-05-31T13:26:02.413991+08:00",
-      "core_products": 11,
-      "customer_facing_total": 31,
-      "stage_based_unlocks": true,
-      "max_visible_per_stage": 5
-    },
-    "customer_facing": 31,
-    "core_products": 11,
-    "lifecycle_v5": {
-      "version": "5.0",
-      "total_stages": 10,
-      "front": 5,
-      "back": 5,
-      "channels": 6,
-      "updated_at": "2026-05-31T13:34:48.296387+08:00"
-    },
-    "lifecycle_v6": {
-      "version": "6.0",
-      "total_stages": 15,
-      "front": 5,
-      "core": 5,
-      "back_extend": 5,
-      "small_loops": 14,
-      "medium_loops": 5,
-      "big_loops": 1,
-      "updated_at": "2026-05-31T13:51:48.187444+08:00"
-    },
-    "system_v7": {
-      "version": "7.0",
-      "updated_at": "2026-05-31T14:57:16.154576+08:00",
-      "modules": {
-        "customer_lifecycle": "15阶段+三级闭环(14小/5中/1大)",
-        "product_system": "4层(11核心/31客户可见/315总)",
-        "rd_pipeline": "4阶段(采集→提炼→转化→产品化)",
-        "team": "4核心+22虚拟",
-        "markets": "31城市·南山策源地",
-        "immune": "5组件·85分",
-        "governance": "DACI·5类决策",
-        "acquisition": "6渠道·5级漏斗",
-        "data": "12556连接·315产品·8.3MB"
-      }
-    },
-    "task_cleanup": {
-      "version": "1.0",
-      "executed_at": "2026-05-31T15:07:33.906406+08:00",
-      "before": {
-        "total": 195,
-        "done": 78,
-        "pending": 106,
-        "progress": 11
-      },
-      "after": {
-        "total": 195,
-        "done": 88,
-        "pending": 1,
-        "progress": 106
-      },
-      "p0_done": 10,
-      "p0_progress": 20,
-      "p1_progress": 46,
-      "p2_progress": 39
-    },
-    "total_products": 315,
-    "task_stats": {
-      "total": 195,
-      "completed": 88,
-      "in_progress": 106,
-      "pending": 1,
-      "p0": 75,
-      "p1": 75,
-      "p2": 45
-    },
-    "lifecycle_distribution": {
-      "LC-005": 248,
-      "LC-003": 1,
-      "LC-004": 63,
-      "LC-001": 3
-    },
-    "avatar_stats": {
-      "total": 22,
-      "active": 22
-    },
-    "city_stats": {
-      "total": 31,
-      "by_tier": {
-        "一线城市": 4,
-        "新一线城市": 10,
-        "产业重镇": 10,
-        "省会节点": 5,
-        "特色城市": 1,
-        "核心策源地": 1
-      }
-    },
-    "offline_count": 76,
-    "archive_count": 67,
-    "products_with_llm": 35,
-    "customer_stats": {
-      "total": 5,
-      "profiles": 31,
-      "individual_flows": 5
-    },
-    "flywheel_info": {
-      "knowledge_pipelines": 5,
-      "crons_total": 20,
-      "crons_active": 5,
-      "scripts_total": 12,
-      "workflows_total": 18,
-      "documents_total": 75,
-      "living_rules_total": 48
-    },
-    "rd_stats": {
-      "stages": 4,
-      "active_projects": 4
-    },
-    "loop_stats": {
-      "small": 14,
-      "medium": 5,
-      "big": 1
-    },
-    "acquisition_stats": {
-      "channels": 6,
-      "funnel_stages": 5
-    }
+    ]
   },
   "products": [
     {
@@ -49617,7 +49679,7 @@
       "status": "已下架",
       "source_file": "site/test-premortem.html",
       "detected_at": "2026-05-30T14:17:39.314108+00:00",
-      "last_scan_time": "2026-05-30T14:17:39.314108+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
       "auto_registered": true,
       "quality_score": 0,
       "llm_rating": null,
@@ -49625,7 +49687,8 @@
       "jtbd_category": "knowledge",
       "product_tier": "tier_4_archive",
       "archived_at": "2026-05-30T14:46:00.382218+00:00",
-      "archive_reason": "无URL，幽灵产品"
+      "archive_reason": "无URL，幽灵产品",
+      "file_updated": true
     },
     {
       "id": "PROD-385",
@@ -49652,7 +49715,7 @@
       "status": "已下架",
       "source_file": "site/test-slicing.html",
       "detected_at": "2026-05-30T14:17:39.314108+00:00",
-      "last_scan_time": "2026-05-30T14:17:39.314108+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
       "auto_registered": true,
       "quality_score": 0,
       "llm_rating": null,
@@ -49660,7 +49723,8 @@
       "jtbd_category": "knowledge",
       "product_tier": "tier_4_archive",
       "archived_at": "2026-05-30T14:46:00.382218+00:00",
-      "archive_reason": "无URL，幽灵产品"
+      "archive_reason": "无URL，幽灵产品",
+      "file_updated": true
     }
   ],
   "customers": [
@@ -50185,7 +50249,7 @@
       "name": "飞书知识库(Wiki)内容填充+公开",
       "description": "飞书知识库(Wiki)内容填充+公开",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-14",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -50317,7 +50381,7 @@
       "name": "飞书自动化日报/周报上线",
       "description": "飞书自动化日报/周报上线",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -50350,7 +50414,7 @@
       "name": "系统全链路测试",
       "description": "系统全链路测试",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-20",
       "assignee": "满意红+蓝军",
       "source": "扣子飞书Base",
@@ -50383,7 +50447,7 @@
       "name": "蓝军全面审计",
       "description": "蓝军全面审计",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-21",
       "assignee": "蓝军",
       "source": "扣子飞书Base",
@@ -50416,7 +50480,7 @@
       "name": "发布内容打包(论文+叙事+品牌)",
       "description": "发布内容打包(论文+叙事+品牌)",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-06-10",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -50449,7 +50513,7 @@
       "name": "飞书生态全面就绪",
       "description": "飞书生态全面就绪",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-06-15",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -50482,7 +50546,7 @@
       "name": "官宣方案终稿+预演",
       "description": "官宣方案终稿+预演",
       "priority": "P0·立即",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-06-18",
       "assignee": "满意红+Egbertie",
       "source": "扣子飞书Base",
@@ -50515,7 +50579,7 @@
       "name": "系统压力测试(蓝军72h)",
       "description": "系统压力测试(蓝军72h)",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-06-19",
       "assignee": "蓝军",
       "source": "扣子飞书Base",
@@ -50548,7 +50612,7 @@
       "name": "🎯 夏至官宣日",
       "description": "🎯 夏至官宣日",
       "priority": "P0·立即",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-06-21",
       "assignee": "全员",
       "source": "扣子飞书Base",
@@ -50647,7 +50711,7 @@
       "name": "测试版定价方案(D-0508-4)",
       "description": "测试版定价方案(D-0508-4)",
       "priority": "P0·立即",
-      "status": "✅ 已完成",
+      "status": "⏳ 进行中",
       "deadline": "2026-05-09",
       "assignee": "满意红+Egbertie",
       "source": "扣子飞书Base",
@@ -50672,8 +50736,7 @@
         "满意红+Egbertie"
       ],
       "health": "stale",
-      "days_since_update": "unknown",
-      "completed_at": "2026-05-31T15:07:33.906406+08:00"
+      "days_since_update": "unknown"
     },
     {
       "id": "TASK-027",
@@ -50747,7 +50810,7 @@
       "name": "外部学习·微信/小红书/微博渠道验证",
       "description": "外部学习·微信/小红书/微博渠道验证",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-11",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -50780,7 +50843,7 @@
       "name": "05-05:学习任务体系按P0启动",
       "description": "05-05:学习任务体系按P0启动",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-12",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -50813,7 +50876,7 @@
       "name": "05-05:三生万物产品体系追踪",
       "description": "05-05:三生万物产品体系追踪",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-15",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -50846,7 +50909,7 @@
       "name": "05-06:对话优化(Egbertie第1点)",
       "description": "05-06:对话优化(Egbertie第1点)",
       "priority": "P0·立即",
-      "status": "✅ 已完成",
+      "status": "⏳ 进行中",
       "deadline": "2026-05-10",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -50871,8 +50934,7 @@
         "满意红"
       ],
       "health": "stale",
-      "days_since_update": "unknown",
-      "completed_at": "2026-05-31T15:07:33.906406+08:00"
+      "days_since_update": "unknown"
     },
     {
       "id": "TASK-033",
@@ -50880,7 +50942,7 @@
       "name": "05-06:项目体系(Egbertie第2点)",
       "description": "05-06:项目体系(Egbertie第2点)",
       "priority": "P0·立即",
-      "status": "✅ 已完成",
+      "status": "⏳ 进行中",
       "deadline": "2026-05-10",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -50905,8 +50967,7 @@
         "满意红"
       ],
       "health": "stale",
-      "days_since_update": "unknown",
-      "completed_at": "2026-05-31T15:07:33.906406+08:00"
+      "days_since_update": "unknown"
     },
     {
       "id": "TASK-034",
@@ -50914,7 +50975,7 @@
       "name": "05-06:技能无边(Egbertie第4点)",
       "description": "05-06:技能无边(Egbertie第4点)",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-14",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -50947,7 +51008,7 @@
       "name": "05-06:学用结合(Egbertie第6点)",
       "description": "05-06:学用结合(Egbertie第6点)",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-14",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -50980,7 +51041,7 @@
       "name": "05-06:奋斗纪实四卷学习",
       "description": "05-06:奋斗纪实四卷学习",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-15",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51013,7 +51074,7 @@
       "name": "05-06:接手宝典学习",
       "description": "05-06:接手宝典学习",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-15",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51046,7 +51107,7 @@
       "name": "05-06:产品化终炼学习",
       "description": "05-06:产品化终炼学习",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-15",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51079,7 +51140,7 @@
       "name": "05-06:25条指令血液化",
       "description": "05-06:25条指令血液化",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-14",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51112,7 +51173,7 @@
       "name": "05-07:auto_token_report.py实装",
       "description": "05-07:auto_token_report.py实装",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-11",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51145,7 +51206,7 @@
       "name": "05-07:auto_rituals.sh实装",
       "description": "05-07:auto_rituals.sh实装",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-11",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51244,7 +51305,7 @@
       "name": "05-08:专家替身→独立Agent",
       "description": "05-08:专家替身→独立Agent",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-14",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51277,7 +51338,7 @@
       "name": "05-08:客户替身→独立Agent",
       "description": "05-08:客户替身→独立Agent",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-14",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51310,7 +51371,7 @@
       "name": "05-08:多Agent测试流程",
       "description": "05-08:多Agent测试流程",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51343,7 +51404,7 @@
       "name": "05-08:Standing Orders常设权限",
       "description": "05-08:Standing Orders常设权限",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-14",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51376,7 +51437,7 @@
       "name": "05-08:Boot Hook启用",
       "description": "05-08:Boot Hook启用",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51409,7 +51470,7 @@
       "name": "05-08:Memory Hook启用",
       "description": "05-08:Memory Hook启用",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51442,7 +51503,7 @@
       "name": "05-08:Coding Agent Skill启用",
       "description": "05-08:Coding Agent Skill启用",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51475,7 +51536,7 @@
       "name": "05-08:Browser Skill启用",
       "description": "05-08:Browser Skill启用",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51508,7 +51569,7 @@
       "name": "05-08:四级安全审查执行验证",
       "description": "05-08:四级安全审查执行验证",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-12",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51541,7 +51602,7 @@
       "name": "05-08:外部信息可信度标注制度化",
       "description": "05-08:外部信息可信度标注制度化",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-12",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51574,7 +51635,7 @@
       "name": "05-08:五条底层真理写入SOUL验证",
       "description": "05-08:五条底层真理写入SOUL验证",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-12",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51739,7 +51800,7 @@
       "name": "05-09:先学再战违规→学习流程制度化",
       "description": "05-09:先学再战违规→学习流程制度化",
       "priority": "P0·立即",
-      "status": "✅ 已完成",
+      "status": "⏳ 进行中",
       "deadline": "2026-05-09",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51764,8 +51825,7 @@
         "满意红"
       ],
       "health": "stale",
-      "days_since_update": "unknown",
-      "completed_at": "2026-05-31T15:07:33.906406+08:00"
+      "days_since_update": "unknown"
     },
     {
       "id": "TASK-060",
@@ -51773,7 +51833,7 @@
       "name": "05-09:H5留资入口+数据统计",
       "description": "05-09:H5留资入口+数据统计",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-14",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51806,7 +51866,7 @@
       "name": "05-09:扣子双向匹配推进",
       "description": "05-09:扣子双向匹配推进",
       "priority": "P1·本周",
-      "status": "✅ 已完成",
+      "status": "⏳ 进行中",
       "deadline": "2026-05-10",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51831,8 +51891,7 @@
         "满意红"
       ],
       "health": "stale",
-      "days_since_update": "unknown",
-      "completed_at": "2026-05-31T15:07:33.906406+08:00"
+      "days_since_update": "unknown"
     },
     {
       "id": "TASK-062",
@@ -51840,7 +51899,7 @@
       "name": "SYS:auto_token_report.py实装到cron",
       "description": "SYS:auto_token_report.py实装到cron",
       "priority": "P0·立即",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-11",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51873,7 +51932,7 @@
       "name": "SYS:auto_rituals.sh实装到cron",
       "description": "SYS:auto_rituals.sh实装到cron",
       "priority": "P0·立即",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-11",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51906,7 +51965,7 @@
       "name": "SYS:auto_dependency_check.py评估",
       "description": "SYS:auto_dependency_check.py评估",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51939,7 +51998,7 @@
       "name": "SYS:auto_evolution_engine.py评估",
       "description": "SYS:auto_evolution_engine.py评估",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -51972,7 +52031,7 @@
       "name": "SYS:auto_recovery_verify.py评估",
       "description": "SYS:auto_recovery_verify.py评估",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52005,7 +52064,7 @@
       "name": "SYS:auto_system_health.py评估",
       "description": "SYS:auto_system_health.py评估",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52038,7 +52097,7 @@
       "name": "SYS:coupling_map.py评估",
       "description": "SYS:coupling_map.py评估",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52071,7 +52130,7 @@
       "name": "SYS:external_learning_engine.py评估",
       "description": "SYS:external_learning_engine.py评估",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52104,7 +52163,7 @@
       "name": "SYS:knowledge_architect.py评估",
       "description": "SYS:knowledge_architect.py评估",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52137,7 +52196,7 @@
       "name": "SYS:knowledge_connector.py评估",
       "description": "SYS:knowledge_connector.py评估",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52170,7 +52229,7 @@
       "name": "SYS:knowledge_flywheel_pipeline.py评估",
       "description": "SYS:knowledge_flywheel_pipeline.py评估",
       "priority": "P0·立即",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-14",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52203,7 +52262,7 @@
       "name": "SYS:knowledge_orchestrator.py评估",
       "description": "SYS:knowledge_orchestrator.py评估",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52236,7 +52295,7 @@
       "name": "SYS:neural_trainer.py评估",
       "description": "SYS:neural_trainer.py评估",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52269,7 +52328,7 @@
       "name": "SYS:pre_delivery_gate.py激活",
       "description": "SYS:pre_delivery_gate.py激活",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-12",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52302,7 +52361,7 @@
       "name": "SYS:skill_activation_hook.py激活",
       "description": "SYS:skill_activation_hook.py激活",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-12",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52335,7 +52394,7 @@
       "name": "SYS:star_backup.sh首次执行",
       "description": "SYS:star_backup.sh首次执行",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-12",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52368,7 +52427,7 @@
       "name": "SYS:system_ops.py评估",
       "description": "SYS:system_ops.py评估",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52401,7 +52460,7 @@
       "name": "SYS:task_delivery_archiver.py评估",
       "description": "SYS:task_delivery_archiver.py评估",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52500,7 +52559,7 @@
       "name": "BASE:阶段里程碑表状态检查",
       "description": "BASE:阶段里程碑表状态检查",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-12",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52566,7 +52625,7 @@
       "name": "MEM:待续工作清单.json激活",
       "description": "MEM:待续工作清单.json激活",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52599,7 +52658,7 @@
       "name": "MEM:验证清单.json激活",
       "description": "MEM:验证清单.json激活",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52632,7 +52691,7 @@
       "name": "MEM:INDEX.md更新",
       "description": "MEM:INDEX.md更新",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-14",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52698,7 +52757,7 @@
       "name": "漏斗L3:深度问卷59题版上线",
       "description": "漏斗L3:深度问卷59题版上线",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-14",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52731,7 +52790,7 @@
       "name": "漏斗L3:收款通道确认",
       "description": "漏斗L3:收款通道确认",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-14",
       "assignee": "Egbertie",
       "source": "扣子飞书Base",
@@ -52764,7 +52823,7 @@
       "name": "漏斗L4:飞书日历预约系统",
       "description": "漏斗L4:飞书日历预约系统",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-21",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52962,7 +53021,7 @@
       "name": "深度学习·W2: Seth Godin部落营销",
       "description": "深度学习·W2: Seth Godin部落营销",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-16",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -52995,7 +53054,7 @@
       "name": "深度学习·W2: Dieter Rams设计10原则",
       "description": "深度学习·W2: Dieter Rams设计10原则",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-17",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -53028,7 +53087,7 @@
       "name": "深度学习·W2: Donella Meadows系统杠杆",
       "description": "深度学习·W2: Donella Meadows系统杠杆",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-18",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -53061,7 +53120,7 @@
       "name": "深度学习·W3: Annie Duke不确定决策",
       "description": "深度学习·W3: Annie Duke不确定决策",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-21",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -53094,7 +53153,7 @@
       "name": "深度学习·W3: Grant Sanderson可视化",
       "description": "深度学习·W3: Grant Sanderson可视化",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-22",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -53127,7 +53186,7 @@
       "name": "深度学习·W3: Robert McKee故事结构",
       "description": "深度学习·W3: Robert McKee故事结构",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-23",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -53160,7 +53219,7 @@
       "name": "深度学习·W4: John Boyd OODA循环",
       "description": "深度学习·W4: John Boyd OODA循环",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-26",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -53193,7 +53252,7 @@
       "name": "深度学习·W4: Sal Khan微学习法",
       "description": "深度学习·W4: Sal Khan微学习法",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-27",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -53226,7 +53285,7 @@
       "name": "深度学习·W4: Deming质量管理",
       "description": "深度学习·W4: Deming质量管理",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-28",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -53259,7 +53318,7 @@
       "name": "子项目:训练方法论·每日训练日志",
       "description": "子项目:训练方法论·每日训练日志",
       "priority": "P0·立即",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-10",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -53292,7 +53351,7 @@
       "name": "子项目:训练方法论·每周方法论提取",
       "description": "子项目:训练方法论·每周方法论提取",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-11",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -53325,7 +53384,7 @@
       "name": "子项目:训练方法论·扣子协作启动",
       "description": "子项目:训练方法论·扣子协作启动",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "2026-05-10",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -53490,7 +53549,7 @@
       "name": "飞书驾驶舱内容填充",
       "description": "飞书驾驶舱内容填充",
       "priority": "P0",
-      "status": "✅ 已完成",
+      "status": "进行中",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -53515,8 +53574,7 @@
         "满意红"
       ],
       "health": "stale",
-      "days_since_update": "unknown",
-      "completed_at": "2026-05-31T15:07:33.906406+08:00"
+      "days_since_update": "unknown"
     },
     {
       "id": "TASK-113",
@@ -53524,7 +53582,7 @@
       "name": "公众号首篇最终版整合",
       "description": "公众号首篇最终版整合",
       "priority": "P0",
-      "status": "⏳ 进行中",
+      "status": "待启动",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -53557,7 +53615,7 @@
       "name": "客户体验链试填报告",
       "description": "客户体验链试填报告",
       "priority": "P0",
-      "status": "⏳ 进行中",
+      "status": "待启动",
       "deadline": "",
       "assignee": "满意红+蓝军",
       "source": "扣子飞书Base",
@@ -53590,7 +53648,7 @@
       "name": "底稿V1.0推进",
       "description": "底稿V1.0推进",
       "priority": "P0",
-      "status": "⏳ 进行中",
+      "status": "待启动",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -53623,7 +53681,7 @@
       "name": "五维测评在线版开发",
       "description": "五维测评在线版开发",
       "priority": "P1",
-      "status": "⏳ 进行中",
+      "status": "待启动",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -53656,7 +53714,7 @@
       "name": "竞品差异化定位页",
       "description": "竞品差异化定位页",
       "priority": "P1",
-      "status": "⏳ 进行中",
+      "status": "待启动",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -54118,7 +54176,7 @@
       "name": "案例库填充（首批6/84）",
       "description": "案例库填充（首批6/84）",
       "priority": "P0·立即",
-      "status": "✅ 已完成",
+      "status": "⏳ 进行中",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -54143,8 +54201,7 @@
         "满意红"
       ],
       "health": "stale",
-      "days_since_update": "unknown",
-      "completed_at": "2026-05-31T15:07:33.906406+08:00"
+      "days_since_update": "unknown"
     },
     {
       "id": "TASK-132",
@@ -54152,7 +54209,7 @@
       "name": "飞书知识库内容同步准备",
       "description": "飞书知识库内容同步准备",
       "priority": "P1·本周",
-      "status": "✅ 已完成",
+      "status": "⏳ 进行中",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -54177,8 +54234,7 @@
         "满意红"
       ],
       "health": "stale",
-      "days_since_update": "unknown",
-      "completed_at": "2026-05-31T15:07:33.906406+08:00"
+      "days_since_update": "unknown"
     },
     {
       "id": "TASK-133",
@@ -54417,7 +54473,7 @@
       "name": "案例库填充·10类型批量录入",
       "description": "案例库填充·10类型批量录入",
       "priority": "P0·立即",
-      "status": "✅ 已完成",
+      "status": "⏳ 进行中",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -54442,8 +54498,7 @@
         "满意红"
       ],
       "health": "stale",
-      "days_since_update": "unknown",
-      "completed_at": "2026-05-31T15:07:33.906406+08:00"
+      "days_since_update": "unknown"
     },
     {
       "id": "TASK-141",
@@ -54484,7 +54539,7 @@
       "name": "案例库批量+10(累计16/84)",
       "description": "案例库批量+10(累计16/84)",
       "priority": "P0·立即",
-      "status": "✅ 已完成",
+      "status": "⏳ 进行中",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -54509,8 +54564,7 @@
         "满意红"
       ],
       "health": "stale",
-      "days_since_update": "unknown",
-      "completed_at": "2026-05-31T15:07:33.906406+08:00"
+      "days_since_update": "unknown"
     },
     {
       "id": "TASK-143",
@@ -55244,7 +55298,7 @@
       "name": "【L1·文明】13个符号全量定位",
       "description": "【L1·文明】13个符号全量定位",
       "priority": "P0·立即",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55277,7 +55331,7 @@
       "name": "【L1·文明】两翼三脉产品线展开",
       "description": "【L1·文明】两翼三脉产品线展开",
       "priority": "P0·立即",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55310,7 +55364,7 @@
       "name": "【L1·文明】火承土印因果律实现",
       "description": "【L1·文明】火承土印因果律实现",
       "priority": "P0·立即",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55343,7 +55397,7 @@
       "name": "【L1·文明】金石拓印版本年轮",
       "description": "【L1·文明】金石拓印版本年轮",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55376,7 +55430,7 @@
       "name": "【L1·文明】米白=纸产品隐喻",
       "description": "【L1·文明】米白=纸产品隐喻",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55409,7 +55463,7 @@
       "name": "【L1·文明】暗金=方法论历史深度",
       "description": "【L1·文明】暗金=方法论历史深度",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55442,7 +55496,7 @@
       "name": "【L2·根系】68Entry→决策剧场场景映射",
       "description": "【L2·根系】68Entry→决策剧场场景映射",
       "priority": "P0·立即",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55475,7 +55529,7 @@
       "name": "【L2·根系】8赛道参数→评分引擎校准",
       "description": "【L2·根系】8赛道参数→评分引擎校准",
       "priority": "P0·立即",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55508,7 +55562,7 @@
       "name": "【L2·根系】扣子6创业者公式→客户模拟",
       "description": "【L2·根系】扣子6创业者公式→客户模拟",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55541,7 +55595,7 @@
       "name": "【L2·根系】12×8冲突矩阵→审核标准",
       "description": "【L2·根系】12×8冲突矩阵→审核标准",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55574,7 +55628,7 @@
       "name": "【L3·土壤】日起课→驾驶舱自动同步",
       "description": "【L3·土壤】日起课→驾驶舱自动同步",
       "priority": "P0·立即",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55607,7 +55661,7 @@
       "name": "【L3·土壤】飞轮日报→三人协作者",
       "description": "【L3·土壤】飞轮日报→三人协作者",
       "priority": "P0·立即",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55640,7 +55694,7 @@
       "name": "【L3·土壤】翻书自动代谢通道",
       "description": "【L3·土壤】翻书自动代谢通道",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55673,7 +55727,7 @@
       "name": "【L3·土壤】单向门清单确立",
       "description": "【L3·土壤】单向门清单确立",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55706,7 +55760,7 @@
       "name": "【L3·土壤】知识债务自动追踪",
       "description": "【L3·土壤】知识债务自动追踪",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55739,7 +55793,7 @@
       "name": "【L4·骨架】评分引擎真实数据通道",
       "description": "【L4·骨架】评分引擎真实数据通道",
       "priority": "P0·立即",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55772,7 +55826,7 @@
       "name": "【L4·骨架】矛盾热力图动态化",
       "description": "【L4·骨架】矛盾热力图动态化",
       "priority": "P0·立即",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55805,7 +55859,7 @@
       "name": "【L4·骨架】决策剧场真实数据场景",
       "description": "【L4·骨架】决策剧场真实数据场景",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55838,7 +55892,7 @@
       "name": "【L4·骨架】干预方案模板引擎",
       "description": "【L4·骨架】干预方案模板引擎",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55871,7 +55925,7 @@
       "name": "【L4·骨架】产品Roadmap生成",
       "description": "【L4·骨架】产品Roadmap生成",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55904,7 +55958,7 @@
       "name": "【L5·枝叶】DQI双引擎仪表盘",
       "description": "【L5·枝叶】DQI双引擎仪表盘",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55937,7 +55991,7 @@
       "name": "【L5·枝叶】MRI引擎自评报告",
       "description": "【L5·枝叶】MRI引擎自评报告",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -55970,7 +56024,7 @@
       "name": "【L5·枝叶】TI信任指数统一度量",
       "description": "【L5·枝叶】TI信任指数统一度量",
       "priority": "P1·本周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -56003,7 +56057,7 @@
       "name": "【L5·枝叶】CI相变曲线可视化",
       "description": "【L5·枝叶】CI相变曲线可视化",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -56036,7 +56090,7 @@
       "name": "【L6·生长】替身自动知识分配",
       "description": "【L6·生长】替身自动知识分配",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -56069,7 +56123,7 @@
       "name": "【L6·生长】替身生长日志",
       "description": "【L6·生长】替身生长日志",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -56102,7 +56156,7 @@
       "name": "【L6·生长】联合审核标准自动繁殖",
       "description": "【L6·生长】联合审核标准自动繁殖",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -56135,7 +56189,7 @@
       "name": "【L6·生长】替身休眠唤醒机制",
       "description": "【L6·生长】替身休眠唤醒机制",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -56168,7 +56222,7 @@
       "name": "【L7·生态】每周三生态审计",
       "description": "【L7·生态】每周三生态审计",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -56201,7 +56255,7 @@
       "name": "【L7·生态】客户数据回流物理仓库",
       "description": "【L7·生态】客户数据回流物理仓库",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -56234,7 +56288,7 @@
       "name": "【L7·生态】年度行业报告雏形",
       "description": "【L7·生态】年度行业报告雏形",
       "priority": "P2·两周",
-      "status": "⏳ 进行中",
+      "status": "⬜ 待执行",
       "deadline": "",
       "assignee": "满意红",
       "source": "扣子飞书Base",
@@ -57545,7 +57599,7 @@
       "status": "待审核",
       "source_file": "memory/Token压缩日志.md",
       "detected_at": "2026-05-30T14:17:39.314108+00:00",
-      "last_scan_time": "2026-05-30T16:47:54.159868+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
       "auto_registered": true,
       "quality_score": 0,
       "llm_rating": null,
@@ -57759,12 +57813,13 @@
       "status": "待审核",
       "source_file": "memory/expert_workflow_rules.md",
       "detected_at": "2026-05-30T14:17:39.314108+00:00",
-      "last_scan_time": "2026-05-30T14:17:39.314108+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
       "auto_registered": true,
       "quality_score": 0,
       "llm_rating": null,
       "lifecycle_stage": "LC-001",
-      "document_age_days": 0
+      "document_age_days": 0,
+      "file_updated": true
     },
     {
       "id": "DOC-058",
@@ -57787,12 +57842,13 @@
       "status": "待审核",
       "source_file": "memory/expert_team_manifest.md",
       "detected_at": "2026-05-30T14:17:39.314108+00:00",
-      "last_scan_time": "2026-05-30T14:17:39.314108+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
       "auto_registered": true,
       "quality_score": 0,
       "llm_rating": null,
       "lifecycle_stage": "LC-001",
-      "document_age_days": 0
+      "document_age_days": 0,
+      "file_updated": true
     },
     {
       "id": "DOC-060",
@@ -57970,7 +58026,7 @@
       "status": "待审核",
       "source_file": "memory/_data/pipeline_log.md",
       "detected_at": "2026-05-30T14:17:39.314108+00:00",
-      "last_scan_time": "2026-05-30T16:47:54.159868+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
       "auto_registered": true,
       "quality_score": 0,
       "llm_rating": null,
@@ -58013,7 +58069,281 @@
       "status": "待审核",
       "source_file": "memory/2026-05-31.md",
       "detected_at": "2026-05-30T16:47:54.159868+00:00",
-      "last_scan_time": "2026-05-30T16:47:54.159868+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001",
+      "file_updated": true
+    },
+    {
+      "id": "DOC-076",
+      "name": "2026-05-31",
+      "family": "未知",
+      "status": "待审核",
+      "source_file": "memory/deep/2026-05-31.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-077",
+      "name": "2026-05-29",
+      "family": "未知",
+      "status": "待审核",
+      "source_file": "memory/daily/2026-05-29.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-078",
+      "name": "2026-05-31",
+      "family": "未知",
+      "status": "待审核",
+      "source_file": "memory/daily/2026-05-31.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-079",
+      "name": "2026-05-30",
+      "family": "未知",
+      "status": "待审核",
+      "source_file": "memory/daily/2026-05-30.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-080",
+      "name": "2026-05-31",
+      "family": "未知",
+      "status": "待审核",
+      "source_file": "memory/rem/2026-05-31.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-081",
+      "name": "Token压缩日志",
+      "family": "章",
+      "status": "待审核",
+      "source_file": "memory/ops_logs/Token压缩日志.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-082",
+      "name": "运维清理周报_2026-05-30",
+      "family": "未知",
+      "status": "待审核",
+      "source_file": "memory/ops_logs/运维清理周报_2026-05-30.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-083",
+      "name": "飞书同步日志",
+      "family": "章",
+      "status": "待审核",
+      "source_file": "memory/ops_logs/飞书同步日志.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-084",
+      "name": "扣子同步日志",
+      "family": "章",
+      "status": "待审核",
+      "source_file": "memory/ops_logs/扣子同步日志.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-085",
+      "name": "邮箱检查日志",
+      "family": "衡",
+      "status": "待审核",
+      "source_file": "memory/ops_logs/邮箱检查日志.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-086",
+      "name": "2026-05-31",
+      "family": "未知",
+      "status": "待审核",
+      "source_file": "memory/light/2026-05-31.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-087",
+      "name": "2026-05-30_avatar_simulation_report",
+      "family": "未知",
+      "status": "待审核",
+      "source_file": "memory/reports/2026-05-30_avatar_simulation_report.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-088",
+      "name": "2026-05-31_filesystem_audit",
+      "family": "未知",
+      "status": "待审核",
+      "source_file": "memory/reports/2026-05-31_filesystem_audit.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-089",
+      "name": "2026-05-30_snowball_final_report",
+      "family": "镜",
+      "status": "待审核",
+      "source_file": "memory/reports/2026-05-30_snowball_final_report.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-090",
+      "name": "2026-05-30_full_honest_audit",
+      "family": "未知",
+      "status": "待审核",
+      "source_file": "memory/reports/2026-05-30_full_honest_audit.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-091",
+      "name": "2026-05-30_avatar_simulation_plan",
+      "family": "未知",
+      "status": "待审核",
+      "source_file": "memory/reports/2026-05-30_avatar_simulation_plan.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-092",
+      "name": "2026-05-30_admin_v3_report",
+      "family": "未知",
+      "status": "待审核",
+      "source_file": "memory/reports/2026-05-30_admin_v3_report.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-093",
+      "name": "2026-05-30_honest_audit",
+      "family": "未知",
+      "status": "待审核",
+      "source_file": "memory/reports/2026-05-30_honest_audit.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-094",
+      "name": "2026-05-30_city_round1_report",
+      "family": "未知",
+      "status": "待审核",
+      "source_file": "memory/reports/2026-05-30_city_round1_report.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-095",
+      "name": "2026-05-30_lessons_learned",
+      "family": "未知",
+      "status": "待审核",
+      "source_file": "memory/reports/2026-05-30_lessons_learned.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
+    },
+    {
+      "id": "DOC-096",
+      "name": "2026-05-30_round3_paradigm_shift",
+      "family": "未知",
+      "status": "待审核",
+      "source_file": "memory/reports/2026-05-30_round3_paradigm_shift.md",
+      "detected_at": "2026-05-31T04:04:19.570628+00:00",
+      "last_scan_time": "2026-05-31T04:04:19.570628+00:00",
       "auto_registered": true,
       "quality_score": 0,
       "llm_rating": null,
@@ -262865,2191 +263195,5 @@
         "决策通道"
       ]
     }
-  ],
-  "customer_journey": {
-    "version": "1.0",
-    "created_at": "2026-05-31T12:49:08.406426+08:00",
-    "description": "客户从首次接触到深度合作的5阶段全生命周期模型，每阶段有匹配产品和晋级条件",
-    "stages": [
-      {
-        "id": "stage-1",
-        "name": "发现",
-        "icon": "🔍",
-        "desc": "客户首次接触到满意解研究所，了解五维决策框架",
-        "customer_mindset": "「65%的创业失败源于合伙人冲突？这跟我有关吗？」",
-        "trigger_products": [
-          "五维自评·简版",
-          "品牌首页"
-        ],
-        "match_products": [
-          "assessment",
-          "index.html"
-        ],
-        "next_stage_condition": "完成一次五维自评",
-        "typical_duration": "1-7天",
-        "key_metrics": [
-          "页面访问",
-          "自评完成率"
-        ]
-      },
-      {
-        "id": "stage-2",
-        "name": "评估",
-        "icon": "🧭",
-        "desc": "客户完成自评，看到自己的决策模式画像，开始认真对待问题",
-        "customer_mindset": "「原来我们的问题不是沟通，是决策模式不同——那怎么解决？」",
-        "trigger_products": [
-          "五维雷达图",
-          "决策前自检清单"
-        ],
-        "match_products": [
-          "radar",
-          "checklist",
-          "chemical-report"
-        ],
-        "next_stage_condition": "完成雷达图或自检清单",
-        "typical_duration": "3-14天",
-        "key_metrics": [
-          "雷达图完成",
-          "自检清单使用"
-        ]
-      },
-      {
-        "id": "stage-3",
-        "name": "尝试",
-        "icon": "🎴",
-        "desc": "客户使用结构化工具（卡牌、剧场）深入探索合伙人关系中的具体问题",
-        "customer_mindset": "「我想跟合伙人试试这些工具，看看能不能把说不出的不对劲变成看得见的数据」",
-        "trigger_products": [
-          "合伙人决策卡牌",
-          "决策剧场"
-        ],
-        "match_products": [
-          "cards-play",
-          "decision-theatre",
-          "slicing-pie",
-          "fulldiag"
-        ],
-        "next_stage_condition": "与合伙人完成至少一次卡牌对局或决策剧场",
-        "typical_duration": "7-30天",
-        "key_metrics": [
-          "卡牌使用次数",
-          "决策剧场完成"
-        ]
-      },
-      {
-        "id": "stage-4",
-        "name": "深入",
-        "icon": "⚖️",
-        "desc": "客户开始系统性使用五维框架进行合伙人决策，需要深度诊断和个性化指导",
-        "customer_mindset": "「我们需要更系统的方案——不只是工具，是一套方法论」",
-        "trigger_products": [
-          "完整诊断报告",
-          "退出指引",
-          "元合伙框架"
-        ],
-        "match_products": [
-          "chemical-report",
-          "exit-guide",
-          "deep-slicing",
-          "deep-wasserman",
-          "match",
-          "metapartner"
-        ],
-        "next_stage_condition": "完成完整诊断或退出方案设计",
-        "typical_duration": "30-90天",
-        "key_metrics": [
-          "完整诊断完成",
-          "深度文章阅读"
-        ]
-      },
-      {
-        "id": "stage-5",
-        "name": "共契",
-        "icon": "🤝",
-        "desc": "客户与满意解研究所建立深度合作关系，成为方法的实践者和传播者",
-        "customer_mindset": "「这套方法已经成为我们决策的一部分——我想推荐给其他创始人」",
-        "trigger_products": [
-          "案例库",
-          "知识库",
-          "白皮书"
-        ],
-        "match_products": [
-          "cases",
-          "creation",
-          "whitepaper",
-          "university",
-          "proposal"
-        ],
-        "next_stage_condition": "客户主动推荐新客户或深度参与共创",
-        "typical_duration": "90天+",
-        "key_metrics": [
-          "推荐率",
-          "复购率",
-          "共创参与"
-        ]
-      }
-    ],
-    "customer_stage_map": {
-      "硬科技创始人": {
-        "current_stage": "发现",
-        "progress": "已完成五维自评，准备进入评估阶段",
-        "recommended_next": "评估·五维雷达图"
-      },
-      "VC投后负责人": {
-        "current_stage": "发现",
-        "progress": "浏览了品牌首页，了解框架概念",
-        "recommended_next": "发现·五维自评"
-      },
-      "律所合伙人": {
-        "current_stage": "发现",
-        "progress": "通过行业渠道了解到研究所",
-        "recommended_next": "发现·五维自评"
-      },
-      "政府园区负责人": {
-        "current_stage": "发现",
-        "progress": "通过南山产业生态接触到研究所",
-        "recommended_next": "发现·了解更多"
-      },
-      "独立董事/顾问": {
-        "current_stage": "发现",
-        "progress": "独立研究满意解方法，尚未试用工具",
-        "recommended_next": "发现·五维自评"
-      }
-    }
-  },
-  "individual_customer_flows": [
-    {
-      "customer_id": "CUST-001",
-      "customer_name": "硬科技创始人",
-      "industry": "激光雷达·AI芯片",
-      "city": "深圳·南山",
-      "persona_id": "AVAT-001",
-      "current_stage": "发现",
-      "stage_history": [
-        {
-          "stage": "发现",
-          "entered_at": "2026-05-28T10:00:00",
-          "source": "行业文章"
-        },
-        {
-          "stage": "发现",
-          "event": "完成自评",
-          "at": "2026-05-30T14:00:00",
-          "score_delta": 15
-        }
-      ],
-      "progress": 35,
-      "next_milestone": "完成雷达图 → 进入评估阶段",
-      "health_score": 78,
-      "health_breakdown": {
-        "engagement": 80,
-        "adoption": 35,
-        "satisfaction": 85,
-        "expansion": 20,
-        "risk": 25
-      },
-      "last_activity": "2026-05-30T14:00:00",
-      "active_days": 3,
-      "products_used": [
-        "assessment"
-      ],
-      "products_recommended": [
-        "radar",
-        "checklist"
-      ],
-      "risk_signals": [],
-      "timeline": [
-        {
-          "date": "2026-05-28",
-          "event": "首次访问品牌首页",
-          "type": "visit"
-        },
-        {
-          "date": "2026-05-29",
-          "event": "阅读五维框架文章",
-          "type": "content"
-        },
-        {
-          "date": "2026-05-30",
-          "event": "完成五维自评",
-          "type": "activation",
-          "score": 72
-        }
-      ],
-      "front_stage": "转化",
-      "front_progress": 80,
-      "acquisition_source": "直接访问",
-      "first_touchpoint": "品牌首页",
-      "first_touch_date": "2026-05-28",
-      "full_stage": "发现",
-      "back_extend_stage": "none"
-    },
-    {
-      "customer_id": "CUST-002",
-      "customer_name": "VC投后负责人",
-      "industry": "风险投资",
-      "city": "北京",
-      "persona_id": "AVAT-002",
-      "current_stage": "发现",
-      "stage_history": [
-        {
-          "stage": "发现",
-          "entered_at": "2026-05-29T09:00:00",
-          "source": "LP推荐"
-        }
-      ],
-      "progress": 15,
-      "next_milestone": "完成五维自评 → 理解工具价值",
-      "health_score": 55,
-      "health_breakdown": {
-        "engagement": 30,
-        "adoption": 15,
-        "satisfaction": 70,
-        "expansion": 10,
-        "risk": 45
-      },
-      "last_activity": "2026-05-29T09:30:00",
-      "active_days": 1,
-      "products_used": [],
-      "products_recommended": [
-        "assessment"
-      ],
-      "risk_signals": [
-        "超过48小时未活跃",
-        "未使用任何产品"
-      ],
-      "timeline": [
-        {
-          "date": "2026-05-29",
-          "event": "首次访问品牌首页",
-          "type": "visit"
-        }
-      ],
-      "front_stage": "转化",
-      "front_progress": 80,
-      "acquisition_source": "直接访问",
-      "first_touchpoint": "品牌首页",
-      "first_touch_date": "2026-05-29",
-      "full_stage": "发现",
-      "back_extend_stage": "none"
-    },
-    {
-      "customer_id": "CUST-003",
-      "customer_name": "律所合伙人",
-      "industry": "法律服务",
-      "city": "上海",
-      "persona_id": "AVAT-003",
-      "current_stage": "发现",
-      "stage_history": [
-        {
-          "stage": "发现",
-          "entered_at": "2026-05-30T11:00:00",
-          "source": "行业同行推荐"
-        }
-      ],
-      "progress": 5,
-      "next_milestone": "首次访问 → 完成自评",
-      "health_score": 60,
-      "health_breakdown": {
-        "engagement": 15,
-        "adoption": 5,
-        "satisfaction": 80,
-        "expansion": 15,
-        "risk": 35
-      },
-      "last_activity": "2026-05-30T11:00:00",
-      "active_days": 1,
-      "products_used": [],
-      "products_recommended": [
-        "assessment",
-        "radar"
-      ],
-      "risk_signals": [
-        "初次接触·需跟进"
-      ],
-      "timeline": [
-        {
-          "date": "2026-05-30",
-          "event": "首次访问品牌首页",
-          "type": "visit"
-        }
-      ],
-      "front_stage": "转化",
-      "front_progress": 80,
-      "acquisition_source": "直接访问",
-      "first_touchpoint": "品牌首页",
-      "first_touch_date": "2026-05-30",
-      "full_stage": "发现",
-      "back_extend_stage": "none"
-    },
-    {
-      "customer_id": "CUST-004",
-      "customer_name": "政府园区负责人",
-      "industry": "公共管理",
-      "city": "深圳·南山",
-      "persona_id": "AVAT-004",
-      "current_stage": "发现",
-      "stage_history": [
-        {
-          "stage": "发现",
-          "entered_at": "2026-05-27T15:00:00",
-          "source": "南山产业生态"
-        }
-      ],
-      "progress": 20,
-      "next_milestone": "了解完整方案 → 匹配园区需求",
-      "health_score": 65,
-      "health_breakdown": {
-        "engagement": 40,
-        "adoption": 20,
-        "satisfaction": 75,
-        "expansion": 30,
-        "risk": 30
-      },
-      "last_activity": "2026-05-28T16:00:00",
-      "active_days": 2,
-      "products_used": [],
-      "products_recommended": [
-        "assessment",
-        "chemical-report",
-        "cases"
-      ],
-      "risk_signals": [
-        "活跃度下降中"
-      ],
-      "timeline": [
-        {
-          "date": "2026-05-27",
-          "event": "首次访问",
-          "type": "visit"
-        },
-        {
-          "date": "2026-05-28",
-          "event": "浏览核心产品页面",
-          "type": "content"
-        }
-      ],
-      "front_stage": "转化",
-      "front_progress": 80,
-      "acquisition_source": "直接访问",
-      "first_touchpoint": "品牌首页",
-      "first_touch_date": "2026-05-27",
-      "full_stage": "发现",
-      "back_extend_stage": "none"
-    },
-    {
-      "customer_id": "CUST-005",
-      "customer_name": "独立董事/顾问",
-      "industry": "咨询",
-      "city": "杭州",
-      "persona_id": "AVAT-005",
-      "current_stage": "发现",
-      "stage_history": [
-        {
-          "stage": "发现",
-          "entered_at": "2026-05-30T08:00:00",
-          "source": "独立研究"
-        }
-      ],
-      "progress": 10,
-      "next_milestone": "分析五维框架 → 确认适用性",
-      "health_score": 70,
-      "health_breakdown": {
-        "engagement": 25,
-        "adoption": 10,
-        "satisfaction": 85,
-        "expansion": 20,
-        "risk": 20
-      },
-      "last_activity": "2026-05-30T09:00:00",
-      "active_days": 1,
-      "products_used": [],
-      "products_recommended": [
-        "assessment",
-        "cards-play",
-        "deep-slicing"
-      ],
-      "risk_signals": [],
-      "timeline": [
-        {
-          "date": "2026-05-30",
-          "event": "首次访问",
-          "type": "visit"
-        }
-      ],
-      "front_stage": "转化",
-      "front_progress": 80,
-      "acquisition_source": "直接访问",
-      "first_touchpoint": "品牌首页",
-      "first_touch_date": "2026-05-30",
-      "full_stage": "发现",
-      "back_extend_stage": "none"
-    }
-  ],
-  "health_score_model": {
-    "version": "2.0",
-    "description": "5维度加权健康评分模型，总分100",
-    "dimensions": {
-      "engagement": {
-        "weight": 0.25,
-        "label": "活跃度",
-        "description": "访问频率·停留时长·回访率"
-      },
-      "adoption": {
-        "weight": 0.3,
-        "label": "采用度",
-        "description": "产品使用数·完成率·进度"
-      },
-      "satisfaction": {
-        "weight": 0.2,
-        "label": "满意度",
-        "description": "反馈评分·净推荐值·投诉率"
-      },
-      "expansion": {
-        "weight": 0.15,
-        "label": "扩展潜力",
-        "description": "阶段晋升·新增需求·推荐意愿"
-      },
-      "risk": {
-        "weight": 0.1,
-        "label": "风险指标",
-        "description": "流失风险·停滞信号·负面事件（逆指标）"
-      }
-    },
-    "tiers": {
-      "healthy": {
-        "range": [
-          80,
-          100
-        ],
-        "color": "#3D7A4F",
-        "icon": "🟢",
-        "label": "健康",
-        "action": "维持"
-      },
-      "attention": {
-        "range": [
-          60,
-          79
-        ],
-        "color": "#C2780A",
-        "icon": "🟡",
-        "label": "关注",
-        "action": "主动触达"
-      },
-      "at_risk": {
-        "range": [
-          40,
-          59
-        ],
-        "color": "#E67E22",
-        "icon": "🟠",
-        "label": "风险",
-        "action": "重点干预"
-      },
-      "critical": {
-        "range": [
-          0,
-          39
-        ],
-        "color": "#C23B22",
-        "icon": "🔴",
-        "label": "危急",
-        "action": "立即响应"
-      }
-    }
-  },
-  "early_warnings": {
-    "version": "1.0",
-    "enabled": true,
-    "last_check": "2026-05-31T13:04:17.446145+08:00",
-    "rules": [
-      {
-        "id": "WARN-001",
-        "name": "活跃度骤降",
-        "condition": "last_activity > 72小时 且 current_stage != '共契'",
-        "severity": "P1",
-        "auto_action": "推送激活邮件·标记CSM跟进",
-        "triggered_for": [
-          "CUST-002",
-          "CUST-004"
-        ]
-      },
-      {
-        "id": "WARN-002",
-        "name": "阶段停滞",
-        "condition": "同一阶段停留 > 30天 且 progress < 50%",
-        "severity": "P1",
-        "auto_action": "推荐进阶产品·安排阶段评审",
-        "triggered_for": []
-      },
-      {
-        "id": "WARN-003",
-        "name": "首次接触未激活",
-        "condition": "首次访问 > 7天 且 products_used.length = 0",
-        "severity": "P2",
-        "auto_action": "发送引导邮件·推荐自评入口",
-        "triggered_for": []
-      },
-      {
-        "id": "WARN-004",
-        "name": "健康分持续下降",
-        "condition": "health_score 连续2次下降 或 下降幅度 > 20",
-        "severity": "P0",
-        "auto_action": "立即通知创始人·触达客户",
-        "triggered_for": []
-      },
-      {
-        "id": "WARN-005",
-        "name": "高价值客户静默",
-        "condition": "health_score > 70 且 last_activity > 14天",
-        "severity": "P2",
-        "auto_action": "推送新内容·邀请体验新产品",
-        "triggered_for": []
-      }
-    ],
-    "active_alerts": [
-      {
-        "customer": "VC投后负责人",
-        "rule": "WARN-001",
-        "severity": "P1",
-        "message": "超过48小时未活跃，建议触达",
-        "created_at": "2026-05-31T13:04:17.446145+08:00"
-      }
-    ]
-  },
-  "product_matching": {
-    "version": "2.0",
-    "method": "基于阶段×行业×痛点的三维匹配",
-    "match_matrix": {
-      "硬科技创始人": {
-        "current_match": [
-          "radar",
-          "checklist"
-        ],
-        "next_stage_match": [
-          "cards-play",
-          "decision-theatre"
-        ],
-        "deep_match": [
-          "chemical-report",
-          "exit-guide",
-          "deep-wasserman"
-        ],
-        "pain_point_match": {
-          "信任危机": "cards-play",
-          "决策分歧": "decision-theatre",
-          "股权分配": "slicing-pie"
-        }
-      },
-      "VC投后负责人": {
-        "current_match": [
-          "assessment"
-        ],
-        "next_stage_match": [
-          "radar",
-          "checklist"
-        ],
-        "deep_match": [
-          "match",
-          "exit-guide"
-        ],
-        "pain_point_match": {
-          "portfolio评估": "match",
-          "创始人退出": "exit-guide"
-        }
-      },
-      "律所合伙人": {
-        "current_match": [
-          "assessment",
-          "radar"
-        ],
-        "next_stage_match": [
-          "cards-play",
-          "decision-theatre"
-        ],
-        "deep_match": [
-          "chemical-report",
-          "exit-guide",
-          "deep-lencioni"
-        ],
-        "pain_point_match": {
-          "合伙人协议": "checklist",
-          "股权纠纷": "slicing-pie",
-          "退出设计": "exit-guide"
-        }
-      },
-      "政府园区负责人": {
-        "current_match": [
-          "assessment",
-          "chemical-report"
-        ],
-        "next_stage_match": [
-          "cases",
-          "radar"
-        ],
-        "deep_match": [
-          "university",
-          "proposal",
-          "whitepaper"
-        ],
-        "pain_point_match": {
-          "产业匹配": "match",
-          "培训体系": "university"
-        }
-      },
-      "独立董事/顾问": {
-        "current_match": [
-          "assessment",
-          "cards-play"
-        ],
-        "next_stage_match": [
-          "deep-slicing",
-          "radar"
-        ],
-        "deep_match": [
-          "chemical-report",
-          "decision-theatre",
-          "deep-thiel"
-        ],
-        "pain_point_match": {
-          "决策框架": "assessment",
-          "治理方法": "checklist",
-          "冲突案例": "cases"
-        }
-      }
-    },
-    "industry_match": {
-      "激光雷达·AI芯片": [
-        "cards-play",
-        "decision-theatre"
-      ],
-      "风险投资": [
-        "match",
-        "exit-guide"
-      ],
-      "法律服务": [
-        "checklist",
-        "slicing-pie",
-        "exit-guide"
-      ],
-      "公共管理": [
-        "cases",
-        "university",
-        "proposal"
-      ],
-      "新能源·储能": [
-        "chemical-report",
-        "radar"
-      ],
-      "医疗健康": [
-        "assessment",
-        "checklist"
-      ],
-      "AI机器人": [
-        "decision-theatre",
-        "cards-play"
-      ]
-    }
-  },
-  "automation_rules": {
-    "version": "1.0",
-    "rules": [
-      {
-        "id": "AUTO-001",
-        "name": "24小时激活引导",
-        "trigger": "new_customer_first_visit + 24h",
-        "condition": "products_used.length == 0",
-        "action": "推送自评入口链接 + 欢迎邮件",
-        "status": "active"
-      },
-      {
-        "id": "AUTO-002",
-        "name": "阶段晋升推荐",
-        "trigger": "stage_transition",
-        "condition": "automatically",
-        "action": "根据product_matching引擎推荐下一阶段产品",
-        "status": "active"
-      },
-      {
-        "id": "AUTO-003",
-        "name": "7天静默预警",
-        "trigger": "inactive_7_days",
-        "condition": "health_score > 50",
-        "action": "触达 + 推荐新鲜内容",
-        "status": "active"
-      },
-      {
-        "id": "AUTO-004",
-        "name": "健康分告急",
-        "trigger": "health_score < 40",
-        "condition": "immediately",
-        "action": "P0告警 → 创始人触达 → 客户特殊关怀方案",
-        "status": "active"
-      },
-      {
-        "id": "AUTO-005",
-        "name": "共契客户共创",
-        "trigger": "stage == '共契'",
-        "condition": "automatically",
-        "action": "邀请参与案例共创·推荐成为内测伙伴",
-        "status": "active"
-      }
-    ]
-  },
-  "product_layers": {
-    "version": "4.0",
-    "philosophy": "从客户解决问题出发，而非从产品列表出发",
-    "created_at": "2026-05-31T13:26:02.413991+08:00",
-    "layers": {
-      "L0_core": {
-        "name": "核心产品",
-        "description": "客户从发现到共契全程接触的核心工具——品牌首页直接展示",
-        "max_count": 11,
-        "products": [
-          {
-            "slug": "assessment",
-            "name": "五维决策自评",
-            "why_customer_needs": "想了解自己的决策模式——这是所有客户的起点"
-          },
-          {
-            "slug": "radar",
-            "name": "五维雷达图",
-            "why_customer_needs": "做完自评后，想看自己在五个维度上的画像"
-          },
-          {
-            "slug": "cards-play",
-            "name": "合伙人决策卡牌",
-            "why_customer_needs": "想找个安全的方式，跟合伙人谈那些说不出口的事"
-          },
-          {
-            "slug": "checklist",
-            "name": "决策前自检清单",
-            "why_customer_needs": "重大决策前，需要一个结构化框架避免遗漏"
-          },
-          {
-            "slug": "decision-theatre",
-            "name": "决策剧场",
-            "why_customer_needs": "想在行动前预演不同选择的后果"
-          },
-          {
-            "slug": "chemical-report",
-            "name": "完整诊断报告",
-            "why_customer_needs": "需要一份可以跟合伙人和投资人分享的系统性评估"
-          },
-          {
-            "slug": "exit-guide",
-            "name": "合伙人退出指引",
-            "why_customer_needs": "走到分手这一步，需要一个体面的退出方案"
-          },
-          {
-            "slug": "cases",
-            "name": "决策案例库",
-            "why_customer_needs": "想看看别人的类似情况是怎么处理的"
-          },
-          {
-            "slug": "product-catalog",
-            "name": "产品目录",
-            "why_customer_needs": "想浏览全部可用工具和方法论"
-          },
-          {
-            "slug": "about",
-            "name": "关于我们",
-            "why_customer_needs": "想了解研究所的背景、方法论来源和创始人"
-          },
-          {
-            "slug": "slicing-pie",
-            "name": "分割饼·股权工具",
-            "why_customer_needs": "股权分配是最容易出问题的地方——需要量化方法"
-          }
-        ]
-      },
-      "L1_support": {
-        "name": "支撑产品",
-        "description": "深度诊断工具和专项方法论——客户在特定阶段需要时使用",
-        "products": [
-          {
-            "slug": "fulldiag",
-            "name": "全面合伙人诊断",
-            "stage": "深入"
-          },
-          {
-            "slug": "match",
-            "name": "匹配引擎",
-            "stage": "深入"
-          },
-          {
-            "slug": "metapartner",
-            "name": "元合伙框架",
-            "stage": "深入"
-          },
-          {
-            "slug": "thermometer",
-            "name": "关系温度计",
-            "stage": "评估"
-          },
-          {
-            "slug": "knights",
-            "name": "四骑士识别",
-            "stage": "评估"
-          },
-          {
-            "slug": "rps",
-            "name": "RPS风险剖面",
-            "stage": "尝试"
-          },
-          {
-            "slug": "crisis-sim",
-            "name": "危机模拟",
-            "stage": "尝试"
-          },
-          {
-            "slug": "pre0",
-            "name": "Pre-0身体觉察",
-            "stage": "评估"
-          },
-          {
-            "slug": "stars-method",
-            "name": "星光方法论",
-            "stage": "深入"
-          },
-          {
-            "slug": "go",
-            "name": "决策通道",
-            "stage": "发现"
-          },
-          {
-            "slug": "deep-slicing",
-            "name": "深度·分割饼",
-            "stage": "深入"
-          },
-          {
-            "slug": "deep-wasserman",
-            "name": "深度·合伙人困境",
-            "stage": "深入"
-          },
-          {
-            "slug": "deep-lencioni",
-            "name": "深度·团队五障",
-            "stage": "深入"
-          },
-          {
-            "slug": "deep-thiel",
-            "name": "深度·从0到1",
-            "stage": "深入"
-          },
-          {
-            "slug": "deep-duke",
-            "name": "深度·决策心理学",
-            "stage": "深入"
-          },
-          {
-            "slug": "cases-cluster",
-            "name": "案例集群",
-            "stage": "尝试"
-          },
-          {
-            "slug": "case-zhangxue",
-            "name": "案例·张学武",
-            "stage": "尝试"
-          },
-          {
-            "slug": "creation",
-            "name": "星月传奇·共创",
-            "stage": "共契"
-          },
-          {
-            "slug": "proposal",
-            "name": "方案书",
-            "stage": "共契"
-          },
-          {
-            "slug": "university",
-            "name": "决策大学",
-            "stage": "共契"
-          }
-        ]
-      },
-      "L2_assets": {
-        "name": "知识资产",
-        "description": "案例、方法论、白皮书、行业研究——按需查阅",
-        "count_remaining": "其余线上+归入知识库产品",
-        "notable": [
-          "whitepaper",
-          "deep-*",
-          "case-*",
-          "blood-*",
-          "ops-*",
-          "media-*",
-          "dialogue-*"
-        ]
-      },
-      "L3_internal": {
-        "name": "内部资产",
-        "description": "脚本、Cron、实验性内容、历史资产——仅内部使用",
-        "count_remaining": "其余已下架产品"
-      }
-    }
-  },
-  "customer_product_fusion": {
-    "version": "2.0",
-    "principle": "每个阶段客户只看到3-5个最相关的产品，而非全部315个。随着阶段晋升，逐步解锁更多产品。",
-    "created_at": "2026-05-31T13:26:02.413991+08:00",
-    "stages": {
-      "发现": {
-        "visible_products": 3,
-        "products": [
-          {
-            "slug": "assessment",
-            "role": "入门",
-            "why": "唯一的起点——必须先了解自己"
-          },
-          {
-            "slug": "go",
-            "role": "导航",
-            "why": "帮客户找到适合自己的路径"
-          },
-          {
-            "slug": "about",
-            "role": "信任",
-            "why": "了解我们是谁、凭什么值得信任"
-          }
-        ],
-        "customer_action": "完成五维自评 → 进入评估阶段",
-        "auto_trigger": "24小时内未完成自评 → 推送提醒"
-      },
-      "评估": {
-        "visible_products": 5,
-        "unlocks_from_previous": [
-          "radar",
-          "checklist",
-          "thermometer"
-        ],
-        "products": [
-          {
-            "slug": "radar",
-            "role": "可视化",
-            "why": "把自评结果变成直观的五维图"
-          },
-          {
-            "slug": "checklist",
-            "role": "结构化",
-            "why": "重大决策前必须过一遍"
-          },
-          {
-            "slug": "thermometer",
-            "role": "测量",
-            "why": "量化合伙人关系的温度"
-          },
-          {
-            "slug": "knights",
-            "role": "识别",
-            "why": "识别关系中的四骑士信号"
-          },
-          {
-            "slug": "pre0",
-            "role": "觉察",
-            "why": "身体层面的决策信号"
-          }
-        ],
-        "customer_action": "完成任意2个评估工具 → 进入尝试阶段",
-        "auto_trigger": "7天未进展 → 推荐卡牌对局"
-      },
-      "尝试": {
-        "visible_products": 5,
-        "unlocks_from_previous": [
-          "cards-play",
-          "decision-theatre",
-          "crisis-sim"
-        ],
-        "products": [
-          {
-            "slug": "cards-play",
-            "role": "对话",
-            "why": "最核心的交互工具——让不可讨论的变得可讨论"
-          },
-          {
-            "slug": "decision-theatre",
-            "role": "预演",
-            "why": "在安全环境中测试不同决策"
-          },
-          {
-            "slug": "crisis-sim",
-            "role": "压力测试",
-            "why": "最坏情况下你们的关系扛得住吗"
-          },
-          {
-            "slug": "slicing-pie",
-            "role": "量化",
-            "why": "股权问题必须早谈"
-          },
-          {
-            "slug": "rps",
-            "role": "全局",
-            "why": "全面风险评估"
-          }
-        ],
-        "customer_action": "完成至少1次卡牌或剧场 → 进入深入阶段",
-        "auto_trigger": "14天未进展 → 创始人主动触达"
-      },
-      "深入": {
-        "visible_products": 5,
-        "unlocks_from_previous": [
-          "chemical-report",
-          "exit-guide",
-          "match",
-          "fulldiag"
-        ],
-        "products": [
-          {
-            "slug": "chemical-report",
-            "role": "系统性",
-            "why": "完整的诊断报告——可以跟投资人和律师分享"
-          },
-          {
-            "slug": "match",
-            "role": "匹配",
-            "why": "你们的匹配度到底多少"
-          },
-          {
-            "slug": "fulldiag",
-            "role": "深度",
-            "why": "四层诊断——物理到心理"
-          },
-          {
-            "slug": "exit-guide",
-            "role": "退出",
-            "why": "如果需要分手——体面的方案"
-          },
-          {
-            "slug": "metapartner",
-            "role": "框架",
-            "why": "元层面的合伙人方法论"
-          }
-        ],
-        "customer_action": "完成完整诊断 → 进入共契阶段",
-        "auto_trigger": "自动推荐深度文章"
-      },
-      "共契": {
-        "visible_products": 5,
-        "unlocks_from_previous": [
-          "cases",
-          "creation",
-          "proposal",
-          "university"
-        ],
-        "products": [
-          {
-            "slug": "cases",
-            "role": "参考",
-            "why": "别人的经验是最好的老师"
-          },
-          {
-            "slug": "creation",
-            "role": "共创",
-            "why": "你的经验也能成为案例"
-          },
-          {
-            "slug": "proposal",
-            "role": "扩展",
-            "why": "为组织定制方案"
-          },
-          {
-            "slug": "university",
-            "role": "体系化",
-            "why": "系统学习决策方法论"
-          },
-          {
-            "slug": "whitepaper",
-            "role": "权威",
-            "why": "可引用的正式研究"
-          }
-        ],
-        "customer_action": "推荐新客户或参与案例共创",
-        "auto_trigger": "主动邀请共创 + 推荐合伙人计划"
-      }
-    }
-  },
-  "product_fusion_stats": {
-    "version": "4.0",
-    "philosophy": "客户视角的产品分层——不是删除产品，是分清主次",
-    "summary": {
-      "total_all": 315,
-      "L0_core_visible": 11,
-      "L1_support": 20,
-      "L2_assets_approx": 50,
-      "L3_internal_approx": 234,
-      "customer_facing": 31
-    },
-    "key_insights": [
-      "客户从「发现」到「共契」全程只需要接触31个产品（L0+L1）",
-      "87%的产品（L2+L3）是内部资产和知识沉淀，不对客户直接展示",
-      "每个阶段最多5个可见产品——避免选择焦虑",
-      "产品不是越多越好——是「对的产品在对的时间出现」",
-      "产品层层解锁——给客户清晰的晋级路径，而非一次性扔315个"
-    ]
-  },
-  "full_lifecycle": {
-    "version": "6.0",
-    "philosophy": "客户生命周期从营销第一刻开始——宣发即起点，共契即目标",
-    "created_at": "2026-05-31T13:34:48.296387+08:00",
-    "total_stages": 15,
-    "front_half": {
-      "name": "获客引擎",
-      "stages": [
-        "宣发",
-        "触达",
-        "吸引",
-        "转化",
-        "导入"
-      ],
-      "owner": "市场+创始人"
-    },
-    "back_half": {
-      "name": "深耕体系",
-      "stages": [
-        "发现",
-        "评估",
-        "尝试",
-        "深入",
-        "共契"
-      ],
-      "owner": "客户成功+创始人"
-    },
-    "stages": [
-      {
-        "id": "stage-00",
-        "name": "宣发",
-        "icon": "📡",
-        "half": "front",
-        "question": "目标客户在哪里能看到我们？",
-        "description": "内容发布·渠道投放·品牌曝光",
-        "channels": [
-          "微信公众号/知乎/LinkedIn",
-          "行业峰会/闭门会",
-          "VC/园区/律所渠道",
-          "创始人个人品牌",
-          "SEO/博客"
-        ],
-        "metrics": [
-          "内容发布量",
-          "渠道覆盖数",
-          "品牌搜索量"
-        ],
-        "content": [
-          "行业洞察文章",
-          "方法论白皮书",
-          "案例分析",
-          "创始人访谈"
-        ]
-      },
-      {
-        "id": "stage-01",
-        "name": "触达",
-        "icon": "👀",
-        "half": "front",
-        "question": "谁看到了我们的内容？",
-        "description": "目标客户通过某个渠道接触到我们",
-        "channels": [
-          "微信阅读/转发",
-          "LinkedIn浏览/互动",
-          "活动签到/名片",
-          "VC推荐/LP介绍",
-          "搜索/直接访问"
-        ],
-        "metrics": [
-          "网页PV",
-          "文章阅读量",
-          "活动参与",
-          "推荐来源"
-        ],
-        "content": [
-          "数据冲击型标题",
-          "真实案例故事",
-          "框架可视化"
-        ]
-      },
-      {
-        "id": "stage-02",
-        "name": "吸引",
-        "icon": "💡",
-        "half": "front",
-        "question": "客户有没有产生兴趣？",
-        "description": "从看到到关注——客户开始主动探索",
-        "channels": [
-          "深度阅读>3min",
-          "浏览多页面",
-          "下载/收藏",
-          "关注/订阅"
-        ],
-        "metrics": [
-          "平均停留",
-          "跳出率",
-          "浏览深度",
-          "回访率"
-        ],
-        "content": [
-          "65%数据冲击",
-          "五维框架介绍",
-          "案例故事共鸣",
-          "3分钟零门槛体验"
-        ]
-      },
-      {
-        "id": "stage-03",
-        "name": "转化",
-        "icon": "⚡",
-        "half": "front",
-        "question": "客户愿意行动了吗？",
-        "description": "完成自评·留信息·首次互动",
-        "channels": [
-          "五维自评完成",
-          "预约咨询",
-          "留联系方式",
-          "分享给合伙人",
-          "加入内测"
-        ],
-        "metrics": [
-          "自评完成率",
-          "访问→自评转化率",
-          "咨询预约量"
-        ],
-        "content": [
-          "3分钟自评(CTA)",
-          "自检清单PDF(留资)",
-          "免费·隐私安全·即刻看结果"
-        ]
-      },
-      {
-        "id": "stage-04",
-        "name": "导入",
-        "icon": "🚪",
-        "half": "front",
-        "question": "客户顺利进入体系了吗？",
-        "description": "查看报告·了解框架·首次使用工具",
-        "channels": [
-          "自评报告(立即看)",
-          "五维框架(3分钟)",
-          "推荐下一步(个性化)",
-          "第一个工具(轻松开始)"
-        ],
-        "metrics": [
-          "报告查看率",
-          "首次工具使用",
-          "导入完成率",
-          "Day1留存"
-        ],
-        "content": [
-          "个性化导入引导",
-          "Day1邮件序列",
-          "首次工具推荐"
-        ]
-      },
-      {
-        "id": "stage-10",
-        "name": "升级",
-        "icon": "💎",
-        "half": "back_extend",
-        "question": "客户能不能获得更深价值？",
-        "description": "从标准化工具到个性化深度服务——客户价值的第二增长曲线",
-        "customer_action": "使用高级工具·深度诊断·定制方案",
-        "our_action": "升级推荐·一对一咨询·战略级服务",
-        "trigger": "共契阶段完成后·客户主动提出·健康分>85",
-        "metrics": [
-          "升级转化率",
-          "深度服务收入",
-          "客户满意度"
-        ],
-        "small_loop": "深度咨询→续约→更高LTV→更多资源投入→更好服务"
-      },
-      {
-        "id": "stage-11",
-        "name": "传播",
-        "icon": "📢",
-        "half": "back_extend",
-        "question": "客户愿意帮我们说话吗？",
-        "description": "从满意客户到主动传播者——口碑是最强的增长引擎",
-        "customer_action": "NPS评分·写推荐语·案例授权·社交分享",
-        "our_action": "推荐激励计划·案例包装·LinkedIn背书·PR合作",
-        "trigger": "深度使用>90天·NPS>9·主动表达满意",
-        "metrics": [
-          "NPS分数",
-          "推荐转化率",
-          "案例发布数",
-          "社交提及"
-        ],
-        "small_loop": "NPS高分→口碑传播→新客户获取→更多成功案例→更强品牌"
-      },
-      {
-        "id": "stage-12",
-        "name": "社群",
-        "icon": "🌐",
-        "half": "back_extend",
-        "question": "客户之间能互相帮助吗？",
-        "description": "从一对一服务到多对多网络——客户间的化学反应开始发生",
-        "customer_action": "加入社群·参与讨论·分享经验·同行互助",
-        "our_action": "社群运营·闭门活动·同行匹配·知识库共建",
-        "trigger": "客户数>10·主动表达交流意愿·行业相近",
-        "metrics": [
-          "社群活跃度",
-          "同行匹配数",
-          "活动参与率",
-          "互助次数"
-        ],
-        "small_loop": "闭门会→同行匹配→社群增长→更多活动→更强粘性"
-      },
-      {
-        "id": "stage-13",
-        "name": "共创",
-        "icon": "✨",
-        "half": "back_extend",
-        "question": "客户愿意和我们一起创造吗？",
-        "description": "从消费者到共创者——客户成为产品进化的一部分",
-        "customer_action": "共创案例·联合研究·产品内测·方法共建",
-        "our_action": "共创邀请·联合署名·优先体验·品牌共建",
-        "trigger": "社群活跃>6月·主动提出合作·行业互补",
-        "metrics": [
-          "共创项目数",
-          "联合产出数",
-          "产品反馈采纳率"
-        ],
-        "small_loop": "联合署名→品牌升级→更多合作→更丰富产出→更高价值"
-      },
-      {
-        "id": "stage-14",
-        "name": "反哺",
-        "icon": "🔄",
-        "half": "back_extend",
-        "question": "客户如何反哺整个体系？",
-        "description": "从共生者到体系的一部分——客户成为导师、投资人或渠道伙伴",
-        "customer_action": "成为导师·投资/合作·渠道推荐·生态共建",
-        "our_action": "导师体系·生态合作·联合品牌·投资机会",
-        "trigger": "共创>1年·深度信任·价值观匹配",
-        "metrics": [
-          "导师数量",
-          "渠道伙伴数",
-          "生态合作金额",
-          "品牌联合曝光"
-        ],
-        "small_loop": "导师体系→人才池→生态繁荣→更大市场→更多伙伴"
-      },
-      {
-        "id": "stage-10",
-        "name": "升级",
-        "icon": "💎",
-        "half": "back_extend",
-        "question": "客户能不能获得更深价值？",
-        "description": "从标准化工具到个性化深度服务——客户价值的第二增长曲线",
-        "customer_action": "使用高级工具·深度诊断·定制方案",
-        "our_action": "升级推荐·一对一咨询·战略级服务",
-        "trigger": "共契阶段完成后·客户主动提出·健康分>85",
-        "metrics": [
-          "升级转化率",
-          "深度服务收入",
-          "客户满意度"
-        ],
-        "small_loop": "深度咨询→续约→更高LTV→更多资源投入→更好服务"
-      },
-      {
-        "id": "stage-11",
-        "name": "传播",
-        "icon": "📢",
-        "half": "back_extend",
-        "question": "客户愿意帮我们说话吗？",
-        "description": "从满意客户到主动传播者——口碑是最强的增长引擎",
-        "customer_action": "NPS评分·写推荐语·案例授权·社交分享",
-        "our_action": "推荐激励计划·案例包装·LinkedIn背书·PR合作",
-        "trigger": "深度使用>90天·NPS>9·主动表达满意",
-        "metrics": [
-          "NPS分数",
-          "推荐转化率",
-          "案例发布数",
-          "社交提及"
-        ],
-        "small_loop": "NPS高分→口碑传播→新客户获取→更多成功案例→更强品牌"
-      },
-      {
-        "id": "stage-12",
-        "name": "社群",
-        "icon": "🌐",
-        "half": "back_extend",
-        "question": "客户之间能互相帮助吗？",
-        "description": "从一对一服务到多对多网络——客户间的化学反应开始发生",
-        "customer_action": "加入社群·参与讨论·分享经验·同行互助",
-        "our_action": "社群运营·闭门活动·同行匹配·知识库共建",
-        "trigger": "客户数>10·主动表达交流意愿·行业相近",
-        "metrics": [
-          "社群活跃度",
-          "同行匹配数",
-          "活动参与率",
-          "互助次数"
-        ],
-        "small_loop": "闭门会→同行匹配→社群增长→更多活动→更强粘性"
-      },
-      {
-        "id": "stage-13",
-        "name": "共创",
-        "icon": "✨",
-        "half": "back_extend",
-        "question": "客户愿意和我们一起创造吗？",
-        "description": "从消费者到共创者——客户成为产品进化的一部分",
-        "customer_action": "共创案例·联合研究·产品内测·方法共建",
-        "our_action": "共创邀请·联合署名·优先体验·品牌共建",
-        "trigger": "社群活跃>6月·主动提出合作·行业互补",
-        "metrics": [
-          "共创项目数",
-          "联合产出数",
-          "产品反馈采纳率"
-        ],
-        "small_loop": "联合署名→品牌升级→更多合作→更丰富产出→更高价值"
-      },
-      {
-        "id": "stage-14",
-        "name": "反哺",
-        "icon": "🔄",
-        "half": "back_extend",
-        "question": "客户如何反哺整个体系？",
-        "description": "从共生者到体系的一部分——客户成为导师、投资人或渠道伙伴",
-        "customer_action": "成为导师·投资/合作·渠道推荐·生态共建",
-        "our_action": "导师体系·生态合作·联合品牌·投资机会",
-        "trigger": "共创>1年·深度信任·价值观匹配",
-        "metrics": [
-          "导师数量",
-          "渠道伙伴数",
-          "生态合作金额",
-          "品牌联合曝光"
-        ],
-        "small_loop": "导师体系→人才池→生态繁荣→更大市场→更多伙伴"
-      }
-    ],
-    "back_extend": {
-      "name": "后端延展",
-      "stages": [
-        "升级",
-        "传播",
-        "社群",
-        "共创",
-        "反哺"
-      ],
-      "owner": "生态+创始人"
-    }
-  },
-  "acquisition_engine": {
-    "version": "1.0",
-    "created_at": "2026-05-31T13:34:48.296387+08:00",
-    "channels": [
-      {
-        "id": "CH-001",
-        "name": "创始人IP",
-        "type": "内容",
-        "priority": "P0",
-        "audience": "硬科技创始人·VC合伙人",
-        "calendar": "每周1篇深度+每日互动",
-        "cost": "时间成本",
-        "status": "待启动"
-      },
-      {
-        "id": "CH-002",
-        "name": "微信公众号",
-        "type": "内容",
-        "priority": "P1",
-        "audience": "创业者·管理者",
-        "calendar": "每周2篇(1深度+1工具)",
-        "cost": "时间成本",
-        "status": "待启动"
-      },
-      {
-        "id": "CH-003",
-        "name": "渠道合作",
-        "type": "合作伙伴",
-        "priority": "P0",
-        "audience": "VC投后·园区·律所",
-        "calendar": "季度沟通",
-        "cost": "关系维护",
-        "status": "待启动"
-      },
-      {
-        "id": "CH-004",
-        "name": "闭门活动",
-        "type": "线下",
-        "priority": "P1",
-        "audience": "创始人·投资人",
-        "calendar": "月度1次",
-        "cost": "场地+茶歇",
-        "status": "待启动"
-      },
-      {
-        "id": "CH-005",
-        "name": "SEO/内容沉淀",
-        "type": "内容",
-        "priority": "P2",
-        "audience": "搜索用户",
-        "calendar": "持续优化",
-        "cost": "时间成本",
-        "status": "待启动"
-      },
-      {
-        "id": "CH-006",
-        "name": "口碑推荐",
-        "type": "社交",
-        "priority": "P1",
-        "audience": "共契客户",
-        "calendar": "持续激励",
-        "cost": "推荐激励",
-        "status": "待启动"
-      }
-    ],
-    "funnel_targets": {
-      "宣发": 5000,
-      "触达": 1000,
-      "吸引": 300,
-      "转化": 60,
-      "导入": 42
-    },
-    "content_arsenal": {
-      "evergreen": [
-        {
-          "title": "65%的创业失败源于合伙人冲突——数据与真相",
-          "type": "数据冲击",
-          "target": "宣发→触达"
-        },
-        {
-          "title": "五维决策框架白皮书",
-          "type": "方法论",
-          "target": "触达→吸引"
-        },
-        {
-          "title": "从握手到翻脸:合伙人关系的12个转折信号",
-          "type": "故事共鸣",
-          "target": "触达→吸引"
-        },
-        {
-          "title": "3分钟了解你的决策模式",
-          "type": "互动体验",
-          "target": "吸引→转化"
-        },
-        {
-          "title": "真实案例:某硬科技团队的合伙人危机与解决",
-          "type": "社会证明",
-          "target": "吸引→转化"
-        }
-      ],
-      "lead_magnets": [
-        {
-          "title": "合伙人决策前自检清单(PDF)",
-          "gate": "留邮箱"
-        },
-        {
-          "title": "五维决策自评(在线)",
-          "gate": "无需注册"
-        },
-        {
-          "title": "合伙人关系健康度快速评估",
-          "gate": "3分钟免费"
-        }
-      ]
-    }
-  },
-  "closed_loops": {
-    "version": "1.0",
-    "created_at": "2026-05-31T13:51:48.187444+08:00",
-    "philosophy": "闭环不是画圈——是输出能反过来增强输入。小闭环促转化，中闭环增飞轮，大闭环造生态。",
-    "small_loops": [
-      {
-        "id": "SL-01",
-        "name": "自评→分享闭环",
-        "stages": [
-          "宣发",
-          "触达",
-          "吸引"
-        ],
-        "cycle": "完成自评→分享结果→吸引新客户→更多自评",
-        "metric": "分享率",
-        "status": "待激活"
-      },
-      {
-        "id": "SL-02",
-        "name": "留资→触达闭环",
-        "stages": [
-          "吸引",
-          "转化"
-        ],
-        "cycle": "下载PDF→留邮箱→邮件触达→回到网站",
-        "metric": "邮件打开率",
-        "status": "待激活"
-      },
-      {
-        "id": "SL-03",
-        "name": "导入→激活闭环",
-        "stages": [
-          "转化",
-          "导入",
-          "发现"
-        ],
-        "cycle": "完成导入→使用首个工具→完成自评→体验升级",
-        "metric": "Day7激活率",
-        "status": "待激活"
-      },
-      {
-        "id": "SL-04",
-        "name": "评估→诊断闭环",
-        "stages": [
-          "发现",
-          "评估"
-        ],
-        "cycle": "自评完成→雷达图→更多诊断→更深认知",
-        "metric": "诊断完成率",
-        "status": "待激活"
-      },
-      {
-        "id": "SL-05",
-        "name": "卡牌→推荐闭环",
-        "stages": [
-          "评估",
-          "尝试"
-        ],
-        "cycle": "卡牌对局→分享给合伙人→合伙人自评→双向了解",
-        "metric": "合伙人参与率",
-        "status": "待激活"
-      },
-      {
-        "id": "SL-06",
-        "name": "剧场→反馈闭环",
-        "stages": [
-          "尝试"
-        ],
-        "cycle": "决策剧场→行动反馈→产品改进→更好体验",
-        "metric": "反馈采纳率",
-        "status": "待激活"
-      },
-      {
-        "id": "SL-07",
-        "name": "诊断→方案闭环",
-        "stages": [
-          "尝试",
-          "深入"
-        ],
-        "cycle": "完整诊断→个性化方案→实施→效果跟踪",
-        "metric": "方案实施率",
-        "status": "待激活"
-      },
-      {
-        "id": "SL-08",
-        "name": "退出→转介闭环",
-        "stages": [
-          "深入"
-        ],
-        "cycle": "退出方案→律所推荐→律所渠道→新客户",
-        "metric": "转介率",
-        "status": "待激活"
-      },
-      {
-        "id": "SL-09",
-        "name": "案例→传播闭环",
-        "stages": [
-          "共契",
-          "传播"
-        ],
-        "cycle": "共创案例→行业传播→品牌提升→更多咨询",
-        "metric": "案例传播量",
-        "status": "待激活"
-      },
-      {
-        "id": "SL-10",
-        "name": "升级→续约闭环",
-        "stages": [
-          "升级"
-        ],
-        "cycle": "深度服务→更高价值→续约→更多资源",
-        "metric": "续约率",
-        "status": "待激活"
-      },
-      {
-        "id": "SL-11",
-        "name": "NPS→口碑闭环",
-        "stages": [
-          "传播"
-        ],
-        "cycle": "NPS评分→口碑传播→新客获取→更多数据",
-        "metric": "NPS推荐转化",
-        "status": "待激活"
-      },
-      {
-        "id": "SL-12",
-        "name": "社群→互助闭环",
-        "stages": [
-          "社群"
-        ],
-        "cycle": "闭门活动→同行匹配→社群活跃→更多活动",
-        "metric": "社群活跃度",
-        "status": "待激活"
-      },
-      {
-        "id": "SL-13",
-        "name": "共创→品牌闭环",
-        "stages": [
-          "共创"
-        ],
-        "cycle": "联合署名→品牌共建→更多合作→更高品牌价值",
-        "metric": "品牌价值提升",
-        "status": "待激活"
-      },
-      {
-        "id": "SL-14",
-        "name": "导师→生态闭环",
-        "stages": [
-          "反哺"
-        ],
-        "cycle": "导师体系→人才输出→生态合作→体系壮大",
-        "metric": "生态健康度",
-        "status": "待激活"
-      }
-    ],
-    "medium_loops": [
-      {
-        "id": "ML-01",
-        "name": "获客飞轮",
-        "stages": [
-          "宣发",
-          "触达",
-          "吸引",
-          "转化",
-          "导入"
-        ],
-        "description": "客户成功故事→口碑传播→新客户→更丰富的成功故事",
-        "momentum": 0,
-        "health": 0,
-        "key_lever": "成功案例的生产和传播速度"
-      },
-      {
-        "id": "ML-02",
-        "name": "深耕飞轮",
-        "stages": [
-          "发现",
-          "评估",
-          "尝试",
-          "深入",
-          "共契"
-        ],
-        "description": "工具使用→深度体验→阶段晋升→更高价值→推荐更多工具",
-        "momentum": 0,
-        "health": 0,
-        "key_lever": "阶段晋升的速度和深度"
-      },
-      {
-        "id": "ML-03",
-        "name": "传播飞轮",
-        "stages": [
-          "升级",
-          "传播"
-        ],
-        "description": "NPS高分→案例背书→行业声誉→更多咨询→更优质客户",
-        "momentum": 0,
-        "health": 0,
-        "key_lever": "NPS分数和案例传播量"
-      },
-      {
-        "id": "ML-04",
-        "name": "生态飞轮",
-        "stages": [
-          "社群",
-          "共创"
-        ],
-        "description": "社群活跃→共创项目→生态合作→市场拓展→更大社群",
-        "momentum": 0,
-        "health": 0,
-        "key_lever": "生态合作的数量和质量"
-      },
-      {
-        "id": "ML-05",
-        "name": "知识飞轮",
-        "stages": [
-          "反哺"
-        ],
-        "description": "客户反馈→产品迭代→更好工具→更满意→更多反馈",
-        "momentum": 0,
-        "health": 0,
-        "key_lever": "反馈到产品迭代的速度"
-      }
-    ],
-    "big_loop": {
-      "id": "BL-01",
-      "name": "体系自进化大闭环",
-      "description": "客户成功→案例资产→品牌资产→吸引更多优质客户→体系更强大→方法迭代→更好的客户成功",
-      "stages": "全部15阶段",
-      "cycle_time": "6个月",
-      "health": 0,
-      "momentum": 0,
-      "key_indicators": [
-        "品牌资产增长率",
-        "客户质量指数",
-        "方法论迭代速度",
-        "生态伙伴数量",
-        "市场影响力"
-      ]
-    }
-  },
-  "rd_pipeline": {
-    "version": "1.0",
-    "created_at": "2026-05-31T14:57:16.154576+08:00",
-    "philosophy": "外部信息→内部知识→可交付产品——R&D是体系自进化的燃料引擎。采集→提炼→转化→产品化→传播，循环不息。",
-    "stages": [
-      {
-        "id": "RD-01",
-        "name": "采集",
-        "icon": "🔬",
-        "question": "外部世界有什么值得学习？",
-        "sources": [
-          "学术论文(合伙人冲突/决策心理学/组织行为)",
-          "行业报告(创投趋势/硬科技/AI)",
-          "商业案例(大疆/正浩/禾赛/字节)",
-          "书籍文献(Founder's Dilemmas等)",
-          "客户反馈(使用数据/NPS/访谈)"
-        ],
-        "output": "原始素材池",
-        "tools": [
-          "sri_nourishment_collector.py",
-          "Inkwell阅读",
-          "行业监控Cron"
-        ],
-        "metrics": [
-          "周采集量",
-          "覆盖领域",
-          "来源多样性"
-        ]
-      },
-      {
-        "id": "RD-02",
-        "name": "提炼",
-        "icon": "🧪",
-        "question": "如何将素材变成方法论？",
-        "process": "分析核心洞见→归纳为框架→校验→术语标准化",
-        "output": "方法论卡片·框架定义·知识资产",
-        "tools": [
-          "sri_knowledge_flywheel.py",
-          "专家团队评审",
-          "蓝军验证"
-        ],
-        "metrics": [
-          "月提炼产出",
-          "方法论复用",
-          "框架采纳率"
-        ],
-        "examples": [
-          "五维决策框架(时间轴/可行域/身心流/信义观/直觉阈)",
-          "13种冲突类型学",
-          "四层诊断模型"
-        ]
-      },
-      {
-        "id": "RD-03",
-        "name": "转化",
-        "icon": "⚗️",
-        "question": "如何将方法论变成产品？",
-        "process": "框架→原型→内测→打磨→上线",
-        "output": "产品原型·交互工具·测评模型",
-        "tools": [
-          "sri_product_scanner.py",
-          "sri_lifecycle_manager.py",
-          "LLM替身评估"
-        ],
-        "metrics": [
-          "转化周期",
-          "原型→精品率",
-          "月上线数"
-        ],
-        "examples": [
-          "五维自评(方法论→19题测评)",
-          "卡牌对局(冲突类型学→交互卡牌)",
-          "决策剧场(情景推演→预演工具)"
-        ]
-      },
-      {
-        "id": "RD-04",
-        "name": "产品化",
-        "icon": "💎",
-        "question": "如何将产品打磨为精品？",
-        "process": "上线→客户使用→反馈→迭代→精品",
-        "output": "精品产品·白皮书·课程·认证",
-        "tools": [
-          "sri_consistency_checker.py",
-          "sri_auto_healer.py",
-          "质量门禁"
-        ],
-        "metrics": [
-          "精品数",
-          "迭代周期",
-          "满意度"
-        ],
-        "examples": [
-          "决策剧场(精品·镜族·L4)",
-          "卡牌对局(精品·镜族·L2)",
-          "化学报告(精品·衡族·完整诊断)"
-        ]
-      }
-    ],
-    "active_projects": [
-      {
-        "id": "RD-PROJ-01",
-        "name": "Wasserman《Founder's Dilemmas》深研",
-        "stage": "提炼",
-        "target": "深度·合伙人困境",
-        "progress": 40
-      },
-      {
-        "id": "RD-PROJ-02",
-        "name": "南山硬科技生态实地调研",
-        "stage": "采集",
-        "target": "城市市场报告·南山篇",
-        "progress": 10
-      },
-      {
-        "id": "RD-PROJ-03",
-        "name": "五维框架实证验证",
-        "stage": "转化",
-        "target": "五维自评v2.0",
-        "progress": 25
-      },
-      {
-        "id": "RD-PROJ-04",
-        "name": "客户退出案例收集",
-        "stage": "采集",
-        "target": "退出指引v2.0",
-        "progress": 5
-      }
-    ],
-    "metrics": {
-      "rd_velocity": 0,
-      "idea_to_product_days": 30,
-      "active_topics": 5,
-      "knowledge_assets": 0
-    }
-  },
-  "team_architecture": {
-    "version": "1.0",
-    "created_at": "2026-05-31T14:57:16.154576+08:00",
-    "founder": {
-      "name": "Egbertie LAU",
-      "roles": [
-        "战略决策",
-        "客户关系",
-        "品牌代表",
-        "方法论总设计师"
-      ]
-    },
-    "core_roles": [
-      {
-        "role": "内容与研究",
-        "icon": "📚",
-        "tasks": [
-          "行业研究",
-          "白皮书",
-          "案例整理",
-          "知识库维护"
-        ]
-      },
-      {
-        "role": "产品与技术",
-        "icon": "🛠️",
-        "tasks": [
-          "产品开发",
-          "网站维护",
-          "驾驶舱",
-          "自动化"
-        ]
-      },
-      {
-        "role": "客户成功",
-        "icon": "🤝",
-        "tasks": [
-          "客户导入",
-          "阶段推进",
-          "健康监控",
-          "预警响应"
-        ]
-      },
-      {
-        "role": "市场与渠道",
-        "icon": "📡",
-        "tasks": [
-          "内容发布",
-          "渠道维护",
-          "活动组织",
-          "品牌传播"
-        ]
-      }
-    ],
-    "virtual_team": {
-      "expert_avatars": 22,
-      "usage": "按需激活——研究·审核·创意·验证"
-    },
-    "stats": {
-      "core": 4,
-      "virtual": 22,
-      "bottleneck": "创始人即唯一执行者·所有决策汇聚于一点"
-    }
-  },
-  "city_markets": {
-    "version": "1.0",
-    "created_at": "2026-05-31T14:57:16.154576+08:00",
-    "strategy": "南山→深圳→大湾区→全国 四层辐射",
-    "layers": [
-      {
-        "tier": "策源地",
-        "cities": [
-          "南山"
-        ],
-        "desc": "产业原生市场·硬科技生态核心·每日触达"
-      },
-      {
-        "tier": "第一圈",
-        "cities": [
-          "深圳"
-        ],
-        "desc": "大湾区引擎·供应链完整"
-      },
-      {
-        "tier": "第二圈",
-        "cities": [
-          "广州",
-          "东莞",
-          "珠海",
-          "佛山",
-          "惠州"
-        ],
-        "desc": "制造业腹地·潜在客户密集"
-      },
-      {
-        "tier": "第三圈",
-        "cities": [
-          "北京",
-          "上海",
-          "杭州",
-          "成都",
-          "武汉"
-        ],
-        "desc": "创投中心·峰会·战略合作"
-      }
-    ],
-    "priority": {
-      "name": "南山",
-      "score": 95
-    },
-    "expansion": "南山(已完成)→深圳(6月)→大湾区(9月)→全国(12月)"
-  },
-  "immune_system": {
-    "version": "1.0",
-    "created_at": "2026-05-31T14:57:16.154576+08:00",
-    "components": [
-      {
-        "id": "IMM-01",
-        "name": "代码质量门禁",
-        "freq": "每次push",
-        "checks": [
-          "语法",
-          "品牌",
-          "连接"
-        ],
-        "status": "active"
-      },
-      {
-        "id": "IMM-02",
-        "name": "数据完整性扫描",
-        "freq": "每小时",
-        "checks": [
-          "JSON有效",
-          "字段完整",
-          "孤儿检测"
-        ],
-        "status": "active"
-      },
-      {
-        "id": "IMM-03",
-        "name": "反孤岛检测",
-        "freq": "心跳",
-        "checks": [
-          "索引一致性",
-          "僵尸任务",
-          "Cron健康"
-        ],
-        "status": "active"
-      },
-      {
-        "id": "IMM-04",
-        "name": "备份新鲜度",
-        "freq": "每日",
-        "checks": [
-          "GitHub推送",
-          "飞书同步",
-          "本地快照"
-        ],
-        "status": "active"
-      },
-      {
-        "id": "IMM-05",
-        "name": "客户健康预警",
-        "freq": "实时",
-        "checks": [
-          "活跃度",
-          "阶段停滞",
-          "健康分下降"
-        ],
-        "status": "active"
-      }
-    ],
-    "health": {
-      "score": 85,
-      "status": "healthy",
-      "known_issues": 3
-    }
-  },
-  "decision_governance": {
-    "version": "1.0",
-    "created_at": "2026-05-31T14:57:16.154576+08:00",
-    "model": "DACI（Driver·Approver·Contributor·Informed）",
-    "types": [
-      {
-        "type": "战略决策",
-        "driver": "创始人",
-        "approver": "创始人",
-        "contributor": "专家团队·蓝军",
-        "freq": "季度"
-      },
-      {
-        "type": "产品决策",
-        "driver": "产品负责人",
-        "approver": "创始人",
-        "contributor": "客户成功·数据分析",
-        "freq": "月度"
-      },
-      {
-        "type": "技术决策",
-        "driver": "技术负责人",
-        "approver": "创始人",
-        "contributor": "代码工程师",
-        "freq": "按需"
-      },
-      {
-        "type": "内容决策",
-        "driver": "内容负责人",
-        "approver": "创始人",
-        "contributor": "研究·创意设计",
-        "freq": "周度"
-      },
-      {
-        "type": "客户决策",
-        "driver": "客户成功",
-        "approver": "创始人",
-        "contributor": "客户替身·数据分析",
-        "freq": "按需"
-      }
-    ],
-    "meetings": {
-      "日": "15分钟站会",
-      "周": "1小时数据复盘",
-      "月": "2小时战略复盘",
-      "季度": "半天OKR+大闭环审查"
-    }
-  }
+  ]
 }
