@@ -22246,6 +22246,17 @@
       "back": 5,
       "channels": 6,
       "updated_at": "2026-05-31T13:34:48.296387+08:00"
+    },
+    "lifecycle_v6": {
+      "version": "6.0",
+      "total_stages": 15,
+      "front": 5,
+      "core": 5,
+      "back_extend": 5,
+      "small_loops": 14,
+      "medium_loops": 5,
+      "big_loops": 1,
+      "updated_at": "2026-05-31T13:51:48.187444+08:00"
     }
   },
   "products": [
@@ -262948,7 +262959,9 @@
       "front_progress": 80,
       "acquisition_source": "直接访问",
       "first_touchpoint": "品牌首页",
-      "first_touch_date": "2026-05-28"
+      "first_touch_date": "2026-05-28",
+      "full_stage": "发现",
+      "back_extend_stage": "none"
     },
     {
       "customer_id": "CUST-002",
@@ -262995,7 +263008,9 @@
       "front_progress": 80,
       "acquisition_source": "直接访问",
       "first_touchpoint": "品牌首页",
-      "first_touch_date": "2026-05-29"
+      "first_touch_date": "2026-05-29",
+      "full_stage": "发现",
+      "back_extend_stage": "none"
     },
     {
       "customer_id": "CUST-003",
@@ -263042,7 +263057,9 @@
       "front_progress": 80,
       "acquisition_source": "直接访问",
       "first_touchpoint": "品牌首页",
-      "first_touch_date": "2026-05-30"
+      "first_touch_date": "2026-05-30",
+      "full_stage": "发现",
+      "back_extend_stage": "none"
     },
     {
       "customer_id": "CUST-004",
@@ -263095,7 +263112,9 @@
       "front_progress": 80,
       "acquisition_source": "直接访问",
       "first_touchpoint": "品牌首页",
-      "first_touch_date": "2026-05-27"
+      "first_touch_date": "2026-05-27",
+      "full_stage": "发现",
+      "back_extend_stage": "none"
     },
     {
       "customer_id": "CUST-005",
@@ -263141,7 +263160,9 @@
       "front_progress": 80,
       "acquisition_source": "直接访问",
       "first_touchpoint": "品牌首页",
-      "first_touch_date": "2026-05-30"
+      "first_touch_date": "2026-05-30",
+      "full_stage": "发现",
+      "back_extend_stage": "none"
     }
   ],
   "health_score_model": {
@@ -263848,10 +263869,10 @@
     ]
   },
   "full_lifecycle": {
-    "version": "5.0",
+    "version": "6.0",
     "philosophy": "客户生命周期从营销第一刻开始——宣发即起点，共契即目标",
     "created_at": "2026-05-31T13:34:48.296387+08:00",
-    "total_stages": 10,
+    "total_stages": 15,
     "front_half": {
       "name": "获客引擎",
       "stages": [
@@ -264002,8 +264023,195 @@
           "Day1邮件序列",
           "首次工具推荐"
         ]
+      },
+      {
+        "id": "stage-10",
+        "name": "升级",
+        "icon": "💎",
+        "half": "back_extend",
+        "question": "客户能不能获得更深价值？",
+        "description": "从标准化工具到个性化深度服务——客户价值的第二增长曲线",
+        "customer_action": "使用高级工具·深度诊断·定制方案",
+        "our_action": "升级推荐·一对一咨询·战略级服务",
+        "trigger": "共契阶段完成后·客户主动提出·健康分>85",
+        "metrics": [
+          "升级转化率",
+          "深度服务收入",
+          "客户满意度"
+        ],
+        "small_loop": "深度咨询→续约→更高LTV→更多资源投入→更好服务"
+      },
+      {
+        "id": "stage-11",
+        "name": "传播",
+        "icon": "📢",
+        "half": "back_extend",
+        "question": "客户愿意帮我们说话吗？",
+        "description": "从满意客户到主动传播者——口碑是最强的增长引擎",
+        "customer_action": "NPS评分·写推荐语·案例授权·社交分享",
+        "our_action": "推荐激励计划·案例包装·LinkedIn背书·PR合作",
+        "trigger": "深度使用>90天·NPS>9·主动表达满意",
+        "metrics": [
+          "NPS分数",
+          "推荐转化率",
+          "案例发布数",
+          "社交提及"
+        ],
+        "small_loop": "NPS高分→口碑传播→新客户获取→更多成功案例→更强品牌"
+      },
+      {
+        "id": "stage-12",
+        "name": "社群",
+        "icon": "🌐",
+        "half": "back_extend",
+        "question": "客户之间能互相帮助吗？",
+        "description": "从一对一服务到多对多网络——客户间的化学反应开始发生",
+        "customer_action": "加入社群·参与讨论·分享经验·同行互助",
+        "our_action": "社群运营·闭门活动·同行匹配·知识库共建",
+        "trigger": "客户数>10·主动表达交流意愿·行业相近",
+        "metrics": [
+          "社群活跃度",
+          "同行匹配数",
+          "活动参与率",
+          "互助次数"
+        ],
+        "small_loop": "闭门会→同行匹配→社群增长→更多活动→更强粘性"
+      },
+      {
+        "id": "stage-13",
+        "name": "共创",
+        "icon": "✨",
+        "half": "back_extend",
+        "question": "客户愿意和我们一起创造吗？",
+        "description": "从消费者到共创者——客户成为产品进化的一部分",
+        "customer_action": "共创案例·联合研究·产品内测·方法共建",
+        "our_action": "共创邀请·联合署名·优先体验·品牌共建",
+        "trigger": "社群活跃>6月·主动提出合作·行业互补",
+        "metrics": [
+          "共创项目数",
+          "联合产出数",
+          "产品反馈采纳率"
+        ],
+        "small_loop": "联合署名→品牌升级→更多合作→更丰富产出→更高价值"
+      },
+      {
+        "id": "stage-14",
+        "name": "反哺",
+        "icon": "🔄",
+        "half": "back_extend",
+        "question": "客户如何反哺整个体系？",
+        "description": "从共生者到体系的一部分——客户成为导师、投资人或渠道伙伴",
+        "customer_action": "成为导师·投资/合作·渠道推荐·生态共建",
+        "our_action": "导师体系·生态合作·联合品牌·投资机会",
+        "trigger": "共创>1年·深度信任·价值观匹配",
+        "metrics": [
+          "导师数量",
+          "渠道伙伴数",
+          "生态合作金额",
+          "品牌联合曝光"
+        ],
+        "small_loop": "导师体系→人才池→生态繁荣→更大市场→更多伙伴"
+      },
+      {
+        "id": "stage-10",
+        "name": "升级",
+        "icon": "💎",
+        "half": "back_extend",
+        "question": "客户能不能获得更深价值？",
+        "description": "从标准化工具到个性化深度服务——客户价值的第二增长曲线",
+        "customer_action": "使用高级工具·深度诊断·定制方案",
+        "our_action": "升级推荐·一对一咨询·战略级服务",
+        "trigger": "共契阶段完成后·客户主动提出·健康分>85",
+        "metrics": [
+          "升级转化率",
+          "深度服务收入",
+          "客户满意度"
+        ],
+        "small_loop": "深度咨询→续约→更高LTV→更多资源投入→更好服务"
+      },
+      {
+        "id": "stage-11",
+        "name": "传播",
+        "icon": "📢",
+        "half": "back_extend",
+        "question": "客户愿意帮我们说话吗？",
+        "description": "从满意客户到主动传播者——口碑是最强的增长引擎",
+        "customer_action": "NPS评分·写推荐语·案例授权·社交分享",
+        "our_action": "推荐激励计划·案例包装·LinkedIn背书·PR合作",
+        "trigger": "深度使用>90天·NPS>9·主动表达满意",
+        "metrics": [
+          "NPS分数",
+          "推荐转化率",
+          "案例发布数",
+          "社交提及"
+        ],
+        "small_loop": "NPS高分→口碑传播→新客户获取→更多成功案例→更强品牌"
+      },
+      {
+        "id": "stage-12",
+        "name": "社群",
+        "icon": "🌐",
+        "half": "back_extend",
+        "question": "客户之间能互相帮助吗？",
+        "description": "从一对一服务到多对多网络——客户间的化学反应开始发生",
+        "customer_action": "加入社群·参与讨论·分享经验·同行互助",
+        "our_action": "社群运营·闭门活动·同行匹配·知识库共建",
+        "trigger": "客户数>10·主动表达交流意愿·行业相近",
+        "metrics": [
+          "社群活跃度",
+          "同行匹配数",
+          "活动参与率",
+          "互助次数"
+        ],
+        "small_loop": "闭门会→同行匹配→社群增长→更多活动→更强粘性"
+      },
+      {
+        "id": "stage-13",
+        "name": "共创",
+        "icon": "✨",
+        "half": "back_extend",
+        "question": "客户愿意和我们一起创造吗？",
+        "description": "从消费者到共创者——客户成为产品进化的一部分",
+        "customer_action": "共创案例·联合研究·产品内测·方法共建",
+        "our_action": "共创邀请·联合署名·优先体验·品牌共建",
+        "trigger": "社群活跃>6月·主动提出合作·行业互补",
+        "metrics": [
+          "共创项目数",
+          "联合产出数",
+          "产品反馈采纳率"
+        ],
+        "small_loop": "联合署名→品牌升级→更多合作→更丰富产出→更高价值"
+      },
+      {
+        "id": "stage-14",
+        "name": "反哺",
+        "icon": "🔄",
+        "half": "back_extend",
+        "question": "客户如何反哺整个体系？",
+        "description": "从共生者到体系的一部分——客户成为导师、投资人或渠道伙伴",
+        "customer_action": "成为导师·投资/合作·渠道推荐·生态共建",
+        "our_action": "导师体系·生态合作·联合品牌·投资机会",
+        "trigger": "共创>1年·深度信任·价值观匹配",
+        "metrics": [
+          "导师数量",
+          "渠道伙伴数",
+          "生态合作金额",
+          "品牌联合曝光"
+        ],
+        "small_loop": "导师体系→人才池→生态繁荣→更大市场→更多伙伴"
       }
-    ]
+    ],
+    "back_extend": {
+      "name": "后端延展",
+      "stages": [
+        "升级",
+        "传播",
+        "社群",
+        "共创",
+        "反哺"
+      ],
+      "owner": "生态+创始人"
+    }
   },
   "acquisition_engine": {
     "version": "1.0",
@@ -264118,6 +264326,245 @@
           "title": "合伙人关系健康度快速评估",
           "gate": "3分钟免费"
         }
+      ]
+    }
+  },
+  "closed_loops": {
+    "version": "1.0",
+    "created_at": "2026-05-31T13:51:48.187444+08:00",
+    "philosophy": "闭环不是画圈——是输出能反过来增强输入。小闭环促转化，中闭环增飞轮，大闭环造生态。",
+    "small_loops": [
+      {
+        "id": "SL-01",
+        "name": "自评→分享闭环",
+        "stages": [
+          "宣发",
+          "触达",
+          "吸引"
+        ],
+        "cycle": "完成自评→分享结果→吸引新客户→更多自评",
+        "metric": "分享率",
+        "status": "待激活"
+      },
+      {
+        "id": "SL-02",
+        "name": "留资→触达闭环",
+        "stages": [
+          "吸引",
+          "转化"
+        ],
+        "cycle": "下载PDF→留邮箱→邮件触达→回到网站",
+        "metric": "邮件打开率",
+        "status": "待激活"
+      },
+      {
+        "id": "SL-03",
+        "name": "导入→激活闭环",
+        "stages": [
+          "转化",
+          "导入",
+          "发现"
+        ],
+        "cycle": "完成导入→使用首个工具→完成自评→体验升级",
+        "metric": "Day7激活率",
+        "status": "待激活"
+      },
+      {
+        "id": "SL-04",
+        "name": "评估→诊断闭环",
+        "stages": [
+          "发现",
+          "评估"
+        ],
+        "cycle": "自评完成→雷达图→更多诊断→更深认知",
+        "metric": "诊断完成率",
+        "status": "待激活"
+      },
+      {
+        "id": "SL-05",
+        "name": "卡牌→推荐闭环",
+        "stages": [
+          "评估",
+          "尝试"
+        ],
+        "cycle": "卡牌对局→分享给合伙人→合伙人自评→双向了解",
+        "metric": "合伙人参与率",
+        "status": "待激活"
+      },
+      {
+        "id": "SL-06",
+        "name": "剧场→反馈闭环",
+        "stages": [
+          "尝试"
+        ],
+        "cycle": "决策剧场→行动反馈→产品改进→更好体验",
+        "metric": "反馈采纳率",
+        "status": "待激活"
+      },
+      {
+        "id": "SL-07",
+        "name": "诊断→方案闭环",
+        "stages": [
+          "尝试",
+          "深入"
+        ],
+        "cycle": "完整诊断→个性化方案→实施→效果跟踪",
+        "metric": "方案实施率",
+        "status": "待激活"
+      },
+      {
+        "id": "SL-08",
+        "name": "退出→转介闭环",
+        "stages": [
+          "深入"
+        ],
+        "cycle": "退出方案→律所推荐→律所渠道→新客户",
+        "metric": "转介率",
+        "status": "待激活"
+      },
+      {
+        "id": "SL-09",
+        "name": "案例→传播闭环",
+        "stages": [
+          "共契",
+          "传播"
+        ],
+        "cycle": "共创案例→行业传播→品牌提升→更多咨询",
+        "metric": "案例传播量",
+        "status": "待激活"
+      },
+      {
+        "id": "SL-10",
+        "name": "升级→续约闭环",
+        "stages": [
+          "升级"
+        ],
+        "cycle": "深度服务→更高价值→续约→更多资源",
+        "metric": "续约率",
+        "status": "待激活"
+      },
+      {
+        "id": "SL-11",
+        "name": "NPS→口碑闭环",
+        "stages": [
+          "传播"
+        ],
+        "cycle": "NPS评分→口碑传播→新客获取→更多数据",
+        "metric": "NPS推荐转化",
+        "status": "待激活"
+      },
+      {
+        "id": "SL-12",
+        "name": "社群→互助闭环",
+        "stages": [
+          "社群"
+        ],
+        "cycle": "闭门活动→同行匹配→社群活跃→更多活动",
+        "metric": "社群活跃度",
+        "status": "待激活"
+      },
+      {
+        "id": "SL-13",
+        "name": "共创→品牌闭环",
+        "stages": [
+          "共创"
+        ],
+        "cycle": "联合署名→品牌共建→更多合作→更高品牌价值",
+        "metric": "品牌价值提升",
+        "status": "待激活"
+      },
+      {
+        "id": "SL-14",
+        "name": "导师→生态闭环",
+        "stages": [
+          "反哺"
+        ],
+        "cycle": "导师体系→人才输出→生态合作→体系壮大",
+        "metric": "生态健康度",
+        "status": "待激活"
+      }
+    ],
+    "medium_loops": [
+      {
+        "id": "ML-01",
+        "name": "获客飞轮",
+        "stages": [
+          "宣发",
+          "触达",
+          "吸引",
+          "转化",
+          "导入"
+        ],
+        "description": "客户成功故事→口碑传播→新客户→更丰富的成功故事",
+        "momentum": 0,
+        "health": 0,
+        "key_lever": "成功案例的生产和传播速度"
+      },
+      {
+        "id": "ML-02",
+        "name": "深耕飞轮",
+        "stages": [
+          "发现",
+          "评估",
+          "尝试",
+          "深入",
+          "共契"
+        ],
+        "description": "工具使用→深度体验→阶段晋升→更高价值→推荐更多工具",
+        "momentum": 0,
+        "health": 0,
+        "key_lever": "阶段晋升的速度和深度"
+      },
+      {
+        "id": "ML-03",
+        "name": "传播飞轮",
+        "stages": [
+          "升级",
+          "传播"
+        ],
+        "description": "NPS高分→案例背书→行业声誉→更多咨询→更优质客户",
+        "momentum": 0,
+        "health": 0,
+        "key_lever": "NPS分数和案例传播量"
+      },
+      {
+        "id": "ML-04",
+        "name": "生态飞轮",
+        "stages": [
+          "社群",
+          "共创"
+        ],
+        "description": "社群活跃→共创项目→生态合作→市场拓展→更大社群",
+        "momentum": 0,
+        "health": 0,
+        "key_lever": "生态合作的数量和质量"
+      },
+      {
+        "id": "ML-05",
+        "name": "知识飞轮",
+        "stages": [
+          "反哺"
+        ],
+        "description": "客户反馈→产品迭代→更好工具→更满意→更多反馈",
+        "momentum": 0,
+        "health": 0,
+        "key_lever": "反馈到产品迭代的速度"
+      }
+    ],
+    "big_loop": {
+      "id": "BL-01",
+      "name": "体系自进化大闭环",
+      "description": "客户成功→案例资产→品牌资产→吸引更多优质客户→体系更强大→方法迭代→更好的客户成功",
+      "stages": "全部15阶段",
+      "cycle_time": "6个月",
+      "health": 0,
+      "momentum": 0,
+      "key_indicators": [
+        "品牌资产增长率",
+        "客户质量指数",
+        "方法论迭代速度",
+        "生态伙伴数量",
+        "市场影响力"
       ]
     }
   }

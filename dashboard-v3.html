@@ -1460,7 +1460,7 @@ function renderCustomerJourney() {
   var frontStages5 = lfStages.filter(function(s){return s.half==='front';});
   var backStages5 = lfStages.filter(function(s){return s.half==='back';});
 
-  var h = '<div class="panel-header"><h2>🗺️ 客户360 · 全生命周期 v5.0</h2><p style="font-size:0.78em;color:var(--ink-light)">10阶段完整链路: 宣发→触达→吸引→转化→导入→发现→评估→尝试→深入→共契</p></div>';
+  var h = '<div class="panel-header"><h2>🗺️ 客户360 · 闭环引擎 v6.0</h2><p style="font-size:0.78em;color:var(--ink-light)">15阶段完整链路: 宣发→触达→吸引→转化→导入→发现→评估→尝试→深入→共契→升级→传播→社群→共创→反哺</p></div>';
 
   // ==== L1: 10阶段总览条 ====
   h += '<div style="display:flex;gap:4px;overflow-x:auto;padding:8px 0;margin-bottom:16px;-webkit-overflow-scrolling:touch">';
@@ -1747,6 +1747,65 @@ function renderCustomerJourney() {
     h += '<div style="font-size:0.72em;color:var(--ink-light);margin-top:3px">'+escHtml(fusionStats.key_insights[i])+'</div>';
   }
   h += '</div>';
+
+  // ==== 闭环引擎 (v6.0) ====
+  var closedLoops = EIDX.closed_loops || {};
+  var smallLoops = closedLoops.small_loops || [];
+  var mediumLoops = closedLoops.medium_loops || [];
+  var bigLoop = closedLoops.big_loop || {};
+
+  h += '<div class="section-head" style="margin-top:20px">🔄 闭环引擎 · 三级闭环体系</div>';
+  h += '<div class="panel-header"><p style="font-size:0.8em;color:var(--ink-light)">小闭环促转化·中闭环增飞轮·大闭环造生态——输出能反过来增强输入才是真正的闭环</p></div>';
+
+  // 统计卡
+  h += '<div class="stat-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:12px">';
+  h += '<div class="stat-card"><div class="stat-num">'+smallLoops.length+'</div><div class="stat-label">小闭环</div><div style="font-size:0.6em;color:var(--ink-lighter)">阶段内自循环</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+mediumLoops.length+'</div><div class="stat-label">中闭环·飞轮</div><div style="font-size:0.6em;color:var(--ink-lighter)">跨阶段增强回路</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">1</div><div class="stat-label">大闭环·生态</div><div style="font-size:0.6em;color:var(--ink-lighter)">体系自进化</div></div>';
+  h += '</div>';
+
+  // 5个飞轮卡片
+  h += '<div class="section-head">⚡ 5大飞轮 · 中闭环</div>';
+  h += '<div style="display:flex;gap:10px;overflow-x:auto;padding-bottom:8px">';
+  for (var i = 0; i < mediumLoops.length; i++) {
+    var ml = mediumLoops[i];
+    var mlHealth = ml.health || 0;
+    var mlColor = mlHealth >= 70 ? '#3D7A4F' : (mlHealth >= 40 ? '#C2780A' : '#C23B22');
+    h += '<div style="min-width:200px;background:var(--card-white);border:1px solid var(--border-warm);border-radius:10px;padding:14px;flex-shrink:0">';
+    h += '<div style="font-weight:600;font-size:0.85em">⚡ '+escHtml(ml.name)+'</div>';
+    h += '<div style="font-size:0.68em;color:var(--ink-light);margin-top:4px;line-height:1.4">'+escHtml(ml.description)+'</div>';
+    h += '<div style="margin-top:8px"><div style="font-size:0.65em;color:var(--ink-lighter);margin-bottom:2px">动量</div>';
+    h += '<div style="height:4px;background:#F0EBE0;border-radius:2px;overflow:hidden"><div style="height:100%;width:'+mlHealth+'%;background:'+mlColor+';border-radius:2px"></div></div></div>';
+    h += '<div style="font-size:0.6em;color:var(--ink-lighter);margin-top:4px">杠杆: '+escHtml(ml.key_lever)+'</div>';
+    h += '</div>';
+  }
+  h += '</div>';
+
+  // 大闭环
+  h += '<div class="section-head" style="margin-top:16px">🌍 体系自进化大闭环</div>';
+  h += '<div style="background:var(--card-warm);border:2px solid var(--accent-gold);border-radius:12px;padding:18px 20px">';
+  h += '<div style="font-weight:600;font-size:0.9em">'+escHtml(bigLoop.name||'')+'</div>';
+  h += '<div style="font-size:0.75em;color:var(--ink-light);margin-top:4px;line-height:1.5">'+escHtml(bigLoop.description||'')+'</div>';
+  h += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;font-size:0.68em">';
+  var bi = bigLoop.key_indicators || [];
+  for (var i = 0; i < bi.length; i++) h += '<span style="background:rgba(184,134,11,.1);color:var(--accent-gold);padding:2px 8px;border-radius:8px">'+escHtml(bi[i])+'</span>';
+  h += '</div>';
+  h += '<div style="font-size:0.65em;color:var(--ink-lighter);margin-top:6px">周期: '+escHtml(bigLoop.cycle_time||'?')+'</div>';
+  h += '</div>';
+
+  // 14个小闭环简表
+  h += '<div class="section-head" style="margin-top:16px">🔗 14个小闭环 · 单阶段自循环</div>';
+  h += '<div style="overflow-x:auto"><table class="data-table" style="width:100%;font-size:0.72em">';
+  h += '<thead><tr><th>闭环</th><th>循环路径</th><th>阶段</th><th>核心指标</th></tr></thead><tbody>';
+  for (var i = 0; i < Math.min(smallLoops.length, 14); i++) {
+    var sl = smallLoops[i];
+    h += '<tr><td style="font-weight:500;white-space:nowrap">'+escHtml(sl.name)+'</td>';
+    h += '<td style="font-size:0.8em;color:var(--ink-light)">'+escHtml(sl.cycle)+'</td>';
+    h += '<td style="font-size:0.7em">'+(sl.stages||[]).join('·')+'</td>';
+    h += '<td style="font-size:0.7em;color:var(--accent-gold)">'+escHtml(sl.metric)+'</td>';
+    h += '</tr>';
+  }
+  h += '</tbody></table></div>';
 
   document.getElementById('tab-journey').innerHTML = h;
 }
