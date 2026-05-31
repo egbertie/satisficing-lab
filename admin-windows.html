@@ -59,7 +59,7 @@ body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;backgr
 </style>
 </head>
 <body>
-<div class="gate-overlay" id="gate"><div class="gate-box"><h2>&#x1f510; 管理后台 v3.0</h2><div class="sub">9大管理域 · 36子模块 · 三级数据穿透</div><input type="password" id="gpw" placeholder="输入密码" onkeydown="if(event.key===&#39;Enter&#39;)checkGate(this)"><button onclick="checkGate(this)">进入</button><div class="gate-error" id="gate-error"></div><div class="gate-degrade" id="gate-degrade">&#x26a0;&#xfe0f; 浏览器限制了会话存储，关闭标签页后需重新登录</div></div></div>
+
 <div class="app" id="app"><nav class="sidebar" id="sidebar"></nav><main class="main" id="main-content"></main></div>
 <script>
 
@@ -165,12 +165,8 @@ function sortTbl(id,key,th){
 }
 var rowBuilders={};
 
-/* ===== 密码门 — 已移除（直接进入） ===== */
-(function(){
-  document.getElementById('gate').classList.add('hidden');
-  document.getElementById('app').classList.add('show');
-  initApp();
-})();
+/* ===== 直接进入（无密码） ===== */
+initApp();
 
 /* ===== 初始化 ===== */
 function initApp(){
