@@ -87,8 +87,8 @@ function runStep2() {
       seed: function() {
         if (!this.pw().length) dbsv('sri_db_passwords', [{ id: 1, code: '123654', products: 'all', customer: '内测', status: '启用' }]);
         if (!this.qu().length) dbsv('sri_db_quality', [
-          { qm_id: 'QM-001', standard: 'L0提案审核', status: '待执行', assignee: '满意红', deadline: '06-07', priority: 'P0' },
-          { qm_id: 'QM-002', standard: 'L1方法论审核', status: '55%', assignee: '满意红', deadline: '06-07', priority: 'P0' }
+          { qm_id: 'QM-001', standard: 'L0提案审核', status: '待执行', assignee: '满意解研究所', deadline: '06-07', priority: 'P0' },
+          { qm_id: 'QM-002', standard: 'L1方法论审核', status: '55%', assignee: '满意解研究所', deadline: '06-07', priority: 'P0' }
         ]);
         if (!this.gr().length) dbsv('sri_db_gr', [
           { m: '飞轮循环', c: 0, t: 100 }, { m: '线上产品', c: 233, t: 250 }

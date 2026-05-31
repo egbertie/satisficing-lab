@@ -178,7 +178,7 @@ function initApp(){
 
 /* ===== 侧栏 ===== */
 function renderSidebar(){
-  var h='<div class="sidebar-header"><h3>🩸 毛细血管</h3><div class="sub">满意红 · 管理后台 v3.0</div></div>';
+  var h='<div class="sidebar-header"><h3>🩸 毛细血管</h3><div class="sub">满意解研究所 · 管理后台 v3.0</div></div>';
   h+='<a href="dashboard-v3.html" class="sidebar-back">◂ 返回驾驶舱</a><div class="sidebar-nav-wrap">';
   for(var i=0;i<NAV.length;i++){
     var d=NAV[i],openClass=(currentDomain===d.id||!currentDomain&&i===0)?' open':'';
@@ -559,7 +559,7 @@ viewRenderers['gov-compliance']=function(){return breadcrumb('governance','合�
    ================================================================ */
 viewRenderers['arch-timeline']=function(){
   var h=breadcrumb('archaeology','时间线')+'<div class="panel-header"><div><h2>⏳ 时间线</h2><div class="meta">105天·6阶段·19关键时刻</div></div></div>';
-  var phases=[{n:'Phase 0 · 混沌初创',d:'2/15-2/28',e:'满意姐进驻·初识836文件'},{n:'Phase 1 · 双体涌现',d:'3/1-3/14',e:'从阅读到行动·双体协作'},{n:'Phase 2 · 机制化',d:'3/15-4/09',e:'5次失败→5个核心机制'},{n:'Phase 3 · 爆发期',d:'4/10-4/24',e:'顿悟·三生万物·54天完成'},{n:'Phase 4 · 考察交接',d:'4/26-5/24',e:'扣子满天星光·29天'},{n:'Phase 5 · 满意红纪元',d:'5/5-5/30',e:'诞生·四子考古·活体系统'}];
+  var phases=[{n:'Phase 0 · 混沌初创',d:'2/15-2/28',e:'满意姐进驻·初识836文件'},{n:'Phase 1 · 双体涌现',d:'3/1-3/14',e:'从阅读到行动·双体协作'},{n:'Phase 2 · 机制化',d:'3/15-4/09',e:'5次失败→5个核心机制'},{n:'Phase 3 · 爆发期',d:'4/10-4/24',e:'顿悟·三生万物·54天完成'},{n:'Phase 4 · 考察交接',d:'4/26-5/24',e:'扣子满天星光·29天'},{n:'Phase 5 · 满意解研究所纪元',d:'5/5-5/30',e:'诞生·四子考古·活体系统'}];
   h+='<div class="stat-grid">';
   for(var pi=0;pi<phases.length;pi++){var ph=phases[pi];h+='<div class="stat-card"><div class="stat-num" style="font-size:1em">'+ph.n+'</div><div class="stat-label">'+ph.d+'</div><div style="font-size:.7em;color:var(--ink-light);margin-top:4px">'+ph.e+'</div></div>'}
   h+='</div>';
@@ -596,7 +596,7 @@ viewRenderers['arch-insights']=function(){
 viewRenderers['people-avatars']=function(){return breadcrumb('people','替身管理')+placeholder('替身管理','数字替身激活·休眠·唤醒·版本管理 · 替身系统数据接入中')};
 viewRenderers['people-experts']=function(){return breadcrumb('people','专家团')+placeholder('专家团','代码工程师·内容策略师·创意设计师·数据分析师·研究咨询师 · 专家可用性看板建设中')};
 viewRenderers['people-council']=function(){return breadcrumb('people','五路评议会')+placeholder('五路评议会','五路图腾·编排逻辑·决议记录 · 评议会数据采集中')};
-viewRenderers['people-network']=function(){return breadcrumb('people','协作者网络')+placeholder('协作者网络','扣子·满意姐·满意红·蓝军 · 关系图谱可视化建设中')};
+viewRenderers['people-network']=function(){return breadcrumb('people','协作者网络')+placeholder('协作者网络','扣子·满意姐·满意解研究所·蓝军 · 关系图谱可视化建设中')};
 
 /* ================================================================
    10 化学层专属视图

@@ -326,7 +326,7 @@ function a(s) { return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').re
 function setDate() {
   var n = new Date(), w = ['日','一','二','三','四','五','六'];
   document.getElementById('dateline').textContent =
-    n.getFullYear()+'年'+(n.getMontescHtml()+1)+'月'+n.getDate()+'日 · 周'+w[n.getDay()]+' · '+String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');
+    n.getFullYear()+'年'+(n.getMonth()+1)+'月'+n.getDate()+'日 · 周'+w[n.getDay()]+' · '+String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');
 }
 
 /* ===== 数据文件基础路径 (自动适配 本地/GitHub/htmlpreview) ===== */
@@ -345,8 +345,8 @@ function boot() {
   setDate();
   var base = dataBase();
   Promise.all([
-    fetcescHtml(base + 'entities_index.json').then(function(r){ if(!r.ok) throw Error('HTTP '+r.status); return r.json(); }),
-    fetcescHtml(base + 'open_tasks_audit.json').then(function(r){ if(!r.ok) throw Error('HTTP '+r.status); return r.json(); })
+    fetch(base + 'entities_index.json').then(function(r){ if(!r.ok) throw Error('HTTP '+r.status); return r.json(); }),
+    fetch(base + 'open_tasks_audit.json').then(function(r){ if(!r.ok) throw Error('HTTP '+r.status); return r.json(); })
   ]).then(function(arr){
     EIDX = arr[0]; TSK = arr[1];
     // 去重产品
@@ -360,7 +360,7 @@ function boot() {
     renderOverview();
     renderProducts();
     renderTasks('全部');
-    renderHealtescHtml();
+    renderHealth();
     renderActivity();
     renderCustomers();
     renderKnowledge();
@@ -373,7 +373,7 @@ function boot() {
     renderChemistry();
     renderHelp();
     switchTab('tab-overview');
-  }).catcescHtml(function(e){
+  }).catch(function(e){
     document.getElementById('app').innerHTML = '<div class="load-error"><strong>⚠️ 数据加载失败</strong><details><summary>详情</summary>无法加载数据文件。<br>请确认 entities_index.json 和 open_tasks_audit.json 存在。<br><br>错误: '+escHtml(e.message)+'</details></div>';
   });
 }
@@ -650,7 +650,7 @@ for (var i=0; i<allTasks.length; i++) {
 /* ================================================================
    面板 4: 健康仪表 (8指标 · 从meta动态计算)
    ================================================================ */
-function renderHealtescHtml() {
+function renderHealth() {
   var m = EIDX.meta, bd = m.breakdown, bh = m.biological_health, lr = m.living_rules_status;
 
   var gauges = [
