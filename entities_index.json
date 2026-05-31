@@ -22173,7 +22173,48 @@
     "medium_connections": 11728,
     "weak_connections": 2,
     "flywheel_cycles": 5,
-    "first_run_count": 0
+    "first_run_count": 0,
+    "customer_stages": {
+      "发现": 5,
+      "评估": 0,
+      "尝试": 0,
+      "深入": 0,
+      "共契": 0,
+      "total": 5
+    },
+    "customer_journey_updated": "2026-05-31T12:49:08.406426+08:00",
+    "product_stage_matrix": {
+      "发现": [
+        "assessment",
+        "index.html"
+      ],
+      "评估": [
+        "radar",
+        "checklist",
+        "chemical-report"
+      ],
+      "尝试": [
+        "cards-play",
+        "decision-theatre",
+        "slicing-pie",
+        "fulldiag"
+      ],
+      "深入": [
+        "chemical-report",
+        "exit-guide",
+        "deep-slicing",
+        "deep-wasserman",
+        "match",
+        "metapartner"
+      ],
+      "共契": [
+        "cases",
+        "creation",
+        "whitepaper",
+        "university",
+        "proposal"
+      ]
+    }
   },
   "products": [
     {
@@ -262659,5 +262700,157 @@
         "决策通道"
       ]
     }
-  ]
+  ],
+  "customer_journey": {
+    "version": "1.0",
+    "created_at": "2026-05-31T12:49:08.406426+08:00",
+    "description": "客户从首次接触到深度合作的5阶段全生命周期模型，每阶段有匹配产品和晋级条件",
+    "stages": [
+      {
+        "id": "stage-1",
+        "name": "发现",
+        "icon": "🔍",
+        "desc": "客户首次接触到满意解研究所，了解五维决策框架",
+        "customer_mindset": "「65%的创业失败源于合伙人冲突？这跟我有关吗？」",
+        "trigger_products": [
+          "五维自评·简版",
+          "品牌首页"
+        ],
+        "match_products": [
+          "assessment",
+          "index.html"
+        ],
+        "next_stage_condition": "完成一次五维自评",
+        "typical_duration": "1-7天",
+        "key_metrics": [
+          "页面访问",
+          "自评完成率"
+        ]
+      },
+      {
+        "id": "stage-2",
+        "name": "评估",
+        "icon": "🧭",
+        "desc": "客户完成自评，看到自己的决策模式画像，开始认真对待问题",
+        "customer_mindset": "「原来我们的问题不是沟通，是决策模式不同——那怎么解决？」",
+        "trigger_products": [
+          "五维雷达图",
+          "决策前自检清单"
+        ],
+        "match_products": [
+          "radar",
+          "checklist",
+          "chemical-report"
+        ],
+        "next_stage_condition": "完成雷达图或自检清单",
+        "typical_duration": "3-14天",
+        "key_metrics": [
+          "雷达图完成",
+          "自检清单使用"
+        ]
+      },
+      {
+        "id": "stage-3",
+        "name": "尝试",
+        "icon": "🎴",
+        "desc": "客户使用结构化工具（卡牌、剧场）深入探索合伙人关系中的具体问题",
+        "customer_mindset": "「我想跟合伙人试试这些工具，看看能不能把说不出的不对劲变成看得见的数据」",
+        "trigger_products": [
+          "合伙人决策卡牌",
+          "决策剧场"
+        ],
+        "match_products": [
+          "cards-play",
+          "decision-theatre",
+          "slicing-pie",
+          "fulldiag"
+        ],
+        "next_stage_condition": "与合伙人完成至少一次卡牌对局或决策剧场",
+        "typical_duration": "7-30天",
+        "key_metrics": [
+          "卡牌使用次数",
+          "决策剧场完成"
+        ]
+      },
+      {
+        "id": "stage-4",
+        "name": "深入",
+        "icon": "⚖️",
+        "desc": "客户开始系统性使用五维框架进行合伙人决策，需要深度诊断和个性化指导",
+        "customer_mindset": "「我们需要更系统的方案——不只是工具，是一套方法论」",
+        "trigger_products": [
+          "完整诊断报告",
+          "退出指引",
+          "元合伙框架"
+        ],
+        "match_products": [
+          "chemical-report",
+          "exit-guide",
+          "deep-slicing",
+          "deep-wasserman",
+          "match",
+          "metapartner"
+        ],
+        "next_stage_condition": "完成完整诊断或退出方案设计",
+        "typical_duration": "30-90天",
+        "key_metrics": [
+          "完整诊断完成",
+          "深度文章阅读"
+        ]
+      },
+      {
+        "id": "stage-5",
+        "name": "共契",
+        "icon": "🤝",
+        "desc": "客户与满意解研究所建立深度合作关系，成为方法的实践者和传播者",
+        "customer_mindset": "「这套方法已经成为我们决策的一部分——我想推荐给其他创始人」",
+        "trigger_products": [
+          "案例库",
+          "知识库",
+          "白皮书"
+        ],
+        "match_products": [
+          "cases",
+          "creation",
+          "whitepaper",
+          "university",
+          "proposal"
+        ],
+        "next_stage_condition": "客户主动推荐新客户或深度参与共创",
+        "typical_duration": "90天+",
+        "key_metrics": [
+          "推荐率",
+          "复购率",
+          "共创参与"
+        ]
+      }
+    ],
+    "customer_stage_map": {
+      "硬科技创始人": {
+        "current_stage": "发现",
+        "progress": "已完成五维自评，准备进入评估阶段",
+        "recommended_next": "评估·五维雷达图"
+      },
+      "VC投后负责人": {
+        "current_stage": "发现",
+        "progress": "浏览了品牌首页，了解框架概念",
+        "recommended_next": "发现·五维自评"
+      },
+      "律所合伙人": {
+        "current_stage": "发现",
+        "progress": "通过行业渠道了解到研究所",
+        "recommended_next": "发现·五维自评"
+      },
+      "政府园区负责人": {
+        "current_stage": "发现",
+        "progress": "通过南山产业生态接触到研究所",
+        "recommended_next": "发现·了解更多"
+      },
+      "独立董事/顾问": {
+        "current_stage": "发现",
+        "progress": "独立研究满意解方法，尚未试用工具",
+        "recommended_next": "发现·五维自评"
+      }
+    }
+  }
 }

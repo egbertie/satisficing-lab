@@ -311,6 +311,7 @@ body {
   <div class="tab-panel" id="tab-cities"></div>
   <div class="tab-panel" id="tab-flows"></div>
   <div class="tab-panel" id="tab-flywheel"></div>
+  <div class="tab-panel" id="tab-journey"></div>
   <div class="tab-panel" id="tab-chemistry"></div>
   <div class="tab-panel" id="tab-help"></div>
 
@@ -401,6 +402,7 @@ function boot() {
     renderFlows();
     renderFlywheel();
     renderChemistry();
+    renderCustomerJourney();
     renderHelp();
     switchTab('tab-overview');
   }).catch(function(e){
@@ -422,6 +424,7 @@ function buildNav() {
     {id:'tab-organization', label:'🏛️ 组织'},
     {id:'tab-archaeology', label:'🏺 考古'},
     {id:'tab-cities', label:'🏙️ 城市市场'},
+    {id:'tab-journey', label:'🗺️ 客户旅程'},
     {id:'tab-flows', label:'🔌 流仪表板'},
     {id:'tab-flywheel', label:'♻️ 飞轮运转'},
     {id:'tab-chemistry', label:'🧬 化学与控制'},
@@ -1424,6 +1427,84 @@ function renderFlywheel() {
 }
 
 /* ===== 化学与控制 ===== */
+/* 面板: 客户旅程 */
+function renderCustomerJourney() {
+  var cj = (EIDX.customer_journey || {});
+  var stages = cj.stages || [];
+  var smap = cj.customer_stage_map || {};
+  var prods = EIDX.products || [];
+  var matrix = (EIDX.meta || {}).product_stage_matrix || {};
+  var h = '<div class="section-head" style="margin-top:12px">🗺️ 客户全生命周期 · 5阶段旅程</div>';
+  h += '<div class="panel-header"><p style="font-size:0.82em;color:var(--ink-light);margin-top:4px">每个阶段匹配不同的产品和体验——从「发现」到「共契」，客户在体系中的成长路径</p></div>';
+
+  // Stage cards
+  h += '<div class="overview-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">';
+  for (var i = 0; i < stages.length; i++) {
+    var s = stages[i];
+    var stageCount = smap ? Object.values(smap).filter(function(x) { return x.current_stage === s.name; }).length : 0;
+    var matchCount = s.match_products ? s.match_products.length : 0;
+    h += '<div class="ov-card" style="text-align:left;padding:16px">';
+    h += '<div style="font-size:1.5em;margin-bottom:6px">' + s.icon + '</div>';
+    h += '<div style="font-weight:600;font-size:0.95em;color:var(--ink)">' + escHtml(s.name) + '</div>';
+    h += '<div style="font-size:0.72em;color:var(--ink-light);margin-top:4px;line-height:1.5">' + escHtml(s.desc) + '</div>';
+    h += '<div style="font-size:0.68em;color:var(--ink-lighter);margin-top:6px">💬 ' + escHtml(s.customer_mindset) + '</div>';
+    h += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">';
+    h += '<span style="font-size:0.65em;background:var(--card-warm);border-radius:8px;padding:2px 8px;color:var(--ink-light)">👥 ' + stageCount + '个客户</span>';
+    h += '<span style="font-size:0.65em;background:var(--card-warm);border-radius:8px;padding:2px 8px;color:var(--ink-light)">📦 ' + matchCount + '个产品</span>';
+    h += '</div>';
+    h += '<div style="font-size:0.65em;color:var(--ink-lighter);margin-top:4px">⏱ ' + escHtml(s.typical_duration) + '</div>';
+    h += '</div>';
+  }
+  h += '</div>';
+
+  // Product-stage matrix
+  h += '<div class="section-head" style="margin-top:20px">📦 产品 × 阶段匹配矩阵</div>';
+  h += '<div style="overflow-x:auto"><table class="data-table" style="width:100%;font-size:0.82em">';
+  h += '<thead><tr><th>阶段</th><th>推荐产品</th><th>产品数</th><th>晋级条件</th></tr></thead><tbody>';
+  for (var i = 0; i < stages.length; i++) {
+    var s = stages[i];
+    h += '<tr>';
+    h += '<td style="font-weight:600;white-space:nowrap">' + s.icon + ' ' + escHtml(s.name) + '</td>';
+    h += '<td style="font-size:0.85em">' + escHtml((s.trigger_products || []).join(' · ')) + '</td>';
+    h += '<td style="text-align:center">' + (s.match_products || []).length + '</td>';
+    h += '<td style="font-size:0.78em;color:var(--ink-light)">' + escHtml(s.next_stage_condition) + '</td>';
+    h += '</tr>';
+  }
+  h += '</tbody></table></div>';
+
+  // Customer status table
+  h += '<div class="section-head" style="margin-top:20px">👥 客户当前位置</div>';
+  h += '<div style="overflow-x:auto"><table class="data-table" style="width:100%;font-size:0.82em">';
+  h += '<thead><tr><th>客户</th><th>当前阶段</th><th>进度</th><th>推荐下一步</th></tr></thead><tbody>';
+  var cnames = Object.keys(smap);
+  for (var i = 0; i < cnames.length; i++) {
+    var cn = cnames[i];
+    var cs = smap[cn];
+    h += '<tr>';
+    h += '<td style="font-weight:500">' + escHtml(cn) + '</td>';
+    h += '<td>' + escHtml(cs.current_stage) + '</td>';
+    h += '<td style="font-size:0.78em;color:var(--ink-light)">' + escHtml(cs.progress) + '</td>';
+    h += '<td style="font-size:0.78em;color:var(--accent-gold)">' + escHtml(cs.recommended_next) + '</td>';
+    h += '</tr>';
+  }
+  h += '</tbody></table></div>';
+
+  // 关键指标
+  var stageCounts = (EIDX.meta || {}).customer_stages || {};
+  h += '<div class="section-head" style="margin-top:20px">📊 阶段分布</div>';
+  h += '<div class="graph-stat">';
+  for (var i = 0; i < stages.length; i++) {
+    var s = stages[i];
+    var cnt = stageCounts[s.name] || 0;
+    var total = stageCounts.total || 5;
+    var pct = Math.round(cnt / total * 100);
+    h += '<div class="stat-card"><div class="stat-num">' + cnt + '</div><div class="stat-label">' + s.icon + ' ' + escHtml(s.name) + '</div><div style="font-size:0.65em;color:var(--ink-lighter)">' + pct + '%</div></div>';
+  }
+  h += '</div>';
+
+  document.getElementById('tab-journey').innerHTML = h;
+}
+
 function renderChemistry() {
   var m = EIDX.meta || {}, chem = m.chemistry || {}, heat = m.heating || {}, pc = m.perpetual_control || {}, org = m.orchestration_health || {};
   var ls = m.llm_stats || {}, dist = ls.distribution || {};
