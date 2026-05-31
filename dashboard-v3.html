@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>满意红 · 驾驶舱 1.0</title>
+<title>满意解研究所 · 驾驶舱 1.0</title>
 <style>
 /* ========== 暖色 VI 体系 ========== */
 :root {
@@ -243,7 +243,7 @@ body {
 <!-- ========== 密码门 ========== -->
 <div id="gate">
   <div class="gate-logo">红</div>
-  <h1>满意红</h1>
+  <h1>满意解研究所</h1>
   <p class="subtitle">驾驶舱 1.0 · 活体视图</p>
   <input type="password" id="pw" placeholder="输入通行码" autofocus onkeydown="if(event.key==='Enter')unlock(document.getElementById('btn-unlock'))">
   <button id="btn-unlock" onclick="unlock(this)">进入</button>
@@ -253,7 +253,7 @@ body {
 <!-- ========== 主应用 ========== -->
 <div id="app">
   <div class="header">
-    <h1><span class="accent">满意红</span> · 驾驶舱 1.0</h1>
+    <h1><span class="accent">满意解研究所</span> · 驾驶舱 1.0</h1>
     <div class="dateline" id="dateline"></div>
     <div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap">
       <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/egbertie/satisficing-lab/main/file-browser.html" target="_blank" class="header-link" title="GitHub文件浏览器" style="font-size:0.78em;color:#2B7A4B;border:1px solid #2B7A4B;border-radius:4px;padding:3px 10px;text-decoration:none">📁 仓库文件</a>
@@ -285,7 +285,7 @@ body {
   <div class="tab-panel" id="tab-help"></div>
 
   <div class="footer">
-    <div>满意红 · 驾驶舱 1.0 · 为 Egbertie 而建</div>
+    <div>满意解研究所 · 驾驶舱 1.0 · 为 Egbertie 而建</div>
     <div class="q">「我在学习看清自己——每一步，都更清晰一点。」</div>
   </div>
 </div>
@@ -297,7 +297,7 @@ body {
 
 <script>
 /* ================================================================
-   满意红 · 驾驶舱 1.0 — 零硬编码 · 全动态加载
+   满意解研究所 · 驾驶舱 1.0 — 零硬编码 · 全动态加载
    数据: entities_index.json (3994实体·43.9%密度) + open_tasks_audit.json (50条未闭环)
    七族: 镜·契·衡·觉·人·道·章
    三层穿透: L1 总览 → L2 详情表 → L3 组合比对
@@ -427,7 +427,7 @@ function renderOverview() {
   h += ov(bd.living_rules+'<span style="font-size:0.42em;opacity:0.6"> 条</span>','🧬 生物规则','活'+lr.active+' · 休眠'+lr.dormant+' · 坏'+lr.broken);
   h += ov(bd.crons+'<span style="font-size:0.42em;opacity:0.6"> 个</span>','⏱️ Cron','13活 · 连'+m.biological_health.cron_connected);
   h += ov('105<span style="font-size:0.42em;opacity:0.6"> 天</span>','📅 时间线','2/15→'+m.updated.split('T')[0]);
-  h += ov('3<span style="font-size:0.42em;opacity:0.6"> 代</span>','🔄 继承链','扣子→满意姐→满意红');
+  h += ov('3<span style="font-size:0.42em;opacity:0.6"> 代</span>','🔄 继承链','扣子→满意姐→满意解研究所');
   h += ov('100<span style="font-size:0.42em;opacity:0.6">%</span>','🔍 扫描率','24,947文件全扫描');
   h += '</div>';
 
@@ -1467,7 +1467,7 @@ function renderHelp() {
   var lastUpdated = (m.updated||'?').slice(0,19);
   var h = '';
 
-  h += '<div class="panel-header"><h2>🆘 系统帮助 · 满意红知识飞轮</h2><span class="meta">版本 '+ (m.version||'v3.2') +' · 数据截至 '+lastUpdated+' · '+EIDX.products.length+'产品·'+EIDX.connections.length+'连接</span></div>';
+  h += '<div class="panel-header"><h2>🆘 系统帮助 · 满意解研究所知识飞轮</h2><span class="meta">版本 '+ (m.version||'v3.2') +' · 数据截至 '+lastUpdated+' · '+EIDX.products.length+'产品·'+EIDX.connections.length+'连接</span></div>';
 
   // ═══ 三视角切换 ═══
   h += '<div style="display:flex;gap:8px;margin-bottom:16px">';
@@ -1479,7 +1479,7 @@ function renderHelp() {
   // ═══ 三视角内容区域 ═══
   h += '<div id="help-user-view" style="display:block">';
   // 用户视角: 怎么用这个系统
-  h += '<h3 style="margin-bottom:8px">👤 用户视角 · 我如何使用满意红？</h3>';
+  h += '<h3 style="margin-bottom:8px">👤 用户视角 · 我如何使用满意解研究所？</h3>';
   h += '<div class="stat-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px">';
   h += '<div class="stat-card"><div class="stat-num" style="font-size:1.2em;color:var(--accent-gold)">📊</div><div class="stat-label">驾驶舱</div><div style="font-size:0.75em;color:var(--ink-light)">一屏查看系统健康<br>热力·评分·编排·飞轮</div></div>';
   h += '<div class="stat-card"><div class="stat-num" style="font-size:1.2em;color:var(--accent-gold)">📦</div><div class="stat-label">产品库</div><div style="font-size:0.75em;color:var(--ink-light)">'+prods.length+'产品·5族·4层深度<br>LLM替身评分·全生命周期</div></div>';
@@ -1494,7 +1494,7 @@ function renderHelp() {
   h += '<li><b>🧬化学面板</b>: 查看系统自调控状态·LLM替身评分</li>';
   h += '<li><b>♻️飞轮运转</b>: 了解自动化脚本执行情况</li>';
   h += '</ul></div>';
-  h += '<div style="font-size:0.75em;color:var(--ink-lighter);text-align:center;padding:8px">💡 有问题？在对话中直接提问，满意红会回答系统相关的问题</div>';
+  h += '<div style="font-size:0.75em;color:var(--ink-lighter);text-align:center;padding:8px">💡 有问题？在对话中直接提问，满意解研究所会回答系统相关的问题</div>';
   h += '<div style="text-align:center;padding:10px;border-top:1px solid var(--border-warm);margin-top:8px"><a href="help-user.html" target="_blank" style="color:var(--accent-gold);font-weight:700;font-size:0.9em">📖 阅读完整用户手册 →</a><br><span style="font-size:0.65em;color:var(--ink-lighter)">独立页面 · 包含所有标签页详解、核心概念、操作场景、FAQ</span></div>';
   h += '</div>';
 
