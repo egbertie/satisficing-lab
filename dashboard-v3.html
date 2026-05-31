@@ -973,7 +973,37 @@ function renderKnowledge() {
   }
   h += '</tbody></table></div>';
 
+  // 搜索框 + 知识检索
+  h += '<div style="display:flex;gap:8px;margin:12px 0 14px"><input type="text" id="kw-search" placeholder="搜索知识库..." style="flex:1;padding:8px 12px;border:1px solid var(--border-warm);border-radius:8px;font-size:0.82em;outline:none;background:var(--card-white)" oninput="filterKnowledge()"><select id="kw-filter" style="padding:8px 12px;border:1px solid var(--border-warm);border-radius:8px;font-size:0.78em;background:var(--card-white);cursor:pointer" onchange="filterKnowledge()"><option value="all">全部</option><option value="docs">文档</option><option value="terms">术语</option><option value="insts">指令</option></select></div>';
+  h += '<div id="kw-results">';
+  // 构建全部知识条目
+  var allItems = [];
+  for (var i=0; i<docs.length; i++) allItems.push({type:'📄',kind:'docs',name:docs[i].name||'?',cat:docs[i].category||'',desc:(docs[i].topics||[]).join('·')||docs[i].description||'',file:docs[i].file_path||''});
+  for (var i=0; i<terms.length; i++) allItems.push({type:'📖',kind:'terms',name:terms[i].name||'?',cat:terms[i].category||'',desc:terms[i].definition||'',file:''});
+  for (var i=0; i<insts.length; i++) allItems.push({type:'📋',kind:'insts',name:insts[i].name||'?',cat:'指令集',desc:insts[i].purpose||'',file:insts[i].file_path||''});
+  window._kwItems = allItems;
+  for (var i=0; i<allItems.length; i++) {
+    var ai = allItems[i];
+    h += '<div class="task-item" style="padding:6px 10px;margin:2px 0;border-radius:6px;border:1px solid var(--border-warm);background:var(--card-white);font-size:0.72em;display:flex;gap:8px;align-items:center"><span style="font-size:0.9em">'+ai.type+'</span><span style="font-weight:500;flex:1">'+escHtml(ai.name)+'</span><span style="color:var(--ink-lighter);font-size:0.85em">'+escHtml(ai.cat)+'</span><span style="color:var(--ink-light);font-size:0.85em;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escHtml(ai.desc||'')+'</span></div>';
+  }
+  h += '</div>';
+  h += '<div style="font-size:0.68em;color:var(--ink-lighter);margin-top:8px;text-align:right">知识库: '+allItems.length+'条 (📄'+docs.length+' 📖'+terms.length+' 📋'+insts.length+')</div>';
+
   document.getElementById('tab-knowledge').innerHTML = h;
+}
+
+function filterKnowledge() {
+  var q = ((document.getElementById('kw-search')||{}).value||'').toLowerCase();
+  var filt = (document.getElementById('kw-filter')||{}).value||'all';
+  var allItems = window._kwItems||[];
+  var h = '';
+  for (var i=0; i<allItems.length; i++) {
+    var ai = allItems[i];
+    if (filt!=='all' && ai.kind!==filt) continue;
+    if (q && (ai.name||'').toLowerCase().indexOf(q)<0 && (ai.desc||'').toLowerCase().indexOf(q)<0 && (ai.cat||'').toLowerCase().indexOf(q)<0) continue;
+    h += '<div class="task-item" style="padding:6px 10px;margin:2px 0;border-radius:6px;border:1px solid var(--border-warm);background:var(--card-white);font-size:0.72em;display:flex;gap:8px;align-items:center"><span style="font-size:0.9em">'+ai.type+'</span><span style="font-weight:500;flex:1">'+escHtml(ai.name)+'</span><span style="color:var(--ink-lighter);font-size:0.85em">'+escHtml(ai.cat)+'</span><span style="color:var(--ink-light);font-size:0.85em;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escHtml(ai.desc||'')+'</span></div>';
+  }
+  document.getElementById('kw-results').innerHTML = h||'<div style="font-size:0.75em;color:var(--ink-lighter);text-align:center;padding:20px">无匹配结果</div>';
 }
 
 /* ================================================================
