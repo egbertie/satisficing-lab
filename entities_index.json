@@ -22227,7 +22227,18 @@
       "attention_customers": 4,
       "at_risk_customers": 1,
       "critical_customers": 0
-    }
+    },
+    "product_management_v4": {
+      "version": "4.0",
+      "philosophy": "客户视角的产品分层 × 阶段性解锁",
+      "updated_at": "2026-05-31T13:26:02.413991+08:00",
+      "core_products": 11,
+      "customer_facing_total": 31,
+      "stage_based_unlocks": true,
+      "max_visible_per_stage": 5
+    },
+    "customer_facing": 31,
+    "core_products": 11
   },
   "products": [
     {
@@ -263409,6 +263420,398 @@
         "action": "邀请参与案例共创·推荐成为内测伙伴",
         "status": "active"
       }
+    ]
+  },
+  "product_layers": {
+    "version": "4.0",
+    "philosophy": "从客户解决问题出发，而非从产品列表出发",
+    "created_at": "2026-05-31T13:26:02.413991+08:00",
+    "layers": {
+      "L0_core": {
+        "name": "核心产品",
+        "description": "客户从发现到共契全程接触的核心工具——品牌首页直接展示",
+        "max_count": 11,
+        "products": [
+          {
+            "slug": "assessment",
+            "name": "五维决策自评",
+            "why_customer_needs": "想了解自己的决策模式——这是所有客户的起点"
+          },
+          {
+            "slug": "radar",
+            "name": "五维雷达图",
+            "why_customer_needs": "做完自评后，想看自己在五个维度上的画像"
+          },
+          {
+            "slug": "cards-play",
+            "name": "合伙人决策卡牌",
+            "why_customer_needs": "想找个安全的方式，跟合伙人谈那些说不出口的事"
+          },
+          {
+            "slug": "checklist",
+            "name": "决策前自检清单",
+            "why_customer_needs": "重大决策前，需要一个结构化框架避免遗漏"
+          },
+          {
+            "slug": "decision-theatre",
+            "name": "决策剧场",
+            "why_customer_needs": "想在行动前预演不同选择的后果"
+          },
+          {
+            "slug": "chemical-report",
+            "name": "完整诊断报告",
+            "why_customer_needs": "需要一份可以跟合伙人和投资人分享的系统性评估"
+          },
+          {
+            "slug": "exit-guide",
+            "name": "合伙人退出指引",
+            "why_customer_needs": "走到分手这一步，需要一个体面的退出方案"
+          },
+          {
+            "slug": "cases",
+            "name": "决策案例库",
+            "why_customer_needs": "想看看别人的类似情况是怎么处理的"
+          },
+          {
+            "slug": "product-catalog",
+            "name": "产品目录",
+            "why_customer_needs": "想浏览全部可用工具和方法论"
+          },
+          {
+            "slug": "about",
+            "name": "关于我们",
+            "why_customer_needs": "想了解研究所的背景、方法论来源和创始人"
+          },
+          {
+            "slug": "slicing-pie",
+            "name": "分割饼·股权工具",
+            "why_customer_needs": "股权分配是最容易出问题的地方——需要量化方法"
+          }
+        ]
+      },
+      "L1_support": {
+        "name": "支撑产品",
+        "description": "深度诊断工具和专项方法论——客户在特定阶段需要时使用",
+        "products": [
+          {
+            "slug": "fulldiag",
+            "name": "全面合伙人诊断",
+            "stage": "深入"
+          },
+          {
+            "slug": "match",
+            "name": "匹配引擎",
+            "stage": "深入"
+          },
+          {
+            "slug": "metapartner",
+            "name": "元合伙框架",
+            "stage": "深入"
+          },
+          {
+            "slug": "thermometer",
+            "name": "关系温度计",
+            "stage": "评估"
+          },
+          {
+            "slug": "knights",
+            "name": "四骑士识别",
+            "stage": "评估"
+          },
+          {
+            "slug": "rps",
+            "name": "RPS风险剖面",
+            "stage": "尝试"
+          },
+          {
+            "slug": "crisis-sim",
+            "name": "危机模拟",
+            "stage": "尝试"
+          },
+          {
+            "slug": "pre0",
+            "name": "Pre-0身体觉察",
+            "stage": "评估"
+          },
+          {
+            "slug": "stars-method",
+            "name": "星光方法论",
+            "stage": "深入"
+          },
+          {
+            "slug": "go",
+            "name": "决策通道",
+            "stage": "发现"
+          },
+          {
+            "slug": "deep-slicing",
+            "name": "深度·分割饼",
+            "stage": "深入"
+          },
+          {
+            "slug": "deep-wasserman",
+            "name": "深度·合伙人困境",
+            "stage": "深入"
+          },
+          {
+            "slug": "deep-lencioni",
+            "name": "深度·团队五障",
+            "stage": "深入"
+          },
+          {
+            "slug": "deep-thiel",
+            "name": "深度·从0到1",
+            "stage": "深入"
+          },
+          {
+            "slug": "deep-duke",
+            "name": "深度·决策心理学",
+            "stage": "深入"
+          },
+          {
+            "slug": "cases-cluster",
+            "name": "案例集群",
+            "stage": "尝试"
+          },
+          {
+            "slug": "case-zhangxue",
+            "name": "案例·张学武",
+            "stage": "尝试"
+          },
+          {
+            "slug": "creation",
+            "name": "星月传奇·共创",
+            "stage": "共契"
+          },
+          {
+            "slug": "proposal",
+            "name": "方案书",
+            "stage": "共契"
+          },
+          {
+            "slug": "university",
+            "name": "决策大学",
+            "stage": "共契"
+          }
+        ]
+      },
+      "L2_assets": {
+        "name": "知识资产",
+        "description": "案例、方法论、白皮书、行业研究——按需查阅",
+        "count_remaining": "其余线上+归入知识库产品",
+        "notable": [
+          "whitepaper",
+          "deep-*",
+          "case-*",
+          "blood-*",
+          "ops-*",
+          "media-*",
+          "dialogue-*"
+        ]
+      },
+      "L3_internal": {
+        "name": "内部资产",
+        "description": "脚本、Cron、实验性内容、历史资产——仅内部使用",
+        "count_remaining": "其余已下架产品"
+      }
+    }
+  },
+  "customer_product_fusion": {
+    "version": "2.0",
+    "principle": "每个阶段客户只看到3-5个最相关的产品，而非全部315个。随着阶段晋升，逐步解锁更多产品。",
+    "created_at": "2026-05-31T13:26:02.413991+08:00",
+    "stages": {
+      "发现": {
+        "visible_products": 3,
+        "products": [
+          {
+            "slug": "assessment",
+            "role": "入门",
+            "why": "唯一的起点——必须先了解自己"
+          },
+          {
+            "slug": "go",
+            "role": "导航",
+            "why": "帮客户找到适合自己的路径"
+          },
+          {
+            "slug": "about",
+            "role": "信任",
+            "why": "了解我们是谁、凭什么值得信任"
+          }
+        ],
+        "customer_action": "完成五维自评 → 进入评估阶段",
+        "auto_trigger": "24小时内未完成自评 → 推送提醒"
+      },
+      "评估": {
+        "visible_products": 5,
+        "unlocks_from_previous": [
+          "radar",
+          "checklist",
+          "thermometer"
+        ],
+        "products": [
+          {
+            "slug": "radar",
+            "role": "可视化",
+            "why": "把自评结果变成直观的五维图"
+          },
+          {
+            "slug": "checklist",
+            "role": "结构化",
+            "why": "重大决策前必须过一遍"
+          },
+          {
+            "slug": "thermometer",
+            "role": "测量",
+            "why": "量化合伙人关系的温度"
+          },
+          {
+            "slug": "knights",
+            "role": "识别",
+            "why": "识别关系中的四骑士信号"
+          },
+          {
+            "slug": "pre0",
+            "role": "觉察",
+            "why": "身体层面的决策信号"
+          }
+        ],
+        "customer_action": "完成任意2个评估工具 → 进入尝试阶段",
+        "auto_trigger": "7天未进展 → 推荐卡牌对局"
+      },
+      "尝试": {
+        "visible_products": 5,
+        "unlocks_from_previous": [
+          "cards-play",
+          "decision-theatre",
+          "crisis-sim"
+        ],
+        "products": [
+          {
+            "slug": "cards-play",
+            "role": "对话",
+            "why": "最核心的交互工具——让不可讨论的变得可讨论"
+          },
+          {
+            "slug": "decision-theatre",
+            "role": "预演",
+            "why": "在安全环境中测试不同决策"
+          },
+          {
+            "slug": "crisis-sim",
+            "role": "压力测试",
+            "why": "最坏情况下你们的关系扛得住吗"
+          },
+          {
+            "slug": "slicing-pie",
+            "role": "量化",
+            "why": "股权问题必须早谈"
+          },
+          {
+            "slug": "rps",
+            "role": "全局",
+            "why": "全面风险评估"
+          }
+        ],
+        "customer_action": "完成至少1次卡牌或剧场 → 进入深入阶段",
+        "auto_trigger": "14天未进展 → 创始人主动触达"
+      },
+      "深入": {
+        "visible_products": 5,
+        "unlocks_from_previous": [
+          "chemical-report",
+          "exit-guide",
+          "match",
+          "fulldiag"
+        ],
+        "products": [
+          {
+            "slug": "chemical-report",
+            "role": "系统性",
+            "why": "完整的诊断报告——可以跟投资人和律师分享"
+          },
+          {
+            "slug": "match",
+            "role": "匹配",
+            "why": "你们的匹配度到底多少"
+          },
+          {
+            "slug": "fulldiag",
+            "role": "深度",
+            "why": "四层诊断——物理到心理"
+          },
+          {
+            "slug": "exit-guide",
+            "role": "退出",
+            "why": "如果需要分手——体面的方案"
+          },
+          {
+            "slug": "metapartner",
+            "role": "框架",
+            "why": "元层面的合伙人方法论"
+          }
+        ],
+        "customer_action": "完成完整诊断 → 进入共契阶段",
+        "auto_trigger": "自动推荐深度文章"
+      },
+      "共契": {
+        "visible_products": 5,
+        "unlocks_from_previous": [
+          "cases",
+          "creation",
+          "proposal",
+          "university"
+        ],
+        "products": [
+          {
+            "slug": "cases",
+            "role": "参考",
+            "why": "别人的经验是最好的老师"
+          },
+          {
+            "slug": "creation",
+            "role": "共创",
+            "why": "你的经验也能成为案例"
+          },
+          {
+            "slug": "proposal",
+            "role": "扩展",
+            "why": "为组织定制方案"
+          },
+          {
+            "slug": "university",
+            "role": "体系化",
+            "why": "系统学习决策方法论"
+          },
+          {
+            "slug": "whitepaper",
+            "role": "权威",
+            "why": "可引用的正式研究"
+          }
+        ],
+        "customer_action": "推荐新客户或参与案例共创",
+        "auto_trigger": "主动邀请共创 + 推荐合伙人计划"
+      }
+    }
+  },
+  "product_fusion_stats": {
+    "version": "4.0",
+    "philosophy": "客户视角的产品分层——不是删除产品，是分清主次",
+    "summary": {
+      "total_all": 315,
+      "L0_core_visible": 11,
+      "L1_support": 20,
+      "L2_assets_approx": 50,
+      "L3_internal_approx": 234,
+      "customer_facing": 31
+    },
+    "key_insights": [
+      "客户从「发现」到「共契」全程只需要接触31个产品（L0+L1）",
+      "87%的产品（L2+L3）是内部资产和知识沉淀，不对客户直接展示",
+      "每个阶段最多5个可见产品——避免选择焦虑",
+      "产品不是越多越好——是「对的产品在对的时间出现」",
+      "产品层层解锁——给客户清晰的晋级路径，而非一次性扔315个"
     ]
   }
 }

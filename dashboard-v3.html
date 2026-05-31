@@ -1587,6 +1587,66 @@ function renderCustomerJourney() {
   }
   h += '</tbody></table></div>';
 
+  // ==== 产品×客户融合模型 (v4.0) ====
+  var fusion = EIDX.customer_product_fusion || {};
+  var fStages = fusion.stages || {};
+  var fKeys = Object.keys(fStages);
+  var layers = EIDX.product_layers || {};
+  var l0 = (layers.layers || {}).L0_core || {};
+  var l0prods = l0.products || [];
+  var fusionStats = EIDX.product_fusion_stats || {};
+  var fusionSummary = fusionStats.summary || {};
+
+  h += '<div class="section-head" style="margin-top:20px">产品×客户融合 · 阶段性解锁</div>';
+  h += '<div class="panel-header"><p style="font-size:0.82em;color:var(--ink-light)">客户只需31个产品（L0+L1），每个阶段最多看到5个。315个产品中87%是内部资产。</p></div>';
+
+  // 统计卡
+  h += '<div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:12px">';
+  h += '<div class="stat-card"><div class="stat-num" style="color:var(--accent-gold)">'+l0prods.length+'</div><div class="stat-label">核心产品(L0)</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+fusionSummary.customer_facing+'</div><div class="stat-label">客户可见(L0+L1)</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+fusionSummary.total_all+'</div><div class="stat-label">总产品(L0~L3)</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">5</div><div class="stat-label">每阶段最多</div></div>';
+  h += '</div>';
+
+  // 核心产品卡片
+  h += '<div class="section-head">核心产品(L0) · 每个客户都会接触</div>';
+  h += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">';
+  for (var i = 0; i < l0prods.length; i++) {
+    var lp = l0prods[i];
+    h += '<div style="background:var(--card-white);border:1px solid var(--accent-gold);border-radius:8px;padding:10px 14px;font-size:0.78em">';
+    h += '<div style="font-weight:600;color:var(--ink)">'+escHtml(lp.name)+'</div>';
+    h += '<div style="font-size:0.75em;color:var(--ink-light);margin-top:2px;max-width:220px">'+escHtml(lp.why_customer_needs)+'</div>';
+    h += '</div>';
+  }
+  h += '</div>';
+
+  // 阶段性解锁表
+  h += '<div class="section-head">阶段性解锁 · 客户看到的产品随阶段递进</div>';
+  h += '<div style="overflow-x:auto"><table class="data-table" style="width:100%;font-size:0.78em">';
+  h += '<thead><tr><th>阶段</th><th>可见产品</th><th>解锁产品</th><th>触发动作</th><th>自动化</th></tr></thead><tbody>';
+  for (var i = 0; i < fKeys.length; i++) {
+    var sk = fKeys[i];
+    var sc = fStages[sk];
+    var prods = sc.products || [];
+    var unlocks = sc.unlocks_from_previous || [];
+    h += '<tr>';
+    h += '<td style="font-weight:600;white-space:nowrap">'+escHtml(sk)+'</td>';
+    h += '<td><span style="font-weight:700;color:var(--accent-gold)">'+sc.visible_products+'</span>个</td>';
+    h += '<td style="font-size:0.72em">'+(unlocks.length>0?'解锁: '+unlocks.join(', '):'起点')+'</td>';
+    h += '<td style="font-size:0.72em;color:var(--ink-light)">'+escHtml(sc.customer_action||'')+'</td>';
+    h += '<td style="font-size:0.68em;color:var(--ink-lighter)">'+escHtml(sc.auto_trigger||'')+'</td>';
+    h += '</tr>';
+  }
+  h += '</tbody></table></div>';
+
+  // 精简洞察
+  h += '<div style="background:var(--card-warm);border:1px solid var(--border-warm);border-radius:10px;padding:14px 18px;margin-top:12px">';
+  h += '<div style="font-size:0.78em;font-weight:600;color:var(--ink);margin-bottom:6px">第一性原理</div>';
+  for (var i = 0; i < (fusionStats.key_insights||[]).length; i++) {
+    h += '<div style="font-size:0.72em;color:var(--ink-light);margin-top:3px">'+escHtml(fusionStats.key_insights[i])+'</div>';
+  }
+  h += '</div>';
+
   document.getElementById('tab-journey').innerHTML = h;
 }
 
