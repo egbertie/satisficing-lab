@@ -40,7 +40,7 @@
 | 触发动作 | 无（Token < 70%，仅记录） |
 | 标记 | [FIN-A] |
 
-## 2026-05-31 21:59 (Cron: compression-check)
+## 2026-05-31 23:59 (Cron: compression-check)
 
 | 项目 | 值 |
 |------|-----|
