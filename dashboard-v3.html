@@ -320,13 +320,13 @@ var taskFilt = '全部';
 })();
 
 /* ===== 工具 ===== */
-function h(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function a(s) { return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 function setDate() {
   var n = new Date(), w = ['日','一','二','三','四','五','六'];
   document.getElementById('dateline').textContent =
-    n.getFullYear()+'年'+(n.getMonth()+1)+'月'+n.getDate()+'日 · 周'+w[n.getDay()]+' · '+String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');
+    n.getFullYear()+'年'+(n.getMontescHtml()+1)+'月'+n.getDate()+'日 · 周'+w[n.getDay()]+' · '+String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');
 }
 
 /* ===== 数据文件基础路径 (自动适配 本地/GitHub/htmlpreview) ===== */
@@ -345,8 +345,8 @@ function boot() {
   setDate();
   var base = dataBase();
   Promise.all([
-    fetch(base + 'entities_index.json').then(function(r){ if(!r.ok) throw Error('HTTP '+r.status); return r.json(); }),
-    fetch(base + 'open_tasks_audit.json').then(function(r){ if(!r.ok) throw Error('HTTP '+r.status); return r.json(); })
+    fetcescHtml(base + 'entities_index.json').then(function(r){ if(!r.ok) throw Error('HTTP '+r.status); return r.json(); }),
+    fetcescHtml(base + 'open_tasks_audit.json').then(function(r){ if(!r.ok) throw Error('HTTP '+r.status); return r.json(); })
   ]).then(function(arr){
     EIDX = arr[0]; TSK = arr[1];
     // 去重产品
@@ -354,13 +354,13 @@ function boot() {
     PRODS = [];
     var raw = EIDX.products || [];
     for (var i=0; i<raw.length; i++) {
-      if (!seen[raw[i].name]) { seen[raw[i].name] = true; PRODS.push(raw[i]); }
+      if (!seen[raw[i].name]) { seen[raw[i].name] = true; PRODS.pusescHtml(raw[i]); }
     }
     buildNav();
     renderOverview();
     renderProducts();
     renderTasks('全部');
-    renderHealth();
+    renderHealtescHtml();
     renderActivity();
     renderCustomers();
     renderKnowledge();
@@ -373,8 +373,8 @@ function boot() {
     renderChemistry();
     renderHelp();
     switchTab('tab-overview');
-  }).catch(function(e){
-    document.getElementById('app').innerHTML = '<div class="load-error"><strong>⚠️ 数据加载失败</strong><details><summary>详情</summary>无法加载数据文件。<br>请确认 entities_index.json 和 open_tasks_audit.json 存在。<br><br>错误: '+h(e.message)+'</details></div>';
+  }).catcescHtml(function(e){
+    document.getElementById('app').innerHTML = '<div class="load-error"><strong>⚠️ 数据加载失败</strong><details><summary>详情</summary>无法加载数据文件。<br>请确认 entities_index.json 和 open_tasks_audit.json 存在。<br><br>错误: '+escHtml(e.message)+'</details></div>';
   });
 }
 
@@ -451,8 +451,8 @@ function renderOverview() {
   var jingpin = [];
   var others = [];
   for (var i = 0; i < allProds.length; i++) {
-    if (allProds[i].status === '精品') jingpin.push(allProds[i]);
-    else others.push(allProds[i]);
+    if (allProds[i].status === '精品') jingpin.pusescHtml(allProds[i]);
+    else others.pusescHtml(allProds[i]);
   }
   var top10 = jingpin.concat(others).slice(0, 10);
   h += '<div class="section-head" style="margin-top:20px">🏆 Top 10 产品（精品优先）</div>';
@@ -461,12 +461,12 @@ function renderOverview() {
     var p = top10[i];
     var fb = p.family || '未归类';
     var q = p.quality_score !== undefined ? p.quality_score : '-';
-    var qNote = p.quality_score_note ? ' <span style="font-size:0.72em;color:var(--ink-lighter)">' + h(p.quality_score_note) + '</span>' : '';
+    var qNote = p.quality_score_note ? ' <span style="font-size:0.72em;color:var(--ink-lighter)">' + escHtml(p.quality_score_note) + '</span>' : '';
     var url = p.url || '';
     var qStyle = '';
     if (p.quality_confidence === 'A') qStyle = 'color:var(--green-ok);font-weight:600';
     else if (p.quality_confidence === 'D') qStyle = 'color:var(--ink-lighter);font-style:italic';
-    h += '<tr><td>' + h(p.id) + '</td><td style="font-weight:500">' + h(p.name) + '</td><td><span class="family-badge ' + fb + '">' + fb + '</span></td><td style="' + qStyle + '">' + q + qNote + '</td><td>' + (url ? '<a class="prod-link" href="' + a(url) + '" target="_blank" rel="noopener">打开 →</a>' : '-') + '</td></tr>';
+    h += '<tr><td>' + escHtml(p.id) + '</td><td style="font-weight:500">' + escHtml(p.name) + '</td><td><span class="family-badge ' + fb + '">' + fb + '</span></td><td style="' + qStyle + '">' + q + qNote + '</td><td>' + (url ? '<a class="prod-link" href="' + a(url) + '" target="_blank" rel="noopener">打开 →</a>' : '-') + '</td></tr>';
   }
   h += '</tbody></table></div>';
 
@@ -505,7 +505,7 @@ function renderDetailRows() {
   var prods = EIDX.products || [];
   var filt = [];
   for (var i=0; i<prods.length; i++) {
-    if (prodFilt==='全部' || (prods[i].family||'未归类')===prodFilt) filt.push(prods[i]);
+    if (prodFilt==='全部' || (prods[i].family||'未归类')===prodFilt) filt.pusescHtml(prods[i]);
   }
   var h = '';
   for (var i=0; i<filt.length; i++) {
@@ -514,7 +514,7 @@ function renderDetailRows() {
     var desc = (p.description||'').substring(0,60);
     if (p.description && p.description.length>60) desc+='…';
     var url = p.url||'';
-    h += '<tr><td class="check-col"><input type="checkbox"'+chk+' onclick="toggleSel(this,\''+a(p.name)+'\')"></td><td>'+h(p.name)+'</td><td><span class="family-badge '+fb+'">'+fb+'</span></td><td>'+(p.status||p.maturity||'-')+'</td><td style="font-size:0.8em;color:var(--ink-light)">'+h(desc||'')+'</td><td>'+(url?'<a class="prod-link" href="'+a(url)+'" target="_blank" rel="noopener">打开 →</a>':'-')+'</td></tr>';
+    h += '<tr><td class="check-col"><input type="checkbox"'+chk+' onclick="toggleSel(this,\''+a(p.name)+'\')"></td><td>'+escHtml(p.name)+'</td><td><span class="family-badge '+fb+'">'+fb+'</span></td><td>'+(p.status||p.maturity||'-')+'</td><td style="font-size:0.8em;color:var(--ink-light)">'+escHtml(desc||'')+'</td><td>'+(url?'<a class="prod-link" href="'+a(url)+'" target="_blank" rel="noopener">打开 →</a>':'-')+'</td></tr>';
   }
   document.getElementById('detail-tbody').innerHTML = h;
 }
@@ -536,7 +536,7 @@ function toggleDetail(btn) {
 
 function toggleSel(cb, name) {
   var idx = selProds.indexOf(name);
-  if (cb.checked && idx<0) selProds.push(name);
+  if (cb.checked && idx<0) selProds.pusescHtml(name);
   else if (!cb.checked && idx>=0) selProds.splice(idx,1);
   updateCmpBar();
 }
@@ -565,13 +565,13 @@ function openCmp(btn) {
   var items = [];
   for (var i=0; i<selProds.length; i++) {
     for (var j=0; j<prods.length; j++) {
-      if (prods[j].name === selProds[i]) { items.push(prods[j]); break; }
+      if (prods[j].name === selProds[i]) { items.pusescHtml(prods[j]); break; }
     }
   }
 
   var h = '<h3>🔍 组合比对</h3><p class="cmp-sub">'+items.length+' 个产品并排对比</p><button class="cmp-close" onclick="closeCmp(this)">✕</button>';
   h += '<table class="cmp-table"><thead><tr><th>维度</th>';
-  for (var i=0; i<items.length; i++) h += '<th>'+h(items[i].name)+'</th>';
+  for (var i=0; i<items.length; i++) h += '<th>'+escHtml(items[i].name)+'</th>';
   h += '</tr></thead><tbody>';
 
   // 族
@@ -586,7 +586,7 @@ function openCmp(btn) {
 
   // 描述
   h += '<tr><td>描述</td>';
-  for (var i=0; i<items.length; i++) h += '<td style="font-size:0.82em">'+h(items[i].description||'-')+'</td>';
+  for (var i=0; i<items.length; i++) h += '<td style="font-size:0.82em">'+escHtml(items[i].description||'-')+'</td>';
   h += '</tr>';
 
   // 链接
@@ -642,7 +642,7 @@ for (var i=0; i<allTasks.length; i++) {
     var it = allTasks[i];
     if (taskFilt!=='全部' && it.priority!==taskFilt) continue;
     var pc = it.priority.toLowerCase();
-    h += '<div class="task-item '+pc+'"><span class="task-badge '+pc+'">'+it.priority+'</span><div class="task-body"><div class="task-title">'+h(it.title)+'</div><div class="task-desc">状态: '+h(it.status||'待处理')+' · 来源: '+h(it.source||'')+'</div></div></div>';
+    h += '<div class="task-item '+pc+'"><span class="task-badge '+pc+'">'+it.priority+'</span><div class="task-body"><div class="task-title">'+escHtml(it.title)+'</div><div class="task-desc">状态: '+escHtml(it.status||'待处理')+' · 来源: '+escHtml(it.source||'')+'</div></div></div>';
   }
   document.getElementById('tab-tasks').innerHTML = h;
 }
@@ -650,7 +650,7 @@ for (var i=0; i<allTasks.length; i++) {
 /* ================================================================
    面板 4: 健康仪表 (8指标 · 从meta动态计算)
    ================================================================ */
-function renderHealth() {
+function renderHealtescHtml() {
   var m = EIDX.meta, bd = m.breakdown, bh = m.biological_health, lr = m.living_rules_status;
 
   var gauges = [
@@ -686,8 +686,8 @@ function renderHealth() {
     var freq = c.frequency || c.schedule || '-';
     var purpose = c.purpose || c.description || c.kind || '-';
     var active = c.status === 'active' || c.status === 'ok';
-    var statusHtml = active ? '<span style="color:var(--green-ok);font-weight:500">✅ 活跃</span>' : '<span style="color:var(--ink-lighter)">⏳ ' + h(c.status || 'idle') + '</span>';
-    h += '<tr><td style="font-weight:500">' + h(c.name) + '</td><td style="font-size:0.82em;color:var(--ink-light)">' + h(freq) + '</td><td style="font-size:0.8em;color:var(--ink-light)">' + h(purpose) + '</td><td>' + statusHtml + '</td></tr>';
+    var statusHtml = active ? '<span style="color:var(--green-ok);font-weight:500">✅ 活跃</span>' : '<span style="color:var(--ink-lighter)">⏳ ' + escHtml(c.status || 'idle') + '</span>';
+    h += '<tr><td style="font-weight:500">' + escHtml(c.name) + '</td><td style="font-size:0.82em;color:var(--ink-light)">' + escHtml(freq) + '</td><td style="font-size:0.8em;color:var(--ink-light)">' + escHtml(purpose) + '</td><td>' + statusHtml + '</td></tr>';
   }
   h += '</tbody></table></div>';
 
@@ -733,10 +733,10 @@ function renderActivity() {
     var confStyle = '';
     if (d.confidence >= 0.9) confStyle = 'color:var(--green-ok);font-weight:600';
     else if (d.confidence >= 0.8) confStyle = 'color:var(--amber-warn);font-weight:500';
-    var ctxHtml = h(d.context || '-');
+    var ctxHtml = escHtml(d.context || '-');
     var ctxId = 'dec-ctx-' + i;
-    h += '<tr style="cursor:pointer" onclick="var e=document.getElementById(\'' + ctxId + '\');e.style.display=e.style.display===\'none\'?\'\':\'none\'"><td style="white-space:nowrap">' + h(d.date) + '</td><td style="font-weight:500">' + h(d.title) + '</td><td style="' + confStyle + '">' + conf + '</td><td>' + h(d.lifecycle_stage || '-') + '</td></tr>';
-    h += '<tr id="' + ctxId + '" style="display:none;background:var(--card-warm)"><td colspan="4" style="font-size:0.78em;color:var(--ink-light);padding:8px 16px">📋 ' + ctxHtml + '<br><span style="color:var(--ink-lighter)">决策结果: ' + h(d.outcome || '-') + '</span></td></tr>';
+    h += '<tr style="cursor:pointer" onclick="var e=document.getElementById(\'' + ctxId + '\');e.style.display=e.style.display===\'none\'?\'\':\'none\'"><td style="white-space:nowrap">' + escHtml(d.date) + '</td><td style="font-weight:500">' + escHtml(d.title) + '</td><td style="' + confStyle + '">' + conf + '</td><td>' + escHtml(d.lifecycle_stage || '-') + '</td></tr>';
+    h += '<tr id="' + ctxId + '" style="display:none;background:var(--card-warm)"><td colspan="4" style="font-size:0.78em;color:var(--ink-light);padding:8px 16px">📋 ' + ctxHtml + '<br><span style="color:var(--ink-lighter)">决策结果: ' + escHtml(d.outcome || '-') + '</span></td></tr>';
   }
   h += '</tbody></table></div>';
 
@@ -755,7 +755,7 @@ function renderCustomers() {
   var h = '';
   for (var i=0; i<custs.length; i++) {
     var c = custs[i];
-    h += '<div class="cust-card"><h4>'+h(c.name)+'</h4><div class="cust-meta">行业: '+h(c.industry||'未标注')+' · 阶段: '+h(c.stage||'画像')+'</div><div class="cust-needs">核心需求: '+h(c.needs_summary||c.description||'')+'</div></div>';
+    h += '<div class="cust-card"><h4>'+escHtml(c.name)+'</h4><div class="cust-meta">行业: '+escHtml(c.industry||'未标注')+' · 阶段: '+escHtml(c.stage||'画像')+'</div><div class="cust-needs">核心需求: '+escHtml(c.needs_summary||c.description||'')+'</div></div>';
   }
 
   // 客户画像库
@@ -767,7 +767,7 @@ function renderCustomers() {
     var isInternal = cp.target_user === '内部';
     var greyStyle = isInternal ? 'color:var(--ink-lighter);font-style:italic' : '';
     var dv = cp.decision_value !== undefined ? cp.decision_value : '-';
-    h += '<tr style="' + (isInternal ? 'opacity:0.6' : '') + '"><td style="font-size:0.78em;color:var(--ink-lighter)">' + h(cp.id) + '</td><td style="font-weight:500;' + greyStyle + '">' + h(cp.name) + '</td><td>' + h(cp.industry || '-') + '</td><td style="font-size:0.82em;color:var(--ink-light)">' + h(cp.decision_type || '-') + '</td><td>' + dv + '</td></tr>';
+    h += '<tr style="' + (isInternal ? 'opacity:0.6' : '') + '"><td style="font-size:0.78em;color:var(--ink-lighter)">' + escHtml(cp.id) + '</td><td style="font-weight:500;' + greyStyle + '">' + escHtml(cp.name) + '</td><td>' + escHtml(cp.industry || '-') + '</td><td style="font-size:0.82em;color:var(--ink-light)">' + escHtml(cp.decision_type || '-') + '</td><td>' + dv + '</td></tr>';
   }
   h += '</tbody></table></div>';
 
@@ -795,14 +795,14 @@ function renderKnowledge() {
   var rt = {};
   for (var i=0; i<conns.length; i++) { var t = conns[i].relationship_type||'未知'; rt[t] = (rt[t]||0)+1; }
   var rts = [];
-  for (var k in rt) { if (rt.hasOwnProperty(k)) rts.push({k:k, v:rt[k]}); }
+  for (var k in rt) { if (rt.hasOwnProperty(k)) rts.pusescHtml({k:k, v:rt[k]}); }
   rts.sort(function(a,b){ return b.v-a.v; });
   rts = rts.slice(0,10);
   var maxR = rts.length>0 ? rts[0].v : 1;
   h += '<div class="family-bars"><h4>🔗 连接类型分布 (Top 10)</h4>';
   for (var i=0; i<rts.length; i++) {
     var pct = Math.round(rts[i].v/maxR*100);
-    h += '<div class="bar-row"><span class="bar-label" style="width:auto;min-width:100px;text-align:left;font-size:0.76em">'+h(rts[i].k.substring(0,18))+'</span><div class="bar-track"><div class="bar-fill _mirror" style="width:'+pct+'%">'+rts[i].v+'</div></div></div>';
+    h += '<div class="bar-row"><span class="bar-label" style="width:auto;min-width:100px;text-align:left;font-size:0.76em">'+escHtml(rts[i].k.substring(0,18))+'</span><div class="bar-track"><div class="bar-fill _mirror" style="width:'+pct+'%">'+rts[i].v+'</div></div></div>';
   }
   h += '</div>';
 
@@ -812,7 +812,7 @@ function renderKnowledge() {
   for (var i=0; i<docs.length; i++) {
     var d = docs[i];
     var ts = (d.topics||[]).join(' · ');
-    h += '<tr><td>'+h(d.name)+'</td><td>'+h(d.category||'-')+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+h(ts||'-')+'</td><td style="font-size:0.72em;color:var(--ink-lighter);word-break:break-all">'+h(d.file_path||'-')+'</td></tr>';
+    h += '<tr><td>'+escHtml(d.name)+'</td><td>'+escHtml(d.category||'-')+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+escHtml(ts||'-')+'</td><td style="font-size:0.72em;color:var(--ink-lighter);word-break:break-all">'+escHtml(d.file_path||'-')+'</td></tr>';
   }
   h += '</tbody></table></div>';
 
@@ -824,7 +824,7 @@ function renderKnowledge() {
     var t = topTerms[i];
     var def = (t.definition||'').substring(0,80);
     if (t.definition && t.definition.length>80) def += '…';
-    h += '<tr><td style="font-weight:500">'+h(t.name)+'</td><td>'+h(t.category||'-')+'</td><td style="font-size:0.8em;color:var(--ink-light)">'+h(def)+'</td><td>'+h(t.status||'-')+'</td></tr>';
+    h += '<tr><td style="font-weight:500">'+escHtml(t.name)+'</td><td>'+escHtml(t.category||'-')+'</td><td style="font-size:0.8em;color:var(--ink-light)">'+escHtml(def)+'</td><td>'+escHtml(t.status||'-')+'</td></tr>';
   }
   h += '</tbody></table></div>';
 
@@ -833,7 +833,7 @@ function renderKnowledge() {
   h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>名称</th><th>用途</th><th>状态</th><th>路径</th></tr></thead><tbody>';
   for (var i=0; i<insts.length; i++) {
     var ist = insts[i];
-    h += '<tr><td>'+h(ist.name)+'</td><td style="font-size:0.8em;color:var(--ink-light)">'+h(ist.purpose||'-')+'</td><td>'+h(ist.status||'-')+'</td><td style="font-size:0.72em;color:var(--ink-lighter)">'+h(ist.file_path||'-')+'</td></tr>';
+    h += '<tr><td>'+escHtml(ist.name)+'</td><td style="font-size:0.8em;color:var(--ink-light)">'+escHtml(ist.purpose||'-')+'</td><td>'+escHtml(ist.status||'-')+'</td><td style="font-size:0.72em;color:var(--ink-lighter)">'+escHtml(ist.file_path||'-')+'</td></tr>';
   }
   h += '</tbody></table></div>';
 
@@ -871,7 +871,7 @@ function renderGovernance() {
     else if (st==='broken'||st==='坏') stStyle = 'color:var(--accent-red)';
     var trig = (r.trigger||'').substring(0,60);
     if (r.trigger && r.trigger.length>60) trig += '…';
-    h += '<tr><td style="font-weight:500">'+h(r.name)+'</td><td style="'+stStyle+'">'+h(st)+'</td><td>'+h(r.priority||'-')+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+h(trig||'-')+'</td></tr>';
+    h += '<tr><td style="font-weight:500">'+escHtml(r.name)+'</td><td style="'+stStyle+'">'+escHtml(st)+'</td><td>'+escHtml(r.priority||'-')+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+escHtml(trig||'-')+'</td></tr>';
   }
   h += '</tbody></table></div>';
 
@@ -880,7 +880,7 @@ function renderGovernance() {
   h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>名称</th><th>版本</th><th>日期</th><th>状态</th></tr></thead><tbody>';
   for (var i=0; i<gf.length; i++) {
     var g = gf[i];
-    h += '<tr><td>'+h(g.name)+'</td><td>'+h(g.version||'-')+'</td><td>'+h(g.date||'-')+'</td><td>'+h(g.status||'-')+'</td></tr>';
+    h += '<tr><td>'+escHtml(g.name)+'</td><td>'+escHtml(g.version||'-')+'</td><td>'+escHtml(g.date||'-')+'</td><td>'+escHtml(g.status||'-')+'</td></tr>';
   }
   h += '</tbody></table></div>';
 
@@ -891,7 +891,7 @@ function renderGovernance() {
     var e = ev[i];
     var sev = e.severity||'-';
     var sevStyle = sev==='critical'?'color:var(--accent-red);font-weight:500':'';
-    h += '<tr><td>'+h(e.name)+'</td><td>'+h(e.date||'-')+'</td><td style="'+sevStyle+'">'+h(sev)+'</td><td>'+h(e.category||'-')+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+h((e.fix||'').substring(0,60))+'</td></tr>';
+    h += '<tr><td>'+escHtml(e.name)+'</td><td>'+escHtml(e.date||'-')+'</td><td style="'+sevStyle+'">'+escHtml(sev)+'</td><td>'+escHtml(e.category||'-')+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+escHtml((e.fix||'').substring(0,60))+'</td></tr>';
   }
   h += '</tbody></table></div>';
 
@@ -902,7 +902,7 @@ function renderGovernance() {
     var c = cr[i];
     var freq = c.schedule||'-';
     var purpose = c.purpose || c.description || c.kind || '-';
-    h += '<tr><td>'+h(c.name)+'</td><td>'+h(freq)+'</td><td style="font-size:0.8em;color:var(--ink-light)">'+h(purpose)+'</td><td>'+h(c.status||'-')+'</td></tr>';
+    h += '<tr><td>'+escHtml(c.name)+'</td><td>'+escHtml(freq)+'</td><td style="font-size:0.8em;color:var(--ink-light)">'+escHtml(purpose)+'</td><td>'+escHtml(c.status||'-')+'</td></tr>';
   }
   h += '</tbody></table></div>';
 
@@ -929,7 +929,7 @@ function renderOrganization() {
   h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>名称</th><th>层级</th><th>元素</th><th>维度</th><th>贡献分</th></tr></thead><tbody>';
   for (var i=0; i<av.length; i++) {
     var a = av[i];
-    h += '<tr><td style="font-weight:500">'+h(a.name)+'</td><td>'+h(a.tier||'-')+'</td><td>'+h(a.element||'-')+'</td><td>'+h(a.dimension||'-')+'</td><td>'+h(String(a.contribution_score!==undefined?a.contribution_score:'-'))+'</td></tr>';
+    h += '<tr><td style="font-weight:500">'+escHtml(a.name)+'</td><td>'+escHtml(a.tier||'-')+'</td><td>'+escHtml(a.element||'-')+'</td><td>'+escHtml(a.dimension||'-')+'</td><td>'+escHtml(String(a.contribution_score!==undefined?a.contribution_score:'-'))+'</td></tr>';
   }
   h += '</tbody></table></div>';
 
@@ -939,7 +939,7 @@ function renderOrganization() {
   for (var i=0; i<wf.length; i++) {
     var w = wf[i];
     var steps = w.steps ? w.steps.length : 0;
-    h += '<tr><td>'+h(w.name)+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+h(w.trigger||'-')+'</td><td>'+steps+'</td><td>'+h(w.status||'-')+'</td></tr>';
+    h += '<tr><td>'+escHtml(w.name)+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+escHtml(w.trigger||'-')+'</td><td>'+steps+'</td><td>'+escHtml(w.status||'-')+'</td></tr>';
   }
   h += '</tbody></table></div>';
 
@@ -948,7 +948,7 @@ function renderOrganization() {
   h += '<div class="detail-wrap show"><table class="detail-table"><thead><tr><th>名称</th><th>语言</th><th>频率</th><th>用途</th></tr></thead><tbody>';
   for (var i=0; i<sc.length; i++) {
     var s = sc[i];
-    h += '<tr><td>'+h(s.name)+'</td><td>'+h(s.language||'-')+'</td><td>'+h(s.frequency||'-')+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+h(s.purpose||'-')+'</td></tr>';
+    h += '<tr><td>'+escHtml(s.name)+'</td><td>'+escHtml(s.language||'-')+'</td><td>'+escHtml(s.frequency||'-')+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+escHtml(s.purpose||'-')+'</td></tr>';
   }
   h += '</tbody></table></div>';
 
@@ -976,7 +976,7 @@ function renderArchaeology() {
 
   // 里程碑时间线 (按日期排序)
   var mis = [];
-  for (var i=0; i<mi.length; i++) mis.push(mi[i]);
+  for (var i=0; i<mi.length; i++) mis.pusescHtml(mi[i]);
   mis.sort(function(a,b){
     var da = a.target_date||'';
     var db = b.target_date||'';
@@ -994,7 +994,7 @@ function renderArchaeology() {
     if (st==='完成') stStyle = 'color:var(--green-ok);font-weight:500';
     else if (st==='进行中') stStyle = 'color:var(--amber-warn);font-weight:500';
     else if (st==='待开始') stStyle = 'color:var(--ink-lighter)';
-    h += '<tr><td>'+h(m.target_date||'-')+'</td><td style="font-weight:500">'+h(m.name||'-')+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+h((m.description||'').substring(0,50))+'</td><td style="'+stStyle+'">'+h(st)+'</td></tr>';
+    h += '<tr><td>'+escHtml(m.target_date||'-')+'</td><td style="font-weight:500">'+escHtml(m.name||'-')+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+escHtml((m.description||'').substring(0,50))+'</td><td style="'+stStyle+'">'+escHtml(st)+'</td></tr>';
   }
   h += '</tbody></table></div>';
 
@@ -1005,7 +1005,7 @@ function renderArchaeology() {
     var art = ha[i];
     var sig = (art.significance||'').substring(0,80);
     if (art.significance && art.significance.length>80) sig += '…';
-    h += '<tr><td style="font-weight:500">'+h(art.name)+'</td><td>'+h(art.era||'-')+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+h(sig||'-')+'</td></tr>';
+    h += '<tr><td style="font-weight:500">'+escHtml(art.name)+'</td><td>'+escHtml(art.era||'-')+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+escHtml(sig||'-')+'</td></tr>';
   }
   h += '</tbody></table></div>';
 
@@ -1015,7 +1015,7 @@ function renderArchaeology() {
   for (var i=0; i<sim.length; i++) {
     var s = sim[i];
     var desc = s.description || s.outcomes || s.industry || '-';
-    h += '<tr><td>'+h(s.name)+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+h(desc)+'</td></tr>';
+    h += '<tr><td>'+escHtml(s.name)+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+escHtml(desc)+'</td></tr>';
   }
   h += '</tbody></table></div>';
 
@@ -1026,7 +1026,7 @@ function renderArchaeology() {
     var d = ad[i];
     var desc = (d.description||'').substring(0,100);
     if (d.description && d.description.length>100) desc += '…';
-    h += '<tr><td style="font-weight:500">'+h(d.name)+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+h(desc||'-')+'</td></tr>';
+    h += '<tr><td style="font-weight:500">'+escHtml(d.name)+'</td><td style="font-size:0.78em;color:var(--ink-light)">'+escHtml(desc||'-')+'</td></tr>';
   }
   h += '</tbody></table></div>';
 
@@ -1047,7 +1047,7 @@ function renderCities() {
   for (var i = 0; i < cities.length; i++) {
     var t = cities[i].tier || '未分类';
     if (!tiers[t]) tiers[t] = [];
-    tiers[t].push(cities[i]);
+    tiers[t].pusescHtml(cities[i]);
   }
   var totalCust = 0, totalProd = 0, totalKf = 0, topKf = 0;
   for (var i = 0; i < cities.length; i++) {
@@ -1094,7 +1094,7 @@ function renderCities() {
     var inds = cities[i].key_industries || [];
     for (var j = 0; j < inds.length; j++) {
       if (!indMap[inds[j]]) indMap[inds[j]] = [];
-      indMap[inds[j]].push(cities[i].name);
+      indMap[inds[j]].pusescHtml(cities[i].name);
     }
   }
   var indKeys = Object.keys(indMap).sort(function(a,b){ return indMap[b].length - indMap[a].length; });
@@ -1316,7 +1316,7 @@ function renderFlywheel() {
   if (cc.by_type) {
     h += '<div style="font-weight:600;margin-top:12px;margin-bottom:8px">🔬 实体一致性 ('+ (cc.total_issues||0) +'异常)</div>';
     var ccItems = [];
-    for (var k in cc.by_type) ccItems.push({k:k, v:cc.by_type[k]});
+    for (var k in cc.by_type) ccItems.pusescHtml({k:k, v:cc.by_type[k]});
     ccItems.sort(function(a,b){return b.v - a.v});
     h += '<table class="data-table" style="width:100%;font-size:0.75em"><thead><tr><th>类型</th><th style="width:60px">数量</th></tr></thead><tbody>';
     for (var i=0;i<Math.min(ccItems.length,6);i++) h += '<tr><td>'+ccItems[i].k+'</td><td style="text-align:center;font-weight:700;color:'+(ccItems[i].v>0?'#e74c3c':'#27ae60')+'">'+ccItems[i].v+'</td></tr>';
@@ -1441,7 +1441,7 @@ function renderChemistry() {
   // 替身Top5精简
   var ar = ls.avatar_rankings || {};
   var arList = [];
-  for (var k in ar) arList.push({name:k, avg:ar[k]});
+  for (var k in ar) arList.pusescHtml({name:k, avg:ar[k]});
   arList.sort(function(a,b){return b.avg - a.avg});
   h += '<div class="stat-card" style="font-size:0.75em;background:#f8f4f8"><div style="font-weight:600;margin-bottom:4px">👤 替身Top5</div>';
   for (var i=0;i<Math.min(arList.length,5);i++) {
