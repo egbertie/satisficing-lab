@@ -1428,79 +1428,164 @@ function renderFlywheel() {
 
 /* ===== 化学与控制 ===== */
 /* 面板: 客户旅程 */
+/* ===== 面板: 客户360 (v3.0) ===== */
+/* ===== 面板: 客户360 (v3.0) ===== */
 function renderCustomerJourney() {
-  var cj = (EIDX.customer_journey || {});
-  var stages = cj.stages || [];
-  var smap = cj.customer_stage_map || {};
-  var prods = EIDX.products || [];
-  var matrix = (EIDX.meta || {}).product_stage_matrix || {};
-  var h = '<div class="section-head" style="margin-top:12px">🗺️ 客户全生命周期 · 5阶段旅程</div>';
-  h += '<div class="panel-header"><p style="font-size:0.82em;color:var(--ink-light);margin-top:4px">每个阶段匹配不同的产品和体验——从「发现」到「共契」，客户在体系中的成长路径</p></div>';
+  var flows = EIDX.individual_customer_flows || [];
+  var hm = EIDX.health_score_model || {};
+  var dims = hm.dimensions || {};
+  var tiers = hm.tiers || {};
+  var warns = EIDX.early_warnings || {};
+  var alerts = warns.active_alerts || [];
+  var match = EIDX.product_matching || {};
+  var mm = match.match_matrix || {};
+  var rules = (EIDX.automation_rules || {}).rules || [];
+  var stages5 = (EIDX.customer_journey || {}).stages || [];
+  var mh = (EIDX.meta || {}).customer_management_v3 || {};
 
-  // Stage cards
-  h += '<div class="overview-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">';
-  for (var i = 0; i < stages.length; i++) {
-    var s = stages[i];
-    var stageCount = smap ? Object.values(smap).filter(function(x) { return x.current_stage === s.name; }).length : 0;
-    var matchCount = s.match_products ? s.match_products.length : 0;
-    h += '<div class="ov-card" style="text-align:left;padding:16px">';
-    h += '<div style="font-size:1.5em;margin-bottom:6px">' + s.icon + '</div>';
-    h += '<div style="font-weight:600;font-size:0.95em;color:var(--ink)">' + escHtml(s.name) + '</div>';
-    h += '<div style="font-size:0.72em;color:var(--ink-light);margin-top:4px;line-height:1.5">' + escHtml(s.desc) + '</div>';
-    h += '<div style="font-size:0.68em;color:var(--ink-lighter);margin-top:6px">💬 ' + escHtml(s.customer_mindset) + '</div>';
-    h += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">';
-    h += '<span style="font-size:0.65em;background:var(--card-warm);border-radius:8px;padding:2px 8px;color:var(--ink-light)">👥 ' + stageCount + '个客户</span>';
-    h += '<span style="font-size:0.65em;background:var(--card-warm);border-radius:8px;padding:2px 8px;color:var(--ink-light)">📦 ' + matchCount + '个产品</span>';
+  var h = '<div class="panel-header"><h2>🗺️ 客户360 · 独立客户流管理 v3.0</h2></div>';
+
+  // ==== L1: 总览卡片 ====
+  var hColor = mh.healthy_customers > 0 ? '#3D7A4F' : '#C2780A';
+  h += '<div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px">';
+  h += '<div class="stat-card"><div class="stat-num" style="color:'+hColor+'">'+flows.length+'</div><div class="stat-label">独立客户流</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+(mh.healthy_customers||0)+'</div><div class="stat-label">健康</div></div>';
+  h += '<div class="stat-card" style="background:'+(alerts.length>0?'rgba(194,59,34,.04)':'')+'"><div class="stat-num" style="color:'+(alerts.length>0?'var(--accent-red)':'var(--ink)')+'">'+(alerts.length||0)+'</div><div class="stat-label">活跃预警</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+rules.length+'</div><div class="stat-label">自动化规则</div></div>';
+  h += '</div>';
+
+  // ==== 独立客户流卡片 ====
+  h += '<div class="section-head">独立客户流（共'+flows.length+'条）</div>';
+  h += '<div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch">';
+  for (var i = 0; i < flows.length; i++) {
+    var cf = flows[i];
+    var hs = cf.health_score || 0;
+    var tierKey = hs >= 80 ? 'healthy' : (hs >= 60 ? 'attention' : (hs >= 40 ? 'at_risk' : 'critical'));
+    var tierLabel = tiers[tierKey] ? tiers[tierKey].label : '?';
+    var brk = cf.health_breakdown || {};
+    var signals = cf.risk_signals || [];
+    var timeline = cf.timeline || [];
+
+    h += '<div style="min-width:280px;background:var(--card-white);border:1px solid var(--border-warm);border-radius:12px;padding:16px;flex-shrink:0">';
+    h += '<div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px">';
+    h += '<div><div style="font-weight:600;font-size:0.95em">'+escHtml(cf.customer_name)+'</div>';
+    h += '<div style="font-size:0.7em;color:var(--ink-lighter)">'+escHtml(cf.industry)+' · '+escHtml(cf.city)+'</div></div>';
+    h += '<div style="text-align:right"><div style="font-size:1.4em;font-weight:700">'+hs+'</div><div style="font-size:0.6em;color:var(--ink-lighter)">'+tierLabel+'</div></div>';
     h += '</div>';
-    h += '<div style="font-size:0.65em;color:var(--ink-lighter);margin-top:4px">⏱ ' + escHtml(s.typical_duration) + '</div>';
+
+    // 进度条
+    h += '<div style="margin:8px 0"><div style="display:flex;justify-content:space-between;font-size:0.65em;margin-bottom:2px"><span>'+escHtml(cf.current_stage)+'</span><span>'+cf.progress+'%</span></div>';
+    h += '<div style="height:6px;background:#F0EBE0;border-radius:3px;overflow:hidden"><div style="height:100%;width:'+cf.progress+'%;background:var(--accent-gold);border-radius:3px"></div></div></div>';
+
+    // 健康细分
+    h += '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin:8px 0;font-size:0.55em;text-align:center">';
+    var dk = ['engagement','adoption','satisfaction','expansion','risk'];
+    var dl = ['参与','采用','满意','扩展','风险'];
+    for (var j = 0; j < dk.length; j++) {
+      var dv = brk[dk[j]] || 0;
+      var dc = dv >= 70 ? '#3D7A4F' : (dv >= 40 ? '#C2780A' : '#C23B22');
+      h += '<div><div style="font-weight:700;color:'+dc+'">'+dv+'</div><div style="color:var(--ink-lighter)">'+dl[j]+'</div></div>';
+    }
+    h += '</div>';
+
+    // 产品
+    h += '<div style="font-size:0.65em;margin-top:4px"><span style="color:var(--ink-lighter)">已用: </span>'+(cf.products_used||[]).join(', ')+'</div>';
+    h += '<div style="font-size:0.65em"><span style="color:var(--ink-lighter)">推荐: </span><span style="color:var(--accent-gold)">'+(cf.products_recommended||[]).join(', ')+'</span></div>';
+
+    // 风险信号
+    if (signals.length > 0) {
+      h += '<div style="margin-top:6px">';
+      for (var j = 0; j < signals.length; j++) {
+        h += '<div style="font-size:0.6em;color:var(--accent-red);background:rgba(194,59,34,.06);padding:2px 6px;border-radius:4px;margin-top:2px"> '+escHtml(signals[j])+'</div>';
+      }
+      h += '</div>';
+    }
+
+    // 时间线
+    if (timeline.length > 0) {
+      h += '<div style="margin-top:8px;padding-top:6px;border-top:1px solid var(--border-warm);font-size:0.62em">';
+      for (var j = 0; j < Math.min(timeline.length, 3); j++) {
+        var ev = timeline[j];
+        h += '<div style="display:flex;gap:4px;margin-top:3px"><span style="color:var(--ink-lighter)">'+escHtml(ev.date)+'</span><span>'+escHtml(ev.event)+'</span></div>';
+      }
+      h += '</div>';
+    }
+
+    h += '<div style="font-size:0.6em;color:var(--ink-lighter);margin-top:6px">活跃'+cf.active_days+'天 · '+escHtml(cf.last_activity||'')+'</div>';
     h += '</div>';
   }
   h += '</div>';
 
-  // Product-stage matrix
-  h += '<div class="section-head" style="margin-top:20px">📦 产品 × 阶段匹配矩阵</div>';
-  h += '<div style="overflow-x:auto"><table class="data-table" style="width:100%;font-size:0.82em">';
-  h += '<thead><tr><th>阶段</th><th>推荐产品</th><th>产品数</th><th>晋级条件</th></tr></thead><tbody>';
-  for (var i = 0; i < stages.length; i++) {
-    var s = stages[i];
-    h += '<tr>';
-    h += '<td style="font-weight:600;white-space:nowrap">' + s.icon + ' ' + escHtml(s.name) + '</td>';
-    h += '<td style="font-size:0.85em">' + escHtml((s.trigger_products || []).join(' · ')) + '</td>';
-    h += '<td style="text-align:center">' + (s.match_products || []).length + '</td>';
-    h += '<td style="font-size:0.78em;color:var(--ink-light)">' + escHtml(s.next_stage_condition) + '</td>';
+  // ==== 健康评分热力图 ====
+  h += '<div class="section-head" style="margin-top:20px">健康评分热力图</div>';
+  h += '<div style="overflow-x:auto"><table class="data-table" style="width:100%;font-size:0.78em">';
+  h += '<thead><tr><th>客户</th><th>总分</th><th>活跃度</th><th>采用度</th><th>满意度</th><th>扩展力</th><th>风险</th><th>趋势</th></tr></thead><tbody>';
+  for (var i = 0; i < flows.length; i++) {
+    var cf = flows[i];
+    var brk = cf.health_breakdown || {};
+    var hs = cf.health_score || 0;
+    var sc = hs >= 80 ? '#3D7A4F' : (hs >= 60 ? '#C2780A' : (hs >= 40 ? '#E67E22' : '#C23B22'));
+    h += '<tr><td style="font-weight:500">'+escHtml(cf.customer_name)+'</td>';
+    h += '<td style="font-weight:700;color:'+sc+'">'+hs+'</td>';
+    var dk = ['engagement','adoption','satisfaction','expansion','risk'];
+    for (var j = 0; j < dk.length; j++) {
+      var v = brk[dk[j]] || 0;
+      var bc = v >= 70 ? 'rgba(61,122,79,'+(v/200)+')' : (v >= 40 ? 'rgba(194,120,10,'+(v/200)+')' : 'rgba(194,59,34,'+(v/200)+')');
+      h += '<td style="background:'+bc+';text-align:center;font-weight:600;font-size:0.85em">'+v+'</td>';
+    }
+    h += '<td style="font-size:0.7em;color:var(--ink-lighter)"> '+escHtml(cf.next_milestone||'')+'</td>';
     h += '</tr>';
   }
   h += '</tbody></table></div>';
 
-  // Customer status table
-  h += '<div class="section-head" style="margin-top:20px">👥 客户当前位置</div>';
-  h += '<div style="overflow-x:auto"><table class="data-table" style="width:100%;font-size:0.82em">';
-  h += '<thead><tr><th>客户</th><th>当前阶段</th><th>进度</th><th>推荐下一步</th></tr></thead><tbody>';
-  var cnames = Object.keys(smap);
-  for (var i = 0; i < cnames.length; i++) {
-    var cn = cnames[i];
-    var cs = smap[cn];
-    h += '<tr>';
-    h += '<td style="font-weight:500">' + escHtml(cn) + '</td>';
-    h += '<td>' + escHtml(cs.current_stage) + '</td>';
-    h += '<td style="font-size:0.78em;color:var(--ink-light)">' + escHtml(cs.progress) + '</td>';
-    h += '<td style="font-size:0.78em;color:var(--accent-gold)">' + escHtml(cs.recommended_next) + '</td>';
+  // ==== 预警中心 ====
+  h += '<div class="section-head" style="margin-top:20px">预警中心 · '+(alerts.length||0)+'条活跃</div>';
+  if (alerts.length > 0) {
+    for (var i = 0; i < alerts.length; i++) {
+      var a = alerts[i];
+      var aColor = a.severity === 'P0' ? 'var(--accent-red)' : (a.severity === 'P1' ? '#E67E22' : 'var(--accent-gold)');
+      h += '<div style="background:var(--card-white);border:1px solid '+aColor+';border-radius:8px;padding:10px 14px;margin-bottom:8px">';
+      h += '<div style="display:flex;justify-content:space-between;align-items:center"><span style="font-weight:600;font-size:0.85em">'+escHtml(a.customer)+'</span><span style="font-size:0.7em;padding:2px 8px;border-radius:10px;background:'+aColor+';color:#fff">'+escHtml(a.severity)+'</span></div>';
+      h += '<div style="font-size:0.75em;color:var(--ink-light);margin-top:4px"> '+escHtml(a.message)+'</div>';
+      h += '<div style="font-size:0.65em;color:var(--ink-lighter);margin-top:2px">'+escHtml(a.rule||'')+' · '+(a.created_at||'')+'</div>';
+      h += '</div>';
+    }
+  } else {
+    h += '<div class="placeholder-card"><div class="ph-icon">OK</div><p>无活跃预警 · 所有客户健康</p></div>';
+  }
+
+  // ==== 自动化规则表 ====
+  h += '<div class="section-head" style="margin-top:20px">自动化管理规则</div>';
+  h += '<div style="overflow-x:auto"><table class="data-table" style="width:100%;font-size:0.78em">';
+  h += '<thead><tr><th>规则</th><th>触发条件</th><th>动作</th><th>状态</th></tr></thead><tbody>';
+  for (var i = 0; i < rules.length; i++) {
+    var r = rules[i];
+    h += '<tr><td style="font-weight:500">'+escHtml(r.name)+'</td>';
+    h += '<td style="font-size:0.75em">'+escHtml(r.trigger)+'</td>';
+    h += '<td style="font-size:0.75em">'+escHtml(r.action)+'</td>';
+    h += '<td><span style="font-size:0.7em;padding:2px 8px;border-radius:8px;background:rgba(61,122,79,.12);color:#3D7A4F">'+escHtml(r.status||'active')+'</span></td>';
     h += '</tr>';
   }
   h += '</tbody></table></div>';
 
-  // 关键指标
-  var stageCounts = (EIDX.meta || {}).customer_stages || {};
-  h += '<div class="section-head" style="margin-top:20px">📊 阶段分布</div>';
-  h += '<div class="graph-stat">';
-  for (var i = 0; i < stages.length; i++) {
-    var s = stages[i];
-    var cnt = stageCounts[s.name] || 0;
-    var total = stageCounts.total || 5;
-    var pct = Math.round(cnt / total * 100);
-    h += '<div class="stat-card"><div class="stat-num">' + cnt + '</div><div class="stat-label">' + s.icon + ' ' + escHtml(s.name) + '</div><div style="font-size:0.65em;color:var(--ink-lighter)">' + pct + '%</div></div>';
+  // ==== 客户×产品匹配 ====
+  h += '<div class="section-head" style="margin-top:20px">客户×产品匹配</div>';
+  h += '<div style="overflow-x:auto"><table class="data-table" style="width:100%;font-size:0.78em">';
+  h += '<thead><tr><th>客户</th><th>当前推荐</th><th>下一阶段</th><th>痛点匹配</th></tr></thead><tbody>';
+  var mnames = Object.keys(mm);
+  for (var i = 0; i < Math.min(mnames.length, 5); i++) {
+    var mn = mnames[i];
+    var mc = mm[mn];
+    h += '<tr><td style="font-weight:500">'+escHtml(mn)+'</td>';
+    h += '<td style="font-size:0.75em;color:var(--accent-gold)">'+(mc.current_match||[]).join(', ')+'</td>';
+    h += '<td style="font-size:0.75em">'+(mc.next_stage_match||[]).join(', ')+'</td>';
+    h += '<td style="font-size:0.7em;color:var(--ink-light)">';
+    var pm = mc.pain_point_match || {};
+    var pk = Object.keys(pm).slice(0,3);
+    for (var j = 0; j < pk.length; j++) h += escHtml(pk[j])+' '+escHtml(pm[pk[j]])+' ';
+    h += '</td></tr>';
   }
-  h += '</div>';
+  h += '</tbody></table></div>';
 
   document.getElementById('tab-journey').innerHTML = h;
 }
