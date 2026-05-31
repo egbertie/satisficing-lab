@@ -43,6 +43,25 @@ td a:hover{text-decoration:underline}
 .error{text-align:center;padding:40px;color:var(--red)}
 .footer{padding:20px;text-align:center;font-size:11px;opacity:0.4}
 .footer a{color:var(--gold);text-decoration:none}
+@media(max-width:768px){
+  .main{padding:10px}
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .stat{padding:8px}.stat .n{font-size:16px}
+  .search-wrap{flex-direction:column}
+  .filters{overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}
+  .fbtn{white-space:nowrap;font-size:10px;padding:3px 8px}
+  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{font-size:10px}
+  th{padding:6px 4px;font-size:9px}
+  td{padding:5px 4px;font-size:10px}
+  td a{font-size:11px}
+  .topbar h1{font-size:14px}
+  .topbar a{font-size:11px}
+  .badge{font-size:8px}
+}
+@media(max-width:400px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
 </style>
 </head>
 <body>
