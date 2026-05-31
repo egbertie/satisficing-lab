@@ -594,6 +594,18 @@ function renderProducts() {
   h += '<div class="stat-card"><div class="stat-num">'+withLLM+'</div><div class="stat-label">🤖 LLM评分</div><div style="font-size:0.6em;color:var(--ink-lighter)">覆盖率'+(Math.round(withLLM/prods.length*100))+'%</div></div>';
   h += '</div>';
 
+  // 心理类型统计
+  var psychoTypes = {'镜子':0,'翻译':0,'地图':0,'解药':0,'灯塔':0};
+  for (var i=0; i<prods.length; i++) { var pt = prods[i].psycho_type||'地图'; psychoTypes[pt] = (psychoTypes[pt]||0)+1; }
+  h += '<div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px">';
+  var pti = ['镜子','翻译','地图','解药','灯塔'];
+  var pte = ['🔍','🤝','🗺️','💊','🌟'];
+  for (var i=0; i<pti.length; i++) {
+    var pk = pti[i];
+    h += '<span style="font-size:0.65em;padding:3px 8px;border-radius:8px;background:var(--card-warm);color:var(--ink-light)">'+pte[i]+' '+pk+':'+psychoTypes[pk]+'</span>';
+  }
+  h += '</div>';
+
   // 族筛选
   h += '<div class="family-filters" id="prod-filters">';
   var fo = ['全部','镜','衡','契','觉','人','道','章','未归类'];
@@ -603,7 +615,7 @@ function renderProducts() {
   }
   h += '</div>';
   h += '<button class="btn-outline" onclick="toggleDetail(this)" id="btn-detail">'+(detailOn?'收起详情':'展开详情表')+'</button>';
-  h += '<div class="detail-wrap'+(detailOn?' show':'')+'" id="detail-wrap"><table class="detail-table"><thead><tr><th class="check-col">☑</th><th>产品名</th><th>族</th><th>状态</th><th>LLM</th><th>描述</th><th>链接</th></tr></thead><tbody id="detail-tbody"></tbody></table></div>';
+  h += '<div class="detail-wrap'+(detailOn?' show':'')+'" id="detail-wrap"><table class="detail-table"><thead><tr><th class="check-col">☑</th><th>产品名</th><th>族</th><th>心理类型</th><th>共鸣</th><th>LLM</th><th>链接</th></tr></thead><tbody id="detail-tbody"></tbody></table></div>';
   h += '<div class="cmp-bar" id="cmp-bar"><span>已选 <span class="cmp-count" id="cmp-count">0</span> 个</span><button class="btn-cmp" id="btn-cmp" disabled onclick="openCmp(this)">对比选中</button><button class="btn-outline" onclick="clearSel(this)">清空</button></div>';
   document.getElementById('tab-products').innerHTML = h;
   renderDetailRows();
@@ -620,10 +632,12 @@ function renderDetailRows() {
   for (var i=0; i<filt.length; i++) {
     var p = filt[i], chk = (selProds.indexOf(p.name)>=0?' checked':'');
     var fb = p.family||'未归类';
-    var desc = (p.description||'').substring(0,60);
-    if (p.description && p.description.length>60) desc+='…';
+    var pt = p.psycho_type||'地图';
+    var ptIcons = {'镜子':'🔍','翻译':'🤝','地图':'🗺️','解药':'💊','灯塔':'🌟'};
+    var rs = p.resonance_score||0;
+    var rsColor = rs>=80?'#3D7A4F':(rs>=60?'#C2780A':'#C23B22');
     var url = p.url||'';
-    h += '<tr><td class="check-col"><input type="checkbox"'+chk+' onclick="toggleSel(this,\''+a(p.name)+'\')"></td><td>'+escHtml(p.name)+'</td><td><span class="family-badge '+fb+'">'+fb+'</span></td><td>'+(p.status||p.maturity||'-')+'</td><td style="font-size:0.8em;color:var(--ink-light)">'+escHtml(desc||'')+'</td><td>'+(url?'<a class="prod-link" href="'+a(url)+'" target="_blank" rel="noopener">打开 →</a>':'-')+'</td></tr>';
+    h += '<tr><td class="check-col"><input type="checkbox"'+chk+' onclick="toggleSel(this,\''+a(p.name)+'\')"></td><td style="font-weight:500">'+escHtml(p.name)+'</td><td><span class="family-badge '+fb+'">'+fb+'</span></td><td style="font-size:0.75em">'+(ptIcons[pt]||'🗺️')+' '+pt+'</td><td style="color:'+rsColor+';font-weight:500;font-size:0.8em">'+rs+'</td><td style="font-size:0.8em">'+(p.llm_rating||'-')+'</td><td>'+(url?'<a class="prod-link" href="'+a(url)+'" target="_blank" rel="noopener">打开→</a>':'-')+'</td></tr>';
   }
   document.getElementById('detail-tbody').innerHTML = h;
 }
