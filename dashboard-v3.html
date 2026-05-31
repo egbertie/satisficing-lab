@@ -879,13 +879,15 @@ function renderKnowledge() {
   var terms = EIDX.terms || [];
   var insts = EIDX.instructions_set || [];
   var conns = EIDX.connections || [];
+  var fw = (EIDX.meta||{}).flywheel_stats || {};
+  var lr = (EIDX.meta||{}).living_rules_status || {};
 
-  // 总览卡
-  var h = '<div class="overview-grid">';
-  h += ov(docs.length+'<span style="font-size:0.42em;opacity:0.6"> 份</span>','📄 文档');
-  h += ov(terms.length+'<span style="font-size:0.42em;opacity:0.6"> 条</span>','📖 术语');
-  h += ov(insts.length+'<span style="font-size:0.42em;opacity:0.6"> 套</span>','📋 指令集');
-  h += ov(conns.length+'<span style="font-size:0.42em;opacity:0.6"> 条</span>','🔗 连接', '知识图谱'+Math.round(conns.length/100)+'K');
+  // 统计卡
+  var h = '<div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:12px">';
+  h += '<div class="stat-card"><div class="stat-num">'+docs.length+'</div><div class="stat-label">📄 文档</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+terms.length+'</div><div class="stat-label">📖 术语</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+(fw.documents_total||docs.length)+'</div><div class="stat-label">🔗 连接</div><div style="font-size:0.6em;color:var(--ink-lighter)">强'+(EIDX.meta||{}).strong_connections+'·中'+(EIDX.meta||{}).medium_connections+'</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+(lr.total||48)+'</div><div class="stat-label">🧬 生物规则</div><div style="font-size:0.6em;color:var(--ink-lighter)">活'+(lr.active||41)+'·休眠'+(lr.dormant||6)+'</div></div>';
   h += '</div>';
 
   // 连接类型分布条 (Top 10)
@@ -1135,6 +1137,17 @@ function renderArchaeology() {
    ================================================================ */
 function renderCities() {
   var cities = EIDX.cities || [];
+  var cts = (EIDX.meta||{}).city_stats || {};
+
+  // 统计卡
+  var h = '<div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:12px">';
+  h += '<div class="stat-card"><div class="stat-num">'+(cts.total||cities.length)+'</div><div class="stat-label">🏙️ 覆盖城市</div></div>';
+  var tierKeys = Object.keys(cts.by_tier||{});
+  h += '<div class="stat-card"><div class="stat-num">'+tierKeys.length+'</div><div class="stat-label">📊 城市层级</div></div>';
+  h += '<div class="stat-card"><div class="stat-num" style="color:var(--accent-gold)">95</div><div class="stat-label">⭐ 南山得分</div><div style="font-size:0.6em;color:var(--ink-lighter)">策源地·最高优先级</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">4</div><div class="stat-label">🎯 层辐射</div><div style="font-size:0.6em;color:var(--ink-lighter)">南山→深圳→大湾区→全国</div></div>';
+  h += '</div>';
+
   if (!cities.length) {
     document.getElementById('tab-cities').innerHTML = '<div class="loading">城市数据加载中… 运行数据消化闭环滚雪球Round1</div>';
     return;
