@@ -36,6 +36,13 @@
 - 所有面板遵循相同的层级标准
 - 标准化组件：stat-card, toolbar, fillTbl, sortTbl
 
+### 开发工具链（2026-05-31 固化）
+- **本地测试**：`./dev.sh test` → http://localhost:8766 （不需要 push 即可预览）
+- **代码验收**：`./dev.sh verify` → 语法+品牌+误替换+数据文件 9项检查
+- **定版推送**：`./dev.sh push` → 验收 → 确认 → 推送
+- **备份镜像**：`.github/workflows/mirror-backup.yml` → 每次 push 自动同步到备份仓库
+- **备份仓库**：https://github.com/egbertie/satisficing-lab-backup （需先创建并配置 BACKUP_TOKEN secret）
+
 ### 流 > 连接（2026-05-30 Round 3 新增）
 - 声明(declarative) ≠ 事件(event)。蓝图正确不等于电路接通
 - 组织系统应按流层(信号/认知/行动/验证/学习)而非实体类型
