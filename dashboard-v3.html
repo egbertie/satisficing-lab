@@ -1128,6 +1128,13 @@ function renderOrganization() {
   }
   h += '</tbody></table></div>';
 
+  // ═══ VI Logo资产展示 ═══
+  h += '<div class="section-head" style="margin-top:20px">🏷️ VI Logo资产</div>';
+  h += '<div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">';
+  h += '<div style="background:var(--card-white);border:1px solid var(--border-warm);border-radius:10px;padding:16px;text-align:center;width:160px"><img src="assets/logo-small.png" alt="火承土印" style="width:120px;height:auto" onerror="this.style.display=\'none\'"><div style="font-size:0.75em;font-weight:600;margin-top:8px">🔥 火承土印</div><div style="font-size:0.65em;color:var(--ink-lighter)">主标识·品牌Logo</div></div>';
+  h += '<div style="background:var(--card-white);border:1px solid var(--border-warm);border-radius:10px;padding:16px;text-align:center;width:160px"><img src="assets/dingyu-small.png" alt="鼎玉" style="width:120px;height:auto" onerror="this.style.display=\'none\'"><div style="font-size:0.75em;font-weight:600;margin-top:8px">🏺 鼎玉</div><div style="font-size:0.65em;color:var(--ink-lighter)">第二标识·鼎+玉</div></div>';
+  h += '</div>';
+
   document.getElementById('tab-organization').innerHTML = h;
 }
 
