@@ -1,5 +1,5 @@
 {
-  "last_scan": "2026-06-01T00:34:00+08:00",
+  "last_scan": "2026-06-01T06:34:21+08:00",
   "health": "warning",
   "issues": 4,
   "known_findings": [
@@ -40,19 +40,21 @@
     }
   ],
   "delta_since_last": {
-    "files_total": 15938,
-    "files_changed": 52,
+    "files_total": 15964,
+    "files_changed": 26,
     "new_products": 0,
     "new_customers": 0,
     "new_conversations": 0,
     "new_connections": 0,
     "new_scripts": 0,
-    "entities_reindexed": false
+    "entities_reindexed": false,
+    "metadata_extracted": 1207,
+    "data_integrity": "~40%"
   },
   "product_count": 315,
   "customer_count": 5,
   "connections": 16,
   "git_clean": null,
-  "notes": "00:34 scan — files 15,938 (+52 from 18:34). Cross-midnight archive bump. Product discovery still 0 (known pipeline bug, restored from entities_index: 315). Knowledge connections 16 (no change). Customers stable at 5. All known issues persist. Quiet overnight period.",
+  "notes": "06:34 scan — files 15,964 (+26 from 00:34). Early morning low-delta period. Metadata extraction completed first batch: 1,207 files processed, data integrity improved from ~15% to ~40%. All known issues persist: product_discovery_zero and files_index_no_category. Knowledge connections stable at 16. Customers stable at 5. 26 new files detected, likely ongoing archive activity.",
   "fix_applied": "dashboard_seed_v2.json rebuilt from entities_index.json — 315 products restored"
 }
