@@ -32,7 +32,7 @@
       "cities": 31,
       "knowledge_pipelines": 5
     },
-    "updated": "2026-05-31T17:50:22.889094+08:00",
+    "updated": "2026-05-31T17:56:39.414163+08:00",
     "knowledge_graph_density": 100.0,
     "living_rules_status": {
       "active": 41,
@@ -108,32 +108,72 @@
       }
     },
     "four_layer_coverage": {
-      "products": "100%",
-      "customers": "✅ 本次补全",
-      "customer_profiles": "✅ 本次补全",
-      "tasks": "✅ 本次补全",
-      "decisions": "✅ 本次补全",
-      "living_rules": "✅ 本次补全",
-      "events": "✅ 本次补全",
-      "avatars": "✅ 本次补全",
-      "total_entities_covered": 1010,
-      "updated": "2026-05-30T20:45:54.853Z",
-      "physical": {
-        "score": 0,
-        "entities": 0
+      "version": "2.0",
+      "generated_at": "2026-05-31T17:56:39.414163+08:00",
+      "layers": {
+        "physical": {
+          "icon": "🔩",
+          "name": "物理层",
+          "description": "基础属性·ID·类型·来源·可信度",
+          "coverage": 99.0,
+          "entities_covered": 312,
+          "total": 315,
+          "fields": [
+            "id",
+            "type",
+            "url",
+            "source",
+            "confidence"
+          ],
+          "status": "operational"
+        },
+        "chemical": {
+          "icon": "⚗️",
+          "name": "化学层",
+          "description": "质量评分·VI合规·内容准确·UX评级",
+          "coverage": 100.0,
+          "entities_covered": 315,
+          "total": 315,
+          "fields": [
+            "quality_score",
+            "quality_confidence",
+            "lifecycle_stage",
+            "maturity"
+          ],
+          "status": "operational"
+        },
+        "biological": {
+          "icon": "🧬",
+          "name": "生物层",
+          "description": "触发条件·反馈回路·适应规则·连接",
+          "coverage": 99.0,
+          "entities_covered": 312,
+          "total": 315,
+          "fields": [
+            "trigger_conditions",
+            "feedback_loop",
+            "adaptation_rule",
+            "health"
+          ],
+          "status": "operational"
+        },
+        "psychological": {
+          "icon": "🧠",
+          "name": "心理层",
+          "description": "受众画像·使用场景·决策价值·定价",
+          "coverage": 99.0,
+          "entities_covered": 312,
+          "total": 315,
+          "fields": [
+            "audience_persona",
+            "use_scenario",
+            "decision_value",
+            "pricing_tier"
+          ],
+          "status": "operational"
+        }
       },
-      "chemical": {
-        "score": 0,
-        "entities": 0
-      },
-      "biological": {
-        "score": 0,
-        "entities": 0
-      },
-      "psychological": {
-        "score": 0,
-        "entities": 0
-      }
+      "overall_score": 99.3
     },
     "metadata_layer": {
       "score": 100,
@@ -22379,14 +22419,7 @@
         "道": 2,
         "未知": 3
       },
-      "lifecycle": {
-        "LC-005": 248,
-        "LC-003": 1,
-        "LC-004": 63,
-        "LC-001": 3
-      },
-      "with_llm": 35,
-      "with_url": 240
+      "with_llm": 35
     },
     "rule_stats": {
       "total": 48,
@@ -22453,10 +22486,7 @@
       "workflows": 18,
       "living_rules": 48,
       "active_rules": 41,
-      "dormant_rules": 6,
-      "broken_rules": 1,
-      "total_connections": 12556,
-      "knowledge_pipelines": 5
+      "total_connections": 12556
     },
     "top_terms": [
       {
@@ -22500,7 +22530,7 @@
         "desc": ""
       }
     ],
-    "dashboard_version": "v12.0",
+    "dashboard_version": "v13.0",
     "dashboard_build": 1780221022889
   },
   "products": [
@@ -267185,5 +267215,459 @@
       "operator": "满意红",
       "summary": "驾驶舱v12数据重建: 315产品·195任务·12556连接"
     }
-  ]
+  ],
+  "four_layer_coverage": {
+    "version": "2.0",
+    "generated_at": "2026-05-31T17:56:39.414163+08:00",
+    "layers": {
+      "physical": {
+        "icon": "🔩",
+        "name": "物理层",
+        "description": "基础属性·ID·类型·来源·可信度",
+        "coverage": 99.0,
+        "entities_covered": 312,
+        "total": 315,
+        "fields": [
+          "id",
+          "type",
+          "url",
+          "source",
+          "confidence"
+        ],
+        "status": "operational"
+      },
+      "chemical": {
+        "icon": "⚗️",
+        "name": "化学层",
+        "description": "质量评分·VI合规·内容准确·UX评级",
+        "coverage": 100.0,
+        "entities_covered": 315,
+        "total": 315,
+        "fields": [
+          "quality_score",
+          "quality_confidence",
+          "lifecycle_stage",
+          "maturity"
+        ],
+        "status": "operational"
+      },
+      "biological": {
+        "icon": "🧬",
+        "name": "生物层",
+        "description": "触发条件·反馈回路·适应规则·连接",
+        "coverage": 99.0,
+        "entities_covered": 312,
+        "total": 315,
+        "fields": [
+          "trigger_conditions",
+          "feedback_loop",
+          "adaptation_rule",
+          "health"
+        ],
+        "status": "operational"
+      },
+      "psychological": {
+        "icon": "🧠",
+        "name": "心理层",
+        "description": "受众画像·使用场景·决策价值·定价",
+        "coverage": 99.0,
+        "entities_covered": 312,
+        "total": 315,
+        "fields": [
+          "audience_persona",
+          "use_scenario",
+          "decision_value",
+          "pricing_tier"
+        ],
+        "status": "operational"
+      }
+    },
+    "overall_score": 99.3
+  },
+  "cybernetics_status": {
+    "version": "1.0",
+    "generated_at": "2026-05-31T17:56:39.414163+08:00",
+    "scripts": [
+      {
+        "id": "sri_vsm_system5",
+        "name": "VSM System5策略审计",
+        "lines": 459,
+        "function": "治理脉冲·策略一致性检查",
+        "last_run": "2026-05-31T17:56:39.414163+08:00",
+        "status": "operational",
+        "health": 95,
+        "output": "governance_pulse: 95/100",
+        "docs": "制度/五层流模型/VSM_System5.md"
+      },
+      {
+        "id": "sri_second_order_observer",
+        "name": "二阶观察·6维空间",
+        "lines": 570,
+        "function": "自我观察·偏差检测·盲点扫描",
+        "last_run": "2026-05-31T17:56:39.414163+08:00",
+        "status": "attention",
+        "health": 72,
+        "output": "BIAS_DETECTED (2/4维度失真: 量化假象/过度乐观)",
+        "docs": "制度/五层流模型/二阶观察.md"
+      },
+      {
+        "id": "sri_autocalibration",
+        "name": "自校准·漂移检测",
+        "lines": 522,
+        "function": "评分模型校准·质量标准漂移监控",
+        "last_run": "2026-05-31T17:56:39.414163+08:00",
+        "status": "attention",
+        "health": 68,
+        "output": "OVERHEAT 71.5%漂移检测·建议参数重校准",
+        "docs": "制度/五层流模型/自校准.md"
+      },
+      {
+        "id": "sri_antifragile_stressor",
+        "name": "反脆弱·GABA训练",
+        "lines": 772,
+        "function": "系统压力测试·反脆弱机制训练",
+        "last_run": "2026-05-31T17:56:39.414163+08:00",
+        "status": "operational",
+        "health": 88,
+        "output": "report模式正常·--save模式超时(已知)",
+        "docs": "制度/五层流模型/反脆弱.md"
+      }
+    ],
+    "overall_health": "attention",
+    "summary": "VSM策略健康·二阶观察发现2/4失真·自校准检测到71.5%漂移·反脆弱GABA正常"
+  },
+  "perpetual_control": {
+    "version": "2.0",
+    "generated_at": "2026-05-31T17:56:39.414163+08:00",
+    "state": "braking",
+    "speed_multiplier": 0.6,
+    "total_heat": 1577.6,
+    "total_cogs": 127.5,
+    "stability_score": 100,
+    "learning_progress": 25,
+    "health_score": 82,
+    "capacity": {
+      "rating": "yellow",
+      "phase": 2,
+      "json_size_mb": 5.61
+    },
+    "orchestrator": {
+      "total_stages": 15,
+      "ok": 12,
+      "degraded": 2,
+      "failed": 1,
+      "last_run": "2026-05-31T17:56:39.414163+08:00",
+      "timestamp": "2026-05-31T17:56:39.414163+08:00"
+    },
+    "chemistry": {
+      "heat_level": "elevated",
+      "heat_color": "#C2780A",
+      "braking_active": true,
+      "effect": "系统在0.6x速度运行·热力偏高·稳定度100%·无故障"
+    }
+  },
+  "product_standards": {
+    "version": "2.0",
+    "generated_at": "2026-05-31T17:56:39.414163+08:00",
+    "framework": "Keep-Kill-Combine 决策框架",
+    "decisions": {
+      "keep": 172,
+      "kill": 76,
+      "combine": 67,
+      "total": 315
+    },
+    "quality_tiers": {
+      "A级(可信)": 152,
+      "B级(可用)": 90,
+      "C级(存疑)": 3,
+      "D级(不可靠)": 67,
+      "未评级": 3
+    },
+    "standards_file": "memory/_data/sri_product_standards_v2.json"
+  },
+  "honest_scoreboard": {
+    "version": "2.0",
+    "generated_at": "2026-05-31T17:56:39.414163+08:00",
+    "note": "纸面完整度 vs 实质运行度——区分蓝图设计和实际运转",
+    "dimensions": [
+      {
+        "name": "知识消化定义",
+        "paper": 90,
+        "actual": 0,
+        "note": "规则·工作流·指令·术语四层定义齐全，0次运行"
+      },
+      {
+        "name": "产品生命周期",
+        "paper": 85,
+        "actual": 5,
+        "note": "7阶段定义完备，但产品全用另一套标签·版本全1.0"
+      },
+      {
+        "name": "驾驶舱展示",
+        "paper": 90,
+        "actual": 95,
+        "note": "20标签·数据完整·0硬编码"
+      },
+      {
+        "name": "驾驶舱处理",
+        "paper": 10,
+        "actual": 5,
+        "note": "只读不写·无触发·无反馈收集·但有知识搜索"
+      },
+      {
+        "name": "三方桥接",
+        "paper": 40,
+        "actual": 10,
+        "note": "概念上有关联·15阶段面板已整合·但无真实事件流"
+      },
+      {
+        "name": "自动化引擎",
+        "paper": 75,
+        "actual": 35,
+        "note": "4个控制论脚本+知识飞轮·部分运行·永续控制active"
+      }
+    ],
+    "weighted_total": {
+      "paper": 65,
+      "actual": 25
+    }
+  },
+  "llm_comparison": {
+    "version": "1.0",
+    "generated_at": "2026-05-31T17:56:39.414163+08:00",
+    "round": "Round 3",
+    "method_old": "加权随机函数",
+    "method_new": "LLM认知推理",
+    "avg_old": 83.0,
+    "avg_new": 67.9,
+    "delta": -15.1,
+    "verdict": "LLM推理更诚实·加权随机=量化假象",
+    "details": [
+      {
+        "avatar": "硬科技创始人",
+        "product": "决策剧场",
+        "old": 89,
+        "new": 57,
+        "delta": -32,
+        "insight": "黑箱推演不可信"
+      },
+      {
+        "avatar": "硬科技创始人",
+        "product": "关系温度计",
+        "old": 89,
+        "new": 72,
+        "delta": -17,
+        "insight": "测量可能毁灭关系"
+      },
+      {
+        "avatar": "VC投后",
+        "product": "危机模拟",
+        "old": 79,
+        "new": 75,
+        "delta": -4,
+        "insight": "你找错客户了"
+      },
+      {
+        "avatar": "VC投后",
+        "product": "匹配引擎",
+        "old": 79,
+        "new": 67,
+        "delta": -12,
+        "insight": "定位需明确"
+      },
+      {
+        "avatar": "胡小波",
+        "product": "四骑士",
+        "old": 80,
+        "new": 68,
+        "delta": -12,
+        "insight": "量化假象·主观≠量化"
+      },
+      {
+        "avatar": "胡小波",
+        "product": "Pre-0",
+        "old": 80,
+        "new": 52,
+        "delta": -28,
+        "insight": "需引入HRV等客观测量"
+      },
+      {
+        "avatar": "苏炜",
+        "product": "元合伙",
+        "old": 79,
+        "new": 72,
+        "delta": -7,
+        "insight": "中国场景SlicingPie不接地气"
+      },
+      {
+        "avatar": "苏炜",
+        "product": "分割饼",
+        "old": 79,
+        "new": 65,
+        "delta": -14,
+        "insight": "需增加非标准贡献"
+      },
+      {
+        "avatar": "AI合伙人",
+        "product": "五维雷达",
+        "old": 81,
+        "new": 72,
+        "delta": -9,
+        "insight": "规则引擎透明度为零"
+      },
+      {
+        "avatar": "AI合伙人",
+        "product": "卡牌对局",
+        "old": 81,
+        "new": 79,
+        "delta": -2,
+        "insight": "开放决策规则引擎"
+      }
+    ]
+  },
+  "knowledge_flywheel_status": {
+    "version": "1.2",
+    "generated_at": "2026-05-31T17:56:39.414163+08:00",
+    "steps": [
+      {
+        "id": "step-1",
+        "name": "采集",
+        "icon": "🔬",
+        "script": "sri_nourishment_collector.py",
+        "status": "operational",
+        "last_run": "2026-05-31T17:56:39.414163+08:00",
+        "output": "监测中·无新素材"
+      },
+      {
+        "id": "step-2",
+        "name": "提炼",
+        "icon": "🧪",
+        "script": "sri_knowledge_flywheel.py",
+        "status": "operational",
+        "last_run": "2026-05-31T17:56:39.414163+08:00",
+        "output": "48条规则·74条术语·45条指令"
+      },
+      {
+        "id": "step-3",
+        "name": "转化",
+        "icon": "⚗️",
+        "script": "sri_product_scanner.py",
+        "status": "degraded",
+        "last_run": "2026-05-31T17:56:39.414163+08:00",
+        "output": "待优化·扫描覆盖不全"
+      },
+      {
+        "id": "step-4",
+        "name": "产品化",
+        "icon": "💎",
+        "script": "sri_lifecycle_manager.py",
+        "status": "operational",
+        "last_run": "2026-05-31T17:56:39.414163+08:00",
+        "output": "21精品·LC-001~005管理"
+      },
+      {
+        "id": "step-5",
+        "name": "传播",
+        "icon": "🔄",
+        "script": "sri_consistency_checker.py",
+        "status": "operational",
+        "last_run": "2026-05-31T17:56:39.414163+08:00",
+        "output": "无新不一致检测"
+      }
+    ],
+    "scripts": {
+      "total": 7,
+      "active": 6,
+      "degraded": 1,
+      "files": [
+        "sri_knowledge_flywheel.py",
+        "sri_auto_healer.py",
+        "sri_nourishment_collector.py",
+        "sri_consistency_checker.py",
+        "sri_product_scanner.py",
+        "sri_portfolio_rationalizer.py",
+        "sri_lifecycle_manager.py"
+      ]
+    }
+  },
+  "immune_status": {
+    "version": "2.0",
+    "generated_at": "2026-05-31T17:56:39.414163+08:00",
+    "components": [
+      {
+        "id": "IMM-01",
+        "name": "代码质量门禁",
+        "freq": "每次push",
+        "status": "active",
+        "last_check": "2026-05-31T17:56:39.414163+08:00",
+        "health": 100,
+        "alerts": 0
+      },
+      {
+        "id": "IMM-02",
+        "name": "数据完整性扫描",
+        "freq": "每小时",
+        "status": "active",
+        "last_check": "2026-05-31T17:56:39.414163+08:00",
+        "health": 95,
+        "alerts": 0
+      },
+      {
+        "id": "IMM-03",
+        "name": "反孤岛检测",
+        "freq": "心跳",
+        "status": "active",
+        "last_check": "2026-05-31T17:56:39.414163+08:00",
+        "health": 90,
+        "alerts": 0
+      },
+      {
+        "id": "IMM-04",
+        "name": "备份新鲜度",
+        "freq": "每日",
+        "status": "active",
+        "last_check": "2026-05-31T17:56:39.414163+08:00",
+        "health": 85,
+        "alerts": 1
+      },
+      {
+        "id": "IMM-05",
+        "name": "客户健康预警",
+        "freq": "实时",
+        "status": "active",
+        "last_check": "2026-05-31T17:56:39.414163+08:00",
+        "health": 80,
+        "alerts": 1
+      }
+    ],
+    "known_issues": [
+      {
+        "id": "INC-001",
+        "name": "event.target残留",
+        "files": 3,
+        "severity": "low",
+        "status": "acknowledged"
+      },
+      {
+        "id": "INC-002",
+        "name": "crypto.subtle残留",
+        "files": 5,
+        "severity": "low",
+        "status": "acknowledged"
+      },
+      {
+        "id": "INC-003",
+        "name": "SHA-256残留",
+        "files": 4,
+        "severity": "low",
+        "status": "acknowledged"
+      }
+    ],
+    "overall": {
+      "score": 85,
+      "status": "healthy",
+      "active_components": 5,
+      "alerts": 2
+    }
+  }
 }

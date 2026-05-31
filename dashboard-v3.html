@@ -344,6 +344,7 @@ body {
   <div class="tab-panel" id="tab-journey"></div>
   <div class="tab-panel" id="tab-rd"></div>
   <div class="tab-panel" id="tab-auto"></div>
+  <div class="tab-panel" id="tab-cyber"></div>
   <div class="tab-panel" id="tab-chemistry"></div>
   <div class="tab-panel" id="tab-help"></div>
 
@@ -436,6 +437,7 @@ function boot() {
     renderChemistry();
     renderCustomerJourney();
     renderRDPipeline();
+    renderCybernetics();
     renderAutoEngine();
     renderHelp();
     switchTab('tab-overview');
@@ -461,6 +463,7 @@ function buildNav() {
     {id:'tab-journey', label:'🗺️ 客户旅程'},
     {id:'tab-rd', label:'🔬 知识研发'},
     {id:'tab-auto', label:'⚡ 自动化引擎'},
+    {id:'tab-cyber', label:'🛡️ 控制论'},
     {id:'tab-flows', label:'🔌 流仪表板'},
     {id:'tab-flywheel', label:'♻️ 飞轮运转'},
     {id:'tab-chemistry', label:'🧬 化学与控制'},
@@ -2142,6 +2145,115 @@ function renderChemistry() {
 
 /* ===== 🆘 帮助面板 · 用户/管理者/开发者三视角 ===== */
 /* 面板: 自动化引擎 */
+/* 面板: 控制论运行状态 */
+function renderCybernetics() {
+  var cyb = EIDX.cybernetics_status || {};
+  var scripts = cyb.scripts || [];
+  var pc = EIDX.perpetual_control || {};
+  var flc = EIDX.four_layer_coverage || {};
+  var layers = flc.layers || {};
+  var hscore = EIDX.honest_scoreboard || {};
+  var llm = EIDX.llm_comparison || {};
+  var kf = EIDX.knowledge_flywheel_status || {};
+  var imm = EIDX.immune_status || {};
+
+  var h = '<div class="panel-header"><h2>🛡️ 控制论 · 系统自观察与自调控</h2><p style="font-size:0.75em;color:var(--ink-light);margin-top:4px">VSM System5·二阶观察·自校准·反脆弱·永续控制·四层诊断·诚实评分</p></div>';
+
+  // ═══ 四层诊断框架 ═══
+  h += '<div class="section-head">🔩⚗️🧬🧠 四层诊断框架</div>';
+  h += '<div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:14px">';
+  var lkeys = ['physical','chemical','biological','psychological'];
+  for (var i=0; i<lkeys.length; i++) {
+    var lk = lkeys[i];
+    var l = layers[lk] || {};
+    var cov = l.coverage || 0;
+    var covColor = cov >= 80 ? '#3D7A4F' : (cov >= 50 ? '#C2780A' : '#C23B22');
+    h += '<div class="stat-card"><div style="font-size:1.3em">'+(l.icon||'?')+'</div><div style="font-weight:600;font-size:0.85em">'+(l.name||'?')+'</div><div class="stat-num" style="font-size:1.3em;color:'+covColor+'">'+cov+'%</div><div style="font-size:0.6em;color:var(--ink-lighter)">'+l.entities_covered+'/'+l.total+'实体</div><div style="font-size:0.55em;color:var(--ink-lighter);margin-top:2px">'+escHtml((l.fields||[]).join('·'))+'</div></div>';
+  }
+  h += '</div>';
+
+  // ═══ 控制论脚本 ═══
+  h += '<div class="section-head">🧬 控制论四脚本 · 整体: '+escHtml(cyb.overall_health||'?')+'</div>';
+  h += '<div style="overflow-x:auto"><table class="data-table" style="width:100%;font-size:0.75em;margin-bottom:14px">';
+  h += '<thead><tr><th>脚本</th><th>行数</th><th>功能</th><th>健康</th><th>最新输出</th></tr></thead><tbody>';
+  for (var i=0; i<scripts.length; i++) {
+    var sc = scripts[i];
+    var he = sc.health || 0;
+    var hc = he >= 85 ? '#3D7A4F' : (he >= 60 ? '#C2780A' : '#C23B22');
+    h += '<tr><td style="font-weight:500">'+escHtml(sc.name)+'</td><td style="text-align:center">'+sc.lines+'</td><td style="font-size:0.75em;color:var(--ink-light)">'+escHtml(sc.function)+'</td><td style="color:'+hc+'">'+he+'%</td><td style="font-size:0.7em;color:var(--ink-light)">'+escHtml(sc.output||'')+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+  h += '<div style="font-size:0.68em;color:var(--ink-lighter);margin-bottom:10px">'+escHtml(cyb.summary||'')+'</div>';
+
+  // ═══ 永续控制 ═══
+  h += '<div class="section-head">🔄 永续控制</div>';
+  var pcStateColor = pc.state === 'steady' ? '#3D7A4F' : '#C2780A';
+  h += '<div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:14px">';
+  h += '<div class="stat-card"><div class="stat-num" style="color:'+pcStateColor+'">'+escHtml(pc.state)+'</div><div class="stat-label">运行状态</div><div style="font-size:0.6em">'+pc.speed_multiplier+'x速度</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+pc.total_heat+'</div><div class="stat-label">总热力</div></div>';
+  h += '<div class="stat-card"><div class="stat-num" style="color:#3D7A4F">'+pc.stability_score+'%</div><div class="stat-label">稳定度</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+pc.learning_progress+'%</div><div class="stat-label">学习进度</div></div>';
+  h += '</div>';
+  h += '<div style="font-size:0.7em;color:var(--ink-light);margin-bottom:14px">'+(pc.chemistry||{}).effect+' · 编排器: '+(pc.orchestrator||{}).ok+'✅/'+(pc.orchestrator||{}).degraded+'🟡/'+(pc.orchestrator||{}).failed+'❌</div>';
+
+  // ═══ 诚实评分 ═══
+  h += '<div class="section-head">📊 诚实评分仪表</div>';
+  var dims = hscore.dimensions || [];
+  h += '<div style="overflow-x:auto"><table class="data-table" style="width:100%;font-size:0.75em;margin-bottom:14px">';
+  h += '<thead><tr><th>维度</th><th>纸面完整</th><th>实质运行</th><th>说明</th></tr></thead><tbody>';
+  for (var i=0; i<dims.length; i++) {
+    var dm = dims[i];
+    var paperColor = dm.paper >= 80 ? '#3D7A4F' : (dm.paper >= 50 ? '#C2780A' : '#C23B22');
+    var actualColor = dm.actual >= 80 ? '#3D7A4F' : (dm.actual >= 40 ? '#C2780A' : '#C23B22');
+    h += '<tr><td style="font-weight:500">'+escHtml(dm.name)+'</td><td style="color:'+paperColor+';font-weight:600">'+dm.paper+'%</td><td style="color:'+actualColor+';font-weight:600">'+dm.actual+'%</td><td style="font-size:0.7em;color:var(--ink-light)">'+escHtml(dm.note)+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
+  // ═══ LLM对比评分 ═══
+  h += '<div class="section-head">🤖 LLM替身评分对比 (Round 3)</div>';
+  h += '<div style="font-size:0.75em;color:var(--ink-light);margin-bottom:8px">加权随机函数avg:'+llm.avg_old+' → LLM认知推理avg:'+llm.avg_new+' (差'+llm.delta+') · '+escHtml(llm.verdict||'')+'</div>';
+  h += '<div style="overflow-x:auto"><table class="data-table" style="width:100%;font-size:0.72em;margin-bottom:14px">';
+  h += '<thead><tr><th>替身</th><th>产品</th><th>旧评分</th><th>LLM</th><th>偏差</th><th>洞察</th></tr></thead><tbody>';
+  var details = llm.details || [];
+  for (var i=0; i<details.length; i++) {
+    var d = details[i];
+    var deltaColor = Math.abs(d.delta) >= 20 ? '#C23B22' : (Math.abs(d.delta) >= 10 ? '#C2780A' : '#3D7A4F');
+    h += '<tr><td>'+escHtml(d.avatar)+'</td><td>'+escHtml(d.product)+'</td><td>'+d.old+'</td><td>'+d.new+'</td><td style="color:'+deltaColor+';font-weight:600">'+d.delta+'</td><td style="font-size:0.75em;color:var(--ink-light)">'+escHtml(d.insight)+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
+  // ═══ 知识飞轮五步 ═══
+  h += '<div class="section-head">🔬 知识飞轮 v1.2</div>';
+  var steps = kf.steps || [];
+  h += '<div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px">';
+  for (var i=0; i<steps.length; i++) {
+    var st = steps[i];
+    var stColor = st.status === 'operational' ? '#3D7A4F' : (st.status === 'degraded' ? '#C2780A' : '#C23B22');
+    h += '<div style="flex:1;min-width:110px;background:var(--card-white);border:1px solid var(--border-warm);border-radius:8px;padding:10px;text-align:center;flex-shrink:0;font-size:0.72em">';
+    h += '<div style="font-size:1.2em">'+(st.icon||'?')+'</div><div style="font-weight:600;margin-top:2px">'+escHtml(st.name)+'</div>';
+    h += '<div style="font-size:0.65em;color:var(--ink-lighter)">'+escHtml(st.script||'')+'</div>';
+    h += '<div style="margin-top:4px;color:'+stColor+';font-weight:500">● '+escHtml(st.status)+'</div></div>';
+  }
+  h += '</div>';
+  h += '<div style="font-size:0.68em;color:var(--ink-lighter)">脚本: '+(kf.scripts||{}).active+'/'+(kf.scripts||{}).total+' active</div>';
+
+  // ═══ 免疫系统 ═══
+  h += '<div class="section-head" style="margin-top:16px">🛡️ 免疫系统 · '+(imm.overall||{}).score+'分</div>';
+  var comps = imm.components || [];
+  h += '<div style="overflow-x:auto"><table class="data-table" style="width:100%;font-size:0.72em">';
+  h += '<thead><tr><th>组件</th><th>频率</th><th>健康</th><th>预警</th><th>最后检查</th></tr></thead><tbody>';
+  for (var i=0; i<comps.length; i++) {
+    var cp = comps[i];
+    var cph = cp.health || 0;
+    var cphc = cph >= 90 ? '#3D7A4F' : (cph >= 70 ? '#C2780A' : '#C23B22');
+    var alertCount = cp.alerts || 0;
+    h += '<tr><td style="font-weight:500">'+escHtml(cp.name)+'</td><td>'+escHtml(cp.freq)+'</td><td style="color:'+cphc+'">'+cph+'%</td><td style="color:'+(alertCount>0?'#C23B22':'#3D7A4F')+'">'+alertCount+'</td><td style="font-size:0.7em;color:var(--ink-lighter)">'+escHtml((cp.last_check||'').substring(0,10))+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
+  document.getElementById('tab-cyber').innerHTML = h;
+}
+
 function renderAutoEngine() {
   var auto = EIDX.auto_engine || {};
   var cronsData = auto.crons || {};
