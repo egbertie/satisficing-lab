@@ -354,7 +354,7 @@ function boot() {
     PRODS = [];
     var raw = EIDX.products || [];
     for (var i=0; i<raw.length; i++) {
-      if (!seen[raw[i].name]) { seen[raw[i].name] = true; prods.push(raw[i]); }
+      if (!seen[raw[i].name]) { seen[raw[i].name] = true; PRODS.push(raw[i]); }
     }
     buildNav();
     renderOverview();
@@ -382,7 +382,7 @@ function boot() {
 function buildNav() {
   var ts = [
     {id:'tab-overview', label:'📊 总览'},
-    {id:'tab-products', label:'📦 产品资产 ('+prods.length+')'},
+    {id:'tab-products', label:'📦 产品资产 ('+PRODS.length+')'},
     {id:'tab-tasks', label:'✅ 待办任务 ('+(TSK?TSK.total_open:'?')+')'},
     {id:'tab-health', label:'🫀 健康仪表'},
     {id:'tab-activity', label:'📜 活动日志'},
