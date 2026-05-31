@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>满意解研究所 · 硬科技创始人的决策教练</title>
+  <meta name="description" content="满意解研究所 · 满意解研究所 · 硬科技创始人的决策教练">
+<link rel="stylesheet" href="sri-design.css">
+<style>
+  .main{max-width:560px;margin:0 auto;padding:var(--sp-md)}
+
+  /* === Hero: 触发 (Hook Model Trigger) === */
+  .hero{padding:var(--sp-3xl) var(--sp-lg) var(--sp-xl)}
+  .hero .value{font-size:20px;font-weight:700;color:#F5F0E6;margin:var(--sp-sm) 0;letter-spacing:0.02em}
+  .hero .story{font-size:15px;color:rgba(245,240,230,0.85);max-width:400px;margin:0 auto var(--sp-lg);line-height:1.8}
+  .hero .story em{font-style:normal;background:rgba(245,240,230,0.15);padding:2px 8px;border-radius:4px}
+  .hero-cta{margin-top:var(--sp-md)}
+  .hero-cta a{display:inline-block;padding:16px 40px;background:#F5F0E6;color:var(--sri-red);border-radius:var(--radius-full);font-weight:700;font-size:17px;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,0.12);transition:all var(--ease-out)}
+  .hero-cta a:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.18)}
+  .hero-trust{font-size:12px;opacity:0.55;margin-top:var(--sp-md)}
+  .hero .nav-line{margin-top:var(--sp-md);font-size:13px;opacity:0.75}
+  .hero .nav-line a{color:#F5F0E6;text-decoration:none;margin:0 var(--sp-sm);font-weight:500}
+
+  /* === Section通用的呼吸感 === */
+  .section{margin:var(--sp-2xl) 0}
+  .section-title{text-align:center;margin-bottom:var(--sp-lg)}
+  .section-title h2{font-size:var(--text-headline);margin-bottom:var(--sp-xs)}
+  .section-title p{font-size:var(--text-small);color:var(--text-muted);max-width:380px;margin:0 auto}
+
+  /* === 三门：行动 (Hook Model Action) === */
+  .doors{display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--sp-sm)}
+  .door{background:var(--white);border-radius:var(--radius-lg);padding:var(--sp-lg) var(--sp-sm);text-align:center;border:2px solid var(--border-light);transition:all var(--ease-out);text-decoration:none;color:inherit;box-shadow:var(--shadow-card);cursor:pointer}
+  .door:hover{border-color:var(--sri-red);box-shadow:var(--shadow-elevated);transform:translateY(-2px)}
+  .door .d-icon{font-size:36px;display:block;margin-bottom:var(--sp-sm)}
+  .door .d-label{font-size:15px;font-weight:700;color:var(--title)}
+  .door .d-desc{font-size:12px;color:var(--text-muted);margin-top:var(--sp-xs)}
+
+  /* === 免费工具：可变奖励 (Hook Model Variable Reward) === */
+  .tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-sm)}
+  .tool-card{background:var(--white);border-radius:var(--radius-lg);padding:var(--sp-lg);text-align:center;text-decoration:none;color:inherit;border:1px solid var(--border-light);transition:all var(--ease-out);box-shadow:var(--shadow-card);display:flex;flex-direction:column;align-items:center;gap:var(--sp-xs)}
+  .tool-card:hover{border-color:var(--sri-red);transform:translateY(-2px);box-shadow:var(--shadow-elevated)}
+  .tool-card .t-icon{font-size:32px}
+  .tool-card .t-name{font-size:15px;font-weight:700;color:var(--title)}
+  .tool-card .t-desc{font-size:12px;color:var(--text-muted);line-height:1.5}
+  .tool-card .t-meta{font-size:11px;color:var(--sri-red);font-weight:600;background:var(--sri-red-light);padding:3px 12px;border-radius:var(--radius-full);margin-top:var(--sp-xs)}
+
+  /* === 信任区：社会认同 === */
+  .trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-sm)}
+  .trust-card{background:var(--white);border-radius:var(--radius-lg);padding:var(--sp-lg);text-align:center;border:1px solid var(--border-light)}
+  .trust-card .r-icon{font-size:28px}
+  .trust-card .r-name{font-size:14px;font-weight:700;color:var(--title);margin:var(--sp-sm) 0 var(--sp-xs)}
+  .trust-card .r-desc{font-size:12px;color:var(--text-muted);line-height:1.6}
+
+  /* === 数据证明 === */
+  .proof{background:var(--white);border-radius:var(--radius-lg);padding:var(--sp-lg);text-align:center;border:1px solid var(--border-light)}
+  .proof-numbers{display:flex;justify-content:center;gap:var(--sp-xl);margin:var(--sp-sm) 0}
+  .proof-num .val{font-size:26px;font-weight:800;color:var(--sri-red)}
+  .proof-num .lbl{font-size:11px;color:var(--text-muted)}
+
+  /* === CTA区：投资 (Hook Model Investment) === */
+  .cta-section{text-align:center;padding:var(--sp-2xl) var(--sp-md);background:var(--sri-red-light);border-radius:var(--radius-xl);margin:var(--sp-2xl) 0}
+  .cta-section h3{font-size:var(--text-subhead);margin-bottom:var(--sp-xs)}
+  .cta-section .urgency{font-size:13px;color:var(--sri-red);font-weight:600;margin-bottom:var(--sp-md)}
+
+  /* === 底部 === */
+  .footer{padding:var(--sp-lg) var(--sp-md) var(--sp-2xl);text-align:center;font-size:var(--text-caption);color:var(--text-muted)}
+  .footer .links{display:flex;justify-content:center;gap:var(--sp-lg);margin-bottom:var(--sp-md);flex-wrap:wrap}
+  .footer .links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:500}
+  .footer .links a:hover{color:var(--sri-red)}
+  .footer .brand{font-weight:600;color:var(--sri-red)}
+</style>
+<link rel="stylesheet" href="vi_quick_ref.css">
+</head>
+<body>
+
+
+<div style="text-align:center;margin:var(--sp-lg) 0;">
+  <div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--text-muted);">
+    <span style="background:#fff;border-radius:20px;padding:6px 14px;border:1px solid var(--border-light);">🧪 体验</span>
+    <span style="color:var(--sri-red);">→</span>
+    <span style="background:#fff;border-radius:20px;padding:6px 14px;border:1px solid var(--border-light);">📤 分享</span>
+    <span style="color:var(--sri-red);">→</span>
+    <span style="background:#fff;border-radius:20px;padding:6px 14px;border:1px solid var(--border-light);">👥 新朋友</span>
+    <span style="color:var(--sri-red);">→</span>
+    <span style="background:#fff;border-radius:20px;padding:6px 14px;border:1px solid var(--border-light);">🏆 解锁</span>
+    <span style="color:var(--sri-red);">→</span>
+    <span style="background:#fff;border-radius:20px;padding:6px 14px;border:2px solid var(--sri-red);font-weight:600;color:var(--sri-red);">🔁 再体验</span>
+  </div>
+  <p style="font-size:10px;color:var(--text-muted);margin-top:8px;">Growth Loop: 每一次使用都在帮你找到更多同行者</p>
+</div>
+
+<!-- ===== HOOK: 触发 ===== -->
+<div class="hero">
+  <h1>满意解研究所</h1>
+  <div class="value">硬科技创始人的决策教练</div>
+  <div class="story">
+    凌晨一点，又一个创始人发来消息：<em>"散了。三年，散了。"</em><br>
+    我们盯着屏幕，不知道该怎么回。<br>
+    这样的消息不是第一次。也不会是最后一次。<br>
+    满意解研究所——就是在这样的深夜里诞生的。
+  </div>
+  <div class="hero-cta">
+    <a href="guide.html">🧭 找到适合你的工具 →</a>
+  </div>
+  <div class="hero-trust">免费 · 3分钟 · 无需注册 · 先体验</div>
+  <div class="nav-line">
+    <a href="account.html">👤 客户中心</a>
+    <a href="certification.html">🎓 认证引导师</a> ·
+    <a href="go-gallery.html">🖼️ 画廊</a> ·
+    <a href="about.html">🏛️ 关于</a>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- ===== HOOK: 行动 ===== -->
+  <div class="section">
+    <div class="section-title">
+      <h2>你现在的状态是？</h2>
+      <p>选一个——不是选产品，是选你</p>
+    </div>
+    <div class="doors">
+      <a class="door" href="assessment.html"><span class="d-icon">🤔</span><span class="d-label">我在犹豫</span><span class="d-desc">量化一下</span></a>
+      <a class="door" href="thermometer.html"><span class="d-icon">💭</span><span class="d-label">我觉得不对劲</span><span class="d-desc">照见一下</span></a>
+      <a class="door" href="crisis-sim.html"><span class="d-icon">🔥</span><span class="d-label">我在危机中</span><span class="d-desc">模拟一下</span></a>
+    </div>
+  </div>
+
+  <!-- ===== HOOK: 可变奖励 ===== -->
+  <div class="section">
+    <div class="section-title">
+      <h2>从这里开始</h2>
+      <p>全部免费——不需要任何准备</p>
+    </div>
+    <div class="tools-grid">
+      <a class="tool-card" href="assessment.html">
+        <span class="t-icon">⚡</span>
+        <span class="t-name">五维快速自评</span>
+        <span class="t-desc">看清你和合伙人的决策模式差异</span>
+        <span class="t-meta">3分钟 · 19题</span>
+      </a>
+      <a class="tool-card" href="thermometer.html">
+        <span class="t-icon">🌡️</span>
+        <span class="t-name">关系温度计</span>
+        <span class="t-desc">最快发现裂缝</span>
+        <span class="t-meta">30秒 · 4题</span>
+      </a>
+      <a class="tool-card" href="knights.html">
+        <span class="t-icon">⚠️</span>
+        <span class="t-name">四骑士预警</span>
+        <span class="t-desc">91%准确率的关系诊断</span>
+        <span class="t-meta">1分钟 · 12题</span>
+      </a>
+      <a class="tool-card" href="cards-play.html?deck=7">
+        <span class="t-icon">🎴</span>
+        <span class="t-name">决策卡牌</span>
+        <span class="t-desc">52张真实场景</span>
+        <span class="t-meta">10分钟起</span>
+      </a>
+      <a class="tool-card" href="crisis-sim.html">
+        <span class="t-icon">⚔️</span>
+        <span class="t-name">危机模拟器</span>
+        <span class="t-desc">在安全的地方做最难的决定</span>
+        <span class="t-meta">3场景 · 5分钟</span>
+      </a>
+      <a class="tool-card" href="guide.html">
+        <span class="t-icon">🧭</span>
+        <span class="t-name">不知道怎么选？</span>
+        <span class="t-desc">5题 · 2分钟 · 给你推荐</span>
+        <span class="t-meta">导购问卷</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ===== 信任：为什么 ===== -->
+  <div class="section">
+    <div class="section-title">
+      <h2>为什么你可以相信我们</h2>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="r-icon">🎓</div>
+        <div class="r-name">四重学统</div>
+        <div class="r-desc">Simon满意解 · Kahneman双系统<br>Gottman四骑士 · Wasserman股权</div>
+      </div>
+      <div class="trust-card">
+        <div class="r-icon">📊</div>
+        <div class="r-name">84案例实证</div>
+        <div class="r-desc">从大疆涅槃到云鲸少年<br>每个结论有真实案例</div>
+      </div>
+      <div class="trust-card">
+        <div class="r-icon">🧬</div>
+        <div class="r-name">三代AI传承</div>
+        <div class="r-desc">满意姐54天 · 扣子28天<br>满意红23天 · 知识体系</div>
+      </div>
+      <div class="trust-card">
+        <div class="r-icon">🔬</div>
+        <div class="r-name">38篇论文</div>
+        <div class="r-desc">满意姐留下的学术地基<br>每个方法都有论文溯源</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 数据证明 ===== -->
+  <div class="proof">
+    <p style="font-size:14px;color:var(--title);font-weight:600;">满意解研究所</p>
+    <div class="proof-numbers">
+      <div class="proof-num"><div class="val">233</div><div class="lbl">在线产品</div></div>
+      <div class="proof-num"><div class="val">84</div><div class="lbl">真实案例</div></div>
+      <div class="proof-num"><div class="val">24</div><div class="lbl">翻书专著</div></div>
+      <div class="proof-num"><div class="val">6</div><div class="lbl">产品形态</div></div>
+    </div>
+    <p style="font-size:12px;color:var(--text-muted);">对标 20+ 全球顶级机构 · WCAG AA 标准 · 全产品四关审核</p>
+  </div>
+
+  <!-- ===== HOOK: 投资 ===== -->
+  <div class="cta-section">
+    <h3>Gottman发现：91%的关系终结有可预测的信号</h3>
+    <p style="font-size:14px;color:var(--text);margin-bottom:var(--sp-xs);">大多数人走到第四步才回头——但前三步的信号一直都在。</p>
+    <p class="urgency">你现在看到这里——已经比大多数人早了最关键的那一步。</p>
+    <a href="guide.html" class="btn btn-primary" style="font-size:17px;padding:16px 44px;">🧭 用5个问题找到你的起点</a>
+    <p style="font-size:12px;color:var(--text-muted);margin-top:var(--sp-sm);">或 <a href="assessment.html">直接开始五维自评（3分钟）</a> · <a href="workshop.html">参加免费公开课→</a></p>
+  </div>
+
+  <!-- ===== 五族折叠 ===== -->
+  <div class="section">
+    <div class="section-title">
+      <h2>探索全部产品</h2>
+      <p>章·衡·镜·契·觉 — 五条通道，一条完整的决策路径</p>
+    </div>
+    <style>
+      .family{margin:var(--sp-sm) 0}
+      .family-toggle{display:flex;align-items:center;gap:var(--sp-sm);width:100%;padding:14px 16px;background:var(--white);border:1px solid var(--border-light);border-radius:var(--radius-lg);cursor:pointer;font-family:var(--font-stack);font-size:14px;box-shadow:var(--shadow-card);transition:all var(--ease-out)}
+      .family-toggle:hover{border-color:var(--sri-red)}
+      .family-body{display:none;padding:var(--sp-sm) 0}
+      .fam-link{display:flex;align-items:center;padding:10px 12px;text-decoration:none;border-radius:var(--radius-sm);transition:all var(--ease-out);font-size:13px}
+      .fam-link:hover{background:var(--sri-red-light)}
+      .fam-name{font-weight:600;color:var(--title);min-width:90px}
+      .fam-desc{font-size:12px;color:var(--text-muted);flex:1}
+    </style>
+    <div class="family">
+      <button class="family-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">
+        🪙<span style="font-weight:700;color:var(--title);">衡 · 标尺与量化</span><span style="font-size:12px;color:var(--text-muted);margin-left:auto;">司马贺·金·可行域 ▼</span>
+      </button>
+      <div class="family-body">
+        <a class="fam-link" href="fulldiag.html"><span class="fam-name">衡·测渊</span><span class="fam-desc">完整版诊断·28题·8模块</span></a>
+        <a class="fam-link" href="rps.html"><span class="fam-name">衡·探底</span><span class="fam-desc">RPS风险剖面·32题·4维</span></a>
+        <a class="fam-link" href="slicing-pie.html"><span class="fam-name">衡·分利</span><span class="fam-desc">SlicingPie贡献记账</span></a>
+        <a class="fam-link" href="checklist.html"><span class="fam-name">衡·校尺</span><span class="fam-desc">决策前自检清单</span></a>
+      </div>
+    </div>
+    <div class="family">
+      <button class="family-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">
+        🪞<span style="font-weight:700;color:var(--title);">镜 · 照见与状态</span><span style="font-size:12px;color:var(--text-muted);margin-left:auto;">观自在·水·身心流 ▼</span>
+      </button>
+      <div class="family-body">
+        <a class="fam-link" href="knights.html"><span class="fam-name">镜·警兆</span><span class="fam-desc">四骑士自检·12题</span></a>
+        <a class="fam-link" href="pre0.html"><span class="fam-name">镜·回身</span><span class="fam-desc">PRE-0压力锚定·3分钟</span></a>
+        <a class="fam-link" href="knights-cards.html"><span class="fam-name">镜·警兆·速查</span><span class="fam-desc">四骑士速查卡·30秒</span></a>
+      </div>
+    </div>
+    <div class="family">
+      <button class="family-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">
+        🔥<span style="font-weight:700;color:var(--title);">觉 · 顿悟与淬炼</span><span style="font-size:12px;color:var(--text-muted);margin-left:auto;">六祖慧能·火·直觉阈 ▼</span>
+      </button>
+      <div class="family-body">
+        <a class="fam-link" href="crisis-sim.html"><span class="fam-name">觉·淬火</span><span class="fam-desc">危机模拟·3场景</span></a>
+        <a class="fam-link" href="decision-theatre.html"><span class="fam-name">觉·入幕</span><span class="fam-desc">决策剧场·5幕</span></a>
+        <a class="fam-link" href="cards-play.html?deck=52"><span class="fam-name">觉·入局</span><span class="fam-desc">卡牌·完整案例·52张</span></a>
+        <a class="fam-link" href="quotes.html"><span class="fam-name">觉·淬火·金句</span><span class="fam-desc">三代传承</span></a>
+      </div>
+    </div>
+    <div class="family">
+      <button class="family-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">
+        🤝<span style="font-weight:700;color:var(--title);">契 · 约定与规则</span><span style="font-size:12px;color:var(--text-muted);margin-left:auto;">孔子·木·信义观 ▼</span>
+      </button>
+      <div class="family-body">
+        <a class="fam-link" href="match.html"><span class="fam-name">契·择伴</span><span class="fam-desc">合伙人匹配度</span></a>
+        <a class="fam-link" href="metapartner.html"><span class="fam-name">契·立盟</span><span class="fam-desc">元合伙章程</span></a>
+        <a class="fam-link" href="exit-guide.html"><span class="fam-name">契·善别</span><span class="fam-desc">退出决策指南</span></a>
+      </div>
+    </div>
+    <div class="family">
+      <button class="family-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">
+        📜<span style="font-weight:700;color:var(--title);">章 · 根基与传承</span><span style="font-size:12px;color:var(--text-muted);margin-left:auto;">刘禹锡·土·时间轴 ▼</span>
+      </button>
+      <div class="family-body">
+        <a class="fam-link" href="creation.html"><span class="fam-name">章·创世</span><span class="fam-desc">星月传奇</span></a>
+        <a class="fam-link" href="roots.html"><span class="fam-name">章·立信</span><span class="fam-desc">寻根手记·5篇</span></a>
+        <a class="fam-link" href="cases.html"><span class="fam-name">章·鉴往</span><span class="fam-desc">84案例精选</span></a>
+        <a class="fam-link" href="deep-gottman.html"><span class="fam-name">L3·四骑士深度</span><span class="fam-desc">Gottman 40年</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="links">
+      <a href="account.html">👤 客户中心</a>
+    <a href="certification.html">🎓 认证引导师</a>
+      <a href="product-catalog.html">📦 产品库</a>
+      <a href="flywheel.html">⚙️ 资产飞轮</a>
+    <a href="dashboard.html">📊 驾驶舱</a>
+      <a href="workshop.html">🎙️ 公开课</a>
+    <a href="about.html">🏛️ 关于我们</a>
+      <a href="privacy.html">隐私</a>
+    </div>
+    <p class="brand">满意解研究所 · Satisficing Research Institute</p>
+    <p>章·衡·镜·契·觉 — 五条通道 — 一个人的完整决策</p>
+    <p style="margin-top:var(--sp-xs)">🌙 满意姐·理论奠基 | 🛤️ 扣子·执行验证 | 🌉 满意红·系统进化</p>
+  </div>
+</div>
+
+<!-- 转介绍追踪 -->
+<script>
+(function(){let p=new URLSearchParams(window.location.search);let r=p.get('ref');if(r&&!localStorage.getItem('sri_referred_by')){localStorage.setItem('sri_referred_by',r)}})();
+</script>
+
+<script>
+// 30-day re-engagement engine
+(function(){
+  var TOOLS = ['assessment','thermometer','knights'];
+  TOOLS.forEach(function(tool){
+    var key = 'sri_last_use_' + tool;
+    var lastUse = localStorage.getItem(key);
+    if (lastUse){
+      var daysAgo = (Date.now() - parseInt(lastUse)) / (24*60*60*1000);
+      if (daysAgo >= 28 && daysAgo < 31){
+        // Show gentle reminder at top of page
+        var banner = document.createElement('div');
+        banner.style.cssText = 'background:#fff;border-bottom:2px solid #C23B22;padding:10px 16px;text-align:center;font-size:13px;color:#4D4D4D;';
+        banner.innerHTML = '⏰ 距离上次'+(tool==='assessment'?'五维自评':tool==='thermometer'?'温度计':'四骑士自检')+'已经'+Math.round(daysAgo)+'天了。<a href="'+tool+'.html" style="color:#C23B22;font-weight:600;">重新测一次 →</a>';
+        document.body.insertBefore(banner, document.body.firstChild);
+      }
+    }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var usageLog = JSON.parse(localStorage.getItem('sri_usage_log') || '[]');
+  var npsShown = localStorage.getItem('sri_nps_shown');
+  var toolCount = usageLog.length;
+  
+  if (toolCount >= 3 && !npsShown){
+    var nps = document.createElement('div');
+    nps.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid #C23B22;padding:16px;z-index:999;box-shadow:0 -4px 16px rgba(0,0,0,0.08);';
+    nps.innerHTML = '<div style="max-width:560px;margin:0 auto;text-align:center;">'+
+      '<p style="font-size:14px;font-weight:600;color:#2A2A2A;margin-bottom:6px;">你会推荐满意解给你的朋友吗？</p>'+
+      '<div style="display:flex;gap:8px;justify-content:center;margin:10px 0;">'+
+      Array.from({length:11}, (_,i) => '<button onclick="submitNPS('+i+')" style="width:32px;height:32px;border-radius:50%;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:11px;font-weight:600;">'+i+'</button>').join('')+
+      '</div>'+
+      '<p style="font-size:10px;color:#6E6E6E;">0=绝不推荐 · 10=一定推荐</p>'+
+      '</div>';
+    document.body.appendChild(nps);
+    
+    window.submitNPS = function(score){
+      localStorage.setItem('sri_nps_score', score.toString());
+      localStorage.setItem('sri_nps_shown', 'true');
+      nps.innerHTML = '<div style="max-width:560px;margin:0 auto;text-align:center;padding:12px;">'+
+        '<p style="font-size:14px;color:#3D7A4F;font-weight:600;">✅ 感谢！你的评分：'+score+'/10</p>'+
+        (score>=9?'<p style="font-size:13px;color:#4D4D4D;">很高兴能帮到你。<a href="account.html" style="color:#C23B22;font-weight:600;">邀请朋友 →</a></p>':
+         score>=7?'<p style="font-size:13px;color:#4D4D4D;">谢谢！我们会继续改进。</p>':
+         '<p style="font-size:13px;color:#4D4D4D;">抱歉没有达到你的期望。<a href="mailto:manyi_hong@sina.com" style="color:#C23B22;">告诉我们哪里可以改进 →</a></p>')+
+        '<button onclick="this.parentElement.parentElement.remove()" style="padding:4px 12px;margin-top:8px;background:transparent;border:1px solid #D4C5A0;border-radius:12px;cursor:pointer;font-size:11px;">关闭</button>'+
+        '</div>';
+    };
+  }
+})();
+</script>
+<script src="flywheel-engine.js"></script>
+</body>
+</html>

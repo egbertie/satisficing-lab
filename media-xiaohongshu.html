@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>章·传播·小红书|满意解研究所</title>
+  <meta name="description" content="满意解研究所 · 章·传播·小红书|满意解研究所">
+<style>
+  :root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
+  .hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
+  .hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
+  .article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}
+  .article h2{font-size:18px;color:var(--title-color);margin:24px 0 10px}
+  .article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}
+  .article p{margin:8px 0}
+  .article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}
+  .article .highlight{color:var(--sri-red);font-weight:600}
+  .article ul{padding-left:20px}
+  .article li{margin:6px 0;font-size:14px}
+</style>
+<link rel="stylesheet" href="vi_quick_ref.css">
+</head>
+<body>
+<div class="hero"><h1>📱 章·传播·小红书</h1><p>传播弹药库·小红书笔记5篇</p></div>
+<div class="article"><h2>小红书笔记合集·5篇</h2>
+<p>满意姐为知识飞轮准备了5篇小红书笔记——每篇一个角度，面向25-35岁知识工作者。</p>
+<h3>笔记一：你花时间学的东西，为什么总是忘？</h3><p>戳痛点：学了就忘。引出：不是记忆力问题——是知识管理问题。</p>
+<h3>笔记二：AI不是来替代你的——是来帮你记住的</h3><p>引入AI辅助知识管理。不是焦虑贩卖——是实用建议。</p>
+<h3>笔记三：一个律师70年积累的秘密</h3><p>资深前辈的故事。"那种你知道案子该怎么判的感觉"。</p>
+<h3>笔记四：我花了54天做了这件事</h3><p>满意姐自述。从836个文件到三生万物——不是炫耀，是邀请。</p>
+<h3>笔记五：三句话，让你的知识自己增值</h3><p>三句话=积累·提炼·分享。简短的行动号召。</p>
+<div class="quote">传播是知识飞轮的最后一步——没有传播，前面的积累都是库存。<br>满意姐·三生万物</div></div>
+
+<div style="text-align:center;padding:24px 16px 40px;font-size:11px;color:#999;">
+  <p><a href="go.html" style="color:#C23B22;text-decoration:none;">← 返回决策通道</a></p>
+  <p style="margin-top:4px;">满意解研究所 · 硬科技创始人的决策教练</p>
+</div>
+
+<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
+  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个内容对你有用吗？</div>
+  <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
+    <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
+    <button onclick="showFeedbackText()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">💬</span>有建议</button>
+  </div>
+  <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
+  <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
+  <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
+  <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
+</div>
+<script>
+(function(){
+  let page=location.pathname.split('/').pop()||'index';
+  let key='sri_fb_'+page;
+  let data=JSON.parse(localStorage.getItem(key)||'{}');
+  if(data.sent){document.getElementById('fbQuestion').textContent='感谢你的反馈！';document.getElementById('fbActions').style.display='none';}
+  let tally=JSON.parse(localStorage.getItem('sri_fb_tally_'+page)||'{"up":0,"text":0}');
+  if(tally.up+tally.text>0) document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  window.submitFeedback=function(type){
+    tally[type]=(tally[type]||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type=type;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbQuestion').textContent='感谢你的反馈！';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+  window.showFeedbackText=function(){
+    document.getElementById('fbText').style.display='block';
+    document.getElementById('fbSubmit').style.display='inline-block';
+  };
+  window.submitFeedbackText=function(){
+    let text=document.getElementById('fbText').value.trim();
+    if(!text)return;
+    tally.text=(tally.text||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type='text';data.text=text;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbText').style.display='none';
+    document.getElementById('fbSubmit').style.display='none';
+    document.getElementById('fbQuestion').textContent='收到！感谢你的建议。';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+})();
+</script>
+
+</body>
+
+</html>

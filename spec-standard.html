@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>产品说明书规范 · 满意解研究所</title>
+<style>
+:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
+.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:32px 20px 24px;text-align:center}
+.hero h1{font-size:20px;font-weight:700}.hero p{font-size:12px;opacity:.8}
+.main{max-width:680px;margin:0 auto;padding:16px}
+
+.panel{background:#fff;border-radius:14px;padding:20px;margin-bottom:12px;border:1px solid var(--border)}
+.panel h3{font-size:14px;color:var(--title-color);margin-bottom:10px}
+.panel h4{font-size:13px;color:var(--sri-red);margin:12px 0 6px}
+
+table{width:100%;font-size:11px;border-collapse:collapse;margin:8px 0}
+th{text-align:left;padding:6px 4px;border-bottom:1px solid var(--border);color:var(--sri-gold);font-size:10px}
+td{padding:6px 4px;border-bottom:1px solid #f0e8d8;font-size:11px}
+
+.checklist{margin:8px 0;font-size:12px;line-height:2}
+.checklist li{list-style:none;padding:2px 0}
+.checklist li.done::before{content:'✅ '}
+.checklist li.pending::before{content:'⬜ '}
+
+code{background:rgba(194,59,34,0.06);padding:2px 6px;border-radius:4px;font-size:11px}
+.btn{display:inline-block;padding:8px 18px;border-radius:16px;font-size:12px;font-weight:600;text-decoration:none;margin:4px}
+.btn-primary{background:var(--sri-red);color:#F5F0E6}
+.footer{text-align:center;padding:20px;font-size:10px;opacity:.4}
+</style>
+<link rel="stylesheet" href="vi_quick_ref.css">
+</head>
+<body>
+<div class="hero"><h1>📋 产品说明书编写规范</h1><p>满意解研究所 · V1.0 · 对标Reforge Product Brief + API Doc Standards</p></div>
+<div class="main">
+
+<div class="panel">
+  <h3>一、说明书体系</h3>
+  <p style="font-size:12px;line-height:1.8;">每个产品必须配套<strong>两份说明书</strong>：开发者说明书（内部维护） + 客户说明书（对外使用引导）。</p>
+
+  <h4>A. 开发者说明书 · 十要素</h4>
+  <table>
+    <tr><th>#</th><th>要素</th><th>内容要求</th><th>对标</th></tr>
+    <tr><td>1</td><td>产品标识</td><td>编号SP-XXX·文件名·器物代号·五族归属·形态·URL</td><td>PIM元数据</td></tr>
+    <tr><td>2</td><td>理论来源</td><td>核心理论·学者·年份·关键论文/著作</td><td>HBR引用标准</td></tr>
+    <tr><td>3</td><td>翻书依据</td><td>翻书索引编号·关键数据·样本量·准确率</td><td>APA信效度</td></tr>
+    <tr><td>4</td><td>阈值与公式</td><td>评分公式·临界值·算法逻辑·边界条件</td><td>Gartner方法透明</td></tr>
+    <tr><td>5</td><td>理论限制</td><td>适用场景·不适用场景·已知局限性</td><td>APA局限性声明</td></tr>
+    <tr><td>6</td><td>技术架构</td><td>技术栈·存储方式·依赖·部署方式</td><td>API文档标准</td></tr>
+    <tr><td>7</td><td>逻辑流程</td><td>输入→处理→输出·关键算法·错误处理</td><td>UML流程图</td></tr>
+    <tr><td>8</td><td>对外分类</td><td>🟢公开/🟡门控/🔴内部/邀约</td><td>PLM分类</td></tr>
+    <tr><td>9</td><td>深度等级</td><td>L1轻量/L2标准/L3深度</td><td>HBR三级</td></tr>
+    <tr><td>10</td><td>版本历史</td><td>创建日期·修改记录·审核记录</td><td>Git Changelog</td></tr>
+  </table>
+
+  <h4>B. 客户说明书 · 六要素</h4>
+  <table>
+    <tr><th>#</th><th>要素</th><th>内容要求</th></tr>
+    <tr><td>1</td><td>这是什么</td><td>一句话描述 + 一段话解释</td></tr>
+    <tr><td>2</td><td>适合谁</td><td>目标客户画像·适用场景·不适用场景</td></tr>
+    <tr><td>3</td><td>如何使用</td><td>步骤1-2-3·预计时间·所需准备</td></tr>
+    <tr><td>4</td><td>你会得到什么</td><td>输出结果·结果解读·分数含义</td></tr>
+    <tr><td>5</td><td>理论基础（简明版）</td><td>基于什么理论·准确性声明·局限性说明</td></tr>
+    <tr><td>6</td><td>下一步</td><td>根据结果推荐关联产品/深度服务</td></tr>
+  </table>
+</div>
+
+<div class="panel">
+  <h3>二、理论真实性审核清单</h3>
+  <ul class="checklist">
+    <li class="done">每个论断是否可以追溯到具体学者和论文？</li>
+    <li class="done">关键数据（如91%准确率）是否有原文出处？</li>
+    <li class="done">阈值（如CI≥0.7）是否有方法论依据？</li>
+    <li class="done">产品适用场景是否与理论原情境一致？</li>
+    <li class="done">是否有"过度承诺"或"夸大疗效"的表述？</li>
+    <li class="pending">信效度数据是否经过≥100样本验证？（内测期后补充）</li>
+  </ul>
+</div>
+
+<div class="panel">
+  <h3>三、说明书生成状态</h3>
+  <table>
+    <tr><th>状态</th><th>产品数</th><th>说明</th></tr>
+    <tr><td>✅ 已完成</td><td>0</td><td>--</td></tr>
+    <tr><td>🔄 模板已就绪</td><td>217</td><td>两份说明书模板已完成，逐产品生成中</td></tr>
+    <tr><td>📋 优先启动</td><td>20</td><td>20个核心产品优先生成完整说明书</td></tr>
+  </table>
+</div>
+
+<div style="text-align:center;padding:12px;">
+  <a class="btn btn-primary" href="product-catalog.html">查看产品库 →</a>
+  <a class="btn btn-primary" href="go.html" style="background:transparent;border:1.5px solid var(--sri-red);color:var(--sri-red);">返回决策通道</a>
+</div>
+
+</div>
+<div class="footer">满意解研究所 · 产品说明书编写规范 V1.0 · 对标 Reforge + API Docs + HBR + APA</div>
+</body>
+</html>

@@ -354,7 +354,7 @@ function boot() {
     PRODS = [];
     var raw = EIDX.products || [];
     for (var i=0; i<raw.length; i++) {
-      if (!seen[raw[i].name]) { seen[raw[i].name] = true; PRODS.pusescHtml(raw[i]); }
+      if (!seen[raw[i].name]) { seen[raw[i].name] = true; PRODS.push(raw[i]); }
     }
     buildNav();
     renderOverview();
@@ -451,8 +451,8 @@ function renderOverview() {
   var jingpin = [];
   var others = [];
   for (var i = 0; i < allProds.length; i++) {
-    if (allProds[i].status === '精品') jingpin.pusescHtml(allProds[i]);
-    else others.pusescHtml(allProds[i]);
+    if (allProds[i].status === '精品') jingpin.push(allProds[i]);
+    else others.push(allProds[i]);
   }
   var top10 = jingpin.concat(others).slice(0, 10);
   h += '<div class="section-head" style="margin-top:20px">🏆 Top 10 产品（精品优先）</div>';
@@ -505,7 +505,7 @@ function renderDetailRows() {
   var prods = EIDX.products || [];
   var filt = [];
   for (var i=0; i<prods.length; i++) {
-    if (prodFilt==='全部' || (prods[i].family||'未归类')===prodFilt) filt.pusescHtml(prods[i]);
+    if (prodFilt==='全部' || (prods[i].family||'未归类')===prodFilt) filt.push(prods[i]);
   }
   var h = '';
   for (var i=0; i<filt.length; i++) {
@@ -536,7 +536,7 @@ function toggleDetail(btn) {
 
 function toggleSel(cb, name) {
   var idx = selProds.indexOf(name);
-  if (cb.checked && idx<0) selProds.pusescHtml(name);
+  if (cb.checked && idx<0) selProds.push(name);
   else if (!cb.checked && idx>=0) selProds.splice(idx,1);
   updateCmpBar();
 }
@@ -565,7 +565,7 @@ function openCmp(btn) {
   var items = [];
   for (var i=0; i<selProds.length; i++) {
     for (var j=0; j<prods.length; j++) {
-      if (prods[j].name === selProds[i]) { items.pusescHtml(prods[j]); break; }
+      if (prods[j].name === selProds[i]) { items.push(prods[j]); break; }
     }
   }
 
@@ -795,7 +795,7 @@ function renderKnowledge() {
   var rt = {};
   for (var i=0; i<conns.length; i++) { var t = conns[i].relationship_type||'未知'; rt[t] = (rt[t]||0)+1; }
   var rts = [];
-  for (var k in rt) { if (rt.hasOwnProperty(k)) rts.pusescHtml({k:k, v:rt[k]}); }
+  for (var k in rt) { if (rt.hasOwnProperty(k)) rts.push({k:k, v:rt[k]}); }
   rts.sort(function(a,b){ return b.v-a.v; });
   rts = rts.slice(0,10);
   var maxR = rts.length>0 ? rts[0].v : 1;
@@ -976,7 +976,7 @@ function renderArchaeology() {
 
   // 里程碑时间线 (按日期排序)
   var mis = [];
-  for (var i=0; i<mi.length; i++) mis.pusescHtml(mi[i]);
+  for (var i=0; i<mi.length; i++) mis.push(mi[i]);
   mis.sort(function(a,b){
     var da = a.target_date||'';
     var db = b.target_date||'';
@@ -1047,7 +1047,7 @@ function renderCities() {
   for (var i = 0; i < cities.length; i++) {
     var t = cities[i].tier || '未分类';
     if (!tiers[t]) tiers[t] = [];
-    tiers[t].pusescHtml(cities[i]);
+    tiers[t].push(cities[i]);
   }
   var totalCust = 0, totalProd = 0, totalKf = 0, topKf = 0;
   for (var i = 0; i < cities.length; i++) {
@@ -1094,7 +1094,7 @@ function renderCities() {
     var inds = cities[i].key_industries || [];
     for (var j = 0; j < inds.length; j++) {
       if (!indMap[inds[j]]) indMap[inds[j]] = [];
-      indMap[inds[j]].pusescHtml(cities[i].name);
+      indMap[inds[j]].push(cities[i].name);
     }
   }
   var indKeys = Object.keys(indMap).sort(function(a,b){ return indMap[b].length - indMap[a].length; });
@@ -1316,7 +1316,7 @@ function renderFlywheel() {
   if (cc.by_type) {
     h += '<div style="font-weight:600;margin-top:12px;margin-bottom:8px">🔬 实体一致性 ('+ (cc.total_issues||0) +'异常)</div>';
     var ccItems = [];
-    for (var k in cc.by_type) ccItems.pusescHtml({k:k, v:cc.by_type[k]});
+    for (var k in cc.by_type) ccItems.push({k:k, v:cc.by_type[k]});
     ccItems.sort(function(a,b){return b.v - a.v});
     h += '<table class="data-table" style="width:100%;font-size:0.75em"><thead><tr><th>类型</th><th style="width:60px">数量</th></tr></thead><tbody>';
     for (var i=0;i<Math.min(ccItems.length,6);i++) h += '<tr><td>'+ccItems[i].k+'</td><td style="text-align:center;font-weight:700;color:'+(ccItems[i].v>0?'#e74c3c':'#27ae60')+'">'+ccItems[i].v+'</td></tr>';
@@ -1441,7 +1441,7 @@ function renderChemistry() {
   // 替身Top5精简
   var ar = ls.avatar_rankings || {};
   var arList = [];
-  for (var k in ar) arList.pusescHtml({name:k, avg:ar[k]});
+  for (var k in ar) arList.push({name:k, avg:ar[k]});
   arList.sort(function(a,b){return b.avg - a.avg});
   h += '<div class="stat-card" style="font-size:0.75em;background:#f8f4f8"><div style="font-weight:600;margin-bottom:4px">👤 替身Top5</div>';
   for (var i=0;i<Math.min(arList.length,5);i++) {

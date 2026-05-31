@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>衡·观局 | 五维快速自评 | 满意解研究所</title>
+  <meta name="description" content="满意解研究所 · 衡·观局 | 五维快速自评 | 满意解研究所">
+<link rel="stylesheet" href="vi_quick_ref.css">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  :root {
+    --c1: #C23B22; --c2: #C23B22; --c3: #C23B22; --c4: #C23B22; --c5: #C23B22;
+    --bg: #F5F0E6; --card: #F5F0E6; --text: #F5F0E6; --muted: #4A4A4A;
+    --brand: #C23B22; --brand2: #B8860B;
+  }
+  body { font-family:-apple-system,"Noto Sans SC","PingFang SC",sans-serif; background:var(--bg); color:var(--text); min-height:100vh; padding-bottom:60px; }
+  
+  /* 顶部 */
+  .hero { background:linear-gradient(135deg,var(--brand),var(--brand2)); padding:40px 24px 28px; text-align:center; }
+  .hero h1 { font-size:24px; font-weight:700; margin-bottom:6px; }
+  .hero p { font-size:13px; opacity:0.9; }
+  
+  /* 进度条 */
+  .progress-wrap { background:#D4C5A0; height:4px; position:sticky; top:0; z-index:10; }
+  .progress-bar { height:100%; background:linear-gradient(90deg,var(--brand),var(--brand2)); transition:width 0.4s ease; width:0%; }
+  
+  /* 步骤 */
+  .step { display:none; padding:20px 16px; max-width:480px; margin:0 auto; }
+  .step.active { display:block; animation:fadeIn 0.3s ease; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+  
+  /* 模块标题 */
+  .module-tag { display:inline-block; font-size:11px; font-weight:600; padding:3px 10px; border-radius:12px; margin-bottom:8px; color:#fff; }
+  .module-tag.t { background:var(--c1); }
+  .module-tag.d { background:var(--c2); }
+  .module-tag.b { background:var(--c3); color:#F5F0E6; }
+  .module-tag.x { background:var(--c4); }
+  .module-tag.z { background:var(--c5); }
+  
+  .q-num { font-size:12px; color:var(--muted); margin-bottom:4px; }
+  .q-text { font-size:17px; font-weight:500; line-height:1.6; margin-bottom:20px; }
+  
+  /* 选项按钮 */
+  .options { display:flex; flex-direction:column; gap:10px; }
+  .opt { background:var(--card); border:2px solid transparent; border-radius:12px; padding:14px 16px; font-size:14px; line-height:1.5; color:var(--text); cursor:pointer; transition:all 0.2s; text-align:left; }
+  .opt:active { transform:scale(0.98); }
+  .opt.selected { border-color:var(--brand); background:rgba(194,59,34,0.15); }
+  
+  /* 按钮 */
+  .btn { display:block; width:100%; padding:14px; border:none; border-radius:12px; font-size:16px; font-weight:600; cursor:pointer; margin-top:20px; transition:all 0.2s; }
+  .btn-primary { background:linear-gradient(135deg,var(--brand),var(--brand2)); color:#fff; }
+  .btn-primary:disabled { opacity:0.4; cursor:not-allowed; }
+  .btn-secondary { background:transparent; border:1px solid var(--muted); color:var(--muted); font-size:13px; }
+  
+  /* 结果页 */
+  .result-card { background:var(--card); border-radius:16px; padding:24px 20px; margin:16px; }
+  .result-title { text-align:center; font-size:18px; font-weight:700; margin-bottom:4px; }
+  .result-sub { text-align:center; font-size:12px; color:var(--muted); margin-bottom:20px; }
+  .radar-box { text-align:center; margin:16px 0; }
+  .radar-box svg { max-width:100%; height:auto; }
+  
+  .dim-row { display:flex; align-items:center; gap:10px; margin:8px 0; }
+  .dim-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+  .dim-name { font-size:14px; font-weight:600; width:56px; }
+  .dim-bar-bg { flex:1; height:8px; background:#D4C5A0; border-radius:4px; overflow:hidden; }
+  .dim-bar { height:100%; border-radius:4px; transition:width 0.6s ease; }
+  .dim-score { font-size:14px; font-weight:700; width:36px; text-align:right; }
+  .dim-badge { font-size:11px; padding:2px 8px; border-radius:10px; color:#fff; flex-shrink:0; }
+  .badge-green { background:#C23B22; }
+  .badge-yellow { background:#C23B22; color:#F5F0E6; }
+  .badge-red { background:#C23B22; }
+  
+  .alert-box { border-radius:12px; padding:14px 16px; margin:16px 0; font-size:13px; line-height:1.6; }
+  .alert-red { background:rgba(239,68,68,0.12); border-left:4px solid #C23B22; }
+  .alert-yellow { background:rgba(245,158,11,0.12); border-left:4px solid #C23B22; }
+  .alert-green { background:rgba(16,185,129,0.12); border-left:4px solid #C23B22; }
+  
+  .cta-box { text-align:center; padding:20px; }
+  .cta-box h3 { font-size:16px; margin-bottom:8px; }
+  .cta-box p { font-size:13px; color:var(--muted); margin-bottom:16px; }
+  
+  .footer { text-align:center; padding:24px 16px 8px; font-size:11px; color:#4A4A4A; }
+</style>
+</head>
+<script>
+// 授权验证 - 满意解研究所
+(function(){
+  // Public pages - no auth needed
+  var publicPages = ['go.html','index.html','about.html','privacy.html','terms.html','symbols.html',
+    'creation.html','stars.html','roots.html','wulu.html','qijin.html','wings.html','eyes.html',
+    '54days.html','fails.html','liang.html','treasure.html','farewell.html',
+    'cases.html','tracks.html','lineage.html','whitepaper.html','quotes.html',
+    'flywheel.html','fw-','bluearmy.html','opensource.html','hibernate.html','life.html','newcomer.html',
+    'duanwei.html','bigrich.html','game-','blood-','media-','skill-','university.html',
+    'report-demo.html','radar.html','chemical-report.html','proposal.html','gate.html',
+    'miniapp-preview.html','cards.html'];
+  
+  var page = window.location.pathname.split('/').pop();
+  
+  // Check if this is a public page
+  for (var i=0; i<publicPages.length; i++) {
+    if (page === publicPages[i] || (publicPages[i].endsWith('-') && page.startsWith(publicPages[i]))) {
+      return; // Public page - no auth needed
+    }
+  }
+  
+  // Protected page - check auth
+  var auth = JSON.parse(localStorage.getItem('sri_auth') || '{}');
+  if (!auth.valid || new Date().getTime() >= auth.expires) {
+    // Not authenticated - redirect to gate
+    var target = page;
+    var productName = page.replace('.html','');
+    window.location.href = 'gate.html?to=' + encodeURIComponent(target) + '&p=' + encodeURIComponent(productName);
+  }
+})();
+</script>
+
+<body>
+
+<div class="progress-wrap"><div class="progress-bar" id="prog"></div></div>
+
+<div class="hero" id="heroSection">
+  <h1>五维决策测评</h1>
+  <p>满意解研究所 · 快速踩雷检测 · 15题</p>
+</div>
+
+<!-- 欢迎页 -->
+<div class="step active" id="step-welcome">
+  <div style="text-align:center;padding:40px 0 20px;">
+    <div style="font-size:48px;margin-bottom:16px;">🔥</div>
+    <h2 style="font-size:20px;margin-bottom:12px;">你的合伙人决策健康吗？</h2>
+    <p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:24px;">
+      基于满意解五维决策框架<br>
+      对标 Hogan HPI · Gallup Q12 · 360°反馈<br>
+      <span style="color:#D4C5A0;">3分钟 · 15题 · 即时出结果</span>
+    </p>
+    <p style="font-size:12px;color:var(--muted);margin-top:8px;">选择你的赛道(可选): 
+      <select id="sectorSelect" style="background:var(--sri-cream);border:1px solid var(--sri-gold);border-radius:8px;padding:4px 8px;font-size:12px;color:var(--sri-dark);">
+        <option value="">通用(不指定)</option>
+        <option value="量子计算">量子计算</option>
+        <option value="脑机接口">脑机接口</option>
+        <option value="eVTOL">eVTOL</option>
+        <option value="机器人">机器人</option>
+        <option value="芯片">芯片</option>
+        <option value="智能驾驶">智能驾驶</option>
+        <option value="储能">储能</option>
+        <option value="出海">出海</option>
+      </select>
+    </p>
+  </div>
+  <button class="btn btn-primary" onclick="goStep('T1')">开始测评</button>
+</div>
+
+<!-- 问题容器 -->
+<div id="questions"></div>
+
+<!-- 结果页 -->
+<div class="step" id="step-result">
+  <div class="result-card">
+    <div class="result-title">测评结果</div>
+    <div class="result-sub">满意解研究所 · 五维决策测评</div>
+    <div class="radar-box" id="radarBox"></div>
+    <div id="dimBars"></div>
+  </div>
+  <div id="alerts" style="padding:0 16px;"></div>
+  <div id="actionAdvice" style="padding:0 16px;margin:12px 0;"></div>
+  <div class="cta-box">
+    <h3>你的完整诊断报告</h3>
+    <p>基于你的15题回答·实时生成个人化诊断报告·含行动建议</p>
+    <button class="btn btn-primary" onclick="goToReport()">→ 查看我的完整诊断报告</button>
+    <p style="font-size:11px;color:var(--muted);margin-top:12px">想知道更多？</p>
+    <button class="btn btn-secondary" style="margin-top:8px;" onclick="window.location.href='decision-theatre.html'">🎭 决策剧场·场景体验</button>
+    <button class="btn btn-secondary" style="margin-top:6px;" onclick="downloadData()">💾 下载我的诊断数据</button>
+    <button class="btn btn-secondary" style="margin-top:6px;" onclick="restart()">重新测评</button>
+  </div>
+  <div class="footer">
+    满意解研究所 · Satisficing Research Institute<br>
+    让每个合伙人决策都有据可依
+  </div>
+</div>
+
+<script>
+// ===== 题目数据 =====
+const questions = [
+  // 时间轴
+  {id:"T1",tag:"t",tagLabel:"时间轴",num:"1/15",
+   text:"短期利益和长期利益冲突时，我通常会选短期。",
+   opts:["非常符合","比较符合","说不清","比较不符合","非常不符合"],reverse:true},
+  {id:"T2",tag:"t",tagLabel:"时间轴",num:"2/15",
+   text:"投资人说「市场窗口就这半年，先冲了再说」。你的合伙人想冲。你觉得：",
+   opts:["合伙人说得对，先冲再说","有一定道理但需要更多分析","不确定，要看具体情况","这需要冷静评估，窗口焦虑不是决策理由","必须拒绝——冲不等于快"]},
+  {id:"T3",tag:"t",tagLabel:"时间轴",num:"3/15",
+   text:"过去一年里，你因为「等不及」而在事情没有准备好的情况下做了决定——次数是多少？",
+   opts:["0次","1次","2次","3-4次","5次以上"],reverse:true},
+  // 可行域
+  {id:"D1",tag:"d",tagLabel:"可行域",num:"4/15",
+   text:"我清楚知道自己在合伙人决策上最多能承受的损失是多少。",
+   opts:["完全不知道","不太清楚","大概知道","比较清楚","很清楚"]},
+  {id:"D2",tag:"d",tagLabel:"可行域",num:"5/15",
+   text:"一个技术大牛要求超出你预算的股权，但他说「值这个价」。你：",
+   opts:["觉得有道理，可以谈","愿意谈但要控制幅度","不确定","明确拒绝，超出底线就是超出","超出底线绝对不行，再好也不妥协"]},
+  {id:"D3",tag:"d",tagLabel:"可行域",num:"6/15",
+   text:"你在合伙人谈判中临时改变过底线的次数？",
+   opts:["从来没有","很少，偶尔1次","有过2-3次","比较多","每次都变"],reverse:true},
+  // 身心流
+  {id:"B1",tag:"b",tagLabel:"身心流",num:"7/15",
+   text:"我在做重要决策时会注意身体的感觉（心跳、肩膀、胃），并且会把这些感觉纳入考虑。",
+   opts:["几乎不","很少","有时","经常","这是我决策的一部分"]},
+  {id:"B2",tag:"b",tagLabel:"身心流",num:"8/15",
+   text:"连续高强度工作后，一个重大决策需要现在做出。你：",
+   opts:["现在决定，不能再等了","有点犹豫但会做决定","先快速过一遍关键信息","知道自己疲劳时判断会偏差，先休息至少2小时","必须休息——疲惫时的决定最危险"]},
+  {id:"B3",tag:"b",tagLabel:"身心流",num:"9/15",
+   text:"过去三个月里，你身体发出警报（失眠/头痛/胃痛），但你继续往前冲——发生了多少次？",
+   opts:["0次","1-2次","3-5次","基本每周都有","几乎每天都在"],reverse:true},
+  // 信义观
+  {id:"X1",tag:"x",tagLabel:"信义观",num:"10/15",
+   text:"我能具体说出：合伙人的哪三件事让我完全放心，哪三件事让我心里打鼓。",
+   opts:["说不上来","能说出部分","大概知道但不够具体","比较清晰","非常清晰"]},
+  {id:"X2",tag:"x",tagLabel:"信义观",num:"11/15",
+   text:"你发现合伙人在外把「你们的」成绩说成「我的」。你：",
+   opts:["小事，忍了","心里不舒服但不说","觉得需要找机会表达不满","这是信任问题，必须谈清楚","立即约谈——这不是面子，是信任底线"]},
+  {id:"X3",tag:"x",tagLabel:"信义观",num:"12/15",
+   text:"你有没有因为「不好意思」而推迟了和合伙人之间必须发生的艰难对话？",
+   opts:["从不推迟","偶尔推迟","有过几次","经常推迟","推迟了多次"],reverse:true},
+  // 直觉阈
+  {id:"Z1",tag:"z",tagLabel:"直觉阈",num:"13/15",
+   text:"我的数据分析和我的直觉打架时，我通常会听数据分析的。",
+   opts:["非常符合","比较符合","说不清","比较不符合","非常不符合"],reverse:true},
+  {id:"Z2",tag:"z",tagLabel:"直觉阈",num:"14/15",
+   text:"见一个潜在合伙人，表面一切完美，但你心里有个细微的声音说「不对」。你：",
+   opts:["忽略，一切看起来都很好","不太在意但会留意","有点不安但继续推进","把这个声音当回事，做深度背调","绝对重视——直觉信号值得认真对待"]},
+  {id:"Z3",tag:"z",tagLabel:"直觉阈",num:"15/15",
+   text:"过去一年，你有过「第一反应是对的，但后来被人说服了，结果果然出问题」的经历——次数？",
+   opts:["0次","1次","2次","3-4次","5次以上"],reverse:true},
+];
+
+const dimNames = ["时间轴","可行域","身心流","信义观","直觉阈"];
+const dimColors = {"T":"#C23B22","D":"#B8860B","B":"#C23B22","X":"#D4756A","Z":"#8B1A1A"};
+const dimGuidance = {
+  "时间轴": {low:"你可能在透支未来。建议先做心理对照练习——在做每个决定前，先问「五年后回头看会怎样」。",mid:"时间轴维度有提升空间。建议定期(季度)做长远方向思考，不被日常推着走。",high:"你的时间轴维度很健康。你能平衡短期和长期，这是合伙人决策的核心能力。"},
+  "可行域": {low:"你的底线可能不够硬。建议先明确退出机制——在投入前先想好「什么情况下撤」。",mid:"可行域判断还可以更坚定。建议在投入前白纸黑字写下底线，并且守住它。",high:"你的可行域判断很清晰。你知道什么是「够用就好」，这是满意解的核心。"},
+  "身心流": {low:"你可能在忽视身体警报。建议纳入身心流觉察——身体是你的第二大脑。",mid:"身心流维度有提升空间。试着在决策前停顿3秒，感受身体的第一反应。",high:"你能读取身体信号并纳入决策。身心流的平衡让你在压力下也能保持判断力。"},
+  "信义观": {low:"信任可能出了问题。建议启动一次艰难对话——不说会比说更危险。",mid:"信义观维度有提升空间。试着更具体地分辨「在哪些事上信」vs「在哪些事上打鼓」。",high:"你的信任判断很分化。你能区分「整体信任」和「具体信任」，这是成熟的标志。"},
+  "直觉阈": {low:"你可能在压抑直觉。建议区分「恐惧」和「直觉信号」——前者吵闹，后者平静。",mid:"直觉阈维度有提升空间。下次数据与直觉打架时，先感受身体第一反应，再用理性核对。",high:"你能平衡直觉和理性。直觉是你决策工具箱里的重要工具，而非敌人。"},
+};
+
+let answers = {};
+let currentQ = 0;
+const DIM_MAP = {T:"T",D:"D",B:"B",X:"X",Z:"Z"};
+
+// 构建问题DOM
+function buildQuestions() {
+  const container = document.getElementById('questions');
+  let html = '';
+  questions.forEach((q,i) => {
+    html += `<div class="step" id="step-${q.id}">
+      <div class="q-num">第 ${q.num} 题</div>
+      <span class="module-tag ${q.tag}">${q.tagLabel}</span>
+      <div class="q-text">${q.text}</div>
+      <div class="options" id="opts-${q.id}">
+        ${q.opts.map((o,j) => `<button class="opt" data-v="${j+1}" onclick="pick('${q.id}',${j+1},this)">${o}</button>`).join('')}
+      </div>
+      <button class="btn btn-primary" id="next-${q.id}" disabled onclick="nextQ('${q.id}')">
+        ${i < questions.length - 1 ? '下一题' : '查看结果'}
+      </button>
+    </div>`;
+  });
+  container.innerHTML = html;
+}
+
+function pick(qid, val, el) {
+  answers[qid] = val;
+  const opts = document.querySelectorAll(`#opts-${qid} .opt`);
+  opts.forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById(`next-${qid}`).disabled = false;
+}
+
+function nextQ(qid) {
+  const idx = questions.findIndex(q => q.id === qid);
+  if (idx < questions.length - 1) {
+    goStep(questions[idx+1].id);
+  } else {
+    showResult();
+  }
+}
+
+function goStep(qid) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById(`step-${qid}`);
+  if(target) target.classList.add('active');
+  const idx = questions.findIndex(q => q.id === qid);
+  const pct = ((idx) / questions.length) * 100;
+  document.getElementById('prog').style.width = pct + '%';
+}
+
+function showResult() {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step-result').classList.add('active');
+  document.getElementById('prog').style.width = '100%';
+  document.getElementById('heroSection').style.display = 'none';
+  
+  // 观自在审核: 展示诊断前先做深呼吸缓冲
+  document.getElementById('alerts').innerHTML = '<div class="card" style="text-align:center;padding:24px;background:#C23B2204;border:1px solid var(--brand);border-radius:16px"><p style="font-size:18px;color:var(--brand)">✋ 你刚做完19道题</p><p style="font-size:13px;color:var(--muted);margin-top:8px">在结果出来前——察觉一下身体:<br>手心暖还是凉？心跳快还是慢？胃松还是紧？</p><p style="font-size:11px;color:var(--muted);margin-top:8px">这是一个诊断·不是判决·是让你们关系更好的起点</p></div>';
+  setTimeout(() => { renderFullResult(); }, 5000);
+}
+
+function renderFullResult() {
+  // 计算各维度得分
+  const dimScores = {};
+  const dimQuestions = {};
+  questions.forEach(q => {
+    const d = q.id.charAt(0);
+    if(!dimQuestions[d]) dimQuestions[d] = [];
+    dimQuestions[d].push(q);
+  });
+  
+  for(const [d, qs] of Object.entries(dimQuestions)) {
+    let sum = 0, count = 0;
+    qs.forEach(q => {
+      if(answers[q.id] !== undefined) {
+        let v = answers[q.id];
+        if(q.reverse) v = 6 - v;
+        sum += v;
+        count++;
+      }
+    });
+    dimScores[d] = count > 0 ? (sum / count) : 0;
+  }
+  
+  // V4.0·30天重测自动对比
+  const prevData = localStorage.getItem('sri_baseline');
+  if(prevData) {
+    const prev = JSON.parse(prevData);
+    const dims = ['T','D','B','X','Z'];
+    const names = ['时间轴','可行域','身心流','信义观','直觉阈'];
+    let compHtml = '<div class="card" style="margin-top:12px;background:#C23B2204;border:1px solid var(--gold);border-radius:16px;padding:16px">';
+    compHtml += '<h4 style="color:var(--brand);margin-bottom:8px">📈 距上次诊断的变化</h4>';
+    dims.forEach((d,i) => {
+      if(prev[d] !== undefined) {
+        const delta = (dimScores[d] - prev[d]).toFixed(2);
+        const arrow = delta > 0 ? '↑' : (delta < 0 ? '↓' : '→');
+        const color = delta > 0.15 ? '#B8860B' : (delta < -0.15 ? '#C23B22' : '#4A4A4A');
+        compHtml += `<p style="font-size:12px;color:${color}">${names[i]}: ${prev[d].toFixed(1)}→${dimScores[d].toFixed(1)} Δ${delta} ${arrow}</p>`;
+      }
+    });
+    compHtml += '</div>';
+    document.getElementById('alerts').insertAdjacentHTML('beforeend', compHtml);
+  }
+  // 保存当前基线
+  localStorage.setItem('sri_baseline', JSON.stringify(dimScores));
+  localStorage.setItem('sri_baseline_date', new Date().toISOString());
+  
+  // 雷达图
+  renderRadar(dimScores);
+  
+  // 维度条形图
+  let barsHtml = '';
+  for(const d of ['T','D','B','X','Z']) {
+    const name = dimNames[['T','D','B','X','Z'].indexOf(d)];
+    const score = dimScores[d];
+    const pct = (score / 5) * 100;
+    const color = dimColors[d];
+    let badge, badgeClass;
+    if(score >= 3.5) { badge = '健康'; badgeClass = 'badge-green'; }
+    else if(score >= 2.5) { badge = '临界'; badgeClass = 'badge-yellow'; }
+    else { badge = '关注'; badgeClass = 'badge-red'; }
+    barsHtml += `<div class="dim-row">
+      <div class="dim-dot" style="background:${color}"></div>
+      <div class="dim-name" style="color:${color}">${name}</div>
+      <div class="dim-bar-bg"><div class="dim-bar" style="width:${pct}%;background:${color}"></div></div>
+      <div class="dim-score" style="color:${color}">${score.toFixed(1)}</div>
+      <span class="dim-badge ${badgeClass}">${badge}</span>
+    </div>`;
+  }
+  document.getElementById('dimBars').innerHTML = barsHtml;
+  
+  // 提示
+  let alertsHtml = '';
+  for(const d of ['T','D','B','X','Z']) {
+    const name = dimNames[['T','D','B','X','Z'].indexOf(d)];
+    const score = dimScores[d];
+    const g = dimGuidance[name];
+    if(score < 2.5) {
+      alertsHtml += `<div class="alert-box alert-red">🔴 <strong>${name}</strong>（${score.toFixed(1)}/5.0）<br>${g.low}</div>`;
+    } else if(score < 3.5) {
+      alertsHtml += `<div class="alert-box alert-yellow">🟡 <strong>${name}</strong>（${score.toFixed(1)}/5.0）<br>${g.mid}</div>`;
+    } else {
+      alertsHtml += `<div class="alert-box alert-green">🟢 <strong>${name}</strong>（${score.toFixed(1)}/5.0）<br>${g.high}</div>`;
+    }
+  }
+  
+  // 检查是否有红灯
+  const redDims = Object.entries(dimScores).filter(([d,s]) => s < 2.5);
+  if(redDims.length > 0) {
+    const names = redDims.map(([d]) => dimNames[['T','D','B','X','Z'].indexOf(d)]);
+    alertsHtml += `<div class="alert-box alert-red" style="margin-top:12px;">⚠️ <strong>检测到 ${redDims.length} 个维度触发红灯</strong><br>建议做完整版测评（88题·25分钟）获全维度分析 + 脱轨因子检测 + 信效度验证 + 行为指引。</div>`;
+  }
+  
+  document.getElementById('alerts').innerHTML = alertsHtml;
+  
+  // 行动建议（基于分数自动生成）
+  let adviceHtml = '<div class="result-card"><div class="result-title" style="font-size:16px">📋 建议优先关注</div>';
+  const sorted = Object.entries(dimScores).sort((a,b) => a[1]-b[1]);
+  const lowest = sorted[0];
+  const secondLowest = sorted[1];
+  const adviceMap = {
+    'T': '时间轴偏低：你倾向于高估短期利益。建议：下一次做重大决策前，先问自己——"如果今天是五年后回头看，这个决定还成立吗？"把这句话写在会议室白板上。',
+    'D': '可行域偏低：你的底线可能不够清晰。建议：和合伙人一起列出"绝不妥协的3条底线"——写下来、签字、贴在看得见的地方。',
+    'B': '身心流偏低：你的身体在发出信号但你忽略了。建议：下次在做出重要决定前，停下来做三次深呼吸。感觉一下手心是暖还是凉。带着身体的答案再决策。',
+    'X': '信义观偏低：你和合伙人之间可能有一些"没说出口的话"。建议：约合伙人单独喝一次咖啡——不聊业务，只问一句"我们之间最近有什么你觉得不对但没说的事？"',
+    'Z': '直觉阈偏低：你可能过度依赖数据忽略了直觉。建议：下次遇到两难选择时，抛硬币——不是用硬币做决定，是在硬币飞起来的瞬间，感受你希望它是哪一面。'
+  };
+  adviceHtml += `<p style="font-size:14px;color:var(--brand);margin:12px 0"><strong>${dimNames[['T','D','B','X','Z'].indexOf(lowest[0])]}（${lowest[1].toFixed(0)}/5）</strong></p>`;
+  adviceHtml += `<p style="font-size:13px;line-height:1.7">${adviceMap[lowest[0]]}</p>`;
+  if(secondLowest[1] < 3.5){
+    adviceHtml += `<p style="font-size:14px;color:var(--brand);margin:16px 0 8px"><strong>其次关注：${dimNames[['T','D','B','X','Z'].indexOf(secondLowest[0])]}（${secondLowest[1].toFixed(0)}/5）</strong></p>`;
+    adviceHtml += `<p style="font-size:13px;line-height:1.7">${adviceMap[secondLowest[0]]}</p>`;
+  }
+  adviceHtml += '</div>';
+  document.getElementById('actionAdvice').innerHTML = adviceHtml;
+  
+  // V4.0·当场生成诊断摘要(无需命令行)
+  generateQuickDiagnosis(dimScores);
+}
+
+function renderRadar(dimScores) {
+  const dims = ['T','D','B','X','Z'];
+  const labels = dimNames;
+  const colors = ['#C23B22','#B8860B','#C23B22','#D4756A','#8B1A1A'];
+  const n = 5;
+  const cx = 150, cy = 140, maxR = 100;
+  const angles = dims.map((_,i) => Math.PI/2 - 2*Math.PI*i/n);
+  
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 260" width="300" height="260">`;
+  svg += `<rect width="300" height="260" fill="none"/>`;
+  
+  // 网格
+  for(let level=0.2;level<=1.0;level+=0.2){
+    const r = maxR*level;
+    const pts = angles.map(a => `${cx+r*Math.cos(a)},${cy-r*Math.sin(a)}`).join(' ');
+    svg += `<polygon points="${pts}" fill="none" stroke="${level>=0.8?'#4A4A4A':'#D4C5A0'}" stroke-width="${level>=0.8?1:0.5}"/>`;
+  }
+  
+  // 轴线
+  angles.forEach(a => {
+    svg += `<line x1="${cx}" y1="${cy}" x2="${cx+maxR*Math.cos(a)}" y2="${cy-maxR*Math.sin(a)}" stroke="#4A4A4A" stroke-width="1"/>`;
+  });
+  
+  // 数据
+  const pts = dims.map((d,i) => {
+    const r = maxR*(dimScores[d]/5);
+    return `${cx+r*Math.cos(angles[i])},${cy-r*Math.sin(angles[i])}`;
+  });
+  
+  svg += `<polygon points="${pts.join(' ')}" fill="rgba(59,130,246,0.18)" stroke="#C23B22" stroke-width="2" stroke-linejoin="round"/>`;
+  
+  dims.forEach((d,i) => {
+    const r = maxR*(dimScores[d]/5);
+    const px = cx+r*Math.cos(angles[i]);
+    const py = cy-r*Math.sin(angles[i]);
+    svg += `<circle cx="${px}" cy="${py}" r="7" fill="${colors[i]}" fill-opacity="0.25"/>`;
+    svg += `<circle cx="${px}" cy="${py}" r="4" fill="${colors[i]}" stroke="#F5F0E6" stroke-width="1.5"/>`;
+    svg += `<text x="${px}" y="${py-10}" text-anchor="middle" font-size="11" font-weight="bold" fill="${colors[i]}">${dimScores[d].toFixed(1)}</text>`;
+  });
+  
+  // 标签
+  const labelR = maxR + 22;
+  angles.forEach((a,i) => {
+    const lx = cx + labelR*Math.cos(a);
+    const ly = cy - labelR*Math.sin(a);
+    let anchor = "middle";
+    if(a > 0.2) anchor = "end";
+    else if(a < -0.2) anchor = "start";
+    svg += `<text x="${lx}" y="${ly}" text-anchor="${anchor}" font-size="12" font-weight="bold" fill="${colors[i]}">${labels[i]}</text>`;
+  });
+  
+  svg += `</svg>`;
+  document.getElementById('radarBox').innerHTML = svg;
+}
+
+function shareResult() {
+  const dims = ['T','D','B','X','Z'];
+  const labels = dimNames;
+  let text = "我的五维决策测评结果（满意解研究所）\n\n";
+  dims.forEach((d,i) => {
+    text += `${labels[i]}：${answers[d] !== undefined ? '已测' : '未测'}\n`;
+  });
+  text += "\n你也来测测：五维决策测评";
+  if(navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => alert('结果已复制到剪贴板'));
+  } else {
+    alert('分享功能需要HTTPS环境');
+  }
+}
+
+// V4.0·当场诊断摘要
+function generateQuickDiagnosis(dimScores) {
+  const dims = ['T','D','B','X','Z'];
+  const names = ['时间轴','可行域','身心流','信义观','直觉阈'];
+  const scores = dims.map(d => dimScores[d] || 3);
+  const avg = (scores.reduce((a,b)=>a+b,0)/5).toFixed(2);
+  const spread = (Math.max(...scores)-Math.min(...scores)).toFixed(2);
+  
+  // Find the two dimensions with biggest gap
+  const gaps = dims.map((d,i) => ({dim:d, name:names[i], score:scores[i]}));
+  gaps.sort((a,b) => Math.abs(a.score-avg) - Math.abs(b.score-avg));
+  const top2 = gaps.slice(-2).reverse();
+  
+  // Determine stage label (not score)
+  let stageLabel, stageClass, stageDetail;
+  const bx = dimScores['X'] || 3;  // 信义观
+  if(bx < 2.5) {
+    stageLabel = '腐蚀期';
+    stageClass = 'red';
+    stageDetail = '信义观得分低于2.5是你唯一需要关注的信号。在84案例中没有一对信义观<3的合伙人通过调解恢复。';
+  } else if(spread > 2.0) {
+    stageLabel = '胶着期';
+    stageClass = 'orange';
+    stageDetail = `你的团队在${top2[0].name}和${top2[1].name}两个维度分歧最大。这不是'谁对谁错'——这是两个人对'公司核心资产是什么'有不同的答案。`;
+  } else if(spread > 1.0) {
+    stageLabel = '摩擦期';
+    stageClass = 'yellow';
+    stageDetail = `你和你合伙人的节奏分歧主要在${top2[0].name}维度上。35%的硬科技团队都有同样的问题。这很正常——但你需要在分歧变成裂痕之前做一次对齐对话。`;
+  } else {
+    stageLabel = '健康期';
+    stageClass = 'green';
+    stageDetail = '你们的五个维度高度对齐。这是签章的最佳时机——最好的合同是在你们还相爱的时候签的。';
+  }
+  
+  let diagnosisHtml = '<div class="card" style="margin-top:16px;background:#C23B2204;border:1px solid var(--brand);border-radius:16px;padding:20px">';
+  diagnosisHtml += '<h3 style="color:var(--brand);font-size:16px;margin-bottom:12px">📊 你的团队关系阶段</h3>';
+  
+  // Stage badge - no score, just label
+  const stageColors = {red:'#C62828',orange:'#E65100',yellow:'#F9A825',green:'#2E7D32'};
+  diagnosisHtml += `<div style="text-align:center;margin:16px 0">`;
+  diagnosisHtml += `<div style="font-size:42px;font-weight:700;color:${stageColors[stageClass]}">${stageLabel}</div>`;
+  diagnosisHtml += `</div>`;
+  
+  // Key insight - not radar, just the two most important dimensions
+  diagnosisHtml += `<p style="font-size:14px;color:var(--text);line-height:1.6;margin-bottom:16px">${stageDetail}</p>`;
+  
+  // CTA - experience solving, not buying
+  diagnosisHtml += '<div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">';
+  diagnosisHtml += '<a href="thermometer.html" style="text-align:center;background:#C23B22;color:#F5F0E6;padding:10px;border-radius:10px;font-size:14px;text-decoration:none">🩺 30秒关系温度计（免费）</a>';
+  diagnosisHtml += '<p style="text-align:center;font-size:12px;color:var(--muted);margin:4px 0">做完温度计后把这个链接发给你的合伙人——这可能是你们今年最重要的对话。</p>';
+  diagnosisHtml += '</div></div>';
+  
+  document.getElementById('alerts').insertAdjacentHTML('beforeend', diagnosisHtml);
+}
+
+// V4.0·下载诊断数据JSON
+function downloadData() {
+  // 将assessment的answers转换为评分引擎紧凑版格式
+  const engineData = {"answers":{}};
+  const mapping = {
+    'T': ['A1','A2','A3'],
+    'D': ['B1','B2','B3'],
+    'B': ['C1','C2'],
+    'X': ['C3','C4'],
+    'Z': ['Z1','Z2','Z3']
+  };
+  // 从assessment的维度得分反推紧凑版字段
+  const dimQuestions = {};
+  questions.forEach(q => { const d = q.id.charAt(0); if(!dimQuestions[d]) dimQuestions[d]=[]; dimQuestions[d].push(q); });
+  for(const [dim, fields] of Object.entries(mapping)) {
+    if(dimQuestions[dim]) {
+      const qs = dimQuestions[dim];
+      for(let i=0; i<fields.length && i<qs.length; i++) {
+        engineData.answers[fields[i]] = answers[qs[i].id] || 3;
+      }
+    }
+  }
+  const blob = new Blob([JSON.stringify(engineData)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'my_diagnosis.json';
+  a.click();
+  alert('诊断数据已下载！\n\n运行: python3 scoring_engine_v3.0.py --json my_diagnosis.json\n或联系满意红帮你分析。');
+}
+
+function goToReport() {
+  const data = {
+    t: dimScores.T.toFixed(2),
+    d: dimScores.D.toFixed(2),
+    b: dimScores.B.toFixed(2),
+    x: dimScores.X.toFixed(2),
+    z: dimScores.Z.toFixed(2),
+    stage: document.querySelector('.stage-badge')?.textContent || ''
+  };
+  window.location.href = 'chemical-report.html#' + encodeURIComponent(JSON.stringify(data));
+}
+
+function restart() {
+  answers = {};
+  document.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+  document.querySelectorAll('[id^="next-"]').forEach(b => b.disabled = true);
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step-welcome').classList.add('active');
+  document.getElementById('heroSection').style.display = '';
+  document.getElementById('prog').style.width = '0%';
+}
+
+// 初始化
+buildQuestions();
+</script>
+
+<p style="margin-top:16px;font-size:11px;text-align:center;color:#4A4A4A;"><a href="privacy.html" style="color:#4A4A4A;">隐私政策</a> · <a href="terms.html" style="color:#4A4A4A;">用户协议</a></p>
+
+<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
+  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
+  <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
+    <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
+    <button onclick="showFeedbackText()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">💬</span>有建议</button>
+  </div>
+  <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
+  <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
+  <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
+  <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
+  <p style="font-size:10px;opacity:0.4;margin-top:8px;"><a href="go.html" style="color:inherit;">返回决策通道</a></p>
+</div>
+<script>
+(function(){
+  let page=location.pathname.split('/').pop()||'index';
+  let key='sri_fb_'+page;
+  let data=JSON.parse(localStorage.getItem(key)||'{}');
+  if(data.sent){document.getElementById('fbQuestion').textContent='感谢你的反馈！';document.getElementById('fbActions').style.display='none';}
+  let tally=JSON.parse(localStorage.getItem('sri_fb_tally_'+page)||'{"up":0,"text":0}');
+  if(tally.up+tally.text>0) document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  window.submitFeedback=function(type){
+    tally[type]=(tally[type]||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type=type;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbQuestion').textContent='感谢你的反馈！';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+  window.showFeedbackText=function(){
+    document.getElementById('fbText').style.display='block';
+    document.getElementById('fbSubmit').style.display='inline-block';
+  };
+  window.submitFeedbackText=function(){
+    let text=document.getElementById('fbText').value.trim();
+    if(!text)return;
+    tally.text=(tally.text||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type='text';data.text=text;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbText').style.display='none';
+    document.getElementById('fbSubmit').style.display='none';
+    document.getElementById('fbQuestion').textContent='收到！感谢你的建议。';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+})();
+</script>
+
+
+<div style="text-align:center;margin:12px 0;">
+  <button onclick="shareResult()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;color:#C23B22;cursor:pointer;font-size:13px;font-weight:600;">📤 分享你的结果</button>
+  <p id="shareDone" style="display:none;color:#4A8C5C;font-size:12px;margin-top:4px;">✅ 已生成分享卡片</p>
+</div>
+<script>
+function shareResult(){
+  let t=dimScores.T.toFixed(1),d=dimScores.D.toFixed(1),b=dimScores.B.toFixed(1),x=dimScores.X.toFixed(1),z=dimScores.Z.toFixed(1);
+  let stage=document.querySelector('.stage-badge')?.textContent||'';
+  let text=`我的五维决策画像\n⏰时间轴:${t} | 📐可行域:${d} | 🌊身心流:${b}\n🌳信义观:${x} | 🔥直觉阈:${z}\n📊阶段:${stage}\n\n你也来测一下：`;
+  let url=window.location.href.replace('assessment.html','go.html');
+  if(navigator.share){navigator.share({title:'五维决策自评',text,url}).catch(()=>{});}
+  else{navigator.clipboard.writeText(text+' '+url).then(()=>{document.getElementById('shareDone').style.display='block';setTimeout(()=>document.getElementById('shareDone').style.display='none',3000);});}
+}
+</script>
+<div style="max-width:560px;margin:32px auto 0;padding:16px;">
+<div style="background:#fff;border-radius:16px;padding:24px;text-align:center;border:2px solid #C23B22;">
+<h3 style="font-size:18px;color:#2A2A2A;margin-bottom:8px;">🎯 这就是你的决策画像</h3>
+<p style="font-size:13px;color:#6E6E6E;margin-bottom:12px;">保存或分享——下次回来看看变化</p>
+<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:12px 0;">
+<button onclick="copyResult()" style="padding:10px 22px;background:#C23B22;color:#fff;border:none;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;">📋 复制结果</button>
+<button onclick="shareResult()" style="padding:10px 22px;background:transparent;border:1.5px solid #C23B22;color:#C23B22;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;">📤 分享给合伙人</button>
+</div>
+<p id="copyMsg" style="display:none;color:#3D7A4F;font-size:12px;font-weight:600;">✅ 已复制！</p>
+<div style="margin-top:16px;padding-top:16px;border-top:1px solid #D4C5A0;display:flex;flex-direction:column;gap:8px;">
+<p style="font-size:12px;color:#6E6E6E;text-align:center;">下一步</p>
+<a href="thermometer.html" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#F5F0E6;border-radius:10px;text-decoration:none;color:#4A4A4A;font-size:13px;"><span style="font-size:20px;">🌡️</span><span style="font-weight:700;color:#2A2A2A;">关系温度计</span> · 30秒测信任度</a>
+<a href="knights.html" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#F5F0E6;border-radius:10px;text-decoration:none;color:#4A4A4A;font-size:13px;"><span style="font-size:20px;">⚠️</span><span style="font-weight:700;color:#2A2A2A;">四骑士自检</span> · 1分钟看预警</a>
+<a href="cards-play.html?deck=7" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#F5F0E6;border-radius:10px;text-decoration:none;color:#4A4A4A;font-size:13px;"><span style="font-size:20px;">🎴</span><span style="font-weight:700;color:#2A2A2A;">决策卡牌</span> · 场景模拟练习</a>
+<a href="account.html" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#F5F0E6;border-radius:10px;text-decoration:none;color:#4A4A4A;font-size:13px;"><span style="font-size:20px;">👤</span><span style="font-weight:700;color:#2A2A2A;">注册账户</span> · 解锁更多 + 追踪进度</a>
+</div></div></div>
+
+
+<script>
+(function(){
+  var toolName = location.pathname.split('/').pop().replace('.html','');
+  localStorage.setItem('sri_last_use_'+toolName, Date.now().toString());
+})();
+</script>
+
+<script>
+(function(){
+  var usageLog = JSON.parse(localStorage.getItem('sri_usage_log') || '[]');
+  var npsShown = localStorage.getItem('sri_nps_shown');
+  var toolCount = usageLog.length;
+  
+  if (toolCount >= 3 && !npsShown){
+    var nps = document.createElement('div');
+    nps.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid #C23B22;padding:16px;z-index:999;box-shadow:0 -4px 16px rgba(0,0,0,0.08);';
+    nps.innerHTML = '<div style="max-width:560px;margin:0 auto;text-align:center;">'+
+      '<p style="font-size:14px;font-weight:600;color:#2A2A2A;margin-bottom:6px;">你会推荐满意解给你的朋友吗？</p>'+
+      '<div style="display:flex;gap:8px;justify-content:center;margin:10px 0;">'+
+      Array.from({length:11}, (_,i) => '<button onclick="submitNPS('+i+')" style="width:32px;height:32px;border-radius:50%;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:11px;font-weight:600;">'+i+'</button>').join('')+
+      '</div>'+
+      '<p style="font-size:10px;color:#6E6E6E;">0=绝不推荐 · 10=一定推荐</p>'+
+      '</div>';
+    document.body.appendChild(nps);
+    
+    window.submitNPS = function(score){
+      localStorage.setItem('sri_nps_score', score.toString());
+      localStorage.setItem('sri_nps_shown', 'true');
+      nps.innerHTML = '<div style="max-width:560px;margin:0 auto;text-align:center;padding:12px;">'+
+        '<p style="font-size:14px;color:#3D7A4F;font-weight:600;">✅ 感谢！你的评分：'+score+'/10</p>'+
+        (score>=9?'<p style="font-size:13px;color:#4D4D4D;">很高兴能帮到你。<a href="account.html" style="color:#C23B22;font-weight:600;">邀请朋友 →</a></p>':
+         score>=7?'<p style="font-size:13px;color:#4D4D4D;">谢谢！我们会继续改进。</p>':
+         '<p style="font-size:13px;color:#4D4D4D;">抱歉没有达到你的期望。<a href="mailto:manyi_hong@sina.com" style="color:#C23B22;">告诉我们哪里可以改进 →</a></p>')+
+        '<button onclick="this.parentElement.parentElement.remove()" style="padding:4px 12px;margin-top:8px;background:transparent;border:1px solid #D4C5A0;border-radius:12px;cursor:pointer;font-size:11px;">关闭</button>'+
+        '</div>';
+    };
+  }
+})();
+</script>
+<script src="flywheel-engine.js"></script>
+</body>
+</html>

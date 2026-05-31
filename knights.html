@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>镜·警兆 | 四骑士自检 | 满意解研究所</title>
+  <meta name="description" content="满意解研究所 · 镜·警兆 | 四骑士自检 | 满意解研究所">
+<style>
+  :root { --sri-red:#C23B22; --sri-gold:#B8860B; --sri-bg:#F5F0E6; --text:#4A4A4A; --title:#2A2A2A; --border:#D4C5A0; }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif; background:var(--sri-bg); color:var(--text); min-height:100vh; }
+  .hero { background:linear-gradient(135deg,var(--sri-red),var(--title)); color:#F5F0E6; padding:36px 20px 28px; text-align:center; }
+  .hero h1 { font-size:21px; font-weight:700; }
+  .hero p { font-size:12px; opacity:0.85; }
+  .main { max-width:520px; margin:0 auto; padding:16px; }
+  
+  .intro { background:#fff; border-radius:14px; padding:20px; margin-bottom:16px; }
+  .intro h3 { font-size:16px; color:var(--title); margin-bottom:8px; }
+  .intro p { font-size:13px; line-height:1.8; }
+
+  .knight { background:#fff; border-radius:12px; padding:16px; margin-bottom:10px; border-left:4px solid var(--border); cursor:pointer; transition:0.15s; }
+  .knight.active { border-color:var(--sri-red); }
+  .knight .k-header { display:flex; align-items:center; gap:8px; }
+  .knight .k-icon { font-size:28px; }
+  .knight .k-name { font-size:15px; font-weight:700; color:var(--title); }
+  .knight .k-desc { font-size:12px; color:var(--text); margin-top:4px; }
+  .knight .k-check { margin-top:8px; display:none; }
+  .knight.active .k-check { display:block; }
+
+  .check-item { display:flex; align-items:center; gap:8px; padding:6px 0; cursor:pointer; font-size:13px; }
+  .check-box { min-width:20px; height:20px; border:1.5px solid var(--border); border-radius:4px; }
+  .check-item.checked .check-box { background:var(--sri-red); border-color:var(--sri-red); position:relative; }
+  .check-item.checked .check-box::after { content:'✓'; color:#fff; font-size:12px; position:absolute; top:-3px; left:3px; }
+
+  .result { display:none; background:#fff; border-radius:14px; padding:24px; border:2px solid var(--sri-red); text-align:center; margin-top:16px; animation:fadeIn 0.4s; }
+  .result.show { display:block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .result h2 { color:var(--title); margin-bottom:10px; }
+  .result .level-badge { display:inline-block; padding:8px 24px; border-radius:14px; font-size:18px; font-weight:700; margin:8px 0; }
+  .level-green { background:rgba(74,140,92,0.12); color:#4A8C5C; }
+  .level-amber { background:rgba(184,134,11,0.12); color:#B8860B; }
+  .level-red { background:rgba(194,59,34,0.12); color:var(--sri-red); }
+
+  .btn { display:inline-block; padding:10px 22px; border-radius:16px; font-size:13px; font-weight:600; cursor:pointer; border:none; text-decoration:none; }
+  .btn-primary { background:var(--sri-red); color:#F5F0E6; }
+  .btn-outline { background:transparent; border:1.5px solid var(--sri-red); color:var(--sri-red); }
+  .footer { text-align:center; padding:24px 16px 40px; font-size:11px; color:#999; }
+  .footer a { color:var(--sri-red); text-decoration:none; }
+</style>
+<link rel="stylesheet" href="vi_quick_ref.css">
+</head>
+<script>
+// 授权验证 - 满意解研究所
+(function(){
+  // Public pages - no auth needed
+  var publicPages = ['go.html','index.html','about.html','privacy.html','terms.html','symbols.html',
+    'creation.html','stars.html','roots.html','wulu.html','qijin.html','wings.html','eyes.html',
+    '54days.html','fails.html','liang.html','treasure.html','farewell.html',
+    'cases.html','tracks.html','lineage.html','whitepaper.html','quotes.html',
+    'flywheel.html','fw-','bluearmy.html','opensource.html','hibernate.html','life.html','newcomer.html',
+    'duanwei.html','bigrich.html','game-','blood-','media-','skill-','university.html',
+    'report-demo.html','radar.html','chemical-report.html','proposal.html','gate.html',
+    'miniapp-preview.html','cards.html'];
+  
+  var page = window.location.pathname.split('/').pop();
+  
+  // Check if this is a public page
+  for (var i=0; i<publicPages.length; i++) {
+    if (page === publicPages[i] || (publicPages[i].endsWith('-') && page.startsWith(publicPages[i]))) {
+      return; // Public page - no auth needed
+    }
+  }
+  
+  // Protected page - check auth
+  var auth = JSON.parse(localStorage.getItem('sri_auth') || '{}');
+  if (!auth.valid || new Date().getTime() >= auth.expires) {
+    // Not authenticated - redirect to gate
+    var target = page;
+    var productName = page.replace('.html','');
+    window.location.href = 'gate.html?to=' + encodeURIComponent(target) + '&p=' + encodeURIComponent(productName);
+  }
+})();
+</script>
+
+<body>
+<div class="hero"><h1>🪞 镜·警兆</h1><p>Gottman四骑士·合伙人关系预警</p></div>
+<div class="main">
+  <div class="intro">
+    <h3>四骑士是什么？</h3>
+    <p>Gottman花了40年研究关系解体——发现可以预测91%的离婚率。<strong>同样的四个信号，在合伙人关系中同样精准。</strong></p>
+    <p style="margin-top:8px;">它们出现的顺序是：<strong>批评→蔑视→防御→冷漠</strong>。每往前走一步，修复就越难。大部分人感知到问题的时候——已经走到第三步了。</p>
+  </div>
+
+  <div class="knight" onclick="toggleKnight(this)" id="k1">
+    <div class="k-header"><span class="k-icon">🗣️</span><div><div class="k-name">第一骑士：批评</div><div class="k-desc">不是抱怨具体行为——是攻击对方的人格</div></div></div>
+    <div class="k-check">
+      <div class="check-item" onclick="event.stopPropagation();toggleCheck(this)"><span class="check-box"></span>我对他/她说"你从来不..."或"你总是..."</div>
+      <div class="check-item" onclick="event.stopPropagation();toggleCheck(this)"><span class="check-box"></span>讨论问题时，我的第一反应是说"你的问题是..."</div>
+      <div class="check-item" onclick="event.stopPropagation();toggleCheck(this)"><span class="check-box"></span>我会在心里给他/她贴标签（"他就这样""她改不了"）</div>
+    </div>
+  </div>
+
+  <div class="knight" onclick="toggleKnight(this)" id="k2">
+    <div class="k-header"><span class="k-icon">😤</span><div><div class="k-name">第二骑士：蔑视</div><div class="k-desc">99%准确率的关系杀手——不是批评，是否定</div></div></div>
+    <div class="k-check">
+      <div class="check-item" onclick="event.stopPropagation();toggleCheck(this)"><span class="check-box"></span>我和别人吐槽过他/她（不是事情，是人）</div>
+      <div class="check-item" onclick="event.stopPropagation();toggleCheck(this)"><span class="check-box"></span>我翻过白眼或冷笑——即使没有说出来</div>
+      <div class="check-item" onclick="event.stopPropagation();toggleCheck(this)"><span class="check-box"></span>我感觉"他/她就这水平，没什么好说的"</div>
+    </div>
+  </div>
+
+  <div class="knight" onclick="toggleKnight(this)" id="k3">
+    <div class="k-header"><span class="k-icon">🛡️</span><div><div class="k-name">第三骑士：防御</div><div class="k-desc">不是解释——是在对方的话到达之前就筑墙</div></div></div>
+    <div class="k-check">
+      <div class="check-item" onclick="event.stopPropagation();toggleCheck(this)"><span class="check-box"></span>他/她一提问题，我立刻想"但你也..."</div>
+      <div class="check-item" onclick="event.stopPropagation();toggleCheck(this)"><span class="check-box"></span>我已经预判了他/她会说什么——并且准备了反驳</div>
+      <div class="check-item" onclick="event.stopPropagation();toggleCheck(this)"><span class="check-box"></span>会议中我更多在想"怎么保护自己"而非"怎么解决问题"</div>
+    </div>
+  </div>
+
+  <div class="knight" onclick="toggleKnight(this)" id="k4">
+    <div class="k-header"><span class="k-icon">💤</span><div><div class="k-name">第四骑士：冷漠</div><div class="k-desc">不是沉默——是不再觉得对方值得回应</div></div></div>
+    <div class="k-check">
+      <div class="check-item" onclick="event.stopPropagation();toggleCheck(this)"><span class="check-box"></span>我们不再争论了——因为我觉得争论也没有用</div>
+      <div class="check-item" onclick="event.stopPropagation();toggleCheck(this)"><span class="check-box"></span>我已经一个星期没有主动找他/她说话</div>
+      <div class="check-item" onclick="event.stopPropagation();toggleCheck(this)"><span class="check-box"></span>我在心里已经开始想"如果换一个合伙人..."</div>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:16px;">
+    <button class="btn btn-primary" onclick="showResult()">查看预警结果</button>
+    <button class="btn btn-outline" onclick="resetAll()">重新自检</button>
+  </div>
+  <div class="result" id="resultBox"></div>
+</div>
+<div class="footer"><p><a href="go.html">← 返回决策通道</a></p><p style="margin-top:4px;font-size:10px;">满意解研究所 · 镜·警兆 · 水族·观自在·Gottman四骑士</p></div>
+
+<script>
+function toggleKnight(el) { el.classList.toggle('active'); }
+function toggleCheck(el) { el.classList.toggle('checked'); event.stopPropagation(); }
+function showResult() {
+  let counts = [0,0,0,0]; // 4 knights
+  for (let i=1;i<=4;i++) {
+    let knight = document.getElementById('k'+i);
+    counts[i-1] = knight.querySelectorAll('.check-item.checked').length;
+  }
+  let total = counts.reduce((a,b)=>a+b,0);
+  let maxKnight = counts.indexOf(Math.max(...counts));
+  let knightNames = ['批评','蔑视','防御','冷漠'];
+  let knightWords = ['你需要注意开口的方式——用"I feel"替代"You never"','这是最危险的信号。91%的关系终结，蔑视是头号预测因子。','你已经在筑墙了。停下来——让对方的话先落地，再回应。','你已经走到了最后一步。冷漠不是平静——是放弃了。'];
+  
+  let level = total>=9 ? 'red' : total>=5 ? 'amber' : 'green';
+  let levelText = total>=9 ? '🔴 高风险预警' : total>=5 ? '🟡 中风险预警' : '🟢 低风险';
+  let className = level==='red'?'level-red':level==='amber'?'level-amber':'level-green';
+  
+  let knightBars = '';
+  for (let i=0;i<4;i++) {
+    let pct = Math.min(counts[i]/3*100,100);
+    knightBars += `<div style="margin:6px 0;font-size:12px;"><strong>${['🗣️批评','😤蔑视','🛡️防御','💤冷漠'][i]}</strong> ${counts[i]}/3 
+    <div style="background:#D4C5A0;height:4px;border-radius:2px;margin-top:2px;"><div style="background:${counts[i]>=2?'var(--sri-red)':'var(--sri-gold)'};height:100%;width:${pct}%;border-radius:2px;transition:width 0.5s;"></div></div></div>`;
+  }
+
+  let html = `<h2>预警报告</h2><div class="level-badge ${className}">${levelText}</div><p style="font-size:13px;">Gottman四骑士信号：共 ${total}/12 个信号触发</p>
+  <p style="font-size:13px;margin-top:8px;">${totals>=9?'你需要认真面对。四骑士的每一步都会让修复更难。这些信号不是今天才出现的——你只是今天才正视它们。':total>=5?'有一些值得关注的信号。好消息是：你看到了。大多数人走到冷漠那一步才回头。':"你们的合伙关系目前没有严重的四骑士信号。但Gottman说：不是'没有信号'——是'今天没有'。保持觉察比任何工具都重要。"}</p>
+  ${knightBars}
+  <p style="margin-top:12px;font-size:13px;color:var(--sri-red);font-weight:600;">最需关注的：${knightNames[maxKnight]}</p>
+  <p style="font-size:12px;color:var(--text);">${knightWords[maxKnight]}</p>
+  <p style="margin-top:12px;font-size:10px;opacity:0.5;">Gottman·婚姻实验室·四骑士预测模型（91%准确率）</p>
+  <div style="margin-top:16px;"><a class="btn btn-primary" href="thermometer.html">去做温度计</a> <a class="btn btn-outline" href="assessment.html">做五维自评</a></div>`;
+  
+  document.getElementById('resultBox').innerHTML = html;
+  document.getElementById('resultBox').classList.add('show');
+  window.scrollTo(0,0);
+}
+function resetAll() {
+  document.querySelectorAll('.check-item').forEach(el=>el.classList.remove('checked'));
+  document.querySelectorAll('.knight').forEach(el=>el.classList.remove('active'));
+  document.getElementById('resultBox').classList.remove('show');
+}
+</script>
+
+<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
+  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
+  <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
+    <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
+    <button onclick="showFeedbackText()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">💬</span>有建议</button>
+  </div>
+  <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
+  <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
+  <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
+  <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
+  <p style="font-size:10px;opacity:0.4;margin-top:8px;"><a href="go.html" style="color:inherit;">返回决策通道</a></p>
+</div>
+<script>
+(function(){
+  let page=location.pathname.split('/').pop()||'index';
+  let key='sri_fb_'+page;
+  let data=JSON.parse(localStorage.getItem(key)||'{}');
+  if(data.sent){document.getElementById('fbQuestion').textContent='感谢你的反馈！';document.getElementById('fbActions').style.display='none';}
+  let tally=JSON.parse(localStorage.getItem('sri_fb_tally_'+page)||'{"up":0,"text":0}');
+  if(tally.up+tally.text>0) document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  window.submitFeedback=function(type){
+    tally[type]=(tally[type]||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type=type;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbQuestion').textContent='感谢你的反馈！';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+  window.showFeedbackText=function(){
+    document.getElementById('fbText').style.display='block';
+    document.getElementById('fbSubmit').style.display='inline-block';
+  };
+  window.submitFeedbackText=function(){
+    let text=document.getElementById('fbText').value.trim();
+    if(!text)return;
+    tally.text=(tally.text||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type='text';data.text=text;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbText').style.display='none';
+    document.getElementById('fbSubmit').style.display='none';
+    document.getElementById('fbQuestion').textContent='收到！感谢你的建议。';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+})();
+</script>
+
+
+<div style="max-width:560px;margin:32px auto 0;padding:16px;">
+<div style="background:#fff;border-radius:16px;padding:24px;text-align:center;border:2px solid #C23B22;">
+<h3 style="font-size:18px;color:#2A2A2A;margin-bottom:8px;">🎯 这就是你的决策画像</h3>
+<p style="font-size:13px;color:#6E6E6E;margin-bottom:12px;">保存或分享——下次回来看看变化</p>
+<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:12px 0;">
+<button onclick="copyResult()" style="padding:10px 22px;background:#C23B22;color:#fff;border:none;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;">📋 复制结果</button>
+<button onclick="shareResult()" style="padding:10px 22px;background:transparent;border:1.5px solid #C23B22;color:#C23B22;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;">📤 分享给合伙人</button>
+</div>
+<p id="copyMsg" style="display:none;color:#3D7A4F;font-size:12px;font-weight:600;">✅ 已复制！</p>
+<div style="margin-top:16px;padding-top:16px;border-top:1px solid #D4C5A0;display:flex;flex-direction:column;gap:8px;">
+<p style="font-size:12px;color:#6E6E6E;text-align:center;">下一步</p>
+<a href="thermometer.html" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#F5F0E6;border-radius:10px;text-decoration:none;color:#4A4A4A;font-size:13px;"><span style="font-size:20px;">🌡️</span><span style="font-weight:700;color:#2A2A2A;">关系温度计</span> · 30秒测信任度</a>
+<a href="knights.html" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#F5F0E6;border-radius:10px;text-decoration:none;color:#4A4A4A;font-size:13px;"><span style="font-size:20px;">⚠️</span><span style="font-weight:700;color:#2A2A2A;">四骑士自检</span> · 1分钟看预警</a>
+<a href="cards-play.html?deck=7" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#F5F0E6;border-radius:10px;text-decoration:none;color:#4A4A4A;font-size:13px;"><span style="font-size:20px;">🎴</span><span style="font-weight:700;color:#2A2A2A;">决策卡牌</span> · 场景模拟练习</a>
+<a href="account.html" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#F5F0E6;border-radius:10px;text-decoration:none;color:#4A4A4A;font-size:13px;"><span style="font-size:20px;">👤</span><span style="font-weight:700;color:#2A2A2A;">注册账户</span> · 解锁更多 + 追踪进度</a>
+</div></div></div>
+
+
+<script>
+(function(){
+  var toolName = location.pathname.split('/').pop().replace('.html','');
+  localStorage.setItem('sri_last_use_'+toolName, Date.now().toString());
+})();
+</script>
+
+<script>
+(function(){
+  var usageLog = JSON.parse(localStorage.getItem('sri_usage_log') || '[]');
+  var npsShown = localStorage.getItem('sri_nps_shown');
+  var toolCount = usageLog.length;
+  
+  if (toolCount >= 3 && !npsShown){
+    var nps = document.createElement('div');
+    nps.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid #C23B22;padding:16px;z-index:999;box-shadow:0 -4px 16px rgba(0,0,0,0.08);';
+    nps.innerHTML = '<div style="max-width:560px;margin:0 auto;text-align:center;">'+
+      '<p style="font-size:14px;font-weight:600;color:#2A2A2A;margin-bottom:6px;">你会推荐满意解给你的朋友吗？</p>'+
+      '<div style="display:flex;gap:8px;justify-content:center;margin:10px 0;">'+
+      Array.from({length:11}, (_,i) => '<button onclick="submitNPS('+i+')" style="width:32px;height:32px;border-radius:50%;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:11px;font-weight:600;">'+i+'</button>').join('')+
+      '</div>'+
+      '<p style="font-size:10px;color:#6E6E6E;">0=绝不推荐 · 10=一定推荐</p>'+
+      '</div>';
+    document.body.appendChild(nps);
+    
+    window.submitNPS = function(score){
+      localStorage.setItem('sri_nps_score', score.toString());
+      localStorage.setItem('sri_nps_shown', 'true');
+      nps.innerHTML = '<div style="max-width:560px;margin:0 auto;text-align:center;padding:12px;">'+
+        '<p style="font-size:14px;color:#3D7A4F;font-weight:600;">✅ 感谢！你的评分：'+score+'/10</p>'+
+        (score>=9?'<p style="font-size:13px;color:#4D4D4D;">很高兴能帮到你。<a href="account.html" style="color:#C23B22;font-weight:600;">邀请朋友 →</a></p>':
+         score>=7?'<p style="font-size:13px;color:#4D4D4D;">谢谢！我们会继续改进。</p>':
+         '<p style="font-size:13px;color:#4D4D4D;">抱歉没有达到你的期望。<a href="mailto:manyi_hong@sina.com" style="color:#C23B22;">告诉我们哪里可以改进 →</a></p>')+
+        '<button onclick="this.parentElement.parentElement.remove()" style="padding:4px 12px;margin-top:8px;background:transparent;border:1px solid #D4C5A0;border-radius:12px;cursor:pointer;font-size:11px;">关闭</button>'+
+        '</div>';
+    };
+  }
+})();
+</script>
+<script src="flywheel-engine.js"></script>
+</body>
+</html>
