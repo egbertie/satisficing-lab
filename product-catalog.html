@@ -82,6 +82,14 @@ td a:hover{text-decoration:underline}
       <option value="llm_desc">LLM评分 ↓</option>
       <option value="name_asc">名称 A-Z</option>
     </select>
+    <select id="psychoFilter" onchange="render()">
+      <option value="全部">心理类型:全部</option>
+      <option value="镜子">🔍 镜子</option>
+      <option value="翻译">🤝 翻译</option>
+      <option value="地图">🗺️ 地图</option>
+      <option value="解药">💊 解药</option>
+      <option value="灯塔">🌟 灯塔</option>
+    </select>
   </div>
   <div class="filters" id="filters"></div>
   <div class="table-wrap">
@@ -124,6 +132,8 @@ function load(){
         desc: (p.description||'').substring(0,80),
         url: p.url||'',
         confidence: p.quality_confidence||'',
+        psycho_type: p.psycho_type||'地图',
+        resonance_score: p.resonance_score||0,
       };
     });
     render();
@@ -135,8 +145,10 @@ function load(){
 function render(){
   var q=document.getElementById('search').value.toLowerCase();
   SORT=document.getElementById('sortBy').value;
+  var psychoFilt=(document.getElementById('psychoFilter')||{}).value||'全部';
   var filtered=ALL.filter(function(p){
     if(FILT!=='全部' && p.family!==FILT) return false;
+    if(psychoFilt!=='全部' && p.psycho_type!==psychoFilt) return false;
     if(q && p.name.toLowerCase().indexOf(q)===-1 && (p.desc||'').toLowerCase().indexOf(q)===-1 && (p.url||'').toLowerCase().indexOf(q)===-1 && (p.family||'').toLowerCase().indexOf(q)===-1 && (p.status||'').toLowerCase().indexOf(q)===-1) return false;
     return true;
   });
