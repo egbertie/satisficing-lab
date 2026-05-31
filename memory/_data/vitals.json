@@ -1,22 +1,51 @@
 {
-  "last_scan": "2026-05-31T12:34:00+08:00",
+  "last_scan": "2026-05-31T18:34:00+08:00",
   "health": "warning",
   "issues": 4,
   "known_findings": [
-    {"id": "event_target", "status": "recurring", "count": 1, "trend": "down"},
-    {"id": "crypto_subtle", "status": "recurring", "count": 3, "trend": "down"},
-    {"id": "sha256", "status": "recurring", "count": 4, "trend": "stable"},
-    {"id": "backup_freshness", "status": "recurring", "note": "凌晨时段正常未触发"},
-    {"id": "files_index_no_category", "status": "new", "severity": "high", "note": "files_index.json 所有条目丢失 category 字段，需修复 pipeline Stage 2 写入逻辑"},
-    {"id": "product_discovery_zero", "status": "new", "severity": "high", "note": "pipeline Stage 3 产品发现返回 0，与 entities_index 315 产品矛盾，dashboard_seed_v2.json 已从 entities_index 重建恢复"}
+    {
+      "id": "event_target",
+      "status": "recurring",
+      "count": 1,
+      "trend": "down"
+    },
+    {
+      "id": "crypto_subtle",
+      "status": "recurring",
+      "count": 3,
+      "trend": "down"
+    },
+    {
+      "id": "sha256",
+      "status": "recurring",
+      "count": 4,
+      "trend": "stable"
+    },
+    {
+      "id": "backup_freshness",
+      "status": "recurring",
+      "note": "凌晨时段正常未触发"
+    },
+    {
+      "id": "files_index_no_category",
+      "status": "new",
+      "severity": "high",
+      "note": "files_index.json 所有条目丢失 category 字段，需修复 pipeline Stage 2 写入逻辑"
+    },
+    {
+      "id": "product_discovery_zero",
+      "status": "new",
+      "severity": "high",
+      "note": "pipeline Stage 3 产品发现返回 0，与 entities_index 315 产品矛盾，dashboard_seed_v2.json 已从 entities_index 重建恢复"
+    }
   ],
   "delta_since_last": {
-    "files_total": 15850,
-    "files_changed": -163,
+    "files_total": 15886,
+    "files_changed": 36,
     "new_products": 0,
     "new_customers": 0,
     "new_conversations": 0,
-    "new_connections": 2,
+    "new_connections": 0,
     "new_scripts": 0,
     "entities_reindexed": false
   },
@@ -24,6 +53,6 @@
   "customer_count": 5,
   "connections": 16,
   "git_clean": null,
-  "notes": "12:34 scan — file count dropped to 15850 (-163). Product discovery returned 0 (regression, restored from entities_index as 315). Knowledge connections 16 (+2 from 06:34). Customers stable at 5. Known recurring 4 findings + 2 high-severity issues (files_index_no_category, product_discovery_zero).",
+  "notes": "18:34 scan — files 15886 (+36 from 12:34). Product discovery still 0 (known pipeline bug, restored from entities_index: 315). Knowledge connections 16 (no change). Customers stable at 5. All known issues persist (files_index_no_category, product_discovery_zero). Quiet period.",
   "fix_applied": "dashboard_seed_v2.json rebuilt from entities_index.json — 315 products restored"
 }
