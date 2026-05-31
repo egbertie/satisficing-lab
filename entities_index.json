@@ -7,7 +7,7 @@
       "customers": 5,
       "tasks": 195,
       "avatars": 22,
-      "documents": 75,
+      "documents": 76,
       "decisions": 35,
       "milestones": 9,
       "terms": 74,
@@ -32,8 +32,8 @@
       "cities": 31,
       "knowledge_pipelines": 5
     },
-    "updated": "2026-05-31T17:56:39.414163+08:00",
-    "knowledge_graph_density": 100.0,
+    "updated": "2026-05-31T22:43:54.089440+08:00",
+    "knowledge_graph_density": 12.7,
     "living_rules_status": {
       "active": 41,
       "dormant": 6,
@@ -44,8 +44,8 @@
       "rules_with_triggers": 48,
       "rules_with_feedback": 48,
       "rules_with_adaptation": 48,
-      "cron_connected": 11,
-      "fully_alive": 40
+      "cron_connected": 5,
+      "fully_alive": 41
     },
     "product_families": {
       "镜": 12,
@@ -58,7 +58,7 @@
       "未知": 3
     },
     "new_products_from_scan": 158,
-    "knowledge_graph_density_note": "强12549+中5=12554/12556=100.0% (auto-updated 2026-05-31 10:43)",
+    "knowledge_graph_density_note": "强12456+中98+弱2=12556/12556=12.7% (auto-updated 2026-05-31 22:43)",
     "auto_rule_connections": 1830,
     "corrections": [
       "2026-05-30: 知识图谱密度99.9%→43.9%",
@@ -22183,9 +22183,10 @@
     },
     "connection_stats": {
       "total": 12556,
-      "strong": 826,
-      "medium": 11728,
-      "weak": 2
+      "strong": 12456,
+      "medium": 98,
+      "weak": 2,
+      "updated": "2026-05-31T22:43:54.089440+08:00"
     },
     "auto_update_log": [
       {
@@ -22218,6 +22219,48 @@
         "product_families_diff": [
           "未知: 0→3"
         ]
+      },
+      {
+        "timestamp": "2026-05-31T22:43:08.325676+08:00",
+        "version": "3.0",
+        "changes": {
+          "documents": {
+            "old": 75,
+            "new": 76
+          },
+          "knowledge_pipelines": {
+            "old": 5,
+            "new": 0
+          }
+        },
+        "anomalies": [
+          "⚠️ knowledge_pipelines: 5→0 (↓100.0%)"
+        ],
+        "density": 12.7,
+        "product_families_changed": false
+      },
+      {
+        "timestamp": "2026-05-31T22:43:42.329027+08:00",
+        "version": "3.0",
+        "changes": {
+          "knowledge_pipelines": {
+            "old": 0,
+            "new": 5
+          }
+        },
+        "anomalies": [
+          "⚠️ knowledge_pipelines: 0→5 (new)"
+        ],
+        "density": 12.7,
+        "product_families_changed": false
+      },
+      {
+        "timestamp": "2026-05-31T22:43:54.089440+08:00",
+        "version": "3.0",
+        "changes": {},
+        "anomalies": [],
+        "density": 12.7,
+        "product_families_changed": false
       }
     ],
     "total_entities": 13242,
