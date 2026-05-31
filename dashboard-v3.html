@@ -656,30 +656,55 @@ document.getElementById('cmp-overlay').addEventListener('click', function(e){ if
    面板 3: 待办任务 (来自 open_tasks_audit.json)
    ================================================================ */
 function renderTasks(filt) {
-  taskFilt = filt;
+  taskFilt = filt || '全部';
   var tasks = (EIDX.tasks || []).slice();
   var allTasks = tasks;
-  if (!allTasks.length) {
-    document.getElementById('tab-tasks').innerHTML = '<div class="loading">任务数据加载中...</div>';
-    return;
-  }
+  var ts = (EIDX.meta || {}).task_stats || {};
 
-  var cnts = {'全部':allTasks.length, P0:0, P1:0, P2:0};
-  for (var i=0; i<allTasks.length; i++) cnts[allTasks[i].priority] = (cnts[allTasks[i].priority]||0)+1;
+  var h = '';
+  // 统计卡片
+  h += '<div class="stat-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:12px">';
+  h += '<div class="stat-card"><div class="stat-num">'+(ts.total||allTasks.length)+'</div><div class="stat-label">📋 总任务</div></div>';
+  h += '<div class="stat-card"><div class="stat-num" style="color:#3D7A4F">'+(ts.completed||0)+'</div><div class="stat-label">✅ 已完成</div></div>';
+  h += '<div class="stat-card"><div class="stat-num" style="color:#C2780A">'+(ts.in_progress||0)+'</div><div class="stat-label">⏳ 进行中</div></div>';
+  h += '<div class="stat-card"><div class="stat-num" style="color:var(--accent-red)">'+(ts.pending||0)+'</div><div class="stat-label">⬜ 待执行</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+(ts.p0||0)+'</div><div class="stat-label">🔴 P0</div></div>';
+  h += '</div>';
 
-  var h = '<div class="task-filters">';
-  var fos = ['全部','P0','P1','P2'];
-  for (var i=0; i<fos.length; i++) {
-    h += '<button class="family-filt'+(fos[i]===taskFilt?' active':'')+'" onclick="renderTasks(\''+fos[i]+'\',this)">'+fos[i]+' ('+(cnts[fos[i]]||0)+')</button>';
+  // 筛选按钮
+  var filts = ['全部','P0','P1','P2','已完成','进行中','待执行'];
+  var cntAll = {'全部':allTasks.length, P0:(ts.p0||0), P1:(ts.p1||0), P2:(ts.p2||0), '已完成':(ts.completed||0), '进行中':(ts.in_progress||0), '待执行':(ts.pending||0)};
+  h += '<div class="task-filters">';
+  for (var i=0; i<filts.length; i++) {
+    var f = filts[i];
+    h += '<button class="btn-outline'+(f===taskFilt?' active':'')+'" onclick="renderTasks(\''+f+'\')" style="margin:2px;font-size:0.75em;padding:4px 12px">'+f+' ('+(cntAll[f]||0)+')</button>';
   }
   h += '</div>';
 
-for (var i=0; i<allTasks.length; i++) {
-    var it = allTasks[i];
-    if (taskFilt!=='全部' && it.priority!==taskFilt) continue;
-    var pc = it.priority.toLowerCase();
-    h += '<div class="task-item '+pc+'"><span class="task-badge '+pc+'">'+it.priority+'</span><div class="task-body"><div class="task-title">'+escHtml(it.title)+'</div><div class="task-desc">状态: '+escHtml(it.status||'待处理')+' · 来源: '+escHtml(it.source||'')+'</div></div></div>';
+  // 筛选
+  if (taskFilt==='P0') tasks = tasks.filter(function(t){var p=t.priority||'';return p.indexOf('P0')===0;});
+  else if (taskFilt==='P1') tasks = tasks.filter(function(t){var p=t.priority||'';return p.indexOf('P1')===0;});
+  else if (taskFilt==='P2') tasks = tasks.filter(function(t){var p=t.priority||'';return p.indexOf('P2')===0;});
+  else if (taskFilt==='已完成') tasks = tasks.filter(function(t){var s=t.status||'';return s.indexOf('已完成')>=0;});
+  else if (taskFilt==='进行中') tasks = tasks.filter(function(t){var s=t.status||'';return s.indexOf('进行中')>=0;});
+  else if (taskFilt==='待执行') tasks = tasks.filter(function(t){var s=t.status||'';return s.indexOf('待执行')>=0||s.indexOf('待启动')>=0;});
+
+  // 表格
+  h += '<div style="overflow-x:auto;margin-top:8px"><table class="data-table" style="width:100%;font-size:0.78em">';
+  h += '<thead><tr><th>任务名</th><th>优先级</th><th>状态</th><th>负责人</th><th>截止</th></tr></thead><tbody>';
+  for (var i=0; i<tasks.length; i++) {
+    var it = tasks[i];
+    var pc = (it.priority||'').indexOf('P0')===0 ? 'p0' : ((it.priority||'').indexOf('P1')===0 ? 'p1' : 'p2');
+    var sc = (it.status||'').indexOf('已完成')>=0 ? '#3D7A4F' : ((it.status||'').indexOf('进行中')>=0 ? '#C2780A' : 'var(--accent-red)');
+    h += '<tr><td style="font-weight:500">'+escHtml(it.name||it.title)+'</td>';
+    h += '<td><span class="family-badge '+pc+'">'+escHtml(it.priority)+'</span></td>';
+    h += '<td style="color:'+sc+';font-size:0.8em">'+escHtml(it.status||'?')+'</td>';
+    h += '<td style="font-size:0.75em;color:var(--ink-lighter)">'+escHtml(it.assignee||'')+'</td>';
+    h += '<td style="font-size:0.7em">'+escHtml(it.deadline||'')+'</td></tr>';
   }
+  h += '</tbody></table></div>';
+  h += '<div style="font-size:0.7em;color:var(--ink-lighter);margin-top:6px">显示 '+tasks.length+' / '+allTasks.length+' 条任务</div>';
+
   document.getElementById('tab-tasks').innerHTML = h;
 }
 
