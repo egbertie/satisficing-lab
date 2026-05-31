@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>满意解研究所</title>
 <style>
 :root {
@@ -10,48 +10,260 @@
   --ink: #4A3728;
   --ink-light: #8B7355;
   --ink-lighter: #B8A898;
-  --accent-red: #C23B22;
-  --accent-gold: #B8860B;
+  --accent: #C23B22;
+  --gold: #B8860B;
   --border: #E0D5C0;
+  --card: #FFFFFF;
 }
 * { box-sizing:border-box; margin:0; padding:0; }
 body {
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans SC",sans-serif;
-  background:var(--bg); color:var(--ink); min-height:100vh;
-  display:flex; align-items:center; justify-content:center;
-  -webkit-tap-highlight-color:transparent;
+  background:var(--bg); color:var(--ink); min-height:100vh; line-height:1.6;
 }
-.gate {
-  display:flex; flex-direction:column; align-items:center;
-  padding:32px 20px; max-width:320px; width:100%;
+
+/* Header */
+.header {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+  position: sticky; top: 0; z-index: 10;
+  box-shadow: 0 1px 4px rgba(74,55,40,0.04);
 }
-.logo {
-  width:88px; height:88px; background:var(--accent-red);
-  color:#fff; border-radius:20px; display:flex;
-  align-items:center; justify-content:center;
-  font-size:44px; font-weight:700; margin-bottom:20px;
-  box-shadow: 0 4px 24px rgba(194,59,34,0.25);
+.header-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
 }
-h1 { font-size:1.6em; margin-bottom:4px; }
-.subtitle { color:var(--ink-light); font-size:0.9em; margin-bottom:28px; }
-button {
-  width:100%; padding:12px; background:var(--accent-red); color:#fff;
-  border:none; border-radius:8px; font-size:1em; cursor:pointer;
-  font-weight:500; transition:opacity 0.2s; -webkit-appearance:none;
+.brand { display:flex; align-items:center; gap:10px; }
+.brand .logo {
+  width: 36px; height: 36px; background: var(--accent);
+  color: #fff; border-radius: 8px; display:flex;
+  align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 700;
 }
-button:hover { opacity:0.85; }
-.hint { color:var(--ink-lighter); font-size:0.8em; margin-top:14px; }
+.brand h1 { font-size: 1.15em; font-weight: 600; }
+.nav-links { display:flex; gap:16px; align-items:center; }
+.nav-links a {
+  color: var(--ink-light); text-decoration:none; font-size:0.88em;
+  padding:6px 12px; border-radius:6px; transition: all 0.2s;
+}
+.nav-links a:hover { color: var(--ink); background: var(--bg); }
+.nav-links a.primary {
+  background: var(--accent); color: #fff; font-weight:500;
+  padding: 8px 18px; border-radius: 8px;
+}
+.nav-links a.primary:hover { opacity:0.85; background: var(--accent); }
+
+/* Hero */
+.hero {
+  text-align: center; padding: 48px 24px 32px;
+  max-width: 700px; margin: 0 auto;
+}
+.hero h2 { font-size: 1.6em; font-weight: 300; letter-spacing:0.04em; margin-bottom:8px; }
+.hero p { color: var(--ink-light); font-size:0.95em; margin-bottom:24px; }
+
+/* Stats */
+.stats {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  max-width: 1100px; margin: 0 auto 40px; padding: 0 24px;
+}
+.stat-item {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 24px; text-align: center;
+  min-width: 100px;
+}
+.stat-item .num { font-size: 1.5em; font-weight: 300; color: var(--ink); }
+.stat-item .label { font-size: 0.78em; color: var(--ink-light); margin-top:4px; }
+
+/* Product Grid */
+.section-title {
+  max-width: 1100px; margin: 0 auto 16px; padding: 0 24px;
+  font-size: 1.1em; font-weight: 500;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-title::after {
+  content:''; flex:1; height:1px; background: var(--border);
+}
+
+.product-grid {
+  max-width: 1100px; margin: 0 auto 40px; padding: 0 24px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.product-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 18px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.product-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 4px 16px rgba(74,55,40,0.06);
+}
+.product-card .prod-name {
+  font-weight: 600; font-size: 1em; margin-bottom: 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.product-card .family-tag {
+  display: inline-block; padding: 2px 8px; border-radius: 8px;
+  font-size: 0.7em; font-weight: 500;
+}
+.family-tag.镜 { background: rgba(184,134,11,0.12); color: var(--gold); }
+.family-tag.衡 { background: rgba(61,122,79,0.12); color: #3D7A4F; }
+.family-tag.契 { background: rgba(194,59,34,0.08); color: var(--accent); }
+.family-tag.觉 { background: rgba(74,55,40,0.08); color: var(--ink); }
+.family-tag.人 { background: rgba(107,91,78,0.10); color: #6B5B4E; }
+.family-tag.道 { background: rgba(139,115,85,0.10); color: #8B7355; }
+.family-tag.章 { background: rgba(122,105,88,0.10); color: #7A6958; }
+.family-tag.未归类 { background: rgba(168,152,128,0.12); color: var(--ink-lighter); }
+
+.product-card .prod-desc {
+  font-size: 0.82em; color: var(--ink-light); margin: 6px 0;
+  line-height: 1.5;
+}
+.product-card .prod-meta {
+  display: flex; gap: 12px; font-size: 0.72em; color: var(--ink-lighter);
+  margin-top: 8px;
+}
+.product-card .prod-link {
+  display: inline-block; margin-top: 8px;
+  font-size: 0.8em; color: var(--accent); text-decoration: none;
+}
+.product-card .prod-link:hover { text-decoration: underline; }
+
+/* Footer */
+.footer {
+  text-align: center; padding: 32px 24px; border-top: 1px solid var(--border);
+  margin-top: 40px;
+}
+.footer p { font-size: 0.82em; color: var(--ink-lighter); }
+.footer a { color: var(--gold); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+
+/* Loading / Error */
+.loading { text-align:center; padding:40px; color:var(--ink-lighter); font-style:italic; }
+.error { text-align:center; padding:40px; color:var(--accent); }
+
+@media(max-width:640px) {
+  .product-grid { grid-template-columns: 1fr; }
+  .nav-links { gap:8px; }
+  .nav-links a { font-size:0.8em; padding:4px 8px; }
+}
 </style>
 </head>
 <body>
 
-<div class="gate">
-  <div class="logo">红</div>
-  <h1>满意解研究所</h1>
-  <p class="subtitle">知识体系</p>
-  <button onclick="location.href='dashboard-v3.html'">进入</button>
-  <p class="hint">点击进入驾驶舱</p>
+<div class="header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="logo">解</div>
+      <h1>满意解研究所</h1>
+    </div>
+    <div class="nav-links">
+      <a href="#products">产品服务</a>
+      <a href="#about">关于</a>
+      <a href="dashboard-v3.html" class="primary">🎛️ 驾驶舱</a>
+    </div>
+  </div>
 </div>
 
+<div class="hero">
+  <h2>知识产品 · 从原型到精品</h2>
+  <p>覆盖七族产品线的知识管理体系，为组织提供可复用的决策工具与方法论</p>
+</div>
+
+<div class="stats" id="stats"></div>
+
+<div class="section-title">🛠️ 产品服务</div>
+<div class="product-grid" id="product-grid">
+  <div class="loading">加载中...</div>
+</div>
+
+<div class="section-title" id="about">📖 关于</div>
+<div style="max-width:1100px;margin:0 auto 40px;padding:0 24px;font-size:0.9em;color:var(--ink-light);line-height:1.8">
+  <p>满意解研究所致力于将管理经验转化为可复用的数字化产品。通过七族分类体系（镜·衡·契·觉·人·道·章），系统化管理知识资产，从概念原型逐步打磨至精品。</p>
+  <p style="margin-top:12px">内部管理入口：<a href="dashboard-v3.html">🎛️ 驾驶舱</a> — 提供产品全生命周期管理、数据监控与决策支持。</p>
+</div>
+
+<div class="footer">
+  <p>满意解研究所 · <a href="https://github.com/egbertie/satisficing-lab">GitHub</a></p>
+  <p style="margin-top:4px">「每一步，都更清晰一点。」</p>
+</div>
+
+<script>
+(function() {
+  var base = '';
+  if (location.hostname === 'htmlpreview.github.io') {
+    base = 'https://raw.githubusercontent.com/egbertie/satisficing-lab/main/';
+  }
+
+  var grid = document.getElementById('product-grid');
+  var stats = document.getElementById('stats');
+
+  fetch(base + 'entities_index.json')
+    .then(function(r) { if (!r.ok) throw Error('HTTP ' + r.status); return r.json(); })
+    .then(function(data) {
+      var prods = data.products || [];
+      var m = data.meta || {};
+
+      // Stats
+      var families = {};
+      var premium = 0, online = 0;
+      prods.forEach(function(p) {
+        var f = p.family || '未归类';
+        families[f] = (families[f] || 0) + 1;
+        if (p.status === '精品') premium++;
+        if (p.url) online++;
+      });
+
+      var famList = ['镜','衡','契','觉','人','道','章'];
+      var familyCount = famList.filter(function(f) { return families[f]; }).length;
+
+      stats.innerHTML =
+        '<div class="stat-item"><div class="num">' + prods.length + '</div><div class="label">📦 产品总数</div></div>' +
+        '<div class="stat-item"><div class="num">' + familyCount + '</div><div class="label">🏷️ 产品族</div></div>' +
+        '<div class="stat-item"><div class="num">' + premium + '</div><div class="label">💎 精品</div></div>' +
+        '<div class="stat-item"><div class="num">' + online + '</div><div class="label">🌐 已上线</div></div>' +
+        '<div class="stat-item"><div class="num">' + (m.total_connections || 0) + '</div><div class="label">🔗 知识连接</div></div>';
+
+      // Product cards - prefer premium, online
+      var sorted = prods.slice().sort(function(a, b) {
+        if (a.status === '精品' && b.status !== '精品') return -1;
+        if (b.status === '精品' && a.status !== '精品') return 1;
+        return (a.url ? 0 : 1) - (b.url ? 0 : 1);
+      });
+
+      var html = '';
+      for (var i = 0; i < sorted.length; i++) {
+        var p = sorted[i];
+        var fam = p.family || '未归类';
+        var desc = (p.description || '').substring(0, 100);
+        if (p.description && p.description.length > 100) desc += '…';
+        var url = p.url || '';
+        var status = p.status || p.maturity || '';
+
+        html += '<div class="product-card">' +
+          '<div class="prod-name">' +
+            '<span>' + escText(p.name) + '</span>' +
+            '<span class="family-tag ' + fam + '">' + fam + '</span>' +
+          '</div>' +
+          '<div class="prod-desc">' + escText(desc || '暂无描述') + '</div>' +
+          '<div class="prod-meta">' +
+            (status ? '<span>' + escText(status) + '</span>' : '') +
+          '</div>' +
+          (url ? '<a class="prod-link" href="' + url + '" target="_blank" rel="noopener">打开 →</a>' : '') +
+        '</div>';
+      }
+
+      grid.innerHTML = html;
+    })
+    .catch(function(e) {
+      grid.innerHTML = '<div class="error">⚠️ 数据加载失败：' + e.message + '</div>';
+    });
+
+  function escText(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+})();
+</script>
 </body>
 </html>
