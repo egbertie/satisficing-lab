@@ -1431,6 +1431,14 @@ function renderFlywheel() {
 /* ===== 面板: 客户360 (v3.0) ===== */
 /* ===== 面板: 客户360 (v3.0) ===== */
 function renderCustomerJourney() {
+  var lifecycle = EIDX.full_lifecycle || {};
+  var lfStages = lifecycle.stages || [];
+  var frontStages = lfStages.filter(function(s){return s.half==='front';});
+  var acqEngine = EIDX.acquisition_engine || {};
+  var acqChannels = acqEngine.channels || [];
+  var acqFunnel = acqEngine.funnel_targets || {};
+  var acqContent = acqEngine.content_arsenal || {};
+  var evergreen = acqContent.evergreen || [];
   var flows = EIDX.individual_customer_flows || [];
   var hm = EIDX.health_score_model || {};
   var dims = hm.dimensions || {};
