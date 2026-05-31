@@ -947,15 +947,16 @@ function renderGovernance() {
   var gf = EIDX.governance_frameworks || [];
   var ev = EIDX.events || [];
   var cr = EIDX.crons || [];
+  var lrs = (EIDX.meta||{}).living_rules_status || {active:0,dormant:0,broken:0,total:lr.length};
+  var imm = (EIDX.meta||{}).immune_stats || {};
+  var gov = (EIDX.meta||{}).governance_stats || {};
 
-  var lrs = EIDX.meta && EIDX.meta.living_rules_status ? EIDX.meta.living_rules_status : {active:0,dormant:0,broken:0};
-
-  // 总览卡
-  var h = '<div class="overview-grid">';
-  h += ov(lr.length+'<span style="font-size:0.42em;opacity:0.6"> 条</span>','🧬 生物规则', '活'+lrs.active+'·休眠'+lrs.dormant+'·坏'+lrs.broken);
-  h += ov(gf.length+'<span style="font-size:0.42em;opacity:0.6"> 套</span>','🏛️ 治理框架');
-  h += ov(ev.length+'<span style="font-size:0.42em;opacity:0.6"> 条</span>','⚡ 事件', '免疫记忆库');
-  h += ov(cr.length+'<span style="font-size:0.42em;opacity:0.6"> 个</span>','⏱️ Cron');
+  // 统计卡
+  var h = '<div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:12px">';
+  h += '<div class="stat-card"><div class="stat-num">'+(lrs.total||lr.length)+'</div><div class="stat-label">🧬 生物规则</div><div style="font-size:0.6em;color:var(--ink-lighter)">活'+(lrs.active||0)+'·休眠'+(lrs.dormant||0)+'·坏'+(lrs.broken||0)+'</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+gf.length+'</div><div class="stat-label">🏛️ 治理框架</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+(imm.components||5)+'</div><div class="stat-label">🛡️ 免疫组件</div><div style="font-size:0.6em;color:var(--ink-lighter)">'+(imm.score||85)+'分</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+(gov.decision_types||5)+'</div><div class="stat-label">⚖️ 决策类型</div><div style="font-size:0.6em;color:var(--ink-lighter)">'+(gov.model||'DACI')+'</div></div>';
   h += '</div>';
 
   // 生物规则表
@@ -1015,12 +1016,15 @@ function renderOrganization() {
   var av = EIDX.avatars || [];
   var wf = EIDX.workflows || [];
   var sc = EIDX.scripts || [];
+  var avs = (EIDX.meta||{}).avatar_stats || {};
+  var fw = (EIDX.meta||{}).flywheel_stats || {};
 
-  // 总览卡
-  var h = '<div class="overview-grid">';
-  h += ov(av.length+'<span style="font-size:0.42em;opacity:0.6"> 位</span>','🎭 数字替身', '5图腾·10专家·6Skill·1蓝军');
-  h += ov(wf.length+'<span style="font-size:0.42em;opacity:0.6"> 条</span>','🔄 工作流');
-  h += ov(sc.length+'<span style="font-size:0.42em;opacity:0.6"> 个</span>','📜 脚本');
+  // 统计卡
+  var h = '<div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:12px">';
+  h += '<div class="stat-card"><div class="stat-num">'+(avs.total||av.length)+'</div><div class="stat-label">🎭 替身</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+wf.length+'</div><div class="stat-label">🔄 工作流</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+(fw.scripts_total||sc.length)+'</div><div class="stat-label">📜 脚本</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+(fw.crons_total||0)+'</div><div class="stat-label">⏱️ Cron</div><div style="font-size:0.6em;color:var(--ink-lighter)">'+(fw.crons_active||0)+'活跃</div></div>';
   h += '</div>';
 
   // 替身表
