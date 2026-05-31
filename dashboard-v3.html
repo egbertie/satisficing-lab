@@ -453,21 +453,35 @@ function switchTab(id, btn) {
    面板 1: 总览
    ================================================================ */
 function renderOverview() {
-  var m = EIDX.meta, bd = m.breakdown, pf = m.product_families, lr = m.living_rules_status;
-  var h = '<div class="overview-grid">';
-  h += ov(m.total_entities+'<span style="font-size:0.42em;opacity:0.6"> 实体</span>','🧬 实体总数', '产品'+bd.products+' · 客户'+bd.customers+' · 任务'+bd.tasks);
-  h += ov(bd.products+'<span style="font-size:0.42em;opacity:0.6"> 个</span>','📦 产品','7族 · 精品'+m.premium_count+'·线上'+m.online_count+'·可上架'+m.launchable);
-  h += ov(bd.customers+'<span style="font-size:0.42em;opacity:0.6"> 个</span>','👥 核心客户','+'+bd.customer_profiles+' 画像');
-  h += ov(bd.avatars+'<span style="font-size:0.42em;opacity:0.6"> 位</span>','🎭 数字替身','5图腾·10专家·6Skill·1蓝军');
-  h += ov(m.knowledge_graph_density+'<span style="font-size:0.42em;opacity:0.6">%</span>','🕸️ 图谱密度','强'+m.strong_connections+'·中'+m.medium_connections+'·弱'+m.weak_connections);
-  h += ov(bd.living_rules+'<span style="font-size:0.42em;opacity:0.6"> 条</span>','🧬 生物规则','活'+lr.active+' · 休眠'+lr.dormant+' · 坏'+lr.broken);
-  h += ov(bd.crons+'<span style="font-size:0.42em;opacity:0.6"> 个</span>','⏱️ Cron','13活 · 连'+m.biological_health.cron_connected);
-  h += ov('105<span style="font-size:0.42em;opacity:0.6"> 天</span>','📅 时间线','2/15→'+m.updated.split('T')[0]);
-  h += ov('3<span style="font-size:0.42em;opacity:0.6"> 代</span>','🔄 继承链','扣子→满意姐→满意解研究所');
-  h += ov('100<span style="font-size:0.42em;opacity:0.6">%</span>','🔍 扫描率','24,947文件全扫描');
+  var m = EIDX.meta, bd = m.breakdown||{}, pf = m.product_families||{}, lr = m.living_rules_status||{};
+  var ts = m.task_stats||{}, cs = m.customer_stats||{}, avs = m.avatar_stats||{}, cts = m.city_stats||{};
+  var fw = m.flywheel_info||{}, rd = m.rd_stats||{}, lp = m.loop_stats||{}, acq = m.acquisition_stats||{};
+
+  // ═══ L1: CEO战略视图 - 6个核心KPI ═══
+  var h = '<div class="panel-header"><h2>📊 管理中枢 · 360度总览</h2><p style="font-size:0.75em;color:var(--ink-light);margin-top:4px">产品'+m.total_products+' · 任务'+ts.total+' · 连接'+((bd.connections||0)+'')+' · 城市'+cts.total+' · 替身'+avs.total+' · 客户'+(cs.total||0)+' · 闭环小'+lp.small+'中'+lp.medium+'大'+lp.big+' · 更新于'+escHtml(m.updated||'').substring(0,10)+'</p></div>';
+
+  h += '<div class="stat-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:12px">';
+  h += '<div class="stat-card" style="background:var(--card-white);cursor:pointer" onclick="switchTab(\'tab-products\')"><div class="stat-num" style="font-size:1.6em">'+m.total_products+'</div><div class="stat-label">📦 产品资产</div><div style="font-size:0.65em;color:var(--ink-lighter)">精品'+m.premium_count+'·线上'+m.online_count+'·'+Object.keys(pf).length+'族</div></div>';
+  h += '<div class="stat-card" style="background:var(--card-white);cursor:pointer" onclick="switchTab(\'tab-tasks\')"><div class="stat-num" style="font-size:1.6em">'+ts.total+'</div><div class="stat-label">✅ 任务管理</div><div style="font-size:0.65em;color:var(--ink-lighter)">完成'+ts.completed+'·进行中'+ts.in_progress+'·待执行'+ts.pending+'</div></div>';
+  h += '<div class="stat-card" style="background:var(--card-white);cursor:pointer" onclick="switchTab(\'tab-customers\')"><div class="stat-num" style="font-size:1.6em">'+(cs.total||0)+'</div><div class="stat-label">👥 客户体系</div><div style="font-size:0.65em;color:var(--ink-lighter)">'+cs.profiles+'画像·'+cs.individual_flows+'独立流</div></div>';
+  h += '<div class="stat-card" style="background:var(--card-white);cursor:pointer" onclick="switchTab(\'tab-journey\')"><div class="stat-num" style="font-size:1.6em">15</div><div class="stat-label">🗺️ 生命周期</div><div style="font-size:0.65em;color:var(--ink-lighter)">15阶段·小'+lp.small+'闭环·中'+lp.medium+'飞轮</div></div>';
+  h += '<div class="stat-card" style="background:var(--card-white);cursor:pointer" onclick="switchTab(\'tab-flywheel\')"><div class="stat-num" style="font-size:1.6em">'+(fw.knowledge_pipelines||0)+'</div><div class="stat-label">♻️ 管道/飞轮</div><div style="font-size:0.65em;color:var(--ink-lighter)">知识管道·Cron'+(fw.crons_total||0)+'/'+(fw.crons_active||0)+'活</div></div>';
+  h += '<div class="stat-card" style="background:var(--card-white);cursor:pointer" onclick="switchTab(\'tab-rd\')"><div class="stat-num" style="font-size:1.6em">'+(rd.active_projects||0)+'</div><div class="stat-label">🔬 研发中</div><div style="font-size:0.65em;color:var(--ink-lighter)">'+rd.stages+'阶段·知识转化</div></div>';
   h += '</div>';
 
-  // 七族分布
+  // ═══ L2: 管理入口矩阵 ═══
+  h += '<div class="section-head">⚡ 快速入口</div>';
+  h += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">';
+  h += '<a href="product-catalog.html" target="_blank" style="padding:6px 14px;background:var(--card-white);border:1px solid var(--accent-gold);border-radius:8px;font-size:0.75em;text-decoration:none;color:var(--ink)">📦 产品库</a>';
+  h += '<a href="admin-overview.html" target="_blank" style="padding:6px 14px;background:var(--card-white);border:1px solid var(--accent-red);border-radius:8px;font-size:0.75em;text-decoration:none;color:var(--ink)">⚙️ 管理台</a>';
+  h += '<a href="file-browser.html" target="_blank" style="padding:6px 14px;background:var(--card-white);border:1px solid var(--border-warm);border-radius:8px;font-size:0.75em;text-decoration:none;color:var(--ink)">📁 仓库文件</a>';
+  h += '<a href="help-user.html" target="_blank" style="padding:6px 14px;background:var(--card-white);border:1px solid var(--border-warm);border-radius:8px;font-size:0.75em;text-decoration:none;color:var(--ink)">📖 帮助</a>';
+  h += '<a href="go.html" target="_blank" style="padding:6px 14px;background:var(--card-white);border:1px solid var(--border-warm);border-radius:8px;font-size:0.75em;text-decoration:none;color:var(--ink)">🧭 决策通道</a>';
+  h += '<a href="index.html" target="_blank" style="padding:6px 14px;background:var(--card-white);border:1px solid var(--border-warm);border-radius:8px;font-size:0.75em;text-decoration:none;color:var(--ink)">🏠 品牌首页</a>';
+  h += '<a href="about.html" target="_blank" style="padding:6px 14px;background:var(--card-white);border:1px solid var(--border-warm);border-radius:8px;font-size:0.75em;text-decoration:none;color:var(--ink)">📋 关于我们</a>';
+  h += '</div>';
+
+  // ═══ 七族分布 ═══
   if (pf) {
     h += '<div class="family-bars"><h4>📊 七族产品分布</h4>';
     var fks = ['镜','衡','契','觉','人','道','章','未归类'];
@@ -482,7 +496,7 @@ function renderOverview() {
     h += '</div>';
   }
 
-  // Top 10 产品(精品优先)
+  // ═══ Top 10 精品 ═══
   var allProds = EIDX.products || [];
   var jingpin = [];
   var others = [];
