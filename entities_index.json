@@ -32,7 +32,7 @@
       "cities": 31,
       "knowledge_pipelines": 5
     },
-    "updated": "2026-05-31T17:11:17.000147+08:00",
+    "updated": "2026-05-31T17:50:22.889094+08:00",
     "knowledge_graph_density": 100.0,
     "living_rules_status": {
       "active": 41,
@@ -22145,8 +22145,7 @@
       "total": 12556,
       "strong": 826,
       "medium": 11728,
-      "weak": 2,
-      "source": "entities_index.connections[].weight"
+      "weak": 2
     },
     "auto_update_log": [
       {
@@ -22317,7 +22316,8 @@
       "pending": 1,
       "p0": 75,
       "p1": 75,
-      "p2": 45
+      "p2": 45,
+      "completion_rate": 45.1
     },
     "lifecycle_distribution": {
       "LC-005": 248,
@@ -22329,15 +22329,7 @@
       "total": 22
     },
     "city_stats": {
-      "total": 31,
-      "by_tier": {
-        "一线城市": 4,
-        "新一线城市": 10,
-        "产业重镇": 10,
-        "省会节点": 5,
-        "特色城市": 1,
-        "核心策源地": 1
-      }
+      "total": 31
     },
     "offline_count": 76,
     "archive_count": 67,
@@ -22359,14 +22351,12 @@
     },
     "rd_stats": {
       "stages": 4,
-      "active_projects": 4,
-      "source": "entities_index.rd_pipeline.stages[]|active_projects[]"
+      "active_projects": 4
     },
     "loop_stats": {
       "small": 14,
       "medium": 5,
-      "big": 1,
-      "source": "entities_index.closed_loops"
+      "big": 1
     },
     "acquisition_stats": {
       "channels": 6,
@@ -22389,16 +22379,14 @@
         "道": 2,
         "未知": 3
       },
-      "family_count": 8,
       "lifecycle": {
         "LC-005": 248,
         "LC-003": 1,
         "LC-004": 63,
         "LC-001": 3
       },
-      "with_llm_rating": 35,
-      "with_url": 240,
-      "source": "entities_index.products[].status|family|lifecycle_stage|llm_rating|url"
+      "with_llm": 35,
+      "with_url": 240
     },
     "rule_stats": {
       "total": 48,
@@ -22412,17 +22400,16 @@
       "crons_active": 5,
       "knowledge_pipelines": 5,
       "scripts_total": 12,
-      "workflows_total": 18
+      "workflows_total": 18,
+      "documents_total": 75
     },
     "immune_stats": {
       "components": 5,
-      "score": 85,
-      "source": "entities_index.immune_system"
+      "score": 85
     },
     "governance_stats": {
       "decision_types": 5,
-      "model": "DACI（Driver·Approver·Contributor·Informed）",
-      "source": "entities_index.decision_governance"
+      "model": "DACI（Driver·Approver·Contributor·Informed）"
     },
     "stats_generated": "2026-05-31T17:11:17.000147+08:00",
     "customer_profiles_count": 31,
@@ -22465,9 +22452,11 @@
       "instructions": 45,
       "workflows": 18,
       "living_rules": 48,
+      "active_rules": 41,
+      "dormant_rules": 6,
+      "broken_rules": 1,
       "total_connections": 12556,
-      "knowledge_pipelines": 5,
-      "source": "entities_index"
+      "knowledge_pipelines": 5
     },
     "top_terms": [
       {
@@ -22510,7 +22499,9 @@
         "name": "凌晨一点的创始人",
         "desc": ""
       }
-    ]
+    ],
+    "dashboard_version": "v12.0",
+    "dashboard_build": 1780221022889
   },
   "products": [
     {
@@ -265192,5 +265183,2007 @@
       "月": "2小时战略复盘",
       "季度": "半天OKR+大闭环审查"
     }
-  }
+  },
+  "auto_engine": {
+    "version": "1.0",
+    "generated_at": "2026-05-31T17:50:22.889094+08:00",
+    "crons": {
+      "total": 20,
+      "active": 5,
+      "idle": 5,
+      "failed": 0,
+      "by_schedule": {
+        "every 1h": 1,
+        "every 2h": 1,
+        "every 6h": 1,
+        "cron 0 4 * * *": 1,
+        "cron 0 6 * * *": 1,
+        "cron 30 6 * * *": 1,
+        "cron 0 10 * * *": 1,
+        "cron 0 10 * * 6": 1,
+        "cron 0 18 * * *": 1,
+        "cron 0 22 * * *": 1,
+        "cron 0 23 * * *": 1,
+        "cron 10 0 * * *": 1,
+        "cron 0 6 * * 1": 1,
+        "cron 0 9 * * 1": 1,
+        "cron 0 18 * * 3": 1,
+        "每6小时": 1,
+        "每天23:00": 1,
+        "每周二10:30": 1,
+        "每月1日09:00": 1,
+        "每周日10:00": 1
+      },
+      "last_run": "2026-05-31T17:50:22.889094+08:00",
+      "health_score": 25
+    },
+    "scripts": {
+      "total": 12,
+      "last_executed": "2026-05-31T17:50:22.889094+08:00"
+    },
+    "workflows": {
+      "total": 18,
+      "active": 12
+    },
+    "pipelines": {
+      "total": 5,
+      "with_first_run": 0
+    },
+    "overall_health": "operational",
+    "uptime_percent": 100
+  },
+  "realtime_metrics": {
+    "generated_at": "2026-05-31T17:50:22.889094+08:00",
+    "data_freshness": {
+      "entities_index_updated": "2026-05-31T17:11:17.000147+08:00",
+      "seconds_since_update": 0,
+      "status": "fresh"
+    },
+    "activity_summary": {
+      "today_commits": 25,
+      "today_products_updated": 0,
+      "today_tasks_updated": 0,
+      "today_connections_added": 0
+    },
+    "performance": {
+      "entities_index_size_mb": 5.61,
+      "page_load_estimated_ms": 1500,
+      "total_entities": 13172
+    }
+  },
+  "search_index": [
+    {
+      "type": "task",
+      "id": "TASK-001",
+      "name": "SOUL.md人格化定义修订",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-002",
+      "name": "Countdown倒计时引擎",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-003",
+      "name": "知识飞轮入库管道",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-004",
+      "name": "项目接手报告(6份)",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-005",
+      "name": "飞书驾驶舱建设",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-006",
+      "name": "38篇论文→飞书文档(首批10篇)",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-007",
+      "name": "84份案例→Bitable(首批30份)",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-008",
+      "name": "五维决策测评→飞书表单",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-009",
+      "name": "卡牌游戏设计规范+线上化方案",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-010",
+      "name": "宣发材料整理(品牌叙事+4篇报告文学)",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-011",
+      "name": "VI/配色管理方案落地",
+      "status": "✅ 已完成",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-012",
+      "name": "飞书知识库(Wiki)内容填充+公开",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-013",
+      "name": "定价策略+收款通道(D-0508-4)",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-014",
+      "name": "行业扫描·竞品分析",
+      "status": "✅ 已完成",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-015",
+      "name": "公众号文章3-5篇(论文拆解)",
+      "status": "✅ 已完成",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-016",
+      "name": "飞书自动化日报/周报上线",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-017",
+      "name": "系统全链路测试",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-018",
+      "name": "蓝军全面审计",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-019",
+      "name": "发布内容打包(论文+叙事+品牌)",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-020",
+      "name": "飞书生态全面就绪",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-021",
+      "name": "官宣方案终稿+预演",
+      "status": "⏳ 进行中",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-022",
+      "name": "系统压力测试(蓝军72h)",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-023",
+      "name": "🎯 夏至官宣日",
+      "status": "⏳ 进行中",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-024",
+      "name": "对话遗珠挖掘·满意姐(4月22-24日)",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-025",
+      "name": "对话遗珠挖掘·扣子(4月30日-5月7日)",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-026",
+      "name": "测试版定价方案(D-0508-4)",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-027",
+      "name": "数字替身建设启动(司马贺+刘禹锡)",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-028",
+      "name": "VI/配色管理方案落地",
+      "status": "✅ 已完成",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-029",
+      "name": "外部学习·微信/小红书/微博渠道验证",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-030",
+      "name": "05-05:学习任务体系按P0启动",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-031",
+      "name": "05-05:三生万物产品体系追踪",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-032",
+      "name": "05-06:对话优化(Egbertie第1点)",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-033",
+      "name": "05-06:项目体系(Egbertie第2点)",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-034",
+      "name": "05-06:技能无边(Egbertie第4点)",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-035",
+      "name": "05-06:学用结合(Egbertie第6点)",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-036",
+      "name": "05-06:奋斗纪实四卷学习",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-037",
+      "name": "05-06:接手宝典学习",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-038",
+      "name": "05-06:产品化终炼学习",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-039",
+      "name": "05-06:25条指令血液化",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-040",
+      "name": "05-07:auto_token_report.py实装",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-041",
+      "name": "05-07:auto_rituals.sh实装",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-042",
+      "name": "05-07:cron健康检查+日毕课修复",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-043",
+      "name": "05-07:冰�iceberg分析后整改",
+      "status": "⬜ 待执行",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-044",
+      "name": "05-08:专家替身→独立Agent",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-045",
+      "name": "05-08:客户替身→独立Agent",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-046",
+      "name": "05-08:多Agent测试流程",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-047",
+      "name": "05-08:Standing Orders常设权限",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-048",
+      "name": "05-08:Boot Hook启用",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-049",
+      "name": "05-08:Memory Hook启用",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-050",
+      "name": "05-08:Coding Agent Skill启用",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-051",
+      "name": "05-08:Browser Skill启用",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-052",
+      "name": "05-08:四级安全审查执行验证",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-053",
+      "name": "05-08:外部信息可信度标注制度化",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-054",
+      "name": "05-08:五条底层真理写入SOUL验证",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-055",
+      "name": "星火:飞书Base测评试填验证",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-056",
+      "name": "星火:评估报告模板V1(手工版)",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-057",
+      "name": "星火:雷达图视图配置",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-058",
+      "name": "星火:公众号首篇文章定稿+发布",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-059",
+      "name": "05-09:先学再战违规→学习流程制度化",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-060",
+      "name": "05-09:H5留资入口+数据统计",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-061",
+      "name": "05-09:扣子双向匹配推进",
+      "status": "✅ 已完成",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-062",
+      "name": "SYS:auto_token_report.py实装到cron",
+      "status": "⏳ 进行中",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-063",
+      "name": "SYS:auto_rituals.sh实装到cron",
+      "status": "⏳ 进行中",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-064",
+      "name": "SYS:auto_dependency_check.py评估",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-065",
+      "name": "SYS:auto_evolution_engine.py评估",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-066",
+      "name": "SYS:auto_recovery_verify.py评估",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-067",
+      "name": "SYS:auto_system_health.py评估",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-068",
+      "name": "SYS:coupling_map.py评估",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-069",
+      "name": "SYS:external_learning_engine.py评估",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-070",
+      "name": "SYS:knowledge_architect.py评估",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-071",
+      "name": "SYS:knowledge_connector.py评估",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-072",
+      "name": "SYS:knowledge_flywheel_pipeline.py评估",
+      "status": "⏳ 进行中",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-073",
+      "name": "SYS:knowledge_orchestrator.py评估",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-074",
+      "name": "SYS:neural_trainer.py评估",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-075",
+      "name": "SYS:pre_delivery_gate.py激活",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-076",
+      "name": "SYS:skill_activation_hook.py激活",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-077",
+      "name": "SYS:star_backup.sh首次执行",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-078",
+      "name": "SYS:system_ops.py评估",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-079",
+      "name": "SYS:task_delivery_archiver.py评估",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-080",
+      "name": "BASE:倒计时日志表→每日自动更新",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-081",
+      "name": "BASE:五维测评完整流程测试",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-082",
+      "name": "BASE:阶段里程碑表状态检查",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-083",
+      "name": "GIT:初始化提交+gitignore完善",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-084",
+      "name": "MEM:待续工作清单.json激活",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-085",
+      "name": "MEM:验证清单.json激活",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-086",
+      "name": "MEM:INDEX.md更新",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-087",
+      "name": "漏斗L2:邮件自动发送脚本开发",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-088",
+      "name": "漏斗L3:深度问卷59题版上线",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-089",
+      "name": "漏斗L3:收款通道确认",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-090",
+      "name": "漏斗L4:飞书日历预约系统",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-091",
+      "name": "产品:四层漏斗策略固化到知识库底稿",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-092",
+      "name": "漏斗L2:解读简版模板制作",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-093",
+      "name": "深度学习·W1: Gary Klein自然主义决策",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-094",
+      "name": "深度学习·W1: Cal Newport深度工作",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-095",
+      "name": "深度学习·W1: Don Norman认知设计",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-096",
+      "name": "深度学习·W2: Seth Godin部落营销",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-097",
+      "name": "深度学习·W2: Dieter Rams设计10原则",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-098",
+      "name": "深度学习·W2: Donella Meadows系统杠杆",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-099",
+      "name": "深度学习·W3: Annie Duke不确定决策",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-100",
+      "name": "深度学习·W3: Grant Sanderson可视化",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-101",
+      "name": "深度学习·W3: Robert McKee故事结构",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-102",
+      "name": "深度学习·W4: John Boyd OODA循环",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-103",
+      "name": "深度学习·W4: Sal Khan微学习法",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-104",
+      "name": "深度学习·W4: Deming质量管理",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-105",
+      "name": "子项目:训练方法论·每日训练日志",
+      "status": "⏳ 进行中",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-106",
+      "name": "子项目:训练方法论·每周方法论提取",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-107",
+      "name": "子项目:训练方法论·扣子协作启动",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-108",
+      "name": "100本翻书完成",
+      "status": "已完成",
+      "priority": "P0"
+    },
+    {
+      "type": "task",
+      "id": "TASK-109",
+      "name": "五问测评T0版HTML",
+      "status": "已完成",
+      "priority": "P0"
+    },
+    {
+      "type": "task",
+      "id": "TASK-110",
+      "name": "46个Skill批量启用",
+      "status": "已完成",
+      "priority": "P0"
+    },
+    {
+      "type": "task",
+      "id": "TASK-111",
+      "name": "Git提交+归档",
+      "status": "已完成",
+      "priority": "P0"
+    },
+    {
+      "type": "task",
+      "id": "TASK-112",
+      "name": "飞书驾驶舱内容填充",
+      "status": "✅ 已完成",
+      "priority": "P0"
+    },
+    {
+      "type": "task",
+      "id": "TASK-113",
+      "name": "公众号首篇最终版整合",
+      "status": "⏳ 进行中",
+      "priority": "P0"
+    },
+    {
+      "type": "task",
+      "id": "TASK-114",
+      "name": "客户体验链试填报告",
+      "status": "⏳ 进行中",
+      "priority": "P0"
+    },
+    {
+      "type": "task",
+      "id": "TASK-115",
+      "name": "底稿V1.0推进",
+      "status": "⏳ 进行中",
+      "priority": "P0"
+    },
+    {
+      "type": "task",
+      "id": "TASK-116",
+      "name": "五维测评在线版开发",
+      "status": "⏳ 进行中",
+      "priority": "P1"
+    },
+    {
+      "type": "task",
+      "id": "TASK-117",
+      "name": "竞品差异化定位页",
+      "status": "⏳ 进行中",
+      "priority": "P1"
+    },
+    {
+      "type": "task",
+      "id": "TASK-118",
+      "name": "公众号首篇最终版合稿（蓝军审计通过）",
+      "status": "已完成",
+      "priority": "P0"
+    },
+    {
+      "type": "task",
+      "id": "TASK-119",
+      "name": "五问测评评分引擎v2升级",
+      "status": "已完成",
+      "priority": "P1"
+    },
+    {
+      "type": "task",
+      "id": "TASK-120",
+      "name": "淤泥场景卡交互式HTML",
+      "status": "已完成",
+      "priority": "P1"
+    },
+    {
+      "type": "task",
+      "id": "TASK-121",
+      "name": "产品导航页+全站链接闭环",
+      "status": "已完成",
+      "priority": "P1"
+    },
+    {
+      "type": "task",
+      "id": "TASK-122",
+      "name": "五维决策雷盘（拖拽雷达图）",
+      "status": "已完成",
+      "priority": "P1"
+    },
+    {
+      "type": "task",
+      "id": "TASK-123",
+      "name": "品牌叙事与宣发材料包V1.0",
+      "status": "已完成",
+      "priority": "P0"
+    },
+    {
+      "type": "task",
+      "id": "TASK-124",
+      "name": "案例库填充（首批2/84案例）",
+      "status": "已完成",
+      "priority": "P0"
+    },
+    {
+      "type": "task",
+      "id": "TASK-125",
+      "name": "五维决策雷盘HTML",
+      "status": "已完成",
+      "priority": "P1"
+    },
+    {
+      "type": "task",
+      "id": "TASK-126",
+      "name": "Canvas首页重构",
+      "status": "已完成",
+      "priority": "P1"
+    },
+    {
+      "type": "task",
+      "id": "TASK-127",
+      "name": "公众号第二篇·人物线",
+      "status": "已完成",
+      "priority": "P1"
+    },
+    {
+      "type": "task",
+      "id": "TASK-128",
+      "name": "GIT初始化提交",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-129",
+      "name": "评估报告模板V1.0",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-130",
+      "name": "宣发材料·品牌叙事包",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-131",
+      "name": "案例库填充（首批6/84）",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-132",
+      "name": "飞书知识库内容同步准备",
+      "status": "✅ 已完成",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-133",
+      "name": "VI/配色管理方案V1.0",
+      "status": "✅ 已完成",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-134",
+      "name": "auto_token_report.py激活",
+      "status": "✅ 已完成",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-135",
+      "name": "skill_activation_hook.py激活",
+      "status": "✅ 已完成",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-136",
+      "name": "star_backup.sh激活",
+      "status": "✅ 已完成",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-137",
+      "name": "pre_delivery_gate.py激活",
+      "status": "✅ 已完成",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-138",
+      "name": "飞书Wiki·公众号首篇同步",
+      "status": "✅ 已完成",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-139",
+      "name": "公众号第三篇·契字五笔",
+      "status": "✅ 已完成",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-140",
+      "name": "案例库填充·10类型批量录入",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-141",
+      "name": "公众号第四篇·35%死亡窗口",
+      "status": "✅ 已完成",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-142",
+      "name": "案例库批量+10(累计16/84)",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-143",
+      "name": "公众号第五篇·淤泥红莲",
+      "status": "✅ 已完成",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-144",
+      "name": "公众号第六篇·大雁不是凤凰",
+      "status": "✅ 已完成",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-145",
+      "name": "公众号第七篇·七站巡礼",
+      "status": "✅ 已完成",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-146",
+      "name": "公众号系列1-7篇全部完成",
+      "status": "✅ 已完成",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-147",
+      "name": "卡牌游戏设计规范+线上化V1.0",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-148",
+      "name": "星月传奇·完整版",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-149",
+      "name": "84份案例→飞书Bitable",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-150",
+      "name": "knowledge_orchestrator.py激活",
+      "status": "✅ 已完成",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-151",
+      "name": "deep_read_processor.py激活",
+      "status": "✅ 已完成",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-152",
+      "name": "38篇论文→飞书文档",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-153",
+      "name": "星火:飞书Base测评试填验证",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-154",
+      "name": "漏斗L2:解读简版模板",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-155",
+      "name": "漏斗L2:邮件自动发送脚本",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-156",
+      "name": "产品:四层漏斗策略",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-157",
+      "name": "数字替身建设启动",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-158",
+      "name": "深度学习·W1三本",
+      "status": "✅ 已完成",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-159",
+      "name": "BASE:倒计时日志表每日自动更新",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-160",
+      "name": "BASE:五维测评完整流程测试",
+      "status": "✅ 已完成",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-161",
+      "name": "SYS:auto_token_report.py实装",
+      "status": "✅ 已完成",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-162",
+      "name": "SYS:auto_rituals.sh实装",
+      "status": "✅ 已完成",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-163",
+      "name": "SYS:knowledge_flywheel_pipeline.py评估",
+      "status": "✅ 已完成",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-164",
+      "name": "2026-05-27 雪球学习+雪球融合 全量完成",
+      "status": "✅ 已完成",
+      "priority": "P0"
+    },
+    {
+      "type": "task",
+      "id": "TASK-165",
+      "name": "【L1·文明】13个符号全量定位",
+      "status": "⏳ 进行中",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-166",
+      "name": "【L1·文明】两翼三脉产品线展开",
+      "status": "⏳ 进行中",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-167",
+      "name": "【L1·文明】火承土印因果律实现",
+      "status": "⏳ 进行中",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-168",
+      "name": "【L1·文明】金石拓印版本年轮",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-169",
+      "name": "【L1·文明】米白=纸产品隐喻",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-170",
+      "name": "【L1·文明】暗金=方法论历史深度",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-171",
+      "name": "【L2·根系】68Entry→决策剧场场景映射",
+      "status": "⏳ 进行中",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-172",
+      "name": "【L2·根系】8赛道参数→评分引擎校准",
+      "status": "⏳ 进行中",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-173",
+      "name": "【L2·根系】扣子6创业者公式→客户模拟",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-174",
+      "name": "【L2·根系】12×8冲突矩阵→审核标准",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-175",
+      "name": "【L3·土壤】日起课→驾驶舱自动同步",
+      "status": "⏳ 进行中",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-176",
+      "name": "【L3·土壤】飞轮日报→三人协作者",
+      "status": "⏳ 进行中",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-177",
+      "name": "【L3·土壤】翻书自动代谢通道",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-178",
+      "name": "【L3·土壤】单向门清单确立",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-179",
+      "name": "【L3·土壤】知识债务自动追踪",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-180",
+      "name": "【L4·骨架】评分引擎真实数据通道",
+      "status": "⏳ 进行中",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-181",
+      "name": "【L4·骨架】矛盾热力图动态化",
+      "status": "⏳ 进行中",
+      "priority": "P0·立即"
+    },
+    {
+      "type": "task",
+      "id": "TASK-182",
+      "name": "【L4·骨架】决策剧场真实数据场景",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-183",
+      "name": "【L4·骨架】干预方案模板引擎",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-184",
+      "name": "【L4·骨架】产品Roadmap生成",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-185",
+      "name": "【L5·枝叶】DQI双引擎仪表盘",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-186",
+      "name": "【L5·枝叶】MRI引擎自评报告",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-187",
+      "name": "【L5·枝叶】TI信任指数统一度量",
+      "status": "⏳ 进行中",
+      "priority": "P1·本周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-188",
+      "name": "【L5·枝叶】CI相变曲线可视化",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-189",
+      "name": "【L6·生长】替身自动知识分配",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-190",
+      "name": "【L6·生长】替身生长日志",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-191",
+      "name": "【L6·生长】联合审核标准自动繁殖",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-192",
+      "name": "【L6·生长】替身休眠唤醒机制",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-193",
+      "name": "【L7·生态】每周三生态审计",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-194",
+      "name": "【L7·生态】客户数据回流物理仓库",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "task",
+      "id": "TASK-195",
+      "name": "【L7·生态】年度行业报告雏形",
+      "status": "⏳ 进行中",
+      "priority": "P2·两周"
+    },
+    {
+      "type": "product",
+      "id": "PROD-001",
+      "name": "决策剧场",
+      "status": "精品",
+      "family": "镜"
+    },
+    {
+      "type": "product",
+      "id": "PROD-002",
+      "name": "衡·观局测评",
+      "status": "精品",
+      "family": "衡"
+    },
+    {
+      "type": "product",
+      "id": "PROD-003",
+      "name": "化学报告",
+      "status": "资料·归入知识库",
+      "family": "衡"
+    },
+    {
+      "type": "product",
+      "id": "PROD-004",
+      "name": "卡牌对局",
+      "status": "精品",
+      "family": "镜"
+    },
+    {
+      "type": "product",
+      "id": "PROD-005",
+      "name": "产品目录",
+      "status": "精品",
+      "family": "契"
+    },
+    {
+      "type": "product",
+      "id": "PROD-006",
+      "name": "自检清单",
+      "status": "资料·归入知识库",
+      "family": "衡"
+    },
+    {
+      "type": "product",
+      "id": "PROD-007",
+      "name": "五维雷达图",
+      "status": "线上",
+      "family": "衡"
+    },
+    {
+      "type": "product",
+      "id": "PROD-008",
+      "name": "关系温度计",
+      "status": "精品",
+      "family": "衡"
+    },
+    {
+      "type": "product",
+      "id": "PROD-009",
+      "name": "危机模拟",
+      "status": "精品",
+      "family": "镜"
+    },
+    {
+      "type": "product",
+      "id": "PROD-010",
+      "name": "Pre-0身体觉察",
+      "status": "已下架",
+      "family": "镜"
+    },
+    {
+      "type": "product",
+      "id": "PROD-011",
+      "name": "四骑士识别",
+      "status": "线上",
+      "family": "镜"
+    },
+    {
+      "type": "product",
+      "id": "PROD-012",
+      "name": "骑士卡牌",
+      "status": "线上",
+      "family": "镜"
+    },
+    {
+      "type": "product",
+      "id": "PROD-013",
+      "name": "匹配引擎",
+      "status": "精品",
+      "family": "镜"
+    },
+    {
+      "type": "product",
+      "id": "PROD-014",
+      "name": "元合伙",
+      "status": "线上",
+      "family": "契"
+    },
+    {
+      "type": "product",
+      "id": "PROD-015",
+      "name": "分割饼",
+      "status": "线上",
+      "family": "衡"
+    },
+    {
+      "type": "product",
+      "id": "PROD-016",
+      "name": "RPS风险剖面",
+      "status": "线上",
+      "family": "镜"
+    },
+    {
+      "type": "product",
+      "id": "PROD-017",
+      "name": "案例库",
+      "status": "线上",
+      "family": "契"
+    },
+    {
+      "type": "product",
+      "id": "PROD-018",
+      "name": "案例集群",
+      "status": "线上",
+      "family": "章"
+    },
+    {
+      "type": "product",
+      "id": "PROD-019",
+      "name": "星月传奇",
+      "status": "线上",
+      "family": "章"
+    },
+    {
+      "type": "product",
+      "id": "PROD-020",
+      "name": "星光方法论",
+      "status": "精品",
+      "family": "契"
+    },
+    {
+      "type": "product",
+      "id": "PROD-021",
+      "name": "星光体系",
+      "status": "线上",
+      "family": "契"
+    },
+    {
+      "type": "product",
+      "id": "PROD-022",
+      "name": "根脉溯源",
+      "status": "精品",
+      "family": "契"
+    },
+    {
+      "type": "product",
+      "id": "PROD-023",
+      "name": "驾驶舱V1",
+      "status": "精品",
+      "family": "觉"
+    },
+    {
+      "type": "product",
+      "id": "PROD-024",
+      "name": "驾驶舱V3",
+      "status": "精品",
+      "family": "觉"
+    },
+    {
+      "type": "product",
+      "id": "PROD-025",
+      "name": "飞轮引擎",
+      "status": "线上",
+      "family": "觉"
+    },
+    {
+      "type": "product",
+      "id": "PROD-026",
+      "name": "知识飞轮v1",
+      "status": "精品",
+      "family": "觉"
+    },
+    {
+      "type": "product",
+      "id": "PROD-027",
+      "name": "退出指南",
+      "status": "精品",
+      "family": "觉"
+    },
+    {
+      "type": "product",
+      "id": "PROD-028",
+      "name": "工作坊",
+      "status": "线上",
+      "family": "觉"
+    },
+    {
+      "type": "product",
+      "id": "PROD-029",
+      "name": "向导",
+      "status": "精品",
+      "family": "觉"
+    },
+    {
+      "type": "product",
+      "id": "PROD-030",
+      "name": "引导页",
+      "status": "精品",
+      "family": "觉"
+    },
+    {
+      "type": "product",
+      "id": "PROD-031",
+      "name": "符号体系",
+      "status": "线上",
+      "family": "契"
+    },
+    {
+      "type": "product",
+      "id": "PROD-032",
+      "name": "分享组件",
+      "status": "线上",
+      "family": "觉"
+    },
+    {
+      "type": "product",
+      "id": "PROD-033",
+      "name": "五维教学",
+      "status": "线上",
+      "family": "契"
+    },
+    {
+      "type": "product",
+      "id": "PROD-034",
+      "name": "全面诊断",
+      "status": "资料·归入知识库",
+      "family": "衡"
+    },
+    {
+      "type": "product",
+      "id": "PROD-035",
+      "name": "提案模板",
+      "status": "资料·归入知识库",
+      "family": "衡"
+    },
+    {
+      "type": "product",
+      "id": "PROD-036",
+      "name": "冬眠模式",
+      "status": "线上",
+      "family": "人"
+    },
+    {
+      "type": "product",
+      "id": "PROD-037",
+      "name": "决策教训",
+      "status": "线上",
+      "family": "衡"
+    },
+    {
+      "type": "product",
+      "id": "PROD-038",
+      "name": "首页",
+      "status": "线上",
+      "family": "人"
+    },
+    {
+      "type": "product",
+      "id": "PROD-039",
+      "name": "产品族谱",
+      "status": "线上",
+      "family": "契"
+    },
+    {
+      "type": "product",
+      "id": "PROD-040",
+      "name": "宝藏库",
+      "status": "线上",
+      "family": "章"
+    },
+    {
+      "type": "product",
+      "id": "PROD-041",
+      "name": "失败案例",
+      "status": "精品",
+      "family": "章"
+    },
+    {
+      "type": "product",
+      "id": "PROD-042",
+      "name": "心理量表",
+      "status": "精品",
+      "family": "衡"
+    },
+    {
+      "type": "product",
+      "id": "PROD-043",
+      "name": "密码生成器",
+      "status": "线上",
+      "family": "觉"
+    },
+    {
+      "type": "product",
+      "id": "PROD-044",
+      "name": "54天",
+      "status": "精品",
+      "family": "章"
+    },
+    {
+      "type": "product",
+      "id": "PROD-045",
+      "name": "满意解大学",
+      "status": "线上",
+      "family": "衡"
+    },
+    {
+      "type": "product",
+      "id": "PROD-046",
+      "name": "关于我们",
+      "status": "线上",
+      "family": "道"
+    },
+    {
+      "type": "product",
+      "id": "PROD-047",
+      "name": "段位体系",
+      "status": "线上",
+      "family": "觉"
+    },
+    {
+      "type": "product",
+      "id": "PROD-048",
+      "name": "生命指数",
+      "status": "线上",
+      "family": "章"
+    },
+    {
+      "type": "product",
+      "id": "PROD-049",
+      "name": "认证体系",
+      "status": "线上",
+      "family": "觉"
+    },
+    {
+      "type": "product",
+      "id": "PROD-050",
+      "name": "竞品分析",
+      "status": "线上",
+      "family": "衡"
+    },
+    {
+      "type": "document",
+      "id": "DOC-001",
+      "name": "满意解 信息架构与数据字典 V2",
+      "category": "系统架构"
+    },
+    {
+      "type": "document",
+      "id": "DOC-002",
+      "name": "满意红 七层免疫架构",
+      "category": "系统架构"
+    },
+    {
+      "type": "document",
+      "id": "DOC-003",
+      "name": "前端JS调试血泪教训 2026-05-29",
+      "category": "技术经验"
+    },
+    {
+      "type": "document",
+      "id": "DOC-004",
+      "name": "前端与系统工程完整经验总结",
+      "category": "技术经验"
+    },
+    {
+      "type": "document",
+      "id": "DOC-005",
+      "name": "全量替身独立审核报告 过去5天",
+      "category": "替身审核"
+    },
+    {
+      "type": "document",
+      "id": "DOC-006",
+      "name": "全量替身激活报告 05-29 04:13",
+      "category": "替身激活"
+    },
+    {
+      "type": "document",
+      "id": "DOC-007",
+      "name": "蓝军独立审计报告 过去5天",
+      "category": "审计报告"
+    },
+    {
+      "type": "document",
+      "id": "DOC-008",
+      "name": "数字替身驾驶舱+客户替身补建报告",
+      "category": "替身建设"
+    },
+    {
+      "type": "document",
+      "id": "DOC-009",
+      "name": "客户替身产品审核整合报告",
+      "category": "客户审核"
+    },
+    {
+      "type": "document",
+      "id": "DOC-010",
+      "name": "知识遗产盘点 满意姐+扣子 V1.0",
+      "category": "知识管理"
+    },
+    {
+      "type": "document",
+      "id": "DOC-011",
+      "name": "满意解核心词汇产权表 V1.0",
+      "category": "品牌管理"
+    },
+    {
+      "type": "document",
+      "id": "DOC-012",
+      "name": "DACI元治理框架 V1.0 草案",
+      "category": "治理框架"
+    },
+    {
+      "type": "document",
+      "id": "DOC-013",
+      "name": "VC投后访谈提纲 V1.0 草案",
+      "category": "客户研究"
+    },
+    {
+      "type": "document",
+      "id": "DOC-014",
+      "name": "YTT战略建议 1页纸决策提交",
+      "category": "战略决策"
+    },
+    {
+      "type": "document",
+      "id": "DOC-015",
+      "name": "数字交叉验证结果 P0-2",
+      "category": "验证审计"
+    },
+    {
+      "type": "document",
+      "id": "DOC-016",
+      "name": "Git提交规范 V1.0",
+      "category": "工程规范"
+    },
+    {
+      "type": "document",
+      "id": "DOC-017",
+      "name": "评分引擎P0缺陷清单",
+      "category": "质量审计"
+    },
+    {
+      "type": "document",
+      "id": "DOC-018",
+      "name": "驾驶舱V2 需求分析与架构设计",
+      "category": "系统设计"
+    },
+    {
+      "type": "document",
+      "id": "DOC-019",
+      "name": "驾驶舱V2 架构补充 知识标准化 事件驱动 数字孪生",
+      "category": "系统设计"
+    },
+    {
+      "type": "document",
+      "id": "DOC-020",
+      "name": "驾驶舱V3 自主知识飞轮引擎",
+      "category": "系统设计"
+    },
+    {
+      "type": "document",
+      "id": "DOC-021",
+      "name": "驾驶舱V4 360度管理驾驶舱",
+      "category": "系统设计"
+    },
+    {
+      "type": "document",
+      "id": "DOC-022",
+      "name": "驾驶舱V5 数据初始化与稳健架构",
+      "category": "系统设计"
+    },
+    {
+      "type": "document",
+      "id": "DOC-023",
+      "name": "驾驶舱V6 活的系统",
+      "category": "系统设计"
+    },
+    {
+      "type": "document",
+      "id": "DOC-024",
+      "name": "网站结构分析报告 05-29",
+      "category": "系统审计"
+    },
+    {
+      "type": "document",
+      "id": "DOC-025",
+      "name": "满意红 自我描述",
+      "category": "替身定义"
+    },
+    {
+      "type": "document",
+      "id": "DOC-026",
+      "name": "信义观修复 重读满意姐原文",
+      "category": "品牌修复"
+    },
+    {
+      "type": "document",
+      "id": "DOC-027",
+      "name": "5日精品化任务 V1.0",
+      "category": "行动计划"
+    },
+    {
+      "type": "document",
+      "id": "DOC-028",
+      "name": "扣子资料整理报告",
+      "category": "知识管理"
+    },
+    {
+      "type": "document",
+      "id": "DOC-029",
+      "name": "Week1全量审计报告",
+      "category": "审计报告"
+    },
+    {
+      "type": "document",
+      "id": "DOC-030",
+      "name": "自建Skills原型设计 V1.0",
+      "category": "系统设计"
+    },
+    {
+      "type": "customer",
+      "id": "CUST-001",
+      "name": "硬科技创始人",
+      "industry": "硬科技"
+    },
+    {
+      "type": "customer",
+      "id": "CUST-002",
+      "name": "VC投后负责人",
+      "industry": "风险投资"
+    },
+    {
+      "type": "customer",
+      "id": "CUST-003",
+      "name": "律所合伙人",
+      "industry": "法律服务"
+    },
+    {
+      "type": "customer",
+      "id": "CUST-004",
+      "name": "政府园区负责人",
+      "industry": "公共管理"
+    },
+    {
+      "type": "customer",
+      "id": "CUST-005",
+      "name": "独立董事/顾问",
+      "industry": "咨询"
+    }
+  ],
+  "audit_log": [
+    {
+      "timestamp": "2026-05-31T17:50:22.889094+08:00",
+      "action": "dashboard_v12_data_rebuild",
+      "operator": "满意红",
+      "summary": "驾驶舱v12数据重建: 315产品·195任务·12556连接"
+    }
+  ]
 }

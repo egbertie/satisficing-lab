@@ -343,6 +343,7 @@ body {
   <div class="tab-panel" id="tab-flywheel"></div>
   <div class="tab-panel" id="tab-journey"></div>
   <div class="tab-panel" id="tab-rd"></div>
+  <div class="tab-panel" id="tab-auto"></div>
   <div class="tab-panel" id="tab-chemistry"></div>
   <div class="tab-panel" id="tab-help"></div>
 
@@ -435,6 +436,7 @@ function boot() {
     renderChemistry();
     renderCustomerJourney();
     renderRDPipeline();
+    renderAutoEngine();
     renderHelp();
     switchTab('tab-overview');
   }).catch(function(e){
@@ -458,6 +460,7 @@ function buildNav() {
     {id:'tab-cities', label:'🏙️ 城市市场'},
     {id:'tab-journey', label:'🗺️ 客户旅程'},
     {id:'tab-rd', label:'🔬 知识研发'},
+    {id:'tab-auto', label:'⚡ 自动化引擎'},
     {id:'tab-flows', label:'🔌 流仪表板'},
     {id:'tab-flywheel', label:'♻️ 飞轮运转'},
     {id:'tab-chemistry', label:'🧬 化学与控制'},
@@ -2138,6 +2141,62 @@ function renderChemistry() {
 }
 
 /* ===== 🆘 帮助面板 · 用户/管理者/开发者三视角 ===== */
+/* 面板: 自动化引擎 */
+function renderAutoEngine() {
+  var auto = EIDX.auto_engine || {};
+  var cronsData = auto.crons || {};
+  var cronList = EIDX.crons || [];
+  var scripts = EIDX.scripts || [];
+  var workflows = EIDX.workflows || [];
+  var pipelines = EIDX.knowledge_pipeline || [];
+  var rt = EIDX.realtime_metrics || {};
+  var freshness = rt.data_freshness || {};
+  var audit = EIDX.audit_log || [];
+
+  var h = '<div class="panel-header"><h2>⚡ 自动化引擎 · 系统运行状态</h2><p style="font-size:0.75em;color:var(--ink-light);margin-top:4px">Cron:'+cronsData.total+'/'+cronsData.active+'活 · 脚本:'+scripts.length+' · 工作流:'+workflows.length+' · 管道:'+pipelines.length+' · 数据:'+freshness.status+'</p></div>';
+
+  // 状态总览卡
+  var healthColor = auto.overall_health === 'operational' ? '#3D7A4F' : (auto.overall_health === 'degraded' ? '#C2780A' : '#C23B22');
+  h += '<div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:14px">';
+  h += '<div class="stat-card"><div class="stat-num" style="color:'+healthColor+'">● '+(auto.overall_health||'?')+'</div><div class="stat-label">🟢 系统状态</div><div style="font-size:0.6em;color:var(--ink-lighter)">'+(auto.uptime_percent||100)+'%在线</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+(cronsData.health_score||0)+'%</div><div class="stat-label">⏱️ Cron健康</div><div style="font-size:0.6em;color:var(--ink-lighter)">'+cronsData.total+'/'+cronsData.active+'活跃</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+(rt.performance||{}).entities_index_size_mb+'MB</div><div class="stat-label">📊 数据规模</div><div style="font-size:0.6em;color:var(--ink-lighter)">'+(rt.performance||{}).total_entities+'实体</div></div>';
+  h += '<div class="stat-card"><div class="stat-num" style="color:#3D7A4F">'+freshness.status+'</div><div class="stat-label">🔄 数据新鲜度</div><div style="font-size:0.6em;color:var(--ink-lighter)">'+(freshness.seconds_since_update||0)+'s前更新</div></div>';
+  h += '</div>';
+
+  // Cron状态表
+  h += '<div class="section-head">⏱️ Cron任务 ('+cronList.length+')</div>';
+  h += '<div style="overflow-x:auto"><table class="data-table" style="width:100%;font-size:0.75em;margin-bottom:14px">';
+  h += '<thead><tr><th>Cron名</th><th>频率</th><th>用途</th><th>状态</th></tr></thead><tbody>';
+  for (var i=0; i<cronList.length; i++) {
+    var cr = cronList[i];
+    var status = cr.status||'?';
+    var sc = status==='active'?'#3D7A4F':(status==='failed'?'#C23B22':'#888');
+    h += '<tr><td style="font-weight:500">'+escHtml(cr.name)+'</td><td style="font-size:0.8em">'+escHtml(cr.frequency||cr.schedule||'-')+'</td><td style="font-size:0.75em;color:var(--ink-light)">'+escHtml(cr.purpose||cr.description||'-')+'</td><td style="color:'+sc+'">● '+escHtml(status)+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
+  // 脚本+工作流+管道统计
+  h += '<div class="section-head">📜 脚本·工作流·管道</div>';
+  h += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">';
+  h += '<div class="stat-card" style="flex:1;min-width:140px"><div class="stat-num">'+scripts.length+'</div><div class="stat-label">📜 脚本</div></div>';
+  h += '<div class="stat-card" style="flex:1;min-width:140px"><div class="stat-num">'+workflows.length+'</div><div class="stat-label">🔄 工作流</div></div>';
+  h += '<div class="stat-card" style="flex:1;min-width:140px"><div class="stat-num">'+pipelines.length+'</div><div class="stat-label">🌊 管道</div></div>';
+  h += '</div>';
+
+  // 审计日志
+  h += '<div class="section-head">📝 操作日志 ('+audit.length+')</div>';
+  h += '<div style="overflow-x:auto"><table class="data-table" style="width:100%;font-size:0.7em">';
+  h += '<thead><tr><th>时间</th><th>操作</th><th>摘要</th></tr></thead><tbody>';
+  for (var i=Math.max(0, audit.length-10); i<audit.length; i++) {
+    var a = audit[i];
+    h += '<tr><td style="white-space:nowrap">'+escHtml((a.timestamp||'').substring(0,19))+'</td><td>'+escHtml(a.action||'')+'</td><td style="font-size:0.8em;color:var(--ink-light)">'+escHtml(a.summary||'')+'</td></tr>';
+  }
+  h += '</tbody></table></div>';
+
+  document.getElementById('tab-auto').innerHTML = h;
+}
+
 function renderHelp() {
   var m = EIDX.meta || {}, prods = EIDX.products || [], connects = EIDX.connections || [], cities = EIDX.cities || [], flows = EIDX.flows || {}, ls = m.llm_stats || {}, heat = m.heating || {}, chem = m.chemistry || {}, fw = m.flywheel || {}, org = m.orchestration_health || {}, pc = m.perpetual_control || {};
   var totalScripts = (fw.total_scripts||14) + 4; /* +4新控制论 */
