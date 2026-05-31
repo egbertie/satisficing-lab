@@ -448,25 +448,32 @@ function boot() {
 
 /* ===== 标签导航 ===== */
 function buildNav() {
+  // 按管理层级排序: 战略→执行→资产→分析→工程→帮助
   var ts = [
-    {id:'tab-overview', label:'📊 总览'},
-    {id:'tab-products', label:'📦 产品资产 ('+PRODS.length+')'},
-    {id:'tab-tasks', label:'✅ 待办任务 ('+(TSK?TSK.total_open:'?')+')'},
-    {id:'tab-health', label:'🫀 健康仪表'},
-    {id:'tab-activity', label:'📜 活动日志'},
-    {id:'tab-customers', label:'👥 客户视图'},
-    {id:'tab-knowledge', label:'📚 知识'},
-    {id:'tab-governance', label:'⚖️ 治理'},
-    {id:'tab-organization', label:'🏛️ 组织'},
-    {id:'tab-archaeology', label:'🏺 考古'},
-    {id:'tab-cities', label:'🏙️ 城市市场'},
+    // 战略层: 一眼看全局
+    {id:'tab-overview', label:'📊 总览 (30")'},
+    // 执行层: 产品·任务·客户
+    {id:'tab-products', label:'📦 产品'},
+    {id:'tab-tasks', label:'✅ 任务'},
+    {id:'tab-customers', label:'👥 客户'},
     {id:'tab-journey', label:'🗺️ 客户旅程'},
-    {id:'tab-rd', label:'🔬 知识研发'},
-    {id:'tab-auto', label:'⚡ 自动化引擎'},
+    // 资产层: 知识·组织·城市·考古
+    {id:'tab-knowledge', label:'📚 知识库'},
+    {id:'tab-organization', label:'🏛️ 组织'},
+    {id:'tab-cities', label:'🏙️ 城市'},
+    {id:'tab-archaeology', label:'🏺 考古'},
+    // 分析层: 健康·活动·治理·流·飞轮
+    {id:'tab-health', label:'🫀 健康'},
+    {id:'tab-activity', label:'📜 活动'},
+    {id:'tab-governance', label:'⚖️ 治理'},
+    {id:'tab-flows', label:'🔌 流'},
+    {id:'tab-flywheel', label:'♻️ 飞轮'},
+    // 工程层: 研发·自动化·控制论·化学
+    {id:'tab-rd', label:'🔬 研发'},
+    {id:'tab-auto', label:'⚡ 自动化'},
     {id:'tab-cyber', label:'🛡️ 控制论'},
-    {id:'tab-flows', label:'🔌 流仪表板'},
-    {id:'tab-flywheel', label:'♻️ 飞轮运转'},
-    {id:'tab-chemistry', label:'🧬 化学与控制'},
+    {id:'tab-chemistry', label:'🧬 化学'},
+    // 帮助层
     {id:'tab-help', label:'🆘 帮助'},
     {id:'tab-admin', label:'⚙️ 管理后台', ext:true, href:'admin-overview.html'}
   ];
