@@ -30,8 +30,9 @@ body{font-family:-apple-system,"PingFang SC","Noto Sans SC","Microsoft YaHei",sa
   border-radius:20px; font-size:13px; font-weight:600; letter-spacing:.5px; margin-bottom:20px;
 }
 .hero h1{
-  font-size:clamp(28px,5vw,48px); font-weight:700; color:var(--text);
-  line-height:1.25; max-width:640px; margin-bottom:12px; letter-spacing:-.5px;
+  font-size:clamp(26px,4.5vw,48px); font-weight:700; color:var(--text);
+  line-height:1.25; max-width:720px; margin-bottom:12px; letter-spacing:-.5px;
+  white-space:nowrap;
 }
 .hero h1 em{font-style:normal;color:var(--red)}
 .hero .sub{
@@ -178,7 +179,7 @@ body{font-family:-apple-system,"PingFang SC","Noto Sans SC","Microsoft YaHei",sa
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
   .hero{padding:40px 20px;min-height:80vh}
-  .hero h1{font-size:26px}
+  .hero h1{font-size:22px;white-space:nowrap}
   .solution-grid{grid-template-columns:1fr}
   .prod-grid{grid-template-columns:repeat(2,1fr)}
   .section{padding:56px 16px}
@@ -188,7 +189,7 @@ body{font-family:-apple-system,"PingFang SC","Noto Sans SC","Microsoft YaHei",sa
 }
 @media(max-width:400px){
   .prod-grid{grid-template-columns:1fr}
-  .hero h1{font-size:22px}
+  .hero h1{font-size:17px;white-space:nowrap}
   .cta-btn{padding:14px 28px;font-size:15px}
 }
 </style>
@@ -216,6 +217,40 @@ body{font-family:-apple-system,"PingFang SC","Noto Sans SC","Microsoft YaHei",sa
     <a href="assessment.html" style="display:inline-flex;align-items:center;gap:4px;padding:8px 18px;background:var(--red);color:#fff;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none">🔍 我是新来的 · 先了解自己</a>
     <a href="radar.html" style="display:inline-flex;align-items:center;gap:4px;padding:8px 18px;background:var(--white);color:var(--red);border:1.5px solid var(--red);border-radius:20px;font-size:13px;font-weight:600;text-decoration:none">🧭 做过自评 · 看深度诊断</a>
     <a href="cards-play.html" style="display:inline-flex;align-items:center;gap:4px;padding:8px 18px;background:var(--white);color:var(--gold);border:1.5px solid var(--gold);border-radius:20px;font-size:13px;font-weight:600;text-decoration:none">🎴 想深入探讨 · 使用工具</a>
+  </div>
+</section>
+
+<!-- ===== 情况分诊台 ===== -->
+<section style="max-width:900px;margin:0 auto;padding:0 24px 48px;text-align:center">
+  <div class="section-label">你现在的处境是？</div>
+  <h2 style="margin-bottom:8px">不同处境，不同方案</h2>
+  <p style="font-size:14px;color:var(--text2);margin-bottom:24px">选一个最接近你的状态，我们帮你找对入口</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px">
+    <a href="assessment.html" style="background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:20px;text-decoration:none;color:var(--text);text-align:left;transition:all .2s">
+      <div style="font-size:1.4em;margin-bottom:6px">🔍</div>
+      <div style="font-weight:600;font-size:0.95em">刚认识一个可能的合伙人</div>
+      <div style="font-size:0.78em;color:var(--text2);margin-top:4px">想确认对方是否合适 → 五维自评</div>
+    </a>
+    <a href="cards-play.html" style="background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:20px;text-decoration:none;color:var(--text);text-align:left;transition:all .2s">
+      <div style="font-size:1.4em;margin-bottom:6px">🤔</div>
+      <div style="font-weight:600;font-size:0.95em">合作一段时间了，感觉有些不对劲</div>
+      <div style="font-size:0.78em;color:var(--text2);margin-top:4px">想弄清楚问题在哪 → 关系温度计</div>
+    </a>
+    <a href="slicing-pie.html" style="background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:20px;text-decoration:none;color:var(--text);text-align:left;transition:all .2s">
+      <div style="font-size:1.4em;margin-bottom:6px">📊</div>
+      <div style="font-weight:600;font-size:0.95em">正在谈股权分配，怕踩坑</div>
+      <div style="font-size:0.78em;color:var(--text2);margin-top:4px">想要一个公平的量化方案 → 分割饼</div>
+    </a>
+    <a href="exit-guide.html" style="background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:20px;text-decoration:none;color:var(--text);text-align:left;transition:all .2s">
+      <div style="font-size:1.4em;margin-bottom:6px">💔</div>
+      <div style="font-weight:600;font-size:0.95em">感觉可能走到分手这一步了</div>
+      <div style="font-size:0.78em;color:var(--text2);margin-top:4px">想知道怎么体面退出 → 退出指引</div>
+    </a>
+    <a href="go.html" style="background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:20px;text-decoration:none;color:var(--text);text-align:left;transition:all .2s">
+      <div style="font-size:1.4em;margin-bottom:6px">🌟</div>
+      <div style="font-weight:600;font-size:0.95em">自己的问题解决了，想帮助别人</div>
+      <div style="font-size:0.78em;color:var(--text2);margin-top:4px">成为方法传播者 → 决策通道</div>
+    </a>
   </div>
 </section>
 
