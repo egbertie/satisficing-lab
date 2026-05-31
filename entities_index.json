@@ -22238,7 +22238,15 @@
       "max_visible_per_stage": 5
     },
     "customer_facing": 31,
-    "core_products": 11
+    "core_products": 11,
+    "lifecycle_v5": {
+      "version": "5.0",
+      "total_stages": 10,
+      "front_stages": 5,
+      "back_stages": 5,
+      "channels": 6,
+      "updated_at": "2026-05-31T13:32:46.259406+08:00"
+    }
   },
   "products": [
     {
@@ -262935,7 +262943,12 @@
           "type": "activation",
           "score": 72
         }
-      ]
+      ],
+      "front_stage": "转化",
+      "front_progress": 80,
+      "acquisition_source": "直接访问",
+      "first_touchpoint": "品牌首页",
+      "first_touch_date": "2026-05-28"
     },
     {
       "customer_id": "CUST-002",
@@ -262977,7 +262990,12 @@
           "event": "首次访问品牌首页",
           "type": "visit"
         }
-      ]
+      ],
+      "front_stage": "转化",
+      "front_progress": 80,
+      "acquisition_source": "直接访问",
+      "first_touchpoint": "品牌首页",
+      "first_touch_date": "2026-05-29"
     },
     {
       "customer_id": "CUST-003",
@@ -263019,7 +263037,12 @@
           "event": "首次访问品牌首页",
           "type": "visit"
         }
-      ]
+      ],
+      "front_stage": "转化",
+      "front_progress": 80,
+      "acquisition_source": "直接访问",
+      "first_touchpoint": "品牌首页",
+      "first_touch_date": "2026-05-30"
     },
     {
       "customer_id": "CUST-004",
@@ -263067,7 +263090,12 @@
           "event": "浏览核心产品页面",
           "type": "content"
         }
-      ]
+      ],
+      "front_stage": "转化",
+      "front_progress": 80,
+      "acquisition_source": "直接访问",
+      "first_touchpoint": "品牌首页",
+      "first_touch_date": "2026-05-27"
     },
     {
       "customer_id": "CUST-005",
@@ -263108,7 +263136,12 @@
           "event": "首次访问",
           "type": "visit"
         }
-      ]
+      ],
+      "front_stage": "转化",
+      "front_progress": 80,
+      "acquisition_source": "直接访问",
+      "first_touchpoint": "品牌首页",
+      "first_touch_date": "2026-05-30"
     }
   ],
   "health_score_model": {
@@ -263813,5 +263846,363 @@
       "产品不是越多越好——是「对的产品在对的时间出现」",
       "产品层层解锁——给客户清晰的晋级路径，而非一次性扔315个"
     ]
+  },
+  "full_lifecycle": {
+    "version": "5.0",
+    "philosophy": "客户生命周期从营销第一刻开始，不是从客户来找我们开始",
+    "created_at": "2026-05-31T13:32:46.259406+08:00",
+    "total_stages": 10,
+    "front_half": {
+      "name": "前端获客",
+      "stages": [
+        "宣发",
+        "触达",
+        "吸引",
+        "转化",
+        "导入"
+      ],
+      "description": "从0到1——让目标客户知道我们、对我们产生兴趣、并进入体系"
+    },
+    "back_half": {
+      "name": "后端深耕",
+      "stages": [
+        "发现",
+        "评估",
+        "尝试",
+        "深入",
+        "共契"
+      ],
+      "description": "从1到N——让客户在体系中成长、深化、最终成为传播者"
+    },
+    "stages": [
+      {
+        "id": "stage-00",
+        "name": "宣发",
+        "icon": "📡",
+        "half": "front",
+        "question": "潜在客户在哪里能看到我们？",
+        "description": "内容发布、渠道投放、品牌曝光——这是客户知道我们存在的第一刻",
+        "key_channels": [
+          "微信公众号/知乎/LinkedIn",
+          "行业峰会/闭门活动",
+          "VC/园区/律所渠道合作",
+          "创始人个人品牌",
+          "SEO/博客/白皮书"
+        ],
+        "key_metrics": [
+          "内容发布量",
+          "渠道覆盖数",
+          "品牌搜索量",
+          "提及率"
+        ],
+        "content_types": [
+          "行业洞察文章",
+          "方法论白皮书",
+          "案例分析",
+          "创始人访谈",
+          "数据报告"
+        ],
+        "automation": {
+          "trigger": "周度",
+          "action": "内容发布日历·渠道触达检查·品牌健康度扫描"
+        }
+      },
+      {
+        "id": "stage-01",
+        "name": "触达",
+        "icon": "👀",
+        "half": "front",
+        "question": "谁看到了我们的内容？",
+        "description": "目标客户通过某个渠道看到/听到我们——可能是文章、活动、推荐、搜索",
+        "key_channels": [
+          "微信阅读/转发",
+          "LinkedIn浏览/互动",
+          "活动签到/名片交换",
+          "VC推荐/LP介绍",
+          "搜索引擎/直接访问"
+        ],
+        "key_metrics": [
+          "网页访问量",
+          "文章阅读量",
+          "活动参与人数",
+          "推荐来源追踪"
+        ],
+        "trigger_events": [
+          "首次访问品牌首页",
+          "首次阅读方法论文章",
+          "首次参加线下/线上活动"
+        ],
+        "automation": {
+          "trigger": "每日",
+          "action": "访问来源追踪·内容效果分析·渠道转化率计算"
+        }
+      },
+      {
+        "id": "stage-02",
+        "name": "吸引",
+        "icon": "💡",
+        "half": "front",
+        "question": "客户有没有产生兴趣？",
+        "description": "客户不只是看到——他们开始点击、阅读、停留、探索更多内容",
+        "key_actions": [
+          "深度阅读>3分钟",
+          "浏览多页面",
+          "下载/收藏内容",
+          "关注/订阅",
+          "搜索品牌名"
+        ],
+        "key_metrics": [
+          "平均停留时长",
+          "跳出率",
+          "页面浏览深度",
+          "回访率"
+        ],
+        "hook_content": [
+          "65%失败源于合伙人的数据冲击",
+          "五维决策框架的直观可视化",
+          "真实案例的故事共鸣",
+          "3分钟自评的零门槛体验"
+        ],
+        "automation": {
+          "trigger": "实时",
+          "action": "浏览行为追踪·兴趣度评分·个性化内容推荐"
+        }
+      },
+      {
+        "id": "stage-03",
+        "name": "转化",
+        "icon": "⚡",
+        "half": "front",
+        "question": "客户愿意采取行动了吗？",
+        "description": "从「感兴趣」到「愿意试一试」——完成自评、留下信息、首次互动",
+        "key_actions": [
+          "完成五维自评",
+          "预约咨询",
+          "留下联系方式",
+          "分享给合伙人",
+          "加入内测"
+        ],
+        "key_metrics": [
+          "自评完成率",
+          "转化率(访问→自评)",
+          "咨询预约量",
+          "信息留存量"
+        ],
+        "conversion_barriers": [
+          "自评需要多久？(3分钟——立刻消除顾虑)",
+          "数据安全吗？(隐私政策——建立信任)",
+          "免费吗？(是——降低门槛)"
+        ],
+        "automation": {
+          "trigger": "事件驱动",
+          "action": "完成自评→自动发送报告·未完成→24h提醒·预约→自动确认+日历"
+        }
+      },
+      {
+        "id": "stage-04",
+        "name": "导入",
+        "icon": "🚪",
+        "half": "front",
+        "question": "客户顺利进入体系了吗？",
+        "description": "客户完成首次转化后，被引导进入完整的使用体验——了解框架、接触工具",
+        "key_actions": [
+          "查看自评报告",
+          "了解五维框架",
+          "浏览产品目录",
+          "首次使用工具",
+          "设定目标"
+        ],
+        "key_metrics": [
+          "报告查看率",
+          "首次工具使用",
+          "导入完成率",
+          "Day1留存"
+        ],
+        "onboarding_path": [
+          "自评报告(立即看)→五维框架(3分钟了解)→推荐下一步(个性化)→第一个工具(轻松开始)"
+        ],
+        "automation": {
+          "trigger": "转化后即时",
+          "action": "个性化导入引导·Day1邮件序列·首次工具推荐"
+        }
+      }
+    ]
+  },
+  "acquisition_engine": {
+    "version": "1.0",
+    "created_at": "2026-05-31T13:32:46.259406+08:00",
+    "channels": [
+      {
+        "id": "CH-001",
+        "name": "创始人IP",
+        "type": "内容",
+        "priority": "P0",
+        "description": "Egbertie的个人品牌——LinkedIn+公众号+知乎+行业演讲",
+        "target_audience": "硬科技创始人·VC合伙人",
+        "content_calendar": "每周1篇深度文章 + 每日LinkedIn互动",
+        "expected_reach": "500-2000/篇",
+        "cost": "时间成本",
+        "metrics": {
+          "followers": 0,
+          "avg_views": 0,
+          "leads_generated": 0
+        },
+        "status": "待启动"
+      },
+      {
+        "id": "CH-002",
+        "name": "微信公众号",
+        "type": "内容",
+        "priority": "P1",
+        "description": "满意解研究所官方公众号——方法论·案例·工具介绍",
+        "target_audience": "创业者·企业管理者",
+        "content_calendar": "每周2篇(1篇深度+1篇工具介绍)",
+        "expected_reach": "200-1000/篇",
+        "cost": "时间成本",
+        "metrics": {
+          "followers": 0,
+          "avg_reads": 0,
+          "shares": 0
+        },
+        "status": "待启动"
+      },
+      {
+        "id": "CH-003",
+        "name": "行业渠道合作",
+        "type": "合作伙伴",
+        "priority": "P0",
+        "description": "VC投后团队·产业园区·律所·会计师事务所——推荐客户",
+        "target_audience": "VC投后负责人·园区经理·律所合伙人",
+        "content_calendar": "季度合作伙伴沟通",
+        "expected_reach": "10-30/月",
+        "cost": "关系维护",
+        "metrics": {
+          "partners": 0,
+          "referrals": 0,
+          "conversion": 0
+        },
+        "status": "待启动"
+      },
+      {
+        "id": "CH-004",
+        "name": "行业活动/闭门会",
+        "type": "线下",
+        "priority": "P1",
+        "description": "硬科技创业闭门讨论·合伙人关系工作坊·VC投后沙龙",
+        "target_audience": "创始人·投资人",
+        "content_calendar": "月度1次",
+        "expected_reach": "15-30/场",
+        "cost": "场地+茶歇",
+        "metrics": {
+          "events": 0,
+          "attendees": 0,
+          "leads": 0
+        },
+        "status": "待启动"
+      },
+      {
+        "id": "CH-005",
+        "name": "SEO/内容沉淀",
+        "type": "内容",
+        "priority": "P2",
+        "description": "GitHub Pages SEO优化·知乎长文·白皮书下载·搜索引擎关键词",
+        "target_audience": "搜索「合伙人冲突」「创始人决策」的用户",
+        "content_calendar": "持续优化",
+        "expected_reach": "50-200/月",
+        "cost": "时间成本",
+        "metrics": {
+          "organic_traffic": 0,
+          "keyword_rankings": 0
+        },
+        "status": "待启动"
+      },
+      {
+        "id": "CH-006",
+        "name": "口碑/推荐",
+        "type": "社交",
+        "priority": "P1",
+        "description": "已有客户推荐新客户——最优质的获客渠道",
+        "target_audience": "共契阶段的客户",
+        "content_calendar": "持续激励",
+        "expected_reach": "不定",
+        "cost": "推荐激励",
+        "metrics": {
+          "referrals": 0,
+          "conversion": 0
+        },
+        "status": "待启动"
+      }
+    ],
+    "funnel_stages": {
+      "宣发": {
+        "channels": [
+          "CH-001",
+          "CH-002",
+          "CH-003",
+          "CH-004",
+          "CH-005"
+        ],
+        "target_monthly": 5000
+      },
+      "触达": {
+        "expected_rate": "20%",
+        "target_monthly": 1000
+      },
+      "吸引": {
+        "expected_rate": "30%",
+        "target_monthly": 300
+      },
+      "转化": {
+        "expected_rate": "20%",
+        "target_monthly": 60
+      },
+      "导入": {
+        "expected_rate": "70%",
+        "target_monthly": 42
+      }
+    },
+    "content_assets": {
+      "evergreen": [
+        {
+          "title": "65%的创业失败源于合伙人冲突——数据与真相",
+          "type": "数据冲击",
+          "target": "宣发→触达"
+        },
+        {
+          "title": "五维决策框架白皮书",
+          "type": "方法论",
+          "target": "触达→吸引"
+        },
+        {
+          "title": "从握手到翻脸: 合伙人关系的12个转折信号",
+          "type": "故事共鸣",
+          "target": "触达→吸引"
+        },
+        {
+          "title": "3分钟了解你的决策模式",
+          "type": "互动体验",
+          "target": "吸引→转化"
+        },
+        {
+          "title": "真实案例: 某硬科技创始团队的合伙人危机与解决",
+          "type": "社会证明",
+          "target": "吸引→转化"
+        }
+      ],
+      "lead_magnets": [
+        {
+          "title": "合伙人决策前自检清单(PDF)",
+          "gate": "留邮箱"
+        },
+        {
+          "title": "五维决策自评(在线)",
+          "gate": "无需注册"
+        },
+        {
+          "title": "合伙人关系健康度快速评估",
+          "gate": "3分钟免费"
+        }
+      ]
+    }
   }
 }

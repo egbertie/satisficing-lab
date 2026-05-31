@@ -1443,7 +1443,100 @@ function renderCustomerJourney() {
   var stages5 = (EIDX.customer_journey || {}).stages || [];
   var mh = (EIDX.meta || {}).customer_management_v3 || {};
 
-  var h = '<div class="panel-header"><h2>🗺️ 客户360 · 独立客户流管理 v3.0</h2></div>';
+  var lifecycle = EIDX.full_lifecycle || {};
+  var lfStages = lifecycle.stages || [];
+  var acqEngine = EIDX.acquisition_engine || {};
+  var acqChannels = acqEngine.channels || [];
+  var acqFunnel = acqEngine.funnel_stages || {};
+  var acqContent = acqEngine.content_assets || {};
+  var frontStages5 = lfStages.filter(function(s){return s.half==='front';});
+  var backStages5 = lfStages.filter(function(s){return s.half==='back';});
+
+  var h = '<div class="panel-header"><h2>🗺️ 客户360 · 全生命周期 v5.0</h2><p style="font-size:0.78em;color:var(--ink-light)">10阶段完整链路: 宣发→触达→吸引→转化→导入→发现→评估→尝试→深入→共契</p></div>';
+
+  // ==== L1: 10阶段总览条 ====
+  h += '<div style="display:flex;gap:4px;overflow-x:auto;padding:8px 0;margin-bottom:16px;-webkit-overflow-scrolling:touch">';
+  for (var i = 0; i < lfStages.length; i++) {
+    var ls = lfStages[i];
+    var isFront = ls.half === 'front';
+    var bg = isFront ? 'rgba(194,59,34,.08)' : 'rgba(184,134,11,.08)';
+    var bd = isFront ? 'var(--accent-red)' : 'var(--accent-gold)';
+    h += '<div style="flex:1;min-width:70px;text-align:center;padding:8px 4px;background:'+bg+';border-radius:8px;border:1px solid '+bd+';font-size:0.65em;flex-shrink:0">';
+    h += '<div style="font-size:1.2em">'+escHtml(ls.icon)+'</div>';
+    h += '<div style="font-weight:600;margin-top:2px">'+escHtml(ls.name)+'</div>';
+    h += '</div>';
+  }
+  h += '</div>';
+
+  // ==== 获客引擎概览 (前半段) ====
+  h += '<div class="section-head">📡 前端获客引擎 · 从0到1</div>';
+  h += '<div style="overflow-x:auto"><table class="data-table" style="width:100%;font-size:0.78em;margin-bottom:16px">';
+  h += '<thead><tr><th>阶段</th><th>核心问题</th><th>关键渠道</th><th>关键指标</th><th>内容策略</th></tr></thead><tbody>';
+  for (var i = 0; i < frontStages5.length; i++) {
+    var fs = frontStages5[i];
+    h += '<tr>';
+    h += '<td style="font-weight:600;white-space:nowrap">'+escHtml(fs.icon)+' '+escHtml(fs.name)+'</td>';
+    h += '<td style="font-size:0.8em">'+escHtml(fs.question)+'</td>';
+    h += '<td style="font-size:0.7em;max-width:160px">'+escHtml((fs.key_channels||[]).slice(0,3).join('·'))+'</td>';
+    h += '<td style="font-size:0.7em">'+escHtml((fs.key_metrics||[]).slice(0,2).join('·'))+'</td>';
+    h += '<td style="font-size:0.68em;color:var(--ink-light);max-width:140px">'+escHtml((fs.content_types||fs.hook_content||[]).slice(0,2).join('·'))+'</td>';
+    h += '</tr>';
+  }
+  h += '</tbody></table></div>';
+
+  // ==== 渠道矩阵 ====
+  h += '<div class="section-head">📋 营销渠道矩阵</div>';
+  h += '<div style="overflow-x:auto"><table class="data-table" style="width:100%;font-size:0.78em;margin-bottom:16px">';
+  h += '<thead><tr><th>渠道</th><th>类型</th><th>优先级</th><th>目标受众</th><th>节奏</th><th>状态</th></tr></thead><tbody>';
+  for (var i = 0; i < acqChannels.length; i++) {
+    var ch = acqChannels[i];
+    var pColor = ch.priority === 'P0' ? 'var(--accent-red)' : (ch.priority === 'P1' ? '#E67E22' : 'var(--accent-gold)');
+    h += '<tr><td style="font-weight:500">'+escHtml(ch.name)+'</td>';
+    h += '<td><span style="font-size:0.7em;padding:2px 8px;border-radius:8px;background:rgba(184,134,11,.1);color:var(--accent-gold)">'+escHtml(ch.type)+'</span></td>';
+    h += '<td style="color:'+pColor+';font-weight:600">'+escHtml(ch.priority)+'</td>';
+    h += '<td style="font-size:0.72em">'+escHtml(ch.target_audience)+'</td>';
+    h += '<td style="font-size:0.7em;color:var(--ink-light)">'+escHtml(ch.content_calendar)+'</td>';
+    h += '<td><span style="font-size:0.65em;padding:2px 6px;border-radius:6px;background:rgba(0,0,0,.05);color:var(--ink-lighter)">'+escHtml(ch.status)+'</span></td>';
+    h += '</tr>';
+  }
+  h += '</tbody></table></div>';
+
+  // ==== 转化漏斗 ====
+  h += '<div class="section-head">📊 营销漏斗 · 目标模型</div>';
+  var funnelStages = Object.keys(acqFunnel).filter(function(k){return k!=='channels';});
+  h += '<div style="display:flex;gap:6px;overflow-x:auto;padding-bottom:8px">';
+  var funnelTargets = {'宣发':5000,'触达':1000,'吸引':300,'转化':60,'导入':42};
+  var funnelNames = Object.keys(funnelTargets);
+  for (var i = 0; i < funnelNames.length; i++) {
+    var fn = funnelNames[i];
+    var ft = funnelTargets[fn] || 0;
+    var maxT = funnelTargets['宣发'] || 1;
+    var fpct = Math.round(ft/maxT*100);
+    var fcolor = i < 2 ? 'var(--accent-red)' : (i < 4 ? '#E67E22' : 'var(--accent-gold)');
+    h += '<div style="flex:1;min-width:80px;text-align:center;padding:12px 8px;background:var(--card-white);border:1px solid var(--border-warm);border-radius:10px;flex-shrink:0">';
+    h += '<div style="font-size:0.7em;color:var(--ink-light);margin-bottom:4px">'+escHtml(fn)+'</div>';
+    h += '<div style="font-size:1.3em;font-weight:700;color:'+fcolor+'">'+ft+'</div>';
+    h += '<div style="font-size:0.6em;color:var(--ink-lighter);margin-top:2px">目标/月</div>';
+    h += '</div>';
+  }
+  h += '</div>';
+
+  // ==== 内容资产 ====
+  h += '<div class="section-head" style="margin-top:16px">📝 内容弹药库</div>';
+  var evergreen = acqContent.evergreen || [];
+  h += '<div style="display:flex;gap:8px;flex-wrap:wrap">';
+  for (var i = 0; i < evergreen.length; i++) {
+    var ev = evergreen[i];
+    h += '<div style="background:var(--card-white);border:1px solid var(--border-warm);border-radius:8px;padding:10px 14px;font-size:0.72em;max-width:220px">';
+    h += '<div style="font-weight:600">'+escHtml(ev.title)+'</div>';
+    h += '<div style="display:flex;gap:4px;margin-top:4px">';
+    h += '<span style="font-size:0.7em;background:rgba(194,59,34,.08);color:var(--accent-red);padding:1px 6px;border-radius:6px">'+escHtml(ev.type)+'</span>';
+    h += '<span style="font-size:0.7em;background:rgba(184,134,11,.08);color:var(--accent-gold);padding:1px 6px;border-radius:6px">'+escHtml(ev.target)+'</span>';
+    h += '</div></div>';
+  }
+  h += '</div>';
+
+  // ==== 后端深耕（已有面板继续） ====
 
   // ==== L1: 总览卡片 ====
   var hColor = mh.healthy_customers > 0 ? '#3D7A4F' : '#C2780A';
