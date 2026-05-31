@@ -237,8 +237,10 @@ def run_stage_standalone(script_name, extra_args=None):
         raise FileNotFoundError('Script not found: {}'.format(script_path))
     
     cmd = ['python3', script_path]
-    # 各脚本参数名不同，需要适配
-    if 'flywheel' in script_name:
+    # 优先使用显式 extra_args；否则按脚本名推断参数
+    if extra_args:
+        cmd.extend(extra_args)
+    elif 'flywheel' in script_name:
         cmd.append('all')
     elif 'auto_healer' in script_name:
         cmd.extend(['--limit', '30'])
@@ -248,7 +250,7 @@ def run_stage_standalone(script_name, extra_args=None):
         cmd.append('--save')
     # portfolio_rationalizer 和 orchestrator 不需要参数
     
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120, cwd=WORKSPACE)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=300, cwd=WORKSPACE)
     if result.returncode != 0:
         raise RuntimeError(result.stderr[:200] if result.stderr else 'exit code: {}'.format(result.returncode))
     
@@ -304,7 +306,7 @@ def orchestrate_health_cycle(dry_run=False):
         
         # 断路器包装执行
         def run_stage(s=stage):
-            return run_stage_standalone(s['script'])
+            return run_stage_standalone(s['script'], s.get('extra_args'))
         
         result, error = cb.call(run_stage)
         elapsed_ms = int((time.time() - stage_start) * 1000)
