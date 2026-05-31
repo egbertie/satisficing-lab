@@ -74,7 +74,7 @@ td a:hover{text-decoration:underline}
 <div class="main">
   <div class="stats" id="stats"></div>
   <div class="search-wrap">
-    <input type="text" id="search" placeholder="搜索产品名..." oninput="render()">
+    <input type="text" id="search" placeholder="搜索产品名/描述/URL/族/状态..." oninput="render()">
     <select id="sortBy" onchange="render()">
       <option value="default">默认排序</option>
       <option value="quality_desc">Q值 ↓</option>
@@ -137,7 +137,7 @@ function render(){
   SORT=document.getElementById('sortBy').value;
   var filtered=ALL.filter(function(p){
     if(FILT!=='全部' && p.family!==FILT) return false;
-    if(q && p.name.toLowerCase().indexOf(q)===-1 && (p.desc||'').toLowerCase().indexOf(q)===-1) return false;
+    if(q && p.name.toLowerCase().indexOf(q)===-1 && (p.desc||'').toLowerCase().indexOf(q)===-1 && (p.url||'').toLowerCase().indexOf(q)===-1 && (p.family||'').toLowerCase().indexOf(q)===-1 && (p.status||'').toLowerCase().indexOf(q)===-1) return false;
     return true;
   });
 

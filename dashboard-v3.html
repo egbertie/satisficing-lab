@@ -2348,7 +2348,30 @@ function renderHelp() {
   h += '<tr style="border-bottom:1px solid var(--border-warm)"><td style="padding:4px 0">♻️ 飞轮</td><td style="font-size:0.85em;color:var(--ink-light)">5步周期+规模+运行统计</td></tr>';
   h += '<tr style="border-bottom:1px solid var(--border-warm)"><td style="padding:4px 0">🧬 化学</td><td style="font-size:0.85em;color:var(--ink-light)">LLM替身评分+编排器+永续控制</td></tr>';
   h += '</table></div>';
+  // 全局搜索构建
+  window._searchIdx = [];
+  var si = window._searchIdx;
+  var addS = function(n,d,u,a){ si.push({n:n,d:d||'',u:u||'',a:a||''}); };
+  addS('📊 总览','战略KPI+产品分布+快速入口','','点击标签📊总览');
+  addS('📦 产品资产','族筛选+详情表+统计卡','','点击标签📦产品');
+  addS('✅ 任务管理','筛选P0/P1/P2+展开详情','','点击标签✅任务');
+  addS('📚 知识库','194条(文档·术语·指令)','','点击标签📚知识');
+  addS('🗺️ 客户旅程','15阶段+三级闭环','','点击标签🗺️旅程');
+  addS('🛡️ 控制论','四层诊断+VSM+诚实评分','','点击标签🛡️控制论');
+  addS('📦 产品库','搜索/筛选/LLM评分','product-catalog.html','打开');
+  addS('⚙️ 管理台','产品·驾驶舱·帮助','admin-overview.html','打开');
+  addS('📁 仓库文件','GitHub仓库浏览','file-browser.html','打开');
+  addS('🧭 决策通道','客户决策导航','go.html','打开');
+  addS('🏠 品牌首页','满意解研究所首页','index.html','打开');
+  addS('🔐 密码生成器','产品密码管理','admin-tools.html','打开');
+  var prods = EIDX.products||[];
+  for (var i=0;i<Math.min(prods.length,30);i++){var p=prods[i];addS(escHtml(p.name),escHtml(p.family||'')+'·'+escHtml(p.status||'')+'·Q:'+(p.quality_score||'-'),p.url||'','打开');}
+
   h += '<div style="background:var(--card);border:1px solid var(--border-warm);border-radius:8px;padding:14px;margin-bottom:12px">';
+  h += '<div style="font-weight:600;margin-bottom:6px">🔍 帮助面板搜索</div>';
+  h += '<input type="text" id="global-search" placeholder="搜索面板名/功能/产品/链接..." style="width:100%;padding:10px 14px;border:2px solid var(--border-warm);border-radius:10px;font-size:0.82em;outline:none;background:var(--card-white)" oninput="globalSearch()" onfocus="this.style.borderColor=\'var(--accent-gold)\'" onblur="this.style.borderColor=\'var(--border-warm)\' ">';
+  h += '<div id="global-search-results" style="display:none;margin-top:6px"></div>';
+  h += '</div>';
   h += '<div style="font-weight:600;margin-bottom:4px">🎯 快速入口</div>';
   h += '<ul style="font-size:0.82em;color:var(--ink-light);margin:0;padding-left:18px">';
   h += '<li><b>产品目录 📦</b>: <a href="product-catalog.html" target="_blank">product-catalog.html</a> — 搜索/筛选/LLM评分</li>';
@@ -2479,6 +2502,35 @@ function renderHelp() {
   h += '</div>';
 
   document.getElementById('tab-help').innerHTML = h;
+}
+
+/* 帮助面板全局搜索 */
+function globalSearch() {
+  var q = (document.getElementById('global-search')||{}).value||'';
+  var res = document.getElementById('global-search-results');
+  if (!res) return;
+  if (q.length < 1) { res.style.display='none'; return; }
+  q = q.toLowerCase();
+  var items = window._searchIdx||[];
+  var found = [];
+  for (var i=0; i<items.length; i++) {
+    var it = items[i];
+    if (it.n.toLowerCase().indexOf(q)>=0||it.d.toLowerCase().indexOf(q)>=0) found.push(it);
+  }
+  if (found.length===0) { res.innerHTML='<div style="padding:10px;font-size:0.8em;color:var(--ink-lighter);text-align:center">无匹配</div>'; res.style.display='block'; return; }
+  var rh='<div style="max-height:280px;overflow-y:auto;border:1px solid var(--border-warm);border-radius:8px;background:var(--card-white)">';
+  for (var i=0; i<Math.min(found.length,12); i++) {
+    var f=found[i];
+    rh+='<div style="padding:8px 12px;border-bottom:1px solid var(--border-warm);display:flex;gap:8px;align-items:center;font-size:0.78em">';
+    rh+='<div style="flex:1"><div style="font-weight:500">'+f.n+'</div><div style="font-size:0.8em;color:var(--ink-light)">'+f.d+'</div></div>';
+    if (f.u) rh+='<a href="'+f.u+'" target="_blank" style="padding:4px 10px;background:var(--accent-red);color:#fff;border-radius:6px;font-size:0.75em;text-decoration:none;white-space:nowrap">'+f.a+' →</a>';
+    else rh+='<span style="font-size:0.75em;color:var(--ink-lighter)">'+f.a+'</span>';
+    rh+='</div>';
+  }
+  if (found.length>12) rh+='<div style="padding:6px;text-align:center;font-size:0.7em;color:var(--ink-lighter)">+'+ (found.length-12) +'条更多</div>';
+  rh+='</div>';
+  res.innerHTML=rh;
+  res.style.display='block';
 }
 
 /* ===== 帮助面板视角切换 ===== */
