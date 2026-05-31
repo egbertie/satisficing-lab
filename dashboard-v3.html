@@ -532,11 +532,27 @@ function ov(num, label, sub) {
    ================================================================ */
 function renderProducts() {
   var prods = EIDX.products || [];
-  // 构建族计数
   var fm = {'全部':prods.length};
   for (var i=0; i<prods.length; i++) { var f = prods[i].family||'未归类'; fm[f] = (fm[f]||0)+1; }
 
-  var h = '<div class="family-filters" id="prod-filters">';
+  // 统计
+  var ps = (EIDX.meta||{}).product_stats || {};
+  var premium = ps.premium || 0;
+  var online = ps.online || 0;
+  var offline = ps.offline || 0;
+  var archive = ps.archive || 0;
+  var withLLM = ps.with_llm_rating || 0;
+  var withURL = ps.with_url || 0;
+
+  var h = '<div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:12px">';
+  h += '<div class="stat-card"><div class="stat-num">'+prods.length+'</div><div class="stat-label">📦 总产品</div></div>';
+  h += '<div class="stat-card"><div class="stat-num" style="color:var(--accent-gold)">'+premium+'</div><div class="stat-label">💎 精品</div><div style="font-size:0.6em;color:var(--ink-lighter)">'+withURL+'有链接</div></div>';
+  h += '<div class="stat-card"><div class="stat-num" style="color:#3D7A4F">'+online+'</div><div class="stat-label">🌐 线上</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+withLLM+'</div><div class="stat-label">🤖 LLM评分</div><div style="font-size:0.6em;color:var(--ink-lighter)">覆盖率'+(Math.round(withLLM/prods.length*100))+'%</div></div>';
+  h += '</div>';
+
+  // 族筛选
+  h += '<div class="family-filters" id="prod-filters">';
   var fo = ['全部','镜','衡','契','觉','人','道','章','未归类'];
   for (var i=0; i<fo.length; i++) {
     var k = fo[i]; if (fm[k]===undefined) continue;
@@ -544,7 +560,7 @@ function renderProducts() {
   }
   h += '</div>';
   h += '<button class="btn-outline" onclick="toggleDetail(this)" id="btn-detail">'+(detailOn?'收起详情':'展开详情表')+'</button>';
-  h += '<div class="detail-wrap'+(detailOn?' show':'')+'" id="detail-wrap"><table class="detail-table"><thead><tr><th class="check-col">☑</th><th>产品名</th><th>族</th><th>状态</th><th>描述</th><th>链接</th></tr></thead><tbody id="detail-tbody"></tbody></table></div>';
+  h += '<div class="detail-wrap'+(detailOn?' show':'')+'" id="detail-wrap"><table class="detail-table"><thead><tr><th class="check-col">☑</th><th>产品名</th><th>族</th><th>状态</th><th>LLM</th><th>描述</th><th>链接</th></tr></thead><tbody id="detail-tbody"></tbody></table></div>';
   h += '<div class="cmp-bar" id="cmp-bar"><span>已选 <span class="cmp-count" id="cmp-count">0</span> 个</span><button class="btn-cmp" id="btn-cmp" disabled onclick="openCmp(this)">对比选中</button><button class="btn-outline" onclick="clearSel(this)">清空</button></div>';
   document.getElementById('tab-products').innerHTML = h;
   renderDetailRows();
@@ -823,11 +839,17 @@ function renderActivity() {
    ================================================================ */
 function renderCustomers() {
   var custs = EIDX.customers || [];
-  if (!custs.length) {
-    document.getElementById('tab-customers').innerHTML = '<div class="loading">暂无客户数据</div>';
-    return;
-  }
-  var h = '';
+  var cpCount = (EIDX.customer_profiles || []).length;
+  var flCount = (EIDX.individual_customer_flows || []).length;
+  var cs = (EIDX.meta||{}).customer_stats || {};
+
+  // 统计
+  var h = '<div class="stat-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:12px">';
+  h += '<div class="stat-card"><div class="stat-num">'+custs.length+'</div><div class="stat-label">👥 核心客户</div></div>';
+  h += '<div class="stat-card"><div class="stat-num">'+(cs.profiles||cpCount)+'</div><div class="stat-label">📋 画像库</div></div>';
+  h += '<div class="stat-card" style="cursor:pointer" onclick="switchTab(\'tab-journey\')"><div class="stat-num">'+(cs.individual_flows||flCount)+'</div><div class="stat-label">🗺️ 独立客户流</div><div style="font-size:0.6em;color:var(--ink-lighter)">点击查看详情→</div></div>';
+  h += '</div>';
+
   for (var i=0; i<custs.length; i++) {
     var c = custs[i];
     h += '<div class="cust-card"><h4>'+escHtml(c.name)+'</h4><div class="cust-meta">行业: '+escHtml(c.industry||'未标注')+' · 阶段: '+escHtml(c.stage||'画像')+'</div><div class="cust-needs">核心需求: '+escHtml(c.needs_summary||c.description||'')+'</div></div>';
