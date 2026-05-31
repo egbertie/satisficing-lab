@@ -258,7 +258,7 @@ body {
     <div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap">
       <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/egbertie/satisficing-lab/main/file-browser.html" target="_blank" class="header-link" title="GitHub文件浏览器" style="font-size:0.78em;color:#2B7A4B;border:1px solid #2B7A4B;border-radius:4px;padding:3px 10px;text-decoration:none">📁 仓库文件</a>
       <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/egbertie/satisficing-lab/main/file-browser.html" target="_blank" class="header-link" title="GitHub文件浏览器（随时随地·看已推送的仓库文件）" style="font-size:0.78em;color:#2B7A4B;border:1px solid #2B7A4B;border-radius:4px;padding:3px 10px;text-decoration:none">☁️ 远程文件(GitHub)</a>
-      <a href="admin-windows.html" target="_blank" class="header-link" title="管理窗口" style="font-size:0.78em;color:var(--ink-light);border:1px solid var(--border);border-radius:4px;padding:3px 10px;text-decoration:none">⚙️ 管理</a>
+      <a href="admin-tools.html" target="_blank" class="header-link" title="管理窗口" style="font-size:0.78em;color:var(--ink-light);border:1px solid var(--border);border-radius:4px;padding:3px 10px;text-decoration:none">⚙️ 管理</a>
       <a href="product-catalog.html" target="_blank" class="header-link" title="产品目录" style="font-size:0.78em;color:var(--ink-light);border:1px solid var(--border);border-radius:4px;padding:3px 10px;text-decoration:none">📦 产品</a>
       <a href="help-user.html" target="_blank" class="header-link" title="完整帮助手册" style="font-size:0.78em;color:var(--ink-light);border:1px solid var(--border);border-radius:4px;padding:3px 10px;text-decoration:none">📖 帮助</a>
     </div>
@@ -396,7 +396,7 @@ function buildNav() {
     {id:'tab-flywheel', label:'♻️ 飞轮运转'},
     {id:'tab-chemistry', label:'🧬 化学与控制'},
     {id:'tab-help', label:'🆘 帮助'},
-    {id:'tab-admin', label:'⚙️ 管理后台', ext:true, href:'admin-windows.html'}
+    {id:'tab-admin', label:'⚙️ 管理后台', ext:true, href:'admin-tools.html'}
   ];
   var h = '';
   for (var i=0; i<ts.length; i++) { if (ts[i].ext) h += '<a class="nav-tab" href="'+ts[i].href+'" target="_blank" style="text-decoration:none;display:inline-block">'+ts[i].label+' ↗</a>'; else h += '<button class="nav-tab" onclick="switchTab(\''+ts[i].id+'\',this)">'+ts[i].label+'</button>'; }
@@ -1398,7 +1398,7 @@ function renderChemistry() {
   var m = EIDX.meta || {}, chem = m.chemistry || {}, heat = m.heating || {}, pc = m.perpetual_control || {}, org = m.orchestration_health || {};
   var ls = m.llm_stats || {}, dist = ls.distribution || {};
   var h = '<!-- ⏱️ 驾驶舱=仪表台(Pilot View)·只读快照 · 详细视图→管理窗口' + (EIDX.meta.orchestration_health && EIDX.meta.orchestration_health.timestamp ? EIDX.meta.orchestration_health.timestamp.slice(0,19) : '') + '-->';
-  h += '<div class="panel-header"><h2>🧬 化学与控制 · 一屏快照</h2><span class="meta" style="font-size:0.7em;color:var(--ink-lighter)">⏱️ 驾驶舱=仪表台·只读快照 · 详情→<a href="admin-windows.html" target="_blank" style="color:var(--accent-gold)">管理窗口</a></span></div>';
+  h += '<div class="panel-header"><h2>🧬 化学与控制 · 一屏快照</h2><span class="meta" style="font-size:0.7em;color:var(--ink-lighter)">⏱️ 驾驶舱=仪表台·只读快照 · 详情→<a href="admin-tools.html" target="_blank" style="color:var(--accent-gold)">管理窗口</a></span></div>';
 
   // ═══ 第一行: 核心指标4卡 ═══
   h += '<div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px">';
@@ -1453,7 +1453,7 @@ function renderChemistry() {
 
   // ═══ 底部: 行动链接 ═══
   h += '<div style="text-align:center;padding:16px;border-top:1px solid var(--border-warm);margin-top:8px;font-size:0.78em;color:var(--ink-lighter)">';
-  h += '📋 需要详细分析？打开 <a href="admin-windows.html" target="_blank" style="color:var(--accent-gold);font-weight:600">管理窗口 ⚙️</a> → 查看 chemistry-overview（60链热力图）· chemistry-llm（完整替身排名）· 各域视图';
+  h += '📋 需要详细分析？打开 <a href="admin-tools.html" target="_blank" style="color:var(--accent-gold);font-weight:600">管理窗口 ⚙️</a> → 查看 chemistry-overview（60链热力图）· chemistry-llm（完整替身排名）· 各域视图';
   h += '</div>';
 
   document.getElementById('tab-chemistry').innerHTML = h;
@@ -1490,7 +1490,7 @@ function renderHelp() {
   h += '<ul style="font-size:0.82em;color:var(--ink-light);margin:0;padding-left:18px">';
   h += '<li><b>驾驶舱 🏠</b>: 打开即看系统状态，翻标签了解各维度</li>';
   h += '<li><b>产品目录 📦</b>: <a href="product-catalog.html" target="_blank">product-catalog.html</a> — 浏览/搜索/筛选产品</li>';
-  h += '<li><b>管理后台 ⚙️</b>: <a href="admin-windows.html" target="_blank">admin-windows.html</a> — 深度操作·数据诊断</li>';
+  h += '<li><b>管理后台 ⚙️</b>: <a href="admin-tools.html" target="_blank">admin-tools.html</a> — 深度操作·数据诊断</li>';
   h += '<li><b>🧬化学面板</b>: 查看系统自调控状态·LLM替身评分</li>';
   h += '<li><b>♻️飞轮运转</b>: 了解自动化脚本执行情况</li>';
   h += '</ul></div>';
