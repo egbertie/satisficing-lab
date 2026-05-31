@@ -1129,22 +1129,27 @@ function renderOrganization() {
   h += '</tbody></table></div>';
 
   // ═══ VI Logo资产展示（动态生成） ═══
-  h += '<div class="section-head" style="margin-top:20px">🏷️ VI Logo资产 (14枚)</div>';
+  h += '<div class="section-head" style="margin-top:20px">🏷️ VI Logo资产 (19枚·已入库)</div>';
   var logos = [
     {src:'logo-small.png', name:'🔥 火承土印', desc:'主标识·品牌Logo'},
-    {src:'dingyu-small.png', name:'🏺 鼎玉', desc:'深圳鼎玉家族传承有限公司'},
     {src:'luopan-small.png', name:'🧭 五维决策罗盘', desc:'主标识·外方内圆'},
     {src:'liangyi-small.png', name:'🦅 两翼驱动', desc:'左脑逻辑+右脑直觉'},
     {src:'sanmai-small.png', name:'🌱 三脉根基', desc:'机构·创业·研究所'},
-    {src:'zhijue-small.png', name:'☀️ 直觉阈', desc:'五维分标识·火·六祖慧能'},
-    {src:'kexing-small.png', name:'⚓ 可行域', desc:'五维分标识·金·司马贺'},
-    {src:'shijian-small.png', name:'🪜 时间轴', desc:'五维分标识·土·刘禹锡'},
-    {src:'shenxin-small.png', name:'💧 身心流', desc:'五维分标识·水·观自在'},
-    {src:'xinyi-small.png', name:'🌳 信义观', desc:'五维分标识·木·孔子'},
+    {src:'zhijue-small.png', name:'☀️ 直觉阈', desc:'火·六祖慧能·第一念'},
+    {src:'kexing-small.png', name:'⚓ 可行域', desc:'金·司马贺·边界+锚点'},
+    {src:'shijian-small.png', name:'🪜 时间轴', desc:'土·刘禹锡·长期主义'},
+    {src:'shenxin-small.png', name:'💧 身心流', desc:'水·观自在·圆月水波'},
+    {src:'xinyi-small.png', name:'🌳 信义观', desc:'木·孔子·和而不同'},
     {src:'ding-small.png', name:'🔥 鼎', desc:'文化坐标·火·风控底线'},
     {src:'yu-small.png', name:'💍 玉', desc:'文化坐标·土·双环玉璧'},
     {src:'qi-small.png', name:'✂️ 契', desc:'文化坐标·木土·刻木为信'},
     {src:'jin-small.png', name:'☀️ 晋', desc:'文化坐标·火土·明出地上'},
+    {src:'dingyu-small.png', name:'🏺 鼎玉', desc:'深圳鼎玉家族传承公司'},
+    {src:'luopan-p1-small.png', name:'🔮 健康度罗盘', desc:'L2筛选层·关系诊断'},
+    {src:'zixun-small.png', name:'📞 轻咨询邀请', desc:'30分钟咨询邀请图'},
+    {src:'xungen-small.png', name:'🌿 寻根之旅', desc:'根系生长·火承土脉'},
+    {src:'lianxin-small.png', name:'🍵 莲心雅集', desc:'茶会·水+火'},
+    {src:'guanyin-small.png', name:'🪷 水月观音', desc:'品牌文化符号'},
   ];
   h += '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px">';
   for (var i=0; i<logos.length; i++) {
