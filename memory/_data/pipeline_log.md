@@ -373,3 +373,39 @@
 - **上次质量扫描:** 2026-05-31T12:33
 - **生命体征状态:** warning（files_index_no_category + product_discovery_zero 2个高严重度待修复）
 - **Git 状态:** 待确认
+
+---
+
+## 扫描: 2026-06-01 00:34 CST
+
+**管道版本:** data_init_pipeline.py V1.0
+
+### 扫描摘要
+- **总文件数:** 15,938（+52 / 自 18:34）
+- **可扫描文本文件:** 15,396
+- **元数据处理:** 1,181 个（首轮 500 + 延伸）
+- **产品发现:** 0 个（已知 bug）
+- **客户发现:** 5 个（稳定）
+- **知识连接:** 16 条（无变化）
+
+### 自上次扫描（18:34）以来的变更
+| 指标 | 状态 |
+|------|------|
+| 新产品页面 | 🟡 0（已知 bug：entities_index 有 315 但 pipeline 自身发现为 0）|
+| 新客户文件 | 🟢 5 个（稳定）|
+| 新对话记录 | 🟢 无新增 |
+| 文件变更 | 🟢 +52 文件（总 15,938），主要来自 00:00 跨日归档 |
+
+### 种子数据状态
+- **产品页面（种子）:** 0（已知 bug，dashboard_seed_v2.json 从 entities_index 恢复为 315）
+- **客户画像:** 5 个（稳定）
+- **知识图谱:** 16 条（无新增）
+- **dashboard_seed_v2.json:** ✅ 已重建
+
+### 关注项
+- 🚨 **产品发现为 0** — 持续已知 bug（files_index_no_category root cause），dashboard_seed 仍从 entities_index 恢复
+- 🚨 **files_index_no_category** — 所有条目缺 category 字段，需修复 pipeline Stage 2 写入逻辑
+- 🟢 编码残留（event_target, crypto_subtle, sha256）— 稳定
+- 🟢 客户画像稳定 5 个，无新增
+- 🟢 知识连接 16 条稳定
+- 🟡 凌晨安静时段，无新用户文件或对话
