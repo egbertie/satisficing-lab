@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理后台 · 满意解研究所</title>
+<style>
+:root{--red:#C23B22;--gold:#B8860B;--bg:#FAF7F2;--white:#FFFFFF;--text:#2D2D2D;--text2:#5C5C5C;--border:#E8E0D5;--radius:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.topbar{background:var(--text);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.topbar h1{font-size:16px;font-weight:600}
+.topbar a{color:var(--gold);text-decoration:none;font-size:13px}
+.main{max-width:900px;margin:0 auto;padding:24px 16px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;text-decoration:none;color:var(--text);transition:all .2s}
+.card:hover{border-color:var(--red);box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.card .icon{font-size:32px;margin-bottom:12px}
+.card h3{font-size:16px;margin-bottom:6px}
+.card p{font-size:13px;color:var(--text2);line-height:1.6}
+.footer{text-align:center;padding:24px;font-size:11px;color:#999;margin-top:40px}
+.footer a{color:var(--red);text-decoration:none}
+@media(max-width:600px){.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>⚙️ 管理后台</h1>
+  <a href="dashboard-v3.html">← 返回驾驶舱</a>
+</div>
+
+<div class="main">
+  <div class="cards">
+    <a href="product-catalog.html" class="card">
+      <div class="icon">📦</div>
+      <h3>产品管理</h3>
+      <p>315产品 · 21精品 · 动态筛选 · LLM评分 · 生命周期</p>
+    </a>
+    <a href="dashboard-v3.html" class="card">
+      <div class="icon">📊</div>
+      <h3>驾驶舱</h3>
+      <p>12标签数据总览 · 产品·任务·客户·知识·治理·城市</p>
+    </a>
+    <a href="file-browser.html" class="card">
+      <div class="icon">📁</div>
+      <h3>仓库文件</h3>
+      <p>浏览GitHub仓库全部文件 · HTML/CSS/JS/数据</p>
+    </a>
+    <a href="help-user.html" class="card">
+      <div class="icon">📖</div>
+      <h3>帮助手册</h3>
+      <p>用户帮助 · 使用说明 · 产品介绍</p>
+    </a>
+    <a href="help-dev.html" class="card">
+      <div class="icon">🛠️</div>
+      <h3>开发者帮助</h3>
+      <p>开发指南 · API说明 · 架构文档</p>
+    </a>
+    <a href="help-manager.html" class="card">
+      <div class="icon">👤</div>
+      <h3>管理员帮助</h3>
+      <p>管理指南 · 配置说明 · 维护手册</p>
+    </a>
+  </div>
+</div>
+
+<div class="footer">
+  满意解研究所 · 管理后台 · <a href="index.html">返回首页</a>
+</div>
+
+</body>
+</html>
