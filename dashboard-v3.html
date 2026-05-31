@@ -502,6 +502,7 @@ function renderProducts() {
 }
 
 function renderDetailRows() {
+  var prods = EIDX.products || [];
   var filt = [];
   for (var i=0; i<prods.length; i++) {
     if (prodFilt==='全部' || (prods[i].family||'未归类')===prodFilt) filt.push(prods[i]);
@@ -560,6 +561,7 @@ function clearSel(btn) {
 function openCmp(btn) {
   if (selProds.length < 2) return;
   if (selProds.length > 5) { alert('最多选择5个产品进行对比'); return; }
+  var prods = EIDX.products || [];
   var items = [];
   for (var i=0; i<selProds.length; i++) {
     for (var j=0; j<prods.length; j++) {
