@@ -82,7 +82,8 @@ var NAV=[
     {id:'strategy-risk',label:'风险雷达',desc:'识别·评级·应对'}
   ]},
   {id:'product',label:'📦 产品全生命周期',children:[
-    {id:'product-overview',label:'产品总览',desc:'312产品·7阶段·8族'},
+    {id:'product-overview',label:'产品总览',desc:'315产品·7阶段·双光谱'},
+    {id:'product-spectrum',label:'🧠 双光谱',desc:'左右脑+五维·平衡仪表盘'},
     {id:'product-pipeline',label:'研发管道',desc:'概念→原型→内测→打磨→精品'},
     {id:'product-quality',label:'质量中心',desc:'四维评分·审计·改进'},
     {id:'product-release',label:'版本与发布',desc:'版本历史·变更·部署'}
@@ -409,6 +410,67 @@ viewRenderers['product-release']=function(){
   var h=breadcrumb('product','版本与发布')+'<div class="panel-header"><div><h2>📋 版本与发布</h2><div class="meta">版本历史·变更日志·部署记录</div></div></div>';
   var m=DB.meta||{};
   h+='<div class="stat-grid"><div class="stat-card"><div class="stat-num">'+m.version+'</div><div class="stat-label">📌 数据版本</div></div><div class="stat-card"><div class="stat-num">'+m.updated+'</div><div class="stat-label">🕐 最后更新</div></div><div class="stat-card"><div class="stat-num">'+m.total_entities+'</div><div class="stat-label">📊 实体总数</div></div><div class="stat-card"><div class="stat-num">'+m.product_total+'</div><div class="stat-label">📦 产品总数</div></div></div>';
+  return h;
+};
+
+viewRenderers['product-spectrum']=function(){
+  var ss=(DB.meta||{}).spectrum_summary||{};
+  var h=breadcrumb('product','双光谱')+'<div class="panel-header"><div><h2>🧠 产品双光谱</h2><div class="meta">左右脑+五维连续光谱 · '+(ss.products_evaluated||0)+'产品已评估</div></div></div>';
+  
+  // 预警
+  var diff=Math.abs((ss.L_mean||0)-(ss.R_mean||0));
+  var alertCls=diff>25?'orange':diff>15?'yellow':'green';
+  var alertIcon=alertCls==='green'?'✅':'⚠️';
+  var alertMsg=alertCls==='green'?'产品矩阵左右脑平衡':'L-R差距='+diff.toFixed(1)+'，'+(ss.L_mean>ss.R_mean?'左脑偏侧':'右脑偏侧');
+  h+='<div style="padding:12px 16px;margin-bottom:18px;border-radius:8px;font-size:.82em;'+(alertCls==='orange'?'background:rgba(194,59,34,.08);border:1px solid rgba(194,59,34,.25);color:#A04020;':'background:rgba(194,120,10,.1);border:1px solid rgba(194,120,10,.3);color:#8A6010;')+'"><span style="font-size:1.2em">'+alertIcon+'</span> '+alertMsg+'</div>';
+
+  // 4卡
+  h+='<div class="stat-grid">';
+  h+='<div class="stat-card"><div class="stat-num">'+(ss.L_mean||0).toFixed(1)+'</div><div class="stat-label">📐 左脑均值</div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+(ss.R_mean||0).toFixed(1)+'</div><div class="stat-label">🎨 右脑均值</div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+((ss.balance_score||0)*100).toFixed(0)+'%</div><div class="stat-label">⚖️ 平衡度</div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+diff.toFixed(1)+'</div><div class="stat-label">📏 L-R差距</div></div>';
+  h+='</div>';
+
+  // 五维雷达条
+  var fem=ss.five_elements_mean||{};
+  var dims=[
+    {k:'土_时间轴',l:'🟫 土·时间轴(刘禹锡)',c:'#A08060'},
+    {k:'金_可行域',l:'⬜ 金·可行域(司马贺)',c:'#C0C0C0'},
+    {k:'水_身心流',l:'🟦 水·身心流(观音)',c:'#6080A0'},
+    {k:'木_信义观',l:'🟩 木·信义观(孔子)',c:'#70A060'},
+    {k:'火_直觉阈',l:'🟥 火·直觉阈(慧能)',c:'#C23B22'}
+  ];
+  h+='<div class="panel-header"><h3>📊 五维均值</h3></div>';
+  h+='<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">';
+  for(var di=0;di<dims.length;di++){
+    var d=dims[di],dv=fem[d.k]||0;
+    h+='<div style="display:flex;align-items:center;gap:8px;font-size:.82em">';
+    h+='<span style="width:160px;text-align:right;color:var(--ink-light)">'+d.l+'</span>';
+    h+='<div style="flex:1;height:8px;background:var(--card-warm);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+dv+'%;background:'+d.c+';border-radius:4px"></div></div>';
+    h+='<span style="width:40px;color:var(--ink);font-variant-numeric:tabular-nums">'+dv.toFixed(1)+'</span>';
+    h+='</div>';
+  }
+  h+='</div>';
+
+  // 象限分布
+  var quad=ss.quadrant_distribution||{};
+  var total=ss.products_evaluated||315;
+  h+='<div class="panel-header"><h3>🧭 四象限分布</h3></div>';
+  var qs=[{k:'Ⅰ·全脑型',n:'全脑型',c:'#7B68EE'},{k:'Ⅱ·体验型',n:'体验型',c:'#FF6B6B'},{k:'Ⅲ·真空型',n:'真空型',c:'#DDD6C8'},{k:'Ⅳ·分析型',n:'分析型',c:'#4A90D9'}];
+  h+='<div style="display:flex;gap:2px;height:28px;border-radius:6px;overflow:hidden;margin-bottom:10px">';
+  for(var qi=0;qi<qs.length;qi++){
+    var qc=quad[qs[qi].k]||0,qp=Math.round(qc/total*100);
+    if(qp>0)h+='<div style="width:'+qp+'%;background:'+qs[qi].c+'" title="'+qs[qi].k+': '+qc+'个"></div>';
+  }
+  h+='</div>';
+  h+='<div style="display:flex;gap:14px;font-size:.75em;color:var(--ink-light);flex-wrap:wrap">';
+  for(var qi=0;qi<qs.length;qi++){
+    var qc=quad[qs[qi].k]||0,qp=Math.round(qc/total*100);
+    h+='<span>🟦 '+qs[qi].n+': <b>'+qc+'</b> ('+qp+'%)</span>';
+  }
+  h+='</div>';
+
   return h;
 };
 

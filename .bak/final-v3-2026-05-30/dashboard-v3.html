@@ -968,20 +968,32 @@ document.getElementById('compare-overlay').addEventListener('click', function(e)
 
 /* ========== L2.5 · 🧠 产品大脑 ========== */
 
-// 从 entities_index.json 拉取 spectrum 汇总数据（或使用内嵌默认值）
+// 从 entities_index.json 拉取 spectrum 汇总数据
 var BRAIN_DATA = null;
 
-function renderBrain() {
-  // 默认数据（entities_index.json 中的统计值）
-  var sum = {
-    L_mean: 53.8, R_mean: 34.5, balance_score: 0.81, health_status: 'yellow',
-    quadrant_distribution: {'Ⅰ·全脑型': 15, 'Ⅱ·体验型': 11, 'Ⅲ·真空型': 112, 'Ⅳ·分析型': 177},
-    five_elements_mean: {'土_时间轴': 54.6, '金_可行域': 53.1, '水_身心流': 32.5, '木_信义观': 43.5, '火_直觉阈': 36.5},
-    products_evaluated: 315
-  };
+function loadBrainData(callback) {
+  if (BRAIN_DATA) { callback(BRAIN_DATA); return; }
+  fetch('memory/_data/entities_index.json')
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      BRAIN_DATA = d.meta && d.meta.spectrum_summary ? d.meta.spectrum_summary : null;
+      callback(BRAIN_DATA);
+    })
+    .catch(function() {
+      // 回退默认值
+      BRAIN_DATA = {
+        L_mean: 58.2, R_mean: 28.8, balance_score: 0.71, health_status: 'orange',
+        quadrant_distribution: {'Ⅰ·全脑型': 15, 'Ⅱ·体验型': 9, 'Ⅲ·真空型': 2, 'Ⅳ·分析型': 289},
+        five_elements_mean: {'土_时间轴': 59.7, '金_可行域': 56.7, '水_身心流': 25.3, '木_信义观': 43.1, '火_直觉阈': 32.2},
+        products_evaluated: 315
+      };
+      callback(BRAIN_DATA);
+    });
+}
 
-  // 尝试从缓存的 JSON 数据读取
-  if (BRAIN_DATA) sum = BRAIN_DATA;
+function renderBrain() {
+  loadBrainData(function(sum) {
+  if (!sum) return;
   
   var total = sum.products_evaluated || 315;
   var L = sum.L_mean, R = sum.R_mean;
@@ -1065,6 +1077,7 @@ function renderBrain() {
   h += '</div>'; // brain-grid
 
   document.getElementById('brain-section').innerHTML = h;
+  }); // loadBrainData callback
 }
 
 /* ========== L3 · 需要关注 ========== */
