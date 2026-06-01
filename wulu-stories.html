@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>五路图腾传 · 满意解研究所</title>
+<style>
+  :root {
+    --red: #C23B22;
+    --gold: #B8860B;
+    --bg: #FAF7F2;
+    --text: #2D2D2D;
+    --text2: #5C5C5C;
+    --border: #E8E0D5;
+    --card-bg: #FFFDF9;
+    --radius: 16px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.06);
+    --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", Georgia, serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    padding: 48px 24px 32px;
+  }
+  .badge {
+    display: inline-block;
+    background: #FFF;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    font-size: 13px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+  }
+  .header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 2px;
+  }
+  .header .subtitle {
+    font-size: 16px;
+    color: var(--text2);
+    margin-top: 8px;
+    font-style: italic;
+  }
+  .header .divider {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 16px auto 0;
+  }
+
+  /* ── Five-element row ── */
+  .wuxing-nav {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 0 24px 32px;
+    flex-wrap: wrap;
+  }
+  .wx-dot {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: var(--transition);
+    background: var(--card-bg);
+    color: var(--text2);
+    border-color: var(--border);
+    position: relative;
+    margin: 0 8px;
+  }
+  .wx-dot:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .wx-dot.active {
+    background: var(--gold);
+    color: #FFF;
+    border-color: var(--gold);
+    transform: scale(1.1);
+    box-shadow: 0 4px 16px rgba(184,134,11,0.3);
+  }
+  .wx-dot .label {
+    position: absolute;
+    bottom: -22px;
+    font-size: 11px;
+    white-space: nowrap;
+    color: var(--text2);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    font-weight: 400;
+  }
+  .wx-dot.active .label {
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* ── Card Container ── */
+  .card-stage {
+    max-width: 680px;
+    margin: 0 auto 64px;
+    padding: 0 24px;
+    position: relative;
+    min-height: 520px;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 40px 36px 36px;
+    display: none;
+    animation: fadeSlideIn 0.5s ease;
+  }
+  .card.active-card {
+    display: block;
+  }
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card .element-tag {
+    display: inline-block;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 4px 14px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    color: #FFF;
+  }
+  .tag-earth { background: #8B7E5A; }
+  .tag-metal { background: #7A8B8B; }
+  .tag-water { background: #5B7A9A; }
+  .tag-wood  { background: #6B8E5A; }
+  .tag-fire  { background: var(--red); }
+
+  .card h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+  }
+  .card .years {
+    font-size: 14px;
+    color: var(--text2);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    margin-bottom: 20px;
+  }
+
+  .card .portrait {
+    font-size: 15px;
+    color: var(--text2);
+    line-height: 1.9;
+    margin-bottom: 24px;
+    border-left: 3px solid var(--gold);
+    padding-left: 16px;
+  }
+
+  .card .quote-box {
+    background: linear-gradient(135deg, #FFF9F0 0%, #FFFDF9 100%);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .quote-box .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gold);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .quote-box .quote {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .card .section {
+    margin-bottom: 16px;
+  }
+  .card .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+  }
+  .card .section p {
+    font-size: 15px;
+    color: var(--text2);
+    line-height: 1.85;
+  }
+
+  /* ── Arrows ── */
+  .nav-arrows {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 12px;
+  }
+  .nav-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    color: var(--text2);
+  }
+  .nav-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    box-shadow: 0 2px 12px rgba(184,134,11,0.15);
+  }
+  .nav-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--text2);
+    font-size: 13px;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+  }
+  .footer a {
+    color: var(--text2);
+    text-decoration: none;
+    margin: 0 12px;
+    transition: color 0.2s;
+  }
+  .footer a:hover {
+    color: var(--gold);
+  }
+  .footer .sep {
+    color: var(--border);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .header h1 { font-size: 26px; }
+    .card { padding: 28px 20px 24px; }
+    .card h2 { font-size: 24px; }
+    .quote-box .quote { font-size: 16px; }
+    .wx-dot { width: 40px; height: 40px; font-size: 15px; margin: 0 6px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="header">
+  <div class="badge">🧠 右脑 · 体验型 · 叙事产品</div>
+  <h1>五路图腾传</h1>
+  <p class="subtitle">五个跨越时空的人物，五种审视决策的纬度</p>
+  <div class="divider"></div>
+</header>
+
+<!-- ═══════════════ 五行导航 ═══════════════ -->
+<nav class="wuxing-nav" id="wxNav">
+  <div class="wx-dot active" data-index="0">土<span class="label">时间轴</span></div>
+  <div class="wx-dot" data-index="1">金<span class="label">可行域</span></div>
+  <div class="wx-dot" data-index="2">水<span class="label">身心流</span></div>
+  <div class="wx-dot" data-index="3">木<span class="label">信义观</span></div>
+  <div class="wx-dot" data-index="4">火<span class="label">直觉阈</span></div>
+</nav>
+
+<!-- ═══════════════ 卡片区 ═══════════════ -->
+<div class="card-stage" id="cardStage">
+
+  <!-- 刘禹锡 · 土·时间轴 -->
+  <div class="card active-card" data-index="0">
+    <span class="element-tag tag-earth">土 · 时间轴</span>
+    <h2>刘禹锡</h2>
+    <div class="years">772 — 842 · 唐代</div>
+    <div class="portrait">
+      二十三岁进士及第，风光无限。三十四岁因参与永贞革新被贬，从此开始长达二十三年的贬谪生涯——朗州、连州、夔州、和州，南荒之地走遍。别人被贬三年就崩溃，他写「沉舟侧畔千帆过，病树前头万木春」。别人悲秋伤怀，他写「自古逢秋悲寂寥，我言秋日胜春朝」。<br><br>
+      刘禹锡不是麻木，而是真正拥有了时间尺度。当你的视野拉长到十年、二十年，眼前的得失就褪色了。他教会我们：好的决策，经得起时间拉长之后的重新审视。
+    </div>
+    <div class="quote-box">
+      <div class="label">⚡ 核心箴言</div>
+      <div class="quote">「五年后回头看，今天这个决定还成立吗？」</div>
+    </div>
+    <div class="section">
+      <div class="section-title">与决策的关系</div>
+      <p>几乎所有糟糕的决策都源于时间视野过短。把镜头拉远，问自己——这个选择放到五年后看，你会后悔吗？不会的话，眼前的焦虑就不值得绑架你。</p>
+    </div>
+    <div class="section">
+      <div class="section-title">在商业中</div>
+      <p>季度财报压力让人短视，但真正的好公司做的是十年尺度的事。亚马逊的长期主义、巴菲特的「二十年检验」，都是现代版的刘禹锡思维。</p>
+    </div>
+  </div>
+
+  <!-- 司马贺 · 金·可行域 -->
+  <div class="card" data-index="1">
+    <span class="element-tag tag-metal">金 · 可行域</span>
+    <h2>司马贺</h2>
+    <div class="years">Herbert Simon · 1916 — 2001</div>
+    <div class="portrait">
+      1978年诺贝尔经济学奖得主，但他真正的身份是一个「决策科学家」。他提出「有限理性」——人的认知、信息、时间都是有限的，没有人能做「最优解」，只能做「满意解」。<br><br>
+      这一洞见颠覆了古典经济学的理性人假设。司马贺不是说你该放弃追求更好，而是告诉你：在信息不完备的现实世界，找到让你满意的那个解，就已经是极致理性。追求最优，往往适得其反。
+    </div>
+    <div class="quote-box">
+      <div class="label">⚡ 核心箴言</div>
+      <div class="quote">「在有限信息下，能找到的最满意解是什么？」</div>
+    </div>
+    <div class="section">
+      <div class="section-title">与决策的关系</div>
+      <p>决策瘫痪的根源常是「想找到最好的」。司马贺告诉我们，划定你的可行域，在边界内找到能让你满意的那一个，就果断出手。剩下的精力，留给执行。</p>
+    </div>
+    <div class="section">
+      <div class="section-title">在商业中</div>
+      <p>「MVP」就是满意解思想的工程化——先做一个够用的版本推向市场，再迭代。那些死在车库里从没发布过的「完美产品」，缺的就是司马贺的智慧。</p>
+    </div>
+  </div>
+
+  <!-- 水月观音 · 水·身心流 -->
+  <div class="card" data-index="2">
+    <span class="element-tag tag-water">水 · 身心流</span>
+    <h2>水月观音</h2>
+    <div class="years">观自在 · 内在觉知</div>
+    <div class="portrait">
+      水月观音，一足踏莲，一足垂海，坐于水边岩石之上，静观水中之月。水中之月是虚幻的，但观照的心是真实的。<br><br>
+      观音并不替你消除烦恼，她教你面对烦恼的方式：不逃避、不对抗、只是观照。身体紧绷时知道紧绷，呼吸急促时知道急促。这种觉察本身就是一种力量——当你能看见自己的情绪和身体状态，你就拥有了选择的自由，而不是被它们推着走。
+    </div>
+    <div class="quote-box">
+      <div class="label">⚡ 核心箴言</div>
+      <div class="quote">「你的身体在告诉你什么？」</div>
+    </div>
+    <div class="section">
+      <div class="section-title">与决策的关系</div>
+      <p>理性分析再多，如果身体在抗拒，决策执行就会变形。焦虑时的决策与平静时的决策往往截然不同。先觉察自己的状态，再决定要不要在此刻做决定。</p>
+    </div>
+    <div class="section">
+      <div class="section-title">在商业中</div>
+      <p>顶级交易员、外科医生、飞行员——这些高压决策者，第一课不是技能而是「状态管理」。心率高了不做大仓，累了不签合同。对身体信号的敬畏，是最被低估的商业素养。</p>
+    </div>
+  </div>
+
+  <!-- 孔子 · 木·信义观 -->
+  <div class="card" data-index="3">
+    <span class="element-tag tag-wood">木 · 信义观</span>
+    <h2>孔子</h2>
+    <div class="years">551 BC — 479 BC · 春秋</div>
+    <div class="portrait">
+      周游列国十四年，历经困厄而不改其志。孔子不是迂腐的道德训诫者，而是一个极端清醒的人——他深知，信誉是一个人、一个组织最底层的资产。<br><br>
+      「人而无信，不知其可也。」没有信用，你在任何关系中都寸步难行。孔子的「信义观」不是什么高尚的道德追求，它是社会协作的最低成本方式。守信的人不需要解释、不需要防备、不需要合同，交易摩擦降到了最低。
+    </div>
+    <div class="quote-box">
+      <div class="label">⚡ 核心箴言</div>
+      <div class="quote">「这个决策对得起你的承诺吗？」</div>
+    </div>
+    <div class="section">
+      <div class="section-title">与决策的关系</div>
+      <p>短期利益诱惑面前，把「信义」作为决策过滤器。你答应过什么？你的选择会辜负谁？一旦失信，修复的成本远超你当下能获得的收益。</p>
+    </div>
+    <div class="section">
+      <div class="section-title">在商业中</div>
+      <p>品牌本质就是信用的积累。胖东来不靠营销靠口碑，Costco不赚商品差价赚会员信任。商业史上最持久的护城河不是技术，是「说到做到」四个字。</p>
+    </div>
+  </div>
+
+  <!-- 六祖慧能 · 火·直觉阈 -->
+  <div class="card" data-index="4">
+    <span class="element-tag tag-fire">火 · 直觉阈</span>
+    <h2>六祖慧能</h2>
+    <div class="years">638 — 713 · 唐代</div>
+    <div class="portrait">
+      一个不识字的樵夫，听到《金刚经》一句「应无所住而生其心」，豁然开悟。后来五祖弘忍传衣钵给他，他成为禅宗六祖。他那首著名的偈子——「本来无一物，何处惹尘埃」——展现了一种极致的直觉智慧：直指本质，不假思索。<br><br>
+      慧能的力量不在知识积累，而在剥离一切后的直接感知。当分析走到尽头，当数据互相矛盾，直觉是最好的最后手段——因为直觉是你所有隐性经验在潜意识中的整合。
+    </div>
+    <div class="quote-box">
+      <div class="label">⚡ 核心箴言</div>
+      <div class="quote">「抛开一切分析，你的直觉说什么？」</div>
+    </div>
+    <div class="section">
+      <div class="section-title">与决策的关系</div>
+      <p>直觉不是玄学，是经验的内化。当你在这个领域积累了足够多的隐性知识，你的「第一反应」往往比复杂分析更靠谱。关键在于知道什么时候该信任它。</p>
+    </div>
+    <div class="section">
+      <div class="section-title">在商业中</div>
+      <p>Steve Jobs对产品的直觉、张小龙对用户心理的体感，都超出了用户调研能覆盖的范围。当数据说A、逻辑说B、但你的直觉坚持说C——至少该停下来，认真听听那个声音。</p>
+    </div>
+  </div>
+
+  <!-- 导航按钮 -->
+  <div class="nav-arrows">
+    <button class="nav-btn" id="prevBtn" aria-label="上一个">←</button>
+    <button class="nav-btn" id="nextBtn" aria-label="下一个">→</button>
+  </div>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="footer">
+  <a href="index.html">首页</a>
+  <span class="sep">·</span>
+  <a href="go.html">启动</a>
+  <span class="sep">·</span>
+  <a href="dashboard-v3.html">仪表盘</a>
+  <p style="margin-top:12px;color:var(--border);font-size:12px;">满意解研究所 · 五路图腾 L0 决策核心</p>
+</footer>
+
+<!-- ═══════════════ JS ═══════════════ -->
+<script>
+(function() {
+  const cards = document.querySelectorAll('.card');
+  const dots  = document.querySelectorAll('.wx-dot');
+  const prev  = document.getElementById('prevBtn');
+  const next  = document.getElementById('nextBtn');
+  let current = 0;
+  const total = cards.length;
+
+  function show(index) {
+    if (index === current) return;
+    current = ((index % total) + total) % total;
+
+    cards.forEach((c, i) => {
+      c.classList.toggle('active-card', i === current);
+    });
+    dots.forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => show(parseInt(dot.dataset.index)));
+  });
+
+  prev.addEventListener('click', () => show(current - 1));
+  next.addEventListener('click', () => show(current + 1));
+
+  // Keyboard nav
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft')  show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+    // Number keys 1-5
+    if (e.key >= '1' && e.key <= '5') show(parseInt(e.key) - 1);
+  });
+
+  // Touch swipe
+  let touchStartX = 0;
+  const stage = document.getElementById('cardStage');
+  stage.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, {passive: true});
+  stage.addEventListener('touchend', e => {
+    const diff = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(diff) > 60) {
+      show(current + (diff < 0 ? 1 : -1));
+    }
+  }, {passive: true});
+})();
+</script>
+
+</body>
+</html>
