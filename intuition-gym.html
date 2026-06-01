@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="快速直觉训练——3秒内做出选择，看看你的直觉有多准。满意解研究所出品。">
+<title>直觉训练场 · 满意解研究所</title>
+<style>
+:root{--red:#C23B22;--gold:#B8860B;--bg:#FAF7F2;--white:#fff;--text:#2D2D2D;--text2:#5C5C5C;--border:#E8E0D5;--green:#3D7A4F}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
+.header{text-align:center;padding:40px 20px 16px;background:linear-gradient(180deg,var(--white),var(--bg))}
+.header .badge{display:inline-block;padding:4px 12px;background:rgba(255,107,107,.12);color:#FF6B6B;border-radius:16px;font-size:11px;font-weight:600;margin-bottom:8px}
+.header h1{font-size:clamp(22px,4vw,32px);font-weight:700;margin-bottom:4px}
+.header .sub{font-size:14px;color:var(--text2)}
+.main{max-width:500px;margin:0 auto;padding:0 16px 40px}
+
+/* 计时器 */
+.timer-ring{width:120px;height:120px;border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;position:relative;border:4px solid var(--border);transition:border-color .2s}
+.timer-ring .ring-inner{font-size:40px;font-weight:200;color:var(--text)}
+.timer-ring.active{border-color:var(--gold);animation:ring-pulse .5s infinite}
+.timer-ring.urgent{border-color:var(--red);animation:ring-pulse .2s infinite}
+@keyframes ring-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+
+.round-info{text-align:center;margin-bottom:16px;font-size:14px;color:var(--text2)}
+.round-info .round-num{font-weight:700;color:var(--gold)}
+
+/* 选择题卡片 */
+.question-card{background:var(--white);border:2px solid var(--border);border-radius:14px;padding:28px 24px;text-align:center;margin-bottom:16px;box-shadow:0 2px 16px rgba(0,0,0,.04)}
+.question-card .q-scenario{font-size:13px;color:var(--gold);font-weight:600;margin-bottom:8px}
+.question-card .q-text{font-size:20px;font-weight:700;margin-bottom:20px;line-height:1.5}
+.choices-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.choice-btn{padding:16px 12px;border:2px solid var(--border);border-radius:12px;background:var(--white);cursor:pointer;font-size:15px;font-weight:600;transition:all .15s;text-align:center}
+.choice-btn:hover{border-color:var(--gold);background:var(--bg)}
+.choice-btn:active{transform:scale(.97)}
+.choice-btn.correct{border-color:var(--green);background:rgba(61,122,79,.08);color:var(--green)}
+.choice-btn.wrong{border-color:var(--red);background:rgba(194,59,34,.08);color:var(--red)}
+.choice-btn.disabled{pointer-events:none;opacity:.5}
+
+.feedback-banner{padding:12px 16px;border-radius:10px;text-align:center;font-size:14px;font-weight:600;margin-bottom:16px;display:none}
+.feedback-banner.show{display:block}
+.feedback-banner.correct{background:rgba(61,122,79,.08);color:var(--green)}
+.feedback-banner.wrong{background:rgba(194,59,34,.08);color:var(--red)}
+.feedback-banner.timeout{background:rgba(194,120,10,.08);color:var(--amber-warn)}
+
+/* 结果 */
+.result{margin-top:24px}
+.result .final-score{font-size:56px;font-weight:100;color:var(--gold);text-align:center}
+.result .final-label{text-align:center;font-size:14px;color:var(--text2);margin-bottom:20px}
+.insight-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:12px;box-shadow:0 1px 8px rgba(0,0,0,.03)}
+.insight-card .insight-title{font-size:13px;font-weight:600;color:var(--gold);margin-bottom:4px}
+.insight-card .insight-body{font-size:13px;color:var(--text2);line-height:1.8}
+
+.btn{display:inline-block;padding:12px 28px;border-radius:24px;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;border:none;transition:all .2s}
+.btn-primary{background:var(--red);color:#fff}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(194,59,34,.25)}
+.btn-secondary{background:var(--white);color:var(--red);border:1.5px solid var(--red);margin-left:8px}
+.btn-secondary:hover{background:rgba(194,59,34,.04)}
+
+.footer{text-align:center;padding:24px;font-size:11px;color:var(--text2)}
+.footer a{color:var(--red);text-decoration:none}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">🧠 右脑 · 创意激发 · 🔥88</div>
+  <h1>直觉训练场</h1>
+  <div class="sub">3秒决策，10轮训练。<br>看看你的直觉有多准——然后让它更准。</div>
+</div>
+
+<div class="main">
+
+  <!-- 游戏区 -->
+  <div id="gameArea">
+    <div class="timer-ring" id="timerRing">
+      <div class="ring-inner" id="timerText">3</div>
+    </div>
+    <div class="round-info"><span class="round-num" id="roundNum">1</span> / 10</div>
+    <div class="feedback-banner" id="feedback"></div>
+    <div class="question-card" id="questionCard"></div>
+  </div>
+
+  <!-- 结果区 -->
+  <div class="hidden" id="resultArea"></div>
+
+</div>
+
+<div class="footer">
+  满意解研究所 · 创意激发系列<br>
+  <a href="index.html">首页</a> · <a href="breakthrough-cards.html">突破卡</a> · <a href="go.html">决策通道</a> · <a href="dashboard-v3.html">🧠 产品大脑</a>
+</div>
+
+<script>
+// 10道直觉题——每道题有场景+4个选项+正确答案+直觉提示
+var questions = [
+  {scenario:'商业判断',q:'一个产品上线后数据突然暴跌，第一反应应该是什么？',
+   choices:['立即回滚版本','先检查数据源是否异常','发全员邮件找原因','启动应急预案'],answer:1,
+   insight:'直觉对错不重要——重要的是你选了"先验证再行动"。这是分析直觉，不是盲目直觉。'},
+  {scenario:'人际判断',q:'合伙人突然沉默了一周，你感觉不对劲。应该？',
+   choices:['等他来找你','发消息问他"你还好吗"','当作没发生','先找第三方打听'],answer:1,
+   insight:'你的直觉捕捉到了异常——沉默是信号。直接问"你还好吗"比"你怎么了"更不容易激发防御。'},
+  {scenario:'危机判断',q:'客户在公开场合批评你们的产品。你的第一反应？',
+   choices:['立即公开回应','私下联系了解详情','让PR团队处理','忽略，等事情过去'],answer:1,
+   insight:'公开问题私下解决——先理解再回应。直觉想让你马上解释，但"先听"是更好的直觉。'},
+  {scenario:'机会判断',q:'一个以前拒绝过你的投资人突然约你喝咖啡。',
+   choices:['欣然赴约，准备BP','问清楚他为什么回心转意','先看看最近他们投了什么','礼貌拒绝'],answer:2,
+   insight:'变化背后总有原因。了解他的动机比准备PPT更重要——信息不对称时先补信息。'},
+  {scenario:'团队判断',q:'你最好的工程师说要离职，你觉得不是因为钱。',
+   choices:['加薪挽留','问他真正的原因','让他走，再招一个','给他放一周假'],answer:1,
+   insight:'你的直觉告诉你不是钱的问题——相信它。最好的工程师通常为成长和意义而留，不为钱。'},
+  {scenario:'战略判断',q:'竞争对手突然宣布要做你的核心功能，免费。',
+   choices:['也免费，跟他打','加速差异化，不做价格战','忽略，关注自己的路','发公开信谴责'],answer:1,
+   insight:'直觉想让你反击——但价格战是对手希望你做的事。加速差异化才是正确的防御。'},
+  {scenario:'时间判断',q:'你手上有三个重要决定，但精力只够做一个。先做哪个？',
+   choices:['最紧急的','最重要的','最简单的','随机选'],answer:1,
+   insight:'重要优先于紧急。直觉往往会推你去做紧急的事——这是大脑的生存本能在误导你。'},
+  {scenario:'信任判断',q:'新认识的人提出合作，条件很好但你觉得哪里不对。',
+   choices:['条件好就签','相信直觉，先延后','让别人帮你审','直接拒绝'],answer:1,
+   insight:''哪里不对'就是身体在说话。条件完美时不急着做决定——时间是最好的试金石。'},
+  {scenario:'创意判断',q:'你有一个疯狂的新想法，但所有人都说不行。',
+   choices:['听大家的，放弃','做一个最小原型验证','再调研三个月','换一个想法'],answer:1,
+   insight:'疯狂的想法需要最小的验证。不被理解≠错误——做一个小实验比争论三个月有效。'},
+  {scenario:'终极判断',q:'如果今天是生命的最后一天，你现在做的事还值得吗？',
+   choices:['值得，继续','不值得，立刻停下来','没想过','这个问题太沉重'],answer:0,
+   insight:'乔布斯每天问自己这个问题17年。不是要你放弃——是要你确认：你在做对的事。'}
+];
+
+var currentRound = 0;
+var score = 0;
+var timerId = null;
+var timeLeft = 3;
+var roundResults = [];
+
+function renderRound() {
+  if(currentRound >= questions.length) {
+    showResult();
+    return;
+  }
+  
+  var q = questions[currentRound];
+  document.getElementById('roundNum').textContent = currentRound+1;
+  document.getElementById('feedback').classList.remove('show','correct','wrong','timeout');
+  document.getElementById('timerRing').classList.remove('active','urgent');
+  document.getElementById('timerText').textContent = '3';
+  
+  var h = '';
+  h += '<div class="q-scenario">'+q.scenario+'</div>';
+  h += '<div class="q-text">'+q.q+'</div>';
+  h += '<div class="choices-grid">';
+  for(var i=0;i<q.choices.length;i++){
+    var letter = String.fromCharCode(65+i);
+    h += '<button class="choice-btn" id="choice'+i+'" onclick="selectAnswer('+i+')">'+letter+'. '+q.choices[i]+'</button>';
+  }
+  h += '</div>';
+  document.getElementById('questionCard').innerHTML = h;
+  
+  startTimer();
+}
+
+function startTimer() {
+  clearInterval(timerId);
+  timeLeft = 3;
+  var ring = document.getElementById('timerRing');
+  ring.classList.add('active');
+  
+  timerId = setInterval(function(){
+    timeLeft--;
+    document.getElementById('timerText').textContent = timeLeft;
+    if(timeLeft <= 1) ring.classList.add('urgent');
+    
+    if(timeLeft <= 0) {
+      clearInterval(timerId);
+      ring.classList.remove('active','urgent');
+      handleTimeout();
+    }
+  }, 1000);
+}
+
+function selectAnswer(idx) {
+  clearInterval(timerId);
+  document.getElementById('timerRing').classList.remove('active','urgent');
+  disableAllChoices();
+  
+  var q = questions[currentRound];
+  var correct = idx === q.answer;
+  var reactionTime = 3 - timeLeft;
+  
+  if(correct) score++;
+  roundResults.push({round:currentRound+1, question:q.q, choice:idx, correct:correct, time:reactionTime});
+  
+  // 高亮正确/错误
+  document.getElementById('choice'+q.answer).classList.add('correct');
+  if(!correct) document.getElementById('choice'+idx).classList.add('wrong');
+  
+  // 反馈
+  var fb = document.getElementById('feedback');
+  fb.className = 'feedback-banner show ' + (correct?'correct':'wrong');
+  fb.innerHTML = (correct?'✅ ':'❌ ') + (correct?'你的直觉很准！':'错了也没关系——') + '<br><span style="font-size:12px;font-weight:400">'+q.insight+'</span>';
+  
+  setTimeout(function(){
+    currentRound++;
+    renderRound();
+  }, 1800);
+}
+
+function handleTimeout() {
+  disableAllChoices();
+  var q = questions[currentRound];
+  roundResults.push({round:currentRound+1, question:q.q, choice:-1, correct:false, time:4});
+  
+  document.getElementById('choice'+q.answer).classList.add('correct');
+  
+  var fb = document.getElementById('feedback');
+  fb.className = 'feedback-banner show timeout';
+  fb.innerHTML = '⏰ 时间到！<br><span style="font-size:12px;font-weight:400">'+q.insight+'</span>';
+  
+  setTimeout(function(){
+    currentRound++;
+    renderRound();
+  }, 1800);
+}
+
+function disableAllChoices() {
+  var btns = document.querySelectorAll('.choice-btn');
+  for(var i=0;i<btns.length;i++) btns[i].classList.add('disabled');
+}
+
+function showResult() {
+  document.getElementById('gameArea').classList.add('hidden');
+  
+  var pct = Math.round(score/questions.length*100);
+  var avgTime = roundResults.reduce(function(s,r){return s+r.time},0)/roundResults.length;
+  
+  var icon,title,body;
+  if(pct >= 80){icon='🧿';title='直觉大师';body='你的直觉非常敏锐。'+score+'/10的正确率说明你的经验模式匹配能力很强。继续训练，让它更精准。'}
+  else if(pct >= 50){icon='🎯';title='直觉在成长';body='你的直觉有一半是对的——这已经很好了。最好的决策者不会100%依赖直觉，但会100%听见它。'}
+  else{icon='🌱';title='直觉在萌芽';body='正确率不高不代表你的直觉不好——可能只是对这类问题还不太熟悉。继续练习，模式会出现的。'}
+  
+  var h = '<div class="result">';
+  h += '<div class="final-score">'+pct+'%</div>';
+  h += '<div class="final-label">'+score+'/'+questions.length+' 正确 · 均反应'+(avgTime*1000).toFixed(0)+'ms</div>';
+  
+  h += '<div class="insight-card"><div class="insight-title">'+icon+' '+title+'</div><div class="insight-body">'+body+'</div></div>';
+  
+  h += '<div class="insight-card"><div class="insight-title">📊 你的直觉模式</div><div class="insight-body">';
+  h += '商业判断类: '+(roundResults.filter(function(r){return r.round<=2}).filter(function(r){return r.correct}).length)+'/2 ';
+  h += (roundResults[0].correct&&roundResults[1].correct?'✅ 优秀':(roundResults[0].correct||roundResults[1].correct?'⚠️ 部分':'❌ 需要练习'));
+  h += '<br>';
+  h += '人际判断类: '+(roundResults.filter(function(r){return r.round>=2&&r.round<=4}).filter(function(r){return r.correct}).length)+'/2 ';
+  h += (roundResults[1].correct&&roundResults[2].correct?'✅ 优秀':(roundResults[1].correct||roundResults[2].correct?'⚠️ 部分':'❌ 需要练习'));
+  h += '<br>';
+  h += '战略判断类: '+(roundResults.filter(function(r){return r.round>=5&&r.round<=8}).filter(function(r){return r.correct}).length)+'/4 ';
+  h += '</div></div>';
+  
+  h += '<div style="text-align:center;margin-top:20px">';
+  h += '<button class="btn btn-primary" onclick="restart()">🔄 再练一次</button>';
+  h += '<a href="go.html" class="btn btn-secondary">← 决策通道</a>';
+  h += '</div>';
+  h += '</div>';
+  
+  document.getElementById('resultArea').innerHTML = h;
+  document.getElementById('resultArea').classList.remove('hidden');
+}
+
+function restart() {
+  currentRound = 0;
+  score = 0;
+  roundResults = [];
+  document.getElementById('gameArea').classList.remove('hidden');
+  document.getElementById('resultArea').classList.add('hidden');
+  renderRound();
+}
+
+// 开始
+renderRound();
+</script>
+</body>
+</html>
