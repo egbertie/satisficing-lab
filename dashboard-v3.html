@@ -418,7 +418,7 @@ body {
   <div class="product-section" id="product-section"></div>
 
   <!-- L2.5 · 🧠 产品大脑 -->
-  <div class="section-title">🧠 产品大脑 · <span style="font-size:0.78em;color:var(--ink-lighter);font-weight:400;">v3.0品质体系·四层金字塔·12-Gate·BARS评分</span></div>
+  <div class="section-title">🧠 产品大脑 · <span style="font-size:0.78em;color:var(--ink-lighter);font-weight:400;">v4.0生命视角·用户面向四象限·精品飞轮·蒸馏闭环</span></div>
   <div class="brain-section" id="brain-section"></div>
 
   <!-- L3 · 需要关注 -->
@@ -1101,7 +1101,35 @@ function renderBrain() {
       h += '</div>';
     }
     h += '</div>';
-    h += '<div style="font-size:10px;color:var(--ink-lighter);text-align:center">v3.0品质体系·四层金字塔+12-Gate+精品飞轮·"少即是多"</div>';
+    h += '<div style="font-size:10px;color:var(--ink-lighter);text-align:center">v4.0生命视角·用户面向四象限·精品飞轮·蒸馏闭环·"物尽其用"</div>';
+    h += '</div>';
+  }
+
+  // v4.0 用户面向四象限
+  if (sum.product_system_v4) {
+    var uf = sum.product_system_v4.user_facing_distribution || {};
+    var tp = sum.product_system_v4.true_premium_count || 0;
+    var ai = sum.product_system_v4.ai_agent_count || 0;
+    var dc = sum.product_system_v4.distill_candidates || 0;
+    h += '<div class="brain-panel" style="margin-bottom:20px"><h3>🧭 用户面向 v4.0</h3>';
+    var ufData = [
+      {label:'🏆人用精品',cnt:tp,color:'#C23B22',desc:'给人类客户·有选择权·会推荐'},
+      {label:'🧭AI灯塔',cnt:ai,color:'#B8860B',desc:'给AI/Agent·提升AI能力'},
+      {label:'🔧内部工具',cnt:(uf['🔧 human_internal']||0),color:'#6080A0',desc:'给我们自己用'},
+      {label:'⚙️蒸馏原料',cnt:dc,color:'#AAA',desc:'退役蒸馏·滋养下一代'}
+    ];
+    var totalUF = ufData.reduce(function(s,d){return s+d.cnt},0);
+    for(var ui=0;ui<ufData.length;ui++){
+      var ud=ufData[ui];
+      var up=Math.round(ud.cnt/totalUF*100);
+      h += '<div style="display:flex;align-items:center;gap:6px;font-size:11px;margin-bottom:4px">';
+      h += '<span style="width:70px;text-align:right">'+ud.label+'</span>';
+      h += '<div style="flex:1;height:6px;background:var(--card-warm);border-radius:3px;overflow:hidden"><div style="height:100%;width:'+up+'%;background:'+ud.color+';border-radius:3px"></div></div>';
+      h += '<span style="width:24px;text-align:right;font-weight:600">'+ud.cnt+'</span>';
+      h += '<span style="width:120px;font-size:9px;color:var(--ink-lighter)">'+ud.desc+'</span>';
+      h += '</div>';
+    }
+    h += '<div style="font-size:10px;color:var(--ink-lighter);text-align:center;margin-top:6px">v4.0·先问"给谁用"·再问"好不好"·AI产品不需要Delighter·退役产品可蒸馏</div>';
     h += '</div>';
   }
 
