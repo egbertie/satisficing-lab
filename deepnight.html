@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>深夜书 · 和被允许的对话</title>
+<meta name="description" content="凌晨两点，你有一个做不出的决定。这里不问你怎么想——只问你，如果被允许的话，你会怎么选。">
+<style>
+:root{--bg:#1A1A1A;--text:#D4C5A0;--dim:#6E6E6E;--warm:#C2780A;--white:#F5F0E6}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;overflow-x:hidden}
+
+.room{max-width:380px;width:100%;text-align:center;display:flex;flex-direction:column;align-items:center;gap:32px}
+
+/* 时钟 */
+.clock{font-size:13px;color:var(--dim);letter-spacing:1px;font-variant-numeric:tabular-nums}
+
+/* 问题 */
+.question{font-size:20px;line-height:1.7;font-weight:400;color:var(--text);max-width:340px;display:none;animation:fadeUp .5s}
+.question.show{display:block}
+.question em{font-style:normal;color:var(--warm)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* 输入 */
+.input-area{width:100%;display:none;animation:fadeUp .5s}
+.input-area.show{display:block}
+textarea.deep-input{width:100%;padding:16px;border:none;border-bottom:1.5px solid var(--dim);background:transparent;color:var(--white);font-size:16px;line-height:1.8;resize:none;font-family:inherit;text-align:center;transition:border-color .4s;min-height:60px}
+textarea.deep-input:focus{outline:none;border-bottom-color:var(--warm)}
+textarea.deep-input::placeholder{color:var(--dim)}
+
+/* 按钮 */
+.btn-next{background:transparent;border:1.5px solid var(--dim);color:var(--dim);padding:10px 24px;border-radius:20px;font-size:13px;cursor:pointer;transition:all .3s;display:none}
+.btn-next.show{display:inline-block}
+.btn-next:hover{border-color:var(--warm);color:var(--warm)}
+.btn-next:disabled{opacity:.3;cursor:not-allowed}
+
+/* 完成页 */
+.final-text{font-size:15px;line-height:2;color:var(--text);text-align:center;max-width:300px;display:none;animation:fadeUp .8s}
+.final-text.show{display:block}
+.final-text .line{display:block;margin-bottom:4px}
+.final-text .accent{color:var(--warm);font-weight:600}
+
+/* 底部淡入 */
+.fade-in{opacity:0;animation:fadeIn .8s .5s forwards}
+@keyframes fadeIn{to{opacity:1}}
+
+.back-home{position:fixed;bottom:24px;left:0;right:0;text-align:center;font-size:11px;opacity:.3}
+.back-home a{color:var(--dim);text-decoration:none}
+.back-home a:hover{color:var(--text)}
+</style>
+</head>
+<body>
+
+<div class="room">
+  <div class="clock" id="clock"></div>
+  
+  <!-- Q1 -->
+  <div class="question show" id="q1">你现在面对的那个决定——<br>如果用一句话说出来，<br>是什么？</div>
+  <div class="input-area show" id="a1">
+    <textarea class="deep-input" id="inp1" placeholder="写下来……" rows="2" oninput="onType(1,this)" maxlength="120"></textarea>
+    <button class="btn-next" id="btn1" disabled onclick="next(2)">→</button>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question" id="q2">如果没有人会评判你——<br>没有投资人、没有合伙人、没有家人——<br>你<em>真正</em>想选的是什么？</div>
+  <div class="input-area" id="a2">
+    <textarea class="deep-input" id="inp2" placeholder="那个不敢说出口的选择……" rows="2" oninput="onType(2,this)" maxlength="120"></textarea>
+    <button class="btn-next" id="btn2" disabled onclick="next(3)">→</button>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question" id="q3">是什么在阻止你？<br>不是外部原因——<br>是你<em>自己</em>里面的那个声音，<br>在说什么？</div>
+  <div class="input-area" id="a3">
+    <textarea class="deep-input" id="inp3" placeholder="那个声音说……" rows="2" oninput="onType(3,this)" maxlength="120"></textarea>
+    <button class="btn-next" id="btn3" disabled onclick="next(4)">→</button>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question" id="q4">如果那个阻止你的声音<br>不是威胁，而是保护——<br>它在保护什么？</div>
+  <div class="input-area" id="a4">
+    <textarea class="deep-input" id="inp4" placeholder="它在保护……" rows="2" oninput="onType(4,this)" maxlength="120"></textarea>
+    <button class="btn-next" id="btn4" disabled onclick="finish()">→</button>
+  </div>
+
+  <!-- 完成 -->
+  <div class="final-text" id="final">
+    <span class="line">你看见了。</span>
+    <span class="line">你想选的方向，</span>
+    <span class="line">和你在害怕的东西，</span>
+    <span class="line">都在这里了。</span>
+    <span class="line" style="margin-top:12px">不需要今晚做决定。</span>
+    <span class="line accent">你已经被允许了——</span>
+    <span class="line accent">被你自己允许。</span>
+    <span class="line" style="margin-top:16px;font-size:12px;color:var(--dim)" id="saveHint"></span>
+  </div>
+
+  <div class="btn-next fade-in" id="restartBtn" style="display:none" onclick="restart()">再写一次</div>
+</div>
+
+<div class="back-home"><a href="go.html">← 决策通道</a> · <a href="dashboard-v3.html">🧠 产品大脑</a></div>
+
+<script>
+// 实时时钟
+function tick() {
+  var now = new Date();
+  var h = now.getHours(); var m = now.getMinutes();
+  document.getElementById('clock').textContent = 
+    (h<10?'0':'')+h+':'+(m<10?'0':'')+m + ' · 深夜书';
+}
+tick(); setInterval(tick, 30000);
+
+var answers = {};
+
+function onType(n, el) {
+  var val = el.value.trim();
+  answers['q'+n] = val;
+  var btn = document.getElementById('btn'+n);
+  if(btn) {
+    btn.disabled = val.length < 3;
+    btn.classList.toggle('show', val.length >= 3);
+  }
+}
+
+// 自动换行: 检测到句号或回车时, 自动跳到下一题
+var inputs = document.querySelectorAll('.deep-input');
+inputs.forEach(function(inp, i){
+  inp.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' && !e.shiftKey && this.value.trim().length >= 3) {
+      e.preventDefault();
+      var n = i + 1;
+      var btn = document.getElementById('btn'+n);
+      if(btn && !btn.disabled) btn.click();
+    }
+  });
+});
+
+function next(n) {
+  // 隐藏当前
+  var prevN = n - 1;
+  document.getElementById('q'+prevN).classList.remove('show');
+  document.getElementById('a'+prevN).classList.remove('show');
+  
+  // 短暂过渡
+  setTimeout(function(){
+    if(n <= 4) {
+      document.getElementById('q'+n).classList.add('show');
+      document.getElementById('a'+n).classList.add('show');
+      document.getElementById('inp'+n).focus();
+    }
+  }, 300);
+}
+
+function finish() {
+  document.getElementById('q4').classList.remove('show');
+  document.getElementById('a4').classList.remove('show');
+  
+  // 保存到localStorage
+  var entry = {
+    date: new Date().toLocaleDateString('zh-CN'),
+    time: new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'}),
+    answers: Object.assign({}, answers)
+  };
+  var history = JSON.parse(localStorage.getItem('sri_deepnight') || '[]');
+  history.unshift(entry);
+  if(history.length > 5) history.length = 5;
+  localStorage.setItem('sri_deepnight', JSON.stringify(history));
+  
+  document.getElementById('saveHint').textContent = '已保存 · ' + history.length + '次深夜对话';
+  
+  setTimeout(function(){
+    document.getElementById('final').classList.add('show');
+    document.getElementById('restartBtn').style.display = 'inline-block';
+  }, 400);
+}
+
+function restart() {
+  answers = {};
+  document.querySelectorAll('.deep-input').forEach(function(el){el.value = ''});
+  document.querySelectorAll('.btn-next').forEach(function(el){el.classList.remove('show');el.disabled = true});
+  document.getElementById('final').classList.remove('show');
+  document.getElementById('restartBtn').style.display = 'none';
+  
+  document.getElementById('q1').classList.add('show');
+  document.getElementById('a1').classList.add('show');
+  document.getElementById('inp1').focus();
+  tick();
+}
+
+// 如果用户在深夜访问(22:00-06:00), 显示深夜模式的特殊时钟
+(function(){
+  var h = new Date().getHours();
+  if(h >= 22 || h < 6) {
+    document.getElementById('clock').textContent += ' · 这个时间，你不需要答案';
+  }
+})();
+</script>
+</body>
+</html>
