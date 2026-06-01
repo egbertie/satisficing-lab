@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="决策前5分钟身体扫描——身体的智慧先于头脑的判断。满意解研究所出品。">
+<meta property="og:title" content="五分钟身体扫描 · 满意解研究所">
+<meta property="og:description" content="闭上眼，用5分钟听见身体的声音。你的身体知道答案。">
+<title>五分钟身体扫描 · 满意解研究所</title>
+<style>
+:root{--red:#C23B22;--gold:#B8860B;--bg:#FAF7F2;--white:#fff;--text:#2D2D2D;--text2:#5C5C5C;--border:#E8E0D5;--shadow:0 2px 16px rgba(0,0,0,.04);--radius:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;align-items:center}
+.header{text-align:center;padding:48px 24px 24px}
+.header .badge{display:inline-block;padding:4px 12px;background:rgba(96,128,160,.12);color:#6080A0;border-radius:16px;font-size:11px;font-weight:600;margin-bottom:12px}
+.header h1{font-size:clamp(24px,4vw,36px);font-weight:700;margin-bottom:6px;color:var(--text)}
+.header .sub{font-size:15px;color:var(--text2)}
+
+.scan-area{max-width:480px;width:100%;padding:0 24px}
+
+/* 步骤指示器 */
+.steps{display:flex;gap:8px;justify-content:center;margin-bottom:32px}
+.step-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;border:2px solid var(--border);color:var(--text2);background:var(--white);transition:all .3s}
+.step-dot.active{border-color:var(--gold);background:var(--gold);color:#fff}
+.step-dot.done{border-color:#70A060;background:#70A060;color:#fff}
+
+/* 引导卡片 */
+.guide-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:32px 24px;text-align:center;box-shadow:var(--shadow);margin-bottom:20px;transition:all .3s}
+.guide-card .icon{font-size:48px;margin-bottom:16px}
+.guide-card h3{font-size:20px;font-weight:600;margin-bottom:8px;color:var(--text)}
+.guide-card .inst{font-size:14px;color:var(--text2);margin-bottom:8px;line-height:1.8}
+.guide-card .timer{font-size:40px;font-weight:300;color:var(--gold);margin:16px 0;font-variant-numeric:tabular-nums}
+.guide-card .timer.warning{color:var(--red);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+.btn{display:inline-block;padding:14px 36px;border-radius:24px;font-size:16px;font-weight:600;cursor:pointer;border:none;transition:all .2s;text-decoration:none}
+.btn-primary{background:var(--red);color:#fff;box-shadow:0 4px 16px rgba(194,59,34,.2)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(194,59,34,.3)}
+.btn-outline{background:var(--white);color:var(--red);border:1.5px solid var(--red)}
+.btn-outline:hover{background:rgba(194,59,34,.04)}
+
+/* 身体部位扫描 */
+.body-zones{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px}
+.zone-btn{padding:16px 8px;border-radius:var(--radius);border:1.5px solid var(--border);background:var(--white);cursor:pointer;text-align:center;transition:all .2s;font-size:13px}
+.zone-btn:hover{border-color:var(--gold)}
+.zone-btn.checked{border-color:#70A060;background:rgba(112,160,96,.08)}
+.zone-btn .z-emoji{font-size:24px;margin-bottom:4px;display:block}
+.zone-btn .z-label{font-size:12px;color:var(--text2)}
+.zone-btn .z-state{font-size:11px;color:var(--text2);margin-top:2px}
+
+/* 感受选择 */
+.feel-grid{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px}
+.feel-chip{padding:10px 18px;border-radius:20px;border:1.5px solid var(--border);background:var(--white);cursor:pointer;font-size:14px;transition:all .2s}
+.feel-chip:hover{border-color:var(--gold)}
+.feel-chip.selected{border-color:var(--red);background:rgba(194,59,34,.06);color:var(--red);font-weight:600}
+
+/* 完成页 */
+.result-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;text-align:center;box-shadow:var(--shadow);margin-bottom:20px}
+.result-card .score{font-size:64px;font-weight:100;color:var(--gold);margin:16px 0}
+.result-card .advice{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:20px}
+.result-card .advice strong{color:var(--text)}
+
+/* Footer */
+.footer{text-align:center;padding:32px 24px;font-size:11px;color:var(--text2)}
+.footer a{color:var(--red);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">🧠 右脑 · 体验型 · 水95 🔥85</div>
+  <h1>五分钟身体扫描</h1>
+  <div class="sub">闭上眼，让身体说话。它比头脑更早知道答案。</div>
+</div>
+
+<div class="scan-area">
+
+  <!-- 步骤指示器 -->
+  <div class="steps">
+    <div class="step-dot active" id="step1">1</div>
+    <div class="step-dot" id="step2">2</div>
+    <div class="step-dot" id="step3">3</div>
+    <div class="step-dot" id="step4">4</div>
+    <div class="step-dot" id="step5">5</div>
+  </div>
+
+  <!-- Step 1: 准备 -->
+  <div class="guide-card" id="card1">
+    <div class="icon">🪑</div>
+    <h3>第一步：坐定</h3>
+    <p class="inst">找一个安静的地方坐下。<br>双脚平放地面，双手放在大腿上。<br>轻轻闭上眼睛，做三次深呼吸。</p>
+    <button class="btn btn-primary" onclick="nextStep(2)">准备好了 →</button>
+  </div>
+
+  <!-- Step 2: 身体扫描 -->
+  <div class="guide-card hidden" id="card2">
+    <div class="icon">🔍</div>
+    <h3>第二步：扫描身体</h3>
+    <p class="inst">从头顶开始，慢慢向下<br>感受每个部位的状态——<br>紧张？放松？温暖？沉重？</p>
+    <div class="timer" id="timer">02:00</div>
+    <div class="body-zones">
+      <button class="zone-btn" onclick="toggleZone(this,'头部')"><span class="z-emoji">🧠</span><span class="z-label">头部</span><span class="z-state"></span></button>
+      <button class="zone-btn" onclick="toggleZone(this,'颈部')"><span class="z-emoji">🦴</span><span class="z-label">颈部</span><span class="z-state"></span></button>
+      <button class="zone-btn" onclick="toggleZone(this,'肩膀')"><span class="z-emoji">💪</span><span class="z-label">肩膀</span><span class="z-state"></span></button>
+      <button class="zone-btn" onclick="toggleZone(this,'胸口')"><span class="z-emoji">❤️</span><span class="z-label">胸口</span><span class="z-state"></span></button>
+      <button class="zone-btn" onclick="toggleZone(this,'腹部')"><span class="z-emoji">🫃</span><span class="z-label">腹部</span><span class="z-state"></span></button>
+      <button class="zone-btn" onclick="toggleZone(this,'双手')"><span class="z-emoji">🤲</span><span class="z-label">双手</span><span class="z-state"></span></button>
+      <button class="zone-btn" onclick="toggleZone(this,'后背')"><span class="z-emoji">🦴</span><span class="z-label">后背</span><span class="z-state"></span></button>
+      <button class="zone-btn" onclick="toggleZone(this,'双腿')"><span class="z-emoji">🦵</span><span class="z-label">双腿</span><span class="z-state"></span></button>
+      <button class="zone-btn" onclick="toggleZone(this,'双脚')"><span class="z-emoji">🦶</span><span class="z-label">双脚</span><span class="z-state"></span></button>
+    </div>
+    <button class="btn btn-primary" id="btnScanDone" onclick="finishScan()" disabled>至少选3个部位 →</button>
+  </div>
+
+  <!-- Step 3: 感受标签 -->
+  <div class="guide-card hidden" id="card3">
+    <div class="icon">🎭</div>
+    <h3>第三步：给感受命名</h3>
+    <p class="inst">在刚才扫描到的部位中，<br>选出最能描述你此刻身体状态的词：</p>
+    <div class="feel-grid">
+      <button class="feel-chip" onclick="toggleFeel(this)">紧绷</button>
+      <button class="feel-chip" onclick="toggleFeel(this)">放松</button>
+      <button class="feel-chip" onclick="toggleFeel(this)">沉重</button>
+      <button class="feel-chip" onclick="toggleFeel(this)">轻盈</button>
+      <button class="feel-chip" onclick="toggleFeel(this)">温暖</button>
+      <button class="feel-chip" onclick="toggleFeel(this)">冰冷</button>
+      <button class="feel-chip" onclick="toggleFeel(this)">酸胀</button>
+      <button class="feel-chip" onclick="toggleFeel(this)">刺痛</button>
+      <button class="feel-chip" onclick="toggleFeel(this)">麻木</button>
+      <button class="feel-chip" onclick="toggleFeel(this)">跳动</button>
+      <button class="feel-chip" onclick="toggleFeel(this)">通畅</button>
+      <button class="feel-chip" onclick="toggleFeel(this)">堵塞</button>
+      <button class="feel-chip" onclick="toggleFeel(this)">空虚</button>
+      <button class="feel-chip" onclick="toggleFeel(this)">饱满</button>
+      <button class="feel-chip" onclick="toggleFeel(this)">平静</button>
+      <button class="feel-chip" onclick="toggleFeel(this)">躁动</button>
+    </div>
+    <button class="btn btn-primary" id="btnFeelDone" onclick="nextStep(4)" disabled>至少选1个 →</button>
+  </div>
+
+  <!-- Step 4: 身体与决策 -->
+  <div class="guide-card hidden" id="card4">
+    <div class="icon">💡</div>
+    <h3>第四步：身体的建议</h3>
+    <p class="inst">回想你最近面临的一个决策。<br>当你在心里默念这个决定时，<br>身体的哪个部位有反应？<br>它在说什么？</p>
+    <textarea id="bodyMessage" style="width:100%;height:100px;border:1.5px solid var(--border);border-radius:var(--radius);padding:14px;font-size:14px;font-family:inherit;resize:none;background:var(--white)" placeholder="写下身体的信号...（可跳过）"></textarea>
+    <button class="btn btn-primary" style="margin-top:16px" onclick="nextStep(5)">完成 →</button>
+  </div>
+
+  <!-- Step 5: 结果 -->
+  <div class="guide-card hidden" id="card5">
+    <div class="icon">🌊</div>
+    <h3>身体扫描完成</h3>
+    <div class="result-card" style="box-shadow:none;margin:16px 0">
+      <div class="score" id="awarenessScore">--</div>
+      <div style="font-size:13px;color:var(--text2);margin-top:-12px">身体觉察分</div>
+      <div class="advice" id="adviceText"></div>
+    </div>
+    <button class="btn btn-outline" onclick="resetScan()">🔄 再来一次</button>
+    <a href="go.html" class="btn btn-outline" style="margin-left:8px">← 返回决策通道</a>
+  </div>
+
+</div>
+
+<div class="footer">
+  满意解研究所 · 身体智慧系列<br>
+  <a href="index.html">首页</a> · <a href="pre0.html">PRE-0深度版</a> · <a href="dashboard-v3.html">🧠 产品大脑</a>
+</div>
+
+<script>
+var checkedZones = [];
+var selectedFeels = [];
+var timerInterval = null;
+
+function nextStep(n) {
+  for(var i=1;i<=5;i++) {
+    var card = document.getElementById('card'+i);
+    var dot = document.getElementById('step'+i);
+    if(card) card.classList.add('hidden');
+    if(i===n) {
+      if(card) card.classList.remove('hidden');
+      if(dot) dot.classList.add('active');
+    } else if(i<n) {
+      if(dot) {dot.classList.remove('active');dot.classList.add('done')}
+    } else {
+      if(dot) {dot.classList.remove('active','done')}
+    }
+  }
+  if(n===2) startTimer();
+  if(n===5) showResult();
+}
+
+function toggleZone(btn, name) {
+  btn.classList.toggle('checked');
+  var span = btn.querySelector('.z-state');
+  if(btn.classList.contains('checked')) {
+    checkedZones.push(name);
+    span.textContent = '✓';
+  } else {
+    checkedZones = checkedZones.filter(function(z){return z!==name});
+    span.textContent = '';
+  }
+  document.getElementById('btnScanDone').disabled = checkedZones.length < 3;
+}
+
+function finishScan() {
+  clearInterval(timerInterval);
+  nextStep(3);
+}
+
+function toggleFeel(btn) {
+  btn.classList.toggle('selected');
+  if(btn.classList.contains('selected')) {
+    selectedFeels.push(btn.textContent);
+  } else {
+    selectedFeels = selectedFeels.filter(function(f){return f!==btn.textContent});
+  }
+  document.getElementById('btnFeelDone').disabled = selectedFeels.length < 1;
+}
+
+function showResult() {
+  var score = Math.min(100, checkedZones.length * 10 + selectedFeels.length * 2);
+  var msg = document.getElementById('bodyMessage').value.trim();
+  if(msg) score += 5;
+  score = Math.min(100, score);
+  
+  document.getElementById('awarenessScore').textContent = score + '/100';
+  
+  var advice = '';
+  if(score >= 80) {
+    advice = '<strong>身体觉察力很强。</strong>你的身体是你最好的决策顾问。每次重要决定前花5分钟扫描，它会越来越准确。';
+  } else if(score >= 50) {
+    advice = '<strong>正在建立身体连接。</strong>你已经开始听见身体的声音了。坚持每天练习，信号会越来越清晰。';
+  } else {
+    advice = '<strong>你和身体的对话才刚刚开始。</strong>没关系——大多数人都是这样。给身体一点时间，它会学会和你说话。';
+  }
+  advice += '<br><br><em>"身体的智慧先于头脑的判断。"</em>';
+  document.getElementById('adviceText').innerHTML = advice;
+}
+
+function startTimer() {
+  var s = 120;
+  var timer = document.getElementById('timer');
+  function tick() {
+    s--;
+    var m = Math.floor(s/60);
+    var sec = s%60;
+    timer.textContent = (m<10?'0':'')+m+':'+(sec<10?'0':'')+sec;
+    if(s<=30) timer.classList.add('warning');
+    if(s<=0) {clearInterval(timerInterval);timer.textContent='时间到'}
+  }
+  clearInterval(timerInterval);
+  timerInterval = setInterval(tick, 1000);
+}
+
+function resetScan() {
+  checkedZones = [];
+  selectedFeels = [];
+  clearInterval(timerInterval);
+  document.getElementById('bodyMessage').value = '';
+  document.getElementById('btnScanDone').disabled = true;
+  document.getElementById('btnFeelDone').disabled = true;
+  var zones = document.querySelectorAll('.zone-btn');
+  for(var i=0;i<zones.length;i++) zones[i].classList.remove('checked');
+  var feels = document.querySelectorAll('.feel-chip');
+  for(var i=0;i<feels.length;i++) feels[i].classList.remove('selected');
+  nextStep(1);
+}
+</script>
+</body>
+</html>

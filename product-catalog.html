@@ -103,11 +103,14 @@ td a:hover{text-decoration:underline}
     </table>
     <div class="count" id="count"></div>
   </div>
+  <p style="font-size:11px;color:var(--text-muted);text-align:center;margin-top:12px">
+    🧠 双光谱评价体系 · L=(金+土)/2 R=(水+火)/2 · 平衡度=1-|L-R|/100
+  </p>
 </div>
 
 <div class="footer">
-  满意解研究所 · 产品目录 · 数据来源 entities_index.json
-  · <a href="dashboard-v3.html">驾驶舱</a>
+  满意解研究所 · 产品目录 · 双光谱分类 · 数据来源 entities_index.json
+  · <a href="dashboard-v3.html">🧠 产品大脑</a>
   · <a href="index.html">返回首页</a>
 </div>
 
@@ -122,106 +125,119 @@ function load(){
     return r.json();
   }).then(function(d){
     ALL = (d.products||[]).map(function(p,i){
+      var sp = p.spectrum || {};
+      var fe = sp.five_elements || {};
       return {
         id: p.id||('SP-'+String(i+1).padStart(3,'0')),
         name: p.name||'?',
         family: p.family||'未归类',
+        quadrant: sp.hemisphere || '未评估',
+        L: sp.L !== undefined ? sp.L : null,
+        R: sp.R !== undefined ? sp.R : null,
+        balance: sp.balance !== undefined ? sp.balance : null,
+        elem_earth: fe['土_时间轴'] || null,
+        elem_metal: fe['金_可行域'] || null,
+        elem_water: fe['水_身心流'] || null,
+        elem_wood: fe['木_信义观'] || null,
+        elem_fire: fe['火_直觉阈'] || null,
+        primary_elem: sp.primary_element || '',
         status: p.status||p.maturity||'?',
         quality: p.quality_score!==undefined?p.quality_score:'-',
         llm: p.llm_rating!==undefined?p.llm_rating:null,
-        lifecycle: p.lifecycle_stage||'?',
         desc: (p.description||'').substring(0,80),
         url: p.url||'',
-        confidence: p.quality_confidence||'',
-        psycho_type: p.psycho_type||'地图',
-        resonance_score: p.resonance_score||0,
       };
     });
     render();
   }).catch(function(e){
-    document.getElementById('tbody').innerHTML='<tr><td colspan="8" class="error">⚠️ 加载失败: '+esc(e.message)+'</td></tr>';
+    document.getElementById('tbody').innerHTML='<tr><td colspan="7" class="error">⚠️ 加载失败: '+esc(e.message)+'</td></tr>';
   });
 }
+
+var ALL=[], QUAD_FILT='全部';
 
 function render(){
   var q=document.getElementById('search').value.toLowerCase();
   SORT=document.getElementById('sortBy').value;
-  var psychoFilt=(document.getElementById('psychoFilter')||{}).value||'全部';
+  QUAD_FILT=(document.getElementById('quadrantFilter')||{}).value||'全部';
   var filtered=ALL.filter(function(p){
-    if(FILT!=='全部' && p.family!==FILT) return false;
-    if(psychoFilt!=='全部' && p.psycho_type!==psychoFilt) return false;
-    if(q && p.name.toLowerCase().indexOf(q)===-1 && (p.desc||'').toLowerCase().indexOf(q)===-1 && (p.url||'').toLowerCase().indexOf(q)===-1 && (p.family||'').toLowerCase().indexOf(q)===-1 && (p.status||'').toLowerCase().indexOf(q)===-1) return false;
+    if(QUAD_FILT!=='全部' && p.quadrant!==QUAD_FILT) return false;
+    if(q && p.name.toLowerCase().indexOf(q)===-1 && (p.desc||'').toLowerCase().indexOf(q)===-1 && (p.family||'').toLowerCase().indexOf(q)===-1 && (p.quadrant||'').toLowerCase().indexOf(q)===-1) return false;
     return true;
   });
 
-  // Sort
   if(SORT==='quality_desc') filtered.sort(function(a,b){return (b.quality=== '-'?-1:b.quality)-(a.quality==='-'?-1:a.quality)});
   else if(SORT==='quality_asc') filtered.sort(function(a,b){return (a.quality==='-'?999:a.quality)-(b.quality==='-'?999:b.quality)});
   else if(SORT==='llm_desc') filtered.sort(function(a,b){return (b.llm||0)-(a.llm||0)});
   else if(SORT==='name_asc') filtered.sort(function(a,b){return a.name.localeCompare(b.name,'zh')});
+  else if(SORT==='L_desc') filtered.sort(function(a,b){return (b.L||0)-(a.L||0)});
+  else if(SORT==='R_desc') filtered.sort(function(a,b){return (b.R||0)-(a.R||0)});
+  else if(SORT==='balance_desc') filtered.sort(function(a,b){return (b.balance||0)-(a.balance||0)});
 
   var h='';
   for(var i=0;i<filtered.length;i++){
     var p=filtered[i];
-    var qColor=p.confidence==='A'?'color:#3D7A4F;font-weight:600':(p.confidence==='D'?'color:#888':'');
-
-    // LLM badge
-    var llmHtml='-';
-    if(p.llm!==null){
-      var c=p.llm>=85?'bg-green':(p.llm>=70?'bg-gold':'bg-red');
-      llmHtml='<span class="badge '+c+'">'+p.llm+'</span>';
+    
+    // 象限颜色
+    var qColor='#888', qBg='rgba(136,136,136,.1)';
+    if(p.quadrant==='Ⅰ·全脑型'){qColor='#7B68EE';qBg='rgba(123,104,238,.12)';}
+    else if(p.quadrant==='Ⅱ·体验型'){qColor='#FF6B6B';qBg='rgba(255,107,107,.12)';}
+    else if(p.quadrant==='Ⅲ·真空型'){qColor='#AAA';qBg='rgba(170,170,170,.08)';}
+    else if(p.quadrant==='Ⅳ·分析型'){qColor='#4A90D9';qBg='rgba(74,144,217,.12)';}
+    
+    // 五维迷你条
+    var elemStr='';
+    var dims=[{k:'土',v:p.elem_earth,c:'#A08060'},{k:'金',v:p.elem_metal,c:'#C0C0C0'},{k:'水',v:p.elem_water,c:'#6080A0'},{k:'木',v:p.elem_wood,c:'#70A060'},{k:'火',v:p.elem_fire,c:'#C23B22'}];
+    for(var di=0;di<dims.length;di++){
+      var dv = dims[di].v || 0;
+      elemStr += '<span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:'+dims[di].c+';opacity:'+(dv/100*0.6+0.4)+';margin:0 1px" title="'+dims[di].k+':'+dv+'"></span>';
     }
-
-    // Status badge
-    var stClass='bg-gray';
-    if(p.status==='精品') stClass='bg-gold';
-    else if(p.status==='线上') stClass='bg-green';
-    else if(p.status==='已下架') stClass='bg-red';
-    var famClass='bg-gray';
-    if(p.family==='镜') famClass='bg-gold';
-    else if(p.family==='衡'||p.family==='觉') famClass='bg-green';
-    else if(p.family==='契'||p.family==='人') famClass='bg-red';
+    
+    // 平衡度颜色
+    var bal = p.balance || 0;
+    var balColor = bal >= 0.8 ? '#3D7A4F' : (bal >= 0.5 ? '#C2780A' : '#C23B22');
 
     h+='<tr>'+
       '<td style="font-weight:500">'+esc(p.name)+'</td>'+
-      '<td><span class="badge '+famClass+'">'+esc(p.family)+'</span></td>'+
-      '<td><span class="badge '+stClass+'">'+esc(p.status)+'</span></td>'+
-      '<td style="'+qColor+'">'+(p.quality!=='-'?p.quality:'-')+'</td>'+
-      '<td>'+llmHtml+'</td>'+
-      '<td style="font-size:10px">'+esc(p.lifecycle)+'</td>'+
-      '<td style="font-size:10px;color:#888;max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(p.desc||'-')+'</td>'+
+      '<td><span style="display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;background:'+qBg+';color:'+qColor+'">'+esc(p.quadrant)+'</span></td>'+
+      '<td style="font-variant-numeric:tabular-nums">'+(p.L!==null?p.L.toFixed(0):'-')+'</td>'+
+      '<td style="font-variant-numeric:tabular-nums">'+(p.R!==null?p.R.toFixed(0):'-')+'</td>'+
+      '<td style="font-variant-numeric:tabular-nums;color:'+balColor+'">'+(p.balance!==null?(p.balance*100).toFixed(0)+'%':'-')+'</td>'+
+      '<td>'+elemStr+'</td>'+
       '<td>'+(p.url?'<a href="'+esc(p.url)+'" target="_blank">→</a>':'-')+'</td>'+
       '</tr>';
   }
-  document.getElementById('tbody').innerHTML=h||'<tr><td colspan="8" style="text-align:center;padding:20px;color:#888">无匹配产品</td></tr>';
+  document.getElementById('tbody').innerHTML=h||'<tr><td colspan="7" style="text-align:center;padding:20px;color:#888">无匹配产品</td></tr>';
   document.getElementById('count').textContent='显示 '+filtered.length+' / '+ALL.length+' 个产品';
 
-  // Stats
-  var premium=ALL.filter(function(p){return p.status==='精品'}).length;
-  var online=ALL.filter(function(p){return p.status==='线上'}).length;
-  var offline=ALL.filter(function(p){return p.status==='已下架'}).length;
-  var fams={}; ALL.forEach(function(p){fams[p.family]=(fams[p.family]||0)+1});
-  var famCount=Object.keys(fams).length;
+  // Stats with spectrum
+  var quadDist = {};
+  ALL.forEach(function(p){ quadDist[p.quadrant] = (quadDist[p.quadrant]||0)+1 });
+  var avgL = ALL.reduce(function(s,p){return s+(p.L||0)},0)/ALL.length;
+  var avgR = ALL.reduce(function(s,p){return s+(p.R||0)},0)/ALL.length;
   document.getElementById('stats').innerHTML=
     '<div class="stat"><div class="n">'+ALL.length+'</div><div class="l">📦 总数</div></div>'+
-    '<div class="stat"><div class="n">'+premium+'</div><div class="l">💎 精品</div></div>'+
-    '<div class="stat"><div class="n">'+online+'</div><div class="l">🌐 线上</div></div>'+
-    '<div class="stat"><div class="n">'+offline+'</div><div class="l">📦 下架</div></div>'+
-    '<div class="stat"><div class="n">'+famCount+'</div><div class="l">🏷️ 族</div></div>';
+    '<div class="stat"><div class="n">'+(avgL.toFixed(0))+'</div><div class="l">📐 左脑均值</div></div>'+
+    '<div class="stat"><div class="n">'+(avgR.toFixed(0))+'</div><div class="l">🎨 右脑均值</div></div>'+
+    '<div class="stat"><div class="n">'+(quadDist['Ⅰ·全脑型']||0)+'</div><div class="l">🟣 全脑</div></div>'+
+    '<div class="stat"><div class="n">'+(quadDist['Ⅱ·体验型']||0)+'</div><div class="l">🔴 体验</div></div>'+
+    '<div class="stat"><div class="n">'+(quadDist['Ⅳ·分析型']||0)+'</div><div class="l">🔵 分析</div></div>';
 }
 
-// Filter buttons
+// Filter buttons — quadrant based
 (function(){
-  var fo=['全部','镜','衡','契','觉','人','道','章','未归类'];
+  var fo=['全部','Ⅰ·全脑型','Ⅳ·分析型','Ⅱ·体验型','Ⅲ·真空型'];
+  var labels={'全部':'全部','Ⅰ·全脑型':'🟣全脑','Ⅳ·分析型':'🔵分析','Ⅱ·体验型':'🔴体验','Ⅲ·真空型':'⬜真空'};
   var h='';
   for(var i=0;i<fo.length;i++){
-    h+='<button class="fbtn'+(fo[i]==='全部'?' active':'')+'" onclick="setFilt(\''+fo[i]+'\',this)">'+fo[i]+'</button>';
+    h+='<button class="fbtn'+(fo[i]==='全部'?' active':'')+'" onclick="setQuadFilt(\''+fo[i]+'\',this)">'+labels[fo[i]]+'</button>';
   }
   document.getElementById('filters').innerHTML=h;
 })();
 
-function setFilt(f,btn){
-  FILT=f;
+function setQuadFilt(f,btn){
+  QUAD_FILT=f;
+  document.getElementById('quadrantFilter').value=f;
   var bs=document.querySelectorAll('.fbtn');
   for(var i=0;i<bs.length;i++) bs[i].classList.remove('active');
   btn.classList.add('active');

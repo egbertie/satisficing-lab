@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="记录每次重大决策前后的身体信号。长期追踪，形成你个人的身体-决策模式图谱。满意解研究所出品。">
+<title>决策身体日记 · 满意解研究所</title>
+<style>
+:root{--red:#C23B22;--gold:#B8860B;--bg:#FAF7F2;--white:#fff;--text:#2D2D2D;--text2:#5C5C5C;--border:#E8E0D5}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
+.header{text-align:center;padding:40px 20px 20px;background:linear-gradient(180deg,var(--white),var(--bg))}
+.header .badge{display:inline-block;padding:4px 12px;background:rgba(96,128,160,.12);color:#6080A0;border-radius:16px;font-size:11px;font-weight:600;margin-bottom:10px}
+.header h1{font-size:clamp(22px,4vw,32px);font-weight:700;margin-bottom:6px}
+.header .sub{font-size:14px;color:var(--text2)}
+
+.main{max-width:520px;margin:0 auto;padding:0 16px 40px}
+
+/* 日记列表 */
+.journal-list{margin-bottom:20px}
+.journal-entry{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:10px;box-shadow:0 2px 10px rgba(0,0,0,.03);transition:all .2s}
+.journal-entry:hover{border-color:var(--gold)}
+.journal-entry .je-date{font-size:11px;color:var(--text2);margin-bottom:4px}
+.journal-entry .je-decision{font-size:15px;font-weight:600;margin-bottom:4px;color:var(--text)}
+.journal-entry .je-body{font-size:13px;color:var(--text2);margin-bottom:4px}
+.journal-entry .je-before,.je-after{display:inline-block;padding:2px 10px;border-radius:12px;font-size:11px;margin-right:6px}
+.je-before{background:rgba(194,59,34,.08);color:var(--red)}
+.je-after{background:rgba(112,160,96,.08);color:#70A060}
+.empty-state{text-align:center;padding:40px 16px;color:var(--text2);font-size:14px}
+.empty-state .e-icon{font-size:48px;margin-bottom:12px}
+
+/* 表单 */
+.form-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:20px;box-shadow:0 2px 16px rgba(0,0,0,.04)}
+.form-card h3{font-size:18px;font-weight:600;margin-bottom:16px;text-align:center}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:13px;font-weight:600;color:var(--text2);margin-bottom:6px}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;background:var(--white);color:var(--text)}
+.form-group textarea{height:80px;resize:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--gold)}
+
+.slider-group{display:flex;align-items:center;gap:12px}
+.slider-group input[type=range]{flex:1;accent-color:var(--red)}
+.slider-group .slider-val{min-width:36px;text-align:center;font-size:14px;font-weight:600;color:var(--red)}
+
+.feel-chips{display:flex;flex-wrap:wrap;gap:6px}
+.feel-chip{padding:6px 14px;border-radius:16px;font-size:12px;cursor:pointer;border:1.5px solid var(--border);background:var(--white);transition:all .2s}
+.feel-chip.selected{border-color:var(--red);background:rgba(194,59,34,.06);color:var(--red);font-weight:600}
+
+.btn{display:block;width:100%;padding:14px;border-radius:24px;font-size:16px;font-weight:600;cursor:pointer;border:none;transition:all .2s;text-align:center;margin-top:16px}
+.btn-primary{background:var(--red);color:#fff}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(194,59,34,.25)}
+.btn-secondary{background:var(--white);color:var(--red);border:1.5px solid var(--red);margin-top:8px}
+.btn-secondary:hover{background:rgba(194,59,34,.04)}
+
+/* 决策前/后对比 */
+.compare-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.compare-box{padding:16px;border-radius:10px;text-align:center}
+.compare-box.before{background:rgba(194,59,34,.04);border:1px solid rgba(194,59,34,.15)}
+.compare-box.after{background:rgba(112,160,96,.04);border:1px solid rgba(112,160,96,.15)}
+.compare-box .c-label{font-size:11px;font-weight:600;margin-bottom:4px}
+.compare-box .c-value{font-size:28px;font-weight:300}
+.compare-box .c-sub{font-size:12px;color:var(--text2)}
+.before .c-label{color:var(--red)}
+.after .c-label{color:#70A060}
+
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.stat-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;box-shadow:0 1px 8px rgba(0,0,0,.03)}
+.stat-card .st-num{font-size:24px;font-weight:300;color:var(--gold)}
+.stat-card .st-label{font-size:11px;color:var(--text2);margin-top:2px}
+
+.footer{text-align:center;padding:20px;font-size:11px;color:var(--text2)}
+.footer a{color:var(--red);text-decoration:none}
+
+.hidden{display:none!important}
+.show-form-btn{text-align:center;margin-bottom:16px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">🧠 右脑 · 体验+调查 · 水90 🔥75 土50</div>
+  <h1>决策身体日记</h1>
+  <div class="sub">每次重大决策，身体都会留下痕迹。记录它，读懂它。</div>
+</div>
+
+<div class="main">
+
+  <!-- 统计卡片 -->
+  <div class="stats-row" id="statsRow">
+    <div class="stat-card"><div class="st-num" id="totalEntries">0</div><div class="st-label">📝 记录数</div></div>
+    <div class="stat-card"><div class="st-num" id="avgTension">-</div><div class="st-label">⚡ 平均紧张度</div></div>
+    <div class="stat-card"><div class="st-num" id="topSignal">-</div><div class="st-label">🔝 最多信号</div></div>
+  </div>
+
+  <!-- 日记列表 -->
+  <div class="journal-list" id="journalList">
+    <div class="empty-state" id="emptyState">
+      <div class="e-icon">📖</div>
+      <p>还没有记录。<br>每次做重要决定前后来这里，记下身体说了什么。</p>
+    </div>
+  </div>
+
+  <div class="show-form-btn" id="showFormBtn">
+    <button class="btn btn-primary" onclick="showForm()">✍️ 记录一次决策</button>
+  </div>
+
+  <!-- 表单 -->
+  <div class="form-card hidden" id="formCard">
+    <h3>📝 记录决策前后的身体信号</h3>
+    
+    <div class="form-group">
+      <label>📅 日期</label>
+      <input type="date" id="inpDate">
+    </div>
+    <div class="form-group">
+      <label>🎯 你要做的决定是什么？</label>
+      <input type="text" id="inpDecision" placeholder="例如：是否接受新合伙人">
+    </div>
+    
+    <div class="compare-row">
+      <div class="compare-box before">
+        <div class="c-label">决定前</div>
+        <div class="c-value" id="tensionBefore">-</div>
+        <div class="c-sub">身体紧张度</div>
+      </div>
+      <div class="compare-box after">
+        <div class="c-label">决定后</div>
+        <div class="c-value" id="tensionAfter">-</div>
+        <div class="c-sub">身体放松度</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>⚡ 决定前的身体紧张度 (0=完全放松, 10=极度紧张)</label>
+      <div class="slider-group">
+        <span>😌</span>
+        <input type="range" min="0" max="10" value="5" id="tensionSlider" oninput="updateTension(this.value)">
+        <span style="font-size:20px">😰</span>
+        <span class="slider-val" id="tensionVal">5</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>📍 哪个部位最明显？</label>
+      <div class="feel-chips" id="bodyZones">
+        <span class="feel-chip" onclick="this.classList.toggle('selected')">🧠 头</span>
+        <span class="feel-chip" onclick="this.classList.toggle('selected')">🦴 颈</span>
+        <span class="feel-chip" onclick="this.classList.toggle('selected')">💪 肩</span>
+        <span class="feel-chip" onclick="this.classList.toggle('selected')">❤️ 胸</span>
+        <span class="feel-chip" onclick="this.classList.toggle('selected')">🫃 腹</span>
+        <span class="feel-chip" onclick="this.classList.toggle('selected')">🤲 手</span>
+        <span class="feel-chip" onclick="this.classList.toggle('selected')">🦵 腿</span>
+        <span class="feel-chip" onclick="this.classList.toggle('selected')">🦶 脚</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>💬 身体在说什么？</label>
+      <textarea id="inpBodyMsg" placeholder="例如：胃紧缩了一下，好像在说'不行'..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>✅ 决定后的身体状态 (0=依然紧张, 10=完全释放)</label>
+      <div class="slider-group">
+        <span>😰</span>
+        <input type="range" min="0" max="10" value="5" id="reliefSlider" oninput="document.getElementById('reliefVal').textContent=this.value;document.getElementById('tensionAfter').textContent=this.value">
+        <span>😌</span>
+        <span class="slider-val" id="reliefVal">5</span>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" onclick="saveEntry()">💾 保存记录</button>
+    <button class="btn btn-secondary" onclick="hideForm()">取消</button>
+  </div>
+
+</div>
+
+<div class="footer">
+  满意解研究所 · 身体智慧系列<br>
+  <a href="index.html">首页</a> · <a href="body-scan.html">五分钟身体扫描</a> · <a href="stress-signals.html">压力信号卡</a> · <a href="dashboard-v3.html">🧠 产品大脑</a>
+</div>
+
+<script>
+var STORAGE_KEY = 'sri_body_journal';
+var entries = [];
+
+function loadEntries() {
+  try {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    entries = raw ? JSON.parse(raw) : [];
+  } catch(e) {
+    entries = [];
+  }
+  renderList();
+}
+
+function renderList() {
+  var list = document.getElementById('journalList');
+  var empty = document.getElementById('emptyState');
+  
+  if(entries.length === 0) {
+    empty.classList.remove('hidden');
+    list.querySelectorAll('.journal-entry').forEach(function(e){e.remove()});
+  } else {
+    empty.classList.add('hidden');
+    var h = '';
+    for(var i=entries.length-1;i>=0;i--) {
+      var e = entries[i];
+      h += '<div class="journal-entry">';
+      h += '<div class="je-date">📅 '+esc(e.date)+'</div>';
+      h += '<div class="je-decision">'+esc(e.decision)+'</div>';
+      h += '<div class="je-body">📍 '+esc(e.zones||'')+' · 💬 '+esc(e.bodyMsg||'')+'</div>';
+      h += '<span class="je-before">决定前: '+e.tension+'/10</span>';
+      h += '<span class="je-after">决定后: '+e.relief+'/10</span>';
+      h += '</div>';
+    }
+    var existing = list.querySelectorAll('.journal-entry');
+    existing.forEach(function(e){e.remove()});
+    list.insertAdjacentHTML('beforeend', h);
+  }
+  
+  updateStats();
+}
+
+function updateStats() {
+  document.getElementById('totalEntries').textContent = entries.length;
+  
+  if(entries.length > 0) {
+    var avgT = entries.reduce(function(s,e){return s+e.tension},0) / entries.length;
+    document.getElementById('avgTension').textContent = avgT.toFixed(1)+'/10';
+    
+    var zoneCounts = {};
+    entries.forEach(function(e){
+      (e.zones||'').split(',').forEach(function(z){if(z.trim()) zoneCounts[z.trim()]=(zoneCounts[z.trim()]||0)+1});
+    });
+    var top = Object.entries(zoneCounts).sort(function(a,b){return b[1]-a[1]})[0];
+    document.getElementById('topSignal').textContent = top ? top[0] : '-';
+  } else {
+    document.getElementById('avgTension').textContent = '-';
+    document.getElementById('topSignal').textContent = '-';
+  }
+}
+
+function showForm() {
+  document.getElementById('formCard').classList.remove('hidden');
+  document.getElementById('showFormBtn').classList.add('hidden');
+  document.getElementById('inpDate').value = new Date().toISOString().split('T')[0];
+}
+
+function hideForm() {
+  document.getElementById('formCard').classList.add('hidden');
+  document.getElementById('showFormBtn').classList.remove('hidden');
+}
+
+function updateTension(v) {
+  document.getElementById('tensionVal').textContent = v;
+  document.getElementById('tensionBefore').textContent = v;
+}
+
+function saveEntry() {
+  var date = document.getElementById('inpDate').value;
+  var decision = document.getElementById('inpDecision').value.trim();
+  var tension = parseInt(document.getElementById('tensionSlider').value);
+  var relief = parseInt(document.getElementById('reliefSlider').value);
+  var bodyMsg = document.getElementById('inpBodyMsg').value.trim();
+  
+  if(!decision) {alert('请先填写你要做的决定');return}
+  
+  var zones = [];
+  document.querySelectorAll('#bodyZones .feel-chip.selected').forEach(function(c){zones.push(c.textContent.trim())});
+  
+  entries.push({
+    date: date || new Date().toISOString().split('T')[0],
+    decision: decision,
+    tension: tension,
+    relief: relief,
+    zones: zones.join(','),
+    bodyMsg: bodyMsg,
+    recordedAt: new Date().toISOString()
+  });
+  
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+  
+  // 重置表单
+  document.getElementById('inpDecision').value = '';
+  document.getElementById('inpBodyMsg').value = '';
+  document.getElementById('tensionSlider').value = 5;
+  document.getElementById('reliefSlider').value = 5;
+  updateTension(5);
+  document.querySelectorAll('#bodyZones .feel-chip.selected').forEach(function(c){c.classList.remove('selected')});
+  
+  hideForm();
+  renderList();
+}
+
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+loadEntries();
+</script>
+</body>
+</html>

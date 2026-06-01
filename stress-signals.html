@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="12张身体压力信号识别卡——在决策前识别身体发出的预警信号。满意解研究所出品。">
+<title>压力信号卡 · 满意解研究所</title>
+<style>
+:root{--red:#C23B22;--gold:#B8860B;--bg:#FAF7F2;--white:#fff;--text:#2D2D2D;--text2:#5C5C5C;--border:#E8E0D5}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
+.header{text-align:center;padding:40px 20px 20px;background:linear-gradient(180deg,var(--white),var(--bg))}
+.header .badge{display:inline-block;padding:4px 12px;background:rgba(96,128,160,.12);color:#6080A0;border-radius:16px;font-size:11px;font-weight:600;margin-bottom:10px}
+.header h1{font-size:clamp(22px,4vw,32px);font-weight:700;margin-bottom:6px}
+.header .sub{font-size:14px;color:var(--text2);max-width:400px;margin:0 auto}
+
+.main{max-width:560px;margin:0 auto;padding:0 16px 40px}
+
+/* 进度 */
+.progress{display:flex;align-items:center;gap:8px;justify-content:center;margin:20px 0;font-size:13px;color:var(--text2)}
+.progress-bar{flex:1;max-width:200px;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--gold);transition:width .3s}
+
+/* 卡片 */
+.card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:28px 24px;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,.04);margin-bottom:16px}
+.card .signal-emoji{font-size:56px;margin-bottom:12px}
+.card .signal-name{font-size:22px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.card .signal-body{font-size:14px;color:var(--gold);font-weight:600;margin-bottom:12px}
+.card .signal-desc{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:20px}
+.card .signal-question{font-size:16px;font-weight:600;color:var(--text);margin-bottom:20px;padding:12px;background:var(--bg);border-radius:8px}
+
+/* 按钮 */
+.btn-row{display:flex;gap:10px;justify-content:center}
+.btn{padding:12px 24px;border-radius:20px;font-size:15px;font-weight:600;cursor:pointer;border:none;transition:all .2s}
+.btn-yes{background:rgba(96,128,160,.12);color:#6080A0;border:1.5px solid rgba(96,128,160,.3)}
+.btn-yes:hover,.btn-yes.active{background:#6080A0;color:#fff;border-color:#6080A0}
+.btn-no{background:rgba(194,59,34,.06);color:var(--red);border:1.5px solid rgba(194,59,34,.2)}
+.btn-no:hover,.btn-no.active{background:var(--red);color:#fff;border-color:var(--red)}
+
+/* 结果 */
+.result{text-align:center;padding:32px 16px}
+.result .result-icon{font-size:64px;margin-bottom:16px}
+.result .result-title{font-size:24px;font-weight:700;margin-bottom:8px}
+.result .result-body{font-size:15px;color:var(--text2);line-height:2;margin-bottom:24px}
+.result .result-body strong{color:var(--text)}
+.result .signals-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px}
+.result .signal-tag{padding:6px 14px;border-radius:16px;font-size:12px;font-weight:600}
+.tag-active{background:rgba(194,59,34,.1);color:var(--red)}
+.tag-calm{background:rgba(112,160,96,.1);color:#70A060}
+
+.btn-restart{display:inline-block;padding:12px 28px;border-radius:24px;background:var(--red);color:#fff;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;border:none;margin-right:8px;transition:all .2s}
+.btn-restart:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(194,59,34,.25)}
+
+.footer{text-align:center;padding:20px;font-size:11px;color:var(--text2)}
+.footer a{color:var(--red);text-decoration:none}
+
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">🧠 右脑 · 体验型 · 水85 🔥60</div>
+  <h1>压力信号卡</h1>
+  <div class="sub">12张身体信号卡。你的身体在压力来临前就会预警——学会认读这些信号。</div>
+</div>
+
+<div class="main">
+
+  <div class="progress">
+    <span id="progressText">1/12</span>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:8%"></div></div>
+  </div>
+
+  <!-- 卡片区 -->
+  <div class="card" id="cardArea">
+    <div class="signal-emoji" id="signalEmoji">😤</div>
+    <div class="signal-name" id="signalName">咬紧牙关</div>
+    <div class="signal-body" id="signalBody">下巴·颞颌关节</div>
+    <div class="signal-desc" id="signalDesc">在重要会议或决策前，你是否会不自觉地咬紧牙关？<br>这是身体最古老的防御信号之一——它在帮你"咬住阵地"。</div>
+    <div class="signal-question" id="signalQuestion">过去一周，你有过这种感觉吗？</div>
+    <div class="btn-row">
+      <button class="btn btn-yes" onclick="answer(true)">✓ 有过</button>
+      <button class="btn btn-no" onclick="answer(false)">✗ 没有</button>
+    </div>
+  </div>
+
+  <!-- 结果区 -->
+  <div class="result hidden" id="resultArea">
+    <div class="result-icon" id="resultIcon">🌊</div>
+    <div class="result-title" id="resultTitle"></div>
+    <div class="result-body" id="resultBody"></div>
+    <div class="signals-list" id="signalsList"></div>
+    <button class="btn-restart" onclick="restart()">🔄 再测一次</button>
+    <a href="go.html" style="font-size:14px;color:var(--red);text-decoration:none;margin-left:8px">← 决策通道</a>
+  </div>
+
+</div>
+
+<div class="footer">
+  满意解研究所 · 身体智慧系列<br>
+  <a href="index.html">首页</a> · <a href="body-scan.html">五分钟身体扫描</a> · <a href="pre0.html">PRE-0深度版</a> · <a href="dashboard-v3.html">🧠 产品大脑</a>
+</div>
+
+<script>
+var signals = [
+  {emoji:'😤',name:'咬紧牙关',body:'下巴·颞颌关节',desc:'在重要会议或决策前，你是否会不自觉地咬紧牙关？<br>这是身体最古老的防御信号之一——它在帮你"咬住阵地"。',q:'过去一周，你有过这种感觉吗？'},
+  {emoji:'🫀',name:'心跳加速',body:'心脏·胸腔',desc:'当你想到那个决定时，心跳是不是变快了？<br>心脏是最诚实的决策顾问——它几乎从不说谎。',q:'最近做决定时，心跳有变化吗？'},
+  {emoji:'🤲',name:'手心出汗',body:'手掌·指尖',desc:'手心出汗不是软弱——是远古的"准备战斗"信号。<br>身体在告诉你：这件事很重要。',q:'想到重要决定时，手心会潮湿吗？'},
+  {emoji:'🫃',name:'胃部紧缩',body:'胃·腹部',desc:''我胃里有个结'——这是肠道神经系统在说话。<br>科学家称它为'第二大脑'，有5亿个神经元。',q:'做决定前，胃部有没有不适？'},
+  {emoji:'🦴',name:'肩颈僵硬',body:'肩膀·颈部',desc:'肩膀扛着全世界的重量？<br>身体的压力最先储存在肩颈——它像一个气压计。',q:'最近肩膀或脖子特别僵硬吗？'},
+  {emoji:'😮‍💨',name:'呼吸变浅',body:'胸腔·横膈膜',desc:'注意你的呼吸——是不是不知不觉变浅了？<br>浅呼吸是身体进入'警戒模式'的第一个信号。',q:'你注意到自己的呼吸变浅了吗？'},
+  {emoji:'😴',name:'不明疲倦',body:'全身·能量',desc:'不是没睡好，是一种'重'。<br>决策疲劳在身体上表现为无法解释的疲惫。',q:'最近有没有莫名特别累的时候？'},
+  {emoji:'🤯',name:'头脑空白',body:'大脑·前额叶',desc:'压力之下，前额叶皮层会暂时'离线'。<br>这就是为什么你会在关键时刻'脑子一片空白'。',q:'做决定时，脑子有没有卡住过？'},
+  {emoji:'👂',name:'耳鸣或听力变化',body:'耳朵·听觉',desc:'压力会让听觉系统变得敏感。<br>有些人在高压决策前会听到嗡嗡声或耳朵堵塞。',q:'耳鸣或听力有变化吗？'},
+  {emoji:'🦵',name:'腿部躁动',body:'双腿·脚',desc:'不自觉抖腿？脚趾蜷缩？<br>腿是身体的'逃跑引擎'，它知道什么时候想跑。',q:'坐着的时候，腿会不自觉动吗？'},
+  {emoji:'💧',name:'口干或喉咙紧',body:'口腔·喉咙',desc:''话卡在嗓子眼'——喉咙紧张是身体在说'我需要表达但不敢'。',q:'说话前有没有喉咙发紧的感觉？'},
+  {emoji:'❄️',name:'手脚冰凉',body:'手脚末端',desc:'压力让血液回流到核心器官，四肢先冷。<br>这是身体在'节能模式'下的自我保护。',q:'手脚经常冰凉吗？'}
+];
+
+var current = 0;
+var activeSignals = [];
+
+function renderCard() {
+  if(current >= signals.length) {
+    showResult();
+    return;
+  }
+  var s = signals[current];
+  document.getElementById('signalEmoji').textContent = s.emoji;
+  document.getElementById('signalName').textContent = s.name;
+  document.getElementById('signalBody').textContent = s.body;
+  document.getElementById('signalDesc').innerHTML = s.desc;
+  document.getElementById('signalQuestion').textContent = s.q;
+  document.getElementById('progressText').textContent = (current+1)+'/'+signals.length;
+  document.getElementById('progressFill').style.width = ((current+1)/signals.length*100)+'%';
+}
+
+function answer(yes) {
+  if(yes) activeSignals.push(signals[current]);
+  current++;
+  renderCard();
+}
+
+function showResult() {
+  document.getElementById('cardArea').classList.add('hidden');
+  document.getElementById('resultArea').classList.remove('hidden');
+  
+  var count = activeSignals.length;
+  var icon, title, body;
+  
+  if(count === 0) {
+    icon = '🌟'; title = '身体信号：平静';
+    body = '你当前的身体状态非常好。<strong>没有检测到明显的压力信号。</strong><br>这是一个做重要决定的好时机——身体给了你绿灯。';
+  } else if(count <= 3) {
+    icon = '🌤️'; title = '身体信号：轻度';
+    body = '你的身体发出了<strong>'+count+'个轻微信号</strong>。<br>这些信号提醒你：在重要决定前，花5分钟做一次身体扫描。';
+  } else if(count <= 6) {
+    icon = '🌧️'; title = '身体信号：中度';
+    body = '你的身体发出了<strong>'+count+'个明确的压力信号</strong>。<br>这些信号不是障碍——是导航。它们告诉你在哪些方面需要额外关注。';
+  } else {
+    icon = '⛈️'; title = '身体信号：高度';
+    body = '你的身体发出了<strong>'+count+'个强烈的预警信号</strong>。<br>你的身体正在大声说话。在做重大决策前，强烈建议先做PRE-0身体觉察。';
+  }
+  
+  document.getElementById('resultIcon').textContent = icon;
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultBody').innerHTML = body;
+  
+  var tags = '';
+  for(var i=0;i<activeSignals.length;i++) {
+    tags += '<span class="signal-tag tag-active">'+activeSignals[i].emoji+' '+activeSignals[i].name+'</span>';
+  }
+  for(var i=0;i<signals.length;i++) {
+    if(activeSignals.indexOf(signals[i])<0) {
+      tags += '<span class="signal-tag tag-calm">'+signals[i].emoji+' '+signals[i].name+'</span>';
+    }
+  }
+  document.getElementById('signalsList').innerHTML = tags;
+}
+
+function restart() {
+  current = 0;
+  activeSignals = [];
+  document.getElementById('cardArea').classList.remove('hidden');
+  document.getElementById('resultArea').classList.add('hidden');
+  renderCard();
+}
+
+renderCard();
+</script>
+</body>
+</html>
