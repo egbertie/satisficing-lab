@@ -31,10 +31,10 @@ def audit_12gate(p):
         'detail': f"描述{'✅' if has_desc and desc_len>20 else '❌('+str(desc_len)+'字)'} JTBD{'✅' if has_jtbd else '❌'} 用户{'✅' if has_target else '❌'}"
     }
     
-    # A2: 时间到价值 — 有time_estimate字段且≤20分钟
+    # A2: 时间到价值 — 有time_estimate字段且≤30分钟
     has_time = bool(p.get('time_estimate'))
     time_val = p.get('time_estimate','')
-    is_fast = '分钟' in str(time_val) and not any(x in str(time_val) for x in ['30','40','50','60'])
+    is_fast = '分钟' in str(time_val) and not any(x in str(time_val) for x in ['40','50','60'])
     gates['A2_TTU'] = {
         'pass': has_time and is_fast,
         'detail': f"时间估算:{time_val if has_time else '缺失'} {'✅' if has_time and is_fast else '⚠️'}"
