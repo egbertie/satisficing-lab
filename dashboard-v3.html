@@ -418,7 +418,7 @@ body {
   <div class="product-section" id="product-section"></div>
 
   <!-- L2.5 · 🧠 产品大脑 -->
-  <div class="section-title">🧠 产品大脑 · <span style="font-size:0.78em;color:var(--ink-lighter);font-weight:400;">BARS v2.0·行为锚定·5级x5维·实时评估</span></div>
+  <div class="section-title">🧠 产品大脑 · <span style="font-size:0.78em;color:var(--ink-lighter);font-weight:400;">v3.0品质体系·四层金字塔·12-Gate·BARS评分</span></div>
   <div class="brain-section" id="brain-section"></div>
 
   <!-- L3 · 需要关注 -->
@@ -1075,6 +1075,35 @@ function renderBrain() {
   h += '</div>';
 
   h += '</div>'; // brain-grid
+
+  // v3.0 品质金字塔
+  var qs = sum.quality_system;
+  if (qs) {
+    var tiers = qs.tier_distribution || {};
+    h += '<div class="brain-panel" style="margin-bottom:20px"><h3>🏆 品质金字塔 v3.0</h3>';
+    h += '<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px">';
+    var tierData = [
+      {label:'🏆精品',key:'🏆精品',color:'#C23B22',target:'≤30',desc:'12-Gate通过·Delighter·用户推荐'},
+      {label:'⭐优质',key:'⭐优质',color:'#B8860B',target:'50-80',desc:'JTBD清晰·高完成度·缺少惊喜'},
+      {label:'✅合格',key:'✅合格',color:'#6080A0',target:'50-80',desc:'基本可用·需补A门'},
+      {label:'🌱原型',key:'🌱原型',color:'#AAA',target:'动态',desc:'概念验证·核心功能开发中'}
+    ];
+    var totalPyramid = (tiers['🏆精品']||0)+(tiers['⭐优质']||0)+(tiers['✅合格']||0)+(tiers['🌱原型']||0);
+    for(var ti=0;ti<tierData.length;ti++){
+      var td=tierData[ti];
+      var cnt=tiers[td.key]||0;
+      var pct=Math.round(cnt/totalPyramid*100);
+      h += '<div style="display:flex;align-items:center;gap:8px;font-size:12px">';
+      h += '<span style="width:60px;text-align:right">'+td.label+'</span>';
+      h += '<div style="flex:1;height:8px;background:var(--card-warm);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:'+td.color+';border-radius:4px"></div></div>';
+      h += '<span style="width:32px;text-align:right;font-weight:600;color:'+td.color+'">'+cnt+'</span>';
+      h += '<span style="width:100px;font-size:10px;color:var(--ink-lighter)">'+td.desc+'</span>';
+      h += '</div>';
+    }
+    h += '</div>';
+    h += '<div style="font-size:10px;color:var(--ink-lighter);text-align:center">v3.0品质体系·四层金字塔+12-Gate+精品飞轮·"少即是多"</div>';
+    h += '</div>';
+  }
 
   document.getElementById('brain-section').innerHTML = h;
   }); // loadBrainData callback
