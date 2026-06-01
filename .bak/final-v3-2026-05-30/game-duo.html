@@ -5,29 +5,168 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>觉·双人|契晋双人对话卡|满意解研究所</title>
 <style>
-  :root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0}
+  :root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0;--radius:8px}
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
   .hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
   .hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
-  .article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}
-  .article h2{font-size:18px;color:var(--title-color);margin:24px 0 10px}
-  .article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}
-  .article p{margin:8px 0}
-  .article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}
-  .article .highlight{color:var(--sri-red);font-weight:600}
-  .article ul{padding-left:20px}
-  .article li{margin:6px 0;font-size:14px}
+  .container{max-width:960px;margin:0 auto;padding:20px 16px 40px}
+
+  /* 双区布局 */
+  .duo{display:flex;gap:24px;margin-bottom:24px}
+  .zone{flex:1;background:#fff;border-radius:12px;padding:24px 20px;box-shadow:0 2px 12px rgba(0,0,0,.04);display:flex;flex-direction:column;gap:16px;min-height:380px;transition:all .3s}
+  .zone.active{border:2px solid var(--sri-gold);box-shadow:0 4px 20px rgba(184,134,11,.12)}
+
+  .zone-label{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;padding:4px 14px;border-radius:20px;width:fit-content}
+  .zone-a .zone-label{background:rgba(194,59,34,.1);color:var(--sri-red)}
+  .zone-b .zone-label{background:rgba(184,134,11,.12);color:var(--sri-gold)}
+
+  .zone .status{font-size:12px;color:#999;display:flex;align-items:center;gap:6px}
+  .zone .status .dot{width:8px;height:8px;border-radius:50%;background:#ccc}
+  .zone.drawn .status .dot{background:var(--sri-gold)}
+  .zone.answered .status .dot{background:var(--sri-red)}
+  .zone .status-text{font-size:12px}
+
+  .draw-btn{padding:12px 24px;border-radius:24px;border:1.5px solid var(--border);background:#fff;cursor:pointer;font-size:14px;font-weight:600;color:var(--title-color);width:fit-content;transition:all .2s;min-width:140px;text-align:center}
+  .zone-a .draw-btn{border-color:var(--sri-red);color:var(--sri-red)}
+  .zone-b .draw-btn{border-color:var(--sri-gold);color:var(--sri-gold)}
+  .draw-btn:hover{transform:translateY(-1px)}
+  .zone-a .draw-btn:hover{background:rgba(194,59,34,.06)}
+  .zone-b .draw-btn:hover{background:rgba(184,134,11,.08)}
+  .draw-btn:active{transform:translateY(0)}
+  .draw-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+  .question-box{background:var(--sri-bg);border-radius:var(--radius);padding:16px;font-size:15px;line-height:1.7;display:none;border-left:3px solid var(--sri-gold)}
+  .zone-a .question-box{border-left-color:var(--sri-red)}
+  .zone.drawn .question-box{display:block}
+  .question-box .q-label{font-size:11px;text-transform:uppercase;font-weight:700;letter-spacing:.5px;margin-bottom:6px}
+  .zone-a .q-label{color:var(--sri-red)}
+  .zone-b .q-label{color:var(--sri-gold)}
+
+  .answer-area{display:none;flex-direction:column;gap:10px}
+  .zone.drawn .answer-area{display:flex}
+  .answer-area textarea{width:100%;min-height:100px;border:1.5px solid var(--border);border-radius:var(--radius);padding:12px;font-size:14px;font-family:inherit;resize:vertical;background:#fff;line-height:1.7;transition:border-color .2s}
+  .answer-area textarea:focus{outline:none;border-color:var(--sri-red)}
+  .answer-area .submit-btn{padding:10px 20px;border-radius:20px;border:none;background:var(--sri-red);color:#fff;cursor:pointer;font-size:13px;font-weight:600;width:fit-content;transition:all .2s}
+  .answer-area .submit-btn:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(194,59,34,.25)}
+  .answer-area .submit-btn:active{transform:translateY(0)}
+  .zone.answered .answer-area textarea{pointer-events:none;background:var(--sri-bg);border-color:#e0dac8}
+  .zone.answered .answer-area .submit-btn{display:none}
+
+  .zone .done-mark{display:none;font-size:13px;color:var(--sri-red);font-weight:600;align-items:center;gap:4px}
+  .zone.answered .done-mark{display:flex}
+
+  /* 交换区 */
+  .exchange-area{text-align:center;margin:0 0 24px}
+  .exchange-btn{padding:14px 36px;border-radius:24px;border:none;background:linear-gradient(135deg,var(--sri-red),var(--sri-gold));color:#fff;cursor:pointer;font-size:16px;font-weight:700;opacity:.35;transition:all .3s;pointer-events:none}
+  .exchange-btn.ready{opacity:1;pointer-events:auto}
+  .exchange-btn.ready:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(184,134,11,.3)}
+  .exchange-result{display:none;background:#fff;border-radius:12px;padding:24px;margin-top:20px;box-shadow:0 2px 16px rgba(0,0,0,.04);text-align:left}
+  .exchange-result h3{font-size:16px;color:var(--title-color);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .exchange-result .block{background:var(--sri-bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:12px;font-size:14px;line-height:1.7}
+  .exchange-result .block.highlight-block{border-left:3px solid var(--sri-red)}
+  .exchange-result .block.gift-block{background:linear-gradient(135deg,rgba(194,59,34,.06),rgba(184,134,11,.08));border-left:3px solid var(--sri-gold);font-style:italic}
+
+  /* 历史 */
+  .history-area{max-width:960px;margin:0 auto 20px;padding:0 16px}
+  .history-toggle{font-size:13px;color:var(--sri-red);cursor:pointer;text-decoration:underline;margin-bottom:8px;display:inline-block}
+  .history-list{display:none;background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);max-height:300px;overflow-y:auto}
+  .history-list .entry{padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;line-height:1.6}
+  .history-list .entry:last-child{border-bottom:none}
+  .history-list .entry .h-time{font-size:11px;color:#999;margin-bottom:4px}
+  .history-list .entry .h-cards{display:flex;gap:12px;flex-wrap:wrap}
+  .history-list .entry .h-card{flex:1;min-width:180px}
+  .history-list .entry .h-card .h-q{font-weight:600;font-size:12px;margin-bottom:2px}
+  .history-list .entry .h-card .h-a{color:#555}
+
+  .clear-btn{font-size:11px;color:#999;cursor:pointer;margin-top:4px;display:inline-block;text-decoration:underline}
+  .clear-btn:hover{color:var(--sri-red)}
+
+  .no-history{color:#999;font-size:13px;text-align:center;padding:12px}
+
+  @media(max-width:640px){
+    .duo{flex-direction:column}
+    .zone{min-height:auto}
+    .hero h1{font-size:18px}
+  }
 </style>
 <link rel="stylesheet" href="vi_quick_ref.css">
 </head>
 <body>
 <div class="hero"><h1>🎮 觉·双人</h1><p>游戏工厂·契晋·双人对话卡</p></div>
-<div class="article"><h2>契晋·双人对话卡</h2><p>不是"你问他答"——是<span class="highlight">两个人同时抽卡、同时回答、交换阅读</span>。</p>
-<h3>设计理念</h3><p>满意姐的"契·晋"——先立契约（坦诚），再求进阶（理解）。双人对话卡就是契晋的实体化：每人抽取一个问题，写下来，交换看。不是辩论——是互相理解。</p>
-<h3>卡片类型</h3><p><strong>契卡</strong>（契约）：关于承诺、信任、底线<br><strong>晋卡</strong>（进阶）：关于成长、改变、未来</p>
-<div class="quote">契是"我相信你"。晋是"我配得上你的信任"。<br>—— 满意姐</div></div>
 
+<div class="container">
+
+  <!-- 设计理念 -->
+  <div style="text-align:center;margin-bottom:24px;font-size:14px;color:var(--text);line-height:1.8;max-width:600px;margin-left:auto;margin-right:auto">
+    <p>满意姐的「契·晋」——先立<span style="color:var(--sri-red);font-weight:600">契约</span>（坦诚），再求<span style="color:var(--sri-gold);font-weight:600">进阶</span>（理解）。</p>
+    <p style="font-size:13px;color:#999;margin-top:4px">两人同时抽卡、各自写答、交换阅读</p>
+  </div>
+
+  <!-- 双区 -->
+  <div class="duo" id="duo">
+    <!-- A区: 契卡 -->
+    <div class="zone zone-a" id="zoneA">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span class="zone-label">🔏 A区 · 契卡</span>
+        <span class="status"><span class="dot"></span><span class="status-text">未抽卡</span></span>
+      </div>
+      <p style="font-size:12px;color:#999">契约 / 承诺 / 信任 / 底线</p>
+      <button class="draw-btn" id="drawA" onclick="drawCard('A')">🎴 抽一张契卡</button>
+      <div class="question-box" id="qBoxA">
+        <div class="q-label">契卡问题</div>
+        <div id="questionA"></div>
+      </div>
+      <div class="answer-area" id="answerAreaA">
+        <textarea id="answerA" placeholder="写下你的回答…" oninput="checkExchangeReady()"></textarea>
+        <button class="submit-btn" id="submitA" onclick="submitAnswer('A')">✓ 提交回答</button>
+      </div>
+      <div class="done-mark" id="doneA">✓ 已回答</div>
+    </div>
+
+    <!-- 交换区指示 -->
+    <div style="display:none" id="dividerHint"></div>
+
+    <!-- B区: 晋卡 -->
+    <div class="zone zone-b" id="zoneB">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span class="zone-label">🌱 B区 · 晋卡</span>
+        <span class="status"><span class="dot"></span><span class="status-text">未抽卡</span></span>
+      </div>
+      <p style="font-size:12px;color:#999">成长 / 改变 / 未来 / 进阶</p>
+      <button class="draw-btn" id="drawB" onclick="drawCard('B')">🎴 抽一张晋卡</button>
+      <div class="question-box" id="qBoxB">
+        <div class="q-label">晋卡问题</div>
+        <div id="questionB"></div>
+      </div>
+      <div class="answer-area" id="answerAreaB">
+        <textarea id="answerB" placeholder="写下你的回答…" oninput="checkExchangeReady()"></textarea>
+        <button class="submit-btn" id="submitB" onclick="submitAnswer('B')">✓ 提交回答</button>
+      </div>
+      <div class="done-mark" id="doneB">✓ 已回答</div>
+    </div>
+  </div>
+
+  <!-- 交换阅读 -->
+  <div class="exchange-area">
+    <button class="exchange-btn" id="exchangeBtn" onclick="doExchange()">🔄 交换阅读</button>
+    <div class="exchange-result" id="exchangeResult"></div>
+  </div>
+
+  <!-- 重新开始 -->
+  <div style="text-align:center;margin-bottom:24px">
+    <button onclick="resetAll()" style="padding:8px 20px;border-radius:20px;border:1.5px solid var(--border);background:#fff;cursor:pointer;font-size:13px;color:#999;transition:all .2s">🔄 重新开始</button>
+  </div>
+
+  <!-- 历史 -->
+  <div class="history-area">
+    <span class="history-toggle" id="historyToggle" onclick="toggleHistory()">📋 查看回答历史</span>
+    <span class="clear-btn" id="clearBtn" onclick="clearHistory()" style="margin-left:16px">清空历史</span>
+    <div class="history-list" id="historyList"></div>
+  </div>
+</div>
+
+<!-- 返回 + 反馈 -->
 <div style="text-align:center;padding:24px 16px 40px;font-size:11px;color:#999;">
   <p><a href="go.html" style="color:#C23B22;text-decoration:none;">← 返回决策通道</a></p>
   <p style="margin-top:4px;">满意解研究所 · 硬科技创始人的决策教练</p>
@@ -44,7 +183,342 @@
   <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
   <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
 </div>
+
 <script>
+// ========== 卡片数据库 ==========
+const qiCards = [
+  "你最怕对方做什么？",
+  "你最需要对方理解的底线是什么？",
+  "如果对方明天离开——你最遗憾什么？",
+  "你欠对方一句什么话？",
+  "你对对方最大的信任是什么时候建立的？",
+  "什么情况下你会说「我不能再跟你合作了」？",
+  "你觉得对方最不了解你的是什么？",
+  "如果只能提一个要求——你会提什么？",
+  "你觉得你们之间最大的不公平是什么？",
+  "你最想对方为你改变的1件事是什么？"
+];
+
+const jinCards = [
+  "3年后你希望这段关系变成什么样？",
+  "你觉得对方最需要成长的是什么？",
+  "如果你能教对方一件事——是什么？",
+  "你希望对方在哪个方面变得更强？",
+  "你们之间最应该增加的是什么？",
+  "这段关系里，你觉得自己最应该进步的是什么？",
+  "如果给你们的关系打1个目标——会是什么？",
+  "你觉得对方在哪个方面低估了自己？",
+  "再过5年，你觉得你们会感谢对方什么？",
+  "写下你希望3年后对方对你说的一句话。"
+];
+
+// ========== 状态管理 ==========
+const STORAGE_KEY = 'sri_duo_history';
+let state = {
+  cardA: null,
+  cardB: null,
+  answerA: '',
+  answerB: '',
+  submittedA: false,
+  submittedB: false,
+  exchanged: false
+};
+
+// ========== 抽卡 ==========
+function drawCard(zone) {
+  if (zone === 'A' && state.cardA !== null) return;
+  if (zone === 'B' && state.cardB !== null) return;
+
+  const cards = zone === 'A' ? qiCards : jinCards;
+  const idx = Math.floor(Math.random() * cards.length);
+  const card = cards[idx];
+
+  if (zone === 'A') {
+    state.cardA = { index: idx, text: card };
+    document.getElementById('questionA').textContent = card;
+    document.getElementById('drawA').textContent = '🎴 换一张';
+    document.getElementById('drawA').onclick = function() { redrawCard('A'); };
+    document.getElementById('zoneA').classList.add('drawn');
+    document.getElementById('zoneA').querySelector('.status-text').textContent = '已抽卡';
+  } else {
+    state.cardB = { index: idx, text: card };
+    document.getElementById('questionB').textContent = card;
+    document.getElementById('drawB').textContent = '🎴 换一张';
+    document.getElementById('drawB').onclick = function() { redrawCard('B'); };
+    document.getElementById('zoneB').classList.add('drawn');
+    document.getElementById('zoneB').querySelector('.status-text').textContent = '已抽卡';
+  }
+  state.exchanged = false;
+  document.getElementById('exchangeResult').style.display = 'none';
+  document.getElementById('exchangeBtn').classList.remove('ready');
+}
+
+function redrawCard(zone) {
+  if (zone === 'A' && state.submittedA) return;
+  if (zone === 'B' && state.submittedB) return;
+  const cards = zone === 'A' ? qiCards : jinCards;
+  let idx;
+  do {
+    idx = Math.floor(Math.random() * cards.length);
+  } while (cards.length > 1 && zone === 'A' && state.cardA && idx === state.cardA.index ||
+           zone === 'B' && state.cardB && idx === state.cardB.index);
+  const card = cards[idx];
+  if (zone === 'A') {
+    state.cardA = { index: idx, text: card };
+    document.getElementById('questionA').textContent = card;
+    document.getElementById('answerA').value = state.answerA;
+  } else {
+    state.cardB = { index: idx, text: card };
+    document.getElementById('questionB').textContent = card;
+    document.getElementById('answerB').value = state.answerB;
+  }
+  state.exchanged = false;
+  document.getElementById('exchangeResult').style.display = 'none';
+  document.getElementById('exchangeBtn').classList.remove('ready');
+}
+
+// ========== 提交回答 ==========
+function submitAnswer(zone) {
+  const textarea = document.getElementById('answer' + zone);
+  const answer = textarea.value.trim();
+  if (!answer) { textarea.focus(); return; }
+
+  if (zone === 'A') {
+    state.answerA = answer;
+    state.submittedA = true;
+    document.getElementById('zoneA').classList.add('answered');
+    document.getElementById('zoneA').querySelector('.status-text').textContent = '已回答';
+  } else {
+    state.answerB = answer;
+    state.submittedB = true;
+    document.getElementById('zoneB').classList.add('answered');
+    document.getElementById('zoneB').querySelector('.status-text').textContent = '已回答';
+  }
+
+  document.getElementById('exchangeResult').style.display = 'none';
+  document.getElementById('exchangeBtn').classList.remove('ready');
+  checkExchangeReady();
+}
+
+function checkExchangeReady() {
+  // 实时检查两区是否都已完成
+  if (state.submittedA && state.submittedB) {
+    document.getElementById('exchangeBtn').classList.add('ready');
+  } else {
+    document.getElementById('exchangeBtn').classList.remove('ready');
+  }
+}
+
+// ========== 交换阅读 ==========
+function doExchange() {
+  if (!state.submittedA || !state.submittedB) return;
+  if (state.exchanged) return;
+
+  state.exchanged = true;
+
+  const a = state.answerA;
+  const b = state.answerB;
+  const qa = state.cardA.text;
+  const qb = state.cardB.text;
+
+  // 找共同关键词
+  const commonWords = findCommonKeywords(a, b);
+  const diffWords = findDiffKeywords(a, b);
+
+  // 合成礼物
+  const gift = synthesizeGift(qa, a, qb, b);
+
+  const html = `
+    <h3>🔄 交换结果</h3>
+    <div style="display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap">
+      <div style="flex:1;min-width:220px;background:var(--sri-bg);border-radius:8px;padding:14px;font-size:13px;line-height:1.6">
+        <div style="font-weight:700;color:var(--sri-red);margin-bottom:6px">🔏 契卡 · ${escapeHtml(qa)}</div>
+        <div style="color:#555">${escapeHtml(a)}</div>
+      </div>
+      <div style="flex:1;min-width:220px;background:var(--sri-bg);border-radius:8px;padding:14px;font-size:13px;line-height:1.6">
+        <div style="font-weight:700;color:var(--sri-gold);margin-bottom:6px">🌱 晋卡 · ${escapeHtml(qb)}</div>
+        <div style="color:#555">${escapeHtml(b)}</div>
+      </div>
+    </div>
+    <div class="block highlight-block" style="margin-top:12px">
+      <strong>🤝 你们相同的…</strong>
+      <p style="margin-top:4px">${commonWords || '尽管视角不同，但你们都在认真对待这段关系——这份「想理解对方」的心意，就是最大的相同。'}</p>
+    </div>
+    <div class="block highlight-block">
+      <strong>🔀 你们不同的…</strong>
+      <p style="margin-top:4px">${diffWords || '一个在守护，一个在开拓——契卡在问底线，晋卡在看远方。这不是分歧，是互补。'}</p>
+    </div>
+    <div class="block gift-block">
+      <strong>🎁 一份给对方的礼物</strong>
+      <p style="margin-top:4px">${gift}</p>
+    </div>
+  `;
+  document.getElementById('exchangeResult').innerHTML = html;
+  document.getElementById('exchangeResult').style.display = 'block';
+
+  // 保存到历史
+  saveHistory(qa, a, qb, b, commonWords, gift);
+  renderHistory();
+}
+
+function findCommonKeywords(a, b) {
+  // 尝试提取共同主题词
+  const themes = {
+    '信任': ['信任', '相信', '信赖'],
+    '理解': ['理解', '懂', '了解', '明白'],
+    '成长': ['成长', '进步', '变好', '变得', '成为'],
+    '沟通': ['沟通', '交流', '说', '谈', '聊'],
+    '时间': ['时间', '未来', '以后', '之后', '一起'],
+    '改变': ['改变', '变化', '不同', '调整'],
+    '尊重': ['尊重', '认可', '肯定'],
+    '陪伴': ['陪伴', '一起', '并肩', '同行'],
+    '坦诚': ['坦诚', '诚实', '真诚', '真话'],
+    '支持': ['支持', '帮助', '帮忙', '撑'],
+    '合作': ['合作', '共事', '搭档'],
+    '底线': ['底线', '边界', '原则'],
+  };
+
+  const found = [];
+  const text = a + b;
+  for (const [theme, keywords] of Object.entries(themes)) {
+    if (keywords.some(k => text.includes(k))) {
+      found.push(theme);
+    }
+  }
+
+  if (found.length >= 2) {
+    return `你们都提到了「${found.slice(0, 2).join('」和「')}」——这也许是你们关系里最重要的锚点。`;
+  }
+  if (found.length === 1) {
+    return `你们都关注「${found[0]}」——这是你们共同的锚点。`;
+  }
+  return '';
+}
+
+function findDiffKeywords(a, b) {
+  const aThemes = { '信任': ['信任', '相信'], '底线': ['底线', '边界', '不能'], '坦诚': ['坦诚', '真话'], '害怕': ['怕', '担心', '害怕'] };
+  const bThemes = { '成长': ['成长', '进步'], '未来': ['未来', '以后', '3年', '5年'], '改变': ['改变', '变得'], '目标': ['目标', '希望'] };
+
+  let aFound = [], bFound = [];
+  for (const [t, ks] of Object.entries(aThemes)) { if (ks.some(k => a.includes(k))) aFound.push(t); }
+  for (const [t, ks] of Object.entries(bThemes)) { if (ks.some(k => b.includes(k))) bFound.push(t); }
+
+  if (aFound.length && bFound.length) {
+    return `契卡在谈「${aFound[0]}」，晋卡在看「${bFound[0]}」——一个关注此刻的根基，一个望向未来的可能。这就是「契与晋」：先守好，再往前走。`;
+  }
+  return '';
+}
+
+function synthesizeGift(qa, a, qb, b) {
+  // 把两条回答合成一段温暖的第三人称叙述
+  const nameA = 'TA（契卡侧）';
+  const nameB = 'TA（晋卡侧）';
+  return `两个人，两个问题，两份真心。\n\n${nameA}被问到：「${qa}」——${nameA}的回答里，能读到一段认真思考过的承诺。\n\n${nameB}被问到：「${qb}」——${nameB}看见的不只是愿望，还有愿意付出的改变。\n\n你们的对话卡不只是一场提问，它是一面镜子——照见了契约的重量，也照见了进阶的方向。今日交换的这些话，值得收好。`;
+}
+
+// ========== 历史记录 ==========
+function saveHistory(qa, a, qb, b, common, gift) {
+  let history = [];
+  try {
+    history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  } catch(e) { history = []; }
+  history.push({
+    time: new Date().toLocaleString('zh-CN'),
+    qa, a, qb, b, common, gift
+  });
+  // 最多保留50条
+  if (history.length > 50) history = history.slice(-50);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+}
+
+function renderHistory() {
+  let history = [];
+  try {
+    history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  } catch(e) { history = []; }
+
+  const container = document.getElementById('historyList');
+  if (history.length === 0) {
+    container.innerHTML = '<div class="no-history">暂无回答历史</div>';
+    document.getElementById('clearBtn').style.display = 'none';
+  } else {
+    document.getElementById('clearBtn').style.display = 'inline-block';
+    container.innerHTML = history.slice().reverse().map((h, i) => `
+      <div class="entry">
+        <div class="h-time">🕐 ${escapeHtml(h.time)}</div>
+        <div class="h-cards">
+          <div class="h-card">
+            <div class="h-q" style="color:var(--sri-red)">🔏 ${escapeHtml(h.qa)}</div>
+            <div class="h-a">${escapeHtml(h.a)}</div>
+          </div>
+          <div class="h-card">
+            <div class="h-q" style="color:var(--sri-gold)">🌱 ${escapeHtml(h.qb)}</div>
+            <div class="h-a">${escapeHtml(h.b)}</div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+function toggleHistory() {
+  const list = document.getElementById('historyList');
+  const toggle = document.getElementById('historyToggle');
+  if (list.style.display === 'block') {
+    list.style.display = 'none';
+    toggle.textContent = '📋 查看回答历史';
+  } else {
+    renderHistory();
+    list.style.display = 'block';
+    toggle.textContent = '📋 收起历史';
+  }
+}
+
+function clearHistory() {
+  if (confirm('确定要清空所有回答历史吗？')) {
+    localStorage.removeItem(STORAGE_KEY);
+    document.getElementById('historyList').style.display = 'none';
+    document.getElementById('historyToggle').textContent = '📋 查看回答历史';
+    document.getElementById('clearBtn').style.display = 'none';
+  }
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// ========== 重新开始 ==========
+function resetAll() {
+  if (state.submittedA || state.submittedB) {
+    if (!confirm('确定重新开始吗？未保存的历史将被保留。')) return;
+  }
+  state = { cardA: null, cardB: null, answerA: '', answerB: '', submittedA: false, submittedB: false, exchanged: false };
+
+  // A区重置
+  document.getElementById('zoneA').classList.remove('drawn', 'answered');
+  document.getElementById('zoneA').querySelector('.status-text').textContent = '未抽卡';
+  document.getElementById('drawA').textContent = '🎴 抽一张契卡';
+  document.getElementById('drawA').onclick = function() { drawCard('A'); };
+  document.getElementById('questionA').textContent = '';
+  document.getElementById('answerA').value = '';
+  document.getElementById('answerA').removeAttribute('readonly');
+
+  // B区重置
+  document.getElementById('zoneB').classList.remove('drawn', 'answered');
+  document.getElementById('zoneB').querySelector('.status-text').textContent = '未抽卡';
+  document.getElementById('drawB').textContent = '🎴 抽一张晋卡';
+  document.getElementById('drawB').onclick = function() { drawCard('B'); };
+  document.getElementById('questionB').textContent = '';
+  document.getElementById('answerB').value = '';
+
+  // 交换区重置
+  document.getElementById('exchangeResult').style.display = 'none';
+  document.getElementById('exchangeBtn').classList.remove('ready');
+}
+
+// ========== 反馈组件 ==========
 (function(){
   let page=location.pathname.split('/').pop()||'index';
   let key='sri_fb_'+page;
@@ -79,8 +553,25 @@
     document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
   };
 })();
+
+// ========== 初始化 ==========
+document.addEventListener('DOMContentLoaded', function() {
+  checkExchangeReady();
+  renderHistorySilent();
+});
+
+function renderHistorySilent() {
+  let history = [];
+  try {
+    history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  } catch(e) { history = []; }
+  if (history.length > 0) {
+    document.getElementById('clearBtn').style.display = 'inline-block';
+  } else {
+    document.getElementById('clearBtn').style.display = 'none';
+  }
+}
 </script>
 
 </body>
-
 </html>

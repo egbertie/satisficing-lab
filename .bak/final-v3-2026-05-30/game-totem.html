@@ -10,28 +10,232 @@
   body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
   .hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
   .hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
-  .article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}
-  .article h2{font-size:18px;color:var(--title-color);margin:24px 0 10px}
-  .article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}
-  .article p{margin:8px 0}
-  .article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}
-  .article .highlight{color:var(--sri-red);font-weight:600}
-  .article ul{padding-left:20px}
-  .article li{margin:6px 0;font-size:14px}
+
+  /* ── 抽签区 ── */
+  .draw-zone{max-width:500px;margin:0 auto;padding:24px 16px 32px;text-align:center}
+  .draw-zone .prompt{font-size:15px;color:var(--text);margin-bottom:20px;line-height:1.8}
+  .draw-zone .prompt em{color:var(--sri-red);font-style:normal;font-weight:600}
+
+  /* 扇形卡牌 */
+  .fan{position:relative;height:240px;margin:0 auto 28px;max-width:400px}
+  .fan .card{position:absolute;width:120px;height:176px;border-radius:12px;cursor:pointer;transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .3s;user-select:none;display:flex;align-items:center;justify-content:center}
+  .fan .card .card-back{width:100%;height:100%;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#F5F0E6;font-size:40px;position:relative;overflow:hidden}
+  .fan .card .card-back::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,0.08));border-radius:12px}
+  .fan .card .card-back .totem-icon{font-size:44px;position:relative;z-index:2}
+  .fan .card .card-back .totem-label{font-size:11px;margin-top:6px;opacity:.85;position:relative;z-index:2;letter-spacing:1px}
+
+  /* 五色 */
+  .card-earth .card-back{background:linear-gradient(135deg,#8B7355,#A0522D)}
+  .card-metal .card-back{background:linear-gradient(135deg,#C0C0C0,#808080)}
+  .card-water .card-back{background:linear-gradient(135deg,#4682B4,#1E3A5F)}
+  .card-wood .card-back{background:linear-gradient(135deg,#6B8E23,#3B5E0D)}
+  .card-fire .card-back{background:linear-gradient(135deg,#C23B22,#8B0000)}
+
+  /* 摆放位置 - 扇形 */
+  .fan .card:nth-child(1){left:0;top:60px;transform:rotate(-20deg);z-index:1}
+  .fan .card:nth-child(2){left:30px;top:36px;transform:rotate(-10deg);z-index:2}
+  .fan .card:nth-child(3){left:80px;top:24px;transform:rotate(0deg);z-index:3}
+  .fan .card:nth-child(4){left:145px;top:36px;transform:rotate(10deg);z-index:4}
+  .fan .card:nth-child(5){left:190px;top:60px;transform:rotate(20deg);z-index:5}
+
+  /* 翻牌动画 */
+  .fan .card.flipped{z-index:10}
+  .fan .card.flipped .card-back{display:none}
+  .fan .card.revealing{animation:revealCard .5s ease-out forwards}
+
+  @keyframes revealCard{
+    0%{transform:scale(1.1) translateY(-20px);opacity:.6}
+    60%{transform:scale(1.02) translateY(-2px);opacity:1}
+    100%{transform:scale(1) translateY(0);opacity:1}
+  }
+
+  /* 翻牌后面板 */
+  .card-face{display:none;width:100%;height:100%;border-radius:12px;flex-direction:column;align-items:center;justify-content:center;padding:12px;text-align:center;color:#fff}
+  .fan .card.flipped{animation:none;transform:none}
+  .fan .card.flipped .card-face{display:flex}
+  .fan .card.flipped.card-earth .card-face{background:linear-gradient(135deg,#8B7355,#6B4226)}
+  .fan .card.flipped.card-metal .card-face{background:linear-gradient(135deg,#C0C0C0,#606060)}
+  .fan .card.flipped.card-water .card-face{background:linear-gradient(135deg,#4682B4,#152B45)}
+  .fan .card.flipped.card-wood .card-face{background:linear-gradient(135deg,#6B8E23,#2E4A0A)}
+  .fan .card.flipped.card-fire .card-face{background:linear-gradient(135deg,#C23B22,#6B0000)}
+
+  .card-face .sage-icon{font-size:28px;margin-bottom:4px}
+  .card-face .sage-name{font-size:12px;font-weight:700;letter-spacing:1px}
+  .card-face .sage-quote{font-size:11px;font-style:italic;margin-top:6px;opacity:.92;line-height:1.5}
+
+  /* 抽取后提示区 */
+  .result-zone{display:none;padding:16px 20px;margin:0 auto 20px;max-width:440px;text-align:left;background:#fff;border-radius:12px;border:1.5px solid var(--border);animation:fadeIn .5s}
+  .result-zone.show{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  .result-zone .question-label{font-size:12px;color:var(--sri-red);font-weight:600;margin-bottom:8px}
+  .result-zone .question-text{font-size:16px;color:var(--title-color);font-weight:700;line-height:1.6;margin-bottom:16px}
+  .result-zone textarea{width:100%;height:72px;border:1.5px solid var(--border);border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:var(--sri-bg);resize:vertical;line-height:1.6}
+  .result-zone textarea::placeholder{color:#aaa}
+  .result-zone .save-btn{margin-top:10px;padding:8px 20px;border-radius:20px;border:1.5px solid var(--sri-red);background:#fff;color:var(--sri-red);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+  .result-zone .save-btn:hover{background:var(--sri-red);color:#fff}
+  .result-zone .save-btn.saved{background:#4A8C5C;border-color:#4A8C5C;color:#fff;pointer-events:none}
+  .result-zone .hint{font-size:11px;color:#999;margin-top:8px}
+
+  /* 重新抽签 */
+  .draw-again{margin-top:16px;text-align:center}
+  .draw-again button{padding:10px 28px;border-radius:24px;border:1.5px solid var(--border);background:#fff;color:var(--text);font-size:14px;cursor:pointer;transition:all .2s;font-family:inherit}
+  .draw-again button:hover{background:var(--sri-bg);border-color:var(--sri-gold)}
+
+  /* ── 图腾记录本 ── */
+  .history-zone{max-width:500px;margin:0 auto;padding:20px 16px}
+  .history-zone h3{font-size:15px;color:var(--title-color);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .history-zone h3 .count-badge{font-size:11px;background:var(--sri-red);color:#fff;padding:2px 10px;border-radius:12px}
+
+  /* 统计柱状图 */
+  .stats-bar{margin-bottom:16px;display:flex;gap:8px;align-items:flex-end;height:80px;padding:0 4px}
+  .stats-bar .bar-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+  .stats-bar .bar-fill{width:100%;max-width:48px;border-radius:6px 6px 0 0;transition:height .4s ease-out;position:relative;min-height:8px}
+  .stats-bar .bar-fill.bar-earth{background:#8B7355}
+  .stats-bar .bar-fill.bar-metal{background:#C0C0C0}
+  .stats-bar .bar-fill.bar-water{background:#4682B4}
+  .stats-bar .bar-fill.bar-wood{background:#6B8E23}
+  .stats-bar .bar-fill.bar-fire{background:#C23B22}
+  .stats-bar .bar-count{font-size:10px;color:var(--text);font-weight:600}
+  .stats-bar .bar-label{font-size:9px;color:#999}
+
+  /* 历史列表 */
+  .history-list{list-style:none;max-height:360px;overflow-y:auto}
+  .history-list li{padding:10px 14px;margin:6px 0;background:#fff;border-radius:10px;border:1px solid var(--border);font-size:13px;display:flex;align-items:center;gap:10px;transition:all .2s}
+  .history-list li:hover{box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+  .history-list li .hist-icon{font-size:22px;flex-shrink:0}
+  .history-list li .hist-body{flex:1;min-width:0}
+  .history-list li .hist-body .hist-sage{font-weight:600;font-size:13px;color:var(--title-color)}
+  .history-list li .hist-body .hist-note{font-size:12px;color:var(--text);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .history-list li .hist-time{font-size:10px;color:#999;flex-shrink:0}
+  .history-empty{text-align:center;color:#999;font-size:13px;padding:16px}
+
+  .clear-btn{text-align:center;margin-top:12px}
+  .clear-btn button{padding:6px 16px;border-radius:16px;border:1px solid #ddd;background:transparent;color:#999;font-size:11px;cursor:pointer;font-family:inherit;transition:all .2s}
+  .clear-btn button:hover{border-color:var(--sri-red);color:var(--sri-red)}
+
+  /* 返回 & 反馈 */
+  .footer-zone{text-align:center;padding:24px 16px 40px;font-size:11px;color:#999}
+  .footer-zone a{color:var(--sri-red);text-decoration:none}
+  .footer-zone .sub{font-size:11px;margin-top:4px}
 </style>
 <link rel="stylesheet" href="vi_quick_ref.css">
 </head>
 <body>
-<div class="hero"><h1>🎮 觉·图腾</h1><p>游戏工厂·五路图腾·决策卡</p></div>
-<div class="article"><h2>五路图腾·决策卡</h2><p>五条决策通道——每条通道一套卡牌。不是"选一个图腾"——是<span class="highlight">走完五条通道。</span></p>
-<h3>五套卡组</h3><p><strong>土·刘禹锡卡</strong>（时间轴）："五年后回头看——这个决定还成立吗？"<br><strong>金·司马贺卡</strong>（可行域）："你的'够用就好'线在哪里？"<br><strong>水·观自在卡</strong>（身心流）："身体在说什么？"<br><strong>木·孔子卡</strong>（信义观）："钱和原则，你选哪个？"<br><strong>火·慧能卡</strong>（直觉阈）："心里那个声音，你敢不敢听？"</p>
-<h3>玩法</h3><p>单人：每日抽一张·回答一个问题<br>双人：各抽一张·交换答案·讨论分歧<br>团队：每人抽一张·共同决策前各走一条通道</p></div>
-
-<div style="text-align:center;padding:24px 16px 40px;font-size:11px;color:#999;">
-  <p><a href="go.html" style="color:#C23B22;text-decoration:none;">← 返回决策通道</a></p>
-  <p style="margin-top:4px;">满意解研究所 · 硬科技创始人的决策教练</p>
+<div class="hero">
+  <h1>🎴 觉·图腾</h1>
+  <p>游戏工厂·五路图腾·决策卡</p>
 </div>
 
+<!-- 抽签区 -->
+<div class="draw-zone" id="drawZone">
+  <div class="prompt" id="drawPrompt">
+    <em>抽取一张图腾卡，接收一个视角</em><br>
+    选择一张与你共振的卡牌
+  </div>
+
+  <div class="fan" id="fan">
+    <!-- 5张卡牌扇形排列 -->
+    <div class="card card-earth" data-totem="earth" onclick="revealCard(this)">
+      <div class="card-back">
+        <div class="totem-icon">🪨</div>
+        <div class="totem-label">土</div>
+      </div>
+      <div class="card-face">
+        <div class="sage-icon">🪨</div>
+        <div class="sage-name">土·刘禹锡</div>
+        <div class="sage-quote">「时间会给你答案」</div>
+      </div>
+    </div>
+    <div class="card card-metal" data-totem="metal" onclick="revealCard(this)">
+      <div class="card-back">
+        <div class="totem-icon">⚙️</div>
+        <div class="totem-label">金</div>
+      </div>
+      <div class="card-face">
+        <div class="sage-icon">⚙️</div>
+        <div class="sage-name">金·司马贺</div>
+        <div class="sage-quote">「够用就好」</div>
+      </div>
+    </div>
+    <div class="card card-water" data-totem="water" onclick="revealCard(this)">
+      <div class="card-back">
+        <div class="totem-icon">💧</div>
+        <div class="totem-label">水</div>
+      </div>
+      <div class="card-face">
+        <div class="sage-icon">💧</div>
+        <div class="sage-name">水·水月观音</div>
+        <div class="sage-quote">「先感受，再判断」</div>
+      </div>
+    </div>
+    <div class="card card-wood" data-totem="wood" onclick="revealCard(this)">
+      <div class="card-back">
+        <div class="totem-icon">🌿</div>
+        <div class="totem-label">木</div>
+      </div>
+      <div class="card-face">
+        <div class="sage-icon">🌿</div>
+        <div class="sage-name">木·孔子</div>
+        <div class="sage-quote">「以原则为尺」</div>
+      </div>
+    </div>
+    <div class="card card-fire" data-totem="fire" onclick="revealCard(this)">
+      <div class="card-back">
+        <div class="totem-icon">🔥</div>
+        <div class="totem-label">火</div>
+      </div>
+      <div class="card-face">
+        <div class="sage-icon">🔥</div>
+        <div class="sage-name">火·慧能</div>
+        <div class="sage-quote">「相信直觉」</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 引导问题 + 感悟记录 -->
+  <div class="result-zone" id="resultZone">
+    <div class="question-label">💡 带着这个视角，问自己：</div>
+    <div class="question-text" id="questionText"></div>
+    <textarea id="noteInput" placeholder="记下你的感悟…选这张卡的瞬间在想什么？这张卡在提醒你什么？"></textarea>
+    <button class="save-btn" id="saveBtn" onclick="saveNote()">📝 保存感悟</button>
+    <div class="hint">刷新页面后仍可查看历史记录</div>
+  </div>
+
+  <div class="draw-again">
+    <button onclick="resetDraw()">🔄 重新抽签</button>
+  </div>
+</div>
+
+<!-- 图腾记录本 -->
+<div class="history-zone" id="historyZone">
+  <h3>
+    📖 图腾记录本
+    <span class="count-badge" id="historyCount">0</span>
+  </h3>
+
+  <!-- 统计柱状图 -->
+  <div class="stats-bar" id="statsBar"></div>
+
+  <!-- 出现最多 -->
+  <div id="topTotem" style="font-size:12px;color:var(--sri-red);font-weight:600;margin-bottom:12px;text-align:center;"></div>
+
+  <!-- 历史列表 -->
+  <ul class="history-list" id="historyList">
+    <li class="history-empty">还没有抽过签，快去选一张吧 🎴</li>
+  </ul>
+
+  <div class="clear-btn" id="clearBtn" style="display:none">
+    <button onclick="clearHistory()">清空记录</button>
+  </div>
+</div>
+
+<!-- 返回 + 来源 -->
+<div class="footer-zone">
+  <p><a href="go.html">← 返回决策通道</a></p>
+  <p class="sub">满意解研究所 · 硬科技创始人的决策教练</p>
+</div>
+
+<!-- 反馈组件 -->
 <div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
   <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个内容对你有用吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
@@ -43,7 +247,194 @@
   <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
   <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
 </div>
+
+<p style="text-align:center;font-size:10px;opacity:0.5;padding:10px;">📚 来源: 满意姐·游戏工厂V2.0 · 满意红产品化</p>
+
 <script>
+/* ── 图腾数据 ── */
+const TOTEMS = {
+  earth: { icon:'🪨', name:'土·刘禹锡', quote:'时间会给你答案', color:'#8B7355', css:'earth',
+    question:'五年后回头看，今天这个决定还成立吗？' },
+  metal: { icon:'⚙️', name:'金·司马贺', quote:'够用就好', color:'#C0C0C0', css:'metal',
+    question:'有没有一个更简单的方法？' },
+  water: { icon:'💧', name:'水·水月观音', quote:'先感受，再判断', color:'#4682B4', css:'water',
+    question:'你的身体在告诉你什么？' },
+  wood:  { icon:'🌿', name:'木·孔子', quote:'以原则为尺', color:'#6B8E23', css:'wood',
+    question:'你的原则是什么？' },
+  fire:  { icon:'🔥', name:'火·慧能', quote:'相信直觉', color:'#C23B22', css:'fire',
+    question:'如果不思考，第一个答案是什么？' }
+};
+
+/* ── 状态 ── */
+let drawnTotem = null;
+let history = JSON.parse(localStorage.getItem('sri_totem_history')||'[]');
+
+/* ── 翻牌 ── */
+function revealCard(el){
+  if(drawnTotem) return; // 已抽过，需先重置
+  const totemKey = el.dataset.totem;
+  drawnTotem = totemKey;
+  const t = TOTEMS[totemKey];
+
+  // 先给翻牌动画
+  el.classList.add('revealing');
+
+  // 短暂动画后显示结果
+  setTimeout(()=>{
+    el.classList.remove('revealing');
+    el.classList.add('flipped');
+
+    // 让其他卡淡出
+    const allCards = document.querySelectorAll('#fan .card');
+    allCards.forEach(c=>{
+      if(c!==el){ c.style.opacity='0.35';c.style.pointerEvents='none'; }
+    });
+
+    // 在扇形中间展示被选中的卡
+    el.style.left='100px';
+    el.style.top='20px';
+    el.style.transform='rotate(0deg)';
+    el.style.zIndex='10';
+    el.style.width='140px';
+    el.style.height='196px';
+
+    // 显示引导问题
+    document.getElementById('questionText').textContent = t.question;
+    document.getElementById('resultZone').classList.add('show');
+    document.getElementById('drawPrompt').innerHTML =
+      `<em>你抽到了 🌟  ${t.icon} ${t.name}</em><br>「${t.quote}」`;
+    document.getElementById('noteInput').value = '';
+    document.getElementById('saveBtn').classList.remove('saved');
+    document.getElementById('saveBtn').textContent = '📝 保存感悟';
+  }, 320);
+}
+
+/* ── 保存感悟 ── */
+function saveNote(){
+  if(!drawnTotem) return;
+  const note = document.getElementById('noteInput').value.trim();
+  const t = TOTEMS[drawnTotem];
+  const entry = {
+    totem: drawnTotem,
+    icon: t.icon,
+    name: t.name,
+    question: t.question,
+    note: note || '(未记录)',
+    time: new Date().toISOString()
+  };
+  history.unshift(entry);
+  localStorage.setItem('sri_totem_history', JSON.stringify(history));
+  document.getElementById('saveBtn').classList.add('saved');
+  document.getElementById('saveBtn').textContent = '✅ 已保存';
+  renderHistory();
+}
+
+/* ── 重新抽签 ── */
+function resetDraw(){
+  drawnTotem = null;
+  document.getElementById('resultZone').classList.remove('show');
+  document.getElementById('drawPrompt').innerHTML =
+    '<em>抽取一张图腾卡，接收一个视角</em><br>选择一张与你共振的卡牌';
+  document.getElementById('noteInput').value = '';
+  document.getElementById('saveBtn').classList.remove('saved');
+  document.getElementById('saveBtn').textContent = '📝 保存感悟';
+
+  const allCards = document.querySelectorAll('#fan .card');
+  allCards.forEach(c=>{
+    c.classList.remove('flipped','revealing');
+    c.style.opacity='1';
+    c.style.pointerEvents='auto';
+  });
+
+  // 恢复原始位置
+  const positions = [
+    { left:'0', top:'60px', rot:'-20deg', w:'120px', h:'176px' },
+    { left:'30px', top:'36px', rot:'-10deg', w:'120px', h:'176px' },
+    { left:'80px', top:'24px', rot:'0deg', w:'120px', h:'176px' },
+    { left:'145px', top:'36px', rot:'10deg', w:'120px', h:'176px' },
+    { left:'190px', top:'60px', rot:'20deg', w:'120px', h:'176px' }
+  ];
+  allCards.forEach((c,i)=>{
+    c.style.left = positions[i].left;
+    c.style.top = positions[i].top;
+    c.style.transform = `rotate(${positions[i].rot})`;
+    c.style.zIndex = i+1;
+    c.style.width = positions[i].w;
+    c.style.height = positions[i].h;
+  });
+}
+
+/* ── 渲染历史 ── */
+function renderHistory(){
+  const count = history.length;
+  document.getElementById('historyCount').textContent = count;
+
+  // 统计
+  const tally = {};
+  history.forEach(h=>{ tally[h.totem] = (tally[h.totem]||0)+1; });
+  const maxCount = Math.max(1, ...Object.values(tally));
+
+  // 柱状图
+  const order = ['earth','metal','water','wood','fire'];
+  const icons = { earth:'🪨', metal:'⚙️', water:'💧', wood:'🌿', fire:'🔥' };
+  let barHTML = '';
+  order.forEach(k=>{
+    const c = tally[k]||0;
+    const h = Math.max(8, (c/maxCount)*72);
+    barHTML += `<div class="bar-item">
+      <div class="bar-count">${c}</div>
+      <div class="bar-fill bar-${k}" style="height:${h}px"></div>
+      <div class="bar-label">${icons[k]}</div>
+    </div>`;
+  });
+  document.getElementById('statsBar').innerHTML = barHTML;
+
+  // 最多
+  const topKey = order.reduce((a,b)=>(tally[a]||0)>=(tally[b]||0)?a:b, 'earth');
+  if(count>0){
+    const top = TOTEMS[topKey];
+    document.getElementById('topTotem').innerHTML =
+      `🏆 你抽到最多的是：${top.icon} ${top.name}（${tally[topKey]||0}次）`;
+  } else {
+    document.getElementById('topTotem').textContent = '';
+  }
+
+  // 列表
+  const list = document.getElementById('historyList');
+  if(count===0){
+    list.innerHTML = '<li class="history-empty">还没有抽过签，快去选一张吧 🎴</li>';
+    document.getElementById('clearBtn').style.display = 'none';
+    return;
+  }
+  document.getElementById('clearBtn').style.display = 'block';
+
+  let items = '';
+  history.forEach(h=>{
+    const t = new Date(h.time);
+    const ts = `${t.getMonth()+1}/${t.getDate()} ${String(t.getHours()).padStart(2,'0')}:${String(t.getMinutes()).padStart(2,'0')}`;
+    items += `<li>
+      <div class="hist-icon">${h.icon}</div>
+      <div class="hist-body">
+        <div class="hist-sage">${h.name}</div>
+        <div class="hist-note">${h.note}</div>
+      </div>
+      <div class="hist-time">${ts}</div>
+    </li>`;
+  });
+  list.innerHTML = items;
+}
+
+function clearHistory(){
+  if(!confirm('确定要清空所有图腾记录吗？')) return;
+  history = [];
+  localStorage.setItem('sri_totem_history', JSON.stringify(history));
+  renderHistory();
+}
+
+/* ── 初始化 ── */
+renderHistory();
+
+/* ── 反馈组件 ── */
 (function(){
   let page=location.pathname.split('/').pop()||'index';
   let key='sri_fb_'+page;
@@ -80,7 +471,5 @@
 })();
 </script>
 
-<p style="text-align:center;font-size:10px;opacity:0.5;padding:10px;">📚 来源: 满意姐·游戏工厂V2.0 · 满意红产品化</p>
 </body>
-
 </html>

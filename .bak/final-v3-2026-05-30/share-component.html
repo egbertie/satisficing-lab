@@ -2,45 +2,157 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>分享组件 · 满意解研究所</title>
-  <meta name="description" content="满意解研究所 · 分享组件 · 满意解研究所">
 <style>
-.share-section { max-width:560px; margin:32px auto; padding:16px; }
-.share-card { background:#fff; border-radius:16px; padding:24px; text-align:center; border:2px solid var(--sri-red, #C23B22); }
-.share-card h3 { font-size:18px; color:#2A2A2A; margin-bottom:8px; }
-.share-card .result-preview { background:#F5F0E6; border-radius:12px; padding:16px; margin:12px 0; font-size:13px; line-height:1.8; color:#4A4A4A; }
-.share-card .share-actions { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin:12px 0; }
-.share-card .next-steps { display:flex; flex-direction:column; gap:8px; margin-top:16px; padding-top:16px; border-top:1px solid #D4C5A0; }
-.share-card .next-step { display:flex; align-items:center; gap:10px; padding:10px 14px; background:#F5F0E6; border-radius:10px; text-decoration:none; color:#4A4A4A; font-size:13px; transition:0.15s; }
-.share-card .next-step:hover { background:rgba(194,59,34,0.06); }
-.share-card .next-step .ns-icon { font-size:20px; }
-.share-card .next-step .ns-name { font-weight:700; color:#2A2A2A; }
+:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0;--sri-green:#4A8C5C}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
+.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
+.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
+
+.main{max-width:560px;margin:0 auto;padding:24px 16px 40px}
+.intro{text-align:center;font-size:14px;line-height:2;margin-bottom:24px}
+
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:13px;font-weight:600;color:var(--title-color);margin-bottom:6px}
+.form-group input,.form-group textarea{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;background:#fff;transition:border-color 0.2s}
+.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--sri-gold)}
+.form-group textarea{height:80px;resize:vertical;line-height:1.7}
+.form-group .hint{font-size:11px;color:#999;margin-top:4px}
+
+.preview-card{background:#fff;border-radius:16px;padding:24px;text-align:center;border:2px solid var(--sri-red);margin:24px 0;display:none}
+.preview-card.show{display:block}
+.preview-card h3{font-size:17px;color:var(--title-color);margin-bottom:8px}
+.preview-card .preview-body{background:var(--sri-bg);border-radius:12px;padding:16px;margin:12px 0;font-size:13px;line-height:2;color:var(--text);text-align:left;white-space:pre-wrap;word-break:break-word}
+.preview-card .preview-tagline{font-size:11px;color:var(--sri-gold);margin-top:8px;font-style:italic}
+
+.btn-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px 0}
+.btn-primary{padding:12px 28px;border-radius:24px;border:none;background:var(--title-color);color:#fff;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:background 0.2s}
+.btn-primary:hover{background:var(--sri-gold)}
+.btn-outline{padding:10px 22px;border-radius:24px;border:1.5px solid var(--sri-red);background:transparent;color:var(--sri-red);font-size:13px;cursor:pointer;font-family:inherit;transition:all 0.2s}
+.btn-outline:hover{background:rgba(194,59,34,0.06)}
+.copy-hint{font-size:12px;color:var(--sri-green);font-weight:600;display:none}
+.copy-hint.show{display:block}
+
+.next-steps{display:flex;flex-direction:column;gap:8px;margin-top:24px;padding-top:20px;border-top:1px solid var(--border)}
+.next-step{display:flex;align-items:center;gap:10px;padding:12px 16px;background:#fff;border-radius:10px;text-decoration:none;color:var(--text);font-size:13px;transition:all 0.15s;border:1px solid #f0e8d8}
+.next-step:hover{background:rgba(194,59,34,0.04);border-color:var(--sri-gold)}
+.next-step .ns-icon{font-size:20px}
+.next-step .ns-name{font-weight:700;color:var(--title-color)}
+
+.back-link{text-align:center;padding:20px;font-size:11px;color:#999}
+.back-link a{color:var(--sri-red);text-decoration:none}
 </style>
-<link rel="stylesheet" href="vi_quick_ref.css">
 </head>
 <body>
-<div class="share-section">
-  <div class="share-card">
+<div class="hero"><h1>📤 分享组件</h1><p>生成你的决策画像·分享或保存</p></div>
+
+<div class="main">
+  <div class="intro"><p>写下你最近的一个决策洞察——<br>生成一张可以分享、可以保存的<em style="color:var(--sri-red);font-style:normal;font-weight:600">决策画像卡</em>。</p></div>
+
+  <div class="form-group">
+    <label>💡 你的洞察（一句话）</label>
+    <input id="fTitle" placeholder="例：在沉默里发现了真正的分歧" oninput="updatePreview()">
+  </div>
+  <div class="form-group">
+    <label>📝 展开说说（可选）</label>
+    <textarea id="fBody" placeholder="你想记住的——一个细节，一个转折，一个决定..." oninput="updatePreview()"></textarea>
+  </div>
+  <div class="form-group">
+    <label>🏷️ 标签（用空格分隔）</label>
+    <input id="fTags" placeholder="决策 合伙人 信任" oninput="updatePreview()">
+    <div class="hint">帮助以后回顾时分类查找</div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-primary" onclick="generateCard()">✨ 生成决策画像卡</button>
+  </div>
+
+  <div class="preview-card" id="previewCard">
     <h3>🎯 这就是你的决策画像</h3>
-    <p style="font-size:13px;color:#6E6E6E;margin-bottom:8px;">保存或分享——下次回来看看变化</p>
-    
-    <div class="result-preview" id="preview">你的测评结果将显示在这里</div>
-    
-    <div class="share-actions">
-      <button class="btn btn-primary" onclick="copyResult()" style="padding:10px 22px;background:#C23B22;color:#fff;border:none;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;">📋 复制结果</button>
-      <button class="btn btn-outline" onclick="shareResult()" style="padding:10px 22px;background:transparent;border:1.5px solid #C23B22;color:#C23B22;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;">📤 分享给合伙人</button>
-    </div>
-    <p id="copyMsg" style="display:none;color:#3D7A4F;font-size:12px;font-weight:600;">✅ 已复制！</p>
-    
-    <div class="next-steps">
-      <p style="font-size:12px;color:#6E6E6E;text-align:center;">下一步</p>
-      <a class="next-step" href="thermometer.html"><span class="ns-icon">🌡️</span><span class="ns-name">关系温度计</span> · 30秒测信任度</a>
-      <a class="next-step" href="knights.html"><span class="ns-icon">⚠️</span><span class="ns-name">四骑士自检</span> · 1分钟看预警</a>
-      <a class="next-step" href="cards-play.html?deck=7"><span class="ns-icon">🎴</span><span class="ns-name">决策卡牌</span> · 场景模拟练习</a>
-      <a class="next-step" href="account.html"><span class="ns-icon">👤</span><span class="ns-name">注册账户</span> · 解锁更多工具 + 追踪进度</a>
-    </div>
+    <div class="preview-body" id="previewBody"></div>
+    <div class="preview-tagline" id="previewTagline"></div>
+  </div>
+
+  <div class="btn-row" id="shareActions" style="display:none">
+    <button class="btn-primary" onclick="copyCard()">📋 复制结果</button>
+    <button class="btn-outline" onclick="shareCard()">📤 分享给合伙人</button>
+  </div>
+  <div class="copy-hint" id="copyHint">✅ 已复制到剪贴板！</div>
+
+  <p style="text-align:center;font-size:11px;color:#999;margin-top:8px" id="savedHint"></p>
+
+  <div class="next-steps">
+    <a class="next-step" href="thermometer.html"><span class="ns-icon">🌡️</span><span class="ns-name">关系温度计</span> · 30秒测信任度</a>
+    <a class="next-step" href="knights.html"><span class="ns-icon">⚠️</span><span class="ns-name">四骑士自检</span> · 1分钟看预警</a>
+    <a class="next-step" href="cases.html"><span class="ns-icon">📚</span><span class="ns-name">案例库</span> · 从别人的坑里看自己</a>
   </div>
 </div>
+
+<div class="back-link"><a href="go.html">← 返回决策通道</a></div>
+
+<script>
+var cardText = '';
+
+function updatePreview(){
+  var title = document.getElementById('fTitle').value.trim();
+  var body = document.getElementById('fBody').value.trim();
+  if(!title && !body) return;
+}
+
+function generateCard(){
+  var title = document.getElementById('fTitle').value.trim();
+  var body = document.getElementById('fBody').value.trim();
+  var tags = document.getElementById('fTags').value.trim();
+
+  if(!title && !body){
+    alert('至少写一行——一句话就行 ✨');
+    return;
+  }
+
+  var now = new Date();
+  var ts = now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate();
+  cardText = (title ? '💡 '+title+'\n\n' : '')+body+'\n\n—— 📅 '+ts;
+  if(tags) cardText += '\n'+tags.split(/\\s+/).map(function(t){return '#'+t;}).join(' ');
+
+  document.getElementById('previewBody').textContent = cardText;
+  document.getElementById('previewTagline').textContent = '满意解研究所 · 决策画像';
+  document.getElementById('previewCard').classList.add('show');
+  document.getElementById('shareActions').style.display = 'flex';
+
+  // 保存历史
+  saveHistory({title:title,body:body,tags:tags,time:now.toISOString()});
+  document.getElementById('savedHint').textContent = '💾 已保存到你的本地记录';
+  setTimeout(function(){document.getElementById('savedHint').textContent='';},2000);
+}
+
+function copyCard(){
+  navigator.clipboard.writeText(cardText + '\n\n—— 来自 满意解研究所').then(function(){
+    var hint = document.getElementById('copyHint');
+    hint.classList.add('show');
+    setTimeout(function(){hint.classList.remove('show');},2000);
+  });
+}
+
+function shareCard(){
+  if(navigator.share){
+    navigator.share({title:'我的决策画像',text:cardText+'\n\n—— 来自 满意解研究所'});
+  } else {
+    copyCard();
+    alert('已复制！可以粘贴发给你的合伙人 📤');
+  }
+}
+
+// localStorage 历史
+var HIST_KEY = 'sri_share_hist';
+function saveHistory(item){
+  var h = loadHistory();
+  h.unshift(item);
+  if(h.length>20) h = h.slice(0,20);
+  localStorage.setItem(HIST_KEY,JSON.stringify(h));
+}
+function loadHistory(){try{return JSON.parse(localStorage.getItem(HIST_KEY))||[];}catch(e){return[];}}
+</script>
 </body>
 </html>
