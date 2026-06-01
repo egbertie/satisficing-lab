@@ -109,7 +109,7 @@ td a:hover{text-decoration:underline}
 </div>
 
 <div class="footer">
-  满意解研究所 · 产品目录 · 双光谱分类 · 数据来源 entities_index.json
+  满意解研究所 · 产品目录 · v3.0品质体系(四层金字塔+12-Gate) · 数据来源 entities_index.json
   · <a href="dashboard-v3.html">🧠 产品大脑</a>
   · <a href="index.html">返回首页</a>
 </div>
@@ -135,6 +135,8 @@ function load(){
         L: sp.L !== undefined ? sp.L : null,
         R: sp.R !== undefined ? sp.R : null,
         balance: sp.balance !== undefined ? sp.balance : null,
+        gatePass: p.quality_12gate_pass || 0,
+        qualityTier: p.quality_tier_v3 || '?',
         elem_earth: fe['土_时间轴'] || null,
         elem_metal: fe['金_可行域'] || null,
         elem_water: fe['水_身心流'] || null,
@@ -210,18 +212,20 @@ function render(){
   document.getElementById('tbody').innerHTML=h||'<tr><td colspan="7" style="text-align:center;padding:20px;color:#888">无匹配产品</td></tr>';
   document.getElementById('count').textContent='显示 '+filtered.length+' / '+ALL.length+' 个产品';
 
-  // Stats with spectrum
+  // Stats with spectrum + v3 quality tiers
   var quadDist = {};
   ALL.forEach(function(p){ quadDist[p.quadrant] = (quadDist[p.quadrant]||0)+1 });
   var avgL = ALL.reduce(function(s,p){return s+(p.L||0)},0)/ALL.length;
   var avgR = ALL.reduce(function(s,p){return s+(p.R||0)},0)/ALL.length;
+  var premium12 = ALL.filter(function(p){return (p.gatePass||0)>=10}).length;
+  var gateAvg = ALL.reduce(function(s,p){return s+(p.gatePass||0)},0)/ALL.length;
   document.getElementById('stats').innerHTML=
     '<div class="stat"><div class="n">'+ALL.length+'</div><div class="l">📦 总数</div></div>'+
-    '<div class="stat"><div class="n">'+(avgL.toFixed(0))+'</div><div class="l">📐 左脑均值</div></div>'+
-    '<div class="stat"><div class="n">'+(avgR.toFixed(0))+'</div><div class="l">🎨 右脑均值</div></div>'+
-    '<div class="stat"><div class="n">'+(quadDist['Ⅰ·全脑型']||0)+'</div><div class="l">🟣 全脑</div></div>'+
-    '<div class="stat"><div class="n">'+(quadDist['Ⅱ·体验型']||0)+'</div><div class="l">🔴 体验</div></div>'+
-    '<div class="stat"><div class="n">'+(quadDist['Ⅳ·分析型']||0)+'</div><div class="l">🔵 分析</div></div>';
+    '<div class="stat"><div class="n">'+premium12+'</div><div class="l">🏆 精品(10+门)</div></div>'+
+    '<div class="stat"><div class="n">'+(gateAvg.toFixed(1))+'</div><div class="l">🚪 均Gate</div></div>'+
+    '<div class="stat"><div class="n">'+(avgL.toFixed(0))+'</div><div class="l">📐 左脑</div></div>'+
+    '<div class="stat"><div class="n">'+(avgR.toFixed(0))+'</div><div class="l">🎨 右脑</div></div>'+
+    '<div class="stat"><div class="n">'+(quadDist['Ⅱ·体验型']||0)+'</div><div class="l">🔴 体验</div></div>';
 }
 
 // Filter buttons — quadrant based
