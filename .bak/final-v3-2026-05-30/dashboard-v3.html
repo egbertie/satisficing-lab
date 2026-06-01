@@ -234,6 +234,71 @@ body {
 .bar-fill._other { background: var(--ink-lighter); }
 .bar-count { width:28px; text-align:center; font-size:0.84em; color: var(--ink-light); flex-shrink:0; font-variant-numeric:tabular-nums; }
 
+/* ========== L2.5 · 🧠 产品大脑（左右脑+五维双光谱） ========== */
+.brain-section { margin-bottom: 48px; }
+.brain-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+.brain-stat-card {
+  background: var(--card-white); border: 1px solid var(--border-warm);
+  border-radius: 12px; padding: 16px; text-align: center;
+  box-shadow: var(--shadow-subtle); transition: border-color 0.2s;
+}
+.brain-stat-card:hover { border-color: var(--accent-gold); }
+.brain-stat-card .stat-num { font-size: 2em; font-weight: 300; color: var(--ink); }
+.brain-stat-card .stat-label { font-size: 0.78em; color: var(--ink-light); margin-top: 4px; }
+.brain-stat-card.warn { border-left: 3px solid var(--amber-warn); }
+.brain-stat-card.good { border-left: 3px solid var(--green-ok); }
+
+.brain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+@media (max-width: 600px) { .brain-grid { grid-template-columns: 1fr; } }
+
+.brain-panel {
+  background: var(--card-white); border: 1px solid var(--border-warm);
+  border-radius: 14px; padding: 20px; box-shadow: var(--shadow-subtle);
+}
+.brain-panel h3 {
+  font-size: 1em; font-weight: 500; color: var(--accent-gold);
+  margin-bottom: 14px; letter-spacing: 0.03em;
+}
+
+/* 四象限散点图 */
+.brain-scatter { position: relative; width: 100%; padding-bottom: 80%; background: var(--card-warm); border-radius: 10px; overflow: hidden; }
+.brain-scatter svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+/* 五维雷达 Mini */
+.radar-mini { display: flex; flex-direction: column; gap: 10px; }
+.radar-bar-row { display: flex; align-items: center; gap: 8px; }
+.radar-bar-label { width: 80px; font-size: 0.78em; color: var(--ink-light); text-align: right; flex-shrink: 0; }
+.radar-bar-track { flex: 1; height: 8px; background: var(--card-warm); border-radius: 4px; overflow: hidden; }
+.radar-bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+.radar-bar-fill.earth { background: #A08060; }
+.radar-bar-fill.metal { background: #C0C0C0; }
+.radar-bar-fill.water { background: #6080A0; }
+.radar-bar-fill.wood { background: #70A060; }
+.radar-bar-fill.fire { background: var(--accent-red); }
+.radar-bar-val { width: 36px; font-size: 0.78em; color: var(--ink); text-align: left; font-variant-numeric: tabular-nums; }
+
+/* 象限分布条 */
+.quad-dist { display: flex; gap: 2px; height: 24px; border-radius: 6px; overflow: hidden; margin-bottom: 12px; }
+.quad-bar { height: 100%; transition: all 0.3s; }
+.quad-bar:hover { filter: brightness(1.15); }
+.quad-bar.q1 { background: #7B68EE; }
+.quad-bar.q2 { background: #FF6B6B; }
+.quad-bar.q3 { background: #DDD6C8; }
+.quad-bar.q4 { background: #4A90D9; }
+.quad-legend { display: flex; gap: 14px; font-size: 0.72em; color: var(--ink-light); flex-wrap: wrap; }
+.quad-legend span { display: flex; align-items: center; gap: 4px; }
+.quad-dot { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+
+/* 失衡预警横幅 */
+.brain-alert {
+  padding: 12px 18px; border-radius: 10px; font-size: 0.82em; display: flex; align-items: center; gap: 10px;
+  margin-bottom: 20px;
+}
+.brain-alert.yellow { background: rgba(194,120,10,0.1); border: 1px solid rgba(194,120,10,0.3); color: #8A6010; }
+.brain-alert.orange { background: rgba(194,59,34,0.08); border: 1px solid rgba(194,59,34,0.25); color: #A04020; }
+.brain-alert.green { background: rgba(61,122,79,0.08); border: 1px solid rgba(61,122,79,0.25); color: #3D7A4F; }
+.brain-alert .alert-icon { font-size: 1.3em; }
+
 /* ========== L3 · 需要关注 ========== */
 .attention-section { margin-bottom: 48px; }
 .attention-item {
@@ -351,6 +416,10 @@ body {
   <!-- L2 · 产品资产 -->
   <div class="section-title">📦 产品资产 · <span style="font-size:0.78em;color:var(--ink-lighter);font-weight:400;">点击展开详情 · 勾选对比</span></div>
   <div class="product-section" id="product-section"></div>
+
+  <!-- L2.5 · 🧠 产品大脑 -->
+  <div class="section-title">🧠 产品大脑 · <span style="font-size:0.78em;color:var(--ink-lighter);font-weight:400;">左右脑+五维双光谱 · 基于规则自动评估</span></div>
+  <div class="brain-section" id="brain-section"></div>
 
   <!-- L3 · 需要关注 -->
   <div class="section-title">⚠️ 需要关注</div>
@@ -486,13 +555,14 @@ var AC = [
    初始化
    ================================================================ */
 
-function initDashboard() {
+  function initDashboard() {
   renderDateline();
   renderCountdown();
   renderVitals();
   renderGauges();
   renderOverview();
   renderProducts();
+  renderBrain();
   renderAttention();
   renderActivity();
 }
@@ -895,6 +965,107 @@ document.getElementById('compare-overlay').addEventListener('click', function(e)
     this.classList.remove('show');
   }
 });
+
+/* ========== L2.5 · 🧠 产品大脑 ========== */
+
+// 从 entities_index.json 拉取 spectrum 汇总数据（或使用内嵌默认值）
+var BRAIN_DATA = null;
+
+function renderBrain() {
+  // 默认数据（entities_index.json 中的统计值）
+  var sum = {
+    L_mean: 53.8, R_mean: 34.5, balance_score: 0.81, health_status: 'yellow',
+    quadrant_distribution: {'Ⅰ·全脑型': 15, 'Ⅱ·体验型': 11, 'Ⅲ·真空型': 112, 'Ⅳ·分析型': 177},
+    five_elements_mean: {'土_时间轴': 54.6, '金_可行域': 53.1, '水_身心流': 32.5, '木_信义观': 43.5, '火_直觉阈': 36.5},
+    products_evaluated: 315
+  };
+
+  // 尝试从缓存的 JSON 数据读取
+  if (BRAIN_DATA) sum = BRAIN_DATA;
+  
+  var total = sum.products_evaluated || 315;
+  var L = sum.L_mean, R = sum.R_mean;
+  var diff = Math.abs(L - R);
+  var quad = sum.quadrant_distribution;
+  var fem = sum.five_elements_mean;
+
+  // 预警横幅
+  var h = '';
+  var alertLevel = sum.health_status === 'green' ? 'green' : (diff > 20 ? 'orange' : 'yellow');
+  var alertIcon = alertLevel === 'green' ? '✅' : '⚠️';
+  var alertMsg = alertLevel === 'green' 
+    ? '产品矩阵左右脑平衡，五维分布健康。'
+    : (diff > 20 
+      ? '产品矩阵显著左脑偏侧(L-R=' + diff.toFixed(1) + ')。右脑产品不足，建议增加体验型/创意型产品。'
+      : '产品矩阵轻度左脑偏侧(L-R=' + diff.toFixed(1) + ')。关注右脑产品比例，向全脑平衡发展。');
+  h += '<div class="brain-alert ' + alertLevel + '"><span class="alert-icon">' + alertIcon + '</span><span>' + alertMsg + '</span></div>';
+
+  // 4张 stat-card
+  h += '<div class="brain-stats">';
+  h += '<div class="brain-stat-card good"><div class="stat-num">' + L.toFixed(1) + '</div><div class="stat-label">📐 左脑均值</div></div>';
+  h += '<div class="brain-stat-card good"><div class="stat-num">' + R.toFixed(1) + '</div><div class="stat-label">🎨 右脑均值</div></div>';
+  h += '<div class="brain-stat-card ' + (sum.balance_score >= 0.8 ? 'good' : 'warn') + '"><div class="stat-num">' + (sum.balance_score * 100).toFixed(0) + '%</div><div class="stat-label">⚖️ 平衡度</div></div>';
+  h += '<div class="brain-stat-card ' + (diff > 20 ? 'warn' : 'good') + '"><div class="stat-num">' + diff.toFixed(1) + '</div><div class="stat-label">📏 L-R差距</div></div>';
+  h += '</div>';
+
+  // 两栏：象限分布 + 五维雷达
+  h += '<div class="brain-grid">';
+  
+  // 左侧：象限分布
+  h += '<div class="brain-panel"><h3>🧭 四象限产品分布</h3>';
+  h += '<div class="quad-dist">';
+  var qKeys = ['Ⅰ·全脑型', 'Ⅱ·体验型', 'Ⅲ·真空型', 'Ⅳ·分析型'];
+  var qClasses = ['q1', 'q2', 'q3', 'q4'];
+  var qIcons = ['🧠', '🎭', '📦', '🔬'];
+  var qNames = ['全脑型', '体验型', '真空型', '分析型'];
+  for (var qi = 0; qi < qKeys.length; qi++) {
+    var qc = quad[qKeys[qi]] || 0;
+    var qp = Math.round(qc / total * 100);
+    if (qp > 0) h += '<div class="quad-bar ' + qClasses[qi] + '" style="width:' + qp + '%" title="' + qNames[qi] + ': ' + qc + '个 (' + qp + '%)"></div>';
+  }
+  h += '</div>';
+  h += '<div class="quad-legend">';
+  for (var qi = 0; qi < qKeys.length; qi++) {
+    var qc = quad[qKeys[qi]] || 0;
+    var qp = Math.round(qc / total * 100);
+    h += '<span><span class="quad-dot" style="background:' + (qClasses[qi] === 'q1' ? '#7B68EE' : qClasses[qi] === 'q2' ? '#FF6B6B' : qClasses[qi] === 'q3' ? '#DDD6C8' : '#4A90D9') + '"></span> ' + qIcons[qi] + ' ' + qNames[qi] + ': ' + qc + ' (' + qp + '%)</span>';
+  }
+  h += '</div>';
+  h += '</div>';
+
+  // 右侧：五维均值雷达
+  h += '<div class="brain-panel"><h3>📊 五维均值（全产品）</h3>';
+  h += '<div class="radar-mini">';
+  var dims = [
+    {key: '土_时间轴', label: '🟫 土·时间轴', cls: 'earth', icon: '刘禹锡'},
+    {key: '金_可行域', label: '⬜ 金·可行域', cls: 'metal', icon: '司马贺'},
+    {key: '水_身心流', label: '🟦 水·身心流', cls: 'water', icon: '水月观音'},
+    {key: '木_信义观', label: '🟩 木·信义观', cls: 'wood', icon: '孔子'},
+    {key: '火_直觉阈', label: '🟥 火·直觉阈', cls: 'fire', icon: '慧能'}
+  ];
+  for (var di = 0; di < dims.length; di++) {
+    var d = dims[di];
+    var dv = fem[d.key] || 0;
+    h += '<div class="radar-bar-row">';
+    h += '<span class="radar-bar-label" title="' + d.icon + '">' + d.label + '</span>';
+    h += '<div class="radar-bar-track"><div class="radar-bar-fill ' + d.cls + '" style="width:' + dv + '%"></div></div>';
+    h += '<span class="radar-bar-val">' + dv.toFixed(1) + '</span>';
+    h += '</div>';
+  }
+  h += '</div>';
+  
+  // 标注偏侧说明
+  var leftElems = fem['金_可行域'] + fem['土_时间轴'];
+  var rightElems = fem['水_身心流'] + fem['火_直觉阈'];
+  h += '<div style="margin-top:14px;font-size:0.75em;color:var(--ink-light);text-align:center;">';
+  h += '左脑力(金+土)=' + leftElems.toFixed(0) + ' · 右脑力(水+火)=' + rightElems.toFixed(0) + ' · 桥梁(木)=' + (fem['木_信义观'] || 0).toFixed(0);
+  h += '</div>';
+  h += '</div>';
+
+  h += '</div>'; // brain-grid
+
+  document.getElementById('brain-section').innerHTML = h;
+}
 
 /* ========== L3 · 需要关注 ========== */
 
