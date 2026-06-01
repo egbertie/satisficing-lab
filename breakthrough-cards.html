@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="打破决策僵局的创意激发工具——当所有分析都指向死胡同时，换一个角度看问题。满意解研究所出品。">
+<title>突破卡 · 满意解研究所</title>
+<style>
+:root{--red:#C23B22;--gold:#B8860B;--bg:#FAF7F2;--white:#fff;--text:#2D2D2D;--text2:#5C5C5C;--border:#E8E0D5}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
+.header{text-align:center;padding:40px 20px 16px}
+.header .badge{display:inline-block;padding:4px 12px;background:rgba(255,107,107,.12);color:#FF6B6B;border-radius:16px;font-size:11px;font-weight:600;margin-bottom:8px}
+.header h1{font-size:clamp(22px,4vw,32px);font-weight:700;margin-bottom:4px}
+.header .sub{font-size:14px;color:var(--text2);max-width:400px;margin:0 auto}
+
+.main{max-width:480px;margin:0 auto;padding:0 16px 40px}
+
+.card-container{perspective:1000px;margin-bottom:20px}
+.card{background:var(--white);border:2px solid var(--border);border-radius:16px;padding:32px 24px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.06);transition:transform .3s;min-height:280px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.card.flipping{transform:rotateY(90deg)}
+.card .card-icon{font-size:48px;margin-bottom:12px}
+.card .card-question{font-size:20px;font-weight:700;margin-bottom:8px;color:var(--text)}
+.card .card-prompt{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:16px;max-width:380px}
+.card .card-tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;background:rgba(184,134,11,.1);color:var(--gold);margin-bottom:16px}
+
+.controls{display:flex;gap:12px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
+.btn{padding:12px 24px;border-radius:24px;font-size:15px;font-weight:600;cursor:pointer;border:none;transition:all .2s}
+.btn-primary{background:var(--red);color:#fff}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(194,59,34,.25)}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn-outline{background:var(--white);color:var(--red);border:1.5px solid var(--red)}
+.btn-outline:hover{background:rgba(194,59,34,.04)}
+
+.info-row{display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:20px;font-size:13px;color:var(--text2)}
+.info-row .count{font-weight:700;color:var(--gold);font-size:18px}
+
+/* 记录区 */
+.journal-section{margin-top:24px}
+.journal-section h3{font-size:14px;color:var(--text2);margin-bottom:12px;text-align:center}
+.journal-entries{display:flex;flex-direction:column;gap:8px}
+.je{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:12px;font-size:13px}
+.je .je-q{color:var(--red);font-weight:600;margin-bottom:2px}
+.je .je-a{color:var(--text2)}
+.je .je-time{font-size:10px;color:var(--text2);margin-top:4px}
+
+.footer{text-align:center;padding:24px;font-size:11px;color:var(--text2)}
+.footer a{color:var(--red);text-decoration:none}
+
+.deck-empty{text-align:center;padding:40px;color:var(--text2)}
+.btn-reset{display:block;width:100%;padding:10px;border-radius:12px;font-size:13px;cursor:pointer;border:1px dashed var(--border);background:var(--bg);color:var(--text2);text-align:center;margin-top:16px}
+.btn-reset:hover{border-color:var(--red);color:var(--red)}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">🧠 右脑 · 创意激发 · 🔥85</div>
+  <h1>突破卡</h1>
+  <div class="sub">当你分析了一切，还是走不出来——<br>翻开一张卡，换一个角度看世界。</div>
+</div>
+
+<div class="main">
+
+  <div class="info-row">
+    <span>剩余</span><span class="count" id="remainCount">15</span><span>/15 张</span>
+  </div>
+
+  <div class="card-container">
+    <div class="card" id="cardArea">
+      <div class="card-icon">🃏</div>
+      <div class="card-question">点击「翻一张」开始</div>
+      <div class="card-prompt" id="cardPrompt">每次翻卡，都是一次思维的跳跃</div>
+      <div class="card-tag" id="cardTag">🧠 右脑激活</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="btn btn-primary" id="btnDraw" onclick="drawCard()">🃏 翻一张</button>
+    <button class="btn btn-outline" id="btnAnswer" onclick="showAnswer()" disabled>✍️ 我的答案</button>
+  </div>
+
+  <!-- 答案输入 -->
+  <div id="answerBox" style="display:none;margin-bottom:20px">
+    <textarea id="answerInput" style="width:100%;height:80px;border:1.5px solid var(--border);border-radius:12px;padding:14px;font-size:14px;font-family:inherit;resize:none;background:var(--white)" placeholder="写下来...思维在笔尖会变得更清晰"></textarea>
+    <button class="btn btn-outline" style="width:100%;margin-top:8px" onclick="saveAnswer()">💾 保存思考</button>
+  </div>
+
+  <!-- 历史 -->
+  <div class="journal-section" id="journalSection" style="display:none">
+    <h3>📝 翻卡记录</h3>
+    <div class="journal-entries" id="journalEntries"></div>
+    <button class="btn-reset" onclick="resetDeck()">🔄 重新开始</button>
+  </div>
+
+</div>
+
+<div class="footer">
+  满意解研究所 · 创意激发系列<br>
+  <a href="index.html">首页</a> · <a href="decision-theatre.html">决策剧场</a> · <a href="go.html">决策通道</a> · <a href="dashboard-v3.html">🧠 产品大脑</a>
+</div>
+
+<script>
+var deck = [
+  {icon:'🪞',q:'如果你是对方，这件事怎么看？',tag:'视角转换',prompt:'试着用对方最在意的三个东西来解释你的决定。'},
+  {icon:'⏰',q:'5年后回头看，今天这个选择还重要吗？',tag:'时间拉伸',prompt:'把时间拉长，该焦虑的会变淡，不该焦虑的会消失。'},
+  {icon:'🎲',q:'如果你必须随机选一个，你希望骰子停在哪？',tag:'直觉锚定',prompt:'在抛硬币的0.1秒，你的心会跳向某个方向——那就是答案。'},
+  {icon:'👶',q:'如果是一个完全不懂这件事的人，会怎么选？',tag:'朴素智慧',prompt:'外行人没有你的知识偏见。他们的直觉有时比你的分析更准。'},
+  {icon:'⚰️',q:'如果你明天就要离开，今天你会做什么决定？',tag:'终极视角',prompt:'面对终点，所有的'应该'都会消失，只剩下'重要'。'},
+  {icon:'🚪',q:'不做这个决定，会失去什么？做了，又会失去什么？',tag:'得失对仗',prompt:'每一个'是'都伴随着一千个'否'。写出两边的失去。'},
+  {icon:'🤫',q:'这件事里，你不敢对自己承认的部分是什么？',tag:'阴影对话',prompt:'不是别人不知道的那部分，是你自己也不愿看的那部分。'},
+  {icon:'🌊',q:'你的身体在说什么？深呼吸一次再回答。',tag:'身体智慧',prompt:'闭上眼睛，感受身体哪个部位有反应。那里有答案。'},
+  {icon:'🔥',q:'如果没有任何限制，你的第一反应是什么？',tag:'去约束',prompt:'先忘掉'但是'和'万一'。纯粹的欲望指向哪里？'},
+  {icon:'🗿',q:'这件事里，什么是不可妥协的？',tag:'原则锚定',prompt:'先守住不能丢的东西，剩下的都是可以谈的。'},
+  {icon:'🌱',q:'最好的可能是什么？最坏的又是什么？',tag:'极值探索',prompt:'把两个极端都看清楚，中间地带就亮了。'},
+  {icon:'🪢',q:'这个困境里，有没有第三个选项？',tag:'跳出二元',prompt:'A或B是假象。第三个选项通常藏在'能不能都要'或'能不能都不要'之间。'},
+  {icon:'🎭',q:'如果是你敬佩的一个人，他会怎么选？',tag:'榜样投射',prompt:'借用他人的智慧框架。有时候够不着自己的答案，够得着别人的。'},
+  {icon:'🕯️',q:'此刻你最需要的是什么——答案，还是勇气？',tag:'需求识别',prompt:'有时候你不需要一个选择，你需要的是承认你已经有选择但不敢做的勇气。'},
+  {icon:'✨',q:'抛开一切分析，你的直觉说什么？',tag:'纯粹直觉',prompt:'最后一问。你的大脑已经算完了——现在听它的最终判决。'}
+];
+
+var remaining = [];
+var currentCard = null;
+var history = [];
+var STORAGE_KEY = 'sri_breakthrough_deck';
+
+function shuffle() {
+  remaining = deck.slice().sort(function(){return Math.random()-0.5});
+  currentCard = null;
+  document.getElementById('remainCount').textContent = remaining.length;
+  document.getElementById('btnDraw').disabled = false;
+  document.getElementById('btnAnswer').disabled = true;
+  document.getElementById('answerBox').style.display = 'none';
+  
+  var card = document.getElementById('cardArea');
+  card.innerHTML = '<div class="card-icon">🃏</div><div class="card-question">准备好了吗？</div><div class="card-prompt">15张突破卡，每一张都是一扇新的窗户</div><div class="card-tag">🧠 右脑激活</div>';
+}
+
+function drawCard() {
+  if(remaining.length === 0) return;
+  
+  currentCard = remaining.pop();
+  var card = document.getElementById('cardArea');
+  card.classList.add('flipping');
+  
+  setTimeout(function(){
+    card.innerHTML = '<div class="card-icon">'+currentCard.icon+'</div>'+
+      '<div class="card-question">'+currentCard.q+'</div>'+
+      '<div class="card-prompt">'+currentCard.prompt+'</div>'+
+      '<div class="card-tag">'+currentCard.tag+'</div>';
+    card.classList.remove('flipping');
+  }, 150);
+  
+  document.getElementById('remainCount').textContent = remaining.length;
+  document.getElementById('btnAnswer').disabled = false;
+  
+  if(remaining.length === 0) {
+    document.getElementById('btnDraw').disabled = true;
+    document.getElementById('btnDraw').textContent = '✅ 全部翻完';
+  }
+}
+
+function showAnswer() {
+  document.getElementById('answerBox').style.display = 'block';
+  document.getElementById('answerInput').focus();
+}
+
+function saveAnswer() {
+  var answer = document.getElementById('answerInput').value.trim();
+  if(!answer && !currentCard) return;
+  
+  history.push({
+    card: currentCard,
+    answer: answer || '(未记录)',
+    time: new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})
+  });
+  
+  document.getElementById('answerInput').value = '';
+  document.getElementById('answerBox').style.display = 'none';
+  document.getElementById('btnAnswer').disabled = true;
+  
+  renderHistory();
+}
+
+function renderHistory() {
+  var section = document.getElementById('journalSection');
+  var entries = document.getElementById('journalEntries');
+  
+  if(history.length === 0) {
+    section.style.display = 'none';
+    return;
+  }
+  
+  section.style.display = 'block';
+  var h = '';
+  for(var i=history.length-1;i>=0;i--){
+    var e = history[i];
+    h += '<div class="je">';
+    h += '<div class="je-q">'+e.card.icon+' '+e.card.q+'</div>';
+    h += '<div class="je-a">💬 '+esc(e.answer)+'</div>';
+    h += '<div class="je-time">'+e.time+' · '+e.card.tag+'</div>';
+    h += '</div>';
+  }
+  entries.innerHTML = h;
+}
+
+function resetDeck() {
+  history = [];
+  shuffle();
+  renderHistory();
+}
+
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+shuffle();
+</script>
+</body>
+</html>
