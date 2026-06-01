@@ -3,17 +3,17 @@
     "version": "3.0",
     "created": "2026-05-30T00:53:49.000534",
     "breakdown": {
-      "products": 256,
+      "products": 315,
       "customers": 5,
       "tasks": 195,
       "avatars": 22,
-      "documents": 210,
+      "documents": 76,
       "decisions": 35,
       "milestones": 9,
       "terms": 74,
       "events": 5,
-      "scripts": 168,
-      "crons": 39,
+      "scripts": 12,
+      "crons": 20,
       "connections": 12556,
       "customer_profiles": 31,
       "quality_metrics": 23,
@@ -32,8 +32,8 @@
       "knowledge_pipelines": 5,
       "lifecycle_stages": 7
     },
-    "updated": "2026-06-01T22:44:50.178578+08:00",
-    "knowledge_graph_density": 38.5,
+    "updated": "2026-06-02T04:43:25.215881+08:00",
+    "knowledge_graph_density": 39.9,
     "living_rules_status": {
       "active": 41,
       "dormant": 6,
@@ -48,17 +48,17 @@
       "fully_alive": 41
     },
     "product_families": {
-      "人": 14,
-      "契": 34,
-      "未知": 3,
-      "章": 112,
+      "镜": 12,
       "衡": 102,
+      "契": 34,
+      "章": 112,
       "觉": 36,
+      "人": 14,
       "道": 2,
-      "镜": 12
+      "未知": 3
     },
-    "new_products_from_scan": 158,
-    "knowledge_graph_density_note": "强12556+中98+弱2=12556/256产品/38.5% (auto-updated 2026-06-01 22:44)",
+    "new_products_from_scan": 315,
+    "knowledge_graph_density_note": "强12556+中98+弱2=12556/315产品/39.9% (auto-updated 2026-06-02 04:43)",
     "auto_rule_connections": 1830,
     "corrections": [
       "2026-05-30: 知识图谱密度99.9%→43.9%",
@@ -66,14 +66,15 @@
       "2026-05-30: 时间考古起点4/23→2/15"
     ],
     "lifecycle_stages": {
-      "LC-001": 3,
+      "LC-005": 248,
       "LC-003": 1,
       "LC-004": 63,
-      "LC-005": 248
+      "LC-001": 3
     },
     "maturity_levels": {
+      "M3_成熟": 41,
       "M2_成型": 271,
-      "M3_成熟": 41
+      "unknown": 3
     },
     "dev_batches": {
       "第一波·低垂果实": 253,
@@ -233,10 +234,11 @@
       "daci_default": "决策默认DACI: Driver=司马贺(可行域), Approver=蓝军(独立审计), Contributor=相关专家, Informed=Egbertie"
     },
     "q_confidence_distribution": {
-      "A": 152,
-      "B": 90,
+      "D": 67,
       "C": 3,
-      "D": 67
+      "B": 90,
+      "A": 152,
+      "unknown": 3
     },
     "quality_confidence": {
       "added": "2026-05-30T05:25:00",
@@ -268,7 +270,7 @@
     },
     "anti_island": {
       "mechanism": "V1.0",
-      "last_consistency_scan": "2026-06-01T08:45:07.841704+00:00",
+      "last_consistency_scan": "2026-06-02T04:43:25.215881+08:00",
       "product_index_consistency": "100%",
       "active_detectors": 5,
       "orphan_products": 0,
@@ -345,7 +347,7 @@
       "timestamp": 1780135875,
       "description": "城市维度首次注入：30个城市实体+多层连接编织 + 补丁19条"
     },
-    "last_updated": 1780303507,
+    "last_updated": 1780346605,
     "avatar_simulation": {
       "phase": "R2_P2_1",
       "avatars_upgraded": 5,
@@ -22626,7 +22628,19 @@
       ],
       "threshold": ">10%"
     },
-    "product_families_note": "family sum (315) may exceed total products (256) due to products belonging to multiple families or products not yet categorized into families"
+    "product_families_note": "family sum (315) may exceed total products (256) due to products belonging to multiple families or products not yet categorized into families",
+    "anomaly_report": {
+      "timestamp": "2026-06-02T04:43:25.215881+08:00",
+      "rule": "entity_change >10%",
+      "anomalies_detected": [
+        "products: 256→315 (+59, 23.0%)",
+        "documents: 210→76 (-134, 63.8%)",
+        "scripts: 168→12 (-156, 92.9%)",
+        "crons: 39→20 (-19, 48.7%)"
+      ],
+      "severity": "⚠️ WARNING",
+      "note": "以下实体数变动超过10%阈值，请人工核查"
+    }
   },
   "products": [
     {
