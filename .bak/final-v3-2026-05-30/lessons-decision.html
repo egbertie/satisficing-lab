@@ -1,8 +1,582 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>衡·课程·决策课|硬科技合伙人决策课|满意解研究所</title><style>:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}.article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}.article h2{font-size:18px;color:var(--title-color);margin:24px 0 10px}.article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}.article p{margin:8px 0}.article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}.article .highlight{color:var(--sri-red);font-weight:600}li{margin:6px 0;font-size:14px}ul{padding-left:20px}table{width:100%;font-size:12px;border-collapse:collapse;margin:12px 0}th{padding:6px;border-bottom:1px solid #D4C5A0;color:var(--sri-gold);text-align:left}td{padding:6px;border-bottom:1px solid #f0e8d8}</style><link rel="stylesheet" href="vi_quick_ref.css">
-</head><body><div class="hero"><h1>🎓 衡·课程·决策课</h1><p>硬科技合伙人决策课·12节录播课大纲</p></div><div class="article"><h2>硬科技合伙人决策课</h2><p>12节录播课 + 每月1次直播答疑 + 案例库权限。价格定位：2999元/人（早鸟价1999元）。</p>
-<h3>课程大纲</h3><p>第1课：合伙人选择的第一性原理<br>第2课：股权分配的底层逻辑（Wasserman+Moyer）<br>第3课：控制权与决策权——谁说了算<br>第4课：利益分配——赚了钱怎么分<br>第5课：退出机制——怎么好聚好散<br>第6课：信任检测——Gottman四骑士在合伙人场景<br>第7课：冲突处理——Lencioni五层障碍<br>第8课：危机决策——Feld·高压下的选择<br>第9课：引入新合伙人——Wasserman的忠告<br>第10课：家族企业传承——二代接班人的决策课<br>第11课：融资与估值——对赌条款不要闭眼签<br>第12课：实战演练——用68Entry踩雷全景反推你的团队</p>
-<h3>配套案例</h3><p>大疆·比锐·云鲸·固高·海柔·张雪机车——6个真实案例覆盖全部12节课</p></div><p style="text-align:center;padding:20px;font-size:11px;color:#999"><a href="go.html" style="color:#C23B22;text-decoration:none">← 返回决策通道</a></p>
-<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>决策者的自修室 | 硬科技合伙人决策课 | 满意解研究所</title>
+<style>
+:root{
+  --sri-red:#C23B22;
+  --sri-gold:#B8860B;
+  --sri-bg:#F5F0E6;
+  --text:#4A4A4A;
+  --title-color:#2A2A2A;
+  --white:#FFFFFF;
+  --border-light:#E0D8C8;
+  --shadow-card:0 2px 8px rgba(0,0,0,0.06);
+  --shadow-elevated:0 6px 20px rgba(0,0,0,0.10);
+  --radius-md:12px;
+  --radius-lg:16px;
+  --radius-full:999px
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;
+  background:var(--sri-bg);
+  color:var(--text);
+  min-height:100vh
+}
+
+/* === Hero === */
+.hero{
+  background:linear-gradient(160deg,#1A1A2E 0%,#2A1A2E 30%,var(--sri-gold) 100%);
+  color:#F5F0E6;
+  padding:48px 20px 36px;
+  text-align:center;
+  position:relative;
+  overflow:hidden
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  top:-60px;right:-60px;
+  width:200px;height:200px;
+  background:radial-gradient(circle,rgba(245,240,230,0.06) 0%,transparent 70%);
+  border-radius:50%
+}
+.hero .hero-sub{
+  font-size:11px;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  opacity:.55;
+  margin-bottom:12px
+}
+.hero h1{
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:0.03em;
+  margin-bottom:10px
+}
+.hero .hero-desc{
+  font-size:14px;
+  opacity:.78;
+  max-width:360px;
+  margin:0 auto;
+  line-height:1.8
+}
+.hero .hero-desc em{
+  font-style:normal;
+  background:rgba(245,240,230,0.12);
+  padding:2px 8px;
+  border-radius:4px;
+  white-space:nowrap
+}
+.hero .nav-back{
+  margin-top:22px;
+  font-size:12px;
+  opacity:.6
+}
+.hero .nav-back a{
+  color:#F5F0E6;
+  text-decoration:none
+}
+
+/* === Self Check Section === */
+.self-check{
+  max-width:600px;
+  margin:0 auto;
+  padding:28px 20px 10px;
+  text-align:center
+}
+.self-check h2{
+  font-size:16px;
+  color:var(--title-color);
+  margin-bottom:6px;
+  font-weight:700
+}
+.self-check .check-sub{
+  font-size:12px;
+  color:var(--text);
+  opacity:.6;
+  margin-bottom:16px
+}
+.check-tags{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+  max-width:500px;
+  margin:0 auto
+}
+.check-tag{
+  padding:8px 16px;
+  border-radius:var(--radius-full);
+  border:1.5px solid var(--border-light);
+  background:var(--white);
+  cursor:pointer;
+  font-size:13px;
+  color:var(--text);
+  transition:all .2s;
+  user-select:none;
+  white-space:nowrap
+}
+.check-tag:hover{
+  border-color:var(--sri-red);
+  color:var(--sri-red)
+}
+.check-tag.selected{
+  background:var(--sri-red);
+  color:var(--white);
+  border-color:var(--sri-red);
+  font-weight:600
+}
+.check-result{
+  display:none;
+  margin-top:14px;
+  font-size:13px
+}
+.check-result.active{
+  display:block
+}
+.check-result .result-text{
+  color:var(--sri-red);
+  font-weight:600
+}
+.check-result .result-hint{
+  font-size:11px;
+  color:var(--text);
+  opacity:.55;
+  margin-top:4px
+}
+
+/* === Big Question Section === */
+.big-question{
+  max-width:600px;
+  margin:0 auto;
+  padding:24px 20px 10px;
+  text-align:center
+}
+.big-question .bq-label{
+  font-size:11px;
+  letter-spacing:0.2em;
+  color:var(--sri-gold);
+  text-transform:uppercase;
+  font-weight:600;
+  margin-bottom:8px
+}
+.big-question .bq-main{
+  font-size:18px;
+  font-weight:700;
+  color:var(--title-color);
+  margin-bottom:6px;
+  line-height:1.6
+}
+.big-question .bq-sub{
+  font-size:12px;
+  color:var(--text);
+  opacity:.55;
+  margin-bottom:16px
+}
+.q-options{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+  max-width:500px;
+  margin:0 auto
+}
+.q-option{
+  padding:10px 20px;
+  border-radius:var(--radius-full);
+  border:2px solid var(--border-light);
+  background:var(--white);
+  cursor:pointer;
+  font-size:14px;
+  color:var(--text);
+  transition:all .25s;
+  font-weight:500;
+  text-decoration:none;
+  display:inline-block
+}
+.q-option:hover{
+  border-color:var(--sri-gold);
+  background:rgba(184,134,11,0.04);
+  transform:translateY(-1px)
+}
+.q-option.active{
+  border-color:var(--sri-red);
+  background:rgba(194,59,34,0.05);
+  color:var(--sri-red);
+  font-weight:700;
+  box-shadow:var(--shadow-card)
+}
+.q-filter-hint{
+  display:none;
+  margin-top:12px;
+  font-size:12px;
+  color:var(--text);
+  opacity:.65
+}
+.q-filter-hint.active{display:block}
+.q-filter-hint .clear-filter{
+  color:var(--sri-red);
+  cursor:pointer;
+  text-decoration:underline;
+  font-weight:600
+}
+
+/* === Lessons Grid === */
+.lessons{
+  max-width:680px;
+  margin:10px auto 0;
+  padding:10px 20px 36px
+}
+.lessons-title{
+  text-align:center;
+  font-size:18px;
+  font-weight:700;
+  color:var(--title-color);
+  margin-bottom:20px
+}
+.lessons-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px
+}
+@media(max-width:560px){
+  .lessons-grid{grid-template-columns:1fr}
+  .hero h1{font-size:24px}
+}
+
+/* === Lesson Card === */
+.lesson-card{
+  background:var(--white);
+  border-radius:var(--radius-lg);
+  padding:18px 16px;
+  border:1.5px solid var(--border-light);
+  transition:all .25s;
+  box-shadow:var(--shadow-card);
+  position:relative;
+  cursor:default
+}
+.lesson-card:hover{
+  border-color:var(--sri-gold);
+  box-shadow:var(--shadow-elevated);
+  transform:translateY(-2px)
+}
+.lesson-card.dimmed{
+  opacity:.25;
+  pointer-events:none;
+  transform:none;
+  box-shadow:none
+}
+.lesson-card.highlight{
+  border-color:var(--sri-red);
+  box-shadow:0 0 0 3px rgba(194,59,34,0.12);
+  animation:pulseBorder 1.6s ease-in-out
+}
+@keyframes pulseBorder{
+  0%,100%{box-shadow:0 0 0 3px rgba(194,59,34,0.12)}
+  50%{box-shadow:0 0 0 6px rgba(194,59,34,0.18)}
+}
+.lesson-card .lc-num{
+  font-size:10px;
+  letter-spacing:0.1em;
+  color:var(--sri-gold);
+  font-weight:700;
+  margin-bottom:6px;
+  text-transform:uppercase
+}
+.lesson-card .lc-question{
+  font-size:15px;
+  font-weight:700;
+  color:var(--title-color);
+  line-height:1.5;
+  margin-bottom:8px
+}
+.lesson-card .lc-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  margin-bottom:10px
+}
+.lesson-card .lc-tag{
+  font-size:10px;
+  padding:3px 10px;
+  border-radius:var(--radius-full);
+  background:rgba(194,59,34,0.06);
+  color:var(--sri-red);
+  font-weight:600
+}
+.lesson-card .lc-toggle{
+  font-size:12px;
+  color:var(--sri-gold);
+  cursor:pointer;
+  font-weight:600;
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  user-select:none;
+  transition:color .2s
+}
+.lesson-card .lc-toggle:hover{color:var(--sri-red)}
+.lesson-card .lc-toggle .arrow{
+  display:inline-block;
+  transition:transform .25s;
+  font-size:10px
+}
+.lesson-card .lc-toggle.open .arrow{
+  transform:rotate(180deg)
+}
+.lesson-card .lc-detail{
+  display:none;
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px solid var(--border-light);
+  font-size:13px;
+  line-height:1.7;
+  color:var(--text);
+  animation:fadeIn .3s ease
+}
+.lesson-card .lc-detail.open{display:block}
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(-6px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* === CTA Section === */
+.cta-section{
+  max-width:600px;
+  margin:0 auto;
+  padding:0 20px 40px;
+  text-align:center
+}
+.cta-gentle{
+  display:inline-block;
+  padding:14px 36px;
+  border-radius:var(--radius-full);
+  border:2px solid var(--sri-gold);
+  background:var(--white);
+  color:var(--sri-gold);
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  text-decoration:none;
+  transition:all .25s
+}
+.cta-gentle:hover{
+  background:var(--sri-gold);
+  color:var(--white);
+  transform:translateY(-2px);
+  box-shadow:0 4px 16px rgba(184,134,11,0.25)
+}
+.cta-muted{
+  font-size:11px;
+  color:var(--text);
+  opacity:.45;
+  margin-top:10px
+}
+
+/* === Back Link === */
+.back-link{
+  text-align:center;
+  padding:8px 20px 0;
+  font-size:11px;
+  color:#999
+}
+.back-link a{
+  color:var(--sri-red);
+  text-decoration:none
+}
+
+/* === Feedback Component (preserved) === */
+.fb-wrap{
+  max-width:600px;
+  margin:24px auto 40px;
+  padding:0 16px;
+  text-align:center;
+  font-size:13px;
+  border-top:1px solid #D4C5A0;
+  padding-top:20px
+}
+
+/* === Footer === */
+.site-footer{
+  text-align:center;
+  padding:20px 16px 40px;
+  font-size:11px;
+  color:#999;
+  opacity:.6
+}
+</style>
+</head>
+<body>
+
+<!-- ====== HERO ====== -->
+<div class="hero">
+  <div class="hero-sub">衡 · 决策课</div>
+  <h1>决策者的自修室</h1>
+  <p class="hero-desc">
+    12个<em>你最可能</em>在深夜问自己的问题<br>
+    不是课程大纲，是一盏灯
+  </p>
+  <div class="nav-back"><a href="go.html">← 决策通道</a></div>
+</div>
+
+<!-- ====== 决策困境自查 ====== -->
+<div class="self-check">
+  <h2>⚡ 决策困境自查</h2>
+  <p class="check-sub">选出你最担心的3件事，看看你该从哪里开始</p>
+  <div class="check-tags" id="checkTags">
+    <span class="check-tag" data-idx="0">选错合伙人</span>
+    <span class="check-tag" data-idx="1">股权分不好</span>
+    <span class="check-tag" data-idx="2">控制权不稳</span>
+    <span class="check-tag" data-idx="3">利益打架</span>
+    <span class="check-tag" data-idx="4">不知道怎么退出</span>
+    <span class="check-tag" data-idx="5">信任破裂</span>
+    <span class="check-tag" data-idx="6">团队内耗</span>
+    <span class="check-tag" data-idx="7">高压决策</span>
+    <span class="check-tag" data-idx="8">新合伙人来不来</span>
+    <span class="check-tag" data-idx="9">二代接班难题</span>
+    <span class="check-tag" data-idx="10">对赌条款恐惧</span>
+    <span class="check-tag" data-idx="11">避坑经验不足</span>
+  </div>
+  <div class="check-result" id="checkResult">
+    <p class="result-text" id="checkResultText"></p>
+    <p class="result-hint" id="checkResultHint"></p>
+  </div>
+</div>
+
+<!-- ====== 开场大问题 ====== -->
+<div class="big-question">
+  <div class="bq-label">深夜自问</div>
+  <div class="bq-main">你最近一次在决策上卡住——是在哪个环节？</div>
+  <p class="bq-sub">点击下面最接近你困境的问题</p>
+  <div class="q-options" id="qOptions">
+    <span class="q-option" data-filter="partner">选合伙人</span>
+    <span class="q-option" data-filter="equity">分股权</span>
+    <span class="q-option" data-filter="exit">退出僵局</span>
+    <span class="q-option" data-filter="invest">融资压力</span>
+  </div>
+  <div class="q-filter-hint" id="qFilterHint">
+    已为你高亮相关课程 · <span class="clear-filter" onclick="clearQuestionFilter()">查看全部</span>
+  </div>
+</div>
+
+<!-- ====== 12课卡片 ====== -->
+<div class="lessons">
+  <div class="lessons-title">🧭 12 盏深夜的灯</div>
+  <div class="lessons-grid" id="lessonsGrid">
+    <!-- 1 -->
+    <div class="lesson-card" data-tags="partner">
+      <div class="lc-num">第 1 课 · 合伙人</div>
+      <div class="lc-question">我该不该跟他合伙？</div>
+      <div class="lc-tags"><span class="lc-tag">第一性原理</span><span class="lc-tag">合伙人选择</span></div>
+      <span class="lc-toggle" onclick="toggleDetail(this)">这节讲什么 <span class="arrow">▾</span></span>
+      <div class="lc-detail">合伙不是看顺眼，是看"不可替代性"和"冲突后的恢复力"。这一节我们从第一性原理出发，拆解合伙人选择的底层逻辑——不是找最厉害的人，是找"翻脸后还能坐下来谈"的人。</div>
+    </div>
+    <!-- 2 -->
+    <div class="lesson-card" data-tags="equity">
+      <div class="lc-num">第 2 课 · 股权</div>
+      <div class="lc-question">股权到底怎么分才不后悔？</div>
+      <div class="lc-tags"><span class="lc-tag">Wasserman</span><span class="lc-tag">Moyer</span><span class="lc-tag">底层逻辑</span></div>
+      <span class="lc-toggle" onclick="toggleDetail(this)">这节讲什么 <span class="arrow">▾</span></span>
+      <div class="lc-detail">分股权不是分蛋糕，是分"未来的后悔"。Wasserman 研究了上万家创业公司发现：一开始均分股权的团队，5年后后悔率超过80%。这一节教你正确的股权分配框架。</div>
+    </div>
+    <!-- 3 -->
+    <div class="lesson-card" data-tags="equity partner">
+      <div class="lc-num">第 3 课 · 控制权</div>
+      <div class="lc-question">谁说了算——控制权怎么分配？</div>
+      <div class="lc-tags"><span class="lc-tag">决策权</span><span class="lc-tag">治理结构</span></div>
+      <span class="lc-toggle" onclick="toggleDetail(this)">这节讲什么 <span class="arrow">▾</span></span>
+      <div class="lc-detail">股权≠控制权。你有51%的股份，但重大决策可能还是卡死。这一节讲治理结构设计：哪些事情必须一致同意，哪些可以多数通过，哪些创始人可以独断。</div>
+    </div>
+    <!-- 4 -->
+    <div class="lesson-card" data-tags="equity">
+      <div class="lc-num">第 4 课 · 利益分配</div>
+      <div class="lc-question">赚了钱怎么分？</div>
+      <div class="lc-tags"><span class="lc-tag">利益分配</span><span class="lc-tag">绩效权重</span></div>
+      <span class="lc-toggle" onclick="toggleDetail(this)">这节讲什么 <span class="arrow">▾</span></span>
+      <div class="lc-detail">钱进来了，矛盾就开始了。谁贡献多？怎么衡量？动态分配机制比固定比例更重要。这一节从"权责利"三角框架出发，建立一套不会让团队散伙的分配逻辑。</div>
+    </div>
+    <!-- 5 -->
+    <div class="lesson-card" data-tags="exit">
+      <div class="lc-num">第 5 课 · 退出</div>
+      <div class="lc-question">怎么好聚好散——退出机制？</div>
+      <div class="lc-tags"><span class="lc-tag">退出设计</span><span class="lc-tag">好聚好散</span></div>
+      <span class="lc-toggle" onclick="toggleDetail(this)">这节讲什么 <span class="arrow">▾</span></span>
+      <div class="lc-detail">最好的退出机制在合伙第一天就设计好。回购条款、vesting schedule、离婚条款——这些不是不吉利，是对所有人的保护。大疆早年合伙人纠纷的教训，这一节给你讲透。</div>
+    </div>
+    <!-- 6 -->
+    <div class="lesson-card" data-tags="partner">
+      <div class="lc-num">第 6 课 · 信任</div>
+      <div class="lc-question">信任裂了怎么修？</div>
+      <div class="lc-tags"><span class="lc-tag">Gottman</span><span class="lc-tag">四骑士</span><span class="lc-tag">信任检测</span></div>
+      <span class="lc-toggle" onclick="toggleDetail(this)">这节讲什么 <span class="arrow">▾</span></span>
+      <div class="lc-detail">关系心理学家 Gottman 发现，婚姻破裂前有四个预兆信号。神奇的是，这四个"骑士"在合伙人关系里一模一样：指责、蔑视、防御、筑墙。这一节教你识别和修复信任裂痕。</div>
+    </div>
+    <!-- 7 -->
+    <div class="lesson-card" data-tags="partner exit">
+      <div class="lc-num">第 7 课 · 冲突</div>
+      <div class="lc-question">团队冲突怎么解？</div>
+      <div class="lc-tags"><span class="lc-tag">Lencioni</span><span class="lc-tag">五层障碍</span></div>
+      <span class="lc-toggle" onclick="toggleDetail(this)">这节讲什么 <span class="arrow">▾</span></span>
+      <div class="lc-detail">Lencioni 的五层障碍模型指出：团队失败不是从冲突开始，是从"回避冲突"开始。这一节用五个真实案例，帮你定位你的团队卡在哪一层，以及怎么爬出来。</div>
+    </div>
+    <!-- 8 -->
+    <div class="lesson-card" data-tags="invest">
+      <div class="lc-num">第 8 课 · 高压</div>
+      <div class="lc-question">高压下怎么选？</div>
+      <div class="lc-tags"><span class="lc-tag">Feld</span><span class="lc-tag">危机决策</span><span class="lc-tag">高压</span></div>
+      <span class="lc-toggle" onclick="toggleDetail(this)">这节讲什么 <span class="arrow">▾</span></span>
+      <div class="lc-detail">Brad Feld 说：创始人在高压下做的决策，决定了公司是死是活。这一节拆解高压决策的认知陷阱——确认偏误、沉没成本、群体思维——以及一套实战决策框架。</div>
+    </div>
+    <!-- 9 -->
+    <div class="lesson-card" data-tags="partner equity">
+      <div class="lc-num">第 9 课 · 新合伙人</div>
+      <div class="lc-question">新合伙人来还是不来？</div>
+      <div class="lc-tags"><span class="lc-tag">Wasserman</span><span class="lc-tag">引入时机</span></div>
+      <span class="lc-toggle" onclick="toggleDetail(this)">这节讲什么 <span class="arrow">▾</span></span>
+      <div class="lc-detail">引入新合伙人是创始团队最危险的动作之一。Wasserman 的忠告：时机比人选更重要。太早引入会稀释创始团队的凝聚力，太晚又错过窗口。这一节给你一套评估框架。</div>
+    </div>
+    <!-- 10 -->
+    <div class="lesson-card" data-tags="exit">
+      <div class="lc-num">第 10 课 · 传承</div>
+      <div class="lc-question">二代接班——家族企业的坎？</div>
+      <div class="lc-tags"><span class="lc-tag">家族企业</span><span class="lc-tag">二代传承</span></div>
+      <span class="lc-toggle" onclick="toggleDetail(this)">这节讲什么 <span class="arrow">▾</span></span>
+      <div class="lc-detail">硬科技领域有大量家族企业背景的团队。接班不是交钥匙那么简单——能力传承、信任重建、老臣安置，每一个都是深坑。这一节用固高的真实案例给你拆解。</div>
+    </div>
+    <!-- 11 -->
+    <div class="lesson-card" data-tags="invest">
+      <div class="lc-num">第 11 课 · 融资</div>
+      <div class="lc-question">对赌条款——别闭眼签字？</div>
+      <div class="lc-tags"><span class="lc-tag">融资估值</span><span class="lc-tag">对赌条款</span></div>
+      <span class="lc-toggle" onclick="toggleDetail(this)">这节讲什么 <span class="arrow">▾</span></span>
+      <div class="lc-detail">对赌协议不是"签了就完了"——是签了才刚开始。触发条件、补偿方式、控制权转移，每一条都可能改变你的公司走向。这一节逐条拆解对赌条款的陷阱和谈判策略。</div>
+    </div>
+    <!-- 12 -->
+    <div class="lesson-card" data-tags="partner equity exit invest">
+      <div class="lc-num">第 12 课 · 实战</div>
+      <div class="lc-question">从别人的坑里看自己——实战推演？</div>
+      <div class="lc-tags"><span class="lc-tag">68Entry</span><span class="lc-tag">踩雷全景</span><span class="lc-tag">案例推演</span></div>
+      <span class="lc-toggle" onclick="toggleDetail(this)">这节讲什么 <span class="arrow">▾</span></span>
+      <div class="lc-detail">大疆·比锐·云鲸·固高·海柔·张雪机车——6个真实案例覆盖全部前11课。用68个踩雷节点反推你的团队，不是学理论，是"如果是我在那个时间点，我会怎么选？"</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== CTA ====== -->
+<div class="cta-section">
+  <a class="cta-gentle" href="go.html?action=decision-dialogue">📞 预约一次决策对话</a>
+  <p class="cta-muted">不是销售电话，是一次真诚的诊断对话</p>
+</div>
+
+<!-- ====== Back Link ====== -->
+<p class="back-link"><a href="go.html">← 返回决策通道</a></p>
+
+<!-- ====== Feedback Component (完整保留) ====== -->
+<div class="fb-wrap">
   <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个内容对你有用吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
     <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
@@ -13,13 +587,115 @@
   <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
   <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
 </div>
+
+<div class="site-footer">满意解研究所 · 衡 · 决策者的自修室</div>
+
 <script>
+// ===== 决策困境自查 =====
 (function(){
-  let page=location.pathname.split('/').pop()||'index';
-  let key='sri_fb_'+page;
-  let data=JSON.parse(localStorage.getItem(key)||'{}');
-  if(data.sent){document.getElementById('fbQuestion').textContent='感谢你的反馈！';document.getElementById('fbActions').style.display='none';}
-  let tally=JSON.parse(localStorage.getItem('sri_fb_tally_'+page)||'{"up":0,"text":0}');
+  var selected=[];
+  var maxChecks=3;
+  var tags=document.querySelectorAll('#checkTags .check-tag');
+  var result=document.getElementById('checkResult');
+  var resultText=document.getElementById('checkResultText');
+  var resultHint=document.getElementById('checkResultHint');
+
+  var insights=[
+    '你的焦虑集中在"人"上——建议从<b>第1课（我该不该跟他合伙？）</b>和<b>第6课（信任裂了怎么修？）</b>开始',
+    '你的焦虑集中在"利益分配"——建议从<b>第2课（股权怎么分）</b>和<b>第4课（赚了钱怎么分？）</b>开始',
+    '你的焦虑集中在"控制权"——建议从<b>第3课（谁说了算？）</b>和<b>第5课（怎么好聚好散？）</b>开始',
+    '你的焦虑分布在多个维度——建议从<b>第12课（实战推演）</b>做一个全景诊断',
+    '你的焦虑偏向外部压力——建议从<b>第8课（高压下怎么选？）</b>和<b>第11课（对赌条款）</b>开始'
+  ];
+
+  tags.forEach(function(tag){
+    tag.addEventListener('click',function(){
+      var idx=parseInt(this.getAttribute('data-idx'));
+      if(this.classList.contains('selected')){
+        this.classList.remove('selected');
+        selected=selected.filter(function(i){return i!==idx});
+      }else if(selected.length<maxChecks){
+        this.classList.add('selected');
+        selected.push(idx);
+      }
+      if(selected.length>=3){
+        result.classList.add('active');
+        resultText.innerHTML='📍 你的决策画像：' + insights[Math.min(3, Math.floor(selected[0]/3))];
+        resultHint.textContent='下面的课程卡片已按你的关切排序，优先查看高亮项目';
+      }else if(selected.length>0){
+        result.classList.add('active');
+        resultText.innerHTML='还有'+(maxChecks-selected.length)+'个可以选，越精确诊断越准';
+        resultHint.textContent='';
+      }else{
+        result.classList.remove('active');
+      }
+    });
+  });
+})();
+
+// ===== 开场大问题 - 课程过滤 =====
+(function(){
+  var options=document.querySelectorAll('#qOptions .q-option');
+  var cards=document.querySelectorAll('.lesson-card');
+  var hint=document.getElementById('qFilterHint');
+  var activeFilter=null;
+
+  options.forEach(function(opt){
+    opt.addEventListener('click',function(){
+      var filter=this.getAttribute('data-filter');
+      if(this.classList.contains('active')){
+        // deselect
+        this.classList.remove('active');
+        activeFilter=null;
+        hint.classList.remove('active');
+        cards.forEach(function(c){c.classList.remove('dimmed','highlight')});
+        return;
+      }
+      // deselect others
+      options.forEach(function(o){o.classList.remove('active')});
+      this.classList.add('active');
+      activeFilter=filter;
+      hint.classList.add('active');
+
+      cards.forEach(function(card){
+        var tags=card.getAttribute('data-tags')||'';
+        if(tags.indexOf(filter)!==-1){
+          card.classList.remove('dimmed');
+          card.classList.add('highlight');
+          setTimeout(function(){card.classList.remove('highlight')},2000);
+        }else{
+          card.classList.add('dimmed');
+          card.classList.remove('highlight');
+        }
+      });
+    });
+  });
+
+  window.clearQuestionFilter=function(){
+    options.forEach(function(o){o.classList.remove('active')});
+    hint.classList.remove('active');
+    activeFilter=null;
+    cards.forEach(function(c){c.classList.remove('dimmed','highlight')});
+  };
+})();
+
+// ===== 卡片展开/折叠 =====
+window.toggleDetail=function(el){
+  el.classList.toggle('open');
+  var detail=el.nextElementSibling;
+  if(detail) detail.classList.toggle('open');
+};
+
+// ===== 反馈组件 (完整保留) =====
+(function(){
+  var page=location.pathname.split('/').pop()||'index';
+  var key='sri_fb_'+page;
+  var data=JSON.parse(localStorage.getItem(key)||'{}');
+  if(data.sent){
+    document.getElementById('fbQuestion').textContent='感谢你的反馈！';
+    document.getElementById('fbActions').style.display='none';
+  }
+  var tally=JSON.parse(localStorage.getItem('sri_fb_tally_'+page)||'{"up":0,"text":0}');
   if(tally.up+tally.text>0) document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
   window.submitFeedback=function(type){
     tally[type]=(tally[type]||0)+1;
@@ -35,7 +711,7 @@
     document.getElementById('fbSubmit').style.display='inline-block';
   };
   window.submitFeedbackText=function(){
-    let text=document.getElementById('fbText').value.trim();
+    var text=document.getElementById('fbText').value.trim();
     if(!text)return;
     tally.text=(tally.text||0)+1;
     localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
@@ -50,4 +726,5 @@
 })();
 </script>
 
-</body></html>
+</body>
+</html>

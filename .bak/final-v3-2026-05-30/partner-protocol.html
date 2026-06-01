@@ -3,16 +3,105 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>契·协议|合作协议模板|满意解研究所</title>
-<style>:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}.article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}.article h2{font-size:18px;color:var(--title-color);margin:24px 0 10px}.article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}.article p{margin:8px 0}.article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}.article .highlight{color:var(--sri-red);font-weight:600}li{margin:6px 0;font-size:14px}ul{padding-left:20px}</style>
+<title>立约时刻|契·协议|满意解研究所</title>
+<style>:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}.article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}.article h2{font-size:18px;color:var(--title-color);margin:24px 0 10px}.article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}.article p{margin:8px 0}.article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}.article .highlight{color:var(--sri-red);font-weight:600}li{margin:6px 0;font-size:14px}ul{padding-left:20px}
+
+/* === 三问区域 === */
+.three-qs{margin:24px 0;padding:20px;background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+.three-qs label{display:block;font-size:14px;font-weight:600;color:var(--title-color);margin:14px 0 6px}
+.three-qs label:first-child{margin-top:0}
+.three-qs label .emoji{font-size:16px;margin-right:4px}
+.three-qs textarea{width:100%;height:56px;border:1.5px solid #D4C5A0;border-radius:8px;padding:10px 12px;font-size:14px;font-family:inherit;resize:vertical;background:#FDFAF3;transition:border-color 0.2s}
+.three-qs textarea:focus{outline:none;border-color:var(--sri-red);box-shadow:0 0 0 3px rgba(194,59,34,0.08)}
+.three-qs .btn-row{text-align:center;margin-top:16px}
+.three-qs .btn-suggest{padding:10px 28px;border-radius:20px;border:none;background:var(--sri-red);color:#fff;font-size:14px;font-weight:600;cursor:pointer;transition:opacity 0.2s}
+.three-qs .btn-suggest:hover{opacity:0.9}
+.three-qs .btn-suggest:active{opacity:0.75}
+.suggest-box{margin-top:16px;padding:14px 16px;background:rgba(194,59,34,0.04);border-left:3px solid var(--sri-red);border-radius:0 8px 8px 0;font-size:14px;line-height:1.8;display:none}
+.suggest-box.show{display:block}
+
+/* === 协议卡片 === */
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+@media(max-width:480px){.card-grid{grid-template-columns:1fr}}
+.proto-card{background:#fff;border:1.5px solid #E5DCC8;border-radius:10px;padding:16px;cursor:pointer;transition:box-shadow 0.2s,border-color 0.2s}
+.proto-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.08);border-color:var(--sri-gold)}
+.proto-card .card-title{font-size:14px;font-weight:700;color:var(--title-color);margin-bottom:4px}
+.proto-card .card-scene{font-size:12px;color:#888;margin-bottom:10px;line-height:1.6}
+.proto-card .card-btn{padding:6px 14px;border-radius:14px;border:1.5px solid var(--sri-gold);background:#fff;color:var(--sri-gold);font-size:12px;cursor:pointer;transition:all 0.2s;display:inline-block}
+.proto-card .card-btn:hover{background:var(--sri-gold);color:#fff}
+.proto-card .card-btn.active{background:var(--sri-gold);color:#fff}
+.card-detail{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed #D4C5A0;font-size:13px;line-height:1.8;color:#666}
+.card-detail.show{display:block}
+.card-detail strong{color:var(--sri-red)}
+.proto-card.selected{border-color:var(--sri-red);background:#FFF8F6}
+
+/* === 立约仪式 === */
+.ritual-box{margin:28px 0;padding:24px;background:linear-gradient(135deg,#FFF8E7,#FDF2E0);border:2px solid var(--sri-gold);border-radius:12px;text-align:center}
+.ritual-box h3{font-size:17px;color:var(--sri-gold);margin:0 0 12px}
+.ritual-box .ritual-text{font-size:14px;line-height:2;color:var(--text);text-align:left;padding:16px;background:#fff;border-radius:8px;margin:12px 0;white-space:pre-wrap;word-break:break-word}
+.ritual-box .btn-copy{padding:8px 20px;border-radius:18px;border:1.5px solid var(--sri-gold);background:#fff;color:var(--sri-gold);font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s}
+.ritual-box .btn-copy:hover{background:var(--sri-gold);color:#fff}
+.ritual-box .copy-hint{font-size:11px;color:#888;margin-top:6px;display:none}
+.ritual-box .copy-hint.show{display:block}
+
+/* === 底部分隔 === */
+.section-sep{text-align:center;color:#C4B896;font-size:20px;margin:32px 0 8px;letter-spacing:4px}
+</style>
 <link rel="stylesheet" href="vi_quick_ref.css">
 </head>
-<body><div class="hero"><h1>📋 契·协议</h1><p>满意解·7类合作伙伴协议模板</p></div><div class="article"><h2>满意解·合作伙伴协议模板</h2>
-<p>7类合作协议——覆盖满意解研究所的主要合作场景。</p>
-<h3>7类协议</h3>
-<p>1. <strong>VC投后合作</strong>：投资机构为被投企业采购决策诊断<br>2. <strong>孵化器合作</strong>：入驻企业打包服务<br>3. <strong>加速器合作</strong>：Demo Day前的团队诊断<br>4. <strong>律所合作</strong>：合伙人协议+冲突预防的联合服务<br>5. <strong>大学合作</strong>：创业课程的决策模块<br>6. <strong>行业协会</strong>：行业白皮书+调研合作<br>7. <strong>独立引导师</strong>：认证培训+品牌授权</p>
-<div class="quote">白纸黑字，不以信任代替规则。<br>契·立盟——先立约，再做事。</div></div>
+<body>
+<div class="hero">
+  <h1>立约时刻</h1>
+  <p>白纸黑字，不以信任代替规则。先立约，再做事。</p>
+</div>
+
+<div class="article">
+
+  <!-- 问自己三问 -->
+  <h2>先问自己三问</h2>
+  <p style="font-size:13px;color:#888;margin-bottom:4px;">填写后，帮你梳理立约方向——答案自动保存。</p>
+  <div class="three-qs">
+    <label><span class="emoji">❓</span> 你跟谁合作？</label>
+    <textarea id="q1" placeholder="例如：一家A轮SaaS公司、一个产业园区、某律所合伙人…"></textarea>
+
+    <label><span class="emoji">❓</span> 你们之间最大的不确定是什么？</label>
+    <textarea id="q2" placeholder="例如：诊断范围不清、交付标准模糊、IP归属没说好…"></textarea>
+
+    <label><span class="emoji">❓</span> 如果出问题——你最怕发生什么？</label>
+    <textarea id="q3" placeholder="例如：对方中途退出、成果被挪用、付款纠纷…"></textarea>
+
+    <div class="btn-row">
+      <button class="btn-suggest" onclick="genSuggestion()">生成立约建议 →</button>
+    </div>
+    <div class="suggest-box" id="suggestBox"></div>
+  </div>
+
+  <!-- 协议卡片 -->
+  <h2>选择合适的协议</h2>
+  <p style="font-size:13px;color:#888;margin-bottom:4px;">7类合作场景——点击「这适合我吗？」查看详情。</p>
+  <div class="card-grid" id="cardGrid">
+    <!-- JS 动态生成 -->
+  </div>
+
+  <!-- 立约仪式 -->
+  <h2>立约仪式</h2>
+  <p style="font-size:13px;color:#888;margin-bottom:4px;">完成三问 + 选择一个协议类型后——生成你们的预立约文。</p>
+  <div class="ritual-box" id="ritualBox">
+    <h3>🤝 预立约文</h3>
+    <p style="font-size:13px;color:#888;" id="ritualPlaceholder">在上方填写三问并选择一个协议类型后，这里会自动生成一段预立约文。</p>
+    <div class="ritual-text" id="ritualText" style="display:none;"></div>
+    <button class="btn-copy" id="btnCopy" onclick="copyRitual()" style="display:none;">📋 复制立约文</button>
+    <div class="copy-hint" id="copyHint">已复制到剪贴板 ✓</div>
+  </div>
+
+  <div class="section-sep">· · ·</div>
+
+  <div class="quote">白纸黑字，不以信任代替规则。<br>契·立盟——先立约，再做事。</div>
+</div>
+
 <p style="text-align:center;padding:20px;font-size:11px;color:#999"><a href="go.html" style="color:#C23B22;text-decoration:none">← 返回决策通道</a></p>
+
+<!-- 反馈组件 - 完整保留 -->
 <div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
   <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个内容对你有用吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
@@ -24,7 +113,216 @@
   <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
   <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
 </div>
+
 <script>
+// ===== 协议数据 =====
+var protocols = [
+  {id:'vc',title:'VC投后合作',scene:'我的被投企业需要一个客观诊断',condition:'适用于VC机构为被投企业采购决策诊断服务，需明确诊断范围、交付物形式及费用承担方。',clauses:'关键条款：诊断范围界定、知识产权归属、保密义务、付款节点与验收标准。'},
+  {id:'incubator',title:'孵化器合作',scene:'入驻团队需要打包决策支持',condition:'适用于孵化器为入驻企业提供打包决策支持服务，按年/按批次签约，含一定数量的诊断额度。',clauses:'关键条款：服务包内容与次数、单次诊断时长、团队转介机制、续约条件。'},
+  {id:'accelerator',title:'加速器合作',scene:'Demo Day前给团队做一次体检',condition:'适用于加速器在Demo Day前后为团队提供集中诊断，通常以短期项目制执行。',clauses:'关键条款：项目周期、诊断批次与排期、成果交付形式、紧急加诊机制。'},
+  {id:'law',title:'律所合作',scene:'合伙人协议+冲突预防的联合服务',condition:'适用于律所与满意解联合推出「合伙人协议+决策诊断」打包服务，面向初创企业创始人团队。',clauses:'关键条款：联合品牌使用、服务边界划分、客户转介规则、收益分成比例。'},
+  {id:'university',title:'大学合作',scene:'创业课程需要一个决策模块',condition:'适用于高校创业学院/中心引入决策方法作为课程模块，可嵌入学分课程或独立工作坊。',clauses:'关键条款：课程内容授权、讲师认证要求、学生数据保护、教材改编权限。'},
+  {id:'association',title:'行业协会',scene:'行业白皮书+调研合作',condition:'适用于行业协会联合发布行业白皮书或开展专项调研，满意解提供方法论与数据分析。',clauses:'关键条款：联合署名规则、数据使用权、发布渠道、后续商业开发权。'},
+  {id:'facilitator',title:'独立引导师',scene:'认证培训+品牌授权',condition:'适用于独立顾问/引导师申请满意解认证，获得品牌授权与标准化工具包。',clauses:'关键条款：认证条件与续期、品牌使用规范、工具包授权范围、质量监督机制。'}
+];
+
+var selectedProtocol = null;
+
+// ===== localStorage =====
+var STORAGE_KEY = 'sri_partner_protocol';
+
+function loadState(){
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+  } catch(e) {
+    return {};
+  }
+}
+
+function saveState(state){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+// ===== 三问 =====
+function initThreeQs(){
+  var state = loadState();
+  var q1 = document.getElementById('q1');
+  var q2 = document.getElementById('q2');
+  var q3 = document.getElementById('q3');
+  if (state.q1) q1.value = state.q1;
+  if (state.q2) q2.value = state.q2;
+  if (state.q3) q3.value = state.q3;
+  if (state.suggestion) {
+    var box = document.getElementById('suggestBox');
+    box.textContent = state.suggestion;
+    box.classList.add('show');
+  }
+  // auto-save on input
+  [q1, q2, q3].forEach(function(el){
+    el.addEventListener('input', function(){
+      var st = loadState();
+      st.q1 = q1.value;
+      st.q2 = q2.value;
+      st.q3 = q3.value;
+      saveState(st);
+      updateRitual();
+    });
+  });
+}
+
+function genSuggestion(){
+  var q1 = document.getElementById('q1').value.trim();
+  var q2 = document.getElementById('q2').value.trim();
+  var q3 = document.getElementById('q3').value.trim();
+  var box = document.getElementById('suggestBox');
+
+  if (!q1 && !q2 && !q3) {
+    box.classList.remove('show');
+    return;
+  }
+
+  var parts = [];
+  if (q1) parts.push('你计划与「' + q1 + '」合作');
+  if (q2) parts.push('核心不确定在于「' + q2 + '」');
+  if (q3) parts.push('你最担心的是「' + q3 + '」');
+
+  var suggestion = '根据你的回答：\n\n' + parts.join('；') + '。\n\n📌 建议：优先明确合作边界与交付标准，将关键条款写入书面协议。下方7类协议中，选择最接近你场景的那一个——点击卡片查看详情。';
+
+  box.textContent = suggestion;
+  box.classList.add('show');
+
+  var st = loadState();
+  st.suggestion = suggestion;
+  saveState(st);
+  updateRitual();
+}
+
+// ===== 协议卡片 =====
+function initCards(){
+  var grid = document.getElementById('cardGrid');
+  var html = '';
+
+  protocols.forEach(function(p, idx){
+    html += '<div class="proto-card" id="card-' + p.id + '" onclick="toggleCard(\'' + p.id + '\')">';
+    html += '<div class="card-title">' + (idx+1) + '. ' + p.title + '</div>';
+    html += '<div class="card-scene">' + p.scene + '</div>';
+    html += '<span class="card-btn" id="btn-' + p.id + '">这适合我吗？</span>';
+    html += '<div class="card-detail" id="detail-' + p.id + '">';
+    html += '<p><strong>适用条件</strong><br>' + p.condition + '</p>';
+    html += '<p style="margin-top:6px;"><strong>核心条款</strong><br>' + p.clauses + '</p>';
+    html += '<p style="margin-top:8px;"><button class="card-btn" id="select-' + p.id + '" onclick="event.stopPropagation();selectProtocol(\'' + p.id + '\')">✅ 选择这份协议</button></p>';
+    html += '</div>';
+    html += '</div>';
+  });
+
+  grid.innerHTML = html;
+
+  // 恢复已选协议
+  var state = loadState();
+  if (state.selectedProtocol) {
+    selectProtocol(state.selectedProtocol, true);
+  }
+}
+
+function toggleCard(id){
+  var detail = document.getElementById('detail-' + id);
+  var btn = document.getElementById('btn-' + id);
+  detail.classList.toggle('show');
+  if (detail.classList.contains('show')) {
+    btn.textContent = '收起 ▲';
+    btn.classList.add('active');
+  } else {
+    btn.textContent = '这适合我吗？';
+    btn.classList.remove('active');
+  }
+}
+
+function selectProtocol(id, silent){
+  // 清除旧选择
+  if (selectedProtocol && selectedProtocol !== id) {
+    var oldBtn = document.getElementById('select-' + selectedProtocol);
+    var oldCard = document.getElementById('card-' + selectedProtocol);
+    if (oldCard) oldCard.classList.remove('selected');
+    if (oldBtn) oldBtn.textContent = '✅ 选择这份协议';
+  }
+  selectedProtocol = id;
+  var card = document.getElementById('card-' + id);
+  if (card) card.classList.add('selected');
+  var selBtn = document.getElementById('select-' + id);
+  if (selBtn) selBtn.textContent = '✅ 已选择';
+
+  var st = loadState();
+  st.selectedProtocol = id;
+  saveState(st);
+
+  if (!silent) {
+    // 展开详情
+    var detail = document.getElementById('detail-' + id);
+    if (detail && !detail.classList.contains('show')) {
+      detail.classList.add('show');
+      var btn = document.getElementById('btn-' + id);
+      if (btn) { btn.textContent = '收起 ▲'; btn.classList.add('active'); }
+    }
+  }
+
+  updateRitual();
+}
+
+// ===== 立约仪式 =====
+function updateRitual(){
+  var st = loadState();
+  var q1 = st.q1 || '';
+  var q2 = st.q2 || '';
+  var q3 = st.q3 || '';
+  var sel = st.selectedProtocol;
+  var hasQA = !!(q1 || q2 || q3);
+
+  var ritualText = document.getElementById('ritualText');
+  var placeholder = document.getElementById('ritualPlaceholder');
+  var btnCopy = document.getElementById('btnCopy');
+
+  if (!hasQA && !sel) {
+    ritualText.style.display = 'none';
+    btnCopy.style.display = 'none';
+    placeholder.style.display = 'block';
+    return;
+  }
+
+  // 找到协议名称
+  var protoName = '';
+  if (sel) {
+    for (var i = 0; i < protocols.length; i++) {
+      if (protocols[i].id === sel) { protoName = protocols[i].title; break; }
+    }
+  }
+
+  var lines = [];
+  lines.push('我们约定——');
+  lines.push('');
+  if (q1) lines.push('以「' + q1 + '」为合作对象，');
+  if (q2) lines.push('正视「' + q2 + '」这一核心不确定，');
+  if (q3) lines.push('承诺不使「' + q3 + '」成为现实，');
+  if (protoName) lines.push('选用「' + protoName + '」作为合作框架，');
+  lines.push('');
+  lines.push('白纸黑字，以此为约。');
+  lines.push('立约人：_______________  日期：_______________');
+
+  ritualText.textContent = lines.join('\n');
+  ritualText.style.display = 'block';
+  btnCopy.style.display = 'inline-block';
+  placeholder.style.display = 'none';
+}
+
+function copyRitual(){
+  var text = document.getElementById('ritualText').textContent;
+  navigator.clipboard.writeText(text).then(function(){
+    var hint = document.getElementById('copyHint');
+    hint.classList.add('show');
+    setTimeout(function(){ hint.classList.remove('show'); }, 2000);
+  });
+}
+
+// ===== 反馈组件 (完整保留原有逻辑) =====
 (function(){
   let page=location.pathname.split('/').pop()||'index';
   let key='sri_fb_'+page;
@@ -59,6 +357,11 @@
     document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
   };
 })();
+
+// ===== 初始化 =====
+initThreeQs();
+initCards();
+updateRitual();
 </script>
 
 <p style="text-align:center;font-size:10px;opacity:0.5;padding:10px;">📚 来源: 满意解研究所 · 满意姐(kimi) · 满意红(openclaw)</p>
