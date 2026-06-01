@@ -12,14 +12,13 @@
       "milestones": 9,
       "terms": 74,
       "events": 5,
-      "scripts": 12,
-      "crons": 20,
+      "scripts": 21,
+      "crons": 39,
       "connections": 12556,
       "customer_profiles": 31,
       "quality_metrics": 23,
       "growth_metrics": 10,
       "vi_standards": 20,
-      "lifecycle_stages": 7,
       "instructions_set": 45,
       "workflows": 18,
       "governance_frameworks": 6,
@@ -30,9 +29,10 @@
       "additional_discoveries": 7,
       "living_rules": 48,
       "cities": 31,
-      "knowledge_pipelines": 5
+      "knowledge_pipelines": 5,
+      "lifecycle_stages": 7
     },
-    "updated": "2026-06-01T06:32:19+08:00",
+    "updated": "2026-06-01T10:46:41+08:00",
     "knowledge_graph_density": 12.7,
     "living_rules_status": {
       "active": 41,
@@ -48,17 +48,17 @@
       "fully_alive": 41
     },
     "product_families": {
-      "镜": 12,
-      "衡": 102,
-      "契": 34,
-      "章": 112,
-      "觉": 36,
       "人": 14,
+      "契": 34,
+      "未知": 3,
+      "章": 112,
+      "衡": 102,
+      "觉": 36,
       "道": 2,
-      "未知": 3
+      "镜": 12
     },
     "new_products_from_scan": 158,
-    "knowledge_graph_density_note": "强12456+中98+弱2=12556/12556=12.7% (auto-updated 2026-05-31 22:43)",
+    "knowledge_graph_density_note": "强12556+中98+弱2=12556/315产品/12.7% (auto-updated 2026-06-01 10:46)",
     "auto_rule_connections": 1830,
     "corrections": [
       "2026-05-30: 知识图谱密度99.9%→43.9%",
@@ -66,21 +66,19 @@
       "2026-05-30: 时间考古起点4/23→2/15"
     ],
     "lifecycle_stages": {
-      "LC-005": 248,
+      "LC-001": 3,
       "LC-003": 1,
       "LC-004": 63,
-      "LC-001": 3
+      "LC-005": 248
     },
     "maturity_levels": {
-      "M3_成熟": 41,
       "M2_成型": 271,
-      "未知": 3
+      "M3_成熟": 41
     },
     "dev_batches": {
       "第一波·低垂果实": 253,
-      "第二波·内容精品化": 43,
       "第三波·精品线+OPS": 16,
-      "未知": 3
+      "第二波·内容精品化": 43
     },
     "quality_framework": {
       "dimensions": [
@@ -235,7 +233,10 @@
       "daci_default": "决策默认DACI: Driver=司马贺(可行域), Approver=蓝军(独立审计), Contributor=相关专家, Informed=Egbertie"
     },
     "q_confidence_distribution": {
-      "D": 315
+      "A": 152,
+      "B": 90,
+      "C": 3,
+      "D": 67
     },
     "quality_confidence": {
       "added": "2026-05-30T05:25:00",
@@ -247,14 +248,16 @@
         "D": "Q值基于模板推断(非实测)"
       },
       "distribution": {
-        "D": 315,
-        "total": 315
+        "A": 152,
+        "B": 90,
+        "C": 3,
+        "D": 67
       },
-      "total_graded": 315
+      "total_graded": 312
     },
     "cron_monitoring": {
-      "total_crons": 20,
-      "monitored": 20,
+      "total_crons": 39,
+      "monitored": 39,
       "alert_rules": [
         "连续3次失败 → 🔴 P0告警",
         "超时 (>5min) → 🟡 P1告警",
@@ -22574,7 +22577,15 @@
       }
     ],
     "dashboard_version": "v13.0",
-    "dashboard_build": 1780221022889
+    "dashboard_build": 1780221022889,
+    "alert_flags": [
+      "⚠️ products: 315 → 217 (↓31.1%)",
+      "⚠️ documents: 76 → 64 (↓15.8%)",
+      "⚠️ crons: 20 → 0 (↓100.0%)",
+      "⚠️ scripts: 12 → 21 (↑75.0%)",
+      "扫描时间: 2026-06-01 10:44:07",
+      "2026-06-01 autoscan: scripts: 12 → 21 (↑75.0%); crons: 20 → 39 (↑95.0%)"
+    ]
   },
   "products": [
     {
