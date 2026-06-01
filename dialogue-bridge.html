@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="合伙人对话引导工具——5个核心问题，帮助你和合伙人在关键议题上完成一次真正的对话。满意解研究所出品。">
+<title>对话桥 · 满意解研究所</title>
+<style>
+:root{--red:#C23B22;--gold:#B8860B;--bg:#FAF7F2;--white:#fff;--text:#2D2D2D;--text2:#5C5C5C;--border:#E8E0D5;--green:#3D7A4F}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
+.header{text-align:center;padding:40px 20px 16px;background:linear-gradient(180deg,var(--white),var(--bg))}
+.header .badge{display:inline-block;padding:4px 12px;background:rgba(96,128,160,.12);color:#6080A0;border-radius:16px;font-size:11px;font-weight:600;margin-bottom:8px}
+.header h1{font-size:clamp(22px,4vw,32px);font-weight:700;margin-bottom:4px}
+.header .sub{font-size:14px;color:var(--text2);max-width:420px;margin:0 auto}
+
+.main{max-width:500px;margin:0 auto;padding:0 16px 40px}
+
+/* 问题卡片 */
+.q-card{background:var(--white);border:2px solid var(--border);border-radius:14px;padding:28px 24px;text-align:center;margin-bottom:16px;box-shadow:0 2px 16px rgba(0,0,0,.04);transition:all .3s}
+.q-card.active{border-color:var(--gold);box-shadow:0 4px 20px rgba(184,134,11,.08)}
+.q-card .q-num{font-size:11px;font-weight:600;color:var(--gold);margin-bottom:6px}
+.q-card .q-question{font-size:20px;font-weight:700;margin-bottom:16px;line-height:1.5}
+.q-card .q-context{font-size:13px;color:var(--text2);margin-bottom:16px;padding:10px 14px;background:var(--bg);border-radius:8px;line-height:1.7}
+.q-card .q-dims{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.q-dim{font-size:10px;padding:3px 8px;border-radius:10px;font-weight:600;background:rgba(112,160,96,.1);color:var(--green)}
+
+.answer-area{display:flex;flex-direction:column;gap:8px}
+.answer-area textarea{width:100%;height:64px;border:1.5px solid var(--border);border-radius:10px;padding:12px;font-size:14px;font-family:inherit;resize:none;background:var(--white);transition:border-color .2s}
+.answer-area textarea:focus{outline:none;border-color:var(--gold)}
+.btn-save{padding:8px 20px;border-radius:16px;border:1.5px solid var(--green);background:var(--white);color:var(--green);cursor:pointer;font-size:13px;font-weight:600;transition:all .2s}
+.btn-save:hover{background:var(--green);color:#fff}
+
+.progress{display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:20px;font-size:13px;color:var(--text2)}
+.progress-track{flex:1;max-width:160px;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--green);transition:width .3s}
+
+/* 总结页 */
+.summary-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:28px 24px;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,.04);margin-bottom:20px}
+.summary-card .sum-icon{font-size:48px;margin-bottom:12px}
+.summary-card h3{font-size:20px;margin-bottom:8px}
+.summary-card .sum-text{font-size:14px;color:var(--text2);line-height:1.9;margin-bottom:20px}
+.summary-card .sum-text strong{color:var(--text)}
+.summary-review{text-align:left;margin:16px 0}
+.summary-review .review-item{background:var(--bg);border-radius:10px;padding:10px 14px;margin-bottom:6px;font-size:13px}
+.summary-review .review-q{color:var(--red);font-weight:600;margin-bottom:2px}
+.summary-review .review-a{color:var(--text2)}
+
+.btn{display:inline-block;padding:12px 28px;border-radius:24px;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;border:none;transition:all .2s}
+.btn-primary{background:var(--red);color:#fff}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(194,59,34,.25)}
+.btn-secondary{background:var(--white);color:var(--red);border:1.5px solid var(--red);margin-left:8px}
+.btn-secondary:hover{background:rgba(194,59,34,.04)}
+
+.footer{text-align:center;padding:24px;font-size:11px;color:var(--text2)}
+.footer a{color:var(--red);text-decoration:none}
+
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">🧠 右脑 · 关系连接 · 水70 💧木65 🌿</div>
+  <h1>对话桥</h1>
+  <div class="sub">5个问题，一次真正的对话。<br>有些话，总得有人问出来。</div>
+</div>
+
+<div class="main">
+
+  <div class="progress">
+    <span id="progressText">1/5</span>
+    <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:20%"></div></div>
+  </div>
+
+  <div id="questionArea"></div>
+  <div class="hidden" id="summaryArea"></div>
+
+</div>
+
+<div class="footer">
+  满意解研究所 · 关系连接系列<br>
+  <a href="index.html">首页</a> · <a href="thermometer.html">关系温度计</a> · <a href="metapartner.html">元合伙章程</a> · <a href="dashboard-v3.html">🧠 产品大脑</a>
+</div>
+
+<script>
+var questions = [
+  {
+    num:'第一个问题',icon:'🤝',
+    q:'我们为什么在一起？',
+    context:'不是业务逻辑，不是股权结构。回到最初——是什么让你们选择了彼此？那个当时让你确信"就是这个人"的瞬间是什么？',
+    dims:['木·信义观','水·身心流'],
+    hint:'写下最初的信任来源。不是为了评判，是为了重新看见。'
+  },
+  {
+    num:'第二个问题',icon:'⚡',
+    q:'什么事你一直想说但没敢说？',
+    context:'每个合伙人关系里都有一两个"房间里的大象"。不是指责——是邀请。创造一个安全的空间，让那个不敢说的话，第一次被说出来。',
+    dims:['水·身心流','火·直觉阈'],
+    hint:'不需要完美表达。重要的是：开始说了。'
+  },
+  {
+    num:'第三个问题',icon:'💪',
+    q:'我做哪件事让你最累？你做哪件事让我最累？',
+    context:'坦诚而不攻击。这不是"你不好的清单"，是"我们怎样可以更轻松地在一起"的地图。',
+    dims:['水·身心流','木·信义观'],
+    hint:'对事不对人。用事实+感受，不用评价。'
+  },
+  {
+    num:'第四个问题',icon:'🧭',
+    q:'如果三个月后我们散伙了，最可能的原因是什么？',
+    context:'不是悲观——是预防。航空业用"事前验尸"把事故率降到接近零。合伙人关系也是。',
+    dims:['木·信义观','土·时间轴'],
+    hint:'诚实说出来，然后问"我们现在做什么可以不让它发生？"'
+  },
+  {
+    num:'第五个问题',icon:'🌉',
+    q:'你希望我为你做的，但我还没做到的是什么？',
+    context:'最后一个问题，给对方一个被看见的机会。不是要求——是请求。让对方说出他/她最需要的支持。',
+    dims:['水·身心流','木·信义观'],
+    hint:'重点不是"你做得不够"，而是"你可以怎样更好地支持我"。'
+  }
+];
+
+var answers = [];
+var currentIdx = 0;
+
+function renderQuestion(idx) {
+  var q = questions[idx];
+  var h = '<div class="q-card active">';
+  h += '<div class="q-num">'+q.num+'</div>';
+  h += '<div class="q-question">'+q.icon+' '+q.q+'</div>';
+  h += '<div class="q-context">'+q.context+'</div>';
+  h += '<div class="q-dims">';
+  for(var i=0;i<q.dims.length;i++){
+    h += '<span class="q-dim">'+q.dims[i]+'</span>';
+  }
+  h += '</div>';
+  h += '<div class="answer-area">';
+  h += '<textarea id="answerInput" placeholder="'+q.hint+'"></textarea>';
+  h += '<div style="display:flex;gap:8px;justify-content:center;margin-top:6px">';
+  if(idx > 0) h += '<button class="btn-save" style="border-color:var(--border);color:var(--text2)" onclick="prevQuestion()">← 上一题</button>';
+  h += '<button class="btn-save" onclick="saveAnswer('+idx+')">'+(idx<questions.length-1?'下一题 →':'完成 ✅')+'</button>';
+  h += '</div></div>';
+  h += '</div>';
+  
+  document.getElementById('questionArea').innerHTML = h;
+  document.getElementById('progressText').textContent = (idx+1)+'/'+questions.length;
+  document.getElementById('progressFill').style.width = ((idx+1)/questions.length*100)+'%';
+  
+  var inp = document.getElementById('answerInput');
+  if(inp && answers[idx]) inp.value = answers[idx].answer || '';
+  if(inp) setTimeout(function(){inp.focus()}, 100);
+}
+
+function saveAnswer(idx) {
+  var inp = document.getElementById('answerInput');
+  var answer = inp ? inp.value.trim() : '';
+  
+  answers[idx] = {
+    question: questions[idx],
+    answer: answer || '(未记录)'
+  };
+  
+  if(idx < questions.length - 1) {
+    currentIdx = idx + 1;
+    renderQuestion(currentIdx);
+  } else {
+    showSummary();
+  }
+}
+
+function prevQuestion() {
+  if(currentIdx > 0) {
+    currentIdx--;
+    renderQuestion(currentIdx);
+  }
+}
+
+function showSummary() {
+  document.getElementById('questionArea').classList.add('hidden');
+  
+  var filledCount = answers.filter(function(a){return a.answer && a.answer!=='(未记录)'}).length;
+  var icon = filledCount>=4?'🌟':(filledCount>=2?'🌤️':'🌱');
+  var title = filledCount>=4?'对话完成':(filledCount>=2?'走在路上':'开始就是勇气');
+  var t2 = filledCount>=4?'你们回答了大多数问题。真正的对话从写下第一个字就开始了。':
+           (filledCount>=2?'部分问题没有回答——没关系。能走到这里，已经比大多数人走得更远。':
+            '有些问题很难回答。没关系——能看见这些问题，本身就是重要的一步。');
+  
+  var h = '<div class="summary-card">';
+  h += '<div class="sum-icon">'+icon+'</div>';
+  h += '<h3>'+title+'</h3>';
+  h += '<div class="sum-text"><strong>'+filledCount+'/5 个问题</strong>被回答。<br>'+t2+'</div>';
+  
+  // 回顾所有回答
+  h += '<div class="summary-review">';
+  for(var i=0;i<answers.length;i++){
+    var a = answers[i];
+    h += '<div class="review-item">';
+    h += '<div class="review-q">'+a.question.icon+' '+a.question.q+'</div>';
+    h += '<div class="review-a">💬 '+(a.answer||'(未回答)')+'</div>';
+    h += '</div>';
+  }
+  h += '</div>';
+  h += '</div>';
+  
+  h += '<div style="text-align:center">';
+  h += '<button class="btn btn-primary" onclick="restart()">🔄 重新对话</button>';
+  h += '<a href="go.html" class="btn btn-secondary">← 决策通道</a>';
+  h += '</div>';
+  
+  document.getElementById('summaryArea').innerHTML = h;
+  document.getElementById('summaryArea').classList.remove('hidden');
+  document.getElementById('progressText').textContent = '完成';
+  document.getElementById('progressFill').style.width = '100%';
+}
+
+function restart() {
+  answers = [];
+  currentIdx = 0;
+  document.getElementById('questionArea').classList.remove('hidden');
+  document.getElementById('summaryArea').classList.add('hidden');
+  renderQuestion(0);
+}
+
+renderQuestion(0);
+</script>
+</body>
+</html>
