@@ -59,7 +59,7 @@ data["meta"]["spectrum_summary"] = {
     "quadrant_distribution": summary["quadrant_distribution"],
     "last_evaluated": summary["evaluated_at"],
     "products_evaluated": updated,
-    "products_pending_llm_review": summary["needs_llm_review_count"]
+    "products_pending_llm_review": summary.get("needs_llm_review_count", 0)
 }
 
 data["meta"]["updated"] = datetime.now(tz_shanghai).isoformat()
