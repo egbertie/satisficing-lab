@@ -3,16 +3,16 @@
     "version": "3.0",
     "created": "2026-05-30T00:53:49.000534",
     "breakdown": {
-      "products": 315,
+      "products": 256,
       "customers": 5,
       "tasks": 195,
       "avatars": 22,
-      "documents": 76,
+      "documents": 210,
       "decisions": 35,
       "milestones": 9,
       "terms": 74,
       "events": 5,
-      "scripts": 21,
+      "scripts": 17,
       "crons": 39,
       "connections": 12556,
       "customer_profiles": 31,
@@ -32,8 +32,8 @@
       "knowledge_pipelines": 5,
       "lifecycle_stages": 7
     },
-    "updated": "2026-06-01T10:46:41+08:00",
-    "knowledge_graph_density": 12.7,
+    "updated": "2026-06-01T16:45:07.841733+08:00",
+    "knowledge_graph_density": 49.0,
     "living_rules_status": {
       "active": 41,
       "dormant": 6,
@@ -58,7 +58,7 @@
       "镜": 12
     },
     "new_products_from_scan": 158,
-    "knowledge_graph_density_note": "强12556+中98+弱2=12556/315产品/12.7% (auto-updated 2026-06-01 10:46)",
+    "knowledge_graph_density_note": "强12556+中98+弱2=12556/256产品/49.0% (auto-updated 2026-06-01 16:45)",
     "auto_rule_connections": 1830,
     "corrections": [
       "2026-05-30: 知识图谱密度99.9%→43.9%",
@@ -113,9 +113,9 @@
           "icon": "🔩",
           "name": "物理层",
           "description": "基础属性·ID·类型·来源·可信度",
-          "coverage": 99.0,
-          "entities_covered": 312,
-          "total": 315,
+          "coverage": 100.0,
+          "entities_covered": 256,
+          "total": 256,
           "fields": [
             "id",
             "type",
@@ -130,8 +130,8 @@
           "name": "化学层",
           "description": "质量评分·VI合规·内容准确·UX评级",
           "coverage": 100.0,
-          "entities_covered": 315,
-          "total": 315,
+          "entities_covered": 256,
+          "total": 256,
           "fields": [
             "quality_score",
             "quality_confidence",
@@ -144,9 +144,9 @@
           "icon": "🧬",
           "name": "生物层",
           "description": "触发条件·反馈回路·适应规则·连接",
-          "coverage": 99.0,
-          "entities_covered": 312,
-          "total": 315,
+          "coverage": 100.0,
+          "entities_covered": 256,
+          "total": 256,
           "fields": [
             "trigger_conditions",
             "feedback_loop",
@@ -159,9 +159,9 @@
           "icon": "🧠",
           "name": "心理层",
           "description": "受众画像·使用场景·决策价值·定价",
-          "coverage": 99.0,
-          "entities_covered": 312,
-          "total": 315,
+          "coverage": 100.0,
+          "entities_covered": 256,
+          "total": 256,
           "fields": [
             "audience_persona",
             "use_scenario",
@@ -268,7 +268,7 @@
     },
     "anti_island": {
       "mechanism": "V1.0",
-      "last_consistency_scan": "2026-05-31T02:43:10.391666+00:00",
+      "last_consistency_scan": "2026-06-01T08:45:07.841704+00:00",
       "product_index_consistency": "100%",
       "active_detectors": 5,
       "orphan_products": 0,
@@ -345,7 +345,7 @@
       "timestamp": 1780135875,
       "description": "城市维度首次注入：30个城市实体+多层连接编织 + 补丁19条"
     },
-    "last_updated": 1780157423,
+    "last_updated": 1780303507,
     "avatar_simulation": {
       "phase": "R2_P2_1",
       "avatars_upgraded": 5,
@@ -22585,7 +22585,16 @@
       "⚠️ scripts: 12 → 21 (↑75.0%)",
       "扫描时间: 2026-06-01 10:44:07",
       "2026-06-01 autoscan: scripts: 12 → 21 (↑75.0%); crons: 20 → 39 (↑95.0%)"
-    ]
+    ],
+    "anomaly_alert": {
+      "timestamp": "2026-06-01T16:45:07.841726+08:00",
+      "details": [
+        "products: 315→256 (↓18.7%)",
+        "documents: 76→210 (↑176.3%)",
+        "scripts: 21→17 (↓19.0%)"
+      ],
+      "threshold": ">10%"
+    }
   },
   "products": [
     {
