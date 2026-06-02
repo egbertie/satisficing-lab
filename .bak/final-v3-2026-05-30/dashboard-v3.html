@@ -413,6 +413,10 @@ body {
   <div class="section-title">📋 快速概览</div>
   <div class="overview-cards" id="overview-cards"></div>
 
+  <!-- 🏛️ · 文化概览 -->
+  <div class="section-title">🏛️ 文化体系 · <span style="font-size:0.78em;color:var(--ink-lighter);font-weight:400;">火承土印·鼎玉契晋·三脉两翼·五维相生</span></div>
+  <div class="culture-section" id="culture-section" style="max-width:1100px;margin:0 auto"></div>
+
   <!-- L2 · 产品资产 -->
   <div class="section-title">📦 产品资产 · <span style="font-size:0.78em;color:var(--ink-lighter);font-weight:400;">点击展开详情 · 勾选对比</span></div>
   <div class="product-section" id="product-section"></div>
@@ -561,6 +565,7 @@ var AC = [
   renderVitals();
   renderGauges();
   renderOverview();
+  renderCulture();
   renderProducts();
   renderBrain();
   renderAttention();
@@ -683,6 +688,43 @@ function renderOverview() {
 var currentFilter = '全部';
 var selectedProducts = [];
 var detailVisible = false;
+
+/* ================================================================
+   🏛️ · 文化概览（六层架构 + 密码速查 + 演化闭环）
+   ================================================================ */
+function renderCulture() {
+  var h = '';
+  h += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:16px">';
+  // 六层架构卡片
+  var layers = [
+    {l:'L0', name:'基本假设', icon:'🧬', color:'#2A2A2A', items:'满意解·契晋呼吸·传承连续·温度功能·系统根源·诚实免疫'},
+    {l:'L1', name:'共享价值观', icon:'🎯', color:'#C23B22', items:'7条核心价值观(V3.0)·每条附五行动作'},
+    {l:'L2', name:'行为规范', icon:'⚙️', color:'#B8860B', items:'决策流·协作流·自我管理·子代理纪律'},
+    {l:'L3', name:'制度制品', icon:'📋', color:'#3A6B8C', items:'宣言·MEMORY·SOUL·ADR·dev.sh·免疫'},
+    {l:'L4', name:'仪式节奏', icon:'🌅', color:'#4A8C5C', items:'日起课·免疫自检·日毕课·深睡·五维快照'},
+    {l:'L5', name:'边界约束', icon:'🛡️', color:'#C23B22', items:'PRE-0·双经济·错误预算·七层免疫'}
+  ];
+  layers.forEach(function(ly) {
+    h += '<div style="background:var(--card-bg);border:1px solid var(--border-warm);border-radius:10px;padding:14px;font-size:11px;line-height:1.6;border-left:3px solid '+ly.color+'">';
+    h += '<div style="font-weight:700;color:'+ly.color+';margin-bottom:4px">'+ly.icon+' '+ly.l+'·'+ly.name+'</div>';
+    h += '<div style="color:var(--ink);opacity:.75">'+ly.items+'</div>';
+    h += '</div>';
+  });
+  h += '</div>';
+  // 演化闭环
+  h += '<div style="background:var(--card-warm);border:1px solid var(--accent-gold);border-radius:10px;padding:12px;text-align:center;font-size:11px;color:var(--ink);opacity:.8;margin-bottom:12px">';
+  h += '<span style="font-weight:600;color:var(--ink)">🔄 文化演化闭环</span> · 日常实践 → 深睡反思 → 反模式提炼 → 规则更新 → 内化';
+  h += '</div>';
+  // 密码速查
+  h += '<div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:8px">';
+  var codes = ['契=我相信你·锚','晋=我配得上你的信任·风','鼎=站得稳','玉=有价值','两翼=左脑+右脑','三脉=三层锻造','五维=土金水木火','火承土印=品牌根','明出地上=周易晋卦'];
+  codes.forEach(function(c) {
+    h += '<span style="padding:3px 8px;background:rgba(184,134,11,.06);border-radius:8px;font-size:10px;color:var(--ink);opacity:.7">'+c+'</span>';
+  });
+  h += '</div>';
+  h += '<p style="text-align:center;font-size:10px;color:var(--ink-lighter);margin:0"><a href="culture.html" style="color:var(--accent-gold);text-decoration:none">📖 完整企业文化体系 →</a></p>';
+  document.getElementById('culture-section').innerHTML = h;
+}
 
 function renderProducts() {
   // 族筛选按钮
@@ -1189,5 +1231,6 @@ function renderActivity() {
   document.getElementById('activity-section').innerHTML = h;
 }
 </script>
+<p style="text-align:center;font-size:10px;opacity:0.35;padding:4px;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</p>
 </body>
 </html>
