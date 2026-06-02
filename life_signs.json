@@ -1,0 +1,71 @@
+{
+  "timestamp": "2026-06-02T18:04:00+08:00",
+  "scan_version": "1.0",
+  "scan_type": "免疫自检·七层扫描",
+  "layers": {
+    "L0_自识_数据完整性": {
+      "status": "✅",
+      "entities_index_json": "OK (8.09MB)",
+      "file_index_json": "OK (85KB)",
+      "product_catalog_json": "OK (61KB)",
+      "pipeline_last_scan": "2026-06-02 12:34 CST",
+      "notes": "三个核心JSON文件均可解析，pipeline扫描正常进行中"
+    },
+    "L1_物理_文件权限": {
+      "status": "✅",
+      "敏感文件裸漏": "无",
+      "openclaw目录权限": "drwx------",
+      "关键文件权限": "entities_index.json(-rw-------), dev.sh(-rwx------), .git-smart-push.sh(-rwx------)",
+      "notes": "所有文件权限安全，无敏感文件暴露"
+    },
+    "L2_先天_dev_sh": {
+      "status": "✅",
+      "脚本可用": true,
+      "test": "支持 test/verify/push",
+      "notes": "dev.sh语法正常，三命令可用"
+    },
+    "L3_隔离_bak": {
+      "status": "✅",
+      "bak文件数": 1,
+      "备份对比": "entities_index.json(8.09MB) vs .bak(8.08MB), 差异2KB",
+      "notes": "备份文件存在且差异在合理范围(~2KB增量)"
+    },
+    "L4_适应_Cron": {
+      "status": "⚠️",
+      "health_score": 70,
+      "total_jobs": 41,
+      "ok_jobs": 31,
+      "error_jobs": 10,
+      "error_details": [
+        "数据管道·每6小时 (1次)- pipeline_log编辑失败",
+        "飞轮·日报 (2次)- feishu channel不支持",
+        "entities_index_autoupdate (1次)- Message failed",
+        "工作日志 (1次)- 超时",
+        "飞轮·自动修复 (1次)- 超时",
+        "飞轮·化学调控 (1次)- 超时",
+        "飞轮·LLM评分 (1次)- 超时",
+        "查收邮箱·上午 (2次)- 超时",
+        "专家团队Review (1次)- feishu channel不支持",
+        "备份验证 (1次)- feishu channel不支持"
+      ],
+      "root_cause_clusters": {
+        "超时_timeout": "飞轮·自动修复, 飞轮·化学调控, 飞轮·LLM评分, 查收邮箱·上午, 工作日志 (5个)",
+        "feishu_channel_unsupported": "飞轮·日报, 专家团队Review, 备份验证 (3个)",
+        "其他": "数据管道·每6小时(edit失败), entities_index_autoupdate(message失败)"
+      },
+      "notes": "10个异常中5个为超时(可能模型响应慢), 3个为feishu通道不支持(已知配置问题), 2个为其他。建议: 给超时任务增加timeoutSeconds如300s, 并将feishu delivery job改为none模式"
+    }
+  },
+  "summary": {
+    "overall_health": "⚠️ 黄色 - 需关注",
+    "green_layers": 4,
+    "yellow_layers": 1,
+    "red_layers": 0,
+    "action_items": [
+      "修复Cron超时: 5个飞轮/邮箱任务超时，建议增加timeoutSeconds至300",
+      "修复feishu通道: 3个任务delivery配置为feishu但通道不支持，建议改为none",
+      "修复数据管道: pipeline_log edit失败，检查文件权限或内容冲突",
+      "无P0紧急问题，系统核心功能正常"
+    ]
+  }
+}
