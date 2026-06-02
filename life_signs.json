@@ -1,35 +1,33 @@
 {
-  "timestamp": "2026-06-02T20:03:22+08:00",
+  "timestamp": "2026-06-02T21:01:29+08:00",
   "scan_version": "1.0",
   "scan_type": "免疫自检·七层扫描",
   "layers": {
     "L0_自识_数据完整性": {
       "status": "✅",
-      "entities_index_json": "OK (66 keys, 8.09MB)",
-      "memory_files_index_json": "OK (16067 records)",
-      "product_catalog_json": "N/A — 文件不存在(可能已移至其他位置)",
-      "notes": "entities_index.json 和 files_index.json 均可正常解析。product_catalog.json 不在预期路径 memory/_data/"
+      "entities_index_json": "OK (66 keys, 8.49MB, +0.40MB vs 上次)",
+      "memory_files_index_json": "N/A — 文件不存在(一直不存在)",
+      "notes": "entities_index.json 正常解析，数据增长在合理范围"
     },
     "L1_物理_文件权限": {
       "status": "✅",
-      "敏感文件裸漏": "无真正敏感文件暴露",
+      "敏感文件裸漏": "无",
       "openclaw目录权限": "drwx------",
       "关键文件权限": "entities_index.json(-rw-------), dev.sh(-rwx------), .git-smart-push.sh(-rwx------), life_signs.json(-rw-------)",
-      "误报检查": "无新增误报",
-      "notes": "所有文件权限安全"
+      "notes": "所有文件权限安全，无变化"
     },
     "L2_先天_dev_sh": {
       "status": "✅",
-      "脚本可用": true,
       "verify结果": "9/9 全部通过 ✅",
       "details": "语法检查(2/2) ✅ · 品牌检查(1/1) ✅ · escHtml(4/4) ✅ · 数据文件(2/2) ✅",
-      "notes": "dev.sh verify 全绿，entities_index.json 和 open_tasks_audit.json 均有效"
+      "notes": "dev.sh verify 全绿"
     },
     "L3_隔离_bak": {
       "status": "✅",
-      "bak文件数": 793,
-      "备份对比": "entities_index.json(8.09MB) vs .bak/final-v3(24KB)",
-      "notes": ".bak 目录权限 drwx------，备份完整。entities_index.json.bak(8.08MB, Jun 1)为最近快照"
+      "bak文件数": 135,
+      "entities_index.json.bak": "8.48MB (Jun 1 04:45)",
+      "memory_backups_bak": "memory/_backups/ 下有大量 .bak 文件",
+      "notes": "备份机制正常，entities_index.json.bak 与主文件大小接近(8.48 vs 8.49MB)"
     },
     "L4_适应_Cron": {
       "status": "⚠️",
@@ -37,40 +35,40 @@
       "total_jobs": 41,
       "ok_jobs": 31,
       "error_jobs": 10,
+      "trend": "持平 — 错误数未恶化(10→10)，但连续失败任务未得到修复",
       "error_by_type": {
         "timeout": 7,
         "feishu_unsupported": 3,
         "message_failed": 1
       },
       "error_details": [
-        "飞轮·日报生成 — timeout (consecutive: 3) ⚠️",
-        "查收Sina邮箱-上午 — timeout (consecutive: 2) ⚠️",
-        "entities_index_autoupdate — Message failed (consecutive: 1)",
-        "工作日志自动生成·每日 — timeout (consecutive: 1)",
-        "飞轮·自动修复 — timeout (consecutive: 1)",
-        "飞轮·化学调控器 — timeout (consecutive: 1)",
-        "飞轮·LLM评分缺口检测 — timeout (consecutive: 1)",
-        "weekly-expert-team-review — feishu channel 不支持 (consecutive: 1)",
-        "backup_weekly_verify — feishu channel 不支持 (consecutive: 1)",
-        "monthly_five_dimension_snapshot — feishu channel 不支持 (consecutive: 1)"
+        "🔴 飞轮·日报生成 — timeout consecutive:3 (120s不足，建议→300s)",
+        "🟡 查收Sina邮箱-上午 — timeout consecutive:2 (300s不足，建议→600s)",
+        "🟡 entities_index_autoupdate — Message failed (可能payload有feishu工具调用)",
+        "🟡 工作日志自动生成·每日 — timeout (300s可能不够)",
+        "🟡 飞轮·自动修复 — timeout (300s不足)",
+        "🟡 飞轮·化学调控器 — timeout (300s不足)",
+        "🟡 飞轮·LLM评分缺口检测 — timeout (300s不足)",
+        "🟡 weekly-expert-team-review — feishu channel 不支持 (delivery.channel=feishu → none)",
+        "🟡 backup_weekly_verify — feishu channel 不支持 (delivery.channel=feishu → none)",
+        "🟡 monthly_five_dimension_snapshot — feishu channel 不支持 (delivery.channel=feishu → none)"
       ],
-      "trend": "⚠️ 恶化 — 错误从 7 升至 10。飞轮·日报 consecutive:3 需重点关注。3个feishu通道错误属于配置问题(已知)",
-      "notes": "7个timeout + 3个feishu通道 + 1个message失败。建议: (1)飞轮·日报 timeoutSeconds 从 120→300 (2)修复3个feishu通道job的delivery为none (3)entities_index_autoupdate检查payload"
+      "action_items": [
+        "🔴 飞轮·日报生成: consecutive:3 → timeoutSeconds 120→300",
+        "🟡 查收Sina邮箱-上午: consecutive:2 → timeoutSeconds 300→600",
+        "🟡 3个feishu渠道任务: delivery.channel=feishu → 改为none或删除channel",
+        "🟡 entities_index_autoupdate: 检查payload中是否有feishu工具调用→移除",
+        "🟡 飞轮·自动修复/化学调控器/LLM缺口/工作日志: timeoutSeconds 均需上调",
+        "🟢 L0-L3 全部绿色"
+      ]
     }
   },
   "summary": {
-    "overall_health": "⚠️ 黄色 — Cron 超时恶化(7→10)",
+    "overall_health": "⚠️ 黄色 — 10个错误未改善(持平上周) · L0-L3全绿",
     "green_layers": 4,
     "yellow_layers": 1,
     "red_layers": 0,
-    "trend": "⚠️ 需关注 — Cron错误从7升至10，飞轮·日报连续3次失败",
-    "action_items": [
-      "🔴 飞轮·日报: consecutive:3，需立即修复 — timeoutSeconds 120→300",
-      "🟡 修复3个feishu渠道Cron: weekly-expert-team-review, backup_weekly_verify, monthly_five_dimension_snapshot — 将delivery.mode改为none",
-      "🟡 查收Sina邮箱-上午: timeout consecutive:2, 建议timeoutSeconds 300→600",
-      "🟡 entities_index_autoupdate: Message failed，检查payload是否有不存在的feishu工具调用",
-      "🟢 L0-L3 全部绿色，核心系统健康",
-      "🟢 dev.sh verify 9/9 通过"
-    ]
+    "trend": "→ 持平 — 错误数10与上次相同，飞轮·日报连续3次失败是最大风险",
+    "quick_actions": "需要手动干预: (1)飞轮·日报 timeoutSeconds 上调 (2)3个feishu通道修复 (3)查收邮箱timeout上调"
   }
 }
