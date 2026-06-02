@@ -1,0 +1,81 @@
+{
+  "scan_time": "2026-06-02T22:08:00+08:00",
+  "scan_time_utc": "2026-06-02T14:08:00Z",
+  "overall_health": "⚠️ warning",
+  "layers": {
+    "L0_identity": {
+      "status": "✅ pass",
+      "name": "数据完整性",
+      "checks": {
+        "entities_index_json": {"status": "pass", "detail": "342 products, 37 entity types, kg_density 100%"},
+        "dashboard_seed_v2": {"status": "pass", "detail": "valid JSON, products/customers/scan_info"},
+        "files_index_json": {"status": "pass", "detail": "4.1MB, 16067 entries"},
+        "今日日志": {"status": "pass", "detail": "memory/2026-06-02.md (7060 bytes)"}
+      }
+    },
+    "L1_physical": {
+      "status": "✅ pass",
+      "name": "文件权限",
+      "checks": {
+        "site_html_permissions": {"status": "pass", "detail": "0 world-writable files"},
+        "key_file_permissions": {"status": "pass", "detail": "all 600 (owner-only)"},
+        "git_dir": {"status": "pass", "detail": "drwx------"}
+      }
+    },
+    "L2_innate": {
+      "status": "✅ pass",
+      "name": "dev.sh验证",
+      "checks": {
+        "dev_sh_verify": {"status": "pass", "detail": "9/9 通过"},
+        "syntax_dashboard": {"status": "pass"},
+        "syntax_admin": {"status": "pass"},
+        "brand_check": {"status": "pass", "detail": "满意红已清零"},
+        "escHtml_check": {"status": "pass", "detail": "无push/fetch误替换"},
+        "data_validity": {"status": "pass", "detail": "entities_index + open_tasks_audit OK"}
+      }
+    },
+    "L3_isolation": {
+      "status": "✅ pass",
+      "name": "备份隔离",
+      "checks": {
+        "bak_size": {"status": "pass", "detail": ".bak 38M, site/.bak 84K, memory/_backups 232M"},
+        "bak_freshness": {"status": "pass", "detail": "272 files modified in last 24h"},
+        "site_deprecated": {"status": "pass", "detail": "4 deprecated dashboards in site/.bak"},
+        "total_html_backups": {"status": "pass", "detail": "783 + 4 HTML backups"}
+      }
+    },
+    "L4_adaptive": {
+      "status": "⚠️ warning",
+      "name": "Cron适应",
+      "summary": "31/41 健康, 10 异常",
+      "checks": {
+        "total_jobs": 41,
+        "healthy_jobs": 31,
+        "failed_jobs": 10
+      },
+      "failures": {
+        "timeout_6": [
+          "工作日志自动生成·每日 (1 consecutive)",
+          "飞轮·自动修复 (1)",
+          "飞轮·化学调控器 (1)",
+          "飞轮·LLM评分缺口检测 (1)",
+          "查收Sina邮箱-上午 (2)",
+          "飞轮·日报生成 (3)"
+        ],
+        "channel_error_3": [
+          "weekly-expert-team-review (channel=feishu invalid)",
+          "backup_weekly_verify (channel=feishu invalid)",
+          "monthly_five_dimension_snapshot (channel=feishu invalid)"
+        ],
+        "message_failed_1": [
+          "entities_index_autoupdate (⚠️ ✉️ Message failed)"
+        ]
+      }
+    }
+  },
+  "recommendations": [
+    "修复3个jobs的delivery.channel: feishu→openclaw-weixin 或移除delivery",
+    "增加超时job的timeoutSeconds (120→300)",
+    "飞轮·日报生成连续3次失败，需重点排查"
+  ]
+}
