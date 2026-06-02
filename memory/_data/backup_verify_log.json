@@ -1,0 +1,55 @@
+{
+  "run_at": "2026-06-02T10:30:00+08:00",
+  "run_at_utc": "2026-06-02T02:30:00Z",
+  "cron_job": "backup_weekly_verify",
+  "status": "PASS_WITH_NOTE",
+  "backup_source": {
+    "type": "git_tag",
+    "tag": "stable-v4-reborn-2026-05-30",
+    "note": "⚠️ 无集中备份归档文件(.tar.gz/.zip)。当前备份策略为Git标签+GitHub镜像备份。改用最新稳定标签作为等效备份源。"
+  },
+  "steps": {
+    "step1_unzip": {
+      "status": "SKIPPED",
+      "detail": "未找到备份归档文件。仓库使用 git tag 作为版本快照，通过 GitHub Actions mirror-backup.yml 推送到备份仓库 https://github.com/egbertie/satisficing-lab-backup"
+    },
+    "step2_html_verify": {
+      "status": "PASS",
+      "sample_size": 5,
+      "total_html_files": 248,
+      "files_checked": [
+        {"file": "terms.html", "size_bytes": 7693, "has_doctype": true, "has_html_tag": true, "result": "OK"},
+        {"file": "skill-fresh.html", "size_bytes": 5593, "has_doctype": true, "has_html_tag": true, "result": "OK"},
+        {"file": "rps.html", "size_bytes": 14602, "has_doctype": true, "has_html_tag": true, "result": "OK"},
+        {"file": "sk-16-honesty.html", "size_bytes": 5936, "has_doctype": true, "has_html_tag": true, "result": "OK"},
+        {"file": "spec-standard.html", "size_bytes": 5864, "has_doctype": true, "has_html_tag": true, "result": "OK"}
+      ],
+      "passed": 5,
+      "failed": 0
+    },
+    "step3_json_verify": {
+      "status": "PASS",
+      "sample_size": 5,
+      "total_json_files": 38,
+      "files_checked": [
+        {"file": "memory/_data/quality_scan_20260530.json", "keys": 4, "result": "OK"},
+        {"file": "memory/_data/living_rules.json", "keys": 7, "result": "OK"},
+        {"file": "memory/Archives/gate_reports/gate_report_20260507_234530.json", "keys": 8, "result": "OK"},
+        {"file": "memory/_data/temporal_archaeology.json", "keys": 10, "result": "OK"},
+        {"file": "memory/Archives/gate_reports/gate_report_20260507_234353.json", "keys": 8, "result": "OK"}
+      ],
+      "passed": 5,
+      "failed": 0
+    }
+  },
+  "summary": {
+    "html_passed": "5/5",
+    "json_passed": "5/5",
+    "overall": "PASS",
+    "warnings": [
+      "⚠️ 无集中备份归档文件，当前依赖 Git 标签 + GitHub Actions 镜像备份",
+      "⚠️ backup_weekly_verify 任务设计假设存在 .tar.gz 归档，需适配 git-based 备份方案或增加定期打包步骤"
+    ],
+    "recommendation": "考虑在 mirror-backup.yml 或新 cron 中增加定期 tar 打包步骤，使备份验证任务可完整执行。"
+  }
+}
