@@ -32207,20 +32207,20 @@
     },
     "chemical_governor": {
       "version": "2.0",
-      "executed_at": "2026-06-01T22:31:51.586913+00:00",
+      "executed_at": "2026-06-02T00:36:34.742795+00:00",
       "state": "braking",
-      "current_heat": 1550.1,
-      "setpoint": "978.7-1078.7",
-      "speed_multiplier": 0.6,
+      "current_heat": 1708.8,
+      "setpoint": "1500.1-1600.1",
+      "speed_multiplier": 0.75,
       "effect": "ineffective",
       "learning": "保持·设定点适应中",
-      "strategy": "稳态运行",
-      "heat_delta": 0.0,
-      "stability_score": 100,
-      "learning_progress": 40,
-      "total_runs": 8,
+      "strategy": "反脆弱训练·扰动0.25·测试恢复力",
+      "heat_delta": 158.70000000000005,
+      "stability_score": 84.1,
+      "learning_progress": 50,
+      "total_runs": 10,
       "principle": "第二阶控制论·系统观察自己的调控·调整设定点·反脆弱训练",
-      "antifragile_level": 40
+      "antifragile_level": 50
     },
     "_tuning_history": [
       {
@@ -32363,6 +32363,24 @@
         "window_used": "72h",
         "samples": 8,
         "drift": "OVERHEAT_MINOR"
+      },
+      {
+        "run": 10,
+        "timestamp": "2026-06-02T00:36:34.742795+00:00",
+        "state": "braking",
+        "speed": 0.75,
+        "heat_before": 1550.1,
+        "heat_after": 1708.8,
+        "heat_delta": 158.70000000000005,
+        "setpoint_low": 1500.1,
+        "setpoint_high": 1600.1,
+        "effect": "ineffective",
+        "learning": "保持·设定点适应中",
+        "strategy": "反脆弱训练·扰动0.25·测试恢复力",
+        "health_score": 100.0,
+        "stability_score": 84.1,
+        "learning_progress": 50,
+        "perturbation": 0.25
       }
     ],
     "bottleneck_analysis": {
@@ -32383,20 +32401,20 @@
     },
     "perpetual_control": {
       "version": "2.0",
-      "executed_at": "2026-06-01T22:31:51.586913+00:00",
+      "executed_at": "2026-06-02T00:36:34.742795+00:00",
       "state": "braking",
-      "current_heat": 1550.1,
-      "setpoint": "978.7-1078.7",
-      "speed_multiplier": 0.6,
+      "current_heat": 1708.8,
+      "setpoint": "1500.1-1600.1",
+      "speed_multiplier": 0.75,
       "effect": "ineffective",
       "learning": "保持·设定点适应中",
-      "strategy": "稳态运行",
-      "heat_delta": 0.0,
-      "stability_score": 100,
-      "learning_progress": 40,
-      "total_runs": 8,
+      "strategy": "反脆弱训练·扰动0.25·测试恢复力",
+      "heat_delta": 158.70000000000005,
+      "stability_score": 84.1,
+      "learning_progress": 50,
+      "total_runs": 10,
       "principle": "第二阶控制论·系统观察自己的调控·调整设定点·反脆弱训练",
-      "antifragile_level": 40
+      "antifragile_level": 50
     },
     "second_order": {
       "observed_at": "2026-06-01T22:31:52.527632+00:00",
