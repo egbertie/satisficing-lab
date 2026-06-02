@@ -3,58 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>章·五路 | 五路图腾 | 满意解研究所</title>
+<title>章·五路|五路图腾|满意解研究所</title>
 <style>
-  :root { --sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title:#2A2A2A }
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
-  .hero{background:linear-gradient(135deg,var(--title),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
-  .hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
-  .article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}
-  .article h2{font-size:18px;color:var(--title);margin:24px 0 10px}
-  .article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}
-  .article p{margin:8px 0}
-  .article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}
-  .article .highlight{color:var(--sri-red);font-weight:600}
-  .footer{text-align:center;padding:24px 16px 40px;font-size:11px;color:#999}
-  .footer a{color:var(--sri-red);text-decoration:none}
+:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0;--sri-green:#4A8C5C}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
+.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
+.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
+
+.wulu-zone{max-width:560px;margin:0 auto;padding:24px 16px 40px}
+.wulu-intro{text-align:center;font-size:14px;line-height:2;margin-bottom:24px}
+
+/* 五路标签 */
+.tab-bar{display:flex;gap:4px;margin-bottom:20px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+.tab-item{flex:1;min-width:64px;padding:10px 8px;border-radius:10px;border:1.5px solid #f0e8d8;background:#fff;cursor:pointer;text-align:center;font-size:12px;font-weight:600;transition:all 0.2s;font-family:inherit;white-space:nowrap}
+.tab-item:hover{border-color:var(--sri-gold)}
+.tab-item.active{background:var(--title-color);color:#fff;border-color:var(--title-color)}
+.tab-item .tab-icon{font-size:20px;display:block;margin-bottom:2px}
+
+.path-panel{display:none;background:#fff;border-radius:14px;padding:24px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.04);animation:fadeIn 0.3s}
+.path-panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.path-panel .path-icon{font-size:36px;margin-bottom:8px}
+.path-panel .path-name{font-size:18px;font-weight:700;color:var(--title-color);margin-bottom:4px}
+.path-panel .path-sage{font-size:13px;color:var(--sri-gold);margin-bottom:12px}
+.path-panel .path-story{font-size:14px;line-height:2;color:var(--text);margin-bottom:16px;padding:12px;background:rgba(184,134,11,0.04);border-radius:8px}
+.path-panel .path-question{font-size:15px;font-weight:600;color:var(--sri-red);padding:12px 16px;background:rgba(194,59,34,0.04);border-radius:10px;line-height:1.8;margin-bottom:12px}
+.path-panel textarea{width:100%;height:60px;border:1.5px solid var(--border);border-radius:10px;padding:10px;font-size:13px;font-family:inherit;resize:vertical;line-height:1.6}
+.path-panel .btn-answer{padding:6px 18px;border-radius:16px;border:1.5px solid var(--sri-red);background:#fff;color:var(--sri-red);font-size:12px;cursor:pointer;margin-top:8px;font-family:inherit;transition:all 0.2s}
+.path-panel .btn-answer:hover{background:var(--sri-red);color:#fff}
+
+.answers-log{max-width:500px;margin:0 auto;padding:16px;text-align:center}
+.answers-log h3{font-size:14px;color:var(--title-color);margin-bottom:8px}
+.answer-badges{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.answer-badge{padding:4px 10px;border-radius:10px;font-size:11px;background:#f0e8d8;color:#999}
+.answer-badge.filled{background:rgba(74,140,92,0.1);color:var(--sri-green);font-weight:600}
+
+.back-link{text-align:center;padding:20px;font-size:11px;color:#999}
+.back-link a{color:var(--sri-red);text-decoration:none}
+.feedback-zone{max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px}
 </style>
-<link rel="stylesheet" href="vi_quick_ref.css">
 </head>
 <body>
 <div class="hero"><h1>🗺️ 章·五路</h1><p>五路图腾 · 五条决策通道</p></div>
-<div class="article"><h2>五路图腾不是装饰</h2>
-<p>它们是五条决策通道——每一条对应一种认知方式。</p>
 
-<h3>🪨 土 · 刘禹锡 · 时间轴</h3>
-<p><strong>"惟吾德馨"——根基与信任</strong></p>
-<p>刘禹锡谪居常德十年，写下"沉舟侧畔千帆过"。不是消极——是在一无所有的时候仍然看到"千帆在过"，仍然相信前方有路。</p>
-<p>在决策中：<span class="highlight">"五年后回头看，我今天做的这个决定还成立吗？"</span></p>
+<div class="wulu-zone">
+  <div class="wulu-intro">
+    <p>五路图腾不是装饰——是五条决策通道。<br>不是五选一，是<em>五条路都要走一遍</em>。</p>
+  </div>
 
-<h3>🪙 金 · 司马贺 · 可行域</h3>
-<p><strong>"满意解"——不求最优，但求最适</strong></p>
-<p>司马贺（赫伯特·西蒙）告诉我们：在有限信息、有限时间内，真正的智慧不是找到"完美答案"，是找到<span class="highlight">"够用的答案"并立刻行动</span>。</p>
-<p>在决策中：<span class="highlight">"我的'够用就好'的线划在哪里？"</span></p>
+  <div class="tab-bar" id="tabBar"></div>
+  <div id="panelContainer"></div>
+</div>
 
-<h3>💧 水 · 观自在 · 身心流</h3>
-<p><strong>"自在从容"——照见·不迎不拒</strong></p>
-<p>不是"冷静"——是<span class="highlight">"我知道我很紧张，我允许自己紧张，我不让紧张替我做决定。"</span></p>
-<p>在决策中：<span class="highlight">"这个决定是我的思考做的，还是我的恐惧做的？"</span></p>
+<div class="answers-log" id="answersLog">
+  <h3>🗺️ 你的五路印记</h3>
+  <div class="answer-badges" id="answerBadges"></div>
+</div>
 
-<h3>🪵 木 · 孔子 · 信义观</h3>
-<p><strong>"仁者爱人"——规则与承诺</strong></p>
-<p>黎红雷教授——中国儒商的主要倡导者。孔子不是旧书上的字，是<span class="highlight">"在利益面前，你能不能看着对方的眼睛说：这是我应该拿的。"</span></p>
-<p>在决策中：<span class="highlight">"钱和原则选哪个？"</span></p>
+<div class="back-link"><a href="go.html">← 返回决策通道</a></div>
 
-<h3>🔥 火 · 六祖慧能 · 直觉阈</h3>
-<p><strong>"知行合一"——顿悟·淬炼</strong></p>
-<p>六祖说："前念迷即凡夫，后念悟即佛"。直觉不是"无知的猜测"——是<span class="highlight">大脑在潜意识中整合了百倍于意识的信息</span>。</p>
-<p>在决策中：<span class="highlight">"心里那个声音，你敢不敢听？"</span></p>
-
-<div class="quote">五条通道 · 一个人的完整决策<br>不是五选一——是五条路都要走一遍</div></div>
-<div class="footer"><p><a href="go.html">← 返回决策通道</a></p><p style="margin-top:4px">满意解研究所 · 章·五路 · 满意解研究所</p></div>
-
-<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
+<div class="feedback-zone">
   <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
     <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
@@ -62,11 +71,98 @@
   </div>
   <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
   <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
-  <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
+  <div id="fbThanks" style="display:none;color:var(--sri-green);font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
   <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
-  <p style="font-size:10px;opacity:0.4;margin-top:8px;"><a href="go.html" style="color:inherit;">返回决策通道</a></p>
 </div>
+
 <script>
+var PATHS = [
+  {id:'earth', icon:'🪨', name:'土·时间轴', sage:'刘禹锡·常德司马楼',
+   story:'刘禹锡谪居常德十年，写下"沉舟侧畔千帆过"。不是消极——是在一无所有的时候仍然看到"千帆在过"，仍然相信前方有路。\n\n时间不是敌人。时间是一条河——你要做的不是拦住它，是顺它走。',
+   question:'五年后回头看，你今天做的这个决定——还成立吗？'},
+  {id:'metal', icon:'⚙️', name:'金·可行域', sage:'司马贺·卡内基梅隆',
+   story:'司马贺（赫伯特·西蒙）证明了"有限理性"：人类不可能做出完全理性的决策——因为我们永远信息不全、时间不够、算力有限。\n\n不是"做最好的决定"——是"做一个足够好的决定，然后继续往前走"。',
+   question:'够用就好的最低线——在哪里？有没有一个更简单的方法？'},
+  {id:'water', icon:'💧', name:'水·身心流', sage:'水月观音·普陀山',
+   story:'观音"观自在"——不是向外求，是向内看。看自己当下的感受，不逃避，不放大。\n\n不是"冷静"——是"我知道我很紧张，我允许自己紧张，我不让紧张替我做决定。"',
+   question:'闭上眼睛10秒。手心·心跳·胃——身体在说什么？'},
+  {id:'wood', icon:'🌿', name:'木·信义观', sage:'孔子·曲阜杏坛',
+   story:'孔子说的"仁"——不是善良，是"把人当人"。在商业里——就是把合伙人当人，把客户当人，把对手当人。\n\n钱和原则冲突的时候——你站在哪一边？',
+   question:'这个决定涉及谁？你的原则是什么？如果钱和原则冲突——你怎么选？'},
+  {id:'fire', icon:'🔥', name:'火·直觉阈', sage:'六祖慧能·曹溪南华寺',
+   story:'六祖说："本来无一物，何处惹尘埃。"——不是否定问题，是说你给自己加的东西太多了。\n\n直觉不是"无知的猜测"——是大脑在潜意识中整合了百倍于意识的信息。',
+   question:'把分析放一边。心里第一个冒出来的方向——是什么？别改它。'}
+];
+
+var STORAGE_KEY = '***';
+
+var currentPath = 'earth';
+
+function loadState(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{};}catch(e){return{};}}
+function saveState(s){localStorage.setItem(STORAGE_KEY,JSON.stringify(s));}
+
+function renderTabs(){
+  var bar = document.getElementById('tabBar');
+  var html = '';
+  PATHS.forEach(function(p){
+    var active = currentPath===p.id?' active':'';
+    html += '<button class="tab-item'+active+'" onclick="switchPath(\''+p.id+'\')"><span class="tab-icon">'+p.icon+'</span>'+p.name.slice(0,4)+'</button>';
+  });
+  bar.innerHTML = html;
+}
+
+function switchPath(id){
+  currentPath = id;
+  renderTabs();
+  renderPanels();
+}
+
+function renderPanels(){
+  var container = document.getElementById('panelContainer');
+  var state = loadState();
+  var html = '';
+  PATHS.forEach(function(p){
+    var active = currentPath===p.id?' active':'';
+    var saved = state[p.id]||'';
+    html += '<div class="path-panel'+active+'" id="pp-'+p.id+'">';
+    html += '<div class="path-icon">'+p.icon+'</div>';
+    html += '<div class="path-name">'+p.name+'</div>';
+    html += '<div class="path-sage">'+p.sage+'</div>';
+    html += '<div class="path-story">'+p.story+'</div>';
+    html += '<div class="path-question">❓ '+p.question+'</div>';
+    html += '<textarea id="a-'+p.id+'" placeholder="写下你的答案...">'+escHtml(saved)+'</textarea>';
+    html += '<button class="btn-answer" onclick="saveAnswer(\''+p.id+'\')">💾 记下</button>';
+    html += '</div>';
+  });
+  container.innerHTML = html;
+  renderBadges();
+}
+
+function saveAnswer(id){
+  var text = document.getElementById('a-'+id).value.trim();
+  var state = loadState();
+  state[id] = text;
+  saveState(state);
+  renderBadges();
+}
+
+function renderBadges(){
+  var state = loadState();
+  var container = document.getElementById('answerBadges');
+  var html = '';
+  PATHS.forEach(function(p){
+    var filled = !!state[p.id];
+    html += '<span class="answer-badge'+(filled?' filled':'')+'">'+(filled?'✅ ':'📍 ')+p.icon+' '+p.name.slice(2)+'</span>';
+  });
+  container.innerHTML = html;
+}
+
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+renderTabs();
+renderPanels();
+
+// ===== 反馈组件 =====
 (function(){
   let page=location.pathname.split('/').pop()||'index';
   let key='sri_fb_'+page;
@@ -102,7 +198,5 @@
   };
 })();
 </script>
-
-<p style="text-align:center;font-size:10px;opacity:0.5;padding:10px;">📚 来源: 满意解研究所 · 满意姐(kimi) · 满意红(openclaw)</p>
 </body>
 </html>
