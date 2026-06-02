@@ -11,6 +11,14 @@
 <body><div class="hero"><h1>⚙️ Skill·AI伙伴成熟度训练</h1><p>三生万物·技能延伸</p></div><div class="article"><h2>AI伙伴成熟度训练系统</h2><p>训练AI Agent从L1(基础被动)进化到L4(跨场景协同)。</p>
 <h3>训练阶段</h3><p>L1·基础：被动响应·依赖指令<br>L2·辅助：自动流程·日起课/日毕课<br>L3·自主：主动闭环·自我纠偏<br>L4·协同：多Agent协作·跨场景进化</p></div>
 <p style="text-align:center;padding:20px;font-size:11px;color:#999"><a href="go.html" style="color:#C23B22;text-decoration:none">← 返回决策通道</a></p>
+
+<div style="max-width:500px;margin:20px auto;padding:16px;background:#fff;border-radius:12px;border:1.5px solid var(--sri-gold);text-align:center">
+  <p style="font-size:13px;font-weight:600;color:var(--title-color);margin-bottom:6px">🛠️ 这个技能——我现在用到了吗？</p>
+  <textarea id="skillReflect" style="width:100%;height:56px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;resize:vertical;margin-bottom:8px;line-height:1.6" placeholder="标个状态：正在用 / 还没用过 / 想试试..."></textarea>
+  <button onclick="(function(){var t=document.getElementById('skillReflect').value.trim();if(!t)return;var k='sri_sk_'+location.pathname.split('/').pop();localStorage.setItem(k,JSON.stringify({text:t,time:new Date().toISOString()}));var s=document.getElementById('skHint');s.style.opacity='1';setTimeout(function(){s.style.opacity='0'},1500)})()" style="padding:6px 20px;border-radius:16px;border:1.5px solid var(--sri-red);background:#fff;color:var(--sri-red);font-size:12px;cursor:pointer;font-family:inherit">💾 标记</button>
+  <div id="skHint" style="font-size:11px;color:#4A8C5C;margin-top:4px;opacity:0;transition:opacity 0.3s">✓ 已保存</div>
+</div>
+
 <div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
   <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个内容对你有用吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">

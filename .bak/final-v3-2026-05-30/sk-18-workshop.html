@@ -11,6 +11,14 @@
 <body><div class="hero"><h1>⚙️ Skill·五维决策工作坊</h1><p>三生万物·技能延伸</p></div><div class="article"><h2>五维决策工作坊</h2><p>引导团队走完五条通道——不是"上课"，是"一起做决策"。</p>
 <h3>工作坊结构（90分钟）</h3><p>0-10min：开场·选一个真实决策<br>10-25min：土·时间轴·"五年后回头看"<br>25-40min：金·可行域·"够用就好的线"<br>40-55min：水·身心流·"身体在说什么"<br>55-70min：木·信义观·"钱和原则"<br>70-85min：火·直觉阈·"心里那个声音"<br>85-90min：交汇·"我们看到了什么不同的东西？"</p></div>
 <p style="text-align:center;padding:20px;font-size:11px;color:#999"><a href="go.html" style="color:#C23B22;text-decoration:none">← 返回决策通道</a></p>
+
+<div style="max-width:500px;margin:20px auto;padding:16px;background:#fff;border-radius:12px;border:1.5px solid var(--sri-gold);text-align:center">
+  <p style="font-size:13px;font-weight:600;color:var(--title-color);margin-bottom:6px">🛠️ 这个技能——我现在用到了吗？</p>
+  <textarea id="skillReflect" style="width:100%;height:56px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;resize:vertical;margin-bottom:8px;line-height:1.6" placeholder="标个状态：正在用 / 还没用过 / 想试试..."></textarea>
+  <button onclick="(function(){var t=document.getElementById('skillReflect').value.trim();if(!t)return;var k='sri_sk_'+location.pathname.split('/').pop();localStorage.setItem(k,JSON.stringify({text:t,time:new Date().toISOString()}));var s=document.getElementById('skHint');s.style.opacity='1';setTimeout(function(){s.style.opacity='0'},1500)})()" style="padding:6px 20px;border-radius:16px;border:1.5px solid var(--sri-red);background:#fff;color:var(--sri-red);font-size:12px;cursor:pointer;font-family:inherit">💾 标记</button>
+  <div id="skHint" style="font-size:11px;color:#4A8C5C;margin-top:4px;opacity:0;transition:opacity 0.3s">✓ 已保存</div>
+</div>
+
 <div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
   <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个内容对你有用吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">

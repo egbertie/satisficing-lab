@@ -1,10 +1,63 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>章·飞轮·V1|知识复利飞轮产品定义|满意解研究所</title>
-  <meta name="description" content="满意解研究所 · 章·飞轮·V1|知识复利飞轮产品定义|满意解研究所"><style>:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}.article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}.article h2{font-size:18px;color:var(--title-color);margin:24px 0 10px}.article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}.article p{margin:8px 0}.article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}.article .highlight{color:var(--sri-red);font-weight:600}li{margin:6px 0;font-size:14px}ul{padding-left:20px}table{width:100%;font-size:12px;border-collapse:collapse;margin:12px 0}th{padding:6px;border-bottom:1px solid #D4C5A0;color:var(--sri-gold);text-align:left}td{padding:6px;border-bottom:1px solid #f0e8d8}</style><link rel="stylesheet" href="vi_quick_ref.css">
-</head><body><div class="hero"><h1>⚙️ 章·飞轮·V1</h1><p>满意姐·知识复利飞轮·产品定义V0.1</p></div><div class="article"><h2>知识复利飞轮·产品定义</h2><p>满意姐在V1.5阶段定义的知识管理SaaS产品——<span class="highlight">"让你的知识自己增值"。</span></p>
-<h3>核心假设</h3><p>知识不是线性积累——是指数级连接。一个知识节点，当它连接到第二个、第三个——价值不是1+1=2，是1×2=2→2×3=6。</p>
-<h3>产品架构</h3><p>输入层：自动捕获·手动录入·API接入<br>处理层：分类·标签·关联·提炼<br>存储层：结构化知识图谱<br>输出层：搜索·推荐·报告·提醒<br>进化层：使用反馈→自动优化关联权重</p>
-<h3>对标产品</h3><p>Notion(知识存储)·Roam Research(双向链接)·Obsidian(知识图谱)·Readwise(阅读管理)。知识复利飞轮的差异化：<span class="highlight">不是"帮你存"——是"帮你增值"。</span></p></div><p style="text-align:center;padding:20px;font-size:11px;color:#999"><a href="go.html" style="color:#C23B22;text-decoration:none">← 返回决策通道</a></p>
-<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>章·飞轮·V1|知识复利飞轮产品定义|满意解研究所</title>
+<style>
+:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0;--sri-green:#4A8C5C}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
+.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
+.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
+.article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}
+.article h2{font-size:18px;color:var(--title-color);margin:24px 0 10px}
+.article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}
+.article p{margin:8px 0}
+.article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}
+.article .highlight{color:var(--sri-red);font-weight:600}
+li{margin:6px 0;font-size:14px}ul{padding-left:20px}
+
+/* 飞轮自检 */
+.flywheel-zone{max-width:500px;margin:28px auto;padding:20px;background:#fff;border-radius:14px;border:2px solid var(--sri-gold);text-align:center}
+.flywheel-zone h3{font-size:16px;color:var(--title-color);margin-bottom:12px}
+.flywheel-steps{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.fw-step{padding:12px 14px;background:var(--sri-bg);border-radius:10px;text-align:left;font-size:13px;cursor:pointer;border:1.5px solid #f0e8d8;transition:all 0.2s}
+.fw-step:hover{border-color:var(--sri-gold)}
+.fw-step.checked{background:rgba(74,140,92,0.06);border-color:var(--sri-green)}
+.fw-step .fw-check{font-size:16px;margin-right:8px}
+.fw-result{display:none;padding:14px;border-radius:10px;font-size:14px;line-height:2;animation:fadeIn 0.4s}
+.fw-result.show{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+.back-link{text-align:center;padding:20px;font-size:11px;color:#999}
+.back-link a{color:var(--sri-red);text-decoration:none}
+.feedback-zone{max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px}
+</style>
+</head>
+<body>
+<div class="hero"><h1>⚙️ 章·飞轮·V1</h1><p>满意姐·知识复利飞轮·产品定义V0.1</p></div>
+<div class="article">
+  <h2>知识复利飞轮·产品定义</h2>
+  <p>满意姐在V1.5阶段定义的知识管理SaaS产品——<span class="highlight">"让你的知识自己增值"。</span></p>
+  <h3>核心假设</h3>
+  <p>知识不是线性积累——是指数级连接。一个知识节点，当它连接到第二个、第三个——价值不是1+1=2，是1×2=2→2×3=6。</p>
+  <h3>产品架构</h3>
+  <p>输入层：自动捕获·手动录入·API接入<br>处理层：分类·标签·关联·提炼<br>存储层：结构化知识图谱<br>输出层：搜索·推荐·报告·提醒<br>进化层：使用反馈→自动优化关联权重</p>
+  <h3>对标产品</h3>
+  <p>Notion(知识存储)·Roam Research(双向链接)·Obsidian(知识图谱)·Readwise(阅读管理)。知识复利飞轮的差异化：<span class="highlight">不是"帮你存"——是"帮你增值"。</span></p>
+</div>
+
+<div class="flywheel-zone">
+  <h3>⚙️ 你的知识飞轮在转吗？</h3>
+  <p style="font-size:12px;color:#999;margin-bottom:12px">勾选你已经做到的——看看飞轮转了几层</p>
+  <div class="flywheel-steps" id="fwSteps"></div>
+  <button class="btn-save" style="padding:8px 22px;border-radius:18px;border:none;background:var(--sri-red);color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:8px" onclick="checkFlywheel()">🔍 看看飞轮</button>
+  <div class="fw-result" id="fwResult"></div>
+</div>
+
+<div class="back-link"><a href="go.html">← 返回决策通道</a></div>
+<div class="feedback-zone">
   <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个内容对你有用吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
     <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
@@ -12,10 +65,65 @@
   </div>
   <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
   <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
-  <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
+  <div id="fbThanks" style="display:none;color:var(--sri-green);font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
   <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
 </div>
+
 <script>
+var FW_STEPS = [
+  {id:'input', label:'📥 输入层：我持续在收集/记录信息'},
+  {id:'process', label:'🔧 处理层：我的信息有分类和标签'},
+  {id:'store', label:'🗄️ 存储层：我的知识不散落在各处'},
+  {id:'output', label:'📤 输出层：我能快速找到需要的信息'},
+  {id:'evolve', label:'🔄 进化层：我的知识系统在使用中变好'}
+];
+
+var FW_KEY = '***';
+var checks = {};
+
+function loadChecks(){try{checks=JSON.parse(localStorage.getItem(FW_KEY))||{};}catch(e){}}
+
+function renderSteps(){
+  var html = '';
+  FW_STEPS.forEach(function(s){
+    var done = checks[s.id];
+    html += '<div class="fw-step'+(done?' checked':'')+'" onclick="toggleFW(\''+s.id+'\')">';
+    html += '<span class="fw-check">'+(done?'✅':'⬜')+'</span>'+s.label+'</div>';
+  });
+  document.getElementById('fwSteps').innerHTML = html;
+  // 恢复结果
+  if(Object.keys(checks).length>0) showFWResult();
+}
+
+function toggleFW(id){
+  checks[id] = !checks[id];
+  localStorage.setItem(FW_KEY, JSON.stringify(checks));
+  renderSteps();
+}
+
+function checkFlywheel(){
+  showFWResult();
+}
+
+function showFWResult(){
+  var count = Object.values(checks).filter(Boolean).length;
+  var result = document.getElementById('fwResult');
+  var levels = [
+    '🛑 飞轮还没开始转——但看到它本身就是第一步。',
+    '🐣 飞轮开始转了——输入层在运转。下一步：整理和分类。',
+    '🌱 飞轮在加速——输入+整理有节奏了。下一步：让它能输出。',
+    '🚀 飞轮有惯性了——知识开始"找你"。差最后一层：让它自动进化。',
+    '✨ 飞轮全速运转——你的知识在增值。不是"存了多少"——是"连接了多少"。'
+  ];
+  result.innerHTML = (count>=5 ? levels[4] : levels[Math.min(count, levels.length-1)]);
+  result.className = 'fw-result show';
+  result.style.background = count>=4 ? 'rgba(74,140,92,0.06)' : 'rgba(184,134,11,0.04)';
+}
+
+loadChecks();
+renderSteps();
+
+// ===== 反馈组件 =====
 (function(){
   let page=location.pathname.split('/').pop()||'index';
   let key='sri_fb_'+page;
@@ -51,5 +159,5 @@
   };
 })();
 </script>
-
-</body></html>
+</body>
+</html>

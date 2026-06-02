@@ -38,6 +38,14 @@
   <p style="margin-top:4px;">满意解研究所 · 硬科技创始人的决策教练</p>
 </div>
 
+
+<div style="max-width:500px;margin:20px auto;padding:16px;background:#fff;border-radius:12px;border:1.5px solid var(--sri-gold);text-align:center">
+  <p style="font-size:13px;font-weight:600;color:var(--title-color);margin-bottom:6px">💭 这篇让我想到了什么？</p>
+  <textarea id="deepReflect" style="width:100%;height:56px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;resize:vertical;margin-bottom:8px;line-height:1.6" placeholder="写下你的想法..."></textarea>
+  <button onclick="(function(){var t=document.getElementById('deepReflect').value.trim();if(!t)return;var k='sri_refl_'+location.pathname.split('/').pop();var h=JSON.parse(localStorage.getItem(k)||'[]');h.unshift({text:t,time:new Date().toISOString()});if(h.length>10)h=h.slice(0,10);localStorage.setItem(k,JSON.stringify(h));var s=document.getElementById('reHint');s.style.opacity='1';setTimeout(function(){s.style.opacity='0'},1500)})()" style="padding:6px 20px;border-radius:16px;border:1.5px solid var(--sri-red);background:#fff;color:var(--sri-red);font-size:12px;cursor:pointer;font-family:inherit">💾 记下</button>
+  <div id="reHint" style="font-size:11px;color:#4A8C5C;margin-top:4px;opacity:0;transition:opacity 0.3s">✓ 已保存</div>
+</div>
+
 <div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
   <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个内容对你有用吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
