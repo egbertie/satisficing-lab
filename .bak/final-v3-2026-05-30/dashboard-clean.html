@@ -31,6 +31,7 @@ body{font-family:-apple-system,"PingFang SC",sans-serif;background:#F5F0E6;color
 .tg{display:inline-block;padding:1px 6px;border-radius:8px;font-size:9px;font-weight:600}.tgr{background:rgba(194,59,34,0.12);color:#C23B22}.tga{background:rgba(184,134,11,0.12);color:#B8860B}.tgg{background:rgba(61,122,79,0.12);color:#3D7A4F}
 .pbar{height:6px;background:#f0e8d8;border-radius:3px;overflow:hidden;flex:1}.pfill{height:100%;background:#C23B22}
 .bl{border-left:3px solid #C23B22}.emp{text-align:center;padding:20px;color:#6E6E6E;font-size:12px}
+@media(max-width:480px){body{font-size:14px}}
 </style>
 </head>
 <body>
@@ -168,5 +169,14 @@ function searchResults(q){
 }
 </script>
 <p style="text-align:center;font-size:10px;opacity:0.35;padding:4px;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</p>
+
+<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px">
+  <div id="fbQ" style="color:#4A4A4A;font-weight:600;margin-bottom:10px">这个页面对你有用吗？</div>
+  <div id="fbBtns" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px">
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'up');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">👍 有用</button>
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'text');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">💬 有建议</button>
+  </div>
+</div>
+
 </body>
 </html>

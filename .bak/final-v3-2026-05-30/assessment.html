@@ -80,6 +80,7 @@
   .cta-box p { font-size:13px; color:var(--muted); margin-bottom:16px; }
   
   .footer { text-align:center; padding:24px 16px 8px; font-size:11px; color:#4A4A4A; }
+@media(max-width:480px){body{font-size:14px}}
 </style>
 </head>
 <script>
@@ -576,7 +577,7 @@ function downloadData() {
   const a = document.createElement('a');
   a.href = url; a.download = 'my_diagnosis.json';
   a.click();
-  alert('诊断数据已下载！\n\n运行: python3 scoring_engine_v3.0.py --json my_diagnosis.json\n或联系满意红帮你分析。');
+  alert('诊断数据已下载！\n\n运行: python3 scoring_engine_v3.0.py --json my_diagnosis.json\n或联系满意解研究所帮你分析。');
 }
 
 function goToReport() {

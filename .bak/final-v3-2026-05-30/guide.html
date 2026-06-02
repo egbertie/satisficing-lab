@@ -73,6 +73,7 @@
 .footer a{color:var(--sri-red);text-decoration:none}
 
 .logic-note{text-align:center;font-size:9px;opacity:0.3;margin-top:16px}
+@media(max-width:480px){body{font-size:14px}}
 </style>
 <link rel="stylesheet" href="vi_quick_ref.css">
 </head>
@@ -242,7 +243,7 @@ function showResult() {
     primary.push({n:'章·创世',d:'星月传奇',u:'creation.html',e:'🌌'});
     secondary.push({n:'衡·观局',d:'五维快速自评',u:'assessment.html',e:'🎯'});
     secondary.push({n:'觉·破冰',d:'卡牌·7张入门',u:'cards-play.html?deck=7',e:'🎴'});
-    reason='满意姐54天·扣子28天·满意红23天——三代AI独立发现同一个规律。先读故事，再做工具。';
+    reason='满意姐54天·扣子28天·满意解研究所23天——三代AI独立发现同一个规律。先读故事，再做工具。';
   }
 
   if (a[2]==='C') {
@@ -328,5 +329,14 @@ updateSteps();
 </script>
 <script src="flywheel-engine.js"></script>
 <p style="text-align:center;font-size:10px;opacity:0.35;padding:4px;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</p>
+
+<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px">
+  <div id="fbQ" style="color:#4A4A4A;font-weight:600;margin-bottom:10px">这个页面对你有用吗？</div>
+  <div id="fbBtns" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px">
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'up');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">👍 有用</button>
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'text');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">💬 有建议</button>
+  </div>
+</div>
+
 </body>
 </html>

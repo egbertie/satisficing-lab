@@ -10,6 +10,7 @@ button{padding:10px 20px;margin:4px;border-radius:8px;border:1px solid #999;back
 button.on{background:#C23B22;color:#fff}
 .test{background:#fff;border-radius:12px;padding:16px;margin:12px 0;border:1px solid #e0d5c8}
 .pass{color:green}.fail{color:red}
+@media(max-width:480px){body{font-size:14px}}
 </style>
 </head>
 <body>
@@ -64,5 +65,16 @@ function testFil(type,btn){
 }
 </script>
 <p style="text-align:center;font-size:10px;opacity:0.35;padding:4px;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</p>
+
+<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px">
+  <div id="fbQ" style="color:#4A4A4A;font-weight:600;margin-bottom:10px">这个页面对你有用吗？</div>
+  <div id="fbBtns" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px">
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'up');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">👍 有用</button>
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'text');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">💬 有建议</button>
+  </div>
+</div>
+
+
+<p style="text-align:center;padding:10px;font-size:11px"><a href="go.html" style="color:#C23B22;text-decoration:none">← 返回决策通道</a></p>
 </body>
 </html>
