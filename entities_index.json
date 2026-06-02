@@ -3,16 +3,16 @@
     "version": "3.0",
     "created": "2026-05-30T00:53:49.000534",
     "breakdown": {
-      "products": 514,
+      "products": 315,
       "customers": 5,
       "tasks": 195,
       "avatars": 22,
-      "documents": 45,
+      "documents": 76,
       "decisions": 35,
       "milestones": 9,
       "terms": 74,
       "events": 5,
-      "scripts": 17,
+      "scripts": 12,
       "crons": 20,
       "connections": 12556,
       "customer_profiles": 31,
@@ -22,7 +22,7 @@
       "instructions_set": 45,
       "workflows": 18,
       "governance_frameworks": 6,
-      "content_assets": 13,
+      "content_assets": 0,
       "scoring_models": 2,
       "simulation_scenarios": 16,
       "historical_artifacts": 10,
@@ -30,10 +30,11 @@
       "living_rules": 48,
       "cities": 31,
       "knowledge_pipelines": 5,
-      "lifecycle_stages": 7
+      "lifecycle_stages": 7,
+      "knowledge_pipeline": 5
     },
-    "updated": "2026-06-02T10:45:37+08:00",
-    "knowledge_graph_density": 24.4,
+    "updated": "2026-06-02T16:43:53.266291+08:00",
+    "knowledge_graph_density": 39.9,
     "living_rules_status": {
       "active": 41,
       "dormant": 6,
@@ -45,20 +46,21 @@
       "rules_with_feedback": 48,
       "rules_with_adaptation": 48,
       "cron_connected": 5,
-      "fully_alive": 41
+      "fully_alive": 41,
+      "total": 48
     },
     "product_families": {
-      "镜": 6,
-      "衡": 218,
-      "契": 32,
-      "章": 87,
-      "觉": 70,
-      "人": 6,
-      "道": 6,
-      "未知": 89
+      "镜": 12,
+      "衡": 102,
+      "契": 34,
+      "章": 112,
+      "觉": 36,
+      "人": 14,
+      "道": 2,
+      "未知": 3
     },
-    "new_products_from_scan": 514,
-    "knowledge_graph_density_note": "强12556+中98+弱2=12556/514产品/24.4% (auto-updated 2026-06-02 10:45)",
+    "new_products_from_scan": 315,
+    "knowledge_graph_density_note": "强12556+中98+弱2=12556/315产品/39.9% (auto-updated 2026-06-02 16:43)",
     "auto_rule_connections": 1830,
     "corrections": [
       "2026-05-30: 知识图谱密度99.9%→43.9%",
@@ -115,8 +117,8 @@
           "name": "物理层",
           "description": "基础属性·ID·类型·来源·可信度",
           "coverage": 100.0,
-          "entities_covered": 256,
-          "total": 256,
+          "entities_covered": 315,
+          "total": 315,
           "fields": [
             "id",
             "type",
@@ -131,8 +133,8 @@
           "name": "化学层",
           "description": "质量评分·VI合规·内容准确·UX评级",
           "coverage": 100.0,
-          "entities_covered": 256,
-          "total": 256,
+          "entities_covered": 315,
+          "total": 315,
           "fields": [
             "quality_score",
             "quality_confidence",
@@ -146,8 +148,8 @@
           "name": "生物层",
           "description": "触发条件·反馈回路·适应规则·连接",
           "coverage": 100.0,
-          "entities_covered": 256,
-          "total": 256,
+          "entities_covered": 315,
+          "total": 315,
           "fields": [
             "trigger_conditions",
             "feedback_loop",
@@ -161,8 +163,8 @@
           "name": "心理层",
           "description": "受众画像·使用场景·决策价值·定价",
           "coverage": 100.0,
-          "entities_covered": 256,
-          "total": 256,
+          "entities_covered": 315,
+          "total": 315,
           "fields": [
             "audience_persona",
             "use_scenario",
@@ -250,10 +252,11 @@
         "D": "Q值基于模板推断(非实测)"
       },
       "distribution": {
-        "A": 152,
-        "B": 90,
+        "D": 67,
         "C": 3,
-        "D": 67
+        "B": 90,
+        "A": 152,
+        "unknown": 3
       },
       "total_graded": 312
     },
@@ -347,7 +350,7 @@
       "timestamp": 1780135875,
       "description": "城市维度首次注入：30个城市实体+多层连接编织 + 补丁19条"
     },
-    "last_updated": 1780368337,
+    "last_updated": 1780389833,
     "avatar_simulation": {
       "phase": "R2_P2_1",
       "avatars_upgraded": 5,
@@ -22640,7 +22643,12 @@
       ],
       "severity": "⚠️ WARNING",
       "note": "以下实体数变动超过10%阈值，请人工核查"
-    }
+    },
+    "anomaly_alerts": [
+      "⚠️ products: 514→315 (↓38.7%)",
+      "⚠️ documents: 45→76 (↑68.9%)",
+      "⚠️ scripts: 17→12 (↓29.4%)"
+    ]
   },
   "products": [
     {
