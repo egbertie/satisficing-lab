@@ -1,66 +1,76 @@
 {
-  "timestamp": "2026-06-02T19:01:29+08:00",
+  "timestamp": "2026-06-02T20:03:22+08:00",
   "scan_version": "1.0",
   "scan_type": "免疫自检·七层扫描",
   "layers": {
     "L0_自识_数据完整性": {
       "status": "✅",
       "entities_index_json": "OK (66 keys, 8.09MB)",
-      "file_index_json": "OK (3 keys, 85KB)",
-      "memory_files_index_json": "OK (16067 records, 4.08MB)",
-      "product_catalog_json": "OK (217 entries, 61KB)",
-      "notes": "核心JSON均可解析；补充检查 memory/_data/files_index.json 数据完整"
+      "memory_files_index_json": "OK (16067 records)",
+      "product_catalog_json": "N/A — 文件不存在(可能已移至其他位置)",
+      "notes": "entities_index.json 和 files_index.json 均可正常解析。product_catalog.json 不在预期路径 memory/_data/"
     },
     "L1_物理_文件权限": {
       "status": "✅",
       "敏感文件裸漏": "无真正敏感文件暴露",
       "openclaw目录权限": "drwx------",
       "关键文件权限": "entities_index.json(-rw-------), dev.sh(-rwx------), .git-smart-push.sh(-rwx------), life_signs.json(-rw-------)",
-      "误报检查": "扣子资料目录下的token_*.py为脚本名含token(非凭证), 飞书文件夹token映射表.md为文档(非凭证) — 均为误报",
+      "误报检查": "无新增误报",
       "notes": "所有文件权限安全"
     },
     "L2_先天_dev_sh": {
       "status": "✅",
       "脚本可用": true,
-      "test结果": "port 18793 already in use — 非脚本问题，端口已被占用(正常: openclaw gateway运行中)",
-      "notes": "dev.sh 语法正常，verify/push 可执行；test 报端口冲突是已有gateway进程所致，非脚本缺陷"
+      "verify结果": "9/9 全部通过 ✅",
+      "details": "语法检查(2/2) ✅ · 品牌检查(1/1) ✅ · escHtml(4/4) ✅ · 数据文件(2/2) ✅",
+      "notes": "dev.sh verify 全绿，entities_index.json 和 open_tasks_audit.json 均有效"
     },
     "L3_隔离_bak": {
       "status": "✅",
       "bak文件数": 793,
       "备份对比": "entities_index.json(8.09MB) vs .bak/final-v3(24KB)",
-      "notes": ".bak 包含多个激活快照，final-v3 的 entities_index 仅有 24KB(早期快照)，当前生产版本 8.09MB 正常"
+      "notes": ".bak 目录权限 drwx------，备份完整。entities_index.json.bak(8.08MB, Jun 1)为最近快照"
     },
     "L4_适应_Cron": {
       "status": "⚠️",
-      "health_score": 82,
-      "total_jobs": 40,
-      "ok_jobs": 33,
-      "error_jobs": 7,
+      "health_score": 76,
+      "total_jobs": 41,
+      "ok_jobs": 31,
+      "error_jobs": 10,
+      "error_by_type": {
+        "timeout": 7,
+        "feishu_unsupported": 3,
+        "message_failed": 1
+      },
       "error_details": [
-        "飞轮·日报生成 — feishu channel 不支持(已知配置问题)",
-        "entities_index_autoupdate — Message failed",
-        "工作日志自动生成·每日 — 超时",
-        "飞轮·自动修复 — 超时",
-        "飞轮·化学调控器 — 超时",
-        "飞轮·LLM评分缺口检测 — 超时",
-        "查收Sina邮箱-上午 — 超时"
+        "飞轮·日报生成 — timeout (consecutive: 3) ⚠️",
+        "查收Sina邮箱-上午 — timeout (consecutive: 2) ⚠️",
+        "entities_index_autoupdate — Message failed (consecutive: 1)",
+        "工作日志自动生成·每日 — timeout (consecutive: 1)",
+        "飞轮·自动修复 — timeout (consecutive: 1)",
+        "飞轮·化学调控器 — timeout (consecutive: 1)",
+        "飞轮·LLM评分缺口检测 — timeout (consecutive: 1)",
+        "weekly-expert-team-review — feishu channel 不支持 (consecutive: 1)",
+        "backup_weekly_verify — feishu channel 不支持 (consecutive: 1)",
+        "monthly_five_dimension_snapshot — feishu channel 不支持 (consecutive: 1)"
       ],
-      "trend": "从上次扫描(18:04)的10个错误降至7个 — 飞轮·日报第二条错误消失，备份验证/专家团队Review的feishu错误消失",
-      "notes": "5个超时类 + 1个feishu通道 + 1个message失败。建议: 给超时任务增加 timeoutSeconds 至 300s"
+      "trend": "⚠️ 恶化 — 错误从 7 升至 10。飞轮·日报 consecutive:3 需重点关注。3个feishu通道错误属于配置问题(已知)",
+      "notes": "7个timeout + 3个feishu通道 + 1个message失败。建议: (1)飞轮·日报 timeoutSeconds 从 120→300 (2)修复3个feishu通道job的delivery为none (3)entities_index_autoupdate检查payload"
     }
   },
   "summary": {
-    "overall_health": "⚠️ 黄色 — 需关注(Cron超时)",
+    "overall_health": "⚠️ 黄色 — Cron 超时恶化(7→10)",
     "green_layers": 4,
     "yellow_layers": 1,
     "red_layers": 0,
-    "trend": "改善 — Cron错误从10降至7 (+30%)",
+    "trend": "⚠️ 需关注 — Cron错误从7升至10，飞轮·日报连续3次失败",
     "action_items": [
-      "修复Cron超时: 5个飞轮/邮箱任务超时，建议增加 timeoutSeconds 至 300",
-      "修复entities_index_autoupdate: Message failed，检查payload",
-      "飞轮·日报: feishu channel 不支持(已知)，可改 delivery 为 none",
-      "无P0紧急问题，系统核心功能正常"
+      "🔴 飞轮·日报: consecutive:3，需立即修复 — timeoutSeconds 120→300",
+      "🟡 修复3个feishu渠道Cron: weekly-expert-team-review, backup_weekly_verify, monthly_five_dimension_snapshot — 将delivery.mode改为none",
+      "🟡 查收Sina邮箱-上午: timeout consecutive:2, 建议timeoutSeconds 300→600",
+      "🟡 entities_index_autoupdate: Message failed，检查payload是否有不存在的feishu工具调用",
+      "🟢 L0-L3 全部绿色，核心系统健康",
+      "🟢 dev.sh verify 9/9 通过"
     ]
   }
 }

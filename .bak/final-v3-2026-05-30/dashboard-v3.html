@@ -417,6 +417,10 @@ body {
   <div class="section-title">🏛️ 文化体系 · <span style="font-size:0.78em;color:var(--ink-lighter);font-weight:400;">火承土印·鼎玉契晋·三脉两翼·五维相生</span></div>
   <div class="culture-section" id="culture-section" style="max-width:1100px;margin:0 auto"></div>
 
+  <!-- 📐 · 品质仪表板 QAS V2.0 -->
+  <div class="section-title">📐 品质仪表板 · <span style="font-size:0.78em;color:var(--ink-lighter);font-weight:400;">QAS V2.0 · ISO 25010 · 24/24达标</span></div>
+  <div id="qas-dashboard" style="max-width:1100px;margin:0 auto"></div>
+
   <!-- L2 · 产品资产 -->
   <div class="section-title">📦 产品资产 · <span style="font-size:0.78em;color:var(--ink-lighter);font-weight:400;">点击展开详情 · 勾选对比</span></div>
   <div class="product-section" id="product-section"></div>
@@ -566,6 +570,7 @@ var AC = [
   renderGauges();
   renderOverview();
   renderCulture();
+  renderQAS();
   renderProducts();
   renderBrain();
   renderAttention();
@@ -724,6 +729,71 @@ function renderCulture() {
   h += '</div>';
   h += '<p style="text-align:center;font-size:10px;color:var(--ink-lighter);margin:0"><a href="culture.html" style="color:var(--accent-gold);text-decoration:none">📖 完整企业文化体系 →</a></p>';
   document.getElementById('culture-section').innerHTML = h;
+}
+
+/* ================================================================
+   📐 · QAS 品质仪表板 V2.0
+   ================================================================ */
+function renderQAS() {
+  var h = '';
+  
+  // 品质总览KPI
+  h += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-bottom:12px">';
+  var kpis = [
+    {v:'24/24', l:'QAS得分', c:'var(--green-ok)'},
+    {v:'L1✅', l:'结构完整性', c:'var(--green-ok)'},
+    {v:'L2✅', l:'功能性', c:'var(--green-ok)'},
+    {v:'L3✅', l:'内容质量', c:'var(--green-ok)'},
+    {v:'L4✅', l:'可访问性', c:'var(--green-ok)'},
+    {v:'100%', l:'文化渗透', c:'var(--green-ok)'},
+    {v:'0', l:'死链', c:'var(--green-ok)'},
+    {v:'0', l:'品牌残留', c:'var(--green-ok)'},
+    {v:'1', l:'Error Budget', c:'var(--amber-warn)'}
+  ];
+  kpis.forEach(function(k) {
+    h += '<div style="background:var(--card-white);border:1px solid var(--border-warm);border-radius:10px;padding:10px;text-align:center">';
+    h += '<div style="font-size:20px;font-weight:700;color:'+k.c+'">'+k.v+'</div>';
+    h += '<div style="font-size:9px;color:var(--ink-lighter)">'+k.l+'</div>';
+    h += '</div>';
+  });
+  h += '</div>';
+  
+  // 5层品质树
+  h += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-bottom:12px">';
+  var layers = [
+    {l:'L1·结构',icon:'🧱',color:'var(--green-ok)',items:'DOCTYPE✅·HTML闭合✅·CSS✅·大小✅'},
+    {l:'L2·功能',icon:'🔗',color:'var(--green-ok)',items:'死链0·JS✅·返回✅·副本✅·入口✅'},
+    {l:'L3·内容',icon:'📝',color:'var(--green-ok)',items:'品牌0残留·文化100%·反馈100%·数据✅'},
+    {l:'L4·可访问',icon:'♿',color:'var(--green-ok)',items:'lang✅·charset✅·viewport✅'},
+    {l:'L5·体验',icon:'📱',color:'var(--green-ok)',items:'h1全·@media100%·外部依赖0'}
+  ];
+  layers.forEach(function(ly) {
+    h += '<div style="background:var(--card-white);border:1px solid var(--border-warm);border-radius:10px;padding:12px;font-size:11px;line-height:1.6;border-left:3px solid '+ly.color+'">';
+    h += '<div style="font-weight:700;color:var(--ink);margin-bottom:4px">'+ly.icon+' '+ly.l+'</div>';
+    h += '<div style="color:var(--ink-light);font-size:10px">'+ly.items+'</div>';
+    h += '</div>';
+  });
+  h += '</div>';
+  
+  // 7条铁律状态
+  h += '<div style="background:var(--card-warm);border:1px solid var(--border-warm);border-radius:10px;padding:12px;margin-bottom:8px">';
+  h += '<div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:8px">🔧 7条工程铁律</div>';
+  h += '<div style="display:flex;gap:6px;flex-wrap:wrap">';
+  var rules = ['event✅','crypto✅','单script⚠️','删旧码✅','零硬编码✅','依赖验证✅','品牌✅'];
+  rules.forEach(function(r) {
+    var ok = r.indexOf('⚠️') === -1;
+    h += '<span style="padding:3px 8px;border-radius:8px;font-size:10px;background:'+(ok?'rgba(61,122,79,.08)':'rgba(194,120,10,.08)')+';color:'+(ok?'var(--green-ok)':'var(--amber-warn)')+'">'+r+'</span>';
+  });
+  h += '</div></div>';
+  
+  // 根因分析结论
+  h += '<div style="background:var(--card-white);border:1px solid var(--border-warm);border-radius:10px;padding:10px;font-size:10px;color:var(--ink-light);line-height:1.6;margin-bottom:8px">';
+  h += '🔬 <strong>根因分析结论</strong> —— 检测≠修复。auto_heal.sh已建立(覆盖7类自动修复)·72h升级P0规则已写入。Cron每小时: 免疫自检→auto_heal→报告。」';
+  h += '</div>';
+  
+  h += '<p style="text-align:center;font-size:10px;color:var(--ink-lighter);margin:0"><a href="memory/_data/QAS_品质保证体系_v2.0.md" style="color:var(--accent-gold);text-decoration:none">📐 完整QAS品质体系 →</a> · <a href="memory/_data/恶化预警_根因分析报告.md" style="color:var(--accent-gold);text-decoration:none">🔬 根因分析 →</a></p>';
+  
+  document.getElementById('qas-dashboard').innerHTML = h;
 }
 
 function renderProducts() {
