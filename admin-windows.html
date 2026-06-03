@@ -59,9 +59,9 @@ body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;backgr
 </style>
 </head>
 <body>
-<h1 style="font-size:1.5em;padding:16px">admin-windows</h1>
+<h1 style="font-size:1.5em;padding:16px">🏢 管理后台 · 满意解研究所</h1>
 
-<div class="app" id="app"><nav class="sidebar" id="sidebar"></nav><main class="main" id="main-content"></main></div>
+<div class="app" id="app" style="display:flex"><nav class="sidebar" id="sidebar"><div style="padding:20px;text-align:center;color:var(--ink-light);margin-top:40px"><div class="spinner" style="border-top-color:var(--gold)"></div><p style="margin-top:12px;font-size:.82em">正在连接数据引擎...</p></div></nav><main class="main" id="main-content"><div class="loading"><div class="spinner"></div><p style="margin-top:16px;font-size:.9em">📡 加载 entities_index.json (6.8MB)...</p></div></main></div>
 <script>
 
 /* ================================================================
@@ -182,13 +182,13 @@ initApp();
 /* ===== 初始化 ===== */
 function initApp(){
   renderSidebar();
-  fetch('entities_index.json'),{headers:{'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MiwiZW1haWwiOiJlZ2JlcnRpZUBzYXRpc2ZpY2luZy5pbyIsImV4cCI6MTc4MDc0NjU3OSwiaWF0IjoxNzgwNDg3Mzc5fQ.p-51AhaMuII54q_-cj6fcl5onJOVBY6noozC9vT_HxU'}}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(function(j){
+  fetch('entities_index.json').then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(function(j){
     DB=j;loadError=false;renderSidebar();navTo('strategy-kpi');
   }).catch(function(err){console.error(err);loadError=true;DB=null;renderSidebar();navTo('strategy-kpi')});
-  // 后端实时数据（驾驶舱管理员自动登录）
+  // 后端实时数据
   window._BACKEND={loaded:false,data:null};
-  var adminToken='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MiwiZW1haWwiOiJlZ2JlcnRpZUBzYXRpc2ZpY2luZy5pbyIsImV4cCI6MTc4MDc0NjU3OSwiaWF0IjoxNzgwNDg3Mzc5fQ.p-51AhaMuII54q_-cj6fcl5onJOVBY6noozC9vT_HxU';
-  fetch('http://127.0.0.1:5050/api/admin/dashboard/summary',{headers:{'Authorization':'Bearer '+adminToken}}),{headers:{'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MiwiZW1haWwiOiJlZ2JlcnRpZUBzYXRpc2ZpY2luZy5pbyIsImV4cCI6MTc4MDc0NjU3OSwiaWF0IjoxNzgwNDg3Mzc5fQ.p-51AhaMuII54q_-cj6fcl5onJOVBY6noozC9vT_HxU'}}).then(function(r){return r.json()}).then(function(d){window._BACKEND={loaded:true,data:d}}).catch(function(e){console.log('后端API未连接:',e.message)});
+  var adminToken='eyJhbG…_HxU';
+  fetch('http://127.0.0.1:5050/api/admin/dashboard/summary',{headers:{'Authorization':'***'+adminToken}}).then(function(r){return r.json()}).then(function(d){window._BACKEND={loaded:true,data:d}}).catch(function(e){console.log('后端API未连接:',e.message)});
 }
 
 /* ===== 侧栏 ===== */
@@ -750,7 +750,7 @@ viewRenderers['backend-dashboard']=function(){
 viewRenderers['backend-funnel']=function(){
   var h=breadcrumb('backend','获客漏斗')+'<div class="panel-header"><div><h2>🔻 获客漏斗</h2><div class="meta">最近30天</div></div></div>';
   h+='<div id="funnelContainer"><div class="loading"><div class="spinner"></div><p>加载中...</p></div></div>';
-  fetch('http://127.0.0.1:5050/api/admin/dashboard/funnel?days=30'),{headers:{'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MiwiZW1haWwiOiJlZ2JlcnRpZUBzYXRpc2ZpY2luZy5pbyIsImV4cCI6MTc4MDc0NjU3OSwiaWF0IjoxNzgwNDg3Mzc5fQ.p-51AhaMuII54q_-cj6fcl5onJOVBY6noozC9vT_HxU'}}).then(function(r){return r.json()}).then(function(d){
+  fetch('http://127.0.0.1:5050/api/admin/dashboard/funnel?days=30',{headers:{'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MiwiZW1haWwiOiJlZ2JlcnRpZUBzYXRpc2ZpY2luZy5pbyIsImV4cCI6MTc4MDc0NjU3OSwiaWF0IjoxNzgwNDg3Mzc5fQ.p-51AhaMuII54q_-cj6fcl5onJOVBY6noozC9vT_HxU'}}).then(function(r){return r.json()}).then(function(d){
     var fh='<div class="stat-grid">';
     (d.funnel||[]).forEach(function(s){fh+='<div class="stat-card" style="cursor:default"><div class="stat-num">'+s.count+'</div><div class="stat-label">'+s.stage+'</div><div class="stat-bar"><div class="fill fill-gold" style="width:'+(parseFloat(s.conversion_rate)||0)+'%"></div></div><div style="font-size:.7em;color:var(--ink-light)">转化率: '+s.conversion_rate+'</div></div>'});
     fh+='</div>';
@@ -762,7 +762,7 @@ viewRenderers['backend-funnel']=function(){
 viewRenderers['backend-dau']=function(){
   var h=breadcrumb('backend','日活趋势')+'<div class="panel-header"><div><h2>📈 日活用户趋势</h2><div class="meta">最近7天</div></div></div>';
   h+='<div id="dauContainer"><div class="loading"><div class="spinner"></div><p>加载中...</p></div></div>';
-  fetch('http://127.0.0.1:5050/api/admin/dashboard/dau?days=7'),{headers:{'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MiwiZW1haWwiOiJlZ2JlcnRpZUBzYXRpc2ZpY2luZy5pbyIsImV4cCI6MTc4MDc0NjU3OSwiaWF0IjoxNzgwNDg3Mzc5fQ.p-51AhaMuII54q_-cj6fcl5onJOVBY6noozC9vT_HxU'}}).then(function(r){return r.json()}).then(function(d){
+  fetch('http://127.0.0.1:5050/api/admin/dashboard/dau?days=7',{headers:{'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MiwiZW1haWwiOiJlZ2JlcnRpZUBzYXRpc2ZpY2luZy5pbyIsImV4cCI6MTc4MDc0NjU3OSwiaWF0IjoxNzgwNDg3Mzc5fQ.p-51AhaMuII54q_-cj6fcl5onJOVBY6noozC9vT_HxU'}}).then(function(r){return r.json()}).then(function(d){
     var rows=(d.dau||[]);if(!rows.length){document.getElementById('dauContainer').innerHTML='<div class="placeholder-card"><p>暂无数据</p></div>';return}
     var max=0;rows.forEach(function(r){if(r.dau>max)max=r.dau});
     var th='<table class="data-table"><thead><tr><th>日期</th><th>DAU</th><th>趋势</th></tr></thead><tbody>';
@@ -776,7 +776,7 @@ viewRenderers['backend-dau']=function(){
 viewRenderers['backend-products']=function(){
   var h=breadcrumb('backend','产品使用排行')+'<div class="panel-header"><div><h2>📦 产品使用排行</h2><div class="meta">最近30天</div></div></div>';
   h+='<div id="prodContainer"><div class="loading"><div class="spinner"></div><p>加载中...</p></div></div>';
-  fetch('http://127.0.0.1:5050/api/admin/dashboard/products?days=30'),{headers:{'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MiwiZW1haWwiOiJlZ2JlcnRpZUBzYXRpc2ZpY2luZy5pbyIsImV4cCI6MTc4MDc0NjU3OSwiaWF0IjoxNzgwNDg3Mzc5fQ.p-51AhaMuII54q_-cj6fcl5onJOVBY6noozC9vT_HxU'}}).then(function(r){return r.json()}).then(function(d){
+  fetch('http://127.0.0.1:5050/api/admin/dashboard/products?days=30',{headers:{'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MiwiZW1haWwiOiJlZ2JlcnRpZUBzYXRpc2ZpY2luZy5pbyIsImV4cCI6MTc4MDc0NjU3OSwiaWF0IjoxNzgwNDg3Mzc5fQ.p-51AhaMuII54q_-cj6fcl5onJOVBY6noozC9vT_HxU'}}).then(function(r){return r.json()}).then(function(d){
     var prods=(d.products||[]);if(!prods.length){document.getElementById('prodContainer').innerHTML='<div class="placeholder-card"><p>暂无数据</p></div>';return}
     var th='<table class="data-table"><thead><tr><th>产品ID</th><th>使用次数</th><th>独立用户</th></tr></thead><tbody>';
     prods.forEach(function(p){th+='<tr><td>'+escH(p.product_id||'?')+'</td><td>'+p.usage_count+'</td><td>'+p.unique_users+'</td></tr>'});
@@ -789,7 +789,7 @@ viewRenderers['backend-products']=function(){
 viewRenderers['backend-events']=function(){
   var h=breadcrumb('backend','事件流')+'<div class="panel-header"><div><h2>📋 最近行为事件</h2><div class="meta">实时·最近100条</div></div></div>';
   h+='<div id="evtContainer"><div class="loading"><div class="spinner"></div><p>加载中...</p></div></div>';
-  fetch('http://127.0.0.1:5050/api/admin/dashboard/events/recent?limit=100'),{headers:{'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MiwiZW1haWwiOiJlZ2JlcnRpZUBzYXRpc2ZpY2luZy5pbyIsImV4cCI6MTc4MDc0NjU3OSwiaWF0IjoxNzgwNDg3Mzc5fQ.p-51AhaMuII54q_-cj6fcl5onJOVBY6noozC9vT_HxU'}}).then(function(r){return r.json()}).then(function(d){
+  fetch('http://127.0.0.1:5050/api/admin/dashboard/events/recent?limit=100',{headers:{'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MiwiZW1haWwiOiJlZ2JlcnRpZUBzYXRpc2ZpY2luZy5pbyIsImV4cCI6MTc4MDc0NjU3OSwiaWF0IjoxNzgwNDg3Mzc5fQ.p-51AhaMuII54q_-cj6fcl5onJOVBY6noozC9vT_HxU'}}).then(function(r){return r.json()}).then(function(d){
     var evts=(d.events||[]);if(!evts.length){document.getElementById('evtContainer').innerHTML='<div class="placeholder-card"><p>暂无事件</p></div>';return}
     var th='<table class="data-table"><thead><tr><th>时间</th><th>用户</th><th>类别</th><th>动作</th><th>详情</th></tr></thead><tbody>';
     evts.forEach(function(e){var p=JSON.parse(e.properties||'{}');th+='<tr><td>'+escH((e.created_at||'').slice(0,19))+'</td><td>'+(e.name||e.email||(e.customer_id?'客户#'+e.customer_id:'匿名'))+'</td><td><span class="tag">'+escH(e.category||'')+'</span></td><td>'+escH(e.action||'')+'</td><td style="font-size:.7em">'+escH(JSON.stringify(p).slice(0,100))+'</td></tr>'});
@@ -802,7 +802,7 @@ viewRenderers['backend-events']=function(){
 viewRenderers['backend-customers']=function(){
   var h=breadcrumb('backend','客户列表')+'<div class="panel-header"><div><h2>👤 客户列表</h2><div class="meta">按最近活跃排序</div></div></div>';
   h+='<div id="custContainer"><div class="loading"><div class="spinner"></div><p>加载中...</p></div></div>';
-  fetch('http://127.0.0.1:5050/api/admin/dashboard/customers?limit=50'),{headers:{'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MiwiZW1haWwiOiJlZ2JlcnRpZUBzYXRpc2ZpY2luZy5pbyIsImV4cCI6MTc4MDc0NjU3OSwiaWF0IjoxNzgwNDg3Mzc5fQ.p-51AhaMuII54q_-cj6fcl5onJOVBY6noozC9vT_HxU'}}).then(function(r){return r.json()}).then(function(d){
+  fetch('http://127.0.0.1:5050/api/admin/dashboard/customers?limit=50',{headers:{'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MiwiZW1haWwiOiJlZ2JlcnRpZUBzYXRpc2ZpY2luZy5pbyIsImV4cCI6MTc4MDc0NjU3OSwiaWF0IjoxNzgwNDg3Mzc5fQ.p-51AhaMuII54q_-cj6fcl5onJOVBY6noozC9vT_HxU'}}).then(function(r){return r.json()}).then(function(d){
     var cs=(d.customers||[]);if(!cs.length){document.getElementById('custContainer').innerHTML='<div class="placeholder-card"><p>暂无客户数据</p></div>';return}
     var th='<table class="data-table"><thead><tr><th>姓名</th><th>邮箱</th><th>企业</th><th>行业</th><th>生命周期</th><th>健康分</th><th>风险分</th><th>最近活跃</th></tr></thead><tbody>';
     cs.forEach(function(c){
@@ -1023,12 +1023,6 @@ viewRenderers['chemistry-llm']=function(){
    启动
    ================================================================ */
 (function(){
-  // 无密码直接启动（已在 checkGate 移除后的 IIFE 中执行 initApp）
+  // 无密码直接启动
 })();
-</div>
 </script>
-
-</script>
-</table>
-</body>
-</html>

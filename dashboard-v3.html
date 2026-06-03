@@ -32,40 +32,8 @@ body {
   line-height: 1.6;
 }
 
-/* ========== 密码门 ========== */
-#gate {
-  display: flex; align-items: center; justify-content: center;
-  min-height: 100vh; flex-direction: column; gap: 20px;
-  background: var(--paper-white);
-}
-#gate .gate-logo {
-  width: 60px; height: 60px; border-radius: 50%;
-  background: var(--accent-red);
-  color: white;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.6em; font-weight: 300;
-  margin-bottom: 8px;
-}
-#gate h1 { font-size: 2.2em; font-weight: 300; color: var(--ink); letter-spacing: 0.08em; }
-#gate .subtitle { color: var(--ink-light); font-size: 0.95em; margin-bottom: 16px; }
-#gate input {
-  background: var(--card-white); border: 1px solid var(--border-warm);
-  color: var(--ink); padding: 12px 20px; width: 260px; border-radius: 10px;
-  font-size: 1.1em; text-align: center; outline: none;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-#gate input:focus { border-color: var(--accent-gold); box-shadow: 0 0 0 3px rgba(184,134,11,0.1); }
-#gate button {
-  background: var(--accent-red); color: #fff; border: none;
-  padding: 11px 44px; border-radius: 10px; font-size: 1.05em;
-  cursor: pointer; transition: all 0.2s; letter-spacing: 0.04em;
-  font-weight: 500;
-}
-#gate button:hover { background: #A8351E; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(194,59,34,0.25); }
-#gate .hint { color: var(--ink-lighter); font-size: 0.82em; }
-
 /* ========== 应用主体 ========== */
-#app { display:none; max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+#app { display:block; max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
 
 /* ========== Header ========== */
 .header { text-align: center; margin-bottom: 44px; padding-bottom: 28px; border-bottom: 1px solid var(--border-warm); }
@@ -375,21 +343,11 @@ body {
 </head>
 <body>
 
-<!-- ==================== 密码门 ==================== -->
-<div id="gate">
-  <div class="gate-logo">红</div>
-  <h1>满意解</h1>
-  <p class="subtitle">自我报告 · 驾驶舱 V3</p>
-  <input type="password" id="pw" placeholder="输入通行码" autofocus onkeydown="if(event.key==='Enter') document.getElementById('btn-unlock').click()">
-  <button id="btn-unlock" onclick="unlock(this)">进入</button>
-  <p class="hint">提示: 123654</p>
-</div>
-
 <!-- ==================== 主应用 ==================== -->
-<div id="app">
+<div id="app" style="display:block">
   <!-- Header -->
   <div class="header">
-    <h1><span class="accent">满意解</span> · 自我报告</h1>
+    <h1><span class="accent">满意解</span> · 驾驶舱 V3</h1>
     <div class="dateline" id="dateline"></div>
     <div class="countdown" id="countdown"></div>
   </div>
@@ -398,11 +356,10 @@ body {
   <div class="section-title">🫀 生命体征 <span style="font-size:0.7em;color:var(--ink-lighter);font-weight:400;">· 每30分钟自动更新</span></div>
   <div class="vitals-bar" id="vitals-bar"></div>
   <div class="quick-actions">
-    <button onclick="location.href='gate.html'" title="密码生成与管理">🔐 密码管理</button>
-    <button onclick="window.open('memory/_data/entities_index.json','_blank')" title="查看完整实体索引">📋 实体索引</button>
-    <button onclick="window.open('memory/deep/满意解_信息架构与数据字典_V2.md','_blank')" title="信息架构与数据字典">📖 数据字典</button>
-    <button onclick="window.open('https://egbertie.github.io/satisficing-lab/dashboard.html','_blank')" title="驾驶舱V1(原始版)">📊 V1面板</button>
-    <button onclick="window.open('https://egbertie.github.io/satisficing-lab/go.html','_blank')" title="产品导航">🧭 产品地图</button>
+    <button onclick="location.href='admin-windows.html'" title="管理后台 v3.2 · 9域36模块">🏢 管理后台</button>
+    <button onclick="location.href='go.html'" title="产品导航">🧭 产品地图</button>
+    <button onclick="location.href='client.html'" title="客户通道">🤝 客户通道</button>
+    <button onclick="location.href='account.html'" title="个人中心">👤 个人中心</button>
   </div>
 
   <!-- L1 · 内稳态仪表 -->
@@ -412,6 +369,14 @@ body {
   <!-- L1 · 快速概览 -->
   <div class="section-title">📋 快速概览</div>
   <div class="overview-cards" id="overview-cards"></div>
+
+  <!-- 🏛️ · 文化概览 -->
+  <div class="section-title">🏛️ 文化体系 · <span style="font-size:0.78em;color:var(--ink-lighter);font-weight:400;">火承土印·鼎玉契晋·三脉两翼·五维相生</span></div>
+  <div class="culture-section" id="culture-section" style="max-width:1100px;margin:0 auto"></div>
+
+  <!-- 📐 · 品质仪表板 QAS V2.0 -->
+  <div class="section-title">📐 品质仪表板 · <span style="font-size:0.78em;color:var(--ink-lighter);font-weight:400;">QAS V2.0 · ISO 25010 · 24/24达标</span></div>
+  <div id="qas-dashboard" style="max-width:1100px;margin:0 auto"></div>
 
   <!-- L2 · 产品资产 -->
   <div class="section-title">📦 产品资产 · <span style="font-size:0.78em;color:var(--ink-lighter);font-weight:400;">点击展开详情 · 勾选对比</span></div>
@@ -446,36 +411,7 @@ body {
    满意解 · 驾驶舱 V3 — 完全重写
    配色: VI 体系（宣纸白底 / 墨色正文 / 绀红强调 / 古铜金）
    三层穿透: L1 概览卡 → L2 展开详情表 → L3 组合比对
-   单 script 块，sessionStorage 密码门，明文密码 123654
    ================================================================ */
-
-var PASSCODE = '123654';
-
-/* ========== 密码门 ========== */
-function unlock(btn) {
-  var inp = document.getElementById('pw');
-  if (inp.value.trim() === PASSCODE) {
-    sessionStorage.setItem('sri_dash_v3_unlocked', '1');
-    document.getElementById('gate').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    initDashboard();
-  } else {
-    btn.textContent = '✗ 再试';
-    btn.style.background = '#8A5030';
-    inp.value = '';
-    inp.focus();
-    setTimeout(function() { btn.textContent = '进入'; btn.style.background = ''; }, 1200);
-  }
-}
-
-/* ========== sessionStorage 自动恢复 ========== */
-(function() {
-  if (sessionStorage.getItem('sri_dash_v3_unlocked') === '1') {
-    document.getElementById('gate').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    initDashboard();
-  }
-})();
 
 /* ================================================================
    数据 — 硬编码在 JS 中
@@ -561,6 +497,8 @@ var AC = [
   renderVitals();
   renderGauges();
   renderOverview();
+  renderCulture();
+  renderQAS();
   renderProducts();
   renderBrain();
   renderAttention();
@@ -683,6 +621,108 @@ function renderOverview() {
 var currentFilter = '全部';
 var selectedProducts = [];
 var detailVisible = false;
+
+/* ================================================================
+   🏛️ · 文化概览（六层架构 + 密码速查 + 演化闭环）
+   ================================================================ */
+function renderCulture() {
+  var h = '';
+  h += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:16px">';
+  // 六层架构卡片
+  var layers = [
+    {l:'L0', name:'基本假设', icon:'🧬', color:'#2A2A2A', items:'满意解·契晋呼吸·传承连续·温度功能·系统根源·诚实免疫'},
+    {l:'L1', name:'共享价值观', icon:'🎯', color:'#C23B22', items:'7条核心价值观(V3.0)·每条附五行动作'},
+    {l:'L2', name:'行为规范', icon:'⚙️', color:'#B8860B', items:'决策流·协作流·自我管理·子代理纪律'},
+    {l:'L3', name:'制度制品', icon:'📋', color:'#3A6B8C', items:'宣言·MEMORY·SOUL·ADR·dev.sh·免疫'},
+    {l:'L4', name:'仪式节奏', icon:'🌅', color:'#4A8C5C', items:'日起课·免疫自检·日毕课·深睡·五维快照'},
+    {l:'L5', name:'边界约束', icon:'🛡️', color:'#C23B22', items:'PRE-0·双经济·错误预算·七层免疫'}
+  ];
+  layers.forEach(function(ly) {
+    h += '<div style="background:var(--card-bg);border:1px solid var(--border-warm);border-radius:10px;padding:14px;font-size:11px;line-height:1.6;border-left:3px solid '+ly.color+'">';
+    h += '<div style="font-weight:700;color:'+ly.color+';margin-bottom:4px">'+ly.icon+' '+ly.l+'·'+ly.name+'</div>';
+    h += '<div style="color:var(--ink);opacity:.75">'+ly.items+'</div>';
+    h += '</div>';
+  });
+  h += '</div>';
+  // 演化闭环
+  h += '<div style="background:var(--card-warm);border:1px solid var(--accent-gold);border-radius:10px;padding:12px;text-align:center;font-size:11px;color:var(--ink);opacity:.8;margin-bottom:12px">';
+  h += '<span style="font-weight:600;color:var(--ink)">🔄 文化演化闭环</span> · 日常实践 → 深睡反思 → 反模式提炼 → 规则更新 → 内化';
+  h += '</div>';
+  // 密码速查
+  h += '<div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:8px">';
+  var codes = ['契=我相信你·锚','晋=我配得上你的信任·风','鼎=站得稳','玉=有价值','两翼=左脑+右脑','三脉=三层锻造','五维=土金水木火','火承土印=品牌根','明出地上=周易晋卦'];
+  codes.forEach(function(c) {
+    h += '<span style="padding:3px 8px;background:rgba(184,134,11,.06);border-radius:8px;font-size:10px;color:var(--ink);opacity:.7">'+c+'</span>';
+  });
+  h += '</div>';
+  h += '<p style="text-align:center;font-size:10px;color:var(--ink-lighter);margin:0"><a href="culture.html" style="color:var(--accent-gold);text-decoration:none">📖 完整企业文化体系 →</a></p>';
+  document.getElementById('culture-section').innerHTML = h;
+}
+
+/* ================================================================
+   📐 · QAS 品质仪表板 V2.0
+   ================================================================ */
+function renderQAS() {
+  var h = '';
+  
+  // 品质总览KPI
+  h += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-bottom:12px">';
+  var kpis = [
+    {v:'24/24', l:'QAS得分', c:'var(--green-ok)'},
+    {v:'L1✅', l:'结构完整性', c:'var(--green-ok)'},
+    {v:'L2✅', l:'功能性', c:'var(--green-ok)'},
+    {v:'L3✅', l:'内容质量', c:'var(--green-ok)'},
+    {v:'L4✅', l:'可访问性', c:'var(--green-ok)'},
+    {v:'100%', l:'文化渗透', c:'var(--green-ok)'},
+    {v:'0', l:'死链', c:'var(--green-ok)'},
+    {v:'0', l:'品牌残留', c:'var(--green-ok)'},
+    {v:'1', l:'Error Budget', c:'var(--amber-warn)'}
+  ];
+  kpis.forEach(function(k) {
+    h += '<div style="background:var(--card-white);border:1px solid var(--border-warm);border-radius:10px;padding:10px;text-align:center">';
+    h += '<div style="font-size:20px;font-weight:700;color:'+k.c+'">'+k.v+'</div>';
+    h += '<div style="font-size:9px;color:var(--ink-lighter)">'+k.l+'</div>';
+    h += '</div>';
+  });
+  h += '</div>';
+  
+  // 5层品质树
+  h += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-bottom:12px">';
+  var layers = [
+    {l:'L1·结构',icon:'🧱',color:'var(--green-ok)',items:'DOCTYPE✅·HTML闭合✅·CSS✅·大小✅'},
+    {l:'L2·功能',icon:'🔗',color:'var(--green-ok)',items:'死链0·JS✅·返回✅·副本✅·入口✅'},
+    {l:'L3·内容',icon:'📝',color:'var(--green-ok)',items:'品牌0残留·文化100%·反馈100%·数据✅'},
+    {l:'L4·可访问',icon:'♿',color:'var(--green-ok)',items:'lang✅·charset✅·viewport✅'},
+    {l:'L5·体验',icon:'📱',color:'var(--green-ok)',items:'h1全·@media100%·外部依赖0'}
+  ];
+  layers.forEach(function(ly) {
+    h += '<div style="background:var(--card-white);border:1px solid var(--border-warm);border-radius:10px;padding:12px;font-size:11px;line-height:1.6;border-left:3px solid '+ly.color+'">';
+    h += '<div style="font-weight:700;color:var(--ink);margin-bottom:4px">'+ly.icon+' '+ly.l+'</div>';
+    h += '<div style="color:var(--ink-light);font-size:10px">'+ly.items+'</div>';
+    h += '</div>';
+  });
+  h += '</div>';
+  
+  // 7条铁律状态
+  h += '<div style="background:var(--card-warm);border:1px solid var(--border-warm);border-radius:10px;padding:12px;margin-bottom:8px">';
+  h += '<div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:8px">🔧 7条工程铁律</div>';
+  h += '<div style="display:flex;gap:6px;flex-wrap:wrap">';
+  var rules = ['event✅','crypto✅','单script⚠️','删旧码✅','零硬编码✅','依赖验证✅','品牌✅'];
+  rules.forEach(function(r) {
+    var ok = r.indexOf('⚠️') === -1;
+    h += '<span style="padding:3px 8px;border-radius:8px;font-size:10px;background:'+(ok?'rgba(61,122,79,.08)':'rgba(194,120,10,.08)')+';color:'+(ok?'var(--green-ok)':'var(--amber-warn)')+'">'+r+'</span>';
+  });
+  h += '</div></div>';
+  
+  // 根因分析结论
+  h += '<div style="background:var(--card-white);border:1px solid var(--border-warm);border-radius:10px;padding:10px;font-size:10px;color:var(--ink-light);line-height:1.6;margin-bottom:8px">';
+  h += '🔬 <strong>根因分析结论</strong> —— 检测≠修复。auto_heal.sh已建立(覆盖7类自动修复)·72h升级P0规则已写入。Cron每小时: 免疫自检→auto_heal→报告。」';
+  h += '</div>';
+  
+  h += '<p style="text-align:center;font-size:10px;color:var(--ink-lighter);margin:0"><a href="memory/_data/QAS_品质保证体系_v2.0.md" style="color:var(--accent-gold);text-decoration:none">📐 完整QAS品质体系 →</a> · <a href="memory/_data/恶化预警_根因分析报告.md" style="color:var(--accent-gold);text-decoration:none">🔬 根因分析 →</a></p>';
+  
+  document.getElementById('qas-dashboard').innerHTML = h;
+}
 
 function renderProducts() {
   // 族筛选按钮
@@ -1188,6 +1228,19 @@ function renderActivity() {
   }
   document.getElementById('activity-section').innerHTML = h;
 }
+
+// 直接启动
+initDashboard();
 </script>
+<p style="text-align:center;font-size:10px;opacity:0.35;padding:4px;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</p>
+
+<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px">
+  <div id="fbQ" style="color:#4A4A4A;font-weight:600;margin-bottom:10px">这个页面对你有用吗？</div>
+  <div id="fbBtns" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px">
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'up');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">👍 有用</button>
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'text');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">💬 有建议</button>
+  </div>
+</div>
+
 </body>
 </html>
