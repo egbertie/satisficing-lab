@@ -90,6 +90,7 @@ a{color:var(--gold);text-decoration:none}
 </div>
 <div class="toast" id="toast"></div>
 </div>
+<script src="sri-api.js"></script>
 <script src="feishu-notify.js"></script>
 <script>
 function switchTab(n){
@@ -104,24 +105,40 @@ function showToast(m,t){
   el.className='toast '+t;el.textContent=m;
   setTimeout(function(){el.className='toast'},3000);
 }
+
+// 后端优先，飞书 fallback
+var USE_BACKEND = !!window.SRI_API;
+
 async function submitQuick(e){
   e.preventDefault();
   var b=document.getElementById('qBtn');b.disabled=true;b.textContent='发送中...';
-  var ok=await FeishuNotify.contact({
-    name:document.getElementById('qName').value.trim(),
-    email:document.getElementById('qEmail').value.trim(),
-    company:'',
-    message:document.getElementById('qMessage').value.trim()
-  });
+  var name=document.getElementById('qName').value.trim();
+  var email=document.getElementById('qEmail').value.trim();
+  var msg=document.getElementById('qMessage').value.trim();
+  var ok=false;
+
+  if(USE_BACKEND){
+    try{
+      var r=await SRI_API.contact({name:name,email:email,message:msg});
+      ok=!!r.ok;
+    }catch(e){
+      console.log('后端不可用，使用飞书 fallback');
+      ok=await FeishuNotify.contact({name:name,email:email,company:'',message:msg});
+    }
+  }else{
+    ok=await FeishuNotify.contact({name:name,email:email,company:'',message:msg});
+  }
+
   if(ok){showToast('✅ 留言已发送！我们会尽快联系您。','success');document.getElementById('quickForm').reset()}
   else showToast('❌ 发送失败，请稍后重试。','error');
   b.disabled=false;b.textContent='✈️ 发送留言';
   return false;
 }
+
 async function submitReg(e){
   e.preventDefault();
   var b=document.getElementById('rBtn');b.disabled=true;b.textContent='提交中...';
-  var ok=await FeishuNotify.register({
+  var fields={
     name:document.getElementById('rName').value.trim(),
     email:document.getElementById('rEmail').value.trim(),
     phone:document.getElementById('rPhone').value.trim(),
@@ -130,9 +147,24 @@ async function submitReg(e){
     industry:document.getElementById('rIndustry').value.trim(),
     stage:document.getElementById('rStage').value,
     source:document.getElementById('rSource').value,
-    interests:document.getElementById('rIndustry').value.trim()
-  });
-  if(ok){showToast('✅ 注册成功！我们会尽快联系您。','success');document.getElementById('regForm').reset()}
+    interests:document.getElementById('rIndustry').value.trim(),
+    password:document.getElementById('rEmail').value.trim().replace(/[^a-zA-Z0-9]/g,'').slice(0,6)+'123'
+  };
+  var ok=false;
+
+  if(USE_BACKEND){
+    try{
+      var r=await SRI_API.contact({name:fields.name,email:fields.email,message:'新客户注册 · '+fields.industry+' · '+fields.stage});
+      ok=!!r.ok;
+    }catch(e){
+      console.log('后端不可用，使用飞书 fallback');
+      ok=await FeishuNotify.register(fields);
+    }
+  }else{
+    ok=await FeishuNotify.register(fields);
+  }
+
+  if(ok){showToast('✅ 提交成功！我们会尽快联系您。','success');document.getElementById('regForm').reset()}
   else showToast('❌ 提交失败，请稍后重试。','error');
   b.disabled=false;b.textContent='📤 提交注册';
   return false;
