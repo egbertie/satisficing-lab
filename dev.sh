@@ -1,58 +1,62 @@
 #!/bin/bash
-# ===========================================
-# 满意解研究所 · 开发服务器启动脚本
-# ===========================================
-# 用法: ./dev.sh [test|verify|push]
-#   test   - 启动本地测试服务器（前端+后端）
-#   verify - 运行代码检查
-#   push   - 推送到 GitHub Pages
-# ===========================================
+# ═══════════════════════════════════════
+# 满意解研究所 · 开发服务器 v2.0
+# ═══════════════════════════════════════
+# 用法: ./dev.sh [test|verify|push|db-reset]
+# ═══════════════════════════════════════
 
 set -e
 cd "$(dirname "$0")"
 
 case "${1:-test}" in
   test)
-    echo "🚀 启动开发环境..."
+    echo "🚀 启动开发环境 v2.0..."
     echo ""
     echo "  前端: http://localhost:8766"
     echo "  后端: http://localhost:5000"
     echo "  健康: http://localhost:5000/api/health"
     echo ""
-    # 启动后端
     python3 server/app.py &
-    BACKEND_PID=$!
-    # 启动前端
+    BACKEND=$!
     python3 -m http.server 8766 --bind 127.0.0.1 &
-    FRONTEND_PID=$!
-    echo "  PID: Backend=$BACKEND_PID Frontend=$FRONTEND_PID"
-    echo "  按 Ctrl+C 停止所有服务"
+    FRONTEND=$!
+    echo "  PID: Backend=$BACKEND Frontend=$FRONTEND"
+    echo "  按 Ctrl+C 停止"
     wait
     ;;
 
   verify)
-    echo "🔍 代码验证..."
-    # Python 语法
-    python3 -m py_compile server/app.py && echo "  ✅ server/app.py"
-    python3 -m py_compile server/config.py && echo "  ✅ server/config.py"
-    python3 -m py_compile server/models/database.py && echo "  ✅ server/models/database.py"
-    python3 -m py_compile server/models/customer.py && echo "  ✅ server/models/customer.py"
-    python3 -m py_compile server/routes/auth.py && echo "  ✅ server/routes/auth.py"
-    python3 -m py_compile server/routes/contact.py && echo "  ✅ server/routes/contact.py"
-    python3 -m py_compile server/services/feishu.py && echo "  ✅ server/services/feishu.py"
-    # API 测试
+    echo "🔍 代码验证 v2.0..."
+    FILES=(
+      server/app.py server/config.py
+      server/models/database.py server/models/customer.py server/models/schema_v2.py
+      server/routes/auth.py server/routes/contact.py server/routes/events.py server/routes/admin.py
+      server/services/feishu.py server/services/events.py server/services/mailer.py
+      server/middleware/security.py
+    )
+    for f in "${FILES[@]}"; do
+      python3 -m py_compile "$f" && echo "  ✅ $f"
+    done
+    
+    # API 集成测试
     python3 -c "
 import sys; sys.path.insert(0,'.')
 from server.app import create_app
 app = create_app()
 with app.test_client() as c:
     assert c.get('/api/health').status_code == 200
-    print('  ✅ /api/health')
     r = c.post('/api/contact', json={'name':'QA','message':'test'})
     assert r.status_code == 201
-    print('  ✅ /api/contact')
-print('\\n✅ 全部验证通过')
+    print('  ✅ API 集成测试通过')
 "
+    echo -e "\n✅ 全部验证通过"
+    ;;
+
+  db-reset)
+    echo "🗑️  重置数据库..."
+    rm -f server/data/sri.db*
+    python3 -c "from server.app import create_app; create_app()"
+    echo "✅ 数据库已重置"
     ;;
 
   push)
@@ -64,6 +68,6 @@ print('\\n✅ 全部验证通过')
     ;;
 
   *)
-    echo "用法: ./dev.sh [test|verify|push]"
+    echo "用法: ./dev.sh [test|verify|push|db-reset]"
     ;;
 esac
