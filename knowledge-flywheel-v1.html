@@ -3,205 +3,165 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>今日一得 · 知识飞轮日常</title>
-<meta name="description" content="每天记一件事。飞轮不是靠架构转的——是靠每一天、每一个微小输入转的。满意解研究所出品。">
+<title>章·飞轮·V1|知识复利飞轮产品定义|满意解研究所</title>
+  <meta name="description" content="满意解研究所 · 章·飞轮·V1|知识复利飞轮产品定义|满意解研究所">
 <style>
-:root{--red:#C23B22;--gold:#B8860B;--bg:#FAF7F2;--white:#fff;--text:#2D2D2D;--text2:#5C5C5C;--border:#E8E0D5}
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:-apple-system,"PingFang SC","Noto Sans SC",serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0;--sri-green:#4A8C5C}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
+.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
+.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
+.article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}
+.article h2{font-size:18px;color:var(--title-color);margin:24px 0 10px}
+.article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}
+.article p{margin:8px 0}
+.article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}
+.article .highlight{color:var(--sri-red);font-weight:600}
+li{margin:6px 0;font-size:14px}ul{padding-left:20px}
 
-.v5-badge{background:linear-gradient(135deg,var(--gold),var(--red));color:#fff;padding:8px 18px;text-align:center;font-size:10px;letter-spacing:.5px}
+/* 飞轮自检 */
+.flywheel-zone{max-width:500px;margin:28px auto;padding:20px;background:#fff;border-radius:14px;border:2px solid var(--sri-gold);text-align:center}
+.flywheel-zone h3{font-size:16px;color:var(--title-color);margin-bottom:12px}
+.flywheel-steps{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.fw-step{padding:12px 14px;background:var(--sri-bg);border-radius:10px;text-align:left;font-size:13px;cursor:pointer;border:1.5px solid #f0e8d8;transition:all 0.2s}
+.fw-step:hover{border-color:var(--sri-gold)}
+.fw-step.checked{background:rgba(74,140,92,0.06);border-color:var(--sri-green)}
+.fw-step .fw-check{font-size:16px;margin-right:8px}
+.fw-result{display:none;padding:14px;border-radius:10px;font-size:14px;line-height:2;animation:fadeIn 0.4s}
+.fw-result.show{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 
-.main{max-width:440px;margin:0 auto;padding:24px 16px 60px}
-
-/* 飞轮计数 */
-.flywheel-ring{width:120px;height:120px;border-radius:50%;border:3px solid var(--border);margin:0 auto 24px;display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative;transition:all .3s}
-.flywheel-ring.active{border-color:var(--gold);box-shadow:0 0 24px rgba(184,134,11,.08)}
-.flywheel-ring .fw-count{font-size:42px;font-weight:200;color:var(--gold)}
-.flywheel-ring .fw-label{font-size:11px;color:var(--text2);margin-top:2px}
-
-/* 输入区 */
-.input-card{background:var(--white);border-radius:14px;padding:24px 20px;border:1px solid var(--border);box-shadow:0 2px 12px rgba(0,0,0,.03);margin-bottom:16px}
-.input-card .today-date{font-size:12px;color:var(--gold);margin-bottom:12px;font-weight:600}
-.input-card .prompt{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:14px;display:none}
-.input-card .prompt.active{display:block}
-.input-card .prompt em{font-style:normal;color:var(--red)}
-
-textarea.today-input{width:100%;padding:14px;border:2px solid var(--border);border-radius:10px;font-size:15px;font-family:inherit;background:var(--white);color:var(--text);line-height:1.7;resize:none;min-height:80px;transition:border-color .3s}
-textarea.today-input:focus{outline:none;border-color:var(--gold)}
-textarea.today-input::placeholder{color:#CCC}
-
-/* 轮换提示 */
-.rotate-prompts{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
-.rotate-btn{padding:6px 12px;border-radius:14px;font-size:11px;cursor:pointer;border:1.5px solid var(--border);background:var(--white);color:var(--text2);transition:all .2s}
-.rotate-btn:hover,.rotate-btn.active{border-color:var(--gold);color:var(--gold)}
-
-.btn-save{display:block;width:100%;padding:14px;border-radius:24px;font-size:15px;font-weight:600;cursor:pointer;border:none;background:var(--red);color:#fff;margin-top:16px;transition:all .2s}
-.btn-save:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(194,59,34,.25)}
-.btn-save:disabled{opacity:.4;cursor:not-allowed;transform:none}
-
-/* 保存反馈 */
-.saved-flash{text-align:center;color:var(--gold);font-size:14px;font-weight:600;padding:12px;animation:fadeIn .4s;display:none}
-.saved-flash.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
-
-/* 历史 */
-.history-section{margin-top:32px;border-top:1px solid var(--border);padding-top:20px}
-.history-section h3{font-size:13px;color:var(--text2);margin-bottom:12px;text-align:center}
-.h-entry{background:var(--white);border-radius:10px;padding:12px 14px;margin-bottom:8px;border:1px solid var(--border);font-size:13px;line-height:1.7}
-.h-entry .h-date{font-size:10px;color:var(--gold);margin-bottom:4px}
-.h-entry .h-text{color:var(--text)}
-.h-entry .h-prompt{font-size:10px;color:var(--text2);margin-top:4px;font-style:italic}
-
-/* 飞轮理论卡 */
-.theory-card{background:var(--bg);border-radius:10px;padding:12px 16px;margin-top:24px;font-size:12px;color:var(--text2);line-height:1.8;text-align:center;border:1px dashed var(--border)}
-.theory-card strong{color:var(--gold)}
-
-.btn-row{display:flex;gap:10px;justify-content:center;margin-top:12px}
-.btn-outline{background:transparent;border:1.5px solid var(--red);color:var(--red);padding:10px 20px;border-radius:20px;font-size:13px;cursor:pointer;text-decoration:none;transition:all .2s}
-.btn-outline:hover{background:rgba(194,59,34,.04)}
-
-.footer{text-align:center;padding:20px;font-size:11px;color:var(--text2);max-width:440px;margin:0 auto}
-.footer a{color:var(--red);text-decoration:none}
+.back-link{text-align:center;padding:20px;font-size:11px;color:#999}
+.back-link a{color:var(--sri-red);text-decoration:none}
+.feedback-zone{max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px}
+@media(max-width:480px){body{font-size:14px}}
 </style>
 </head>
 <body>
-
-<div class="v5-badge">⭐ 优质 · 土L5🟫 · v5.0统一框架 · 知识飞轮日常</div>
-
-<div class="main">
-
-  <!-- 飞轮环 -->
-  <div class="flywheel-ring" id="fwRing">
-    <div class="fw-count" id="fwCount">0</div>
-    <div class="fw-label">日 · 一得</div>
-  </div>
-
-  <!-- 输入卡 -->
-  <div class="input-card">
-    <div class="today-date" id="todayDate"></div>
-    <div class="prompt active" id="prompt1">
-      <em>今天</em>，你学到了什么？<br>可以是一个事实、一个洞察、一次教训。<br>不用完整——一行字就够了。
-    </div>
-    <div class="prompt" id="prompt2">
-      <em>今天</em>，有什么事让你改变了一个想法？<br>哪怕是很小的改变——<br>"原来我以为___，现在我发现___。"
-    </div>
-    <div class="prompt" id="prompt3">
-      <em>今天</em>，你有什么想对六个月后的自己说的？<br>一条提醒、一个预感、一句警告。
-    </div>
-    <textarea class="today-input" id="todayInput" placeholder="记下今天的一得……" maxlength="300" oninput="onInput()"></textarea>
-    <div class="rotate-prompts">
-      <button class="rotate-btn active" onclick="switchPrompt(1,this)">📝 学到了什么</button>
-      <button class="rotate-btn" onclick="switchPrompt(2,this)">💡 改变了什么想法</button>
-      <button class="rotate-btn" onclick="switchPrompt(3,this)">🔮 对六个月后的自己</button>
-    </div>
-    <button class="btn-save" id="btnSave" disabled onclick="saveEntry()">💾 存入飞轮</button>
-    <div class="saved-flash" id="savedFlash">✓ 已存入飞轮 · 它会在你需要的时候回来</div>
-  </div>
-
-  <!-- 飞轮理论 -->
-  <div class="theory-card">
-    知识不是线性积累——是指数级连接。<br>
-    <strong>一个想法连上第二个→价值×2→连上第三个→价值×6</strong><br>
-    你现在存入的每一"得"，<br>都会在飞轮转动时，和之前的"得"连接在一起。<br>
-    这不是"帮你存"——是<strong>"帮你增值"</strong>。
-  </div>
-
-  <!-- 历史 -->
-  <div class="history-section" id="historySection" style="display:none">
-    <h3>📚 你的飞轮记录</h3>
-    <div id="historyList"></div>
-  </div>
-
-  <div class="btn-row">
-    <a class="btn-outline" href="go.html">← 返回通道</a>
-    <a class="btn-outline" href="dashboard-v3.html">🧠 产品大脑</a>
-  </div>
-
+<div class="hero"><h1>⚙️ 章·飞轮·V1</h1><p>满意姐·知识复利飞轮·产品定义V0.1</p></div>
+<div class="article">
+  <h2>知识复利飞轮·产品定义</h2>
+  <p>满意姐在V1.5阶段定义的知识管理SaaS产品——<span class="highlight">"让你的知识自己增值"。</span></p>
+  <h3>核心假设</h3>
+  <p>知识不是线性积累——是指数级连接。一个知识节点，当它连接到第二个、第三个——价值不是1+1=2，是1×2=2→2×3=6。</p>
+  <h3>产品架构</h3>
+  <p>输入层：自动捕获·手动录入·API接入<br>处理层：分类·标签·关联·提炼<br>存储层：结构化知识图谱<br>输出层：搜索·推荐·报告·提醒<br>进化层：使用反馈→自动优化关联权重</p>
+  <h3>对标产品</h3>
+  <p>Notion(知识存储)·Roam Research(双向链接)·Obsidian(知识图谱)·Readwise(阅读管理)。知识复利飞轮的差异化：<span class="highlight">不是"帮你存"——是"帮你增值"。</span></p>
 </div>
 
-<div class="footer">
-  <p>今日一得 · 知识飞轮日常 · 满意解研究所 · v5.0统一框架</p>
+<div class="flywheel-zone">
+  <h3>⚙️ 你的知识飞轮在转吗？</h3>
+  <p style="font-size:12px;color:#999;margin-bottom:12px">勾选你已经做到的——看看飞轮转了几层</p>
+  <div class="flywheel-steps" id="fwSteps"></div>
+  <button class="btn-save" style="padding:8px 22px;border-radius:18px;border:none;background:var(--sri-red);color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:8px" onclick="checkFlywheel()">🔍 看看飞轮</button>
+  <div class="fw-result" id="fwResult"></div>
+</div>
+
+<div class="back-link"><a href="go.html">← 返回决策通道</a></div>
+<div class="feedback-zone">
+  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个内容对你有用吗？</div>
+  <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
+    <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
+    <button onclick="showFeedbackText()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">💬</span>有建议</button>
+  </div>
+  <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
+  <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
+  <div id="fbThanks" style="display:none;color:var(--sri-green);font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
+  <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
 </div>
 
 <script>
-var STORAGE = 'sri_flywheel_entries';
-var entries = JSON.parse(localStorage.getItem(STORAGE) || '[]');
-var currentPrompt = 1;
+var FW_STEPS = [
+  {id:'input', label:'📥 输入层：我持续在收集/记录信息'},
+  {id:'process', label:'🔧 处理层：我的信息有分类和标签'},
+  {id:'store', label:'🗄️ 存储层：我的知识不散落在各处'},
+  {id:'output', label:'📤 输出层：我能快速找到需要的信息'},
+  {id:'evolve', label:'🔄 进化层：我的知识系统在使用中变好'}
+];
 
-// 显示今天日期
-var now = new Date();
-var weekdays = ['日','一','二','三','四','五','六'];
-document.getElementById('todayDate').textContent = 
-  now.getFullYear()+'年'+(now.getMonth()+1)+'月'+now.getDate()+'日 · 周'+weekdays[now.getDay()];
+var FW_KEY = '***';
+var checks = {};
 
-// 更新飞轮计数
-document.getElementById('fwCount').textContent = entries.length;
-if(entries.length > 0) document.getElementById('fwRing').classList.add('active');
+function loadChecks(){try{checks=JSON.parse(localStorage.getItem(FW_KEY))||{};}catch(e){}}
 
-// 渲染历史
-if(entries.length > 0) {
-  document.getElementById('historySection').style.display = 'block';
-  var histHtml = '';
-  for(var i=Math.min(entries.length-1, 6); i>=0; i--) {
-    var e = entries[i];
-    histHtml += '<div class="h-entry"><div class="h-date">'+e.date+' · '+e.prompt+'</div>';
-    histHtml += '<div class="h-text">'+escHtml(e.text)+'</div></div>';
-  }
-  document.getElementById('historyList').innerHTML = histHtml;
-}
-
-function switchPrompt(n, btn) {
-  currentPrompt = n;
-  document.querySelectorAll('.prompt').forEach(function(p){p.classList.remove('active')});
-  document.getElementById('prompt'+n).classList.add('active');
-  document.querySelectorAll('.rotate-btn').forEach(function(b){b.classList.remove('active')});
-  btn.classList.add('active');
-  document.getElementById('todayInput').focus();
-}
-
-function onInput() {
-  var val = document.getElementById('todayInput').value.trim();
-  document.getElementById('btnSave').disabled = val.length < 3;
-}
-
-function saveEntry() {
-  var text = document.getElementById('todayInput').value.trim();
-  if(text.length < 3) return;
-  
-  var prompts = ['学到了什么','改变了想法','对六个月后的自己'];
-  
-  entries.push({
-    date: now.toLocaleDateString('zh-CN'),
-    time: now.toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'}),
-    text: text,
-    prompt: prompts[currentPrompt-1]
+function renderSteps(){
+  var html = '';
+  FW_STEPS.forEach(function(s){
+    var done = checks[s.id];
+    html += '<div class="fw-step'+(done?' checked':'')+'" onclick="toggleFW(\''+s.id+'\')">';
+    html += '<span class="fw-check">'+(done?'✅':'⬜')+'</span>'+s.label+'</div>';
   });
-  
-  localStorage.setItem(STORAGE, JSON.stringify(entries));
-  
-  // 更新UI
-  document.getElementById('fwCount').textContent = entries.length;
-  document.getElementById('fwRing').classList.add('active');
-  document.getElementById('todayInput').value = '';
-  document.getElementById('btnSave').disabled = true;
-  
-  var flash = document.getElementById('savedFlash');
-  flash.classList.add('active');
-  setTimeout(function(){flash.classList.remove('active')}, 2000);
-  
-  // 刷新历史
-  document.getElementById('historySection').style.display = 'block';
-  var histHtml = '';
-  for(var i=Math.min(entries.length-1, 6); i>=0; i--) {
-    var e = entries[i];
-    histHtml += '<div class="h-entry"><div class="h-date">'+e.date+' · '+e.prompt+'</div>';
-    histHtml += '<div class="h-text">'+escHtml(e.text)+'</div></div>';
-  }
-  document.getElementById('historyList').innerHTML = histHtml;
+  document.getElementById('fwSteps').innerHTML = html;
+  // 恢复结果
+  if(Object.keys(checks).length>0) showFWResult();
 }
 
-function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function toggleFW(id){
+  checks[id] = !checks[id];
+  localStorage.setItem(FW_KEY, JSON.stringify(checks));
+  renderSteps();
+}
+
+function checkFlywheel(){
+  showFWResult();
+}
+
+function showFWResult(){
+  var count = Object.values(checks).filter(Boolean).length;
+  var result = document.getElementById('fwResult');
+  var levels = [
+    '🛑 飞轮还没开始转——但看到它本身就是第一步。',
+    '🐣 飞轮开始转了——输入层在运转。下一步：整理和分类。',
+    '🌱 飞轮在加速——输入+整理有节奏了。下一步：让它能输出。',
+    '🚀 飞轮有惯性了——知识开始"找你"。差最后一层：让它自动进化。',
+    '✨ 飞轮全速运转——你的知识在增值。不是"存了多少"——是"连接了多少"。'
+  ];
+  result.innerHTML = (count>=5 ? levels[4] : levels[Math.min(count, levels.length-1)]);
+  result.className = 'fw-result show';
+  result.style.background = count>=4 ? 'rgba(74,140,92,0.06)' : 'rgba(184,134,11,0.04)';
+}
+
+loadChecks();
+renderSteps();
+
+// ===== 反馈组件 =====
+(function(){
+  let page=location.pathname.split('/').pop()||'index';
+  let key='sri_fb_'+page;
+  let data=JSON.parse(localStorage.getItem(key)||'{}');
+  if(data.sent){document.getElementById('fbQuestion').textContent='感谢你的反馈！';document.getElementById('fbActions').style.display='none';}
+  let tally=JSON.parse(localStorage.getItem('sri_fb_tally_'+page)||'{"up":0,"text":0}');
+  if(tally.up+tally.text>0) document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  window.submitFeedback=function(type){
+    tally[type]=(tally[type]||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type=type;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbQuestion').textContent='感谢你的反馈！';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+  window.showFeedbackText=function(){
+    document.getElementById('fbText').style.display='block';
+    document.getElementById('fbSubmit').style.display='inline-block';
+  };
+  window.submitFeedbackText=function(){
+    let text=document.getElementById('fbText').value.trim();
+    if(!text)return;
+    tally.text=(tally.text||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type='text';data.text=text;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbText').style.display='none';
+    document.getElementById('fbSubmit').style.display='none';
+    document.getElementById('fbQuestion').textContent='收到！感谢你的建议。';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+})();
 </script>
+
+<div style="text-align:center;padding:8px 0;font-size:10px;opacity:0.25;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</div>
 </body>
 </html>
