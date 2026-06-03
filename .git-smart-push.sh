@@ -116,13 +116,41 @@ if $should_push; then
     exit 0
   fi
 
-  git commit --no-verify -m "auto: 智能同步 $(date '+%m-%d %H:%M') [$reason]" 2>/dev/null
-  git push origin main 2>&1 | tail -1 >> "$LOG_FILE"
+  commit_ok=false
+  if git commit --no-verify -m "auto: 智能同步 $(date '+%m-%d %H:%M') [$reason]" 2>&1; then
+    commit_ok=true
+  else
+    echo "[$(date '+%H:%M')] Commit failed (maybe nothing to commit)" >> "$LOG_FILE"
+  fi
 
-  last_push=$now
-  push_count_today=$((push_count_today + 1))
-  pending="false"
-  save_state $last_push $last_change $push_count_today "false"
+  if $commit_ok; then
+    # 先尝试直接push，失败则pull --rebase后重试
+    push_output=$(git push origin main 2>&1)
+    push_rc=$?
 
-  echo "[$(date '+%H:%M')] Push done. Today: $push_count_today/$DAILY_MAX_PUSHES" >> "$LOG_FILE"
+    if [ $push_rc -ne 0 ]; then
+      echo "[$(date '+%H:%M')] Push rejected, trying pull --rebase..." >> "$LOG_FILE"
+      echo "$push_output" | tail -2 >> "$LOG_FILE"
+      if git pull --rebase origin main 2>&1 >> "$LOG_FILE"; then
+        if git push origin main 2>&1 | tail -1 >> "$LOG_FILE"; then
+          push_rc=0
+        fi
+      fi
+    else
+      echo "$push_output" | tail -1 >> "$LOG_FILE"
+    fi
+
+    if [ $push_rc -eq 0 ]; then
+      last_push=$now
+      push_count_today=$((push_count_today + 1))
+      pending="false"
+      save_state $last_push $last_change $push_count_today "false"
+      echo "[$(date '+%H:%M')] Push OK. Today: $push_count_today/$DAILY_MAX_PUSHES" >> "$LOG_FILE"
+    else
+      # Push失败：保留pending标记，下次重试
+      last_change=$now
+      save_state $last_push $last_change $push_count_today "true"
+      echo "[$(date '+%H:%M')] Push FAILED (will retry). Today: $push_count_today/$DAILY_MAX_PUSHES" >> "$LOG_FILE"
+    fi
+  fi
 fi
