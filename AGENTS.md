@@ -57,6 +57,7 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 - Don't run destructive commands without asking.
 - `trash` > `rm` (recoverable beats gone forever)
 - When in doubt, ask.
+- **Coze 群聊实时归档**：每次在 Coze 群聊与满意扣子、满意契互动后，**必须立即**将双方消息归档到 `对话/YYYY-MM-DD/coze-exchange/YYYY-MM-DD_三人对话实录.md`。使用 `python3 memory/_scripts/coze_archive.py --role=<role> --text="<content>"`。不可依赖事后记忆或补充归档。
 
 ## External vs Internal
 
