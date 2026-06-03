@@ -2,324 +2,280 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>客户中心 · 满意解研究所</title>
-  <meta name="description" content="满意解研究所 · 客户中心 · 满意解研究所">
-<link rel="stylesheet" href="sri-design.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人中心 · 满意解研究所</title>
+<meta name="description" content="满意解研究所 · 客户个人中心">
+<script src="sri-track.js"></script>
+<script src="sri-api.js"></script>
 <style>
-:root{--red:#C23B22;--gold:#B8860B;--bg:#F5F0E6;--ink:#4A4A4A;--title:#2A2A2A}
-
-  .main { max-width: 520px; margin: 0 auto; padding: var(--sp-md); }
-
-  .hero { padding: var(--sp-2xl) var(--sp-lg); }
-  .hero h1 { font-size: 22px; }
-
-  .tab-bar { display: flex; gap: 0; margin-bottom: var(--sp-lg); border-bottom: 2px solid var(--border-light); }
-  .tab-btn { flex: 1; padding: 12px 8px; border: none; background: transparent; font-size: 14px; font-weight: 600; color: var(--text-muted); cursor: pointer; font-family: var(--font-stack); border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all var(--ease-out); }
-  .tab-btn.active { color: var(--sri-red); border-bottom-color: var(--sri-red); }
-
-  .tab-content { display: none; }
-  .tab-content.active { display: block; animation: fadeUp 0.3s var(--ease-out) both; }
-
-  .card { background: var(--white); border-radius: var(--radius-lg); padding: var(--sp-lg); border: 1px solid var(--border-light); margin-bottom: var(--sp-md); box-shadow: var(--shadow-card); }
-
-  .field { margin-bottom: var(--sp-md); }
-  .field label { display: block; font-size: 13px; font-weight: 600; color: var(--title); margin-bottom: 4px; }
-  .field .hint { font-size: 11px; color: var(--text-muted); }
-
-  .profile-header { text-align: center; padding: var(--sp-lg) 0; }
-  .profile-avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--sri-red); color: #F5F0E6; font-size: 28px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: var(--sp-sm); }
-  .profile-name { font-size: 18px; font-weight: 700; color: var(--title); }
-
-  .stat-row { display: flex; justify-content: center; gap: var(--sp-xl); margin: var(--sp-md) 0; }
-  .stat-item { text-align: center; }
-  .stat-val { font-size: 24px; font-weight: 700; color: var(--sri-red); }
-  .stat-label { font-size: 11px; color: var(--text-muted); }
-
-  .tier-card { background: var(--white); border-radius: var(--radius-lg); padding: var(--sp-lg); margin: var(--sp-sm) 0; border: 1px solid var(--border-light); text-align: center; }
-  .tier-card.featured { border: 2px solid var(--sri-red); }
-  .tier-card .tier-badge { display: inline-block; padding: 3px 14px; border-radius: var(--radius-full); font-size: 12px; font-weight: 700; margin-bottom: var(--sp-sm); }
-  .tier-card .tier-name { font-size: 16px; font-weight: 700; color: var(--title); margin-bottom: 4px; }
-  .tier-card .tier-requirement { font-size: 12px; color: var(--text-muted); margin-bottom: var(--sp-sm); }
-  .tier-card .tier-reward { font-size: 13px; color: var(--sri-red); font-weight: 600; }
-
-  .referral-box { background: var(--sri-red-light); border-radius: var(--radius-lg); padding: var(--sp-lg); text-align: center; margin: var(--sp-md) 0; }
-  .referral-link { background: var(--white); padding: 10px 14px; border-radius: var(--radius-md); font-size: 13px; font-family: var(--font-mono); word-break: break-all; margin: var(--sp-sm) 0; border: 1px solid var(--border); }
-  .copy-confirm { display: none; color: var(--green); font-size: 12px; font-weight: 600; }
-
-  .progress-bar { height: 8px; background: var(--border-light); border-radius: 4px; margin: var(--sp-sm) 0; overflow: hidden; }
-  .progress-fill { height: 100%; background: var(--sri-red); border-radius: 4px; transition: width 0.5s var(--ease-out); }
-
-  .btn-block { width: 100%; text-align: center; }
+:root{--red:#C23B22;--gold:#B8860B;--bg:#FAF7F2;--white:#FFF;--text:#2D2D2D;--text2:#5C5C5C;--text3:#999;--border:#E8E0D5;--green:#3D7A4F;--radius:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
+a{color:var(--gold);text-decoration:none}
+.header{background:var(--white);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+.header .logo{font-size:16px;font-weight:700;color:var(--red)}
+.container{max-width:800px;margin:0 auto;padding:24px 20px 60px}
+.hero{text-align:center;padding:32px 0 20px}
+.hero .avatar{width:64px;height:64px;border-radius:50%;background:var(--red);color:#fff;font-size:28px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px}
+.card{background:var(--white);border-radius:var(--radius);padding:20px;border:1px solid var(--border);margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.card h3{font-size:15px;margin-bottom:10px}
+.card p{font-size:13px;color:var(--text2);margin-bottom:4px}
+.tabs{display:flex;gap:0;margin-bottom:20px;border-bottom:2px solid var(--border)}
+.tab{flex:1;padding:10px 4px;border:none;background:transparent;font-size:13px;font-weight:600;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;font-family:inherit}
+.tab.active{color:var(--red);border-bottom-color:var(--red)}
+.tab-content{display:none;animation:fadeUp .3s both}
+.tab-content.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .2s;font-family:inherit}
+.btn-primary{background:var(--red);color:#fff}.btn-primary:hover{background:#A8321C}
+.btn-outline{background:transparent;color:var(--red);border:1px solid var(--red)}
+.btn-outline:hover{background:rgba(194,59,34,.05)}
+.btn-block{width:100%}.btn:disabled{opacity:.5}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);padding:12px 24px;border-radius:8px;font-size:14px;font-weight:600;z-index:100;opacity:0;pointer-events:none;transition:all .3s}
+.toast.show{opacity:1}.toast.success{background:#E8F5E9;color:var(--green)}.toast.error{background:#FFEBEE;color:var(--red)}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12px;font-weight:600;margin-bottom:3px}
+.field input{width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:inherit;outline:none}
+.field input:focus{border-color:var(--gold)}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;margin:2px}
+.tag-red{background:#FDE8E5;color:var(--red)}.tag-gold{background:#FDF3E0;color:var(--gold)}.tag-green{background:#E8F0EB;color:var(--green)}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:16px}
+.stat-card{background:var(--white);border-radius:var(--radius);padding:16px;text-align:center;border:1px solid var(--border)}
+.stat-num{font-size:22px;font-weight:700;color:var(--red)}.stat-label{font-size:11px;color:var(--text3);margin-top:2px}
+.delivery-item{display:flex;align-items:center;justify-content:space-between;padding:12px;border-bottom:1px solid var(--border)}
+.delivery-item:last-child{border-bottom:none}
+.delivery-item .name{font-weight:600;font-size:13px}
+.delivery-item .meta{font-size:11px;color:var(--text3)}
+.empty{text-align:center;padding:40px;color:var(--text3)}
+@media(max-width:480px){.container{padding:12px 14px}.tabs{font-size:11px}}
 </style>
-<link rel="stylesheet" href="vi_quick_ref.css">
 </head>
 <body>
-
-<div class="hero">
-  <h1>👤 客户中心</h1>
-  <p style="color:rgba(245,240,230,0.9);font-size:14px;">你的满意解账户</p>
+<div class="header"><a class="logo" href="index.html">🔥 满意解研究所</a><a href="index.html" style="font-size:13px;color:var(--gold)">← 返回首页</a></div>
+<div class="container">
+<!-- 未登录 -->
+<div id="guestView" style="display:none">
+  <div class="hero">
+    <div class="avatar">👤</div>
+    <h2 style="margin-bottom:4px">欢迎来到个人中心</h2>
+    <p style="font-size:13px;color:var(--text2)">登录后管理你的档案、产品和推荐</p>
+  </div>
+  <div class="card">
+    <h3>🔑 登录</h3>
+    <form id="loginForm" onsubmit="return doLogin(event)">
+      <div class="field"><label>邮箱</label><input type="email" id="loginEmail" placeholder="your@email.com" required></div>
+      <div class="field"><label>密码</label><input type="password" id="loginPwd" placeholder="至少6位" required></div>
+      <button type="submit" class="btn btn-primary btn-block">登录</button>
+    </form>
+  </div>
+  <div class="card">
+    <h3>🆕 注册</h3>
+    <form id="regForm" onsubmit="return doRegister(event)">
+      <div class="field"><label>邮箱 *</label><input type="email" id="regEmail" required></div>
+      <div class="field"><label>姓名 *</label><input type="text" id="regName" required></div>
+      <div class="field"><label>密码 *（至少6位）</label><input type="password" id="regPwd" required></div>
+      <div class="field"><label>企业</label><input type="text" id="regCompany"></div>
+      <div class="field"><label>行业</label><input type="text" id="regIndustry" placeholder="半导体 / AI / 生物医药..."></div>
+      <button type="submit" class="btn btn-outline btn-block">创建账户</button>
+    </form>
+  </div>
 </div>
 
-<div class="main">
-  <!-- Tabs -->
-  <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('profile',this)">📋 我的</button>
-    <button class="tab-btn" onclick="switchTab('referral',this)">🎁 转介绍</button>
-    <button class="tab-btn" onclick="switchTab('unlock',this)">🔓 解锁</button>
+<!-- 已登录 -->
+<div id="memberView" style="display:none">
+  <div class="hero">
+    <div class="avatar" id="mAvatar">👤</div>
+    <h2 id="mName" style="margin-bottom:2px">---</h2>
+    <p style="font-size:12px;color:var(--text3)"><span id="mEmail">---</span> · <span id="mRole">---</span></p>
   </div>
 
-  <!-- ===== TAB 1: 个人信息 ===== -->
-  <div class="tab-content active" id="tab-profile">
-    <div id="profileView">
-      <div class="profile-header">
-        <div class="profile-avatar" id="avatarDisplay">👤</div>
-        <div class="profile-name" id="nameDisplay">未注册</div>
-        <p style="font-size:12px;color:var(--text-muted);" id="companyDisplay">完善信息以获得更多功能</p>
-      </div>
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('overview')">📊 概览</button>
+    <button class="tab" onclick="switchTab('profile')">👤 档案</button>
+    <button class="tab" onclick="switchTab('delivery')">📦 产品</button>
+    <button class="tab" onclick="switchTab('referral')">🤝 推荐</button>
+  </div>
 
-      <div class="card">
-        <h3 style="font-size:15px;margin-bottom:var(--sp-md);">📋 基本信息</h3>
-        <div class="field">
-          <label>姓名</label>
-          <input type="text" id="name" placeholder="你的姓名">
-        </div>
-        <div class="field">
-          <label>企业/机构</label>
-          <input type="text" id="company" placeholder="你所在的企业">
-        </div>
-        <div class="field">
-          <label>邮箱 <span class="hint">（用于接收测评报告和专属密码）</span></label>
-          <input type="email" id="email" placeholder="your@email.com">
-        </div>
-        <div class="field">
-          <label>身份</label>
-          <select id="role">
-            <option value="">请选择</option>
-            <option>创始人/CEO</option><option>联合创始人/CTO</option><option>联合创始人/COO</option>
-            <option>合伙人</option><option>投资人</option><option>其他</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>行业赛道</label>
-          <select id="industry">
-            <option value="">请选择</option>
-            <option>硬科技（半导体/量子/芯片）</option><option>人工智能/机器人</option>
-            <option>新能源/储能</option><option>精密制造</option>
-            <option>生物医药/脑机</option><option>eVTOL/航天</option>
-            <option>SaaS/软件</option><option>其他</option>
-          </select>
-        </div>
-        <button class="btn btn-primary btn-block" onclick="saveProfile()" style="margin-top:var(--sp-sm);">保存信息</button>
-        <p class="hint" style="text-align:center;margin-top:var(--sp-sm);">你的信息仅用于满意解研究所内部，不会分享给第三方</p>
-      </div>
-
-      <div class="card" id="statsCard" style="display:none;">
-        <h3 style="font-size:15px;margin-bottom:var(--sp-md);">📊 我的数据</h3>
-        <div class="stat-row">
-          <div class="stat-item"><div class="stat-val" id="toolsUsed">0</div><div class="stat-label">使用工具</div></div>
-          <div class="stat-item"><div class="stat-val" id="refCount">0</div><div class="stat-label">成功转介绍</div></div>
-          <div class="stat-item"><div class="stat-val" id="tierLevel">—</div><div class="stat-label">当前等级</div></div>
-        </div>
-        <div class="progress-bar"><div class="progress-fill" id="tierProgress" style="width:0%"></div></div>
-        <p style="font-size:11px;color:var(--text-muted);text-align:center;" id="tierHint"></p>
-      </div>
+  <div class="tab-content active" id="tab-overview">
+    <div class="stat-row">
+      <div class="stat-card"><div class="stat-num" id="statProducts">0</div><div class="stat-label">已购产品</div></div>
+      <div class="stat-card"><div class="stat-num" id="statInquiries">0</div><div class="stat-label">留言咨询</div></div>
+      <div class="stat-card"><div class="stat-num" id="statReferrals">0</div><div class="stat-label">成功推荐</div></div>
+      <div class="stat-card"><div class="stat-num" id="statScore">-</div><div class="stat-label">决策风格</div></div>
+    </div>
+    <div class="card">
+      <h3>🔥 快速入口</h3>
+      <a href="assessment.html" class="btn btn-primary" style="margin:4px">🧭 决策自评</a>
+      <a href="go.html" class="btn btn-outline" style="margin:4px">🛠 产品中心</a>
+      <a href="client.html" class="btn btn-outline" style="margin:4px">💬 联系我们</a>
     </div>
   </div>
 
-  <!-- ===== TAB 2: 转介绍 ===== -->
+  <div class="tab-content" id="tab-profile">
+    <div class="card">
+      <h3>👤 个人档案</h3>
+      <form id="profileForm" onsubmit="return updateProfile(event)">
+        <div class="field"><label>姓名</label><input type="text" id="pName"></div>
+        <div class="field"><label>手机</label><input type="tel" id="pPhone"></div>
+        <div class="field"><label>企业</label><input type="text" id="pCompany"></div>
+        <div class="field"><label>职位</label><input type="text" id="pPosition"></div>
+        <div class="field"><label>行业</label><input type="text" id="pIndustry"></div>
+        <button type="submit" class="btn btn-primary">保存</button>
+        <button type="button" class="btn btn-outline" onclick="doLogout()" style="margin-left:8px">退出登录</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-delivery">
+    <div class="card">
+      <h3>📦 我的产品</h3>
+      <div id="deliveryList"></div>
+    </div>
+  </div>
+
   <div class="tab-content" id="tab-referral">
     <div class="card">
-      <h3 style="font-size:15px;margin-bottom:4px;">🎁 邀请朋友，解锁深度工具</h3>
-      <p style="font-size:12px;color:var(--text-muted);">双方都有奖励——你和你的朋友都会得到更多</p>
-
-      <div class="referral-box">
-        <p style="font-size:13px;font-weight:600;color:var(--title);margin-bottom:8px;">你的专属转介绍链接</p>
-        <div class="referral-link" id="refLink">请先完善个人信息</div>
-        <button class="btn btn-sm btn-outline" onclick="copyRef()" style="margin-top:8px;">📋 复制链接</button>
-        <span class="copy-confirm" id="copyConfirm">✅ 已复制！</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3 style="font-size:15px;margin-bottom:4px;">🏆 转介绍阶梯奖励</h3>
-      <p style="font-size:12px;color:var(--text-muted);">每邀请一位朋友（他完成任意一个测评工具），你解锁更多</p>
-
-      <div class="tier-card featured" style="margin-top:12px;">
-        <span class="tier-badge badge-red">当前</span>
-        <div class="tier-name">🌱 青铜 · 起步</div>
-        <div class="tier-requirement">邀请 0 人 · 你现在在这里</div>
-        <div class="tier-reward">✅ 免费工具全解锁</div>
-      </div>
-      <div class="tier-card">
-        <span class="tier-badge badge-gold">白银</span>
-        <div class="tier-name">🥈 白银 · 进阶</div>
-        <div class="tier-requirement">邀请 3 人完成测评</div>
-        <div class="tier-reward">🔓 解锁完整版五维诊断（衡·测渊）</div>
-      </div>
-      <div class="tier-card">
-        <span class="tier-badge badge-gold">黄金</span>
-        <div class="tier-name">🥇 黄金 · 深度</div>
-        <div class="tier-requirement">邀请 5 人完成测评</div>
-        <div class="tier-reward">🔓 解锁全部L3深度内容（Gottman/Wasserman/Duke全量）</div>
-      </div>
-      <div class="tier-card">
-        <span class="tier-badge badge-green">钻石</span>
-        <div class="tier-name">💎 钻石 · 大师</div>
-        <div class="tier-requirement">邀请 10 人完成测评</div>
-        <div class="tier-reward">🔓 免费一次引导师 1v1 解读（价值3000元）</div>
-      </div>
-
-      <div class="referral-box" style="margin-top:12px;">
-        <p style="font-size:13px;font-weight:600;color:var(--title);">🤝 你的朋友会得到什么</p>
-        <p style="font-size:12px;color:var(--text);margin-top:4px;">通过你的链接注册的朋友——<br>自动获得 <strong>7天完整权限</strong>（全部工具可用）</p>
-      </div>
+      <h3>🤝 推荐有礼</h3>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:12px">推荐朋友注册，双方各获得奖励。</p>
+      <div class="field"><label>我的推荐链接</label><input type="text" id="refLink" readonly onclick="this.select()"></div>
+      <button class="btn btn-primary btn-block" onclick="createRef()">生成推荐链接</button>
+      <div id="refList" style="margin-top:16px"></div>
     </div>
   </div>
-
-  <!-- ===== TAB 3: 解锁进度 ===== -->
-  <div class="tab-content" id="tab-unlock">
-    <div class="card">
-      <h3 style="font-size:15px;margin-bottom:4px;">🔓 你的解锁进度</h3>
-      <p style="font-size:12px;color:var(--text-muted);">通过转介绍和使用，解锁更多深度工具</p>
-
-      <div id="unlockList">
-        <div style="padding:8px 0;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:10px;">
-          <span style="font-size:18px;">✅</span>
-          <div style="flex:1;">
-            <div style="font-weight:600;color:var(--title);font-size:13px;">免费工具</div>
-            <div style="font-size:11px;color:var(--text-muted);">观局·触温·警兆·破冰·淬火·鉴往</div>
-          </div>
-          <span style="font-size:11px;color:var(--green);">已解锁</span>
-        </div>
-        <div style="padding:8px 0;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:10px;">
-          <span style="font-size:18px;">🔒</span>
-          <div style="flex:1;">
-            <div style="font-weight:600;color:var(--title);font-size:13px;">完整版诊断</div>
-            <div style="font-size:11px;color:var(--text-muted);">衡·测渊 · 28题 · 8模块</div>
-          </div>
-          <span style="font-size:11px;color:var(--sri-red);">需邀请3人</span>
-        </div>
-        <div style="padding:8px 0;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:10px;">
-          <span style="font-size:18px;">🔒</span>
-          <div style="flex:1;">
-            <div style="font-weight:600;color:var(--title);font-size:13px;">L3深度内容</div>
-            <div style="font-size:11px;color:var(--text-muted);">Gottman/Wasserman/Duke/Feld/Thiel全量</div>
-          </div>
-          <span style="font-size:11px;color:var(--sri-red);">需邀请5人</span>
-        </div>
-        <div style="padding:8px 0;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:10px;">
-          <span style="font-size:18px;">🔒</span>
-          <div style="flex:1;">
-            <div style="font-weight:600;color:var(--title);font-size:13px;">引导师1v1解读</div>
-            <div style="font-size:11px;color:var(--text-muted);">90分钟·专属报告·行动方案</div>
-          </div>
-          <span style="font-size:11px;color:var(--sri-red);">需邀请10人</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
 </div>
-<p style="text-align:center;padding:var(--sp-lg);"><a href="go.html" style="color:var(--text-muted);text-decoration:none;font-size:13px;">← 返回决策通道</a></p>
+
+<div class="toast" id="toast"></div>
+</div>
 
 <script>
-// Tab switching
-function switchTab(name, btn) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('tab-'+name).classList.add('active');
-  if (name === 'profile') loadProfile();
-  if (name === 'referral') loadReferral();
-}
+var customer = null;
 
-// Profile management
-function saveProfile() {
-  let profile = {
-    name: document.getElementById('name').value.trim(),
-    company: document.getElementById('company').value.trim(),
-    email: document.getElementById('email').value.trim(),
-    role: document.getElementById('role').value,
-    industry: document.getElementById('industry').value,
-    customerId: 'SRI-' + Date.now().toString(36).toUpperCase(),
-    registered: new Date().toISOString(),
-    toolsUsed: JSON.parse(localStorage.getItem('sri_usage_log') || '[]').length || 0,
-    refCount: parseInt(localStorage.getItem('sri_ref_count') || '0'),
-  };
-  if (!profile.name) { alert('请至少填写姓名'); return; }
-  
-  localStorage.setItem('sri_profile', JSON.stringify(profile));
-  loadProfile();
-  alert('✅ 信息已保存！');
-}
-
-function loadProfile() {
-  let p = JSON.parse(localStorage.getItem('sri_profile') || '{}');
-  if (p.name) {
-    document.getElementById('avatarDisplay').textContent = p.name[0];
-    document.getElementById('nameDisplay').textContent = p.name;
-    document.getElementById('companyDisplay').textContent = p.company || '';
-    document.getElementById('name').value = p.name || '';
-    document.getElementById('company').value = p.company || '';
-    document.getElementById('email').value = p.email || '';
-    document.getElementById('role').value = p.role || '';
-    document.getElementById('industry').value = p.industry || '';
-    
-    // Stats
-    document.getElementById('statsCard').style.display = 'block';
-    let used = JSON.parse(localStorage.getItem('sri_usage_log') || '[]').length;
-    let refs = parseInt(localStorage.getItem('sri_ref_count') || '0');
-    document.getElementById('toolsUsed').textContent = used || 0;
-    document.getElementById('refCount').textContent = refs;
-    
-    // Tier
-    let tier, nextTier, progress;
-    if (refs >= 10) { tier = '💎 钻石'; nextTier = '已达最高'; progress = 100; }
-    else if (refs >= 5) { tier = '🥇 黄金'; nextTier = '距钻石还需 '+(10-refs)+' 人'; progress = (refs-5)*20; }
-    else if (refs >= 3) { tier = '🥈 白银'; nextTier = '距黄金还需 '+(5-refs)+' 人'; progress = (refs-3)*50; }
-    else { tier = '🌱 青铜'; nextTier = '距白银还需 '+(3-refs)+' 人'; progress = refs*33; }
-    
-    document.getElementById('tierLevel').textContent = tier;
-    document.getElementById('tierProgress').style.width = progress+'%';
-    document.getElementById('tierHint').textContent = nextTier;
-    
-    // Referral link
-    let refCode = p.customerId || 'SRI-UNREGISTERED';
-    document.getElementById('refLink').textContent = 'https://egbertie.github.io/satisficing-lab/go.html?ref='+refCode;
-  } else {
-    document.getElementById('statsCard').style.display = 'none';
-    document.getElementById('refLink').textContent = '请先完善个人信息以生成转介绍链接';
-  }
-}
-
-function loadReferral() {
-  loadProfile();
-}
-
-function copyRef() {
-  let link = document.getElementById('refLink').textContent;
-  if (link.includes('请先')) { alert('请先在"我的"页完善个人信息'); return; }
-  navigator.clipboard.writeText(link).then(() => {
-    let c = document.getElementById('copyConfirm');
-    c.style.display = 'inline';
-    setTimeout(() => c.style.display = 'none', 2000);
-  });
-}
-
-// Track referral visits
-(function() {
-  let params = new URLSearchParams(window.location.search);
-  let ref = params.get('ref');
-  if (ref && !localStorage.getItem('sri_referred_by')) {
-    localStorage.setItem('sri_referred_by', ref);
-    // Increment referrer's count (handled by referrer's localStorage)
-    // In production: API call to backend
-  }
+// Init
+(function(){
+  var t = SRI_API.getToken();
+  if(t){
+    SRI_API.getMe().then(function(d){customer=d.customer;renderMember();}).catch(function(){showGuest();});
+  }else{showGuest();}
 })();
 
-loadProfile();
+function showGuest(){document.getElementById('guestView').style.display='block';document.getElementById('memberView').style.display='none';}
+function showMember(){document.getElementById('guestView').style.display='none';document.getElementById('memberView').style.display='block';}
+
+function renderMember(){
+  if(!customer)return;
+  showMember();
+  document.getElementById('mName').textContent=customer.name||'未设置';
+  document.getElementById('mEmail').textContent=customer.email;
+  document.getElementById('mRole').textContent={trial:'试用',free:'免费',premium:'付费',vip:'VIP',partner:'合伙人'}[customer.role]||customer.role;
+  document.getElementById('mAvatar').textContent=(customer.name||'?')[0];
+  document.getElementById('statScore').textContent=customer.decision_style||'-';
+  
+  // Load data
+  loadProfile();
+  loadDeliveries();
+  loadReferrals();
+}
+
+function loadProfile(){
+  var c=customer; if(!c)return;
+  document.getElementById('pName').value=c.name||'';
+  document.getElementById('pPhone').value=c.phone||'';
+  document.getElementById('pCompany').value=c.company||'';
+  document.getElementById('pPosition').value=c.position||'';
+  document.getElementById('pIndustry').value=c.industry||'';
+}
+
+async function updateProfile(e){
+  e.preventDefault();
+  var d={
+    name:document.getElementById('pName').value.trim(),
+    phone:document.getElementById('pPhone').value.trim(),
+    company:document.getElementById('pCompany').value.trim(),
+    position:document.getElementById('pPosition').value.trim(),
+    industry:document.getElementById('pIndustry').value.trim()
+  };
+  try{
+    await SRI_API.updateProfile(d);
+    toast('✅ 档案已更新','success');
+  }catch(e){toast('❌ 更新失败','error');}
+  return false;
+}
+
+async function loadDeliveries(){
+  try{
+    var r=await SRI_API.getDeliveries();
+    var items=r.deliveries||[];
+    document.getElementById('statProducts').textContent=items.length;
+    var html=items.length?items.map(function(d){
+      return '<div class="delivery-item"><div><div class="name">'+d.product_name+'</div><div class="meta">'+d.granted_at+'</div></div><span class="tag tag-green">使用中</span></div>';
+    }).join(''):'<div class="empty">暂无产品</div>';
+    document.getElementById('deliveryList').innerHTML=html;
+  }catch(e){}
+}
+
+async function loadReferrals(){
+  try{
+    var r=await SRI_API.getReferrals();
+    var items=r.referrals||[];
+    document.getElementById('statReferrals').textContent=items.filter(function(x){return x.status==='converted'}).length;
+    var html=items.length?items.map(function(rf){
+      return '<div class="delivery-item"><div><div class="name">'+rf.referral_code+'</div><div class="meta">状态: '+rf.status+'</div></div></div>';
+    }).join(''):'';
+    document.getElementById('refList').innerHTML=html||'<div class="empty" style="padding:16px">暂无推荐记录</div>';
+  }catch(e){}
+}
+
+async function doLogin(e){
+  e.preventDefault();
+  try{
+    var r=await SRI_API.login(document.getElementById('loginEmail').value.trim(),document.getElementById('loginPwd').value.trim());
+    customer=r.customer;renderMember();toast('✅ 登录成功','success');
+  }catch(e){toast('❌ 登录失败: '+(e.error||'邮箱或密码错误'),'error');}
+  return false;
+}
+
+async function doRegister(e){
+  e.preventDefault();
+  var pwd=document.getElementById('regPwd').value.trim();
+  if(pwd.length<6){toast('密码至少6位','error');return false;}
+  try{
+    var r=await SRI_API.register({
+      email:document.getElementById('regEmail').value.trim(),
+      password:pwd,
+      name:document.getElementById('regName').value.trim(),
+      company:document.getElementById('regCompany').value.trim(),
+      industry:document.getElementById('regIndustry').value.trim()
+    });
+    customer=r.customer;renderMember();toast('✅ 注册成功','success');
+  }catch(e){toast('❌ '+(e.error||'注册失败'),'error');}
+  return false;
+}
+
+async function doLogout(){
+  await SRI_API.logout();customer=null;showGuest();toast('已退出登录','success');
+}
+
+async function createRef(){
+  try{
+    var r=await SRI_API.createReferral();
+    document.getElementById('refLink').value=r.link;
+    loadReferrals();
+    toast('✅ 推荐链接已生成','success');
+  }catch(e){toast('❌ 生成失败','error');}
+}
+
+function switchTab(n){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+  document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
+  var idx={overview:0,profile:1,delivery:2,referral:3}[n]||0;
+  document.querySelectorAll('.tab')[idx].classList.add('active');
+  document.getElementById('tab-'+n).classList.add('active');
+}
+
+function toast(m,t){
+  var el=document.getElementById('toast');el.className='toast show '+t;el.textContent=m;
+  setTimeout(function(){el.className='toast'},3000);
+}
 </script>
-<script src="flywheel-engine.js"></script>
 </body>
 </html>

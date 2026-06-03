@@ -5,7 +5,7 @@
  */
 
 const SRI_API = {
-  base: "http://127.0.0.1:5000",
+  base: "http://127.0.0.1:5050",
   // 部署到腾讯云后改为: "https://api.你的域名.com"
 
   tokenKey: "sri_token",
@@ -120,5 +120,14 @@ const SRI_API = {
   // ─── 产品交付 ───
   async getDeliveries() {
     return this._fetch("/api/deliveries");
+  },
+
+  // ─── 转介绍 ───
+  async createReferral() {
+    return this._fetch("/api/referral/create", { method: "POST" });
+  },
+
+  async getReferrals() {
+    return this._fetch("/api/referrals");
   }
 };
