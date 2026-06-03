@@ -32,8 +32,40 @@ body {
   line-height: 1.6;
 }
 
+/* ========== 密码门 ========== */
+#gate {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 100vh; flex-direction: column; gap: 20px;
+  background: var(--paper-white);
+}
+#gate .gate-logo {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: var(--accent-red);
+  color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6em; font-weight: 300;
+  margin-bottom: 8px;
+}
+#gate h1 { font-size: 2.2em; font-weight: 300; color: var(--ink); letter-spacing: 0.08em; }
+#gate .subtitle { color: var(--ink-light); font-size: 0.95em; margin-bottom: 16px; }
+#gate input {
+  background: var(--card-white); border: 1px solid var(--border-warm);
+  color: var(--ink); padding: 12px 20px; width: 260px; border-radius: 10px;
+  font-size: 1.1em; text-align: center; outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+#gate input:focus { border-color: var(--accent-gold); box-shadow: 0 0 0 3px rgba(184,134,11,0.1); }
+#gate button {
+  background: var(--accent-red); color: #fff; border: none;
+  padding: 11px 44px; border-radius: 10px; font-size: 1.05em;
+  cursor: pointer; transition: all 0.2s; letter-spacing: 0.04em;
+  font-weight: 500;
+}
+#gate button:hover { background: #A8351E; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(194,59,34,0.25); }
+#gate .hint { color: var(--ink-lighter); font-size: 0.82em; }
+
 /* ========== 应用主体 ========== */
-#app { display:block; max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+#app { display:none; max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
 
 /* ========== Header ========== */
 .header { text-align: center; margin-bottom: 44px; padding-bottom: 28px; border-bottom: 1px solid var(--border-warm); }
@@ -343,11 +375,21 @@ body {
 </head>
 <body>
 
+<!-- ==================== 密码门 ==================== -->
+<div id="gate">
+  <div class="gate-logo">红</div>
+  <h1>满意解</h1>
+  <p class="subtitle">自我报告 · 驾驶舱 V3</p>
+  <input type="password" id="pw" placeholder="输入通行码" autofocus onkeydown="if(event.key==='Enter') document.getElementById('btn-unlock').click()">
+  <button id="btn-unlock" onclick="unlock(this)">进入</button>
+  <p class="hint">提示: 123654</p>
+</div>
+
 <!-- ==================== 主应用 ==================== -->
-<div id="app" style="display:block">
+<div id="app">
   <!-- Header -->
   <div class="header">
-    <h1><span class="accent">满意解</span> · 驾驶舱 V3</h1>
+    <h1><span class="accent">满意解</span> · 自我报告</h1>
     <div class="dateline" id="dateline"></div>
     <div class="countdown" id="countdown"></div>
   </div>
@@ -356,10 +398,11 @@ body {
   <div class="section-title">🫀 生命体征 <span style="font-size:0.7em;color:var(--ink-lighter);font-weight:400;">· 每30分钟自动更新</span></div>
   <div class="vitals-bar" id="vitals-bar"></div>
   <div class="quick-actions">
-    <button onclick="location.href='admin-windows.html'" title="管理后台 v3.2 · 9域36模块">🏢 管理后台</button>
-    <button onclick="location.href='go.html'" title="产品导航">🧭 产品地图</button>
-    <button onclick="location.href='client.html'" title="客户通道">🤝 客户通道</button>
-    <button onclick="location.href='account.html'" title="个人中心">👤 个人中心</button>
+    <button onclick="location.href='gate.html'" title="密码生成与管理">🔐 密码管理</button>
+    <button onclick="window.open('memory/_data/entities_index.json','_blank')" title="查看完整实体索引">📋 实体索引</button>
+    <button onclick="window.open('memory/deep/满意解_信息架构与数据字典_V2.md','_blank')" title="信息架构与数据字典">📖 数据字典</button>
+    <button onclick="window.open('https://egbertie.github.io/satisficing-lab/dashboard.html','_blank')" title="驾驶舱V1(原始版)">📊 V1面板</button>
+    <button onclick="window.open('https://egbertie.github.io/satisficing-lab/go.html','_blank')" title="产品导航">🧭 产品地图</button>
   </div>
 
   <!-- L1 · 内稳态仪表 -->
@@ -411,7 +454,36 @@ body {
    满意解 · 驾驶舱 V3 — 完全重写
    配色: VI 体系（宣纸白底 / 墨色正文 / 绀红强调 / 古铜金）
    三层穿透: L1 概览卡 → L2 展开详情表 → L3 组合比对
+   单 script 块，sessionStorage 密码门，明文密码 123654
    ================================================================ */
+
+var PASSCODE = '123654';
+
+/* ========== 密码门 ========== */
+function unlock(btn) {
+  var inp = document.getElementById('pw');
+  if (inp.value.trim() === PASSCODE) {
+    sessionStorage.setItem('sri_dash_v3_unlocked', '1');
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    initDashboard();
+  } else {
+    btn.textContent = '✗ 再试';
+    btn.style.background = '#8A5030';
+    inp.value = '';
+    inp.focus();
+    setTimeout(function() { btn.textContent = '进入'; btn.style.background = ''; }, 1200);
+  }
+}
+
+/* ========== sessionStorage 自动恢复 ========== */
+(function() {
+  if (sessionStorage.getItem('sri_dash_v3_unlocked') === '1') {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    initDashboard();
+  }
+})();
 
 /* ================================================================
    数据 — 硬编码在 JS 中
@@ -1228,9 +1300,6 @@ function renderActivity() {
   }
   document.getElementById('activity-section').innerHTML = h;
 }
-
-// 直接启动
-initDashboard();
 </script>
 <p style="text-align:center;font-size:10px;opacity:0.35;padding:4px;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</p>
 

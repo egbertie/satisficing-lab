@@ -59,9 +59,9 @@ body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;backgr
 </style>
 </head>
 <body>
-<h1 style="font-size:1.5em;padding:16px">🏢 管理后台 · 满意解研究所</h1>
+<h1 style="font-size:1.5em;padding:16px">admin-windows</h1>
 
-<div class="app" id="app" style="display:flex"><nav class="sidebar" id="sidebar"><div style="padding:20px;text-align:center;color:var(--ink-light);margin-top:40px"><div class="spinner" style="border-top-color:var(--gold)"></div><p style="margin-top:12px;font-size:.82em">正在连接数据引擎...</p></div></nav><main class="main" id="main-content"><div class="loading"><div class="spinner"></div><p style="margin-top:16px;font-size:.9em">📡 加载 entities_index.json (6.8MB)...</p></div></main></div>
+<div class="app" id="app"><nav class="sidebar" id="sidebar"></nav><main class="main" id="main-content"></main></div>
 <script>
 
 /* ================================================================
@@ -114,8 +114,7 @@ var NAV=[
   ]},
   {id:'governance',label:'🛡️ 免疫与治理',children:[
     {id:'gov-immune',label:'免疫系统',desc:'L0-L6七层·事件'},
-    {id:'gov-rules',label:'规则引擎',desc:'53规则·激活·反馈'},
-    {id:'gov-token-health',label:'💊 Token健康度',desc:'消耗·Cron·预警·自检'},
+    {id:'gov-rules',label:'规则引擎',desc:'48规则·激活·反馈'},
     {id:'gov-quality-gate',label:'质量门禁',desc:'代码·内容·设计·数据'},
     {id:'gov-compliance',label:'合规与审计',desc:'隐私·安全·许可'}
   ]},
@@ -124,14 +123,6 @@ var NAV=[
     {id:'arch-artifacts',label:'历史文物',desc:'35件·来源·意义'},
     {id:'arch-simulations',label:'模拟与场景',desc:'16场景·30天随访'},
     {id:'arch-insights',label:'发现与洞察',desc:'趋势·模式·异常'}
-  ]},
-  {id:'backend',label:'🖥️ 后端实时监控',children:[
-    {id:'backend-dashboard',label:'📊 实时总览',desc:'API数据·客户·事件·漏斗'},
-    {id:'backend-funnel',label:'🔻 获客漏斗',desc:'访问→使用→注册→付费'},
-    {id:'backend-dau',label:'📈 日活趋势',desc:'7日DAU曲线'},
-    {id:'backend-products',label:'📦 产品使用排行',desc:'热门产品TOP20'},
-    {id:'backend-events',label:'📋 事件流',desc:'最近行为事件'},
-    {id:'backend-customers',label:'👤 客户列表',desc:'生命周期·健康分'}
   ]},
   {id:'people',label:'👥 组织与人',children:[
     {id:'people-avatars',label:'替身管理',desc:'激活·休眠·唤醒'},
@@ -185,10 +176,6 @@ function initApp(){
   fetch('entities_index.json').then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(function(j){
     DB=j;loadError=false;renderSidebar();navTo('strategy-kpi');
   }).catch(function(err){console.error(err);loadError=true;DB=null;renderSidebar();navTo('strategy-kpi')});
-  // 后端实时数据
-  window._BACKEND={loaded:false,data:null};
-  var adminToken='eyJhbG…_HxU';
-  fetch('http://127.0.0.1:5050/api/admin/dashboard/summary',{headers:{'Authorization':'***'+adminToken}}).then(function(r){return r.json()}).then(function(d){window._BACKEND={loaded:true,data:d}}).catch(function(e){console.log('后端API未连接:',e.message)});
 }
 
 /* ===== 侧栏 ===== */
@@ -630,61 +617,6 @@ viewRenderers['gov-quality-gate']=function(){
 
 viewRenderers['gov-compliance']=function(){return breadcrumb('governance','合规与审计')+placeholder('合规与审计','隐私政策·安全许可·审计跟踪 · 法务审核后将完整展示')};
 
-/* ===== Token健康度面板 (LRULE-CRON 001-005) ===== */
-viewRenderers['gov-token-health']=function(){
-  var h=breadcrumb('governance','Token健康度')+'<div class="panel-header"><div><h2>💊 Token健康度监控</h2><div class="meta">Cron自检·消耗预警·防膨胀·双经济约束</div></div></div>';
-
-  // 加载状态数据
-  var state={health:'unknown',analysis:{},alerts:[]};
-  try {
-    var raw=localStorage.getItem('token_health_state');
-    if(raw) state=JSON.parse(raw);
-  } catch(e){}
-
-  var a=state.analysis||{},health=state.health||'unknown';
-  var healthEmoji=health==='green'?'🟢':health==='yellow'?'🟡':health==='red'?'🔴':'⚪';
-  var healthLabel=health==='green'?'正常':health==='yellow'?'警告':health==='red'?'异常':'未知';
-
-  h+='<div class="stat-grid" style="grid-template-columns:repeat(4,1fr)">';
-  h+='<div class="stat-card"><div class="stat-num">'+healthEmoji+'</div><div class="stat-label">健康状态: '+healthLabel+'</div></div>';
-  h+='<div class="stat-card"><div class="stat-num">'+(a.token_pct!==undefined?a.token_pct+'%':'—')+'</div><div class="stat-label">Token消耗率</div><div class="stat-bar"><div class="fill '+(a.token_pct>=90?'fill-warn':a.token_pct>=80?'fill-gold':'fill-green')+'" style="width:'+Math.min(a.token_pct||0,100)+'%"></div></div></div>';
-  h+='<div class="stat-card"><div class="stat-num">'+(a.total_crons||'—')+'</div><div class="stat-label">Cron总数 / 红线30</div><div class="stat-bar"><div class="fill '+(a.total_crons>30?'fill-warn':'fill-green')+'" style="width:'+Math.min((a.total_crons||0)*3.3,100)+'%"></div></div></div>';
-  h+='<div class="stat-card"><div class="stat-num">'+(a.daily_execs||'—')+'</div><div class="stat-label">日执行 / 红线60</div><div class="stat-bar"><div class="fill '+(a.daily_execs>60?'fill-warn':'fill-green')+'" style="width:'+Math.min((a.daily_execs||0)*1.6,100)+'%"></div></div></div>';
-  h+='</div>';
-
-  h+='<div class="graph-stat" style="grid-template-columns:repeat(3,1fr);margin-top:14px">';
-  h+='<div class="stat-card"><div class="stat-label">错误率</div><div class="stat-num" style="font-size:1.4em">'+(a.error_rate!==undefined?(a.error_rate*100).toFixed(1)+'%':'—')+'</div><div class="stat-bar"><div class="fill '+(a.error_rate>0.15?'fill-warn':'fill-green')+'" style="width:'+Math.min((a.error_rate||0)*600,100)+'%"></div></div></div>';
-  h+='<div class="stat-card"><div class="stat-label">错误任务数</div><div class="stat-num" style="font-size:1.4em">'+(a.error_count||0)+'</div></div>';
-  h+='<div class="stat-card"><div class="stat-label">新增配额</div><div class="stat-num" style="font-size:1.4em">'+(a.new_cron_quota||0)+'</div><div style="font-size:.7em;color:var(--ink-light);margin-top:4px">需3天绿色后可申请</div></div>';
-  h+='</div>';
-
-  // 红线规则摘要
-  h+='<h3 style="font-size:.9em;margin:20px 0 10px">🧬 活跃规则 (LRULE-CRON 001-005)</h3>';
-  h+='<table class="data-table" style="font-size:.78em"><thead><tr><th>规则</th><th>红线</th><th>触发</th><th>后果</th></tr></thead><tbody>';
-  h+='<tr><td><b>CRON-001</b> 新增审批红线</td><td>Cron≤31</td><td>新增前检查</td><td>超限→禁止</td></tr>';
-  h+='<tr><td><b>CRON-002</b> 失败自动熔断</td><td>连续5+次失败</td><td>每4h</td><td>自动禁用</td></tr>';
-  h+='<tr><td><b>CRON-003</b> Token分级预警</td><td>≥90%红·≥80%黄·≥70%蓝</td><td>每6h</td><td>压缩/暂停非P0</td></tr>';
-  h+='<tr><td><b>CRON-004</b> 日执行限高</td><td>≤60次/天</td><td>每次扫描</td><td>超限→告警合并</td></tr>';
-  h+='<tr><td><b>CRON-005</b> 新增冷却期</td><td>3天绿色+7天评估</td><td>新增申请前</td><td>不满足→拒绝</td></tr>';
-  h+='</tbody></table>';
-
-  // 告警列表
-  if(state.alerts&&state.alerts.length){
-    h+='<h3 style="font-size:.9em;margin:20px 0 10px">📢 告警 ('+state.alerts.length+'条)</h3>';
-    for(var ai=0;ai<state.alerts.length;ai++){
-      h+='<div class="layer-section" style="border-left-color:'+(state.alerts[ai].indexOf('🔴')>=0?'var(--red)':'var(--gold)')+'"><div class="layer-title" style="font-size:.8em">'+state.alerts[ai]+'</div></div>';
-    }
-  } else {
-    h+='<div class="placeholder-card" style="margin-top:16px"><div class="ph-icon">✅</div><div class="ph-title">无告警</div><div class="ph-desc">上次扫描: '+(state.last_scan||'未扫描')+'</div></div>';
-  }
-
-  // 更新按钮
-  h+='<div style="margin-top:20px;text-align:center"><button class="btn btn-outline btn-sm" onclick="refreshTokenHealth()">🔄 手动刷新 (需从localStorage加载)</button></div>';
-  h+='<div style="font-size:.68em;color:var(--ink-lighter);text-align:center;margin-top:6px">数据由 Cron自检+Token健康度监控 (每4h) 自动更新</div>';
-
-  return h;
-};
-
 /* ================================================================
    08 考古与洞察
    ================================================================ */
@@ -728,91 +660,6 @@ viewRenderers['people-avatars']=function(){return breadcrumb('people','替身管
 viewRenderers['people-experts']=function(){return breadcrumb('people','专家团')+placeholder('专家团','代码工程师·内容策略师·创意设计师·数据分析师·研究咨询师 · 专家可用性看板建设中')};
 viewRenderers['people-council']=function(){return breadcrumb('people','五路评议会')+placeholder('五路评议会','五路图腾·编排逻辑·决议记录 · 评议会数据采集中')};
 viewRenderers['people-network']=function(){return breadcrumb('people','协作者网络')+placeholder('协作者网络','扣子·满意姐·满意解研究所·蓝军 · 关系图谱可视化建设中')};
-
-/* ===== 后端实时监控面板 ===== */
-var BK=function(){var d=window._BACKEND||{};if(!d.loaded)return null;return d.data};
-
-viewRenderers['backend-dashboard']=function(){
-  var d=BK();
-  if(!d) return breadcrumb('backend','实时总览')+'<div class="loading"><div class="spinner"></div><p>正在连接后端API...</p></div>';
-  var cs=d.customers||{},es=d.events||{},em=d.emails||{};
-  var h=breadcrumb('backend','实时总览')+'<div class="panel-header"><div><h2>🖥️ 后端实时监控总览</h2><div class="meta">API v2.0 · 数据来源: SQLite + 飞书集成</div></div></div>';
-  h+='<div class="stat-grid"><div class="stat-card"><div class="stat-num">'+cs.total+'</div><div class="stat-label">👤 总客户数</div></div><div class="stat-card"><div class="stat-num" style="color:var(--green)">'+cs.new_today+'</div><div class="stat-label">🆕 今日新增</div></div><div class="stat-card"><div class="stat-num">'+cs.active_today+'</div><div class="stat-label">🔥 今日活跃</div></div><div class="stat-card"><div class="stat-num">'+es.total+'</div><div class="stat-label">📊 总事件数</div></div><div class="stat-card"><div class="stat-num">'+es.today+'</div><div class="stat-label">📈 今日事件</div></div><div class="stat-card"><div class="stat-num">'+(d.sessions?d.sessions.today:'-')+'</div><div class="stat-label">🔗 今日会话</div></div><div class="stat-card"><div class="stat-num">'+em.total+'</div><div class="stat-label">✉️ 总邮件</div></div><div class="stat-card"><div class="stat-num" style="color:var(--warn)">'+(d.inquiries?d.inquiries.open:'-')+'</div><div class="stat-label">💬 待处理留言</div></div></div>';
-  h+='<h4 style="margin:12px 0 8px">客户生命周期分布</h4><div class="stat-grid">';
-  var st=cs.by_lifecycle||{};for(var k in st)h+='<div class="stat-card" style="cursor:default"><div class="stat-num">'+st[k]+'</div><div class="stat-label">'+k+'</div></div>';
-  h+='</div>';
-  h+='<h4 style="margin:12px 0 8px">事件分类分布</h4><div class="stat-grid">';
-  var ec=es.by_category||{};for(var k in ec)h+='<div class="stat-card" style="cursor:default"><div class="stat-num">'+ec[k]+'</div><div class="stat-label">'+k+'</div></div>';
-  h+='</div>';
-  return h;
-};
-
-viewRenderers['backend-funnel']=function(){
-  var h=breadcrumb('backend','获客漏斗')+'<div class="panel-header"><div><h2>🔻 获客漏斗</h2><div class="meta">最近30天</div></div></div>';
-  h+='<div id="funnelContainer"><div class="loading"><div class="spinner"></div><p>加载中...</p></div></div>';
-  fetch('http://127.0.0.1:5050/api/admin/dashboard/funnel?days=30',{headers:{'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MiwiZW1haWwiOiJlZ2JlcnRpZUBzYXRpc2ZpY2luZy5pbyIsImV4cCI6MTc4MDc0NjU3OSwiaWF0IjoxNzgwNDg3Mzc5fQ.p-51AhaMuII54q_-cj6fcl5onJOVBY6noozC9vT_HxU'}}).then(function(r){return r.json()}).then(function(d){
-    var fh='<div class="stat-grid">';
-    (d.funnel||[]).forEach(function(s){fh+='<div class="stat-card" style="cursor:default"><div class="stat-num">'+s.count+'</div><div class="stat-label">'+s.stage+'</div><div class="stat-bar"><div class="fill fill-gold" style="width:'+(parseFloat(s.conversion_rate)||0)+'%"></div></div><div style="font-size:.7em;color:var(--ink-light)">转化率: '+s.conversion_rate+'</div></div>'});
-    fh+='</div>';
-    document.getElementById('funnelContainer').innerHTML=fh;
-  });
-  return h;
-};
-
-viewRenderers['backend-dau']=function(){
-  var h=breadcrumb('backend','日活趋势')+'<div class="panel-header"><div><h2>📈 日活用户趋势</h2><div class="meta">最近7天</div></div></div>';
-  h+='<div id="dauContainer"><div class="loading"><div class="spinner"></div><p>加载中...</p></div></div>';
-  fetch('http://127.0.0.1:5050/api/admin/dashboard/dau?days=7',{headers:{'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MiwiZW1haWwiOiJlZ2JlcnRpZUBzYXRpc2ZpY2luZy5pbyIsImV4cCI6MTc4MDc0NjU3OSwiaWF0IjoxNzgwNDg3Mzc5fQ.p-51AhaMuII54q_-cj6fcl5onJOVBY6noozC9vT_HxU'}}).then(function(r){return r.json()}).then(function(d){
-    var rows=(d.dau||[]);if(!rows.length){document.getElementById('dauContainer').innerHTML='<div class="placeholder-card"><p>暂无数据</p></div>';return}
-    var max=0;rows.forEach(function(r){if(r.dau>max)max=r.dau});
-    var th='<table class="data-table"><thead><tr><th>日期</th><th>DAU</th><th>趋势</th></tr></thead><tbody>';
-    rows.forEach(function(r){var pct=max>0?Math.round(r.dau/max*100):0;th+='<tr><td>'+r.date+'</td><td><strong>'+r.dau+'</strong></td><td><div class="stat-bar"><div class="fill fill-green" style="width:'+pct+'%"></div></div></td></tr>'});
-    th+='</tbody></table>';
-    document.getElementById('dauContainer').innerHTML=th;
-  });
-  return h;
-};
-
-viewRenderers['backend-products']=function(){
-  var h=breadcrumb('backend','产品使用排行')+'<div class="panel-header"><div><h2>📦 产品使用排行</h2><div class="meta">最近30天</div></div></div>';
-  h+='<div id="prodContainer"><div class="loading"><div class="spinner"></div><p>加载中...</p></div></div>';
-  fetch('http://127.0.0.1:5050/api/admin/dashboard/products?days=30',{headers:{'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MiwiZW1haWwiOiJlZ2JlcnRpZUBzYXRpc2ZpY2luZy5pbyIsImV4cCI6MTc4MDc0NjU3OSwiaWF0IjoxNzgwNDg3Mzc5fQ.p-51AhaMuII54q_-cj6fcl5onJOVBY6noozC9vT_HxU'}}).then(function(r){return r.json()}).then(function(d){
-    var prods=(d.products||[]);if(!prods.length){document.getElementById('prodContainer').innerHTML='<div class="placeholder-card"><p>暂无数据</p></div>';return}
-    var th='<table class="data-table"><thead><tr><th>产品ID</th><th>使用次数</th><th>独立用户</th></tr></thead><tbody>';
-    prods.forEach(function(p){th+='<tr><td>'+escH(p.product_id||'?')+'</td><td>'+p.usage_count+'</td><td>'+p.unique_users+'</td></tr>'});
-    th+='</tbody></table>';
-    document.getElementById('prodContainer').innerHTML=th;
-  });
-  return h;
-};
-
-viewRenderers['backend-events']=function(){
-  var h=breadcrumb('backend','事件流')+'<div class="panel-header"><div><h2>📋 最近行为事件</h2><div class="meta">实时·最近100条</div></div></div>';
-  h+='<div id="evtContainer"><div class="loading"><div class="spinner"></div><p>加载中...</p></div></div>';
-  fetch('http://127.0.0.1:5050/api/admin/dashboard/events/recent?limit=100',{headers:{'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MiwiZW1haWwiOiJlZ2JlcnRpZUBzYXRpc2ZpY2luZy5pbyIsImV4cCI6MTc4MDc0NjU3OSwiaWF0IjoxNzgwNDg3Mzc5fQ.p-51AhaMuII54q_-cj6fcl5onJOVBY6noozC9vT_HxU'}}).then(function(r){return r.json()}).then(function(d){
-    var evts=(d.events||[]);if(!evts.length){document.getElementById('evtContainer').innerHTML='<div class="placeholder-card"><p>暂无事件</p></div>';return}
-    var th='<table class="data-table"><thead><tr><th>时间</th><th>用户</th><th>类别</th><th>动作</th><th>详情</th></tr></thead><tbody>';
-    evts.forEach(function(e){var p=JSON.parse(e.properties||'{}');th+='<tr><td>'+escH((e.created_at||'').slice(0,19))+'</td><td>'+(e.name||e.email||(e.customer_id?'客户#'+e.customer_id:'匿名'))+'</td><td><span class="tag">'+escH(e.category||'')+'</span></td><td>'+escH(e.action||'')+'</td><td style="font-size:.7em">'+escH(JSON.stringify(p).slice(0,100))+'</td></tr>'});
-    th+='</tbody></table>';
-    document.getElementById('evtContainer').innerHTML=th;
-  });
-  return h;
-};
-
-viewRenderers['backend-customers']=function(){
-  var h=breadcrumb('backend','客户列表')+'<div class="panel-header"><div><h2>👤 客户列表</h2><div class="meta">按最近活跃排序</div></div></div>';
-  h+='<div id="custContainer"><div class="loading"><div class="spinner"></div><p>加载中...</p></div></div>';
-  fetch('http://127.0.0.1:5050/api/admin/dashboard/customers?limit=50',{headers:{'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MiwiZW1haWwiOiJlZ2JlcnRpZUBzYXRpc2ZpY2luZy5pbyIsImV4cCI6MTc4MDc0NjU3OSwiaWF0IjoxNzgwNDg3Mzc5fQ.p-51AhaMuII54q_-cj6fcl5onJOVBY6noozC9vT_HxU'}}).then(function(r){return r.json()}).then(function(d){
-    var cs=(d.customers||[]);if(!cs.length){document.getElementById('custContainer').innerHTML='<div class="placeholder-card"><p>暂无客户数据</p></div>';return}
-    var th='<table class="data-table"><thead><tr><th>姓名</th><th>邮箱</th><th>企业</th><th>行业</th><th>生命周期</th><th>健康分</th><th>风险分</th><th>最近活跃</th></tr></thead><tbody>';
-    cs.forEach(function(c){
-      var ht=c.health_score||50,rs=c.risk_score||0;
-      th+='<tr><td>'+escH(c.name||'?')+'</td><td>'+escH(c.email||'')+'</td><td>'+escH(c.company||'')+'</td><td>'+escH(c.industry||'')+'</td><td><span class="tag '+(c.lifecycle_stage==='paying'?'tag-green':c.lifecycle_stage==='churned'?'tag-red':'tag-gold')+'">'+escH(c.lifecycle_stage||'lead')+'</span></td><td style="color:'+(ht>70?'var(--green)':ht>40?'var(--warn)':'var(--red)')+'">'+ht+'</td><td style="color:'+(rs>50?'var(--red)':rs>20?'var(--warn)':'var(--green)')+'">'+rs+'</td><td>'+escH((c.last_active_at||c.registered_at||'').slice(0,10))+'</td></tr>'});
-    th+='</tbody></table>';
-    document.getElementById('custContainer').innerHTML=th;
-  });
-  return h;
-};
 
 /* ================================================================
    10 化学层专属视图
@@ -1023,8 +870,14 @@ viewRenderers['chemistry-llm']=function(){
    启动
    ================================================================ */
 (function(){
-  // 无密码直接启动
+  // 无密码直接启动（已在 checkGate 移除后的 IIFE 中执行 initApp）
 })();
+</div>
 </script>
+
+</script>
+</table>
+
+<div style="text-align:center;padding:8px 0;font-size:10px;opacity:0.25;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</div>
 </body>
 </html>
