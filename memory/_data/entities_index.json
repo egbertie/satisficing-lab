@@ -485,8 +485,8 @@
     },
     "flywheel": {
       "version": "1.2",
-      "last_run": "2026-06-03T10:04:11.032553+00:00",
-      "total_runs": 33,
+      "last_run": "2026-06-03T16:06:39.135921+00:00",
+      "total_runs": 34,
       "cycles": {
         "ingestion": {
           "status": "idle",
@@ -548,8 +548,16 @@
         "alerts": 0,
         "timestamp": "2026-06-03T07:18:17.361883+00:00"
       },
-      "last_run_elapsed_ms": 132,
+      "last_run_elapsed_ms": 143,
       "recent_runs": [
+        {
+          "run_id": 34,
+          "timestamp": "2026-06-03T16:06:39.135921+00:00",
+          "cycle": "scan",
+          "events_count": 4,
+          "elapsed_ms": 143,
+          "dry_run": false
+        },
         {
           "run_id": 33,
           "timestamp": "2026-06-03T10:04:11.032553+00:00",
@@ -700,14 +708,6 @@
           "cycle": "llm-gap",
           "events_count": 1,
           "elapsed_ms": 108,
-          "dry_run": false
-        },
-        {
-          "run_id": 14,
-          "timestamp": "2026-06-01T01:13:12.169141+00:00",
-          "cycle": "llm-gap",
-          "events_count": 1,
-          "elapsed_ms": 106,
           "dry_run": false
         }
       ],
@@ -32680,6 +32680,18 @@
         "new_value": null,
         "trigger": "freshness_check",
         "source": "cycle_2",
+        "cycle": null
+      },
+      {
+        "id": "CHG-2665",
+        "timestamp": "2026-06-03T16:06:39.148177+00:00",
+        "entity_type": "documents",
+        "entity_id": "DOC-123",
+        "field": "entity_created",
+        "old_value": null,
+        "new_value": "auto_registered_from:memory/deep/2026-06-04.md",
+        "trigger": "flywheel_scan",
+        "source": "cycle_1",
         "cycle": null
       }
     ],
@@ -90749,7 +90761,7 @@
       "status": "待审核",
       "source_file": "memory/Token压缩日志.md",
       "detected_at": "2026-05-30T14:17:39.314108+00:00",
-      "last_scan_time": "2026-06-03T06:51:21.017146+00:00",
+      "last_scan_time": "2026-06-03T16:06:39.136317+00:00",
       "auto_registered": true,
       "quality_score": 0,
       "llm_rating": null,
@@ -90933,7 +90945,7 @@
       "status": "待审核",
       "source_file": "memory/扣子同步日志.md",
       "detected_at": "2026-05-30T14:17:39.314108+00:00",
-      "last_scan_time": "2026-06-03T06:51:21.017146+00:00",
+      "last_scan_time": "2026-06-03T16:06:39.136317+00:00",
       "auto_registered": true,
       "quality_score": 0,
       "llm_rating": null,
@@ -91844,7 +91856,7 @@
       "status": "待审核",
       "source_file": "memory/2026-06-03.md",
       "detected_at": "2026-06-03T06:51:21.017146+00:00",
-      "last_scan_time": "2026-06-03T07:18:14.211523+00:00",
+      "last_scan_time": "2026-06-03T16:06:39.136317+00:00",
       "auto_registered": true,
       "quality_score": 0,
       "llm_rating": null,
@@ -91893,6 +91905,19 @@
       "llm_rating": null,
       "lifecycle_stage": "LC-001",
       "document_age_days": 0
+    },
+    {
+      "id": "DOC-123",
+      "name": "2026-06-04",
+      "family": "未知",
+      "status": "待审核",
+      "source_file": "memory/deep/2026-06-04.md",
+      "detected_at": "2026-06-03T16:06:39.136317+00:00",
+      "last_scan_time": "2026-06-03T16:06:39.136317+00:00",
+      "auto_registered": true,
+      "quality_score": 0,
+      "llm_rating": null,
+      "lifecycle_stage": "LC-001"
     }
   ],
   "decisions": [
