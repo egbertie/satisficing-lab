@@ -252,16 +252,31 @@ account.html ─── password.js                (密码管理)
 | `dev.sh` | 开发工具入口（test/verify/push） |
 | `devserver.py` | Python 零依赖本地服务器（端口 8766） |
 
-**验证检查项（`dev.sh verify`，9 项）：**
-1. dashboard-v3.html JS 语法
-2. admin-tools.html JS 语法
-3. 「满意红」品牌名已清零
-4. escHtml 函数存在
-5. 无 `function h(` 误替换残留
-6. 无 push-escHtml 误替换
-7. 无 fetch-escHtml 误替换
-8. entities_index.json JSON 有效性
-9. open_tasks_audit.json JSON 有效性
+**验证检查项（`dev.sh verify`，20 项）：**
+
+| # | 类别 | 检查内容 | 发现场景 |
+|---|------|----------|----------|
+| 1-13 | 后端代码 | Python 语法编译（13个文件） | — |
+| 14 | 前端完整性 | `sri-design.css` ≥ 5KB（防止截断） | 2026-06-03：批量注入脚本意外覆盖为 117B |
+| 15 | 前端完整性 | `flywheel-engine.js` ≥ 5KB | 2026-06-03：同批被截断 |
+| 16 | 前端完整性 | `gate-check.js` ≥ 10KB | 2026-06-03：同批被截断 |
+| 17 | 前端完整性 | `sri-track.js` ≥ 2KB | — |
+| 18 | 前端完整性 | `sri-api.js` ≥ 2KB | — |
+| 19 | 数据 | `entities_index.json` JSON 有效性 | — |
+| 20 | 关键页面 | JS 括号平衡检查 | 2026-06-03：残留 `</div>` 导致 JS 语法错误 |
+| 21 | 品牌 | 「满意红」品牌名已全部清除 | — |
+| 22 | 导航 | 关键页面客户通道入口一致性 | 2026-06-03：go.html 缺少客户通道链接 |
+| 23 | 安全 | 驾驶舱无密码泄漏（`PASSCODE`/`123654`） | 2026-06-03：源码含明文密码 `123654` |
+| 24 | 安全 | 管理后台无裸 `<h1>admin-windows</h1>` 标题 | 2026-06-03：页面显示 "admin-windows" |
+| 25 | HTML | 关键页面 `</html>` 标签完整 | 2026-06-03：admin-windows 缺少 `</body></html>` |
+| 26 | 链接 | HTML 页面内部引用有效性（死链检查） | — |
+| 27 | API | 后端 Health + Contact API 可用性 | — |
+
+**运行方式**：
+```bash
+./dev.sh verify
+# 应通过 20+/20+ 项检查
+```
 
 ---
 
@@ -536,9 +551,12 @@ tar czf satisficing-lab-YYYYMMDD.tar.gz \
 |------|------|------|
 | 404 | GitHub Pages 未启用 | Settings → Pages → Source: main / root |
 | 显示异常 | CSS 缓存 | 硬刷新 Ctrl+Shift+R |
+| 页面排版崩溃 | sri-design.css 被截断 | `git show HEAD:sri-design.css > sri-design.css` |
 | 数据不显示 | entities_index.json 损坏 | `python3 -c "import json; json.load(open('entities_index.json'))"` |
+| 只显示页面标题不渲染 | JS 语法错误（残留HTML标签） | `./dev.sh verify` 检查括号平衡 + 运行 `node --check` |
 | 自定义域名失效 | DNS 记录过期 | 检查 CNAME 记录 / GitHub Pages 设置 |
 | 仓库被删 | 账号问题 | 从本地备份恢复：`git push --force origin main` |
+| JS/CSS 文件变成几字节 | 批量脚本误覆盖非HTML文件 | `git show HEAD:文件名 > 文件名` 逐个恢复 |
 
 ### 从零恢复（最坏情况）
 
