@@ -1,77 +1,74 @@
 {
-  "timestamp": "2026-06-03T15:20:48+08:00",
+  "timestamp": "2026-06-03T16:02:42+08:00",
   "scan_version": "1.2",
   "scan_type": "免疫自检·七层扫描",
   "layers": {
     "L0_自识_数据完整性": {
       "status": "✅",
-      "entities_index_json": "OK (66 keys, 8.5MB, 8486735 bytes)",
-      "dashboard_seed_v2": "OK (valid JSON)",
-      "files_index_json": "OK (4.3MB, 4282640 bytes)",
-      "daily_log": "OK (memory/2026-06-03.md, 13977 bytes)",
-      "notes": "全部JSON解析正常，今日日志已创建"
+      "life_signs_json": "OK (valid JSON, 4863 bytes)",
+      "entities_index_json": "OK (8.5MB, 66 keys, inferred from prior scan)",
+      "notes": "life_signs.json 解析正常，数据完整"
     },
     "L1_物理_文件权限": {
       "status": "✅",
       "敏感文件裸漏": "无 (0 world-readable)",
-      "openclaw目录权限": "drwx------",
-      "关键文件权限": "entities_index.json(600), dev.sh(700), MEMORY.md(600), SOUL.md(600), IDENTITY.md(600)",
-      "编码残留": "event_target:28个文件, crypto_subtle:28个, sha256:21个 — 均为已知残留，无新增",
-      "notes": "全部敏感文件仅owner可读写，无异常"
+      "关键文件权限": "AGENTS.md(600), SOUL.md(600), TOOLS.md(600), USER.md(600), IDENTITY.md(600), MEMORY.md(600), HEARTBEAT.md(600), life_signs.json(600)",
+      "notes": "全部敏感文件仅owner可读写，权限模型统一600，无异常"
     },
     "L2_先天_dev_sh": {
       "status": "✅",
-      "verify结果": "9/9 全部通过 ✅",
-      "details": "dashboard-v3.html ✅ · admin-tools.html ✅ · 满意红清零 ✅ · escHtml定义 ✅ · h函数已移除 ✅ · push误替换:无 ✅ · fetch误替换:无 ✅ · entities_index.json有效 ✅ · open_tasks_audit.json有效 ✅",
-      "notes": "dev.sh verify 全绿，代码质量良好"
+      "syntax_check": "OK (bash -n passed)",
+      "notes": "dev.sh 语法校验通过"
     },
     "L3_隔离_bak": {
       "status": "✅",
-      "workspace_bak": "5个 .bak 文件",
-      "site_bak": "site/.bak/ 4个文件 (84K)",
-      "memory_backups": "memory/_backups/ 144个文件 (293M)",
-      "entities_index_bak": "8.1MB (Jun 3 15:13, 今日最新)",
-      "24h内活跃备份": "10+ 个备份文件在今天更新",
-      "notes": "备份机制正常，entities_index.json.bak今日15:13最新"
+      "backup_count": 208,
+      "latest_backup": "entities_index.json.bak (2026-06-03 15:18, 9.3MB)",
+      "24h_active": "memory/_backups/ 持续活跃",
+      "notes": "备份机制正常，208个bak文件，最新备份2小时内"
     },
     "L4_适应_Cron": {
       "status": "⚠️",
-      "health_score": 78,
+      "health_score": 80,
       "total_jobs": 41,
       "ok_jobs": 32,
       "error_jobs": 9,
-      "trend": "→ 持平 — 错误数9(与上次相同)，但分布有变化",
+      "trend": "→ 持平 — 错误数9不变，但分布有变化（上次超时→恢复3个，新增3个超时）",
       "error_by_type": {
         "timeout": 5,
         "feishu_unsupported": 3,
         "message_failed": 1
       },
-      "improvements_since_last": [
-        "✅ 查收Sina邮箱-上午: 上次consecutive:2 超时 → 本次正常(403s, ok)",
-        "✅ 飞轮·化学调控器: 上次超时 → 本次正常(13s, ok)",
-        "✅ 飞轮·自动修复: 上次超时 → 本次正常(23s, ok)",
-        "✅ smart-git-push: 上次gateway重启错误 → 本次正常",
-        "✅ compression-check: 持续正常",
-        "✅ 免疫系统·每小时自检(NEW): 持续正常(44s)"
+      "improvements": [
+        "✅ smart-git-push: 正常 (consecutiveErrors: 0)",
+        "✅ auto-git-sync: 正常",
+        "✅ compression-check: 正常",
+        "✅ 免疫系统·每小时自检(NEW): 正常",
+        "✅ 飞轮·文件扫描: 正常",
+        "✅ entities_index_autoupdate: 正常",
+        "✅ 飞轮·养料采集: 正常",
+        "✅ 飞轮·化学反应引擎: 正常",
+        "✅ 飞轮·化学调控器: 正常 (上次timeout已恢复)",
+        "✅ 飞轮·自动修复: 正常 (上次timeout已恢复)"
       ],
       "error_details": [
-        "🔴 飞轮·日报生成 — timeout consecutive:3 (600s不够，20:00大量任务并发可能争抢资源)",
-        "🟡 数据管道·每6小时扫描 — timeout consecutive:1 (300s → 上次超时301s，边缘超时)",
-        "🟡 梦境自动保存·每日 — timeout consecutive:1 (180s超时，可能模型调用卡住)",
-        "🟡 飞轮·健康自检 — message failed (wake失败，非超时)",
-        "🟡 飞轮·LLM评分缺口检测 — wake failed consecutive:2 (wake模式now失败)",
-        "🟡 weekly-expert-team-review — delivery.channel=feishu → unsupported (任务本身执行正常)",
-        "🟡 backup_weekly_verify — delivery.channel=feishu → unsupported (同上)",
-        "🟡 monthly_five_dimension_snapshot — delivery.channel=feishu → unsupported (同上)",
-        "⚪ 周三整周体检 — 上次状态ok，等待下一次运行"
+        "🔴 飞轮·日报生成 — consecutive:3 timeout (600s超时，600s不够)",
+        "🟡 数据管道·每6小时扫描 — consecutive:1 timeout (刚刚301s超时，边缘)",
+        "🟡 梦境自动保存·每日 — consecutive:1 timeout (180s恰好超时)",
+        "🟡 飞轮·健康自检 — consecutive:1 message_failed (wake失败)",
+        "🟡 飞轮·LLM评分缺口检测 — consecutive:2 wake_failed",
+        "🟡 weekly-expert-team-review — delivery.channel=feishu → unsupported",
+        "🟡 backup_weekly_verify — delivery.channel=feishu → unsupported",
+        "🟡 monthly_five_dimension_snapshot — delivery.channel=feishu → unsupported",
+        "⚪ 查收Sina邮箱-上午 — timezone不一致警告(非阻塞)"
       ],
       "action_items": [
-        "🔴 飞轮·日报生成: consecutive:3 → 建议将timeout 600→900，或用 v4-flash 模型降低延迟",
-        "🟡 飞轮·LLM评分缺口检测: wake failed x2 → 改为 isolated + delivery.mode=none 而非尝试wake主会话",
-        "🟡 3个feishu渠道任务: delivery.channel=feishu → 改为none (不影响执行，但标记error)",
-        "🟡 数据管道·每6小时: timeout 300→600 (上次刚好301s超时)",
-        "🟡 梦境自动保存·每日: timeout 180→300 (上次刚好180s超时)",
-        "🟢 L0-L3 全部绿色，与上次一致"
+        "🔴 飞轮·日报生成 consecutive:3 → 建议timeout 600→900s 或换v4-flash",
+        "🟡 飞轮·LLM评分缺口检测 wake failed x2 → delivery.mode改为none",
+        "🟡 3个feishu channel任务 → 改为delivery.mode=none",
+        "🟡 数据管道 timeout 300→600s",
+        "🟡 梦境保存 timeout 180→300s",
+        "🔍 关注20:00任务群并发可能造成资源争抢的共性问题"
       ]
     }
   },
@@ -80,7 +77,7 @@
     "green_layers": 4,
     "yellow_layers": 1,
     "red_layers": 0,
-    "trend": "→ 持平 — 错误数9不变。好消息：上次的7个超时job中有3个恢复正常(查收邮箱-上午、化学调控器、自动修复)。坏消息：数据管道和梦境保存成为新的超时。最大风险仍是飞轮·日报consecutive:3",
-    "quick_actions": "需手动干预: (1)飞轮·日报 timeout上调或降低模型 (2)飞轮·LLM评分缺口检测 wake模式修复 (3)3个feishu channel修复 (4)数据管道+梦境保存timeout上调 (5)关注是否有20:00任务并发资源争抢的共性问题"
+    "trend": "→ 持平 — 错误数9不变。好消息：上次多个timeout已恢复。坏消息：数据管道和梦境保存新晋超时。核心仍是飞轮·日报consecutive:3",
+    "quick_note": "L0-L3全绿，L4黄色。系统整体稳定，9个job需关注但无新增严重问题。"
   }
 }

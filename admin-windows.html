@@ -114,7 +114,8 @@ var NAV=[
   ]},
   {id:'governance',label:'🛡️ 免疫与治理',children:[
     {id:'gov-immune',label:'免疫系统',desc:'L0-L6七层·事件'},
-    {id:'gov-rules',label:'规则引擎',desc:'48规则·激活·反馈'},
+    {id:'gov-rules',label:'规则引擎',desc:'53规则·激活·反馈'},
+    {id:'gov-token-health',label:'💊 Token健康度',desc:'消耗·Cron·预警·自检'},
     {id:'gov-quality-gate',label:'质量门禁',desc:'代码·内容·设计·数据'},
     {id:'gov-compliance',label:'合规与审计',desc:'隐私·安全·许可'}
   ]},
@@ -616,6 +617,61 @@ viewRenderers['gov-quality-gate']=function(){
 };
 
 viewRenderers['gov-compliance']=function(){return breadcrumb('governance','合规与审计')+placeholder('合规与审计','隐私政策·安全许可·审计跟踪 · 法务审核后将完整展示')};
+
+/* ===== Token健康度面板 (LRULE-CRON 001-005) ===== */
+viewRenderers['gov-token-health']=function(){
+  var h=breadcrumb('governance','Token健康度')+'<div class="panel-header"><div><h2>💊 Token健康度监控</h2><div class="meta">Cron自检·消耗预警·防膨胀·双经济约束</div></div></div>';
+
+  // 加载状态数据
+  var state={health:'unknown',analysis:{},alerts:[]};
+  try {
+    var raw=localStorage.getItem('token_health_state');
+    if(raw) state=JSON.parse(raw);
+  } catch(e){}
+
+  var a=state.analysis||{},health=state.health||'unknown';
+  var healthEmoji=health==='green'?'🟢':health==='yellow'?'🟡':health==='red'?'🔴':'⚪';
+  var healthLabel=health==='green'?'正常':health==='yellow'?'警告':health==='red'?'异常':'未知';
+
+  h+='<div class="stat-grid" style="grid-template-columns:repeat(4,1fr)">';
+  h+='<div class="stat-card"><div class="stat-num">'+healthEmoji+'</div><div class="stat-label">健康状态: '+healthLabel+'</div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+(a.token_pct!==undefined?a.token_pct+'%':'—')+'</div><div class="stat-label">Token消耗率</div><div class="stat-bar"><div class="fill '+(a.token_pct>=90?'fill-warn':a.token_pct>=80?'fill-gold':'fill-green')+'" style="width:'+Math.min(a.token_pct||0,100)+'%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+(a.total_crons||'—')+'</div><div class="stat-label">Cron总数 / 红线30</div><div class="stat-bar"><div class="fill '+(a.total_crons>30?'fill-warn':'fill-green')+'" style="width:'+Math.min((a.total_crons||0)*3.3,100)+'%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-num">'+(a.daily_execs||'—')+'</div><div class="stat-label">日执行 / 红线60</div><div class="stat-bar"><div class="fill '+(a.daily_execs>60?'fill-warn':'fill-green')+'" style="width:'+Math.min((a.daily_execs||0)*1.6,100)+'%"></div></div></div>';
+  h+='</div>';
+
+  h+='<div class="graph-stat" style="grid-template-columns:repeat(3,1fr);margin-top:14px">';
+  h+='<div class="stat-card"><div class="stat-label">错误率</div><div class="stat-num" style="font-size:1.4em">'+(a.error_rate!==undefined?(a.error_rate*100).toFixed(1)+'%':'—')+'</div><div class="stat-bar"><div class="fill '+(a.error_rate>0.15?'fill-warn':'fill-green')+'" style="width:'+Math.min((a.error_rate||0)*600,100)+'%"></div></div></div>';
+  h+='<div class="stat-card"><div class="stat-label">错误任务数</div><div class="stat-num" style="font-size:1.4em">'+(a.error_count||0)+'</div></div>';
+  h+='<div class="stat-card"><div class="stat-label">新增配额</div><div class="stat-num" style="font-size:1.4em">'+(a.new_cron_quota||0)+'</div><div style="font-size:.7em;color:var(--ink-light);margin-top:4px">需3天绿色后可申请</div></div>';
+  h+='</div>';
+
+  // 红线规则摘要
+  h+='<h3 style="font-size:.9em;margin:20px 0 10px">🧬 活跃规则 (LRULE-CRON 001-005)</h3>';
+  h+='<table class="data-table" style="font-size:.78em"><thead><tr><th>规则</th><th>红线</th><th>触发</th><th>后果</th></tr></thead><tbody>';
+  h+='<tr><td><b>CRON-001</b> 新增审批红线</td><td>Cron≤31</td><td>新增前检查</td><td>超限→禁止</td></tr>';
+  h+='<tr><td><b>CRON-002</b> 失败自动熔断</td><td>连续5+次失败</td><td>每4h</td><td>自动禁用</td></tr>';
+  h+='<tr><td><b>CRON-003</b> Token分级预警</td><td>≥90%红·≥80%黄·≥70%蓝</td><td>每6h</td><td>压缩/暂停非P0</td></tr>';
+  h+='<tr><td><b>CRON-004</b> 日执行限高</td><td>≤60次/天</td><td>每次扫描</td><td>超限→告警合并</td></tr>';
+  h+='<tr><td><b>CRON-005</b> 新增冷却期</td><td>3天绿色+7天评估</td><td>新增申请前</td><td>不满足→拒绝</td></tr>';
+  h+='</tbody></table>';
+
+  // 告警列表
+  if(state.alerts&&state.alerts.length){
+    h+='<h3 style="font-size:.9em;margin:20px 0 10px">📢 告警 ('+state.alerts.length+'条)</h3>';
+    for(var ai=0;ai<state.alerts.length;ai++){
+      h+='<div class="layer-section" style="border-left-color:'+(state.alerts[ai].indexOf('🔴')>=0?'var(--red)':'var(--gold)')+'"><div class="layer-title" style="font-size:.8em">'+state.alerts[ai]+'</div></div>';
+    }
+  } else {
+    h+='<div class="placeholder-card" style="margin-top:16px"><div class="ph-icon">✅</div><div class="ph-title">无告警</div><div class="ph-desc">上次扫描: '+(state.last_scan||'未扫描')+'</div></div>';
+  }
+
+  // 更新按钮
+  h+='<div style="margin-top:20px;text-align:center"><button class="btn btn-outline btn-sm" onclick="refreshTokenHealth()">🔄 手动刷新 (需从localStorage加载)</button></div>';
+  h+='<div style="font-size:.68em;color:var(--ink-lighter);text-align:center;margin-top:6px">数据由 Cron自检+Token健康度监控 (每4h) 自动更新</div>';
+
+  return h;
+};
 
 /* ================================================================
    08 考古与洞察
