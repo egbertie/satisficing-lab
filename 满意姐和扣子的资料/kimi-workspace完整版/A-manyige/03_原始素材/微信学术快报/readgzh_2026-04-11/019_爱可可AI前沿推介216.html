@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>爱可可AI前沿推介(2.16)</title>
+  <meta name="description" content="LG - 机器学习 CV - 计算机视觉 CL - 计算与语言 RO - 机器人
+
+1、[CL] SoftMatcha 2：A Fast and Soft Pattern Matcher for Trillion-Scale Corpora2、[RO] YOR：Your Own Mobile Manipulator f">
+  <meta name="author" content="爱可可爱生活">
+  <meta property="og:title" content="爱可可AI前沿推介(2.16)">
+  <meta property="og:description" content="LG - 机器学习 CV - 计算机视觉 CL - 计算与语言 RO - 机器人
+
+1、[CL] SoftMatcha 2：A Fast and Soft Pattern Matcher for Trillion-Scale Corpora2、[RO] YOR：Your Own Mobile Manipulator for Generalizable Robotics3、[CL] LaCy：Wha">
+  <meta property="og:type" content="article">
+  
+  <style>
+    body { max-width: 800px; margin: 0 auto; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: #333; }
+    h1 { font-size: 1.8em; margin-bottom: 0.5em; }
+    .meta { color: #666; margin-bottom: 2em; border-bottom: 1px solid #eee; padding-bottom: 1em; }
+    .meta p { margin: 0.3em 0; }
+    .content { font-size: 1.05em; }
+    .content img { max-width: 100%; height: auto; }
+    .footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #eee; color: #999; font-size: 0.9em; }
+    a { color: #1a73e8; }
+  </style>
+</head>
+<body>
+  <article>
+    <h1>爱可可AI前沿推介(2.16)</h1>
+    <div class="meta">
+      <p><strong>作者：</strong>爱可可爱生活</p>
+      <p><strong>发布时间：</strong>2026-02-16 06:31</p>
+    </div>
+    <div class="content">
+      <p>LG - 机器学习 CV - 计算机视觉 CL - 计算与语言 RO - 机器人</p>
+<p>1、[CL] SoftMatcha 2：A Fast and Soft Pattern Matcher for Trillion-Scale Corpora2、[RO] YOR：Your Own Mobile Manipulator for Generalizable Robotics3、[CL] LaCy：What Small Language Models Can and Should Learn is Not Just a Question of Loss4、[RO] RISE： Self-Improving Robot Policy with Compositional World Model5、[LG] Retrieval-Aware Distillation for Transformer-SSM Hybrids</p>
+<p>摘要：面向万亿级语料库的高效软性模式匹配器、面向通用机器人研究的个人移动机械臂系统、小语言模型“能学到什么”与“该学到什么”并非仅是损失函数的问题、基于组合式世界模型的自进化机器人策略、面向Transformer-SSM混合架构的检索感知蒸馏</p>
+<p>1、[CL] SoftMatcha 2: A Fast and Soft Pattern Matcher for Trillion-Scale Corpora</p>
+<p>M Yoneda, Y Matsushita, G Kamoda, K Suenaga...[University of Tokyo &amp; Kyoto University &amp; Graduate University for Advanced Studie]</p>
+<p>SoftMatcha 2：面向万亿级语料库的高效软性模式匹配器</p>
+<p>要点:</p>
+<p>提出SoftMatcha 2算法，旨在实现万亿（Trillion）级Token语料库上的超高速（&lt;0.3秒）“软”模式匹配（能处理词语替换、插入和删除）。</p>
+<p>颠覆了传统软搜索的思路。它没有直接在索引中搜索相似模式，而是反转了视角：首先枚举出与查询在语义上相似的候选模式，然后用高度优化的精确查找方法来验证这些模式是否存在于语料库中。</p>
+<p>为使这种“枚举-再查找”的范式变得可行，引入了两大核心技术创新：</p>
+<p>磁盘感知的快速后缀数组： 一种新的、受谷歌BigTable启发的两阶段索引方案，其设计目标是每次精确查找仅需一次随机磁盘访问，从而使其在磁盘上的性能远超传统后缀数组实现（例如，比infini-gram快33倍）。</p>
+<p>动态的语料库感知剪枝： 一项关键技术，用于缓解候选模式的组合爆炸问题。该技术逐个Token构建模式，并在每一步剪掉那些在语料库中实际不存在的前缀，从而有效地利用语料库自身的统计特性来引导搜索。</p>
+<p>提供了一个高信息熵的理论分析：论文从理论上证明，通过利用自然语言的统计属性（如n-gram的幂律分布），其提出的剪枝方法能有效抑制搜索空间随查询长度的指数增长，并随语料库大小呈亚线性扩展。</p>
+<p>通过实验展示了显著的性能优势：在1.4万亿Token的FineWeb-Edu语料库上，软搜索的95百分位延迟仅为278毫秒，在可扩展性上远超第一代SoftMatcha。</p>
+<p>展示了一个具有高度影响力的实际应用：检测大语言模型训练数据中的基准测试污染。</p>
+<p>应用中一个反直觉的关键发现是，“软”搜索能够揭示精确匹配工具无法发现的关键数据泄露形式，例如“语义污染”（微小的措辞变化）和“模板泄露”（句子结构相同但数字或实体不同）。</p>
+<p>该方法的有效性在七种语言上得到了验证，显示了其广泛的适用性。</p>
+<p>承认了方法的局限性，例如它在词/Token层面操作，无法捕捉跨越多词的语义等价关系（如“U.S.”vs.“United States”）。</p>
+<p>主旨： 本文旨在解决在万亿级（Trillion-scale）的超大规模自然语言语料库中进行快速且灵活的文本搜索的挑战。现有工具要么无法扩展到如此大的规模，要么不支持语义相似性搜索（如替换、插入、删除），要么速度过慢。本文的目标是提供一个既能处理语义变化又能实现亚秒级延迟的搜索解决方案。</p>
+<p>创新：</p>
+<p>范式创新： 颠覆了传统的搜索模式，提出了一种“先枚举候选、后精确查找”（enumerate-then-lookup）的新范式。这种方法将复杂的软匹配问题分解为语义候选项生成和海量高效精确匹配两个子问题。</p>
+<p>索引结构创新： 设计了一种“磁盘感知的分阶段后缀数组”（Disk-Aware, Staged Suffix Array）。通过模仿BigTable的两级索引思想，将磁盘上的后缀数组查询所需的多次随机I/O操作减少到单次，极大地加速了核心的精确匹配步骤。</p>
+<p>剪枝算法创新： 提出了“动态语料库感知剪枝”（Dynamic Corpus-Aware Pruning）。在逐词生成候选模式的过程中，利用语料库本身的信息（即某个前缀是否存在）进行实时剪枝，有效利用了自然语言n-gram的幂律分布特性，从根本上抑制了搜索空间的组合爆炸。</p>
+<p>理论与实践结合： 不仅凭经验设计算法，还从理论上证明了剪枝策略的有效性，解释了为何该方法不会随着查询变长而陷入指数级灾难，增强了方法的可信度和普适性。</p>
+<p>贡献：</p>
+<p>工具贡献： 提供了SoftMatcha 2这一超快速、功能强大的开源搜索工具，为大模型研究者、语料库语言学家提供了一个能在万亿级语料上进行复杂语义搜索的利器，并提供了在线演示。</p>
+<p>算法贡献： 提出了一套完整的、可扩展到万亿级语料的软搜索算法框架，其核心的“磁盘感知后缀数组”和“动态剪枝”思想对大规模文本处理和信息检索领域具有重要的参考价值。</p>
+<p>应用贡献： 将该工具成功应用于检测LLM训练数据中的基准污染，并首次揭示了精确匹配方法会遗漏的“语义污染”和“模板泄露”两类新型污染，为构建更公平、可靠的LLM评测体系做出了实际贡献。</p>
+<p>提升：</p>
+<p>搜索速度： 在精确搜索方面，比state-of-the-art的infini-gram快33倍。在软搜索方面，对于万亿级语料实现了亚秒级（P95延迟278ms）的响应，解决了第一代SoftMatcha无法扩展到50B以上语料的瓶颈。</p>
+<p>可扩展性： 实验证明，与SoftMatcha v1的延迟随语料库大小线性增长不同，SoftMatcha 2的延迟增长非常缓慢，几乎是平的，展现了对万亿级数据的卓越可扩展性。</p>
+<p>功能性： 相比infini-gram等精确匹配工具，它支持语义上的替换、插入和删除，搜索能力更强。在基准污染检测等应用中，能够发现更多样、更隐蔽的数据泄露问题。</p>
+<p>不足：</p>
+<p>语义粒度局限： 算法在词或子词（token）级别进行操作，无法捕捉跨多个词的组合语义或短语级的相似性，例如无法将“U.S.”和“United States”视为语义等价。</p>
+<p>资源需求高： 构建索引需要大量的磁盘空间（例如，1.4T语料需要21.6TB的索引）和计算时间（53.8小时），这使得部署和维护的门槛较高。</p>
+<p>对语言统计特性的依赖： 算法的效率高度依赖于自然语言的统计规律（如n-gram的稀疏性）。对于不符合这种规律的人工数据或特定领域的文本，剪枝效果可能会打折扣。</p>
+<p>心得：</p>
+<p>逆向思维的威力——“生成与检验”模式的再思考： 本文最精妙的启发在于其“先枚举再查找”的逆向思维。当直接解决一个问题（在海量数据中软匹配）非常困难时，可以转换为生成所有可能的“解”（相似的短语），然后高效地检验这些解是否存在。这种“生成与检验”的范式在很多AI问题中都值得借鉴，关键在于如何设计高效的生成器（本文中的语义扩展）和检验器（本文中的单次I/O后缀数组）。</p>
+<p>算法设计必须与硬件和数据特性深度耦合： 本文的成功并非单一算法的胜利，而是算法、硬件（磁盘I/O特性）和数据（语言统计规律）三者协同优化的结果。“磁盘感知”的索引设计体现了对硬件瓶颈的深刻理解，而“语料库感知”的剪枝则体现了对数据内在规律的极致利用。这提醒我们，在处理大数据问题时，脱离实际系统和数据特性的纯理论算法设计是远远不够的。</p>
+<p>“更好”的工具能揭示“新”的问题： 软搜索工具不仅是比精确搜索“更灵活”的工具，它还因此获得了发现新问题的能力。通过SoftMatcha 2，研究者发现了“语义污染”和“模板泄露”这些被忽略的基准污染类型。这深刻地说明了工具的进步可以直接推动科学发现，一个更强大的“显微镜”能让我们看到之前无法观察到的微观世界。</p>
+<p>一句话总结: 本文通过颠覆传统搜索范式，提出一种“先枚举、后验证”的创新思路，并结合了单次磁盘寻道的硬件感知索引和利用语言统计规律的动态剪枝两大核心技术，成功打造了能在万亿级语料上实现亚秒级语义搜索的SoftMatcha 2工具，其反直觉的高效率不仅解决了大规模软搜索的难题，更能揭示现有精确匹配工具无法发现的新型数据污染问题。</p>
+<p>We present an ultra-fast and flexible search algorithm that enables search over trillion-scale natural language corpora in under 0.3 seconds while handling semantic variations (substitution, insertion, and deletion). Our approach employs string matching based on suffix arrays that scales well with corpus size. To mitigate the combinatorial explosion induced by the semantic relaxation of queries, our method is built on two key algorithmic ideas: fast exact lookup enabled by a disk-aware design, and dynamic corpus-aware pruning. We theoretically show that the proposed method suppresses exponential growth in the search space with respect to query length by leveraging statistical properties of natural language. In experiments on FineWeb-Edu (Lozhkov et al., 2024) (1.4T tokens), we show that our method achieves significantly lower search latency than existing methods: infini-gram (Liu et al., 2024), infini-gram mini (Xu et al., 2025), and SoftMatcha (Deguchi et al., 2025). As a practical application, we demonstrate that our method identifies benchmark contamination in training corpora, unidentified by existing approaches. We also provide an online demo of fast, soft search across corpora in seven languages.</p>
+<p>https://arxiv.org/abs/2602.10908</p>
+<p>2、[RO] YOR: Your Own Mobile Manipulator for Generalizable Robotics</p>
+<p>M H Anjaria, M E Erciyes, V Ghatnekar, N Navarkar...[New York University]</p>
+<p>YOR：面向通用机器人研究的个人移动机械臂系统</p>
+<p>要点:</p>
+<p>旨在填补机器人领域的一个空白：即缺少一个既能满足移动操作研究的高能力需求，又价格亲民（低于1万美元）的平台。</p>
+<p>提出了一个特定且实用的“设计范式”作为最佳解决方案：集成了全向移动底盘、伸缩式垂直升降臂和双柔顺机械臂。</p>
+<p>推出了YOR（Your Own Robot），一个完全开源的、体现了上述设计范式的移动操作机器人。</p>
+<p>一个关键的反直觉或高信息熵观点是，该设计刻意避开了更复杂的系统（如足式机器人）。论文认为，对于当前可规模化的研究而言，其提出的轮式设计范式在可控性和鲁棒性上更优，且没有动态平衡等尚未解决的难题。</p>
+<p>设计巧妙地利用了商用现成品（COTS）来降低成本和复杂性，例如使用可靠的电动升降桌的驱动装置作为垂直升降模块——这是一个不寻常但高效的选择。</p>
+<p>全向转向轮（Swerve Drive）底盘是其核心特性，能实现平移和旋转的解耦控制，在拥挤的室内环境中比传统的差速驱动底盘灵活得多。</p>
+<p>通过在机械臂上使用柔顺的关节刚度控制，强调了安全性与适应性，这对于涉及接触和在人类中心环境中操作的任务至关重要。</p>
+<p>该平台不仅仅是一个硬件设计，更通过一系列全面的应用验证了其研究适用性：</p>
+<p>可用于复杂家庭任务（如装载洗碗机）的直观全身遥操作。</p>
+<p>成功地通过模仿学习掌握了双臂移动操作任务（回收纸箱），证明了其作为学习平台的能力。</p>
+<p>拥有一个强大的SLAM和导航技术栈，能够实现精确定位、全身协调控制和实时动态避障。</p>
+<p>整个项目——包括CAD文件、物料清单（BOM）和软件——完全开源，旨在促进社区发展，并降低移动操作研究的准入门槛。</p>
+<p>承认了其局限性，例如使用了可能存在奇异点问题的6自由度机械臂，并指出了未来的升级方向，如7自由度机械臂和语义导航。</p>
+<p>主旨： 本文旨在解决当前机器人研究领域缺乏一个兼具高功能性、易用性、安全性和低成本的开源移动操作平台的问题。为了让更多研究者能够开展可规模化的移动操作研究，论文提出并实现了一个名为YOR的机器人，其核心设计理念是在预算有限（低于1万美元）的前提下，通过整合全向底盘、垂直升降和双臂操作，找到一个能力、成本与控制复杂度之间的“最佳平衡点”。</p>
+<p>创新：</p>
+<p>设计范式创新 (Form Factor Innovation): 本文最大的创新在于提出并验证了一个特定的、高性价比的移动操作机器人“形态”：全向底盘 + 伸缩升降 + 双柔顺臂。它不是发明了某个新组件，而是论证了这种组合是当前条件下进行通用机器人研究的“甜点区”(sweet spot)。</p>
+<p>系统集成与成本控制创新: 巧妙地将非机器人领域的成熟商用部件（如升降桌的升降柱）创造性地应用于机器人设计中，极大地降低了成本和开发难度，同时保证了可靠性。</p>
+<p>开源生态系统构建: YOR不仅仅是一个机器人，更是一个完全开源的平台。它提供从硬件（CAD、BOM）到软件（控制、SLAM、遥操作）的全套解决方案，旨在构建一个社区可以共同参与和贡献的生态系统，这在昂贵的机器人硬件领域是一项重要的创新。</p>
+<p>全身控制与应用的整合: YOR展示了一套完整的、紧密集成的应用框架，将直观的遥操作、前沿的模仿学习策略和可靠的自主导航无缝结合，证明了该硬件平台作为研究工具的完整性和实用性。</p>
+<p>贡献：</p>
+<p>硬件平台贡献: 提供了一个详细、可复现、低成本（&lt;1万美元）的双臂移动操作机器人设计（YOR），显著降低了研究者进入该领域的硬件门槛。</p>
+<p>软件栈贡献: 开源了一套完整的、适用于YOR的软件栈，包括底层控制、全身遥操作接口、SLAM与导航系统，为后续的算法研究提供了坚实的基础。</p>
+<p>理念与方向贡献: 通过YOR的成功实践，为社区指明了一个务实且高效的研究方向：即在当前阶段，与其追求复杂的类人机器人，不如优化轮式移动操作平台，以加速数据收集和算法迭代。</p>
+<p>实验验证贡献: 通过一系列真实的家庭任务（如洗碗、整理衣物）和量化实验（如tally-mark精度测试），充分验证了YOR平台在功能、精度和鲁棒性上的能力，证明了其设计的有效性。</p>
+<p>提升：</p>
+<p>成本效益: 相比价格高达数万甚至数十万美元的商业移动操作平台（如RB-Y1、PR2），YOR将成本降低了一个数量级，同时保留了双臂、移动和垂直伸展等核心功能。</p>
+<p>机动性与灵活性: 相比使用差速轮的平台（如Mobile ALOHA），YOR的全向底盘提供了无与伦比的机动性，能在狭小空间内进行精细的位姿调整，这对于家庭环境中的操作至关重要。</p>
+<p>功能完整性: 相比其他低成本平台（如单臂的Tidybot++或工作空间有限的XLeRobot），YOR提供了双臂协调操作和宽广的垂直工作范围（可从地面拾取至高处放置），功能更加完整和通用。</p>
+<p>开放性与可扩展性: 相比封闭的商业平台，YOR的完全开源设计允许研究者自由修改、定制和扩展，无论是更换机械臂、传感器还是升级计算单元都非常方便。</p>
+<p>不足：</p>
+<p>机械臂自由度限制: 论文明确指出，当前使用的6自由度机械臂在某些姿态下会遇到奇异点问题，这会限制其灵活性。升级到7自由度机械臂是未来的一个重要改进方向。</p>
+<p>导航与感知的智能化水平: 当前的SLAM和导航系统主要基于几何信息，缺乏对环境的语义理解。集成更先进的语义导航或开放词汇模型（如论文中引用的OK-Robot）将使其更加智能。</p>
+<p>全身协调控制的深度: 尽管实现了全身协调，但控制策略相对解耦（例如，手臂补偿底盘运动）。更高级的、统一的全身控制器（perceptive loco-manipulation）将能实现更动态和灵巧的动作。</p>
+<p>心得：</p>
+<p>机器人学的“务实主义”胜利: 本文最深刻的启发是，推动AI机器人领域发展的关键，未必是追求最先进、最复杂的终极形态（如人形机器人），而可能是设计出“足够好”且“足够便宜”的标准化研究平台。YOR的设计哲学体现了这种务实主义，它优先解决当前研究的核心瓶颈——缺乏可规模化部署的硬件。</p>
+<p>跨界工程思维的重要性: 将升降桌的部件用于机器人垂直升降，这种“跨界”的工程思维极具启发性。它告诉我们，机器人领域的创新不一定需要从零开始发明轮子，巧妙地利用其他行业成熟、可靠且量产的廉价组件，是实现低成本和高可靠性的捷径。</p>
+<p>平台化与开源是加速研究的催化剂: YOR的真正价值可能不在于其本身的技术指标有多么顶尖，而在于它通过开源提供了一个“共同的研究语言”。当大量研究者都在一个相似、廉价且易得的平台上进行实验时，算法的比较和复现将变得更加容易，整个社区的迭代速度会大大加快，这正是ALOHA等项目带来的启示。</p>
+<p>一句话总结: 本文通过提出并开源了一款名为YOR的低成本（低于1万美元）移动操作机器人，巧妙地整合了全向底盘、升降桌式垂直升降和双柔顺臂，定义了一种高性价比的设计新范式，它不仅极大地降低了通用机器人研究的门槛，更以其全面的功能和开放的生态系统，为整个领域提供了一个加速算法迭代和应用探索的标准化平台。</p>
+<p>Recent advances in robot learning have generated significant interest in capable platforms that may eventually approach human-level competence. This interest, combined with the commoditization of actuators, has propelled growth in low-cost robotic platforms. However, the optimal form factor for mobile manipulation, especially on a budget, remains an open question. We introduce YOR, an open-source, low-cost mobile manipulator that integrates an omnidirectional base, a telescopic vertical lift, and two arms with grippers to achieve whole-body mobility and manipulation. Our design emphasizes modularity, ease of assembly using off-the-shelf components, and affordability, with a bill-of-materials cost under 10,000 USD. We demonstrate YOR&#039;s capability by completing tasks that require coordinated whole-body control, bimanual manipulation, and autonomous navigation. Overall, YOR offers competitive functionality for mobile manipulation research at a fraction of the cost of existing platforms. Project website: this https URL</p>
+<p>https://arxiv.org/abs/2602.11150</p>
+<p>3、[CL] LaCy: What Small Language Models Can and Should Learn is Not Just a Question of Loss</p>
+<p>S Ujváry, L Béthune, P Ablin, J Monteiro...[Apple]</p>
+<p>LaCy：小语言模型“能学到什么”与“该学到什么”并非仅是损失函数的问题</p>
+<p>要点:</p>
+<p>挑战了语言模型预训练中的一个基本假设：即损失（loss）是判断模型能学什么、该学什么的唯一核心指标。</p>
+<p>引入了“准确性”（与训练数据中的真值词元完全匹配，这是损失函数所衡量的）和“可接受性”（生成一个事实正确但不同的合理续写）之间的关键区别，这是一个高信息熵的观点。</p>
+<p>论证了高损失是一个模棱两可的信号：它既可能表示一个SLM应该委托外部知识源处理的、难以学习的事实性词元，也可能表示一个有多种合理续写方式的、SLM应该学习的非事实性词元。</p>
+<p>提出了LaCy，一种新的针对小型语言模型（SLM）的预训练方法，该方法使用一个简单且廉价的工具——spaCy语法分析器——来消除损失信号的歧义。</p>
+<p>LaCy的核心原则是：当一个词元同时被spaCy识别为“事实性”且在预训练中表现出高损失时，就训练SLM输出一个特殊的`&lt;CALL- 该方法旨在防止SLM浪费其有限的参数容量去尝试记忆那些无法可靠存储的事实，而是教它们“自我感知”其知识边界。</p>
+<p>论文将此方法置于“模型级联”的框架下，即SLM输出的`&lt;CALL- 实验证明，在下游生成任务中，经过LaCy训练的SLM比仅基于损失标准（如Rho-1）或更昂贵的LLM评判器标注训练的基线模型，取得了更高的事实准确率（以FactScore衡量）。</p>
+<p>一个关键发现是，LaCy模型表现出更低的“事实泄露”，即它们将更少的事实内化到自身参数中，这验证了该训练方法的有效性。</p>
+<p>一个重要的反直觉结果：作为预训练进展的标准度量，验证集损失在这个词元选择的设定下，与下游的事实性表现（FactScore）并不相关，这表明需要采用更贴近任务的评估方法。</p>
+<p>LaCy的数据预处理计算成本低廉（可在CPU上运行）且易于扩展，使其比需要强大GPU评判模型的方法更适用于大规模预训练。</p>
+<p>主旨： 本文旨在解决小型语言模型（SLM）因参数容量有限而难以准确记忆和生成事实性知识的根本问题。文章的核心论点是，传统的、仅依赖于最小化交叉熵损失的预训练方法并不足以教会SLM何时应该依赖自身参数、何时应该寻求外部帮助。为此，本文提出了一种新的预训练范式（LaCy），教导SLM学会区分哪些词元是其能力范围内可以学习的，哪些是超出其能力范围、需要通过生成一个&lt;CALL&gt;词元来委托给外部知识源（如更大的模型）处理的事实性知识。</p>
+<p>创新：</p>
+<p>理念创新： 首次明确区分了模型预测的“准确性”（Accuracy）与“可接受性”（Acceptability），并指出预训练损失函数只关心前者，而这对于事实性生成任务是不足的。这一理念上的辨析是本文最核心的创新。</p>
+<p>方法创新： 提出了LaCy方法，巧妙地将经典的、基于规则的NLP工具（spaCy语法分析器）与现代深度学习的信号（损失）相结合。这种“传统+现代”的混合方法既简单、高效，又精准地解决了“何时调用”这一关键问题。</p>
+<p>成本与效率创新: 相较于使用昂贵的大模型（LLM Judge）来标注事实性数据，LaCy的标注过程仅需CPU，成本极低且易于扩展，为在超大规模数据集上进行此类选择性预训练提供了可行的路径。</p>
+<p>评估视角创新: 引入了“事实泄露”（Fact Leakage）这一评估维度，直观地量化了模型在多大程度上“不恰当地”将事实知识硬塞进其有限的参数中，为评估此类模型的训练效果提供了新的视角。</p>
+<p>贡献：</p>
+<p>方法论贡献： 提出并验证了一种简单、廉价且有效的新型SLM预训练方法（LaCy），为如何训练SLM以更好地与外部工具或模型协作提供了具体的解决方案。</p>
+<p>理论贡献： 揭示了在选择性学习（token selection）场景下，预训练损失与下游任务性能（尤其是事实性）之间可能存在的脱钩现象，对如何评估和理解语言模型预训练过程提出了新的见解。</p>
+<p>实践贡献： 实验证明LaCy在提升下游任务的事实准确性方面优于多种现有方法，为开发更可靠、更少幻觉的SLM应用提供了有效工具。</p>
+<p>提升：</p>
+<p>事实准确性： 在传记生成任务中，使用模型级联的LaCy模型比基线和其他对比方法取得了显著更高的FactScore。</p>
+<p>模型行为的合理性： LaCy训练的模型能更准确地识别出自己无法处理的事实性知识，表现为最低的“事实泄露”，这意味着其参数容量被更有效地用于学习语言模式而非脆弱的事实记忆。</p>
+<p>训练效率和成本： LaCy的标注过程比使用LLM Judge的方法快得多，且无需GPU资源，大大降低了数据准备的成本和复杂性。</p>
+<p>不足：</p>
+<p>启发式方法的局限性： LaCy依赖于spaCy和自定义规则来识别“事实性”词元。这种启发式方法可能不够完备，可能会漏掉或错误标记某些类型的事实，其泛化能力有待在更多样化的数据上验证。</p>
+<p>级联机制的简化： 论文为了聚焦于“何时调用”的问题，简化了“调用后做什么”的机制（即简单地查询一个更大的模型）。在实际应用中，更复杂的工具调用或知识库检索机制可能会与LaCy的调用策略产生更复杂的相互作用。</p>
+<p>实验规模有限： 论文承认这是一项探索性的初步研究，模型规模和训练数据量相对有限。LaCy的行为在更大规模的预训练下是否会更加稳健和有效，仍是一个有待验证的问题。</p>
+<p>心得：</p>
+<p>“旧瓶装新酒”的智慧——经典NLP工具的复兴： 本文最令人深思的一点是，它没有用一个更强大的模型去解决问题，而是返璞归真，使用了一个经典的、轻量级的NLP工具（spaCy）。这揭示了一个重要的工程哲学：在AI领域，最先进的解决方案未必是最好的，将传统工具的确定性和可解释性与现代模型的统计信号相结合，有时能产生意想不到的、既高效又优雅的解决方案。</p>
+<p>重新审视“损失”的真正含义： 这篇论文促使我们深刻反思交叉熵损失的本质。它优化的目标是“模仿”，即尽可能地复现训练数据。然而，在很多任务中，我们的目标是“真实”或“有用”，而非简单的模仿。LaCy通过引入“可接受性”的概念，实际上是在尝试弥合“模仿”与“真实”之间的鸿沟，这对于未来设计更对齐人类意图的模型目标函数具有重要启发。</p>
+<p>SLM的定位：聪明的“路由器”，而非廉价的“知识库”： 这项工作强化了一种观点，即SLM的未来不在于成为一个包罗万象但质量低劣的知识库，而在于成为一个高效的、能感知自身能力边界的“任务路由器”。它的核心价值是处理高频的、模式化的语言任务，并在遇到知识密集型或不确定的节点时，精准地将请求分发给更专业的“后端”（无论是更大的LLM、数据库还是API）。LaCy正是训练这种“路由”能力的一种有效方法。</p>
+<p>一句话总结: 本文颠覆了仅依赖损失函数来指导模型学习的传统观念，创新性地提出，高损失在区分事实错误和可接受的表述差异上存在歧义；为此，论文设计了LaCy这一廉价而高效的预训练方法，通过结合语法分析器和损失信号，教会小型语言模型精准识别自身知识边界并适时“求助”，从而显著提升了生成内容的事实准确性。</p>
+<p>Language models have consistently grown to compress more world knowledge into their parameters, but the knowledge that can be pretrained into them is upper-bounded by their parameter size. Especially the capacity of Small Language Models (SLMs) is limited, leading to factually incorrect generations. This problem is often mitigated by giving the SLM access to an outside source: the ability to query a larger model, documents, or a database. Under this setting, we study the fundamental question of \emph{which tokens an SLM can and should learn} during pretraining, versus \emph{which ones it should delegate} via a &lt;CALL&gt; token. We find that this is not simply a question of loss: although the loss is predictive of whether a predicted token mismatches the ground-truth, some tokens are \emph{acceptable} in that they are truthful alternative continuations of a pretraining document, and should not trigger a &lt;CALL]&gt; even if their loss is high. We find that a spaCy grammar parser can help augment the loss signal to decide which tokens the SLM should learn to delegate to prevent factual errors and which are safe to learn and predict even under high losses. We propose LaCy, a novel pretraining method based on this token selection philosophy. Our experiments demonstrate that LaCy models successfully learn which tokens to predict and where to delegate for help. This results in higher FactScores when generating in a cascade with a bigger model and outperforms Rho or LLM-judge trained SLMs, while being simpler and cheaper.</p>
+<p>https://arxiv.org/abs/2602.12005</p>
+<p>4、[RO] RISE: Self-Improving Robot Policy with Compositional World Model</p>
+<p>J Yang, K Lin, J Li, W Zhang...[The Chinese University of Hong Kong &amp; Kinetix AI]</p>
+<p>RISE：基于组合式世界模型的自进化机器人策略</p>
+<p>要点:</p>
+<p>指出了当前视觉-语言-动作（VLA）模型的一个核心弱点：由于模仿学习（IL）的局限性（如暴露偏差），它们在富含接触和动态变化的任务中表现脆弱。</p>
+<p>提出强化学习（RL）是解决方案，但同时点明了其主要瓶颈：在物理世界中进行在线策略（on-policy）RL是缓慢、昂贵、劳动密集且有风险的。</p>
+<p>提出了RISE框架，其核心思想是将整个在线策略RL过程从物理世界转移到一个学习到的“想象空间”中进行。这是本文最核心的范式转变。</p>
+<p>RISE的核心是一个“组合式世界模型”（Compositional World Model）。这是一个高信息熵的概念，它将复杂的世界建模问题分解为两个独立的、可控的子问题：</p>
+<p>一个可控的动力学模型：根据一个提议的动作，预测未来的多视角观测（机器人将看到什么）。该模型被训练得既可控又高效。</p>
+<p>一个进程价值模型：评估这些想象出的未来状态的“好坏”，从而提供一个密集的奖励信号（优势值）。</p>
+<p>这种组合式设计是一个关键洞见，它允许每个组件使用最适合其任务的架构和目标函数进行优化（例如，用视频扩散模型做动力学，用VLA骨干做价值评估）。</p>
+<p>价值模型使用了巧妙的混合目标函数进行训练：结合了简单的时序进程估计（以保证稳定性）和在成功/失败数据上的时序差分（TD）学习（以使其对细微的失败敏感）。</p>
+<p>RISE实现了一个闭环的自提升流程：策略提出动作，世界模型想象结果并提供优势值，然后策略利用这些想象出来的在线策略数据进行更新，整个过程无需物理交互。</p>
+<p>实验证明，在模仿学习模型通常难以处理的复杂真实世界任务中，RISE取得了巨大的性能提升：动态砖块分拣提升+35%，背包打包提升+45%，纸盒封装提升+35%。</p>
+<p>一个关键的反直觉发现是，即使通过更多真实世界交互来延长现有RL方法（如RECAP或DSRL）的训练时间，也无法弥合性能差距，这凸显了通过想象生成的在线策略数据的质量和多样性是至关重要的。</p>
+<p>论文有意识地将机器人学习的瓶颈从物理交互（机器人时间、人力监督）转换为了计算瓶颈（训练世界模型的GPU时间），并认为这是更具可扩展性的发展路径。</p>
+<p>主旨： 本文旨在解决基于模仿学习的VLA（视觉-语言-动作）模型在处理复杂、富含接触的真实世界操作任务时鲁棒性不足的问题。传统的强化学习（RL）虽然能解决此问题，但在物理世界中进行在线学习的成本和效率瓶颈极高。为此，本文提出了RISE框架，通过构建一个组合式世界模型，将策略的在线学习过程完全转移到“想象”中进行，从而实现一种可扩展、高效且安全的机器人自我提升范式。</p>
+<p>创新：</p>
+<p>范式创新： 最大的创新是提出了一个完整的“想象中在线强化学习”（On-policy RL in Imagination）框架。它系统性地用一个学习到的世界模型替代了物理环境，从而将机器人学习的瓶颈从昂贵的“物理交互时间”转变为可扩展的“计算时间”。</p>
+<p>世界模型架构创新： 提出了“组合式世界模型”（Compositional World Model），将世界建模解耦为“动力学预测”和“价值评估”两个独立的模块。这种解耦思想允许为每个子任务选择最优的架构和训练方法，是实现高效、可靠想象的关键。</p>
+<p>价值函数学习创新： 针对想象场景，设计了一种混合价值学习目标，结合了“进程回归”（Progress Estimate）的稠密信号和“时序差分”（TD Learning）的失败敏感性，从而能为策略优化提供更稳定和信息丰富的优势（advantage）信号。</p>
+<p>动力学模型训练创新： 采用了“任务中心批处理”（Task-Centric Batching）策略来训练动力学模型，优先保证同一场景下动作的多样性，从而有效提升了模型对动作的控制性和生成质量。</p>
+<p>贡献：</p>
+<p>框架贡献： 提出了RISE，一个完整的、端到端的、用于VLA模型自我提升的RL框架，为如何在真实世界机器人上实现可扩展的在线学习提供了切实可行的蓝图。</p>
+<p>方法论贡献： 验证了组合式世界模型作为物理环境替代品的可行性和优越性，并为如何设计和训练其中的动力学和价值模型提供了宝贵的设计经验和关键技术细节。</p>
+<p>实证贡献： 在三个极具挑战性（动态、可形变、精细协调）的真实世界任务上进行了广泛实验，用强大的实证结果证明了RISE相比现有IL和RL方法的显著优越性，有力地推动了RL在真实机器人操作领域的应用边界。</p>
+<p>提升：</p>
+<p>任务成功率： 相比于最先进的基线方法（如RECAP），RISE在所有三个真实世界任务上都取得了巨大的绝对性能提升，成功率分别提高了+35%（动态分拣）、+45%（背包打包）和+35%（纸盒封装）。</p>
+<p>学习效率（物理层面）： 通过在想象中进行在线学习，RISE极大地减少了对昂贵且缓慢的物理世界交互的依赖，相比于传统的在线RL方法（如PPO），避免了性能崩溃和安全风险。</p>
+<p>数据质量： 相比于只能利用有限离线数据的RL方法，RISE能够通过想象生成海量的、与当前策略匹配的在线（on-policy）数据，从而更有效地进行策略改进，避免了分布偏移问题。</p>
+<p>不足：</p>
+<p>想象与现实的差距（Imagination-Reality Gap）： 框架的性能上限受限于世界模型的保真度。尽管表现出色，但学习到的世界模型在某些罕见或训练数据未覆盖的场景下仍可能产生与物理现实不符的模拟，导致策略在现实中执行失败。</p>
+<p>计算成本高昂： 框架将物理成本转化为了计算成本。训练一个高质量、多视角的视频生成（动力学）模型和价值模型需要大量的GPU资源和时间，这对于计算资源受限的研究者构成了新的门槛。</p>
+<p>对离线数据的依赖： RISE仍然需要一个“策略预热”（Policy Warm-up）阶段，即需要一定量的真实世界离线数据来初始化策略和世界模型。它并非完全从零开始学习，如何平衡真实数据与想象数据的比例仍是一个需要探索的问题。</p>
+<p>心得：</p>
+<p>解耦是解决复杂问题的金钥匙： 本文最核心的启发来自于其“组合式”的设计哲学。面对“创建一个能用于RL的完美世界模型”这一极其复杂的任务，RISE没有试图用一个端到端的庞大模型硬解，而是将其分解为两个更清晰、更独立的子任务：预测“会发生什么”（动力学）和判断“是好是坏”（价值）。这种分而治之、各个击破的思路，是工程和科研领域解决复杂系统问题的通用智慧。</p>
+<p>RL的未来在于“优质的训练场”而非“蛮力探索”： RISE有力地证明，提升机器人RL性能的关键，可能不在于设计更复杂的RL算法本身，而在于为其提供一个高质量、可扩展的“训练场”。与其在昂贵、危险的现实世界中进行有限的探索，不如先投入计算资源构建一个足够逼真的“想象世界”，让策略在这个世界里“修炼成仙”后再出山。这为机器人学习的发展指明了一条从“硬件驱动”到“数据与计算驱动”的道路。</p>
+<p>价值函数是想象的“指南针”： 仅仅能生成逼真的未来视频（动力学模型）是不够的，如果无法判断哪个未来更好，策略就无法改进。RISE中的价值模型扮演了“指南针”的角色，为在想象空间中的探索指明了方向。这强调了在模型基学习中，除了生成能力，评估（Critic）和价值判断能力同样至关重要，两者相辅相成，缺一不可。</p>
+<p>一句话总结: 本文通过RISE框架，开创性地将机器人强化学习的主战场从昂贵、低效的物理世界转移到了一个由“组合式世界模型”构建的计算高效的“想象空间”中，该模型通过解耦的动力学预测和价值评估，为策略提供了海量的在线训练数据，从而在无需真实交互的情况下实现了机器人的高效自我提升，并在多个复杂的真实世界任务上取得了突破性的性能。</p>
+<p>Despite the sustained scaling on model capacity and data acquisition, Vision–Language–Action (VLA) models remain brittle in contact-rich and dynamic manipulation tasks, where minor execution deviations can compound into failures. While reinforcement learning (RL) offers a principled path to robustness, on-policy RL in the physical world is constrained by safety risk, hardware cost, and environment reset. To bridge this gap, we present RISE, a scalable framework of robotic reinforcement learning via imagination. At its core is a Compositional World Model that (i) predicts multi-view future via a controllable dynamics model, and (ii) evaluates imagined outcomes with a progress value model, producing informative advantages for the policy improvement. Such compositional design allows state and value to be tailored by best-suited yet distinct architectures and objectives. These components are integrated into a closed-loop self-improving pipeline that continuously generates imaginary rollouts, estimates advantages, and updates the policy in imaginary space without costly physical interaction. Across three challenging real-world tasks, RISE yields significant improvement over prior art, with more than +35% absolute performance increase in dynamic brick sorting, +45% for backpack packing, and +35% for box closing, respectively.</p>
+<p>https://arxiv.org/abs/2602.11075</p>
+<p>5、[LG] Retrieval-Aware Distillation for Transformer-SSM Hybrids</p>
+<p>A Bick, E P. Xing, A Gu[CMU]</p>
+<p>面向Transformer-SSM混合架构的检索感知蒸馏</p>
+<p>要点:</p>
+<p>旨在解决高效的状态空间模型（SSM）与Transformer在需要上下文检索的任务上存在的显著性能差距。</p>
+<p>挑战了Transformer-SSM混合模型设计的传统智慧，这些设计通常采用均匀或启发式的注意力层布局（例如，每隔N层放置一个注意力层）。</p>
+<p>核心且反直觉的洞见是：Transformer的检索能力并非一种分布式功能，而是高度集中在一个小的、可识别的注意力头子集中，这些头被称为“收集与聚合”（Gather-and-Aggregate, G&amp;A）头。</p>
+<p>提出了“检索感知蒸馏”（retrieval-aware distillation），一种将上述洞见付诸实践的新方法。它不再采用启发式布局，而是通过经验性方法识别并只保留那些对检索至关重要的G&amp;A头。</p>
+<p>识别过程简单有效：在一个合成的键值检索任务上，逐个“烧蚀”（ablate）每个注意力头，并根据导致的性能下降程度对其进行排序。</p>
+<p>该方法随后将一个预训练的Transformer转化为一个高效的混合模型：只保留排名最高的少数几个头（例如，512个中只留10个），并将其余的头蒸馏成循环的SSM头。</p>
+<p>一个关键的实验发现：仅保留2%最关键的注意力头，就能在检索密集型基准测试上恢复完整Transformer超过95%的性能，这与之前需要至少25%注意力头的混合模型相比是巨大的进步。</p>
+<p>另一个高信息熵的发现：一旦检索任务被这些保留的注意力头明确地接管，SSM骨干网络的状态维度可以被大幅度削减（例如，减少8倍）而性能损失很小。</p>
+<p>这揭示了一种功能上的专业化：在纯SSM中，巨大的状态维度是弥补其检索能力不足的“拐杖”。而在检索感知的混合模型中，SSM可以专注于局部建模，只需要一个更小的状态。</p>
+<p>由此产生的混合模型比同类混合模型在内存效率上高出5-6倍，因为它同时减少了线性增长的注意力KV缓存和固定大小的SSM状态内存。</p>
+<p>主旨： 本文旨在解决状态空间模型（SSM）在上下文检索能力上弱于Transformer的核心痛点，并挑战现有混合架构中“一刀切”式地保留大量注意力层的低效做法。为此，论文提出了一种名为“检索感知蒸馏”的新方法，通过精准识别并只保留Transformer中负责检索功能的极少数关键注意力头（G&amp;A头），同时将其他部分蒸馏为SSM，从而在几乎不牺牲检索性能的前提下，构建出内存效率远超现有混合模型的Transformer-SSM混合架构。</p>
+<p>创新：</p>
+<p>架构设计理念创新： 颠覆了基于固定模式（如交错、固定比例）的混合模型设计，提出了一种基于“功能定位”的设计理念。它不再问“应该保留多少注意力”，而是问“应该保留哪些特定的注意力头”。</p>
+<p>方法论创新： 提出了一套简单而有效的操作流程来识别和保留关键组件。通过在合成任务上进行系统性“烧蚀测试”（ablation study），将注意力头的功能量化为“检索重要性分数”，为模型架构的“外科手术式”改造提供了数据驱动的依据。</p>
+<p>对SSM角色的新理解： 论文通过实验揭示了SSM状态维度的作用。一个反直觉的发现是，当检索任务被注意力分担后，SSM的状态维度可以大幅压缩。这创新性地指出，纯SSM中的大状态在很大程度上是为弥补其检索短板而存在的“补偿机制”。</p>
+<p>双重效率提升： 该方法实现了双重内存优化。它不仅通过大幅减少注意力头的数量来削减线性增长的KV缓存，还通过揭示SSM角色的变化，进一步压缩了SSM的固定状态内存，实现了对混合模型内存占用的极致优化。</p>
+<p>贡献：</p>
+<p>模型贡献： 提供了一种构建超高效Transformer-SSM混合模型的新方法，其产出的模型在保持强大检索能力的同时，内存效率比现有混合模型高5-6倍。</p>
+<p>理论贡献： 深入阐释了Transformer中检索功能的“局部化”特性，即它高度集中于少数G&amp;A头。这一发现不仅指导了本文的模型设计，也为理解Transformer内部工作机制提供了新的视角。</p>
+<p>实践贡献： 证明了仅需保留极少（~2%）的注意力头即可恢复绝大部分检索性能，为设计下一代高效长序列模型提供了极具价值的实践指导和量化依据。</p>
+<p>提升：</p>
+<p>内存效率： 这是最显著的提升。相较于需要保留25%或50%注意力层的启发式混合模型，本文方法在达到相似性能的同时，将内存占用降低了5-6倍。</p>
+<p>注意力头效率： 将实现高性能所需的注意力头数量从数百个（如128个）减少到了仅仅10个，实现了超过10倍的效率提升。</p>
+<p>SSM效率： 在保证性能的前提下，成功将SSM的状态维度（d_state）从64降低到8，实现了8倍的压缩，进一步降低了模型的固定内存开销和计算量。</p>
+<p>不足：</p>
+<p>模型规模的局限性： 实验主要在1B-1.5B参数规模的模型上进行。在更大规模的模型（如7B, 70B）中，检索功能的分布和头的冗余性可能会发生变化，本文的结论是否能直接推广尚不明确。</p>
+<p>检索任务的单一性： 识别关键头的过程依赖于一个合成的键值（KV）检索任务。虽然该任务能有效捕捉多种基准测试的性能，但对于更复杂的检索场景（如多跳检索），可能存在该方法无法识别出的其他关键组件。</p>
+<p>KV缓存共享的缺失： 尽管减少了KV对的总数，但本文的方法没有进一步探索在保留的头之间或层内共享KV缓存（如GQA）。这为进一步优化留下了空间。</p>
+<p>功能分离不完全： 烧蚀实验显示，仍有极少数SSM头对检索任务有影响，表明检索功能并未被100%地从SSM中剥离出来。这种耦合限制了对SSM状态进行更激进压缩的可能性。</p>
+<p>心得：</p>
+<p>“少即是多”的精准工程哲学： 本文最深刻的启发在于其“外科手术式”的精准思维。面对一个复杂系统（Transformer），与其粗暴地保留大块组件（整个注意力层），不如先深入理解其内部的功能分工，然后只保留那些不可或替代的核心单元。这种从“保留多少”到“保留哪个”的思维转变，是实现极致效率的关键，对所有复杂的系统优化问题都具有指导意义。</p>
+<p>合成任务作为“探针”的威力： 使用一个简单的合成任务（KV-retrieval）作为探针来诊断和量化一个庞大模型中各个组件的功能，这是一个非常巧妙且高效的研究范式。它告诉我们，要理解一个复杂的黑箱，有时不需要复杂的分析工具，一个精心设计的、能触及系统核心功能的简单测试就足够了。</p>
+<p>组件间的“功能代偿”效应： 本文揭示了SSM和注意力之间存在的功能代偿关系——纯SSM用大状态来“补偿”检索能力的缺失。这一发现极具启发性，它提醒我们在分析和设计混合架构时，必须考虑不同组件间可能存在的相互代偿。当引入一个擅长某项任务的新组件时，原有组件中用于“笨拙地”处理该任务的部分就可以被极大地简化或移除。</p>
+<p>一句话总结: 本文通过一个反直觉的发现——即Transformer的检索能力高度集中于极少数“G&amp;A”注意力头——提出了一种“检索感知蒸馏”方法，通过精准保留这2%的关键头并大幅简化SSM骨干，构建出比现有混合模型内存效率高5-6倍的新架构，深刻揭示了混合模型中注意力与SSM之间功能互补与代偿的深层关系。</p>
+<p>State-space models (SSMs) offer efficient sequence modeling but lag behind Transformers on benchmarks that require in-context retrieval. Prior work links this gap to a small set of attention heads, termed Gather-and-Aggregate (G&amp;A), which SSMs struggle to reproduce. We propose retrieval-aware distillation, which converts a pretrained Transformer into a hybrid student by preserving only these retrieval-critical heads and distilling the rest into recurrent heads. We identify the essential heads via ablation on a synthetic retrieval task, producing a hybrid with sparse, non-uniform attention placement. We show that preserving just 2% of attention heads recovers over 95% of teacher performance on retrieval-heavy tasks (10 heads in a 1B model), requiring far fewer heads than hybrids that retain at least 25%. We further find that large recurrent states often compensate for missing retrieval: once retrieval is handled by these heads, the SSM backbone can be simplified with limited loss, even with an 8× reduction in state dimension. By reducing both the attention cache and the SSM state, the resulting hybrid is 5–6× more memory-efficient than comparable hybrids, closing the Transformer–SSM gap at a fraction of the memory cost.</p>
+<p>https://arxiv.org/abs/2602.11374</p>
+    </div>
+    
+    <div class="footer" style="margin-top:3em;padding-top:1em;border-top:1px solid #eee;color:#aaa;font-size:0.85em;">
+      <p><strong>原文链接：</strong><a href="https://mp.weixin.qq.com/s/9TtuMFOonUB-c3xQsHQ6Bw">https://mp.weixin.qq.com/s/9TtuMFOonUB-c3xQsHQ6Bw</a></p>
+      <p style="margin-top:0.8em;">Powered by <a href="https://readgzh.site" style="color:#aaa;text-decoration:none;">ReadGZH</a> · <a href="https://readgzh.site/docs" style="color:#aaa;text-decoration:none;">开发者文档</a> · <a href="https://readgzh.site/pricing" style="color:#aaa;text-decoration:none;">升级套餐</a></p>
+      <p style="margin-top:0.4em;font-size:0.8em;">💡 免费注册获取每天 30 积分 · Lite ¥9/月 · Pro ¥39/月 → <a href="https://readgzh.site/dashboard" style="color:#aaa;">readgzh.site/dashboard</a></p>
+    </div>
+  </article>
+</body>
+</html>

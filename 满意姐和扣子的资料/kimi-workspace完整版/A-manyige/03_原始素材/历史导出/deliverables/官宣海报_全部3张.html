@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 20px; 
+    padding: 20px; 
+    background: #f0f0f0;
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.poster {
+    width: 1080px;
+    height: 1920px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+/* 海报1: 主视觉 */
+.poster-1 {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+.poster-1 .totem {
+    width: 400px;
+    height: 400px;
+    margin-bottom: 80px;
+    opacity: 0.9;
+}
+.poster-1 h1 {
+    font-size: 120px;
+    font-weight: 300;
+    letter-spacing: 20px;
+    margin-bottom: 40px;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.poster-1 .subtitle {
+    font-size: 42px;
+    color: #e8d5b7;
+    margin-bottom: 20px;
+    letter-spacing: 8px;
+}
+.poster-1 .tagline {
+    font-size: 36px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 100px;
+}
+.poster-1 .date {
+    font-size: 48px;
+    color: #e8d5b7;
+    letter-spacing: 12px;
+    border: 3px solid #e8d5b7;
+    padding: 20px 60px;
+}
+.poster-1 .five-elements {
+    position: absolute;
+    bottom: 80px;
+    display: flex;
+    gap: 30px;
+}
+.poster-1 .element {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+.element-fire { background: #e74c3c; }
+.element-earth { background: #d4a574; }
+.element-metal { background: #95a5a6; }
+.element-wood { background: #27ae60; }
+.element-water { background: #3498db; }
+
+/* 海报2: 个人介绍 */
+.poster-2 {
+    background: linear-gradient(180deg, #faf8f5 0%, #f5f0e8 100%);
+    padding: 100px 80px;
+    color: #2c3e50;
+}
+.poster-2 .header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+.poster-2 .brand {
+    font-size: 72px;
+    color: #8b6914;
+    letter-spacing: 16px;
+    margin-bottom: 20px;
+}
+.poster-2 .position {
+    font-size: 32px;
+    color: #666;
+    letter-spacing: 4px;
+}
+.poster-2 .content {
+    display: flex;
+    gap: 60px;
+    margin-bottom: 80px;
+}
+.poster-2 .left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.poster-2 .totem-visual {
+    width: 380px;
+    height: 380px;
+    background: conic-gradient(
+        from 0deg,
+        #e74c3c 0deg 72deg,
+        #d4a574 72deg 144deg,
+        #95a5a6 144deg 216deg,
+        #27ae60 216deg 288deg,
+        #3498db 288deg 360deg
+    );
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+.poster-2 .totem-visual::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background: #faf8f5;
+    border-radius: 50%;
+}
+.poster-2 .totem-visual::after {
+    content: '五路\n图腾';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 48px;
+    font-weight: bold;
+    color: #8b6914;
+    line-height: 1.3;
+}
+.poster-2 .right {
+    flex: 1.2;
+    padding-top: 40px;
+}
+.poster-2 .section {
+    margin-bottom: 50px;
+}
+.poster-2 .section-title {
+    font-size: 28px;
+    color: #8b6914;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+.poster-2 .section-content {
+    font-size: 32px;
+    line-height: 1.8;
+    color: #444;
+}
+.poster-2 .highlight {
+    color: #8b6914;
+    font-weight: 600;
+}
+.poster-2 .footer {
+    text-align: center;
+    padding: 40px;
+    background: #8b6914;
+    color: white;
+    font-size: 40px;
+    letter-spacing: 8px;
+    margin: 0 -80px -100px -80px;
+}
+
+/* 海报3: 首发福利 */
+.poster-3 {
+    background: linear-gradient(135deg, #c0392b 0%, #8e44ad 50%, #2980b9 100%);
+    padding: 100px 80px;
+    color: white;
+    text-align: center;
+}
+.poster-3 .badge {
+    display: inline-block;
+    background: #f1c40f;
+    color: #c0392b;
+    font-size: 36px;
+    font-weight: bold;
+    padding: 15px 50px;
+    border-radius: 50px;
+    margin-bottom: 40px;
+    letter-spacing: 4px;
+}
+.poster-3 h1 {
+    font-size: 100px;
+    margin-bottom: 30px;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    letter-spacing: 20px;
+}
+.poster-3 .limit {
+    font-size: 48px;
+    color: #f1c40f;
+    margin-bottom: 80px;
+    letter-spacing: 8px;
+}
+.poster-3 .offer-box {
+    background: rgba(255,255,255,0.15);
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 30px;
+    padding: 60px;
+    margin-bottom: 60px;
+    backdrop-filter: blur(10px);
+}
+.poster-3 .offer-title {
+    font-size: 48px;
+    margin-bottom: 30px;
+}
+.poster-3 .offer-value {
+    font-size: 80px;
+    color: #f1c40f;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+.poster-3 .offer-items {
+    text-align: left;
+    font-size: 36px;
+    line-height: 2;
+}
+.poster-3 .offer-items li {
+    margin-bottom: 20px;
+    list-style: none;
+}
+.poster-3 .offer-items li::before {
+    content: '✓ ';
+    color: #f1c40f;
+    font-weight: bold;
+}
+.poster-3 .conditions {
+    text-align: left;
+    background: rgba(0,0,0,0.2);
+    border-radius: 20px;
+    padding: 50px;
+    margin-bottom: 60px;
+}
+.poster-3 .conditions h3 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: #f1c40f;
+}
+.poster-3 .conditions ol {
+    font-size: 32px;
+    line-height: 2;
+    padding-left: 40px;
+}
+.poster-3 .conditions li {
+    margin-bottom: 15px;
+}
+.poster-3 .cta {
+    background: #f1c40f;
+    color: #c0392b;
+    padding: 40px 60px;
+    border-radius: 20px;
+    font-size: 40px;
+    font-weight: bold;
+    letter-spacing: 6px;
+}
+.poster-3 .cta-sub {
+    font-size: 28px;
+    color: rgba(255,255,255,0.8);
+    margin-top: 30px;
+}
+</style>
+</head>
+<body>
+
+<!-- 海报1: 主视觉 -->
+<div class="poster poster-1">
+    <svg class="totem" viewBox="0 0 400 400">
+        <!-- 五路图腾简化版 -->
+        <circle cx="200" cy="200" r="180" fill="none" stroke="#e8d5b7" stroke-width="2" opacity="0.3"/>
+        <circle cx="200" cy="200" r="140" fill="none" stroke="#e8d5b7" stroke-width="2" opacity="0.3"/>
+        <circle cx="200" cy="200" r="100" fill="none" stroke="#e8d5b7" stroke-width="2" opacity="0.5"/>
+        
+        <!-- 五行元素 -->
+        <circle cx="200" cy="80" r="30" fill="#e74c3c"/>
+        <text x="200" y="88" text-anchor="middle" fill="white" font-size="20" font-weight="bold">火</text>
+        
+        <circle cx="314" cy="146" r="30" fill="#d4a574"/>
+        <text x="314" y="154" text-anchor="middle" fill="white" font-size="20" font-weight="bold">土</text>
+        
+        <circle cx="314" cy="254" r="30" fill="#95a5a6"/>
+        <text x="314" y="262" text-anchor="middle" fill="white" font-size="20" font-weight="bold">金</text>
+        
+        <circle cx="200" cy="320" r="30" fill="#27ae60"/>
+        <text x="200" y="328" text-anchor="middle" fill="white" font-size="20" font-weight="bold">木</text>
+        
+        <circle cx="86" cy="254" r="30" fill="#3498db"/>
+        <text x="86" y="262" text-anchor="middle" fill="white" font-size="20" font-weight="bold">水</text>
+        
+        <!-- 连接线 -->
+        <line x1="200" y1="110" x2="284" y2="146" stroke="#e8d5b7" stroke-width="2" opacity="0.5"/>
+        <line x1="314" y1="176" x2="314" y2="224" stroke="#e8d5b7" stroke-width="2" opacity="0.5"/>
+        <line x1="284" y1="254" x2="200" y2="290" stroke="#e8d5b7" stroke-width="2" opacity="0.5"/>
+        <line x1="170" y1="320" x2="86" y2="284" stroke="#e8d5b7" stroke-width="2" opacity="0.5"/>
+        <line x1="86" y1="224" x2="86" y2="176" stroke="#e8d5b7" stroke-width="2" opacity="0.5"/>
+        <line x1="116" y1="146" x2="170" y2="110" stroke="#e8d5b7" stroke-width="2" opacity="0.5"/>
+        
+        <!-- 中心 -->
+        <circle cx="200" cy="200" r="40" fill="#e8d5b7"/>
+        <text x="200" y="195" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold">满意解</text>
+        <text x="200" y="212" text-anchor="middle" fill="#1a1a2e" font-size="12">研究所</text>
+    </svg>
+    
+    <h1>满意解研究所</h1>
+    <p class="subtitle">合伙人选择决策教练</p>
+    <p class="tagline">22年积淀 · 专注硬件创业</p>
+    <p class="date">2026.03.25 正式启航</p>
+</div>
+
+<!-- 海报2: 个人介绍 -->
+<div class="poster poster-2">
+    <div class="header">
+        <div class="brand">满意解研究所</div>
+        <div class="position">硬件初创企业家 · 合伙人选择决策教练</div>
+    </div>
+    
+    <div class="content">
+        <div class="left">
+            <div class="totem-visual"></div>
+        </div>
+        <div class="right">
+            <div class="section">
+                <div class="section-title">创始人</div>
+                <div class="section-content">
+                    <span class="highlight">Egbertie</span><br>
+                    22年跨界积淀
+                </div>
+            </div>
+            <div class="section">
+                <div class="section-title">背景</div>
+                <div class="section-content">
+                    11年银行体系<span class="highlight">风控专家</span><br>
+                    11年硬科技<span class="highlight">连续创业</span>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section-title">方法论</div>
+                <div class="section-content">
+                    五路图腾决策模型<br>
+                    <span style="font-size: 24px; color: #666;">
+                        儒商哲学 × 决策科学 × 极限测试<br>
+                        × 合伙人伦理 × 压力管理
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">帮你选对合伙人 · 少踩坑 · 多成事</div>
+</div>
+
+<!-- 海报3: 首发福利 -->
+<div class="poster poster-3">
+    <div class="badge">限时免费</div>
+    <h1>首发福利</h1>
+    <p class="limit">仅限前3位</p>
+    
+    <div class="offer-box">
+        <div class="offer-title">合伙人选择决策咨询</div>
+        <div class="offer-value">价值 ¥5,000</div>
+        <ul class="offer-items">
+            <li>1小时一对一深度咨询</li>
+            <li>定制化合伙人评估报告</li>
+            <li>3个月微信答疑支持</li>
+        </ul>
+    </div>
+    
+    <div class="conditions">
+        <h3>报名条件</h3>
+        <ol>
+            <li>已获得或正在申请政府补贴</li>
+            <li>面临合伙人选择困境</li>
+            <li>愿意分享脱敏案例</li>
+        </ol>
+    </div>
+    
+    <div class="cta">关注公众号 回复「首发福利」</div>
+    <p class="cta-sub">搜索「满意解研究所」立即预约 · 名额有限先到先得</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/quick_start.py",
+  "filename": "quick_start.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "5310285b4d7505df",
+  "content_length": 2850,
+  "ingested_at": "2026-03-31T17:27:46.195291",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\n文件格式读取工具 - 快速上手指南\n运行此脚本创建测试文件并演示读取功能\n\"\"\"\n\nimport os\nimport sys\nfrom pathlib import Path\n\n# 创建测试目录\ntest_dir = Path(\"./test_files\")\ntest_dir.mkdir(exist_ok=True)\n\nprint(\"=\" * 60)\nprint(\"  文件格式读取工具 - 快速上手\")\nprint(\"=\" * 60)\nprint()\n\n# 1. 创建测试文本文件\nprint(\"[1] 创建测试文件...\")\n\n# UTF-8编码的文本文件\ntest_txt = test_dir / \"test_utf8.txt\"\ntest_txt.write_text(\"\"\"这是UTF-8编码的测试文件。\n这是一段中文内容。\nHello World in English.\n数字: 12345\n特殊字符: àáâãäåæçèéêë\n\"\"\", encoding='utf-8')\nprin",
+  "limitations_applied": []
+}

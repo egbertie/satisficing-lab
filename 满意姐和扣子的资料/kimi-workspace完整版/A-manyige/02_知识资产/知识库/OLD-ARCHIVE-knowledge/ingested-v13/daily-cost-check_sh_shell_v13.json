@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_cost-control/scripts/daily-cost-check.sh",
+  "filename": "daily-cost-check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "5d3579726624c69a",
+  "content_length": 2523,
+  "ingested_at": "2026-03-31T17:27:45.151847",
+  "content_preview": "#!/bin/bash\n# 每日成本检查脚本\n# 使用方式: ./daily-cost-check.sh [--quiet]\n\nQUIET=$1\nWORKSPACE=\"/root/.openclaw/workspace\"\nCOST_DIR=\"$WORKSPACE/memory/cost\"\nDATE=$(date +%Y%m%d)\n\nmkdir -p \"$COST_DIR\"\n\n# 计算当日非Kimi模型总成本\nNON_KIMI_TOTAL=0\nDAILY_TOTAL=0\n\nif [ -f \"$COST_DIR/cost-log.jsonl\" ]; then\n    # 非Kimi成本\n    NON_KIMI_LINES=$(grep \"\\\"date\\\":\\\"$DATE\\\"\" \"$COST_DIR/cost-log.jsonl\" | grep -v -i \"kimi\" 2>/dev/null)\n    if [ -n \"$NON_KIMI_LINES\" ]; then\n        NON_KIMI_TOTAL=$(echo \"$NON_KIMI_LINES\" | python3 -c",
+  "limitations_applied": []
+}

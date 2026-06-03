@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_bilibili-subtitle-download-skill/cheese_downloader.py",
+  "filename": "cheese_downloader.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "76c953efcdc85890",
+  "content_length": 7542,
+  "ingested_at": "2026-03-31T17:27:45.219621",
+  "content_preview": "import asyncio\nimport os\nimport sys\nimport json\nfrom json import loads, dumps\nfrom bilibili_api import Credential, cheese, login_v2\nfrom qrcode import QRCode\n\nCHARS_PER_CHUNK = 100000\n\nasync def login_with_qrcode_picture():\n    qr = login_v2.QrCodeLogin(platform=login_v2.QrCodeLoginChannel.WEB)\n    await qr.generate_qrcode()\n    \n    qr_path = os.path.join(os.getcwd(), \"bilibili_login_qr.png\")\n    \n    from qrcode import QRCode\n    url = getattr(qr, '_QrCodeLogin__qr_link', None)\n    if not url:",
+  "limitations_applied": []
+}

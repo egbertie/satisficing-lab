@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/blue_army_morning_reading.sh",
+  "filename": "blue_army_morning_reading.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "a9ddab96672e883e",
+  "content_length": 1605,
+  "ingested_at": "2026-03-31T17:27:46.159194",
+  "content_preview": "#!/bin/bash\n# 蓝军晨读机制脚本\n# 每天早晨读取思维方式清单并记录\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nMORNING_READING_LOG=\"$WORKSPACE/diary/blue-army-morning-reading.log\"\nTHINKING_PATTERNS_FILE=\"$WORKSPACE/CORE/THINKING_PATTERNS_COMPLETE_LIST.md\"\n\necho \"=== 蓝军晨读 ===\" | tee -a \"$MORNING_READING_LOG\"\necho \"日期: $(date +%Y-%m-%d)\" | tee -a \"$MORNING_READING_LOG\"\necho \"时间: $(date +%H:%M)\" | tee -a \"$MORNING_READING_LOG\"\necho \"\" | tee -a \"$MORNING_READING_LOG\"\n\n# 检查思维方式清单是否存在\nif [ ! -f \"$THINKING_PATTERNS_FILE\" ]; then\n   ",
+  "limitations_applied": []
+}

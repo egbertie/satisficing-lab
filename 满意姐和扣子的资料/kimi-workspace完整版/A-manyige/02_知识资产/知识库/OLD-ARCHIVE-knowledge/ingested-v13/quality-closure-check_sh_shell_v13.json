@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/quality-closure/scripts/quality-closure-check.sh",
+  "filename": "quality-closure-check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "b3c0e4202397b553",
+  "content_length": 1629,
+  "ingested_at": "2026-03-31T17:27:45.349471",
+  "content_preview": "#!/bin/bash\n# 质量闭环检查脚本\n# skills/quality-closure/scripts/quality-closure-check.sh\n\necho \"=== 质量闭环检查 ===\"\necho \"检查时间: $(date)\"\necho \"\"\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nSKILL_DIR=\"$WORKSPACE/skills/quality-closure\"\nLOG_DIR=\"$SKILL_DIR/logs\"\nDEFECT_FILE=\"$LOG_DIR/defects.json\"\n\nmkdir -p \"$LOG_DIR\"\n\n# 初始化缺陷文件\nif [ ! -f \"$DEFECT_FILE\" ]; then\n    echo \"[]\" > \"$DEFECT_FILE\"\nfi\n\n# 检查待验证修复\necho \"1. 检查待验证修复...\"\nPENDING_VERIFY=$(cat \"$DEFECT_FILE\" 2>/dev/null | grep -c '\"status\": \"fixed\"' || echo \"0\"",
+  "limitations_applied": []
+}

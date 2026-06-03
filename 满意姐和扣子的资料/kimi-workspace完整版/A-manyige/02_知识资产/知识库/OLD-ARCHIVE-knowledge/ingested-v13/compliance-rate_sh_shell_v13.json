@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_reporting-standards/scripts/compliance-rate.sh",
+  "filename": "compliance-rate.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "c3b7c9ae36f99936",
+  "content_length": 913,
+  "ingested_at": "2026-03-31T17:27:45.315153",
+  "content_preview": "#!/bin/bash\n# 制度执行率计算脚本\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nREPORT_DIR=\"$WORKSPACE/memory/reports\"\n\necho \"=== 制度执行率统计 ===\"\necho \"统计时间: $(date '+%Y-%m-%d %H:%M:%S')\"\necho \"\"\n\n# 本周日报统计\nDAILY_COUNT=0\nif [ -d \"$REPORT_DIR/daily\" ]; then\n    DAILY_COUNT=$(find \"$REPORT_DIR/daily\" -name \"*.md\" -mtime -7 2>/dev/null | wc -l)\nfi\n\nEXPECTED=7\nRATE=$(awk \"BEGIN {printf \\\"%.1f\\\", ($DAILY_COUNT / $EXPECTED) * 100}\")\n\necho \"📊 本周日报完成率: $RATE% ($DAILY_COUNT/$EXPECTED)\"\necho \"\"\n\n# 显示状态\nif (( $(echo \"$RATE >= ",
+  "limitations_applied": []
+}

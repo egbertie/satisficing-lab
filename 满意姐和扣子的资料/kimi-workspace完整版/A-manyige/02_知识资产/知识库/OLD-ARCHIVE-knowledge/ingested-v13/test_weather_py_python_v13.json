@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/weather-query/test_weather.py",
+  "filename": "test_weather.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "4330854d9b219a1e",
+  "content_length": 3486,
+  "ingested_at": "2026-03-31T17:27:45.474086",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nWeather Query Skill 测试套件\nS7: 对抗测试实现\n\"\"\"\n\nimport sys\nimport os\nsys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))\n\nfrom weather_client import WeatherClient\n\nclass WeatherTestSuite:\n    \"\"\"Weather Skill对抗测试套件\"\"\"\n    \n    def __init__(self):\n        self.results = []\n        self.passed = 0\n        self.failed = 0\n    \n    def test(self, name: str, condition: bool, details: str = \"\"):\n        \"\"\"记录测试结果\"\"\"\n        if condition:\n            print(f\"✅ {name}\")\n  ",
+  "limitations_applied": []
+}

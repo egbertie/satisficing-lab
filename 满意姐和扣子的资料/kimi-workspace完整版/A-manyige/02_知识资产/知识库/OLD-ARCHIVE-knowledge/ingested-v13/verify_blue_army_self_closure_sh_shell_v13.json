@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify_blue_army_self_closure.sh",
+  "filename": "verify_blue_army_self_closure.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "203890f624515b96",
+  "content_length": 1565,
+  "ingested_at": "2026-03-31T17:27:46.199682",
+  "content_preview": "#!/bin/bash\n# 蓝军自我闭环升级验证脚本\n\necho \"=== 蓝军自我闭环升级验证 ===\"\necho \"\"\n\n# 检查自我闭环模块\necho \"1. 自我闭环模块:\"\nif [ -f \"/root/.openclaw/workspace/skills/blue-army-self-closure/blue_army_self_closure.py\" ]; then\n    echo \"   ✅ blue_army_self_closure.py 存在\"\n    lines=$(wc -l < /root/.openclaw/workspace/skills/blue-army-self-closure/blue_army_self_closure.py)\n    echo \"      代码行数: $lines\"\nelse\n    echo \"   ❌ blue_army_self_closure.py 不存在\"\n    exit 1\nfi\n\n# 检查关键方法\necho \"\"\necho \"2. 关键方法存在性:\"\ngrep -q \"audit_own_output\" /",
+  "limitations_applied": []
+}

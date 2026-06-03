@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blue-auditor/blue_auditor.py",
+  "filename": "blue_auditor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "8d9ab0707733d24d",
+  "content_length": 6826,
+  "ingested_at": "2026-03-31T17:27:45.374578",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n蓝军全量Skill审计工具\n按新标准（≥150行、10+测试、Token评估）逐一检查\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport subprocess\nfrom pathlib import Path\nfrom dataclasses import dataclass\nfrom typing import List, Dict, Optional\n\nSKILLS_DIR = \"/root/.openclaw/workspace/skills\"\nREPORT_FILE = \"/root/.openclaw/workspace/reports/blue-army-skill-audit-20260328.json\"\n\n# 高标准要求\nHIGH_STANDARD = {\n    'min_lines': 150,\n    'min_tests': 10,\n    'requires_token_assessment': True,\n    'requires_test_function': ",
+  "limitations_applied": []
+}

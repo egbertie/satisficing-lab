@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/system-v3/checkpoint_engine/zero_token_wakeup.yaml",
+  "filename": "zero_token_wakeup.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "a09652f9f0004911",
+  "content_length": 1024,
+  "ingested_at": "2026-03-31T17:27:46.129700",
+  "content_preview": "# Zero-Token Wakeup 配置\n# 零Token唤醒机制\n# 命名空间: NGT-WAKE-v1.0-FIN-260327\n\nversion: \"1.0\"\ndescription: \"断电后零Token快速恢复机制\"\n\nwakeup:\n  # 状态保存（休眠前）\n  hibernate:\n    trigger:\n      - \"user_exit\"\n      - \"idle_timeout\"\n      - \"manual_command\"\n      \n    save_content:\n      - \"session_state\"\n      - \"working_memory\"\n      - \"pending_tasks\"\n      - \"checkpoint_reference\"\n      \n    format: \"compressed_binary\"\n    location: \"tier_2_warm_storage\"\n    encryption: true\n\n  # 唤醒机制\n  wakeup:\n    detection:\n      -",
+  "limitations_applied": []
+}

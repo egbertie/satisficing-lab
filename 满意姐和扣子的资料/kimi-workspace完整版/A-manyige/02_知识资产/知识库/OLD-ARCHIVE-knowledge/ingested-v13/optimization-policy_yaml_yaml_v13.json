@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/config/optimization-policy.yaml",
+  "filename": "optimization-policy.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "a7d96afea1307498",
+  "content_length": 831,
+  "ingested_at": "2026-03-31T17:27:44.688252",
+  "content_preview": "# 优化策略配置\n\nthresholds:\n  empty_rate_warning: 0.8\n  token_budget_warning: 0.1\n  inactive_days_warning: 30\n  success_rate_warning: 0.5\n  high_frequency_threshold: 60\n\nauto_optimize:\n  tier_1: true\n  tier_2: false\n  tier_3: false\n  max_changes_per_run: 3\n\nnotification:\n  channels:\n    - kimi\n    - feishu\n  progressive_timeline:\n    - delay: 0\n      channel: kimi\n    - delay: 5\n      channel: feishu\n    - delay: 15\n      action: execute\n    - delay: 30\n      action: pending\n\nreporting:\n  daily:\n    e",
+  "limitations_applied": []
+}

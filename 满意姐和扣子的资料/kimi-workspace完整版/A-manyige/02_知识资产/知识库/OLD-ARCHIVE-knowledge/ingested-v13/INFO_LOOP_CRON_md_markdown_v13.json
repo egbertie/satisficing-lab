@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/config/INFO_LOOP_CRON.md",
+  "filename": "INFO_LOOP_CRON.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "99da940b42cb43d5",
+  "content_length": 2334,
+  "ingested_at": "2026-03-31T17:27:44.520078",
+  "content_preview": "# 信息闭环自动化Cron配置\n> **配置版本**: V1.0  \n> **创建时间**: 2026-03-20  \n> **维护者**: 满意妞\n\n---\n\n## 定时任务\n\n| 任务 | 频率 | 时间 | 动作 | 产出 |\n|------|------|------|------|------|\n| 信息闭环检查 | 每小时 | :00 | 扫描未闭环任务 | 提醒报告 |\n| 日报生成 | 每日 | 18:00 | 汇总当日闭环状态 | 闭环日报 |\n| 周报生成 | 每周 | 周日 20:00 | 统计周闭环率 | 闭环周报 |\n| 月度优化 | 每月 | 最后一天 22:00 | 分析闭环效率 | 优化建议 |\n\n---\n\n## Cron表达式\n\n```bash\n# 每小时检查未闭环任务\n0 * * * * cd /root/.openclaw/workspace && python3 scripts/info-loop-automation.py hourly >> logs/info-loop-hourly.log 2>&1\n\n# 每日18:00生成闭环日报\n0 1",
+  "limitations_applied": []
+}

@@ -1,0 +1,44 @@
+# 负熵构造体 - 周期性任务Cron配置
+# 文件路径: /root/.openclaw/workspace/scripts/cron-tasks/crontab-config.txt
+# 
+# 使用说明:
+# 1. 编辑crontab: crontab -e
+# 2. 复制以下内容到crontab
+# 3. 确保脚本路径正确
+# 4. 重载cron: sudo service cron reload
+#
+# 执行时间设计原则（错峰执行）:
+# - 晨间仪式: 07:00 (开启一天)
+# - 信息防火墙1: 12:00 (午间检查)
+# - 自我评估1: 14:00 (下午校准)
+# - 检查点健康: 16:00 (下午健康检查)
+# - 信息防火墙2: 18:00 (晚间检查)
+# - 自我评估2: 20:00 (晚间校准)
+# - 黄昏归位: 22:00 (一天结束)
+# - 知识OS维护: 02:00 (深夜低峰期)
+
+# 环境变量
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+WORKSPACE=/root/.openclaw/workspace
+LOG_DIR=$WORKSPACE/logs/cron-tasks
+
+# 晨间图腾仪式 - 每日07:00
+0 7 * * * cd $WORKSPACE && /usr/bin/python3 $WORKSPACE/scripts/cron-tasks/morning-ritual.py >> $LOG_DIR/morning-ritual-cron.log 2>&1
+
+# 信息防火墙检查 - 每日12:00和18:00
+0 12 * * * cd $WORKSPACE && /usr/bin/python3 $WORKSPACE/scripts/cron-tasks/info-firewall-check.py >> $LOG_DIR/info-firewall-check-cron.log 2>&1
+0 18 * * * cd $WORKSPACE && /usr/bin/python3 $WORKSPACE/scripts/cron-tasks/info-firewall-check.py >> $LOG_DIR/info-firewall-check-cron.log 2>&1
+
+# 自我评估校准 - 每日14:00和20:00
+0 14 * * * cd $WORKSPACE && /usr/bin/python3 $WORKSPACE/scripts/cron-tasks/self-assessment-calibrator.py >> $LOG_DIR/self-assessment-calibrator-cron.log 2>&1
+0 20 * * * cd $WORKSPACE && /usr/bin/python3 $WORKSPACE/scripts/cron-tasks/self-assessment-calibrator.py >> $LOG_DIR/self-assessment-calibrator-cron.log 2>&1
+
+# 检查点健康验证 - 每日16:00
+0 16 * * * cd $WORKSPACE && /usr/bin/python3 $WORKSPACE/scripts/cron-tasks/checkpoint-health-check.py >> $LOG_DIR/checkpoint-health-check-cron.log 2>&1
+
+# 黄昏图腾归位 - 每日22:00
+0 22 * * * cd $WORKSPACE && /usr/bin/python3 $WORKSPACE/scripts/cron-tasks/evening-ritual.py >> $LOG_DIR/evening-ritual-cron.log 2>&1
+
+# 知识OS维护 - 每日02:00（深夜低峰期）
+0 2 * * * cd $WORKSPACE && /usr/bin/python3 $WORKSPACE/scripts/cron-tasks/knowledge-os-maintenance.py >> $LOG_DIR/knowledge-os-maintenance-cron.log 2>&1

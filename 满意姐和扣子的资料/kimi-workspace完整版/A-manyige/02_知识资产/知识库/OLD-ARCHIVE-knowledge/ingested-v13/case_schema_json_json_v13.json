@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/schemas/case_schema.json",
+  "filename": "case_schema.json",
+  "file_type": "json",
+  "extension": ".json",
+  "file_hash": "78afef8bd2497e95",
+  "content_length": 4831,
+  "ingested_at": "2026-03-31T17:27:44.987221",
+  "content_preview": "{\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n  \"title\": \"合伙人案例库数据规范\",\n  \"description\": \"用于标准化录入创业合伙人案例的数据结构\",\n  \"type\": \"object\",\n  \"required\": [\"case_id\", \"case_name\", \"industry\", \"result\"],\n  \"properties\": {\n    \"case_id\": {\n      \"type\": \"string\",\n      \"description\": \"案例唯一标识，格式：CASE-XXX\",\n      \"pattern\": \"^CASE-[0-9]{3}$\"\n    },\n    \"case_name\": {\n      \"type\": \"string\",\n      \"description\": \"案例名称\",\n      \"minLength\": 1,\n      \"maxLength\": 100\n    },\n    \"industry\": {\n      \"ty",
+  "limitations_applied": []
+}

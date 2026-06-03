@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/ai-meeting-notes/scripts/ai-meeting-notes.py",
+  "filename": "ai-meeting-notes.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "2b0ddb318e155f5b",
+  "content_length": 22410,
+  "ingested_at": "2026-03-31T17:27:45.438384",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nai-meeting-notes.py\nAI会议笔记处理系统 - Level 5 生产级\n\n功能：\n- 多种输入格式支持 (文本/VTT/录音)\n- 智能信息提取 (要点/行动项/责任人/截止时间)\n- 准确性自检\n- 局限标注\n- 对抗测试\n\"\"\"\n\nimport argparse\nimport json\nimport logging\nimport sys\nimport os\nimport re\nimport hashlib\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import List, Dict, Optional, Tuple\nfrom dataclasses import dataclass, asdict\n\n# 配置日志\nlogging.basicConfig(\n    level=logging.INFO,\n    format='%(asctime)s - %(name)s - %(levelname)",
+  "limitations_applied": []
+}

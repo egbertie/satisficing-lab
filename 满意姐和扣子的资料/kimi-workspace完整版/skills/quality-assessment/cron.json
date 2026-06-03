@@ -1,0 +1,39 @@
+{
+  "version": "2.0.0",
+  "skill_name": "quality-assessment",
+  "description": "质量评估体系 - S1-S7完整评估 + 定时扫描 + 趋势分析",
+  "jobs": [
+    {
+      "name": "skill-assessment-weekly",
+      "schedule": "0 9 * * 1",
+      "enabled": true,
+      "command": "/root/.openclaw/workspace/skills/quality-assessment/scripts/assess-skill.sh --batch",
+      "timeout": 600,
+      "description": "每周一09:00批量评估所有Skill"
+    },
+    {
+      "name": "quality-trend-update",
+      "schedule": "0 */6 * * *",
+      "enabled": true,
+      "command": "/root/.openclaw/workspace/skills/quality-assessment/scripts/trend-analysis.sh --update",
+      "timeout": 120,
+      "description": "每6小时更新质量趋势数据"
+    },
+    {
+      "name": "weekly-assessment-report",
+      "schedule": "0 20 * * 0",
+      "enabled": true,
+      "command": "/root/.openclaw/workspace/skills/quality-assessment/scripts/quality-report.sh weekly",
+      "timeout": 120,
+      "description": "每周日20:00生成质量周报"
+    },
+    {
+      "name": "cross-validation-test",
+      "schedule": "0 4 * * 1",
+      "enabled": true,
+      "command": "/root/.openclaw/workspace/skills/quality-assessment/scripts/assess-adversarial-test.sh --batch",
+      "timeout": 180,
+      "description": "每周一凌晨运行S7交叉验证测试"
+    }
+  ]
+}

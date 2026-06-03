@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_github-ci-monitor/scripts/ci_check.sh",
+  "filename": "ci_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "d2766f668dba2d16",
+  "content_length": 3024,
+  "ingested_at": "2026-03-31T17:27:45.193166",
+  "content_preview": "#!/bin/bash\n# GitHub CI Check - Main Monitoring Script\n# CI状态检查主脚本\n\nset -e\n\nREPO=\"${1:-}\"\nPR_NUMBER=\"${2:-}\"\n\nif [ -z \"$REPO\" ]; then\n    echo \"🔍 GitHub CI Monitor\"\n    echo \"\"\n    echo \"Usage: $0 [owner/repo] [pr-number]\"\n    echo \"\"\n    echo \"Examples:\"\n    echo \"  $0 myorg/myrepo           # 检查仓库整体状态\"\n    echo \"  $0 myorg/myrepo 42        # 检查PR #42状态\"\n    exit 1\nfi\n\necho \"========================================\"\necho \"🔍 GitHub CI 状态检查\"\necho \"========================================\"\necho \"仓",
+  "limitations_applied": []
+}

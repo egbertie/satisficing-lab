@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/check_calendar.py",
+  "filename": "check_calendar.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "a64c4f10ea07b8c9",
+  "content_length": 963,
+  "ingested_at": "2026-03-31T17:27:46.198247",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n日历检查脚本\n检查即将发生的事件\n\"\"\"\nimport sys\nfrom pathlib import Path\nfrom datetime import datetime, timedelta\n\nsys.path.insert(0, str(Path(\"/root/.openclaw/workspace\")))\n\ndef check_upcoming_events(window_minutes=30, notify=False):\n    \"\"\"检查即将到来的事件\"\"\"\n    window = timedelta(minutes=window_minutes)\n    \n    # 这里应该调用日历API获取事件\n    # 暂时返回模拟结果\n    events = []  # 模拟无即将发生的事件\n    \n    print(f\"✅ 日历检查完成\")\n    print(f\"   检查窗口: {window_minutes}分钟\")\n    print(f\"   即将发生的事件: {len(events)}\")\n    \n",
+  "limitations_applied": []
+}

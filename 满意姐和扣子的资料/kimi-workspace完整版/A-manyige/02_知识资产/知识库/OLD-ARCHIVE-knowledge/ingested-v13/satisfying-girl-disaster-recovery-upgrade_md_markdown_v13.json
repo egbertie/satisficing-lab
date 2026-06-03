@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/satisfying-girl-disaster-recovery-upgrade.md",
+  "filename": "satisfying-girl-disaster-recovery-upgrade.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "459adb897f95e92e",
+  "content_length": 3982,
+  "ingested_at": "2026-03-31T17:27:45.503536",
+  "content_preview": "# 满意妞灾备思维全面融入升级方案\n# 时间: 2026-03-30 22:50\n# 目标: 将灾备思维、极端情况重视、突发风险思维融入所有工作\n\n---\n\n## 一、已有工作灾备化升级清单\n\n### 1. 方法论提取流水线 ⭐升级\n\n**原设计**: 一次性处理4125文件，生成索引\n**灾备升级**:\n- ✅ **Checkpoint机制**: 每处理100个文件保存进度\n- ✅ **断点续传**: 中断后可从上次位置继续\n- ✅ **备份索引**: 每日备份`METHODOLOGY_INDEX.json`\n- ✅ **恢复脚本**: `scripts/methodology_recovery.py`\n\n**升级交付**:\n```python\n# 新增: 处理进度保存\nsave_progress(processed_count, last_file)\n# 新增: 断点检测\nif checkpoint_exists():\n    resume_from_checkpoint()\n# 新增: 每日备份索引\nbackup_index_daily()\n```\n\n---\n\n### 2. 任务",
+  "limitations_applied": []
+}

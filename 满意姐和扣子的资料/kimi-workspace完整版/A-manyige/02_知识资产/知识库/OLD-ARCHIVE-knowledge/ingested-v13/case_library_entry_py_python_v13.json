@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/case_library_entry.py",
+  "filename": "case_library_entry.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "4e038956db713d92",
+  "content_length": 9026,
+  "ingested_at": "2026-03-31T17:27:46.157432",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\n案例库录入脚本\n功能：交互式录入合伙人案例，自动生成ID，验证必填字段，保存数据\n预计录入时间：从30分钟缩短到10分钟\n\"\"\"\n\nimport json\nimport os\nimport re\nfrom datetime import datetime\nfrom pathlib import Path\n\n# 配置路径\nBASE_DIR = Path(\"/root/.openclaw/workspace\")\nDATA_DIR = BASE_DIR / \"data\" / \"cases\"\nINDEX_FILE = DATA_DIR / \"index.json\"\nSCHEMA_FILE = BASE_DIR / \"schemas\" / \"case_schema.json\"\n\n# 确保目录存在\nDATA_DIR.mkdir(parents=True, exist_ok=True)\n\n# 选项定义\nINDUSTRIES = [\"硬科技\", \"AI\", \"生物医药\", \"新能源\", \"半导体\", ",
+  "limitations_applied": []
+}

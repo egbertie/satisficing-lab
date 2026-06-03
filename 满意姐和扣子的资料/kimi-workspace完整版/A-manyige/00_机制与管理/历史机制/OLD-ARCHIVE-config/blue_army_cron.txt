@@ -1,0 +1,17 @@
+# 蓝军审计机制Cron任务配置
+# 部署到系统crontab
+
+# 每周一 09:00 执行每周审计
+0 9 * * 1 /root/.openclaw/workspace/scripts/blue_army_weekly_audit.sh >> /root/.openclaw/workspace/logs/cron_weekly_audit.log 2>&1
+
+# 每天 09:00 执行违规检测与惩罚
+0 9 * * * /root/.openclaw/workspace/scripts/punishment_enforcer.sh >> /root/.openclaw/workspace/logs/cron_punishment.log 2>&1
+
+# 每月1日 09:00 执行月度深度审计
+0 9 1 * * /root/.openclaw/workspace/scripts/blue_army_weekly_audit.sh --deep >> /root/.openclaw/workspace/logs/cron_monthly_audit.log 2>&1
+
+# 每30分钟保存系统状态（Checkpoint机制）
+*/30 * * * * /root/.openclaw/workspace/scripts/auto-checkpoint.sh >> /root/.openclaw/workspace/logs/cron_checkpoint.log 2>&1
+
+# 每天 02:00 执行备份
+0 2 * * * /root/.openclaw/workspace/scripts/backup_to_external.py >> /root/.openclaw/workspace/logs/cron_backup.log 2>&1

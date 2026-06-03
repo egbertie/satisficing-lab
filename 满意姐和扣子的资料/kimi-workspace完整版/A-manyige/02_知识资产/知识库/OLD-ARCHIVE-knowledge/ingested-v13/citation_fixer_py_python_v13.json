@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/citation-consistency-auto-fix/scripts/citation_fixer.py",
+  "filename": "citation_fixer.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e2494a5e569198f1",
+  "content_length": 4551,
+  "ingested_at": "2026-03-31T17:27:45.392733",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n引用一致性自动修复脚本\n\"\"\"\n\nimport json\nimport re\nimport os\nfrom pathlib import Path\nfrom datetime import datetime\n\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nREPORT_FILE = WORKSPACE / \"logs\" / \"citation-fix-report.json\"\n\ndef find_markdown_files():\n    \"\"\"查找所有Markdown文件\"\"\"\n    md_files = []\n    for root, dirs, files in os.walk(WORKSPACE):\n        # 跳过隐藏目录和node_modules\n        dirs[:] = [d for d in dirs if not d.startswith('.') and d != 'node_modules']\n        for file in files",
+  "limitations_applied": []
+}

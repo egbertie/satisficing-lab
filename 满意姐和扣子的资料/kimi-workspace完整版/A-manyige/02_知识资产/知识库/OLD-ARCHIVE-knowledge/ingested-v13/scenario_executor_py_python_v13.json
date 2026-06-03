@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/scenario-planner/scenario_executor.py",
+  "filename": "scenario_executor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "bc6585e96aaeaf28",
+  "content_length": 5755,
+  "ingested_at": "2026-03-31T17:27:45.323202",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n场景规划自动化执行器\nS4: 自动化集成实现\n\"\"\"\n\nimport json\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\nclass ScenarioPlannerExecutor:\n    \"\"\"场景规划自动化执行器\"\"\"\n    \n    def __init__(self):\n        self.output_dir = Path(\"/root/.openclaw/workspace/scenarios\")\n        self.output_dir.mkdir(exist_ok=True)\n        \n    def generate_scenarios(self, decision_topic, context):\n        \"\"\"生成4情景规划\"\"\"\n        scenarios = {\n            \"decision\": decision_topic,\n            \"gener",
+  "limitations_applied": []
+}

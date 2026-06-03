@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/config/cron-rules.yaml",
+  "filename": "cron-rules.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "c42102ba35cfa5b7",
+  "content_length": 1352,
+  "ingested_at": "2026-03-31T17:27:44.688073",
+  "content_preview": "# 全局Cron规则配置\n# 由Cron优化管理器维护\n\n# 三层响应架构定义\ntier_definitions:\n  tier_1:\n    name: \"自动执行\"\n    description: \"低风险任务，系统自动执行\"\n    features:\n      - \"无需用户确认\"\n      - \"失败后自动通知\"\n      - \"适合维护类任务\"\n    auto_execute: true\n    confirmation_window: null\n    risk_levels: [low]\n    \n  tier_2:\n    name: \"确认窗口\"\n    description: \"中风险任务，提供确认窗口\"\n    features:\n      - \"执行前提醒用户\"\n      - \"可设置默认行为\"\n      - \"无响应则按默认执行\"\n    auto_execute: false\n    confirmation_window: 15  # 默认15分钟\n    risk_levels: [medium]\n    \n  tier_3:\n   ",
+  "limitations_applied": []
+}

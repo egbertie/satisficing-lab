@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/test_files/test_jina_ai.py",
+  "filename": "test_jina_ai.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "00cd282b9cee42b3",
+  "content_length": 4851,
+  "ingested_at": "2026-03-31T17:27:44.646348",
+  "content_preview": "\"\"\"\nJina AI API 测试脚本\n搜索底座API：Embedding、Reader、ReRanker、分类器等\n\n注册步骤:\n1. 访问 https://jina.ai/?sui=apikey\n2. 免费API密钥直接显示在页面，复制保存\n\n免费额度 (每天):\n- Embeddings: 500 RPM / 1M TPM\n- r.reader: 200 RPM\n- s.reader: 40 RPM\n- Classifier: 200 RPM\n- Segmenter: 200 RPM\n- 无需信用卡，即时可用\n\"\"\"\n\nimport requests\nimport os\n\n# 从环境变量读取，或手动替换\nJINA_API_KEY = os.getenv(\"JINA_API_KEY\", \"YOUR_JINA_API_KEY_HERE\")\n\nHEADERS = {\n    \"Authorization\": f\"Bearer {JINA_API_KEY}\",\n    \"Content-Type\": \"application/json\",\n    \"Accept\": \"applicat",
+  "limitations_applied": []
+}

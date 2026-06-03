@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/blue_army_monitor.sh",
+  "filename": "blue_army_monitor.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "5a8e8a014229d093",
+  "content_length": 876,
+  "ingested_at": "2026-03-31T17:27:46.147940",
+  "content_preview": "#!/bin/bash\n# 蓝军不作为监控脚本\n# 满意妞用于监控蓝军审计是否及时的机制\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nBLUE_ARMY_AUDIT_DIR=\"$WORKSPACE/diary/blue-audit\"\nREPORT_FILE=\"$WORKSPACE/diary/blue-army-inactivity-alerts.md\"\n\n# 检查蓝军最近审计时间\nLAST_AUDIT=$(ls -t \"$BLUE_ARMY_AUDIT_DIR\"/*.md 2>/dev/null | head -1)\nLAST_AUDIT_TIME=$(stat -c %Y \"$LAST_AUDIT\" 2>/dev/null || echo \"0\")\nNOW=$(date +%s)\nHOURS_SINCE=$(( (NOW - LAST_AUDIT_TIME) / 3600 ))\n\n# 如果超过2小时无审计，记录不作为\necho \"=== 蓝军监控检查 ===\" >> \"$REPORT_FILE\"\necho \"检查时间: $(date)\" >> \"$",
+  "limitations_applied": []
+}

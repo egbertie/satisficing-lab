@@ -1,0 +1,71 @@
+---
+name: super-knowledge-ingest
+version: "7.0.0"
+description: |
+  知识入库Skill - 高标准整改版
+  支持9种文件类型，完整实现5标准（S1-S5），通过蓝军19项测试
+  新增：大规模SOP整合、多子代理并行、Skill框架化
+
+# Skill配置
+runtime: python3.10
+entry: run.py
+
+# 输入参数
+inputs:
+  - name: input_path
+    type: string
+    required: true
+    description: 输入文件或目录路径
+  
+  - name: batch_size
+    type: integer
+    default: 50
+    description: 每批次处理文件数
+  
+  - name: max_workers
+    type: integer
+    default: 4
+    description: 最大并行子代理数（安全防范）
+  
+  - name: test_mode
+    type: boolean
+    default: false
+    description: 测试模式（运行19项蓝军测试）
+
+# 输出
+outputs:
+  - name: ingest_report
+    type: json
+    description: 入库报告
+  
+  - name: index_file
+    type: file
+    description: 索引文件路径
+
+# 5标准验证
+standards:
+  s1_global: true      # 全局考虑
+  s2_closed_loop: true # 系统闭环
+  s3_observable: true  # 可观测输出
+  s4_automation: true  # 自动化集成
+  s5_accuracy: true    # 准确性验证
+
+# 蓝军审计
+blue_army:
+  tests_count: 19
+  pass_threshold: 100%  # 必须全部通过
+  audit_required: true
+
+# 大规模SOP整合
+sop:
+  version: "1.0"
+  steps: 9
+  parallel: true
+  max_agents: 8
+
+# 安全防范
+security:
+  max_file_size: 10MB
+  max_workers: 8
+  timeout: 600
+  retry_count: 3

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/SECURITY_AUDIT_FIX.md",
+  "filename": "SECURITY_AUDIT_FIX.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "1f7bf5778e2173f1",
+  "content_length": 1948,
+  "ingested_at": "2026-03-31T17:27:46.519774",
+  "content_preview": "# 安全审计修复方案\n\n> **审计时间**: 2026-03-22 09:43  \n> **修复状态**: 立即执行  \n> **风险等级**: 中等（可信插件的代码模式警告）\n\n---\n\n## 一、发现的安全问题\n\n### 严重 (CRITICAL) - 4项（可信插件的代码模式）\n\n| 问题 | 插件 | 位置 | 说明 |\n|------|------|------|------|\n| 环境变量+网络发送 | feishu | media.ts:484 | 凭证收集风险（模式警告） |\n| Shell命令执行 | kimi-claw | terminal-session-manager.js:1 | child_process使用 |\n| 环境变量+网络发送 | kimi-search | index.js:37 | 凭证收集风险（模式警告） |\n| 环境变量+网络发送 | wecom | index.esm.js:299/325 | 凭证收集风险（模式警告） |\n\n**说明**: 这些都是已安装的可信插件的正常行为，但代码模式被标记为潜在风险。\n\n### 警告 (WARN) ",
+  "limitations_applied": []
+}

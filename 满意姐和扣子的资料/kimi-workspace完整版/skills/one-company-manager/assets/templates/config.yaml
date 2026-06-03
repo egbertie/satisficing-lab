@@ -1,0 +1,335 @@
+# 系统配置（v3.0 增强版）
+
+# 行业模板
+industry_template: "general"  # general/self-media/ecommerce/consulting/education/uphost
+
+# 财务阈值
+monthly_living_expenses: 5000  # 月生活费（元）
+emergency_fund_months: 3      # 应急基金月数
+
+# 提醒时段
+reminder_hours:
+  morning: 9
+  afternoon: 14
+  evening: 20
+
+# 健康阈值
+max_continuous_work_hours: 4
+min_sleep_hours: 6
+min_weekly_exercise: 3
+
+# 自定义关键词
+business_keywords:
+  - 项目
+  - 客户
+  - 合作
+
+# ===== 外部系统集成 =====
+integrations:
+  # 日程类
+  calendar:
+    google_calendar:
+      enabled: false
+      api_key: ""
+      calendar_id: ""
+      sync_direction: "bidirectional"
+      sync_frequency: "hourly"
+    outlook:
+      enabled: false
+      api_key: ""
+      sync_direction: "bidirectional"
+      sync_frequency: "hourly"
+
+  # 项目管理类
+  project_management:
+    github:
+      enabled: false
+      token: ""
+      repo_owner: ""
+      repo_name: ""
+      sync_issues: true
+    notion:
+      enabled: false
+      api_key: ""
+      database_id: ""
+      sync_direction: "bidirectional"
+    trello:
+      enabled: false
+      api_key: ""
+      board_id: ""
+      sync_direction: "bidirectional"
+
+  # 数据分析类
+  analytics:
+    wechat_official_account:
+      enabled: false
+      app_id: ""
+      app_secret: ""
+      sync_frequency: "daily"
+    douyin:
+      enabled: false
+      access_token: ""
+      sync_frequency: "daily"
+    xiaohongshu:
+      enabled: false
+      access_token: ""
+      sync_frequency: "daily"
+    bilibili:
+      enabled: false
+      access_token: ""
+      sync_frequency: "daily"
+
+  # 支付类（v3.0新增）
+  payment:
+    wechat_pay:
+      enabled: false
+      merchant_id: ""
+      api_key: ""
+      cert_path: ""
+      sync_frequency: "daily"
+    alipay:
+      enabled: false
+      app_id: ""
+      private_key: ""
+      public_key: ""
+      sync_frequency: "daily"
+    stripe:
+      enabled: false
+      api_key: ""
+      webhook_url: ""
+      sync_frequency: "daily"
+    paypal:
+      enabled: false
+      client_id: ""
+      client_secret: ""
+      sync_frequency: "daily"
+
+  # 营销类（v3.0新增）
+  marketing:
+    douyin_open:
+      enabled: false
+      app_id: ""
+      app_secret: ""
+      auto_publish: false
+    xiaohongshu_open:
+      enabled: false
+      app_id: ""
+      app_secret: ""
+      auto_publish: false
+    mailchimp:
+      enabled: false
+      api_key: ""
+      list_id: ""
+      auto_send: false
+
+  # 协作类（v3.0新增）
+  collaboration:
+    feishu:
+      enabled: false
+      app_id: ""
+      app_secret: ""
+      sync_tasks: true
+    wework:
+      enabled: false
+      corp_id: ""
+      agent_id: ""
+      secret: ""
+      sync_tasks: true
+    tencent_meeting:
+      enabled: false
+      sdk_id: ""
+      secret_id: ""
+      auto_create: false
+    zoom:
+      enabled: false
+      api_key: ""
+      api_secret: ""
+      auto_create: false
+
+  # 工具类（v3.0新增）
+  tools:
+    baidu_netdisk:
+      enabled: false
+      access_token: ""
+      backup_path: ""
+      auto_backup: false
+    aliyun_drive:
+      enabled: false
+      access_token: ""
+      backup_path: ""
+      auto_backup: false
+    gitlab:
+      enabled: false
+      private_token: ""
+      project_id: ""
+      sync_issues: true
+    gitee:
+      enabled: false
+      access_token: ""
+      repo_owner: ""
+      repo_name: ""
+      sync_issues: true
+
+# ===== 智能决策配置 =====
+ai_decisions:
+  enabled: true
+  auto_analysis_frequency: "daily"  # daily/weekly/monthly
+  priority_adjustment_enabled: true
+  health_optimization_enabled: true
+
+  # 自动化决策执行（v3.0新增）
+  auto_execution:
+    enabled: false  # 默认关闭，需用户手动开启
+    business_priority_adjustment:
+      enabled: false
+      threshold: 20  # 变化超过20%触发
+      confirm_required: true  # 需要用户确认
+    cash_flow_risk_response:
+      enabled: false
+      threshold_days: 90  # 现金不足90天时触发
+      auto_send_reminder: true  # 自动发送催款提醒
+      auto_pause_expenses: false  # 暂停非必要支出（需确认）
+    health_intervention:
+      enabled: false
+      threshold_load: 80  # 健康负荷超过80%触发
+      auto_insert_break: true  # 自动插入休息时间
+      auto_reduce_workload: false  # 自动降低工作目标（需确认）
+    customer_maintenance:
+      enabled: false
+      auto_birthday_greeting: true  # 自动发送生日问候
+      auto_satisfaction_survey: true  # 自动发送满意度调研
+      auto_followup_days: 90  # 90天未联系自动提醒
+
+# ===== 自定义快捷命令（v3.0新增）=====
+custom_commands:
+  enabled: false
+  commands:
+    # 用户可以自定义快捷命令
+    # 示例:
+    # 记: "记账 {amount} {description}"
+    # 财: "/财务"
+    # 健: "/健康"
+    # 客: "/客户"
+
+# ===== 行业专属配置 =====
+industry_config:
+  # 自媒体
+  self_media:
+    content_planning:
+      default_publish_frequency: 3
+      ai_topic_generation: false
+      topic_hotness_threshold: 80
+    ad_cooperation:
+      min_quote_wechat: 1000
+      min_quote_douyin: 1500
+      min_quote_xiaohongshu: 800
+
+  # 电商
+  ecommerce:
+    inventory:
+      low_stock_threshold: 10
+      auto_reorder_enabled: false
+      prediction_days: 30
+    customer_segmentation:
+      vip_threshold: 5000
+      high_value_threshold: 2000
+      auto_segment: true
+
+  # 咨询
+  consulting:
+    project:
+      default_duration: 30
+      hourly_rate: 500
+      auto_gantt: false
+    knowledge:
+      auto_build_modules: false
+
+  # 教培
+  education:
+    course:
+      default_duration: 30
+      max_students: 100
+      auto_analysis: true
+    tutoring:
+      auto_recommend: false
+
+  # UP主/主播
+  uphost:
+    streaming:
+      default_duration: 3
+      min_days_between: 2
+    content:
+      auto_recommend: false
+    revenue:
+      auto_analysis: true
+
+# ===== 对话交互配置（v3.0新增）=====
+dialog_config:
+  # 上下文理解
+  context_awareness:
+    enabled: true
+    max_context_turns: 10  # 最大上下文轮数
+    entity_tracking: true  # 实体跟踪
+
+  # 模糊指令解析
+  fuzzy_command:
+    enabled: true
+    confidence_threshold: 0.8  # 置信度阈值
+
+  # 多轮对话任务拆解
+  multi_turn_task:
+    enabled: true
+    max_task_steps: 5  # 最大任务步骤数
+
+  # 个性化
+  personalization:
+    enabled: true
+    learning_mode: false  # 学习用户习惯
+
+# ===== 高级设置 =====
+advanced:
+  # 数据备份
+  backup:
+    enabled: true
+    auto_backup_frequency: "daily"
+    backup_path: "~/onepilot/backups"
+    retention_days: 30
+
+  # 数据加密
+  encryption:
+    enabled: false
+    key: ""
+
+  # 日志记录
+  logging:
+    enabled: true
+    level: "info"  # debug/info/warn/error
+    path: "~/onepilot/logs"
+
+# 其他配置
+default_timezone: Asia/Shanghai
+
+## 使用说明
+- monthly_living_expenses: 用于计算应急基金（3个月生活费）
+- emergency_fund_months: 现金低于此月数的生活费时触发告警
+- reminder_hours: 每日提醒的时间点（早中晚各一次）
+- max_continuous_work_hours: 连续工作超过此时长会提醒休息
+- min_sleep_hours: 睡眠少于此时长会触发健康预警
+- min_weekly_exercise: 每周最少运动次数，未完成时会提醒
+- business_keywords: 用于智能识别业务相关的自然语言输入
+- industry_template: 行业模板标识，初始化时选择
+- integrations: 外部系统集成配置，需用户提供API凭证
+- ai_decisions: 智能决策配置，启用后自动生成优化建议
+- auto_execution: 自动化决策执行，默认关闭需用户手动开启
+- custom_commands: 自定义快捷命令，提升操作效率
+- industry_config: 行业专属配置，根据选择的行业动态加载
+- dialog_config: 对话交互配置，控制上下文理解、模糊指令等功能
+- advanced: 高级设置，包括数据备份、加密、日志等
+
+## v3.0 新增功能说明
+1. 扩展的外部系统集成：支付类、营销类、协作类、工具类
+2. 自动化决策执行：业务优先级、现金流风险、健康干预、客户维护
+3. 自定义快捷命令：用户可自定义快捷指令
+4. 行业专属配置：每个行业有独立的配置项
+5. 对话交互增强：上下文理解、模糊指令解析、多轮对话
+6. 高级设置：数据备份、加密、日志记录

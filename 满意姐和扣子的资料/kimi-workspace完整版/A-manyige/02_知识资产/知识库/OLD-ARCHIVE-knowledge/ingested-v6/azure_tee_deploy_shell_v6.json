@@ -1,0 +1,33 @@
+{
+  "source_path": "/root/.openclaw/workspace/azure_tee_deploy.sh",
+  "filename": "azure_tee_deploy.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 3661,
+  "checksum": "2d57235287921951",
+  "ingested_at": "2026-03-31T17:30:47.722309",
+  "line_count": 130,
+  "title": "azure_tee_deploy",
+  "description": "Azure TEE Confidential Computing Instance Deployment Script",
+  "sections": [],
+  "entities": [],
+  "key_points": [
+    "Azure TEE Confidential Computing Instance Deployment Script",
+    "This script deploys a Standard_DC8s_v3 VM with Intel TDX support",
+    "1. Login to Azure (uncomment the appropriate method)",
+    "Method 1: Interactive login (for local development)",
+    "az login",
+    "Method 2: Service Principal (for CI/CD automation)",
+    "az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID",
+    "Method 3: Managed Identity (for Azure VM/Container)",
+    "az login --identity",
+    "2. Set variables",
+    "Generate SSH key if not exists",
+    "3. Create Resource Group",
+    "4. Create Virtual Network and Subnet",
+    "5. Create Public IP",
+    "6. Create Network Security Group"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

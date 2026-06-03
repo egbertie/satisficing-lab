@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/memory/multi-agent-design-spec.md",
+  "filename": "multi-agent-design-spec.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "0e5fd39e9721aff8",
+  "content_length": 2386,
+  "ingested_at": "2026-03-31T17:27:46.467439",
+  "content_preview": "# 多Agent分身设计方案\n\n## 设计原则（基于AIRES-004 agency-agents + AIRES-007 简单设计原则）\n\n> **每增加一个Agent，就多一个故障点；每次交接，就是上下文死亡一次。**\n> **一个Agent，一个任务，可衡量的输出。**\n\n---\n\n## 当前系统: 87个系统 → 专业化Agent分身\n\n### 核心原则\n- **专才 > 通才**: 每个Agent只精通一个领域\n- **简单优先**: 避免复杂多Agent链\n- **独立交付**: 每个Agent可直接输出结果\n\n---\n\n## Agent分身架构\n\n### 第一层: 核心治理Agent（5个）\n\n| Agent | 职责 | 对应现有系统 | 输出 |\n|-------|------|--------------|------|\n| **QualityGuard** | 质量门禁 | quality-gate-system, quality-assurance | 通过/不通过报告 |\n| **TokenWatch** | Token监控 | token-budget-en",
+  "limitations_applied": []
+}

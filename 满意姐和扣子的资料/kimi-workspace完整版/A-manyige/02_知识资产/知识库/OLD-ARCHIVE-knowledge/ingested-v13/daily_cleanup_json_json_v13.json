@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_git-workflow-auto/cron/daily_cleanup.json",
+  "filename": "daily_cleanup.json",
+  "file_type": "json",
+  "extension": ".json",
+  "file_hash": "cd97f71a29af03a5",
+  "content_length": 421,
+  "ingested_at": "2026-03-31T17:27:45.304790",
+  "content_preview": "{\n  \"id\": \"git-workflow-cleanup\",\n  \"schedule\": \"0 2 * * *\",\n  \"timezone\": \"Asia/Shanghai\",\n  \"enabled\": true,\n  \"command\": \"cd ~/.openclaw/workspace && find . -name '.git' -type d -exec dirname {} \\\\; | head -5 | while read repo; do cd \\\"$repo\\\" && ~/.openclaw/workspace/skills/git-workflow-auto/scripts/cleanup.sh; done\",\n  \"timeout\": 300,\n  \"logging\": {\n    \"enabled\": true,\n    \"path\": \"./logs/git_cleanup.log\"\n  }\n}\n",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/knowledge-ingest/ingested/SKILL.2416.md",
+  "filename": "SKILL.2416.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "611f73cd67e420e8",
+  "content_length": 1713,
+  "ingested_at": "2026-03-31T17:27:45.676855",
+  "content_preview": "# citation-consistency-auto-fix Skill V5标准版本\n\n## S1: 全局考虑\n\n### 输入\n- 工作区文件路径\n- 引用模式（内部链接、外部URL）\n- 修复策略（自动/人工确认）\n\n### 覆盖维度\n| 维度 | 考虑内容 |\n|------|----------|\n| **人** | 开发者维护文档、用户查阅资料 |\n| **事** | 扫描引用、检测失效、自动修复 |\n| **物** | Markdown文件、内部链接、外部URL |\n| **环境** | 本地文件系统、网络环境 |\n| **外部集成** | 外部URL可用性检查 |\n| **边界情况** | 循环引用、相对路径、URL临时失效 |\n\n---\n\n## S2: 系统考虑\n\n### 处理流程\n```\n全量扫描 → 引用提取 → 有效性验证 → 失效标记 → 自动修复 → 报告生成\n    ↑                                              ↓\n    └──────────── 定时执行 ← 手动触发 ←────────────┘\n``",
+  "limitations_applied": []
+}

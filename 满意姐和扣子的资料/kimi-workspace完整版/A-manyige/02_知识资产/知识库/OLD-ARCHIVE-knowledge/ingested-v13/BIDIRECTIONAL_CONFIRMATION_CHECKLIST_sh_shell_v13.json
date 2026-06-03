@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/CORE/BIDIRECTIONAL_CONFIRMATION_CHECKLIST.sh",
+  "filename": "BIDIRECTIONAL_CONFIRMATION_CHECKLIST.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "89169b9c471d8d8c",
+  "content_length": 365,
+  "ingested_at": "2026-03-31T17:27:44.545156",
+  "content_preview": "#!/bin/bash\n# BIDIRECTIONAL_CONFIRMATION_CHECKLIST机制执行脚本\necho \"=== BIDIRECTIONAL_CONFIRMATION_CHECKLIST机制检查 ===\"\necho \"时间: $(date)\"\nif [ -f \"/root/.openclaw/workspace/CORE/BIDIRECTIONAL_CONFIRMATION_CHECKLIST.md\" ]; then\n    echo \"✅ BIDIRECTIONAL_CONFIRMATION_CHECKLIST.md 存在\"\nelse\n    echo \"❌ BIDIRECTIONAL_CONFIRMATION_CHECKLIST.md 不存在\"\n    exit 1\nfi\necho \"检查完成\"\n",
+  "limitations_applied": []
+}

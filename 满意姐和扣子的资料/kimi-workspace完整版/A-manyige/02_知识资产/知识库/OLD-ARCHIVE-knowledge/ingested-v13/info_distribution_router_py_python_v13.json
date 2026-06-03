@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/info-distribution-router/info_distribution_router.py",
+  "filename": "info_distribution_router.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "88c9e10cd401300b",
+  "content_length": 10708,
+  "ingested_at": "2026-03-31T17:27:44.801231",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n信息分发路由器 V1.0\n管理信息在33位小伙伴之间的高效流通和使用\n\n核心职责:\n1. 信息分级和权限控制\n2. 智能路由到需要的人\n3. 确保信息及时到达\n4. 追踪信息使用效果\n\"\"\"\n\nimport json\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Optional, Set\nfrom dataclasses import dataclass, asdict\nfrom enum import Enum\n\nclass InfoLevel(Enum):\n    \"\"\"信息分级\"\"\"\n    PUBLIC = \"C\"      # 公开信息，可外部分享\n    INTERNAL = \"B\"    # 内部信息，全员可见\n    SENSITIVE = \"A\"   # 敏感信息，L3及以上可见\n    STRATEGIC = \"S\"   # 战略信息，L4-L5可见\n\n\n@dataclass\nclass",
+  "limitations_applied": []
+}

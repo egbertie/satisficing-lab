@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_cron-optimization-manager/templates/audit_template.md",
+  "filename": "audit_template.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "18f3f03d8aeda8c7",
+  "content_length": 1324,
+  "ingested_at": "2026-03-31T17:27:45.157268",
+  "content_preview": "# Cron审计报告模板\n\n## 报告信息\n\n- **报告类型**: Cron全面审计\n- **生成时间**: {{timestamp}}\n- **审计范围**: 全部Cron\n- **审计标准**: 方案C+优化标准\n\n## 审计概览\n\n| 指标 | 数值 |\n|------|------|\n| 总计Cron数 | {{total_crons}} |\n| 启用Cron数 | {{enabled_crons}} |\n| 禁用Cron数 | {{disabled_crons}} |\n| P0-保留 | {{p0_count}} |\n| P1-优化 | {{p1_count}} |\n| P2-延迟 | {{p2_count}} |\n| P3-删除 | {{p3_count}} |\n\n## 详细审计结果\n\n{{#each crons}}\n### {{name}} ({{id}})\n\n- **层级**: Tier {{tier}}\n- **状态**: {{status}}\n- **综合得分**: {{score}}/10\n- **分类**: {{classification}}\n\n**详细评分",
+  "limitations_applied": []
+}

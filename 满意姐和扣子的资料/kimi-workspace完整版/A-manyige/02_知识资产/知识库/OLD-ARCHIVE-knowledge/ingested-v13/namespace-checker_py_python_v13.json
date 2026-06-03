@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/namespace-enforcement/scripts/namespace-checker.py",
+  "filename": "namespace-checker.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e20a691e1287d2e3",
+  "content_length": 28621,
+  "ingested_at": "2026-03-31T17:27:45.395628",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nNamespace Checker - 命名空间检查器\n实现5标准化要求：S1-S7\n\nS1: 全局考虑 - 命名规范对文件检索效率的影响\nS2: 系统闭环 - 文件创建→命名检查→违规处理→索引更新\nS3: 可观测输出 - 合规率、违规清单、迁移进度\nS4: 自动化集成 - 自动检查、自动提示、自动修复建议\nS5: 自我验证 - 命名检查器自检\nS6: 认知谦逊 - 标注存量文件不强制迁移\nS7: 对抗测试 - 模拟命名冲突场景\n\"\"\"\n\nimport os\nimport re\nimport json\nimport sys\nimport argparse\nfrom pathlib import Path\nfrom datetime import datetime\nfrom typing import List, Dict, Any, Optional, Tuple\nfrom dataclasses import dataclass, asdict\nfrom enum import Enum\n\n\nclass ViolationTyp",
+  "limitations_applied": []
+}

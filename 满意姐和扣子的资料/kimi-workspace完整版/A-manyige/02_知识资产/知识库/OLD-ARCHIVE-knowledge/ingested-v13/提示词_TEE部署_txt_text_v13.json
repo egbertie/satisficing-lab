@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/A-manyige/99_📦完整下载包/V2.0_技术跃升成果集/提示词_TEE部署.txt",
+  "filename": "提示词_TEE部署.txt",
+  "file_type": "text",
+  "extension": ".txt",
+  "file_hash": "d96899cdb0658ec7",
+  "content_length": 2447,
+  "ingested_at": "2026-03-31T17:27:46.377530",
+  "content_preview": "# TEE机密计算部署 - AI执行提示词\n\n## 🎯 任务目标\n在Azure上部署Intel TDX机密计算实例，运行Llama2-7B基准测试，验证TEE性能损失<10%。\n\n## 📋 前置要求\n- Azure订阅（含DCsv3系列配额）\n- 本地安装 Azure CLI v2.84.0+\n- SSH密钥对（用于连接VM）\n\n## 🚀 执行步骤\n\n### 步骤1: Azure登录认证\n```bash\naz login\n# 按提示完成浏览器交互式认证\n# 确认输出显示登录成功和订阅信息\n```\n\n### 步骤2: 确认配额\n```bash\naz vm list-skus --location eastus --size Standard_DC8s_v3 --output table\n# 确认返回结果不为空（有配额）\n```\n\n### 步骤3: 一键部署\n在交付包目录执行：\n```bash\ncd V2.0_完整交付包/部署脚本/\nchmod +x *.sh\n./deploy_and_benchmark.sh 2>&1 | tee deployment_log.txt\n```\n\n此脚本会",
+  "limitations_applied": []
+}

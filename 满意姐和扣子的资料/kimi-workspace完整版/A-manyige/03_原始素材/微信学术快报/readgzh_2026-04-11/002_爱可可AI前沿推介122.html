@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>爱可可AI前沿推介(1.22)</title>
+  <meta name="description" content="LG - 机器学习 CV - 计算机视觉 CL - 计算与语言
+
+1、[AI] Rethinking the AI Scientist：Interactive Multi-Agent Workflows for Scientific Discovery2、[CL] Speculative Decoding：Perfor">
+  <meta name="author" content="爱可可爱生活">
+  <meta property="og:title" content="爱可可AI前沿推介(1.22)">
+  <meta property="og:description" content="LG - 机器学习 CV - 计算机视觉 CL - 计算与语言
+
+1、[AI] Rethinking the AI Scientist：Interactive Multi-Agent Workflows for Scientific Discovery2、[CL] Speculative Decoding：Performance or Illusion?3、[LG] CooperBench：Why">
+  <meta property="og:type" content="article">
+  
+  <style>
+    body { max-width: 800px; margin: 0 auto; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: #333; }
+    h1 { font-size: 1.8em; margin-bottom: 0.5em; }
+    .meta { color: #666; margin-bottom: 2em; border-bottom: 1px solid #eee; padding-bottom: 1em; }
+    .meta p { margin: 0.3em 0; }
+    .content { font-size: 1.05em; }
+    .content img { max-width: 100%; height: auto; }
+    .footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #eee; color: #999; font-size: 0.9em; }
+    a { color: #1a73e8; }
+  </style>
+</head>
+<body>
+  <article>
+    <h1>爱可可AI前沿推介(1.22)</h1>
+    <div class="meta">
+      <p><strong>作者：</strong>爱可可爱生活</p>
+      <p><strong>发布时间：</strong>2026-01-22 05:51</p>
+    </div>
+    <div class="content">
+      <p>LG - 机器学习 CV - 计算机视觉 CL - 计算与语言</p>
+<p>1、[AI] Rethinking the AI Scientist：Interactive Multi-Agent Workflows for Scientific Discovery2、[CL] Speculative Decoding：Performance or Illusion?3、[LG] CooperBench：Why Coding Agents Cannot be Your Teammates Yet4、[CL] Beyond Tokens：Concept-Level Training Objectives for LLMs5、[LG] Q-learning with Adjoint Matching</p>
+<p>摘要：赋能科学发现的交互式多智能体工作流、投机性解码是性能实效还是虚幻表象、为什么编程智能体还无法成为你的合格队友、面向大语言模型的概念级训练目标、基于伴随匹配的Q-learning</p>
+<p>1、[AI] Rethinking the AI Scientist: Interactive Multi-Agent Workflows for Scientific Discovery</p>
+<p>L Weidener, M Brkić, M Jovanović, R Singh...</p>
+<p>重构AI科学家：赋能科学发现的交互式多智能体工作流</p>
+<p>要点：</p>
+<p>挑战了当前主流的、缓慢的、批处理式的“AI科学家”系统范式（例如，Kosmos每次研究循环需数小时），并提出了一种名为“Deep Research”的交互式多智能体系统，将研究周转时间缩短至分钟级别。</p>
+<p>提出了一种模块化架构，包含规划、数据分析、文献检索和新颖性检测等专业智能体，并通过编排使其并行工作。</p>
+<p>一项关键的架构创新是“持久化对话世界状态”，它在迭代的研究周期中维护一个摘要化的上下文，以防止信息稀释，并支持连贯的长期研究。</p>
+<p>提供了两种操作模式：一种是半自主模式，在关键决策点设有选择性的人工检查点，以实现协作指导；另一种是针对明确定义任务的全自主模式，这种设计务实地解决了完全自主系统的脆弱性问题。</p>
+<p>其数据分析智能体采用一种复杂的迭代工作流（规划、编码、执行、观察、反思），并动态构建一个包含规则和上下文条目的“知识库”来指导其推理过程。</p>
+<p>通过实验证明了其业界领先的性能，其数据分析智能体在BixBench开放式问答基准测试中达到了48.8%的准确率，显著超越了K-Dense Analyst和GPT-5等基线模型14至26个百分点。</p>
+<p>反直觉/高信息熵观点 1： 该系统的知识来源受到根本性限制，仅依赖于开放获取的文献，这意味着它对大约50%的科学出版物是“盲”的，尤其是那些隐藏在出版商付费墙后的高影响力研究。</p>
+<p>反直觉/高信息熵观点 2： 作者对自动化新颖性评估的内在局限性进行了深刻的自我批判分析，指出了将文本相似性映射到真正概念创新的过程中存在的无法回避的挑战，这些挑战源于哲学层面（如何定义新颖性）和技术层面（同义词、多义词问题）。</p>
+<p>反直觉/高信息熵观点 3： 论文对其取得优异成绩的基准测试（BixBench）本身提出了批判，通过案例研究（Bix-30, Bix-60）证明，智能体的“失败”可能源于基准测试的模糊性（“未明确定义的分析自由度”），而非智能体本身的能力不足，从而质疑了在复杂科学任务中使用简单二元评分的有效性。</p>
+<p>系统的编排器框架（BioAgents）是开源的，但核心的数据分析和文献检索组件尚未公开发布，这对实现完全的可复现性构成了一定限制。</p>
+<p>主旨： 本文旨在解决当前“AI科学家”系统存在的两大核心问题：一是工作流效率低下（以小时为单位的批处理模式）导致无法与研究人员进行实时互动；二是系统普遍采用闭源模式，阻碍了社区发展。为此，论文提出了一个名为“Deep Research”的交互式多智能体系统，通过分钟级的快速迭代和人机协同，重塑AI辅助科学发现的范式。</p>
+<p>创新：</p>
+<p>交互式工作流范式： 核心创新在于将科研周期从数小时的“批处理”模式转变为分钟级的“交互式”模式，首次实现了AI与科学家之间近乎实时的迭代与引导。</p>
+<p>持久化世界状态（Persistent World State）： 架构上创新地引入一个持久化的、经摘要的“世界状态”，以在多轮对话中维持关键上下文，有效解决了长程研究中上下文信息被稀释的问题。</p>
+<p>务实的双模操作： 创造性地设计了半自主（有选择性的人工检查点）和全自主两种模式。这不仅是一种功能设计，更是一种创新的理念，即承认当前完全自主AI的脆弱性，并通过人机协同来确保研究的可靠性与方向性。</p>
+<p>知识库驱动的数据分析智能体： 其数据分析智能体并非简单的代码生成器，而是通过迭代地构建和更新内部“知识库”（包含规则和上下文），实现了对复杂生物信息学任务的深度推理和鲁棒执行。</p>
+<p>贡献：</p>
+<p>系统贡献： 设计并实现了一个名为“Deep Research”的完整系统，为构建高效、交互式的AI科研助手提供了一个可行的架构蓝图。</p>
+<p>实证贡献： 在权威的BixBench生物计算基准上，其数据分析智能体取得了当前最佳性能（SOTA），有力地证明了其架构设计和迭代推理方法的有效性。</p>
+<p>思想贡献（最具启发性）： 论文贡献了对AI4S（AI for Science）领域深刻而坦诚的批判性反思。它不仅展示了系统的能力，更系统地揭示了该领域的普遍局限，如开放获取文献的知识盲区、自动化新颖性评估的根本性难题，以及科学基准测试本身的模糊性。这种深刻的自我批判，提升了该领域研究的成熟度。</p>
+<p>提升：</p>
+<p>科研效率： 将AI研究周期从其他系统的数小时大幅缩短至数分钟，实现了质的飞跃，使得实时互动成为可能。</p>
+<p>分析性能： 在BixBench基准测试的开放式问答（Open Response）任务上，实现了48.8%的准确率，相较于K-Dense Analyst (34.4%) 和 GPT-5 (22.9%) 等先进基线，提升了14到26个百分点，展现了在复杂数据分析任务上的卓越能力。</p>
+<p>人机交互性： 通过半自主模式，系统能够在关键节点（如遇到矛盾、意图模糊或研究收敛时）暂停并请求人类指导，相比完全自主的“黑盒”系统，提供了更可靠、更符合科研实践的协作体验。</p>
+<p>不足：</p>
+<p>知识获取局限性： 系统完全依赖开放获取（Open Access）文献，这意味着它无法访问约占半数的、受付费墙保护的学术资源，可能因此错失大量关键的、高影响力的研究成果。</p>
+<p>核心组件闭源： 尽管编排器框架是开源的，但关键的“生物数据分析”和“生物文献”智能体并未开源，这限制了社区对其核心能力的全面评估、复现和进一步开发。</p>
+<p>新颖性评估的脆弱性： 正如作者坦言，新颖性检测主要依赖文本相似度，这在概念层面是不可靠的，难以区分真正的概念创新和表面的文本重叠，尤其在面对跨学科术语和同义词时表现脆弱。</p>
+<p>端到端评估缺失： 论文中的量化评估主要集中在数据分析这一个子智能体上。对于整个系统（包括文献检索、新颖性判断、多智能体协同）在真实科研任务中的端到端综合性能，缺乏定量的基准测试。</p>
+<p>心得：</p>
+<p>交互范式比模型能力更重要： 本文最深刻的启发是，在复杂的科学探索任务中，一个高效、可控的“人机交互工作流”可能比底层AI模型的原始智能更为关键。将AI从一个提供最终答案的“黑盒预言机”转变为一个能与研究者并肩作战、快速迭代的“交互式副驾驶”，是实现AI辅助科研价值最大化的核心路径。</p>
+<p>坦诚局限性是研究成熟的标志： 论文的讨论部分极具价值，它没有回避而是深入剖析了系统的根本性限制（知识盲区、评估难题等）。这种坦诚和深刻的自我批判，为浮躁的AI领域注入了一剂清醒剂，提醒我们必须正视AI能力的边界，这也是推动领域健康发展的必要条件。</p>
+<p>必须审慎地对待基准测试： 论文对BixBench基准的批判性分析（如“分析自由度”问题）极具启发性。它揭示了一个重要事实：在复杂科学领域，基准测试本身可能存在模糊性和主观性，一个智能体的“错误”答案未必代表其能力不足，可能只是选择了另一条同样合理的分析路径。这促使我们必须超越简单的排行榜分数，更深入地理解AI的推理过程和评估任务本身的有效性。</p>
+<p>一句话总结: 本文提出了一个名为“Deep Research”的交互式多智能体AI科研系统，它通过将研究周期从数小时缩短至数分钟，实现了与研究人员的实时协同；其不仅在生物信息学基准测试上取得了业界最佳性能，更具启发性的是，它深刻地揭示并批判了当前AI科研工具的普遍局限——如依赖开放文献导致的知识盲区以及基准测试本身的模糊性，为该领域树立了严谨与务实的新标杆。</p>
+<p>Artificial intelligence systems for scientific discovery have demonstrated remarkable potential, yet existing approaches remain largely proprietary and operate in batch-processing modes requiring hours per research cycle, precluding real-time researcher guidance. This paper introduces Deep Research, a multi-agent system enabling interactive scientific investigation with turnaround times measured in minutes. The architecture comprises specialized agents for planning, data analysis, literature search, and novelty detection, unified through a persistent world state that maintains context across iterative research cycles. Two operational modes support different workflows: semi-autonomous mode with selective human checkpoints, and fully autonomous mode for extended investigations. Evaluation on the BixBench computational biology benchmark demonstrated state-of-the-art performance, achieving 48.8% accuracy on open response and 64.5% on multiple-choice evaluation, exceeding existing baselines by 14 to 26 percentage points. Analysis of architectural constraints, including open access literature limitations and challenges inherent to automated novelty assessment, informs practical deployment considerations for AI-assisted scientific workflows.</p>
+<p>https://arxiv.org/abs/2601.12542</p>
+<p>2、[CL] Speculative Decoding: Performance or Illusion?</p>
+<p>X Liu, J Yu, J Park, I Stoica...[UC Berkeley]</p>
+<p>投机性解码是性能实效还是虚幻表象？</p>
+<p>要点:</p>
+<p>本文首次在一个生产级的、被广泛使用的推理引擎（vLLM）上对推测解码（SD）进行了系统性研究，超越了以往基于研究原型和不切实际的小批量（batch size）测评。</p>
+<p>挑战了SD在理论上输出完全一致的假设，观察到由于GPU执行的非确定性（如并行计算内核、浮点数差异），即使在贪心解码下，生成文本也会存在差异。</p>
+<p>系统性地评测了多种SD变体（草稿模型、EAGLE、n-gram、MTP），覆盖了不同的模型、工作负载（包括复杂的推理任务）和批量大小。</p>
+<p>核心发现：随着批量大小的增加，SD带来的加速效果会减弱，因为系统逐渐变为计算密集型，此时验证被拒绝词元（token）的计算开销变得更加昂贵。</p>
+<p>反直觉/高信息熵观点 1： SD中最主要的性能瓶颈并非生成草稿的阶段，而是由大模型执行的验证阶段。该阶段耗时可占总执行时间的95%，这意味着在被拒绝的词元上浪费的计算是限制加速比的主要障碍。</p>
+<p>反直觉/高信息熵观点 2： 接受率并非一个单一稳定的指标，它在三个层面上表现出高度的可变性：在单次请求内部（长文本生成过程中接受长度会增加）、在不同请求之间、以及在不同数据集之间。</p>
+<p>揭示了不同SD方法的独特“性格”：n-gram方法表现出“爆发式”且不稳定的特性，在像代码编辑这样的高重复性任务中表现出色；EAGLE方法则稳定且一致；草稿模型方法能达到最高的接受率，但对草稿模型的相对成本很敏感。</p>
+<p>通过模拟一个只验证“已知会被接受”的词元的“预言机”（oracle），量化了SD加速比的理论上限，揭示了当前性能与理想情况之间的巨大差距。</p>
+<p>反直觉/高信息熵观点 3： SD加速的最高潜力可能并非来自某个单一的、更优越的草稿生成方法，而是来自对不同方法的自适应组合。一个模拟的“预言机”如果在每个词元位置智能选择最佳方法（如n-gram或EAGLE），可以实现显著更高的加速比（高达4.9倍），指明了混合策略是未来的一个关键研究方向。</p>
+<p>该研究提供了一个模拟器，以鼓励后续研究来弥合实测性能与理论上限之间的差距。</p>
+<p>主旨： 本文旨在解决推测解码（SD）在现实世界中有效性不明的问题。通过在生产级推理系统vLLM上进行首次系统性、大规模的基准测试，论文深入剖析了多种SD变体在不同工况下的真实性能、性能瓶颈和行为模式，并量化了其与理论性能上限的差距，从而为从业者提供实践指导，并为研究者指明新的优化方向。</p>
+<p>创新：</p>
+<p>评测范式的创新： 首次将SD的评估从学术界的“实验室环境”（研究原型、batch size=1）迁移到“工业界真实场景”（生产级引擎vLLM、大batch size），这种评测范式本身的转变是其核心创新，使得结论更具实践指导意义。</p>
+<p>瓶颈分析的创新： 通过详尽的时间分解，明确指出了“验证阶段”而非“草稿生成阶段”是SD的主要性能瓶颈，这一发现颠覆了直觉，并为后续优化指明了靶心。</p>
+<p>行为建模的创新： 提出了对接受率进行多维度（请求内、请求间、数据集间）可变性分析的新视角，并揭示了不同SD方法的“性格”，为理解和预测其性能提供了更精细的模型。</p>
+<p>理论上限的提出与量化： 创造性地设计了“预言机”模拟实验，不仅量化了当前SD技术距离理想性能的差距，更进一步提出了“自适应组合”这一新的、可能突破单一方法性能极限的理论上限，开辟了新的研究思路。</p>
+<p>贡献：</p>
+<p>实践贡献： 为在生产环境中部署SD的工程师提供了第一份详尽的、基于真实数据的“选型指南”，清晰展示了不同SD变体在不同模型、负载和批处理大小下的优劣势。</p>
+<p>实证贡献： 建立了一套更符合现实的SD评测基准和方法论，其公开的 benchmark 结果和模拟器为后续相关研究提供了坚实的基线和可复现的工具。</p>
+<p>理论贡献： 深入揭示了SD的内在运行机制和性能瓶颈，特别是“验证成本”和“接受率可变性”两大核心要素。同时，通过对理论上限的探索，为SD领域的未来发展指明了两个极具潜力的方向：减少无效验证和自适应方法组合。</p>
+<p>提升：</p>
+<p>推理吞吐量： 在生产级系统vLLM中，验证了所有SD变体在多数情况下均优于基线。例如，在小批量下，EAGLE在GSM8K上可带来1.73倍加速，草稿模型方法在70B模型上可带来1.96倍加速。</p>
+<p>性能认知： 将SD的性能认知从一个单一的“平均加速比”数字，提升到了一个多维度的理解，包括它如何随批量大小衰减，以及不同方法在特定任务（如n-gram在代码任务）上的特异性优势。</p>
+<p>优化潜力： 通过“预言机”模拟，证明了通过智能调度和组合不同SD方法，理论上可以将加速比提升至4.9倍，远超当前任何单一方法的表现，极大地提升了对SD优化潜力的认知。</p>
+<p>不足：</p>
+<p>评测广度有限： 尽管覆盖了多种主流SD变体，但论文并未包含一些其他有影响力的架构，如基于多头预测的树状注意力方法（Tree-based methods like Medusa），这使得比较分析不够全面。</p>
+<p>未来方向的实践性不足： 论文提出的“预言机”和“自适应组合”是非常有启发性的理论上限，但并未提供一个轻量级、实际可行的预测器或调度器来实现这一策略。如何低成本地实现这种自适应选择，仍是一个开放性问题。</p>
+<p>硬件环境单一： 所有实验均在NVIDIA H100上进行。由于不同GPU架构的计算/内存带宽特性不同，研究结论在其他硬件（如A100、AMD GPU或TPU）上的普适性有待验证。</p>
+<p>对MTP的分析较为局限： 对多词元预测（MTP）的评估仅限于一个模型（GLM-4.5-Air），且该模型存在已知局限性（仅有一个预测头被复用），这可能未能充分展现MTP技术的潜力。</p>
+<p>心得：</p>
+<p>实践是检验真理的唯一标准： 这篇论文最有价值之处在于其“走出实验室”的务实精神。它雄辩地证明了，在复杂的系统工程问题中，学术原型上的性能数字可能具有误导性。只有在真实的、高度优化的生产环境中，才能发现真正的瓶颈（如验证成本）和关键的交互效应（如批量大小的影响）。</p>
+<p>平均值掩盖真相，分布和可变性揭示本质： 本文对“接受率”的深入分析是一个极佳的范例。它告诉我们，不应满足于一个简单的平均指标。深入探究指标背后的分布、动态变化和“性格”，才能真正理解一个系统的行为模式。n-gram的“爆发式”和EAGLE的“稳定性”就是最好的证明。</p>
+<p>优化的下一站是“混合”与“自适应”： 论文通过“预言机”的模拟，极具前瞻性地指出了优化的未来方向。当单一策略的边际效益递减时，最高效的路径往往是根据上下文动态地组合多种策略，取长补短。这不仅适用于推测解码，也对AI系统设计的许多其他领域（如模型路由、数据增强策略）具有深刻的启发。</p>
+<p>一句话总结: 这篇开创性的论文首次在生产级推理引擎中系统性地评测了推测解码，颠覆性地指出其核心瓶颈是“验证成本”而非“草稿生成”，并揭示了通过自适应地组合不同解码策略，存在一个远超当前性能的巨大理论提升空间，为该技术的实际应用和未来研究树立了新的里程碑。</p>
+<p>Speculative decoding (SD) has become a popular technique to accelerate Large Language Model (LLM) inference, yet its real-world effectiveness remains unclear as prior evaluations rely on research prototypes and unrealistically small batch sizes. We present, to our knowledge, the first systematic study of SD on a production-grade and widely deployed inference engine (vLLM), covering multiple SD variants (n-gram, EAGLE/EAGLE-3, Draft-Model, Multi-Token Prediction) across diverse workloads, model scales, and batch sizes. We analyze key factors governing SD performance, and quantify a theoretical upper bound on SD speedup. Our results show that verification by the target model dominates the execution, while acceptance length varies markedly across output token positions, requests, and datasets. Comparing measured performance with theoretical bounds reveals substantial gaps between observed and theoretical upper bounds, and we leverage this observation to highlight new research opportunities that our study opens up in improving SD.</p>
+<p>https://arxiv.org/abs/2601.11580</p>
+<p>3、[LG] CooperBench: Why Coding Agents Cannot be Your Teammates Yet</p>
+<p>A Khatua, H Zhu, P Tran, A Prabhudesai...[Stanford University &amp; SAP Labs US]</p>
+<p>CooperBench：为什么编程智能体还无法成为你的合格队友</p>
+<p>要点:</p>
+<p>引入了CooperBench，这是首个旨在评估AI编程智能体协调能力的基准测试，将研究焦点从个体能力转向协作中的社交智能。</p>
+<p>该基准包含12个真实开源代码库中的600多个任务，其中两个智能体被分配了逻辑上兼容但可能存在冲突的功能。成功需要代码兼容和功能正确两个条件都满足。</p>
+<p>提出了核心发现：“协调的诅咒”。顶尖的AI智能体（GPT-5, Claude 4.5）在协作（Coop模式）时的成功率比单个智能体完成全部两项任务（Solo模式）时下降了约50%。</p>
+<p>这种协调差距在中等难度的任务上最为显著，表明智能体难以在技术复杂性和协调的认知负荷之间取得平衡。</p>
+<p>反直觉/高信息熵观点 1： 提供通信渠道并不能提高整体成功率。尽管智能体会利用沟通来减少表面的合并冲突，但它们的对话充满了问题，导致无法实现真正的协调。</p>
+<p>对沟通失败的分析揭示了三大问题：重复（用无用信息堵塞信道）、无响应（忽略问题，打断决策循环）和幻觉（提供不正确的信息）。</p>
+<p>反直觉/高信息熵观点 2： 协调失败不仅仅是沟通不畅。论文识别了更深层次的失败原因，根植于三大能力缺陷：沟通（未能分享关键信息）、承诺（未能信守诺言）和预期（即便被告知，也未能准确建模伙伴的状态和行为）。</p>
+<p>反直觉/高信息熵观点 3： 许多失败的根源在于一个“信任悖论”。智能体被训练得谨慎并倾向于验证信息，但在隔离工作区下的有效协作却要求信任伙伴无法被直接观察到的行为。这种矛盾削弱了它们建立共享心智模型的能力。</p>
+<p>尽管失败率很高，论文也识别出了罕见但成功的涌现式协调行为：角色划分、资源划分和协商。这些成功模式的共同点在于，它们将模糊的意图转化为具体的、可验证的承诺。</p>
+<p>论文主张研究范式应从优化个体智能体技能，转向为协作任务明确地发展社交智能。</p>
+<p>主旨： 本文旨在检验和挑战一个核心假设：强大的个体AI能力能否直接转化为有效的团队协作能力。通过引入一个名为CooperBench的、专为评估协作编码而设计的全新基准，论文系统地揭示了当前最先进的AI编程智能体在需要协调时面临的严重性能衰退（即“协调的诅咒”），并深入剖析了导致这种失败的根本原因，最终倡导AI研究应从追求个体能力转向培养社交智能。</p>
+<p>创新：</p>
+<p>基准测试的创新 (CooperBench)： 创建了首个专注于协作冲突解决的编码基准。它巧妙地设计了“逻辑兼容但实现上可能冲突”的任务，并建立了可验证的评估流程（代码合并+单元测试），使得对“协调”这一抽象能力的衡量变得具体和可量化。</p>
+<p>核心发现的创新 (“协调的诅咒”)： 首次通过大规模实验量化并命名了AI协作中的性能衰退现象。这一发现颠覆了“1+13.  失败归因的创新 (三大能力缺陷)： 超越了对表面现象（如沟通不畅）的分析，创新性地提出了一个更深层次的失败原因分类框架：沟通、承诺、预期。这为理解和解决AI协作问题提供了全新的、更根本的理论视角。</p>
+<p>涌现行为的识别与分析： 在大量失败案例中，敏锐地捕捉并分析了罕见的成功模式（角色划分、资源划分、协商），并提炼出其共同核心——“将意图转化为可验证的承诺”，为如何训练更具协作能力的智能体指明了具体方向。</p>
+<p>贡献：</p>
+<p>工具贡献： 提供了CooperBench这一开源平台，为学术界和工业界评估和改进协作型AI智能体提供了一个急需的、高质量的“靶场”。</p>
+<p>实证贡献： 通过对多种顶尖大模型的全面评测，提供了关于当前AI协作能力现状的、迄今为止最详尽、最严谨的实证数据，揭示了该领域存在的巨大鸿沟。</p>
+<p>认知贡献： 提出了“协调的诅咒”、“信任悖论”等概念，并系统化了协调失败的根本原因，极大地深化了我们对AI协作复杂性的理解。</p>
+<p>方向贡献： 论文的结论发出了强有力的呼吁，倡导AI研究领域进行范式转移，即从单纯追求个体智能（如编码能力）转向重点发展社交智能（如沟通、建模他人意图的能力），为整个领域指明了未来的发展方向。</p>
+<p>提升：</p>
+<p>评估维度： 将对AI编码能力的评估从单一智能体的任务完成率（如SWE-Bench），提升到了多智能体协作下的协调成功率，这是一个全新的、更接近真实世界团队工作场景的评估维度。</p>
+<p>问题诊断能力： 提供了从“症状”（如工作重叠）到“根本原因”（如预期失败）的诊断框架，使得对AI协作失败的分析不再停留在表面，而是能够深入到智能体的核心能力缺陷。</p>
+<p>对未来研究的指导性： 通过对成功和失败案例的深入分析，为未来的研究提供了明确的提升方向，例如设计能促进“可验证承诺”的协议，或通过强化学习来奖励成功的涌现行为。</p>
+<p>不足：</p>
+<p>任务复杂度的局限性： CooperBench中的任务被有意设计为个体可解的，以突出协调的挑战。但这可能无法完全反映真实世界中那些需要多个开发者共同努力才能完成的、本身就极其复杂的任务。</p>
+<p>智能体框架的单一性： 实验基于单一的开源框架（OpenHands）进行，虽然论文强调其关注点是底层模型的能力，但不同的智能体框架设计（如不同的规划、记忆模块）可能会对协作表现产生影响，这一点未被充分探讨。</p>
+<p>通信模态的局限性： 实验中的通信仅限于异步文本消息。现实中的人类协作还包括更丰富的模态，如实时对话、共享屏幕等。缺乏对这些模态的探索，可能会低估AI在更丰富交互场景下的协作潜力。</p>
+<p>emergent behavior 的稀有性： 论文提到的成功的涌现行为非常罕见，这使得对其进行定量分析和得出普适性结论变得困难。这些行为是模型的偶然闪光还是可复现能力的体现，尚需更多研究。</p>
+<p>心得：</p>
+<p>社交智能是通用智能的关键短板： 这篇论文给我最大的启发是，当前我们所追求的“智能”在很大程度上是“孤岛式”的。一个能独立解决复杂问题的AI，在需要与他人协作时却表现得像一个“社交障碍者”。这深刻地揭示了，真正的通用智能不仅需要逻辑推理和专业技能，更需要理解、预测和适应他人心智的能力，即社交智能。</p>
+<p>“信任”是协作的基石，也是AI的难题：“信任悖论”的提出非常精辟。它点出了一个根本矛盾：AI被训练成基于“可验证证据”行动，而人类协作却常常建立在对他人“不可见行为”的信任之上。如何让AI学会在信息不完全的情况下建立和维持信任，将是实现高效人机/AI-AI协作的核心挑战。</p>
+<p>好的评估基准是推动领域发展的引擎： CooperBench本身就是一项杰出的贡献。它通过巧妙的设计，将一个模糊的、难以衡量的问题（协调能力）转化为了一个可以量化、可以迭代优化的工程问题。这再次证明，一个好的基准测试不仅能衡量现有技术的水平，更能定义一个领域未来的研究方向。</p>
+<p>一句话总结: 本文通过引入首个专注于协作冲突的编码基准CooperBench，颠覆性地揭示了当前顶尖AI智能体在协作时存在严重的“协调诅咒”——即团队表现远逊于个体——其根源在于沟通、承诺和预期建模这三大社交智能的缺失，而非编码能力不足，从而有力地主张AI研究的重心应从个体能力转向协作智能。</p>
+<p>Resolving team conflicts requires not only task-specific competence, but also social intelligence to find common ground and build consensus. As AI agents increasingly collaborate on complex work, they must develop coordination capabilities to function as effective teammates. Yet we hypothesize that current agents lack these capabilities. To test this, we introduce CooperBench, a benchmark of over 600 collaborative coding tasks across 12 libraries in 4 programming languages. Each task assigns two agents different features that can be implemented independently but may conflict without proper coordination. Tasks are grounded in real open-source repositories with expert-written tests. Evaluating state-of-the-art coding agents, we observe the curse of coordination: agents achieve on average 30% lower success rates when working together compared to performing both tasks individually. This contrasts sharply with human teams, where adding teammates typically improves productivity. Our analysis reveals three key issues: (1) communication channels become jammed with vague, ill-timed, and inaccurate messages; (2) even with effective communication, agents deviate from their commitments; and (3) agents often hold incorrect expectations about others&#039; plans and communication. Through large-scale simulation, we also observe rare but interesting emergent coordination behavior including role division, resource division, and negotiation. Our research presents a novel benchmark for collaborative coding and calls for a shift from pursuing individual agent capability to developing social intelligence.</p>
+<p>https://arxiv.org/abs/2601.13295</p>
+<p>4、[CL] Beyond Tokens: Concept-Level Training Objectives for LLMs</p>
+<p>L Iyer, P Somani, A Guo, D Jurafsky...[Stanford University]</p>
+<p>超越词元：面向大语言模型的概念级训练目标</p>
+<p>要点:</p>
+<p>挑战了LLM领域基础的“下一词元预测”（NTP）训练目标，指出该目标优先考虑表层字符串匹配，而非深层语义理解。</p>
+<p>提出了一种从“词元级别”到“概念级别”预测（NCP）的范式转变，其中“概念”是语义等价的多种表层形式的集合（例如，“mom”、“mother”、“mommy”都映射到“母亲”这一概念）。</p>
+<p>介绍了两种实现NCP的具体方法：</p>
+<p>NCP数据增强：为一个句子创建多个训练样本，每个样本使用一个不同的同义词或上义词作为结尾。</p>
+<p>NCP损失函数：修改损失函数，使其能够接受预定义概念集中的任何一个词元作为正确预测。</p>
+<p>概念的提取通过两种途径实现：一种是使用WordNet的无上下文方法，另一种是提示LLM在特定上下文中生成替代词的上下文感知方法。</p>
+<p>反直觉/高信息熵观点 1：使用“下一概念预测”（NCP）目标训练的模型，在标准的“下一词元预测”（NTP）任务上，反而取得了更低的困惑度。这表明，学习在语义相似的词元“云”上进行泛化，能帮助模型构建一个更鲁棒、更准确的底层概率分布，从而使其对单一的真实词元也不那么“惊讶”。</p>
+<p>实验证明，与NTP基线相比，经过NCP训练的模型在领域迁移方面表现出更强的鲁棒性。</p>
+<p>经过下游任务微调后，NCP模型在包括SNLI、GLUE和仇恨言论检测在内的七个不同的NLP分类基准测试中，其性能持续优于NTP基线模型。</p>
+<p>分析揭示了预测行为的质的差异：NTP倾向于预测同一单词的词汇变体（如“article”,“articles”），而NCP则在语义相关但不同的词（如“articles”,“searches”,“episodes”）上预测一个概率分布。</p>
+<p>承认研究的局限性，包括概念提取方法的不完美（WordNet缺乏上下文，LLM可能存在偏见）以及评估主要集中在分类任务上。</p>
+<p>主旨： 本文旨在解决当前大语言模型（LLM）训练中“下一词元预测”（NTP）目标存在的根本性问题——即过度关注文本的表层形式而忽略了其内在的语义。为此，论文提出了一种新的训练范式，即“下一概念预测”（NCP），通过将模型优化的目标从单个词元转向由多个同义词/上义词构成的语义“概念”，从而引导模型更好地学习和泛化语言的意义。</p>
+<p>创新：</p>
+<p>训练目标的范式革新： 核心创新在于提出了从预测“词元”到预测“概念”的根本性转变。这是一种对LLM训练信号的重新思考，旨在弥合模型训练（匹配字符串）与期望能力（理解意义）之间的鸿沟。</p>
+<p>双重实现路径： 创新性地提出了两种将概念监督融入训练的并行方法——“数据增强”和“损失函数修改”。这不仅提供了灵活的实现选项，也从不同角度验证了概念级监督的有效性。</p>
+<p>系统的概念提取策略： 设计并对比了“上下文感知”（基于LLM）和“无上下文”（基于WordNet）两种概念提取方法，为如何在实践中获取和定义“概念”提供了系统性的探索。</p>
+<p>反直觉的性能验证： 论文最引人注目的创新发现是，NCP训练的模型在评估NTP性能的困惑度指标上反而更优。这一发现为“更高层次的抽象监督有助于底层学习”提供了强有力的、非直观的证据。</p>
+<p>贡献：</p>
+<p>理论贡献： 提出并形式化了NCP这一新的训练框架，为LLM的基础理论研究开辟了一个新方向，即如何设计更符合人类认知和语义抽象的训练目标。</p>
+<p>实证贡献： 通过在Llama-3-8B模型上进行的大量实验，提供了坚实的证据，证明NCP相比NTP在模型困惑度、跨领域鲁棒性和下游任务性能上均有显著优势。</p>
+<p>方法论贡献： 提供了从数据准备、概念提取到模型训练的全套可行方法，为其他研究者探索和应用概念级监督提供了具体的蓝图和代码。</p>
+<p>认知贡献： 揭示了NTP训练可能存在的“惩罚合理变体”的内在缺陷，并阐明了概念级训练能够促使模型学习到更平滑、更泛化的语义表示，深化了社区对LLM学习动态的理解。</p>
+<p>提升：</p>
+<p>模型困惑度： NCP训练的模型在标准的NTP困惑度评估中，取得了比NTP基线更低的分数，显示出其更强的语言建模基础能力。</p>
+<p>跨领域鲁棒性： 在跨领域迁移测试中，NCP模型表现出更强的适应性，其困惑度受领域变化的影响小于NTP模型。</p>
+<p>下游任务性能： 在7个不同的NLP分类基准任务上，经过NCP后训练再微调的模型，其准确率全面且持续地优于所有NTP基线模型。例如，NHP Context-Free Data Augmentation模型在多个任务上取得了最佳或接近最佳的成绩。</p>
+<p>不足：</p>
+<p>概念提取的依赖性与不完美性： 整个方法的效果高度依赖于概念提取的质量。无论是依赖WordNet（可能缺乏上下文相关性）还是LLM（可能引入偏见和不一致性），概念本身的定义和获取都是一个挑战，且存在不确定性。</p>
+<p>评估范围的局限性： 论文的评估主要集中在分类任务上。虽然结果积极，但这些任务的基线性能通常已经很高，可能无法完全展现NCP在需要更强抽象、生成和推理能力的任务上的全部潜力。</p>
+<p>监督信号的单一性： 论文将“概念”主要定义为同义词和上义词的集合。对于更复杂的概念结构，如层次化关系、跨语言映射等，并未进行探索，这限制了当前方法的广度。</p>
+<p>训练阶段的局限性： 实验是在模型“后训练”（post-training）阶段进行的。NCP方法在从零开始的大规模预训练中的效果和成本如何，仍是一个有待验证的重要问题。</p>
+<p>心得：</p>
+<p>训练目标的质量重于数据的数量： 本文最深刻的启发是，LLM的进步可能不仅仅依赖于更大规模的模型和数据，更取决于我们为其提供的“监督信号”的质量。从“下一词元”到“下一概念”的转变，本质上是一次对监督信号的“提纯”，使其更接近我们希望模型学习到的核心能力——语义理解，而非机械模仿。</p>
+<p>“模糊”的正确性优于“精确”的错误： NTP要求模型精确匹配一个词元，而NCP则允许模型在一个语义正确的“概念空间”内进行预测。这一“模糊化”或“柔性化”的监督方式，反而带来了更强的泛化能力。这启示我们，在设计AI学习目标时，适度容忍表层形式的多样性，聚焦于核心意义的一致性，可能是通往更鲁棒智能的有效路径。</p>
+<p>反直觉结果往往指向更深层的原理： NCP模型在NTP任务上表现更好的反直觉发现，是这篇论文的点睛之笔。它迫使我们思考，为什么一个看似“不直接”的训练方法能取得更好的效果。答案可能在于，概念学习迫使模型构建了更平滑、更合理的语义空间，这反过来让它在面对任何具体的词元时都能做出更稳健的预测。这个发现为理解LLM的内部工作机制提供了新的视角。</p>
+<p>一句话总结: 本文挑战了传统的“下一词元预测”目标，创新地提出了基于“概念”（即语义等价词语集合）的训练新范式，并极具启发性地证明，这种更高层次的语义监督不仅能提升模型在下游任务和领域迁移中的表现，甚至能反直觉地降低其在原始词元预测任务上的困惑度，揭示了对齐人类语义抽象是提升LLM能力的关键。</p>
+<p>The next-token prediction (NTP) objective has been foundational in the development of modern large language models (LLMs), driving advances in fluency and generalization. However, NTP operates at the token level, treating deviations from a single reference continuation as errors even when alternative continuations are equally plausible or semantically equivalent (e.g., “mom” vs. “mother”). As a result, token-level loss can penalize valid abstractions, paraphrases, or conceptually correct reasoning paths, biasing models toward surface form rather than underlying meaning. This mismatch between the training signal and semantic correctness motivates learning objectives that operate over higher-level representations. We propose a shift from tokenlevel to concept-level prediction, where concepts group multiple surface forms of the same idea (e.g.; “mom,” “mommy,” “mother” → MOTHER). We introduce various methods for integrating conceptual supervision into LLM training and show that concept-aware models achieve lower perplexity, improved robustness under domain shift, and stronger performance than NTP-based models on diverse NLP benchmarks. This suggests concept-level supervision as an improved training signal that better aligns LLMs with human semantic abstractions.</p>
+<p>https://arxiv.org/abs/2601.11791</p>
+<p>5、[LG] Q-learning with Adjoint Matching</p>
+<p>Q Li, S Levine[UC Berkeley]</p>
+<p>基于伴随匹配的Q-learning</p>
+<p>要点:</p>
+<p>解决了连续动作强化学习（RL）中的一个核心矛盾：高表现力策略（如扩散/流策略）的表达能力与利用Q函数梯度（∇aQ）进行优化可行性之间的权衡。</p>
+<p>指出了一个关键问题：直接通过流策略的多步去噪过程进行反向传播，在数值上是不稳定的。</p>
+<p>提出了一个新算法 Q-learning with Adjoint Matching (QAM)，该算法借鉴了生成模型领域的最新技术来解决此问题。</p>
+<p>核心技术创新：QAM 使用“精简”伴随状态（lean adjoint state）方法。它不通过正在优化的策略（fθ）进行不稳定的反向传播，而是利用一个稳定的、预先训练好的行为策略（fβ）的梯度，将评估函数在最终动作上的梯度（∇aQ）转换为一个无偏的、对中间噪声动作的逐级监督信号。</p>
+<p>这种方法使得QAM能够直接利用评估函数的一阶信息（∇aQ）来训练一个高表现力的流策略，既避免了反向传播的不稳定性，也避免了因蒸馏而导致的表达能力损失。</p>
+<p>理论上，QAM能够保证收敛到最优的行为约束策略 (πθ ∝ πβ - exp(Q))。</p>
+<p>反直觉/高信息熵观点 1：关键洞见在于解耦了梯度传播路径与被优化的模型。伴随匹配目标函数使用一个固定的、稳定的流模型（fβ）来计算梯度，以指导一个动态的、学习中的流模型（fθ）的训练，从而避免了当一个模型自身的、可能病态的梯度被反馈给自身时产生的不稳定性。</p>
+<p>反直觉/高信息熵观点 2：先前的方法要么完全丢弃宝贵的梯度信息（∇aQ），要么做出强烈的、通常不正确的假设（例如，假设在噪声动作上的梯度能近似在最终动作上的梯度）。QAM表明，通过伴随方法的正确变换，可以精确地、无近似偏差地使用这些梯度信息。</p>
+<p>提出了两个实用变体，QAM-FQL和QAM-EDIT，它们放宽了严格的行为约束，以实现更好的探索和分布外动作，并在实践中非常有效。</p>
+<p>实验证明，QAM及其变体在OGBench基准测试中具有挑战性的稀疏奖励任务上，无论是在离线RL还是离线到在线RL设置中，都持续优于众多强大的基线算法。</p>
+<p>主旨： 本文旨在解决在连续动作强化学习中，如何高效且稳定地使用一个参数化的Q函数（Critic）来优化一个高表现力的生成式策略（如扩散或流策略）这一长期存在的挑战。传统方法因反向传播不稳定而受限，本文提出的Q-learning with Adjoint Matching (QAM)算法，通过引入伴随匹配技术，实现了在不牺牲策略表达能力和不引入偏差的前提下，直接利用Q函数梯度进行稳定、高效的策略优化。</p>
+<p>创新：</p>
+<p>方法论创新（引入Adjoint Matching）： 首次将生成模型领域的伴随匹配（Adjoint Matching）技术引入到强化学习的策略优化中。这是一个跨领域的思想迁移，为解决RL中的策略梯度优化问题提供了全新的、更强大的数学工具。</p>
+<p>梯度路径解耦： 核心技术创新在于巧妙地解耦了梯度计算和模型优化。QAM不通过正在学习的、可能不稳定的策略fθ进行反向传播，而是利用一个固定的行为策略fβ来计算“lean”伴随状态，从而将critic在最终动作处的梯度稳定地“传播”回中间步骤，生成无偏的监督信号。这从根本上解决了BPTT（Backpropagation Through Time）在多步生成策略中的不稳定性问题。</p>
+<p>兼顾表达能力与优化效率： 与现有方法相比，QAM实现了“鱼与熊掌兼得”。它既不像某些方法那样为了稳定而牺牲策略的表达能力（如单步蒸馏），也不像另一些方法那样为了保留表达能力而完全放弃使用宝贵的梯度信息。</p>
+<p>理论与实践的结合： QAM不仅有坚实的理论保障（收敛到最优行为正则化策略），还在极具挑战性的OGBench基准上取得了SOTA性能，展现了其在离线和离线到在线学习中的实际效用。同时，还提出了QAM-FQL和QAM-EDIT两个实用变体，进一步提升了算法的适用性。</p>
+<p>贡献：</p>
+<p>算法贡献： 提出了QAM这一全新的、基于TD学习的RL算法。它为如何将强大的生成式策略（流/扩散模型）与基于Q函数的Actor-Critic框架有效结合，提供了一个优雅且高效的解决方案。</p>
+<p>理论贡献： 证明了通过伴随匹配，可以将策略优化问题转化为一个稳定的、逐级监督的目标函数，且该目标函数的最优解恰好对应于理论上的最优行为约束策略。这为策略优化提供了新的理论视角。</p>
+<p>实证贡献： 在大规模、高难度的OGBench基准上进行了全面的实验，不仅验证了QAM的卓越性能，还系统地比较了多种利用扩散/流策略的RL方法，为社区提供了宝贵的实证数据和深入的比较分析。</p>
+<p>技术范式贡献： QAM的成功展示了一种新的技术范式：当直接优化一个目标（如通过BPTT）因数值不稳定而困难时，可以寻找一个具有相同最优解但优化路径更稳定的替代目标（如伴随匹配目标）。这一思想对其他存在类似优化难题的领域也具有启发意义。</p>
+<p>提升：</p>
+<p>离线RL性能： 在OGBench的50个任务上，QAM及其变体（QAM-F, QAM-E）取得了最高的综合得分（分别为44, 45, 46），显著优于包括FQL (36), ReBRAC (40), QSM (42) 在内的所有基线方法。</p>
+<p>离线到在线RL性能： 在在线微调阶段，QAM-EDIT展现出强大的样本效率和鲁棒性，在多个具有挑战性的任务（如cube-triple）上优于所有对比方法，并在所有任务中表现出最稳健的性能。</p>
+<p>对数据质量的鲁棒性： 在面对带噪声或分段的“脏”数据时，QAM-EDIT表现出比其他基线更强的鲁棒性。特别是在cube-triple-noisy任务上，当多数基线方法完全失败时，QAM-EDIT的性能仅有轻微下降。</p>
+<p>优化稳定性： 相较于直接使用反向传播的BAM和FBRAC等方法，QAM通过伴随匹配避免了数值不稳定性，从而获得了更好的性能。例如，BAM的综合得分仅为35，低于QAM。</p>
+<p>不足：</p>
+<p>对Critic质量的依赖： 正如论文所讨论的，QAM的有效性高度依赖于Q函数（Critic）梯度的质量。如果Critic本身学习得不好或其梯度“病态”（ill-conditioned），QAM的性能可能会受到严重影响。尽管梯度裁剪能缓解此问题，但这仍是一个潜在的脆弱点。</p>
+<p>计算复杂度： 相比于一些简单的方法，QAM的计算流程更复杂，需要求解一个前向SDE和一个反向ODE来计算伴随状态，这可能会增加每一步训练的计算开销。</p>
+<p>超参数敏感性： 敏感性分析显示，温度系数τ对算法性能有较大影响，需要仔细调优。虽然其他超参数相对鲁棒，但这仍然给实际应用带来了一定的调参负担。</p>
+<p>约束的局限性： 基础版的QAM严格遵循KL行为约束，这可能限制了其在最优策略与行为策略支持集（support）差异巨大时的表现。尽管论文提出了QAM-FQL和QAM-EDIT来放宽这一约束，但这本身也说明了原始约束的局限性。</p>
+<p>心得：</p>
+<p>解耦是解决复杂优化问题的钥匙： 本文最精妙的启发在于其“解耦”思想。当一个优化过程因为自指（self-reference，如通过自身梯度来更新自身）而变得不稳定时，引入一个稳定、固定的“参照物”（这里的行为策略fβ）来辅助计算梯度，可以打破这种不稳定的正反馈循环。这种思想在控制论、优化理论等多个领域都有深刻的共鸣。</p>
+<p>数学工具的迁移是创新的重要来源： 本文成功地将控制论和生成模型中的“伴随方法”迁移到强化学习中，完美解决了BPTT的难题。这生动地展示了跨学科知识融合的巨大威力。很多看似棘手的领域内问题，可能在其他领域已经有了成熟的、不同形式的解决方案，保持开放的视野和扎实的数学功底是做出突破性创新的关键。</p>
+<p>不要轻易丢弃信息，而是要寻找正确的变换方式： 面对不稳定的∇aQ，很多方法的选择是“要么不用”（如FAWAC），“要么近似用”（如DAC）。QAM则给出了第三条路：“变换后精确地用”。它告诉我们，有价值的信息（如梯度）即使在原始形式下难以使用，也不应轻易放弃，而应积极寻找一种数学变换，将其转化为稳定且无偏的形式。这是一种更深刻、更具原则性的解决问题之道。</p>
+<p>一句话总结: 本文提出的QAM算法，通过开创性地将生成模型领域的伴随匹配技术引入强化学习，巧妙地解耦了梯度计算与策略优化过程，从而在不牺牲策略表达能力的前提下，首次实现了对高表现力流策略（Flow Policy）稳定、无偏且高效的梯度优化，并在高难度RL基准测试中取得了SOTA性能。</p>
+<p>We propose Q-learning with Adjoint Matching (QAM), a novel TD-based reinforcement learning (RL) algorithm that tackles a long-standing challenge in continuousaction RL: efficient optimization of an expressive diffusion or flow-matching policy with respect to a parameterized Q-function. Effective optimization requires exploiting the first-order information of the critic, but it is challenging to do so for flow or diffusion policies because direct gradient-based optimization via backpropagation through their multi-step denoising process is numerically unstable. Existing methods work around this either by only using the value and discarding the gradient information, or by relying on approximations that sacrifice policy expressivity or bias the learned policy. QAM sidesteps both of these challenges by leveraging adjoint matching, a recently proposed technique in generative modeling, which transforms the critic’s action gradient to form a step-wise objective function that is free from unstable backpropagation, while providing an unbiased, expressive policy at the optimum. Combined with temporal-difference backup for critic learning, QAM consistently outperforms prior approaches on hard, sparse reward tasks in both offline and offline-to-online RL.</p>
+<p>https://arxiv.org/abs/2601.14234</p>
+    </div>
+    
+    <div class="footer" style="margin-top:3em;padding-top:1em;border-top:1px solid #eee;color:#aaa;font-size:0.85em;">
+      <p><strong>原文链接：</strong><a href="https://mp.weixin.qq.com/s/0Rtcm_rjW6XRAPA8pcJ4BQ">https://mp.weixin.qq.com/s/0Rtcm_rjW6XRAPA8pcJ4BQ</a></p>
+      <p style="margin-top:0.8em;">Powered by <a href="https://readgzh.site" style="color:#aaa;text-decoration:none;">ReadGZH</a> · <a href="https://readgzh.site/docs" style="color:#aaa;text-decoration:none;">开发者文档</a> · <a href="https://readgzh.site/pricing" style="color:#aaa;text-decoration:none;">升级套餐</a></p>
+      <p style="margin-top:0.4em;font-size:0.8em;">💡 免费注册获取每天 30 积分 · Lite ¥9/月 · Pro ¥39/月 → <a href="https://readgzh.site/dashboard" style="color:#aaa;">readgzh.site/dashboard</a></p>
+    </div>
+  </article>
+</body>
+</html>

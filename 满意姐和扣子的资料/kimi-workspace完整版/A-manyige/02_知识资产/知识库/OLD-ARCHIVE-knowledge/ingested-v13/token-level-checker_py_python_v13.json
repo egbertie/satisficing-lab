@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/token-management-satisficing/scripts/token-level-checker.py",
+  "filename": "token-level-checker.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "9f8656f8cb85596d",
+  "content_length": 2659,
+  "ingested_at": "2026-03-31T17:27:45.362001",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nToken档位判断与检查项生成器\n根据当前Token余量动态生成检查清单\n\"\"\"\n\nimport json\nimport sys\nfrom datetime import datetime\nfrom pathlib import Path\n\ndef get_token_level(percentage):\n    \"\"\"根据Token百分比判断档位 (percentage是已消耗百分比)\"\"\"\n    remaining = 100 - percentage\n    if remaining > 70:\n        return \"L1\", \"正常频率(30分钟)\"\n    elif remaining > 50:\n        return \"L2\", \"降频33%(45分钟)\"\n    elif remaining > 30:\n        return \"L3\", \"降频50%(60分钟)\"\n    else:\n        return \"L4\", \"降频75%(120分钟，仅P0)\"\n\ndef get_check",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/quality-assurance/qa_system/adversarial.py",
+  "filename": "adversarial.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "df621808964695ae",
+  "content_length": 8728,
+  "ingested_at": "2026-03-31T17:27:44.997250",
+  "content_preview": "\"\"\"\nAdversarial Testing Module\n对抗测试 - S7实现\n\"\"\"\n\nimport ast\nimport re\nfrom typing import List, Dict, Any, Callable\nfrom pathlib import Path\n\nfrom .core import AdversarialResult, AdversarialReport, LimitationRegistry\n\n\nclass DefectInjector:\n    \"\"\"缺陷注入器\"\"\"\n    \n    # 缺陷注入模板\n    INJECTIONS = {\n        \"syntax_error\": {\n            \"description\": \"植入语法错误\",\n            \"inject\": lambda code: code.replace(\"def \", \"df \", 1),\n            \"expected_detection\": \"STATIC_ANALYSIS\"\n        },\n        \"undefi",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/CORE/USER.sh",
+  "filename": "USER.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "84419bea86f963d7",
+  "content_length": 205,
+  "ingested_at": "2026-03-31T17:27:44.544429",
+  "content_preview": "#!/bin/bash\n# USER机制执行脚本\necho \"=== USER机制检查 ===\"\necho \"时间: $(date)\"\nif [ -f \"/root/.openclaw/workspace/CORE/USER.md\" ]; then\n    echo \"✅ USER.md 存在\"\nelse\n    echo \"❌ USER.md 不存在\"\n    exit 1\nfi\necho \"检查完成\"\n",
+  "limitations_applied": []
+}

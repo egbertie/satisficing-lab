@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_git/scripts/git-runner.py",
+  "filename": "git-runner.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "815ec5b5aadffd7f",
+  "content_length": 5523,
+  "ingested_at": "2026-03-31T17:27:45.149068",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\ngit-runner.py\nGit version control helper\n\nGenerated: 2026-03-20\nVersion: 1.0.0\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport logging\nimport argparse\nfrom datetime import datetime\nfrom pathlib import Path\n\n# Configuration\nSKILL_NAME = \"git\"\nLOG_DIR = Path(\"logs\")\nREPORT_DIR = Path(\"reports\")\n\n\nclass GitRunner:\n    \"\"\"Main runner class for git\"\"\"\n    \n    def __init__(self):\n        self.start_time = datetime.now()\n        self.status = \"initialized\"\n        self.results ",
+  "limitations_applied": []
+}

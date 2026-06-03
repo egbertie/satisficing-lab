@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/multi-source-search/multi_source_search.py",
+  "filename": "multi_source_search.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "5d0b949e5f98ac85",
+  "content_length": 13567,
+  "ingested_at": "2026-03-31T17:27:44.780788",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n多源搜索编排器 V1.0\n整合多个搜索API，统一输出，智能编排\n\n支持源:\n- Brave Search（网页搜索，快速）\n- Perplexity AI（深度搜索，详细）\n- Kimi Search（中文搜索，精准）\n- web_search工具（备用）\n\"\"\"\n\nimport json\nimport time\nimport asyncio\nimport aiohttp\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Optional, Union\nfrom dataclasses import dataclass, asdict\n\n@dataclass\nclass SearchResult:\n    \"\"\"搜索结果数据结构\"\"\"\n    title: str\n    url: str\n    snippet: str\n    source: str  # brave/perplexity/kimi/web",
+  "limitations_applied": []
+}

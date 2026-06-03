@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/universal-task-executor-v3/core/token_engine.py",
+  "filename": "token_engine.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "fc4c132062af466d",
+  "content_length": 12814,
+  "ingested_at": "2026-03-31T17:27:45.366842",
+  "content_preview": "\"\"\"\nUniversal Task Executor V3.0 - Token优化引擎\n基于架构设计实现L1-L5五级Token档位管理\n\"\"\"\n\nimport logging\nfrom typing import Dict, List, Optional, Callable, Any\nfrom dataclasses import dataclass, field\nfrom datetime import datetime\nfrom enum import Enum\n\nfrom .structures import (\n    TokenLevel, TokenBudget, TokenConsumption, TokenLevelConfig,\n    Task, TaskPriority, TaskStatus\n)\n\nlogger = logging.getLogger(__name__)\n\n\nclass TokenLevelChangedEvent:\n    \"\"\"Token档位变化事件\"\"\"\n    def __init__(self, old_level: TokenLe",
+  "limitations_applied": []
+}

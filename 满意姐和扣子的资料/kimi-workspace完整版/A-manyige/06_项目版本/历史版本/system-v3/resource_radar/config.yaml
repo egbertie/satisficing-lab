@@ -1,0 +1,97 @@
+# Resource Radar 配置
+# 资源雷达 — 全球免费资源自动套利
+# 命名空间: NGT-RADAR-v1.0-FIN-260327
+# 限制: 仅限免费资源，避免浪费
+
+version: "1.0"
+description: "全球免费AI资源自动发现与套利"
+
+resource_categories:
+  # LLM API免费额度
+  llm_apis:
+    - name: "Kimi"
+      free_tier: "无限（当前账户）"
+      endpoints: [chat, search, fetch]
+      priority: 1
+    - name: "GitHub Models"
+      free_tier: "GPT-4o 50次/天, GPT-4o-mini 150次/天"
+      endpoints: [chat, embeddings]
+      priority: 2
+    - name: "Groq"
+      free_tier: "Llama/Mixtral 有限额度"
+      endpoints: [chat]
+      priority: 3
+      
+  # 搜索服务
+  search_services:
+    - name: "Kimi Search"
+      free_tier: "无限"
+      type: "chinese_optimized"
+    - name: "Brave Search"
+      free_tier: "API可用"
+      type: "general"
+    - name: "Tavily"
+      free_tier: "API可用"
+      type: "research"
+      
+  # 向量数据库
+  vector_dbs:
+    - name: "Milvus"
+      free_tier: "开源自托管"
+      deployment: "docker"
+    - name: "pgvector"
+      free_tier: "Postgres扩展"
+      deployment: "docker"
+      
+  # 存储服务
+  storage:
+    - name: "GitHub"
+      free_tier: "无限公共仓库"
+      type: "cold_storage"
+    - name: "飞书云盘"
+      free_tier: "企业版"
+      type: "warm_storage"
+    - name: "企业微信"
+      free_tier: "文档/消息"
+      type: "warm_storage"
+      
+  # 开发工具
+  dev_tools:
+    - name: "Dify"
+      free_tier: "开源版"
+      deployment: "docker"
+    - name: "n8n"
+      free_tier: "开源版"
+      deployment: "docker"
+
+arbitrage_strategy:
+  # 动态路由策略
+  routing:
+    primary: "Kimi"  # 主要来源
+    fallback_order:
+      - "GitHub Models"
+      - "Groq"
+    selection_criteria:
+      - "availability"
+      - "cost"
+      - "latency"
+      
+  # 限额管理
+  quota_management:
+    github_models:
+      daily_limit_gpt4o: 50
+      daily_limit_gpt4o_mini: 150
+      tracker_file: "memory/quota_github_models.json"
+    
+  # 监控告警
+  alerts:
+    - condition: "quota < 20%"
+      action: "switch_to_fallback"
+    - condition: "service_down"
+      action: "circuit_breaker"
+
+# 免费资源发现源
+free_resource_feeds:
+  - "https://github.com/ripienaar/free-for-dev"
+  - "https://github.com/zedeus/nitter"
+  - "https://alternativeto.net/platform/self-hosted/?license=opensource"

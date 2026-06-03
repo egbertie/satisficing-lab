@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/universal-task-executor-v3/docs/DATA_STRUCTURES.md",
+  "filename": "DATA_STRUCTURES.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "75de0cbae3db45c4",
+  "content_length": 25631,
+  "ingested_at": "2026-03-31T17:27:45.365426",
+  "content_preview": "# Universal Task Executor V3.0 - 数据结构定义\n\n**版本**: 3.0.0  \n**用途**: 定义V3.0所有核心数据结构，确保跨组件一致性  \n**格式**: JSON Schema + Python Dataclass\n\n---\n\n## 1. 任务相关数据结构\n\n### 1.1 基础任务定义\n\n```python\n# structures/task.py\nfrom dataclasses import dataclass, field\nfrom typing import Dict, List, Optional, Any, Union\nfrom datetime import datetime\nfrom enum import Enum\nimport uuid\n\nclass TaskStatus(Enum):\n    \"\"\"任务状态枚举\"\"\"\n    PENDING = \"pending\"           # 待处理\n    RUNNING = \"running\"           # 执行中\n    PAUSED = \"paused\" ",
+  "limitations_applied": []
+}

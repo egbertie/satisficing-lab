@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/conversation-researcher/scripts/research-runner.py",
+  "filename": "research-runner.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "3e54f8138aba25ec",
+  "content_length": 17568,
+  "ingested_at": "2026-03-31T17:27:45.338312",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nresearch-runner.py\nConversation Researcher - Level 5 Standard\n多源深度研究 + 对抗验证 + 专业报告生成\n\nUsage:\n    python3 research-runner.py \"研究主题\"\n    python3 research-runner.py  # 使用 RESEARCH_TOPIC 环境变量\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport re\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Any, Optional\nfrom dataclasses import dataclass, field, asdict\n\n# 确保依赖路径\nsys.path.insert(0, str(Path(__file__).parent.parent / \"lib\"))\n\n@dataclass\nclas",
+  "limitations_applied": []
+}

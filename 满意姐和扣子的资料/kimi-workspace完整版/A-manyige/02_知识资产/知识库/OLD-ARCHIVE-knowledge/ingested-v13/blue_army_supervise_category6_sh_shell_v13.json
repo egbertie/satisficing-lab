@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/blue_army_supervise_category6.sh",
+  "filename": "blue_army_supervise_category6.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "7d5dd5d5f05bda0f",
+  "content_length": 715,
+  "ingested_at": "2026-03-31T17:27:46.160314",
+  "content_preview": "#!/bin/bash\n# 蓝军监督第6类审计脚本\n\necho \"=== 蓝军监督报告：第6类历史审计 ===\"\necho \"监督者: 蓝军\"\necho \"时间: $(date)\"\necho \"\"\n\n# 检查满意妞是否在执行\nif [ -f \"/root/.openclaw/workspace/diary/category6_progress/audit_progress.log\" ]; then\n    echo \"✅ 满意妞已开始执行第6类审计\"\n    echo \"最近进度:\"\n    tail -5 /root/.openclaw/workspace/diary/category6_progress/audit_progress.log\nelse\n    echo \"❌ 满意妞尚未开始第6类审计\"\nfi\n\necho \"\"\n\n# 检查进度标记\nif [ -f \"/root/.openclaw/workspace/diary/category6_progress/STARTED\" ]; then\n    echo \"✅ 第6类已启动标记存在\"\n    cat /root/.open",
+  "limitations_applied": []
+}

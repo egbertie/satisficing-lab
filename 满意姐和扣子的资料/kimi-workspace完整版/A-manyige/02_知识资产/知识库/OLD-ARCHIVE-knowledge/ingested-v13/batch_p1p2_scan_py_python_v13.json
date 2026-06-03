@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/super-knowledge-ingest/scripts/batch_p1p2_scan.py",
+  "filename": "batch_p1p2_scan.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "3dd5191a5fc977bf",
+  "content_length": 3066,
+  "ingested_at": "2026-03-31T17:27:45.430479",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nP1/P2层批量入库脚本 - 简化7层标准化\n蓝军抽检模式\n\"\"\"\n\nimport os\nimport hashlib\nfrom datetime import datetime\nfrom pathlib import Path\n\nWORKSPACE = \"/root/.openclaw/workspace\"\nKNOWLEDGE_DIR = f\"{WORKSPACE}/knowledge\"\n\ndef get_file_info(filepath):\n    \"\"\"获取文件信息\"\"\"\n    stat = os.stat(filepath)\n    with open(filepath, 'rb') as f:\n        file_hash = hashlib.sha256(f.read()).hexdigest()\n    try:\n        lines = sum(1 for _ in open(filepath, 'r', encoding='utf-8', errors='ignore'))\n    except:",
+  "limitations_applied": []
+}

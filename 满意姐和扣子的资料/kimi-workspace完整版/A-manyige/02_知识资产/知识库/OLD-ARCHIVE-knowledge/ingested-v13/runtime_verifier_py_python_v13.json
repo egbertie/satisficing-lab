@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blue-auditor/runtime_verifier.py",
+  "filename": "runtime_verifier.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e0640dbca0ab0085",
+  "content_length": 3747,
+  "ingested_at": "2026-03-31T17:27:45.375330",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n运行时验证模块 - Runtime Verification\n蓝军审计SOP V1.2 新增维度\n\"\"\"\n\nimport subprocess\nimport sys\nfrom pathlib import Path\nfrom typing import Tuple, List\n\nclass RuntimeVerifier:\n    \"\"\"运行时验证器\"\"\"\n    \n    def __init__(self, skill_path: Path):\n        self.skill_path = skill_path\n        self.results = []\n        \n    def verify_python_runs(self, file_name: str) -> Tuple[bool, str]:\n        \"\"\"验证Python文件能实际运行\"\"\"\n        file_path = self.skill_path / file_name\n        if not file_path.e",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/cron-tasks/checkpoint-health-check.py",
+  "filename": "checkpoint-health-check.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "eabfeb2351dcfa55",
+  "content_length": 8962,
+  "ingested_at": "2026-03-31T17:27:46.221225",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\n检查点健康验证脚本 (Checkpoint Health Check)\n执行时间: 每日 16:00\n功能:\n1. 验证checkpoint文件存在性和完整性\n2. 检查磁盘空间\n3. 验证关键文件可访问\n4. 生成健康报告\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport logging\nimport shutil\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\n# ============ 配置区域 ============\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nLOG_DIR = WORKSPACE / \"logs\" / \"cron-tasks\"\nMEMORY_DIR = WORKSPACE / \"memory\"\nCHECKPOINT_FILE = MEMORY_DIR / \"system_state_",
+  "limitations_applied": []
+}

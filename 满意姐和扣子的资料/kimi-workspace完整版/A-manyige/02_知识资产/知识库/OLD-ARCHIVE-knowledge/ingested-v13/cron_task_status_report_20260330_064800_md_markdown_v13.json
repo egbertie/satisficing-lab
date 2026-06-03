@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/reports/cron_task_status_report_20260330_064800.md",
+  "filename": "cron_task_status_report_20260330_064800.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "e7a0eb009e5466b1",
+  "content_length": 821,
+  "ingested_at": "2026-03-31T17:27:46.227197",
+  "content_preview": "# Cron任务运行状态验证报告\n\n**验证时间**: Mon Mar 30 06:48:00 AM CST 2026\n**验证方法**: 检查crontab配置 + 日志文件存在性\n\n---\n\n## 当前Cron配置\n\n```\n9 9 * * 1 /root/.openclaw/workspace/scripts/blue_army_weekly_audit.sh >> /var/log/blue_army_audit.log 2>&1\n2 22 * * * /root/.openclaw/workspace/scripts/penalty_auto_check.sh >> /var/log/penalty_check.log 2>&1\n21 * * * * /root/.openclaw/workspace/scripts/json_fault_analyzer.sh >> /var/log/json_fault.log 2>&1\n```\n\n---\n\n## 配置任务列表\n\n| 任务 | 调度 | 脚本路径 | 日志路径 | 状态 |\n|------|------|---------",
+  "limitations_applied": []
+}

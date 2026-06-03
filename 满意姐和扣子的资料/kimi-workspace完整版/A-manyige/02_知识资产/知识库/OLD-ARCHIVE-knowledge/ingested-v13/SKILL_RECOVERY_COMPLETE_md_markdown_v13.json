@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/SKILL_RECOVERY_COMPLETE.md",
+  "filename": "SKILL_RECOVERY_COMPLETE.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "d1330664a62e8d7b",
+  "content_length": 5930,
+  "ingested_at": "2026-03-31T17:27:46.515750",
+  "content_preview": "# Skill全面恢复完成报告\n\n> **完成时间**: 2026-03-22  \n> **恢复状态**: ✅ 全部完成  \n> **当前Skill总数**: 54个\n\n---\n\n## 一、Token熔断系统修正（V2.0）\n\n### 1.1 核心变更\n\n| 项目 | 旧方案 | 新方案 | 状态 |\n|------|--------|--------|------|\n| **熔断依据** | 绝对值（80/90/95%） | 周预算进度比例 | ✅ 已修改 |\n| **超额阈值** | 20% | 10% | ✅ 已修改 |\n| **监控频率** | 15分钟 | 2小时 | ✅ 已修改 |\n| **熔断等级** | 4级 | 4级（按比例） | ✅ 已调整 |\n\n### 1.2 新熔断机制\n\n```\n超额比例 = (实际周消耗 / 预期周进度) × 100%\n\n超额≥10% → 🟡 黄色熔断 → 暂停P3+P4任务\n超额≥20% → 🟠 橙色熔断 → 仅保留P0+P1任务\n超额≥30% → 🔴 红色熔断 → 仅保留P0任务\n超额≥50% → 🚨 紧急熔断 → 完全静默\n```\n\n#",
+  "limitations_applied": []
+}

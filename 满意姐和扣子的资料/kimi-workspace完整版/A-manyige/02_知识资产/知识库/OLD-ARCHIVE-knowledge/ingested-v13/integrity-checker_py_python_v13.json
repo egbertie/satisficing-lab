@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_file-integrity-checker/scripts/integrity-checker.py",
+  "filename": "integrity-checker.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "78ccaaf192f50361",
+  "content_length": 4150,
+  "ingested_at": "2026-03-31T17:27:45.254116",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n文件完整性检查脚本\n版本: V2.0\n功能: 四维检查法（结构/时效/引用/安全）+ 遗忘任务扫描\n\"\"\"\n\nimport os\nimport re\nimport json\nimport sys\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\n# 配置\nREQUIRED_FILES = [\n    \"SOUL.md\",\n    \"IDENTITY.md\",\n    \"USER.md\",\n    \"MEMORY.md\",\n    \"AGENTS.md\",\n    \"HEARTBEAT.md\",\n    \"docs/TASK_MASTER.md\"\n]\n\nREQUIRED_DIRS = [\n    \"memory\",\n    \"docs\",\n    \"skills\",\n    \"scripts\"\n]\n\nLOG_FILE = \"/tmp/integrity-check.log\"\n\ndef log(message):\n    \"\"\"记录日志\"\"\"\n    t",
+  "limitations_applied": []
+}

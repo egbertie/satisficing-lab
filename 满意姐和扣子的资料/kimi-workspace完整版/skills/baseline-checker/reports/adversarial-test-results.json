@@ -1,0 +1,59 @@
+{
+  "test_time": "2026-04-03T14:16:46.966751",
+  "tests_run": 5,
+  "passed": 5,
+  "failed": 0,
+  "sensitivity_score": 100.0,
+  "results": [
+    {
+      "name": "响应时间突破",
+      "injected_value": {
+        "api_response_time_ms": 5000
+      },
+      "detected": true,
+      "actual_status": "VIOLATION",
+      "expected_alert": true,
+      "passed": true
+    },
+    {
+      "name": "内存泄漏模拟",
+      "injected_value": {
+        "memory_usage_mb": 2048
+      },
+      "detected": true,
+      "actual_status": "VIOLATION",
+      "expected_alert": true,
+      "passed": true
+    },
+    {
+      "name": "CPU过载模拟",
+      "injected_value": {
+        "cpu_usage_percent": 95
+      },
+      "detected": true,
+      "actual_status": "VIOLATION",
+      "expected_alert": true,
+      "passed": true
+    },
+    {
+      "name": "磁盘满模拟",
+      "injected_value": {
+        "disk_usage_percent": 95
+      },
+      "detected": true,
+      "actual_status": "VIOLATION",
+      "expected_alert": true,
+      "passed": true
+    },
+    {
+      "name": "合规底线突破",
+      "injected_value": {
+        "nine_baseline_adherence": 95
+      },
+      "detected": true,
+      "actual_status": "VIOLATION",
+      "expected_alert": true,
+      "passed": true
+    }
+  ]
+}

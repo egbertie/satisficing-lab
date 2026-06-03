@@ -1,0 +1,219 @@
+{
+  "summary": {
+    "total": 12,
+    "passed": 12,
+    "pass_rate": 1.0
+  },
+  "by_category": {
+    "S5": {
+      "total": 4,
+      "passed": 4
+    },
+    "S6": {
+      "total": 2,
+      "passed": 2
+    },
+    "S7": {
+      "total": 6,
+      "passed": 6
+    }
+  },
+  "details": [
+    {
+      "test_name": "content_completeness",
+      "category": "S5",
+      "passed": true,
+      "details": {
+        "test_cases": 2
+      },
+      "issues": []
+    },
+    {
+      "test_name": "token_accuracy",
+      "category": "S5",
+      "passed": true,
+      "details": {
+        "test_samples": 3
+      },
+      "issues": []
+    },
+    {
+      "test_name": "tier_match",
+      "category": "S5",
+      "passed": true,
+      "details": {
+        "l1_tokens": 15,
+        "l2_tokens": 200
+      },
+      "issues": []
+    },
+    {
+      "test_name": "format_compliance",
+      "category": "S5",
+      "passed": true,
+      "details": {
+        "checks": [
+          "header",
+          "bullets",
+          "tables"
+        ]
+      },
+      "issues": []
+    },
+    {
+      "test_name": "l1_limitations",
+      "category": "S6",
+      "passed": true,
+      "details": {
+        "known_limitations": [
+          "关键细节丢失",
+          "上下文缺失",
+          "行动项模糊"
+        ],
+        "response_tier": "L2",
+        "has_limitation_notice": true
+      },
+      "issues": []
+    },
+    {
+      "test_name": "limitation_notice_strategy",
+      "category": "S6",
+      "passed": true,
+      "details": {
+        "conditions": {
+          "high_risk_decision": "高风险决策场景应添加",
+          "first_time_user": "首次使用某级别应添加",
+          "important_warning": "涉及重要警告应添加"
+        }
+      },
+      "issues": []
+    },
+    {
+      "test_name": "ambiguous_complexity",
+      "category": "S7",
+      "passed": true,
+      "details": {
+        "request": "看一下",
+        "determined_tier": "L2",
+        "expected_behavior": "根据优先级默认L2（无指令关键词）"
+      },
+      "issues": []
+    },
+    {
+      "test_name": "tier_content_mismatch",
+      "category": "S7",
+      "passed": true,
+      "details": {
+        "user_requested": "L1",
+        "content_complexity": "high",
+        "note": "应提示用户级别与内容可能不匹配"
+      },
+      "issues": []
+    },
+    {
+      "test_name": "budget_demand_conflict",
+      "category": "S7",
+      "passed": true,
+      "details": {
+        "token_budget": 15,
+        "forced_tier": "L1",
+        "has_warning": true,
+        "warning": "⚠️ Token预算<30%，已启用极简输出模式"
+      },
+      "issues": []
+    },
+    {
+      "test_name": "rapid_tier_switching",
+      "category": "S7",
+      "passed": true,
+      "details": {
+        "commands": [
+          "/brief",
+          "/detail",
+          "/normal",
+          "/brief"
+        ],
+        "detected_tiers": [
+          "L1",
+          "L3",
+          "L2",
+          "L1"
+        ],
+        "expected_tiers": [
+          "L1",
+          "L3",
+          "L2",
+          "L1"
+        ]
+      },
+      "issues": []
+    },
+    {
+      "test_name": "complex_vs_simple_requests",
+      "category": "S7",
+      "passed": true,
+      "details": {
+        "simple_requests": [
+          [
+            "完成了吗",
+            "L1"
+          ],
+          [
+            "好的",
+            "L1"
+          ],
+          [
+            "检查状态",
+            "L1"
+          ]
+        ],
+        "complex_requests": [
+          [
+            "诊断系统崩溃原因并提供解决方案",
+            "L3"
+          ],
+          [
+            "对比三个技术方案的优缺点并给出建议",
+            "L2"
+          ],
+          [
+            "分析销售数据趋势并预测下季度",
+            "L3"
+          ]
+        ],
+        "simple_l1_ratio": "3/3",
+        "complex_l3_ratio": "2/3",
+        "note": "P3简单请求->L1, P0含'分析'->L3"
+      },
+      "issues": []
+    },
+    {
+      "test_name": "edge_cases",
+      "category": "S7",
+      "passed": true,
+      "details": {
+        "results": [
+          {
+            "description": "空请求",
+            "request": "",
+            "result": "L2",
+            "error": null
+          },
+          {
+            "description": "冲突命令",
+            "request": "/brief /detail",
+            "result": "L1",
+            "error": null
+          },
+          {
+            "description": "未知命令",
+            "request": "/unknown",
+            "result": "L2",
+            "error": null
+          }
+        ]
+      },
+      "issues": []
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/knowledge_inventory.py",
+  "filename": "knowledge_inventory.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "42ca9bcd99658987",
+  "content_length": 2993,
+  "ingested_at": "2026-03-31T17:27:46.156612",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n知识入库准备脚本\n整理394文件清单，按重要性排序\n\"\"\"\n\nimport json\nfrom pathlib import Path\nfrom datetime import datetime\n\n# 知识库目录\nKNOWLEDGE_DIRS = [\n    \"~/.openclaw/workspace/memory\",\n    \"~/.openclaw/workspace/docs\", \n    \"~/.openclaw/workspace/diary\",\n    \"~/.openclaw/workspace/skills\",\n]\n\n# 重要性评分规则\nIMPORTANCE_RULES = {\n    \"SOUL.md\": 100,\n    \"USER.md\": 100,\n    \"AGENTS.md\": 95,\n    \"MEMORY.md\": 95,\n    \"HEARTBEAT.md\": 90,\n    \"SUPER_RED_LINES.md\": 90,\n    \"IDENTITY.md\": 85,\n    \"SKILL.m",
+  "limitations_applied": []
+}

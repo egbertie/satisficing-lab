@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/cron-tasks/evening-ritual.py",
+  "filename": "evening-ritual.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "6df3aa1fee2dfb98",
+  "content_length": 7309,
+  "ingested_at": "2026-03-31T17:27:46.222190",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\n黄昏图腾归位脚本 (Evening Ritual)\n执行时间: 每日 22:00\n功能:\n1. 汇总今日执行记录\n2. 归档过期日志（保留30天）\n3. 检查今日任务完成情况\n4. 生成黄昏总结报告\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport logging\nimport shutil\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\n# ============ 配置区域 ============\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nLOG_DIR = WORKSPACE / \"logs\" / \"cron-tasks\"\nMEMORY_DIR = WORKSPACE / \"memory\"\nARCHIVE_DIR = WORKSPACE / \"logs\" / \"archive\"\nSOUL_FILE = W",
+  "limitations_applied": []
+}

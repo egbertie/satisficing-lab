@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/create-downloads-index.sh",
+  "filename": "create-downloads-index.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "5a64d3337a51ca9c",
+  "content_length": 1829,
+  "ingested_at": "2026-03-31T17:27:46.164872",
+  "content_preview": "#!/bin/bash\n# create-downloads-index.sh - 创建Downloads目录文件索引\n# 用途: 立即知道downloads目录里有什么\n# 执行频率: 按需（建议每日一次）\n\nset -e\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nDOWNLOADS=\"/root/openclaw/kimi/downloads\"\nINDEX_FILE=\"$WORKSPACE/docs/DOWNLOADS_INDEX.md\"\n\necho \"正在生成Downloads目录索引...\"\n\n# 创建文档头\ncat > \"$INDEX_FILE\" << EOF\n# Downloads目录文件索引\n\n**生成时间**: $(date '+%Y-%m-%d %H:%M:%S')  \n**总文件数**: $(ls \"$DOWNLOADS\" 2>/dev/null | wc -l)  \n**总大小**: $(du -sh \"$DOWNLOADS\" 2>/dev/null | cut -f1)\n\n---\n\n## 统计概览\n\n| 类型 | 数量 | 建",
+  "limitations_applied": []
+}

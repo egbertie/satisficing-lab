@@ -1,0 +1,67 @@
+# SRI Agent OS 知识内化系统配置
+
+# 数据库配置
+database:
+  host: localhost
+  port: 5432
+  database: sri_agent_os
+  user: postgres
+  password: ${DB_PASSWORD}
+
+# Redis配置
+redis:
+  host: localhost
+  port: 6379
+  db: 0
+
+# 本地存储配置（MinIO就绪后迁移）
+storage:
+  type: local
+  local_path: /opt/sri-agent-os/storage
+  backup_levels:
+    - local: /opt/sri-agent-os/storage/local
+    - nas: /opt/sri-agent-os/storage/nas
+    - cloud: /opt/sri-agent-os/storage/cloud
+
+# Kimi API配置
+kimi:
+  api_key: ${KIMI_API_KEY}
+  model: kimi-k2p5
+  max_tokens: 4000
+
+# 本地LLM配置（暂不启用，后续部署）
+local_llm:
+  enabled: false
+  host: localhost
+  port: 8000
+  model: Qwen2.5-7B-Instruct
+
+# 五重门内化配置
+internalization:
+  # 阈值配置
+  thresholds:
+    verification_pass: 80  # 验证通过分数
+    comprehension_min: 60  # 最低理解度
+  
+  # Token预算配置
+  token_budget:
+    pass_1_reading: 800
+    pass_2_notes: 2000
+    pass_3_summary: 1500
+    verification: 500
+    total_max: 5000
+  
+  # 五图腾分类关键词
+  totem_keywords:
+    liu_yuxi_土: [长期, 根基, 战略, 组织, 生态, 3年, 5年]
+    simon_金: [决策, 优化, 边界, 约束, 满意解, 阈值]
+    guan_zizai_水: [直觉, 感知, 洞察, 观察, 内心]
+    confucius_木: [伦理, 合规, 价值观, 信任, 五常]
+    hui_neng_火: [创新, 突破, 顿悟, 变革, 重构]
+
+# 监控配置
+monitoring:
+  token_daily_budget: 10000
+  alert_thresholds:
+    warning: 80
+    critical: 100

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify_setup_tee_env.sh",
+  "filename": "verify_setup_tee_env.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "0290ee77b7f5d217",
+  "content_length": 555,
+  "ingested_at": "2026-03-31T17:27:46.151594",
+  "content_preview": "#!/bin/bash\n# TEE环境配置脚本安全审计和8步验证\n# 任务: setup_tee_env.sh\n\necho \"=== TEE环境配置脚本安全审计和8步验证 ===\"\necho \"\"\n\nSCRIPT_PATH=\"/root/.openclaw/workspace/setup_tee_env.sh\"\n\n# 快速安全审计\necho \"【安全审计】\"\ngrep -n \"password\\|secret\\|key\\|token\" \"$SCRIPT_PATH\" 2>/dev/null | grep -v \"^#\" | head -3 && echo \"⚠️ 需审查\" || echo \"✅ 密钥检查通过\"\n\n# 8步验证\necho \"\"\necho \"【8步验证】\"\ntest -f \"$SCRIPT_PATH\" && echo \"Step1 ✅\"\nbash -n \"$SCRIPT_PATH\" 2>/dev/null && echo \"Step2 ✅\"\ntest -x \"$SCRIPT_PATH\" && echo \"Step3 ✅\"\necho \"Step4-8: 需实际执行后验证\"\n\ne",
+  "limitations_applied": []
+}

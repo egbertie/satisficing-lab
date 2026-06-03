@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/knowledge_ingestion_full.py",
+  "filename": "knowledge_ingestion_full.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "7f3cea5638a08cb8",
+  "content_length": 7965,
+  "ingested_at": "2026-03-31T17:27:46.201694",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n知识入库批量执行脚本 (Week 4-17)\n全量入库 - 5标准化严格执行\n\"\"\"\n\nimport os\nimport sys\nsys.path.insert(0, '/root/.openclaw/workspace/scripts')\n\nfrom knowledge_ingestion_week3 import KnowledgeIngestionWeek3\nfrom pathlib import Path\nfrom datetime import datetime\nimport hashlib\n\nclass BatchIngestion:\n    \"\"\"批量入库执行器\"\"\"\n    \n    def __init__(self, workspace=\"/root/.openclaw/workspace\"):\n        self.workspace = Path(workspace)\n        self.knowledge_dir = self.workspace / \"knowledge\"\n        \n  ",
+  "limitations_applied": []
+}

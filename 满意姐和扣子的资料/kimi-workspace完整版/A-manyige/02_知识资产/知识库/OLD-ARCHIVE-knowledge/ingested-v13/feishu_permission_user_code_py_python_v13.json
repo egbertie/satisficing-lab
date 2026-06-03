@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/feishu_permission_user_code.py",
+  "filename": "feishu_permission_user_code.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "551a1b293541de9a",
+  "content_length": 1975,
+  "ingested_at": "2026-03-31T17:27:46.156416",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n测试用户提供的权限设置代码\n\"\"\"\n\nimport json\nimport requests\n\nAPP_ID = \"cli_a927c5dfa4381cc6\"\nAPP_SECRET = \"8950yzh6jj17nQkKBjvGIdRocdrslhjI\"\n\nDOCUMENT_ID = \"GDtmdVaxroOf7jxR80ycb3Kcnhb\"\nUSER_OPEN_ID = \"ou_aea2e859a6cee1f3a11e8c018eb88ec9\"\n\ndef get_tenant_token():\n    url = \"https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal\"\n    resp = requests.post(url, json={\n        \"app_id\": APP_ID,\n        \"app_secret\": APP_SECRET\n    })\n    return resp.json()[\"tenant_access",
+  "limitations_applied": []
+}

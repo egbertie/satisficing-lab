@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_satisficing-web-fetcher/fetcher.py",
+  "filename": "fetcher.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "6c1c5e88f27267c4",
+  "content_length": 20822,
+  "ingested_at": "2026-03-31T17:27:45.067274",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nSatisficing Web Fetcher - 满意解Web抓取器主模块\n\n核心设计原则：\n1. 安全第一：所有操作都有边界和审计\n2. 渐进增强：从简单到复杂，按需升级\n3. 透明可控：用户清楚知道发生了什么\n\"\"\"\n\nfrom __future__ import annotations\n\nimport json\nimport re\nimport time\nimport hashlib\nimport urllib.request\nimport urllib.parse\nimport ssl\nfrom abc import ABC, abstractmethod\nfrom typing import Any, Optional, List, Dict, Union\nfrom dataclasses import dataclass, field\nfrom pathlib import Path\n\n# 安全模块导入\nimport sys\nsys.path.insert(0, str(Path(__file__).parent))\n",
+  "limitations_applied": []
+}

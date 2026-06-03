@@ -1,0 +1,57 @@
+# 阈值配置
+# 预警与熔断阈值
+
+thresholds:
+  # 预算使用率预警
+  usage_alerts:
+    warning: 70        # 🟡 注意
+    critical: 90       # 🔴 紧急
+    exhausted: 100     # ⛔ 耗尽
+    
+  # 单次任务熔断阈值（相对于预估）
+  circuit_breaker:
+    soft_limit: 1.5    # 150% 预估 - 预警
+    hard_limit: 2.0    # 200% 预估 - 熔断
+    emergency_override: 3.0  # 300% - P0可覆盖
+    
+  # 效率监控阈值
+  efficiency:
+    min_acceptable: 0.7     # 最低可接受效率
+    target: 0.85            # 目标效率
+    excellence: 0.95        # 优秀效率
+    
+  # 预估准确率监控
+  estimation:
+    acceptable_deviation: 0.2   # ±20% 可接受
+    warning_deviation: 0.3      # ±30% 警告
+    critical_deviation: 0.5     # ±50% 严重
+    
+  # 循环检测
+  loop_detection:
+    similarity_threshold: 0.8   # 80% 相似度触发
+    max_similar_tasks: 3        # 连续3个相似任务
+    
+  # 异常检测 (3-sigma规则)
+  anomaly_detection:
+    sigma_multiplier: 3
+    min_samples: 10
+    
+  # 并发控制
+  concurrency:
+    max_concurrent_tasks: 5
+    queue_size: 20
+
+# 自动调整参数
+auto_adjustment:
+  # 预算分配动态调整
+  pool_adjustment:
+    enabled: true
+    evaluation_period_days: 7
+    min_adjustment_percent: 5
+    max_adjustment_percent: 15
+    
+  # 阈值动态调整
+  threshold_adjustment:
+    enabled: true
+    based_on_history_days: 14
+    smoothing_factor: 0.3

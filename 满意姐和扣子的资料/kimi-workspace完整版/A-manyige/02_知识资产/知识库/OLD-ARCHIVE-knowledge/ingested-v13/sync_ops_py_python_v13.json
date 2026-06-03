@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/sync_ops.py",
+  "filename": "sync_ops.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "12d071720b8975a1",
+  "content_length": 3875,
+  "ingested_at": "2026-03-31T17:27:46.160147",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n运营文档同步脚本\n从core/运营体系.yaml生成Working层运营文档\n\"\"\"\n\nimport yaml\nimport os\nfrom datetime import datetime\n\ndef sync_ops():\n    # 读取Core定义\n    with open('core/运营体系.yaml', 'r', encoding='utf-8') as f:\n        data = yaml.safe_load(f)\n    \n    metadata = data.get('metadata', {})\n    operations = data.get('operations', {})\n    \n    # 确保输出目录存在\n    os.makedirs('working/operations', exist_ok=True)\n    \n    # 生成30天提升计划文档\n    team_enhancement = operations.get('team_enhancement_30d', {})\n",
+  "limitations_applied": []
+}

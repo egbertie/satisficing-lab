@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_economic-intelligence/scripts/economic-intelligence-runner.py",
+  "filename": "economic-intelligence-runner.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e5322e4714cbba81",
+  "content_length": 3102,
+  "ingested_at": "2026-03-31T17:27:45.246203",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\neconomic-intelligence-runner.py\n经济情报执行脚本\n\n功能：\n- 核心功能执行\n- 状态检查\n- 报告生成\n\"\"\"\n\nimport argparse\nimport json\nimport logging\nimport sys\nimport os\nfrom datetime import datetime\nfrom pathlib import Path\n\n# 配置日志\nlogging.basicConfig(\n    level=logging.INFO,\n    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',\n    handlers=[\n        logging.StreamHandler(),\n        logging.FileHandler(f'/tmp/economic-intelligence-' + datetime.now().strftime('%Y%m%d') + '.log')\n    ]\n)",
+  "limitations_applied": []
+}

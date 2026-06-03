@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_questionnaire-generator/qgen.sh",
+  "filename": "qgen.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "e1da34ab0cdab20f",
+  "content_length": 5785,
+  "ingested_at": "2026-03-31T17:27:45.053604",
+  "content_preview": "#!/bin/bash\n# questionnaire-generator.sh - 合伙人评估问卷生成器\n# 满意解研究所专用\n\nOUTPUT_DIR=\"${HOME}/.openclaw/questionnaires\"\nTEMPLATE_DIR=\"$(dirname \"$0\")/templates\"\n\n# 初始化\ninit() {\n    mkdir -p \"$OUTPUT_DIR\"\n}\n\n# 生成问卷头部\ngenerate_header() {\n    local type=\"$1\"\n    local date=$(date '+%Y-%m-%d')\n    \n    cat << EOF\n---\ntitle: 合伙人评估问卷 - ${type}\ndate: ${date}\ngenerated_by: 满意解研究所问卷生成器 v1.0\nmethodology: 五路图腾感知力决策\n---\n\n# 合伙人评估问卷\n\n**问卷类型:** ${type}  \n**生成日期:** ${date}  \n**评估方法论:** 五路图腾感知力决策  \n**出品:** 满意解研究所\n\n---\n\n",
+  "limitations_applied": []
+}

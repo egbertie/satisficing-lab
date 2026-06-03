@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/dashboard-manager/dashboard.py",
+  "filename": "dashboard.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "36686a3e417e4ed8",
+  "content_length": 5890,
+  "ingested_at": "2026-03-31T17:27:45.420115",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n统一管理驾驶舱生成器\n5标准化实现\n\"\"\"\n\nimport os\nimport json\nfrom datetime import datetime\nfrom pathlib import Path\n\nclass DashboardManager:\n    \"\"\"管理驾驶舱\"\"\"\n    \n    def __init__(self, workspace=\"/root/.openclaw/workspace\"):\n        self.workspace = Path(workspace)\n        self.reports = {}\n    \n    def scan_project(self) -> dict:\n        \"\"\"扫描项目状态\"\"\"\n        docs_dir = self.workspace / \"docs\"\n        tasks_file = docs_dir / \"TASK_MASTER.md\"\n        \n        # 统计任务（简化版，实际需要解析MD）\n     ",
+  "limitations_applied": []
+}

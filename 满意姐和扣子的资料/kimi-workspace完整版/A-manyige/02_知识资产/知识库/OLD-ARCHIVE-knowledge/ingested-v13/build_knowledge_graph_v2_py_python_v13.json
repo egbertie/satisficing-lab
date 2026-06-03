@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/build_knowledge_graph_v2.py",
+  "filename": "build_knowledge_graph_v2.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "3b0e8d0088b47f3d",
+  "content_length": 3942,
+  "ingested_at": "2026-03-31T17:27:46.200860",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n知识图谱构建器 - 承诺洗澡Phase 1\n基于Skill知识提取结果，构建知识关联\n\"\"\"\n\nimport json\nfrom pathlib import Path\n\ndef build_knowledge_graph():\n    \"\"\"构建知识图谱\"\"\"\n    # 读取Skill知识索引\n    with open(\"/root/.openclaw/workspace/knowledge/system/skill_knowledge_index.json\", 'r') as f:\n        skill_data = json.load(f)\n    \n    # 核心概念节点\n    core_concepts = {\n        \"五路图腾\": {\"type\": \"methodology\", \"related\": []},\n        \"合伙人决策\": {\"type\": \"domain\", \"related\": []},\n        \"知识管理\": {\"type\": \"system\", \"related",
+  "limitations_applied": []
+}

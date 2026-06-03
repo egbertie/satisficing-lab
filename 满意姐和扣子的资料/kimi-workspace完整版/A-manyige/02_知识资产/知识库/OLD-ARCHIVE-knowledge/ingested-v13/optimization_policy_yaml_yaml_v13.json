@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/backups/cron/init-20260315-223523/config/optimization_policy.yaml",
+  "filename": "optimization_policy.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "2a2d0f84a68aaa39",
+  "content_length": 1592,
+  "ingested_at": "2026-03-31T17:27:46.421645",
+  "content_preview": "# 优化策略配置\n\n# 阈值设置\nthresholds:\n  # 空转率警告阈值（超过此值建议禁用）\n  empty_rate_warning: 0.8\n  \n  # Token预算警告阈值（占预算比例）\n  token_budget_warning: 0.1\n  \n  # 未执行天数警告（超过此值建议归档）\n  inactive_days_warning: 30\n  \n  # 成功率警告阈值\n  success_rate_warning: 0.5\n  \n  # 高频检查阈值（分钟）\n  high_frequency_threshold: 60\n\n# 自动优化设置\nauto_optimize:\n  # Tier 1 Cron是否允许自动优化\n  tier_1: true\n  \n  # Tier 2 Cron是否允许自动优化\n  tier_2: false\n  \n  # Tier 3 Cron是否允许自动优化\n  tier_3: false\n  \n  # 自动优化的最大变更数（防止过度优化）\n  max_changes_per_run: 3\n\n# 通知配置\nnotification:\n ",
+  "limitations_applied": []
+}

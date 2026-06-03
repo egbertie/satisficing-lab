@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/token-weekly-monitor/scripts/token-weekly-monitor-runner.py",
+  "filename": "token-weekly-monitor-runner.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "2b4d6a795c958343",
+  "content_length": 19456,
+  "ingested_at": "2026-03-31T17:27:45.409447",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\ntoken-weekly-monitor-runner.py\nToken 周度监控与预警系统 - 主运行脚本\n\nLevel 5 Standard - 生产级完整闭环\n版本: 2.0.0\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport logging\nimport argparse\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import Dict, List, Tuple, Optional\n\n# 配置路径\nSKILL_NAME = \"token-weekly-monitor\"\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nSKILL_DIR = WORKSPACE / \"skills\" / SKILL_NAME\nDATA_FILE = WORKSPACE / \"memory\" / \"token-weekly-monitor.json\"",
+  "limitations_applied": []
+}

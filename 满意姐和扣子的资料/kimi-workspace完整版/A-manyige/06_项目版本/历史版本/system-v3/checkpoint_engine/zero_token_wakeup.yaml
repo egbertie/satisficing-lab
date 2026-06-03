@@ -1,0 +1,55 @@
+# Zero-Token Wakeup 配置
+# 零Token唤醒机制
+# 命名空间: NGT-WAKE-v1.0-FIN-260327
+
+version: "1.0"
+description: "断电后零Token快速恢复机制"
+
+wakeup:
+  # 状态保存（休眠前）
+  hibernate:
+    trigger:
+      - "user_exit"
+      - "idle_timeout"
+      - "manual_command"
+      
+    save_content:
+      - "session_state"
+      - "working_memory"
+      - "pending_tasks"
+      - "checkpoint_reference"
+      
+    format: "compressed_binary"
+    location: "tier_2_warm_storage"
+    encryption: true
+
+  # 唤醒机制
+  wakeup:
+    detection:
+      - "user_message"
+      - "scheduled_task"
+      - "system_event"
+      
+    restore_process:
+      step_1: "加载最近的checkpoint"
+      step_2: "恢复快照状态"
+      step_3: "验证一致性"
+      step_4: "恢复待命"
+      
+    target_time: "10s"
+    token_cost: "0"  # 零Token恢复
+
+  # 增量同步
+  delta_sync:
+    mode: "diff_based"
+    frequency: "realtime"
+    storage: "local_cache"
+    
+  # 健康检查
+  health_check:
+    on_wakeup: true
+    items:
+      - "memory_integrity"
+      - "storage_connectivity"
+      - "api_availability"
+    fallback: "safe_mode"

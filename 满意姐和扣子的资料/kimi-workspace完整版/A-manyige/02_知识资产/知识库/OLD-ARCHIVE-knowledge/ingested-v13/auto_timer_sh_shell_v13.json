@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/auto_timer.sh",
+  "filename": "auto_timer.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "ddb76894b4001b09",
+  "content_length": 554,
+  "ingested_at": "2026-03-31T17:27:46.209288",
+  "content_preview": "#!/bin/bash\n# 自动计时器\n# 1分钟/2分钟自动提醒\n\nTARGET=\"${1:-蓝军}\"\nLOG=\"/root/.openclaw/workspace/diary/auto_timer.log\"\n\nSTART=$(date +%s)\necho \"[$TARGET] 计时开始: $(date '+%H:%M:%S')\" | tee -a \"$LOG\"\n\nwhile true; do\n    NOW=$(date +%s)\n    ELAPSED=$((NOW - START))\n    \n    # 1分钟\n    if [ $ELAPSED -eq 60 ]; then\n        echo \"⚠️  [$TARGET] 1分钟到，无回应\" | tee -a \"$LOG\"\n        echo \"请再次通知$TARGET\"\n    fi\n    \n    # 2分钟\n    if [ $ELAPSED -eq 120 ]; then\n        echo \"❌  [$TARGET] 2分钟到，无回应\" | tee -a \"$LOG\"\n        echo",
+  "limitations_applied": []
+}

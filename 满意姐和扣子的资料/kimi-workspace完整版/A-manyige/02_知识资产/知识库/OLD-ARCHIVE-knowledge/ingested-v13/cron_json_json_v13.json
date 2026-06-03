@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/backups/layer2_automation/cron.json",
+  "filename": "cron.json",
+  "file_type": "json",
+  "extension": ".json",
+  "file_hash": "cb0746951c1ac280",
+  "content_length": 777,
+  "ingested_at": "2026-03-31T17:27:46.426041",
+  "content_preview": "{\n  \"jobs\": [\n    {\n      \"name\": \"daily-backup-health-check\",\n      \"schedule\": \"0 18 * * *\",\n      \"command\": \"cd /root/.openclaw/workspace/backups/layer2_automation \\u0026\\u0026 python3 immortality_protocol.py health\",\n      \"description\": \"每日18:00灾备健康检查\"\n    },\n    {\n      \"name\": \"weekly-full-snapshot\",\n      \"schedule\": \"0 23 * * 0\",\n      \"command\": \"cd /root/.openclaw/workspace/backups/layer2_automation \\u0026\\u0026 python3 immortality_protocol.py snapshot\",\n      \"description\": \"每周日23:0",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_workspace-health-scanner/modules/health_scanner.py",
+  "filename": "health_scanner.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "c7f5f7b97b83b1b6",
+  "content_length": 7893,
+  "ingested_at": "2026-03-31T17:27:45.137533",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nWorkspace Health Scanner - 工作空间健康度扫描器\n扫描四个维度：结构、时效、引用、安全\n\"\"\"\n\nimport os\nimport json\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import Dict, List, Any\n\nclass WorkspaceHealthScanner:\n    \"\"\"工作空间健康度扫描器\"\"\"\n    \n    DIMENSIONS = {\n        'structure': 0.25,\n        'freshness': 0.25,\n        'reference': 0.25,\n        'security': 0.25\n    }\n    \n    CORE_FILES = [\n        'MEMORY.md',\n        'HEARTBEAT.md',\n        'skill.json',\n        '",
+  "limitations_applied": []
+}

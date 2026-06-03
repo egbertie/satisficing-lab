@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/cron-tasks/knowledge-os-maintenance.py",
+  "filename": "knowledge-os-maintenance.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "48c3441d069d66ad",
+  "content_length": 8122,
+  "ingested_at": "2026-03-31T17:27:46.221819",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\n知识OS维护脚本 (Knowledge OS Maintenance)\n执行时间: 每日 02:00（深夜低峰期）\n功能:\n1. 清理过期临时文件\n2. 压缩归档旧日志\n3. 优化文件系统索引\n4. 生成维护报告\n\"\"\"\n\nimport os\nimport sys\nimport gzip\nimport shutil\nimport json\nimport logging\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\n# ============ 配置区域 ============\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nLOG_DIR = WORKSPACE / \"logs\" / \"cron-tasks\"\nARCHIVE_DIR = WORKSPACE / \"logs\" / \"archive\"\nMEMORY_DIR = WORKSPACE / \"me",
+  "limitations_applied": []
+}

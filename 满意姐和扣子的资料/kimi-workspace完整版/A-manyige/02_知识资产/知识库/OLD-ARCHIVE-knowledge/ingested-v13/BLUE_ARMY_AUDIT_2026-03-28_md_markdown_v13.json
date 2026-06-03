@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/reports/AUDIT/BLUE_ARMY_AUDIT_2026-03-28.md",
+  "filename": "BLUE_ARMY_AUDIT_2026-03-28.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "bd98f7fdff70c2dc",
+  "content_length": 3341,
+  "ingested_at": "2026-03-31T17:27:46.244061",
+  "content_preview": "# 蓝军深度审计报告\n\n> **审计时间**: 2026-03-28 12:15  \n> **审计对象**: 26个标记FIN的系统 + 全量Skill目录  \n> **审计标准**: 绝对诚实，不遮掩\n\n---\n\n## 审计方法\n\n1. **代码存在性检查**: 每个FIN系统必须有可运行的Python代码\n2. **5标准化验证**: 检查S1-S7是否真实实现\n3. **文档一致性**: SKILL.md声明 vs 实际代码\n4. **遗漏扫描**: 检查是否有高价值Skill被遗漏\n\n---\n\n## 审计发现\n\n### 严重问题 🔴\n\n#### 1. 超级整合系统仅有文档，无实际代码\n\n| 系统名称 | 状态 | 问题 |\n|----------|------|------|\n| knowledge-suite | ❌ 虚假FIN | 只有SKILL.md，无knowledge_suite.py |\n| automation-suite | ❌ 虚假FIN | 只有SKILL.md，无automation_suite.py |\n| file-suite | ❌ 虚假FIN | ",
+  "limitations_applied": []
+}

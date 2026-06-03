@@ -1,0 +1,47 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/memory_guardian_v2.py",
+  "filename": "memory_guardian_v2.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 15635,
+  "checksum": "e257214b29c82636",
+  "ingested_at": "2026-03-31T17:30:32.828209",
+  "line_count": 430,
+  "title": "memory_guardian_v2",
+  "description": "Memory Guardian V2 - 事件驱动 + 满意解优化\n基于满意解决策框架的内存监控系统\n\n变化:\n- V1: 固定15分钟检查 ❌ 不满意解\n- V2: 场景驱动，对话感知，Token优化 ✅ 满意解",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: MemoryGuardianV2"
+    }
+  ],
+  "entities": [
+    {
+      "name": "MemoryGuardianV2",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "检测对话状态 (通过检查最近交互时间)",
+    "实际实现中可以通过更复杂的方式检测",
+    "这里简化为：如果距离上次检查<5分钟，认为可能有对话",
+    "如果上次检查是5分钟内，可能有人在操作",
+    "检测任务状态 (通过检查进程或状态文件)",
+    "根据任务类型判断内存风险",
+    "规则1: 内存Critical，必须检查",
+    "规则2: 有对话，不检查",
+    "规则3: 根据任务风险",
+    "内存Orange，即使没有任务也要检查",
+    "Safe状态，2小时检查",
+    "如果决策是不检查，记录原因",
+    "满意解决策：是否应该现在检查",
+    "# Token优化效果"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/5standard-integration/test_5standard.py",
+  "filename": "test_5standard.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "664702a08eb84b57",
+  "content_length": 605,
+  "ingested_at": "2026-03-31T17:27:45.422752",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n5standard-integration测试\n快速验证模块存在性\n\"\"\"\n\nimport unittest\nimport sys\nfrom pathlib import Path\n\nsys.path.insert(0, str(Path(__file__).parent))\n\n\nclass Test5StandardIntegration(unittest.TestCase):\n    \"\"\"5标准集成测试\"\"\"\n    \n    def test_skill_exists(self):\n        \"\"\"测试Skill存在\"\"\"\n        skill_dir = Path(__file__).parent\n        self.assertTrue(skill_dir.exists())\n    \n    def test_structure(self):\n        \"\"\"测试基本结构\"\"\"\n        files = list(Path(__file__).parent.glob(\"*.py\"))\n  ",
+  "limitations_applied": []
+}

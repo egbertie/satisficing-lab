@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/quality-assurance/scripts/qa-review.sh",
+  "filename": "qa-review.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "8216c0764d7fa9fe",
+  "content_length": 23524,
+  "ingested_at": "2026-03-31T17:27:45.001320",
+  "content_preview": "#!/bin/bash\n#\n# Quality Assurance Review Script\n# 7标准审查脚本: S1输入 → S2多维度检查 → S3输出报告 → S4触发机制 → S5检查清单 → S6局限标注\n#\n# 使用方式:\n#   ./qa-review.sh <file>              # 审查单个文件\n#   ./qa-review.sh --batch <dir>       # 批量审查目录\n#   ./qa-review.sh --ci --gate=A       # CI集成 (gate: A/B/C/D)\n#   ./qa-review.sh --ci --block-on=Critical,High  # 阻断级别\n#\n\nset -e\n\n# 配置\nSCRIPT_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nWORKSPACE=\"/root/.openclaw/workspace\"\nREPORT_DIR=\"$WORKSPACE/reports/qa\"\nISSUES_DIR=\"$REPO",
+  "limitations_applied": []
+}

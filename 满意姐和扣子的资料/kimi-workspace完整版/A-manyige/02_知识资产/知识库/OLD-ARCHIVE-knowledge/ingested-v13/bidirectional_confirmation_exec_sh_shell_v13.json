@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/bidirectional_confirmation_exec.sh",
+  "filename": "bidirectional_confirmation_exec.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "b620b01b7b340d66",
+  "content_length": 1282,
+  "ingested_at": "2026-03-31T17:27:46.207951",
+  "content_preview": "#!/bin/bash\n# 双向确认执行脚本 - 物理化机制\n# 自动执行通知流程\n\nTARGET=\"${1:-蓝军}\"\nTASK=\"${2:-任务}\"\nFILE=\"${3:-文件路径}\"\nLOG=\"/root/.openclaw/workspace/diary/bidirectional_confirmation.log\"\n\nlog_msg() {\n    echo \"[$(date '+%Y-%m-%d %H:%M:%S')] $1\" | tee -a \"$LOG\"\n}\n\nlog_msg \"=== 双向确认执行开始 ===\"\nlog_msg \"目标: $TARGET\"\nlog_msg \"任务: $TASK\"\nlog_msg \"文件: $FILE\"\n\n# 步骤1: 检查文件存在\nif [ -f \"$FILE\" ]; then\n    SIZE=$(stat -c%s \"$FILE\")\n    log_msg \"✅ 文件存在: $FILE ($SIZE 字节)\"\nelse\n    log_msg \"❌ 文件不存在: $FILE\"\n    exit 1\nfi\n\n# 步骤2: 生成通知内容",
+  "limitations_applied": []
+}

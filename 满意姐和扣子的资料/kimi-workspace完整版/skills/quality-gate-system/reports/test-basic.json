@@ -1,0 +1,63 @@
+{
+  "report_version": "5.0.0",
+  "gate_id": "QG-20260321-190325",
+  "timestamp": "2026-03-21T19:47:28.765651",
+  "target": {
+    "type": "path",
+    "value": "scripts/"
+  },
+  "gate_config": {
+    "level": "basic",
+    "min_score": 60,
+    "block_on_fail": false
+  },
+  "dimensions": {
+    "compliance": {
+      "name": "compliance",
+      "score": 33.0,
+      "weight": 0.25,
+      "weighted_score": 8.25,
+      "checks": [
+        {
+          "name": "code_style",
+          "passed": true,
+          "score": 100,
+          "weight": 0.3,
+          "details": "Code style check completed",
+          "duration_ms": 0,
+          "auto_fixable": true,
+          "fix_command": "black . && isort ."
+        },
+        {
+          "name": "security_scan",
+          "passed": false,
+          "score": 10,
+          "weight": 0.3,
+          "details": "Security scan completed",
+          "duration_ms": 0,
+          "auto_fixable": false,
+          "fix_command": ""
+        }
+      ]
+    }
+  },
+  "summary": {
+    "total_score": 8.25,
+    "grade": "BLOCK",
+    "blocked": true
+  },
+  "findings": [],
+  "remediation": [
+    {
+      "id": 1,
+      "severity": "critical",
+      "dimension": "compliance",
+      "check": "security_scan",
+      "score": 10,
+      "issue": "Security scan completed",
+      "suggestion": "Fix security_scan issues",
+      "auto_fixable": false,
+      "fix_command": ""
+    }
+  ]
+}

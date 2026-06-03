@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/system-v2/blackboard/shared_memory.py",
+  "filename": "shared_memory.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "16507dc7396f46ea",
+  "content_length": 2422,
+  "ingested_at": "2026-03-31T17:27:44.538679",
+  "content_preview": "\"\"\"\nBlackboard - 共享内存模块\n提供线程安全的内存存储\n\"\"\"\n\nimport threading\nfrom typing import Any, Dict, List, Optional\n\n\nclass SharedMemory:\n    \"\"\"\n    共享内存实现\n    \n    特性：\n    - 线程安全（RLock）\n    - 命名空间隔离\n    - 支持任意Python对象\n    \"\"\"\n    \n    # 类级存储：namespace -> {key: value}\n    _storage: Dict[str, Dict[str, Any]] = {}\n    _lock = threading.RLock()\n    \n    def __init__(self, namespace: str = \"default\"):\n        self.namespace = namespace\n        with self._lock:\n            if namespace not in self._storage:\n    ",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/diary/errors/ERR-20260320-002.md",
+  "filename": "ERR-20260320-002.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "24ff7b798055099d",
+  "content_length": 668,
+  "ingested_at": "2026-03-31T17:27:46.583696",
+  "content_preview": "# 错误档案: ERR-20260320-002\n\n## 基本信息\n- **错误ID**: ERR-20260320-002\n- **发现时间**: 2026-03-28T12:43:16.729263\n- **错误类型**: logic\n- **严重程度**: medium\n- **当前状态**: verified\n\n## 错误描述\ncron任务设置在整点（10:00, 14:00），导致与大量其他任务竞争资源，失败率升高\n\n## 根因分析（5 Why）\nWhy 1: 为什么设置整点？→ 方便记忆\nWhy 2: 为什么方便记忆优先？→ 未考虑系统负载\nWhy 3: 为什么未考虑？→ 缺乏错峰意识\nWhy 4: 为什么缺乏？→ 无资源竞争数据分析\nWhy 5: 为什么无分析？→ 缺少系统负载监控\n\n根本原因: 便利性优先于系统稳定性\n\n## 上下文信息\n```json\n{}\n```\n\n## 纠正措施\n- [ ] 已制定纠正计划\n- [ ] 已实施纠正\n- [ ] 已验证纠正有效性\n\n## 预防措施\n- [ ] 已识别预防机制\n- [ ] 已实施预防措施\n- [ ] 已验证预防有效性\n\n",
+  "limitations_applied": []
+}

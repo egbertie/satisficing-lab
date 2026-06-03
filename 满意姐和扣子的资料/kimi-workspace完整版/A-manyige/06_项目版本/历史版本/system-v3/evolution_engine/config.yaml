@@ -1,0 +1,84 @@
+# Evolution Engine 配置
+# 持续进化引擎 — 变异-选择-留存
+# 命名空间: NGT-EVO-v1.0-FIN-260327
+
+version: "1.0"
+description: "系统持续进化引擎，基于反馈的自优化"
+
+evolution:
+  # 变异机制（Variation）
+  variation:
+    sources:
+      - name: "ab_testing"
+        description: "同一任务两种策略，数据选择"
+        frequency: "daily"
+        
+      - name: "cross_pollination"
+        description: "跨领域策略迁移"
+        frequency: "weekly"
+        
+      - name: "mutation"
+        description: "随机参数微调（±5%）"
+        frequency: "daily"
+        mutation_rate: 0.05
+        
+  # 选择压力（Selection）
+  selection:
+    criteria:
+      - name: "token_efficiency"
+        weight: 0.4
+        target: "min_token_per_task"
+        
+      - name: "completion_rate"
+        weight: 0.3
+        target: "max_success_rate"
+        
+      - name: "user_satisfaction"
+        weight: 0.2
+        target: "feedback_score"
+        
+      - name: "speed"
+        weight: 0.1
+        target: "min_response_time"
+        
+  # 留存机制（Retention）
+  retention:
+    threshold: 0.75  # 超过75分保留
+    versioning:
+      format: "{major}.{minor}.{patch}"
+      major: "理论框架重构"
+      minor: "新增能力"
+      patch: "参数微调"
+      
+    archive:
+      type: "git_branch"
+      naming: "evolution/{timestamp}-{score}"
+      
+    rollback:
+      enabled: true
+      history_size: 30
+
+  # 进化计划
+  schedule:
+    daily:
+      - "收集前日性能数据"
+      - "A/B测试分析"
+      - "小参数微调"
+      
+    weekly:
+      - "周度进化报告"
+      - "跨策略迁移"
+      - "版本评估"
+      
+    monthly:
+      - "大版本发布"
+      - "理论框架升级"
+      - "长期趋势分析"
+
+  # 防退化机制
+  anti_degradation:
+    checks:
+      - "性能不下降>5%"
+      - "核心能力不丢失"
+      - "用户满意度不降低"
+    rollback_trigger: "连续3天性能下降"

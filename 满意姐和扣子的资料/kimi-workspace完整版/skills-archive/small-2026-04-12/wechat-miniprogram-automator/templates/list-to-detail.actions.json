@@ -1,0 +1,37 @@
+[
+  {
+    "type": "reLaunch",
+    "url": "{{LIST_ROUTE_URL}}"
+  },
+  {
+    "type": "waitForRoute",
+    "path": "{{LIST_ROUTE_PATH}}",
+    "query": "{{LIST_ROUTE_QUERY}}",
+    "timeoutMs": "{{LIST_ROUTE_TIMEOUT_MS}}"
+  },
+  {
+    "type": "waitForSelector",
+    "selector": "{{LIST_READY_SELECTOR}}",
+    "timeoutMs": "{{LIST_READY_TIMEOUT_MS}}"
+  },
+  {
+    "type": "tap",
+    "selector": "{{LIST_ITEM_SELECTOR}}",
+    "selectorIndex": "{{LIST_ITEM_SELECTOR_INDEX}}"
+  },
+  {
+    "type": "waitForRoute",
+    "path": "{{DETAIL_ROUTE_PATH}}",
+    "query": "{{DETAIL_ROUTE_QUERY}}",
+    "timeoutMs": "{{DETAIL_ROUTE_TIMEOUT_MS}}"
+  },
+  {
+    "type": "waitForSelector",
+    "selector": "{{DETAIL_READY_SELECTOR}}",
+    "timeoutMs": "{{DETAIL_READY_TIMEOUT_MS}}"
+  },
+  {
+    "type": "screenshot",
+    "path": "{{SCREENSHOT_PATH}}"
+  }
+]

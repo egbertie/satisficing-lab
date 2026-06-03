@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/auto-verification-system.sh",
+  "filename": "auto-verification-system.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "607947389b18ff1a",
+  "content_length": 5448,
+  "ingested_at": "2026-03-31T17:27:46.202322",
+  "content_preview": "#!/bin/bash\n# 自运行验证系统 V1.0\n# 核心：自动检测声称完成的机制，无需人工全量检查\n# 应用：反脆弱性 + 时间不对称防护 + 自动信号生成\n\nset -e\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nREPORT_DIR=\"$WORKSPACE/reports/auto-verification\"\nDATE=$(date +%Y-%m-%d)\nLOG_FILE=\"$REPORT_DIR/verification-${DATE}.log\"\n\nmkdir -p \"$REPORT_DIR\"\n\necho \"=== 自运行验证系统 ===\" | tee -a \"$LOG_FILE\"\necho \"时间: $(date)\" | tee -a \"$LOG_FILE\"\necho \"\" | tee -a \"$LOG_FILE\"\n\n# ============================================================================\n# 1. 自动提取声称完成的机制（从memory文件）\n# ==",
+  "limitations_applied": []
+}

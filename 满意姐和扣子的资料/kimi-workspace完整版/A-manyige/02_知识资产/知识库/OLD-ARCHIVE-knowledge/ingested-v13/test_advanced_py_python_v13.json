@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/test_files/test_advanced.py",
+  "filename": "test_advanced.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "17edaace44d026de",
+  "content_length": 2514,
+  "ingested_at": "2026-03-31T17:27:44.645149",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\nPDF和Word读取功能测试\n\"\"\"\n\nfrom pathlib import Path\n\nprint(\"=\" * 60)\nprint(\"  PDF和Word读取功能测试\")\nprint(\"=\" * 60)\nprint()\n\n# 检查依赖安装状态\nprint(\"[1] 检查依赖安装状态...\")\n\ndeps = {\n    'pdfplumber': 'PDF读取（推荐）',\n    'fitz': 'PDF读取（高性能）',\n    'docx': 'Word文档读取',\n}\n\ninstalled = []\nmissing = []\n\nfor module, desc in deps.items():\n    try:\n        __import__(module)\n        print(f\"  ✓ {module:15} - {desc}\")\n        installed.append(module)\n    except ImportError:\n       ",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/automation_pipeline_v2.py",
+  "filename": "automation_pipeline_v2.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "f86c4ac9618fd80f",
+  "content_length": 4266,
+  "ingested_at": "2026-03-31T17:27:46.157640",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n自动化执行管道 - 承诺洗澡Phase 2\n建立监控+执行完整的自动化能力\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\ndef auto_knowledge_ingestion():\n    \"\"\"知识自动入库管道\"\"\"\n    # 检查新文件\n    workspace = Path(\"/root/.openclaw/workspace\")\n    knowledge_dir = workspace / \"knowledge\" / \"ingested\"\n    knowledge_dir.mkdir(parents=True, exist_ok=True)\n    \n    # 扫描新增文件\n    new_files = []\n    for ext in [\".md\", \".txt\", \".json\"]:\n        for f in workspace.rglob(f\"*{ext",
+  "limitations_applied": []
+}

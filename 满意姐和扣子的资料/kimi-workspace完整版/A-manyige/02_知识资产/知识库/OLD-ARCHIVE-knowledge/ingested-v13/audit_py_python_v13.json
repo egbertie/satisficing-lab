@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/data-quality-auditor/scripts/audit.py",
+  "filename": "audit.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "2a27f71168f48d82",
+  "content_length": 5212,
+  "ingested_at": "2026-03-31T17:27:45.389279",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\naudit.py - 数据质量审计命令行工具\nS1-S7 全标准支持\n\nUsage:\n    python3 audit.py --source data.csv --format csv\n    python3 audit.py --source \"postgresql://localhost/db\" --table users --config config.yaml\n    python3 audit.py --adversarial-test  # 运行对抗测试\n\"\"\"\n\nimport argparse\nimport sys\nimport json\nfrom pathlib import Path\n\n# 添加父目录到路径\nsys.path.insert(0, str(Path(__file__).parent))\n\nfrom data_quality_auditor import QualityAuditor, run_adversarial_test\n\n\ndef main():\n    parser = argparse.",
+  "limitations_applied": []
+}

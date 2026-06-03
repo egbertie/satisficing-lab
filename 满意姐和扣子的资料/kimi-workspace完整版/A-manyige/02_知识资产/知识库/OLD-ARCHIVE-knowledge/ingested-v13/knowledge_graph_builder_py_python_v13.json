@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/knowledge_graph_builder.py",
+  "filename": "knowledge_graph_builder.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "697a74e88834ae77",
+  "content_length": 6036,
+  "ingested_at": "2026-03-31T17:27:46.148845",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n知识图谱构建脚本\n将入库的2776个文件建立关联\n\n质量建设：知识关联，非孤立存储\n\"\"\"\n\nimport json\nimport re\nfrom pathlib import Path\nfrom datetime import datetime\nfrom typing import Dict, List, Set, Tuple\n\n# 配置\nINGESTED_DIR = Path(\"/root/.openclaw/workspace/diary/knowledge-ingest/ingested\")\nOUTPUT_DIR = Path(\"/root/.openclaw/workspace/diary/knowledge-graph\")\nOUTPUT_DIR.mkdir(parents=True, exist_ok=True)\n\n\nclass KnowledgeGraphBuilder:\n    \"\"\"知识图谱构建器\"\"\"\n    \n    def __init__(self):\n        self.nodes: Dict[st",
+  "limitations_applied": []
+}

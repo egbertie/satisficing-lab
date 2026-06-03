@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/notification-router/router.py",
+  "filename": "router.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "856c1ad03aaba848",
+  "content_length": 7612,
+  "ingested_at": "2026-03-31T17:27:44.793317",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n分级通知系统 - 智能路由通知到不同渠道\n紧急/重要/普通/归档 四级\n\"\"\"\n\nimport json\nfrom datetime import datetime\nfrom enum import Enum\nfrom pathlib import Path\n\nclass NotificationLevel(Enum):\n    EMERGENCY = \"emergency\"    # 紧急：系统故障、安全告警\n    IMPORTANT = \"important\"    # 重要：任务完成、决策提醒\n    NORMAL = \"normal\"          # 普通：进度更新、日报\n    ARCHIVE = \"archive\"        # 归档：日志、调试信息\n\nclass NotificationRouter:\n    def __init__(self, config_path=None):\n        self.config = self._load_config(config_path)\n        s",
+  "limitations_applied": []
+}

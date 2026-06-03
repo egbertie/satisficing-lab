@@ -1,0 +1,138 @@
+{
+  "source_path": "/root/.openclaw/workspace/config/zero-token-monitoring-design.md",
+  "filename": "zero-token-monitoring-design.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 8197,
+  "checksum": "35c441744f067800",
+  "ingested_at": "2026-03-31T17:30:10.466512",
+  "line_count": 261,
+  "title": "零Token消耗监控体系设计方案",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "零Token消耗监控体系设计方案"
+    },
+    {
+      "level": 2,
+      "title": "一、GC监控与Token消耗"
+    },
+    {
+      "level": 3,
+      "title": "答案：不增加Token消耗"
+    },
+    {
+      "level": 2,
+      "title": "二、内存监控 vs 持久化"
+    },
+    {
+      "level": 3,
+      "title": "现状问题"
+    },
+    {
+      "level": 3,
+      "title": "正确做法"
+    },
+    {
+      "level": 1,
+      "title": "错误：纯内存"
+    },
+    {
+      "level": 1,
+      "title": "正确：内存+延迟持久化"
+    },
+    {
+      "level": 1,
+      "title": "... 累积100次或每5分钟 ..."
+    },
+    {
+      "level": 2,
+      "title": "三、零Token消耗监控体系"
+    },
+    {
+      "level": 3,
+      "title": "层级设计"
+    },
+    {
+      "level": 3,
+      "title": "具体实施方案"
+    },
+    {
+      "level": 4,
+      "title": "1. 系统级（无Token）"
+    },
+    {
+      "level": 1,
+      "title": "内存监控脚本 - 纯Shell，零Token"
+    },
+    {
+      "level": 1,
+      "title": "每5分钟执行一次"
+    },
+    {
+      "level": 4,
+      "title": "2. 应用级（无Token）"
+    },
+    {
+      "level": 1,
+      "title": "openclaw-gateway内部监控 - 批量写入"
+    },
+    {
+      "level": 4,
+      "title": "3. AI级（阈值控制）"
+    },
+    {
+      "level": 2,
+      "title": "四、我们的监控缺口"
+    },
+    {
+      "level": 2,
+      "title": "五、立即执行的监控补强"
+    },
+    {
+      "level": 3,
+      "title": "1. 部署内存监控（5分钟，零Token）"
+    },
+    {
+      "level": 1,
+      "title": "创建监控脚本"
+    },
+    {
+      "level": 1,
+      "title": "内存监控"
+    },
+    {
+      "level": 1,
+      "title": "负载监控"
+    },
+    {
+      "level": 1,
+      "title": "每2分钟执行"
+    },
+    {
+      "level": 3,
+      "title": "2. 部署GC监控（Node.js应用层）"
+    },
+    {
+      "level": 3,
+      "title": "3. 异常告警触发器（可控Token）"
+    },
+    {
+      "level": 1,
+      "title": "告警检查脚本"
+    },
+    {
+      "level": 1,
+      "title": "内存>85%触发告警"
+    },
+    {
+      "level": 2,
+      "title": "六、总结"
+    }
+  ],
+  "entities": [],
+  "key_points": [],
+  "limitations_applied": [],
+  "content_truncated": false
+}

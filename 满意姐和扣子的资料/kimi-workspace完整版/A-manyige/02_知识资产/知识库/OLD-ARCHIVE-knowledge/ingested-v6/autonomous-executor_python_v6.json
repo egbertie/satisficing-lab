@@ -1,0 +1,40 @@
+{
+  "source_path": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/autonomous-execution-suite/autonomous-executor.py",
+  "filename": "autonomous-executor.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 7433,
+  "checksum": "b82f25a8e470972c",
+  "ingested_at": "2026-03-31T17:30:32.048497",
+  "line_count": 231,
+  "title": "autonomous-executor",
+  "description": "自主执行器 - 六通道永不停歇\n无需用户提醒，自主永续运行",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: AutonomousExecutor"
+    }
+  ],
+  "entities": [
+    {
+      "name": "AutonomousExecutor",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "静默记录，不输出到stdout（避免打扰用户）",
+    "信息采集: 每小时执行",
+    "学习进化: 09:00, 14:00, 20:00 (容错窗口整点后0-30分钟)",
+    "持续训练: 10:00, 16:00 (容错窗口整点后0-30分钟)",
+    "沙盘推演: 15:00 (容错窗口15:00-15:30)",
+    "模拟演练: 11:00, 17:00 (容错窗口整点后0-30分钟)",
+    "这里调用kimi-search等工具收集信息",
+    "结果存入数据库，不通知用户",
+    "静默返回（不输出到stdout）",
+    "静默输出（仅记录到日志，不打扰用户）",
+    "只有在cron执行时才输出简要状态"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

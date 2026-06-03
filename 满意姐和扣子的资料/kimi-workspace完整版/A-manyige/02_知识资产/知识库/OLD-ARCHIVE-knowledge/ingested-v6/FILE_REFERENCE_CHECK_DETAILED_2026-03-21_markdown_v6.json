@@ -1,0 +1,145 @@
+{
+  "source_path": "/root/.openclaw/workspace/reports/FILE_REFERENCE_CHECK_DETAILED_2026-03-21.md",
+  "filename": "FILE_REFERENCE_CHECK_DETAILED_2026-03-21.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 7286,
+  "checksum": "20dff02a38e8593e",
+  "ingested_at": "2026-03-31T17:30:15.208234",
+  "line_count": 220,
+  "title": "🔍 全局文件引用一致性检查报告",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "🔍 全局文件引用一致性检查报告"
+    },
+    {
+      "level": 2,
+      "title": "📊 总体统计"
+    },
+    {
+      "level": 2,
+      "title": "🔴 失效引用清单（按类型分类）"
+    },
+    {
+      "level": 3,
+      "title": "1️⃣ 文档引用失效（docs/）"
+    },
+    {
+      "level": 3,
+      "title": "2️⃣ Skill引用失效（skills/）"
+    },
+    {
+      "level": 3,
+      "title": "3️⃣ 版本不一致清单"
+    },
+    {
+      "level": 2,
+      "title": "📍 引用位置分布（Top 20 源文件）"
+    },
+    {
+      "level": 2,
+      "title": "🔧 修复建议"
+    },
+    {
+      "level": 3,
+      "title": "高优先级（P0）- 立即修复"
+    },
+    {
+      "level": 1,
+      "title": "从archive恢复关键文档"
+    },
+    {
+      "level": 1,
+      "title": "修复会议协议路径"
+    },
+    {
+      "level": 1,
+      "title": "修复内部会议协议路径"
+    },
+    {
+      "level": 1,
+      "title": "查找所有引用DISASTER_RECOVERY_V1.md的文件"
+    },
+    {
+      "level": 1,
+      "title": "批量替换为V2版本（需谨慎）"
+    },
+    {
+      "level": 1,
+      "title": "find /root/.openclaw/workspace -name \"*.md\" -not -path \"*/.archive_*\" \\"
+    },
+    {
+      "level": 1,
+      "title": "-exec sed -i 's/DISASTER_RECOVERY_V1\\.md/DISASTER_RECOVERY_V2.md/g' {} \\;"
+    },
+    {
+      "level": 1,
+      "title": "检查归档的skill"
+    },
+    {
+      "level": 1,
+      "title": "从归档恢复（如需要）"
+    },
+    {
+      "level": 1,
+      "title": "cp -r /root/.openclaw/workspace/skills/.archive_management-rules-enforcer/* \\"
+    },
+    {
+      "level": 1,
+      "title": "/root/.openclaw/workspace/skills/management-rules-enforcer/"
+    },
+    {
+      "level": 3,
+      "title": "中优先级（P1）- 计划修复"
+    },
+    {
+      "level": 3,
+      "title": "低优先级（P2）- 后续优化"
+    },
+    {
+      "level": 2,
+      "title": "📈 健康度评估"
+    },
+    {
+      "level": 3,
+      "title": "当前评分: 62.3/100 🟠"
+    },
+    {
+      "level": 2,
+      "title": "📋 修复任务清单"
+    },
+    {
+      "level": 3,
+      "title": "立即执行（本周日晨会前）"
+    },
+    {
+      "level": 3,
+      "title": "本周内完成"
+    },
+    {
+      "level": 3,
+      "title": "持续监控"
+    },
+    {
+      "level": 2,
+      "title": "📝 检查方法说明"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "1. 创建关键缺失文档的软链接或重定向",
+    "2. 引入版本管理规范",
+    "2. 批量修复引用路径",
+    "高影响引用（Top 10）",
+    "3. 定期清理失效引用",
+    "1. 标准化文档路径",
+    "失效Skill引用（Top 10）",
+    "2. 建立文档迁移指南",
+    "1. 建立自动化检查流程",
+    "3. 恢复或重建归档的Skill"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/notion_sync_old/notion_sync_conservative.py",
+  "filename": "notion_sync_conservative.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "0435614edba6b423",
+  "content_length": 17074,
+  "ingested_at": "2026-03-31T17:27:46.662339",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n简化版Notion同步脚本 - 超保守策略\n目标：同步14个核心文档到Notion，确保100%成功率\n\"\"\"\nimport os\nimport sys\nimport time\nimport json\nimport requests\nfrom pathlib import Path\nfrom datetime import datetime\n\n# 配置\nNOTION_TOKEN = \"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\"\nPARENT_PAGE_ID = \"31fa8a0e-2bba-81fa-b98a-d61da835051e\"\nWORKSPACE_DIR = \"/root/.openclaw/workspace\"\nREPORT_PATH = f\"{WORKSPACE_DIR}/docs/NOTION_SYNC_FINAL_REPORT.md\"\n\n# 超时设置（秒）\nCONNECT_TIMEOUT = 30\nREAD_TIMEOUT = 60\n\n# 间隔设置（秒）\n",
+  "limitations_applied": []
+}

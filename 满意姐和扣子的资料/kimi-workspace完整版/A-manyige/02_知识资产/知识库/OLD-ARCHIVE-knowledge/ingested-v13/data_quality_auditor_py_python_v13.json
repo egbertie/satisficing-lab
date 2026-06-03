@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/data-quality-auditor/scripts/data_quality_auditor.py",
+  "filename": "data_quality_auditor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e64c210d2b4276af",
+  "content_length": 26152,
+  "ingested_at": "2026-03-31T17:27:45.389539",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\ndata_quality_auditor.py - 数据质量审计核心模块\nS1-S7 全标准实现\n\nAuthor: Satisficing Institute\nVersion: 2.0.0\n\"\"\"\n\nimport os\nimport re\nimport json\nimport yaml\nimport logging\nimport hashlib\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import Dict, List, Any, Optional, Tuple\nfrom dataclasses import dataclass, asdict\nimport pandas as pd\nimport numpy as np\n\n\n@dataclass\nclass QualityIssue:\n    \"\"\"质量问题记录\"\"\"\n    dimension: str           # 维度: completeness, a",
+  "limitations_applied": []
+}

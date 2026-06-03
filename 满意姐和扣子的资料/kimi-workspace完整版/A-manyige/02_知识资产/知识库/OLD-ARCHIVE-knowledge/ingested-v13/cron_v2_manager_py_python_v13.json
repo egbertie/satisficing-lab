@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/cron_v2_manager.py",
+  "filename": "cron_v2_manager.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "920e76828845b199",
+  "content_length": 5406,
+  "ingested_at": "2026-03-31T17:27:46.189948",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nCron V2.0 动态配置管理器\n根据Token状态自动调整任务频率\n\"\"\"\n\nimport json\nimport subprocess\nimport sys\nfrom datetime import datetime\n\n# Token状态分层配置\nTOKEN_LEVELS = {\n    \"L5\": {\"min\": 70, \"max\": 100, \"desc\": \"正常运营\"},\n    \"L4\": {\"min\": 50, \"max\": 70, \"desc\": \"轻度节省\"},\n    \"L3\": {\"min\": 30, \"max\": 50, \"desc\": \"中度节省\"},\n    \"L2\": {\"min\": 15, \"max\": 30, \"desc\": \"严格节省\"},\n    \"L1\": {\"min\": 0, \"max\": 15, \"desc\": \"紧急模式\"}\n}\n\n# 任务配置模板\nJOB_TEMPLATES = {\n    \"morning-report\": {\n        \"description\": \"晨间",
+  "limitations_applied": []
+}

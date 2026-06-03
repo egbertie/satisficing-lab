@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/quality-assurance/scripts/qa-adversarial-test.sh",
+  "filename": "qa-adversarial-test.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "6fd1496092c0fa56",
+  "content_length": 13337,
+  "ingested_at": "2026-03-31T17:27:45.001768",
+  "content_preview": "#!/bin/bash\n#\n# Adversarial Testing Script for Quality Assurance\n# S7: 对抗测试 - 故意植入错误并测试发现率\n#\n# 使用方式:\n#   ./qa-adversarial-test.sh           # 运行完整测试套件\n#   ./qa-adversarial-test.sh --quick   # 快速测试\n#   ./qa-adversarial-test.sh --report  # 生成报告\n#\n\nset -e\n\n# 配置\nSCRIPT_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nSKILL_DIR=\"$(dirname \"$SCRIPT_DIR\")\"\nWORKSPACE=\"/root/.openclaw/workspace\"\nREPORT_DIR=\"$WORKSPACE/reports/qa/adversarial\"\nTEST_DIR=\"/tmp/qa-adversarial-test-$$\"\nTIMESTAMP=$(date +%Y%",
+  "limitations_applied": []
+}

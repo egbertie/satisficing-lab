@@ -1,0 +1,66 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/universal-task-executor-v3/integration/auto_ingest.py",
+  "filename": "auto_ingest.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 20510,
+  "checksum": "981bf51c7707d365",
+  "ingested_at": "2026-03-31T17:30:32.668131",
+  "line_count": 576,
+  "title": "auto_ingest",
+  "description": "Auto Ingest - 自动入库触发器\n集成super-knowledge-ingest Skill到Universal Task Executor V3.0\n\n职责：\n1. 每处理完任务自动触发入库\n2. 支持配置化入库策略\n3. 入库失败自动重试\n4. 与TaskEngine生命周期集成",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: IngestTrigger"
+    },
+    {
+      "level": 2,
+      "title": "Class: IngestStrategy"
+    },
+    {
+      "level": 2,
+      "title": "Class: IngestPolicy"
+    },
+    {
+      "level": 2,
+      "title": "Class: IngestRecord"
+    },
+    {
+      "level": 2,
+      "title": "Class: AutoIngestor"
+    }
+  ],
+  "entities": [
+    {
+      "name": "IngestTrigger",
+      "type": "class"
+    },
+    {
+      "name": "IngestStrategy",
+      "type": "class"
+    },
+    {
+      "name": "IngestPolicy",
+      "type": "class"
+    },
+    {
+      "name": "IngestRecord",
+      "type": "class"
+    },
+    {
+      "name": "AutoIngestor",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "选择性入库规则（当strategy=SELECTIVE时使用）",
+    "如果是新的任务，先处理之前的队列",
+    "如果达到批大小，立即处理",
+    "从task.extra中获取输出文件",
+    "从task_result.output中获取",
+    "检查report中的文件"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

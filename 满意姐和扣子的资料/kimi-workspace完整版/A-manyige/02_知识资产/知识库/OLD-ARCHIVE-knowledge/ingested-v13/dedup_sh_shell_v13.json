@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/file_management_suite/dedup.sh",
+  "filename": "dedup.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "48296696da5a2163",
+  "content_length": 3740,
+  "ingested_at": "2026-03-31T17:27:46.220166",
+  "content_preview": "#!/bin/bash\n#\n# dedup.sh - 重复文件检测与处理\n# 功能: 扫描重复文件，生成处理建议\n# 用法: ./dedup.sh [--action=report|link|delete]\n\nset -e\n\nACTION=\"${1:-report}\"  # report, link, delete\nWORKSPACE=\"/root/.openclaw/workspace\"\nMIN_SIZE=\"1k\"  # 最小文件大小\n\necho \"🔍 重复文件检测\"\necho \"模式: $ACTION\"\necho \"扫描路径: $WORKSPACE\"\necho \"\"\n\n# 创建临时文件\nTMP_DIR=$(mktemp -d)\nHASH_FILE=\"$TMP_DIR/hashes.txt\"\nDUP_FILE=\"$TMP_DIR/duplicates.txt\"\nREPORT_FILE=\"$WORKSPACE/docs/DUPLICATE_REPORT_$(date +%Y%m%d_%H%M%S).md\"\n\ntrap \"rm -rf $TMP_DIR\" EXIT\n\necho \"→ 正在",
+  "limitations_applied": []
+}

@@ -1,0 +1,67 @@
+# 咨询行业配置
+
+# 行业模板标识
+industry_template: "consulting"
+
+# 财务阈值
+monthly_living_expenses: 10000  # 月生活费（元）
+emergency_fund_months: 6
+
+# 提醒时段
+reminder_hours:
+  morning: 9
+  afternoon: 15
+  evening: 19
+
+# 健康阈值
+max_continuous_work_hours: 4
+min_sleep_hours: 7
+min_weekly_exercise: 3
+
+# 自定义关键词（咨询专用）
+business_keywords:
+  - 咨询
+  - 项目
+  - 客户
+  - 方案
+  - 交付
+  - 案例
+  - 知识
+  - 行研
+
+# 外部系统集成
+integrations:
+  calendar:
+    google_calendar:
+      enabled: false
+      api_key: ""
+      calendar_id: ""
+      sync_direction: "bidirectional"
+    outlook:
+      enabled: false
+      api_key: ""
+      sync_direction: "bidirectional"
+
+  knowledge_management:
+    notion:
+      enabled: false
+      api_key: ""
+      database_id: ""
+      sync_direction: "bidirectional"
+
+# 智能决策配置
+ai_decisions:
+  enabled: true
+  auto_analysis_frequency: "weekly"
+  project_optimization_enabled: true
+  knowledge_suggestion_enabled: true
+  client_insight_enabled: true
+
+# 咨询专用配置
+project_management:
+  default_project_duration: 30  # 默认项目周期（天）
+  hourly_rate: 500  # 小时费率（元）
+  followup_frequency: 90  # 客户回访周期（天）
+
+# 其他配置
+default_timezone: Asia/Shanghai

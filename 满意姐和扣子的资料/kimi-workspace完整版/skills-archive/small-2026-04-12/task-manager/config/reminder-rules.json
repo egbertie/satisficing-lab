@@ -1,0 +1,97 @@
+{
+  "version": "1.0",
+  "created_at": "2026-03-10",
+  "reminder_rules": {
+    "deadline_reminders": [
+      {
+        "name": "24小时预警",
+        "hours_before": 24,
+        "message_template": "⏰ 任务提醒：'{task_name}' 将在24小时后到期（{deadline}），当前进度{progress}%",
+        "channels": ["console", "memory"],
+        "enabled": true
+      },
+      {
+        "name": "当天早上提醒",
+        "hours_before": 0,
+        "time": "09:00",
+        "message_template": "📅 今日任务：'{task_name}' 今天截止，请确保按时完成",
+        "channels": ["console", "memory", "morning_report"],
+        "enabled": true
+      },
+      {
+        "name": "逾期立即提醒",
+        "trigger": "overdue",
+        "message_template": "🚨 任务逾期：'{task_name}' 已逾期，请立即补救并报告",
+        "channels": ["console", "memory"],
+        "urgent": true,
+        "enabled": true
+      }
+    ],
+    "forgotten_scan": {
+      "enabled": true,
+      "frequency": "daily",
+      "time": "08:00",
+      "scan_depth_days": 7,
+      "message_template": "⚠️ 遗忘任务扫描发现 {count} 个被遗忘的任务，请查看TASK_MASTER.md"
+    },
+    "status_change_notifications": {
+      "enabled": true,
+      "notify_on": ["已完成", "已阻塞", "已取消"],
+      "message_template": "任务 '{task_name}' 状态变更为 {new_status}"
+    }
+  },
+  "priority_rules": {
+    "P0-紧急": {
+      "color": "🔴",
+      "response_time": "immediate",
+      "escalation": true
+    },
+    "P1-高优": {
+      "color": "🟠",
+      "response_time": "same_day",
+      "escalation": false
+    },
+    "P2-正常": {
+      "color": "🟡",
+      "response_time": "next_day",
+      "escalation": false
+    },
+    "P3-低优": {
+      "color": "🟢",
+      "response_time": "when_available",
+      "escalation": false
+    }
+  },
+  "report_schedule": {
+    "morning_report": {
+      "enabled": true,
+      "time": "09:00",
+      "format": "markdown",
+      "output_path": "memory/晨报_{{DATE}}.md"
+    },
+    "daily_report": {
+      "enabled": true,
+      "time": "23:59",
+      "format": "markdown",
+      "output_path": "memory/{{DATE}}.md"
+    },
+    "weekly_report": {
+      "enabled": true,
+      "day": "sunday",
+      "time": "23:00",
+      "format": "markdown"
+    }
+  },
+  "escalation_rules": {
+    "overdue_tasks": {
+      "notify_after_hours": 24,
+      "escalate_to": "Egbertie",
+      "message": "任务 '{task_name}' 已逾期24小时，需要关注"
+    },
+    "blocked_tasks": {
+      "notify_immediately": true,
+      "escalate_to": "Egbertie",
+      "message": "任务 '{task_name}' 遇到阻塞，需要决策支持"
+    }
+  }
+}

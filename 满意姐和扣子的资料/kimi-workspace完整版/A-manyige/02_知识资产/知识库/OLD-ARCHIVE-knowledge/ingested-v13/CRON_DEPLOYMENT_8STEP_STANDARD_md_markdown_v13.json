@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/docs/CRON_DEPLOYMENT_8STEP_STANDARD.md",
+  "filename": "CRON_DEPLOYMENT_8STEP_STANDARD.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "a890f464195ade4f",
+  "content_length": 4870,
+  "ingested_at": "2026-03-31T17:27:44.876211",
+  "content_preview": "# Cron部署8步验证标准 V1.0\n\n> **配置≠完成，验证才是终点。**\n\n## 核心原则\n\n**配置只是开始，验证才是完成。**\n\n任何cron任务的部署必须经过8步验证，才能从\"配置中\"状态转为\"已完成\"状态。\n\n---\n\n## 8步验证流程\n\n### 第1步：配置写入验证 ✅\n\n**目标**：确认配置已正确写入系统\n\n**检查项**：\n- [ ] Cron表达式已写入crontab/系统\n- [ ] 配置文件已保存到正确路径\n- [ ] 文件格式符合要求（JSON/YAML/Shell等）\n\n**验证命令**：\n```bash\n# 检查crontab\ncrontab -l | grep \"任务标识\"\n\n# 检查配置文件\nls -la /path/to/config/file\ncat /path/to/config/file\n```\n\n**通过标准**：配置内容存在且可读取\n\n---\n\n### 第2步：语法检查通过 ✅\n\n**目标**：确认配置语法正确，无格式错误\n\n**检查项**：\n- [ ] Cron表达式语法正确（5/6字段格式）\n- [ ] JSON/YAML配置文",
+  "limitations_applied": []
+}

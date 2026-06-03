@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/check_notion_status.sh",
+  "filename": "check_notion_status.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "1d5632fe50b2854c",
+  "content_length": 2235,
+  "ingested_at": "2026-03-31T17:27:46.169708",
+  "content_preview": "#!/bin/bash\n# 生成Notion同步状态报告\n\necho \"========================================\"\necho \"📊 Notion 同步状态报告\"\necho \"========================================\"\necho \"生成时间: $(date '+%Y-%m-%d %H:%M:%S')\"\necho \"\"\n\n# 统计本地文件\necho \"📁 本地文件统计:\"\nTOTAL=$(find /root/.openclaw/workspace -type f \\( -name \"*.md\" -o -name \"*.html\" -o -name \"*.py\" -o -name \"*.json\" -o -name \"*.txt\" -o -name \"*.js\" -o -name \"*.css\" -o -name \"*.yml\" -o -name \"*.yaml\" \\) ! -path \"*/.git/*\" ! -path \"*/node_modules/*\" | wc -l)\necho \"  • 总文件数: ",
+  "limitations_applied": []
+}

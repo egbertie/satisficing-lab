@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/openclaw-state.sh",
+  "filename": "openclaw-state.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "f8c9483b89689a44",
+  "content_length": 3604,
+  "ingested_at": "2026-03-31T17:27:46.145295",
+  "content_preview": "#!/bin/bash\n# Claw状态管理工具\n# 用法: openclaw-state {list|restore|clean|summary}\n\nCOMMAND=$1\nCHECKPOINT_DIR=\"$HOME/.openclaw/immortal-state/checkpoints\"\n\nmkdir -p \"$CHECKPOINT_DIR\"\n\ncase $COMMAND in\n    list|ls)\n        echo \"📂 可用检查点 (最多20个):\"\n        echo \"\"\n        ls -t \"$CHECKPOINT_DIR\"/*.meta 2>/dev/null | head -20 | while read metafile; do\n            basename=$(basename \"$metafile\" .meta)\n            if [ -f \"$CHECKPOINT_DIR/${basename}.tar.gz\" ]; then\n                # 解析元数据\n                py",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/quality-assurance/.github/workflows/quality-assurance.yml",
+  "filename": "quality-assurance.yml",
+  "file_type": "yaml",
+  "extension": ".yml",
+  "file_hash": "52d2880528a4d452",
+  "content_length": 7760,
+  "ingested_at": "2026-03-31T17:27:45.000350",
+  "content_preview": "name: Quality Assurance Pipeline\n\non:\n  push:\n    branches: [main, develop, feature/*]\n  pull_request:\n    branches: [main, develop]\n  schedule:\n    - cron: '0 2 * * 0'  # 每周日凌晨2点\n  workflow_dispatch:\n\njobs:\n  # 阶段1: 预检查\n  precheck:\n    name: 预检查\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      \n      - name: Setup Python\n        uses: actions/setup-python@v5\n        with:\n          python-version: '3.12'\n      \n      - name: Install dependencies\n        run: |\n     ",
+  "limitations_applied": []
+}

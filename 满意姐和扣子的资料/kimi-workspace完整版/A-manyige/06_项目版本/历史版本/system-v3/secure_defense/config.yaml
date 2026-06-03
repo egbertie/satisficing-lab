@@ -1,0 +1,70 @@
+# Secure Defense 四层防御 配置
+# 四层安全防御系统
+# 命名空间: NGT-SECURE-v1.0-FIN-260327
+
+version: "1.0"
+description: "零信任四层纵深防御体系"
+
+security_zones:
+  # Zone 0: 公共区（完全开放）
+  zone_0_public:
+    access: "unrestricted"
+    content: ["README", "INDEX", "公开文档"]
+    
+  # Zone 1: 标准操作区（需身份验证）
+  zone_1_standard:
+    access: "authenticated"
+    content: ["日常技能", "一般文档", "公开知识库"]
+    controls:
+      - "身份验证"
+      - "操作日志"
+      
+  # Zone 2: 敏感区（需额外授权）
+  zone_2_sensitive:
+    access: "authorized"
+    content: ["专家档案", "客户数据", "商业计划"]
+    controls:
+      - "多重验证"
+      - "最小权限"
+      - "审计日志"
+      
+  # Zone 3: 隔离区（物理隔离）
+  zone_3_isolated:
+    access: "air_gapped"
+    content: ["核心算法", "私钥", "最敏感数据"]
+    controls:
+      - "完全隔离"
+      - "Shamir分片"
+      - "人工审批"
+
+shamir_secret_sharing:
+  # Shamir秘密共享配置
+  threshold: 3
+  total_shares: 5
+  key_fragments:
+    - location: "本地加密存储"
+    - location: "飞书云盘"
+    - location: "企微文档"
+    - location: "GitHub Secrets"
+    - location: "纸质备份（物理）"
+
+git_hooks_security:
+  # Git Hooks防泄漏
+  pre_commit:
+    - "扫描敏感关键词（API Key/Token）"
+    - "检查大文件（>10MB）"
+    - "验证文件权限"
+    
+  pre_push:
+    - "检查私有文件未提交"
+    - "验证远程仓库权限"
+
+# 审计日志
+audit_logging:
+  events:
+    - "file_access"
+    - "config_change"
+    - "authentication"
+    - "authorization_failure"
+  retention: "90d"
+  format: "json"

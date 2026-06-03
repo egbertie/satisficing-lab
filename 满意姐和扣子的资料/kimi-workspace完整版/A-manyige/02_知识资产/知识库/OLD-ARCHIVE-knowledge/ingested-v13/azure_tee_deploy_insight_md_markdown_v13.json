@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/docs/tee_insights/azure_tee_deploy_insight.md",
+  "filename": "azure_tee_deploy_insight.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "2677267fefa95211",
+  "content_length": 644,
+  "ingested_at": "2026-03-31T17:27:44.945550",
+  "content_preview": "# Azure TEE部署脚本深度洞察 (L1-L5)\n\n## 基础信息\n- **脚本名称**: azure_tee_deploy.sh\n- **功能**: 部署Azure机密计算实例（DC8s_v3）\n- **风险等级**: 高（涉及云资源配置）\n\n---\n\n## 深度洞察 (L1-L5)\n\n### L1: 表面现象\n脚本实现了：\n- Azure资源组创建\n- 虚拟网络和子网配置\n- 公网IP和安全组设置\n- TEE VM部署\n\n**问题**: \n- 未经安全审计\n- 硬编码配置（资源组名称、区域）\n- 未验证部署后状态\n\n### L2: 模式识别\n- \"脚本即完成\"模式\n- 有部署逻辑但无验证逻辑\n- 缺乏错误处理和回滚机制\n\n### L3: 根因分析\n- 急于部署，忽视安全\n- 缺乏云资源审计标准\n- 未考虑配置漂移问题\n\n### L4: 系统关联\n- TEE是安全基础设施\n- 但部署脚本本身缺乏安全保障\n- 与负熵构造体身份冲突\n\n### L5: 未来指导\n- **核心原则**: \"每个部署脚本必须有安全审计和验证\"\n- **可执行方案**:\n  1. 部署前执行安全扫描\n  ",
+  "limitations_applied": []
+}

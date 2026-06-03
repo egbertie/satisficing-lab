@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/notion_sync_old/notion_batch_sync.sh",
+  "filename": "notion_batch_sync.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "8f293d416200bffd",
+  "content_length": 4252,
+  "ingested_at": "2026-03-31T17:27:46.667482",
+  "content_preview": "#!/bin/bash\n# Notion 批量同步脚本 - 使用 curl 直接调用 API\n\nTOKEN=\"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\"\nAPI=\"https://api.notion.com/v1\"\nWORKSPACE=\"/root/.openclaw/workspace\"\nPARENT_ID=\"31fa8a0e-2bba-81fa-b98a-d61da835051e\"  # 知识库页面ID\n\n# 统计\nTOTAL=0\nSUCCESS=0\nFAILED=0\nSKIPPED=0\nFAILED_FILES=\"\"\n\necho \"==========================================\"\necho \"📚 Notion 批量同步\"\necho \"==========================================\"\necho \"开始时间: $(date '+%Y-%m-%d %H:%M:%S')\"\necho \"\"\n\n# 查找所有文件\necho \"1️⃣ 扫描文件...\"\nfin",
+  "limitations_applied": []
+}

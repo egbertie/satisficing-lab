@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/zombie-hunter.sh",
+  "filename": "zombie-hunter.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "7659743d2c3e3114",
+  "content_length": 1773,
+  "ingested_at": "2026-03-31T17:27:46.140307",
+  "content_preview": "#!/bin/bash\n# Zombie Hunter - 僵尸进程清理\n# 运行频率: 每15分钟\n\nSENTINEL_LOG_DIR=\"/var/log/sentinel\"\nTIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')\n\nlog() {\n    echo \"[$TIMESTAMP] $1\" >> \"$SENTINEL_LOG_DIR/zombie-hunter.log\"\n}\n\n# 查找并清理僵尸进程\nhunt_zombies() {\n    log \"INFO: 开始僵尸进程扫描\"\n    \n    # 获取僵尸进程列表\n    local zombies=$(ps aux | awk '$8 ~ /^Z/ {print $2, $11}' 2>/dev/null)\n    \n    if [ -z \"$zombies\" ]; then\n        log \"OK: 未发现僵尸进程\"\n        return 0\n    fi\n    \n    log \"WARN: 发现僵尸进程:\"\n    echo \"$zombies\" | while r",
+  "limitations_applied": []
+}

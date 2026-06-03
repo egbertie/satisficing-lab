@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/five-level-verification/scripts/adversarial_test.py",
+  "filename": "adversarial_test.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e116ee90e6765cb4",
+  "content_length": 8877,
+  "ingested_at": "2026-03-31T17:27:45.468279",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nS7: Adversarial Testing Module\n对抗测试 - 故意植入错误测试各级发现率\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport tempfile\nimport shutil\nfrom pathlib import Path\nfrom typing import Dict, List, Tuple\nfrom datetime import datetime\n\n# 对抗测试用例定义\nADVERSARIAL_TESTS = {\n    \"L1\": [\n        {\n            \"name\": \"missing_skill_md\",\n            \"description\": \"删除SKILL.md文件\",\n            \"error_type\": \"文件缺失\",\n            \"target_level\": \"L1\"\n        },\n        {\n            \"name\": \"missing_confi",
+  "limitations_applied": []
+}

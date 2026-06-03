@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/generate_morning_report.sh",
+  "filename": "generate_morning_report.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "bbf4003a7b637213",
+  "content_length": 483,
+  "ingested_at": "2026-03-31T17:27:46.158134",
+  "content_preview": "#!/bin/bash\n# 每日晨报生成自动化脚本\n# 用法: ./generate_morning_report.sh [日期，默认为今天]\n\nSCRIPT_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nWORKSPACE_DIR=\"/root/.openclaw/workspace\"\nDATE=${1:-$(date +%Y-%m-%d)}\n\necho \"🌅 满意解晨报生成脚本\"\necho \"======================\"\necho \"日期: $DATE\"\necho \"\"\n\ncd \"$SCRIPT_DIR\" || exit 1\n\n# 运行生成器\npython3 daily_morning_report_generator.py --date \"$DATE\" --print\n\necho \"\"\necho \"======================\"\necho \"✅ 晨报生成完成\"\necho \"📁 输出位置: A满意哥专属文件夹/01_🔥今日重点/晨报_${DATE}.md\"\n",
+  "limitations_applied": []
+}

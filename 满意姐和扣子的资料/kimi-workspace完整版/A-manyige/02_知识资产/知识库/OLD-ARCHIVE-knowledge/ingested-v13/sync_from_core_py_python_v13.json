@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/sync_from_core.py",
+  "filename": "sync_from_core.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "f8ef2d2c9858f11e",
+  "content_length": 6532,
+  "ingested_at": "2026-03-31T17:27:46.170228",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n满意解知识管理系统 - 同步脚本\n从Core定义自动生成Working文档\n\n使用方式:\n  python3 scripts/sync_from_core.py\n\n功能:\n  1. 读取core/*.yaml定义\n  2. 生成/更新working/*.md文档\n  3. 确保全局一致性\n\"\"\"\n\nimport yaml\nimport re\nfrom datetime import datetime\nfrom pathlib import Path\n\n# 路径配置\nCORE_DIR = Path(\"core\")\nWORKING_DIR = Path(\"A满意哥专属文件夹/02_✅成果交付\")\nBACKUP_DIR = Path(\"A满意哥专属文件夹/03_📋历史版本\")\n\nclass KnowledgeSync:\n    def __init__(self):\n        self.core_data = {}\n        self.changes = []\n        \n    def load_core(self):",
+  "limitations_applied": []
+}

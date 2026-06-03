@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/runtime_verification.py",
+  "filename": "runtime_verification.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "3647f95f7141711e",
+  "content_length": 4001,
+  "ingested_at": "2026-03-31T17:27:46.163606",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n运行时验证脚本\n验证所有Skill可运行，生成验证报告\n\n质量第一：实际运行验证，非静态检查\n\"\"\"\n\nimport subprocess\nimport sys\nfrom pathlib import Path\nfrom typing import Dict, List, Tuple\n\n# 待验证的Skill列表\nSKILLS_TO_VERIFY = [\n    (\"checkpoint-manager\", \"checkpoint_manager.py\"),\n    (\"blackboard-manager\", \"blackboard_manager.py\"),\n    (\"worker-orchestrator\", \"worker_orchestrator.py\"),\n]\n\n\ndef verify_skill(skill_name: str, module_name: str) -> Tuple[bool, str]:\n    \"\"\"\n    验证单个Skill\n    \n    Returns:\n        (成功, 消息)",
+  "limitations_applied": []
+}

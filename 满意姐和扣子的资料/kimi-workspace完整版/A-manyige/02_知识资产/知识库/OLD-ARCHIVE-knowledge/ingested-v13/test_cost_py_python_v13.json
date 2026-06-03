@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/cost-redlines/test_cost.py",
+  "filename": "test_cost.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "41955db11e3b1086",
+  "content_length": 354,
+  "ingested_at": "2026-03-31T17:27:45.332370",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\ncost-redlines测试\n\"\"\"\n\nimport unittest\nfrom pathlib import Path\n\n\nclass TestCostRedlines(unittest.TestCase):\n    \"\"\"成本红线测试\"\"\"\n    \n    def test_skill_exists(self):\n        \"\"\"测试存在\"\"\"\n        skill_dir = Path(__file__).parent\n        self.assertTrue(skill_dir.exists())\n\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+  "limitations_applied": []
+}

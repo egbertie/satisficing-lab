@@ -1,0 +1,223 @@
+{
+  "source_path": "/root/.openclaw/workspace/archive/docs/2026-03/WORKSPACE_ORGANIZATION_RULES.md",
+  "filename": "WORKSPACE_ORGANIZATION_RULES.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 20510,
+  "checksum": "58fa11d122b5b191",
+  "ingested_at": "2026-03-31T17:30:17.022158",
+  "line_count": 638,
+  "title": "工作空间组织规则 (WORKSPACE_ORGANIZATION_RULES)",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "工作空间组织规则 (WORKSPACE_ORGANIZATION_RULES)"
+    },
+    {
+      "level": 2,
+      "title": "一、文件夹命名规范"
+    },
+    {
+      "level": 3,
+      "title": "1.1 基本原则"
+    },
+    {
+      "level": 3,
+      "title": "1.2 保留的核心文件夹"
+    },
+    {
+      "level": 3,
+      "title": "1.3 禁止创建的一级文件夹"
+    },
+    {
+      "level": 2,
+      "title": "二、文件存放规则"
+    },
+    {
+      "level": 3,
+      "title": "2.1 一级目录文件限制"
+    },
+    {
+      "level": 3,
+      "title": "2.2 文件分类存放"
+    },
+    {
+      "level": 3,
+      "title": "2.3 命名冲突解决"
+    },
+    {
+      "level": 1,
+      "title": "合并前"
+    },
+    {
+      "level": 1,
+      "title": "合并后"
+    },
+    {
+      "level": 2,
+      "title": "三、定期清理机制"
+    },
+    {
+      "level": 3,
+      "title": "3.1 清理频率"
+    },
+    {
+      "level": 3,
+      "title": "3.2 清理检查清单"
+    },
+    {
+      "level": 1,
+      "title": "1. 检查空文件夹"
+    },
+    {
+      "level": 1,
+      "title": "2. 检查大文件（>10MB）"
+    },
+    {
+      "level": 1,
+      "title": "3. 检查重复文件（按名称）"
+    },
+    {
+      "level": 1,
+      "title": "4. 检查松散文件"
+    },
+    {
+      "level": 1,
+      "title": "目标: < 30 个"
+    },
+    {
+      "level": 3,
+      "title": "3.3 自动清理脚本"
+    },
+    {
+      "level": 1,
+      "title": "workspace-cleanup.sh - 工作空间自动清理脚本"
+    },
+    {
+      "level": 1,
+      "title": "1. 删除空文件夹（排除.git）"
+    },
+    {
+      "level": 1,
+      "title": "2. 清理旧日志（保留30天）"
+    },
+    {
+      "level": 1,
+      "title": "3. 清理临时文件"
+    },
+    {
+      "level": 1,
+      "title": "4. 生成清理报告"
+    },
+    {
+      "level": 2,
+      "title": "四、禁止事项"
+    },
+    {
+      "level": 3,
+      "title": "4.1 严禁行为"
+    },
+    {
+      "level": 3,
+      "title": "4.2 谨慎操作"
+    },
+    {
+      "level": 3,
+      "title": "4.3 推荐操作"
+    },
+    {
+      "level": 1,
+      "title": "✅ 删除前备份"
+    },
+    {
+      "level": 1,
+      "title": "✅ 使用 trash 而非 rm"
+    },
+    {
+      "level": 1,
+      "title": "✅ 批量操作前测试"
+    },
+    {
+      "level": 1,
+      "title": "✅ 记录变更"
+    },
+    {
+      "level": 2,
+      "title": "五、新增内容规范"
+    },
+    {
+      "level": 3,
+      "title": "5.1 新增文件夹流程"
+    },
+    {
+      "level": 3,
+      "title": "5.2 新增文件流程"
+    },
+    {
+      "level": 2,
+      "title": "六、故障恢复"
+    },
+    {
+      "level": 3,
+      "title": "6.1 备份位置"
+    },
+    {
+      "level": 3,
+      "title": "6.2 恢复命令"
+    },
+    {
+      "level": 1,
+      "title": "恢复特定文件"
+    },
+    {
+      "level": 1,
+      "title": "恢复整个目录"
+    },
+    {
+      "level": 2,
+      "title": "七、文件生命周期管理（新增）"
+    },
+    {
+      "level": 3,
+      "title": "7.1 文件流转标准流程"
+    },
+    {
+      "level": 3,
+      "title": "7.2 暂存区规范"
+    },
+    {
+      "level": 3,
+      "title": "7.3 文件处理SOP"
+    },
+    {
+      "level": 4,
+      "title": "下载文件处理流程"
+    },
+    {
+      "level": 1,
+      "title": "Step 1: 每日检查downloads目录"
+    },
+    {
+      "level": 1,
+      "title": "Step 2: 将新文件移入暂存区"
+    },
+    {
+      "level": 1,
+      "title": "Step 3: 分类决策"
+    },
+    {
+      "level": 1,
+      "title": "- 临时文件 → staging/temp/ → 7天后删除"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "允许保留的一级文件",
+    "创建 README.md"
+  ],
+  "limitations_applied": [
+    "Sections limited to 50"
+  ],
+  "content_truncated": false
+}

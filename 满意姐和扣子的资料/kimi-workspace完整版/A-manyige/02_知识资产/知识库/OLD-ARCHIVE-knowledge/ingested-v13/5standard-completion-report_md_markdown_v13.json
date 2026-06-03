@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/dormancy-protocol/5standard-completion-report.md",
+  "filename": "5standard-completion-report.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "b105927a607a9646",
+  "content_length": 7369,
+  "ingested_at": "2026-03-31T17:27:45.476034",
+  "content_preview": "# Dormancy-Protocol 5标准化完成报告\n\n**报告日期**: 2026-03-27  \n**版本**: V1.0  \n**状态**: ✅ 已完成 (S1-S7)  \n\n---\n\n## 执行摘要\n\nDormancy-Protocol系统已完成5标准化(S1-S7)全面实现，成功达成以下目标：\n\n| 目标 | 状态 | 实现方式 |\n|------|------|----------|\n| 10分钟无交互自动休眠 | ✅ 已实现 | IDLE_THRESHOLD=600s, Cron每分钟检测 |\n| 即时唤醒响应 | ✅ 已实现 | 目标<100ms, 实测平均72ms |\n| S1-S7标准化 | ✅ 已完成 | 全部7项标准均已实现 |\n\n---\n\n## S1: 全局考虑 ✅\n\n### 1.1 人的维度 - 用户体验\n\n**休眠对用户等待体验的影响分析**:\n\n| 场景 | 影响 | 缓解策略 |\n|------|------|----------|\n| 短休眠(<1h) | 无感知 | 直接响应，不提示 |\n| 中长休眠(1-6h) | 轻微 | 附带\"欢迎回来\"",
+  "limitations_applied": []
+}

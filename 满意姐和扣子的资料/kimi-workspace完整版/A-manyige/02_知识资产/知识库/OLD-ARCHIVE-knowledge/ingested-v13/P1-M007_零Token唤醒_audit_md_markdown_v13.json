@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/category6_deep_audit/p1/P1-M007_零Token唤醒_audit.md",
+  "filename": "P1-M007_零Token唤醒_audit.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "1591c1ff3520ce80",
+  "content_length": 1373,
+  "ingested_at": "2026-03-31T17:27:46.091446",
+  "content_preview": "# P1-M007 审计报告: 零Token唤醒机制\n**审计时间**: 2026-03-31 12:01  \n**审计员**: 蓝军整改后全覆盖审计子代理  \n**审计标准**: P0标准应用于P1\n\n---\n\n## 审计对象\n- **机制名称**: 零Token唤醒\n- **核心理念**: 本地状态永生，写入文件，不依赖上下文\n- **目标**: 系统重启后自动恢复，零Token消耗\n\n## 文件存在性检查\n\n| 检查项 | 路径 | 状态 |\n|--------|------|------|\n| SOUL.md定义 | SOUL.md | ✅ 存在 |\n| Checkpoint机制 | memory/system_state_checkpoint.json | ✅ 存在 |\n| 恢复脚本 | scripts/system_restart_recovery.py | ✅ 存在 |\n| 自检清单 | checklists/STARTUP_SELF_CHECK.md | ✅ 存在 |\n\n## 机制组件验证\n\n| 组件 | 路径 | 状态 | 验证结果 |\n|------|------|",
+  "limitations_applied": []
+}

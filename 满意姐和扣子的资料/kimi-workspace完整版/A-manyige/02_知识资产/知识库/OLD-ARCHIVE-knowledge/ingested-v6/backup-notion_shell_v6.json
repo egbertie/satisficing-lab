@@ -1,0 +1,74 @@
+{
+  "source_path": "/root/.openclaw/workspace/disaster-recovery/02-自动化备份脚本/backup-notion.sh",
+  "filename": "backup-notion.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 9994,
+  "checksum": "e78cc4a01a541c17",
+  "ingested_at": "2026-03-31T17:30:47.726223",
+  "line_count": 333,
+  "title": "backup-notion",
+  "description": "###############################################################################",
+  "sections": [],
+  "entities": [
+    {
+      "name": "notion_api",
+      "type": "shell_function"
+    },
+    {
+      "name": "search_all",
+      "type": "shell_function"
+    },
+    {
+      "name": "export_page",
+      "type": "shell_function"
+    },
+    {
+      "name": "convert_to_markdown",
+      "type": "shell_function"
+    },
+    {
+      "name": "export_database",
+      "type": "shell_function"
+    },
+    {
+      "name": "convert_db_to_csv",
+      "type": "shell_function"
+    },
+    {
+      "name": "workspace_export",
+      "type": "shell_function"
+    },
+    {
+      "name": "backup_databases_to_git",
+      "type": "shell_function"
+    },
+    {
+      "name": "cleanup",
+      "type": "shell_function"
+    },
+    {
+      "name": "main",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "###############################################################################",
+    "Notion 数据备份脚本",
+    "功能: 导出所有Notion页面和数据库",
+    "###############################################################################",
+    "创建备份目录",
+    "API请求函数",
+    "搜索所有页面和数据库",
+    "合并结果 (简化处理，实际应使用jq)",
+    "获取下一页cursor",
+    "导出单个页面",
+    "获取页面内容 (block children)",
+    "保存原始JSON",
+    "尝试转换为Markdown (简化版)",
+    "递归导出子页面",
+    "简化的JSON到Markdown转换"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

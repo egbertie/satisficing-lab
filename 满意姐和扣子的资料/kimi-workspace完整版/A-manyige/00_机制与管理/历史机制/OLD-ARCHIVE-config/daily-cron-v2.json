@@ -1,0 +1,165 @@
+{
+  "daily_mode_v2": {
+    "description": "日常模式V2.0配置 - 分层管理，动态频率",
+    "trigger_conditions": {
+      "token_remaining_pct": ">30",
+      "default_mode": true
+    },
+    "task_layers": {
+      "P0_critical": {
+        "description": "生存必需，任何情况下都执行",
+        "daily_token_estimate": 6900,
+        "tasks": [
+          {
+            "name": "token-monitor",
+            "schedule": "0 */4 * * *",
+            "description": "Token监控，每4小时",
+            "token_estimate": 375,
+            "adaptive": false
+          },
+          {
+            "name": "morning-totem",
+            "schedule": "0 9 * * *",
+            "description": "晨间图腾仪式",
+            "token_estimate": 1500,
+            "adaptive": false
+          },
+          {
+            "name": "evening-totem",
+            "schedule": "0 18 * * *",
+            "description": "黄昏图腾归位",
+            "token_estimate": 1500,
+            "adaptive": false
+          },
+          {
+            "name": "state-snapshot",
+            "schedule": "0 */2 * * *",
+            "description": "状态快照保存，每2小时",
+            "token_estimate": 200,
+            "adaptive": false
+          }
+        ]
+      },
+      "P1_important": {
+        "description": "重要功能，工作日执行",
+        "daily_token_estimate": 22000,
+        "workdays_only": true,
+        "tasks": [
+          {
+            "name": "waste-tracker",
+            "schedule": "0 23 * * 1-5",
+            "description": "7浪费追踪，工作日23:00",
+            "token_estimate": 3000,
+            "adaptive": false
+          },
+          {
+            "name": "info-intelligence",
+            "schedule": "0 12,18 * * 1-5",
+            "description": "信息情报，每日12:00+18:00",
+            "token_estimate": 6000,
+            "adaptive": false
+          },
+          {
+            "name": "external-learning",
+            "schedule": "0 22 * * 1-5",
+            "description": "外部学习，工作日22:00",
+            "token_estimate": 5000,
+            "adaptive": false
+          },
+          {
+            "name": "blue-team",
+            "schedule": "0 20 * * 2,6",
+            "description": "蓝军审计，周二/六",
+            "token_estimate": 8000,
+            "adaptive": false
+          }
+        ]
+      },
+      "P2_auxiliary": {
+        "description": "辅助功能，按需/降频执行",
+        "daily_token_estimate": 9800,
+        "tasks": [
+          {
+            "name": "heartbeat",
+            "schedule": "*/30 * * * *",
+            "description": "心跳检查，每30分钟（原10分钟）",
+            "token_estimate": 100,
+            "adaptive": true,
+            "adaptive_rules": {
+              "user_active": "每30分钟",
+              "user_away_1h": "每小时",
+              "user_away_4h": "每2小时",
+              "user_away_8h": "暂停"
+            }
+          },
+          {
+            "name": "disaster-recovery",
+            "schedule": "0 3 * * 3,7",
+            "description": "灾备复刻，周三/日（原每日）",
+            "token_estimate": 3000,
+            "adaptive": false
+          },
+          {
+            "name": "forgotten-tasks",
+            "schedule": "0 10 * * 1-5",
+            "description": "被遗忘任务扫描，工作日",
+            "token_estimate": 2000,
+            "adaptive": false
+          }
+        ]
+      },
+      "P3_optional": {
+        "description": "增值功能，用户触发",
+        "daily_token_estimate": 2000,
+        "trigger_based": true,
+        "tasks": [
+          {
+            "name": "dynamic-authority",
+            "trigger": "user_command",
+            "description": "动态权威切换，用户触发",
+            "token_estimate": "variable",
+            "adaptive": false
+          },
+          {
+            "name": "easter-egg",
+            "schedule": "0 20 * * 2,5",
+            "description": "彩蛋触发，每周2次（原每日）",
+            "token_estimate": 2000,
+            "adaptive": false
+          },
+          {
+            "name": "weather-check",
+            "trigger": "user_query",
+            "description": "天气检查，用户询问时",
+            "token_estimate": "variable",
+            "adaptive": false
+          }
+        ]
+      }
+    },
+    "dynamic_adjustment": {
+      "based_on_token": {
+        ">70%": "正常频率",
+        "30-70%": "P2/P3降频50%",
+        "15-30%": "仅保留P0/P1，进入休眠模式",
+        "<15%": "进入完全静默模式"
+      },
+      "based_on_user_activity": {
+        "active_last_hour": "正常频率",
+        "away_1_4_hours": "降频33%",
+        "away_4_8_hours": "降频50%",
+        "away_8_hours+": "暂停非紧急"
+      }
+    },
+    "daily_token_estimate": {
+      "total": "~40-50K",
+      "original": "~100K",
+      "saving": "50-60%"
+    },
+    "batch_processing": {
+      "enabled": true,
+      "schedule": "12:00,18:00",
+      "description": "午间/晚间简报，聚合多个提醒"
+    }
+  }
+}

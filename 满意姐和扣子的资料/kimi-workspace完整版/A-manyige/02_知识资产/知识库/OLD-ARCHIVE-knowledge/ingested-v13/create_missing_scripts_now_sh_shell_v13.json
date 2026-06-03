@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/create_missing_scripts_now.sh",
+  "filename": "create_missing_scripts_now.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "3ec3c89318e32be9",
+  "content_length": 2140,
+  "ingested_at": "2026-03-31T17:27:46.174958",
+  "content_preview": "#!/bin/bash\n# 立即补全缺失脚本（不是今天内，是现在）\n\necho \"=== 立即补全4个缺失脚本（不是今天内）===\"\necho \"时间: $(date)\"\necho \"\"\n\n# 脚本1: 错误预防检查\ncat > /root/.openclaw/workspace/scripts/error_prevention_check.sh << 'EOF'\n#!/bin/bash\n# 错误预防检查脚本 - 物理化执行\nERRORS=0\necho \"=== 错误预防检查 ===\"\necho \"时间: $(date)\"\n\n# 检查1: 单向沟通\nif [ ! -f \"/tmp/confirmation_received\" ]; then\n    echo \"❌ 未确认双向确认\"\n    ERRORS=$((ERRORS + 1))\nelse\n    echo \"✅ 双向确认已确认\"\nfi\n\n# 检查2: 原则坚持  \nif [ ! -f \"/root/.openclaw/workspace/diary/category6_completed\" ]; then\n    echo \"⚠",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/skill-dev-dashboard/skill_dev_dashboard.py",
+  "filename": "skill_dev_dashboard.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "f48e3b9d1fe917d0",
+  "content_length": 11998,
+  "ingested_at": "2026-03-31T17:27:44.814246",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nSkill开发统筹仪表盘 V1.0\nAI-033 无极 · 核心职责\n\n实时监控所有Skill开发进度\n可视化展示团队工作状态\n\"\"\"\n\nimport json\nimport curses\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import Dict, List\nfrom dataclasses import dataclass, asdict\n\n@dataclass\nclass TaskStatus:\n    \"\"\"任务状态\"\"\"\n    skill_name: str\n    assignee: str\n    level: int\n    status: str  # not_started/in_progress/review/completed\n    progress: int  # 0-100\n    deadline: str\n    start_time: str = None\n    comple",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_kimi-cli-task-manager/scripts/execute_task.sh",
+  "filename": "execute_task.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "e2962ddd39f32dda",
+  "content_length": 2365,
+  "ingested_at": "2026-03-31T17:27:45.027733",
+  "content_preview": "#!/bin/bash\n# Kimi Task Executor\n# Kimi任务执行脚本\n\nset -e\n\nTASK_ID=\"${1:-}\"\nSCRIPT_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nTASKS_DIR=\"$(dirname \"$SCRIPT_DIR\")/tasks\"\n\nif [ -z \"$TASK_ID\" ]; then\n    echo \"🤖 Kimi Task Executor\"\n    echo \"\"\n    echo \"Usage: $0 [task-id]\"\n    exit 1\nfi\n\nTASK_FILE=\"$TASKS_DIR/pending/${TASK_ID}.json\"\nif [ ! -f \"$TASK_FILE\" ]; then\n    echo \"❌ 任务不存在: $TASK_ID\"\n    exit 1\nfi\n\n# 读取任务配置\nPROMPT=$(python3 -c \"import json; print(json.load(open('$TASK_FILE')).get('pr",
+  "limitations_applied": []
+}

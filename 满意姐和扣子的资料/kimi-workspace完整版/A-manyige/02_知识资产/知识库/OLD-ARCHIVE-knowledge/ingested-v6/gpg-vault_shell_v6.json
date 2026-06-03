@@ -1,0 +1,34 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/gpg-vault.sh",
+  "filename": "gpg-vault.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 1800,
+  "checksum": "8b829e61ebf3e8d6",
+  "ingested_at": "2026-03-31T17:30:47.798103",
+  "line_count": 70,
+  "title": "gpg-vault",
+  "description": "GPG加密环境变量文件",
+  "sections": [],
+  "entities": [
+    {
+      "name": "encrypt_file",
+      "type": "shell_function"
+    },
+    {
+      "name": "decrypt_file",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "GPG加密环境变量文件",
+    "用于加密敏感配置文件",
+    "使用GPG对称加密（AES-256）",
+    "设置严格权限",
+    "安全擦除原文件（可选）",
+    "shred -u \"$file\"",
+    "初始化GPG密码"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

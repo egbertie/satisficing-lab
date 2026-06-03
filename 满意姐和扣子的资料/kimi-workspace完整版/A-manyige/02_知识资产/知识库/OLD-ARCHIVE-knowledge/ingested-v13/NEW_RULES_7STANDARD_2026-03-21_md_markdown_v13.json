@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/NEW_RULES_7STANDARD_2026-03-21.md",
+  "filename": "NEW_RULES_7STANDARD_2026-03-21.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "5f31c513eae6d1f1",
+  "content_length": 3710,
+  "ingested_at": "2026-03-31T17:27:46.543540",
+  "content_preview": "# 新增军规7标准转化\n\n**军规11-16** | **7标准强制合规** | **创建时间**: 2026-03-21\n\n---\n\n## 军规11: Skill不重复\n\n### 7标准合规\n\n| 标准 | 实现 | 状态 |\n|------|------|------|\n| S1 全局 | 覆盖全部Skill创建流程 | ✅ |\n| S2 系统 | 检测→拒绝→报告闭环 | ✅ |\n| S3 迭代 | 相似度阈值可调 | ✅ |\n| S4 Skill化 | 集成到治理中心 | ✅ |\n| S5 自动化 | 自动相似度检测 | ✅ |\n| S6 认知谦逊 | 阈值置信度80% | ✅ |\n| S7 对抗验证 | 误杀风险+人工复核 | ✅ |\n\n### 实现\n```python\ndef check_skill_duplicate(new_skill):\n    for existing in all_skills:\n        similarity = calculate_similarity(new_skill, existing)\n        if similarity ",
+  "limitations_applied": []
+}

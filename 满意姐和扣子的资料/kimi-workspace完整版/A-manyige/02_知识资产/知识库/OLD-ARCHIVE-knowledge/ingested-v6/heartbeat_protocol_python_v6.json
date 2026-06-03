@@ -1,0 +1,111 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/heartbeat-protocol/scripts/heartbeat_protocol.py",
+  "filename": "heartbeat_protocol.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 26678,
+  "checksum": "aa4097bb61feaa3a",
+  "ingested_at": "2026-03-31T17:30:32.456461",
+  "line_count": 739,
+  "title": "heartbeat_protocol",
+  "description": "Heartbeat Protocol V3.0 - 主控脚本\n实现L1-L5五级Token档位管理系统\n\n核心功能:\n- Token档位自动计算与管理\n- 动态通知频率调整\n- 档位切换自检\n- 对抗测试",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: GearLevel"
+    },
+    {
+      "level": 2,
+      "title": "Class: GearConfig"
+    },
+    {
+      "level": 2,
+      "title": "Class: TokenStatus"
+    },
+    {
+      "level": 2,
+      "title": "Class: GearState"
+    },
+    {
+      "level": 2,
+      "title": "Class: GearCalculator"
+    },
+    {
+      "level": 2,
+      "title": "Class: NotificationManager"
+    },
+    {
+      "level": 2,
+      "title": "Class: SelfValidator"
+    },
+    {
+      "level": 2,
+      "title": "Class: AdversarialTester"
+    },
+    {
+      "level": 2,
+      "title": "Class: HeartbeatProtocol"
+    }
+  ],
+  "entities": [
+    {
+      "name": "GearLevel",
+      "type": "class"
+    },
+    {
+      "name": "GearConfig",
+      "type": "class"
+    },
+    {
+      "name": "TokenStatus",
+      "type": "class"
+    },
+    {
+      "name": "GearState",
+      "type": "class"
+    },
+    {
+      "name": "GearCalculator",
+      "type": "class"
+    },
+    {
+      "name": "NotificationManager",
+      "type": "class"
+    },
+    {
+      "name": "SelfValidator",
+      "type": "class"
+    },
+    {
+      "name": "AdversarialTester",
+      "type": "class"
+    },
+    {
+      "name": "HeartbeatProtocol",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "滞后处理：避免边界抖动",
+    "根据频率概率决定是否通知",
+    "检查24小时内切换次数",
+    "深夜时段(23-8)限制档位切换",
+    "如果有波动，添加随机抖动",
+    "将枚举转换为字符串值进行比较",
+    "正常消耗: 应该逐级降级 (100->90->80->70->60->50->40->30->20->10->0)",
+    "预期经过L5,L4,L3,L2,L1，至少3次切换",
+    "快速消耗: 可能跳级 (100->70->40->10)",
+    "预期至少2次切换，最终到L1",
+    "极速消耗: 80%开始，-50%/h，2小时后到0%",
+    "80->30->0，应该经过L2到L1",
+    "边界抖动: 应该保持稳定（滞后机制生效）",
+    "在70%附近波动，由于滞后机制，应该保持在一个档位"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

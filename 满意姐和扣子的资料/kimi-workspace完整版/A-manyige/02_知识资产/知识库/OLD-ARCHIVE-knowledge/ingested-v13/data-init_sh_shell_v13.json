@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_data-analyst/data-init.sh",
+  "filename": "data-init.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "111e8f8e23a2fd35",
+  "content_length": 5743,
+  "ingested_at": "2026-03-31T17:27:45.022190",
+  "content_preview": "#!/bin/bash\n# data-init.sh - Initialize data analysis workspace\n# Usage: ./data-init.sh\n\nDATA_DIR=\"${HOME}/.openclaw/workspace/data-analysis\"\n\necho \"🚀 Initializing Data Analysis Workspace\"\necho \"=======================================\"\n\n# Create directory structure\nmkdir -p \"$DATA_DIR\"/{data,queries,reports,notebooks,scripts}\n\n# Create queries directory with common patterns\ncat > \"$DATA_DIR/queries/README.md\" << 'EOF'\n# SQL Queries\n\nStore reusable SQL queries here.\n\n## Naming Convention\n- `daily",
+  "limitations_applied": []
+}

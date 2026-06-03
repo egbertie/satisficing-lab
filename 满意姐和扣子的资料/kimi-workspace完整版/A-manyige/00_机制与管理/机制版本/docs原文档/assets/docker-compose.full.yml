@@ -1,0 +1,157 @@
+version: '3.8'
+
+services:
+  # 核心数据库层
+  postgres:
+    image: pgvector/pgvector:pg15
+    environment:
+      POSTGRES_DB: sri_agent_os
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      - sri-network
+
+  # 向量数据库（Memory层）
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    networks:
+      - sri-network
+
+  # 对象存储（3-2-1备份）
+  minio:
+    image: minio/minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_PASSWORD}
+    volumes:
+      - minio_data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    networks:
+      - sri-network
+
+  # 核心业务层
+  api-server:
+    build: ./core
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_URL: postgresql://postgres:${DB_PASSWORD}@postgres:5432/sri_agent_os
+      QDRANT_URL: http://qdrant:6333
+      MINIO_ENDPOINT: minio:9000
+      KIMI_API_KEY: ${KIMI_API_KEY}
+    depends_on:
+      - postgres
+      - qdrant
+      - minio
+    volumes:
+      - ./skills:/app/skills:ro
+      - ./workflows:/app/workflows:ro
+      - ./prompts:/app/prompts:ro
+    networks:
+      - sri-network
+    restart: unless-stopped
+
+  # 工作流执行引擎（Celery Worker）
+  workflow-worker:
+    build: ./core
+    command: celery -A workflow_engine worker --loglevel=info --concurrency=4
+    environment:
+      DATABASE_URL: postgresql://postgres:${DB_PASSWORD}@postgres:5432/sri_agent_os
+      KIMI_API_KEY: ${KIMI_API_KEY}
+    depends_on:
+      - redis
+      - postgres
+    volumes:
+      - ./skills:/app/skills:ro
+    networks:
+      - sri-network
+
+  # 消息队列
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    networks:
+      - sri-network
+
+  # 前端看板
+  dashboard:
+    build: ./dashboard
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_API_URL: http://api-server:8080
+    depends_on:
+      - api-server
+    networks:
+      - sri-network
+
+  # 蓝军审计服务（独立部署，确保安全隔离）
+  blue-team-service:
+    build: ./services/blue_team
+    environment:
+      DATABASE_URL: postgresql://postgres:${DB_PASSWORD}@postgres:5432/sri_agent_os
+      ALERT_WEBHOOK: ${FEISHU_WEBHOOK_URL}
+    networks:
+      - sri-network
+
+  # 备份服务（3-2-1策略自动化）
+  backup-service:
+    image: offen/docker-volume-backup:latest
+    environment:
+      BACKUP_CRON_EXPRESSION: "0 2 * * *"
+      BACKUP_RETENTION_DAYS: "30"
+      BACKUP_FILENAME: backup-sri-%Y-%m-%dT%H-%M-%S.tar.gz
+      BACKUP_ARCHIVE: "/archive"
+      AWS_S3_BUCKET_NAME: ${BACKUP_S3_BUCKET}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_KEY}
+      AWS_ENDPOINT: ${S3_ENDPOINT}
+    volumes:
+      - postgres_data:/backup/postgres:ro
+      - minio_data:/backup/minio:ro
+      - /nas/backup:/archive
+    networks:
+      - sri-network
+
+  # 本地LLM服务（Token优化）
+  local-llm:
+    image: registry.cn-hangzhou.aliyuncs.com/qwen/qwen2.5:7b-instruct
+    command: >
+      --model /models/Qwen2.5-7B-Instruct
+      --served-model-name local-preprocessor
+      --max-model-len 8192
+      --gpu-memory-utilization 0.8
+    volumes:
+      - ./models:/models
+    ports:
+      - "8000:8000"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    networks:
+      - sri-network
+
+volumes:
+  postgres_data:
+  qdrant_storage:
+  minio_data:
+  redis_data:
+
+networks:
+  sri-network:
+    driver: bridge

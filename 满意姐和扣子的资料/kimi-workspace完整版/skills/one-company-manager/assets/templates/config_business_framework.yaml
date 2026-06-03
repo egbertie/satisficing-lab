@@ -1,0 +1,205 @@
+# 系统配置（v3.0 商业框架增强版）
+
+# 行业模板
+industry_template: "general"  # general/self-media/ecommerce/consulting/education/uphost
+
+# 财务阈值
+monthly_living_expenses: 5000  # 月生活费（元）
+emergency_fund_months: 3      # 应急基金月数
+
+# 提醒时段
+reminder_hours:
+  morning: 9
+  afternoon: 14
+  evening: 20
+
+# 健康阈值
+max_continuous_work_hours: 4
+min_sleep_hours: 6
+min_weekly_exercise: 3
+
+# 自定义关键词
+business_keywords:
+  - 项目
+  - 客户
+  - 合作
+
+# ===== 外部系统集成 =====
+integrations:
+  calendar:
+    google_calendar:
+      enabled: false
+      api_key: ""
+      calendar_id: ""
+      sync_direction: "bidirectional"
+    outlook:
+      enabled: false
+      api_key: ""
+      sync_direction: "bidirectional"
+
+  project_management:
+    github:
+      enabled: false
+      token: ""
+      repo_owner: ""
+      repo_name: ""
+      sync_issues: true
+    notion:
+      enabled: false
+      api_key: ""
+      database_id: ""
+
+  analytics:
+    wechat_official_account:
+      enabled: false
+      app_id: ""
+      app_secret: ""
+    douyin:
+      enabled: false
+      access_token: ""
+
+# ===== 智能决策配置 =====
+ai_decisions:
+  enabled: true
+  auto_analysis_frequency: "daily"
+  priority_adjustment_enabled: true
+  health_optimization_enabled: true
+
+# ===== 自定义快捷命令 =====
+custom_commands:
+  enabled: false
+  commands: {}
+
+# ===== 对话交互配置 =====
+dialog_config:
+  context_awareness:
+    enabled: true
+    max_context_turns: 10
+  fuzzy_command:
+    enabled: true
+    confidence_threshold: 0.8
+  multi_turn_task:
+    enabled: true
+    max_task_steps: 5
+
+# ===== 商业框架管理配置（v3.0 新增）=====
+business_framework:
+  enabled: true
+  version: "1.0"
+  
+  # 商业模型配置
+  business_model:
+    enabled: true
+    auto_version: true
+    version_history_limit: 10
+  
+  # 业务方向配置
+  directions:
+    enabled: true
+    max_directions: 10
+    default_priority: "medium"
+    auto_kpi_tracking: true
+    priority_levels:
+      - high
+      - medium
+      - low
+  
+  # 实现路径配置
+  paths:
+    enabled: true
+    max_paths_per_direction: 5
+    auto_milestone_generation: true
+    auto_dependency_detection: true
+    default_milestone_count: 3
+    path_states:
+      - planning
+      - in_progress
+      - completed
+      - paused
+      - cancelled
+  
+  # 外部信号监控配置
+  external_signals:
+    enabled: true
+    auto_monitor: true
+    monitor_frequency: "daily"
+    signal_types:
+      - market
+      - policy
+      - competitor
+      - technology
+      - social
+    relevance_levels:
+      - high
+      - medium
+      - low
+    impact_types:
+      - opportunity
+      - threat
+      - neutral
+    auto_analysis: true
+    alert_rules:
+      high_relevance_threshold: 80
+      auto_alert_enabled: true
+  
+  # 流程管理配置
+  business_processes:
+    enabled: true
+    auto_stage_progression: false
+    auto_task_creation: true
+    auto_relationship_linking: true
+    auto_reminder: true
+    process_templates:
+      - id: "STD-001"
+        name: "商业框架构建"
+        stages: 6
+        auto_enabled: true
+  
+  # 智能决策增强配置
+  intelligent_decisions:
+    enabled: true
+    priority_optimization:
+      enabled: true
+      auto_adjust: false
+      factors:
+        - revenue_growth_rate
+        - cost_effectiveness
+        - market_heat
+        - health_load
+    business_simulation:
+      enabled: true
+      max_scenarios: 10
+      simulation_types:
+        - close_direction
+        - adjust_priority
+        - resource_reallocation
+  
+  # 业务全景视图配置
+  business_overview:
+    enabled: true
+    drill_down_enabled: true
+    visualization_formats:
+      - markdown
+      - mindmap
+      - flowchart
+    auto_export: false
+    export_formats:
+      - markdown
+      - pdf
+
+# ===== 高级设置 =====
+advanced:
+  backup:
+    enabled: true
+    auto_backup_frequency: "daily"
+    backup_path: "~/onepilot/backups"
+    retention_days: 30
+  encryption:
+    enabled: false
+    key: ""
+  logging:
+    enabled: true
+    level: "info"
+    path: "~/onepilot/logs"
+
+default_timezone: Asia/Shanghai

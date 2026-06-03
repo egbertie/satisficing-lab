@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/feishu_api_client.py",
+  "filename": "feishu_api_client.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "d2b58e94100916a6",
+  "content_length": 14137,
+  "ingested_at": "2026-03-31T17:27:46.155193",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\n飞书API客户端基类\n提供Token管理、自动刷新、请求重试和错误处理功能\n\"\"\"\n\nimport json\nimport logging\nimport os\nimport time\nfrom typing import Any, Callable, Dict, List, Optional, Union\nfrom functools import wraps\nfrom dataclasses import dataclass\n\nimport requests\nfrom requests.adapters import HTTPAdapter\nfrom urllib3.util.retry import Retry\n\n# 配置日志\nlogging.basicConfig(\n    level=logging.INFO,\n    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'\n)\nlogger = logging",
+  "limitations_applied": []
+}

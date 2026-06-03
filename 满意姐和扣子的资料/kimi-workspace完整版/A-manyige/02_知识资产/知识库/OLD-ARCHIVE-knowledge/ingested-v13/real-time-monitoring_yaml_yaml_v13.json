@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/config/blue-team/real-time-monitoring.yaml",
+  "filename": "real-time-monitoring.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "26811fba12c464a1",
+  "content_length": 749,
+  "ingested_at": "2026-03-31T17:27:44.521694",
+  "content_preview": "# Blue Team Real-Time Monitoring Configuration\n# 蓝军实时监督配置 - 检测到关键词立即触发拦截\n\ninterception_rules:\n  # 幻觉触发词 - 检测到立即打断\n  hallucination_triggers:\n    - \"显然\"\n    - \"毫无疑问\"\n    - \"100%确定\"\n    - \"绝对\"\n    - \"必然\"\n    - \"毫无疑问地\"\n    - \"很显然\"\n    - \"肯定\"\n  \n  # 过度自信表达\n  overconfidence_triggers:\n    - \"我已经完全理解\"\n    - \"完美解决方案\"\n    - \"没有任何问题\"\n    - \"最佳方案\"\n    - \"最优解\"\n    - \"完全正确\"\n  \n  # 虚构信息特征\n  fabrication_indicators:\n    - \"根据我的经验\"\n    - \"据我所知\"\n    - \"一般来说\"\n    - \"通常认为\"\n    - \"大家都知道\"\n\n# 拦截响应模板\ninterception_respon",
+  "limitations_applied": []
+}

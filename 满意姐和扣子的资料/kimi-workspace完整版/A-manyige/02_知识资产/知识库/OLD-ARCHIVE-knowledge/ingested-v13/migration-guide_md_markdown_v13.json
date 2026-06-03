@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/namespace-enforcement/docs/migration-guide.md",
+  "filename": "migration-guide.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "ea5c4a029fb46a3f",
+  "content_length": 3545,
+  "ingested_at": "2026-03-31T17:27:45.394925",
+  "content_preview": "# 迁移指南\n\n## 概述\n\n本文档指导如何将现有文件迁移到新的命名规范。\n\n## 迁移原则\n\n### S6 认知谦逊\n\n> **存量文件不强制迁移。**\n\n这不是技术限制，而是有意识的决策：\n\n1. **风险最小化**: 避免破坏现有引用和链接\n2. **成本优化**: 不是所有文件都值得迁移\n3. **渐进改进**: 逐步提升而非一次性颠覆\n\n## 迁移策略\n\n### 策略1: 新文件严格合规（必须）\n\n所有新创建的文件**必须**符合命名规范。\n\n```\n# ✅ 正确 - 新文件\nskill-new-feature.md\nscript-helper.py\n\n# ❌ 错误 - 新文件使用旧命名\nNewFeature.md\nhelper_script.py\n```\n\n### 策略2: 按需迁移（推荐）\n\n当你需要修改一个存量文件时，顺便将其重命名。\n\n```\n# 场景: 需要更新 OldFeature.md\n\n步骤1: 重命名文件\nOldFeature.md → skill-old-feature.md\n\n步骤2: 更新内容\n步骤3: 更新引用该文件的其他文档\n```\n\n### 策略",
+  "limitations_applied": []
+}

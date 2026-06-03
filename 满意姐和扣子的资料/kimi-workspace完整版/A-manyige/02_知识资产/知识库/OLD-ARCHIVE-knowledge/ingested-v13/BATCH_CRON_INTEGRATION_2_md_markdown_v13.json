@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/BATCH_CRON_INTEGRATION_2.md",
+  "filename": "BATCH_CRON_INTEGRATION_2.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "81c8cf630061c366",
+  "content_length": 2115,
+  "ingested_at": "2026-03-31T17:27:46.538302",
+  "content_preview": "# Cron集成批量配置 - 第2批\n\n## 处理时间\n2026-03-20\n\n## 目标\n为16个有脚本但缺少Cron配置的Skill添加定时任务。\n\n## 已配置Skill清单\n\n### 1. email-daily-summary-auto\n- **功能**: 自动邮箱日报生成器\n- **Cron配置**: `0 9 * * *`\n- **说明**: 每日上午9点生成邮件摘要报告\n- **文件**: `skills/email-daily-summary-auto/cron.json`\n\n### 2. error-guard-control\n- **功能**: 系统安全控制平面\n- **Cron配置**: `*/15 * * * *`\n- **说明**: 每15分钟检查系统健康状态\n- **文件**: `skills/error-guard-control/cron.json`\n\n### 3. data-analyst\n- **功能**: 数据分析与报告生成\n- **Cron配置**: `0 9 * * 1`\n- **说明**: 每周一上午9点生成数据分析周报\n- **文件**:",
+  "limitations_applied": []
+}

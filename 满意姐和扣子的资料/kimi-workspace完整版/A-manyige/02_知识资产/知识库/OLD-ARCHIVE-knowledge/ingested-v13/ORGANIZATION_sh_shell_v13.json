@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/CORE/ORGANIZATION.sh",
+  "filename": "ORGANIZATION.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "a4e741125e436bd1",
+  "content_length": 245,
+  "ingested_at": "2026-03-31T17:27:44.541496",
+  "content_preview": "#!/bin/bash\n# ORGANIZATION机制执行脚本\necho \"=== ORGANIZATION机制检查 ===\"\necho \"时间: $(date)\"\nif [ -f \"/root/.openclaw/workspace/CORE/ORGANIZATION.md\" ]; then\n    echo \"✅ ORGANIZATION.md 存在\"\nelse\n    echo \"❌ ORGANIZATION.md 不存在\"\n    exit 1\nfi\necho \"检查完成\"\n",
+  "limitations_applied": []
+}

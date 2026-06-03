@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/token-fuse.sh",
+  "filename": "token-fuse.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "e95ff8c198840a0d",
+  "content_length": 1039,
+  "ingested_at": "2026-03-31T17:27:46.192494",
+  "content_preview": "#!/bin/bash\n# Token熔断脚本 - 蓝军修复版\n\nLOG_FILE=\"/tmp/token-fuse.log\"\nDATE_STR=$(date '+%Y-%m-%d %H:%M:%S')\n\n# Token阈值设置\nCRITICAL_THRESHOLD=10\nWARNING_THRESHOLD=30\nCAUTION_THRESHOLD=50\n\n# 模拟Token检查\nTOKEN_REMAINING=75\n\necho \"[$DATE_STR] 🔍 Token fuse check: ${TOKEN_REMAINING}% remaining\" >> \"$LOG_FILE\"\n\nif [ \"$TOKEN_REMAINING\" -le \"$CRITICAL_THRESHOLD\" ]; then\n    echo \"[$DATE_STR] 🚨 CRITICAL: Token ${TOKEN_REMAINING}% - Entering full hibernation\" >> \"$LOG_FILE\"\n    echo \"hibernation\" > /tmp/token-mode.",
+  "limitations_applied": []
+}

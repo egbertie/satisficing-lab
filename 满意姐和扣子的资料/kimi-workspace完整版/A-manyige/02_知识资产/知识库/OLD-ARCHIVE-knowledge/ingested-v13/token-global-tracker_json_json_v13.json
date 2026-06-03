@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/data/token-global-tracker.json",
+  "filename": "token-global-tracker.json",
+  "file_type": "json",
+  "extension": ".json",
+  "file_hash": "5d7ff011689f4330",
+  "content_length": 1048,
+  "ingested_at": "2026-03-31T17:27:44.534777",
+  "content_preview": "{\n  \"version\": \"3.0\",\n  \"model\": \"global-consumption\",\n  \"description\": \"全局Token消耗追踪模型\",\n  \n  \"daily_budget\": 70000,\n  \"weekly_budget\": 490000,\n  \n  \"tracking_method\": {\n    \"source\": \"session_status工具\",\n    \"frequency\": \"每次用户询问时\",\n    \"granularity\": \"主session累积\"\n  },\n  \n  \"calculation\": {\n    \"total_consumption\": \"session.context_used / session.context_max * 100%\",\n    \"remaining\": \"100% - consumption_percentage\",\n    \"note\": \"这是OpenClaw内部上下文压缩后的估算，非精确计费\"\n  },\n  \n  \"user_marked_data\": [\n    {\"t",
+  "limitations_applied": []
+}

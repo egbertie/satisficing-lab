@@ -1,0 +1,58 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/testing-framework/scripts/nightly_test.sh",
+  "filename": "nightly_test.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 4169,
+  "checksum": "1b8f6f2c24d67ea6",
+  "ingested_at": "2026-03-31T17:30:47.781128",
+  "line_count": 146,
+  "title": "nightly_test",
+  "description": "夜间测试脚本 - S4标准实现",
+  "sections": [],
+  "entities": [
+    {
+      "name": "log",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_info",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_warn",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_error",
+      "type": "shell_function"
+    },
+    {
+      "name": "send_notification",
+      "type": "shell_function"
+    },
+    {
+      "name": "main",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "夜间测试脚本 - S4标准实现",
+    "用于定时长时间运行测试",
+    "确保报告目录存在",
+    "发送通知 (可根据需要实现)",
+    "这里可以集成邮件、Slack、Discord等通知",
+    "curl -X POST -H 'Content-type: application/json' \\",
+    "--data \"{\\\"text\\\":\\\"$message\\\"}\" \\",
+    "\"$SLACK_WEBHOOK_URL\"",
+    "1. 安装依赖",
+    "2. 完整测试套件",
+    "3. 覆盖率检查 (更严格)",
+    "4. 测试质量自检",
+    "5. 对抗测试",
+    "6. 长时间稳定性测试 (模拟)",
+    "7. 生成完整报告"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

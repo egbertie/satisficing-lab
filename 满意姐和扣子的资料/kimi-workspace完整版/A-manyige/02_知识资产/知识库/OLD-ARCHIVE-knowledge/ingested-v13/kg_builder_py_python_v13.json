@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/knowledge-graph-framework/scripts/kg_builder.py",
+  "filename": "kg_builder.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "da9cd51d26a2237f",
+  "content_length": 5045,
+  "ingested_at": "2026-03-31T17:27:45.325340",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n知识图谱构建器 - 基础版本\n\"\"\"\n\nimport json\nimport re\nfrom pathlib import Path\nfrom datetime import datetime\n\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nKG_FILE = WORKSPACE / \"memory\" / \"knowledge-graph.json\"\n\n# 基础实体类型\nENTITY_TYPES = ['person', 'project', 'skill', 'concept', 'document', 'event']\n\n# 基础关系类型\nRELATION_TYPES = ['created_by', 'depends_on', 'related_to', 'part_of', 'uses']\n\nclass KnowledgeGraph:\n    def __init__(self):\n        self.entities = {}\n        self.relations",
+  "limitations_applied": []
+}

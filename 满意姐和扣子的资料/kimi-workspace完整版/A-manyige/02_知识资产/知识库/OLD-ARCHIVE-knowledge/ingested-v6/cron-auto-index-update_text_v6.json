@@ -1,0 +1,32 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/cron-auto-index-update.txt",
+  "filename": "cron-auto-index-update.txt",
+  "extension": ".txt",
+  "file_type": "text",
+  "size_bytes": 1704,
+  "checksum": "e3bac93c093caaec",
+  "ingested_at": "2026-03-31T17:30:48.243076",
+  "line_count": 49,
+  "title": "cron-auto-index-update",
+  "description": "# Cron配置 - 自动索引更新",
+  "sections": [],
+  "entities": [],
+  "key_points": [
+    "# Cron配置 - 自动索引更新",
+    "# 文件: scripts/cron-auto-index-update.txt",
+    "# 用途: 每小时执行自动索引更新",
+    "# ==================== 主Cron配置 ====================",
+    "# 每小时执行一次索引更新（错峰17分钟，避免整点竞争）",
+    "17 * * * * /root/.openclaw/workspace/scripts/auto-index-update.sh >> /root/.open",
+    "# 或者使用OpenClaw的cron命令:",
+    "# openclaw cron create --name \"auto-index-update\" \\",
+    "#   --schedule \"17 * * * *\" \\",
+    "#   --command \"/root/.openclaw/workspace/scripts/auto-index-update.sh\" \\",
+    "#   --description \"每小时自动扫描workspace并更新索引\"",
+    "# ==================== 安装命令 ====================",
+    "# 方法1: 直接添加到系统crontab",
+    "# crontab -e"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

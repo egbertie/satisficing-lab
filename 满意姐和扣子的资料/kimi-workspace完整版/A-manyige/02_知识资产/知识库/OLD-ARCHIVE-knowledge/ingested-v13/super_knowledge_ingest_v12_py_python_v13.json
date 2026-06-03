@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/super-knowledge-ingest/super_knowledge_ingest_v12.py",
+  "filename": "super_knowledge_ingest_v12.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "b99ec4582c1b780d",
+  "content_length": 2598,
+  "ingested_at": "2026-03-31T17:27:45.425874",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nsuper-knowledge-ingest V12.0 - 终极纯Python版\n核心突破：纯元组 + 局部变量绑定 + 内联 everything\n目标：突破 1.3μs 纯Python极限\n\"\"\"\n\nimport os\nimport time\nimport threading\nimport queue\n\n# ============ 极简全局状态 ============\n_OUT = \"/root/.openclaw/workspace/knowledge/7standard-v12\"\nos.makedirs(_OUT, exist_ok=True)\n\n_Q = queue.Queue()\n_CACHE = {}\n\n# 后台写入\ndef _w():\n    while True:\n        i = _Q.get()\n        if i is None:\n            break\n        try:\n            with open(i[0], 'wb') as f:\n          ",
+  "limitations_applied": []
+}

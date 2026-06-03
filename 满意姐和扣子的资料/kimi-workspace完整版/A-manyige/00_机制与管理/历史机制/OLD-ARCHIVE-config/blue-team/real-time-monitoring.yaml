@@ -1,0 +1,51 @@
+# Blue Team Real-Time Monitoring Configuration
+# 蓝军实时监督配置 - 检测到关键词立即触发拦截
+
+interception_rules:
+  # 幻觉触发词 - 检测到立即打断
+  hallucination_triggers:
+    - "显然"
+    - "毫无疑问"
+    - "100%确定"
+    - "绝对"
+    - "必然"
+    - "毫无疑问地"
+    - "很显然"
+    - "肯定"
+  
+  # 过度自信表达
+  overconfidence_triggers:
+    - "我已经完全理解"
+    - "完美解决方案"
+    - "没有任何问题"
+    - "最佳方案"
+    - "最优解"
+    - "完全正确"
+  
+  # 虚构信息特征
+  fabrication_indicators:
+    - "根据我的经验"
+    - "据我所知"
+    - "一般来说"
+    - "通常认为"
+    - "大家都知道"
+
+# 拦截响应模板
+interception_response: |
+  🔴 **蓝军实时拦截触发**
+  
+  检测到高置信度表达："{trigger_word}"
+  
+  请确认：
+  1. 该陈述是否有数据/来源支撑？
+  2. 是否存在反例或例外情况？
+  3. 置信度是否可以量化？
+  
+  [蓝军实时监督已激活]
+
+# 统计追踪
+metrics:
+  daily_interceptions: 0
+  weekly_interceptions: 0
+  last_interception: null
+  top_triggers: {}

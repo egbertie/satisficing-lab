@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/token-fuse-system/token_fuse_system.py",
+  "filename": "token_fuse_system.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "6353e8689b35200f",
+  "content_length": 6900,
+  "ingested_at": "2026-03-31T17:27:45.402123",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nToken消耗监控与熔断系统 V2.0\n基于周预算进度比例的分级熔断机制\n\"\"\"\n\nimport json\nimport os\nimport sys\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nTOKEN_STATE_FILE = WORKSPACE / \"memory\" / \"token-weekly-monitor.json\"\nFUSE_STATE_FILE = WORKSPACE / \"memory\" / \"token-fuse-state.json\"\n\n# 熔断阈值配置 - 基于周预算进度比例\n# 假设每周预算100%，按7天平均分配，每天约14.3%\n# 超额10%触发预警（即当天消耗超过24.3%）\nFUSE_THRESHOLDS = {\n    \"yellow\": 110,   # 黄色预警：超出预算10%，暂停P3+P4任务\n    \"o",
+  "limitations_applied": []
+}

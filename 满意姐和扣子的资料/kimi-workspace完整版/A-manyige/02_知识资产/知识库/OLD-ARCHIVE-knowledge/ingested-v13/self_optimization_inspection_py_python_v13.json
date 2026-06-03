@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/self-optimization-and-inspection/self_optimization_inspection.py",
+  "filename": "self_optimization_inspection.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "2751d7ef5e46c088",
+  "content_length": 12980,
+  "ingested_at": "2026-03-31T17:27:44.820533",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nSkill自我优化引擎 + 监督检查机制\n实现：7天清理 + 效率优化 + 相互监督\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\nclass SelfOptimizationAndInspection:\n    \"\"\"自我优化与监督检查系统\"\"\"\n    \n    def __init__(self, workspace_path=\"/root/.openclaw/workspace\"):\n        self.workspace = Path(workspace_path)\n        self.optimization_db = self.workspace / \"memory\" / \"skill_optimization_db.json\"\n        self.inspection_db = self.workspace / \"memory\" / \"inspection_r",
+  "limitations_applied": []
+}

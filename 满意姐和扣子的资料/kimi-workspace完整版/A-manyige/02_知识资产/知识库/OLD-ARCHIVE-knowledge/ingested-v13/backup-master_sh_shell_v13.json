@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/disaster-recovery/02-自动化备份脚本/backup-master.sh",
+  "filename": "backup-master.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "72adec500d656591",
+  "content_length": 3961,
+  "ingested_at": "2026-03-31T17:27:44.642354",
+  "content_preview": "#!/bin/bash\n################################################################################\n# 灾备自动化备份脚本套件 - 主控脚本\n# Disaster Recovery Automated Backup Scripts\n#\n# 版本: 1.0\n# 日期: 2026-03-12\n# 用途: 协调执行所有备份任务\n################################################################################\n\nset -euo pipefail\n\n# 配置\nSCRIPT_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nLOG_DIR=\"${SCRIPT_DIR}/logs\"\nCONFIG_FILE=\"${SCRIPT_DIR}/backup.conf\"\nLOCK_FILE=\"/tmp/dr-backup.lock\"\n\n# 创建日志目录\nmkdir -p \"${LOG_DIR",
+  "limitations_applied": []
+}

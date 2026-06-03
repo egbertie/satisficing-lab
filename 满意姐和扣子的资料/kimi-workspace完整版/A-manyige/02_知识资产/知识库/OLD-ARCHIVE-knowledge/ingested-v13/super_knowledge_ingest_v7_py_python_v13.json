@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/super-knowledge-ingest/super_knowledge_ingest_v7.py",
+  "filename": "super_knowledge_ingest_v7.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "f6132bff254b030c",
+  "content_length": 6051,
+  "ingested_at": "2026-03-31T17:27:45.428147",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nsuper-knowledge-ingest V7.0 - 纯函数极简版\n核心突破：纯函数 + 零初始化 + 无对象创建\n目标：缓存命中 < 0.1ms\n参考：函数式编程 + Zero Allocation\n\"\"\"\n\nimport json\nimport gzip\nimport base64\nimport hashlib\nimport re\nimport time\nimport os\nimport threading\nfrom pathlib import Path\nfrom typing import Dict, List, Optional, Tuple\n\n# ============ 极简全局状态 ============\n# 内存缓存: hash -> (output_bytes, output_path)\n_MEM_CACHE: Dict[str, Tuple[bytes, str]] = {}\n_MEM_LOCK = threading.Lock()\n\n# 文件哈希索引: file_path -> hash (避免重复计",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/info-collection-quality/scripts/info-collection-quality-runner.py",
+  "filename": "info-collection-quality-runner.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "87ff69cbd90ce1ea",
+  "content_length": 22822,
+  "ingested_at": "2026-03-31T17:27:45.457857",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\ninfo-collection-quality-runner.py\n信息采集与质量控制体系 - 5-Standard Skill Runner\n\n功能: 全流程质量管控 (S1-S7)\n- S1: 输入信息源/采集任务定义\n- S2: 质量检查（完整性→准确性→时效性→一致性）\n- S3: 输出质量报告+改进建议\n- S4: 可集成到采集流程自动触发\n- S5: 质量指标量化\n- S6: 局限标注（无法验证主观信息）\n- S7: 对抗测试（故意污染数据测试检测能力）\n\nGenerated: 2026-03-21\nVersion: 2.0.0\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport logging\nimport argparse\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import Dict, List, Any, Optional\nfrom dataclasses im",
+  "limitations_applied": []
+}

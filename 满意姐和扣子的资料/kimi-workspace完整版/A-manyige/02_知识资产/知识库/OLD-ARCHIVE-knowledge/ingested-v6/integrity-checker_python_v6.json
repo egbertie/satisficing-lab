@@ -1,0 +1,53 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_file-integrity-checker/scripts/integrity-checker.py",
+  "filename": "integrity-checker.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 4946,
+  "checksum": "78ccaaf192f50361",
+  "ingested_at": "2026-03-31T17:30:32.382283",
+  "line_count": 176,
+  "title": "integrity-checker",
+  "description": "文件完整性检查脚本\n版本: V2.0\n功能: 四维检查法（结构/时效/引用/安全）+ 遗忘任务扫描",
+  "sections": [],
+  "entities": [
+    {
+      "name": "log",
+      "type": "function"
+    },
+    {
+      "name": "check_structure_integrity",
+      "type": "function"
+    },
+    {
+      "name": "check_content_freshness",
+      "type": "function"
+    },
+    {
+      "name": "check_reference_consistency",
+      "type": "function"
+    },
+    {
+      "name": "check_security_compliance",
+      "type": "function"
+    },
+    {
+      "name": "scan_forgotten_tasks",
+      "type": "function"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "检查memory文件是否30天内更新",
+    "简化实现 - 检查docs目录下的文档引用",
+    "检查敏感信息泄露（简化）",
+    "扫描TASK_MASTER.md中的逾期任务",
+    "简化实现 - 实际应解析任务状态"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

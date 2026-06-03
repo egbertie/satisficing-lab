@@ -1,0 +1,131 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/quality-assurance/qa_system/red_team_generator.py",
+  "filename": "red_team_generator.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 26623,
+  "checksum": "7147af45d3e6ab1b",
+  "ingested_at": "2026-03-31T17:30:32.088118",
+  "line_count": 751,
+  "title": "red_team_generator",
+  "description": "Red Team Generator\n红队缺陷生成器\n\n使用AI驱动的红队策略生成更隐蔽、更复杂的缺陷，\n用于测试质量保障系统的检测极限。",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: ObfuscationLevel"
+    },
+    {
+      "level": 2,
+      "title": "Class: AttackVector"
+    },
+    {
+      "level": 2,
+      "title": "Class: RedTeamDefect"
+    },
+    {
+      "level": 2,
+      "title": "Class: GenerationContext"
+    },
+    {
+      "level": 2,
+      "title": "Class: CodeObfuscator"
+    },
+    {
+      "level": 2,
+      "title": "Class: RedTeamGenerator"
+    },
+    {
+      "level": 2,
+      "title": "Class: DoubleCheckedLocking"
+    },
+    {
+      "level": 2,
+      "title": "Class: Node"
+    },
+    {
+      "level": 2,
+      "title": "Class: RedTeamOrchestrator"
+    }
+  ],
+  "entities": [
+    {
+      "name": "ObfuscationLevel",
+      "type": "class"
+    },
+    {
+      "name": "AttackVector",
+      "type": "class"
+    },
+    {
+      "name": "RedTeamDefect",
+      "type": "class"
+    },
+    {
+      "name": "GenerationContext",
+      "type": "class"
+    },
+    {
+      "name": "CodeObfuscator",
+      "type": "class"
+    },
+    {
+      "name": "RedTeamGenerator",
+      "type": "class"
+    },
+    {
+      "name": "DoubleCheckedLocking",
+      "type": "class"
+    },
+    {
+      "name": "Node",
+      "type": "class"
+    },
+    {
+      "name": "RedTeamOrchestrator",
+      "type": "class"
+    },
+    {
+      "name": "process",
+      "type": "function"
+    },
+    {
+      "name": "check_access",
+      "type": "function"
+    },
+    {
+      "name": "compare_secret",
+      "type": "function"
+    },
+    {
+      "name": "check_password",
+      "type": "function"
+    },
+    {
+      "name": "load_config",
+      "type": "function"
+    },
+    {
+      "name": "process_binary_data",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "使用正则确保是完整的变量名",
+    "将简单表达式拆分为多步",
+    "将明显字符串替换为拼接形式",
+    "简化实现：添加间接跳转",
+    "===== 缺陷生成策略 =====",
+    "使用Unicode相似字符或注释隐藏",
+    "看似正常但行为异常的代码",
+    "看似安全的比较，实际存在时序攻击",
+    "逐字符比较，可被暴力破解",
+    "通过返回时间/异常传递信息",
+    "使用eval - 被混淆",
+    "双重检查锁定 - 可能有问题",
+    "root被删除但循环引用可能导致内存不释放",
+    "不安全：直接执行配置中的代码",
+    "动态加载配置项 - 危险"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

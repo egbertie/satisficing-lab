@@ -1,0 +1,46 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/skill_status_corrector.py",
+  "filename": "skill_status_corrector.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 6862,
+  "checksum": "9a55c46df44f4876",
+  "ingested_at": "2026-03-31T17:30:32.817543",
+  "line_count": 219,
+  "title": "skill_status_corrector",
+  "description": "Skill状态修正器 - R4整改通道\n批量修正Skill虚报状态",
+  "sections": [],
+  "entities": [
+    {
+      "name": "load_fraud_report",
+      "type": "function"
+    },
+    {
+      "name": "correct_skill_status",
+      "type": "function"
+    },
+    {
+      "name": "correct_super_system_skill",
+      "type": "function"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "1. 删除FIN标记，改为WIP",
+    "2. 添加诚实声明（如果适用）",
+    "在文件开头添加诚实声明",
+    "3. 写入修正后的内容",
+    "创建新的诚实SKILL.md",
+    "{name.replace('-', ' ').title()}",
+    "1. 优先修正超级系统框架（10个）",
+    "2. 修正MAJOR级别虚报",
+    "3. 修正MODERATE级别虚报",
+    "4. 修正MINOR级别虚报"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/AGENT_STATE.md",
+  "filename": "AGENT_STATE.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "34598d97b16fe714",
+  "content_length": 733,
+  "ingested_at": "2026-03-31T17:27:44.510402",
+  "content_preview": "# AGENT_STATE.md\n# 代理状态记录\n# 更新时间: 2026-03-21 21:52\n\n## 当前状态\n\n**状态**: 🟡 休眠中（等待用户唤醒）  \n**最后活动时间**: 2026-03-21 21:52  \n**休眠原因**: 用户指令 - \"先休眠暂停工作，等我通知再启动\"\n\n## 唤醒条件\n\n**唤醒方式**: 用户明确说\"启动\"或\"重启\"  \n**响应要求**: **只是唤醒**，不是重新初始化，保持上下文连续  \n**唤醒检查**: \n1. 读取 TOKEN_BUDGET_BASELINE.md（确认基准）\n2. **读取 SUPER_RED_LINES.md（确认安全红线）⚠️ 必须严格执行五遍确认原则**\n3. 确认当前Token状态\n4. 继续休眠前的工作上下文\n\n## 待办事项 (用户返回后)\n\n1. ⏳ 企微Webhook配置（需用户操作）\n2. ⏳ JDK版本检查（3/24飞书证书升级）\n3. ⏳ 区块链存证（4月P3启动）\n4. ⏳ 运营系统完善（商业化准备）\n5. ⏳ 官宣文案最终确认（3/25）\n\n## 系统健康度\n\n| 指标 | 数值",
+  "limitations_applied": []
+}

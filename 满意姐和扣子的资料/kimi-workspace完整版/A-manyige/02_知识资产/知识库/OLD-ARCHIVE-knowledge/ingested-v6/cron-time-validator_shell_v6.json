@@ -1,0 +1,29 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/cron-time-validator.sh",
+  "filename": "cron-time-validator.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 965,
+  "checksum": "20d6436c3fb1d1d3",
+  "ingested_at": "2026-03-31T17:30:47.813810",
+  "line_count": 33,
+  "title": "cron-time-validator",
+  "description": "Cron时间验证脚本 - 防止准点定时任务",
+  "sections": [],
+  "entities": [],
+  "key_points": [
+    "Cron时间验证脚本 - 防止准点定时任务",
+    "创建时间: 2026-03-20",
+    "用途: 验证所有cron任务是否错峰",
+    "检查所有cron任务",
+    "读取cron列表并检查",
+    "准点模式: :00, :30",
+    "需要错峰: :07, :13, :17, :23, :37, :42, :47, :53",
+    "Token耗尽预警检查 - 应为 */4小时错峰",
+    "Kimi Search每日资讯采集 - 应为09:03错峰",
+    "每周六项目复盘 - 应为10:07错峰",
+    "如果发现准点任务，输出告警"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

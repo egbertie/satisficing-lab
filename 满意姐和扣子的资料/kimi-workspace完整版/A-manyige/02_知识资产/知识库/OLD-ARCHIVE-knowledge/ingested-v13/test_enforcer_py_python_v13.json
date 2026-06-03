@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/testing-framework/tests/unit/token-budget-enforcer/test_enforcer.py",
+  "filename": "test_enforcer.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "b8f3a80118cd82a8",
+  "content_length": 10660,
+  "ingested_at": "2026-03-31T17:27:45.443519",
+  "content_preview": "\"\"\"\nToken-Budget-Enforcer 单元测试 - 简化版\n\n风险等级: P0 (关键治理组件)\n测试重点: 预算计算、熔断机制、阈值判断\n\"\"\"\n\nimport sys\nfrom pathlib import Path\nfrom unittest.mock import patch\n\nimport pytest\n\n# 添加Skill路径\nSKILL_PATH = Path(__file__).parent.parent.parent.parent.parent / \"token-budget-enforcer\" / \"scripts\"\nsys.path.insert(0, str(SKILL_PATH))\n\n# 导入被测模块\nimport enforcer\n\n\n@pytest.mark.token_budget\n@pytest.mark.critical\nclass TestTokenBudgetEnforcerBasic:\n    \"\"\"Token-Budget-Enforcer基础测试\"\"\"\n    \n    def test_module_imports(self",
+  "limitations_applied": []
+}

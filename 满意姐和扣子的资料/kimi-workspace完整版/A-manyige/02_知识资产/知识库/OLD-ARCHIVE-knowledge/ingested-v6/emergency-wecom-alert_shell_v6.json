@@ -1,0 +1,98 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/emergency-wecom-alert.sh",
+  "filename": "emergency-wecom-alert.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 11202,
+  "checksum": "74f9b01812849e12",
+  "ingested_at": "2026-03-31T17:30:47.841059",
+  "line_count": 440,
+  "title": "emergency-wecom-alert",
+  "description": "============================================================",
+  "sections": [],
+  "entities": [
+    {
+      "name": "show_help",
+      "type": "shell_function"
+    },
+    {
+      "name": "log",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_info",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_warn",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_error",
+      "type": "shell_function"
+    },
+    {
+      "name": "check_dependencies",
+      "type": "shell_function"
+    },
+    {
+      "name": "parse_config",
+      "type": "shell_function"
+    },
+    {
+      "name": "get_webhook_url",
+      "type": "shell_function"
+    },
+    {
+      "name": "get_severity_config",
+      "type": "shell_function"
+    },
+    {
+      "name": "format_message",
+      "type": "shell_function"
+    },
+    {
+      "name": "build_request_body",
+      "type": "shell_function"
+    },
+    {
+      "name": "send_notification",
+      "type": "shell_function"
+    },
+    {
+      "name": "send_test",
+      "type": "shell_function"
+    },
+    {
+      "name": "send_with_template",
+      "type": "shell_function"
+    },
+    {
+      "name": "parse_args",
+      "type": "shell_function"
+    },
+    {
+      "name": "main",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "============================================================",
+    "紧急企微告警脚本",
+    "Emergency WeCom Alert Script",
+    "============================================================",
+    "./emergency-wecom-alert.sh <level> <message> [options]",
+    "level: P0/P1/P2/P3 (告警级别)",
+    "message: 告警消息内容",
+    "-w, --webhook <name>    指定 webhook 名称 (默认: system_alerts)",
+    "-t, --template <name>   使用指定模板",
+    "-a, --at-all           @所有人",
+    "-f, --file <path>      附加文件内容",
+    "-h, --help             显示帮助",
+    "./emergency-wecom-alert.sh P0 \"系统核心服务异常\"",
+    "./emergency-wecom-alert.sh P1 \"Token使用率超过80%\" -w system_alerts",
+    "./emergency-wecom-alert.sh P2 \"定时任务执行完成\" -t task_success"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

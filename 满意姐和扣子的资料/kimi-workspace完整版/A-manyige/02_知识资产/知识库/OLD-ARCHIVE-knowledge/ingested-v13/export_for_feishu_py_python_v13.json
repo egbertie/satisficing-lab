@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/export_for_feishu.py",
+  "filename": "export_for_feishu.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "064549ac188b1f2f",
+  "content_length": 3573,
+  "ingested_at": "2026-03-31T17:27:46.188337",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n导出Markdown为飞书可导入的HTML\n\"\"\"\n\nimport os\nimport markdown\nimport argparse\nfrom pathlib import Path\n\ndef md_to_html(md_content, title=\"\"):\n    \"\"\"Markdown转HTML（飞书兼容格式）\"\"\"\n    \n    # 飞书兼容的HTML模板\n    html_template = \"\"\"<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <title>{title}</title>\n    <style>\n        body {{ font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif; line-height: 1.6; padding: 40px; max-width: 800px; margin: 0 auto; }}\n",
+  "limitations_applied": []
+}

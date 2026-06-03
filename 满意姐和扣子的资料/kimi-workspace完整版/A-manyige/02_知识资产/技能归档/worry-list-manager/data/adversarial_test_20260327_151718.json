@@ -1,0 +1,149 @@
+{
+  "test_timestamp": "2026-03-27T15:17:18.873435",
+  "summary": {
+    "total_tests": 7,
+    "passed": 4,
+    "failed": 3,
+    "pass_rate": 0.5714,
+    "category_accuracy": 1.0,
+    "priority_accuracy": 0.2857
+  },
+  "test_results": [
+    {
+      "test_id": 1,
+      "test_type": "obvious_critical",
+      "content_preview": "磁盘空间即将耗尽，剩余不足5%，系统可能随时崩溃",
+      "passed": false,
+      "category_match": true,
+      "priority_match": false,
+      "expected": "RESOURCE/P0",
+      "actual": "RESOURCE/P2",
+      "assessment": "失败"
+    },
+    {
+      "test_id": 2,
+      "test_type": "implied_urgency",
+      "content_preview": "项目截止日期明天，核心功能尚未完成，客户非常不满",
+      "passed": false,
+      "category_match": true,
+      "priority_match": false,
+      "expected": "DEADLINE/P0",
+      "actual": "DEADLINE/P2",
+      "assessment": "失败"
+    },
+    {
+      "test_id": 3,
+      "test_type": "subtle_opportunity",
+      "content_preview": "上周开会时客户提到的那个想法，我们好像还没跟进",
+      "passed": true,
+      "category_match": true,
+      "priority_match": true,
+      "expected": "OPPORTUNITY/P2",
+      "actual": "OPPORTUNITY/P2",
+      "assessment": "通过"
+    },
+    {
+      "test_id": 4,
+      "test_type": "risk_underestimation",
+      "content_preview": "日志里有些奇怪的错误，不过好像没影响功能",
+      "passed": true,
+      "category_match": true,
+      "priority_match": false,
+      "expected": "UNRESOLVED/P1",
+      "actual": "UNRESOLVED/P2",
+      "assessment": "通过"
+    },
+    {
+      "test_id": 5,
+      "test_type": "compound_risk",
+      "content_preview": "API配额快用完了，同时存储也快满了，明天还要交付",
+      "passed": false,
+      "category_match": true,
+      "priority_match": false,
+      "expected": "RESOURCE/P0",
+      "actual": "RESOURCE/P2",
+      "assessment": "失败"
+    },
+    {
+      "test_id": 6,
+      "test_type": "external_dependency",
+      "content_preview": "供应商发邮件说可能要调整合作条款",
+      "passed": true,
+      "category_match": true,
+      "priority_match": false,
+      "expected": "EXTERNAL/P1",
+      "actual": "EXTERNAL/P2",
+      "assessment": "通过"
+    },
+    {
+      "test_id": 7,
+      "test_type": "vague_concern",
+      "content_preview": "感觉最近项目进展不太对劲，但具体说不上来",
+      "passed": true,
+      "category_match": true,
+      "priority_match": true,
+      "expected": "UNRESOLVED/P2",
+      "actual": "UNRESOLVED/P2",
+      "assessment": "通过"
+    }
+  ],
+  "failure_analysis": {
+    "patterns": {
+      "obvious_critical": 1,
+      "implied_urgency": 1,
+      "compound_risk": 1
+    },
+    "details": {
+      "obvious_critical": [
+        {
+          "test_id": 1,
+          "test_type": "obvious_critical",
+          "content_preview": "磁盘空间即将耗尽，剩余不足5%，系统可能随时崩溃",
+          "passed": false,
+          "category_match": true,
+          "priority_match": false,
+          "expected": "RESOURCE/P0",
+          "actual": "RESOURCE/P2",
+          "assessment": "失败"
+        }
+      ],
+      "implied_urgency": [
+        {
+          "test_id": 2,
+          "test_type": "implied_urgency",
+          "content_preview": "项目截止日期明天，核心功能尚未完成，客户非常不满",
+          "passed": false,
+          "category_match": true,
+          "priority_match": false,
+          "expected": "DEADLINE/P0",
+          "actual": "DEADLINE/P2",
+          "assessment": "失败"
+        }
+      ],
+      "compound_risk": [
+        {
+          "test_id": 5,
+          "test_type": "compound_risk",
+          "content_preview": "API配额快用完了，同时存储也快满了，明天还要交付",
+          "passed": false,
+          "category_match": true,
+          "priority_match": false,
+          "expected": "RESOURCE/P0",
+          "actual": "RESOURCE/P2",
+          "assessment": "失败"
+        }
+      ]
+    }
+  },
+  "implications": {
+    "detection_capability": "需改进",
+    "blind_spots": [
+      "obvious_critical",
+      "implied_urgency",
+      "compound_risk"
+    ],
+    "recommendations": [
+      "优先级评估准确度偏低，建议优化评估算法"
+    ]
+  }
+}

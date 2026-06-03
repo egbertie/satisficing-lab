@@ -1,0 +1,225 @@
+{
+  "source_path": "/root/.openclaw/workspace/.pre-restore-backup/docs/DISASTER_RECOVERY_V1.1.md",
+  "filename": "DISASTER_RECOVERY_V1.1.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 23484,
+  "checksum": "d34fb521261825d3",
+  "ingested_at": "2026-03-31T17:30:16.642041",
+  "line_count": 825,
+  "title": "灾备复刻重建完全手册 V1.1",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "灾备复刻重建完全手册 V1.1"
+    },
+    {
+      "level": 2,
+      "title": "📋 目录"
+    },
+    {
+      "level": 2,
+      "title": "1. 文档概述"
+    },
+    {
+      "level": 3,
+      "title": "1.1 目的"
+    },
+    {
+      "level": 3,
+      "title": "1.2 适用范围"
+    },
+    {
+      "level": 3,
+      "title": "1.3 风险矩阵"
+    },
+    {
+      "level": 2,
+      "title": "2. 7层备份清单（完整版）"
+    },
+    {
+      "level": 3,
+      "title": "2.1 L7: 运行时状态备份"
+    },
+    {
+      "level": 1,
+      "title": "session-backup.sh - 会话状态备份"
+    },
+    {
+      "level": 3,
+      "title": "2.2 L6: 动态记忆备份"
+    },
+    {
+      "level": 1,
+      "title": "检查MEMORY.md可读性"
+    },
+    {
+      "level": 1,
+      "title": "检查今日日志存在"
+    },
+    {
+      "level": 1,
+      "title": "统计记忆文件数量"
+    },
+    {
+      "level": 3,
+      "title": "2.3 L5: 知识资产备份"
+    },
+    {
+      "level": 3,
+      "title": "2.4 L4: 核心身份备份"
+    },
+    {
+      "level": 3,
+      "title": "2.5 L3: 协作网络备份"
+    },
+    {
+      "level": 3,
+      "title": "2.6 L2: 自动化流水线备份"
+    },
+    {
+      "level": 1,
+      "title": "每日定时任务"
+    },
+    {
+      "level": 1,
+      "title": "每周定时任务"
+    },
+    {
+      "level": 1,
+      "title": "每月定时任务"
+    },
+    {
+      "level": 1,
+      "title": "灾备相关"
+    },
+    {
+      "level": 1,
+      "title": "1. 读取配置文件"
+    },
+    {
+      "level": 1,
+      "title": "2. 验证当前cron任务"
+    },
+    {
+      "level": 1,
+      "title": "3. 如需恢复，从备份重新配置"
+    },
+    {
+      "level": 3,
+      "title": "2.7 L1: 元协议备份"
+    },
+    {
+      "level": 2,
+      "title": "3. RTO/RPO目标"
+    },
+    {
+      "level": 3,
+      "title": "3.1 关键术语"
+    },
+    {
+      "level": 3,
+      "title": "3.2 分层RTO/RPO"
+    },
+    {
+      "level": 3,
+      "title": "3.3 承诺与SLA"
+    },
+    {
+      "level": 2,
+      "title": "4. 多Claw架构灾备考虑"
+    },
+    {
+      "level": 3,
+      "title": "4.1 架构概述"
+    },
+    {
+      "level": 3,
+      "title": "4.2 状态同步协议"
+    },
+    {
+      "level": 1,
+      "title": "1. Git-based同步 (推荐)"
+    },
+    {
+      "level": 1,
+      "title": "2. 共享存储同步"
+    },
+    {
+      "level": 3,
+      "title": "4.3 故障切换流程"
+    },
+    {
+      "level": 1,
+      "title": "检查MEMORY.md最后更新时间"
+    },
+    {
+      "level": 1,
+      "title": "检查Git同步状态"
+    },
+    {
+      "level": 1,
+      "title": "验证关键文件哈希"
+    },
+    {
+      "level": 3,
+      "title": "4.4 影子Claw备份策略"
+    },
+    {
+      "level": 2,
+      "title": "5. 恢复流程"
+    },
+    {
+      "level": 3,
+      "title": "5.1 灾难分级"
+    },
+    {
+      "level": 3,
+      "title": "5.2 标准恢复流程 (REBIRTH)"
+    },
+    {
+      "level": 3,
+      "title": "5.3 场景化恢复指南"
+    },
+    {
+      "level": 4,
+      "title": "场景A: 完全冷启动（AI完全失效后重生）"
+    },
+    {
+      "level": 4,
+      "title": "场景B: 配置文件损坏"
+    },
+    {
+      "level": 1,
+      "title": "1. 从Git恢复"
+    },
+    {
+      "level": 1,
+      "title": "2. 验证配置完整性"
+    },
+    {
+      "level": 1,
+      "title": "3. 重启相关服务"
+    },
+    {
+      "level": 1,
+      "title": "(如有需要)"
+    },
+    {
+      "level": 4,
+      "title": "场景C: Cron任务丢失"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "RTO (Recovery Time Objective)",
+    "主控Claw失效时",
+    "RPO (Recovery Point Objective)",
+    "Cron任务备份清单"
+  ],
+  "limitations_applied": [
+    "Sections limited to 50"
+  ],
+  "content_truncated": false
+}

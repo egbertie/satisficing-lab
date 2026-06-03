@@ -1,0 +1,61 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/resource-limiter.sh",
+  "filename": "resource-limiter.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 3769,
+  "checksum": "2d746fe8ba2b9cf4",
+  "ingested_at": "2026-03-31T17:30:47.896029",
+  "line_count": 117,
+  "title": "resource-limiter",
+  "description": "Resource Limiter - 资源限制与保护",
+  "sections": [],
+  "entities": [
+    {
+      "name": "log",
+      "type": "shell_function"
+    },
+    {
+      "name": "check_cpu_abusers",
+      "type": "shell_function"
+    },
+    {
+      "name": "check_memory_abusers",
+      "type": "shell_function"
+    },
+    {
+      "name": "check_file_handles",
+      "type": "shell_function"
+    },
+    {
+      "name": "check_network_connections",
+      "type": "shell_function"
+    },
+    {
+      "name": "check_io_pressure",
+      "type": "shell_function"
+    },
+    {
+      "name": "main",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "Resource Limiter - 资源限制与保护",
+    "运行频率: 每5分钟",
+    "资源限制阈值",
+    "CPU资源限制",
+    "如果是用户进程，尝试降低优先级",
+    "如果持续超过80%，记录详细信息",
+    "内存资源限制",
+    "如果RSS超过1GB且不是关键服务，警告",
+    "文件句柄限制",
+    "系统总句柄数",
+    "检查单个进程的句柄使用",
+    "网络连接限制",
+    "尝试清理（谨慎）",
+    "echo 1 > /proc/sys/net/ipv4/tcp_tw_reuse 2>/dev/null || true"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

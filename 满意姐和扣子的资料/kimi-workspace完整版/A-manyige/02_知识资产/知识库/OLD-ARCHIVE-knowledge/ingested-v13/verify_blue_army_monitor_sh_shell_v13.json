@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify_blue_army_monitor.sh",
+  "filename": "verify_blue_army_monitor.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "d41cf60675aaca32",
+  "content_length": 278,
+  "ingested_at": "2026-03-31T17:27:46.182542",
+  "content_preview": "#!/bin/bash\necho \"=== blue_army_monitor.sh - 8步验证 ===\"\nSCRIPT=\"/root/.openclaw/workspace/scripts/blue_army_monitor.sh\"\ntest -f \"$SCRIPT\" && echo \"Step1 ✅\"\nbash -n \"$SCRIPT\" 2>/dev/null && echo \"Step2 ✅\"\ntest -x \"$SCRIPT\" && echo \"Step3 ✅\"\necho \"Step4-8: 待验证\"\necho \"状态: PENDING\"\n",
+  "limitations_applied": []
+}

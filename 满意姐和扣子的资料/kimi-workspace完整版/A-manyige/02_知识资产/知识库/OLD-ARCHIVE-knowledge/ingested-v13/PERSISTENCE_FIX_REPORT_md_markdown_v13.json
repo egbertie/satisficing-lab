@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blue-auditor/PERSISTENCE_FIX_REPORT.md",
+  "filename": "PERSISTENCE_FIX_REPORT.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "0972c91a053c3f02",
+  "content_length": 2147,
+  "ingested_at": "2026-03-31T17:27:45.374792",
+  "content_preview": "# 紧箍咒持久化修复报告\n\n**修复时间**: 2026-03-29 21:10  \n**问题**: 紧箍咒数据存储在/tmp，系统重启后会丢失  \n**状态**: ✅ 已修复\n\n---\n\n## 问题分析\n\n**原设计缺陷**:\n- 蓝军延迟积分: `/tmp/blue_army_delay_points` ❌ 重启丢失\n- 蓝军审计时间: `/tmp/blue_army_last_audit_time` ❌ 重启丢失\n- 满意妞信用额度: `/tmp/satisfied_girl_credit` ❌ 重启丢失\n- 满意妞每日额度: `/tmp/satisfied_girl_daily_quota` ❌ 重启丢失\n- 满意妞冷却期: `/tmp/satisfied_girl_cooldown_end` ❌ 重启丢失\n\n**风险**: 系统重启后紧箍咒全部失效，约束归零\n\n---\n\n## 修复措施\n\n### 1. 持久化目录创建\n```\n/root/.openclaw/workspace/skills/blue-auditor/tightening_spell_data/\n├── blu",
+  "limitations_applied": []
+}

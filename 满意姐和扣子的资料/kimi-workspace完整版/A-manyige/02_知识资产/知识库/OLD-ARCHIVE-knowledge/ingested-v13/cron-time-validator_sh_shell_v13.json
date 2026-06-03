@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/cron-time-validator.sh",
+  "filename": "cron-time-validator.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "20d6436c3fb1d1d3",
+  "content_length": 688,
+  "ingested_at": "2026-03-31T17:27:46.153183",
+  "content_preview": "#!/bin/bash\n# Cron时间验证脚本 - 防止准点定时任务\n# 创建时间: 2026-03-20\n# 用途: 验证所有cron任务是否错峰\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nLOG_FILE=\"$WORKSPACE/logs/cron-validator.log\"\n\necho \"=== Cron时间验证器 ===\" | tee -a $LOG_FILE\necho \"时间: $(date)\" | tee -a $LOG_FILE\n\n# 检查所有cron任务\nVIOLATIONS=0\n\n# 读取cron列表并检查\n# 准点模式: :00, :30\n# 需要错峰: :07, :13, :17, :23, :37, :42, :47, :53\n\necho \"检查准点违规...\" | tee -a $LOG_FILE\n\n# Token耗尽预警检查 - 应为 */4小时错峰\n# Kimi Search每日资讯采集 - 应为09:03错峰\n# 每周六项目复盘 - 应为10:07错峰\n\n# 如果发现准点任务，输出告警\nif [ $VIOLATIO",
+  "limitations_applied": []
+}

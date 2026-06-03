@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/full_code_existence_check.sh",
+  "filename": "full_code_existence_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "330744fc0992a43d",
+  "content_length": 3180,
+  "ingested_at": "2026-03-31T17:27:46.181102",
+  "content_preview": "#!/bin/bash\n# 全量代码存在性验证脚本 - 第一项任务\n# 验证所有声称FIN的Skill是否真有代码\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nREPORT_DIR=\"$WORKSPACE/reports\"\nTIMESTAMP=$(date '+%Y%m%d_%H%M%S')\nREPORT_FILE=\"$REPORT_DIR/code_existence_full_report_${TIMESTAMP}.md\"\n\necho \"=== 全量代码存在性验证开始 ===\"\necho \"时间: $(date)\"\necho \"\"\n\nmkdir -p \"$REPORT_DIR\"\n\n# 统计总览\necho \"正在统计...\"\nTOTAL_SKILLS=$(find \"$WORKSPACE/skills\" -name \"SKILL.md\" | wc -l)\nTOTAL_PY=$(find \"$WORKSPACE/skills\" -name \"*.py\" | wc -l)\nTOTAL_SH=$(find \"$WORKSPACE/skills\" -name",
+  "limitations_applied": []
+}

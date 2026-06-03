@@ -1,0 +1,70 @@
+# UP主/主播行业配置
+
+# 行业模板标识
+industry_template: "uphost"
+
+# 财务阈值
+monthly_living_expenses: 7000  # 月生活费（元）
+emergency_fund_months: 3
+
+# 提醒时段
+reminder_hours:
+  morning: 10
+  afternoon: 15
+  evening: 22
+
+# 健康阈值
+max_continuous_work_hours: 4
+min_sleep_hours: 7
+min_weekly_exercise: 2
+
+# 自定义关键词（UP主/主播专用）
+business_keywords:
+  - 视频
+  - 直播
+  - 拍摄
+  - 剪辑
+  - 粉丝
+  - 播放
+  - 联动
+  - 话题
+
+# 外部系统集成
+integrations:
+  calendar:
+    google_calendar:
+      enabled: false
+      api_key: ""
+      calendar_id: ""
+      sync_direction: "bidirectional"
+
+  streaming_platforms:
+    douyin:
+      enabled: false
+      access_token: ""
+      sync_frequency: "daily"
+    kuaishou:
+      enabled: false
+      access_token: ""
+      sync_frequency: "daily"
+    bilibili:
+      enabled: false
+      access_token: ""
+      sync_frequency: "daily"
+
+# 智能决策配置
+ai_decisions:
+  enabled: true
+  auto_analysis_frequency: "daily"
+  content_suggestion_enabled: true
+  trend_analysis_enabled: true
+  collaboration_opportunity_enabled: true
+
+# UP主/主播专用配置
+streaming_management:
+  default_stream_duration: 3  # 默认直播时长（小时）
+  min_days_between_streams: 2  # 两次直播最小间隔（天）
+  collab_followup_frequency: 7  # 联动跟进周期（天）
+
+# 其他配置
+default_timezone: Asia/Shanghai

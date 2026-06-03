@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/test_feishu_endpoints.py",
+  "filename": "test_feishu_endpoints.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "2e87e123c117d0c7",
+  "content_length": 1829,
+  "ingested_at": "2026-03-31T17:27:46.215113",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n飞书API测试 - 尝试不同端点\n\"\"\"\n\nimport json\nimport requests\n\ndef get_token():\n    with open('/root/.openclaw/workspace/config/feishu_config.json', 'r') as f:\n        config = json.load(f)\n    \n    response = requests.post(\n        f\"{config['base_url']}/auth/v3/tenant_access_token/internal\",\n        json={\"app_id\": config['app_id'], \"app_secret\": config['app_secret']},\n        timeout=30\n    )\n    return response.json()['tenant_access_token']\n\ndef test_endpoints():\n    token = g",
+  "limitations_applied": []
+}

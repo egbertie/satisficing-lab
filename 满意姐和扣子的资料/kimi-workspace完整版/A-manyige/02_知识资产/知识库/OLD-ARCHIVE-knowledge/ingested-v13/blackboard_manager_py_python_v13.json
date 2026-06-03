@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blackboard-manager/blackboard_manager.py",
+  "filename": "blackboard_manager.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "d840c7ec985b2df3",
+  "content_length": 9513,
+  "ingested_at": "2026-03-31T17:27:45.411310",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nblackboard-manager: 共享内存状态管理\n实现Worker间状态共享（Blackboard模式）\n\n作者: 满意妞\n版本: 1.0.0\n日期: 2026-03-28\n\"\"\"\n\nimport json\nimport threading\nimport time\nfrom pathlib import Path\nfrom typing import Any, Dict, List, Optional, Callable, Tuple\nfrom dataclasses import dataclass, field\nfrom datetime import datetime\nimport copy\n\n\n@dataclass\nclass StateEntry:\n    \"\"\"状态条目\"\"\"\n    key: str\n    value: Any\n    version: int = 1\n    writer_id: str = \"\"\n    timestamp: str = field(default_factory=lamb",
+  "limitations_applied": []
+}

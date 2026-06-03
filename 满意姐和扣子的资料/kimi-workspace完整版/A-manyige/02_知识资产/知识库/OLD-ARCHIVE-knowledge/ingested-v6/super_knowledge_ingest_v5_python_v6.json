@@ -1,0 +1,75 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/super-knowledge-ingest/super_knowledge_ingest_v5.py",
+  "filename": "super_knowledge_ingest_v5.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 18853,
+  "checksum": "f6efd7e371c1a125",
+  "ingested_at": "2026-03-31T17:30:32.731115",
+  "line_count": 518,
+  "title": "super_knowledge_ingest_v5",
+  "description": "super-knowledge-ingest V5.0 - 极致能效版\n核心突破：零拷贝 + 内存映射 + 结构缓存 + 批量并行\n目标：接近 0ms（缓存命中），批量处理 100 文件 < 1s\n参考：ZeroMQ 零拷贝理念 + Redis 内存数据结构",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: ContentRef"
+    },
+    {
+      "level": 2,
+      "title": "Class: ScanResult"
+    },
+    {
+      "level": 2,
+      "title": "Class: MemoryMappedFile"
+    },
+    {
+      "level": 2,
+      "title": "Class: ZeroCopyIngestor"
+    },
+    {
+      "level": 2,
+      "title": "Class: BatchIngestor"
+    }
+  ],
+  "entities": [
+    {
+      "name": "ContentRef",
+      "type": "class"
+    },
+    {
+      "name": "ScanResult",
+      "type": "class"
+    },
+    {
+      "name": "MemoryMappedFile",
+      "type": "class"
+    },
+    {
+      "name": "ZeroCopyIngestor",
+      "type": "class"
+    },
+    {
+      "name": "BatchIngestor",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "============ 全局常量与缓存 ============",
+    "预编译正则（全局复用）",
+    "LRU 淘汰：移除最旧的",
+    "小文件：不压缩，直接存",
+    "========== 单次极速扫描 ==========",
+    "1. 章节提取 + 行索引构建（一次遍历）",
+    "计算行号（优化：利用已知位置）",
+    "2. 语录提取（限制范围）",
+    "4. 关键点（只扫描前 30KB）",
+    "========== 7层标准（极简实现） ==========",
+    "小文件：直接存原文 + 结构",
+    "大文件：压缩内容 + 结构",
+    "========== 主流程 ==========",
+    "1. 读取 + 计算哈希"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

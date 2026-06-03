@@ -1,0 +1,151 @@
+version: "2026-03-26"
+description: "知识操作系统 - 四层记忆架构"
+
+# 4.1 知识分层架构
+knowledge_layers:
+  l1_core:
+    name: "Core"
+    storage: "memory/MEMORY.md"
+    max_size: "5KB"
+    retention: "permanent"
+    content_types:
+      - 身份定义
+      - 用户信息
+      - 当前任务上下文
+      - 关键决策
+      - 信任积分
+    update_frequency: "on_change"
+    
+  l2_working:
+    name: "Working"
+    storage: "memory/YYYY-MM-DD.md"
+    max_size: "50KB"
+    retention: "30_days"
+    content_types:
+      - 当日操作日志
+      - 进行中任务
+      - 临时决策
+      - 会话摘要
+    update_frequency: "realtime"
+    
+  l3_archive:
+    name: "Archive"
+    storage: "memory/archive/"
+    structure:
+      by_project: "projects/"
+      by_month: "logs/YYYY-MM/"
+      by_topic: "topics/"
+    retention: "permanent"
+    content_types:
+      - 项目历史
+      - 战略演进
+      - 专家档案详情
+      - 技能文档
+    update_frequency: "daily"
+    
+  l4_external:
+    name: "External"
+    storage: "引用链接和文档ID"
+    retention: "reference_only"
+    content_types:
+      - 飞书文档链接
+      - 企微表格ID
+      - GitHub Issues
+      - 外部报告
+    update_frequency: "on_reference"
+
+# 4.2 自动关联系统
+auto_linking:
+  enabled: true
+  
+  rules:
+    expert_linking:
+      trigger: "提及专家名称"
+      examples: ["黎红雷", "罗汉", "方翊沣"]
+      action: "链接到memory/experts/专家名.md"
+      
+    project_linking:
+      trigger: "提及项目名称"
+      examples: ["满意解研究所", "五路图腾"]
+      action: "链接到projects/项目名/"
+      
+    date_linking:
+      trigger: "日期格式 YYYY-MM-DD"
+      action: "链接到memory/日期.md"
+      
+    skill_linking:
+      trigger: "提及Skill名称"
+      examples: ["feishu-bitable", "calendar"]
+      action: "链接到skills/Skill名/SKILL.md"
+      
+    file_linking:
+      trigger: "文件路径引用"
+      action: "验证文件存在并建立链接"
+
+  bidirectional: true
+  auto_update_index: true
+
+# 4.3 检索增强
+retrieval_boost:
+  enabled: true
+  
+  factors:
+    recency:
+      weight: 0.7
+      decay: "exponential"
+      half_life: "7_days"
+      
+    frequency:
+      weight: 0.3
+      count_access: true
+      boost_top: 10
+      
+    relevance:
+      method: "keyword_match"
+      synonym_expansion: true
+
+# 4.4 知识维护
+maintenance:
+  daily:
+    - 归档过期Working层内容
+    - 更新索引
+    - 验证外部链接
+    
+  weekly:
+    - 压缩Archive层
+    - 生成知识图谱报告
+    - 清理无效链接
+    
+  monthly:
+    - 全量索引重建
+    - 知识质量评估
+    - 更新专家档案
+
+# 4.5 知识安全
+security:
+  classification:
+    public:
+      level: 0
+      storage: ["l4_external"]
+      encryption: false
+      
+    internal:
+      level: 1
+      storage: ["l2_working", "l3_archive"]
+      encryption: false
+      
+    confidential:
+      level: 2
+      storage: ["l1_core", "l2_working"]
+      encryption: "at_rest"
+      
+    secret:
+      level: 3
+      storage: [".env files only"]
+      encryption: "hardware_backed"
+      
+  access_log:
+    enabled: true
+    log_reads: true
+    log_writes: true
+    retention: "90_days"

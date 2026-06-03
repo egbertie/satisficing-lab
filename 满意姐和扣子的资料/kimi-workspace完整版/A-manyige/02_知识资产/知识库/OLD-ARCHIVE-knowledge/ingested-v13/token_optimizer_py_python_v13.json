@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/token-optimizer/token_optimizer.py",
+  "filename": "token_optimizer.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "3bc2e9f5242d8649",
+  "content_length": 4670,
+  "ingested_at": "2026-03-31T17:27:45.474281",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nToken Optimizer - Token优化器\n监控和优化Token使用效率\n\"\"\"\n\nimport json\nimport os\nimport sys\nfrom pathlib import Path\nfrom datetime import datetime, timedelta\nfrom typing import Dict, List, Optional, Any\n\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nOPTIMIZER_DB = WORKSPACE / \"memory\" / \"token-optimizer-db.json\"\n\nclass TokenOptimizer:\n    \"\"\"Token优化器\"\"\"\n    \n    def __init__(self, daily_budget: int = 100000):\n        self.daily_budget = daily_budget\n        self.db_path = OPTIMIZE",
+  "limitations_applied": []
+}

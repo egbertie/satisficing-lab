@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.github/workflows/context-check.yml",
+  "filename": "context-check.yml",
+  "file_type": "yaml",
+  "extension": ".yml",
+  "file_hash": "66f9d09d650b6bd6",
+  "content_length": 6707,
+  "ingested_at": "2026-03-31T17:27:44.985766",
+  "content_preview": "name: Context Size Check\n\non:\n  # 定时触发：每 30 分钟检查一次\n  schedule:\n    - cron: '*/30 * * * *'\n  \n  # 手动触发\n  workflow_dispatch:\n    inputs:\n      threshold:\n        description: '自定义黄色阈值（KB）'\n        required: false\n        default: '30'\n        type: string\n\nenv:\n  # 阈值配置\n  CONTEXT_YELLOW_THRESHOLD: ${{ github.event.inputs.threshold && fromJSON(github.event.inputs.threshold) * 1024 || 30720 }}\n  CONTEXT_RED_THRESHOLD: 51200\n  CONVERSATION_HARD_LIMIT: 100\n\njobs:\n  check-context:\n    name: Check Conte",
+  "limitations_applied": []
+}

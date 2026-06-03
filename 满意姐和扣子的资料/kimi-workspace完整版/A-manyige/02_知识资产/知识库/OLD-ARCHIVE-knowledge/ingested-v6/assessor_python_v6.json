@@ -1,0 +1,60 @@
+{
+  "source_path": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/task-priority-intelligence/assessor.py",
+  "filename": "assessor.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 14061,
+  "checksum": "d3a7f8bbfeaa7755",
+  "ingested_at": "2026-03-31T17:30:32.045308",
+  "line_count": 395,
+  "title": "assessor",
+  "description": "任务优先级智能判定器 - Task Priority Intelligence\n\n功能：自动判定任务优先级（P0/P1/P2/P3）\n算法：多因子评分（紧急度×0.4 + 重要度×0.3 + 依赖度×0.2 + 资源匹配度×0.1）",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: TaskInput"
+    },
+    {
+      "level": 2,
+      "title": "Class: PriorityResult"
+    },
+    {
+      "level": 2,
+      "title": "Class: TaskPriorityIntelligence"
+    }
+  ],
+  "entities": [
+    {
+      "name": "TaskInput",
+      "type": "class"
+    },
+    {
+      "name": "PriorityResult",
+      "type": "class"
+    },
+    {
+      "name": "TaskPriorityIntelligence",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "权重配置（更新：增加外部依赖风险权重）",
+    "新增：外部依赖相关关键词",
+    "外部依赖风险加分（提升优先级以触发处理）",
+    "如果任务需要大量资源，分数降低（表示需要更多协调）",
+    "第一性原则：内部优先，外部补充",
+    "规则1：检测\"等待附件\"类描述",
+    "规则2：检测\"外部输入\"类描述",
+    "规则3：检测\"待确认\"类描述",
+    "返回风险分数和建议动作",
+    "新增：外部依赖风险说明",
+    "生成详细报告（第一个任务）"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

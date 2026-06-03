@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/SECURITY_AUDIT_2026-03-21.md",
+  "filename": "SECURITY_AUDIT_2026-03-21.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "4a96edc84b03825e",
+  "content_length": 2453,
+  "ingested_at": "2026-03-31T17:27:46.517202",
+  "content_preview": "# AI Agent 安全风险自查报告\n> 参考：微信公众号《AI Agent又出事！314个恶意插件被下架》\n> 审计时间：2026-03-21 08:05\n> 审计范围：OpenClaw系统全量检查\n\n---\n\n## 🚨 执行摘要\n\n| 风险等级 | 数量 | 状态 |\n|---------|------|------|\n| 🔴 高危 | 3项 | 需立即修复 |\n| 🟡 中危 | 4项 | 建议本周修复 |\n| 🟢 低危 | 2项 | 可延后处理 |\n\n**总体评估：中高风险**\n- 系统暴露面：较大（836个Python文件，2555个JS/TS文件）\n- 敏感数据保护：不足（API密钥明文存储，权限过宽）\n- 供应链安全：需审查（4个第三方扩展）\n\n---\n\n## 🔴 高危风险（立即修复）\n\n### R1: API密钥明文存储 + 权限过宽\n**发现**：\n- 6个.env文件存储API密钥\n- 权限644（其他用户可读）\n- .gitignore未排除.env文件\n\n**风险**：\n- 密钥泄露可导致账户被盗\n- 被恶意利用产生高额费用\n- 数据被窃取\n\n**修复措施**：",
+  "limitations_applied": []
+}

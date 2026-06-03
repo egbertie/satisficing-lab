@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/deep_insight_validator.py",
+  "filename": "deep_insight_validator.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "1accd6b157e36277",
+  "content_length": 4282,
+  "ingested_at": "2026-03-31T17:27:46.176118",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n深度洞察验证脚本\n用途: 自动检查洞察报告是否包含全部10个方法论\n规则: 少一个方法论 = 验证失败\n时间: 2026-03-30\n\"\"\"\n\nimport sys\nimport json\nimport re\nfrom datetime import datetime\nfrom pathlib import Path\n\n# 10方法论关键词定义\nMETHODOLOGY_KEYWORDS = {\n    \"first_principles\": [\"第一性原理\", \"物理本质\", \"拆解\"],\n    \"satisficing\": [\"满意解\", \"最优解陷阱\", \"分批次\"],\n    \"antifragile\": [\"反脆弱\", \"从失败中获益\", \"失败→学习→机制\"],\n    \"skeptor7\": [\"Skeptor-7\", \"7问\", \"我遗漏了什么\"],\n    \"time_asymmetry\": [\"时间不对称\", \"现在省\", \"未来付\", \"净收益\"],\n    \"five_totems\": [\"五图腾\", \"LI",
+  "limitations_applied": []
+}

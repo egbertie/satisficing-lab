@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/feishu_parent_token_test.py",
+  "filename": "feishu_parent_token_test.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "3edfca71272e6042",
+  "content_length": 2557,
+  "ingested_at": "2026-03-31T17:27:46.178771",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n测试 parent_token 方案 - 创建文档到指定文件夹\n\"\"\"\n\nimport json\nimport requests\n\nAPP_ID = \"cli_a927c5dfa4381cc6\"\nAPP_SECRET = \"8950yzh6jj17nQkKBjvGIdRocdrslhjI\"\n\ndef get_tenant_token():\n    url = \"https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal\"\n    resp = requests.post(url, json={\n        \"app_id\": APP_ID,\n        \"app_secret\": APP_SECRET\n    })\n    return resp.json()[\"tenant_access_token\"]\n\ndef get_folders():\n    \"\"\"获取所有文件夹\"\"\"\n    token = get_tenant_token()\n  ",
+  "limitations_applied": []
+}

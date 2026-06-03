@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_knowledge-graph-manager/scripts/kg_updater.py",
+  "filename": "kg_updater.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "c3cce6cf75ee2f6a",
+  "content_length": 12676,
+  "ingested_at": "2026-03-31T17:27:45.283199",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nKnowledge Graph Auto-Updater\n知识图谱自动更新脚本 - Phase 3深挖迭代\n自动从文档、Skill、日志中抽取实体和关系\n\"\"\"\n\nimport os\nimport json\nimport re\nimport hashlib\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import List, Dict, Tuple, Set\n\nclass KnowledgeGraphUpdater:\n    \"\"\"知识图谱自动更新器\"\"\"\n    \n    def __init__(self, kg_path: str = \"/root/.openclaw/workspace/backups/layer5_knowledge/kg_snapshot_v1.json\"):\n        self.kg_path = kg_path\n        self.kg = self._load_kg()\n        self.n",
+  "limitations_applied": []
+}

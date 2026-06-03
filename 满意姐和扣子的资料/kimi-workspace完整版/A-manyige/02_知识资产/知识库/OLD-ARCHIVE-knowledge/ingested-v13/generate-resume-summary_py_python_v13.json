@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/generate-resume-summary.py",
+  "filename": "generate-resume-summary.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e8c5bc1c38062712",
+  "content_length": 3795,
+  "ingested_at": "2026-03-31T17:27:46.189664",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n生成恢复摘要 - 零Token上下文恢复\n\"\"\"\n\nimport json\nimport os\nimport sys\nfrom datetime import datetime\n\ndef generate_summary():\n    workspace = \"/root/.openclaw/workspace\"\n    memory_dir = f\"{workspace}/memory\"\n    \n    summary = {\n        \"generated_at\": datetime.now().isoformat(),\n        \"session_id\": os.environ.get(\"CLAW_SESSION_ID\", \"main\"),\n        \"active_context\": {},\n        \"recent_files\": [],\n        \"pending_tasks\": [],\n        \"last_memory\": None,\n        \"checkpoints_a",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/zero-token-monitor.py",
+  "filename": "zero-token-monitor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "72dc1df4c50bf80d",
+  "content_length": 4730,
+  "ingested_at": "2026-03-31T17:27:46.214947",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n零Token实时文件监控 - 替代Cron轮询\n使用inotify事件驱动，零API调用\n\"\"\"\n\nimport os\nimport sys\nimport time\nimport json\nimport tarfile\nfrom datetime import datetime\nfrom watchdog.observers import Observer\nfrom watchdog.events import FileSystemEventHandler\n\ntry:\n    import zstandard as zstd\n    ZSTD_AVAILABLE = True\nexcept ImportError:\n    ZSTD_AVAILABLE = False\n\nclass ZeroTokenMonitor(FileSystemEventHandler):\n    def __init__(self):\n        self.vault_path = os.path.expanduser(\"~/.openclaw/imm",
+  "limitations_applied": []
+}

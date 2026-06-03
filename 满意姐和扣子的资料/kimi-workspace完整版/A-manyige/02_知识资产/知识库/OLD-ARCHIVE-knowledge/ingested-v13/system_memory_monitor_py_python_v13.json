@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/system_memory_monitor.py",
+  "filename": "system_memory_monitor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "10b068f30a24ac52",
+  "content_length": 1851,
+  "ingested_at": "2026-03-31T17:27:46.186786",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n系统内存监控 - 修复版\n监控实际系统内存，不是Python进程内存\n\"\"\"\n\nimport psutil\nimport sys\nfrom pathlib import Path\n\ndef check_system_memory():\n    \"\"\"检查系统内存（实际可用内存）\"\"\"\n    mem = psutil.virtual_memory()\n    \n    # 实际指标\n    total_mb = mem.total / (1024 * 1024)\n    available_mb = mem.available / (1024 * 1024)\n    used_mb = mem.used / (1024 * 1024)\n    percent = mem.percent\n    \n    # 基线限制\n    BASELINE_MAX = 1024  # MB\n    \n    status = {\n        \"total_mb\": round(total_mb, 2),\n        \"available_",
+  "limitations_applied": []
+}

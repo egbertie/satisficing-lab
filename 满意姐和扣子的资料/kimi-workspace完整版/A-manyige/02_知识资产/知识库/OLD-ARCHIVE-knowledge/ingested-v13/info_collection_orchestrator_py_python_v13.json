@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/info-collection-orchestrator/info_collection_orchestrator.py",
+  "filename": "info_collection_orchestrator.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "5ba14def3e817051",
+  "content_length": 11855,
+  "ingested_at": "2026-03-31T17:27:44.820297",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n信息收集与迭代编排器 V1.0\n统一协调所有信息收集活动，确保持续迭代和更新\n\n核心职责:\n1. 统筹33位小伙伴的信息收集工作\n2. 确保信息持续更新和迭代\n3. 管理信息质量和可信度\n4. 协调信息分发和使用\n\"\"\"\n\nimport json\nimport schedule\nimport time\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import Dict, List, Optional\nfrom dataclasses import dataclass, asdict\n\n@dataclass\nclass CollectionTask:\n    \"\"\"信息收集任务\"\"\"\n    task_id: str\n    name: str\n    assignee: str  # AI小伙伴ID\n    skill_name: str  # 使用的专属Skill\n    sources: List[str]  # 信息",
+  "limitations_applied": []
+}

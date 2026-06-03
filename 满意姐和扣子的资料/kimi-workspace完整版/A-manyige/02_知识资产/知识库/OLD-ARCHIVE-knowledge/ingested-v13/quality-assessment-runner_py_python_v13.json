@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/quality-assessment/scripts/quality-assessment-runner.py",
+  "filename": "quality-assessment-runner.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "4f806fdc2baf6906",
+  "content_length": 8523,
+  "ingested_at": "2026-03-31T17:27:45.434478",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nquality-assessment-runner.py\n质量评估体系执行器 - 5标准 (S1-S7)\n\nGenerated: 2026-03-21\nVersion: 5.0.0\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport logging\nimport argparse\nimport subprocess\nfrom datetime import datetime\nfrom pathlib import Path\n\nSKILL_NAME = \"quality-assessment\"\nSCRIPT_DIR = Path(__file__).parent\nSKILL_DIR = SCRIPT_DIR.parent\nWORKSPACE_DIR = SKILL_DIR.parent.parent\nLOG_DIR = Path(\"logs\")\nREPORT_DIR = WORKSPACE_DIR / \"reports\" / \"assessment\"\nCONFIG_DIR = SKILL_DIR ",
+  "limitations_applied": []
+}

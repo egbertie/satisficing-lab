@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/authority-switch/test_authority.py",
+  "filename": "test_authority.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "5838b0708cd95847",
+  "content_length": 365,
+  "ingested_at": "2026-03-31T17:27:45.477322",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nauthority-switch测试\n\"\"\"\n\nimport unittest\nfrom pathlib import Path\n\n\nclass TestAuthoritySwitch(unittest.TestCase):\n    \"\"\"权限切换测试\"\"\"\n    \n    def test_skill_exists(self):\n        \"\"\"测试Skill存在\"\"\"\n        skill_dir = Path(__file__).parent\n        self.assertTrue(skill_dir.exists())\n\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+  "limitations_applied": []
+}

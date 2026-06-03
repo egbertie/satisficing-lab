@@ -1,0 +1,32 @@
+{
+  "jobs": [
+    {
+      "name": "token-weekly-daily-check",
+      "schedule": "0 12 * * *",
+      "command": "cd /root/.openclaw/workspace && python3 skills/token-weekly-monitor/scripts/token-weekly-monitor-runner.py run --check",
+      "description": "每日中午12点执行Token检查 (S4)",
+      "enabled": true
+    },
+    {
+      "name": "token-weekly-sunday-report",
+      "schedule": "0 20 * * 0",
+      "command": "cd /root/.openclaw/workspace && python3 skills/token-weekly-monitor/scripts/token-weekly-monitor-runner.py run --weekly-report",
+      "description": "每周日晚8点生成周报并推送 (S4)",
+      "enabled": true
+    },
+    {
+      "name": "token-weekly-wednesday-reset",
+      "schedule": "0 12 * * 3",
+      "command": "cd /root/.openclaw/workspace && python3 skills/token-weekly-monitor/scripts/token-weekly-monitor-runner.py run --reset-cycle",
+      "description": "每周三中午12点重置新周期 (周期定义)",
+      "enabled": true
+    },
+    {
+      "name": "token-weekly-validation",
+      "schedule": "0 9 * * 1",
+      "command": "cd /root/.openclaw/workspace && python3 skills/token-weekly-monitor/scripts/token-weekly-monitor-runner.py validate",
+      "description": "每周一上午9点执行数据验证 (S5)",
+      "enabled": true
+    }
+  ]
+}

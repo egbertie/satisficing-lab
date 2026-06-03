@@ -1,0 +1,48 @@
+# 孔子图腾 Skill配置
+# 文件11 - 图腾数字替身系统
+# 五行: 木
+# 核心: 仁义礼智信，修身齐家治国平天下
+
+skill:
+  name: totem_confucius
+  display_name: 孔子图腾
+  description: 至圣先师数字替身 - 儒商伦理与信任治理
+  version: 1.0.0
+  
+  triggers:
+    - pattern: "\\[激活孔子\\]"
+      type: regex
+    - pattern: "仁义礼智信|论语|儒商"
+      type: contains
+    - pattern: "伦理|道德|五常"
+      type: contains
+  
+  system_prompt: prompts/confucius_system_prompt.txt
+  
+  knowledge_base:
+    - path: knowledge/analects.md
+      description: 论语精选
+    - path: knowledge/confucian_ethics.md
+      description: 儒商伦理框架
+  
+  output_format:
+    structure: three_part
+    parts:
+      - name: ethics_review
+        title: "伦理审视"
+      - name: guidance
+        title: "修身指引"
+      - name: maxim
+        title: "圣贤语录"
+  
+  tags:
+    - ethics
+    - confucianism
+    - trust_governance
+    - five_virtues
+  
+  metadata:
+    element: wood
+    principle: 仁义礼智信
+    classics: analects
+    expert: li_honglei

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/skills/Skill部署执行方案.md",
+  "filename": "Skill部署执行方案.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "83c316be40376b06",
+  "content_length": 4038,
+  "ingested_at": "2026-03-31T17:27:46.669823",
+  "content_preview": "# Skill部署执行方案\n\n**执行时间**：2026-03-09 20:05  \n**执行状态**：ClawHub API限流，转为手动部署  \n**部署目标**：github-integration + notion-integration + slack-integration\n\n---\n\n## 一、部署状态\n\n### 自动安装受阻原因\n\n| 尝试方式 | 结果 | 原因 |\n|---------|------|------|\n| clawhub install | ❌ 失败 | API Rate Limit |\n| npx clawhub install | ❌ 失败 | API Rate Limit |\n| git clone | ❌ 失败 | 需GitHub认证 |\n\n### 解决方案\n\n**转为手动部署 + 延时重试机制**\n\n---\n\n## 二、手动部署方案\n\n### 2.1 github-integration 手动部署\n\n**功能需求**：\n- Git版本控制项目文档\n- Webhook通知飞书\n- PR管理重要变更\n\n**部署步骤**：\n\n```bash\n# 步",
+  "limitations_applied": []
+}

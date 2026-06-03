@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/info-collection-workflow/info_collection_workflow.py",
+  "filename": "info_collection_workflow.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "a26420dd9fa0bd32",
+  "content_length": 14680,
+  "ingested_at": "2026-03-31T17:27:44.767536",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n信息收集统一工作流 V1.0\n整合所有信息收集Skill，提供一站式信息收集能力\n\n工作流程:\n1. 搜索 → 2. 抓取 → 3. 清洗 → 4. 提取 → 5. 输出\n\"\"\"\n\nimport json\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Optional\n\n# 导入各个Skill\nimport sys\nsys.path.insert(0, '/root/.openclaw/workspace/skills/smart-web-scraper')\nsys.path.insert(0, '/root/.openclaw/workspace/skills/multi-source-search')\nsys.path.insert(0, '/root/.openclaw/workspace/skills/info-cleaner')\nsys.path.insert(0, '/root/.openclaw",
+  "limitations_applied": []
+}

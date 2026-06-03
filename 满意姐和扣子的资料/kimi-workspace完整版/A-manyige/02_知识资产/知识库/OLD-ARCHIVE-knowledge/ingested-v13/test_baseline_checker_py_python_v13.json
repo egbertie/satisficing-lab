@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/baseline-checker/scripts/test_baseline_checker.py",
+  "filename": "test_baseline_checker.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "45ce506f0ad2e8aa",
+  "content_length": 4131,
+  "ingested_at": "2026-03-31T17:27:45.454007",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nbaseline-checker测试文件\n验证基线检查器核心功能\n\"\"\"\n\nimport unittest\nimport json\nimport sys\nimport os\nfrom pathlib import Path\nfrom unittest.mock import patch, MagicMock\n\n# 添加脚本路径\nsys.path.insert(0, str(Path(__file__).parent))\n\n# 导入baseline-checker-runner (处理连字符文件名)\nimport importlib.util\nspec = importlib.util.spec_from_file_location(\"baseline_checker_runner\", \n    str(Path(__file__).parent / 'baseline-checker-runner.py'))\nbaseline_module = importlib.util.module_from_spec(spec)\nspec.l",
+  "limitations_applied": []
+}

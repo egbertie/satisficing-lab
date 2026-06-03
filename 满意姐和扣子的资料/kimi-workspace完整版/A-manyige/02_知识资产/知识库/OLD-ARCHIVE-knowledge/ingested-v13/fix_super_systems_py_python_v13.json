@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/fix_super_systems.py",
+  "filename": "fix_super_systems.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "05e5bea49ac1e831",
+  "content_length": 2684,
+  "ingested_at": "2026-03-31T17:27:46.216518",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n批量修复超级系统\n添加Token管理和基础文档\n\"\"\"\n\nimport os\nfrom pathlib import Path\n\nSKILLS_DIR = Path(\"/root/.openclaw/workspace/skills\")\n\nSYSTEMS = [\n    'knowledge-suite', 'automation-suite', 'file-suite', 'quality-suite',\n    'backup-suite', 'token-suite', 'content-suite', 'expert-suite',\n    'feishu-suite', 'governance-suite'\n]\n\nTOKEN_TEMPLATE = '''\n# Token管理\nTOKEN_COST_ESTIMATE = \"\"\"\nToken消耗估算：\n- 单次调用: ~500-1000 tokens\n- 批量处理: ~2000-5000 tokens\n\"\"\"\n\nTOKEN_RED_LINES = dict(\n    max_p",
+  "limitations_applied": []
+}

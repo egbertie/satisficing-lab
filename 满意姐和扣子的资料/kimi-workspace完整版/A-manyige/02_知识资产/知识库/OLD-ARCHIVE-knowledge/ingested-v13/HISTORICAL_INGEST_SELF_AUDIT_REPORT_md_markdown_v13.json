@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/system-v3/knowledge_ingest_remediation/reports/HISTORICAL_INGEST_SELF_AUDIT_REPORT.md",
+  "filename": "HISTORICAL_INGEST_SELF_AUDIT_REPORT.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "c0241063679dc56e",
+  "content_length": 2718,
+  "ingested_at": "2026-03-31T17:27:46.130938",
+  "content_preview": "# 知识入库历史批次自查报告\n\n> **自查时间**: 2026-03-31 10:59  \n> **自查范围**: 批次1(176个) + 批次2(50个) = 226个文件  \n> **蓝军审计**: 待执行  \n> **结论**: 全部需要重新入库\n\n---\n\n## 一、历史入库批次问题诊断\n\n### 批次1: 2026-03-28 (176个文件)\n\n**入库方式**:\n- ❌ 直接运行Python脚本: `python3 super_knowledge_ingest_v6.2.py`\n- ❌ 未通过Skill框架调用\n- ❌ 未经过5标准验证\n- ❌ 无蓝军审计\n\n**质量问题**:\n| 检查项 | 标准 | 实际 | 状态 |\n|--------|------|------|------|\n| 5标准验证 | 必须通过S1-S5 | 未验证 | ❌ 不达标 |\n| 蓝军审计 | 19项测试 | 未执行 | ❌ 不达标 |\n| Skill框架 | 必须通过Skill调用 | 直接运行脚本 | ❌ 违规 |\n| 验收流程 | 必须有验收报告 | 无 | ❌ 缺失 |\n| 元数据",
+  "limitations_applied": []
+}

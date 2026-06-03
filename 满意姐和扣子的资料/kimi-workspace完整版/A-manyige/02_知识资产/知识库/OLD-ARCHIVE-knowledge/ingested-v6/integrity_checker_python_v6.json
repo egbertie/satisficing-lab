@@ -1,0 +1,52 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/file-integrity/scripts/integrity_checker.py",
+  "filename": "integrity_checker.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 13705,
+  "checksum": "d586c57dcb94a7c8",
+  "ingested_at": "2026-03-31T17:30:32.702365",
+  "line_count": 403,
+  "title": "integrity_checker",
+  "description": "文件完整性检查脚本\n\n支持检查项：\n1. 文件存在性\n2. 文件大小（>0字节）\n3. 内容可读性（无编码错误）\n4. 关键章节完整性（正则匹配标题）\n\n用法：\n    python integrity_checker.py --path /path/to/file --config config/check_rules.json",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: CheckResult"
+    },
+    {
+      "level": 2,
+      "title": "Class: IntegrityReport"
+    },
+    {
+      "level": 2,
+      "title": "Class: FileIntegrityChecker"
+    }
+  ],
+  "entities": [
+    {
+      "name": "CheckResult",
+      "type": "class"
+    },
+    {
+      "name": "IntegrityReport",
+      "type": "class"
+    },
+    {
+      "name": "FileIntegrityChecker",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "4. 检查关键章节完整性",
+    "检查是否有乱码特征（过多的替换字符）",
+    "总体通过：没有关键失败且所有检查通过（或只有非关键失败）"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

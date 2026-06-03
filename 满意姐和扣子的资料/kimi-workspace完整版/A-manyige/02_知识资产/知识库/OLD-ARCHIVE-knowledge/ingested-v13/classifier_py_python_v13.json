@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_skill-classification/scripts/classifier.py",
+  "filename": "classifier.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "5a533e441d285916",
+  "content_length": 1320,
+  "ingested_at": "2026-03-31T17:27:45.085499",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nSkill分级评估脚本\n版本: V2.0\n\"\"\"\n\nimport os\nimport json\nfrom pathlib import Path\n\ndef check_skill_standards(skill_path):\n    \"\"\"检查Skill的5标准合规性\"\"\"\n    results = {\n        \"has_skill_md\": False,\n        \"has_scripts\": False,\n        \"has_cron\": False,\n        \"is_executable\": False\n    }\n    \n    skill_md = Path(skill_path) / \"SKILL.md\"\n    scripts_dir = Path(skill_path) / \"scripts\"\n    \n    if skill_md.exists():\n        results[\"has_skill_md\"] = True\n    \n    if scripts_dir.exi",
+  "limitations_applied": []
+}

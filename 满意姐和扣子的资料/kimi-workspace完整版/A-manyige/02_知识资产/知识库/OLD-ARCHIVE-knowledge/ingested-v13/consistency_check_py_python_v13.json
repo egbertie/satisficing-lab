@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/consistency_check.py",
+  "filename": "consistency_check.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "13aeb412b2a48dce",
+  "content_length": 6057,
+  "ingested_at": "2026-03-31T17:27:46.141074",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n满意解知识管理系统 - 一致性检查脚本\n自动检测全局不一致问题\n\n使用方式:\n  python3 scripts/consistency_check.py\n\"\"\"\n\nimport re\nfrom pathlib import Path\nfrom colorama import Fore, Style\n\nclass ConsistencyChecker:\n    def __init__(self):\n        self.errors = []\n        self.warnings = []\n        \n    def check_wulu_totem(self):\n        \"\"\"检查五路图腾定义一致性\"\"\"\n        print(\"\\n🔍 检查五路图腾定义...\")\n        \n        # 读取core定义\n        core_file = Path(\"core/五路图腾.yaml\")\n        if core_file.exists():\n            with ",
+  "limitations_applied": []
+}

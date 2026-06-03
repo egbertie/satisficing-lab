@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_execution-protocol/scripts/protocol-check.sh",
+  "filename": "protocol-check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "7e590cf02e5e5ada",
+  "content_length": 1540,
+  "ingested_at": "2026-03-31T17:27:45.021668",
+  "content_preview": "#!/bin/bash\n# 执行协议检查脚本\n# 检查特定任务的协议执行情况\n\nTASK_ID=$1\nWORKSPACE=\"/root/.openclaw/workspace\"\nPROTOCOL_DIR=\"$WORKSPACE/memory/protocol\"\n\nmkdir -p \"$PROTOCOL_DIR\"\n\necho \"=== 执行协议检查 ===\"\necho \"任务ID: ${TASK_ID:-'(未指定)'}\"\necho \"检查时间: $(date '+%Y-%m-%d %H:%M:%S')\"\necho \"\"\n\nif [ -z \"$TASK_ID\" ]; then\n    echo \"使用方式: $0 <task-id>\"\n    echo \"\"\n    echo \"今日协议记录:\"\n    ls -la \"$PROTOCOL_DIR\"/*\"$(date +%Y%m%d)\"* 2>/dev/null | head -20 || echo \"  无记录\"\n    exit 0\nfi\n\n# 检查确认状态\nif [ -f \"$PROTOCOL_DIR/${TASK_ID}-conf",
+  "limitations_applied": []
+}

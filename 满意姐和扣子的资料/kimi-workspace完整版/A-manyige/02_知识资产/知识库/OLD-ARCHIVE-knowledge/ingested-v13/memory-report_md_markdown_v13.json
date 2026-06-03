@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/logs/memory-report.md",
+  "filename": "memory-report.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "9fc3914c41523602",
+  "content_length": 586,
+  "ingested_at": "2026-03-31T17:27:44.648954",
+  "content_preview": "# 内存守护者监控报告\n\n生成时间: 2026-03-28T12:59:39.852518\n\n## 当前状态\n\n| 指标 | 数值 | 状态 |\n|------|------|------|\n| 进程内存 | 14.6MB | SAFE |\n| 系统总内存 | 7950.6MB | - |\n| 系统可用内存 | 5608.7MB | - |\n| 系统使用率 | 29.5% | 🟢 |\n\n## 红线阈值\n\n| 级别 | 阈值 | 当前状态 |\n|------|------|----------|\n| 🟢 Safe | < 1024MB | ✅ |\n| 🟡 Yellow | 1024MB | ⏭️ |\n| 🟠 Orange | 1536MB | ⏭️ |\n| 🔴 Red | 2048MB | ⏭️ |\n| 🚨 Critical | 2560MB | ⏭️ |\n\n## 自动化动作\n\n- Yellow: 记录日志，提醒注意\n- Orange: 启动轻度清理（Python缓存）\n- Red: 启动紧急清理（缓存+日志+GC）\n- Critical: 紧急清理 + 发送告警\n\n## 局限标注 (S",
+  "limitations_applied": []
+}

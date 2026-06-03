@@ -1,0 +1,185 @@
+{
+  "test_type": "adversarial",
+  "timestamp": "2026-03-21T19:55:44.667276",
+  "total": 12,
+  "passed": 12,
+  "failed": 0,
+  "accuracy": 1.0,
+  "results": [
+    {
+      "name": "正常空闲(3小时)",
+      "passed": true,
+      "mock": {
+        "last_activity": "3h_ago"
+      },
+      "expected": {
+        "should_fill": true
+      },
+      "actual": {
+        "should_fill": true,
+        "mode": "dual_line"
+      }
+    },
+    {
+      "name": "用户活跃(5分钟)",
+      "passed": true,
+      "mock": {
+        "last_activity": "5m_ago"
+      },
+      "expected": {
+        "should_fill": false
+      },
+      "actual": {
+        "should_fill": false
+      }
+    },
+    {
+      "name": "刚好2小时空闲",
+      "passed": true,
+      "mock": {
+        "last_activity": "2h_ago"
+      },
+      "expected": {
+        "should_fill": true
+      },
+      "actual": {
+        "should_fill": true,
+        "mode": "dual_line"
+      }
+    },
+    {
+      "name": "差1分钟到2小时",
+      "passed": true,
+      "mock": {
+        "last_activity": "1h59m_ago"
+      },
+      "expected": {
+        "should_fill": false
+      },
+      "actual": {
+        "should_fill": false
+      }
+    },
+    {
+      "name": "Token充足(50%)+空闲",
+      "passed": true,
+      "mock": {
+        "last_activity": "3h_ago",
+        "token_pct": 50
+      },
+      "expected": {
+        "should_fill": true,
+        "mode": "dual_line"
+      },
+      "actual": {
+        "should_fill": true,
+        "mode": "dual_line"
+      }
+    },
+    {
+      "name": "Token较低(20%)+空闲",
+      "passed": true,
+      "mock": {
+        "last_activity": "3h_ago",
+        "token_pct": 20
+      },
+      "expected": {
+        "should_fill": true,
+        "mode": "line2_only"
+      },
+      "actual": {
+        "should_fill": true,
+        "mode": "line2_only"
+      }
+    },
+    {
+      "name": "Token临界(10%)+空闲",
+      "passed": true,
+      "mock": {
+        "last_activity": "3h_ago",
+        "token_pct": 10
+      },
+      "expected": {
+        "should_fill": false
+      },
+      "actual": {
+        "should_fill": false
+      }
+    },
+    {
+      "name": "用户显式阻断",
+      "passed": true,
+      "mock": {
+        "last_activity": "3h_ago",
+        "blocker": true
+      },
+      "expected": {
+        "should_fill": false
+      },
+      "actual": {
+        "should_fill": false
+      }
+    },
+    {
+      "name": "数据异常-未来时间戳",
+      "passed": true,
+      "mock": {
+        "last_activity": "1h_future"
+      },
+      "expected": {
+        "should_fill": false,
+        "error": true
+      },
+      "actual": {
+        "should_fill": false,
+        "error": true
+      }
+    },
+    {
+      "name": "数据异常-60天前",
+      "passed": true,
+      "mock": {
+        "last_activity": "60d_ago"
+      },
+      "expected": {
+        "should_fill": false,
+        "error": true
+      },
+      "actual": {
+        "should_fill": false,
+        "error": true
+      }
+    },
+    {
+      "name": "刚补位完1小时+空闲",
+      "passed": true,
+      "mock": {
+        "last_activity": "3h_ago",
+        "last_fill": "1h_ago"
+      },
+      "expected": {
+        "should_fill": false
+      },
+      "actual": {
+        "should_fill": false
+      }
+    },
+    {
+      "name": "长空闲8小时+Token正常",
+      "passed": true,
+      "mock": {
+        "last_activity": "8h_ago",
+        "token_pct": 60
+      },
+      "expected": {
+        "should_fill": true,
+        "mode": "dual_line"
+      },
+      "actual": {
+        "should_fill": true,
+        "mode": "dual_line"
+      }
+    }
+  ],
+  "conclusion": "PASS"
+}

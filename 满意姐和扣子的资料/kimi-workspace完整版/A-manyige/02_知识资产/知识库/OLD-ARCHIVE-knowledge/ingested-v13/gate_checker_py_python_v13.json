@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/quality-gate-system/scripts/gate_checker.py",
+  "filename": "gate_checker.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "2e670107017eaf0a",
+  "content_length": 7707,
+  "ingested_at": "2026-03-31T17:27:45.007115",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n质量门禁基础检查脚本\n功能：自动化执行基础质量检查，减少Token消耗\n作者：满意解研究所\n版本：1.0.0\n\"\"\"\n\nimport os\nimport sys\nimport re\nimport yaml\nfrom pathlib import Path\nfrom typing import List, Tuple, Dict\n\nclass QualityGateChecker:\n    \"\"\"质量门禁检查器\"\"\"\n    \n    def __init__(self, skill_path: str):\n        self.skill_path = Path(skill_path)\n        self.issues = []\n        self.warnings = []\n        \n    def check_file_exists(self) -> bool:\n        \"\"\"S1: 检查SKILL.md是否存在\"\"\"\n        skill_file = self.skill_path / ",
+  "limitations_applied": []
+}

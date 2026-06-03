@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_optimization-prioritizer/modules/queue_manager.py",
+  "filename": "queue_manager.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "5a05744bc407c059",
+  "content_length": 7193,
+  "ingested_at": "2026-03-31T17:27:45.103827",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nOptimization Prioritizer - 优化建议分级处理器\n对优化建议进行P0-P3分级\n\"\"\"\n\nimport json\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Any, Optional\nfrom dataclasses import dataclass, asdict\nfrom enum import Enum\n\nclass Priority(Enum):\n    P0 = \"P0\"  # 紧急\n    P1 = \"P1\"  # 重要\n    P2 = \"P2\"  # 一般\n    P3 = \"P3\"  # 建议\n\n@dataclass\nclass Suggestion:\n    \"\"\"优化建议\"\"\"\n    id: str\n    title: str\n    description: str\n    impact_scope: str  # system_wide, multip",
+  "limitations_applied": []
+}

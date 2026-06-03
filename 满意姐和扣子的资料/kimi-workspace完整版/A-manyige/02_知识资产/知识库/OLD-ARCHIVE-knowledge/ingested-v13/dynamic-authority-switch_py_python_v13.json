@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/authority-switch/dynamic-authority-switch.py",
+  "filename": "dynamic-authority-switch.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "c45d8acbb0597303",
+  "content_length": 2857,
+  "ingested_at": "2026-03-31T17:27:45.477862",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n动态权威切换脚本\n功能: 根据Token/任务状态自动切换系统模式\n触发: 每30分钟检查 + Token阈值触发\n\"\"\"\n\nimport json\nimport os\nimport sys\n\nAUTHORITY_LEVELS = {\n    \"NORMAL\": {\n        \"level\": 1,\n        \"token_threshold\": (0, 70),\n        \"actions\": [\"全功能开放\", \"所有Skill可用\", \"Cron正常运行\"],\n        \"trigger\": \"Token < 70%\"\n    },\n    \"CAUTION\": {\n        \"level\": 2,\n        \"token_threshold\": (70, 80),\n        \"actions\": [\"精简响应\", \"延迟非紧急任务\", \"预警通知\"],\n        \"trigger\": \"Token 70-80%\"\n    },\n    \"WARNING\": {\n        ",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/super-knowledge-ingest/scripts/batch_p0_ingest.py",
+  "filename": "batch_p0_ingest.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "17cc895a26f0c11d",
+  "content_length": 4085,
+  "ingested_at": "2026-03-31T17:27:45.430992",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nP0层批量入库脚本 - 7层标准化简化版\n用于高效处理剩余P0文档\n\"\"\"\n\nimport os\nimport hashlib\nfrom datetime import datetime\nfrom pathlib import Path\n\nWORKSPACE = \"/root/.openclaw/workspace\"\nKNOWLEDGE_DIR = f\"{WORKSPACE}/knowledge/P0-core\"\n\ndef get_file_info(filepath):\n    \"\"\"获取文件信息\"\"\"\n    stat = os.stat(filepath)\n    with open(filepath, 'rb') as f:\n        file_hash = hashlib.sha256(f.read()).hexdigest()\n    return {\n        'hash': file_hash,\n        'mtime': datetime.fromtimestamp(stat.st_mtime).",
+  "limitations_applied": []
+}

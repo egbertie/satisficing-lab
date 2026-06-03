@@ -1,0 +1,225 @@
+{
+  "source_path": "/root/.openclaw/workspace/.pre-restore-backup/docs/MULTI_CLAW_ARCHITECTURE_DESIGN.md",
+  "filename": "MULTI_CLAW_ARCHITECTURE_DESIGN.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 66376,
+  "checksum": "97c16c5783126435",
+  "ingested_at": "2026-03-31T17:30:16.239076",
+  "line_count": 1410,
+  "title": "多Claw架构设计方案",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "多Claw架构设计方案"
+    },
+    {
+      "level": 2,
+      "title": "文档信息"
+    },
+    {
+      "level": 2,
+      "title": "目录"
+    },
+    {
+      "level": 2,
+      "title": "1. 执行摘要"
+    },
+    {
+      "level": 3,
+      "title": "1.1 背景"
+    },
+    {
+      "level": 3,
+      "title": "1.2 目标"
+    },
+    {
+      "level": 3,
+      "title": "1.3 关键指标 (KPIs)"
+    },
+    {
+      "level": 2,
+      "title": "2. 现状分析"
+    },
+    {
+      "level": 3,
+      "title": "2.1 当前单Claw架构分析"
+    },
+    {
+      "level": 3,
+      "title": "2.2 瓶颈识别"
+    },
+    {
+      "level": 4,
+      "title": "2.2.1 计算资源瓶颈"
+    },
+    {
+      "level": 4,
+      "title": "2.2.2 状态管理瓶颈"
+    },
+    {
+      "level": 4,
+      "title": "2.2.3 故障模式分析"
+    },
+    {
+      "level": 3,
+      "title": "2.3 需要多Claw协同的场景"
+    },
+    {
+      "level": 4,
+      "title": "2.3.1 审计场景 (Audit)"
+    },
+    {
+      "level": 4,
+      "title": "2.3.2 执行场景 (Execution)"
+    },
+    {
+      "level": 4,
+      "title": "2.3.3 学习场景 (Learning)"
+    },
+    {
+      "level": 4,
+      "title": "2.3.4 备份场景 (Backup)"
+    },
+    {
+      "level": 2,
+      "title": "3. 架构设计"
+    },
+    {
+      "level": 3,
+      "title": "3.1 总体架构"
+    },
+    {
+      "level": 3,
+      "title": "3.2 模式对比: Master-Worker vs Peer-to-Peer"
+    },
+    {
+      "level": 4,
+      "title": "3.2.1 Master-Worker 模式"
+    },
+    {
+      "level": 4,
+      "title": "3.2.2 Peer-to-Peer 模式"
+    },
+    {
+      "level": 4,
+      "title": "3.2.3 混合模式 (推荐)"
+    },
+    {
+      "level": 3,
+      "title": "3.3 状态同步机制"
+    },
+    {
+      "level": 4,
+      "title": "3.3.1 状态分类"
+    },
+    {
+      "level": 4,
+      "title": "3.3.2 同步架构"
+    },
+    {
+      "level": 4,
+      "title": "3.3.3 同步策略"
+    },
+    {
+      "level": 1,
+      "title": "状态同步伪代码示例"
+    },
+    {
+      "level": 3,
+      "title": "3.4 故障切换机制"
+    },
+    {
+      "level": 4,
+      "title": "3.4.1 热切换 (Hot Standby)"
+    },
+    {
+      "level": 4,
+      "title": "3.4.2 冷切换 (Cold Standby)"
+    },
+    {
+      "level": 4,
+      "title": "3.4.3 切换机制对比"
+    },
+    {
+      "level": 2,
+      "title": "4. 技术选型"
+    },
+    {
+      "level": 3,
+      "title": "4.1 选项对比"
+    },
+    {
+      "level": 4,
+      "title": "4.1.1 OpenClaw原生多代理支持"
+    },
+    {
+      "level": 4,
+      "title": "4.1.2 外部协调层 - Redis"
+    },
+    {
+      "level": 4,
+      "title": "4.1.3 外部协调层 - NATS"
+    },
+    {
+      "level": 4,
+      "title": "4.1.4 文件系统级别的状态共享"
+    },
+    {
+      "level": 3,
+      "title": "4.2 选型决策矩阵"
+    },
+    {
+      "level": 3,
+      "title": "4.3 推荐方案: 分层混合架构"
+    },
+    {
+      "level": 2,
+      "title": "5. 阶段实施计划"
+    },
+    {
+      "level": 3,
+      "title": "5.1 实施路线图"
+    },
+    {
+      "level": 3,
+      "title": "5.2 Phase 1: 影子克隆体 (只读备份)"
+    },
+    {
+      "level": 4,
+      "title": "5.2.1 目标"
+    },
+    {
+      "level": 4,
+      "title": "5.2.2 架构"
+    },
+    {
+      "level": 4,
+      "title": "5.2.3 实施步骤"
+    },
+    {
+      "level": 4,
+      "title": "5.2.4 关键代码"
+    },
+    {
+      "level": 1,
+      "title": "影子Claw实现示例"
+    },
+    {
+      "level": 4,
+      "title": "5.2.5 成功指标"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "NATS作为消息总线",
+    "Redis作为状态缓存",
+    "文件系统作为持久化"
+  ],
+  "limitations_applied": [
+    "Content truncated to 50000 bytes for scanning",
+    "Sections limited to 50"
+  ],
+  "content_truncated": true
+}

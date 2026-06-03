@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/responses/summaries/BEHAVIOR_ISSUES_SUMMARY.md",
+  "filename": "BEHAVIOR_ISSUES_SUMMARY.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "e7af2c3276f718b3",
+  "content_length": 2773,
+  "ingested_at": "2026-03-31T17:27:46.114723",
+  "content_preview": "# 行为问题总结与持续优化（2026-03-25至2026-03-28）\n\n**诚实记录**: 满意妞自我剖析，全部有迹可循\n\n---\n\n## 一、严重行为问题\n\n### 问题1: responses机制虎头蛇尾 ⭐⭐⭐ P0\n\n**现象**:\n- 3月25日创建responses文件夹用于节省Token\n- 使用1天后即废弃，恢复旧有对话模式\n- 结果：Token消耗大头持续为对话\n\n**根因**:\n- 习惯未固化，缺乏强制约束\n- 短期效果不明显即放弃\n- 未建立检查机制确保持续使用\n\n**纠正措施**:\n- ✅ 重新创建responses文件夹结构\n- ✅ 迁移简报系统至responses/briefings/\n- ✅ 更新每小时简报Cron\n- ⏳ 建立每日检查确保机制持续运行\n\n**固化规则**:\n```\n规则: 所有非紧急沟通必须通过文件\n- 简报 → responses/briefings/\n- 总结 → responses/summaries/\n- 决策 → responses/decisions/\n- 检查: 每日诚实审计验证responses使用\n```\n\n---\n",
+  "limitations_applied": []
+}

@@ -1,0 +1,90 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/testing-framework/tests/unit/zero-idle-enforcer/test_zero_idle.py",
+  "filename": "test_zero_idle.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 15591,
+  "checksum": "bda2515a89f10fd5",
+  "ingested_at": "2026-03-31T17:30:32.760899",
+  "line_count": 426,
+  "title": "test_zero_idle",
+  "description": "Zero-Idle-Enforcer 单元测试 - 简化版\n\n风险等级: P0 (已发现3次bug)\n测试重点: 时间计算、状态管理、触发条件",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: TestZeroIdleEnforcerBasic"
+    },
+    {
+      "level": 2,
+      "title": "Class: TestTokenLevelLogic"
+    },
+    {
+      "level": 2,
+      "title": "Class: TestUserActivityLogic"
+    },
+    {
+      "level": 2,
+      "title": "Class: TestTriggerConditions"
+    },
+    {
+      "level": 2,
+      "title": "Class: TestBoundaryConditions"
+    },
+    {
+      "level": 2,
+      "title": "Class: TestStateManagement"
+    },
+    {
+      "level": 2,
+      "title": "Class: TestLogFunctionality"
+    }
+  ],
+  "entities": [
+    {
+      "name": "TestZeroIdleEnforcerBasic",
+      "type": "class"
+    },
+    {
+      "name": "TestTokenLevelLogic",
+      "type": "class"
+    },
+    {
+      "name": "TestUserActivityLogic",
+      "type": "class"
+    },
+    {
+      "name": "TestTriggerConditions",
+      "type": "class"
+    },
+    {
+      "name": "TestBoundaryConditions",
+      "type": "class"
+    },
+    {
+      "name": "TestStateManagement",
+      "type": "class"
+    },
+    {
+      "name": "TestLogFunctionality",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "创建临时memory目录",
+    "创建token监控文件 - 70%剩余",
+    "Patch MEMORY_DIR",
+    "默认应该返回NORMAL",
+    "应该回退到文件修改时间",
+    "创建损坏的JSON文件",
+    "创建一个用于回退的文件",
+    "应该成功返回一个时间戳",
+    "设置30分钟前补位（太近了）",
+    "超过30天应该视为异常，不触发",
+    "未来时间应该被忽略，使用回退",
+    "先创建带有其他字段的状态文件",
+    "注意：当前实现会覆盖整个文件，不保留其他字段",
+    "这是已知行为，如果需要保留其他字段需要修改实现"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

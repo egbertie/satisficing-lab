@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/blue_army_honest_answer_enforcement.sh",
+  "filename": "blue_army_honest_answer_enforcement.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "7f77ab0e40ee68c9",
+  "content_length": 1569,
+  "ingested_at": "2026-03-31T17:27:46.199246",
+  "content_preview": "#!/bin/bash\n# 蓝军诚实回答强制检查脚本\n# 每次审计报告前必须运行\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nLOG_FILE=\"$WORKSPACE/diary/blue_army_honest_answer.log\"\nAUDIT_ID=\"${1:-unknown}\"\n\necho \"=== 蓝军诚实回答强制检查 ===\" | tee -a \"$LOG_FILE\"\necho \"审计ID: $AUDIT_ID\" | tee -a \"$LOG_FILE\"\necho \"检查时间: $(date)\" | tee -a \"$LOG_FILE\"\necho \"\" | tee -a \"$LOG_FILE\"\n\necho \"【第一部分】思维方式应用（6项全部必须）\" | tee -a \"$LOG_FILE\"\necho \"[ ] 五层深挖（审计版）: 表象→原因→根因→预防→能力\" | tee -a \"$LOG_FILE\"\necho \"[ ] 反脆弱设计（审计版）: 6类审计方法抗干扰检查\" | tee -a \"$LOG_FILE\"\necho \"[ ] 满意",
+  "limitations_applied": []
+}

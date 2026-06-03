@@ -1,0 +1,70 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/namespace-enforcement/scripts/namespace-checker.py",
+  "filename": "namespace-checker.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 31653,
+  "checksum": "29ac1443f71e0a8d",
+  "ingested_at": "2026-03-31T17:30:32.698783",
+  "line_count": 849,
+  "title": "namespace-checker",
+  "description": "Namespace Checker - 命名空间检查器\n实现5标准化要求：S1-S7\n\nS1: 全局考虑 - 命名规范对文件检索效率的影响\nS2: 系统闭环 - 文件创建→命名检查→违规处理→索引更新\nS3: 可观测输出 - 合规率、违规清单、迁移进度\nS4: 自动化集成 - 自动检查、自动提示、自动修复建议\nS5: 自我验证 - 命名检查器自检\nS6: 认知谦逊 - 标注存量文件不强制迁移\nS7",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: ViolationType"
+    },
+    {
+      "level": 2,
+      "title": "Class: Violation"
+    },
+    {
+      "level": 2,
+      "title": "Class: CheckResult"
+    },
+    {
+      "level": 2,
+      "title": "Class: NamespaceChecker"
+    }
+  ],
+  "entities": [
+    {
+      "name": "ViolationType",
+      "type": "class"
+    },
+    {
+      "name": "Violation",
+      "type": "class"
+    },
+    {
+      "name": "CheckResult",
+      "type": "class"
+    },
+    {
+      "name": "NamespaceChecker",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "========== S1: 全局考虑 - 检索效率影响分析 ==========",
+    "计算前缀一致性得分 (0-100)",
+    "可搜索性评分 - 检查描述性命名",
+    "自动补全友好度 - 检查无空格和特殊字符",
+    "========== S2: 系统闭环 - 完整检查流程 ==========",
+    "S6: 识别存量文件（创建时间早于规则实施日期）",
+    "如果文件修改时间早于7天前，认为是存量文件",
+    "检查是否已包含有效类型前缀",
+    "检查是否在skills目录下应该有skill-前缀",
+    "检查同一目录下是否有相似名称（大小写不敏感）",
+    "获取所有文件名（原始形式和大小写不敏感形式）",
+    "检查相似名称（编辑距离）",
+    "========== S3: 可观测输出 =========="
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

@@ -1,0 +1,43 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/super-knowledge-ingest/super_knowledge_ingest_v2.py",
+  "filename": "super_knowledge_ingest_v2.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 30190,
+  "checksum": "92afaf5dba0a15a4",
+  "ingested_at": "2026-03-31T17:30:32.733021",
+  "line_count": 784,
+  "title": "super_knowledge_ingest_v2",
+  "description": "super-knowledge-ingest V2.0 - 7层标准完整入库\n针对深度研究文件的完整7层标准化入库",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: KnowledgeIngestor"
+    }
+  ],
+  "entities": [
+    {
+      "name": "KnowledgeIngestor",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "==================== S1: 输入定义 ====================",
+    "从文件路径和名称提取元数据",
+    "==================== S2: 内容处理 ====================",
+    "提取元数据区块（YAML frontmatter或特殊标记）",
+    "计算处理后的内容完整性",
+    "尝试提取YAML frontmatter",
+    "匹配Markdown标题",
+    "提取该章节的内容（到下一个同级或更高级标题为止）",
+    "匹配\"案例：\"或\"### X.X 案例\"开头的区块",
+    "提取案例标题（第一行）",
+    "匹配\"来源：\"或\"**来源：**\"",
+    "==================== S3: 知识结构化 ====================",
+    "检查是否在同一个段落中共现",
+    "简单的TF-IDF风格关键词提取"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

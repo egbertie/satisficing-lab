@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/notion_sync_old/notion_sync_v3.py",
+  "filename": "notion_sync_v3.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "0a177ba85ab7a88a",
+  "content_length": 16582,
+  "ingested_at": "2026-03-31T17:27:46.667167",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n简化版Notion同步脚本 V3 - 超保守策略\n修复400错误，使用更简单的内容块结构\n\"\"\"\nimport os\nimport sys\nimport time\nimport json\nimport requests\nfrom pathlib import Path\nfrom datetime import datetime\n\n# 配置\nNOTION_TOKEN = \"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\"\nPARENT_PAGE_ID = \"31fa8a0e-2bba-81fa-b98a-d61da835051e\"\nWORKSPACE_DIR = \"/root/.openclaw/workspace\"\nREPORT_PATH = f\"{WORKSPACE_DIR}/docs/NOTION_SYNC_FINAL_REPORT.md\"\n\n# 超时设置（秒）\nCONNECT_TIMEOUT = 30\nREAD_TIMEOUT = 60\n\n# 间隔设置（秒）\nFILE_IN",
+  "limitations_applied": []
+}

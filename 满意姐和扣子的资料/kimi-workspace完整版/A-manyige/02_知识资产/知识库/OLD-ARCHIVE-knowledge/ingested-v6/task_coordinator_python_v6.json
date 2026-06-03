@@ -1,0 +1,38 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_task-coordinator/task_coordinator.py",
+  "filename": "task_coordinator.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 22053,
+  "checksum": "45bcc1126f00bee3",
+  "ingested_at": "2026-03-31T17:30:32.157715",
+  "line_count": 555,
+  "title": "task_coordinator",
+  "description": "任务协调管理核心引擎 V2.0 - 具备学习迭代能力\n\n核心能力：\n1. 智能协调 - 分析任务状态，自动选择执行模式\n2. 学习迭代 - 记录决策效果，持续优化策略\n3. 资源调度 - 合理分配算力，最大化团队产出",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: TaskCoordinator"
+    }
+  ],
+  "entities": [
+    {
+      "name": "TaskCoordinator",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "优先从 data/tasks.json 加载任务数据",
+    "从JSON数据填充任务列表",
+    "添加in_progress任务（排除已在blocked中的）",
+    "回退：从TASK_MASTER.md解析（简化版）",
+    "简单解析：查找严重遗漏任务部分",
+    "检查是否有实际逾期的任务（未完成的）",
+    "新增：批量阻塞检测 - 超过10个阻塞任务优先处理",
+    "识别\"飞书调试陷阱\" - 降低阈值",
+    "新增：识别批量阻塞模式"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

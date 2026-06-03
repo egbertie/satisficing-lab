@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>MEMORY</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; padding: 40px; max-width: 800px; margin: 0 auto; }
+        h1 { color: #1f2329; border-bottom: 2px solid #3370ff; padding-bottom: 10px; }
+        h2 { color: #1f2329; margin-top: 30px; }
+        h3 { color: #3370ff; }
+        code { background: #f5f6f7; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+        pre { background: #f5f6f7; padding: 16px; border-radius: 6px; overflow-x: auto; }
+        blockquote { border-left: 4px solid #3370ff; margin: 0; padding-left: 16px; color: #646a73; }
+        table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+        th, td { border: 1px solid #dee0e3; padding: 8px 12px; text-align: left; }
+        th { background: #f5f6f7; font-weight: 600; }
+        ul, ol { padding-left: 24px; }
+    </style>
+</head>
+<body>
+<h1 id="memorymd-">MEMORY.md - 长期记忆</h1>
+<h2 id="egbertie">关于 Egbertie</h2>
+<ul>
+<li><strong>身份</strong>：满意解研究所创始人</li>
+<li><strong>当前项目</strong>：满意解研究所——专注硬科技转化的合伙人匹配决策教练</li>
+<li><strong>职业背景</strong>：11年银行多岗位、多条线综合经验 + 11年创业体感</li>
+<li><strong>方法论偏好</strong>：左脑风控 + 右脑直觉（基于西蒙"满意解"理论）</li>
+<li><strong>决策风格</strong>：知行合一、平衡型偏行动</li>
+</ul>
+<hr />
+<h2 id="_1">项目进展</h2>
+<h3 id="_2">满意解研究所项目（原：硬件初创企业合伙人选择决策教练）</h3>
+<p><strong>启动时间</strong>：2026-03-06<br />
+<strong>当前状态</strong>：资料库V1.0完成，创始人画像、双角色（PEO+EEO）、核心工具已建立<br />
+<strong>工具开发</strong>：TRL 自评工具 V1.0 已完成（2026-03-10）<br />
+<strong>创始人背景</strong>：11年银行多岗位综合经验 + 11年创业体感，知行合一决策风格<br />
+<strong>交付成果</strong>：
+1. ✅ 满意解研究所资料库V1.0（8大分类）
+2. ✅ 创始人画像_Egbertie（含决策风格DDM评估）
+3. ✅ 项目进化官（PEO）+ 经验萃取官（EEO）双角色
+4. ✅ 压力测试执行手册《极限72小时》
+5. ✅ 合伙人评估问卷V2.0（感知力决策版）
+6. ✅ 对外话术转换手册（中西合璧、命理内敛）
+7. ✅ 专家会诊流程模板</p>
+<p><strong>待办事项</strong>：
+- [ ] V1.0蓝军意见整理（等待附件下载）
+- [ ] 专家网络搭建（哲学教授、技术转移专家、命理顾问）
+- [x] TRL自评工具开发（✅ 2026-03-10 完成）
+- [ ] 首年30个案例库积累</p>
+<hr />
+<h2 id="_3">系统配置</h2>
+<h3 id="openclaw">OpenClaw 安全配置</h3>
+<ul>
+<li><strong>飞书应用</strong>：满意解研究所（cli_a9208a79e2b99cc4）</li>
+<li><strong>安全策略</strong>：最小权限原则，分级授权</li>
+<li><strong>定时任务</strong>：每日 9:00 自动安全检查</li>
+<li><strong>启用插件</strong>：kimi-claw, kimi-search, feishu（待权限完善）</li>
+<li><strong>禁用插件</strong>：dingtalk-connector</li>
+</ul>
+<h3 id="_4">文件协作</h3>
+<ul>
+<li><strong>工作区</strong>：/root/.openclaw/workspace/</li>
+<li><strong>记忆文件</strong>：memory/YYYY-MM-DD.md（每日日志）</li>
+<li><strong>飞书协作</strong>：专用文件夹「Kimi决策助手」（待建立）</li>
+<li><strong>GitHub仓库</strong>：satisficing-institute（已配置）</li>
+<li><strong>Notion工作空间</strong>：满意解研究所（已授权Integration）</li>
+</ul>
+<h3 id="_5">备份策略</h3>
+<ul>
+<li><strong>本地Git</strong>：已初始化，245文件已提交</li>
+<li><strong>GitHub远程</strong>：主备份，版本控制</li>
+<li><strong>Notion双备份</strong>：知识库备用</li>
+<li><strong>飞书云文档</strong>：部分文档协作</li>
+</ul>
+<hr />
+<h2 id="_6">项目资源与工具链</h2>
+<h3 id="api2026-03-10">API与工具配置（2026-03-10更新）</h3>
+<table>
+<thead>
+<tr>
+<th>工具/API</th>
+<th>状态</th>
+<th>费用</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Kimi API</strong></td>
+<td>✅ 已配置</td>
+<td>Allegretto限额内</td>
+<td>代码生成、中文处理</td>
+</tr>
+<tr>
+<td><strong>Claude API</strong></td>
+<td>⚠️ 待解决</td>
+<td>免费额度/按需</td>
+<td>复杂编程（403错误）</td>
+</tr>
+<tr>
+<td><strong>GitHub Models</strong></td>
+<td>⏳ 明早配置</td>
+<td>免费</td>
+<td>GPT-4o等模型</td>
+</tr>
+<tr>
+<td><strong>Perplexity</strong></td>
+<td>⏳ 明早注册</td>
+<td>免费300次/天</td>
+<td>AI搜索</td>
+</tr>
+<tr>
+<td><strong>Jina AI</strong></td>
+<td>⏳ 明早注册</td>
+<td>免费1000次/天</td>
+<td>网页提取</td>
+</tr>
+<tr>
+<td><strong>LangChain</strong></td>
+<td>✅ 已安装</td>
+<td>免费</td>
+<td>AI工作流</td>
+</tr>
+<tr>
+<td><strong>DuckDB</strong></td>
+<td>✅ 已安装</td>
+<td>免费</td>
+<td>数据分析</td>
+</tr>
+<tr>
+<td><strong>FigJam</strong></td>
+<td>✅ 已创建</td>
+<td>免费</td>
+<td>协作画图</td>
+</tr>
+<tr>
+<td><strong>Excalidraw</strong></td>
+<td>⏳ 明早部署</td>
+<td>自托管免费</td>
+<td>手绘白板</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">成本优化策略</h3>
+<ul>
+<li><strong>免费API优先</strong>：无限制充分利用</li>
+<li><strong>收费API规划</strong>：限额内使用，超额预警</li>
+<li><strong>本地工具优先</strong>：DuckDB、本地模型</li>
+<li><strong>按需付费</strong>：轻量使用API，重度再订阅</li>
+</ul>
+<hr />
+<h2 id="_8">工作模式与准则</h2>
+<h3 id="v20">全天候高效工作体系（V2.0）</h3>
+<p><strong>生效时间</strong>：2026-03-10</p>
+<h4 id="2200-0600">夜间时段（22:00-06:00）| 算力充裕期</h4>
+<ul>
+<li>AI自主执行，无需人类在线</li>
+<li>API响应快30%，服务器负载低</li>
+<li>任务：深度分析、批量处理、代码构建</li>
+</ul>
+<h4 id="0900-1800">白天时段（09:00-18:00）| 人机协作期</h4>
+<ul>
+<li>人类：决策、创意、沟通</li>
+<li>AI：执行、记录、实时响应</li>
+<li>模式：并行处理，减少等待</li>
+</ul>
+<h4 id="_9">核心原则</h4>
+<ol>
+<li><strong>免费API无限制</strong>：DuckDB、本地模型、开源服务</li>
+<li><strong>收费API合理规划</strong>：Kimi限额内、Claude按需、超额预警</li>
+<li><strong>夜间错峰</strong>：70%收费API调用在夜间</li>
+<li><strong>结果复用</strong>：100%保存GitHub，避免重复</li>
+</ol>
+<hr />
+<h2 id="_10">重要决策记录</h2>
+<h3 id="2026-03-09">2026-03-09 重大决策</h3>
+<h4 id="1">1. 基础设施建设（通宵部署）</h4>
+<ul>
+<li><strong>时间</strong>：22:00 - 00:30</li>
+<li><strong>成果</strong>：Kimi Code、LangChain、DuckDB、GitHub/Notion集成、全天候工作体系</li>
+<li><strong>原则</strong>：免费优先，最大化性价比</li>
+</ul>
+<h4 id="2-api">2. API使用策略</h4>
+<ul>
+<li><strong>免费API</strong>：无限制（本地工具、开源服务、免费额度）</li>
+<li><strong>收费API</strong>：规划使用（Kimi限额、Claude按需、超额预警）</li>
+<li><strong>成本控制</strong>：月费用从$28+降至$0-15</li>
+</ul>
+<h4 id="3-notion">3. Notion策略</h4>
+<ul>
+<li><strong>决策</strong>：免费版够用，暂不升级付费</li>
+<li><strong>替代方案</strong>：手动导入+GitHub备份</li>
+<li><strong>成本</strong>：$0</li>
+</ul>
+<h4 id="4-claude-code">4. Claude Code策略</h4>
+<ul>
+<li><strong>方案</strong>：先免费联调，需要时再付费</li>
+<li><strong>状态</strong>：Key已配置，403错误（地区限制），明早解决</li>
+<li><strong>备选</strong>：GitHub Models（免费GPT-4o）</li>
+</ul>
+<h4 id="5-24">5. 24小时工作体系</h4>
+<ul>
+<li><strong>夜间</strong>：AI自主执行（22:00-06:00）</li>
+<li><strong>清晨</strong>：晨报生成+人类决策（06:00-09:00）</li>
+<li><strong>白天</strong>：人机协作（09:00-18:00）</li>
+</ul>
+<hr />
+<h2 id="v24">五路图腾体系 V2.4</h2>
+<table>
+<thead>
+<tr>
+<th>图腾</th>
+<th>五行</th>
+<th>核心精神</th>
+<th>相生关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LIU（刘禹锡）</td>
+<td>土</td>
+<td>惟吾德馨</td>
+<td>土生金</td>
+</tr>
+<tr>
+<td>SIMON（西蒙）</td>
+<td>金</td>
+<td>满意解</td>
+<td>金生水</td>
+</tr>
+<tr>
+<td>GUANYIN（观自在）</td>
+<td>水</td>
+<td>自在从容</td>
+<td>水生木</td>
+</tr>
+<tr>
+<td><strong>CONFUCIUS（孔子）</strong></td>
+<td><strong>木</strong></td>
+<td><strong>仁者爱人</strong></td>
+<td><strong>木生火</strong></td>
+</tr>
+<tr>
+<td>HUINENG（六祖）</td>
+<td>火</td>
+<td>顿悟/知行合一</td>
+<td>火生土</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键学术关联</strong>：
+- Egbertie的哲学导师为中国儒商主要倡导者与核心学者
+- 孔子儒商哲学直接融入项目方法论，形成真实学术血统
+- 合伙伦理（木）与导师研究高度契合</p>
+<hr />
+<h2 id="_11">核心专家数字替身</h2>
+<table>
+<thead>
+<tr>
+<th>专家</th>
+<th>身份</th>
+<th>图腾关联</th>
+<th>角色定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>黎红雷教授</strong></td>
+<td>中山大学中外管理研究中心主任、儒商学术开创者</td>
+<td>CONFUCIUS（孔子·木）</td>
+<td>合伙伦理学术源头、伦理校准</td>
+</tr>
+<tr>
+<td><strong>罗汉教授</strong></td>
+<td>湖南大学数学学院教授、Egbertie软件工程硕士导师</td>
+<td>SIMON（西蒙·金）</td>
+<td>方法论护法、量化严谨性把关</td>
+</tr>
+<tr>
+<td><strong>谢宝剑研究员</strong></td>
+<td>暨南大学经济学院研究员、自贸区研究院副院长</td>
+<td>GUANYIN（观音·水）支脉</td>
+<td>地理自在官、深港战略政策顾问</td>
+</tr>
+<tr>
+<td><strong>AI蓝军首席</strong>（待确认）</td>
+<td>大疆AI蓝军首席科学家、Egbertie发小</td>
+<td>HUINENG（六祖·火）</td>
+<td>钻木人、压力测试设计</td>
+</tr>
+</tbody>
+</table>
+<p><strong>参与机制</strong>：
+- <strong>数字替身</strong>：基于公开著作/论文建立"数字人"参与日常研究讨论
+- <strong>真人校准</strong>：重大决策时可直接请教专家本人
+- <strong>全力支持性质</strong>：所有专家均为项目支持者，非商业雇佣关系</p>
+<hr />
+<h2 id="_12">最近更新</h2>
+<p><strong>最后更新</strong>：2026-03-10 12:20<br />
+<strong>下次更新</strong>：每日09:00晨报</p>
+<h3 id="2026-03-10">2026-03-10 全面审计完成</h3>
+<ul>
+<li><strong>审计报告</strong>: <code>docs/COMPREHENSIVE_AUDIT_2026-03-10.md</code></li>
+<li><strong>发现问题</strong>: 18项（4严重/6重要/5一般/3轻微）</li>
+<li><strong>关键遗漏</strong>: HEARTBEAT.md缺失、3/9日志缺失、专家联系方式待获取</li>
+<li><strong>待解决</strong>: Claude API 403错误、定时任务异常修复</li>
+<li><strong>P0措施</strong>: 4项需今天内完成</li>
+</ul>
+<p><strong>关键里程碑</strong>：
+- 2026-03-06：项目启动
+- 2026-03-07：V1.0资料库建立
+- 2026-03-08：专家档案完善
+- 2026-03-09：基础设施建设完备（通宵部署）
+- 2026-03-10：
+  - ✅ 基础建设验收
+  - ✅ <strong>全面整理工作完成</strong>（管理规则手册+任务总清单+执行机制Skill+状态文档）
+  - 🔄 EEO首次访谈（14:00-16:00）</p>
+<p><strong>官宣倒计时</strong>：15天（3月25日 09:00）</p>
+<hr />
+<h2 id="v102026-03-10">管理规则体系 V1.0（2026-03-10建立）</h2>
+<h3 id="rule">记忆规则 [RULE]</h3>
+<ol>
+<li>每次对话结束必须更新MEMORY.md</li>
+<li>每个完成的任务必须记录到memory/YYYY-MM-DD.md</li>
+<li>所有承诺必须有截止日期和提醒机制</li>
+</ol>
+<h3 id="rule_1">报告规则 [RULE]</h3>
+<ol>
+<li>任务到期前必须主动报告（不是等用户问）</li>
+<li>每日09:00生成晨报</li>
+<li>任务状态变更立即通知</li>
+</ol>
+<h3 id="rule_2">执行规则 [RULE]</h3>
+<ol>
+<li>承诺的任务必须完成或主动报告障碍</li>
+<li>无法按时完成必须提前24小时预警</li>
+<li>遗忘的任务发现后立即补救</li>
+</ol>
+<h3 id="_13">相关文档</h3>
+<ul>
+<li><code>docs/MANAGEMENT_RULES.md</code> - 完整管理规则手册</li>
+<li><code>docs/TASK_MASTER.md</code> - 任务总清单（42项任务跟踪）</li>
+<li><code>skills/task-manager/</code> - 任务管理技能</li>
+<li><code>WORKSPACE_STATUS.md</code> - 工作区状态初始化</li>
+</ul>
+</body>
+</html>
+<!-- 知识内化记录 -->
+<!-- 内化时间: 2026-03-31 | 状态: 已内化 -->

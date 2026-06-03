@@ -1,0 +1,49 @@
+memory_system:
+  version: "1.0"
+  created: "2026-04-20"
+  
+  # 目录配置
+  paths:
+    base: "~/.openclaw/workspace/memory-system"
+    knowledge: "knowledge"
+    memory: "memory"
+    projects: "projects"
+    archive: "archive"
+  
+  # 归档配置
+  archive:
+    # 归档文件名格式: YYYY-MM-DD_话题名.md
+    filename_format: "{date}_{topic}.md"
+    # 自动归档触发词 (用户说出这些词时提醒归档)
+    trigger_words:
+      - "换个话题"
+      - "先到这里"
+      - "总结一下"
+      - "/new"
+    # 关键决策标记
+    key_decision_markers:
+      - "决定"
+      - "确定"
+      - "确认"
+      - "同意"
+      - "批准"
+  
+  # 检索配置
+  search:
+    # 默认搜索范围
+    default_scope:
+      - "memory"
+      - "knowledge"
+    # 结果排序: date_desc | date_asc | relevance
+    default_sort: "date_desc"
+    # 每页结果数
+    page_size: 10
+  
+  # 存储限制
+  storage:
+    # 单个归档文件最大大小 (MB)
+    max_file_size_mb: 5
+    # memory目录保留天数 (超期自动移至archive)
+    memory_retention_days: 90
+    # 总存储上限警告 (%)
+    warning_threshold_percent: 90

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/sync_all.sh",
+  "filename": "sync_all.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "f66bee16e80bf559",
+  "content_length": 1328,
+  "ingested_at": "2026-03-31T17:27:46.209776",
+  "content_preview": "#!/bin/bash\n# 一键全量同步脚本\n# 从所有Core定义同步到Working层\n\necho \"========================================\"\necho \" 满意解知识管理系统 - 全量同步\"\necho \"========================================\"\necho \"\"\n\n# 检查Python环境\nif ! command -v python3 &> /dev/null; then\n    echo \"❌ 错误: 未找到Python3\"\n    exit 1\nfi\n\n# 检查PyYAML\nif ! python3 -c \"import yaml\" 2>/dev/null; then\n    echo \"⚠️  安装PyYAML...\"\n    pip install pyyaml -q\nfi\n\necho \"🔄 开始同步...\"\necho \"\"\n\n# 运行所有同步脚本\ncd /root/.openclaw/workspace\n\necho \"1️⃣ 同步案例库...\"\npython3 scripts/sync_",
+  "limitations_applied": []
+}

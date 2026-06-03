@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/super-knowledge-ingest/super_knowledge_ingest_v3.py",
+  "filename": "super_knowledge_ingest_v3.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e88a9d0e75022cee",
+  "content_length": 18391,
+  "ingested_at": "2026-03-31T17:27:45.427398",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nsuper-knowledge-ingest V3.0 - 压缩引用式入库\n核心优化：用位置引用代替内容复制，gzip压缩降低存储\n目标：保证7层标准，输出大小控制在原始文件1-2倍以内\n\"\"\"\n\nimport json\nimport gzip\nimport base64\nimport hashlib\nimport re\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Optional, Tuple\nfrom dataclasses import dataclass, asdict\n\n@dataclass\nclass ContentPosition:\n    \"\"\"内容位置引用，代替实际存储\"\"\"\n    start_line: int\n    end_line: int\n    start_char: int\n    end_char: int\n    char_count: int\n    \n    def",
+  "limitations_applied": []
+}

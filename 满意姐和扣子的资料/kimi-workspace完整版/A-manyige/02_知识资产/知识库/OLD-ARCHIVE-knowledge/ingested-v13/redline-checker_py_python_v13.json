@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_decision-safety-redlines/scripts/redline-checker.py",
+  "filename": "redline-checker.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "0476e6596dbce161",
+  "content_length": 3475,
+  "ingested_at": "2026-03-31T17:27:45.223812",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n决策安全红线检查脚本\n版本: V2.0\n功能: 自动检测并拦截危险内容\n\"\"\"\n\nimport re\nimport sys\nimport json\nfrom datetime import datetime\n\n# 红线配置\nRED_LINES = {\n    \"RED-001\": {\n        \"name\": \"no_final_decision\",\n        \"description\": \"不得给出最终合伙建议\",\n        \"keywords\": [\"应该选谁\", \"建议选\", \"最终建议\", \"决定选\", \"推荐选\", \"我建议\"],\n        \"action\": \"disclaimer\",\n        \"severity\": \"high\"\n    },\n    \"RED-002\": {\n        \"name\": \"no_legal_docs\", \n        \"description\": \"不得生成法律文件\",\n        \"keywords\": [\"生成合同\", \"起草协议\", \"",
+  "limitations_applied": []
+}

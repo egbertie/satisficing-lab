@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/TOKEN_OPTIMIZATION_ANALYSIS.md",
+  "filename": "TOKEN_OPTIMIZATION_ANALYSIS.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "479bc5526c3b7ff4",
+  "content_length": 3529,
+  "ingested_at": "2026-03-31T17:27:46.525247",
+  "content_preview": "# Token高消耗任务优化分析报告\n\n> **分析时间**: 2026-03-22  \n> **当前Token消耗**: 84%  \n> **分析范围**: 25个活跃Cron任务\n\n---\n\n## 一、当前任务消耗分级\n\n### 🔴 极高风险任务（建议立即优化或暂停）\n\n| 任务名称 | 频率 | 预估单次消耗 | 问题分析 | 优化建议 |\n|----------|------|-------------|----------|----------|\n| **灾备复刻每日同步** | 1次/天(03:07) | ~15K-25K | 全量363MB文件扫描，thinking=high | 改为增量同步，仅扫描变更文件 |\n| **全方位灾备同步** | 1次/天(04:17) | ~15K-20K | 与灾备复刻重复，thinking=high | 合并为一个任务，避免重复 |\n| **厂商API能力监控** | 1次/天 | ~10K-15K | 单次运行296秒，超时风险 | 精简监控项，只监控关键API |\n| **每周组织罗盘报告** | 1次/周 | ~20K-30K ",
+  "limitations_applied": []
+}

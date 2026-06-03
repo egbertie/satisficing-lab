@@ -1,0 +1,48 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_satisficing-web-fetcher/security/content_filter.py",
+  "filename": "content_filter.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 6449,
+  "checksum": "408aec2805e4d950",
+  "ingested_at": "2026-03-31T17:30:32.150577",
+  "line_count": 224,
+  "title": "content_filter",
+  "description": "内容过滤器\n\n功能：\n1. PII检测与脱敏\n2. 敏感内容过滤\n3. 内容大小限制\n\n安全要求：\n- 自动检测身份证号、手机号、银行卡\n- 可选脱敏或拒绝\n- 响应内容日志脱敏",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: SensitivityLevel"
+    },
+    {
+      "level": 2,
+      "title": "Class: SensitivePattern"
+    },
+    {
+      "level": 2,
+      "title": "Class: ContentFilter"
+    }
+  ],
+  "entities": [
+    {
+      "name": "SensitivityLevel",
+      "type": "class"
+    },
+    {
+      "name": "SensitivePattern",
+      "type": "class"
+    },
+    {
+      "name": "ContentFilter",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "银行卡号（简单匹配，可能误报）",
+    "API Key（通用模式）",
+    "保留前2后2，中间脱敏"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

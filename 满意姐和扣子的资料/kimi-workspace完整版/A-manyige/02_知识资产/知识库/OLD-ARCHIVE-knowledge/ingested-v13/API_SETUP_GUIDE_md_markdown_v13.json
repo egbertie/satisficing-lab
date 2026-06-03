@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/docs/2026-03/API_SETUP_GUIDE.md",
+  "filename": "API_SETUP_GUIDE.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "8a40be2ae4251896",
+  "content_length": 2324,
+  "ingested_at": "2026-03-31T17:27:46.647204",
+  "content_preview": "# API 配置指南\n\n## 1. GitHub Models API (免费)\n\n### 获取步骤：\n1. 登录 GitHub → 右上角头像 → **Settings**\n2. 左侧菜单 → **Developer settings** → **Personal access tokens** → **Tokens (classic)**\n3. 点击 **Generate new token (classic)**\n4. 填写：\n   - **Note**: `GitHub Models API`\n   - **Expiration**: 90 days (或更长)\n   - **Scopes**: 勾选 `models` (关键！)\n5. 点击 **Generate token** → **立即复制保存**（只显示一次！）\n\n### 配置信息：\n```bash\nexport GITHUB_TOKEN=\"你的token\"\nexport GITHUB_MODELS_BASE_URL=\"https://models.github.ai/inference\"\n```\n\n### 支持模型：",
+  "limitations_applied": []
+}

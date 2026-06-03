@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SOP_MANUAL</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; padding: 40px; max-width: 800px; margin: 0 auto; }
+        h1 { color: #1f2329; border-bottom: 2px solid #3370ff; padding-bottom: 10px; }
+        h2 { color: #1f2329; margin-top: 30px; }
+        h3 { color: #3370ff; }
+        code { background: #f5f6f7; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+        pre { background: #f5f6f7; padding: 16px; border-radius: 6px; overflow-x: auto; }
+        blockquote { border-left: 4px solid #3370ff; margin: 0; padding-left: 16px; color: #646a73; }
+        table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+        th, td { border: 1px solid #dee0e3; padding: 8px 12px; text-align: left; }
+        th { background: #f5f6f7; font-weight: 600; }
+        ul, ol { padding-left: 24px; }
+    </style>
+</head>
+<body>
+<h1 id="sop-v10">满意解研究所 · SOP标准作业程序手册 V1.0</h1>
+<p><strong>文档编号</strong>: SOP-001<br />
+<strong>生效日期</strong>: 2026-03-10<br />
+<strong>最后更新</strong>: 2026-03-10<br />
+<strong>版本</strong>: V1.0<br />
+<strong>适用范围</strong>: 满意解研究所全组织</p>
+<hr />
+<h2 id="_1">目录</h2>
+<ol>
+<li><a href="#1-文档创建sop">文档创建SOP</a></li>
+<li><a href="#2-任务管理sop">任务管理SOP</a></li>
+<li><a href="#3-会议召开sop">会议召开SOP</a></li>
+<li><a href="#4-备份恢复sop">备份恢复SOP</a></li>
+</ol>
+<hr />
+<h2 id="1-sop">1. 文档创建SOP</h2>
+<h3 id="11">1.1 目的</h3>
+<p>规范满意解研究所所有Markdown文档的创建、更新和管理流程，确保文档质量、一致性和可追溯性。</p>
+<h3 id="12">1.2 适用范围</h3>
+<p>适用于所有工作区文档，包括：
+- 组织架构文档
+- 角色定义文档
+- 流程规范文档
+- 研究报告
+- 会议纪要
+- 知识库文章</p>
+<h3 id="13">1.3 文档命名规范</h3>
+<table>
+<thead>
+<tr>
+<th>文档类型</th>
+<th>命名格式</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>规范/章程</td>
+<td><code>XXX_章程.md</code></td>
+<td><code>PROJECT_CHARTER.md</code></td>
+</tr>
+<tr>
+<td>操作手册</td>
+<td><code>XXX_手册.md</code></td>
+<td><code>SOP_MANUAL.md</code></td>
+</tr>
+<tr>
+<td>计划方案</td>
+<td><code>XXX_计划_VX.X.md</code></td>
+<td><code>DISASTER_RECOVERY_PLAN_V1.0.md</code></td>
+</tr>
+<tr>
+<td>会议纪要</td>
+<td><code>YYYY-MM-DD_会议主题.md</code></td>
+<td><code>2026-03-10_周例会.md</code></td>
+</tr>
+<tr>
+<td>检查清单</td>
+<td><code>XXX_清单.md</code></td>
+<td><code>BACKUP_CHECKLIST_DAILY.md</code></td>
+</tr>
+<tr>
+<td>报告文档</td>
+<td><code>XXX_报告_YYYY-MM-DD.md</code></td>
+<td><code>NOTION_SYNC_REPORT_2026-03-10.md</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="14">1.4 文档模板</h3>
+<h4 id="_2">标准头部模板</h4>
+<pre><code class="language-markdown"># 文档标题
+
+**文档编号**: DOC-XXX-XXX  
+**生效日期**: YYYY-MM-DD  
+**最后更新**: YYYY-MM-DD  
+**版本**: VX.X  
+**作者**: 姓名/角色  
+**审批**: 姓名/角色
+
+---
+
+## 变更历史
+
+| 版本 | 日期 | 变更内容 | 变更人 |
+|------|------|----------|--------|
+| V1.0 | YYYY-MM-DD | 初始版本 | XXX |
+
+---
+</code></pre>
+<h4 id="_3">章节结构模板</h4>
+<pre><code class="language-markdown">## 1. 概述
+
+### 1.1 目的
+### 1.2 适用范围
+### 1.3 术语定义
+
+## 2. 正文内容
+
+### 2.1 第一主题
+#### 2.1.1 子主题
+#### 2.1.2 子主题
+
+### 2.2 第二主题
+
+## 3. 附录
+
+### 3.1 相关文档
+### 3.2 联系方式
+### 3.3 参考资料
+
+---
+
+**文档结束**
+</code></pre>
+<h3 id="15">1.5 创建流程</h3>
+<pre><code>┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│  1.需求识别  │───▶│  2.模板选择  │───▶│  3.内容编写  │───▶│  4.自检审查  │
+└─────────────┘    └─────────────┘    └─────────────┘    └──────┬──────┘
+                                                                  │
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐            │
+│ 7.归档发布  │◀───│  6.审批确认  │◀───│  5.交叉审查  │◀───────────┘
+└─────────────┘    └─────────────┘    └─────────────┘
+</code></pre>
+<h3 id="16">1.6 详细步骤</h3>
+<h4 id="1">步骤1: 需求识别</h4>
+<ul>
+<li>明确文档目的和目标读者</li>
+<li>确定文档类型和范围</li>
+<li>分配文档负责人</li>
+</ul>
+<h4 id="2">步骤2: 模板选择</h4>
+<ul>
+<li>从模板库选择合适模板</li>
+<li>复制模板到目标位置</li>
+<li>填写文档头部信息</li>
+</ul>
+<h4 id="3">步骤3: 内容编写</h4>
+<ul>
+<li>遵循"金字塔原理"：结论先行</li>
+<li>使用清晰、简洁的语言</li>
+<li>多用表格、列表、图表</li>
+<li>关键信息加粗或高亮</li>
+</ul>
+<h4 id="4">步骤4: 自检审查</h4>
+<p>检查清单：
+- [ ] 文档头部信息完整
+- [ ] 版本号正确
+- [ ] 章节编号连续
+- [ ] 无拼写和语法错误
+- [ ] 链接可正常访问
+- [ ] 表格格式正确</p>
+<h4 id="5">步骤5: 交叉审查</h4>
+<ul>
+<li>提交给相关角色审查</li>
+<li>收集反馈意见</li>
+<li>修改完善</li>
+</ul>
+<h4 id="6">步骤6: 审批确认</h4>
+<ul>
+<li>提交给Egbertie或授权审批人</li>
+<li>获得书面或电子批准</li>
+<li>记录审批意见</li>
+</ul>
+<h4 id="7">步骤7: 归档发布</h4>
+<ul>
+<li>保存到指定目录</li>
+<li>更新文档索引</li>
+<li>通知相关人员</li>
+<li>同步到Notion/GitHub</li>
+</ul>
+<h3 id="17">1.7 更新流程</h3>
+<table>
+<thead>
+<tr>
+<th>触发条件</th>
+<th>更新类型</th>
+<th>审批要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>错别字修正</td>
+<td>补丁版本+1</td>
+<td>无需审批</td>
+</tr>
+<tr>
+<td>内容补充</td>
+<td>次版本+1</td>
+<td>原审批人确认</td>
+</tr>
+<tr>
+<td>重大变更</td>
+<td>主版本+1</td>
+<td>重新审批</td>
+</tr>
+<tr>
+<td>架构调整</td>
+<td>主版本+1</td>
+<td>Egbertie审批</td>
+</tr>
+</tbody>
+</table>
+<h3 id="18">1.8 文档存储规范</h3>
+<pre><code>/root/.openclaw/workspace/
+├── docs/                    # 核心文档
+│   ├── meetings/           # 会议纪要
+│   ├── reports/            # 报告文档
+│   └── archive/            # 归档文档
+├── skills/                 # Skill文档
+├── memory/                 # 记忆文件
+└── knowledge_base/         # 知识库
+</code></pre>
+<hr />
+<h2 id="2-sop">2. 任务管理SOP</h2>
+<h3 id="21">2.1 目的</h3>
+<p>规范任务的创建、分配、跟踪和关闭流程，确保工作有序进行，提高执行效率。</p>
+<h3 id="22">2.2 任务生命周期</h3>
+<pre><code>    ┌──────────┐
+    │  待创建  │
+    └────┬─────┘
+         │ 触发需求
+         ▼
+    ┌──────────┐     ┌──────────┐
+    │  待分配  │────▶│  已分配  │
+    └────┬─────┘     └────┬─────┘
+         │                │
+         │ 开始执行       │ 开始执行
+         ▼                ▼
+    ┌──────────┐     ┌──────────┐
+    │ 进行中   │     │ 进行中   │
+    └────┬─────┘     └────┬─────┘
+         │                │
+         │ 完成/阻塞      │ 完成/阻塞
+         ▼                ▼
+    ┌──────────┐     ┌──────────┐
+    │ 待验收   │     │ 已关闭   │
+    └────┬─────┘     └──────────┘
+         │ 验收通过
+         ▼
+    ┌──────────┐
+    │  已完成  │
+    └──────────┘
+</code></pre>
+<h3 id="23">2.3 任务分级</h3>
+<table>
+<thead>
+<tr>
+<th>优先级</th>
+<th>标识</th>
+<th>响应时间</th>
+<th>完成时限</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P0-紧急</td>
+<td>🔴</td>
+<td>即时</td>
+<td>4小时</td>
+<td>系统故障、数据丢失</td>
+</tr>
+<tr>
+<td>P1-高</td>
+<td>🟠</td>
+<td>2小时</td>
+<td>24小时</td>
+<td>客户投诉、里程碑风险</td>
+</tr>
+<tr>
+<td>P2-中</td>
+<td>🟡</td>
+<td>4小时</td>
+<td>3天</td>
+<td>常规任务、功能开发</td>
+</tr>
+<tr>
+<td>P3-低</td>
+<td>🟢</td>
+<td>24小时</td>
+<td>1周</td>
+<td>优化建议、文档整理</td>
+</tr>
+</tbody>
+</table>
+<h3 id="24">2.4 任务创建规范</h3>
+<h4 id="_4">任务信息模板</h4>
+<pre><code class="language-markdown">## 任务信息
+
+**任务ID**: TASK-XXXX  
+**任务名称**: [简洁描述任务目标]  
+**优先级**: P0/P1/P2/P3  
+**负责人**: @角色名  
+**协助人**: @角色名（如有）  
+**创建日期**: YYYY-MM-DD  
+**截止日期**: YYYY-MM-DD  
+**关联里程碑**: [里程碑名称]
+
+---
+
+## 任务描述
+
+### 背景
+[说明任务的背景和原因]
+
+### 目标
+[明确任务要达成的具体目标，SMART原则]
+
+### 范围
+**包含**:
+- [ ] 具体事项1
+- [ ] 具体事项2
+
+**不包含**:
+- 排除事项1
+- 排除事项2
+
+### 验收标准
+- [ ] 可衡量的结果1
+- [ ] 可衡量的结果2
+
+### 参考资源
+- 相关文档链接
+- 参考资料链接
+</code></pre>
+<h3 id="25">2.5 任务分配流程</h3>
+<pre><code>┌─────────────┐
+│  任务池     │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│  能力匹配   │───▶│  负载检查   │───▶│  任务分配   │
+└─────────────┘    └─────────────┘    └──────┬──────┘
+                                             │
+                                             ▼
+                                      ┌─────────────┐
+                                      │  通知确认   │
+                                      └─────────────┘
+</code></pre>
+<h4 id="_5">分配原则</h4>
+<ol>
+<li><strong>能力匹配</strong>: 根据角色能力矩阵分配</li>
+<li><strong>负载均衡</strong>: 避免个别角色过载</li>
+<li><strong>发展考虑</strong>: 适当分配挑战性任务</li>
+<li><strong>备份机制</strong>: 关键任务有AB角</li>
+</ol>
+<h3 id="26">2.6 任务跟踪</h3>
+<h4 id="_6">每日跟踪</h4>
+<ul>
+<li>站会汇报：昨日完成/今日计划/阻塞问题</li>
+<li>进度更新：任务状态及时更新</li>
+<li>风险预警：提前识别延期风险</li>
+</ul>
+<h4 id="_7">跟踪工具</h4>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>用途</th>
+<th>更新频率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TASK_MASTER.md</td>
+<td>任务总览</td>
+<td>实时</td>
+</tr>
+<tr>
+<td>每日晨报</td>
+<td>进度汇报</td>
+<td>每日09:00</td>
+</tr>
+<tr>
+<td>飞书任务</td>
+<td>外部协作</td>
+<td>实时</td>
+</tr>
+<tr>
+<td>Notion看板</td>
+<td>可视化管理</td>
+<td>实时</td>
+</tr>
+</tbody>
+</table>
+<h3 id="27">2.7 任务关闭</h3>
+<h4 id="_8">关闭条件</h4>
+<ul>
+<li>[ ] 所有验收标准达成</li>
+<li>[ ] 相关文档已更新</li>
+<li>[ ] 经验已沉淀</li>
+<li>[ ] 验收人已确认</li>
+</ul>
+<h4 id="_9">关闭流程</h4>
+<ol>
+<li>执行人标记完成</li>
+<li>输出物提交</li>
+<li>验收人审查</li>
+<li>验收通过关闭</li>
+<li>经验总结归档</li>
+</ol>
+<hr />
+<h2 id="3-sop">3. 会议召开SOP</h2>
+<h3 id="31">3.1 目的</h3>
+<p>规范各类会议的组织、召开和跟进流程，提高会议效率，确保会议成果落地。</p>
+<h3 id="32">3.2 会议类型</h3>
+<table>
+<thead>
+<tr>
+<th>会议类型</th>
+<th>频率</th>
+<th>时长</th>
+<th>参与人</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>每日站会</strong></td>
+<td>每日</td>
+<td>15分钟</td>
+<td>核心团队</td>
+<td>进度同步、阻塞识别</td>
+</tr>
+<tr>
+<td><strong>周例会</strong></td>
+<td>每周一</td>
+<td>60分钟</td>
+<td>全团队</td>
+<td>周复盘、计划对齐</td>
+</tr>
+<tr>
+<td><strong>里程碑评审</strong></td>
+<td>里程碑</td>
+<td>90分钟</td>
+<td>核心+顾问</td>
+<td>阶段成果、决策</td>
+</tr>
+<tr>
+<td><strong>专题讨论</strong></td>
+<td>按需</td>
+<td>45分钟</td>
+<td>相关人员</td>
+<td>问题解决、决策</td>
+</tr>
+<tr>
+<td><strong>1对1沟通</strong></td>
+<td>按需</td>
+<td>30分钟</td>
+<td>相关两人</td>
+<td>深度交流、反馈</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33">3.3 会议召开流程</h3>
+<pre><code>会前准备 (T-1日或更早)
+    │
+    ├──▶ 确定议程
+    ├──▶ 准备材料
+    ├──▶ 发送邀请
+    └──▶ 确认参与
+            │
+            ▼
+会中执行 (会议当天)
+    │
+    ├──▶ 准时开始
+    ├──▶ 议程推进
+    ├──▶ 记录要点
+    └──▶ 总结行动
+            │
+            ▼
+会后跟进 (24小时内)
+    │
+    ├──▶ 发送纪要
+    ├──▶ 分配任务
+    └──▶ 跟踪落实
+</code></pre>
+<h3 id="34">3.4 会前准备</h3>
+<h4 id="_10">会议预约</h4>
+<ul>
+<li>提前至少1天发送邀请</li>
+<li>明确会议主题、时间、地点/链接</li>
+<li>附上议程和预习材料</li>
+</ul>
+<h4 id="_11">议程模板</h4>
+<pre><code class="language-markdown">## 会议议程
+
+**会议**: [会议名称]  
+**时间**: YYYY-MM-DD HH:MM - HH:MM  
+**地点**: [地点/视频会议链接]  
+**主持人**: @角色名  
+**记录人**: @角色名  
+
+### 议程 (总时长: XX分钟)
+
+| 序号 | 议题 | 负责人 | 时长 | 目标 |
+|------|------|--------|------|------|
+| 1 | 议题1 | @角色 | 10分钟 | 同步信息 |
+| 2 | 议题2 | @角色 | 20分钟 | 讨论决策 |
+| 3 | 议题3 | @角色 | 15分钟 | 分配任务 |
+
+### 预习材料
+- [材料1链接]
+- [材料2链接]
+
+### 期望产出
+- 决策项
+- 行动项清单
+</code></pre>
+<h3 id="35">3.5 会中执行</h3>
+<h4 id="_12">主持人职责</h4>
+<ol>
+<li><strong>开场</strong>: 简述议程、确认时间</li>
+<li><strong>控场</strong>: 控制每个议题时间</li>
+<li><strong>引导</strong>: 确保人人参与、聚焦主题</li>
+<li><strong>总结</strong>: 确认决策和行动项</li>
+</ol>
+<h4 id="_13">记录规范</h4>
+<ul>
+<li>记录关键决策点</li>
+<li>记录明确的行动项(谁+做什么+何时)</li>
+<li>记录待跟进问题</li>
+<li>不必逐字记录</li>
+</ul>
+<h3 id="36">3.6 会议纪要模板</h3>
+<pre><code class="language-markdown"># YYYY-MM-DD_会议主题
+
+**会议时间**: YYYY-MM-DD HH:MM - HH:MM  
+**参会人员**: @角色1, @角色2, ...  
+**缺席人员**: @角色3 (原因)  
+**记录人**: @角色名
+
+---
+
+## 会议议题
+
+1. 议题1
+2. 议题2
+3. 议题3
+
+---
+
+## 关键决策
+
+| 序号 | 决策内容 | 决策人 | 影响范围 |
+|------|----------|--------|----------|
+| 1 | 决策1描述 | @角色 | 影响X团队 |
+| 2 | 决策2描述 | @角色 | 影响Y流程 |
+
+---
+
+## 行动项
+
+| 序号 | 任务 | 负责人 | 截止日期 | 状态 |
+|------|------|--------|----------|------|
+| 1 | 任务1描述 | @角色 | YYYY-MM-DD | 待开始 |
+| 2 | 任务2描述 | @角色 | YYYY-MM-DD | 待开始 |
+
+---
+
+## 待跟进问题
+
+| 序号 | 问题 | 跟进人 | 预计解决时间 |
+|------|------|--------|--------------|
+| 1 | 问题1 | @角色 | YYYY-MM-DD |
+
+---
+
+**下次会议**: YYYY-MM-DD HH:MM
+</code></pre>
+<h3 id="37">3.7 会后跟进</h3>
+<ul>
+<li><strong>24小时内</strong>: 发送会议纪要给所有参会人</li>
+<li><strong>48小时内</strong>: 行动项负责人确认任务</li>
+<li><strong>下次会议前</strong>: 检查行动项完成情况</li>
+</ul>
+<hr />
+<h2 id="4-sop">4. 备份恢复SOP</h2>
+<h3 id="41">4.1 目的</h3>
+<p>规范数据备份和灾难恢复操作流程，确保在发生数据丢失或系统故障时，能够快速、准确地恢复业务运营。</p>
+<h3 id="42">4.2 备份策略</h3>
+<h4 id="_14">备份频率</h4>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>备份频率</th>
+<th>保留时长</th>
+<th>存储位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心配置文件</td>
+<td>每日+变更触发</td>
+<td>30天</td>
+<td>本地+加密云</td>
+</tr>
+<tr>
+<td>Markdown文档</td>
+<td>每日自动</td>
+<td>90天</td>
+<td>本地+Git</td>
+</tr>
+<tr>
+<td>记忆文件</td>
+<td>每日自动</td>
+<td>180天</td>
+<td>本地+加密云</td>
+</tr>
+<tr>
+<td>Skill文件</td>
+<td>每周+变更触发</td>
+<td>60天</td>
+<td>本地+Git</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_15">备份时间</h4>
+<ul>
+<li><strong>每日备份</strong>: 每天 02:00 (Asia/Shanghai)</li>
+<li><strong>每周备份</strong>: 每周日 03:00 (Asia/Shanghai)</li>
+</ul>
+<h3 id="43">4.3 自动备份流程</h3>
+<pre><code>┌─────────────┐
+│ 定时触发    │ 02:00 daily / 03:00 Sunday
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│ 前置检查    │ 磁盘空间&gt;20%? 备份目录可写?
+└──────┬──────┘
+       │ 检查通过
+       ▼
+┌─────────────┐
+│ 执行备份    │ 分类打包/加密/校验
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│ 完整性校验  │ 生成校验和/验证
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│ 存储归档    │ 本地存储+云同步
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│ 清理过期    │ 删除超期备份
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│ 记录日志    │ 更新状态/发送报告
+└─────────────┘
+</code></pre>
+<h3 id="44">4.4 手动备份操作</h3>
+<h4 id="_16">触发命令</h4>
+<pre><code class="language-bash"># 完整备份
+python3 /root/.openclaw/workspace/scripts/backup-manager.py backup --type full
+
+# 仅配置备份
+python3 /root/.openclaw/workspace/scripts/backup-manager.py backup --type config
+
+# 仅文档备份
+python3 /root/.openclaw/workspace/scripts/backup-manager.py backup --type docs
+</code></pre>
+<h3 id="45">4.5 灾难分级</h3>
+<table>
+<thead>
+<tr>
+<th>级别</th>
+<th>定义</th>
+<th>示例</th>
+<th>RTO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P0-紧急</td>
+<td>完全不可用</td>
+<td>系统崩溃、全部数据丢失</td>
+<td>1小时</td>
+</tr>
+<tr>
+<td>P1-严重</td>
+<td>核心功能受损</td>
+<td>关键配置丢失</td>
+<td>2小时</td>
+</tr>
+<tr>
+<td>P2-一般</td>
+<td>非核心功能受损</td>
+<td>部分文档丢失</td>
+<td>4小时</td>
+</tr>
+<tr>
+<td>P3-轻微</td>
+<td>轻微影响</td>
+<td>单个文件丢失</td>
+<td>48小时</td>
+</tr>
+</tbody>
+</table>
+<h3 id="46">4.6 恢复流程</h3>
+<h4 id="p0">P0级灾难恢复 (系统完全不可用)</h4>
+<p><strong>步骤1: 灾难确认 (0-15分钟)</strong>
+- 确认灾难范围和影响
+- 启动应急响应
+- 通知Egbertie</p>
+<p><strong>步骤2: 恢复准备 (15-30分钟)</strong></p>
+<pre><code class="language-bash"># 查看可用备份
+python3 /root/.openclaw/workspace/scripts/backup-manager.py list
+
+# 选择最新完整备份
+BACKUP_DATE=$(ls -lt /backups/weekly/ | head -2 | tail -1 | awk '{print $9}')
+echo &quot;恢复点: $BACKUP_DATE&quot;
+</code></pre>
+<p><strong>步骤3: 执行恢复 (30-90分钟)</strong></p>
+<pre><code class="language-bash"># 执行自动恢复
+python3 /root/.openclaw/workspace/scripts/backup-manager.py restore \
+  --date $BACKUP_DATE \
+  --type full
+
+# 验证关键文件
+cat /root/.openclaw/workspace/.env
+cat /root/.openclaw/openclaw.json
+</code></pre>
+<p><strong>步骤4: 服务恢复 (90-120分钟)</strong></p>
+<pre><code class="language-bash"># 重启服务
+openclaw gateway restart
+
+# 验证定时任务
+openclaw cron list
+
+# 运行验证脚本
+python3 /root/.openclaw/workspace/scripts/backup-manager.py verify
+</code></pre>
+<p><strong>步骤5: 恢复报告</strong>
+- 生成恢复报告
+- 记录故障原因
+- 提出改进建议</p>
+<h4 id="_17">单文件恢复</h4>
+<pre><code class="language-bash"># 恢复单个文件
+python3 /root/.openclaw/workspace/scripts/backup-manager.py restore-file \
+  --backup-date 2026-03-10 \
+  --source-path docs/PROJECT_CHARTER.md \
+  --target-path /root/.openclaw/workspace/docs/PROJECT_CHARTER.md
+</code></pre>
+<h3 id="47">4.7 恢复验证</h3>
+<h4 id="_18">验证清单</h4>
+<ul>
+<li>[ ] 配置文件完整性 (.env, openclaw.json)</li>
+<li>[ ] 定时任务列表正确</li>
+<li>[ ] API连接正常</li>
+<li>[ ] 文档可正常访问</li>
+<li>[ ] Git仓库同步状态正常</li>
+<li>[ ] 备份服务正常运行</li>
+</ul>
+<h4 id="_19">验证命令</h4>
+<pre><code class="language-bash"># 综合验证
+python3 /root/.openclaw/workspace/scripts/backup-manager.py verify --report
+
+# 生成验证报告
+python3 /root/.openclaw/workspace/scripts/backup-manager.py verify \
+  --report --output /tmp/verify-report.md
+</code></pre>
+<h3 id="48">4.8 定期演练</h3>
+<table>
+<thead>
+<tr>
+<th>演练类型</th>
+<th>频率</th>
+<th>内容</th>
+<th>负责人</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>备份验证</td>
+<td>每周</td>
+<td>验证备份文件完整性</td>
+<td>Kimi Claw</td>
+</tr>
+<tr>
+<td>恢复演练</td>
+<td>每月</td>
+<td>模拟P1级恢复</td>
+<td>Kimi Claw</td>
+</tr>
+<tr>
+<td>全面演练</td>
+<td>每季度</td>
+<td>模拟P0级灾难恢复</td>
+<td>Egbertie</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="a">附录A: 常用命令速查</h2>
+<h3 id="_20">备份管理</h3>
+<pre><code class="language-bash"># 查看备份状态
+python3 /root/.openclaw/workspace/scripts/backup-manager.py status
+
+# 列出所有备份
+python3 /root/.openclaw/workspace/scripts/backup-manager.py list
+
+# 手动触发备份
+python3 /root/.openclaw/workspace/scripts/backup-manager.py backup
+
+# 清理旧备份
+python3 /root/.openclaw/workspace/scripts/backup-manager.py cleanup --days 30
+</code></pre>
+<h3 id="_21">系统检查</h3>
+<pre><code class="language-bash"># 磁盘空间
+df -h
+
+# OpenClaw状态
+openclaw status
+openclaw gateway status
+openclaw cron list
+
+# Git状态
+cd /root/.openclaw/workspace &amp;&amp; git status
+</code></pre>
+<hr />
+<h2 id="b">附录B: 变更历史</h2>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>日期</th>
+<th>变更内容</th>
+<th>变更人</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V1.0</td>
+<td>2026-03-10</td>
+<td>初始版本发布</td>
+<td>Kimi Claw</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>文档结束</strong></p>
+<blockquote>
+<p>满意解研究所 · SOP标准作业程序手册 V1.0
+标准化作业，让效率翻倍</p>
+</blockquote>
+</body>
+</html>
+<!-- 知识内化记录 -->
+<!-- 内化时间: 2026-03-31 | 状态: 已内化 -->

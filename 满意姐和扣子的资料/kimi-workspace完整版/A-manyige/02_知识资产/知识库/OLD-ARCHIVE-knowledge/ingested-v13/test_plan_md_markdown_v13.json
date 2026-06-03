@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_task-coordinator/tests/test_plan.md",
+  "filename": "test_plan.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "51a47bd36eca999e",
+  "content_length": 2155,
+  "ingested_at": "2026-03-31T17:27:45.077076",
+  "content_preview": "# Task Coordinator Skill 质量评估测试套件\n\n## 评估目标\n评估 task-coordinator Skill 的任务协调能力，包括模式切换、遗漏检测、预警机制等核心功能。\n\n## 测试设计原则\n1. **覆盖性**: 覆盖所有执行模式（sequential/parallel/notify_user/hybrid）\n2. **边界性**: 测试阈值边界条件\n3. **压力性**: 模拟高负载并发场景\n4. **实用性**: 基于真实使用场景设计\n\n## 测试场景概览\n\n### 正例测试场景 (10个)\n测试 Skill 应该正确触发的场景\n\n| 编号 | 场景名称 | 测试目标 | 预期模式 |\n|------|----------|----------|----------|\n| P01 | 严重过期任务处理 | 验证过期任务触发 sequential 模式 | sequential |\n| P02 | 多过期任务并行补救 | 验证多过期任务使用子代理并行 | sequential+parallel |\n| P03 | 阻塞任务批量确认 | 验证阻塞任务触发",
+  "limitations_applied": []
+}

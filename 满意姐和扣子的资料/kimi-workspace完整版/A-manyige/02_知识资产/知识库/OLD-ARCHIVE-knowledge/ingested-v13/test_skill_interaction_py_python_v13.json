@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/testing-framework/tests/integration/test_skill_interaction.py",
+  "filename": "test_skill_interaction.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "90ee70cbc61a961f",
+  "content_length": 6005,
+  "ingested_at": "2026-03-31T17:27:45.443071",
+  "content_preview": "\"\"\"\nSkill交互集成测试\n\n测试目标: 验证多个Skill之间的数据交互和协作\n测试类型: 集成测试 (Integration Test)\n\"\"\"\n\nimport json\nimport pytest\nfrom pathlib import Path\nfrom unittest.mock import patch\n\n# 被测Skill路径\nSKILLS_ROOT = Path(__file__).parent.parent.parent.parent\n\n\n@pytest.mark.integration\nclass TestSkillInteraction:\n    \"\"\"Skill间交互测试\"\"\"\n    \n    def test_zero_idle_reads_token_budget(self, tmp_path):\n        \"\"\"测试Zero-Idle读取Token预算状态\"\"\"\n        memory_dir = tmp_path / \"memory\"\n        memory_dir.mkdir()\n        \n        # 创建Tok",
+  "limitations_applied": []
+}

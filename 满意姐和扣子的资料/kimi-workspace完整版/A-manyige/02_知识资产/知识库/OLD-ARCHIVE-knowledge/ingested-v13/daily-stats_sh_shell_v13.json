@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_execution-protocol/scripts/daily-stats.sh",
+  "filename": "daily-stats.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "4523286a404cc878",
+  "content_length": 1237,
+  "ingested_at": "2026-03-31T17:27:45.021190",
+  "content_preview": "#!/bin/bash\n# 每日协议统计脚本\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nPROTOCOL_DIR=\"$WORKSPACE/memory/protocol\"\nTODAY=$(date +%Y%m%d)\nSTATS_FILE=\"$PROTOCOL_DIR/stats-${TODAY}.json\"\n\necho \"=== 生成每日协议统计 ===\"\necho \"日期: $TODAY\"\n\n# 创建目录\nmkdir -p \"$PROTOCOL_DIR\"\n\n# 统计今日数据\nCONFIRMED=$(find \"$PROTOCOL_DIR\" -name \"*${TODAY}*-confirmation.md\" 2>/dev/null | wc -l)\nCOMPLETED=$(find \"$PROTOCOL_DIR\" -name \"*${TODAY}*-completion.md\" 2>/dev/null | wc -l)\nESCALATED=$(find \"$PROTOCOL_DIR\" -name \"*${TODAY}*-escalation.md\"",
+  "limitations_applied": []
+}

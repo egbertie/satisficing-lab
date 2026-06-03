@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/quality-gate-system/scripts/generate-report.py",
+  "filename": "generate-report.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "a9492ffb027113ac",
+  "content_length": 11463,
+  "ingested_at": "2026-03-31T17:27:45.006904",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\ngenerate-report.py\n门禁报告生成器 - 支持多种格式和趋势分析\n\nUsage:\n    python3 generate-report.py --input report.json --format html\n    python3 generate-report.py --trend --days 30\n    python3 generate-report.py --compare report1.json report2.json\n\"\"\"\n\nimport json\nimport argparse\nfrom pathlib import Path\nfrom datetime import datetime, timedelta\nfrom typing import List, Dict, Any\nfrom dataclasses import dataclass\n\nREPORTS_DIR = Path(__file__).parent.parent / \"reports\"\nREPORTS_DIR.mkdir(p",
+  "limitations_applied": []
+}

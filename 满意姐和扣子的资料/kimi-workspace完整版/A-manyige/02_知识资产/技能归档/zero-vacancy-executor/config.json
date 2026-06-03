@@ -1,0 +1,107 @@
+{
+  "_schema_version": "1.0.0",
+  "_description": "Zero-Vacancy Executor 配置文件 - 完成5标准化S1-S7",
+  "_status": "WIP",
+  "_limitations": [
+    "单节点配置，未实现集群槽位共享",
+    "启发式预留策略，非最优调度算法",
+    "高并发测试基于模拟负载"
+  ],
+  
+  "slot_management": {
+    "total_slots": 4,
+    "reserved_slots": {
+      "user_dialogue": 1,
+      "emergency": 0
+    },
+    "dynamic_allocation": true,
+    "preemption_enabled": true,
+    "grace_period_ms": 1000
+  },
+  
+  "detection": {
+    "idle_check_interval_sec": 5,
+    "user_intent_detection": true,
+    "intent_triggers": [
+      "user_message_received",
+      "user_typing_detected",
+      "explicit_command"
+    ]
+  },
+  
+  "response": {
+    "max_response_time_ms": 500,
+    "priority_boost": "high",
+    "queue_enabled": true,
+    "max_queue_length": 10
+  },
+  
+  "release": {
+    "session_timeout_sec": 300,
+    "auto_release_on_complete": true,
+    "cleanup_interval_sec": 30
+  },
+  
+  "monitoring": {
+    "enabled": true,
+    "metrics_endpoint": "/metrics",
+    "status_endpoint": "/status",
+    "health_check_interval_sec": 10,
+    "alerts_enabled": true
+  },
+  
+  "alerts": {
+    "thresholds": {
+      "slot_availability_ratio": {
+        "warning": 0.8,
+        "critical": 0.5
+      },
+      "user_response_latency_ms": {
+        "warning": 1000,
+        "critical": 3000
+      },
+      "slot_preemption_count_per_min": {
+        "warning": 10,
+        "critical": 30
+      },
+      "user_wait_queue_length": {
+        "warning": 5,
+        "critical": 10
+      }
+    },
+    "channels": ["log", "webhook"]
+  },
+  
+  "self_check": {
+    "enabled": true,
+    "interval_sec": 60,
+    "checks": [
+      "reserved_slot_available",
+      "slot_count_consistency",
+      "no_orphaned_slots",
+      "priority_valid",
+      "metrics_flowing"
+    ]
+  },
+  
+  "adversarial_test": {
+    "enabled": false,
+    "scenarios": [
+      {
+        "name": "burst_user_requests",
+        "concurrent_users": 10,
+        "duration_sec": 30
+      },
+      {
+        "name": "task_preemption_storm",
+        "preemption_rate_per_sec": 5,
+        "duration_sec": 60
+      },
+      {
+        "name": "slot_leak_simulation",
+        "leak_rate_per_min": 1,
+        "detection_window_sec": 300
+      }
+    ]
+  }
+}

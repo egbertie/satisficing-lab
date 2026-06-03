@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/testing-framework/.github/workflows/skills-test.yml",
+  "filename": "skills-test.yml",
+  "file_type": "yaml",
+  "extension": ".yml",
+  "file_hash": "b6bc3cc232a044d5",
+  "content_length": 8017,
+  "ingested_at": "2026-03-31T17:27:45.444958",
+  "content_preview": "name: OpenClaw Skills Test Suite\n\non:\n  push:\n    branches: [ main, develop, feature/* ]\n    paths:\n      - 'skills/**'\n      - '.github/workflows/skills-test.yml'\n  pull_request:\n    branches: [ main, develop ]\n    paths:\n      - 'skills/**'\n  schedule:\n    # 每日凌晨2点运行\n    - cron: '0 18 * * *'\n  workflow_dispatch:\n    inputs:\n      test_type:\n        description: '测试类型'\n        required: true\n        default: 'all'\n        type: choice\n        options:\n          - all\n          - critical\n      ",
+  "limitations_applied": []
+}

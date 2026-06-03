@@ -1,0 +1,39 @@
+{
+  "pipeline_hooks": {
+    "post_collection": {
+      "enabled": true,
+      "trigger": "auto",
+      "action": "quality_check",
+      "params": {
+        "min_score": 70,
+        "auto_retry": true,
+        "retry_count": 2
+      }
+    },
+    "quality_gate": {
+      "enabled": true,
+      "block_threshold": 65,
+      "action": "block_and_alert",
+      "alert_channels": ["log", "webhook"]
+    },
+    "pre_storage": {
+      "enabled": true,
+      "required_grade": "B+",
+      "action": "verify_and_tag"
+    }
+  },
+  "quality_thresholds": {
+    "critical_sources": ["L1", "L2"],
+    "min_timeliness_days": {
+      "tech": 90,
+      "finance": 30,
+      "general": 365
+    }
+  },
+  "metrics": {
+    "enable_dashboard": true,
+    "retention_days": 90,
+    "alert_on_quality_drop": true,
+    "quality_drop_threshold": 5
+  }
+}

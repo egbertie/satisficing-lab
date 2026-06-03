@@ -1,0 +1,27 @@
+{
+  "id": "counter-case-finder",
+  "name": "counter-case-finder",
+  "displayName": "反向案例发现器",
+  "version": "1.0.0",
+  "description": "帮助用户通过反向案例获得深度洞察的思考工具。当用户面临决策或思考问题时，通过梳理事件要点、定义\"正面\"、搜索反面案例、还原案例脉络、总结失败/成功原因，最终给出基于反面教材的建议。核心逻辑：从反面看正面，从失败学成功。适用于决策分析、风险评估、创新思考、战略规划等场景。输出成果为Word文档格式的反向案例分析报告。",
+  "type": "skill",
+  "author": "your-name",
+  "tags": ["counter-case", "reverse-thinking", "case-study", "decision-making", "risk-analysis", "insight", "learning-from-failure", "docx"],
+  "category": "thinking-tools",
+  "entry": "SKILL.md",
+  "output": ["docx"],
+  "scripts": {
+    "generate": "scripts/generate_report.py",
+    "install": "scripts/install_dependencies.py"
+  },
+  "examples": [
+    "examples/price_war_example.json"
+  ],
+  "config": {
+    "file": "config.json",
+    "schema": {
+      "framework": "string",
+      "outputFormat": "string"
+    }
+  }
+}

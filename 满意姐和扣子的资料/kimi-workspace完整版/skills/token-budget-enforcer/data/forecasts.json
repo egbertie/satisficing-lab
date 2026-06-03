@@ -1,0 +1,52 @@
+{
+  "metadata": {
+    "version": "2.0.0",
+    "model_version": "estimator_v1.5",
+    "last_calibration": "2026-03-20T18:00:00+08:00"
+  },
+  "forecasts": {
+    "2026-03-21": {
+      "date": "2026-03-21",
+      "predicted_usage": 18000,
+      "confidence_interval": {
+        "low": 14000,
+        "high": 22000
+      },
+      "confidence_level": 0.85,
+      "method": "linear_regression_7d",
+      "factors": [
+        "day_of_week",
+        "scheduled_tasks",
+        "historical_average"
+      ]
+    },
+    "2026-03-22": {
+      "date": "2026-03-22",
+      "predicted_usage": 16000,
+      "confidence_interval": {
+        "low": 12000,
+        "high": 20000
+      },
+      "confidence_level": 0.80,
+      "method": "linear_regression_7d"
+    }
+  },
+  "trend_analysis": {
+    "direction": "stable",
+    "change_percent": 2.5,
+    "days_until_exhaustion": null,
+    "recommendation": "maintain_current_allocation"
+  },
+  "estimation_accuracy": {
+    "last_7_days": {
+      "mean_absolute_percentage_error": 0.15,
+      "within_20_percent": 0.82,
+      "within_30_percent": 0.91
+    },
+    "last_30_days": {
+      "mean_absolute_percentage_error": 0.18,
+      "within_20_percent": 0.78,
+      "within_30_percent": 0.88
+    }
+  }
+}

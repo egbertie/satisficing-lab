@@ -1,0 +1,74 @@
+{
+  "report_type": "daily",
+  "generated_at": "2026-03-21T20:17:05.821507",
+  "period_start": "2026-03-21",
+  "period_end": "2026-03-21",
+  "summary": {
+    "total_budget": 50000,
+    "total_used": 15000,
+    "total_remaining": 35000,
+    "usage_percent": 30.0,
+    "task_count": 15,
+    "efficiency_score": 0.82
+  },
+  "pools": {
+    "strategic_reserve": {
+      "allocated": 15000,
+      "used": 0,
+      "remaining": 15000
+    },
+    "operational_budget": {
+      "allocated": 25000,
+      "used": 12000,
+      "remaining": 13000
+    },
+    "innovation_fund": {
+      "allocated": 10000,
+      "used": 3000,
+      "remaining": 7000
+    }
+  },
+  "metrics": {
+    "usage": {
+      "usage_percent": 30.0,
+      "remaining_percent": 70.0,
+      "predicted_usage": 18000,
+      "forecast_deviation": 0.17,
+      "forecast_deviation_percent": "16.7%"
+    },
+    "accuracy_validation": {
+      "status": "valid",
+      "checks": [
+        {
+          "check": "pool_allocation_sum",
+          "status": "pass",
+          "message": "\u9884\u7b97\u6c60\u5206\u914d\u6b63\u786e"
+        },
+        {
+          "check": "consumption_consistency",
+          "status": "pass",
+          "message": "\u6d88\u8017\u7edf\u8ba1\u4e00\u81f4"
+        },
+        {
+          "check": "forecast_accuracy",
+          "status": "pass",
+          "message": "\u9884\u6d4b\u51c6\u786e\u7387: 83.3%"
+        },
+        {
+          "check": "data_completeness",
+          "status": "pass",
+          "message": "\u6570\u636e\u5b8c\u6574"
+        }
+      ],
+      "errors": []
+    },
+    "efficiency": {
+      "score": 0.82,
+      "tokens_per_task": 1000.0
+    }
+  },
+  "alerts": [],
+  "recommendations": [
+    "\u2705 \u9884\u7b97\u4f7f\u7528\u6b63\u5e38\uff0c\u7ee7\u7eed\u4fdd\u6301"
+  ]
+}

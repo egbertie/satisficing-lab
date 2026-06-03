@@ -1,0 +1,142 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/super-knowledge-ingest/super_knowledge_ingest_v6.py",
+  "filename": "super_knowledge_ingest_v6.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 23988,
+  "checksum": "1ad1ea16b08f111b",
+  "ingested_at": "2026-03-31T17:30:32.738487",
+  "line_count": 714,
+  "title": "super_knowledge_ingest_v6",
+  "description": "super-knowledge-ingest V6.0 - 多类型文件支持版\n核心目标：支持9种文件类型，达到满意解和4标准化\n设计理念：稳定可靠 > 极致性能，满意解 > 最优解\n\n支持的文件类型：\n- .md - Markdown文档（原文处理）\n- .py - Python脚本（提取注释、函数、类）\n- .json - JSON配置（结构化存储）\n- .sh - Shell脚本（提取注释、函",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: FileMetadata"
+    },
+    {
+      "level": 2,
+      "title": "Class: IngestResult"
+    },
+    {
+      "level": 2,
+      "title": "Class: FileTypeHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: MarkdownHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: PythonHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: JSONHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: ShellHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: TextHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: YAMLHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: HTMLHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: SVGHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: LogHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: MultiTypeIngestor"
+    }
+  ],
+  "entities": [
+    {
+      "name": "FileMetadata",
+      "type": "class"
+    },
+    {
+      "name": "IngestResult",
+      "type": "class"
+    },
+    {
+      "name": "FileTypeHandler",
+      "type": "class"
+    },
+    {
+      "name": "MarkdownHandler",
+      "type": "class"
+    },
+    {
+      "name": "PythonHandler",
+      "type": "class"
+    },
+    {
+      "name": "JSONHandler",
+      "type": "class"
+    },
+    {
+      "name": "ShellHandler",
+      "type": "class"
+    },
+    {
+      "name": "TextHandler",
+      "type": "class"
+    },
+    {
+      "name": "YAMLHandler",
+      "type": "class"
+    },
+    {
+      "name": "HTMLHandler",
+      "type": "class"
+    },
+    {
+      "name": "SVGHandler",
+      "type": "class"
+    },
+    {
+      "name": "LogHandler",
+      "type": "class"
+    },
+    {
+      "name": "MultiTypeIngestor",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "============ 配置 ============",
+    "============ 数据类 ============",
+    "============ 文件类型处理器 ============",
+    "提取标题（第一个H1）",
+    "提取关键点（加粗文本）",
+    "提取顶层键作为sections",
+    "提取shebang后的注释作为描述",
+    "前10行非空作为关键点",
+    "如果没有找到标题，使用文件名",
+    "提取viewBox等元数据",
+    "提取前5行和后5行作为摘要",
+    "============ 主入库器 ============",
+    "注意: .yaml和.yml映射到同一类型"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

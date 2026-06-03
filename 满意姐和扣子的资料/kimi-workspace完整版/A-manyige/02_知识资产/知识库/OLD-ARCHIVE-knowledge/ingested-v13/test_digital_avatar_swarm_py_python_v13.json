@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/digital-avatar-swarm-v2/test_digital_avatar_swarm.py",
+  "filename": "test_digital_avatar_swarm.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "827a97861b705dc6",
+  "content_length": 1681,
+  "ingested_at": "2026-03-31T17:27:45.415671",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\ndigital-avatar-swarm-v2 单元测试\n\"\"\"\n\nimport unittest\nimport sys\nfrom pathlib import Path\n\nsys.path.insert(0, str(Path(__file__).parent))\nfrom digital_avatar_swarm import DigitalAvatarSwarm, AvatarRole\n\n\nclass TestDigitalAvatarSwarm(unittest.TestCase):\n    \"\"\"DigitalAvatarSwarm单元测试\"\"\"\n    \n    def setUp(self):\n        self.swarm = DigitalAvatarSwarm()\n    \n    def test_init_avatars(self):\n        \"\"\"测试角色初始化\"\"\"\n        self.assertGreater(len(self.swarm.avatars), 0)\n    \n   ",
+  "limitations_applied": []
+}

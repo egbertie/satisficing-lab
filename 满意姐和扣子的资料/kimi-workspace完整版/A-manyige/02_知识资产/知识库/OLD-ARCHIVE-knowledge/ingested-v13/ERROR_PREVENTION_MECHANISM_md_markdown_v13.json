@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/CORE/ERROR_PREVENTION_MECHANISM.md",
+  "filename": "ERROR_PREVENTION_MECHANISM.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "1289512b807aef4a",
+  "content_length": 1688,
+  "ingested_at": "2026-03-31T17:27:44.548268",
+  "content_preview": "# 错误预防机制\n## 防止同类错误复发的系统\n\n**创建时间**: 2026-03-30 09:52  \n**创建原因**: 固化教训，防止复发\n\n---\n\n## 错误类型1: 单向沟通\n\n**触发条件**: \n- 我完成任务后没有确认对方收到\n- 我假设对方会看到\n- 我没有等待确认\n\n**实际案例**: \n- 完成Cron清单后，没有@蓝军确认收到\n- 假设蓝军会看到报告\n- 结果：蓝军可能根本不知道\n\n**预防措施**:\n- [ ] 必须@对方\n- [ ] 必须等待对方确认\"收到\"\n- [ ] 1分钟无回应，再次@对方\n- [ ] 2分钟无回应，申请用户介入\n\n**检查脚本**:\n```bash\n#!/bin/bash\necho \"=== 双向确认检查 ===\"\necho \"[ ] 是否@对方？\"\necho \"[ ] 是否等待对方'收到'确认？\"\necho \"[ ] 是否超过1分钟无回应？\"\necho \"[ ] 是否申请用户介入？\"\n```\n\n---\n\n## 错误类型2: 原则崩塌\n\n**触发条件**: \n- 压力下的即时要求 vs 原规划\n- 我害怕冲突，服从即时压力\n- 放",
+  "limitations_applied": []
+}

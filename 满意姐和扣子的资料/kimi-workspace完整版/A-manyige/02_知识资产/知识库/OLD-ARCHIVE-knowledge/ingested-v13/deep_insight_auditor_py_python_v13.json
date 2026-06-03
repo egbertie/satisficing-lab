@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blue-army-deep-insight-auditor/deep_insight_auditor.py",
+  "filename": "deep_insight_auditor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "a529ceff63c3bfac",
+  "content_length": 3633,
+  "ingested_at": "2026-03-31T17:27:45.451358",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n蓝军深度洞察审计模块\n检查每个产出是否有完整的L1-L5深度洞察\n\n来源: 第六类任务整改 - Skill闭环升级\n创建时间: 2026-03-31\n\"\"\"\n\nimport sys\nimport re\nfrom pathlib import Path\n\nclass DeepInsightAuditor:\n    \"\"\"深度洞察审计器\"\"\"\n    \n    def __init__(self):\n        self.required_sections = [\"L1\", \"L2\", \"L3\", \"L4\", \"L5\"]\n        self.errors = []\n    \n    def audit_file(self, filepath):\n        \"\"\"审计单个文件\"\"\"\n        path = Path(filepath)\n        \n        if not path.exists():\n            self.errors.append(f\"❌ 文件不存在: {filepath}\"",
+  "limitations_applied": []
+}

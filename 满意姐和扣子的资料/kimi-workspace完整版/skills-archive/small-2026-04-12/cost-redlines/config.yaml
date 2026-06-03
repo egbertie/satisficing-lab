@@ -1,0 +1,234 @@
+# 成本红线机制配置文件
+# version: 5.0
+
+# ================================================
+# S1: 输入标准化配置
+# ================================================
+
+# 预算配置
+budget:
+  default_period_days: 30
+  min_budget: 1000
+  max_budget: 100000000
+  # 4级成本标准分配比例
+  level_allocation:
+    L1_BASE: 0.45        # 基础成本 45%
+    L2_EXTENDED: 0.28    # 扩展成本 28%
+    L3_VALUE_ADDED: 0.17 # 增值成本 17%
+    L4_RISK: 0.10        # 风险成本 10%
+  # 预算调整规则
+  adjustment_rules:
+    max_increase_rate: 0.20      # 单次调整上限20%
+    approval_threshold: 0.10     # 超过10%需审批
+    min_adjustment_interval_days: 7  # 最小调整间隔7天
+
+# 成本数据结构配置
+cost_data_schema:
+  required_fields:
+    - amount
+    - category
+    - level
+    - timestamp
+    - description
+  categories:
+    - 人力
+    - 设备
+    - 服务
+    - 软件
+    - 运营
+    - 其他
+  levels:
+    - L1_BASE
+    - L2_EXTENDED
+    - L3_VALUE_ADDED
+    - L4_RISK
+
+# ================================================
+# S1/S2: 预警阈值配置
+# ================================================
+
+alert_thresholds:
+  green:
+    rate: 0.00
+    color: "🟢"
+    action: "monitor"
+    response_time: null
+    description: "正常监控"
+  blue:
+    rate: 0.50
+    color: "🔵"
+    action: "remind"
+    response_time: "24h"
+    description: "成本提醒"
+  yellow:
+    rate: 0.60
+    color: "🟡"
+    action: "warn"
+    response_time: "12h"
+    description: "成本预警"
+  orange:
+    rate: 0.80
+    color: "🟠"
+    action: "alert"
+    response_time: "4h"
+    description: "成本告警"
+  red:
+    rate: 1.00
+    color: "🔴"
+    action: "stop"
+    response_time: "immediate"
+    description: "红线暂停"
+  critical:
+    rate: 1.10
+    color: "⚫"
+    action: "emergency"
+    response_time: "immediate"
+    description: "紧急超支"
+
+# ================================================
+# S2/S4: 监控配置
+# ================================================
+
+monitoring:
+  # 实时检查间隔（秒）
+  check_interval_seconds: 300
+  # 趋势分析天数
+  trend_analysis_days: 30
+  # 预测天数
+  forecast_days: 14
+  # 数据保留天数
+  data_retention_days: 365
+  # 异常检测阈值
+  anomaly_detection:
+    daily_growth_threshold: 0.20     # 日增长>20%视为异常
+    volatility_threshold: 0.30       # 波动率>30%视为异常
+    outlier_std_threshold: 3.0       # 超过3倍标准差视为异常
+
+# ================================================
+# S4: 自动触发配置
+# ================================================
+
+auto_trigger:
+  enabled: true
+  triggers:
+    - name: "realtime-cost-check"
+      type: "file_watch"
+      watch_path: "logs/costs.json"
+      enabled: true
+    - name: "periodic-redline-check"
+      type: "cron"
+      schedule: "0 */4 * * *"
+      enabled: true
+    - name: "daily-report"
+      type: "cron"
+      schedule: "0 18 * * *"
+      enabled: true
+    - name: "forecast-check"
+      type: "cron"
+      schedule: "0 9 * * *"
+      enabled: true
+
+# ================================================
+# S5: 验证配置
+# ================================================
+
+validation:
+  amount:
+    type: "range"
+    min: 0
+    max: 999999999
+    precision: 2
+  timestamp:
+    type: "date_range"
+    min: "2020-01-01"
+    max: "2099-12-31"
+    not_future: true
+  budget_consistency:
+    type: "referential"
+    check: "budget_id_exists"
+    error_if_missing: true
+  duplicate_detection:
+    type: "uniqueness"
+    fields: ["amount", "timestamp", "description"]
+    window_hours: 24
+  max_variance_rate: 0.001  # 0.1%容差
+
+# ================================================
+# S6: 局限标注配置
+# ================================================
+
+limitations:
+  unpredictable_scenarios:
+    - name: "黑天鹅事件"
+      description: "不可预见的重大突发事件"
+      mitigation: "保持充足L4风险储备"
+    - name: "市场剧烈波动"
+      description: "原材料/人力成本的剧烈市场波动"
+      mitigation: "建立价格监控机制"
+    - name: "战略变更"
+      description: "公司战略方向突然调整"
+      mitigation: "预留战略调整预算池"
+    - name: "技术债务爆发"
+      description: "积累的技术债务突然显现"
+      mitigation: "定期技术债务评估"
+  partial_support:
+    - name: "季节性波动"
+      requirement: "至少12个月历史数据"
+    - name: "项目延期成本"
+      note: "需人工录入延期信息"
+
+# ================================================
+# S7: 对抗测试配置
+# ================================================
+
+adversarial_test:
+  enabled: true
+  test_scenarios:
+    - name: "gradual_increase"
+      description: "渐进式增长测试"
+      enabled: true
+    - name: "sudden_spike"
+      description: "突发性成本激增"
+      enabled: true
+    - name: "level_overflow"
+      description: "单级别预算溢出"
+      enabled: true
+    - name: "multi_level_cascade"
+      description: "多级联锁超支"
+      enabled: true
+  pass_criteria:
+    redline_detection: true
+    alert_triggered: true
+    response_time_acceptable: true
+
+# ================================================
+# 通知配置
+# ================================================
+
+notifications:
+  enabled: true
+  channels:
+    console:
+      enabled: true
+    file:
+      enabled: true
+      log_dir: "logs/alerts"
+    # email:
+    #   enabled: false
+    #   smtp_server: "smtp.example.com"
+    #   recipients: ["admin@example.com"]
+    # webhook:
+    #   enabled: false
+    #   url: "https://hooks.example.com/cost-alert"
+
+# ================================================
+# 报告配置
+# ================================================
+
+reports:
+  output_dir: "reports"
+  formats:
+    - json
+    - markdown
+  default_type: "daily"
+  retention_count: 30

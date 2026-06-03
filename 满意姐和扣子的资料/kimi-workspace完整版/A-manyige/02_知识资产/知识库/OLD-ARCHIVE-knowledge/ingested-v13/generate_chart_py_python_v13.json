@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_mermaid-chart-generator/scripts/generate_chart.py",
+  "filename": "generate_chart.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "cbb3c7bca15288d2",
+  "content_length": 3157,
+  "ingested_at": "2026-03-31T17:27:45.080652",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nMermaid图表生成器\n用法: python3 generate_chart.py --type [flowchart|gantt|decision|pie] --input \"描述\"\n\"\"\"\n\nimport argparse\nimport sys\nimport re\nfrom datetime import datetime, timedelta\n\ndef generate_flowchart(description):\n    \"\"\"生成流程图\"\"\"\n    # 解析关键词\n    steps = re.split(r'[→\\-]+', description)\n    steps = [s.strip() for s in steps if s.strip()]\n    \n    mermaid = [\"graph LR\"]\n    for i in range(len(steps) - 1):\n        from_step = f\"S{i}\" if i > 0 else \"Start\"\n        to_step",
+  "limitations_applied": []
+}

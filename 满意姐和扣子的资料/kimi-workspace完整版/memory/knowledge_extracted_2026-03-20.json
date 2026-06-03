@@ -1,0 +1,138 @@
+{
+  "extraction_date": "2026-03-20",
+  "extraction_timestamp": "2026-03-20T23:47:00+08:00",
+  "source_file": "memory/2026-03-20.md",
+  "session_count": 1,
+  "knowledge_items": {
+    "critical_decisions": [
+      {
+        "id": "DEC-2026-03-20-001",
+        "type": "system_architecture",
+        "title": "零空置机制用户对话保留规则",
+        "description": "解决subagents.maxConcurrent:8全开后无用户对话预留的风险",
+        "solution": "创建user-conversation-reservation Skill，每2分钟监控，自动预留用户优先级通道",
+        "five_standards": true,
+        "impact": "high"
+      },
+      {
+        "id": "DEC-2026-03-20-002",
+        "type": "promise_conversion",
+        "title": "全面丢失承诺转化为5标准Skill",
+        "description": "将13项丢失承诺全部转化为5标准Skill（8+5）",
+        "skills_created": [
+          "user-conversation-reservation",
+          "api-configuration-manager",
+          "case-library-expander",
+          "role-profile-completer",
+          "maintenance-scheduler"
+        ],
+        "impact": "high"
+      },
+      {
+        "id": "DEC-2026-03-20-003",
+        "type": "project_management",
+        "title": "3个项目暂停待定",
+        "description": "按用户要求暂停EEO首次访谈、官宣物料就绪、专家网络搭建",
+        "handling": "每周提醒一次是否重启",
+        "impact": "medium"
+      }
+    ],
+    "new_information": [
+      {
+        "id": "INFO-2026-03-20-001",
+        "category": "system_status",
+        "content": "Skill总数达241个，Cron覆盖率100%，5标准Skill 22个",
+        "significance": "里程碑达成"
+      },
+      {
+        "id": "INFO-2026-03-20-002",
+        "category": "cron_schedule",
+        "content": "新增5个Cron任务：每2分钟监控、每日08:17、每周一/三、每周二、每日+每季度",
+        "significance": "自动化程度提升"
+      }
+    ],
+    "todos_extracted": [
+      {
+        "id": "TODO-2026-03-20-001",
+        "content": "每周提醒EEO首次访谈是否重启",
+        "source": "暂停项目",
+        "priority": "P2"
+      },
+      {
+        "id": "TODO-2026-03-20-002",
+        "content": "每周提醒官宣物料就绪是否重启",
+        "source": "暂停项目",
+        "priority": "P2"
+      },
+      {
+        "id": "TODO-2026-03-20-003",
+        "content": "每周提醒专家网络搭建是否重启",
+        "source": "暂停项目",
+        "priority": "P2"
+      },
+      {
+        "id": "TODO-2026-03-20-004",
+        "content": "case-library-expander执行（每周一/三）",
+        "source": "新Cron任务",
+        "priority": "P1"
+      },
+      {
+        "id": "TODO-2026-03-20-005",
+        "content": "role-profile-completer执行（每周二）",
+        "source": "新Cron任务",
+        "priority": "P1"
+      }
+    ],
+    "key_metrics": {
+      "skill_total": 241,
+      "cron_coverage_percent": 100,
+      "five_standard_skills": 22,
+      "promises_converted": 13,
+      "sessions_count": 1,
+      "major_discoveries": 3
+    }
+  },
+  "knowledge_graph_update": {
+    "required": true,
+    "reason": "重大系统架构决策和里程碑达成",
+    "entities_to_add": [
+      {
+        "type": "skill",
+        "name": "user-conversation-reservation",
+        "category": "system_resource_management"
+      },
+      {
+        "type": "skill",
+        "name": "api-configuration-manager",
+        "category": "configuration_management"
+      },
+      {
+        "type": "skill",
+        "name": "case-library-expander",
+        "category": "content_management"
+      },
+      {
+        "type": "skill",
+        "name": "role-profile-completer",
+        "category": "role_management"
+      },
+      {
+        "type": "skill",
+        "name": "maintenance-scheduler",
+        "category": "system_maintenance"
+      }
+    ],
+    "milestones": [
+      {
+        "date": "2026-03-20",
+        "event": "零空置机制完成",
+        "status": "achieved"
+      },
+      {
+        "date": "2026-03-20",
+        "event": "丢失承诺全部转化",
+        "status": "achieved"
+      }
+    ]
+  }
+}

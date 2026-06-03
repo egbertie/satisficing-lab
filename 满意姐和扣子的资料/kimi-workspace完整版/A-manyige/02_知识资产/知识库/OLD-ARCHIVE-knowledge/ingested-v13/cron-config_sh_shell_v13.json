@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/5standard-integration/cron-config.sh",
+  "filename": "cron-config.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "1a21a7d9447cefbb",
+  "content_length": 1830,
+  "ingested_at": "2026-03-31T17:27:45.423121",
+  "content_preview": "#!/bin/bash\n# 5标准Skill Cron集成配置\n# 生成时间: 2026-03-20\n# 说明: 为今日转化的12个Skill补充Cron定时任务\n\n# 零空置强制执行 (30分钟检查)\necho \"*/30 * * * * cd /root/.openclaw/workspace && python3 skills/zero-idle-enforcer/scripts/enforcer.py >> /tmp/zero-idle.log 2>&1\"\n\n# 决策安全红线检查 (每次输出前)\n# 注: 此检查需要在对话流程中集成，非纯Cron\n\n# 文件完整性检查 (每日09:07)\necho \"7 9 * * * cd /root/.openclaw/workspace && python3 skills/file-integrity-checker/scripts/integrity-checker.py >> /tmp/integrity-check.log 2>&1\"\n\n# 知识沉淀自动化 (每日23:47)\necho \"47 23 * * * cd /root/.",
+  "limitations_applied": []
+}

@@ -1,0 +1,66 @@
+# 教培行业配置
+
+# 行业模板标识
+industry_template: "education"
+
+# 财务阈值
+monthly_living_expenses: 6000  # 月生活费（元）
+emergency_fund_months: 3
+
+# 提醒时段
+reminder_hours:
+  morning: 8
+  afternoon: 16
+  evening: 20
+
+# 健康阈值
+max_continuous_work_hours: 4
+min_sleep_hours: 7
+min_weekly_exercise: 3
+
+# 自定义关键词（教培专用）
+business_keywords:
+  - 课程
+  - 学员
+  - 教学
+  - 直播
+  - 录播
+  - 作业
+  - 考核
+  - 复购
+
+# 外部系统集成
+integrations:
+  calendar:
+    google_calendar:
+      enabled: false
+      api_key: ""
+      calendar_id: ""
+      sync_direction: "bidirectional"
+
+  teaching_platforms:
+    wechat_pay:
+      enabled: false
+      app_id: ""
+      app_secret: ""
+    alipay:
+      enabled: false
+      app_id: ""
+      app_secret: ""
+
+# 智能决策配置
+ai_decisions:
+  enabled: true
+  auto_analysis_frequency: "weekly"
+  course_optimization_enabled: true
+  student_retention_enabled: true
+  content_suggestion_enabled: true
+
+# 教培专用配置
+course_management:
+  default_course_duration: 30  # 默认课程周期（天）
+  max_students_per_course: 100  # 单课程最大学员数
+  followup_frequency: 7  # 学员跟进周期（天）
+
+# 其他配置
+default_timezone: Asia/Shanghai

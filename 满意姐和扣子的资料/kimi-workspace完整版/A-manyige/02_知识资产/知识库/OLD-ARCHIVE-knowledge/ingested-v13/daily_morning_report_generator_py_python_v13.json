@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/daily_morning_report_generator.py",
+  "filename": "daily_morning_report_generator.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "03798286be2df49f",
+  "content_length": 19090,
+  "ingested_at": "2026-03-31T17:27:46.136696",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n每日晨报自动生成脚本 - Daily Morning Report Generator\n版本: 1.0.0\n作者: 满意解研究所\n功能: 自动生成格式化的每日晨报，整合MEMORY.md、Skill状态、任务管理等信息\n\"\"\"\n\nimport json\nimport re\nimport os\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import List, Dict, Any, Optional\nfrom dataclasses import dataclass, asdict\n\n\n@dataclass\nclass Task:\n    \"\"\"任务数据类\"\"\"\n    id: str\n    title: str\n    priority: str  # P0/P1/P2/P3\n    status: str  # todo/doing/done/blocked\n    due_date: Optional[str] =",
+  "limitations_applied": []
+}

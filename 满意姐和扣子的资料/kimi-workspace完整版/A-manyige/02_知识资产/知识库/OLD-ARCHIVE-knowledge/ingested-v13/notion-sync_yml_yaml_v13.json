@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.github/workflows/notion-sync.yml",
+  "filename": "notion-sync.yml",
+  "file_type": "yaml",
+  "extension": ".yml",
+  "file_hash": "a4dd6be5ef4fc21b",
+  "content_length": 5343,
+  "ingested_at": "2026-03-31T17:27:44.985575",
+  "content_preview": "name: Notion Sync - 文档自动同步\n\non:\n  # 定时触发：已暂停以节省Token消耗（2026-03-18）\n  # schedule:\n  #   - cron: '0 18 * * *'\n  \n  # 手动触发（保持联通，按需执行）\n  workflow_dispatch:\n    inputs:\n      batch_size:\n        description: '每批处理文件数'\n        required: false\n        default: '10'\n        type: string\n      max_retries:\n        description: '最大重试次数'\n        required: false\n        default: '5'\n        type: string\n      reset_progress:\n        description: '重置进度（从0开始）'\n        required: false\n        default: false\n  ",
+  "limitations_applied": []
+}

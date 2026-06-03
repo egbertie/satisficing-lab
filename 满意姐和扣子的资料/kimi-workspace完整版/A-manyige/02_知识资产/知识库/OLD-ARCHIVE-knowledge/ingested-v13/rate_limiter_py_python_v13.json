@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/interrupt-recovery/rate_limiter.py",
+  "filename": "rate_limiter.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "b97a04822b89494d",
+  "content_length": 1514,
+  "ingested_at": "2026-03-31T17:27:44.993072",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nrate_limiter.py - 极简速率限制器\n只在内存中记录，不写文件，零Token开销\n\"\"\"\n\nimport time\nfrom collections import deque\nfrom typing import Optional, Callable\nimport functools\n\nclass SimpleRateLimiter:\n    \"\"\"简单速率限制器 - 无持久化，零监控开销\"\"\"\n    \n    def __init__(self, max_calls: int = 10, window_seconds: int = 60):\n        self.max_calls = max_calls\n        self.window = window_seconds\n        self.calls = deque()  # 只保留内存中，不写入文件\n    \n    def can_call(self) -> bool:\n        \"\"\"检查是否允许调用\"\"\"\n        now =",
+  "limitations_applied": []
+}

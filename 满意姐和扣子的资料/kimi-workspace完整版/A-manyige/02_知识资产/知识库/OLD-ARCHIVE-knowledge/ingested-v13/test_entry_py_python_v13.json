@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/universal-task-executor-v3/handlers/test_entry.py",
+  "filename": "test_entry.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "21105161c61ae029",
+  "content_length": 1053,
+  "ingested_at": "2026-03-31T17:27:45.370775",
+  "content_preview": "\n\nif __name__ == '__main__':\n    import argparse\n    parser = argparse.ArgumentParser()\n    parser.add_argument('--test', action='store_true', help='Run tests')\n    args = parser.parse_args()\n    \n    if args.test:\n        print(\"=== Category1 Cron Handler Test ===\")\n        handler = Category1CronHandler()\n        print(f\"Handler loaded: {handler.handler_name} v{handler.version}\")\n        print(f\"Categories: {handler.supported_categories}\")\n        \n        # Test task execution\n        test_ta",
+  "limitations_applied": []
+}

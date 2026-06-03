@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/digital-avatar-swarm/tests/test_swarm.py",
+  "filename": "test_swarm.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "4974bc7a26450328",
+  "content_length": 16950,
+  "ingested_at": "2026-03-31T17:27:44.990403",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nDigital-Avatar-Swarm 测试套件\n\n测试范围:\n- S1: 全局考虑 (资源边界、协作模型)\n- S2: 系统闭环 (任务流程、反馈循环)\n- S3: 可观测输出 (状态监控、指标收集)\n- S4: 自动化集成 (分解、负载均衡、故障转移)\n- S5: 自我验证 (健康检查、一致性校验)\n- S6: 认知谦逊 (局限标注、WIP标识)\n- S7: 对抗测试 (故障模拟、压力测试)\n\n运行: pytest tests/test_swarm.py -v\n\"\"\"\n\nimport asyncio\nimport pytest\nimport time\nfrom datetime import datetime\n\n# 确保可以导入主模块\nimport sys\nfrom pathlib import Path\nsys.path.insert(0, str(Path(__file__).parent.parent))\n\nfrom avatar_swarm import (\n    SwarmOrchestrator,\n    Tas",
+  "limitations_applied": []
+}

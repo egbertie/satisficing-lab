@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/quality-gate-system/config/quality-gate.yaml",
+  "filename": "quality-gate.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "7828ea31677a0c0b",
+  "content_length": 5572,
+  "ingested_at": "2026-03-31T17:27:45.006045",
+  "content_preview": "# Quality Gate Configuration\n# 质量门禁系统配置\n\nversion: \"5.0.0\"\nlast_updated: \"2026-03-21\"\n\n# 门禁等级定义 (S1.2)\ngate_levels:\n  basic:\n    name: \"Basic\"\n    description: \"提交前门禁 - 快速检查\"\n    min_score: 60\n    block_on_fail: false\n    timeout_seconds: 60\n    dimensions:\n      - compliance\n    \n  standard:\n    name: \"Standard\"\n    description: \"合并前门禁 - 标准检查\"\n    min_score: 75\n    block_on_fail: true\n    timeout_seconds: 300\n    dimensions:\n      - prerequisites\n      - compliance\n      - results\n    \n  critica",
+  "limitations_applied": []
+}

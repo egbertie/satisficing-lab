@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/universal-task-executor-v3/integration/test_integration.py",
+  "filename": "test_integration.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "5a323aafa12863de",
+  "content_length": 6125,
+  "ingested_at": "2026-03-31T17:27:45.369055",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n知识集成模块测试\n验证Knowledge Bridge、Auto Ingest、Index Manager的集成\n\"\"\"\n\nimport sys\nimport asyncio\nfrom pathlib import Path\n\n# 添加路径\nworkspace_path = Path(__file__).parent.parent.parent.parent\nsys.path.insert(0, str(workspace_path))\n\n# 使用sys.path添加路径后导入\nsys.path.insert(0, str(workspace_path / \"skills\" / \"universal-task-executor-v3\"))\n\nfrom integration import (\n    KnowledgeBridge, IngestConfig,\n    AutoIngestor, IngestPolicy, IngestTrigger, IngestStrategy,\n    IndexManager,\n)\nfrom",
+  "limitations_applied": []
+}

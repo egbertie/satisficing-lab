@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/mechanism_m004_event_driven_check.sh",
+  "filename": "mechanism_m004_event_driven_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "9d7107c27761935b",
+  "content_length": 607,
+  "ingested_at": "2026-03-31T17:27:46.178595",
+  "content_preview": "#!/bin/bash\n# 事件驱动机制检查脚本\n# 虚假完成机制整改 - M004\n\necho \"=== 事件驱动机制检查 ===\"\necho \"\"\necho \"检查事件触发器:\"\necho \"\"\n\n# 检查cron触发器\necho \"1. Cron定时触发:\"\ncrontab -l 2>/dev/null | grep -c \"event\\|trigger\" || echo \"   0个事件触发器\"\n\n# 检查文件监控触发器\necho \"\"\necho \"2. 文件变化监控:\"\nls /root/.openclaw/workspace/scripts/*watch* 2>/dev/null | wc -l\necho \"   个文件监控脚本\"\n\n# 检查关键词触发器\necho \"\"\necho \"3. 关键词触发:\"\ngrep -l \"关键词\\|keyword\\|trigger\" /root/.openclaw/workspace/checklists/*.md 2>/dev/null | wc -l\necho \"   个关键词触发清单\"\n\necho \"\"\necho \"事件驱动机制要求:",
+  "limitations_applied": []
+}

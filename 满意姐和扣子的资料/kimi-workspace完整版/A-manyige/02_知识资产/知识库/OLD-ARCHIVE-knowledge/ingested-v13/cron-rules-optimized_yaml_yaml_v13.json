@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/config/cron-rules-optimized.yaml",
+  "filename": "cron-rules-optimized.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "268998d2b8e8fd54",
+  "content_length": 2689,
+  "ingested_at": "2026-03-31T17:27:44.519118",
+  "content_preview": "# Cron调度优化配置 v2.0\n# 优化目标: 减少资源冲突、均衡负载、错峰执行\n\n# ============ 调度时间规范 ============\n# 使用推荐的错峰分钟: 07, 17, 27, 37, 47, 57\n# 避免整点 (00) 和半点 (30) 的高峰期\n\n# ============ 高频任务 (每15分钟) ============\nhigh_frequency_jobs:\n  - name: \"token-monitor\"\n    schedule: \"07,22,37,52 * * * *\"\n    command: \"python3 skills/token-budget-enforcer/scripts/monitor.py\"\n    tier: 1\n    \n  - name: \"health-check\"\n    schedule: \"12,27,42,57 * * * *\"\n    command: \"python3 skills/baseline-checker/scripts/baseline-checker-runner.py quic",
+  "limitations_applied": []
+}

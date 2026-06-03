@@ -1,0 +1,44 @@
+{
+  "thresholds": {
+    "openclaw": {
+      "healthy": {
+        "min_percentage": 50,
+        "actions": ["normal_operation", "p0_p3_tasks_allowed"],
+        "notification": false
+      },
+      "caution": {
+        "min_percentage": 30,
+        "max_percentage": 50,
+        "actions": ["optimize_priority", "pause_p3_tasks"],
+        "notification": true
+      },
+      "warning": {
+        "min_percentage": 15,
+        "max_percentage": 30,
+        "actions": ["p0_only", "pause_learning", "notify_user"],
+        "notification": true
+      },
+      "critical": {
+        "max_percentage": 15,
+        "actions": ["emergency_pause", "user_instruction_only", "wait_reset"],
+        "notification": true,
+        "escalation": true
+      }
+    }
+  },
+  "anomaly_detection": {
+    "spike_multiplier": 2.0,
+    "continuous_high_days": 3,
+    "high_consumption_multiplier": 1.5,
+    "consumption_ahead_ratio": 1.2
+  },
+  "notifications": {
+    "channels": ["kimi-claw"],
+    "triggers": {
+      "status_change": true,
+      "weekly_report": true,
+      "emergency_alert": true,
+      "daily_digest": false
+    }
+  }
+}

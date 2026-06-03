@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/mechanism_m006_worker_swarm_check.sh",
+  "filename": "mechanism_m006_worker_swarm_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "4f48c661c230718f",
+  "content_length": 747,
+  "ingested_at": "2026-03-31T17:27:46.206917",
+  "content_preview": "#!/bin/bash\n# 6 Worker蜂群机制检查脚本\n# 虚假完成机制整改 - M006\n\necho \"=== 6 Worker蜂群机制检查 ===\"\necho \"\"\n\n# 检查Worker定义\necho \"1. Worker定义文件:\"\ngrep -l \"Meta-Strategist\\|Supervisor-Biz\\|Supervisor-Tech\\|Worker-Analysis\\|Worker-Execution\\|Worker-Creative\" /root/.openclaw/workspace/SOUL.md 2>/dev/null | wc -l\necho \"   个Worker定义\"\n\n# 检查激活记录\necho \"\"\necho \"2. Worker激活记录:\"\ngrep -c \"Worker.*激活\\|激活.*Worker\" /root/.openclaw/workspace/memory/2026-03-31.md 2>/dev/null || echo \"   0次激活\"\n\n# 检查协调机制\necho \"\"\necho \"3. 子代理协调:\"\nls /ro",
+  "limitations_applied": []
+}

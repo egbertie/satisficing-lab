@@ -1,0 +1,71 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/zero-vacancy-executor/scripts/slot_manager.py",
+  "filename": "slot_manager.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 18626,
+  "checksum": "37cc3697cc3e60f0",
+  "ingested_at": "2026-03-31T17:30:32.724405",
+  "line_count": 516,
+  "title": "slot_manager",
+  "description": "Zero-Vacancy Executor - Slot Manager\n槽位管理器：实现S2系统闭环 - 空闲检测→槽位预留→用户响应→释放槽位\n\nWIP状态：当前为概念实现，生产环境需进一步优化\n已知局限：单节点部署，非集群方案",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: SlotStatus"
+    },
+    {
+      "level": 2,
+      "title": "Class: SlotPriority"
+    },
+    {
+      "level": 2,
+      "title": "Class: Slot"
+    },
+    {
+      "level": 2,
+      "title": "Class: SlotManager"
+    }
+  ],
+  "entities": [
+    {
+      "name": "SlotStatus",
+      "type": "class"
+    },
+    {
+      "name": "SlotPriority",
+      "type": "class"
+    },
+    {
+      "name": "Slot",
+      "type": "class"
+    },
+    {
+      "name": "SlotManager",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "S1: 全局考虑 - 预留用户对话槽位",
+    "========== S2: 系统闭环核心方法 ==========",
+    "S4: 自动化集成 - 需要抢占低优先级任务",
+    "S4: 告警 - 抢占事件",
+    "S1: 如果是用户槽位，需要重新预留",
+    "检查是否有预留的用户槽位",
+    "========== S3: 可观测输出 ==========",
+    "========== S4: 自动化集成 ==========",
+    "========== S5: 自我验证 ==========",
+    "检查1: 预留槽位可用",
+    "检查2: 槽位数量一致性",
+    "========== 内部方法 ==========",
+    "========== 运行控制 ==========",
+    "S4: 自动释放超时槽位"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

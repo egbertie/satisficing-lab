@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_reporting-standards/scripts/generate-report.sh",
+  "filename": "generate-report.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "751b14b846452715",
+  "content_length": 3523,
+  "ingested_at": "2026-03-31T17:27:45.315720",
+  "content_preview": "#!/bin/bash\n# 汇报生成脚本\n# 使用方式: ./generate-report.sh [daily|weekly]\n\nTYPE=$1\nWORKSPACE=\"/root/.openclaw/workspace\"\nREPORT_DIR=\"$WORKSPACE/memory/reports\"\nDATE=$(date +%Y%m%d)\nDATE_STR=$(date '+%Y-%m-%d')\n\nmkdir -p \"$REPORT_DIR/daily\" \"$REPORT_DIR/weekly\"\n\nif [ \"$TYPE\" == \"daily\" ] || [ -z \"$TYPE\" ]; then\n    echo \"=== 生成每日汇报 ===\"\n    \n    REPORT_FILE=\"$REPORT_DIR/daily/${DATE}-daily-report.md\"\n    \n    # 收集今日数据\n    PROTOCOL_DIR=\"$WORKSPACE/memory/protocol\"\n    COST_DIR=\"$WORKSPACE/memory/cost\"\n    ",
+  "limitations_applied": []
+}

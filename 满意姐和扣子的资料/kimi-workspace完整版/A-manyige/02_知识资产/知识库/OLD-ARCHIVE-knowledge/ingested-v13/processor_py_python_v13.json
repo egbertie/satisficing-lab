@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_document-processor/scripts/processor.py",
+  "filename": "processor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "9b2fa9c57aaa94c1",
+  "content_length": 630,
+  "ingested_at": "2026-03-31T17:27:45.136648",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nDocument Processor - 文档处理统一入口\n替代: markdown-converter, markdown-exporter, mineru\n\"\"\"\nimport sys\nimport argparse\n\ndef main():\n    parser = argparse.ArgumentParser(description='文档处理套件')\n    parser.add_argument('command', choices=['import', 'export', 'parse'])\n    parser.add_argument('input', help='输入文件')\n    parser.add_argument('-o', '--output', help='输出文件')\n    args = parser.parse_args()\n    \n    print(f\"[document-processor] 命令: {args.command}\")\n    print(f\"[document-pro",
+  "limitations_applied": []
+}

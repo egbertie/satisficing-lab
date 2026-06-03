@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/knowledge-extractor/knowledge_extractor.py",
+  "filename": "knowledge_extractor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "af3d232ff1750f00",
+  "content_length": 15469,
+  "ingested_at": "2026-03-31T17:27:44.833896",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n知识提取引擎 V1.0\n从文本中提取结构化知识\n\n核心功能：\n1. 实体识别（人名/机构/地点/时间）\n2. 关系抽取\n3. 事件提取\n4. 关键词提取\n5. 主题分类\n\"\"\"\n\nimport re\nimport json\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Optional, Tuple, Set\nfrom dataclasses import dataclass, asdict, field\nfrom collections import Counter\n\n@dataclass\nclass ExtractedKnowledge:\n    \"\"\"提取的知识结构\"\"\"\n    entities: List[Dict] = field(default_factory=list)\n    relations: List[Dict] = field(default_factory=list)\n    ev",
+  "limitations_applied": []
+}

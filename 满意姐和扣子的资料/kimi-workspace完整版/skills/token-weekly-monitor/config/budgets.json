@@ -1,0 +1,24 @@
+{
+  "budgets": {
+    "openclaw": {
+      "weekly_total": 70000,
+      "daily_average": 10000,
+      "p0_reserve": 5000,
+      "emergency_buffer": 2000,
+      "calculation_method": "weekly_fixed"
+    },
+    "kimi_allegretto": {
+      "deep_research_monthly": 40,
+      "ppt_monthly": 40,
+      "agent_pool_monthly": 40,
+      "weekly_allocation": 10,
+      "calculation_method": "monthly_divide_4"
+    }
+  },
+  "adjustment_rules": {
+    "auto_adjust": false,
+    "user_calibration_enabled": true,
+    "history_based_prediction": false
+  },
+  "notes": "预算配置 - 根据实际使用情况可调整weekly_total"
+}

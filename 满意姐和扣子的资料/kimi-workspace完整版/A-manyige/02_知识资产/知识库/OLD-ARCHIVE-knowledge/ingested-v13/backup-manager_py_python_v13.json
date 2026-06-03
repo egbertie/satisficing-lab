@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/backup-manager.py",
+  "filename": "backup-manager.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "4c422f34e429f68c",
+  "content_length": 19086,
+  "ingested_at": "2026-03-31T17:27:46.164001",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\n满意解研究所 · 备份管理器\nBackup Manager for Manyi Solution Research Institute\n\n功能:\n- 自动备份核心配置文件、文档、记忆文件\n- 支持全量/增量备份\n- 备份完整性验证\n- 灾难恢复支持\n- 自动清理过期备份\n\n作者: Kimi Claw\n版本: 1.0.0\n日期: 2026-03-10\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport hashlib\nimport shutil\nimport argparse\nimport tarfile\nimport logging\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import Optional, List, Dict, Tuple\n\n# 配置\nVERSION = \"1.0.0\"\nWORKSPACE_DIR = Path(\"/",
+  "limitations_applied": []
+}

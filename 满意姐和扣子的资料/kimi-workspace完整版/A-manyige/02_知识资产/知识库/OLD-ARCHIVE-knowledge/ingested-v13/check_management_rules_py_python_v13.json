@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/check_management_rules.py",
+  "filename": "check_management_rules.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "ad525126b2e4bb96",
+  "content_length": 9034,
+  "ingested_at": "2026-03-31T17:27:46.184231",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n管理规则执行器 - 核心检查脚本\n强制执行检查，不留死角，如实汇报\n\n使用方法:\n    python3 check_management_rules.py [--full|--quick]\n    \n选项:\n    --full  执行完整检查（对话开始时）\n    --quick 执行快速检查（Heartbeat时）\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport time\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nMEMORY_DIR = WORKSPACE / \"memory\"\nDIARY_DIR = WORKSPACE / \"diary\"\nDOCS_DIR = WORKSPACE / \"docs\"\n\ndef log(message, level=\"INFO\"):\n    \"\"\"打印带时间戳的日志\"\"\"",
+  "limitations_applied": []
+}

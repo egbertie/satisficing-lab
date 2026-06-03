@@ -1,0 +1,83 @@
+{
+  "defaults": {
+    "beforeEach": [
+      {
+        "type": "reLaunch",
+        "url": "{{DETAIL_ROUTE_URL}}"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "name": "detail-ready",
+      "actions": [
+        {
+          "type": "waitForRoute",
+          "path": "{{DETAIL_ROUTE_PATH}}",
+          "query": "{{DETAIL_ROUTE_QUERY}}",
+          "timeoutMs": "{{DETAIL_ROUTE_TIMEOUT_MS}}"
+        },
+        {
+          "type": "waitForSelector",
+          "selector": "{{DETAIL_READY_SELECTOR}}",
+          "timeoutMs": "{{DETAIL_READY_TIMEOUT_MS}}"
+        }
+      ]
+    },
+    {
+      "name": "detail-screenshot",
+      "actions": [
+        {
+          "type": "waitForSelector",
+          "selector": "{{DETAIL_READY_SELECTOR}}",
+          "timeoutMs": "{{DETAIL_READY_TIMEOUT_MS}}"
+        },
+        {
+          "type": "screenshot",
+          "path": "{{DETAIL_SCREENSHOT_PATH}}"
+        }
+      ]
+    },
+    {
+      "name": "preview-open-close",
+      "actions": [
+        {
+          "type": "waitForSelector",
+          "selector": "{{PREVIEW_OPEN_SELECTOR}}",
+          "timeoutMs": "{{PREVIEW_OPEN_TIMEOUT_MS}}"
+        },
+        {
+          "type": "tap",
+          "selector": "{{PREVIEW_OPEN_SELECTOR}}",
+          "selectorIndex": "{{PREVIEW_OPEN_SELECTOR_INDEX}}"
+        },
+        {
+          "type": "wait",
+          "ms": "{{PREVIEW_WAIT_MS}}"
+        },
+        {
+          "type": "screenshot",
+          "path": "{{PREVIEW_OPEN_SCREENSHOT_PATH}}"
+        },
+        {
+          "type": "waitForSelector",
+          "selector": "{{PREVIEW_CLOSE_SELECTOR}}",
+          "timeoutMs": "{{PREVIEW_CLOSE_TIMEOUT_MS}}"
+        },
+        {
+          "type": "tap",
+          "selector": "{{PREVIEW_CLOSE_SELECTOR}}",
+          "selectorIndex": "{{PREVIEW_CLOSE_SELECTOR_INDEX}}"
+        },
+        {
+          "type": "wait",
+          "ms": "{{PREVIEW_CLOSE_WAIT_MS}}"
+        },
+        {
+          "type": "screenshot",
+          "path": "{{PREVIEW_CLOSE_SCREENSHOT_PATH}}"
+        }
+      ]
+    }
+  ]
+}

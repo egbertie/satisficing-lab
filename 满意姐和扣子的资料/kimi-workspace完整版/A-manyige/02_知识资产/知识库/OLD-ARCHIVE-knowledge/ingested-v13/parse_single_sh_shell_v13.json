@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_pdf-document-parser/scripts/parse_single.sh",
+  "filename": "parse_single.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "cfe1057a86c0fff6",
+  "content_length": 2167,
+  "ingested_at": "2026-03-31T17:27:45.204944",
+  "content_preview": "#!/bin/bash\n# PDF单文档解析脚本\n# 用法: ./parse_single.sh <pdf_url> [output_dir]\n\nset -e\n\nPDF_URL=\"$1\"\nOUTPUT_DIR=\"${2:-./output}\"\nMINERU_TOKEN=\"${MINERU_TOKEN:-$(cat ~/.config/mineru/token 2>/dev/null || echo '')}\"\n\nif [ -z \"$PDF_URL\" ]; then\n    echo \"❌ 错误: 请提供PDF URL\"\n    echo \"用法: $0 <pdf_url> [output_dir]\"\n    exit 1\nfi\n\nif [ -z \"$MINERU_TOKEN\" ]; then\n    echo \"❌ 错误: 未设置MINERU_TOKEN环境变量\"\n    exit 1\nfi\n\nmkdir -p \"$OUTPUT_DIR\"\n\n# 生成任务ID前缀\nTASK_PREFIX=\"$(date +%Y%m%d_%H%M%S)\"\necho \"🚀 提交解析任务: $PDF_URL\"",
+  "limitations_applied": []
+}

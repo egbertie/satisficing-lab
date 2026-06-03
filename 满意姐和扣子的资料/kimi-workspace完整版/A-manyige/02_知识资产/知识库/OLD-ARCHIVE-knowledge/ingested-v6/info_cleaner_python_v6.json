@@ -1,0 +1,45 @@
+{
+  "source_path": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/info-cleaner/info_cleaner.py",
+  "filename": "info_cleaner.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 14289,
+  "checksum": "d7ea0137d38b40ba",
+  "ingested_at": "2026-03-31T17:30:32.011481",
+  "line_count": 437,
+  "title": "info_cleaner",
+  "description": "信息清洗与去重器 V1.0\n清洗、去重、标准化收集的信息\n\n核心功能：\n1. 文本清洗（去除噪音）\n2. 内容去重（相似度检测）\n3. 格式标准化\n4. 质量评分",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: CleanedContent"
+    },
+    {
+      "level": 2,
+      "title": "Class: InfoCleaner"
+    }
+  ],
+  "entities": [
+    {
+      "name": "CleanedContent",
+      "type": "class"
+    },
+    {
+      "name": "InfoCleaner",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "如果要去重且是重复内容，则跳过",
+    "去除特殊字符（保留基本标点）",
+    "text = re.sub(r'[^\\w\\s' + re.escape(string.punctuation) + ']', '', text)",
+    "去除URL（保留文本）",
+    "去除包含广告关键词的句子",
+    "使用 SimHash 或 MinHash 的简化版本",
+    "分词（简化版：按字符）",
+    "计算每个token的hash"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

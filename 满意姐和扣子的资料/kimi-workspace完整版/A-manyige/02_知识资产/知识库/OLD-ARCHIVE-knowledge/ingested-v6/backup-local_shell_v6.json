@@ -1,0 +1,66 @@
+{
+  "source_path": "/root/.openclaw/workspace/disaster-recovery/02-自动化备份脚本/backup-local.sh",
+  "filename": "backup-local.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 10956,
+  "checksum": "4d68cc3f46ee5c4d",
+  "ingested_at": "2026-03-31T17:30:47.726937",
+  "line_count": 346,
+  "title": "backup-local",
+  "description": "###############################################################################",
+  "sections": [],
+  "entities": [
+    {
+      "name": "backup_directories",
+      "type": "shell_function"
+    },
+    {
+      "name": "backup_config_files",
+      "type": "shell_function"
+    },
+    {
+      "name": "backup_package_lists",
+      "type": "shell_function"
+    },
+    {
+      "name": "backup_git_repos",
+      "type": "shell_function"
+    },
+    {
+      "name": "create_restore_script",
+      "type": "shell_function"
+    },
+    {
+      "name": "sync_to_cloud",
+      "type": "shell_function"
+    },
+    {
+      "name": "cleanup",
+      "type": "shell_function"
+    },
+    {
+      "name": "main",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "###############################################################################",
+    "本地环境备份脚本",
+    "功能: 备份本地开发环境、配置文件和代码仓库",
+    "###############################################################################",
+    "需要备份的目录 (根据实际环境修改)",
+    "需要备份的文件",
+    "创建备份目录",
+    "排除不需要的文件",
+    "备份配置文件",
+    "备份整个.ssh目录 (排除私钥)",
+    "复制配置文件",
+    "备份VSCode配置",
+    "macOS: 备份iTerm2配置",
+    "备份已安装的软件包列表",
+    "Homebrew (macOS)"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

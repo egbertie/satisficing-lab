@@ -1,0 +1,92 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/info-quality-guardian/scripts/info-quality-guardian-runner.py",
+  "filename": "info-quality-guardian-runner.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 30850,
+  "checksum": "a967336504e85d3d",
+  "ingested_at": "2026-03-31T17:30:32.779819",
+  "line_count": 873,
+  "title": "info-quality-guardian-runner",
+  "description": "info-quality-guardian-runner.py\n信息采集质量守护者 - 5-Standard 完整实现\n\n标准覆盖:\n- S1: 输入定义(信息源/质量标准/检查范围)\n- S2: 质量守护(采集→检测→清洗→验证→报告)\n- S3: 输出规范(质量报告+问题清单+改进建议)\n- S4: 集成规范(信息流自动触发)\n- S5: 检测准确性验证(误报/漏报检查)\n- S6: 局限标注",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: Severity"
+    },
+    {
+      "level": 2,
+      "title": "Class: IssueCategory"
+    },
+    {
+      "level": 2,
+      "title": "Class: QualityIssue"
+    },
+    {
+      "level": 2,
+      "title": "Class: QualityReport"
+    },
+    {
+      "level": 2,
+      "title": "Class: SourceRater"
+    },
+    {
+      "level": 2,
+      "title": "Class: QualityGuardian"
+    },
+    {
+      "level": 2,
+      "title": "Class: SelfChecker"
+    }
+  ],
+  "entities": [
+    {
+      "name": "Severity",
+      "type": "class"
+    },
+    {
+      "name": "IssueCategory",
+      "type": "class"
+    },
+    {
+      "name": "QualityIssue",
+      "type": "class"
+    },
+    {
+      "name": "QualityReport",
+      "type": "class"
+    },
+    {
+      "name": "SourceRater",
+      "type": "class"
+    },
+    {
+      "name": "QualityGuardian",
+      "type": "class"
+    },
+    {
+      "name": "SelfChecker",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "========== Stage 1: 采集 (Collection) ==========",
+    "========== Stage 2: 检测 (Detection) ==========",
+    "========== Stage 3: 清洗 (Cleaning) ==========",
+    "尝试标准化为 ISO 8601",
+    "生成内容指纹(用于去重)",
+    "========== Stage 4: 验证 (Verification) ==========",
+    "Level 1: 关键问题检查",
+    "Level 2: 质量分检查",
+    "Level 3: 主观信息标注 - S6局限",
+    "========== Stage 5: 报告 (Reporting) ==========",
+    "========== 主流程 =========="
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

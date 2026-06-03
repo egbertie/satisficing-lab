@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/shadow-clone-sync-v2.sh",
+  "filename": "shadow-clone-sync-v2.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "d0e4c01f69d7303b",
+  "content_length": 1458,
+  "ingested_at": "2026-03-31T17:27:46.155967",
+  "content_preview": "#!/bin/bash\n# Shadow Clone - 安全版本 V2.0\n# 防止循环备份的关键防护措施\n\nSOURCE_DIR=\"/root/.openclaw/workspace\"\nSHADOW_DIR=\"/root/.openclaw/workspace/shadow-clone\"\nLOG_FILE=\"/var/log/shadow-clone.log\"\nTIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')\n\n# ===== 安全红线检查 =====\n\n# 红线1: 检查是否已存在 shadow-clone（防止嵌套）\nif [ -d \"$SHADOW_DIR/shadow-clone\" ]; then\n    echo \"[$TIMESTAMP] FATAL: 检测到嵌套备份！立即停止！\" | tee -a \"$LOG_FILE\"\n    echo \"[$TIMESTAMP] 请手动清理: rm -rf $SHADOW_DIR\" | tee -a \"$LOG_FILE\"\n    exit 1\nfi\n\n# 红线2: 检查备份目录大小\nif [ -d \"",
+  "limitations_applied": []
+}

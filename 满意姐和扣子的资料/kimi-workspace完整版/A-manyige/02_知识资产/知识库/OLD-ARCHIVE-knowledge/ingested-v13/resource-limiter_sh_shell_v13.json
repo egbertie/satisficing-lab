@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/resource-limiter.sh",
+  "filename": "resource-limiter.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "2d746fe8ba2b9cf4",
+  "content_length": 3329,
+  "ingested_at": "2026-03-31T17:27:46.216701",
+  "content_preview": "#!/bin/bash\n# Resource Limiter - 资源限制与保护\n# 运行频率: 每5分钟\n\nSENTINEL_LOG_DIR=\"/var/log/sentinel\"\nTIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')\n\n# 资源限制阈值\nCPU_PER_PROCESS_LIMIT=50   # 单进程CPU上限%\nMEM_PER_PROCESS_LIMIT=20   # 单进程内存上限%\nMAX_OPEN_FILES=10000       # 单进程文件句柄上限\n\nlog() {\n    echo \"[$TIMESTAMP] $1\" >> \"$SENTINEL_LOG_DIR/resource-limiter.log\"\n}\n\n# CPU资源限制\ncheck_cpu_abusers() {\n    log \"INFO: 检查高CPU进程\"\n    \n    ps aux | awk -v limit=\"$CPU_PER_PROCESS_LIMIT\" '$3 > limit && $11 !~ /^\\[/ {print $2, $3, $11}",
+  "limitations_applied": []
+}

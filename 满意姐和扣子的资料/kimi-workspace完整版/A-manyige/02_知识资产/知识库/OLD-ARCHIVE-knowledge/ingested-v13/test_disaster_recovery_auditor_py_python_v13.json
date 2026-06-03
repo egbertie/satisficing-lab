@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/disaster-recovery-auditor/test_disaster_recovery_auditor.py",
+  "filename": "test_disaster_recovery_auditor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "ff94f2fb5c3f428d",
+  "content_length": 1393,
+  "ingested_at": "2026-03-31T17:27:45.449399",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\ndisaster-recovery-auditor 单元测试\n\"\"\"\n\nimport unittest\nimport tempfile\nimport shutil\nimport sys\nfrom pathlib import Path\n\nsys.path.insert(0, str(Path(__file__).parent))\nfrom disaster_recovery_auditor import DisasterRecoveryAuditor\n\n\nclass TestDisasterRecoveryAuditor(unittest.TestCase):\n    \"\"\"DisasterRecoveryAuditor单元测试\"\"\"\n    \n    def setUp(self):\n        self.temp_dir = tempfile.mkdtemp()\n        self.auditor = DisasterRecoveryAuditor(\n            checkpoint_dir=f\"{self",
+  "limitations_applied": []
+}

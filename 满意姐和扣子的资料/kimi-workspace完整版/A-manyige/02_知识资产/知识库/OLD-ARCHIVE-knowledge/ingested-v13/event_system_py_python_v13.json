@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/system-v2/blackboard/event_system.py",
+  "filename": "event_system.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "f14ed2055e2897f7",
+  "content_length": 3307,
+  "ingested_at": "2026-03-31T17:27:44.539162",
+  "content_preview": "\"\"\"\nBlackboard - 事件系统模块\n提供发布-订阅模式的事件机制\n\"\"\"\n\nimport re\nimport threading\nfrom typing import Any, Callable, Dict, List, Set\n\n\nclass EventSystem:\n    \"\"\"\n    事件发布-订阅系统\n    \n    特性：\n    - 支持模式匹配（通配符 *）\n    - 线程安全\n    - 同步/异步回调支持\n    \n    模式示例：\n    - \"data:user:123\" - 精确匹配\n    - \"data:user:*\"   - 匹配所有用户\n    - \"data:*\"        - 匹配所有数据事件\n    \"\"\"\n    \n    def __init__(self):\n        self._subscribers: Dict[str, Set[Callable]] = {}\n        self._lock = threading.RLock()\n        self._event_count = 0\n    \n",
+  "limitations_applied": []
+}

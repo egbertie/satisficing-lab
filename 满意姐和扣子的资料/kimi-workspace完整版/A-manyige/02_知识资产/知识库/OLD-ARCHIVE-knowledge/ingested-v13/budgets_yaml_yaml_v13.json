@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/token-budget-enforcer/config/budgets.yaml",
+  "filename": "budgets.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "d7a53c9cf39ed47e",
+  "content_length": 1673,
+  "ingested_at": "2026-03-31T17:27:45.010815",
+  "content_preview": "# Token预算配置\n# 全局设置\nglobal:\n  daily_budget: 50000\n  timezone: \"Asia/Shanghai\"\n  version: \"2.0.0\"\n  \n# 三级预算池配置\nbudget_pools:\n  strategic_reserve:\n    percentage: 30\n    description: \"仅供真人替身[DIRECTOR]使用\"\n    daily_limit: 15000  # 50K * 30%\n    use_cases:\n      - \"客户紧急沟通\"\n      - \"关键决策分析\"\n      - \"危机响应\"\n    approval_required: false\n    auto_reset: true\n    reset_time: \"00:00\"\n    \n  operational_budget:\n    percentage: 50\n    description: \"数字人日常使用\"\n    daily_limit: 25000  # 50K * 50%\n    use_cases:\n ",
+  "limitations_applied": []
+}

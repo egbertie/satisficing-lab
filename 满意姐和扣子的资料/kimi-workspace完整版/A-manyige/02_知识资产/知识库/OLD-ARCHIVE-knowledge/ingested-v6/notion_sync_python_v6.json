@@ -1,0 +1,65 @@
+{
+  "source_path": "/root/.openclaw/workspace/archive/notion_sync_old/notion_sync.py",
+  "filename": "notion_sync.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 18222,
+  "checksum": "06ec7bd271d62a60",
+  "ingested_at": "2026-03-31T17:30:32.907604",
+  "line_count": 513,
+  "title": "notion_sync",
+  "description": "Markdown 文件同步到 Notion 知识库",
+  "sections": [],
+  "entities": [
+    {
+      "name": "notion_request",
+      "type": "function"
+    },
+    {
+      "name": "create_page",
+      "type": "function"
+    },
+    {
+      "name": "create_database",
+      "type": "function"
+    },
+    {
+      "name": "split_content_to_blocks",
+      "type": "function"
+    },
+    {
+      "name": "content_to_blocks",
+      "type": "function"
+    },
+    {
+      "name": "get_all_markdown_files",
+      "type": "function"
+    },
+    {
+      "name": "get_relative_path",
+      "type": "function"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "Notion API 配置",
+    "速率限制：每个请求间隔 350ms",
+    "检查添加这行后是否超过限制",
+    "简化的代码块处理（实际上应该收集多行）",
+    "限制 blocks 数量（Notion API 限制）",
+    "跳过 .git 目录，但保留 .config 目录",
+    "注意：路径中包含 .openclaw 是正常的工作区路径，不应跳过",
+    "1. 搜索用户的工作区",
+    "使用第一个可用页面作为父页面",
+    "使用第一个可用页面创建我们的父页面",
+    "3. 获取所有 Markdown 文件",
+    "准备页面标题（去掉 .md 后缀）",
+    "转换内容为 blocks"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

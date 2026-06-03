@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/system-v3/meta_agent/compression_protocol.yaml",
+  "filename": "compression_protocol.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "37341b07bbf6296c",
+  "content_length": 1615,
+  "ingested_at": "2026-03-31T17:27:46.127707",
+  "content_preview": "# Compression Protocol 配置\n# 压缩通信协议 — 结构化JSON替代自然语言\n# 命名空间: NGT-COMPRESS-v1.0-FIN-260327\n\nversion: \"1.0\"\ndescription: \"Agent间压缩通信协议，节省80% Token\"\n\nprotocol:\n  # 消息格式（极简JSON）\n  message_format:\n    type: \"compressed_json\"\n    schema: |\n      {\n        \"v\": \"version\",\n        \"t\": \"task_type\",      // 任务类型编码\n        \"p\": \"priority\",       // 优先级 0-9\n        \"s\": \"sender_id\",      // 发送者ID\n        \"r\": \"receiver_id\",    // 接收者ID\n        \"d\": \"data_hash\",      // 数据SHA256前8位\n        \"st\": \"status\",    ",
+  "limitations_applied": []
+}

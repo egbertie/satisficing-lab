@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>爱可可AI前沿推介(1.4)</title>
+  <meta name="description" content="LG - 机器学习 CV - 计算机视觉 CL - 计算与语言 RO - 机器人
+
+1、[LG] Deep Delta Learning2、[RO] GR-Dexter Technical Report3、[CV] Triangle Splatting for Real-Time Radiance Field Rend">
+  <meta name="author" content="爱可可爱生活">
+  <meta property="og:title" content="爱可可AI前沿推介(1.4)">
+  <meta property="og:description" content="LG - 机器学习 CV - 计算机视觉 CL - 计算与语言 RO - 机器人
+
+1、[LG] Deep Delta Learning2、[RO] GR-Dexter Technical Report3、[CV] Triangle Splatting for Real-Time Radiance Field Rendering4、[CL] ShinkaEvolve： Towards Open-E">
+  <meta property="og:type" content="article">
+  
+  <style>
+    body { max-width: 800px; margin: 0 auto; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: #333; }
+    h1 { font-size: 1.8em; margin-bottom: 0.5em; }
+    .meta { color: #666; margin-bottom: 2em; border-bottom: 1px solid #eee; padding-bottom: 1em; }
+    .meta p { margin: 0.3em 0; }
+    .content { font-size: 1.05em; }
+    .content img { max-width: 100%; height: auto; }
+    .footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #eee; color: #999; font-size: 0.9em; }
+    a { color: #1a73e8; }
+  </style>
+</head>
+<body>
+  <article>
+    <h1>爱可可AI前沿推介(1.4)</h1>
+    <div class="meta">
+      <p><strong>作者：</strong>爱可可爱生活</p>
+      <p><strong>发布时间：</strong>2026-01-04 06:30</p>
+    </div>
+    <div class="content">
+      <p>LG - 机器学习 CV - 计算机视觉 CL - 计算与语言 RO - 机器人</p>
+<p>1、[LG] Deep Delta Learning2、[RO] GR-Dexter Technical Report3、[CV] Triangle Splatting for Real-Time Radiance Field Rendering4、[CL] ShinkaEvolve： Towards Open-Ended And Sample-Efficient Program Evolution5、[LG] Training Deep Learning Models with Norm-Constrained LMOs</p>
+<p>摘要：深度增量学习、GR-Dexter技术报告、用三角形Splatting实现实时辐射场渲染、迈向开放式样本高效的程序演化、使用范数约束LMO训练深度学习模型</p>
+<p>1、[LG] Deep Delta Learning</p>
+<p>Y Zhang, Y Liu, M Wang, Q Gu[Princeton University &amp; University of California, Los Angeles]</p>
+<p>深度增量学习</p>
+<p>要点:</p>
+<p>批判了标准残差连接（X_l+1 = X_l + F(X_l)）固有的严格加性归纳偏置，认为这限制了其建模复杂、非单调动态过程的能力。</p>
+<p>提出了深度增量学习（Deep Delta Learning, DDL），一种通过可学习的、依赖于数据的几何算子来调节恒等快捷连接的新型架构。</p>
+<p>DDL 的核心是“增量算子”（Delta Operator）：A(X) = I - β(X)k(X)k(X)ᵀ，它是对单位矩阵的一个秩一扰动，也是对豪斯霍尔德（Householder）反射的一种推广。</p>
+<p>该算子由一个可学习的反射方向向量 k(X) 和一个被约束在 [0, 2] 范围内的可学习标量门控 β(X) 参数化。</p>
+<p>论文对增量算子进行了完整的谱分析，证明其特征值为 {1, ..., 1, 1-β}。与独特特征值 1-β 对应的特征向量是 k。</p>
+<p>这是一个极具反直觉和启发性的核心观点：一个单一的可学习标量 β(X) 能够动态控制层间变换的几何性质，在一个可微分的模块中统一了三种基础运算：</p>
+<p>恒等映射 (β → 0): A(X) 变为单位矩阵，允许网络跳过该层。</p>
+<p>正交投影 (β → 1): A(X) 变为一个向 k 的正交超平面上的投影算子，使网络能够选择性地“擦除”或“遗忘”沿 k 方向的特征。</p>
+<p>几何反射 (β → 2): A(X) 变为一个标准的豪斯霍尔德反射矩阵，它既是正交的，又具有负的行列式，从而能实现方向反转的变换，以建模对抗性动态。</p>
+<p>将整个残差更新过程重构为增量法则（Delta Rule）结构：X_l+1 = X_l + β - k - (vᵀ - kᵀX_l)，其中同一个门控 β 同步地扮演了“擦除”旧信息（kᵀX_l）和“写入”新信息（vᵀ）的步长角色。</p>
+<p>建立了一个深刻的理论联系：DDL 在结构上是 DeltaNet 架构的“深度同构体”。它将增量法则应用于网络深度（l）维度上的特征演化，正如 DeltaNet 将其应用于时间（t）维度上的状态演化一样。</p>
+<p>该方法作用于矩阵形式的隐藏状态（X ∈ R^(d×dv)），其中几何变换作用于特征维度（d），并广播到整个值维度（dv）。</p>
+<p>DDL 声称其能够使网络学习到更丰富的动态系统，包括那些具有负特征值的系统，同时保留了门控残差架构的稳定训练特性。</p>
+<p>主旨： 本文旨在解决标准深度残差网络中恒等快捷连接（identity shortcut）所带来的严格加性归纳偏置问题。这种偏置限制了网络对复杂状态转换（如振荡或对抗性行为）的建模能力。为此，论文提出了一种名为“深度增量学习”（DDL）的新架构，通过一个可学习的、依赖数据的几何变换来泛化残差连接，从而增强网络的表达能力。</p>
+<p>创新：</p>
+<p>几何算子泛化残差连接： 核心创新是提出了“增量算子”（Delta Operator），即 A(X) = I - β(X)kkᵀ，它将经典的豪斯霍尔德反射（Householder reflection）进行推广，用一个可学习的标量门控 β(X) 替代了固定的常数2，从而将一个固定的几何操作变为一个灵活、数据驱动的变换。</p>
+<p>动态统一基础线性变换： 极具创新性地揭示了，通过学习一个简单的标量门控 β(X)，网络可以在恒等映射、正交投影和几何反射这三种根本不同的线性变换之间进行平滑、连续的插值。这赋予了网络前所未有的动态几何控制能力。</p>
+<p>深度维度的增量法则： 将残差更新明确地表述为增量法则（Delta Rule）的形式，即一个同步的“擦除-写入”过程，其中门控 β 同时控制擦除的强度和写入的步长。这个视角极具启发性。</p>
+<p>深度与时间的理论同构： 建立了 DDL 中沿深度的特征演化与 DeltaNet 中沿时间的记忆演化之间的理论同构关系，为理解前馈网络的层级功能提供了来自循环网络的新视角。</p>
+<p>贡献：</p>
+<p>理论贡献： 提供了对增量算子的完整谱分析，清晰地揭示了其门控标量 β 如何直接控制变换矩阵的特征值（1-β）和行列式（1-β），为该模块的几何行为提供了坚实的数学基础。</p>
+<p>模型贡献： 提出了深度增量残差模块（Delta Residual Block），这是一个全新的、有原则的神经网络构建模块，可以作为现有残差连接的直接替代品，以增强模型的表达能力。</p>
+<p>概念贡献： 将几何线性代数、优化更新规则（Delta Rule）和深度网络架构设计联系起来，为深度学习中的特征传播和转换提供了一个全新的、基于几何的理解框架。它促使我们重新思考快捷连接的作用——从简单的信号累加器，转变为一个动态的状态变换算子。</p>
+<p>提升： 本文是一篇理论性很强的论文，并未提供实验结果。因此，其“提升”主要体现在理论和表达能力层面，而非具体的性能指标。</p>
+<p>模型表达能力： 理论上，DDL 能够学习到标准残差网络无法有效表示的变换。通过引入负特征值（当 `β - 灵活性与控制力： 相比于固定的加法操作，DDL 赋予了网络逐层、逐样本动态调整特征变换几何性质的能力，可以根据输入决定是保留信息（恒等）、丢弃信息（投影）还是反转信息（反射）。</p>
+<p>不足：</p>
+<p>缺乏实验验证： 这是本文最主要的不足。论文提出的所有概念和优势都停留在理论层面，没有在任何标准数据集（如ImageNet、GLUE等）上进行实验验证。因此，DDL 的实际效果、训练稳定性、收敛速度以及相对于标准 ResNet 或其他变体的性能优势都是未知的。</p>
+<p>计算开销分析缺失： DDL 引入了额外的分支来计算方向向量 k(X)、门控 β(X) 和值向量 v(X)，这会增加模型的参数量和计算复杂度。论文没有对这部分开销进行量化分析，也没有讨论其与潜在性能提升之间的权衡。</p>
+<p>参数化敏感性未知： 对于 k(X)、β(X) 和 v(X) 的网络结构选择（如附录中提到的MLP或Attention）可能会影响最终性能，但文中没有探讨这种设计的敏感性或提供最佳实践指导。</p>
+<p>心得：</p>
+<p>快捷连接的设计空间远未枯竭： 这篇论文给我最大的启发是，ResNet 的恒等快捷连接并非终点，而是一个可以被深度探索和改造的起点。我们可以将其从一个简单的“加法器”升级为一个动态的、可学习的“算子”，从而赋予网络更强大的特征处理能力。这启发我们思考：快捷连接还可以是什么？它可以是旋转、缩放、或者其他更复杂的学成变换吗？</p>
+<p>单一标量的巨大威力： DDL 展示了通过一个经过精心设计的、有物理/几何意义的单一标量（β），就可以控制一个高维线性变换的整个谱结构。这体现了“少即是多”的设计哲学，即通过有原则的参数化，用极少的参数实现对复杂行为的有效控制，这对于设计高效且可解释的模型极具价值。</p>
+<p>跨领域概念的同构映射： 本文将循环网络中的“增量法则”（处理时间序列）巧妙地“同构”到前馈网络中处理层级特征，这是一个非常深刻的洞见。它表明，不同架构（RNN vs CNN/Transformer）在处理不同维度（时间 vs 深度）的信息演化时，可能遵循着相似的底层计算原理。这种跨领域的思想迁移是推动AI创新的重要源泉。</p>
+<p>一句话总结: 本文挑战了传统残差连接的加性偏置，创新性地提出深度增量学习（DDL），其核心是用一个可学习的几何算子取代恒等映射；该算子通过一个反直觉但极为强大的单一标量门控，在恒等、投影和反射三种基础变换间平滑插值，从而赋予网络前所未有的、能够建模复杂动态的层级特征变换能力，并揭示了前馈网络深度与循环网络时间在信息更新机制上的深刻同构性。</p>
+<p>The efficacy of deep residual networks is fundamentally predicated on the identity shortcut connection. While this mechanism effectively mitigates the vanishing gradient problem, it imposes a strictly additive inductive bias on feature transformations, thereby limiting the network’s capacity to model complex state transitions. In this paper, we introduce Deep Delta Learning (DDL), a novel architecture that generalizes the standard residual connection by modulating the identity shortcut with a learnable, data-dependent geometric transformation. This transformation, termed the Delta Operator, constitutes a rank-1 perturbation of the identity matrix, parameterized by a reflection direction vector k(X) and a gating scalar β(X). We provide a spectral analysis of this operator, demonstrating that the gate β(X) enables dynamic interpolation between identity mapping, orthogonal projection, and geometric reflection. Furthermore, we restructure the residual update as a synchronous rank-1 injection, where the gate acts as a dynamic step size governing both the erasure of old information and the writing of new features. This unification empowers the network to explicitly control the spectrum of its layer-wise transition operator, enabling the modeling of complex, non-monotonic dynamics while preserving the stable training characteristics of gated residual architectures.</p>
+<p>https://github.com/yifanzhang-pro/deep-delta-learning/blob/master/Deep_Delta_Learning.pdf</p>
+<p>2、[RO] GR-Dexter Technical Report</p>
+<p>R Wen, G Chen, Z Cui, M Du...[ByteDance]</p>
+<p>GR-Dexter技术报告</p>
+<p>要点:</p>
+<p>旨在解决将视觉-语言-动作（VLA）模型从简单的夹爪扩展到高自由度（DoF）双臂灵巧手这一重大挑战。</p>
+<p>提出了 GR-Dexter，一个集成了硬件、数据收集系统和模型训练策略协同设计的整体性框架。</p>
+<p>硬件贡献：推出了 ByteDexter V2，一款紧凑、21自由度、连杆驱动的拟人手，集成了触觉传感器，并为易于维护和复杂操作而设计。</p>
+<p>数据收集贡献：开发了一套直观的双臂遥操作系统，使用VR头显（Meta Quest）和数据手套（Manus），为这台56自由度的双臂机器人高效地收集高质量、长时程的演示数据。</p>
+<p>模型训练创新（高信息熵要点）：GR-Dexter 并未仅依赖昂贵的、特定领域的机器人数据，而是采用了一种“数据金字塔”训练策略。该策略在一个VLA模型上混合训练四种来源的数据：</p>
+<p>网络级视觉-语言数据： 为理解抽象指令提供基础的语言和视觉-世界关联能力。</p>
+<p>跨机器人形态数据： 利用现有的、来自不同机器人的大规模数据集，以提升通用的抓取技能。</p>
+<p>人类轨迹数据： 使用第一人称视角的人类视频来扩大数据多样性，并学习类人的操作先验知识。</p>
+<p>本领域机器人轨迹数据： 使用较小规模的高质量遥操作数据，为GR-Dexter特定的硬件进行模型微调。</p>
+<p>一个关键技术环节是跨机器人形态的运动重定向管线，它通过对齐指尖位置来统一不同数据源的视觉和动作空间，从而实现了有效的技能迁移。</p>
+<p>实验结果揭示了一个关键且略带反直觉的发现：仅用机器人数据训练的基线模型（&quot;plain VLA&quot;）在领域内表现良好，但在分布外（OOD）场景中表现显著下降。 -“数据金字塔”方法对于泛化能力至关重要：</p>
+<p>与视觉-语言数据共同训练，显著提升了模型对未见过的空间布局和抽象指令的鲁棒性。</p>
+<p>与跨机器人形态数据共同训练，显著增强了抓取未见过物体的能力。</p>
+<p>在真实世界中成功展示了复杂的、长时程的双臂操作任务，如使用工具（夹子、吸尘器）和整理桌面，体现了其实用灵巧性。</p>
+<p>该工作主张，将实用的灵巧硬件、可扩展的数据收集方法与跨机器人形态的监督学习相结合，是通往通用灵巧操作的一条有前景的道路。</p>
+<p>主旨： 本文旨在解决当前视觉-语言-动作（VLA）模型在应用于高自由度双臂灵巧手时面临的挑战，包括巨大的动作空间、数据采集成本高昂和泛化能力不足。为此，论文提出了一个名为 GR-Dexter 的整体性解决方案，该方案通过协同设计灵巧手硬件、高效的遥操作数据采集系统以及一种创新的多源数据融合训练策略，以实现通用、鲁棒的长时程灵巧操作。</p>
+<p>创新：</p>
+<p>全栈式协同设计： 创新性地将硬件（ByteDexter V2灵巧手）、数据采集（VR遥操作）和模型（VLA）作为一个整体框架进行协同设计和优化，而非孤立地研究其中一个环节。</p>
+<p>数据金字塔训练范式： 核心创新在于提出了“数据金字塔”这一多层次、多来源的数据融合训练策略。它巧妙地结合了网络级VL数据的语义理解能力、跨形态数据的技能多样性、人类视频数据的规模优势以及少量高质量机器人数据的领域适应性，为解决机器人数据稀缺性问题提供了新范式。</p>
+<p>实用的跨形态技能迁移： 设计并实现了一套有效的跨机器人形态和人-机运动重定向流程，通过对齐指尖这一功能核心，成功地将从异构数据中学到的抓取先验知识迁移到目标机器人上，提升了模型的泛化能力。</p>
+<p>高性能灵巧手硬件： 研制了ByteDexter V2这款兼具高自由度（21-DoF）、紧凑设计和触觉感知的灵巧手，为实现复杂的灵巧操作提供了强大的硬件基础。</p>
+<p>贡献：</p>
+<p>系统贡献： 提供了一个完整的、端到端的双臂灵巧操作研究平台（GR-Dexter），涵盖了硬件设计、数据采集接口和模型训练方法，为社区推动该领域的研究提供了宝贵的参考和实践案例。</p>
+<p>方法论贡献： 验证了“数据金字塔”训练策略的有效性，证明了融合多种不同成本和粒度的数据源是提升VLA模型在复杂机器人上泛化能力的关键路径，尤其是在OOD场景下。</p>
+<p>硬件贡献： 提出并实现了一款先进的21自由度拟人灵巧手ByteDexter V2，其设计细节和能力展示对未来的灵巧手研究具有借鉴意义。</p>
+<p>实证贡献： 通过大量的真实世界实验，清晰地展示了不同数据源对模型泛化能力的具体贡献（如VL数据提升指令理解，跨形态数据提升抓取），为未来的数据策展和模型训练提供了明确的指导。</p>
+<p>提升：</p>
+<p>泛化能力： 相比仅使用机器人遥操作数据训练的基线模型，GR-Dexter在多个OOD维度上实现了显著提升：</p>
+<p>对未见空间布局的鲁棒性： 在化妆品整理任务中，OOD成功率从0.64提升至0.89。</p>
+<p>对未见物体的抓取能力： 在取放任务中，对未见物体的成功率从基线的显著下降提升至0.85。</p>
+<p>对未见语言指令的理解能力： 对抽象和新颖指令的执行成功率提升至0.83。</p>
+<p>任务复杂度： 成功完成了需要精细协调和工具使用的长时程任务（如用夹子取面包、开关吸尘器并清扫），展示了远超简单夹爪的能力上限。</p>
+<p>数据效率： 通过利用大规模的现有公开数据集（跨形态机器人和人类数据），减少了对昂贵且耗时的本机器人遥操作数据的依赖，提升了整体的数据利用效率。</p>
+<p>不足：</p>
+<p>数据规模潜力未尽： 论文承认目前仅使用了数百小时的人类轨迹数据，而更大规模的、可利用的第一人称视角人类数据尚未被充分挖掘。</p>
+<p>控制策略的解耦： 目前系统对手和臂的控制是分开的，这可能在需要高度手-臂协同的接触丰富型任务中成为一个瓶颈，未来需要更一体化的控制策略。</p>
+<p>可复现性与成本： 整套系统（定制硬件、昂贵的遥操作设备）非常复杂且成本高昂，这限制了其他研究者复现和在此基础上进行研究的可行性。</p>
+<p>运动重定向的保真度： 尽管跨形态重定向是有效的，但这一过程不可避免地会损失部分运动细节和动态特性，尤其是在人-机差异较大的情况下，可能会影响学习效果的上限。</p>
+<p>心得：</p>
+<p>系统性思维是机器人学的未来： GR-Dexter的成功有力地证明了，在机器人学这一复杂领域，单纯的算法创新已不足够。将硬件、数据和模型视为一个不可分割的整体进行协同设计，是突破当前瓶颈的关键。这种“全栈式”的研发思路值得所有机器人研究者深思。</p>
+<p>“数据金字塔”是数据驱动机器人的核心策略： 本文提出的数据融合策略极具启发性。它揭示了一条清晰的路径：用海量、廉价、低保真度的数据（如网络数据、人类视频）构建模型的通用基础，再用少量、昂贵、高保真度的数据（机器人遥操作）进行精准适配。这是一种兼顾成本、规模和性能的智慧策略，对整个领域都有指导意义。</p>
+<p>拥抱“不完美”数据是通往通用的必经之路： 与其等待完美的、大规模的本机器人数据集，不如主动去利用和整合现有的、来自不同机器人甚至人类的“不完美”数据。GR-Dexter表明，只要有巧妙的对齐和重定向方法，跨形态学习不仅是可行的，更是实现模型鲁棒性和泛化能力的关键。这鼓励研究者们打破数据壁垒，构建更开放和包容的数据生态。</p>
+<p>一句话总结: GR-Dexter通过一个集成了自研21自由度灵巧手、高效VR遥操作和创新的“数据金字塔”训练范式的全栈式框架，有力地证明了融合网络、跨机器人和人类等多源数据是让VLA模型在复杂双臂机器人上实现对未见物体和指令的鲁棒泛化的关键，这远非仅靠领域内数据训练所能及。</p>
+<p>Vision-language-action (VLA) models have enabled language-conditioned, long-horizon robot manipulation, but most existing systems are limited to grippers. Scaling VLA policies to bimanual robots with high degree-of-freedom (DoF) dexterous hands remains challenging due to the expanded action space, frequent hand-object occlusions, and the cost of collecting real-robot data. We present GR-Dexter, a holistic hardware-model-data framework for VLA-based generalist manipulation on a bimanual dexterous-hand robot. Our approach combines the design of a compact 21-DoF robotic hand, an intuitive bimanual teleoperation system for real-robot data collection, and a training recipe that leverages teleoperated robot trajectories together with large-scale visionlanguage and carefully curated cross-embodiment datasets. Across real-world evaluations spanning long-horizon everyday manipulation and generalizable pick-and-place, GR-Dexter achieves strong in-domain performance and improved robustness to unseen objects and unseen instructions. We hope GR-Dexter serves as a practical step toward generalist dexterous-hand robotic manipulation.</p>
+<p>https://arxiv.org/abs/2512.24210</p>
+<p>3、[CV] Triangle Splatting for Real-Time Radiance Field Rendering</p>
+<p>J Held, R Vandeghen, A Deliege, A Hamdi...[University of Liège]</p>
+<p>三角形Splatting：实现实时辐射场渲染</p>
+<p>要点:</p>
+<p>提出“三角形的回归”，挑战NeRF和3D高斯溅射（3DGS）作为新视角合成主流基元的统治地位。</p>
+<p>引入了“三角溅射”（Triangle Splatting），这是一种可微分渲染器，能够直接对“三角汤”（即无结构、不连接的三角形集合）进行端到端的优化。</p>
+<p>一项核心技术创新是用于软光栅化的新颖窗函数：I(p) = ReLU((φ(p)/φ(s))^σ)，其中 φ 是2D投影三角形的符号距离场。</p>
+<p>这个新窗函数是本文信息熵最高的部分。与先前基于Sigmoid的函数相比，它有两个关键优势：</p>
+<p>其影响范围被严格限制在三角形的几何边界内，避免了单个基元影响整个图像的问题，而这是以往方法的一个主要缺陷。</p>
+<p>由于归一化处理，其平滑度能随深度自动缩放，简化了优化过程。</p>
+<p>该方法采用了类似于3DGS的自适应加密和剪枝策略，但针对三角形进行了定制（例如，通过中点细分来分裂三角形，并根据锐度σ进行加密）。</p>
+<p>实验证明，Triangle Splatting在性能上超越了其他非体积基元方法（如2DGS），并且与体积基元方法（如3DGS, 3DCS）相比，具有同等甚至更优的表现，尤其是在感知质量（LPIPS）上。</p>
+<p>在Mip-NeRF360数据集的室内场景上取得了当前最佳（SOTA）效果，感知指标甚至优于备受推崇的Zip-NeRF。这是一个反直觉的结果，因为通常认为三角形的表达能力不如体渲染场。</p>
+<p>最引人注目且反直觉的结果是其与传统图形管线的直接兼容性。优化后的“三角汤”可以直接在现成的游戏引擎中以极高的帧率渲染（例如，在RTX 4090上以720p分辨率达到2400 FPS以上）。</p>
+<p>这弥合了现代可微分渲染/神经渲染与历经数十年、由硬件加速的传统三角形图形生态系统之间长期存在的鸿沟。</p>
+<p>尽管输出是“汤”状的，但与从高斯或神经场中提取表面相比，它为生成基于网格的表示提供了更为直接的路径。</p>
+<p>主旨： 本文旨在解决现有新视角合成方法（如NeRF和3DGS）所用基元与传统图形管线不兼容的问题，并探索直接优化计算机图形学中最基础的三角形基元用于真实感渲染的可行性。为此，论文提出了一种名为“三角溅射”的新型可微分渲染框架，以期统一现代可微分优化与传统高效的图形硬件。</p>
+<p>创新：</p>
+<p>基元回归与统一： 最大的创新在于“返璞归真”，成功地将图形学最经典的三角形基元引入端到端的可微分优化框架，挑战了当前以隐式场和高斯球为主流的范式。</p>
+<p>有界可微分窗函数： 提出了一个基于ReLU和归一化符号距离场的窗函数，巧妙地解决了传统软光栅化中基元影响范围无界的问题，使得梯度优化在空间上更受约束、更稳定，这是方法成功的关键。</p>
+<p>深度自适应平滑度： 通过窗函数的归一化设计，实现了基元平滑度参数σ的效果不随深度变化，简化了优化，避免了像3DCS那样需要手动缩放参数的复杂性。</p>
+<p>高效的自适应控制： 将3DGS中的自适应控制思想（加密与剪枝）成功地迁移并改造应用于三角形基元，实现了对场景复杂度的有效建模。</p>
+<p>贡献：</p>
+<p>范式贡献： 提出并验证了一种全新的、基于三角形溅射的新视角合成范式，证明了直接优化三角形是实现高质量、高效率渲染的可行路径，为领域提供了新的研究方向。</p>
+<p>技术贡献： 设计了一种新颖、稳定且高效的可微分三角形光栅化器，特别是其核心的窗函数，为未来基于显式几何的可微分渲染研究提供了宝贵的技术组件。</p>
+<p>实践贡献： 产出的“三角汤”表示可以直接被标准游戏引擎等传统图形软件使用，实现了前所未有的兼容性和渲染速度（2400+ FPS），极大地推动了神经渲染技术走向实际应用的进程，如游戏和AR/VR。</p>
+<p>性能贡献： 在多个标准数据集上取得了与SOTA方法相当甚至更优的性能，特别是在室内场景上超越了Zip-NeRF，证明了该方法的有效性和竞争力。</p>
+<p>提升：</p>
+<p>渲染速度： 相比所有主流的神经渲染方法（包括3DGS），在传统渲染器中的渲染速度实现了数量级的提升（从~100 FPS提升至2400+ FPS），真正达到了超实时性能。</p>
+<p>视觉质量（特别是清晰度）： 相比基于高斯的方法，其渲染结果在物体边缘和高频细节上更锐利、更清晰，更符合由固体表面构成的真实世界，这在感知质量指标LPIPS上得到了充分体现。</p>
+<p>兼容性： 实现了与现有图形生态的无缝对接，这是NeRF和3DGS等方法难以企及的。优化结果不再是一个需要特殊渲染器的“黑盒”，而是一个通用的3D资产。</p>
+<p>训练效率： 相较于3DCS等方法，训练速度更快，收敛性更好。</p>
+<p>不足：</p>
+<p>网格连接性： 论文明确指出，最终输出是“三角汤”，而非一个具有拓扑连接的流形网格。生成一个干净、 watertight 的网格仍需要额外的后处理步骤。</p>
+<p>浮空物（Floaters）问题： 在室外等大规模、视角稀疏的场景中，由于非体积基元的监督信号较弱，方法有时会产生过拟合到特定训练视角的“浮空物”。</p>
+<p>几何精度： 尽管视觉效果很好，但在几何重建精度（如Chamfer距离）上，相比专门为几何优化的2DGS等方法略逊一筹，表明其主要优势在于视觉渲染而非精确的表面重建。</p>
+<p>心得：</p>
+<p>回归第一性原理的巨大潜力： 这篇论文最深刻的启发是，不必总是发明全新的、复杂的数学表示。回归到领域最基础、最经受考验的第一性原理（如三角形），并用现代的工具（可微分编程）为其注入新的活力，可能会带来颠覆性的突破。它雄辩地证明了“三角形”在神经渲染时代远未过时。</p>
+<p>表示形式决定了生态位的上限： 3DGS虽然强大，但其表示形式决定了它难以融入庞大的传统图形生态。Triangle Splatting从一开始就选择了“生态友好型”的表示，这使其不仅仅是一项渲染技术，更是一座连接学术研究与工业应用的桥梁。这提醒我们，在设计新模型时，必须考虑其输出表示的通用性和下游兼容性。</p>
+<p>技术细节中的魔鬼： 该方法成功的关键并非一个宏大的概念，而是一个精巧的技术细节——新窗函数的设计。对现有方法（sigmoid窗函数）缺陷的深刻洞察，并提出一个有原则的、能解决核心问题的方案，是实现从“不可能”到“SOTA”的飞跃的关键。这彰显了扎实的数学和图形学功底的重要性。</p>
+<p>一句话总结: 本文通过引入一种新的、几何有界的可微分窗函数，革命性地实现了对“三角汤”的直接优化，不仅在新视角合成任务上达到了媲美甚至超越SOTA的视觉质量，更凭借其与传统图形管线的原生兼容性，实现了前所未有的超实时渲染速度，成功地将现代神经渲染与经典计算机图形学连接了起来。</p>
+<p>The field of computer graphics was revolutionized by models such as Neural Radiance Fields and 3D Gaussian Splatting, displacing triangles as the dominant representation for photogrammetry. In this paper, we argue for a triangle comeback. We develop a differentiable renderer that directly optimizes triangles via end-to-end gradients. We achieve this by rendering each triangle as differentiable splats, combining the efficiency of triangles with the adaptive density of representations based on independent primitives. Compared to popular 2D and 3D Gaussian Splatting methods, our approach achieves higher visual fidelity, faster convergence, and increased rendering throughput. On the Mip-NeRF360 dataset, our method outperforms concurrent non-volumetric primitives in visual fidelity and achieves higher perceptual quality than the state-of-the-art Zip-NeRF on indoor scenes. Triangles are simple, compatible with standard graphics stacks and GPU hardware, and highly efficient: for the Garden scene, we achieve over 2,400 FPS at 1280×720 resolution using an off-the-shelf mesh renderer. These results highlight the efficiency and effectiveness of triangle-based representations for high-quality novel view synthesis. Triangles bring us closer to mesh-based optimization by combining classical computer graphics with modern differentiable rendering frameworks.</p>
+<p>https://arxiv.org/abs/2505.19175</p>
+<p>4、[CL] ShinkaEvolve: Towards Open-Ended And Sample-Efficient Program Evolution</p>
+<p>R T Lange, Y Imajuku, E Cetin[Sakana AI]</p>
+<p>ShinkaEvolve：迈向开放式样本高效的程序演化</p>
+<p>要点:</p>
+<p>旨在解决当前由LLM驱动的进化框架存在的两大核心问题：样本效率低下（通常需要数千次评估）以及代码不开源。</p>
+<p>提出了 ShinkaEvolve，一个开源框架，通过三项关键算法创新来显著提升样本效率：</p>
+<p>加权父代采样： 一种巧妙平衡探索（偏好后代较少的程序）与利用（偏好性能更高的程序）的策略，超越了简单的爬山或均匀选择方法。</p>
+<p>代码新颖性拒绝采样： 一种两阶段过滤机制，首先使用代码嵌入拒绝与现有程序过于相似的提议，然后可选择性地使用一个LLM作为最终的“新颖性裁判”，以确保有意义的变异。</p>
+<p>基于老虎机的LLM集成选择： 将“使用哪个LLM进行变异”视为一个多臂老虎机问题（UCB1算法），并根据相对性能增益而非绝对分数来动态地将更多预算分配给能产出高影响力改进的LLM。</p>
+<p>一个极具反直觉且影响力巨大的成果是：仅用150个样本就为圆堆积问题发现了一个全新的、达到SOTA水平的解决方案，而先前的工作（如AlphaEvolve）在此问题上需要数千样本。</p>
+<p>展现了广泛的适用性，并超越了单纯的优化，在四个完全不同且充满挑战的领域中进行了开放式探索：</p>
+<p>数学优化： 圆堆积问题。</p>
+<p>智能体设计： 为AIME数学推理任务进化出复杂的智能体框架，并发现了性能与效率之间的帕累托前沿。</p>
+<p>算法竞赛编程： 成功改进了ALE-Bench组合优化问题中已有的高性能解决方案。</p>
+<p>核心LLM研究（高信息熵要点）： 为训练混合专家（MoE）模型发现了一种新颖有效的负载均衡损失（LBL）函数——这是AI研究前沿领域中一个开放的架构设计难题。</p>
+<p>其发现的MoE损失函数并非随机调整，而是一个可解释的改进：它在标准LBL的基础上增加了一个新的正则化项，该项通过使用路由熵作为缩放因子，专门针对那些未充分特化的专家进行惩罚。</p>
+<p>包含“元草稿本”（Meta-Scratchpad）功能，即由一个代理定期从成功运行中提炼洞见，并将其附加到未来的提示中，实现了一种在线元学习。</p>
+<p>整个框架以开源形式发布，旨在推动先进、高效的进化式发现工具的普及化。</p>
+<p>主旨： 本文旨在解决当前大语言模型（LLM）驱动的进化算法普遍存在的样本效率低下和实现不开源的核心痛点。为此，论文提出了一个名为 ShinkaEvolve 的高效、开源的程序进化框架，通过一系列创新的采样和自适应策略，以极低的样本成本在多个科学和工程领域中实现自动化发现和优化。</p>
+<p>创新：</p>
+<p>系统性的效率提升策略： 创新地将三种元学习思想（如何选择父代、如何过滤变异、如何选择变异算子）融合成一个协同系统。特别是加权父代采样、两阶段新颖性拒绝和基于老虎机的LLM动态选择，共同构成了其超高样本效率的核心。</p>
+<p>动态自适应的变异算子： 将LLM本身视为可选择和优化的“变异算ator”，并使用强化的多臂老虎机算法（奖励函数基于相对提升而非绝对值）来动态调整选择策略，这是一种非常新的、针对进化算法本身的在线优化。</p>
+<p>自动化科学发现的应用范式： 将进化框架的应用从传统的优化问题，拓展到了前沿的、开放的科学发现任务，如自主设计数学推理智能体和发现新的MoE模型训练损失函数。这标志着其定位从一个“优化器”提升到了一个“发现引擎”。</p>
+<p>在线元学习机制： 通过“元草稿本”实现了进化过程中的知识积累和高层指导，让系统能够“从经验中学习如何更好地学习”，加速了收敛。</p>
+<p>贡献：</p>
+<p>算法贡献： 提出了一个由加权父代采样、新颖性拒绝采样和自适应LLM集成构成的完整算法框架，为LLM驱动的进化计算领域提供了一套大幅提升样本效率的有效方法。</p>
+<p>实践贡献： 在四个极具挑战性的领域验证了框架的有效性和通用性，并取得了SOTA或显著优于基线的结果。特别是，仅用150个样本就解决了圆堆积问题，并发现了新的MoE负载均衡损失，这些都是极具影响力的实证成果。</p>
+<p>开源贡献： 发布了 ShinkaEvolve 的完整代码和可视化工具，打破了该领域顶尖工具的闭源壁垒，极大地降低了研究者和开发者进入自动化科学发现领域的门槛，促进了社区的共同发展。</p>
+<p>知识贡献： 通过自动化过程发现了一个新的、可解释且有效的MoE负载均衡损失函数，为核心的深度学习研究领域贡献了新的知识，展示了此类工具作为人类研究者“科研伙伴”的巨大潜力。</p>
+<p>提升：</p>
+<p>样本效率： 实现了数量级的提升。在圆堆积问题上，仅用150个样本就超越了需要数千样本的AlphaEvolve，效率提升了至少一个数量级。在MoE损失发现任务中，仅用30次迭代就找到了有价值的方案。</p>
+<p>方案质量： 在所有四个任务中，最终发现的解决方案都达到了SOTA或显著优于人类设计的基线。例如，在ALE-Bench上改进了已有强力解；在AIME任务上发现了性能-效率帕累托最优的智能体。</p>
+<p>通用性： 成功应用于数学优化、智能体设计、算法编程和深度学习模型设计，证明了框架的广泛适用性，无需针对特定领域进行大量修改。</p>
+<p>不足：</p>
+<p>超参数敏感性： 框架本身引入了一些新的超参数（如父代采样中的λ，新颖性阈值等），论文并未深入探讨这些参数在不同任务间的敏感性以及如何自适应调整。</p>
+<p>任务定义依赖人工： 整个进化过程仍然需要人类专家预先定义清晰的目标函数、评估环境和初始程序。距离完全自主的、端到端的“AI科学家”还有距离。</p>
+<p>适用范围限制： 目前框架主要适用于那些有明确、可计算的数值型优化目标的问题。对于需要复杂、定性评估或人类反馈的任务，其适用性尚待探索。</p>
+<p>心得：</p>
+<p>效率是AI进化的第一推动力： 本文最核心的启示是，在利用LLM进行昂贵的生成和评估时，样本效率不仅仅是一个优化指标，而是决定一个方法是否实用、能否扩展的生命线。ShinkaEvolve的三大创新都直指效率，这使其从一个有趣的学术概念变成了一个强大的实用工具。</p>
+<p>元学习是解锁开放式创新的钥匙： ShinkaEvolve的成功不在于某个单一的聪明提示，而在于其内置的“学习如何学习”的机制。它学习选择好的“父母”（父代采样），学习识别有价值的“孩子”（新颖性过滤），还学习使用更好的“生育工具”（LLM选择）。这种在进化过程中不断优化进化策略本身的元学习循环，是通往真正开放式创新的关键。</p>
+<p>AI不仅是优化器，更是科学发现的伙伴： 本文最令人振奋的一点，是其在MoE负载均衡损失上的发现。这有力地证明了，这类AI系统已经开始有能力在人类知识的前沿领域，自主探索并提出新颖、有效且可解释的解决方案。这预示着一种新的人机协作科研范式，AI不再仅仅是执行者，更是创意的来源和伙伴。</p>
+<p>一句话总结: 本文提出的 ShinkaEvolve 框架，通过将创新的父代加权采样、代码新颖性拒绝和自适应LLM集成策略相结合，极大地提升了LLM驱动的程序进化效率，不仅以惊人的百余次采样解决了复杂的优化问题，更反直觉地在LLM训练这一核心领域自主发现了一种全新的、性能更优的混合专家（MoE）负载均衡损失函数，标志着从单纯的优化工具向自动化科学发现引擎的迈进。</p>
+<p>We introduce ShinkaEvolve: a new open-source framework leveraging large language models (LLMs) to advance scientific discovery with state-of-the-art performance and unprecedented efficiency. Recent advances in scaling inference time compute of LLMs have enabled significant progress in generalized scientific discovery. These approaches rely on evolutionary agentic harnesses that leverage LLMs as mutation operators to generate candidate solutions. However, current code evolution methods suffer from critical limitations: they are sample inefficient, requiring thousands of samples to identify effective solutions, and remain closed-source, hindering broad adoption and extension. ShinkaEvolve addresses these limitations, introducing three key innovations: a parent sampling technique balancing exploration and exploitation, code novelty rejection-sampling for efficient search space exploration, and a bandit-based LLM ensemble selection strategy. We evaluate ShinkaEvolve across diverse tasks, demonstrating consistent improvements in sample efficiency and solution quality. ShinkaEvolve discovers a new state-of-the-art circle packing solution using only 150 samples, designs high-performing agentic harnesses for AIME mathematical reasoning tasks, identifies improvements to ALE-Bench competitive programming solutions, and discovers novel mixture-of-expert load balancing loss functions that illuminate the space of optimization strategies. Our results demonstrate that ShinkaEvolve achieves broad applicability with exceptional sample efficiency. By providing open-source accessibility and cost-efficiency, this work democratizes open-ended discovery across diverse computational problems.</p>
+<p>https://arxiv.org/abs/2509.19349</p>
+<p>5、[LG] Training Deep Learning Models with Norm-Constrained LMOs</p>
+<p>T Pethick, W Xie, K Antonakopoulos, Z Zhu...[EPFL]</p>
+<p>使用范数约束LMO训练深度学习模型</p>
+<p>要点:</p>
+<p>挑战了像Adam这类优化器中“即时”自适应的标准范式，提出通过预先选择与神经网络架构几何特性相匹配的范数来进行“先验”自适应。</p>
+<p>引入了一系列基于范数球上的线性最小化预言机（LMO）的算法。这类算法传统上用于有约束优化，但论文出人意料地将其成功应用于无约束问题。</p>
+<p>核心算法是“无约束随机条件梯度法”（uSCG），其更新规则为 xk+1 ← xk + γk - lmo(dk)。此规则对梯度的大小不敏感，这是与最速下降法的关键区别。</p>
+<p>这个基于LMO的框架提供了一个强大的统一视角，这是本文信息熵最高的一点：它揭示了多种现有优化器，如归一化SGD、SignSGD/Signum，乃至最近的Muon优化器，都可以被视为uSCG在不同范数选择（欧几里得范数、L-无穷范数和谱范数）下的特例。</p>
+<p>提出了一个针对深度学习架构的、有原则的算子范数选择方案，命名为SCION。它根据对信号传播的分析（限制激活值的RMS范数），为不同层选择不同的范数（例如，输入层用列范数，隐藏层用谱范数，输出层用符号范数）。</p>
+<p>一个关键且反直觉的成果是，这种“先验”的几何自适应带来了跨模型尺寸的零样本超参数迁移能力。SCION的最优学习率在模型宽度变化时保持稳定，这是Adam或Muon不具备的特性。论文从理论上通过证明“最大更新学习率”与宽度无关来支持这一点。</p>
+<p>所提出的Scion方法内存效率极高，仅需存储一组模型权重和一组梯度，且两者均可以半精度存储。相比于需要存储二阶矩估计的Adam，这是一个显著优势。</p>
+<p>实验证明了其强大的性能，尤其是在训练高达30亿参数的nanoGPT模型时，SCION和Unconstrained SCION在无需学习率预热的情况下，性能优于Adam和Muon。</p>
+<p>实验还表明，SCION对大批量（large batch）训练更具鲁棒性，相比基线能保持更好的泛化性能，从而带来显著的训练时间加速。</p>
+<p>明确了权重衰减（weight decay）与约束优化之间的联系：证明了对uSCG应用权重衰减等价于有约束的SCG算法，从而实现了对模型参数范数的显式控制。</p>
+<p>主旨： 本文旨在挑战深度学习中主流的“即时自适应”优化器（如Adam），提出一种“先验自适应”的优化范式。该范式通过为神经网络的参数空间预先选择一个合适的几何结构（即范数），并利用基于线性最小化预言机（LMO）的算法家族，来实现更高效、更具可迁移性的模型训练。</p>
+<p>创新：</p>
+<p>LMO用于无约束优化： 核心的理论创新是将传统上用于约束优化的LMO算法（条件梯度法）推广并应用于深度学习中的无约束优化问题，提出了uSCG算法，并证明了其收敛性。</p>
+<p>统一的优化器框架： 极具洞察力地揭示了多种看似无关的优化器（归一化SGD, SignSGD, Muon）都可以在uSCG框架下被统一，其本质区别仅仅在于LMO所作用的范数球不同。这为理解和设计优化器提供了全新的视角。</p>
+<p>架构感知的范数设计 (SCION)： 创新性地将算子范数理论与神经网络的层级结构相结合，为网络的不同部分（输入、隐藏、输出层）设计了不同的、有物理意义的范数约束，从而使优化过程与模型架构的几何特性相匹配。</p>
+<p>零样本超参数迁移： 通过理论分析和实验验证，证明了SCION优化器具有跨模型宽度的超参数（特别是学习率）可迁移性。这是对μP理论的一个重要补充和实践，解决了大模型调参困难的一大痛点。</p>
+<p>贡献：</p>
+<p>理论贡献： 提出了uSCG和SCG在非凸随机设定下的收敛性分析，并首次为Muon等算法提供了收敛率保证。理论上解释了LMO方法为何不需要知道Lipschitz常数。</p>
+<p>算法贡献： 设计了SCION，一个全新的、内存高效、无需Adam、且超参数可迁移的优化器，为大规模模型训练提供了一个有竞争力的替代方案。</p>
+<p>概念贡献： 成功地将“先验几何适应”这一思想转化为一套行之有效的算法框架，挑战了“即时适应”的主流思想，并展示了其在效率和超参数鲁棒性上的优势。</p>
+<p>实践贡献： 在大规模语言模型（nanoGPT）上取得了SOTA级别的性能和训练速度，并展示了其在大批量训练下的优越性，具有很高的实用价值。</p>
+<p>提升：</p>
+<p>超参数鲁棒性与可迁移性： 相比Adam和Muon，SCION的最优学习率在模型宽度变化时基本保持不变，实现了“一次调参，到处使用”，极大地降低了训练大模型的成本。</p>
+<p>训练速度与效率： 在nanoGPT任务上，SCION不仅最终验证损失更低，而且由于对大批量训练更友好，可以实现显著的壁钟时间加速（例如，25%-40%的加速）。同时，它还省去了学习率预热的步骤。</p>
+<p>内存效率： 相比需要存储一阶和二阶矩的Adam，SCION只需存储一份模型参数和一份梯度，大幅节省了内存开销，这对于训练巨型模型至关重要。</p>
+<p>不足：</p>
+<p>LMO计算开销： 尽管论文使用了高效的Newton-Schultz迭代来近似谱范数的LMO，但这部分计算仍然比Adam的逐元素操作要昂贵。论文没有详细量化LMO计算本身带来的额外开销与整体训练时间加速之间的权衡。</p>
+<p>理论与实践的差距： 理论分析是在一些简化假设下进行的（如αk=1时的超参数迁移分析），而实际应用中的动量、学习率衰减等因素可能会使情况更复杂。</p>
+<p>普适性有待检验： 尽管在MLP, CNN, ViT, GPT等多种模型上都取得了成功，但其在更广泛的模型架构（如扩散模型、GNNs）和任务（如多模态、强化学习）上的表现仍有待进一步验证。</p>
+<p>心得：</p>
+<p>回归几何本质，重塑优化器设计： 这篇论文给我最大的启发是，与其在梯度统计量上做文章（如一阶矩、二阶矩），不如回归到优化问题本身的几何结构上。通过为问题“量身定制”一个合适的距离度量（范数），可以从根本上简化优化路径。这是一种更高维度的思考方式，是从“术”的层面（如何用梯度）上升到“道”的层面（空间应该是什么样的）。</p>
+<p>统一性是深刻理解的标志： 当一个新框架能够将多个看似独立的旧方法囊括为自己的特例时，这通常意味着它触及了更底层的原理。uSCG框架对SignSGD、Muon等的统一，就像牛顿力学统一了开普勒定律和伽利略的自由落体，这不仅展示了框架的强大，也加深了我们对这些已有方法的理解。</p>
+<p>“先验知识”在深度学习中依然强大： 在一个崇尚“端到端”、“让数据说话”的时代，这篇论文提醒我们，“先验知识”——这里体现为对模型架构几何特性的理解——依然是获得超凡效率和鲁棒性的利器。它表明，将领域知识（模型结构）与通用优化理论（LMO）巧妙结合，可以战胜那些“一无所知”的黑盒优化方法。</p>
+<p>一句话总结: 本文颠覆性地将用于约束优化的LMO算法框架应用于无约束的深度学习训练，不仅从理论上统一了SignSGD、Muon等多种优化器，更通过为神经网络架构“量体裁衣”般地设计算子范数（SCION），实现了一个内存高效、性能卓越且（反直觉地）具有跨模型尺寸超参数迁移能力的全新优化器。</p>
+<p>In this work, we study optimization methods that leverage the linear minimization oracle (lmo) over a norm-ball. We propose a new stochastic family of algorithms that uses the lmo to adapt to the geometry of the problem and, perhaps surprisingly, show that they can be applied to unconstrained problems. The resulting update rule unifies several existing optimization methods under a single framework. Furthermore, we propose an explicit choice of norm for deep architectures, which, as a side benefit, leads to the transferability of hyperparameters across model sizes. Experimentally, we demonstrate significant speedups on nanoGPT training using our algorithm, Scion, without any reliance on Adam. The proposed method is memory-efficient, requiring only one set of model weights and one set of gradients, which can be stored in halfprecision.</p>
+<p>https://arxiv.org/abs/2502.07529</p>
+    </div>
+    
+    <div class="footer" style="margin-top:3em;padding-top:1em;border-top:1px solid #eee;color:#aaa;font-size:0.85em;">
+      <p><strong>原文链接：</strong><a href="https://mp.weixin.qq.com/s/FnLPJcEWBIs50aH1LxzmRg">https://mp.weixin.qq.com/s/FnLPJcEWBIs50aH1LxzmRg</a></p>
+      <p style="margin-top:0.8em;">Powered by <a href="https://readgzh.site" style="color:#aaa;text-decoration:none;">ReadGZH</a> · <a href="https://readgzh.site/docs" style="color:#aaa;text-decoration:none;">开发者文档</a> · <a href="https://readgzh.site/pricing" style="color:#aaa;text-decoration:none;">升级套餐</a></p>
+      <p style="margin-top:0.4em;font-size:0.8em;">💡 免费注册获取每天 30 积分 · Lite ¥9/月 · Pro ¥39/月 → <a href="https://readgzh.site/dashboard" style="color:#aaa;">readgzh.site/dashboard</a></p>
+    </div>
+  </article>
+</body>
+</html>

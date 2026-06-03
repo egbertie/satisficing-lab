@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/notion-enhanced/setup-wizard.sh",
+  "filename": "setup-wizard.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "e9aeb68387b3bd48",
+  "content_length": 8029,
+  "ingested_at": "2026-03-31T17:27:45.284667",
+  "content_preview": "#!/bin/bash\n#\n# Setup Wizard for OpenClaw Notion Skill\n# Guides you through creating your first database\n\nset -e\n\necho \"🎯 OpenClaw Notion Skill - Setup Wizard\"\necho \"==========================================\"\necho \"\"\n\n# Check for NOTION_TOKEN\nif [ -z \"$NOTION_TOKEN\" ]; then\n    if [ -f \"$HOME/.openclaw/.env\" ]; then\n        export $(cat \"$HOME/.openclaw/.env\" | grep -v '#' | xargs)\n    fi\nfi\n\nif [ -z \"$NOTION_TOKEN\" ]; then\n    echo \"❌ NOTION_TOKEN not found!\"\n    echo \"\"\n    echo \"Setup steps:",
+  "limitations_applied": []
+}

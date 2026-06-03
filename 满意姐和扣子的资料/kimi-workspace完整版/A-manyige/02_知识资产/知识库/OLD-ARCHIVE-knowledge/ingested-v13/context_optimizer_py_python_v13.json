@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/context-optimizer/context_optimizer.py",
+  "filename": "context_optimizer.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "d3e3f9504a6896c4",
+  "content_length": 3583,
+  "ingested_at": "2026-03-31T17:27:45.326489",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nContext Optimizer - 上下文优化器\n智能对话压缩与记忆分层管理\n\"\"\"\n\nimport json\nimport os\nimport sys\nfrom pathlib import Path\nfrom datetime import datetime\nfrom typing import Dict, List, Optional, Any\n\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nOPTIMIZER_DB = WORKSPACE / \"memory\" / \"context-optimizer-db.json\"\n\nclass ContextOptimizer:\n    \"\"\"上下文优化器\"\"\"\n    \n    def __init__(self, token_limit: int = 8000):\n        self.token_limit = token_limit\n        self.db_path = OPTIMIZER_DB\n        se",
+  "limitations_applied": []
+}

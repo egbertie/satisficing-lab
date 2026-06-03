@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/worry-list-manager/scripts/worry_runner.py",
+  "filename": "worry_runner.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "565abf460ff9cd8d",
+  "content_length": 40900,
+  "ingested_at": "2026-03-31T17:27:45.361078",
+  "content_preview": "# 担忧清单管理器 - 主运行脚本\n# worry_runner.py\n\nimport os\nimport sys\nimport json\nimport yaml\nimport argparse\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import List, Dict, Optional\n\n# 配置路径\nSKILL_DIR = Path(\"/root/.openclaw/workspace/skills/worry-list-manager\")\nCONFIG_DIR = SKILL_DIR / \"config\"\nDATA_DIR = SKILL_DIR / \"data\"\nLOG_DIR = SKILL_DIR / \"logs\"\n\n# 确保目录存在\nfor d in [DATA_DIR, LOG_DIR]:\n    d.mkdir(parents=True, exist_ok=True)\n\nWORRIES_FILE = DATA_DIR / \"worries.json\"\n",
+  "limitations_applied": []
+}

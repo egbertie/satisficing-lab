@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_smart-web-fetch/smart-url.py",
+  "filename": "smart-url.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "7b26d51455ea27c9",
+  "content_length": 1697,
+  "ingested_at": "2026-03-31T17:27:45.121398",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nSmart Web Fetch - URL 预处理器\n自动将 URL 转换为清洗服务地址，支持多级降级\n\"\"\"\n\nimport sys\nimport urllib.parse\nimport urllib.request\nimport ssl\n\n# 忽略 SSL 验证（某些服务需要）\nssl_context = ssl.create_default_context()\nssl_context.check_hostname = False\nssl_context.verify_mode = ssl.CERT_NONE\n\n\ndef transform_url(original_url: str) -> str:\n    \"\"\"\n    将原始 URL 转换为智能清洗 URL\n    策略: Jina → markdown.new → defuddle.md\n    \"\"\"\n    encoded_url = urllib.parse.quote(original_url, safe='')\n    \n    # 1. 首选: Jina R",
+  "limitations_applied": []
+}

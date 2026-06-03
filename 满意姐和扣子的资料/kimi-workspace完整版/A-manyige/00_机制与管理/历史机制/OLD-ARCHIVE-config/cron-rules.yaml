@@ -1,0 +1,68 @@
+# 全局Cron规则配置
+# 由Cron优化管理器维护
+
+# 三层响应架构定义
+tier_definitions:
+  tier_1:
+    name: "自动执行"
+    description: "低风险任务，系统自动执行"
+    features:
+      - "无需用户确认"
+      - "失败后自动通知"
+      - "适合维护类任务"
+    auto_execute: true
+    confirmation_window: null
+    risk_levels: [low]
+    
+  tier_2:
+    name: "确认窗口"
+    description: "中风险任务，提供确认窗口"
+    features:
+      - "执行前提醒用户"
+      - "可设置默认行为"
+      - "无响应则按默认执行"
+    auto_execute: false
+    confirmation_window: 15  # 默认15分钟
+    risk_levels: [medium]
+    
+  tier_3:
+    name: "强制阻断"
+    description: "高风险任务，必须手动确认"
+    features:
+      - "必须用户确认"
+      - "绝不自动执行"
+      - "适合敏感操作"
+    auto_execute: false
+    confirmation_window: null
+    confirmation_required: true
+    risk_levels: [high]
+
+# 已废弃Cron清单（已禁用）
+deprecated_crons:
+  - id: zero_vacancy_check
+    name: "零空置检查"
+    reason: "高频空转，改为零空置V3.0"
+    disabled_at: "2026-03-15"
+    
+  - id: resource_scheduler
+    name: "资源调度"
+    reason: "改为事件驱动"
+    disabled_at: "2026-03-15"
+    
+  - id: review_checker
+    name: "复盘检查"
+    reason: "合并到报告生成任务"
+    disabled_at: "2026-03-15"
+    
+  - id: executor_checker
+    name: "执行器检查"
+    reason: "已集成到心跳协议"
+    disabled_at: "2026-03-15"
+
+# 优化策略
+optimization_strategy:
+  max_cron_count: 15
+  max_high_frequency: 0  # 不允许高频Cron
+  preferred_schedule_offset: [17, 37, 47]  # 推荐错峰分钟
+  daily_token_budget: 18000
+  max_empty_rate: 0.2

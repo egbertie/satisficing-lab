@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/disaster-recovery/02-自动化备份脚本/backup-local.sh",
+  "filename": "backup-local.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "d72f2b81d1dc4fe8",
+  "content_length": 9826,
+  "ingested_at": "2026-03-31T17:27:44.642933",
+  "content_preview": "#!/bin/bash\n################################################################################\n# 本地环境备份脚本\n# 功能: 备份本地开发环境、配置文件和代码仓库\n################################################################################\n\nset -euo pipefail\n\nSCRIPT_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nsource \"${SCRIPT_DIR}/common.sh\"\n\n# 配置\nBACKUP_BASE_DIR=\"${BACKUP_BASE_DIR:-${HOME}/Backups/Local}\"\nHOME_DIR=\"${HOME}\"\n\n# 需要备份的目录 (根据实际环境修改)\ndeclare -a BACKUP_DIRS=(\n    \"${HOME}/workspace\"\n    \"${HOME}/projects\"",
+  "limitations_applied": []
+}

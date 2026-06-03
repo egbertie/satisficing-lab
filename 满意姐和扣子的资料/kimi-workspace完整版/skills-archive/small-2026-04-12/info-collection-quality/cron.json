@@ -1,0 +1,16 @@
+{
+  "jobs": [
+    {
+      "name": "info-collection-quality-daily-check",
+      "schedule": "29 12 * * *",
+      "command": "cd /root/.openclaw/workspace/skills/info-collection-quality && python3 scripts/info-collection-quality-runner.py status",
+      "description": "每日质量系统状态检查"
+    },
+    {
+      "name": "info-collection-quality-adversarial-test",
+      "schedule": "0 2 * * 0",
+      "command": "cd /root/.openclaw/workspace/skills/info-collection-quality && python3 scripts/info-collection-quality-runner.py adversarial-test",
+      "description": "每周对抗测试"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/quality-gate/gate.py",
+  "filename": "gate.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "a7be4f3daa4a6624",
+  "content_length": 12631,
+  "ingested_at": "2026-03-31T17:27:44.808657",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n质量门控机制 - 输出前的多重质量检查\n自检 → 蓝军检查 → 交付确认\n\"\"\"\n\nimport json\nfrom enum import Enum\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Optional\n\nclass QualityLevel(Enum):\n    DRAFT = \"draft\"        # 草稿，内部使用\n    REVIEW = \"review\"      # 待审核，需检查\n    APPROVED = \"approved\"  # 已审核，可交付\n    PUBLISHED = \"published\" # 已发布，对外可见\n\nclass QualityGate:\n    \"\"\"质量门控中心\"\"\"\n    \n    def __init__(self, config_path=None):\n        self.checkpoints = {\n            ",
+  "limitations_applied": []
+}

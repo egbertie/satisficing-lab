@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_pdf-document-parser/scripts/parse_batch.sh",
+  "filename": "parse_batch.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "b81bcbdcd38c11f8",
+  "content_length": 1239,
+  "ingested_at": "2026-03-31T17:27:45.204754",
+  "content_preview": "#!/bin/bash\n# PDF批量解析脚本\n# 用法: ./parse_batch.sh <urls_file> [output_dir]\n\nset -e\n\nURLS_FILE=\"$1\"\nOUTPUT_DIR=\"${2:-./batch_output}\"\nMAX_PARALLEL=3\n\nif [ -z \"$URLS_FILE\" ] || [ ! -f \"$URLS_FILE\" ]; then\n    echo \"❌ 错误: 请提供有效的URL列表文件\"\n    echo \"用法: $0 <urls_file> [output_dir]\"\n    exit 1\nfi\n\nmkdir -p \"$OUTPUT_DIR\"\nQUEUE_FILE=\"$OUTPUT_DIR/.queue\"\nFAILED_FILE=\"$OUTPUT_DIR/.failed\"\n\n# 初始化队列\ngrep -v '^#' \"$URLS_FILE\" | grep -v '^$' > \"$QUEUE_FILE\"\nTOTAL=$(wc -l < \"$QUEUE_FILE\")\necho \"📋 批量解析启动: 共 $TOTAL ",
+  "limitations_applied": []
+}

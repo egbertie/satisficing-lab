@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/SILENCE_VS_HIBERNATION.md",
+  "filename": "SILENCE_VS_HIBERNATION.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "1c9dc09271a4956c",
+  "content_length": 2413,
+  "ingested_at": "2026-03-31T17:27:46.508052",
+  "content_preview": "# 完全静默 vs 休眠 概念区分指南\n\n> **文档目的**: 明确区分\"完全静默\"和\"休眠\"两个概念，避免执行混淆  \n> **创建时间**: 2026-03-22  \n> **适用对象**: 主控AI、Cron子代理、用户\n\n---\n\n## 核心区别\n\n| 维度 | 完全静默 (Complete Silence) | 休眠 (Hibernation) |\n|------|----------------------------|-------------------|\n| **本质** | 紧急止损状态 | 正常休息状态 |\n| **Token目标** | **严格为0** | 极低消耗 (<100/天) |\n| **备份任务** | ❌ **禁用** | ✅ **保留** |\n| **Cron任务** | 全部禁用 | 禁用大部分，保留核心 |\n| **触发条件** | 用户指令 / Token<10% | 10分钟无交互 / 夜间 |\n| **数据风险** | 有（无自动备份） | 无 |\n| **适用场景** | Token危机、紧急止损 | 正常夜间休息 |\n\n---\n\n",
+  "limitations_applied": []
+}

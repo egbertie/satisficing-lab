@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blue-auditor/tightening_spell_data/sync_to_persistent.sh",
+  "filename": "sync_to_persistent.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "e69d36fd75ef5823",
+  "content_length": 442,
+  "ingested_at": "2026-03-31T17:27:45.377183",
+  "content_preview": "#!/bin/bash\nPERSIST_DIR=\"/root/.openclaw/workspace/skills/blue-auditor/tightening_spell_data\"\n[ -f /tmp/blue_army_delay_points ] && cp /tmp/blue_army_delay_points \"$PERSIST_DIR/blue_army/\"\n[ -f /tmp/satisfied_girl_credit ] && cp /tmp/satisfied_girl_credit \"$PERSIST_DIR/satisfied_girl/\"\n[ -f /tmp/satisfied_girl_daily_quota ] && cp /tmp/satisfied_girl_daily_quota \"$PERSIST_DIR/satisfied_girl/\"\ndate +%Y%m%d > \"$PERSIST_DIR/last_update_date\"\n",
+  "limitations_applied": []
+}

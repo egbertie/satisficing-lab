@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/file-integrity/scripts/integrity_checker.py",
+  "filename": "integrity_checker.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "a37c2113cfb27ba5",
+  "content_length": 12521,
+  "ingested_at": "2026-03-31T17:27:45.399285",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n文件完整性检查脚本\n\n支持检查项：\n1. 文件存在性\n2. 文件大小（>0字节）\n3. 内容可读性（无编码错误）\n4. 关键章节完整性（正则匹配标题）\n\n用法：\n    python integrity_checker.py --path /path/to/file --config config/check_rules.json\n\"\"\"\n\nimport argparse\nimport json\nimport os\nimport re\nimport sys\nfrom dataclasses import dataclass, field, asdict\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Any, Dict, List, Optional\n\n\n@dataclass\nclass CheckResult:\n    \"\"\"单个检查项的结果\"\"\"\n    name: str\n    passed: bool\n    message",
+  "limitations_applied": []
+}

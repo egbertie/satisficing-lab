@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_zipcracker/ZipCracker.py",
+  "filename": "ZipCracker.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "b7391706c8bc1b96",
+  "content_length": 20968,
+  "ingested_at": "2026-03-31T17:27:45.180815",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\nimport os\nimport shutil\nimport sys\nimport threading\nfrom concurrent.futures import ThreadPoolExecutor, as_completed\nimport time\nimport zipfile\nimport binascii\nimport string\nimport itertools as its\nimport multiprocessing\nimport subprocess\nfrom typing import Optional\n\n# 初始尝试导入 pyzipper\ntry:\n    import pyzipper\n    HAS_PYZIPPER = True\nexcept ImportError:\n    pyzipper = None\n    HAS_PYZIPPER = False\n\nCHARSET_DIGITS = string.digits\nCHARSET_LOWER = strin",
+  "limitations_applied": []
+}

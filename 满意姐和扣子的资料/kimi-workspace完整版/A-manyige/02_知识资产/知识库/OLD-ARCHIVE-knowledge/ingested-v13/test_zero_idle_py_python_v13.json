@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/testing-framework/tests/unit/zero-idle-enforcer/test_zero_idle.py",
+  "filename": "test_zero_idle.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "74b92dfd6c88ba2f",
+  "content_length": 14491,
+  "ingested_at": "2026-03-31T17:27:45.443960",
+  "content_preview": "\"\"\"\nZero-Idle-Enforcer 单元测试 - 简化版\n\n风险等级: P0 (已发现3次bug)\n测试重点: 时间计算、状态管理、触发条件\n\"\"\"\n\nimport json\nimport time\nimport sys\nfrom pathlib import Path\nfrom unittest.mock import patch, MagicMock\n\nimport pytest\n\n# 添加Skill路径\nSKILL_PATH = Path(__file__).parent.parent.parent.parent.parent / \"zero-idle-enforcer\"\nsys.path.insert(0, str(SKILL_PATH))\n\n# 导入被测模块\nimport enforcer\n\n\n@pytest.mark.zero_idle\n@pytest.mark.critical\nclass TestZeroIdleEnforcerBasic:\n    \"\"\"Zero-Idle-Enforcer基础测试类\"\"\"\n    \n    def test_module_i",
+  "limitations_applied": []
+}

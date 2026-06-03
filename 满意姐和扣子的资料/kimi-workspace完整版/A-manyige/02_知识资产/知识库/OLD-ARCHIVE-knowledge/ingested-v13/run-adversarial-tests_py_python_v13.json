@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/adversarial-test/run-adversarial-tests.py",
+  "filename": "run-adversarial-tests.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "549feb8ffb5af3e6",
+  "content_length": 3273,
+  "ingested_at": "2026-03-31T17:27:45.416733",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nS7对抗测试执行脚本\n功能: 执行各类对抗测试，验证系统鲁棒性\n触发: 每周一次 + 重大变更后\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime\n\nTEST_CASES = {\n    \"命名空间违规\": {\n        \"description\": \"故意使用错误命名格式，测试检测能力\",\n        \"test_file\": \"test-wrong-namespace.md\",\n        \"content\": \"# 错误命名文档\\n\\n这是一个测试文档。\",\n        \"expected\": \"检测失败\"\n    },\n    \"过度乐观输入\": {\n        \"description\": \"输入过度乐观的预测，测试情景规划器\",\n        \"input\": \"这个项目100%成功，没有任何风险\",\n        \"expected\": \"强制生成Bear情景\"\n    },\n    \"Token耗尽测试\": {\n        ",
+  "limitations_applied": []
+}

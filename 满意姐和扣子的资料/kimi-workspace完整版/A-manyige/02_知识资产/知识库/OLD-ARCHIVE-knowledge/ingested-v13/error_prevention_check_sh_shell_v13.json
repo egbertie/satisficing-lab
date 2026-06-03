@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/error_prevention_check.sh",
+  "filename": "error_prevention_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "f72d67cd24872bc0",
+  "content_length": 439,
+  "ingested_at": "2026-03-31T17:27:46.171081",
+  "content_preview": "#!/bin/bash\n# 错误预防检查脚本 - 物理化执行\nERRORS=0\necho \"=== 错误预防检查 ===\"\necho \"时间: $(date)\"\n\n# 检查1: 单向沟通\nif [ ! -f \"/tmp/confirmation_received\" ]; then\n    echo \"❌ 未确认双向确认\"\n    ERRORS=$((ERRORS + 1))\nelse\n    echo \"✅ 双向确认已确认\"\nfi\n\n# 检查2: 原则坚持  \nif [ ! -f \"/root/.openclaw/workspace/diary/category6_completed\" ]; then\n    echo \"⚠️  第6类未完成（进行中）\"\nfi\n\nif [ $ERRORS -gt 0 ]; then\n    echo \"❌ 发现 $ERRORS 个错误\"\n    exit 1\nelse\n    echo \"✅ 检查通过\"\n    exit 0\nfi\n",
+  "limitations_applied": []
+}

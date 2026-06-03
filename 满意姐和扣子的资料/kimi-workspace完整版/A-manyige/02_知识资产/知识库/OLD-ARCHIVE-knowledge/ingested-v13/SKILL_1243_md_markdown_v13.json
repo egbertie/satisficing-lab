@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/knowledge-ingest/ingested/SKILL.1243.md",
+  "filename": "SKILL.1243.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "4f09fe73d6da263c",
+  "content_length": 1260,
+  "ingested_at": "2026-03-31T17:27:45.677485",
+  "content_preview": "# sync-manager Skill V5标准版本\n\n> **状态: FIN (已完成) (代码存在，S5/S7待验证)  \n> **诚实声明**: 有代码实现，但自我验证和对抗测试未完成\n\n---\n\n## 待完成\n\n- [ ] S5: 自我验证测试\n- [ ] S7: 对抗测试\n- [ ] 验证后方可标记FIN\n\n## S1: 全局考虑\n\n### 输入\n- 同步源和目标配置\n- 同步模式（全量/增量）\n- 冲突解决策略\n\n### 覆盖维度\n| 维度 | 考虑内容 |\n|------|----------|\n| **人** | 数据管理员、开发者 |\n| **事** | 数据同步、冲突处理、一致性维护 |\n| **物** | 数据源、目标端、同步日志 |\n| **环境** | 网络环境、时区差异 |\n| **外部集成** | Notion、飞书、本地文件等 |\n| **边界情况** | 网络中断、数据冲突、权限不足 |\n\n---\n\n## S2: 系统考虑\n\n### 处理流程\n```\n扫描变更 → 对比差异 → 冲突检测 → 策略处理 → 执行同步 → 记录日志\n```\n\n### 故",
+  "limitations_applied": []
+}

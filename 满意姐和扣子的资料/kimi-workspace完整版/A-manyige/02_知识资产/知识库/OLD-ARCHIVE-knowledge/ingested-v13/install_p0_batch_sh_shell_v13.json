@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/install_p0_batch.sh",
+  "filename": "install_p0_batch.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "9d43c22ba028b934",
+  "content_length": 3161,
+  "ingested_at": "2026-03-31T17:27:46.200494",
+  "content_preview": "#!/bin/bash\n# P0批次Skill批量安装脚本\n# 执行时间: 2026-03-14 23:00\n# 安装数量: 9个Skill\n\nset -e  # 遇错即停\n\nLOG_FILE=\"/root/.openclaw/workspace/logs/p0_install_$(date +%Y%m%d_%H%M%S).log\"\nmkdir -p \"$(dirname \"$LOG_FILE\")\"\n\necho \"===============================================\" | tee -a \"$LOG_FILE\"\necho \"    P0批次 Skill 批量安装\"\necho \"===============================================\" | tee -a \"$LOG_FILE\"\necho \"开始时间: $(date '+%Y-%m-%d %H:%M:%S')\" | tee -a \"$LOG_FILE\"\necho \"日志文件: $LOG_FILE\" | tee -a \"$LOG_FILE\"\necho \"\" | t",
+  "limitations_applied": []
+}

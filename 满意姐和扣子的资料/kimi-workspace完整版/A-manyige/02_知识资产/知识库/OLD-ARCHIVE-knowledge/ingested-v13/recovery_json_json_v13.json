@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/cron-automation/config/recovery.json",
+  "filename": "recovery.json",
+  "file_type": "json",
+  "extension": ".json",
+  "file_hash": "a478fa42818e7177",
+  "content_length": 1758,
+  "ingested_at": "2026-03-31T17:27:45.381286",
+  "content_preview": "{\n  \"version\": \"1.0.0\",\n  \"strategies\": {\n    \"default\": {\n      \"max_retries\": 3,\n      \"retry_intervals\": [60, 300, 600],\n      \"backoff\": \"exponential\",\n      \"on_final_failure\": \"suspend_and_alert\",\n      \"description\": \"默认策略：失败后60s、300s、600s重试，最终失败暂停任务\"\n    },\n    \"aggressive\": {\n      \"max_retries\": 5,\n      \"retry_intervals\": [30, 60, 120, 300, 600],\n      \"backoff\": \"exponential\",\n      \"on_final_failure\": \"suspend_and_alert\",\n      \"description\": \"激进策略：失败后30s、60s、120s、300s、600s重试\"\n    }",
+  "limitations_applied": []
+}

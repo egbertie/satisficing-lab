@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blue-auditor/SATISFIED_GIRL_GUARANTEE.md",
+  "filename": "SATISFIED_GIRL_GUARANTEE.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "d8478c7bdfd744e4",
+  "content_length": 5023,
+  "ingested_at": "2026-03-31T17:27:45.371842",
+  "content_preview": "# 绝对保障机制 - 满意妞执行约束\n\n**机制目的**: 技术手段强制确保\"蓝军审计通过才能做下一个\"\n**生效时间**: 立即\n**监督方式**: 用户可随时验证\n\n---\n\n## 机制1: 工作流锁 - 技术强制\n\n### 实现方式\n```bash\n# 工作流程状态文件\nWORKFLOW_LOCK=\"/tmp/workflow_lock.json\"\n\n# 每次开始新任务前，必须检查锁状态\nfunction check_workflow_lock() {\n    if [ -f \"$WORKFLOW_LOCK\" ]; then\n        STATUS=$(cat \"$WORKFLOW_LOCK\" | python3 -c \"import json,sys; print(json.load(sys.stdin)['status'])\")\n        if [ \"$STATUS\" != \"AUDIT_PASS\" ]; then\n            echo \"❌ 禁止启动新任务: 上一个任务未通过蓝军审计\"\n            echo \"当前状态: $STATUS\"",
+  "limitations_applied": []
+}

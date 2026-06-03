@@ -1,0 +1,33 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/deploy-cron-p0.sh",
+  "filename": "deploy-cron-p0.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 3034,
+  "checksum": "0f82cbb1b4345d2f",
+  "ingested_at": "2026-03-31T17:30:47.861590",
+  "line_count": 86,
+  "title": "deploy-cron-p0",
+  "description": "Cron P0任务部署脚本",
+  "sections": [],
+  "entities": [],
+  "key_points": [
+    "Cron P0任务部署脚本",
+    "5个高优先级任务：Token预警、晨报、逾期提醒、备份验证、日程提醒",
+    "1. Token实时预警 (每15分钟)",
+    "Token实时预警 - 低于20%触发通知",
+    "实际实现需要调用API获取当前Token",
+    "这里先创建占位脚本",
+    "2. 每日晨报生成 (08:55)",
+    "每日晨报生成",
+    "依赖: 飞书日历授权（待外部协调完成）",
+    "TODO: 整合kimi_search获取AI资讯 + 飞书日历获取日程",
+    "3. 任务逾期提醒 (09:30)",
+    "任务逾期提醒 - 检查P0/P1逾期任务",
+    "4. 备份验证测试 (每周三/六 02:00)",
+    "备份验证测试 - PHOENIX-BASELINE",
+    "5. 日程前准备提醒 (每30分钟)"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

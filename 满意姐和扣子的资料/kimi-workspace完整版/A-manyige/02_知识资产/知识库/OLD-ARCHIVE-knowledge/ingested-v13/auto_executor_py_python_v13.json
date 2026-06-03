@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_autonomous-execution-system/auto_executor.py",
+  "filename": "auto_executor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "d95dcc825f491d00",
+  "content_length": 4902,
+  "ingested_at": "2026-03-31T17:27:45.159396",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\n7×24小时自主推进体系执行器\nAuto Executor for 7x24 Autonomous Execution System\n\n功能：\n- 每日晨报生成\n- 任务状态协调\n- 安全检查执行\n- 周复盘生成\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport datetime\nfrom pathlib import Path\n\n# 配置路径\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nTASK_MASTER = WORKSPACE / \"docs\" / \"TASK_MASTER.md\"\nMEMORY_DIR = WORKSPACE / \"memory\"\nTODAY_FOCUS_DIR = WORKSPACE / \"A满意哥专属文件夹\" / \"01_🔥今日重点\"\nARCHIVE_DIR = WORKSPACE / \"A满意哥专属文件夹\" / \"05_📦历史归档\"\n\nclass AutoExecut",
+  "limitations_applied": []
+}

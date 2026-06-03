@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/super-knowledge-ingest/super_knowledge_ingest_v4.py",
+  "filename": "super_knowledge_ingest_v4.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "02bb7292c3aedc34",
+  "content_length": 18115,
+  "ingested_at": "2026-03-31T17:27:45.426944",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nsuper-knowledge-ingest V4.0 - 高能效优化版\n核心优化：懒加载 + 单次扫描 + 智能缓存 + 流式处理\n目标：保证7层标准，时间复杂度O(n)，空间复杂度O(1)（相对于文件大小）\n\"\"\"\n\nimport json\nimport gzip\nimport base64\nimport hashlib\nimport re\nimport time\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Optional, Tuple, Iterator\nfrom dataclasses import dataclass, field\nfrom functools import lru_cache\nimport io\n\n# 预编译正则表达式（避免重复编译）\nRE_SECTION = re.compile(r'^(#{1,6})\\s+(.+)$', re.MULTILINE)\nRE_QUOTE = r",
+  "limitations_applied": []
+}

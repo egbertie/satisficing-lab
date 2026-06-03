@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/config/zero-token-monitoring-design.md",
+  "filename": "zero-token-monitoring-design.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "75054cc6236f8158",
+  "content_length": 5887,
+  "ingested_at": "2026-03-31T17:27:44.521492",
+  "content_preview": "# 零Token消耗监控体系设计方案\n\n**设计原则**: 监控 ≠ AI交互，Token消耗仅发生在AI对话环节\n\n---\n\n## 一、GC监控与Token消耗\n\n### 答案：不增加Token消耗\n\n| 监控类型 | 是否消耗Token | 原因 |\n|----------|---------------|------|\n| GC频率/时长监控 | ❌ 否 | 系统级指标，纯代码采集 |\n| 内存使用率监控 | ❌ 否 | 系统调用，无AI交互 |\n| Token使用量监控 | ❌ 否 | 本地计数，周期性写入文件 |\n| **向AI报告异常** | ✅ 是 | 仅在触发阈值时产生AI对话 |\n\n**关键区分**:\n- **采集监控数据** → 零Token（纯技术操作）\n- **AI分析/报告** → 消耗Token（仅在必要时触发）\n\n---\n\n## 二、内存监控 vs 持久化\n\n### 现状问题\n\n| 存储位置 | 重启后 | 适用场景 | 我们现在的状况 |\n|----------|--------|----------|----------------|\n| 纯内存变量 ",
+  "limitations_applied": []
+}

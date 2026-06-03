@@ -1,0 +1,103 @@
+# Decision Blockchain - 关键决策区块链存证
+# 使用Git commit hash作为决策哈希，确保可追溯
+
+decision_chain:
+  name: "Satisficing Institute Decision Chain"
+  version: "1.0"
+  created: "2026-03-27"
+  
+  # 存证规则
+  rules:
+    auto_record:
+      - "P0级别决策"
+      - "架构变更"
+      - "重大配置修改"
+      - "安全相关操作"
+      - "成本超支>20%"
+    
+    manual_record:
+      - "战略方向选择"
+      - "方法论更新"
+      - "团队结构调整"
+      - "外部合作决策"
+  
+  # 决策记录格式
+  record_format:
+    decision_id: "DEC-{YYYY}-{NNNN}"
+    timestamp: "ISO8601"
+    git_commit: "sha256"
+    decision_type: "strategic|tactical|operational"
+    
+    # 决策内容
+    content:
+      context: "决策背景"
+      options: "可选方案"
+      selected: "选定方案"
+      rationale: "决策理由"
+      expected_outcome: "预期结果"
+    
+    # 参与方
+    stakeholders:
+      - role: "决策者"
+      - role: "建议者"
+      - role: "执行者"
+      - role: "监督者"
+    
+    # 风险评估
+    risk_assessment:
+      level: "high|medium|low"
+      mitigation: "风险缓解措施"
+      rollback_plan: "回滚方案"
+    
+    # 执行追踪
+    execution:
+      status: "pending|in_progress|completed|cancelled"
+      milestones: []
+      actual_outcome: ""
+      deviation_analysis: ""
+  
+  # 历史决策记录（示例）
+  decision_history:
+    - id: "DEC-2026-0001"
+      date: "2026-03-20"
+      commit: "a1b2c3d4"
+      title: "5标准化全面整改"
+      type: "operational"
+      decision: "对76个Skill进行5标准化整改"
+      outcome: "完成29个，后续继续"
+      status: "completed"
+      
+    - id: "DEC-2026-0002"
+      date: "2026-03-26"
+      commit: "e5f6g7h8"
+      title: "Token优化P0执行"
+      type: "operational"
+      decision: "执行蓝军Token优化5项建议"
+      outcome: "节省71% Token消耗"
+      status: "completed"
+      
+    - id: "DEC-2026-0003"
+      date: "2026-03-26"
+      commit: "i9j0k1l2"
+      title: "5标准化100%覆盖"
+      type: "operational"
+      decision: "修复剩余43个Skill，达成100%覆盖"
+      outcome: "72/72 Skill完成5标准化"
+      status: "completed"
+      
+    - id: "DEC-2026-0004"
+      date: "2026-03-27"
+      commit: "PENDING"
+      title: "P0-P1-P2全面建设"
+      type: "strategic"
+      decision: "部署影子克隆、蓝军实时监督、知识图谱、Sprint机制等"
+      outcome: "执行中"
+      status: "in_progress"
+  
+  # 查询接口
+  query_methods:
+    by_date: "按日期范围查询"
+    by_type: "按决策类型查询"
+    by_status: "按执行状态查询"
+    by_stakeholder: "按参与方查询"
+    full_chain: "追溯决策链条"

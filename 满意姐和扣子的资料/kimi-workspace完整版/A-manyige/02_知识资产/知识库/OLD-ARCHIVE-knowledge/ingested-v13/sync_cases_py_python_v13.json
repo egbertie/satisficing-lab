@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/sync_cases.py",
+  "filename": "sync_cases.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "90594ce03ce4597d",
+  "content_length": 3545,
+  "ingested_at": "2026-03-31T17:27:46.144281",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n案例库同步脚本\n从core/案例库.yaml生成Working层案例文档\n\"\"\"\n\nimport yaml\nimport os\nfrom datetime import datetime\n\ndef sync_cases():\n    # 读取Core定义\n    with open('core/案例库.yaml', 'r', encoding='utf-8') as f:\n        data = yaml.safe_load(f)\n    \n    cases = data.get('cases', [])\n    metadata = data.get('metadata', {})\n    \n    # 确保输出目录存在\n    os.makedirs('working/cases', exist_ok=True)\n    \n    # 统计各类案例数量\n    success_count = sum(1 for c in cases if c.get('category') == 'success')\n    failu",
+  "limitations_applied": []
+}

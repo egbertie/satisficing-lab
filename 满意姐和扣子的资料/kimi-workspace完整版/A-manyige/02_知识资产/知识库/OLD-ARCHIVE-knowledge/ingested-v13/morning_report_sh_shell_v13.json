@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/morning_report.sh",
+  "filename": "morning_report.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "b3984457e3042673",
+  "content_length": 355,
+  "ingested_at": "2026-03-31T17:27:46.206444",
+  "content_preview": "#!/bin/bash\n# 晨报 - 每日08:47\n# 使用新的TODO集成晨报生成器\n\necho \"[$(date '+%Y-%m-%d %H:%M:%S')] 开始生成晨报...\" >> /tmp/morning_report.log\n\n# 执行Python晨报生成器\n/usr/bin/python3 /root/.openclaw/workspace/skills/todo-management/morning_report.py >> /tmp/morning_report.log 2>&1\n\n# 同时发送到用户消息（通过OpenClaw消息系统）\necho \"[$(date '+%Y-%m-%d %H:%M:%S')] 晨报生成完成\" >> /tmp/morning_report.log\n",
+  "limitations_applied": []
+}

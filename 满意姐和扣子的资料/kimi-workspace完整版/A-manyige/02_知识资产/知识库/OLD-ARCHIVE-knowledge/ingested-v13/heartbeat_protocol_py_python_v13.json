@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/heartbeat-protocol/scripts/heartbeat_protocol.py",
+  "filename": "heartbeat_protocol.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "7b6a503afe15db84",
+  "content_length": 24207,
+  "ingested_at": "2026-03-31T17:27:45.351871",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nHeartbeat Protocol V3.0 - 主控脚本\n实现L1-L5五级Token档位管理系统\n\n核心功能:\n- Token档位自动计算与管理\n- 动态通知频率调整\n- 档位切换自检\n- 对抗测试\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport logging\nimport argparse\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom enum import Enum\nfrom typing import Dict, List, Optional, Tuple\nfrom dataclasses import dataclass, asdict\n\n# 配置路径\nSKILL_DIR = Path(\"/root/.openclaw/workspace/skills/heartbeat-protocol\")\nLOG_DIR = SKILL_DIR / \"logs\"\nREPORT_DIR = SK",
+  "limitations_applied": []
+}

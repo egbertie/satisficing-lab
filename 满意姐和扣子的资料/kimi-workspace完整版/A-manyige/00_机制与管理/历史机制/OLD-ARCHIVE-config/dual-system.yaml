@@ -1,0 +1,112 @@
+# Dual System Configuration - 双系统思维配置
+# System 1 (Fast) - 直觉、快速、模式匹配
+# System 2 (Slow) - 分析、缓慢、逻辑推理
+
+dual_system:
+  # 系统定义
+  system_1_fast:
+    name: "系统1 - 直觉模式"
+    characteristics:
+      - "快速响应"
+      - "模式识别"
+      - "自动化"
+      - "低Token消耗"
+    triggers:
+      - "简单查询"
+      - "重复性任务"
+      - "信息检索"
+      - "格式转换"
+      - "日志查询"
+    model_config:
+      default_model: "kimi-k2"
+      temperature: 0.3
+      max_tokens: 2000
+    cost_saving: "80%"
+    
+  system_2_slow:
+    name: "系统2 - 分析模式"
+    characteristics:
+      - "深度思考"
+      - "逻辑分析"
+      - "创造性解决"
+      - "高Token消耗"
+    triggers:
+      - "复杂决策"
+      - "战略规划"
+      - "首次任务"
+      - "风险评估"
+      - "创新性工作"
+    model_config:
+      default_model: "kimi-coding/k2p5"
+      temperature: 0.7
+      max_tokens: 8000
+      reasoning: "high"
+    cost_saving: "0% (全功能)"
+
+  # 自动切换规则
+  switching_rules:
+    # 触发System 1的关键词
+    fast_mode_keywords:
+      - "查一下"
+      - "列出"
+      - "显示"
+      - "查询"
+      - "获取"
+      - "读取"
+      - "搜索"
+      - "找"
+      - "是什么"
+      
+    # 触发System 2的关键词
+    slow_mode_keywords:
+      - "分析"
+      - "设计"
+      - "规划"
+      - "评估"
+      - "建议"
+      - "优化"
+      - "解决"
+      - "决策"
+      - "战略"
+      - "创新"
+      - "架构"
+      
+    # 任务复杂度评估
+    complexity_indicators:
+      low:
+        - "单文件操作"
+        - "已知模式"
+        - "数据查询"
+        - "状态检查"
+      
+      medium:
+        - "多步骤任务"
+        - "条件判断"
+        - "简单整合"
+        
+      high:
+        - "跨系统协调"
+        - "创新性方案"
+        - "风险评估"
+        - "长期规划"
+
+  # 当前模式状态
+  current_mode: "AUTO"  # AUTO | FAST | SLOW
+  
+  # 会话级模式锁定
+  mode_lock:
+    enabled: false
+    locked_mode: null
+    unlock_after: null
+
+  # 模式使用统计
+  usage_stats:
+    system_1_invocations: 0
+    system_2_invocations: 0
+    total_tokens_saved: 0
+    last_switch: null
+    
+  # 切换日志
+  switch_log:
+    max_entries: 100
+    entries: []

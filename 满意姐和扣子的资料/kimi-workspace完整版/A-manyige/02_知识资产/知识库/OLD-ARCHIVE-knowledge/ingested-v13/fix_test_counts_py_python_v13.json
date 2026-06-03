@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/fix_test_counts.py",
+  "filename": "fix_test_counts.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "f13af34c8996e239",
+  "content_length": 1962,
+  "ingested_at": "2026-03-31T17:27:46.192344",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n批量补充测试assert\n\"\"\"\n\nimport re\nfrom pathlib import Path\n\nSKILLS_DIR = Path(\"/root/.openclaw/workspace/skills\")\n\nENHANCED_TESTS = '''    try:\n        # Test 1-4: Token管理检查\n        assert 'TOKEN_COST_ESTIMATE' in globals()\n        tests_passed += 1\n        assert 'TOKEN_RED_LINES' in globals()\n        tests_passed += 1\n        assert 'TOKEN_OPTIMIZATION' in globals()\n        tests_passed += 1\n        assert 'BELONGS_TO' in globals()\n        tests_passed += 1\n        \n      ",
+  "limitations_applied": []
+}

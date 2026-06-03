@@ -1,0 +1,70 @@
+{
+  "source_path": "/root/.openclaw/workspace/disaster-recovery/02-自动化备份脚本/backup-master.sh",
+  "filename": "backup-master.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 4639,
+  "checksum": "72adec500d656591",
+  "ingested_at": "2026-03-31T17:30:47.725075",
+  "line_count": 181,
+  "title": "backup-master",
+  "description": "###############################################################################",
+  "sections": [],
+  "entities": [
+    {
+      "name": "log",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_info",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_warn",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_error",
+      "type": "shell_function"
+    },
+    {
+      "name": "check_lock",
+      "type": "shell_function"
+    },
+    {
+      "name": "cleanup",
+      "type": "shell_function"
+    },
+    {
+      "name": "run_backup",
+      "type": "shell_function"
+    },
+    {
+      "name": "send_notification",
+      "type": "shell_function"
+    },
+    {
+      "name": "main",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "###############################################################################",
+    "灾备自动化备份脚本套件 - 主控脚本",
+    "Disaster Recovery Automated Backup Scripts",
+    "# 版本: 1.0",
+    "日期: 2026-03-12",
+    "用途: 协调执行所有备份任务",
+    "###############################################################################",
+    "创建日志目录",
+    "执行备份任务",
+    "这里可以集成飞书、邮件或其他通知渠道",
+    "示例: 飞书通知 (需要配置 webhook)",
+    "curl -X POST -H \"Content-Type: application/json\" \\",
+    "-d \"{\\\"msg_type\\\":\\\"text\\\",\\\"content\\\":{\\\"text\\\":\\\"备份${status}: ${message}\\\"}}\" \\",
+    "\"${FEISHU_WEBHOOK_URL}\" 2>/dev/null || true",
+    "1. GitHub 仓库备份"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

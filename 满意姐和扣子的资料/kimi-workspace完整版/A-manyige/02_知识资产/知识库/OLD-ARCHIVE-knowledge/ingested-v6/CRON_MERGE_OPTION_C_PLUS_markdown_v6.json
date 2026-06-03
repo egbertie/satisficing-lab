@@ -1,0 +1,108 @@
+{
+  "source_path": "/root/.openclaw/workspace/archive/docs/2026-03/CRON_MERGE_OPTION_C_PLUS.md",
+  "filename": "CRON_MERGE_OPTION_C_PLUS.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 5959,
+  "checksum": "930f53f550115b51",
+  "ingested_at": "2026-03-31T17:30:16.951073",
+  "line_count": 209,
+  "title": "方案C+：平衡式事件驱动设计（优化版）",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "方案C+：平衡式事件驱动设计（优化版）"
+    },
+    {
+      "level": 2,
+      "title": "问题识别"
+    },
+    {
+      "level": 2,
+      "title": "优化框架：三层响应机制"
+    },
+    {
+      "level": 3,
+      "title": "第一层：静默自治层（零打扰）"
+    },
+    {
+      "level": 3,
+      "title": "第二层：通知确认层（轻打扰）"
+    },
+    {
+      "level": 3,
+      "title": "第三层：强制阻断层（高打扰）"
+    },
+    {
+      "level": 2,
+      "title": "时间优化设计：渐进式触发"
+    },
+    {
+      "level": 3,
+      "title": "时间窗口策略"
+    },
+    {
+      "level": 3,
+      "title": "智能提醒升级"
+    },
+    {
+      "level": 2,
+      "title": "防空置机制（平衡版）"
+    },
+    {
+      "level": 3,
+      "title": "核心原则"
+    },
+    {
+      "level": 3,
+      "title": "防空置策略"
+    },
+    {
+      "level": 2,
+      "title": "用户自定义配置"
+    },
+    {
+      "level": 3,
+      "title": "可配置参数"
+    },
+    {
+      "level": 1,
+      "title": "用户偏好配置（可调整）"
+    },
+    {
+      "level": 3,
+      "title": "三种预设模式"
+    },
+    {
+      "level": 2,
+      "title": "优化后的方案C+ 评估"
+    },
+    {
+      "level": 2,
+      "title": "实施建议"
+    },
+    {
+      "level": 3,
+      "title": "推荐配置（默认）"
+    },
+    {
+      "level": 3,
+      "title": "逐步验证"
+    },
+    {
+      "level": 2,
+      "title": "总结"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "重度空置（>6小时）",
+    "可控性 ≠ 完全手动，而是「分层授权 + 渐进确认」",
+    "轻度空置（30分钟-2小时）",
+    "中度空置（2-6小时）",
+    "不是\"完全不自启\"，而是\"分级授权自启\""
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

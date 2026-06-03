@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/adversarial-test/test_adversarial.py",
+  "filename": "test_adversarial.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "ba07b37679ddd28c",
+  "content_length": 435,
+  "ingested_at": "2026-03-31T17:27:45.417378",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nadversarial-test Skill测试\n\"\"\"\n\nimport unittest\nfrom pathlib import Path\n\n\nclass TestAdversarialTest(unittest.TestCase):\n    \"\"\"对抗测试Skill验证\"\"\"\n    \n    def test_skill_structure(self):\n        \"\"\"测试Skill结构\"\"\"\n        skill_dir = Path(__file__).parent\n        self.assertTrue((skill_dir / \"SKILL.md\").exists() or len(list(skill_dir.glob(\"*.py\"))) > 0)\n\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+  "limitations_applied": []
+}

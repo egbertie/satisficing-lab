@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entanglement | 量子纠缠合伙人匹配系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            background: #0a0a0f;
+            color: #e4e4e7;
+            overflow-x: hidden;
+        }
+        
+        /* 量子粒子背景 */
+        #quantum-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+        }
+        
+        /* 玻璃态效果 */
+        .glass {
+            background: rgba(20, 20, 30, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .glass-card {
+            background: rgba(30, 30, 45, 0.5);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            border-color: rgba(139, 92, 246, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.1);
+        }
+        
+        /* 渐变文字 */
+        .gradient-text {
+            background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 50%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-text-warm {
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* 发光效果 */
+        .glow {
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+        }
+        
+        .glow-cyan {
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
+        }
+        
+        /* 按钮样式 */
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            border: none;
+            padding: 14px 32px;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(139, 92, 246, 0.5);
+            padding: 14px 32px;
+            border-radius: 12px;
+            color: #a78bfa;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: #8b5cf6;
+        }
+        
+        /* 步骤指示器 */
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 40px;
+        }
+        
+        .step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .step.active {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            color: white;
+        }
+        
+        .step.completed {
+            background: #10b981;
+            color: white;
+        }
+        
+        .step.pending {
+            background: rgba(255,255,255,0.1);
+            color: #71717a;
+        }
+        
+        .step-line {
+            flex: 1;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            max-width: 60px;
+        }
+        
+        .step-line.completed {
+            background: #10b981;
+        }
+        
+        /* 雷达图容器 */
+        .radar-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+        }
+        
+        /* 评分条 */
+        .score-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.1);
+            overflow: hidden;
+        }
+        
+        .score-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+        
+        /* 量子态展示 */
+        .quantum-state {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .state-superposition {
+            background: rgba(139, 92, 246, 0.2);
+            color: #a78bfa;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+        
+        .state-entangled {
+            background: rgba(6, 182, 212, 0.2);
+            color: #22d3ee;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+        
+        .state-collapsed {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        
+        /* 吸引子动画 */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .attractor {
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        /* 时间线 */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #8b5cf6 0%, #06b6d4 50%, #10b981 100%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #8b5cf6;
+            border: 2px solid #0a0a0f;
+        }
+        
+        /* 隐藏滚动条 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.3);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(139, 92, 246, 0.5);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .glass-card {
+                padding: 20px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 量子粒子背景 -->
+    <canvas id="quantum-canvas"></canvas>
+    
+    <!-- 导航 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold gradient-text">Entanglement</h1>
+                    <p class="text-xs text-zinc-500">量子纠缠合伙人匹配系统</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="btn-outline text-sm py-2 px-4">文档</button>
+                <button class="btn-primary text-sm py-2 px-4">开始评估</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <main class="pt-24 pb-20">
+        <!-- 英雄区域 -->
+        <section class="max-w-7xl mx-auto px-6 py-20 text-center">
+            <div class="inline-block mb-6">
+                <span class="quantum-state state-entangled">V1.1 全球首创</span>
+            </div>
+            <h2 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                超越问卷的<br>
+                <span class="gradient-text">量子级合伙人匹配</span>
+            </h2>
+            <p class="text-xl text-zinc-400 max-w-2xl mx-auto mb-10">
+                基于神经科学、复杂系统理论和量子认知<br>
+                预测团队心智的涌现特性，看见不可见的兼容维度
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="btn-primary text-lg" onclick="startAssessment()">
+                    开始沉浸式评估
+                    <svg class="w-5 h-5 inline-block ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </button>
+                <button class="btn-outline text-lg">观看演示</button>
+            </div>
+            
+            <!-- 核心特性 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20">
+                <div class="glass-card p-6">
+                    <div class="w-14 h-14 rounded-2xl bg-violet-500/20 flex items-center justify-center mb-4">
+                        <svg class="w-7 h-7 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">量子感知引擎</h3>
+                    <p class="text-zinc-400 text-sm">抛弃Likert量表，采用叠加态评估，问题之间存在非经典纠缠</p>
+                </div>
+                <div class="glass-card p-6">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center mb-4">
+                        <svg class="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">涌现式匹配</h3>
+                    <p class="text-zinc-400 text-sm">多智能体模拟100+虚拟场景，预测团队心智的涌现结构</p>
+                </div>
+                <div class="glass-card p-6">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 flex items-center justify-center mb-4">
+                        <svg class="w-7 h-7 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">身体化认知</h3>
+                    <p class="text-zinc-400 text-sm">整合HRV、微表情、语音生物标记，解码潜意识共鸣</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 沉浸式评估剧场 -->
+        <section id="assessment-theater" class="max-w-6xl mx-auto px-6 py-20 hidden">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">沉浸式决策剧场</h2>
+                <p class="text-zinc-400">六幕体验，深度解构匹配本质</p>
+            </div>
+            
+            <!-- 步骤指示器 -->
+            <div class="step-indicator justify-center mb-12">
+                <div class="step active" data-step="1">1</div>
+                <div class="step-line"></div>
+                <div class="step pending" data-step="2">2</div>
+                <div class="step-line"></div>
+                <div class="step pending" data-step="3">3</div>
+                <div class="step-line"></div>
+                <div class="step pending" data-step="4">4</div>
+                <div class="step-line"></div>
+                <div class="step pending" data-step="5">5</div>
+                <div class="step-line"></div>
+                <div class="step pending" data-step="6">6</div>
+            </div>
+            
+            <!-- 评估内容区 -->
+            <div id="assessment-content" class="glass-card p-8 md:p-12">
+                <!-- 第一幕：身份解构 -->
+                <div id="act-1" class="assessment-act">
+                    <div class="text-center mb-8">
+                        <span class="text-violet-400 text-sm font-medium tracking-wider">序幕</span>
+                        <h3 class="text-2xl font-bold mt-2">身份解构</h3>
+                        <p class="text-zinc-400 mt-2">回顾关键人生决策，挖掘深层叙事身份</p>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="glass-card p-6 border-l-4 border-violet-500">
+                            <label class="block text-sm font-medium text-zinc-300 mb-3">
+                                描述一个改变你人生轨迹的关键决策时刻
+                            </label>
+                            <textarea class="w-full bg-black/30 border border-zinc-700 rounded-lg p-4 text-zinc-300 focus:border-violet-500 focus:outline-none resize-none" rows="4" placeholder="在那个时刻，是什么驱使你做出选择？"></textarea>
+                        </div>
+                        
+                        <div class="glass-card p-6 border-l-4 border-cyan-500">
+                            <label class="block text-sm font-medium text-zinc-300 mb-3">
+                                回顾过去五年，你最大的个人成长是什么？
+                            </label>
+                            <textarea class="w-full bg-black/30 border border-zinc-700 rounded-lg p-4 text-zinc-300 focus:border-cyan-500 focus:outline-none resize-none" rows="4" placeholder="这段成长如何塑造了今天的你？"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-end mt-8">
+                        <button class="btn-primary" onclick="nextAct(2)">
+                            进入下一幕
+                            <svg class="w-5 h-5 inline-block ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 其他幕次将由JS动态加载 -->
+            </div>
+        </section>
+
+        <!-- 匹配报告仪表盘 -->
+        <section id="match-dashboard" class="max-w-7xl mx-auto px-6 py-20">
+            <div class="text-center mb-12">
+                <span class="quantum-state state-collapsed">实时生成</span>
+                <h2 class="text-3xl font-bold mt-4 mb-4">动态匹配仪表盘</h2>
+                <p class="text-zinc-400">不是分数，而是多维度的动态匹配景观</p>
+            </div>
+            
+            <!-- 综合评分 -->
+            <div class="glass-card p-8 mb-8">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="relative w-48 h-48">
+                        <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="8"/>
+                            <circle id="compatibility-circle" cx="50" cy="50" r="45" fill="none" stroke="url(#gradient)" stroke-width="8"
+                                    stroke-dasharray="283" stroke-dashoffset="70" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#8b5cf6"/>
+                                    <stop offset="100%" style="stop-color:#06b6d4"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span id="compatibility-score" class="text-5xl font-bold gradient-text">78%</span>
+                            <span class="text-sm text-zinc-500 mt-1">综合兼容度</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1 grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="text-center p-4 rounded-xl bg-violet-500/10">
+                            <div class="text-2xl font-bold text-violet-400">85%</div>
+                            <div class="text-xs text-zinc-400 mt-1">量子纠缠</div>
+                        </div>
+                        <div class="text-center p-4 rounded-xl bg-cyan-500/10">
+                            <div class="text-2xl font-bold text-cyan-400">72%</div>
+                            <div class="text-xs text-zinc-400 mt-1">涌现稳定性</div>
+                        </div>
+                        <div class="text-center p-4 rounded-xl bg-emerald-500/10">
+                            <div class="text-2xl font-bold text-emerald-400">91%</div>
+                            <div class="text-xs text-zinc-400 mt-1">身体共鸣</div>
+                        </div>
+                        <div class="text-center p-4 rounded-xl bg-amber-500/10">
+                            <div class="text-2xl font-bold text-amber-400">68%</div>
+                            <div class="text-xs text-zinc-400 mt-1">认知多样性</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 详细分析 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 吸引子景观 -->
+                <div class="glass-card p-6">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-violet-500"></span>
+                        吸引子景观
+                    </h3>
+                    <div id="attractor-landscape" class="h-64 bg-black/20 rounded-xl flex items-center justify-center">
+                        <canvas id="attractor-canvas"></canvas>
+                    </div>
+                    <p class="text-sm text-zinc-500 mt-4">
+                        识别长期合作模式的稳定吸引子，预测系统演化路径
+                    </p>
+                </div>
+                
+                <!-- 认知多样性图谱 -->
+                <div class="glass-card p-6">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
+                        认知多样性图谱
+                    </h3>
+                    <div class="radar-container">
+                        <canvas id="cognitive-radar"></canvas>
+                    </div>
+                    <div class="flex justify-center gap-6 mt-4">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-violet-500"></span>
+                            <span class="text-sm text-zinc-400">李明</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-cyan-500"></span>
+                            <span class="text-sm text-zinc-400">王芳</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 身体共鸣图谱 -->
+                <div class="glass-card p-6">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        身体共鸣图谱
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-zinc-400">HRV同步性</span>
+                                <span class="text-emerald-400">91%</span>
+                            </div>
+                            <div class="score-bar">
+                                <div class="score-fill bg-emerald-500" style="width: 91%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-zinc-400">语音共鸣</span>
+                                <span class="text-emerald-400">87%</span>
+                            </div>
+                            <div class="score-bar">
+                                <div class="score-fill bg-emerald-500" style="width: 87%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-zinc-400">微表情同步</span>
+                                <span class="text-yellow-400">74%</span>
+                            </div>
+                            <div class="score-bar">
+                                <div class="score-fill bg-yellow-500" style="width: 74%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 未来演化预测 -->
+                <div class="glass-card p-6">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                        未来演化预测
+                    </h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="text-sm text-violet-400 font-medium">6个月</div>
+                            <div class="text-zinc-300 mt-1">建立工作节奏</div>
+                            <div class="text-zinc-500 text-sm">成功率: <span class="text-emerald-400">82%</span></div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="text-sm text-cyan-400 font-medium">1年</div>
+                            <div class="text-zinc-300 mt-1">首次重大分歧</div>
+                            <div class="text-zinc-500 text-sm">成功率: <span class="text-yellow-400">71%</span></div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="text-sm text-emerald-400 font-medium">3年</div>
+                            <div class="text-zinc-300 mt-1">愿景对齐演化</div>
+                            <div class="text-zinc-500 text-sm">成功率: <span class="text-violet-400">65%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 建议 -->
+            <div class="glass-card p-6 mt-8">
+                <h3 class="text-lg font-semibold mb-4">优化建议</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 rounded-xl bg-red-500/10 border border-red-500/20">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-2 py-0.5 rounded text-xs bg-red-500/20 text-red-400">高优先级</span>
+                        </div>
+                        <h4 class="font-medium text-zinc-200">建立认知桥接机制</h4>
+                        <p class="text-sm text-zinc-400 mt-2">定期使用结构化沟通框架，弥合分析型与直觉型的差距</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/20">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-2 py-0.5 rounded text-xs bg-yellow-500/20 text-yellow-400">中优先级</span>
+                        </div>
+                        <h4 class="font-medium text-zinc-200">义利之辨框架</h4>
+                        <p class="text-sm text-zinc-400 mt-2">共同制定伦理决策框架，明确不可妥协的价值观底线</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-2 py-0.5 rounded text-xs bg-emerald-500/20 text-emerald-400">机会</span>
+                        </div>
+                        <h4 class="font-medium text-zinc-200">利用创造性能量</h4>
+                        <p class="text-sm text-zinc-400 mt-2">你们的认知差异处于最优区，建立快速实验机制以最大化创新</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 技术架构 -->
+        <section class="max-w-7xl mx-auto px-6 py-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">六层架构</h2>
+                <p class="text-zinc-400">全球首创的跨学科决策生态系统</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="glass-card p-6 flex items-center gap-6 hover:translate-x-2">
+                    <div class="w-16 h-16 rounded-2xl bg-violet-500/20 flex items-center justify-center shrink-0">
+                        <span class="text-2xl font-bold text-violet-400">01</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-semibold">量子化感知引擎</h3>
+                        <p class="text-zinc-400 text-sm mt-1">量子认知理论 + 模糊迹理论 | 叠加态评估 | 问题纠缠</p>
+                    </div>
+                    <svg class="w-6 h-6 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+                
+                <div class="glass-card p-6 flex items-center gap-6 hover:translate-x-2">
+                    <div class="w-16 h-16 rounded-2xl bg-cyan-500/20 flex items-center justify-center shrink-0">
+                        <span class="text-2xl font-bold text-cyan-400">02</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-semibold">涌现式匹配算法</h3>
+                        <p class="text-zinc-400 text-sm mt-1">复杂系统理论 | 多智能体模拟 | 吸引子景观分析</p>
+                    </div>
+                    <svg class="w-6 h-6 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+                
+                <div class="glass-card p-6 flex items-center gap-6 hover:translate-x-2">
+                    <div class="w-16 h-16 rounded-2xl bg-emerald-500/20 flex items-center justify-center shrink-0">
+                        <span class="text-2xl font-bold text-emerald-400">03</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-semibold">身体化认知测评</h3>
+                        <p class="text-zinc-400 text-sm mt-1">具身认知 + 躯体标记假说 | HRV同步 | 微表情解码</p>
+                    </div>
+                    <svg class="w-6 h-6 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+                
+                <div class="glass-card p-6 flex items-center gap-6 hover:translate-x-2">
+                    <div class="w-16 h-16 rounded-2xl bg-amber-500/20 flex items-center justify-center shrink-0">
+                        <span class="text-2xl font-bold text-amber-400">04</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-semibold">叙事身份分析</h3>
+                        <p class="text-zinc-400 text-sm mt-1">McAdams叙事理论 | 未来自我连续性 | 共享意义建构</p>
+                    </div>
+                    <svg class="w-6 h-6 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+                
+                <div class="glass-card p-6 flex items-center gap-6 hover:translate-x-2">
+                    <div class="w-16 h-16 rounded-2xl bg-rose-500/20 flex items-center justify-center shrink-0">
+                        <span class="text-2xl font-bold text-rose-400">05</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-semibold">认知多样性优化</h3>
+                        <p class="text-zinc-400 text-sm mt-1">Page《The Difference》| 最优差异区 | 认知差距桥接</p>
+                    </div>
+                    <svg class="w-6 h-6 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+                
+                <div class="glass-card p-6 flex items-center gap-6 hover:translate-x-2">
+                    <div class="w-16 h-16 rounded-2xl bg-fuchsia-500/20 flex items-center justify-center shrink-0">
+                        <span class="text-2xl font-bold text-fuchsia-400">06</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-semibold">伦理-价值对齐</h3>
+                        <p class="text-zinc-400 text-sm mt-1">儒商伦理 + 道德心理学 | 义利情境测试 | 价值层级动态</p>
+                    </div>
+                    <svg class="w-6 h-6 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="border-t border-zinc-800 py-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="flex items-center justify-center gap-3 mb-4">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                    </svg>
+                </div>
+                <span class="font-bold gradient-text">Entanglement</span>
+            </div>
+            <p class="text-zinc-500 text-sm">
+                全球首创量子纠缠合伙人匹配决策系统 V1.1<br>
+                基于神经科学、复杂系统理论与量子认知
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // 量子粒子背景动画
+        const canvas = document.getElementById('quantum-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+        const particleCount = 60;
+        const connectionDistance = 150;
+        
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = Math.random() * 2 + 1;
+                this.color = Math.random() > 0.5 ? 'rgba(139, 92, 246,' : 'rgba(6, 182, 212,';
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+            
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color + '0.5)';
+                ctx.fill();
+            }
+        }
+        
+        function init() {
+            resize();
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // 更新和绘制粒子
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            
+            // 绘制连接
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < connectionDistance) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(139, 92, 246, ${0.2 * (1 - dist / connectionDistance)})`;
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        window.addEventListener('resize', resize);
+        init();
+        animate();
+        
+        // 开始评估
+        function startAssessment() {
+            document.getElementById('assessment-theater').classList.remove('hidden');
+            document.getElementById('assessment-theater').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // 下一幕
+        function nextAct(actNumber) {
+            // 更新步骤指示器
+            document.querySelector(`.step[data-step="${actNumber-1}"]`).classList.remove('active');
+            document.querySelector(`.step[data-step="${actNumber-1}"]`).classList.add('completed');
+            document.querySelector(`.step-line:nth-child(${actNumber * 2 - 2})`).classList.add('completed');
+            document.querySelector(`.step[data-step="${actNumber}"]`).classList.remove('pending');
+            document.querySelector(`.step[data-step="${actNumber}"]`).classList.add('active');
+            
+            // 加载下一幕内容
+            const content = document.getElementById('assessment-content');
+            
+            if (actNumber === 2) {
+                content.innerHTML = `
+                    <div class="text-center mb-8">
+                        <span class="text-cyan-400 text-sm font-medium tracking-wider">第一幕</span>
+                        <h3 class="text-2xl font-bold mt-2">量子纠缠</h3>
+                        <p class="text-zinc-400 mt-2">完成量子化评估，构建认知波函数</p>
+                    </div>
+                    <div class="glass-card p-8 text-center border-cyan-500/30">
+                        <div class="mb-6">
+                            <span class="quantum-state state-superposition mb-4 inline-block">叠加态</span>
+                        </div>
+                        <h4 class="text-lg mb-4">当面临高风险决策时，你更倾向于？</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
+                            <button class="p-4 rounded-xl border border-zinc-700 hover:border-cyan-500 hover:bg-cyan-500/10 transition-all" onclick="quantumAnswer('analytical')">
+                                深度分析后再行动
+                            </button>
+                            <button class="p-4 rounded-xl border border-zinc-700 hover:border-cyan-500 hover:bg-cyan-500/10 transition-all" onclick="quantumAnswer('intuitive')">
+                                相信直觉快速决策
+                            </button>
+                            <button class="p-4 rounded-xl border border-zinc-700 hover:border-cyan-500 hover:bg-cyan-500/10 transition-all" onclick="quantumAnswer('collaborative')">
+                                寻求合伙人共识
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex justify-end mt-8">
+                        <button class="btn-primary" onclick="nextAct(3)">进入下一幕</button>
+                    </div>
+                `;
+            } else if (actNumber === 3) {
+                content.innerHTML = `
+                    <div class="text-center mb-8">
+                        <span class="text-emerald-400 text-sm font-medium tracking-wider">第二幕</span>
+                        <h3 class="text-2xl font-bold mt-2">模拟共生</h3>
+                        <p class="text-zinc-400 mt-2">AI代理模拟协作，观察涌现特性</p>
+                    </div>
+                    <div class="glass-card p-8">
+                        <div class="flex items-center justify-center mb-8">
+                            <div class="w-20 h-20 rounded-full bg-violet-500/20 flex items-center justify-center">
+                                <span class="text-violet-400 font-bold">李明</span>
+                            </div>
+                            <div class="mx-8 flex flex-col items-center">
+                                <div class="text-2xl mb-2">⚡</div>
+                                <span class="quantum-state state-entangled">协作模拟中</span>
+                            </div>
+                            <div class="w-20 h-20 rounded-full bg-cyan-500/20 flex items-center justify-center">
+                                <span class="text-cyan-400 font-bold">王芳</span>
+                            </div>
+                        </div>
+                        <div class="space-y-3 max-w-xl mx-auto">
+                            <div class="flex items-center gap-3 text-sm">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                <span class="text-zinc-400">突发供应链中断场景</span>
+                                <span class="ml-auto text-emerald-400">已模拟</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                <span class="text-zinc-400">技术路线抉择场景</span>
+                                <span class="ml-auto text-emerald-400">已模拟</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm">
+                                <span class="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span>
+                                <span class="text-zinc-400">义利冲突情境</span>
+                                <span class="ml-auto text-yellow-400">模拟中...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-end mt-8">
+                        <button class="btn-primary" onclick="nextAct(4)">进入下一幕</button>
+                    </div>
+                `;
+            } else {
+                // 跳转到仪表盘
+                document.getElementById('match-dashboard').scrollIntoView({ behavior: 'smooth' });
+                initCharts();
+            }
+        }
+        
+        // 量子回答
+        function quantumAnswer(type) {
+            // 触发波函数坍缩动画
+            event.target.classList.add('bg-cyan-500', 'text-white');
+            setTimeout(() => {
+                event.target.classList.remove('bg-cyan-500', 'text-white');
+                event.target.classList.add('bg-emerald-500/20', 'border-emerald-500');
+            }, 500);
+        }
+        
+        // 初始化图表
+        function initCharts() {
+            // 雷达图
+            const radarCtx = document.getElementById('cognitive-radar').getContext('2d');
+            new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['分析型', '细节导向', '风险容忍', '独立性', '决策速度', '创新能力'],
+                    datasets: [{
+                        label: '李明',
+                        data: [0.7, 0.8, 0.6, 0.7, 0.5, 0.6],
+                        backgroundColor: 'rgba(139, 92, 246, 0.2)',
+                        borderColor: '#8b5cf6',
+                        borderWidth: 2
+                    }, {
+                        label: '王芳',
+                        data: [0.4, 0.5, 0.7, 0.5, 0.7, 0.8],
+                        backgroundColor: 'rgba(6, 182, 212, 0.2)',
+                        borderColor: '#06b6d4',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 1,
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                            pointLabels: { color: '#a1a1aa' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+            
+            // 数字动画
+            animateValue('compatibility-score', 0, 78, 2000);
+        }
+        
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            const range = end - start;
+            const increment = end > start ? 1 : -1;
+            const stepTime = Math.abs(Math.floor(duration / range));
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                obj.innerHTML = current + '%';
+                if (current == end) {
+                    clearInterval(timer);
+                }
+            }, stepTime);
+        }
+    </script>
+</body>
+</html>

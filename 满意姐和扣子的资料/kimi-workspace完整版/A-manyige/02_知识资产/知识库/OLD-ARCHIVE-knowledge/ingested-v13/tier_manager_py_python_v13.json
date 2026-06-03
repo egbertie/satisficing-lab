@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_cron-optimization-manager/modules/tier_manager.py",
+  "filename": "tier_manager.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "1b75a0e669190300",
+  "content_length": 4157,
+  "ingested_at": "2026-03-31T17:27:45.155974",
+  "content_preview": "# -*- coding: utf-8 -*-\n\"\"\"层级管理模块\"\"\"\n\nfrom typing import Dict\n\n\nclass TierManager:\n    \"\"\"Cron层级管理器\"\"\"\n    \n    def __init__(self, manager):\n        self.manager = manager\n    \n    def set_tier(self, cron_id: str, tier: int) -> str:\n        \"\"\"设置Cron层级\"\"\"\n        if cron_id not in self.manager.crons:\n            return f\"错误: Cron '{cron_id}' 不存在\"\n        \n        cron = self.manager.crons[cron_id]\n        old_tier = cron.tier.value\n        \n        from cron_manager import CronTier, RiskLevel\n  ",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/check_blue_army_deep_insight.sh",
+  "filename": "check_blue_army_deep_insight.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "f2c78c8a2a1dc6d6",
+  "content_length": 1646,
+  "ingested_at": "2026-03-31T17:27:46.168700",
+  "content_preview": "#!/bin/bash\n# 蓝军深度洞察审计模块检查脚本\n\necho \"=== 蓝军深度洞察审计模块检查 ===\"\necho \"\"\n\n# 检查模块文件\necho \"1. 模块文件存在性:\"\nif [ -f \"/root/.openclaw/workspace/skills/blue-army-deep-insight-auditor/deep_insight_auditor.py\" ]; then\n    echo \"   ✅ deep_insight_auditor.py 存在\"\n    lines=$(wc -l < /root/.openclaw/workspace/skills/blue-army-deep-insight-auditor/deep_insight_auditor.py)\n    echo \"      代码行数: $lines\"\nelse\n    echo \"   ❌ deep_insight_auditor.py 不存在\"\nfi\n\n# 检查关键方法\necho \"\"\necho \"2. 关键方法存在性:\"\ngrep -q \"audit_file\" /root/.",
+  "limitations_applied": []
+}

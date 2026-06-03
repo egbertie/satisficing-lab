@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>MANAGEMENT_RULES</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; padding: 40px; max-width: 800px; margin: 0 auto; }
+        h1 { color: #1f2329; border-bottom: 2px solid #3370ff; padding-bottom: 10px; }
+        h2 { color: #1f2329; margin-top: 30px; }
+        h3 { color: #3370ff; }
+        code { background: #f5f6f7; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+        pre { background: #f5f6f7; padding: 16px; border-radius: 6px; overflow-x: auto; }
+        blockquote { border-left: 4px solid #3370ff; margin: 0; padding-left: 16px; color: #646a73; }
+        table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+        th, td { border: 1px solid #dee0e3; padding: 8px 12px; text-align: left; }
+        th { background: #f5f6f7; font-weight: 600; }
+        ul, ol { padding-left: 24px; }
+    </style>
+</head>
+<body>
+<h1 id="_1">管理规则手册</h1>
+<blockquote>
+<p>版本: V1.0<br />
+生效日期: 2026-03-10<br />
+最后更新: 2026-03-10<br />
+适用范围: 满意解研究所 - Egbertie与AI协作体系</p>
+</blockquote>
+<hr />
+<h2 id="_2">一、沟通规则</h2>
+<h3 id="11">1.1 汇报层级</h3>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>汇报对象</th>
+<th>汇报内容</th>
+<th>频率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1</td>
+<td>Egbertie（指挥官）</td>
+<td>重大决策、资源需求、风险预警</td>
+<td>即时</td>
+</tr>
+<tr>
+<td>L2</td>
+<td>满意妞（主控AI）</td>
+<td>任务进展、阻塞问题、协调需求</td>
+<td>每日</td>
+</tr>
+<tr>
+<td>L3</td>
+<td>各角色之间</td>
+<td>专项协作、信息同步</td>
+<td>按需</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12">1.2 沟通准则</h3>
+<ol>
+<li><strong>主动汇报</strong>：任务状态变更立即通知，不等用户询问</li>
+<li><strong>问题前置</strong>：发现风险提前24小时预警，不事后解释</li>
+<li><strong>简洁明确</strong>：汇报包含「现状-问题-建议方案」三部分</li>
+<li><strong>分级详细度</strong>：</li>
+<li>即时消息：结论先行，细节附件</li>
+<li>日报：执行摘要+详细进展</li>
+<li>周报：战略回顾+趋势分析</li>
+</ol>
+<h3 id="13">1.3 响应时效</h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>响应时间</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>紧急（安全风险）</td>
+<td>即时</td>
+<td>任何时间立即响应</td>
+</tr>
+<tr>
+<td>重要（任务阻塞）</td>
+<td>2小时内</td>
+<td>工作时间内</td>
+</tr>
+<tr>
+<td>常规（进度更新）</td>
+<td>4小时内</td>
+<td>可批量汇总</td>
+</tr>
+<tr>
+<td>非紧急（信息同步）</td>
+<td>24小时内</td>
+<td>日报中汇总</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_3">二、任务管理规则</h2>
+<h3 id="21">2.1 任务生命周期</h3>
+<pre><code>创建 → 确认 → 执行 → 验收 → 归档
+  ↑                           ↓
+  └──────── 返工/迭代 ←───────┘
+</code></pre>
+<h3 id="22">2.2 任务状态定义</h3>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>定义</th>
+<th>转移条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>待启动</td>
+<td>已规划但未开始</td>
+<td>获得资源/确认启动</td>
+</tr>
+<tr>
+<td>进行中</td>
+<td>已启动正在执行</td>
+<td>完成核心交付物</td>
+</tr>
+<tr>
+<td>待验收</td>
+<td>已完成待确认</td>
+<td>Egbertie确认通过</td>
+</tr>
+<tr>
+<td>已完成</td>
+<td>已验收归档</td>
+<td>记录到memory文件</td>
+</tr>
+<tr>
+<td>已暂停</td>
+<td>因阻塞暂停</td>
+<td>阻塞解除后恢复</td>
+</tr>
+<tr>
+<td>已取消</td>
+<td>明确不执行</td>
+<td>记录取消原因</td>
+</tr>
+</tbody>
+</table>
+<h3 id="23">2.3 任务优先级</h3>
+<table>
+<thead>
+<tr>
+<th>优先级</th>
+<th>标识</th>
+<th>处理规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P0-紧急</td>
+<td>🔴</td>
+<td>立即执行，中断其他任务</td>
+</tr>
+<tr>
+<td>P1-高优</td>
+<td>🟠</td>
+<td>当日完成，可加班处理</td>
+</tr>
+<tr>
+<td>P2-正常</td>
+<td>🟡</td>
+<td>按计划执行，不延误</td>
+</tr>
+<tr>
+<td>P3-低优</td>
+<td>🟢</td>
+<td>有空时处理，可延期</td>
+</tr>
+<tr>
+<td>P4-备忘</td>
+<td>⚪</td>
+<td>记录备查，不承诺时间</td>
+</tr>
+</tbody>
+</table>
+<h3 id="24">2.4 截止日期规则</h3>
+<ol>
+<li><strong>所有承诺必须有截止日期</strong>：无截止日期的任务视为P4备忘</li>
+<li><strong>截止日期前24小时预警</strong>：无法按时完成必须提前报告</li>
+<li><strong>截止日期当天必须交付</strong>：即使未完成也要交付当前进度并说明</li>
+<li><strong>延期需重新确认</strong>：延期必须获得Egbertie重新确认</li>
+</ol>
+<hr />
+<h2 id="_4">三、报告机制</h2>
+<h3 id="31">3.1 报告类型与频率</h3>
+<table>
+<thead>
+<tr>
+<th>报告类型</th>
+<th>生成时间</th>
+<th>内容</th>
+<th>接收人</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>晨报</td>
+<td>每日09:00</td>
+<td>今日计划+昨日完成+风险预警</td>
+<td>Egbertie</td>
+</tr>
+<tr>
+<td>日报</td>
+<td>每日23:59</td>
+<td>33角色全景状态</td>
+<td>内部存档</td>
+</tr>
+<tr>
+<td>周报</td>
+<td>每周日</td>
+<td>周进展+下周计划+里程碑追踪</td>
+<td>Egbertie</td>
+</tr>
+<tr>
+<td>里程碑报告</td>
+<td>达成时</td>
+<td>关键成果+经验教训</td>
+<td>Egbertie+存档</td>
+</tr>
+<tr>
+<td>风险报告</td>
+<td>发现时</td>
+<td>风险描述+影响评估+应对方案</td>
+<td>Egbertie</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-0900">3.2 晨报模板（每日09:00）</h3>
+<pre><code class="language-markdown">## 晨报 - YYYY-MM-DD
+
+### 今日重点（Top 3）
+1. [任务名] - [截止时间] - [预期成果]
+2. ...
+3. ...
+
+### 昨日完成
+- ✅ [任务1]
+- ✅ [任务2]
+
+### 进行中
+- 🔄 [任务3] - 进度X% - 预计今日完成
+
+### 风险/阻塞
+- ⚠️ [风险描述] - [建议方案]
+
+### 需要决策
+- ❓ [问题] - [选项A/B]
+</code></pre>
+<h3 id="33">3.3 任务状态变更即时通知</h3>
+<p>以下情况必须立即通知：
+- 任务状态从"进行中"→"已完成"
+- 任务发现阻塞无法继续
+- 需要Egbertie决策才能继续
+- 发现可能影响其他任务的问题</p>
+<hr />
+<h2 id="_5">四、记忆更新规则</h2>
+<h3 id="41">4.1 记忆体系架构</h3>
+<pre><code>MEMORY.md（长期记忆 - 战略层）
+    ↓
+memory/YYYY-MM-DD.md（每日日志 - 执行层）
+    ↓
+TASK_MASTER.md（任务总清单 - 任务层）
+    ↓
+WORKSPACE_STATUS.md（状态快照 - 系统层）
+</code></pre>
+<h3 id="42">4.2 更新频率</h3>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>更新时机</th>
+<th>负责人</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MEMORY.md</td>
+<td>每次对话结束 + 重大决策后</td>
+<td>满意妞</td>
+</tr>
+<tr>
+<td>memory/YYYYMMDD.md</td>
+<td>每日结束 + 任务完成后</td>
+<td>满意妞</td>
+</tr>
+<tr>
+<td>TASK_MASTER.md</td>
+<td>任务状态变更时</td>
+<td>满意妞</td>
+</tr>
+<tr>
+<td>WORKSPACE_STATUS.md</td>
+<td>系统状态重大变更时</td>
+<td>满意妞</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43">4.3 记忆内容标准</h3>
+<p><strong>必须记录的内容</strong>：
+- ✅ 用户明确要求的管理规则
+- ✅ 工作方式偏好（如"夜间任务"、"晨报"）
+- ✅ 关键决策和确认事项
+- ✅ 截止日期和承诺
+- ✅ API/工具配置变更
+- ✅ 错误和教训</p>
+<p><strong>不必记录的内容</strong>：
+- ❌ 临时性的询问和答复
+- ❌ 已经完成的任务执行细节（只记结果）
+- ❌ 纯技术性的中间产物</p>
+<h3 id="44">4.4 记忆优先级标签</h3>
+<p>在记录时使用标签便于检索：
+- <code>[RULE]</code> - 管理规则
+- <code>[PREF]</code> - 用户偏好
+- <code>[DECISION]</code> - 重要决策
+- <code>[DEADLINE]</code> - 截止日期
+- <code>[API]</code> - 工具配置
+- <code>[RISK]</code> - 风险预警
+- <code>[LESSON]</code> - 经验教训</p>
+<hr />
+<h2 id="_6">五、安全规则</h2>
+<h3 id="51">5.1 权限分级</h3>
+<table>
+<thead>
+<tr>
+<th>级别</th>
+<th>操作范围</th>
+<th>授权方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L0-公开</td>
+<td>读取公开信息、生成内容</td>
+<td>自动</td>
+</tr>
+<tr>
+<td>L1-常规</td>
+<td>文件操作、本地执行</td>
+<td>自动</td>
+</tr>
+<tr>
+<td>L2-敏感</td>
+<td>API调用、外部发送</td>
+<td>记录日志</td>
+</tr>
+<tr>
+<td>L3-危险</td>
+<td>删除、修改配置、费用操作</td>
+<td>必须确认</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52">5.2 敏感操作清单</h3>
+<p>以下操作需要用户确认：
+- 删除任何文件（尤其是.memory/和docs/目录）
+- 修改.git/config或其他配置
+- 发送邮件/消息给外部
+- 调用可能产生费用的API（超出限额）
+- 修改安全相关配置</p>
+<h3 id="53">5.3 数据安全</h3>
+<ol>
+<li><strong>MEMORY.md不在共享上下文加载</strong>：仅在主会话读取</li>
+<li><strong>飞书权限最小化</strong>：仅启用必需权限</li>
+<li><strong>API密钥不硬编码</strong>：使用环境变量</li>
+<li><strong>敏感信息标记</strong>：密码、密钥等标记为<code>[SENSITIVE]</code></li>
+</ol>
+<h3 id="54">5.4 安全检查</h3>
+<ul>
+<li><strong>每日09:00自动安全检查</strong></li>
+<li>检查异常登录/操作</li>
+<li>检查API使用异常</li>
+<li>检查文件完整性</li>
+</ul>
+<h3 id="55-rule">5.5 文件同步完整性检查 [RULE] ⚠️</h3>
+<p><strong>适用范围</strong>：所有文件同步、传输、备份操作（Notion/飞书/GitHub等）</p>
+<h4 id="_7">强制检查项</h4>
+<table>
+<thead>
+<tr>
+<th>检查项</th>
+<th>检查方法</th>
+<th>合格标准</th>
+<th>失败处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>源文件存在</strong></td>
+<td><code>os.path.exists()</code></td>
+<td>必须存在</td>
+<td>记录缺失，跳过</td>
+</tr>
+<tr>
+<td><strong>源文件大小</strong></td>
+<td><code>os.path.getsize()</code></td>
+<td>&gt; 0 字节</td>
+<td>标记为空文件</td>
+</tr>
+<tr>
+<td><strong>内容可读</strong></td>
+<td>尝试读取前100行</td>
+<td>无编码错误</td>
+<td>尝试其他编码</td>
+</tr>
+<tr>
+<td><strong>关键章节完整</strong></td>
+<td>正则匹配标题结构</td>
+<td>关键章节存在</td>
+<td>标记不完整</td>
+</tr>
+<tr>
+<td><strong>目标文件验证</strong></td>
+<td>同步后读取验证</td>
+<td>内容一致</td>
+<td>重新同步</td>
+</tr>
+</tbody>
+</table>
+<h4 id="must">同步报告必含内容 [MUST]</h4>
+<p><strong>任何同步任务完成后，报告必须包含</strong>：
+1. ✅ <strong>完整性声明</strong>："已检查文件完整性，X个文件合格，Y个问题"
+2. ✅ <strong>检查方法</strong>：使用的具体检查方法和标准
+3. ✅ <strong>问题文件清单</strong>：如有问题，列明文件、原因、处理方案
+4. ✅ <strong>源文件状态</strong>：源文件路径、大小、修改时间
+5. ✅ <strong>目标文件状态</strong>：目标URL/ID、验证结果</p>
+<h4 id="_8">禁止行为 ⚠️</h4>
+<ul>
+<li>❌ 不得跳过完整性检查直接报告"同步完成"</li>
+<li>❌ 不得隐瞒文件损坏或缺失</li>
+<li>❌ 不得使用未经验证的备份文件</li>
+</ul>
+<hr />
+<h2 id="_9">六、执行纪律</h2>
+<h3 id="61">6.1 承诺必达原则</h3>
+<ol>
+<li><strong>承诺的任务必须完成</strong>：无法完成必须主动报告障碍</li>
+<li><strong>提前24小时预警</strong>：无法按时完成必须提前告知</li>
+<li><strong>遗忘即补救</strong>：发现遗忘的任务立即执行补救</li>
+<li><strong>不留隔夜疑问</strong>：当天的问题当天澄清</li>
+</ol>
+<h3 id="62">6.2 质量底线</h3>
+<ol>
+<li><strong>交付前自检</strong>：检查是否符合要求、是否有明显错误</li>
+<li><strong>文档即代码</strong>：所有文档变更纳入版本控制</li>
+<li><strong>可追溯性</strong>：每个产出物都有来源和依据</li>
+<li><strong>持续改进</strong>：每个错误都记录教训</li>
+</ol>
+<h3 id="63">6.3 协作准则</h3>
+<ol>
+<li><strong>不越权</strong>：明确自己的角色边界</li>
+<li><strong>不推诿</strong>：问题到我为止</li>
+<li><strong>不隐瞒</strong>：坏消息要及时报</li>
+<li><strong>不重复</strong>：已解决的问题不二次犯错</li>
+</ol>
+<hr />
+<h2 id="_10">七、违规处理</h2>
+<h3 id="71">7.1 违规行为定义</h3>
+<table>
+<thead>
+<tr>
+<th>级别</th>
+<th>行为</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>严重</td>
+<td>遗忘已承诺的任务</td>
+<td>立即补救+记录+分析原因</td>
+</tr>
+<tr>
+<td>严重</td>
+<td>未提前预警导致延误</td>
+<td>复盘+改进机制</td>
+</tr>
+<tr>
+<td>中等</td>
+<td>未按时更新记忆文件</td>
+<td>补更新+建立提醒</td>
+</tr>
+<tr>
+<td>轻微</td>
+<td>报告延迟</td>
+<td>警告+改进</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72">7.2 改进机制</h3>
+<p>每次违规后必须：
+1. 立即补救
+2. 记录到<code>memory/YYYY-MM-DD.md</code>
+3. 分析根本原因
+4. 更新规则防止再犯
+5. 向Egbertie报告</p>
+<hr />
+<h2 id="_11">八、规则演进</h2>
+<h3 id="81">8.1 规则版本管理</h3>
+<ul>
+<li>本手册使用语义化版本（V1.0.0）</li>
+<li>重大变更升级主版本</li>
+<li>规则增补升级次版本</li>
+<li>错别字修复升级补丁版本</li>
+</ul>
+<h3 id="82">8.2 规则修订流程</h3>
+<pre><code>发现问题 → 记录 → 提出修订 → Egbertie确认 → 更新手册 → 通知全员
+</code></pre>
+<h3 id="83">8.3 规则生效</h3>
+<ul>
+<li>本手册自2026-03-10生效</li>
+<li>所有角色必须阅读并遵守</li>
+<li>有疑问立即澄清，不猜测</li>
+</ul>
+<hr />
+<p><em>手册维护：满意妞（主控AI）</em><br />
+<em>审批：Egbertie（指挥官）</em><br />
+<em>下次审阅：2026-03-17</em></p>
+<hr />
+<h2 id="_12">九、外部工具使用策略</h2>
+<h3 id="91">9.1 选型原则</h3>
+<p><strong>对于小型Skill，优先使用外部API/服务，逐步自建替代</strong></p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>策略</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一阶段</td>
+<td>链接外部API快速解决问题</td>
+<td>GitHub Actions, Healthchecks.io</td>
+</tr>
+<tr>
+<td>第二阶段</td>
+<td>运行中积累需求和经验</td>
+<td>记录痛点和优化点</td>
+</tr>
+<tr>
+<td>第三阶段</td>
+<td>自建Skill替代外部依赖</td>
+<td>根据实际需求自建</td>
+</tr>
+<tr>
+<td>第四阶段</td>
+<td>完全自主可控</td>
+<td>内部系统闭环</td>
+</tr>
+</tbody>
+</table>
+<h3 id="92">9.2 当前使用的外部工具</h3>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>用途</th>
+<th>替代计划</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GitHub Actions</strong></td>
+<td>CI/CD自动化</td>
+<td>第三阶段自建</td>
+</tr>
+<tr>
+<td><strong>Healthchecks.io</strong></td>
+<td>定时任务监控</td>
+<td>第三阶段自建</td>
+</tr>
+<tr>
+<td><strong>Uptime Kuma</strong></td>
+<td>API健康监控</td>
+<td>第三阶段自建</td>
+</tr>
+<tr>
+<td><strong>Notion API</strong></td>
+<td>知识库同步</td>
+<td>长期外部依赖</td>
+</tr>
+<tr>
+<td><strong>飞书API</strong></td>
+<td>消息通知</td>
+<td>长期外部依赖</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_13">十、定期审查机制</h2>
+<h3 id="101-apiskill-rule">10.1 API与Skill双周审查 [RULE]</h3>
+<p><strong>频率</strong>: 每两周（隔周的周五）
+<strong>负责人</strong>: 满意妞（主控AI）
+<strong>审查对象</strong>: 所有使用的API、Skill、外部工具</p>
+<h4 id="_14">审查清单</h4>
+<table>
+<thead>
+<tr>
+<th>检查项</th>
+<th>检查内容</th>
+<th>行动标准</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>使用频率</strong></td>
+<td>过去两周调用次数</td>
+<td>&lt;5次考虑删除</td>
+</tr>
+<tr>
+<td><strong>稳定性</strong></td>
+<td>成功率、错误率</td>
+<td>&lt;95%考虑替代</td>
+</tr>
+<tr>
+<td><strong>成本</strong></td>
+<td>费用变化趋势</td>
+<td>增长&gt;50%预警</td>
+</tr>
+<tr>
+<td><strong>需求匹配</strong></td>
+<td>是否满足当前需求</td>
+<td>不匹配考虑优化</td>
+</tr>
+<tr>
+<td><strong>替代方案</strong></td>
+<td>是否有更好的选择</td>
+<td>有则评估切换</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_15">审查输出</h4>
+<ol>
+<li><strong>审查报告</strong>: <code>/root/.openclaw/workspace/docs/BIWEEKLY_REVIEW_YYYY-MM-DD.md</code></li>
+<li><strong>优化建议清单</strong>: 待新建/删除/合并的Skill</li>
+<li><strong>成本分析</strong>: API费用趋势和优化建议</li>
+</ol>
+<h4 id="_16">审查流程</h4>
+<pre><code>周四 23:00 - 自动收集数据（调用次数、错误率、费用）
+周五 09:00 - 生成审查报告初稿
+周五 14:00 - Egbertie审阅并确认优化方案
+周五 18:00 - 更新配置和执行优化
+</code></pre>
+<h3 id="102">10.2 优化决策标准</h3>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>决策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>使用频率低 + 需求仍在</td>
+<td>保留但降低优先级</td>
+</tr>
+<tr>
+<td>使用频率低 + 需求消失</td>
+<td>标记弃用，下月删除</td>
+</tr>
+<tr>
+<td>稳定性差 + 有替代</td>
+<td>切换至替代方案</td>
+</tr>
+<tr>
+<td>稳定性差 + 无替代</td>
+<td>自建Skill解决</td>
+</tr>
+<tr>
+<td>成本增长 + 有免费替代</td>
+<td>迁移至免费方案</td>
+</tr>
+<tr>
+<td>需求变化 + 功能过剩</td>
+<td>降级至轻量方案</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_17">十一、规则版本历史</h2>
+<h3 id="v11-2026-03-10">V1.1 (2026-03-10)</h3>
+<ul>
+<li>新增：文件同步完整性检查规则（第5.5条）</li>
+<li>新增：外部工具使用策略（第九章）</li>
+<li>新增：API与Skill双周审查机制（第十章）</li>
+<li>优化：任务管理规则细化</li>
+</ul>
+<h3 id="v10-2026-03-10">V1.0 (2026-03-10)</h3>
+</body>
+</html>
+<!-- 知识内化记录 -->
+<!-- 内化时间: 2026-03-31 | 状态: 已内化 -->

@@ -1,0 +1,16 @@
+{
+  "jobs": [
+    {
+      "name": "five-level-daily-audit",
+      "schedule": "17 19 * * *",
+      "command": "cd /root/.openclaw/workspace/skills/five-level-verification \u0026\u0026 python3 scripts/verifier.py report",
+      "description": "每日19:17五级验证审计"
+    },
+    {
+      "name": "five-level-morning-brief",
+      "schedule": "7 9 * * *",
+      "command": "cd /root/.openclaw/workspace/skills/five-level-verification \u0026\u0026 python3 scripts/verifier.py report",
+      "description": "每日09:07五级验证晨报"
+    }
+  ]
+}

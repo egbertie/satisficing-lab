@@ -1,0 +1,35 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/auto-git-commit.sh",
+  "filename": "auto-git-commit.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 2484,
+  "checksum": "0ac74e39f3e1b356",
+  "ingested_at": "2026-03-31T17:30:47.825532",
+  "line_count": 82,
+  "title": "auto-git-commit",
+  "description": "Auto Git Commit Script - Secure Version",
+  "sections": [],
+  "entities": [
+    {
+      "name": "cleanup",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "Auto Git Commit Script - Secure Version",
+    "深度记忆: GITHUB_TOKEN已固化，无需重复询问，除非Token失效",
+    "加载环境变量（优先从文件，否则硬编码）",
+    "深度记忆: Token固化（2026-03-26验证有效）",
+    "检查锁文件（防止并发）",
+    "检查是否有更改",
+    "配置git（仅当前仓库）",
+    "添加所有更改",
+    "提交（包含统计信息）",
+    "如果有Token，则推送",
+    "临时设置远程URL（带token）",
+    "恢复远程URL（移除token）"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

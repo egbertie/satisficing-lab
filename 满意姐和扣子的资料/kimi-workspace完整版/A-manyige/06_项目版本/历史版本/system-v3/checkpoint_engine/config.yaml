@@ -1,0 +1,62 @@
+# Checkpoint Engine 配置
+# 检查点引擎 — 零Token断电续传
+# 命名空间: NGT-CHECK-v1.0-FIN-260327
+
+version: "1.0"
+description: "差分持久化检查点引擎，确保状态永生"
+
+checkpoint:
+  # 触发条件
+  triggers:
+    - type: "token_threshold"
+      value: 80  # Token消耗达80%时自动触发
+    - type: "time_interval"
+      value: 300  # 每5分钟检查一次
+    - type: "manual"
+      command: "/checkpoint save"
+  
+  # 存储层级
+  storage_tiers:
+    tier_1_hot:
+      location: "ram_disk"
+      format: "binary_diff"
+      retention: "session"
+      wal_enabled: true
+      
+    tier_2_warm:
+      location: "wecom_feishu"
+      format: "compressed_yaml"
+      retention: "7d"
+      auto_sync: "5min"
+      
+    tier_3_cold:
+      location: "github_nas"
+      format: "full_snapshot"
+      retention: "30d"
+      schedule: "0 2 * * *"  # 每日2点
+      
+    tier_4_polar:
+      location: "oss_cross_region"
+      format: "encrypted_bundle"
+      retention: "1y"
+      schedule: "0 0 * * 0"  # 每周日
+  
+  # 差分算法
+  diff_algorithm:
+    type: "structural_diff"
+    granularity: "paragraph"  # 段落级差异
+    compression: "zstd"
+    hash_verification: "sha256"
+  
+  # 恢复机制
+  recovery:
+    auto_detect: true
+    recovery_time_target: "10s"
+    conflict_resolution: "timestamp_wins"
+    
+  # 监控指标
+  metrics:
+    - checkpoint_success_rate
+    - diff_compression_ratio
+    - recovery_time_ms
+    - storage_usage_bytes

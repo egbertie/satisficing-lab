@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/search_counter.sh",
+  "filename": "search_counter.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "c4b3bd5cb60508ca",
+  "content_length": 547,
+  "ingested_at": "2026-03-31T17:27:46.203924",
+  "content_preview": "#!/bin/bash\n# 搜索计数器脚本\n# 确保搜索执行足够次数，防止偷工减料\n\nCOUNTER_FILE=\"/root/.openclaw/workspace/.search_counter\"\nREQUIRED_COUNT=5\n\necho \"=== 搜索执行计数器 ===\"\necho \"时间: $(date)\"\necho \"\"\n\nCURRENT_COUNT=0\nif [ -f \"$COUNTER_FILE\" ]; then\n    CURRENT_COUNT=$(cat \"$COUNTER_FILE\" 2>/dev/null || echo \"0\")\nfi\n\necho \"当前计数: $CURRENT_COUNT\"\necho \"要求次数: $REQUIRED_COUNT\"\necho \"\"\n\nif [ \"$CURRENT_COUNT\" -ge \"$REQUIRED_COUNT\" ]; then\n    echo \"✅ 次数达标 ($CURRENT_COUNT >= $REQUIRED_COUNT)\"\n    exit 0\nelse\n    echo \"❌ 次数不足，还差 $((REQ",
+  "limitations_applied": []
+}

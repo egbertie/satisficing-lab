@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/zero-idle-enforcer/SELF_CHECK_REPORT.md",
+  "filename": "SELF_CHECK_REPORT.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "10b44bf70b2520ce",
+  "content_length": 3341,
+  "ingested_at": "2026-03-31T17:27:45.478366",
+  "content_preview": "# 零空置强制执行器 - 7标准自检报告\n\n**检查时间**: 2026-03-21 19:55  \n**Skill版本**: V5.0  \n**检查人**: subagent\n\n---\n\n## 7标准检查清单\n\n### ✅ S1: 输入规范\n\n| 子项 | 状态 | 说明 |\n|------|------|------|\n| S1.1 系统状态输入 | ✅ | CPU/内存/磁盘监控 |\n| S1.2 用户活动状态 | ✅ | heartbeat + file mtime检测 |\n| S1.3 Token余量 | ✅ | 三级阈值: NORMAL/LOW/CRITICAL |\n\n**实现位置**:\n- `enforcer.py:get_last_user_activity()` - S1.2\n- `enforcer.py:get_token_level()` - S1.3\n\n---\n\n### ✅ S2: 处理流程\n\n| 子项 | 状态 | 说明 |\n|------|------|------|\n| S2.2 空闲检测 | ✅ | 6步检测流程 |\n| S2.3 补位决策 | ✅ | ",
+  "limitations_applied": []
+}

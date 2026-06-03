@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/system-v3/meta_auditor/scheduler.py",
+  "filename": "scheduler.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "d9a0bc683050a501",
+  "content_length": 3102,
+  "ingested_at": "2026-03-31T17:27:46.132719",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nMeta-Auditor 调度器 V1.0\n统一调度蓝军审计、深度挖掘、诚实回答三大模式\n立即执行版 - 2026-03-31\n\"\"\"\n\nimport json\nimport sys\nfrom datetime import datetime\nfrom pathlib import Path\n\n# 配置\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nDATA_DIR = WORKSPACE / \"data/shared\"\nLOG_FILE = WORKSPACE / \"logs/meta_auditor/scheduler.log\"\n\n# 确保目录存在\nDATA_DIR.mkdir(parents=True, exist_ok=True)\nLOG_FILE.parent.mkdir(parents=True, exist_ok=True)\n\n# 触发条件矩阵\nTRIGGER_MATRIX = {\n    \"user_question\": {\n        \"modes\": [\"hone",
+  "limitations_applied": []
+}

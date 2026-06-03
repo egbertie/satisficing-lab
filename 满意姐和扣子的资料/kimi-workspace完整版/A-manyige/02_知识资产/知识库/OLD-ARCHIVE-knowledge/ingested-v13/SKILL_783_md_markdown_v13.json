@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/knowledge-ingest/ingested/SKILL.783.md",
+  "filename": "SKILL.783.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "837b09e994f32a94",
+  "content_length": 1403,
+  "ingested_at": "2026-03-31T17:27:45.826505",
+  "content_preview": "# checkpoint-manager Skill 设计文档\n\n**Skill名称**: checkpoint-manager  \n**功能**: Token耗尽时的状态检查点管理，实现零Token状态永生  \n**版本**: 1.0.0  \n**状态**: 设计中\n\n---\n\n## S1: 输入定义\n\n### 功能需求\n- 自动创建检查点（Session结束时）\n- 手动创建检查点（用户触发）\n- 从检查点恢复完整状态\n- 检查点版本管理（保留最近N个）\n\n### 输入数据\n- 当前工作区状态（memory/目录）\n- SOUL.md, USER.md, MEMORY.md 等核心文件\n- 执行上下文（当前任务、进度）\n\n---\n\n## S2: 处理流程\n\n### 核心流程\n1. **保存检查点**: 收集关键文件 → 序列化 → 写入检查点目录\n2. **恢复检查点**: 读取检查点 → 还原文件 → 验证完整性\n3. **清理旧检查点**: 保留最近5个，删除更早的\n\n### 检查点结构\n```\n~/.openclaw/immortal-state/checkpoints/\n├",
+  "limitations_applied": []
+}

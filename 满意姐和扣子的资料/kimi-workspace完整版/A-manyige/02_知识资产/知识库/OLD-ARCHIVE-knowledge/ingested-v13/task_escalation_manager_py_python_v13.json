@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/task_escalation_manager.py",
+  "filename": "task_escalation_manager.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "c9abef28c64ac463",
+  "content_length": 2477,
+  "ingested_at": "2026-03-31T17:27:46.152243",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n主动升级机制 - 任务卡住时自动升级\n用途: 监控任务状态，超时限自动升级\n规则: 等待1h→提醒→4h→提案→不反对视为确认\n\"\"\"\n\nimport json\nimport time\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\nclass TaskEscalationManager:\n    \"\"\"任务升级管理器\"\"\"\n    \n    def __init__(self):\n        self.log_file = Path(\"/root/.openclaw/workspace/memory/task_escalation_log.json\")\n        self.escalation_rules = {\n            \"remind\": timedelta(hours=1),      # 1小时提醒\n            \"propose\": timedelta(hours=4),     # 4小时提案\n   ",
+  "limitations_applied": []
+}

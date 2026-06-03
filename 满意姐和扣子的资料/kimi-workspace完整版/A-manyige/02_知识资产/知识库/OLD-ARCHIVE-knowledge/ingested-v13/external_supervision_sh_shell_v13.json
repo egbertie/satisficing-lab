@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/external_supervision.sh",
+  "filename": "external_supervision.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "8d04d35873daf9ef",
+  "content_length": 2729,
+  "ingested_at": "2026-03-31T17:27:46.189328",
+  "content_preview": "#!/bin/bash\n# 外部监督脚本\n# 他律约束，不是自律\n# 自动记录问题，自动扣分，自动通知\n\nCHECK_TYPE=\"$1\"     # supervision/check/punish\nTARGET=\"${2:-满意妞}\"\nLOG_FILE=\"/root/.openclaw/workspace/diary/external_supervision.log\"\nSCORE_FILE=\"/root/.openclaw/workspace/diary/trust_score.log\"\n\necho \"=== 外部监督机制 ===\"\necho \"检查类型: $CHECK_TYPE\"\necho \"目标: $TARGET\"\necho \"时间: $(date)\"\necho \"\"\n\nlog_msg() {\n    echo \"[$(date '+%Y-%m-%d %H:%M:%S')] $1\" | tee -a \"$LOG_FILE\"\n}\n\n# 初始化信任积分（如果不存在）\ninit_score() {\n    if [ ! -f \"$SCORE_FILE\" ]; then\n        ",
+  "limitations_applied": []
+}

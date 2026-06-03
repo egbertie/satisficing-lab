@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/config/cron-master-v1.yaml",
+  "filename": "cron-master-v1.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "4484e09d804675dc",
+  "content_length": 4252,
+  "ingested_at": "2026-03-31T17:27:44.519616",
+  "content_preview": "cron:\n  # ========== Phase 1: P0级Cron（今日部署）==========\n  \n  # 1. Token实时预警\n  token-realtime-alert:\n    schedule: \"*/15 * * * *\"\n    command: \"python3 scripts/token_monitor.py --threshold 20 --notify\"\n    tier: 1\n    priority: P0\n    enabled: true\n    \n  # 2. 每日晨报生成\n  daily-morning-report:\n    schedule: \"55 8 * * *\"\n    command: \"python3 skills/daily-report/generate.py --type morning\"\n    tier: 1\n    priority: P0\n    enabled: true\n    \n  # 3. 任务逾期提醒\n  task-overdue-alert:\n    schedule: \"30 9 * * *\"",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/five-level-verification/scripts/verifier_v1_backup.py",
+  "filename": "verifier_v1_backup.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "a3a9770d7d70e2bf",
+  "content_length": 3634,
+  "ingested_at": "2026-03-31T17:27:45.467360",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nFive-Level Verification System\n五级验证自动化脚本\n\"\"\"\n\nimport sys\nimport json\nimport os\nfrom datetime import datetime\n\nLEVELS = {\n    \"L1\": {\n        \"name\": \"动作层 (Action)\",\n        \"requirements\": [\"动作ID\", \"执行内容\", \"执行证据\", \"自检结果\"],\n        \"auto_check\": True\n    },\n    \"L2\": {\n        \"name\": \"检查层 (Inspection)\",\n        \"requirements\": [\"逆向检查\", \"交叉验证\", \"边界测试\"],\n        \"auto_check\": True\n    },\n    \"L3\": {\n        \"name\": \"固化层 (Solidification)\",\n        \"requirements\": [\"知识图谱绑定",
+  "limitations_applied": []
+}

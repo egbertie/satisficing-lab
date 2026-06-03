@@ -1,0 +1,30 @@
+{
+  "name": "decision-governance",
+  "version": "1.0.0",
+  "description": "决策治理套件 - 权限管理、风险评估、决策追溯",
+  "rules": {
+    "lowRisk": {
+      "scoreRange": [0, 30],
+      "decision": "autonomous",
+      "notify": "logOnly",
+      "examples": ["search", "analyze", "draft"]
+    },
+    "mediumRisk": {
+      "scoreRange": [30, 70],
+      "decision": "autonomousWithNotice",
+      "notify": "dailySummary",
+      "examples": ["generateReport", "modifyInternal", "scheduleTask"]
+    },
+    "highRisk": {
+      "scoreRange": [70, 100],
+      "decision": "confirmBefore",
+      "notify": "immediate",
+      "examples": ["sendExternal", "deleteCritical", "apiKeyOperation"]
+    }
+  },
+  "thresholds": {
+    "apiUsage": 70,
+    "dailyTaskLimit": 100,
+    "emergencyResponse": 5
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/interrupt-recovery/interrupt_recovery_integration.py",
+  "filename": "interrupt_recovery_integration.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 4660,
+  "checksum": "75f2ba066687b9ef",
+  "ingested_at": "2026-03-31T17:30:32.082788",
+  "line_count": 143,
+  "title": "interrupt_recovery_integration",
+  "description": "interrupt_recovery_integration.py\n中断恢复机制集成 - 不新增监控，只整合到现有流程",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: InterruptRecoveryIntegration"
+    }
+  ],
+  "entities": [
+    {
+      "name": "InterruptRecoveryIntegration",
+      "type": "class"
+    },
+    {
+      "name": "get_recovery",
+      "type": "function"
+    },
+    {
+      "name": "with_recovery",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "检查是否有未恢复的中断任务",
+    "开始新任务或恢复旧任务",
+    "如果是API rate limit，特殊处理",
+    "不自动重试rate limit，等待人工决策",
+    "这里可以递归调用，但避免无限递归"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

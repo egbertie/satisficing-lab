@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/tools/trl_api.py",
+  "filename": "trl_api.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "d6f81f2824abfb49",
+  "content_length": 17636,
+  "ingested_at": "2026-03-31T17:27:46.119009",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nTRL 自评工具 - Web API 版本\n满意解研究所 · 硬科技合伙人匹配决策系统\n\n用法: python trl_api.py\n      然后访问 http://localhost:8080\n\"\"\"\n\nimport json\nfrom http.server import HTTPServer, BaseHTTPRequestHandler\nfrom datetime import datetime\nfrom typing import Dict, List\n\n\nclass TRLCalculator:\n    \"\"\"TRL 计算引擎\"\"\"\n    \n    TRL_LEVELS = {\n        1: {\"name\": \"基本原理发现\", \"risk\": \"极高\", \"stage\": \"种子轮/天使轮\", \n            \"partner\": \"技术联合创始人、学术合伙人\"},\n        2: {\"name\": \"技术方案形成\", \"risk\": \"很高\", \"stage\": \"天使轮\",\n     ",
+  "limitations_applied": []
+}

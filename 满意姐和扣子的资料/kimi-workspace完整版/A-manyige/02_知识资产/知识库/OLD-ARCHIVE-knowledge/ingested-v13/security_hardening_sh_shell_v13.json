@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/security_hardening.sh",
+  "filename": "security_hardening.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "8cabcad778f2a7ce",
+  "content_length": 1627,
+  "ingested_at": "2026-03-31T17:27:46.137874",
+  "content_preview": "#!/bin/bash\n# 安全审计修复脚本\n\necho \"=== OpenClaw 安全加固脚本 ===\"\n\n# 1. 备份配置\necho \"[1/3] 备份当前配置...\"\ncp /root/.openclaw/openclaw.json /root/.openclaw/openclaw.json.backup.$(date +%Y%m%d_%H%M%S)\necho \"✓ 配置已备份\"\n\n# 2. 应用配置补丁\necho \"[2/3] 应用安全加固配置...\"\npython3 << 'PYEOF'\nimport json\n\nconfig_file = \"/root/.openclaw/openclaw.json\"\n\nwith open(config_file, 'r') as f:\n    config = json.load(f)\n\n# 修复1: 添加 trustedProxies\nif 'gateway' not in config:\n    config['gateway'] = {}\nconfig['gateway']['trustedProxies'] = [\"127.0",
+  "limitations_applied": []
+}

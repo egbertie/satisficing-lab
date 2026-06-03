@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/A-manyige/03_📋研究任务/Kimi_Claw技术报告_满意解整合分析.md",
+  "filename": "Kimi_Claw技术报告_满意解整合分析.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "603c76edb3656e30",
+  "content_length": 4191,
+  "ingested_at": "2026-03-31T17:27:46.386535",
+  "content_preview": "# Kimi Claw技术报告 → 满意解工作流整合分析\n\n> **来源**: Kimi生成的Kimi Claw/OpenClaw全网调研报告  \n> **分析时间**: 2026-03-19  \n> **整合目标**: V1.4及后续版本优化  \n\n---\n\n## 一、Token优化策略（立即可用）\n\n### 1.1 即时降本命令\n\n| 命令 | 功能 | 满意解应用场景 |\n|------|------|---------------|\n| `/compact` | 压缩上下文，保留关键信息 | 长对话后使用，降幅79% |\n| `/reset` | 保留长期记忆，重置短期上下文 | 每个客户项目结束后 |\n| `/new` | 全新会话 | 切换不同客户时 |\n| `/status` | 查看Token消耗 | 监控每日消耗 |\n\n**满意解整合建议**:\n- 在客户项目交付节点自动触发`/compact`\n- 每日凌晨4点自动`/reset`（非交易时段降频思路）\n\n### 1.2 架构级降本（V1.4已部分实现）\n\n报告中的策略 vs 满意解V1.4现状：\n\n| 策略 | 报",
+  "limitations_applied": []
+}

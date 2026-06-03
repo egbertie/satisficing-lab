@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/token-suite/token_suite.py",
+  "filename": "token_suite.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "484d0fc3df061054",
+  "content_length": 8285,
+  "ingested_at": "2026-03-31T17:27:45.352969",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nToken Suite - Token管理套件 - 预算监控、消耗预警、档位管理、优化\n高标准完整实现（V2.0）\n\n归属: token-suite\nToken成本: 监控本身约100 tokens/次\n核心功能: monitor, alert, budget, optimize\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport time\nfrom typing import Dict, List, Optional, Any\nfrom dataclasses import dataclass, asdict\nfrom datetime import datetime\nfrom pathlib import Path\n\n# Token管理\nTOKEN_COST_ESTIMATE = \"\"\"\nToken消耗估算：\n- 单次调用: ~500-1000 tokens\n- 批量处理: ~2000-5000 tokens\n\"\"\"\n\nTOKEN_RED_LINES = dict(\n    max_per_",
+  "limitations_applied": []
+}

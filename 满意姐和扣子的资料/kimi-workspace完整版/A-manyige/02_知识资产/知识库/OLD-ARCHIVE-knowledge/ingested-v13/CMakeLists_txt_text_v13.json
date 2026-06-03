@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/A-manyige/99_📦完整下载包/V2.0_技术跃升成果集/代码模块/zero_pool_loader/CMakeLists.txt",
+  "filename": "CMakeLists.txt",
+  "file_type": "text",
+  "extension": ".txt",
+  "file_hash": "54901ac1f225bda1",
+  "content_length": 600,
+  "ingested_at": "2026-03-31T17:27:46.380007",
+  "content_preview": "cmake_minimum_required(VERSION 3.16)\nproject(zero_pool_loader VERSION 1.0.0 LANGUAGES CXX)\n\nset(CMAKE_CXX_STANDARD 17)\nset(CMAKE_CXX_STANDARD_REQUIRED ON)\n\n# Find liburing\nfind_package(PkgConfig REQUIRED)\npkg_check_modules(URING REQUIRED liburing)\n\n# Executable\nadd_executable(zero_pool_loader src/main.cpp)\n\n# Link libraries\ntarget_link_libraries(zero_pool_loader ${URING_LIBRARIES} pthread)\ntarget_include_directories(zero_pool_loader PRIVATE ${URING_INCLUDE_DIRS})\ntarget_compile_options(zero_pool",
+  "limitations_applied": []
+}

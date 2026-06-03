@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/file_management_suite/validate.sh",
+  "filename": "validate.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "8e2b50fd071a7490",
+  "content_length": 5197,
+  "ingested_at": "2026-03-31T17:27:46.219621",
+  "content_preview": "#!/bin/bash\n#\n# validate.sh - 完整性验证脚本\n# 功能: 验证文件系统是否符合规范\n# 用法: ./validate.sh [--fix]\n\nset -e\n\nFIX_MODE=false\nif [ \"$1\" == \"--fix\" ]; then\n    FIX_MODE=true\n    echo \"🔧 修复模式已启用\"\nfi\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nERRORS=0\nWARNINGS=0\n\necho \"🔍 文件系统完整性验证\"\necho \"工作空间: $WORKSPACE\"\necho \"\"\n\n# 颜色定义\nRED='\\033[0;31m'\nYELLOW='\\033[1;33m'\nGREEN='\\033[0;32m'\nNC='\\033[0m' # No Color\n\nlog_error() {\n    echo -e \"${RED}❌ ERROR:${NC} $1\"\n    ((ERRORS++)) || true\n}\n\nlog_warning() {\n    echo -e \"${YELLOW}⚠️ ",
+  "limitations_applied": []
+}

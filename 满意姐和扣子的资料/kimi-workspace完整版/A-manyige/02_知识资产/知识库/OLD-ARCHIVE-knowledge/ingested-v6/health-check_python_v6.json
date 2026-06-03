@@ -1,0 +1,60 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/cron-automation/scripts/health-check.py",
+  "filename": "health-check.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 17185,
+  "checksum": "570129ca2a421915",
+  "ingested_at": "2026-03-31T17:30:32.684365",
+  "line_count": 512,
+  "title": "health-check",
+  "description": "健康检查脚本 - Cron-Automation System S5自我验证组件\n\n功能:\n- 检查配置完整性\n- 验证Cron表达式\n- 检查脚本存在性和可执行性\n- 检查资源状态\n- 生成健康报告\n\nS5标准: 自我验证 - 质量指标、自检脚本、健康检查",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: CheckStatus"
+    },
+    {
+      "level": 2,
+      "title": "Class: CheckResult"
+    },
+    {
+      "level": 2,
+      "title": "Class: HealthReport"
+    },
+    {
+      "level": 2,
+      "title": "Class: HealthChecker"
+    }
+  ],
+  "entities": [
+    {
+      "name": "CheckStatus",
+      "type": "class"
+    },
+    {
+      "name": "CheckResult",
+      "type": "class"
+    },
+    {
+      "name": "HealthReport",
+      "type": "class"
+    },
+    {
+      "name": "HealthChecker",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "简化版Cron验证正则",
+    "读取 /proc/meminfo (Linux)",
+    "简化检查，仅检查配置存在"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

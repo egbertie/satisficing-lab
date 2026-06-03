@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/knowledge-graph/scripts/extract-entities.py",
+  "filename": "extract-entities.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "8c4fc33ec80ffd9f",
+  "content_length": 4945,
+  "ingested_at": "2026-03-31T17:27:45.326130",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n知识图谱数据提取脚本\n功能: 从现有文档提取实体关系，填充知识图谱\n触发: 每日一次 + 新文件创建时\n\"\"\"\n\nimport json\nimport os\nimport re\nfrom datetime import datetime\n\ndef extract_entities_from_file(file_path):\n    \"\"\"从单个文件提取实体\"\"\"\n    \n    if not os.path.exists(file_path):\n        return [], []\n    \n    with open(file_path, \"r\", encoding=\"utf-8\") as f:\n        content = f.read()\n    \n    entities = []\n    relations = []\n    doc_title = None  # 初始化doc_title\n    \n    # 提取标题作为实体\n    title_match = re.search(r'^#\\s+(.+)$",
+  "limitations_applied": []
+}

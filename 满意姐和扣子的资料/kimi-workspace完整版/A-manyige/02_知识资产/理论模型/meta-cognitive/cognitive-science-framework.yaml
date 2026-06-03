@@ -1,0 +1,168 @@
+# Cognitive Science Integration - 认知科学集成
+# 本月跨学科框架：认知科学
+
+cognitive_science:
+  name: "满意解研究所认知科学框架"
+  version: "1.0"
+  integration_date: "2026-03-27"
+  
+  # 核心理论
+  core_theories:
+    dual_process:
+      name: "双系统理论"
+      source: "Kahneman - Thinking Fast and Slow"
+      system_1:
+        name: "直觉系统"
+        characteristics:
+          - "快速"
+          - "自动"
+          - "情绪化"
+          - "模式识别"
+        applications:
+          - "初步筛选"
+          - "模式匹配"
+          - "快速响应"
+      system_2:
+        name: "分析系统"
+        characteristics:
+          - "缓慢"
+          - "费力"
+          - "逻辑性"
+          - "计算性"
+        applications:
+          - "深度分析"
+          - "复杂决策"
+          - "验证直觉"
+      integration: "已部署于config/dual-system.yaml"
+      
+    bounded_rationality:
+      name: "有限理性"
+      source: "Herbert Simon"
+      key_insights:
+        - "人类理性受限于信息、时间和认知能力"
+        - "满意解是理性选择"
+        - "启发式在复杂环境中有效"
+      applications:
+        - "合伙人匹配决策"
+        - "风险评估简化"
+        - "快速决策框架"
+        
+    cognitive_bias:
+      name: "认知偏差"
+      source: "Kahneman & Tversky"
+      common_biases:
+        - name: "确认偏误"
+          mitigation: "蓝军强制反方论证"
+          
+        - name: "锚定效应"
+          mitigation: "多锚点对比"
+          
+        - name: "可得性启发"
+          mitigation: "数据驱动而非记忆驱动"
+          
+        - name: "过度自信"
+          mitigation: "置信度量化+历史校准"
+          
+        - name: "损失厌恶"
+          mitigation: "前景理论框架"
+  
+  # 神经科学应用
+  neuroscience_apps:
+    stress_response:
+      name: "压力响应机制"
+      physiology: "HPA轴激活，皮质醇分泌"
+      impact_on_decision: "压力下单系统1主导，风险偏好改变"
+      mitigation:
+        - "决策前正念呼吸"
+        - "压力水平监测"
+        - "重要决策延迟至压力降低"
+        
+    intuition_neuroscience:
+      name: "直觉的神经基础"
+      mechanism: "模式识别神经元快速激活"
+      when_trust: "专家在熟悉领域的直觉"
+      when_distrust: "新领域或高压下的直觉"
+      
+    sleep_cognition:
+      name: "睡眠与认知"
+      source: "fang_yifeng博士专长"
+      mechanisms:
+        - "记忆巩固"
+        - "创意生成"
+        - "情绪调节"
+      recommendations:
+        - "重大决策前保证充足睡眠"
+        - "复杂问题睡前思考，醒后决策"
+        - "睡眠不足时避免高风险决策"
+  
+  # 决策科学应用
+  decision_science:
+    pre_mortem:
+      name: "事前验尸"
+      description: "假设决策已失败，分析原因"
+      application: "重大项目决策前执行"
+      
+    red_teaming:
+      name: "红队思考"
+      description: "专门寻找方案漏洞"
+      application: "蓝军日常职能"
+      
+    reference_class_forecasting:
+      name: "参照类预测"
+      description: "基于类似案例的统计预测"
+      application: "合伙人匹配成功率预测"
+      
+    pre_commitment:
+      name: "预先承诺"
+      description: "提前设定退出条件"
+      application: "投资决策中的止损线"
+  
+  # 学习科学
+  learning_science:
+    deliberate_practice:
+      name: "刻意练习"
+      elements:
+        - "明确目标"
+        - "即时反馈"
+        - "持续挑战舒适区"
+        - "重复精进"
+      application: "决策能力提升训练"
+      
+    spaced_repetition:
+      name: "间隔重复"
+      mechanism: "遗忘曲线优化复习时机"
+      application: "知识管理体系"
+      
+    interleaving:
+      name: "交叉学习"
+      mechanism: "混合不同类型问题"
+      application: "多种决策场景轮换练习"
+  
+  # 实施计划
+  implementation:
+    phase_1:
+      duration: "1周"
+      focus: "双系统理论全面部署"
+      status: "COMPLETED"
+      
+    phase_2:
+      duration: "2周"
+      focus: "认知偏差清单整合到蓝军审计"
+      status: "IN_PROGRESS"
+      
+    phase_3:
+      duration: "1周"
+      focus: "决策科学工具包制作"
+      status: "PENDING"
+      
+    phase_4:
+      duration: "持续"
+      focus: "与方翊沣博士合作深化睡眠认知应用"
+      status: "PLANNED"
+  
+  # 评估指标
+  metrics:
+    decision_quality_score: 0
+    bias_detection_rate: 0
+    system_1_2_switch_accuracy: 0
+    post_decision_regret_rate: 0

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/token_monitor_v21.py",
+  "filename": "token_monitor_v21.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "9ca974bd2e388c2c",
+  "content_length": 2988,
+  "ingested_at": "2026-03-31T17:27:46.213971",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nToken监控与休眠控制集成模块 V2.1\n- 监控Token消耗\n- 自动调整频率\n- 休眠状态检测\n\"\"\"\n\nimport json\nimport os\nimport subprocess\nfrom datetime import datetime\n\nSTATE_FILE = \"/tmp/openclaw/token_monitor_state.json\"\nLOG_FILE = \"/tmp/openclaw/token_monitor.log\"\n\n# Token分层阈值\nTOKEN_LEVELS = {\n    \"L5\": {\"min\": 70, \"max\": 100, \"color\": \"🟢\"},\n    \"L4\": {\"min\": 50, \"max\": 70, \"color\": \"🟡\"},\n    \"L3\": {\"min\": 30, \"max\": 50, \"color\": \"🟠\"},\n    \"L2\": {\"min\": 15, \"max\": 30, \"color\": \"🔴\"},\n    \"L1\": {\"min\": 0, \"m",
+  "limitations_applied": []
+}

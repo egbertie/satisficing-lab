@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_knowledge-extraction/scripts/extractor.py",
+  "filename": "extractor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e8be6a595f8a0f05",
+  "content_length": 3211,
+  "ingested_at": "2026-03-31T17:27:45.322417",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n知识沉淀自动化脚本\n版本: V2.0\n功能: 每日自动萃取知识并结构化存储\n\"\"\"\n\nimport os\nimport re\nimport json\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\nLOG_FILE = \"/tmp/knowledge-extraction.log\"\nOUTPUT_DIR = \"/root/.openclaw/workspace/05_📦历史归档/学习笔记\"\n\ndef log(message):\n    \"\"\"记录日志\"\"\"\n    timestamp = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n    entry = f\"[{timestamp}] {message}\"\n    print(entry)\n    with open(LOG_FILE, \"a\") as f:\n        f.write(entry + \"\\n\")\n\ndef get_today_co",
+  "limitations_applied": []
+}

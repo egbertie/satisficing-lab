@@ -1,0 +1,59 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/testing-framework/tests/integration/test_skill_interaction.py",
+  "filename": "test_skill_interaction.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 6737,
+  "checksum": "90ee70cbc61a961f",
+  "ingested_at": "2026-03-31T17:30:32.758270",
+  "line_count": 203,
+  "title": "test_skill_interaction",
+  "description": "Skill交互集成测试\n\n测试目标: 验证多个Skill之间的数据交互和协作\n测试类型: 集成测试 (Integration Test)",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: TestSkillInteraction"
+    },
+    {
+      "level": 2,
+      "title": "Class: TestDataConsistency"
+    },
+    {
+      "level": 2,
+      "title": "Class: TestErrorHandling"
+    }
+  ],
+  "entities": [
+    {
+      "name": "TestSkillInteraction",
+      "type": "class"
+    },
+    {
+      "name": "TestDataConsistency",
+      "type": "class"
+    },
+    {
+      "name": "TestErrorHandling",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "创建Token预算数据",
+    "验证Zero-Idle能正确读取Token级别",
+    "这里简化测试，实际会调用Zero-Idle的函数",
+    "创建Zero-Idle状态",
+    "Token预算应该考虑补位活动的Token消耗",
+    "创建共享的Heartbeat状态",
+    "多个Skill应该读取到相同的用户活动时间",
+    "Zero-Idle应该判断为不触发（<2小时）",
+    "创建各Skill的状态文件",
+    "验证所有文件都是有效的JSON",
+    "所有Skill应该使用相同的时间戳格式（Unix timestamp，整数）",
+    "所有Skill应该有相同的目录结构",
+    "验证SKILL.md存在",
+    "Skill应该使用默认值而不是崩溃",
+    "应该返回默认值而不是抛出异常"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

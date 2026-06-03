@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/A-manyige/99_📦完整下载包/V2.0_技术跃升成果集/代码模块/a2a_mcp_server.py",
+  "filename": "a2a_mcp_server.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "528ae8ae9ea5a1c9",
+  "content_length": 12877,
+  "ingested_at": "2026-03-31T17:27:46.378923",
+  "content_preview": "# a2a_mcp_server.py - A2A + MCP v2 Elicitation Implementation\n# Autonomous implementation, no external dependencies\n\nimport asyncio\nimport json\nfrom typing import Dict, List, Any, Optional, Callable\nfrom dataclasses import dataclass, asdict\nfrom datetime import datetime\nimport uuid\n\n@dataclass\nclass AgentCard:\n    \"\"\"Google A2A Agent Card\"\"\"\n    name: str\n    description: str\n    url: str\n    capabilities: List[str]\n    skills: List[Dict[str, Any]]\n    \n    def to_dict(self) -> Dict:\n        ret",
+  "limitations_applied": []
+}

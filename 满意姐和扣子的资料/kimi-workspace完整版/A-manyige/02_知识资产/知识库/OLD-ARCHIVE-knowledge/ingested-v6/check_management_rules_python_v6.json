@@ -1,0 +1,75 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/check_management_rules.py",
+  "filename": "check_management_rules.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 10427,
+  "checksum": "f762f5abdf594d71",
+  "ingested_at": "2026-03-31T17:30:32.858024",
+  "line_count": 323,
+  "title": "check_management_rules",
+  "description": "管理规则执行器 - 核心检查脚本\n强制执行检查，不留死角，如实汇报\n\n使用方法:\n    python3 check_management_rules.py [--full|--quick]\n    \n选项:\n    --full  执行完整检查（对话开始时）\n    --quick 执行快速检查（Heartbeat时）",
+  "sections": [],
+  "entities": [
+    {
+      "name": "log",
+      "type": "function"
+    },
+    {
+      "name": "get_file_mtime",
+      "type": "function"
+    },
+    {
+      "name": "check_truth_redline",
+      "type": "function"
+    },
+    {
+      "name": "check_task_management",
+      "type": "function"
+    },
+    {
+      "name": "check_memory_system",
+      "type": "function"
+    },
+    {
+      "name": "check_expert_progress",
+      "type": "function"
+    },
+    {
+      "name": "check_morning_report",
+      "type": "function"
+    },
+    {
+      "name": "run_full_check",
+      "type": "function"
+    },
+    {
+      "name": "run_quick_check",
+      "type": "function"
+    },
+    {
+      "name": "record_execution",
+      "type": "function"
+    },
+    {
+      "name": "format_issues_report",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "检查diary/errors/中是否有未纠正的错误",
+    "检查是否所有纠正项都已勾选",
+    "检查TASK_MASTER.md是否存在",
+    "检查是否有逾期任务（简化检查，实际应解析yaml）",
+    "这里简化处理，实际应解析任务状态",
+    "检查是否有被遗忘任务清单",
+    "检查MEMORY.md更新时间",
+    "简化检查，实际应解析yaml",
+    "如果当前时间已过09:00，检查晨报是否生成",
+    "检查A满意哥专属文件夹中的晨报",
+    "只保留最近100条记录"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

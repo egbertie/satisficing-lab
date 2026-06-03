@@ -1,0 +1,42 @@
+{
+  "defaults": {
+    "beforeEach": [
+      {
+        "type": "reLaunch",
+        "url": "{{ROUTE_URL}}"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "name": "route-snapshot",
+      "actions": [
+        {
+          "type": "waitForRoute",
+          "path": "{{ROUTE_PATH}}",
+          "query": "{{ROUTE_QUERY}}",
+          "timeoutMs": "{{ROUTE_TIMEOUT_MS}}"
+        },
+        {
+          "type": "snapshot",
+          "dataPaths": "{{SNAPSHOT_DATA_PATHS}}",
+          "path": "{{SNAPSHOT_PATH}}"
+        }
+      ]
+    },
+    {
+      "name": "route-screenshot",
+      "actions": [
+        {
+          "type": "waitForSelector",
+          "selector": "{{READY_SELECTOR}}",
+          "timeoutMs": "{{READY_TIMEOUT_MS}}"
+        },
+        {
+          "type": "screenshot",
+          "path": "{{SCREENSHOT_PATH}}"
+        }
+      ]
+    }
+  ]
+}

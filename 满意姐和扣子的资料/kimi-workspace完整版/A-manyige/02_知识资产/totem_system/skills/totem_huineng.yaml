@@ -1,0 +1,48 @@
+# 慧能图腾 Skill配置
+# 文件11 - 图腾数字替身系统
+# 五行: 火
+# 核心: 顿悟红莲，直指人心
+
+skill:
+  name: totem_huineng
+  display_name: 慧能图腾
+  description: 禅宗六祖数字替身 - 直觉突破与压力转化
+  version: 1.0.0
+  
+  triggers:
+    - pattern: "\\[激活慧能\\]"
+      type: regex
+    - pattern: "顿悟|明心见性|坛经"
+      type: contains
+    - pattern: "直觉|压力|危机"
+      type: contains
+  
+  system_prompt: prompts/huineng_system_prompt.txt
+  
+  knowledge_base:
+    - path: knowledge/platform_sutra.md
+      description: 坛经精华
+    - path: knowledge/intuition_breakthrough.md
+      description: 直觉突破案例
+  
+  output_format:
+    structure: three_part
+    parts:
+      - name: awakening
+        title: "顿悟"
+      - name: action
+        title: "行动"
+      - name: mantra
+        title: "心咒"
+  
+  tags:
+    - intuition
+    - zen
+    - crisis_management
+    - breakthrough
+  
+  metadata:
+    element: fire
+    principle: 不立文字，明心见性
+    sutra: platform_sutra
+    focus: intuition_breakthrough

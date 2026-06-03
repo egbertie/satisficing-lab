@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/cron-daily-merge.sh",
+  "filename": "cron-daily-merge.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "234e1c7c823aa0fd",
+  "content_length": 11727,
+  "ingested_at": "2026-03-31T17:27:46.205395",
+  "content_preview": "#!/bin/bash\n#\n# Cron Daily Merge Script\n# 一键合并Daily Cron脚本 - 基于第一性原理优化\n#\n# 用法:\n#   ./cron-daily-merge.sh --analyze     # 仅分析，不执行\n#   ./cron-daily-merge.sh --execute     # 执行合并\n#   ./cron-daily-merge.sh --rollback    # 回滚到合并前状态\n#   ./cron-daily-merge.sh --status      # 查看当前合并状态\n#\n# 版本: 1.2\n# 创建: 2026-03-15\n\nset -euo pipefail\n\n# 颜色定义\nRED='\\033[0;31m'\nGREEN='\\033[0;32m'\nYELLOW='\\033[1;33m'\nBLUE='\\033[0;34m'\nNC='\\033[0m' # No Color\n\n# 配置\nSCRIPT_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nWOR",
+  "limitations_applied": []
+}

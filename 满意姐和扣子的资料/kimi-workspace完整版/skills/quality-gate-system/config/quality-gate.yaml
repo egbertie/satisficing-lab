@@ -1,0 +1,279 @@
+# Quality Gate Configuration
+# 质量门禁系统配置
+
+version: "5.0.0"
+last_updated: "2026-03-21"
+
+# 门禁等级定义 (S1.2)
+gate_levels:
+  basic:
+    name: "Basic"
+    description: "提交前门禁 - 快速检查"
+    min_score: 60
+    block_on_fail: false
+    timeout_seconds: 60
+    dimensions:
+      - compliance
+    
+  standard:
+    name: "Standard"
+    description: "合并前门禁 - 标准检查"
+    min_score: 75
+    block_on_fail: true
+    timeout_seconds: 300
+    dimensions:
+      - prerequisites
+      - compliance
+      - results
+    
+  critical:
+    name: "Critical"
+    description: "发布前门禁 - 完整检查"
+    min_score: 90
+    block_on_fail: true
+    timeout_seconds: 600
+    dimensions:
+      - prerequisites
+      - compliance
+      - results
+      - documentation
+
+# 维度权重配置 (S1.2.1)
+dimensions:
+  prerequisites:
+    name: "前置条件"
+    description: "环境/依赖/权限检查"
+    weight: 0.15
+    checks:
+      env_vars:
+        name: "环境变量"
+        weight: 0.25
+        required_vars: ["PATH", "HOME"]
+        
+      dependencies:
+        name: "依赖检查"
+        weight: 0.25
+        required_files: ["requirements.txt", "package.json"]
+        
+      permissions:
+        name: "权限检查"
+        weight: 0.25
+        
+      config_files:
+        name: "配置文件"
+        weight: 0.25
+        required: ["config/quality-gate.yaml"]
+        
+  compliance:
+    name: "过程合规"
+    description: "代码规范/提交规范/安全扫描"
+    weight: 0.25
+    checks:
+      code_style:
+        name: "代码风格"
+        weight: 0.30
+        tools: ["black", "flake8", "eslint"]
+        auto_fix: true
+        fix_command: "black . && isort ."
+        
+      commit_message:
+        name: "提交规范"
+        weight: 0.20
+        pattern: "^(feat|fix|docs|style|refactor|test|chore)(\\(.+\\))?: .+"
+        
+      security_scan:
+        name: "安全扫描"
+        weight: 0.30
+        tools: ["bandit", "safety"]
+        severity_threshold: "MEDIUM"
+        
+      static_analysis:
+        name: "静态分析"
+        weight: 0.20
+        tools: ["pylint", "mypy"]
+        
+  results:
+    name: "结果验收"
+    description: "测试/覆盖率/性能"
+    weight: 0.40
+    checks:
+      unit_tests:
+        name: "单元测试"
+        weight: 0.30
+        framework: "pytest"
+        required_pass_rate: 100
+        
+      coverage:
+        name: "测试覆盖率"
+        weight: 0.25
+        min_coverage: 80
+        
+      integration_tests:
+        name: "集成测试"
+        weight: 0.25
+        required: false
+        
+      performance:
+        name: "性能测试"
+        weight: 0.20
+        baseline_file: ".perf-baseline.json"
+        regression_threshold: 10
+        
+  documentation:
+    name: "文档完整"
+    description: "变更说明/API文档/部署指南"
+    weight: 0.20
+    checks:
+      changelog:
+        name: "变更日志"
+        weight: 0.30
+        required_files: ["CHANGELOG.md", "HISTORY.md"]
+        
+      api_docs:
+        name: "API文档"
+        weight: 0.30
+        required_sections: ["Installation", "Usage", "API"]
+        
+      deploy_docs:
+        name: "部署文档"
+        weight: 0.20
+        required_files: ["DEPLOY.md", "docker-compose.yml", "Dockerfile"]
+        
+      readme:
+        name: "README更新"
+        weight: 0.20
+        required_sections: ["Installation", "Usage", "Contributing"]
+
+# 通过准则 (S1.3)
+pass_criteria:
+  PASS:
+    min_total_score: 90
+    min_dimension_score: 70
+    description: "完全通过，无需改进"
+    
+  CONDITIONAL:
+    min_total_score: 75
+    min_dimension_score: 60
+    description: "通过，但有改进建议"
+    
+  FAIL:
+    min_total_score: 60
+    min_dimension_score: 50
+    description: "未通过，需要修复"
+    
+  BLOCK:
+    min_total_score: 0
+    min_dimension_score: 0
+    description: "严重问题，强制阻断"
+
+# 豁免规则 (S1.4)
+exemption_rules:
+  hotfix:
+    enabled: true
+    description: "紧急修复豁免"
+    max_score_drop: 10
+    requires_approval: true
+    approvers: ["captain", "director"]
+    audit_required: true
+    
+  docs_only:
+    enabled: true
+    description: "纯文档变更"
+    skip_dimensions: ["results"]
+    min_score: 70
+    file_patterns: ["*.md", "*.rst", "*.txt"]
+    
+  wip:
+    enabled: true
+    description: "Work in Progress"
+    block_on_fail: false
+    requires_tag: "[WIP]"
+    max_duration_hours: 24
+
+# 通知配置
+notifications:
+  slack:
+    enabled: false
+    webhook: "${SLACK_WEBHOOK_URL}"
+    events: ["fail", "block"]
+    
+  email:
+    enabled: false
+    smtp_host: "${SMTP_HOST}"
+    smtp_port: 587
+    from: "quality-gate@example.com"
+    to: ["team@example.com"]
+    events: ["block"]
+    
+  github_status:
+    enabled: true
+    context: "quality-gate-system"
+
+# 输出格式 (S3.4)
+output_formats:
+  json:
+    enabled: true
+    pretty_print: true
+    
+  junit:
+    enabled: true
+    
+  html:
+    enabled: true
+    template: "default"
+    
+  markdown:
+    enabled: true
+    
+  console:
+    enabled: true
+    color: true
+    verbose: false
+
+# CI/CD集成 (S4)
+ci_integration:
+  github_actions:
+    enabled: true
+    workflow_file: ".github/workflows/quality-gate.yml"
+    
+  gitlab_ci:
+    enabled: false
+    stage: "test"
+    
+  jenkins:
+    enabled: false
+    pipeline_script: "Jenkinsfile"
+
+# 标准一致性 (S5)
+standards_consistency:
+  version_control: true
+  drift_detection:
+    enabled: true
+    check_interval_hours: 24
+  
+# 局限标注 (S6)
+limitations:
+  automation: "自动检查无法完全替代人工审查"
+  context_understanding: "无法理解业务逻辑正确性"
+  tool_reliability: "依赖外部工具的准确性"
+  security: "无法检测所有安全漏洞"
+
+# 对抗测试 (S7)
+adversarial_testing:
+  enabled: true
+  schedule: "weekly"
+  test_cases:
+    defect_injection:
+      count: 10
+      categories: ["syntax", "security", "logic"]
+    
+    false_positive:
+      count: 5
+      
+    boundary:
+      count: 8
+      
+  acceptance_criteria:
+    detection_rate: ">= 85%"
+    false_positive_rate: "<= 10%"
+    false_negative_rate: "<= 5%"

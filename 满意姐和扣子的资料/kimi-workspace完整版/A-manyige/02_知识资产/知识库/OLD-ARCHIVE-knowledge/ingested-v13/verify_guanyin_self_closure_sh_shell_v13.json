@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify_guanyin_self_closure.sh",
+  "filename": "verify_guanyin_self_closure.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "dfab5e91eb7d586f",
+  "content_length": 1493,
+  "ingested_at": "2026-03-31T17:27:46.156955",
+  "content_preview": "#!/bin/bash\n# 满意妞自我闭环升级验证脚本\n\necho \"=== 满意妞自我闭环升级验证 ===\"\necho \"\"\n\n# 检查自我闭环模块\necho \"1. 自我闭环模块:\"\nif [ -f \"/root/.openclaw/workspace/skills/guanyin-self-closure/guanyin_self_closure.py\" ]; then\n    echo \"   ✅ guanyin_self_closure.py 存在\"\n    lines=$(wc -l < /root/.openclaw/workspace/skills/guanyin-self-closure/guanyin_self_closure.py)\n    echo \"      代码行数: $lines\"\nelse\n    echo \"   ❌ guanyin_self_closure.py 不存在\"\n    exit 1\nfi\n\n# 检查关键方法\necho \"\"\necho \"2. 关键方法存在性:\"\ngrep -q \"self_audit\" /root/.openclaw/w",
+  "limitations_applied": []
+}

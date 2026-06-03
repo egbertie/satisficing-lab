@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/honesty-tagging-protocol/scripts/honesty.py",
+  "filename": "honesty.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "ec8393eae736bfd2",
+  "content_length": 2951,
+  "ingested_at": "2026-03-31T17:27:45.004761",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nHonesty Tagging Protocol\n强制认知状态标签，根治幻觉\n\"\"\"\n\nimport sys\nimport json\nfrom datetime import datetime\n\nEPISTEMIC_TAGS = {\n    \"KNOWN\": {\"label\": \"[KNOWN]\", \"confidence\": \"高(≥90%)\", \"color\": \"🟢\"},\n    \"INFERRED\": {\"label\": \"[INFERRED]\", \"confidence\": \"中(60-89%)\", \"color\": \"🟡\"},\n    \"UNKNOWN\": {\"label\": \"[UNKNOWN]\", \"confidence\": \"低(<60%)\", \"color\": \"🔴\"},\n    \"CONTRADICTORY\": {\"label\": \"[CONTRADICTORY]\", \"confidence\": \"不确定\", \"color\": \"⚠️\"}\n}\n\nTRUST_SCORE = 30  # 当前信任分\n\nCLAW_S",
+  "limitations_applied": []
+}

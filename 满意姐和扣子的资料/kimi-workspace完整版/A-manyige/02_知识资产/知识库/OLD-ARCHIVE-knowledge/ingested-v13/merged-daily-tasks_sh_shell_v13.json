@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/merged-daily-tasks.sh",
+  "filename": "merged-daily-tasks.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "f90b37c160e31d96",
+  "content_length": 1383,
+  "ingested_at": "2026-03-31T17:27:46.156118",
+  "content_preview": "#!/bin/bash\n# 合并每日任务脚本 - Token优化\n# 将token-monitor、安全审计等合并执行\n\nLOG_FILE=\"/tmp/merged-tasks.log\"\nDATE_STR=$(date '+%Y-%m-%d %H:%M:%S')\n\necho \"[$DATE_STR] 🔄 Starting merged daily tasks...\" >> \"$LOG_FILE\"\n\n# ===== 任务1: Token状态检查 =====\necho \"[$DATE_STR] 📊 Token status check\" >> \"$LOG_FILE\"\necho \"[$DATE_STR]   Status: OK\" >> \"$LOG_FILE\"\n\n# ===== 任务2: 安全检查点 =====\necho \"[$DATE_STR] 🔒 Security baseline check\" >> \"$LOG_FILE\"\n# 检查文件权限\nfind /root/.openclaw/workspace -name \".env*\" -type f ! -perm 600 2>/dev/n",
+  "limitations_applied": []
+}

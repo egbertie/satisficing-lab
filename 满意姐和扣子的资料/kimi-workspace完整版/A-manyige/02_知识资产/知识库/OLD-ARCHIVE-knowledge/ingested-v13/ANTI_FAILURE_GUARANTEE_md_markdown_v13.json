@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/docs/2026-03/ANTI_FAILURE_GUARANTEE.md",
+  "filename": "ANTI_FAILURE_GUARANTEE.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "b6789f46893ca922",
+  "content_length": 2266,
+  "ingested_at": "2026-03-31T17:27:46.639051",
+  "content_preview": "# 不掉链子保障方案 V1.0\n\n> 针对\"完成即停、忘记迭代、效率不持续\"问题的解决方案\n\n---\n\n## 🎯 核心问题\n\n| 问题 | 表现 | 后果 |\n|------|------|------|\n| 完成即停 | 子代理完成→报告→等待用户→再启动 | 时间断层、效率损失 |\n| 忘记迭代 | 忙于执行→忘记优化→重复低效 | 长期停滞、无法进化 |\n| 被动响应 | 用户推动→才行动→不主动思考 | 依赖性强、自主性弱 |\n\n---\n\n## 🛡️ 三重保障机制\n\n### 保障1：自动触发机制（技术层）\n\n**规则**：任何任务完成，自动触发检查\n\n```\n任务完成 → 立即检查：\n  ├─ 是否有依赖此任务的后继？→ 自动启动\n  ├─ 是否有可并行的其他任务？→ 自动启动\n  ├─ 是否达到整点/半点？→ 生成进度快照\n  └─ 用户是否在等待？→ 立即汇报\n```\n\n**实施**：\n- [ ] 修改 `task_coordinator_v2.py` 添加 `on_task_complete` 钩子\n- [ ] 每个子代理完成时，自动调用协调器检查后续\n- [ ] 建立任",
+  "limitations_applied": []
+}

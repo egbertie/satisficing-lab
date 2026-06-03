@@ -1,0 +1,41 @@
+{
+  "source_path": "/root/.openclaw/workspace/plugins/feishu_drive_upload.py",
+  "filename": "feishu_drive_upload.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 5946,
+  "checksum": "f51526f60c03bb9e",
+  "ingested_at": "2026-03-31T17:30:31.966119",
+  "line_count": 202,
+  "title": "feishu_drive_upload",
+  "description": "飞书云盘文件上传插件\n支持上传本地文件到飞书云空间\n\n用法:\n  python3 feishu_drive_upload.py <本地文件路径> [目标文件夹token]\n  \n示例:\n  python3 feishu_drive_upload.py /path/to/file.pdf\n  python3 feishu_drive_upload.py /path/to/file.pdf fldbc",
+  "sections": [],
+  "entities": [
+    {
+      "name": "get_tenant_access_token",
+      "type": "function"
+    },
+    {
+      "name": "upload_file_to_drive",
+      "type": "function"
+    },
+    {
+      "name": "list_root_files",
+      "type": "function"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "配置 - 从OpenClaw配置读取",
+    "检查文件大小限制 (20MB)",
+    "准备multipart/form-data",
+    "检查是否是list命令",
+    "输出可用于分享的链接格式"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

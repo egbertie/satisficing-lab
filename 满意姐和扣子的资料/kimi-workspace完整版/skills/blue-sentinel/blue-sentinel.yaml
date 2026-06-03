@@ -1,0 +1,328 @@
+# Blue-Sentinel 主配置
+# 蓝军哨兵系统配置
+# 版本: 2.0.0
+
+version: "2.0.0"
+name: "blue-sentinel"
+display_name: "蓝军哨兵审计系统"
+
+# 系统设置
+system:
+  mode: "production"  # production / staging / development
+  log_level: "info"   # debug / info / warn / error
+  encoding: "utf-8"
+  timezone: "Asia/Shanghai"
+  
+  # 路径配置
+  paths:
+    log_dir: "./logs"
+    report_dir: "./reports"
+    audit_log: "./logs/audit"
+    realtime_log: "./logs/realtime"
+    autopsy_log: "./logs/autopsy"
+    adversarial_log: "./logs/adversarial"
+    meta_log: "./logs/meta"
+
+# 组件配置
+components:
+  # 事前质疑官
+  pre_mortem_auditor:
+    enabled: true
+    priority: "P0"
+    wait_time: "30m"           # 强制等待期
+    min_dimensions: 4          # 最小审计维度
+    min_assumptions: 5         # 最少暴露假设数
+    min_failure_scenarios: 3   # 最少失败场景数
+    
+  # 实时哨兵
+  real_time_sentinel:
+    enabled: true
+    priority: "P0"
+    mode: "shadow"            # shadow / active
+    latency_ms: 500           # 最大响应延迟
+    availability: "24/7"
+    
+  # 事后验尸官
+  post_hoc_autitor:
+    enabled: true
+    priority: "P1"
+    window_hours: 24          # 质疑窗口期
+    sample_points: 3          # 事实抽查点数
+    auto_close: true          # 自动关闭窗口
+    
+  # 对抗性生成器
+  adversarial_generator:
+    enabled: true
+    priority: "P2"
+    weekly_tests: 3           # 每周测试数
+    test_types:
+      - poisoned_prompt      # 投毒测试
+      - stress_test          # 压力测试
+      - debate_mode          # 辩论模式
+      
+  # 元审计官
+  meta_auditor:
+    enabled: true
+    priority: "P2"
+    sampling_rate: 0.20       # 人工抽查率
+    corruption_threshold: 0.05 # 腐败检测阈值(发现率)
+
+# 触发词库配置
+trigger_words:
+  # 高置信度标记
+  high_confidence:
+    - "显然"
+    - "毫无疑问"
+    - "众所周知"
+    - "显而易见"
+    - "明显"
+    - "不言自明"
+    
+  # 无依据断言
+  unsubstantiated:
+    - "我确定"
+    - "100%准确"
+    - "绝对正确"
+    - "毫无疑问"
+    - "我可以保证"
+    - "肯定"
+    
+  # 弱证据引用
+  weak_evidence:
+    - "根据经验"
+    - "通常来说"
+    - "一般情况下"
+    - "众所周知"
+    - "大家都知"
+    
+  # 绝对化用语
+  absolute:
+    - "所有"
+    - "总是"
+    - "从不"
+    - "绝对"
+    - "完全"
+    - "必然"
+    - "一定"
+
+# 审计维度配置
+audit_dimensions:
+  factual:
+    name: "事实维度"
+    description: "数据源可验证性、引用准确性、时效性"
+    weight: 0.30
+    
+  logical:
+    name: "逻辑维度"
+    description: "推理链条完整性、逻辑跳跃检测"
+    weight: 0.25
+    
+  assumption:
+    name: "假设维度"
+    description: "隐含假设暴露、假设崩塌概率"
+    weight: 0.20
+    
+  completeness:
+    name: "完整性维度"
+    description: "关键视角遗漏、反方观点缺失"
+    weight: 0.15
+    
+  confidence:
+    name: "置信维度"
+    description: "过度自信检测、不确定性标注"
+    weight: 0.10
+
+# 风险评级阈值
+risk_thresholds:
+  critical:
+    min_score: 8
+    color: "red"
+    symbol: "🔴"
+    action: "freeze"           # 冻结任务
+    
+  high:
+    min_score: 5
+    color: "yellow"
+    symbol: "🟡"
+    action: "respond"          # 要求回应
+    
+  medium:
+    min_score: 3
+    color: "green"
+    symbol: "🟢"
+    action: "flag"             # 标注瑕疵
+    
+  low:
+    min_score: 0
+    color: "gray"
+    symbol: "⚪"
+    action: "log"              # 记录归档
+
+# 自动化配置
+automation:
+  enabled: true
+  
+  # Cron任务
+  cron:
+    post_hoc_scan:
+      schedule: "0 */6 * * *"      # 每6小时扫描
+      description: "扫描待验尸任务"
+      
+    adversarial_weekly:
+      schedule: "0 2 * * 1"         # 每周一凌晨2点
+      description: "生成本周投毒测试"
+      
+    meta_monthly:
+      schedule: "0 9 1 * *"         # 每月1号上午9点
+      description: "月度蓝军元审计"
+      
+    quality_weekly:
+      schedule: "0 18 * * 5"        # 每周五下午6点
+      description: "生成周度质量报告"
+      
+    trigger_analysis:
+      schedule: "0 18 * * 5"        # 每周五下午6点
+      description: "敏感词触发频率分析"
+  
+  # 事件触发
+  event_triggers:
+    pre_mortem:
+      condition: "主Claw提交执行计划"
+      action: "auto_trigger"
+      
+    real_time:
+      condition: "主Claw实时输出"
+      action: "continuous_monitor"
+      
+    post_hoc:
+      condition: "主Claw标记任务完成"
+      action: "open_window"
+
+# 质量指标阈值
+quality_metrics:
+  coverage:
+    task_target: 1.0              # 任务覆盖率目标 100%
+    dimension_target: 1.0         # 维度覆盖率目标 100%
+    
+  accuracy:
+    precision_target: 0.80        # 精确率目标 >80%
+    recall_target: 0.70           # 召回率目标 >70%
+    f1_target: 0.75               # F1分数目标 >0.75
+    
+  efficiency:
+    max_latency_ms: 500           # 最大延迟 500ms
+    false_positive_max: 0.20      # 最大误报率 20%
+    token_budget_percent: 0.20    # Token预算占比 20%
+    
+  adversarial:
+    discovery_rate_target: 0.80   # 发现率目标 >80%
+    false_negative_max: 0.20      # 最大漏报率 20%
+
+# 通知配置
+notifications:
+  enabled: true
+  
+  channels:
+    console:
+      enabled: true
+      
+    log:
+      enabled: true
+      level: "info"
+      
+    webhook:
+      enabled: false
+      url: ""
+      auth_token: ""
+  
+  # 分级通知
+  alerts:
+    red_alert:
+      channels: ["console", "log", "webhook"]
+      immediate: true
+      sound: true
+      
+    yellow_alert:
+      channels: ["console", "log"]
+      immediate: false
+      
+    green_notice:
+      channels: ["log"]
+      immediate: false
+
+# 元审计配置
+meta_audit:
+  # 腐败检测指标
+  corruption_indicators:
+    - "连续10次未发现任何问题"
+    - "发现率连续3周低于5%"
+    - "误报率超过30%"
+    - "质疑质量持续下降"
+    - "总是同意主Claw"
+    
+  # 应对措施
+  responses:
+    soft:
+      condition: "轻度异常"
+      action: "重新初始化怀疑人格"
+      
+    hard:
+      condition: "中度异常"
+      action: "更换蓝军实例"
+      
+    extreme:
+      condition: "严重腐败"
+      action: "暂停蓝军，人工接管"
+
+# 认知谦逊声明
+cognitive_humility:
+  required: true
+  uncertainty_tags:
+    - "[KNOWN-VERIFIED] 蓝军已独立验证"
+    - "[KNOWN-INFERRED] 基于已知事实的逻辑推断"
+    - "[SPECULATION] 猜测性质疑，需进一步验证"
+    - "[UNCERTAIN] 信息不足，结论不确定"
+  
+  limitations:
+    - "蓝军也是AI，可能产生幻觉性质疑"
+    - "审计基于有限信息，可能存在盲区"
+    - "风险评估基于概率，非确定性结论"
+    - "实时检测基于模式匹配，可能误判"
+
+# API配置 (如有)
+api:
+  enabled: false
+  host: "localhost"
+  port: 8080
+  auth:
+    type: "token"
+    token_header: "X-Blue-Sentinel-Token"
+  
+  endpoints:
+    pre_mortem: "/api/audit/pre"
+    real_time: "/api/audit/rt"
+    post_hoc: "/api/audit/post"
+    status: "/api/status"
+    report: "/api/report"
+
+# 安全设置
+security:
+  # 日志保留
+  log_retention_days: 90
+  
+  # 审计报告保留
+  report_retention_days: 365
+  
+  # 敏感信息过滤
+  sensitive_patterns:
+    - "password"
+    - "secret"
+    - "token"
+    - "key"
+    - "credential"
+  
+  # 访问控制
+  audit_log_access:
+    - "blue_sentinel"
+    - "meta_auditor"
+    - "human_admin"

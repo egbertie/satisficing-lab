@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/blue-army-disaster-recovery-upgrade.md",
+  "filename": "blue-army-disaster-recovery-upgrade.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "2086dfa9b79b1641",
+  "content_length": 6461,
+  "ingested_at": "2026-03-31T17:27:45.494115",
+  "content_preview": "# 蓝军灾备思维全面融入升级方案\n# 时间: 2026-03-30 22:52\n# 目标: 将灾备思维、极端情况重视、突发风险思维融入蓝军所有工作\n\n---\n\n## 一、蓝军工作灾备化升级清单\n\n### 1. 审计机制 ⭐⭐ 重大升级\n\n**原设计**: 17-19项检查，一次性审计\n**灾备升级**: **审计状态持久化 + 中断恢复**\n\n#### 升级内容\n\n- ✅ **审计进度保存**: 每完成一项检查自动保存\n- ✅ **断点续审**: 审计中断后可从断点继续\n- ✅ **审计历史**: 每次审计结果版本化保存\n- ✅ **对比分析**: 自动对比历史审计，发现退化\n\n**升级交付**:\n```python\nclass BlueArmyAuditor:\n    def __init__(self):\n        self.progress_file = \"memory/audit_progress.json\"\n        self.history_dir = \".versions/audit_history/\"\n    \n    def save_progress(s",
+  "limitations_applied": []
+}

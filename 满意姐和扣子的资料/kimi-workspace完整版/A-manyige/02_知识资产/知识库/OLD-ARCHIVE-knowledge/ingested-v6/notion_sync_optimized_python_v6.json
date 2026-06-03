@@ -1,0 +1,55 @@
+{
+  "source_path": "/root/.openclaw/workspace/archive/notion_sync_old/notion_sync_optimized.py",
+  "filename": "notion_sync_optimized.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 25729,
+  "checksum": "8682f8f4ac2e105a",
+  "ingested_at": "2026-03-31T17:30:32.910907",
+  "line_count": 706,
+  "title": "notion_sync_optimized",
+  "description": "Notion同步脚本 - 优化版 V4\n特性：\n- 断点续传（保存进度，随时恢复）\n- 智能重试（指数退避，自动恢复）\n- 连接池复用（提高稳定性）\n- 批量处理（每批10个文件）\n- 网络故障自动恢复",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: ConnectionPool"
+    },
+    {
+      "level": 2,
+      "title": "Class: ProgressManager"
+    },
+    {
+      "level": 2,
+      "title": "Class: NotionSyncer"
+    }
+  ],
+  "entities": [
+    {
+      "name": "ConnectionPool",
+      "type": "class"
+    },
+    {
+      "name": "ProgressManager",
+      "type": "class"
+    },
+    {
+      "name": "NotionSyncer",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "设置默认headers",
+    "检查是否超过最大重试次数",
+    "限制块数（Notion限制每页1000块）",
+    "分批添加（每批100个）",
+    "跳过隐藏目录和特定目录",
+    "排序：先根目录，后子目录"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

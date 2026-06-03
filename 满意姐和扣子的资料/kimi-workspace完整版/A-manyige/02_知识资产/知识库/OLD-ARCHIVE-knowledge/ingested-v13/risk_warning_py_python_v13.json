@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/A-manyige/00_🧭 罗盘指南/partnership-model/risk_warning.py",
+  "filename": "risk_warning.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "1586aa42148e5a52",
+  "content_length": 12439,
+  "ingested_at": "2026-03-31T17:27:46.294087",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n合伙人风险预警体系 V1.0\n早期信号识别 + 分级预警 + 干预建议\n\"\"\"\n\nimport json\nfrom typing import Dict, List, Optional\nfrom enum import Enum\nfrom dataclasses import dataclass\nfrom datetime import datetime\n\nclass AlertLevel(Enum):\n    GREEN = \"green\"       # 正常\n    YELLOW = \"yellow\"     # 关注\n    ORANGE = \"orange\"     # 警告\n    RED = \"red\"           # 危险\n    BLACK = \"black\"       # 危机\n\n@dataclass\nclass RiskSignal:\n    \"\"\"风险信号\"\"\"\n    signal_type: str\n    description: str\n    severity: AlertLevel\n  ",
+  "limitations_applied": []
+}

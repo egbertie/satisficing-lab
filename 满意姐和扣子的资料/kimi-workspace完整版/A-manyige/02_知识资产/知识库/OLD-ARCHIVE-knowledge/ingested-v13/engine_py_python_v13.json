@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/universal-task-executor-v3/core/engine.py",
+  "filename": "engine.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "bd0dd6cf92d30ac6",
+  "content_length": 21719,
+  "ingested_at": "2026-03-31T17:27:45.367081",
+  "content_preview": "\"\"\"\nUniversal Task Executor V3.0 - 任务调度引擎\n核心引擎，支持1-6类任务的统一接口、Token优化、暂停/重启\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport time\nimport logging\nimport asyncio\nfrom typing import Dict, List, Optional, Any, Callable, Iterator\nfrom dataclasses import dataclass, field\nfrom datetime import datetime\nfrom pathlib import Path\n\nfrom .structures import (\n    Task, TaskBatch, TaskStatus, TaskPriority, TaskResult,\n    ExecutorConfig, TokenLevel\n)\nfrom .token_engine import TokenEngine, TokenAwareScheduler, Token",
+  "limitations_applied": []
+}

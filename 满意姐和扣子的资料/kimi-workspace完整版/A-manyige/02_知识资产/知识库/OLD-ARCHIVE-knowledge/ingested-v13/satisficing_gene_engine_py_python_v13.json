@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/satisficing-gene-engine/satisficing_gene_engine.py",
+  "filename": "satisficing_gene_engine.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "0ca8eb0f9ee1cb14",
+  "content_length": 7206,
+  "ingested_at": "2026-03-31T17:27:45.450540",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n满意解基因内化机制 - M003\n自动应用满意解原则，记录决策过程，验证内化效果\n\n创建时间: 2026-03-31\n状态: 整改完成\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime\nfrom pathlib import Path\n\nclass SatisficingGeneEngine:\n    \"\"\"满意解基因内化引擎\"\"\"\n    \n    def __init__(self, workspace=\"/root/.openclaw/workspace\"):\n        self.workspace = Path(workspace)\n        self.decisions_dir = self.workspace / \"diary\" / \"satisficing_decisions\"\n        self.decisions_dir.mkdir(parents=True, exist_ok=True)\n        \n        # 满意解",
+  "limitations_applied": []
+}

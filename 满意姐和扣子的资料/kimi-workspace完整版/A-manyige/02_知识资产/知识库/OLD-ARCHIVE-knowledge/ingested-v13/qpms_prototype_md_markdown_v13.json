@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/learning_output/avatars/15_LUO_HAN/qpms_prototype.md",
+  "filename": "qpms_prototype.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "ec64dad08b6362f8",
+  "content_length": 732,
+  "ingested_at": "2026-03-31T17:27:44.629001",
+  "content_preview": "# 15_罗汉教授今晚深化：QPMS引擎原型设计\n# 角色: 专家体系-数学建模\n# 时间: 2026-03-27 22:11\n# 诚实红线: 伪代码完成，编码需程序员\n\n---\n\n## 深化内容：可执行算法框架\n\n### 算法流程\n```python\ndef qpms_match(demand, constraints, candidates):\n    # 1. 硬约束过滤\n    filtered = [c for c in candidates if check_hard(c, constraints)]\n    \n    # 2. 满意解搜索\n    threshold = 0.8 * max_possible_score\n    for candidate in filtered:\n        score = calculate_score(demand, candidate)\n        if score >= threshold:\n            return candidate  # 满意即停止\n    \n    # 3. 返回最佳候选\n    ret",
+  "limitations_applied": []
+}

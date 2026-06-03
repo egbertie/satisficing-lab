@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/system-v3/knowledge_ingest_remediation/P0-core-framework/run.py",
+  "filename": "run.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "892b902c257403ac",
+  "content_length": 4164,
+  "ingested_at": "2026-03-31T17:27:46.131825",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n知识入库Skill - 高标准整改版 V7.0.0\n入口脚本 - Skill框架化实现\n立即执行版 - 2026-03-31\n\"\"\"\n\nimport sys\nimport json\nimport argparse\nfrom pathlib import Path\nfrom datetime import datetime\n\n# 版本信息\nVERSION = \"7.0.0\"\nSTANDARDS = [\"S1\", \"S2\", \"S3\", \"S4\", \"S5\"]\n\n# 5标准验证检查清单\nSTANDARDS_CHECKLIST = {\n    \"S1\": {\n        \"name\": \"全局考虑\",\n        \"checks\": [\n            \"9种文件类型全覆盖\",\n            \"统一元数据格式\",\n            \"批量处理能力\",\n            \"文件大小限制\"\n        ],\n        \"status\": \"pending\"\n    },\n    \"S2\": {\n",
+  "limitations_applied": []
+}

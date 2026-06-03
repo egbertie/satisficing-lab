@@ -1,0 +1,82 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/daily_morning_report_generator.py",
+  "filename": "daily_morning_report_generator.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 21091,
+  "checksum": "8808cce3b86aaea6",
+  "ingested_at": "2026-03-31T17:30:32.823494",
+  "line_count": 580,
+  "title": "daily_morning_report_generator",
+  "description": "每日晨报自动生成脚本 - Daily Morning Report Generator\n版本: 1.0.0\n作者: 满意解研究所\n功能: 自动生成格式化的每日晨报，整合MEMORY.md、Skill状态、任务管理等信息",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: Task"
+    },
+    {
+      "level": 2,
+      "title": "Class: SkillStatus"
+    },
+    {
+      "level": 2,
+      "title": "Class: MorningReport"
+    },
+    {
+      "level": 2,
+      "title": "Class: Config"
+    },
+    {
+      "level": 2,
+      "title": "Class: DataCollector"
+    },
+    {
+      "level": 2,
+      "title": "Class: ReportGenerator"
+    }
+  ],
+  "entities": [
+    {
+      "name": "Task",
+      "type": "class"
+    },
+    {
+      "name": "SkillStatus",
+      "type": "class"
+    },
+    {
+      "name": "MorningReport",
+      "type": "class"
+    },
+    {
+      "name": "Config",
+      "type": "class"
+    },
+    {
+      "name": "DataCollector",
+      "type": "class"
+    },
+    {
+      "name": "ReportGenerator",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "匹配 - [ ] 任务内容 或 - [x] 已完成任务",
+    "收集已完成任务（用于计算完成率）",
+    "匹配 (2026-03-25) 格式",
+    "匹配 今天/明天/本周 等",
+    "生成今日重点（P0/P1优先级，未完成的任务）",
+    "使用任务标题作为去重键",
+    "本周完成率计算（基于最近7天）",
+    "优先级：P0 > P1 > 其他",
+    "根据任务内容生成关联建议"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

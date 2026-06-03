@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/universal-checklist-enforcer/config/validation-rules.yaml",
+  "filename": "validation-rules.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "6b99f48e04932c0f",
+  "content_length": 1882,
+  "ingested_at": "2026-03-31T17:27:45.345394",
+  "content_preview": "# 清单验证规则\n# Validation Rules for Checklist Templates\n\nvalidation_rules:\n  # 结构验证\n  structure:\n    - name: 模板必须有版本号\n      check: template.version exists and template.version != \"\"\n      severity: error\n      message: \"模板缺少版本号\"\n      \n    - name: 模板必须有描述\n      check: template.description exists and template.description != \"\"\n      severity: warning\n      message: \"模板缺少描述\"\n      \n    - name: 检查项数组不为空\n      check: template.items exists and len(template.items) > 0\n      severity: error\n      message: ",
+  "limitations_applied": []
+}

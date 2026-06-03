@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_emergence-matching/scripts/matching-calculator.py",
+  "filename": "matching-calculator.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "f7ec9f2f4116d2f5",
+  "content_length": 962,
+  "ingested_at": "2026-03-31T17:27:45.158861",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n涌现匹配算法脚本\n版本: V2.0\n\"\"\"\n\nimport random\n\ndef calculate_match_score(partner_profile, project_requirements):\n    \"\"\"简化版匹配计算\"\"\"\n    # 五维评分\n    dimensions = [\"capability\", \"vision\", \"resource\", \"timing\", \"energy\"]\n    scores = {d: random.uniform(60, 95) for d in dimensions}\n    \n    # 加权计算\n    weights = {\n        \"capability\": 0.3,\n        \"vision\": 0.25,\n        \"resource\": 0.2,\n        \"timing\": 0.15,\n        \"energy\": 0.1\n    }\n    \n    total = sum(scores[d] * weights[d] f",
+  "limitations_applied": []
+}

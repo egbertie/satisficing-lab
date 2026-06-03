@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/knowledge-ingest/ingested/SKILL.1342.md",
+  "filename": "SKILL.1342.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "a518790424d8a4ff",
+  "content_length": 949,
+  "ingested_at": "2026-03-31T17:27:45.750430",
+  "content_preview": "# task-queue Skill V5标准版本\n\n## S1: 全局考虑\n\n### 输入\n- 任务项\n- 优先级\n- 队列配置（容量/并发）\n\n### 覆盖维度\n| 维度 | 考虑内容 |\n|------|----------|\n| **人** | 系统开发者 |\n| **事** | 任务入队、出队、执行、重试 |\n| **物** | 队列、任务、执行器 |\n| **环境** | 系统负载、资源限制 |\n| **外部集成** | 执行器、存储 |\n| **边界情况** | 队列满、任务失败、死循环 |\n\n---\n\n## S2: 系统考虑\n\n### 处理流程\n```\n任务入队 → 优先级排序 → 出队执行 → 结果处理 → 成功/重试/失败\n```\n\n### 故障处理\n- **队列满**: 拒绝新任务或扩展容量\n- **任务失败**: 重试3次，失败后移到死信队列\n- **执行器崩溃**: 任务重新入队\n\n---\n\n## S3: 输出规范\n\n### 队列状态\n```json\n{\n  \"queue_name\": \"default\",\n  \"pending\": 10,\n  \"proces",
+  "limitations_applied": []
+}

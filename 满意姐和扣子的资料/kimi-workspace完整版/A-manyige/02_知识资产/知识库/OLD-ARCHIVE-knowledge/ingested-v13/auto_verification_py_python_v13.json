@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/auto_verification.py",
+  "filename": "auto_verification.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e4575a142c96e04a",
+  "content_length": 5966,
+  "ingested_at": "2026-03-31T17:27:46.190431",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n自动化验证脚本 - Automated Verification Script\n自动验证声称vs实际，防止虚报\n\"\"\"\n\nimport os\nimport json\nimport subprocess\nfrom pathlib import Path\nfrom datetime import datetime\n\nclass AutomatedVerifier:\n    \"\"\"自动化验证器\"\"\"\n    \n    def __init__(self, workspace=\"/root/.openclaw/workspace\"):\n        self.workspace = Path(workspace)\n        self.report_file = self.workspace / \"diary\" / \"auto_verification_reports\" / f\"verification_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json\"\n        self.repo",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_overdue-task-rescuer/scripts/overdue-task-rescuer.py",
+  "filename": "overdue-task-rescuer.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "870a832e146b6771",
+  "content_length": 695,
+  "ingested_at": "2026-03-31T17:27:45.312313",
+  "content_preview": "#!/usr/bin/env python3\n\\\"\\\"\\\"\noverdue-task-rescuer runner\n5-Standard Skill Implementation\n\\\"\\\"\\\"\n\nimport sys\nimport json\nfrom datetime import datetime\n\ndef main():\n    if len(sys.argv) < 2:\n        print(f\"Usage: python3 {sys.argv[0]} [command]\")\n        sys.exit(1)\n    \n    command = sys.argv[1]\n    timestamp = datetime.now().isoformat()\n    \n    # Log execution\n    log_entry = {\n        \"skill\": \"overdue-task-rescuer\",\n        \"command\": command,\n        \"timestamp\": timestamp,\n        \"status",
+  "limitations_applied": []
+}

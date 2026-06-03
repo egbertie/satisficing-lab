@@ -1,0 +1,61 @@
+[
+  {
+    "timestamp": "2026-03-27T15:23:12.693643",
+    "directory": "/root/.openclaw/workspace/skills/namespace-enforcement",
+    "summary": {
+      "total_files": 9,
+      "compliant_files": 5,
+      "compliance_rate": 55.56,
+      "legacy_files": 0,
+      "migration_progress": 100.0,
+      "total_violations": 4
+    },
+    "violations_by_type": {
+      "missing_type": 3,
+      "uppercase": 1
+    },
+    "violations_by_severity": {
+      "error": 3,
+      "warning": 1
+    },
+    "directory_analysis": {
+      "subdirectory_compliance": [
+        {
+          "name": "docs",
+          "file_count": 11,
+          "compliance_rate": 45.45,
+          "violations": 2
+        },
+        {
+          "name": "tests",
+          "file_count": 9,
+          "compliance_rate": 55.56,
+          "violations": 0
+        },
+        {
+          "name": "scripts",
+          "file_count": 15,
+          "compliance_rate": 60.0,
+          "violations": 0
+        },
+        {
+          "name": "reports",
+          "file_count": 15,
+          "compliance_rate": 60.0,
+          "violations": 0
+        }
+      ],
+      "most_problematic": {
+        "name": "docs",
+        "file_count": 11,
+        "compliance_rate": 45.45,
+        "violations": 2
+      }
+    },
+    "s6_cognitive_humility": {
+      "note": "存量文件不强制迁移，渐进式规范化",
+      "legacy_file_count": 0,
+      "migration_recommendation": "建议每周处理5-10个存量文件"
+    }
+  }
+]

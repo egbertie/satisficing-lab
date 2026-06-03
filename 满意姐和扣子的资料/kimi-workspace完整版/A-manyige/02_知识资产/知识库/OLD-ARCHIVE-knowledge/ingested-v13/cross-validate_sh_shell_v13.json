@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/quality-assurance/scripts/cross-validate.sh",
+  "filename": "cross-validate.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "a3f530f310e059ef",
+  "content_length": 841,
+  "ingested_at": "2026-03-31T17:27:45.000721",
+  "content_preview": "#!/bin/bash\n# 交叉验证记录脚本\n# 使用方式: ./cross-validate.sh \"需要验证的决策内容\"\n\nCONTENT=$1\nWORKSPACE=\"/root/.openclaw/workspace\"\nVALIDATION_DIR=\"$WORKSPACE/memory/quality/cross-validation\"\n\nif [ -z \"$CONTENT\" ]; then\n    echo \"使用方式: $0 '需要验证的决策内容'\"\n    echo \"\"\n    echo \"最近交叉验证记录:\"\n    ls -la \"$VALIDATION_DIR\"/*.md 2>/dev/null | tail -10 || echo \"  无记录\"\n    exit 1\nfi\n\nmkdir -p \"$VALIDATION_DIR\"\n\nTIMESTAMP=$(date +%Y%m%d-%H%M%S)\nVALIDATION_FILE=\"$VALIDATION_DIR/${TIMESTAMP}.md\"\n\ncat > \"$VALIDATION_FILE\" << EOF\n# ",
+  "limitations_applied": []
+}

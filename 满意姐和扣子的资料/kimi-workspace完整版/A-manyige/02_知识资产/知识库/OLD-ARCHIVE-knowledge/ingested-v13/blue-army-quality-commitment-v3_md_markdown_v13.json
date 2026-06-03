@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/blue-army-quality-commitment-v3.md",
+  "filename": "blue-army-quality-commitment-v3.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "9f17e5c5d345aaa3",
+  "content_length": 2640,
+  "ingested_at": "2026-03-31T17:27:45.495715",
+  "content_preview": "# 蓝军质量保证承诺书 - Universal Task Executor V3.0\n\n> **承诺时间**: 2026-03-31 12:26  \n> **承诺人**: 蓝军 (质量守门员)  \n> **对象**: Universal Task Executor V3.0 Skill  \n\n---\n\n## 🔴 核心承诺\n\n### 承诺1: 子代理必须使用Skill框架\n\n**历史教训**:\n- CAT6-P0/P1/P2/BLUE-ARMY子代理直接执行任务，未使用Skill\n- 导致Egbertie选择方案A停止重建\n\n**本次保障措施**:\n```python\n# 强制检查清单 - 每个子代理启动前\nPRE_LAUNCH_CHECKLIST = [\n    \"子代理任务描述是否明确引用Skill?\",\n    \"子代理是否知道调用哪个Skill的哪个函数?\",\n    \"子代理输出是否必须通过Skill生成?\",\n    \"子代理是否被明确禁止直接操作文件系统?\",\n]\n```\n\n**违规阻断**:\n- 发现子代理直接执行任务 → 立即停止 → 整改 → 重建\n- 零容忍：一次违",
+  "limitations_applied": []
+}

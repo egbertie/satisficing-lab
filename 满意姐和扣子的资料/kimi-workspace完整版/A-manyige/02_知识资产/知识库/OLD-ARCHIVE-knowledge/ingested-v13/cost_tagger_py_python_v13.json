@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/token-budget-enforcer/scripts/cost_tagger.py",
+  "filename": "cost_tagger.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "39fa475377a5684e",
+  "content_length": 12364,
+  "ingested_at": "2026-03-31T17:27:45.015256",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nToken成本标签系统 - Token Cost Tagging System\n为每个任务自动附加Token成本预估标签\n\n5标准合规:\n- S1: 输入规范 - 任务描述→成本标签\n- S2: 执行闭环 - 标签生成→附加→验证\n- S3: 输出规范 - 标准化标签格式\n- S4: 自动触发 - 与任务系统集成的钩子\n- S5: 准确性验证 - 预估vs实际对比\n- S6: 局限标注 - 预估置信度标注\n- S7: 对抗测试 - 边界情况测试\n\"\"\"\n\nimport json\nimport re\nfrom pathlib import Path\nfrom datetime import datetime\nfrom typing import Dict, Optional, Tuple\n\nclass TokenCostTagger:\n    \"\"\"Token成本标签生成器\"\"\"\n    \n    # 任务类型关键词映射\n    TASK_PATTERNS = {\n        'p0_emergency': {\n         ",
+  "limitations_applied": []
+}

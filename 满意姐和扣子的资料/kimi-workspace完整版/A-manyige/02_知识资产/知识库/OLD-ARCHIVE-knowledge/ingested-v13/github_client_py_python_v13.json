@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/github-api/github_client.py",
+  "filename": "github_client.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "dfb0d59a922c86d4",
+  "content_length": 7265,
+  "ingested_at": "2026-03-31T17:27:45.342749",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nGitHub API 客户端\n5标准化Skill实现\n\"\"\"\n\nimport requests\nimport json\nfrom typing import Dict, List, Optional, Union\nfrom datetime import datetime\n\nclass GitHubClient:\n    \"\"\"GitHub API客户端\"\"\"\n    \n    BASE_URL = \"https://api.github.com\"\n    \n    def __init__(self, token: Optional[str] = None):\n        self.token = token\n        self.headers = {\n            \"Accept\": \"application/vnd.github.v3+json\",\n            \"User-Agent\": \"OpenClaw-GitHub-API-Skill\"\n        }\n        if token",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/file_reader.py",
+  "filename": "file_reader.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "2476f0d20e671b7d",
+  "content_length": 13235,
+  "ingested_at": "2026-03-31T17:27:46.215808",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\n统一文件读取工具 - file_reader.py\n支持格式：PDF, DOCX, TXT, XLSX, CSV\n自动编码检测，统一输出接口\n\n使用方法：\n    from file_reader import read_file, FileReader\n    \n    # 简单读取\n    content = read_file(\"document.pdf\")\n    \n    # 高级用法\n    reader = FileReader()\n    content = reader.read(\"document.docx\")\n\"\"\"\n\nimport os\nimport io\nfrom pathlib import Path\nfrom typing import Union, Optional, List, Dict, Any, Iterator\nimport logging\n\n# 配置日志\nlogging.basicConfig(level=logging.INFO, forma",
+  "limitations_applied": []
+}

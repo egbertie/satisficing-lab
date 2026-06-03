@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_chart-generator/chart.sh",
+  "filename": "chart.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "142be98c5751562d",
+  "content_length": 33555,
+  "ingested_at": "2026-03-31T17:27:45.189135",
+  "content_preview": "#!/usr/bin/env bash\n# chart.sh — Data visualization chart generator\n# Usage: chart.sh <command> <data> [options]\nset -euo pipefail\n\nSCRIPT_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\n\nshow_help() {\n    cat <<'EOF'\nchart.sh — 数据可视化图表生成器\n\nUsage:\n  chart.sh bar \"标签1:值1,标签2:值2\" [--title \"标题\"]     ASCII柱状图\n  chart.sh line \"1,5,3,8,2,7\" [--title \"趋势\"]            ASCII折线图\n  chart.sh pie \"A:30,B:50,C:20\" [--title \"分布\"]           ASCII饼图\n  chart.sh table \"H1,H2,H3|R1,R2,R3|...\"                  格",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_ffmpeg-batch-processor/scripts/batch_processor.py",
+  "filename": "batch_processor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e57e9fe7d505dd33",
+  "content_length": 6338,
+  "ingested_at": "2026-03-31T17:27:45.262160",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nFFmpeg Batch Processor\n批处理视频文件\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport argparse\nimport subprocess\nfrom pathlib import Path\nfrom datetime import datetime\n\nPRESETS = {\n    \"youtube\": {\n        \"resolution\": \"1920x1080\",\n        \"aspect\": \"16:9\",\n        \"crf\": 23,\n        \"description\": \"YouTube 1080p\"\n    },\n    \"tiktok\": {\n        \"resolution\": \"1080x1920\",\n        \"aspect\": \"9:16\",\n        \"crf\": 23,\n        \"description\": \"抖音/竖屏 1080p\"\n    },\n    \"instagram\": {\n",
+  "limitations_applied": []
+}

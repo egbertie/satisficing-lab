@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/info-cleaner/info_cleaner.py",
+  "filename": "info_cleaner.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "054d5b8f87c47ac0",
+  "content_length": 12616,
+  "ingested_at": "2026-03-31T17:27:44.794517",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n信息清洗与去重器 V1.0\n清洗、去重、标准化收集的信息\n\n核心功能：\n1. 文本清洗（去除噪音）\n2. 内容去重（相似度检测）\n3. 格式标准化\n4. 质量评分\n\"\"\"\n\nimport re\nimport json\nimport hashlib\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Optional, Tuple, Set\nfrom dataclasses import dataclass, asdict\nimport string\n\n@dataclass\nclass CleanedContent:\n    \"\"\"清洗后的内容\"\"\"\n    original_text: str\n    cleaned_text: str\n    content_hash: str\n    title: str = \"\"\n    url: str = \"\"\n    quality_score: float = 0.0",
+  "limitations_applied": []
+}

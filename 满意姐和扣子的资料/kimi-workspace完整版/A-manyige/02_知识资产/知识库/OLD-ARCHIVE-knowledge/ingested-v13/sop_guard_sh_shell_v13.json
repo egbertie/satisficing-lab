@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/sop_guard.sh",
+  "filename": "sop_guard.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "f8cb055be340bbcf",
+  "content_length": 928,
+  "ingested_at": "2026-03-31T17:27:46.205027",
+  "content_preview": "#!/bin/bash\n# SOP强制执行守卫\n\nRULE_NAME=\"$1\"\nPLAN_FILE=\"$2\"\n\necho \"=== SOP强制执行检查 ===\"\necho \"规则: $RULE_NAME\"\n\nif [ -z \"$RULE_NAME\" ] || [ -z \"$PLAN_FILE\" ] || [ ! -f \"$PLAN_FILE\" ]; then\n    echo \"❌ 错误: 必须提供规则名称和.plan文件\"\n    exit 1\nfi\n\necho \"【检查】韧性检查清单...\"\nfor item in 重启 超时 并发 权限 依赖 资源; do\n    if ! grep -q \"$item\" \"$PLAN_FILE\"; then\n        echo \"  ❌ 缺少: $item\"\n        exit 1\n    fi\n    echo \"  ✅ $item\"\ndone\n\necho \"【检查】5层思考...\"\nfor step in \"Step 1\" \"Step 2\" \"Step 3\" \"Step 4\"; do\n    if ! grep -q \"$ste",
+  "limitations_applied": []
+}

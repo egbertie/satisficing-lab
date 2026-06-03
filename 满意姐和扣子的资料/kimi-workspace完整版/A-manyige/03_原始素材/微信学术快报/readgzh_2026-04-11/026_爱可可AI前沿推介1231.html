@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>爱可可AI前沿推介(12.31)</title>
+  <meta name="description" content="LG - 机器学习 CV - 计算机视觉 CL - 计算与语言 RO - 机器人 AI - 人工智能
+
+1、[LG] End-to-End Test-Time Training for Long Context2、[RO] Emergence of Human to Robot Transfer in Vision-L">
+  <meta name="author" content="爱可可爱生活">
+  <meta property="og:title" content="爱可可AI前沿推介(12.31)">
+  <meta property="og:description" content="LG - 机器学习 CV - 计算机视觉 CL - 计算与语言 RO - 机器人 AI - 人工智能
+
+1、[LG] End-to-End Test-Time Training for Long Context2、[RO] Emergence of Human to Robot Transfer in Vision-Language-Action Models3、[LG] Shape of Tho">
+  <meta property="og:type" content="article">
+  
+  <style>
+    body { max-width: 800px; margin: 0 auto; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: #333; }
+    h1 { font-size: 1.8em; margin-bottom: 0.5em; }
+    .meta { color: #666; margin-bottom: 2em; border-bottom: 1px solid #eee; padding-bottom: 1em; }
+    .meta p { margin: 0.3em 0; }
+    .content { font-size: 1.05em; }
+    .content img { max-width: 100%; height: auto; }
+    .footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #eee; color: #999; font-size: 0.9em; }
+    a { color: #1a73e8; }
+  </style>
+</head>
+<body>
+  <article>
+    <h1>爱可可AI前沿推介(12.31)</h1>
+    <div class="meta">
+      <p><strong>作者：</strong>爱可可爱生活</p>
+      <p><strong>发布时间：</strong>2025-12-31 06:03</p>
+    </div>
+    <div class="content">
+      <p>LG - 机器学习 CV - 计算机视觉 CL - 计算与语言 RO - 机器人 AI - 人工智能</p>
+<p>1、[LG] End-to-End Test-Time Training for Long Context2、[RO] Emergence of Human to Robot Transfer in Vision-Language-Action Models3、[LG] Shape of Thought：When Distribution Matters More than Correctness in Reasoning Tasks4、[LG] Training AI Co-Scientists Using Rubric Rewards5、[AI] The World Is Bigger! A Computationally-Embedded Perspective on the Big World Hypothesis</p>
+<p>摘要：面向长上下文的端到端推理时训练、视觉-语言-动作模型中“从人到机器人”迁移能力的涌现、推理任务中分布何以比正确性更为关键、利用量规奖励训练AI协同科学家、从计算嵌入视角深度解析“大世界假设”</p>
+<p>1、[LG] End-to-End Test-Time Training for Long Context</p>
+<p>A Tandon, K Dalal, X Li, D Koceja...[Astera Institute &amp; UC San Diego]</p>
+<p>面向长上下文的端到端推理时训练</p>
+<p>要点:</p>
+<p>重新定义了长上下文建模：将其从一个架构设计问题，转变为一个持续学习问题。</p>
+<p>提出了端到端的测试时训练（TTT-E2E）方法：让一个标准的、带有滑动窗口注意力（SWA）的Transformer模型，在测试时根据其正在处理的上下文持续进行学习。</p>
+<p>核心机制是将上下文信息通过下一词预测的梯度更新压缩到模型权重中，而不是将其存储在显式的键值缓存（KV-cache）里。</p>
+<p>在训练阶段采用元学习（meta-learning），专门优化模型的初始权重（W0），使其能更好地在测试时进行学习。这种“学习如何学习”的策略至关重要。</p>
+<p>TTT-E2E在困惑度（perplexity）上实现了与全注意力（full attention）相当的上下文长度扩展性，在实验中，这是Mamba 2或Gated DeltaNet等其他高效方法未能达到的。</p>
+<p>一个非常反直觉的发现：TTT-E2E相对于全注意力的性能优势，在上下文窗口中较早的词元上最为显著，而非较晚的词元。</p>
+<p>实现了与上下文长度无关的恒定推理延迟，这一点与RNN类似，使其在长上下文预填充（prefill）任务上比全注意力快得多（例如，在128K上下文时长快2.7倍）。</p>
+<p>在TTT期间更新的模型层数是一个关键超参数；更新太少的层（例如，24层中只更新1或3层）会阻碍模型随上下文长度有效扩展，这证明了在权重中有足够“存储空间”的重要性。</p>
+<p>一个关键的不足之处在于，该方法在如“大海捞针”（NIAH）这类需要无损信息检索的任务上表现不佳，而全注意力则擅长此类任务。这凸显了TTT-E2E的优势在于信息压缩与泛化，而非完美记忆。</p>
+<p>由于使用了梯度的梯度（双层优化），并且目前缺乏如FlashAttention等优化算子的支持，其训练过程计算成本高昂且延迟较高。</p>
+<p>该方法被视为一个通用框架，它将一种短期记忆机制（滑动窗口注意力）与一种长期记忆机制（通过TTT进行的权重更新）相结合。</p>
+<p>主旨： 本文旨在解决现有长上下文语言模型在性能和计算效率之间的根本性矛盾。它提出了一种新的范式，将长上下文处理问题从设计复杂的、具有二次方复杂度的注意力架构，重新构建为一个持续学习问题，即模型在推理时通过不断学习来动态地将长上下文信息压缩并编码到其自身参数中，从而在保持与全注意力模型相当性能的同时，实现线性甚至恒定的推理成本。</p>
+<p>创新：</p>
+<p>范式创新： 首次将长上下文建模系统性地定义为一个持续学习问题，而非传统的架构设计问题，为解决长上下文挑战开辟了全新的思路。</p>
+<p>方法创新： 提出了端到端的测试时训练（TTT-E2E）框架。它创新地结合了三个关键部分：1）一个基于SWA的高效基础架构；2）在测试时通过标准下一词预测任务持续更新模型权重；3）在训练时通过元学习（梯度的梯度）来优化模型的“学习能力”，即优化模型的初始状态，使其为测试时的快速适应做好准备。</p>
+<p>机制创新： 通过权重更新而非KV缓存来实现长程记忆。这是一种隐式的、压缩式的记忆机制，与注意力机制的显式、无损记忆形成鲜明对比。</p>
+<p>理论视角创新： 通过“备用推导”（Alternative Derivation）章节，巧妙地将TTT-E2E与RNN和之前基于键值绑定（KVB）的TTT工作联系起来，揭示了其本质上是一个巨大的、隐式的RNN，其整个网络的权重构成了其隐藏状态。</p>
+<p>贡献：</p>
+<p>方法论贡献： 提供了一种名为TTT-E2E的通用且有效的方法，它能够应用于标准的Transformer架构（仅需替换为SWA），并显著提升其在长上下文语言建模任务上的性能，同时大幅降低推理延迟。</p>
+<p>实证贡献： 通过在高达128K上下文长度上的大量实验，证明了TTT-E2E在性能扩展性上可以媲美黄金标准——全注意力机制，并且优于Mamba 2、Gated DeltaNet等其他主流高效架构。</p>
+<p>认知贡献： 揭示了长上下文模型的一个深刻权衡：信息压缩与无损检索。TTT-E2E擅长前者，因此在语言建模上表现出色；而全注意力擅长后者，因此在“大海捞针”任务上占优。这为不同应用场景选择合适的技术提供了重要参考。</p>
+<p>启发性贡献： 论文的结果（尤其是在早期词元上优势更明显的反直觉发现）引发了对模型如何处理和利用上下文信息的深刻思考，挑战了“模型在上下文末端信息最丰富”的传统看法。</p>
+<p>提升：</p>
+<p>性能扩展性： 在语言建模任务（以困惑度衡量）上，TTT-E2E随上下文长度增加的性能提升趋势与全注意力模型几乎一致，而其他高效模型则在上下文变得更长后性能开始下降。</p>
+<p>推理效率： 预填充（Prefill）阶段的延迟是恒定的，与上下文长度无关。在128K上下文长度时，其速度是全注意力模型的2.7倍。解码（Decode）延迟也与SWA相当，远优于全注意力模型。</p>
+<p>相对于SWA的提升： TTT-E2E将一个性能较差的SWA基线模型，提升到了超越全注意力的水平，展示了其学习机制的强大威力。</p>
+<p>不足：</p>
+<p>无损检索能力弱： 在需要精确、无损回忆特定信息（如“大海捞针”测试）的任务上表现很差，这限制了其在某些问答或信息提取场景的应用。</p>
+<p>训练成本高昂： 当前实现的训练延迟显著高于标准模型，尤其是在短上下文预训练阶段。这主要是因为“梯度的梯度”计算复杂且缺乏硬件层面的深度优化（如FlashAttention的支持），构成了该方法实用化的主要障碍。</p>
+<p>“自训练”风险： 在长序列生成任务中，模型依赖于自身生成的内容进行梯度更新。虽然初步实验结果是积极的，但这种“自训练”机制在更复杂或对抗性的场景下，可能会导致误差累积或模式崩溃（degeneration）的风险，这一点有待更深入的研究。</p>
+<p>心得：</p>
+<p>重新思考模型能力的来源：架构 vs. 学习过程。 本文最深刻的启发是，强大的模型能力不一定完全来自静态的、精心设计的架构，也可以源于一个动态的、持续自适应的学习过程。将推理过程本身视为一个微型的学习过程，为模型赋予了超越其静态架构限制的能力。</p>
+<p>长上下文的本质：压缩与检索的权衡。 这项工作清晰地揭示了长上下文处理的两种哲学：一种是像全注意力那样，试图无损地“记住”一切，代价是高昂的计算成本；另一种是像TTT-E2E那样，像人脑一样对信息进行有损压缩和整合，形成“直觉”或“概要”，代价是牺牲了对细节的精确回忆。这迫使我们思考，在特定应用中，我们究竟需要哪种能力。</p>
+<p>元学习的巨大潜力：从优化“知识”到优化“学习能力”。 TTT-E2E的核心在于通过元学习，让模型在出厂时就具备了强大的“测试时学习”能力。这表明，未来模型优化的方向可能不仅仅是预训练更多的知识，更是预训练一种高效的、面向任务的自适应和学习能力，使模型在部署后能更好地应对新情境。</p>
+<p>一句话总结: 本文颠覆性地将长上下文建模视为一个持续学习而非架构设计问题，通过一种端到端的测试时训练（TTT-E2E）方法，让模型在推理时动态地将上下文信息压缩进自身权重，从而在实现与全注意力机制相媲美的性能扩展性的同时，保持了恒定的推理延迟，但其核心的压缩机制也使其在需要精确信息检索的任务上表现不佳，深刻揭示了信息压缩与无损记忆之间的根本权衡。</p>
+<p>We formulate long-context language modeling as a problem in continual learning rather than architecture design. Under this formulation, we only use a standard architecture – a Transformer with sliding-window attention. However, our model continues learning at test time via next-token prediction on the given context, compressing the context it reads into its weights. In addition, we improve the model’s initialization for learning at test time via meta-learning at training time. Overall, our method, a form of Test-Time Training (TTT), is End-to-End (E2E) both at test time (via next-token prediction) and training time (via meta-learning), in contrast to previous forms. We conduct extensive experiments with a focus on scaling properties. In particular, for 3B models trained with 164B tokens, our method (TTT-E2E) scales with context length in the same way as Transformer with full attention, while others, such as Mamba 2 and Gated DeltaNet, do not. However, similar to RNNs, TTT-E2E has constant inference latency regardless of context length, making it 2.7× faster than full attention for 128K context. Our code is publicly available.</p>
+<p>https://arxiv.org/abs/2512.23675</p>
+<p>2、[RO] Emergence of Human to Robot Transfer in Vision-Language-Action Models</p>
+<p>S Kareer, K Pertsch, J Darpinian, J Hoffman...[Physical Intelligence]</p>
+<p>视觉-语言-动作模型中“从人到机器人”迁移能力的涌现</p>
+<p>要点:</p>
+<p>核心假说： 机器人从人类视频中学习的能力并非与生俱来，而是一种涌现属性（emergent property），它源于视觉-语言-动作（VLA）模型预训练数据的规模与多样性。</p>
+<p>反直觉发现： 如果VLA模型没有在足够多样化的机器人数据上进行预训练，简单地将其与人类数据共同训练是无效甚至有害的。利用人类数据带来的增益，只有在预训练多样性跨过一个关键阈值后才会“涌现”。</p>
+<p>所提方法： 一种极其简洁的联合训练方案。该方法将人类视为又一种“机器人形态”（embodiment），对人类和机器人数据应用完全相同的行为克隆目标（预测末端执行器轨迹和语言子任务），而无需设计复杂的、手工的对齐机制。</p>
+<p>底层机制： 论文论证，多样化的预训练（跨任务、场景和机器人形态）迫使VLA模型学习到与具体形态无关的抽象表征（embodiment-agnostic representations）。例如，“整理梳妆台”这一概念的潜在特征，无论是由人手还是机器人夹爪执行，都会变得相似，从而实现了知识的自然迁移。</p>
+<p>实证验证： 通过t-SNE分析，论文展示了随着预训练多样性的增加，来自人类和机器人数据的潜在嵌入表征变得越来越重叠和对齐。</p>
+<p>强大的泛化结果： 所提出的方法（π0.5 + ego）在仅由人类数据演示的泛化任务上（新场景、新物体、新任务语义），性能几乎翻倍，证明了知识迁移的有效性。</p>
+<p>迁移的层次： 从人类数据中发生的知识迁移同时存在于高层（语义子任务预测）和低层（连续动作预测）。对于复杂的移动操作任务，两个层面的迁移都至关重要。</p>
+<p>数据价值对比： 实验表明，对于某些任务，使用人类数据进行微调的效果几乎与使用目标机器人自身的领域内数据一样好；对于另一些任务，其效果则与使用另一台领域外机器人数据相当，这进一步强化了“人类即是另一种机器人形态”的观点。</p>
+<p>实践启示： 研究表明，为了实现可扩展的数据收集，为人类佩戴腕部相机是有益的，因为它能模仿机器人的传感器配置并提供更好的可观测性，从而改善了部分任务的迁移效果。</p>
+<p>主旨： 本文旨在探究并证明一个核心观点：机器人直接从人类视频中学习复杂技能的能力，并非取决于精巧的跨域对齐算法，而是一种随着底层VLA模型预训练数据规模和多样性增长而“涌现”出的新能力。</p>
+<p>创新：</p>
+<p>范式创新： 将人类到机器人的迁移问题从一个“算法设计”问题，重新定义为一个“模型能力涌现”问题，其思路深受大语言模型发展规律的启发，为机器人基础模型的研究提供了全新的视角。</p>
+<p>发现式创新： 本文的核心创新并非提出一个复杂的模型结构或损失函数，而是通过系统性的实验发现并证实了“迁移能力涌現”的现象。即，只有当预训练模型的“见识”足够广（跨场景、任务、机器人形态），它才能“顿悟”并开始理解和利用人类数据。</p>
+<p>机制解释创新： 通过对模型内部表征的可视化分析（t-SNE），首次为这种“涌现”提供了可信的机制解释——多样性预训练驱动模型自发学习到了跨形态的通用抽象概念，实现了隐式的表征对齐。</p>
+<p>方法上的简洁性： 提出的“联合训练”配方极其简单，摒弃了复杂的显式对齐步骤，证明了在模型能力足够强的前提下，简单的学习范式同样强大，这本身就是一种方法论上的创新。</p>
+<p>贡献：</p>
+<p>实证贡献： 首次通过严谨的、可量化的实验，清晰地揭示了人类到机器人技能迁移能力与VLA模型预训练多样性之间的强正相关关系和“涌现”拐点，为机器人基础模型的发展路径（即强调数据多样性）提供了强有力的证据。</p>
+<p>方法论贡献： 提供了一种简单、有效且可扩展的配方（π0.5 + ego），用于将人类具身视频数据整合到VLA模型的训练中，显著提升了机器人在新场景、新物体和新任务上的泛化能力。</p>
+<p>认知贡献： 论文的发现促使我们重新思考数据在机器人学习中的作用。某些类型的数据（如人类视频）的价值不是固定的，而是随着模型自身“基础能力”的提升而被动态“解锁”的。</p>
+<p>实践贡献： 对人类数据采集方式（例如，腕部相机的重要性）进行了评估，为未来大规模、低成本地收集机器人训练数据提供了实践指导。</p>
+<p>提升：</p>
+<p>泛化性能： 在三个维度的泛化任务（场景、物体、任务）上，与仅使用机器人数据微调的基线模型相比，加入了人类数据联合训练的模型性能实现了大幅提升，在多个任务上接近翻倍（例如，Spice任务成功率从32%提升至71%，Dresser任务从25%提升至50%）。</p>
+<p>任务理解能力： 在“分拣鸡蛋”任务中，模型从人类视频中学会了“按颜色分类”这一全新语义概念，准确率从随机的57%提升至78%，证明了其能够迁移复杂的任务逻辑。</p>
+<p>数据利用效率： 证明了在特定条件下，少量（几小时）高质量的人类视频数据，其价值可以媲美在目标机器人上收集的、成本更高昂的机器人遥操作数据。</p>
+<p>不足：</p>
+<p>预训练依赖性过高： 整个方法有效性的前提是拥有一个在极其庞大且多样化的机器人数据集上预训练好的强大基础模型（如π0.5）。这使得该方法的准入门槛非常高，其成功在很大程度上依赖于获取这种大规模预训练数据的能力。</p>
+<p>人类数据形式的局限： 论文中使用的人类数据是按照机器人遥操作的“回合制”（episodic）方式采集的，并且带有详细的语言子任务标注。这与真正“在野外”的、被动的、无标注的人类日常活动视频仍有较大差距，如何利用后者仍是未解难题。</p>
+<p>对齐的隐性假设： 论文声称“没有显式对齐”，但实际上在数据处理阶段进行了“弱对齐”，比如将人手姿态映射到机器人末端执行器的6自由度动作空间，并统一了子任务标注格式。这种隐性的对齐可能对成功迁移起到了关键作用。</p>
+<p>形态差异的极限未探明： 实验中的机器人是机械臂，与人手的形态差异尚在一定范围内。该方法对于形态差异更大的情况（如从人手到轮式机器人，或到人形机器人全身）的有效性尚未得到验证。</p>
+<p>心得：</p>
+<p>模型能力的“涌现”是AI发展的核心规律，机器人领域也不例外。 这篇论文最有启发性的一点是，它清晰地展示了模型的能力并非线性增长，而是会在规模和数据多样性达到某个临界点后，解锁全新的、质变的能力。这告诉我们，与其在小模型上设计复杂的算法，不如将精力更多地投入到构建更大、更多样化的基础模型上。</p>
+<p>通用表征是实现泛化的圣杯。 成功的迁移学习根源在于模型能否超越表面的形态差异，学习到任务的本质和物理世界的通用规律。多样化的数据是迫使模型学习这种通用表征的最佳“教练”，而不是依赖于人类设计的特定对齐损失函数。</p>
+<p>“数据”的价值是相对的，取决于“模型”的能力。 在一个弱模型看来，人类视频可能是充满噪声、难以利用的“垃圾数据”；但在一个强大的基础模型看来，同样的数据却是蕴含着丰富知识、可以轻松吸收的“宝藏”。这启发我们，未来数据工程的重点可能不只是清洗数据，更是如何提升模型，使其能够消化和利用更多样、更原始的数据源。</p>
+<p>一句话总结: 本文通过一系列严谨的实验发现，机器人从人类视频中学习技能的能力是一种涌-   挑战了传统认知，即归一化层在现代神经网络（尤其是Transformer）中是不可或缺的。</p>
+<p>Vision-language-action (VLA) models can enable broad open world generalization, but require large and diverse datasets. It is appealing to consider whether some of this data can come from human videos, which cover diverse real-world situations and are easy to obtain. However, it is difficult to train VLAs with human videos alone, and establishing a mapping between humans and robots requires manual engineering and presents a major research challenge. Drawing inspiration from advances in large language models, where the ability to learn from diverse supervision emerges with scale, we ask whether a similar phenomenon holds for VLAs that incorporate human video data. We introduce a simple co-training recipe, and find that human-to-robot transfer emerges once the VLA is pretrained on sufficient scenes, tasks, and embodiments. Our analysis suggests that this emergent capability arises because diverse pretraining produces embodiment-agnostic representations for human and robot data. We validate these findings through a series of experiments probing human to robot skill transfer and find that with sufficiently diverse robot pre-training our method can nearly double the performance on generalization settings seen only in human data.</p>
+<p>https://arxiv.org/abs/2512.22414</p>
+<p>3、[LG] Shape of Thought: When Distribution Matters More than Correctness in Reasoning Tasks</p>
+<p>A Chandra, A Agrawal, A Hosseini, S Fischmeister...[University of Waterloo &amp; MILA &amp; Google DeepMind]</p>
+<p>思维之形：推理任务中分布何以比正确性更为关键</p>
+<p>要点:</p>
+<p>核心反直觉发现： 使用一个更强模型生成的、最终答案全部错误的思维链（CoT）合成数据来微调语言模型，竟然可以提升其推理性能。</p>
+<p>分布比正确性更重要： 论文的核心论点是，训练数据的“形状”或分布，可能比其最终答案的正确性更为关键。与模型自身输出分布更接近的数据，模型学习起来更容易。</p>
+<p>假说一：分布相似性： 由另一语言模型生成的合成数据，在分布上天然比人类编写的文本更接近学生模型。实验证据是，合成数据的初始训练损失显著低于人类数据。</p>
+<p>假说二：部分正确的推理： 导致最终答案错误的思维链并非完全是无用的噪声。它们通常包含了大量有效的、可复用的推理步骤、模式或正确的解题思路，模型可以从中学习。</p>
+<p>“转述”实验作为验证： 为了验证分布相似性假说，研究者用一个大语言模型去“转述”正确的人类编写的解题步骤。仅仅是这种改变文风、使之更接近模型分布的操作，就显著提升了微调效果。</p>
+<p>错误容忍度： 模型对有瑕疵的数据表现出惊人的容忍度。实验表明，即使训练数据中混入高达25%的、完全错误的思维链，其性能仍然可以与使用完美正确的人类数据相媲美，甚至更好。</p>
+<p>对“检查最终答案”的批判： 研究揭示了，仅凭最终答案正确与否来判断推理过程的质量是不可靠的。“正确”的合成思维链可能包含逻辑谬误但碰巧算对，而“错误”的思维链可能方法完全正确，仅有微小的计算失误。</p>
+<p>广泛的实验支持： 这些发现在多个模型家族（Qwen, Llama, Gemma，从1.5B到9B参数）和多种推理领域（数学、算法推理、代码生成）中都得到了验证。</p>
+<p>主旨： 本文旨在挑战并颠覆一个在语言模型推理任务微调中的普遍假设——即训练数据的质量完全由其正确性决定。文章通过系统性实验论证，数据的分布（即其“风格”或“形状”与模型自身输出的相似度）是一个同等甚至更重要的考量维度，并揭示了即使是最终答案错误的合成思维链，也因其分布上的亲和性及内部包含的有效推理片段而具有巨大的训练价值。</p>
+<p>创新：</p>
+<p>观念创新： 首次系统性地提出并证明了在推理微调中，“分布比正确性更重要”这一反直觉的观点，为数据中心AI（Data-Centric AI）在推理领域的应用开辟了全新的视角。</p>
+<p>数据利用创新： 颠覆了传统的数据筛选流程，证明了通常被视作“废料”而丢弃的、导致错误答案的模型生成数据，可以直接用于监督微调并带来性能提升。</p>
+<p>实验设计创新： 设计了两个巧妙的实验来解耦并验证其核心假说：1）通过“转述”人类数据来改变其分布，从而证实分布亲和性的重要性；2）通过逐步注入完全错误的推理，量化了模型对错误的容忍度，揭示了其从不完美数据中学习的能力边界。</p>
+<p>对评估方法的反思： 通过定性分析，深刻揭示了仅依赖最终答案正确性的评估方法的局限性，推动了对更注重推理过程保真度的评估方法的需求。</p>
+<p>贡献：</p>
+<p>实践贡献： 为提升模型推理能力提供了一种成本极低且高效的数据增强策略。研究者不再需要严格过滤以确保每一个训练样本都完美无缺，甚至可以利用被丢弃的“错误”样本，极大地提高了数据利用效率。</p>
+<p>理论贡献： 为我们理解大语言模型如何学习推理提供了新的见解。模型似乎更倾向于学习一种“推理的风格和模式”（shape of thought），而非死记硬背正确的解题路径，显示了其学习机制中强大的模式识别和正则化能力。</p>
+<p>认知贡献： 促使社区重新评估人类“黄金标准”数据的地位。虽然人类数据是正确的，但其异构的分布可能使其成为模型学习的“非母语”，而模型生成的（即使有瑕疵的）数据则更像是“母语”，学习效率更高。</p>
+<p>提升：</p>
+<p>推理性能： 在多个数学、算法和代码生成基准上，使用合成数据（包括最终答案错误的数据）微调的模型，其准确率显著超过了使用人类编写的“黄金标准”数据进行微调的基线。例如，在GSM8K上，Llama-8B使用错误数据微调比使用人类数据绝对提升了20%；在MBPP代码生成上，Qwen-1.5B使用错误数据提升了17%。</p>
+<p>数据有效性： 证明了通过“转述”人类数据，可以显著提升其作为训练数据的价值。例如，在MATH任务上，转述后的人类数据让Gemma-9B的性能提升幅度从+4%跃升至+7%。</p>
+<p>不足：</p>
+<p>对“分布”的度量不够直接： 论文使用初始训练损失和困惑度作为“分布距离”的代理指标，这些指标是间接的。缺乏更直接、更理论化的方法来量化和控制数据分布与模型分布之间的距离。</p>
+<p>学习机制的解释仍是假说： 尽管实验结果有力地支持了两个核心假说（分布亲和性、部分正确性），但其底层的神经机制仍然是一个“黑箱”。为什么模型能够有效地区分并学习“错误”思维链中的“正确”部分，其内在的归纳偏置是什么，仍有待更深入的理论分析。</p>
+<p>适用范围的边界尚不清晰： 实验主要集中在监督微调（SFT）阶段。这些发现是否能推广到后续的强化学习（如PPO）或偏好对齐（如DPO）阶段，是一个重要的开放问题。此外，对于远超9B参数的更大规模模型，这种现象是否依然存在或会发生变化，也需要进一步验证。</p>
+<p>心得：</p>
+<p>重新审视“完美数据”的迷思： 本文最深刻的启发是，我们应该打破对“100%正确”的黄金标准数据的盲目崇拜。在机器学习中，数据的可学性（learnability）是一个与正确性同等重要的维度。一个有瑕疵但“说模型语言”的老师，可能比一个完美但“说外语”的老师教得更好。</p>
+<p>模型是强大的模式学习器，而非脆弱的模仿者： 这项工作展现了LLM强大的归纳偏置和鲁棒性。它们并非简单地复制训练数据中的错误，而是能从大量不完美的样本中提取出共通的、正确的“推理模式”或“思维形状”。这让我们对模型的学习能力有了更强的信心。</p>
+<p>数据策展的未来：从“内容审查”到“风格塑造”： 这项工作预示着未来数据工程的一个新方向。除了关注数据的内容正确性，我们更需要开发技术来塑造数据的“风格”，使其与目标模型的“思维模式”相匹配。像“转述”这样的简单技术可能只是冰山一角，未来可能会有更系统的方法来“编译”外部知识，使其成为模型易于吸收的格式。</p>
+<p>一句话总结: 这篇论文颠覆性地证明，微调语言模型推理能力的关键并非训练数据的最终答案是否正确，而是其“思维形状”是否与模型自身的输出分布相近，以至于使用最终答案全部错误的合成数据进行训练，效果竟能超越完美正确的人类黄金数据。</p>
+<p>We present the surprising finding that a language model’s reasoning capabilities can be improved by training on synthetic datasets of chain-of-thought (CoT) traces from more capable models, even when all of those traces lead to an incorrect final answer. Our experiments show this approach can yield better performance on reasoning tasks than training on human-annotated datasets. We hypothesize that two key factors explain this phenomenon: first, the distribution of synthetic data is inherently closer to the language model’s own distribution, making it more amenable to learning. Second, these ‘incorrect’ traces are often only partially flawed and contain valid reasoning steps from which the model can learn. To further test the first hypothesis, we use a language model to paraphrase humanannotated traces – shifting their distribution closer to the model’s own distribution – and show that this improves performance. For the second hypothesis, we introduce increasingly flawed CoT traces and study to what extent models are tolerant to these flaws. We demonstrate our findings across various reasoning domains like math, algorithmic reasoning and code generation using MATH, GSM8K, Countdown and MBPP datasets on various language models ranging from 1.5B to 9B across Qwen, Llama, and Gemma models. Our study shows that curating datasets that are closer to the model’s distribution is a critical aspect to consider. We also show that a correct final answer is not always a reliable indicator of a faithful reasoning process.</p>
+<p>https://arxiv.org/abs/2512.22255</p>
+<p>4、[LG] Training AI Co-Scientists Using Rubric Rewards</p>
+<p>S Goel, R Hazra, D Jayalath, T Willi, P Jain...[Meta Superintelligence Labs &amp; University of Oxford]</p>
+<p>利用量规奖励训练AI协同科学家</p>
+<p>要点：</p>
+<p>核心问题： 训练语言模型生成高质量、开放式的科研计划非常困难，因为通过真实世界实验获得的反馈既缓慢又昂贵，在某些领域（如医学）甚至不可行。</p>
+<p>解决方案： 提出一种可扩展、自动化的训练方案，该方案充分利用了现存的海量科研论文资源。</p>
+<p>数据提取流水线： 使用一个大语言模型，自动从每篇论文中提取两个关键部分：（1）一个研究目标，概括了论文解决的核心问题；（2）一个与目标配套的评分准则（Rubric），包含了评估一个有效计划所必需的关键标准。</p>
+<p>训练方法 - 基于自评分的强化学习： 通过强化学习（RL）来训练模型。奖励信号由一个初始模型的冻结副本（充当“评分员”）生成。</p>
+<p>关键机制 - 特权信息：“评分员”模型在评分时可以访问提取出的“评分准则”，而生成计划的模型则无法看到。这制造了一个“生成者-验证者”之间的能力差距，从而在没有外部监督的情况下提供了强大的学习信号。</p>
+<p>结构化奖励： 评分过程是结构化的。对于评分准则中的每一项，“评分员”都会对照一组包含七条通用指南（如“方案具体详细”、“无明显缺陷”）的列表来检查是否存在违规。这使得奖励信号更具依据和可解释性。</p>
+<p>人类专家验证： 通过一项耗时225小时的、由机器学习专家参与的大规模人类研究，验证了该方法的有效性。专家们在70%的情况下更偏爱经过微调的模型所生成的计划。同时，专家们也认可了84%的自动提取的评分准-   核心反直觉发现： 使用一个更强模型生成的、最终答案全部错误的思维链（CoT）合成数据来微调语言模型，竟然可以提升其推理性能。</p>
+<p>分布比正确性更重要： 论文的核心论点是，训练数据的“形状”或分布，可能比其最终答案的正确性更为关键。与模型自身输出分布更接近的数据，模型学习起来更容易。</p>
+<p>假说一：分布相似性： 由另一语言模型生成的合成数据，在分布上天然比人类编写的文本更接近学生模型。实验证据是，合成数据的初始训练损失显著低于人类数据。</p>
+<p>假说二：部分正确的推理： 导致最终答案错误的思维链并非完全是无用的噪声。它们通常包含了大量有效的、可复用的推理步骤、模式或正确的解题思路，模型可以从中学习。</p>
+<p>“转述”实验作为验证： 为了验证分布相似性假说，研究者用一个大语言模型去“转述”正确的人类编写的解题步骤。仅仅是这种改变文风、使之更接近模型分布的操作，就显著提升了微调效果。</p>
+<p>错误容忍度： 模型对有瑕疵的数据表现出惊人的容忍度。实验表明，即使训练数据中混入高达25%的、完全错误的思维链，其性能仍然可以与使用完美正确的人类数据相媲美，甚至更好。</p>
+<p>对“检查最终答案”的批判： 研究揭示了，仅凭最终答案正确与否来判断推理过程的质量是不可靠的。“正确”的合成思维链可能包含逻辑谬误但碰巧算对，而“错误”的思维链可能方法完全正确，仅有微小的计算失误。</p>
+<p>广泛的实验支持： 这些发现在多个模型家族（Qwen, Llama, Gemma，从1.5B到9B参数）和多种推理领域（数学、算法推理、代码生成）中都得到了验证。</p>
+<p>中文版要点：</p>
+<p>核心反直觉发现： 使用一个更强模型生成的、最终答案全部错误的思维链（CoT）合成数据来微调语言模型，竟然可以提升其推理性能。</p>
+<p>分布比正确性更重要： 论文的核心论点是，训练数据的“形状”或分布，可能比其最终答案的正确性更为关键。与模型自身输出分布更接近的数据，模型学习起来更容易。</p>
+<p>假说一：分布相似性： 由另一语言模型生成的合成数据，在分布上天然比人类编写的文本更接近学生模型。实验证据是，合成数据的初始训练损失显著低于人类数据。</p>
+<p>假说二：部分正确的推理： 导致最终答案错误的思维链并非完全是无用的噪声。它们通常包含了大量有效的、可复用的推理步骤、模式或正确的解题思路，模型可以从中学习。</p>
+<p>“转述”实验作为验证： 为了验证分布相似性假说，研究者用一个大语言模型去“转述”正确的人类编写的解题步骤。仅仅是这种改变文风、使之更接近模型分布的操作，就显著提升了微调效果。</p>
+<p>错误容忍度： 模型对有瑕疵的数据表现出惊人的容忍度。实验表明，即使训练数据中混入高达25%的、完全错误的思维链，其性能仍然可以与使用完美正确的人类数据相媲美，甚至更好。</p>
+<p>对“检查最终答案”的批判： 研究揭示了，仅凭最终答案正确与否来判断推理过程的质量是不可靠的。“正确”的合成思维链可能包含逻辑谬误但碰巧算对，而“错误”的思维链可能方法完全正确，仅有微小的计算失误。</p>
+<p>广泛的实验支持： 这些发现在多个模型家族（Qwen, Llama, Gemma，从1.5B到9B参数）和多种推理领域（数学、算法推理、代码生成）中都得到了验证。</p>
+<p>主旨： 本文旨在挑战并颠覆一个在语言模型推理任务微调中的普遍假设——即训练数据的质量完全由其正确性决定。文章通过系统性实验论证，数据的分布（即其“风格”或“形状”与模型自身输出的相似度）是一个同等甚至更重要的考量维度，并揭示了即使是最终答案错误的合成思维链，也因其分布上的亲和性及内部包含的有效推理片段而具有巨大的训练价值。</p>
+<p>创新：</p>
+<p>观念创新： 首次系统性地提出并证明了在推理微调中，“分布比正确性更重要”这一反直觉的观点，为数据中心AI（Data-Centric AI）在推理领域的应用开辟了全新的视角。</p>
+<p>数据利用创新： 颠覆了传统的数据筛选流程，证明了通常被视作“废料”而丢弃的、导致错误答案的模型生成数据，可以直接用于监督微调并带来性能提升。</p>
+<p>实验设计创新： 设计了两个巧妙的实验来解耦并验证其核心假说：1）通过“转述”人类数据来改变其分布，从而证实分布亲和性的重要性；2）通过逐步注入完全错误的推理，量化了模型对错误的容忍度，揭示了其从不完美数据中学习的能力边界。</p>
+<p>对评估方法的反思： 通过定性分析，深刻揭示了仅依赖最终答案正确性的评估方法的局限性，推动了对更注重推理过程保真度的评估方法的需求。</p>
+<p>贡献：</p>
+<p>实践贡献： 为提升模型推理能力提供了一种成本极低且高效的数据增强策略。研究者不再需要严格过滤以确保每一个训练样本都完美无缺，甚至可以利用被丢弃的“错误”样本，极大地提高了数据利用效率。</p>
+<p>理论贡献： 为我们理解大语言模型如何学习推理提供了新的见解。模型似乎更倾向于学习一种“推理的风格和模式”（shape of thought），而非死记硬背正确的解题路径，显示了其学习机制中强大的模式识别和正则化能力。</p>
+<p>认知贡献： 促使社区重新评估人类“黄金标准”数据的地位。虽然人类数据是正确的，但其异构的分布可能使其成为模型学习的“非母语”，而模型生成的（即使有瑕疵的）数据则更像是“母语”，学习效率更高。</p>
+<p>提升：</p>
+<p>推理性能： 在多个数学、算法和代码生成基准上，使用合成数据（包括最终答案错误的数据）微调的模型，其准确率显著超过了使用人类编写的“黄金标准”数据进行微调的基线。例如，在GSM8K上，Llama-8B使用错误数据微调比使用人类数据绝对提升了20%；在MBPP代码生成上，Qwen-1.5B使用错误数据提升了17%。</p>
+<p>数据有效性： 证明了通过“转述”人类数据，可以显著提升其作为训练数据的价值。例如，在MATH任务上，转述后的人类数据让Gemma-9B的性能提升幅度从+4%跃升至+7%。</p>
+<p>不足：</p>
+<p>对“分布”的度量不够直接： 论文使用初始训练损失和困惑度作为“分布距离”的代理指标，这些指标是间接的。缺乏更直接、更理论化的方法来量化和控制数据分布与模型分布之间的距离。</p>
+<p>学习机制的解释仍是假说： 尽管实验结果有力地支持了两个核心假说（分布亲和性、部分正确性），但其底层的神经机制仍然是一个“黑箱”。为什么模型能够有效地区分并学习“错误”思维链中的“正确”部分，其内在的归纳偏置是什么，仍有待更深入的理论分析。</p>
+<p>适用范围的边界尚不清晰： 实验主要集中在监督微调（SFT）阶段。这些发现是否能推广到后续的强化学习（如PPO）或偏好对齐（如DPO）阶段，是一个重要的开放问题。此外，对于远超9B参数的更大规模模型，这种现象是否依然存在或会发生变化，也需要进一步验证。</p>
+<p>心得：</p>
+<p>重新审视“完美数据”的迷思： 本文最深刻的启发是，我们应该打破对“100%正确”的黄金标准数据的盲目崇拜。在机器学习中，数据的可学性（learnability）是一个与正确性同等重要的维度。一个有瑕疵但“说模型语言”的老师，可能比一个完美但“说外语”的老师教得更好。</p>
+<p>模型是强大的模式学习器，而非脆弱的模仿者： 这项工作展现了LLM强大的归纳偏置和鲁棒性。它们并非简单地复制训练数据中的错误，而是能从大量不完美的样本中提取出共通的、正确的“推理模式”或“思维形状”。这让我们对模型的学习能力有了更强的信心。</p>
+<p>数据策展的未来：从“内容审查”到“风格塑造”： 这项工作预示着未来数据工程的一个新方向。除了关注数据的内容正确性，我们更需要开发技术来塑造数据的“风格”，使其与目标模型的“思维模式”相匹配。像“转述”这样的简单技术可能只是冰山一角，未来可能会有更系统的方法来“编译”外部知识，使其成为模型易于吸收的格式。</p>
+<p>“自己教自己”的可行性与局限性：“自评分”+“特权信息”的模式，本质上是一种让模型“自己教自己”的引导式学习。它既展示了这种模式在引导模型能力提升方面的巨大潜力，也通过“对弱评分员过拟合”的现象，揭示了其内在的局限性，即模型的成长上限最终还是受限于其“老师”（即使是它自己）的视野。这启发我们，未来的AI发展可能需要一个“老师”与“学生”模型交替迭代、共同进步的体系。</p>
+<p>从“通才”到“专家”的必经之路： 基础模型拥有广博的知识，但缺乏在特定专业领域进行深入、严谨规划的能力。本文的工作展示了一条将“通才”模型（generalist）转化为特定领域“专家”（specialist）的有效路径。通过在特定领域的文献（如ML、医学）中提取准则并进行强化学习，模型学会了该领域的“思维范式”，这比简单的知识灌输要深刻得多。</p>
+<p>一句话总结: 本文提出了一种创新的、可扩展的方法，通过自动从海量科研论文中提取“研究目标”和“评分准则”（rubrics），并利用这些“准则奖励”在强化学习的自评分框架下训练AI“共同科学家”，从而在无需昂贵实验执行反馈的情况下，显著提升了模型生成高质量研究计划的能力，其效果已由人类专家验证。</p>
+<p>AI co-scientists are emerging as a tool to assist human researchers in achieving their research goals. A crucial feature of these AI co-scientists is the ability to generate a research plan given a set of aims and constraints. The plan may be used by researchers for brainstorming, or may even be implemented after further refinement. However, language models currently struggle to generate research plans that follow all constraints and implicit requirements. In this work, we study how to leverage the vast corpus of existing research papers to train language models that generate better research plans. We build a scalable, diverse training corpus by automatically extracting research goals and goal-specific grading rubrics from papers across several domains. We then train models for research plan generation via reinforcement learning with self-grading. A frozen copy of the initial policy acts as the grader during training, with the rubrics creating a generator-verifier gap that enables improvements without external human supervision. To validate this approach, we conduct a study with human experts for machine learning research goals, spanning 225 hours. The experts prefer plans generated by our finetuned Qwen3-30B-A3B model over the initial model for 70% of research goals, and approve 84% of the automatically extracted goal-specific grading rubrics. To assess generality, we also extend our approach to research goals from medical papers, and new arXiv preprints, evaluating with a jury of frontier models. Our finetuning yields 12-22% relative improvements and significant cross-domain generalization, proving effective even in problem settings like medical research where execution feedback is infeasible. Together, these findings demonstrate the potential of a scalable, automated training recipe as a step towards improving general AI co-scientists.</p>
+<p>https://arxiv.org/abs/2512.23707</p>
+<p>5、[AI] The World Is Bigger! A Computationally-Embedded Perspective on the Big World Hypothesis</p>
+<p>A Lewandowski, A A. Ramesh, E Meyer, D Schuurmans...[University of Alberta &amp; The Swiss AI Lab IDSIA]</p>
+<p>世界更广阔：从计算嵌入视角深度解析“大世界假设”</p>
+<p>要点:</p>
+<p>重新定义“大世界假说”： 论文提出，最根本的约束并非给智能体施加明确的、人为的限制（如内存大小），而是智能体本身在计算上被嵌入在环境之中。</p>
+<p>计算嵌入式视角： 将嵌入式智能体建模为一个由环境自身动态所模拟的自动机（一种计算过程），而环境本身则被建模为一个通用的形式化计算机。</p>
+<p>隐式约束： 这种嵌入式关系天然地意味着，环境的计算能力必然大于任何包含于其中的智能体。无论智能体自身的能力如何扩展，它永远比其所处的世界“小”。</p>
+<p>形式化框架 - 通用局部环境： 论文引入了“通用局部环境”的概念，这是一个既具有计算通用性（能模拟任何算法）又具有均匀局部性（其动态可分解为相同的局部过程）的马尔可夫过程。嵌入式智能体就是这些局部过程之一。</p>
+<p>等价性证明： 一个关键的理论成果证明了，这样一个嵌入式自动机在形式上等价于一个标准的智能体，该智能体与一个定义在可数无限状态空间上的部分可观察马尔可夫决策过程（POMDP）进行交互。</p>
+<p>新的目标函数 - 交互性（Interactivity）： 为此设定提出了一个名为“交互性”的新目标。它使用算法复杂度来定义，旨在衡量智能体基于过去经验持续调整其未来行为的能力。</p>
+<p>“交互性”的解释： 高“交互性”意味着智能体未来的行为既复杂（无条件的算法复杂度高），又能被其过去的行为所预测（有条件的算法复杂度低），是一种“可预测的复杂性”。</p>
+<p>寻求交互性即持续学习： 论文证明，最大化“交互性”本身就是一个天然的持续学习问题。一个寻求交互性的智能体（i）永远受其有限能力的限制，并且（ii）一旦停止学习就是次优的。它必须不断改变策略来创造新的、可学习的经验。</p>
+<p>实用算法： 开发了一种基于模型的强化学习算法来最大化“交互性”的一个近似版本，其中算法复杂度被操作化为价值函数的预测误差。</p>
+<p>反直觉的实验发现： 在一个围绕“交互性”设计的、无外部环境的持续学习合成任务中，深度线性网络成功地维持并随容量增加而提升了其交互性，而深度非线性网络（使用ReLU激活函数）则表现不佳，其交互性最终崩溃。</p>
+<p>主旨： 本文旨在为持续学习提供一个更根本、更通用的问题形式化，其灵感来源于“大世界假说”。它通过提出一个“计算嵌入式”的视角，将智能体视为被环境模拟的一个计算过程，从而构建了一个智能体无论自身容量多大、都天然受限于环境的场景。在此基础上，论文提出了一个新的目标函数——“交互性”，并论证了最大化该目标本质上就是一个持续学习问题，即智能体必须永不停止学习才能保持最优。</p>
+<p>创新：</p>
+<p>哲学与形式化的创新： 将“智能体嵌入于世界”这一哲学思考，通过计算理论（通用图灵机、算法复杂度）和强化学习理论（POMDP）严谨地形式化为一个数学模型。这是对智能体-环境边界这一根本问题的深刻重构。</p>
+<p>问题定义的创新： 创造了一个“通用局部环境”的框架，它不仅理论上优雅，而且成功地构建了一个“大世界”场景，其中“世界比智能体大”不是一个外部假设，而是一个内生的、不可避免的数学事实。</p>
+<p>目标函数的创新： 提出了“交互性”（Interactivity）这一全新的、基于算法复杂度的目标函数。它不同于传统的奖励最大化，也不同于现有的内在动机（如好奇心），而是直接衡量智能体“持续适应和学习”的能力本身，即创造“可预测的复杂性”的能力。</p>
+<p>评估范式的创新： 基于“交互性”设计了一个无外部环境的持续学习评估任务。这非常新颖，因为它评估的不是智能体在某个固定任务上的表现，而是其维持学习和适应过程本身的能力，这为评估真正的持续学习算法提供了一个“纯粹”的测试平台。</p>
+<p>贡献：</p>
+<p>理论贡献： 提供了“大世界假说”的一个坚实的计算理论基础，并证明了在这种嵌入式框架下，智能体与一个无限状态空间的POMDP交互等价。这为持续学习的研究提供了更深刻的理论根基。</p>
+<p>概念贡献： 引入了“交互性”这一概念，并将其与持续学习的核心诉求——永不停止适应——直接联系起来，为持续学习的目标设定提供了一个有力的候选方案。</p>
+<p>方法论贡献： 将抽象的算法复杂度概念操作化为可计算的预测误差，并据此设计了一个可行的强化学习算法。这为将计算理论中的深刻思想应用于实际的机器学习算法提供了范例。</p>
+<p>实证贡献： 通过实验揭示了深度线性和非线性网络在持续学习能力上的惊人差异。非线性网络在持续适应性任务中表现出的“可塑性丧失”现象，为理解和解决深度学习中的灾难性遗忘问题提供了新的视角和证据。</p>
+<p>提升：</p>
+<p>理论的普适性： 该框架不依赖于任何特定的环境或任务，而是从计算的本质出发，因此其结论具有很强的普适性，为构建通用人工智能的理论提供了基础。</p>
+<p>持续学习评估的纯粹性： 提出的评估任务直接衡量“持续适应”的能力，避免了传统持续学习基准中任务切换设计可能带来的人为因素和偏见。</p>
+<p>对模型架构的洞察： 实验结果有力地表明，在需要持续适应的场景中，保持可塑性的能力（如深度线性网络所展现的）可能比强大的非线性表达能力更为关键。</p>
+<p>不足：</p>
+<p>理论的可计算性挑战：“交互性”的原始定义基于不可计算的算法复杂度，尽管论文提出了一个基于预测误差的近似，但这个近似与原始定义的理论差距有多大，以及这个近似的有效性边界在哪里，仍有待进一步研究。</p>
+<p>算法的复杂性和可扩展性： 用于最大化“交互性”的算法是一个基于模型的、涉及元梯度（meta-gradient）的双层优化问题，其计算成本高昂，扩展到更复杂的策略和价值函数上存在挑战。</p>
+<p>实验的局限性： 实验是在一个高度抽象和简化的“自预测”环境中进行的。虽然这有助于分离和研究核心的持续学习能力，但这些发现能否直接推广到与丰富、复杂的外部世界交互的真实智能体上，尚需验证。</p>
+<p>对非线性网络失败的解释有待深化： 论文观察到深度非线性网络的失败，并将其与“可塑性丧失”联系起来，但未能提供更深层次的机制解释。为什么ReLU网络在这种持续自我生成的非平稳性中会崩溃，而线性网络不会，这是一个非常值得深入探讨的问题。</p>
+<p>心得：</p>
+<p>约束是智能的摇篮： 这篇论文最深刻的启发是，真正的、持续的智能可能不是源于无限的资源和能力，而是源于根本性的、不可逾越的约束。智能体因为它“小”而世界“大”，才被迫发展出持续学习和适应的能力。这与生物智能在资源有限的环境中演化而来的事实不谋而合。</p>
+<p>学习本身就是目标： 传统RL的目标是最大化外部奖励，学习只是达成目标的手段。而“交互性”框架将“学习”本身——即降低对复杂未来的预测误差——提升为目标。这是一种范式上的转变，暗示着一个真正通用的智能体，其首要任务可能不是解决某个特定问题，而是维持自身对世界的可预测性，即持续地理解和适应世界。</p>
+<p>线性模型的复兴与反思： 深度学习的成功很大程度上归功于非线性。然而，这篇论文的实验结果给了我们一个警示：在持续学习的场景下，非线性带来的强大表达能力可能是一把双刃剑，它可能导致模型过早地“固化”，丧失适应新变化的能力。这促使我们重新思考，在持续学习架构中，如何平衡表达能力与可塑性，或许深度线性结构或受其启发的架构是一个被忽视的有潜力的方向。</p>
+<p>一句话总结: 本文通过将智能体形式化为被一个通用计算机环境所“计算嵌入”的自动机，为“大世界假说”提供了坚实的理论基础，并创新性地提出了一个衡量持续适应能力的“交互性”目标，最终通过实验惊人地发现，在这种要求永不停止学习的场景下，深度线性网络比非线性网络表现出更强的持续学习能力。</p>
+<p>Continual learning is often motivated by the idea, known as the big world hypothesis, that “the world is bigger” than the agent. Recent problem formulations capture this idea by explicitly constraining an agent relative to the environment. These constraints lead to solutions in which the agent continually adapts to best use its limited capacity, rather than converging to a fixed solution. However, explicit constraints can be ad hoc, difficult to incorporate, and may limit the effectiveness of scaling up the agent’s capacity. In this paper, we characterize a problem setting in which an agent, regardless of its capacity, is constrained by being embedded in the environment. In particular, we introduce a computationally-embedded perspective that represents an embedded agent as an automaton simulated within a universal (formal) computer. Such an automaton is always constrained; we prove that it is equivalent to an agent that interacts with a partially observable Markov decision process over a countably infinite state-space. We propose an objective for this setting, which we call interactivity, that measures an agent’s ability to continually adapt its behaviour by learning new predictions. We then develop a model-based reinforcement learning algorithm for interactivity-seeking, and use it to construct a synthetic problem to evaluate continual learning capability. Our results show that deep nonlinear networks struggle to sustain interactivity, whereas deep linear networks sustain higher interactivity as capacity increases.</p>
+<p>https://arxiv.org/abs/2512.23419</p>
+    </div>
+    
+    <div class="footer" style="margin-top:3em;padding-top:1em;border-top:1px solid #eee;color:#aaa;font-size:0.85em;">
+      <p><strong>原文链接：</strong><a href="https://mp.weixin.qq.com/s/edbNJArHFSF2P7PiaIdxqw">https://mp.weixin.qq.com/s/edbNJArHFSF2P7PiaIdxqw</a></p>
+      <p style="margin-top:0.8em;">Powered by <a href="https://readgzh.site" style="color:#aaa;text-decoration:none;">ReadGZH</a> · <a href="https://readgzh.site/docs" style="color:#aaa;text-decoration:none;">开发者文档</a> · <a href="https://readgzh.site/pricing" style="color:#aaa;text-decoration:none;">升级套餐</a></p>
+      <p style="margin-top:0.4em;font-size:0.8em;">💡 免费注册获取每天 30 积分 · Lite ¥9/月 · Pro ¥39/月 → <a href="https://readgzh.site/dashboard" style="color:#aaa;">readgzh.site/dashboard</a></p>
+    </div>
+  </article>
+</body>
+</html>

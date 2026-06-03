@@ -1,0 +1,69 @@
+# 担忧分类定义
+categories:
+  unresolved_concerns:
+    code: UNRESOLVED
+    priority: P0
+    icon: 🔴
+    escalation: "24小时内必须处理"
+    
+  upcoming_deadlines:
+    code: DEADLINE
+    priority: P1
+    icon: 🟡
+    warning_threshold: "3天内到期"
+    escalation_threshold: "1天内到期"
+    
+  missed_opportunities:
+    code: OPPORTUNITY
+    priority: P2
+    icon: 🟢
+    review_cycle: "每周回顾"
+    
+  resource_risks:
+    code: RESOURCE
+    priority: P1
+    icon: 🟠
+    auto_monitor: true
+    
+  external_dependencies:
+    code: EXTERNAL
+    priority: P1
+    icon: 🔵
+    monitor_source: "外部监控"
+
+# 优先级定义
+priorities:
+  P0:
+    name: 紧急
+    color: red
+    response_time: "立即"
+  P1:
+    name: 高
+    color: orange
+    response_time: "24小时内"
+  P2:
+    name: 中
+    color: yellow
+    response_time: "72小时内"
+  P3:
+    name: 低
+    color: green
+    response_time: "一周内"
+
+# 状态定义
+statuses:
+  active:
+    name: 活跃
+    description: 待处理
+  monitoring:
+    name: 监控中
+    description: 正在跟踪
+  pending:
+    name: 待行动
+    description: 已确认待执行
+  resolved:
+    name: 已解决
+    description: 问题已处理
+  archived:
+    name: 已归档
+    description: 过期或无效

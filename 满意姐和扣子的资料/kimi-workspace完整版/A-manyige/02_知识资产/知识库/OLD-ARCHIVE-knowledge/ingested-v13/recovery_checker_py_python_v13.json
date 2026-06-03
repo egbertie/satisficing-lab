@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/interrupt-recovery/recovery_checker.py",
+  "filename": "recovery_checker.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e8f7b27279fb276f",
+  "content_length": 6079,
+  "ingested_at": "2026-03-31T17:27:44.993438",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nrecovery_checker.py\n恢复条件检查器 - 检查API可用性、Token充足性等\n\"\"\"\n\nimport os\nimport time\nimport json\nfrom typing import Dict, List, Tuple\nfrom datetime import datetime, timedelta\n\nclass RecoveryChecker:\n    \"\"\"\n    恢复条件检查器\n    \n    检查以下条件：\n    1. API可用性\n    2. Token充足性\n    3. 速率限制状态\n    4. 系统资源\n    \"\"\"\n    \n    def __init__(self, cooldown_seconds: int = 60):\n        self.cooldown_seconds = cooldown_seconds\n        self.last_checks = {\n            \"api\": 0,\n            \"token\": 0,\n ",
+  "limitations_applied": []
+}

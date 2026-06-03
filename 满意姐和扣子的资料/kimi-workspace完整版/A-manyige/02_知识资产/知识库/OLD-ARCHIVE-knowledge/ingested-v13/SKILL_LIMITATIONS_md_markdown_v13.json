@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/testing-framework/SKILL_LIMITATIONS.md",
+  "filename": "SKILL_LIMITATIONS.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "8963c6a9bc9abd19",
+  "content_length": 2724,
+  "ingested_at": "2026-03-31T17:27:45.441182",
+  "content_preview": "# Testing Limitations & Known Issues\n\n本文件记录测试框架的局限性（S6标准），明确哪些场景无法通过自动化测试覆盖。\n\n---\n\n## 局限性清单\n\n### LIM-001: AI模型输出的非确定性\n\n| 属性 | 内容 |\n|------|------|\n| **Skill** | blue-sentinel |\n| **类型** | 非确定性行为 |\n| **描述** | 认知审计依赖AI模型输出，相同输入可能产生不同结果 |\n| **影响** | 中 |\n| **根本原因** | AI模型的内在随机性（temperature>0） |\n| **缓解措施** | 1. 多次运行取平均 2. 设置随机种子 3. 验证输出格式而非内容 4. 统计一致性检查 |\n| **手动测试** | 是，需人工验证审计质量 |\n\n### LIM-002: 外部Token计数API依赖\n\n| 属性 | 内容 |\n|------|------|\n| **Skill** | token-budget-enforcer |\n| **类型** | 外部依赖 |\n| **描述",
+  "limitations_applied": []
+}

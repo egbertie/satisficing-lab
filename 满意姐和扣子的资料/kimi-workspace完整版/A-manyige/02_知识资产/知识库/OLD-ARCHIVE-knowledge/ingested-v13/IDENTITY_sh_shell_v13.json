@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/CORE/IDENTITY.sh",
+  "filename": "IDENTITY.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "591d8acbef7804a7",
+  "content_length": 225,
+  "ingested_at": "2026-03-31T17:27:44.544604",
+  "content_preview": "#!/bin/bash\n# IDENTITY机制执行脚本\necho \"=== IDENTITY机制检查 ===\"\necho \"时间: $(date)\"\nif [ -f \"/root/.openclaw/workspace/CORE/IDENTITY.md\" ]; then\n    echo \"✅ IDENTITY.md 存在\"\nelse\n    echo \"❌ IDENTITY.md 不存在\"\n    exit 1\nfi\necho \"检查完成\"\n",
+  "limitations_applied": []
+}

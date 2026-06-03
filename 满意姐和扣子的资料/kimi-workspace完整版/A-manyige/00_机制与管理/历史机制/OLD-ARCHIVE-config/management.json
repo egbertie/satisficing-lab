@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  "management": {
+    "auto_cleanup": true,
+    "temp_retention_days": 7,
+    "log_retention_days": 30,
+    "backup_retention_days": 90,
+    "max_directory_depth": 4,
+    "duplicate_check": true,
+    "naming_check": true
+  },
+  "notifications": {
+    "enabled": true,
+    "on_error": true,
+    "daily_summary": true,
+    "weekly_summary": true
+  },
+  "schedules": {
+    "daily_check": "0 6 * * *",
+    "weekly_audit": "0 23 * * 0",
+    "monthly_cleanup": "0 3 1 * *"
+  },
+  "paths": {
+    "workspace": "/root/.openclaw/workspace",
+    "logs": "logs/management",
+    "reports": "reports",
+    "temp": "05-TEMP",
+    "archive": "04-ARCHIVES"
+  }
+}

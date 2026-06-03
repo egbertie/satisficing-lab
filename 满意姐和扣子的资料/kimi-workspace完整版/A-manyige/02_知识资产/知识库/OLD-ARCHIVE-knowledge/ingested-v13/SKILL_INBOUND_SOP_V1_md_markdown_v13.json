@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/docs/2026-03/SKILL_INBOUND_SOP_V1.md",
+  "filename": "SKILL_INBOUND_SOP_V1.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "d02a8b4be305f3cf",
+  "content_length": 3436,
+  "ingested_at": "2026-03-31T17:27:46.634241",
+  "content_preview": "# Skill外来处理SOP（标准作业程序）\n\n**版本**: V1.0  \n**生效日期**: 2026-03-15  \n**适用范围**: 所有外部skill上传/安装请求  \n**制定原则**: 安全第一性原理 + 效益最大化\n\n---\n\n## 一、流程概览\n\n```\n用户上传skill文件\n        ↓\n【阶段1】完整性检查（只做完整性，不做匹配性）\n        ↓\n【阶段2】综合评估（安全/功能/成本/可维护）\n        ↓\n【阶段3】自建迭代（不安装，自建替代）\n        ↓\n交付自建skill + 更新依赖图谱\n```\n\n---\n\n## 二、阶段1：完整性检查（精简版）\n\n### 2.1 检查清单\n\n| 检查项 | 方法 | 通过标准 | Token控制 |\n|--------|------|----------|-----------|\n| 文件数量 | 计数 | 核心文件齐全（meta/skill/run）| <100 tokens |\n| 文件可读 | 尝试读取 | 无权限/损坏错误 | <100 tokens |\n| 基础结构 | 验证JSO",
+  "limitations_applied": []
+}

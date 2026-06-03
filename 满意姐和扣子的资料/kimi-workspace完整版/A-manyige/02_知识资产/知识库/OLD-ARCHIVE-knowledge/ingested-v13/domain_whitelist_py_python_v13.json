@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_satisficing-web-fetcher/security/domain_whitelist.py",
+  "filename": "domain_whitelist.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "044b889a3cbf6f2d",
+  "content_length": 3639,
+  "ingested_at": "2026-03-31T17:27:45.070649",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n域名白名单模块\n\n功能：\n1. 域名访问控制\n2. 支持通配符匹配\n3. 默认拒绝策略\n\n安全要求：\n- 默认拒绝所有域名\n- 必须显式添加白名单\n- 支持通配符子域名\n\"\"\"\n\nimport fnmatch\nfrom typing import List, Set\nfrom urllib.parse import urlparse\nfrom pathlib import Path\n\n\nclass DomainWhitelist:\n    \"\"\"域名白名单管理器\"\"\"\n    \n    # 默认白名单 - 可以根据需要修改\n    DEFAULT_WHITELIST = [\n        # 示例域名，实际使用时应清空或配置\n        \"example.com\",\n        \"*.example.com\",\n    ]\n    \n    def __init__(self, whitelist: List[str] = None):\n        \"\"\"\n        Args:\n            white",
+  "limitations_applied": []
+}

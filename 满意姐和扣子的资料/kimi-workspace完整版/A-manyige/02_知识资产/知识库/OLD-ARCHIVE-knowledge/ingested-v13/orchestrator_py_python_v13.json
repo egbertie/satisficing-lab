@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/cross-skill-orchestrator/orchestrator.py",
+  "filename": "orchestrator.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "bc8656210a6b1f32",
+  "content_length": 10219,
+  "ingested_at": "2026-03-31T17:27:44.825798",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n跨Skill协调器 - Cross Skill Orchestrator\n\n功能：协调多个Skill的顺序/并行执行\n优化：最小执行时间、最大资源利用、依赖自动处理\n\"\"\"\n\nimport json\nimport subprocess\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import List, Dict, Any, Optional\nfrom dataclasses import dataclass\nfrom concurrent.futures import ThreadPoolExecutor, as_completed\n\n@dataclass\nclass SkillTask:\n    \"\"\"Skill任务\"\"\"\n    skill_name: str\n    command: str\n    dependencies: List[str]\n    estimated_duration: int  # 秒\n    can_para",
+  "limitations_applied": []
+}

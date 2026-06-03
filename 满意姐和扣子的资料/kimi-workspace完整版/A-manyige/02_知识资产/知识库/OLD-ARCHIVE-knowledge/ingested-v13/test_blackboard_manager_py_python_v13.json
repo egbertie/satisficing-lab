@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blackboard-manager/test_blackboard_manager.py",
+  "filename": "test_blackboard_manager.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "578943baa32067cd",
+  "content_length": 2721,
+  "ingested_at": "2026-03-31T17:27:45.411638",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nblackboard-manager 单元测试\n\"\"\"\n\nimport unittest\nimport tempfile\nimport shutil\nimport time\nimport sys\nfrom pathlib import Path\n\nsys.path.insert(0, str(Path(__file__).parent))\nfrom blackboard_manager import BlackboardManager, StateEntry\n\n\nclass TestBlackboardManager(unittest.TestCase):\n    \"\"\"BlackboardManager单元测试\"\"\"\n    \n    def setUp(self):\n        self.temp_dir = tempfile.mkdtemp()\n        self.bb = BlackboardManager(storage_path=f\"{self.temp_dir}/state.yaml\")\n    \n    d",
+  "limitations_applied": []
+}

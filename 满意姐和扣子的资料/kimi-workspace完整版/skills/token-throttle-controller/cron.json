@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0",
+  "skill_name": "token-throttle-controller",
+  "description": "Token节流控制器 - 每15分钟监控",
+  "jobs": [
+    {
+      "name": "token-monitor",
+      "schedule": "*/15 * * * *",
+      "enabled": true,
+      "command": "/root/.openclaw/workspace/skills/token-throttle-controller/scripts/throttle-controller.py",
+      "timeout": 60,
+      "description": "每15分钟监控Token使用情况"
+    }
+  ]
+}

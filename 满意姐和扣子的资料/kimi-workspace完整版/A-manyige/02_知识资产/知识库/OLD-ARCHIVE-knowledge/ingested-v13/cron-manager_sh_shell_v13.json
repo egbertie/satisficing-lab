@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/cron-manager.sh",
+  "filename": "cron-manager.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "313d8729c9ecca44",
+  "content_length": 191,
+  "ingested_at": "2026-03-31T17:27:46.169197",
+  "content_preview": "#!/bin/bash\n# Cron管理器CLI包装器\n\nSCRIPT_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nSKILL_DIR=\"$SCRIPT_DIR/../skills/cron-optimization-manager\"\n\npython3 \"$SKILL_DIR/cron_manager.py\" \"$@\"\n",
+  "limitations_applied": []
+}

@@ -1,0 +1,36 @@
+{
+  "checks": {
+    "exists": {
+      "enabled": true,
+      "critical": true,
+      "description": "检查文件是否存在"
+    },
+    "size": {
+      "enabled": true,
+      "min_bytes": 1,
+      "critical": true,
+      "description": "检查文件大小是否大于指定字节数"
+    },
+    "readable": {
+      "enabled": true,
+      "lines": 100,
+      "critical": true,
+      "description": "检查文件内容是否可读，无编码错误"
+    },
+    "structure": {
+      "enabled": true,
+      "required_headers": [
+        "^## ",
+        "^### "
+      ],
+      "critical": false,
+      "description": "检查文件是否包含必需的章节标题"
+    }
+  },
+  "report_template": "standard",
+  "metadata": {
+    "name": "默认检查规则",
+    "version": "1.0.0",
+    "description": "通用的文件完整性检查规则配置"
+  }
+}

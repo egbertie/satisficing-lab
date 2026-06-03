@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/p0_task_check.sh",
+  "filename": "p0_task_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "8b428ce85b463a32",
+  "content_length": 1695,
+  "ingested_at": "2026-03-31T17:27:46.145128",
+  "content_preview": "#!/bin/bash\n# P0任务执行脚本 - 自动化检查\n# 固化运用脚本\n\necho \"=== P0任务执行检查 ===\"\necho \"时间: $(date)\"\necho \"\"\n\n# 检查是否五项维度检查清单存在\nCHECKLIST=\"/root/.openclaw/workspace/checklists/FIVE_DIMENSION_CHECKLIST.md\"\nif [ ! -f \"$CHECKLIST\" ]; then\n    echo \"❌ 错误: 五项维度检查清单不存在\"\n    echo \"请先创建: $CHECKLIST\"\n    exit 1\nfi\n\necho \"✅ 五项维度检查清单存在\"\n\n# 检查是否执行了5遍搜索\necho \"\"\necho \"=== 5遍搜索检查 ===\"\necho \"提示: 必须执行以下5遍搜索\"\necho \"  第1遍: 基础关键词 (已部署/V1.0 FIN/建立)\"\necho \"  第2遍: 变体关键词 (完成/已/日期)\"\necho \"  第3遍: 标记符号 (✅/🟢/归档)\"\necho \"  第4遍: 文件内容深度 (状态完成/实",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/knowledge-ingestion/prepare_p0_batch.py",
+  "filename": "prepare_p0_batch.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "2a4859ac7e70e5ed",
+  "content_length": 2763,
+  "ingested_at": "2026-03-31T17:27:44.612714",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n知识库P0批次准备脚本\n筛选核心文件，准备入库\n\"\"\"\n\nimport os\nimport json\nfrom pathlib import Path\nfrom datetime import datetime\n\n# P0批次筛选规则\nP0_EXTENSIONS = {'.md', '.txt', '.docx', '.doc', '.pdf'}\nP0_KEYWORDS = ['决策', '合伙人', '方法论', '框架', '图腾', '技能', 'skill', '设计', '方案']\nEXCLUDE_DIRS = {'.git', '__pycache__', 'node_modules', 'z_archive_unified'}\n\ndef scan_files(base_path):\n    \"\"\"扫描符合条件的文件\"\"\"\n    p0_files = []\n    p1_files = []\n    \n    for root, dirs, files in os.walk(base_path):\n        # ",
+  "limitations_applied": []
+}

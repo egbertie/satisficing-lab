@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/docs/2026-03/COMPREHENSIVE_FILE_AUDIT_REPORT.md",
+  "filename": "COMPREHENSIVE_FILE_AUDIT_REPORT.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "6ef3424bad8cf017",
+  "content_length": 3995,
+  "ingested_at": "2026-03-31T17:27:46.645858",
+  "content_preview": "# 全面文件审计报告\n\n**审计时间**: 2026-03-19  \n**审计范围**: /root/.openclaw/workspace/ 及 /root/openclaw/kimi/downloads/  \n**审计级别**: P0级基础设施审计\n\n---\n\n## 一、执行摘要\n\n本次审计对满意解研究所工作空间进行了360度全景扫描，发现文件系统存在结构性问题，需要立即重构。\n\n### 关键发现\n- **总文件数**: ~4,200个（workspace）+ 1,095个（downloads）\n- **总目录数**: 600+\n- **空文件夹**: 22个\n- **目录超层**: 多目录层级超过4层限制（最深达10层）\n- **重复风险**: 备份目录存在大量冗余（8.8MB，823个文件）\n- **大文件**: 9个PDF文件>5MB（总计~108MB，均为西蒙著作）\n\n---\n\n## 二、完整文件清单\n\n### 2.1 按类型统计\n\n| 文件类型 | 数量 | 占比 | 位置分布 |\n|---------|------|------|---------|\n| .md | 1",
+  "limitations_applied": []
+}

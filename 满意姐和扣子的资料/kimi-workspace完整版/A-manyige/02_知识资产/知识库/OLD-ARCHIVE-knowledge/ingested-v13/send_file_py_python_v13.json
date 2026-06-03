@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/feishu-send-file/send_file.py",
+  "filename": "send_file.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "7d13f73d7d122c58",
+  "content_length": 2701,
+  "ingested_at": "2026-03-31T17:27:44.775932",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n飞书发送文件脚本\n用法: python3 send_file.py <file_path> <open_id> <app_id> <app_secret> [file_name]\n\"\"\"\n\nimport sys\nimport os\nimport json\nimport urllib.request\nimport urllib.parse\n\ndef get_tenant_token(app_id, app_secret):\n    url = \"https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal\"\n    data = json.dumps({\"app_id\": app_id, \"app_secret\": app_secret}).encode()\n    req = urllib.request.Request(url, data=data, headers={\"Content-Type\": \"application/json\"})\n    wi",
+  "limitations_applied": []
+}

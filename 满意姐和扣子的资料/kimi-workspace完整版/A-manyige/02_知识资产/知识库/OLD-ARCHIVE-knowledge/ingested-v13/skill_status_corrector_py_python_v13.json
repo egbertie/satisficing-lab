@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/skill_status_corrector.py",
+  "filename": "skill_status_corrector.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "9a55c46df44f4876",
+  "content_length": 5981,
+  "ingested_at": "2026-03-31T17:27:46.133888",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nSkill状态修正器 - R4整改通道\n批量修正Skill虚报状态\n\"\"\"\n\nimport os\nimport json\nfrom pathlib import Path\nfrom datetime import datetime\n\nWORKSPACE_ROOT = \"/root/.openclaw/workspace\"\nSKILLS_DIR = f\"{WORKSPACE_ROOT}/skills\"\n\ndef load_fraud_report():\n    \"\"\"加载虚报报告\"\"\"\n    report_path = f\"{WORKSPACE_ROOT}/SKILL_FRAUD_SCAN_REPORT.json\"\n    with open(report_path, 'r', encoding='utf-8') as f:\n        return json.load(f)\n\ndef correct_skill_status(skill_result):\n    \"\"\"修正单个Skill状态\"\"\"\n    name = ski",
+  "limitations_applied": []
+}

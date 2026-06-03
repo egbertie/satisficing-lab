@@ -1,0 +1,152 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/universal-task-executor-v3/docs/CHECKPOINT_DESIGN.md",
+  "filename": "CHECKPOINT_DESIGN.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 41356,
+  "checksum": "25c8758ef7cefe9b",
+  "ingested_at": "2026-03-31T17:30:12.320934",
+  "line_count": 848,
+  "title": "Universal Task Executor V3.0 - 暂停/重启机制设计",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "Universal Task Executor V3.0 - 暂停/重启机制设计"
+    },
+    {
+      "level": 2,
+      "title": "1. 设计原则"
+    },
+    {
+      "level": 3,
+      "title": "1.1 核心目标"
+    },
+    {
+      "level": 3,
+      "title": "1.2 分层策略"
+    },
+    {
+      "level": 2,
+      "title": "2. 核心组件"
+    },
+    {
+      "level": 3,
+      "title": "2.1 Checkpoint管理器"
+    },
+    {
+      "level": 1,
+      "title": "checkpoint/manager.py"
+    },
+    {
+      "level": 3,
+      "title": "2.2 存储抽象"
+    },
+    {
+      "level": 1,
+      "title": "checkpoint/storage.py"
+    },
+    {
+      "level": 2,
+      "title": "3. 暂停/恢复流程"
+    },
+    {
+      "level": 3,
+      "title": "3.1 暂停流程"
+    },
+    {
+      "level": 3,
+      "title": "3.2 恢复流程"
+    },
+    {
+      "level": 2,
+      "title": "4. 处理器集成"
+    },
+    {
+      "level": 3,
+      "title": "4.1 处理器Checkpoint接口"
+    },
+    {
+      "level": 1,
+      "title": "checkpoint/handler_integration.py"
+    },
+    {
+      "level": 3,
+      "title": "4.2 集成示例"
+    },
+    {
+      "level": 1,
+      "title": "handlers/audit_handler.py"
+    },
+    {
+      "level": 2,
+      "title": "5. 自动恢复机制"
+    },
+    {
+      "level": 3,
+      "title": "5.1 系统启动恢复"
+    },
+    {
+      "level": 1,
+      "title": "checkpoint/auto_recovery.py"
+    },
+    {
+      "level": 2,
+      "title": "6. 配置示例"
+    },
+    {
+      "level": 1,
+      "title": "config/checkpoint.yaml"
+    },
+    {
+      "level": 2,
+      "title": "7. CLI命令"
+    },
+    {
+      "level": 1,
+      "title": "Checkpoint管理CLI"
+    },
+    {
+      "level": 1,
+      "title": "列出所有可恢复的Checkpoint"
+    },
+    {
+      "level": 1,
+      "title": "查看Checkpoint详情"
+    },
+    {
+      "level": 1,
+      "title": "从指定Checkpoint恢复"
+    },
+    {
+      "level": 1,
+      "title": "恢复最新的Checkpoint"
+    },
+    {
+      "level": 1,
+      "title": "删除Checkpoint"
+    },
+    {
+      "level": 1,
+      "title": "清理过期Checkpoint"
+    },
+    {
+      "level": 1,
+      "title": "导出Checkpoint"
+    },
+    {
+      "level": 1,
+      "title": "导入Checkpoint"
+    },
+    {
+      "level": 2,
+      "title": "8. 状态机"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "暂停/重启机制设计完成"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

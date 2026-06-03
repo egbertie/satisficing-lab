@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/zero-idle-enforcer/scripts/adversarial-test.py",
+  "filename": "adversarial-test.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "bae9b2164767b1d7",
+  "content_length": 7428,
+  "ingested_at": "2026-03-31T17:27:45.479813",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n零空置强制执行器 - 对抗测试 (S7)\n模拟各种边界条件验证触发逻辑\n\"\"\"\n\nimport json\nimport sys\nimport time\nfrom datetime import datetime\nfrom pathlib import Path\n\n# 添加父目录到路径\nsys.path.insert(0, str(Path(__file__).parent.parent))\n\n\nclass AdversarialTester:\n    \"\"\"对抗测试执行器 - S7\"\"\"\n    \n    def __init__(self):\n        self.current_time = int(time.time())\n        self.passed = 0\n        self.failed = 0\n        self.results = []\n    \n    def _mock_last_activity(self, desc):\n        \"\"\"根据描述模拟最后活动时间\"\"\"\n     ",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/worker-orchestrator/test_worker_orchestrator.py",
+  "filename": "test_worker_orchestrator.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "4d1db31441602f69",
+  "content_length": 2044,
+  "ingested_at": "2026-03-31T17:27:45.421128",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nworker-orchestrator 单元测试\n\"\"\"\n\nimport unittest\nimport tempfile\nimport shutil\nimport sys\nfrom pathlib import Path\n\nsys.path.insert(0, str(Path(__file__).parent))\nfrom worker_orchestrator import WorkerOrchestrator, WorkerType, TaskStatus\n\n\nclass TestWorkerOrchestrator(unittest.TestCase):\n    \"\"\"WorkerOrchestrator单元测试\"\"\"\n    \n    def setUp(self):\n        self.temp_dir = tempfile.mkdtemp()\n        self.orch = WorkerOrchestrator(storage_path=f\"{self.temp_dir}/orchestrator\")\n",
+  "limitations_applied": []
+}

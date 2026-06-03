@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人IP画像报告 — IP Discovery V2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ==================== 设计系统 ====================
+   * 风格定位：编辑式杂志报告 — 温暖、有质感、去模板化
+   * 色调：暖灰底 + 琥珀色主调 + 墨绿辅助
+   * 字体：Noto Serif SC（标题/正文） + DM Sans（UI/数据） + JetBrains Mono（标签/代码感元素）
+   * ================================================ */
+
+  :root {
+    /* ── 色板 ── */
+    --ink: #1a1a18;
+    --ink-soft: #3d3d38;
+    --paper: #f7f5f0;
+    --paper-warm: #edeae2;
+    --paper-card: #fffdf9;
+    --amber: #c4842a;
+    --amber-deep: #9a6518;
+    --amber-glow: #e6a83c;
+    --forest: #2d5a47;
+    --forest-soft: #4a7a62;
+    --rose: #a85a52;
+    --slate: #6b6962;
+    --slate-light: #9a9689;
+    --mist: #d8d4ca;
+    --border: #e2decf;
+    --border-warm: #d4cfbf;
+
+    /* ── 排版 ── */
+    --font-display: 'Noto Serif SC', 'Songti SC', serif;
+    --font-body: 'Noto Serif SC', 'Songti SC', Georgia, serif;
+    --font-ui: 'DM Sans', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+
+    /* ── 尺寸 ── */
+    --measure: 720px;
+    --measure-wide: 980px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 36px;
+    --space-2xl: 56px;
+    --space-3xl: 80px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.75;
+    font-size: 15.5px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* ── 纸张纹理层 ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse at 20% 30%, rgba(196,132,42,0.03) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(45,90,71,0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: var(--measure-wide);
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+  }
+
+  /* ══════════════════ 头部 ══════════════════ */
+  .report-header {
+    position: relative;
+    padding: var(--space-3xl) 0 var(--space-2xl);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .report-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 120px; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--amber), transparent);
+    border-radius: 2px;
+  }
+
+  .header-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-md);
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: var(--space-xl);
+  }
+
+  .header-meta::before,
+  .header-meta::after {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--mist);
+  }
+
+  .report-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4.5vw, 42px);
+    font-weight: 900;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: var(--space-md);
+  }
+
+  .report-title br { display: block; content: ''; margin-top: 4px; }
+
+  .report-title .name-accent {
+    color: var(--amber-deep);
+    position: relative;
+  }
+
+  .report-title .name-accent::after {
+    content: '';
+    position: absolute;
+    bottom: 2px; left: 0; right: 0;
+    height: 6px;
+    background: rgba(196,132,42,0.15);
+    border-radius: 2px;
+    z-index: -1;
+  }
+
+  .report-subtitle {
+    font-family: var(--font-ui);
+    font-size: 14px;
+    color: var(--slate-light);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  /* ══════════════════ 章节通用 ══════════════════ */
+  .section {
+    margin-bottom: var(--space-3xl);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: revealUp 0.6s ease forwards;
+  }
+  .section:nth-child(2) { animation-delay: 0.08s; }
+  .section:nth-child(3) { animation-delay: 0.16s; }
+  .section:nth-child(4) { animation-delay: 0.24s; }
+  .section:nth-child(5) { animation-delay: 0.32s; }
+  .section:nth-child(6) { animation-delay: 0.40s; }
+  .section:nth-child(7) { animation-delay: 0.48s; }
+  .section:nth-child(8) { animation-delay: 0.56s; }
+  .section:nth-child(9) { animation-delay: 0.64s; }
+  .section:nth-child(10){ animation-delay: 0.72s; }
+  .section:nth-child(11){ animation-delay: 0.80s; }
+
+  @keyframes revealUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .section { opacity: 1; transform: none; animation: none; }
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--amber);
+    letter-spacing: 1px;
+    user-select: none;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    flex: 1;
+  }
+
+  .section-hint {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--slate-light);
+    font-weight: 400;
+  }
+
+  /* ══════════════════ 卡片 ══════════════════ */
+  .card {
+    background: var(--paper-card);
+    border: 1px solid var(--border-warm);
+    padding: var(--space-xl);
+    position: relative;
+    box-shadow:
+      0 1px 2px rgba(26,26,24,0.03),
+      0 4px 16px rgba(26,26,24,0.04);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+  }
+
+  /* ══════════════════ 定位陈述（核心区域）══════════════════ */
+  .positioning-block {
+    margin-bottom: var(--space-xl);
+  }
+
+  .positioning-statement {
+    text-align: center;
+    padding: var(--space-2xl) var(--space-xl);
+    background:
+      linear-gradient(135deg, rgba(196,132,42,0.04) 0%, rgba(45,90,71,0.03) 100%);
+    border: 1px solid var(--border-warm);
+    font-family: var(--font-display);
+    font-size: clamp(17px, 2.5vw, 22px);
+    line-height: 1.85;
+    color: var(--ink);
+    font-weight: 600;
+    position: relative;
+    quotes: """ """ "'" "'";
+  }
+
+  .positioning-statement::before {
+    content: open-quote;
+    position: absolute;
+    top: 12px; left: 20px;
+    font-size: 48px;
+    line-height: 1;
+    color: var(--amber);
+    opacity: 0.2;
+    font-family: Georgia, serif;
+  }
+
+  .positioning-statement .hl {
+    color: var(--amber-deep);
+    font-weight: 700;
+    border-bottom: 1.5px solid rgba(196,132,42,0.25);
+  }
+
+  /* 标签云 */
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: var(--space-lg);
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+    cursor: default;
+  }
+
+  .tag-primary {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .tag-secondary {
+    background: var(--paper-warm);
+    color: var(--ink-soft);
+    border: 1px solid var(--border-warm);
+  }
+
+  /* IP 公式 */
+  .ip-formula {
+    margin-top: var(--space-lg);
+    text-align: center;
+    padding: var(--space-lg) var(--space-md);
+    background: var(--paper-warm);
+    border-left: 3px solid var(--amber);
+  }
+
+  .ip-formula-content {
+    font-family: var(--font-body);
+    font-size: 17px;
+    color: var(--ink);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  .ip-formula-content .op {
+    display: inline-block;
+    margin: 0 10px;
+    color: var(--slate);
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  .ip-formula-content .result {
+    color: var(--amber-deep);
+  }
+
+  /* ══════════════════ 雷达图区 ══════════════════ */
+  .radar-section {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  @media (max-width: 800px) {
+    .radar-section { grid-template-columns: 1fr; }
+  }
+
+  .radar-box {
+    background: var(--paper-card);
+    border: 1px solid var(--border-warm);
+    padding: var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .radar-box canvas {
+    max-width: 100%;
+    height: auto !important;
+  }
+
+  .scores-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+
+  .score-row:hover {
+    border-color: var(--mist);
+  }
+
+  .score-name {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    min-width: 72px;
+    color: var(--ink);
+    flex-shrink: 0;
+  }
+
+  .score-bar-track {
+    flex: 1;
+    height: 6px;
+    background: var(--paper-warm);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    width: 0;
+  }
+
+  .fill-high { background: var(--forest); }
+  .fill-mid  { background: var(--amber); }
+  .fill-low  { background: var(--rose); }
+
+  .score-num {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    min-width: 36px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .num-high { color: var(--forest); }
+  .num-mid  { color: var(--amber-deep); }
+  .num-low  { color: var(--rose); }
+
+  /* ══════════════════ 六维度可折叠面板 ══════════════════ */
+  .dimension-detail {
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    margin-bottom: var(--space-md);
+    overflow: hidden;
+  }
+
+  .dimension-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-lg) var(--space-xl);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+    border-bottom: 1px solid transparent;
+  }
+
+  .dimension-head:hover {
+    background: rgba(196,132,42,0.02);
+  }
+
+  .dimension-head.active {
+    border-bottom-color: var(--border-warm);
+  }
+
+  .dim-label-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .dim-index {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--ink);
+    color: var(--paper);
+    letter-spacing: -0.5px;
+  }
+
+  .dim-text h3 {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .dim-text span {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--slate-light);
+    margin-top: 2px;
+    display: block;
+  }
+
+  .dim-badge {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 14px;
+    letter-spacing: 0.5px;
+    border-radius: 2px;
+  }
+
+  .badge-strong { background: rgba(45,90,71,0.08); color: var(--forest); border: 1px solid rgba(45,90,71,0.15); }
+  .badge-moderate{ background: rgba(196,132,42,0.08); color: var(--amber-deep); border: 1px solid rgba(196,132,42,0.15); }
+  .badge-weak   { background: rgba(168,90,82,0.07); color: var(--rose); border: 1px solid rgba(168,90,82,0.15); }
+
+  .dim-toggle {
+    width: 22px; height: 22px;
+    border: 1.5px solid var(--slate-light);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+    margin-left: var(--space-md);
+  }
+
+  .dim-toggle svg {
+    width: 10px; height: 10px;
+    stroke: var(--slate);
+    transition: transform 0.25s ease;
+  }
+
+  .dimension-head.active .dim-toggle {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .dimension-head.active .dim-toggle svg {
+    stroke: var(--paper);
+    transform: rotate(180deg);
+  }
+
+  .dimension-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.22,1,0.36,1),
+                padding 0.35s ease;
+    padding: 0 var(--space-xl);
+  }
+
+  .dimension-body.open {
+    max-height: 800px;
+    padding: 0 var(--space-xl) var(--space-xl);
+  }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+
+  @media (max-width: 600px) {
+    .detail-grid { grid-template-columns: 1fr; }
+  }
+
+  .detail-cell {
+    padding: var(--space-md);
+    background: var(--paper);
+    border: 1px solid var(--border);
+  }
+
+  .detail-cell-label {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--slate);
+    margin-bottom: 6px;
+  }
+
+  .detail-cell-value {
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .evidence-callout {
+    margin-top: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    background: var(--paper);
+    border-left: 3px solid var(--amber);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    color: var(--slate);
+    line-height: 1.65;
+  }
+
+  .evidence-callout strong {
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+
+  /* ══════════════════ 交叉分析矩阵 ══════════════════ */
+  .matrix-scroll { overflow-x: auto; margin-top: var(--space-md); }
+
+  .matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    min-width: 520px;
+  }
+
+  .matrix-table th,
+  .matrix-table td {
+    padding: 11px 14px;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .matrix-table th {
+    background: var(--paper);
+    font-weight: 600;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--slate);
+  }
+
+  .matrix-table th:first-child { text-align: left; }
+  .matrix-table td:first-child { text-align: left; font-weight: 600; color: var(--ink); }
+
+  .consistency-marker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .marker-5 { background: rgba(45,90,71,0.1); color: var(--forest); }
+  .marker-4 { background: rgba(45,90,71,0.06); color: var(--forest); }
+  .marker-3 { background: rgba(107,105,98,0.08); color: var(--slate); }
+  .marker-2 { background: rgba(196,132,42,0.08); color: var(--amber-deep); }
+  .marker-1 { background: rgba(168,90,82,0.08); color: var(--rose); }
+
+  /* 张力列表 */
+  .tension-list { list-style: none; margin-top: var(--space-lg); }
+
+  .tension-item {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--paper);
+    border: 1px solid var(--border);
+    margin-bottom: var(--space-sm);
+    align-items: flex-start;
+  }
+
+  .tension-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .tag-fatal    { background: rgba(168,90,82,0.08); color: var(--rose); border: 1px solid rgba(168,90,82,0.15); }
+  .tag-creative { background: rgba(196,132,42,0.08); color: var(--amber-deep); border: 1px solid rgba(196,132,42,0.15); }
+  .tag-surface { background: rgba(107,105,98,0.06); color: var(--slate); border: 1px solid rgba(216,212,202,0.5); }
+
+  .tension-body h4 {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+
+  .tension-body p {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+
+  /* 强度指标 */
+  .strength-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+
+  .strength-cell {
+    text-align: center;
+    padding: var(--space-lg) var(--space-md);
+    background: var(--paper);
+    border: 1px solid var(--border);
+  }
+
+  .strength-val {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--amber-deep);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .strength-val small {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--slate);
+  }
+
+  .strength-lbl {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    color: var(--slate-light);
+    margin-top: 6px;
+    letter-spacing: 0.3px;
+  }
+
+  .strength-cell.overall {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, rgba(196,132,42,0.04), rgba(45,90,71,0.03));
+    border-color: var(--border-warm);
+  }
+
+  .strength-cell.overall .strength-val {
+    font-size: 48px;
+  }
+
+  /* ══════════════════ 方案卡片 ══════════════════ */
+  .solutions-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .solution-card {
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    padding: var(--space-2xl);
+    position: relative;
+    transition: border-color 0.25s ease;
+    cursor: default;
+  }
+
+  .solution-card:hover {
+    border-color: var(--amber);
+  }
+
+  .solution-card.is-recommended {
+    border-color: var(--amber);
+    background: linear-gradient(135deg, var(--paper-card), rgba(196,132,42,0.025));
+  }
+
+  .rec-badge {
+    position: absolute;
+    top: 0; right: var(--space-xl);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    background: var(--amber);
+    color: #fff;
+    transform: translateY(-50%);
+  }
+
+  .sol-type {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    margin-bottom: var(--space-md);
+    padding: 4px 12px;
+    border-radius: 2px;
+  }
+
+  .type-rec { background: rgba(196,132,42,0.1); color: var(--amber-deep); }
+  .type-bal { background: rgba(45,90,71,0.08); color: var(--forest); }
+  .type-agr { background: rgba(107,105,98,0.08); color: var(--slate); }
+
+  .sol-positioning {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.75;
+    color: var(--ink);
+    padding: var(--space-md) var(--space-lg);
+    background: var(--paper);
+    border-left: 3px solid var(--ink-soft);
+    margin-bottom: var(--space-lg);
+  }
+
+  .sol-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .sol-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 4px 12px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    color: var(--slate);
+    border-radius: 2px;
+  }
+
+  .sol-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  @media (max-width: 600px) { .sol-grid { grid-template-columns: 1fr; } }
+
+  .sol-info {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    padding: var(--space-md);
+    background: var(--paper);
+    border: 1px solid var(--border);
+  }
+
+  .sol-info strong {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--slate);
+    margin-bottom: 4px;
+  }
+
+  .pros-cons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  @media (max-width: 600px) { .pros-cons-grid { grid-template-columns: 1fr; } }
+
+  .pros-box {
+    padding: var(--space-md);
+    background: rgba(45,90,71,0.04);
+    border: 1px solid rgba(45,90,71,0.1);
+  }
+
+  .cons-box {
+    padding: var(--space-md);
+    background: rgba(168,90,82,0.04);
+    border: 1px solid rgba(168,90,82,0.1);
+  }
+
+  .pros-box strong, .cons-box strong {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .pros-box strong { color: var(--forest); }
+  .cons-box strong { color: var(--rose); }
+
+  .pros-box p, .cons-box p {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+
+  .sol-fit-note {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    color: var(--slate);
+    padding-top: var(--space-md);
+    border-top: 1px dashed var(--border);
+  }
+
+  .sol-fit-note b { color: var(--ink-soft); }
+
+  /* ══════════════════ 竞品对标 ══════════════════ */
+  .comp-map-area {
+    background: var(--paper);
+    padding: var(--space-xl);
+    border: 1px solid var(--border);
+    text-align: center;
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .comp-map-area pre {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--slate);
+    line-height: 1.9;
+    white-space: pre;
+    overflow-x: auto;
+  }
+
+  .comp-map-caption {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--slate-light);
+    margin-top: var(--space-md);
+  }
+
+  .comp-table-scroll { overflow-x: auto; margin-top: var(--space-lg); }
+
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-ui);
+    font-size: 12.5px;
+  }
+
+  .comp-table th,
+  .comp-table td {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .comp-table th {
+    background: var(--paper);
+    font-weight: 600;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--slate);
+  }
+
+  .comp-table td:first-child { text-align: left; font-weight: 600; color: var(--forest); }
+  .comp-table .you { background: rgba(196,132,42,0.04); }
+  .comp-table .you td:first-child { color: var(--amber-deep); font-weight: 700; }
+
+  .opp-list { list-style: none; margin-top: var(--space-lg); }
+
+  .opp-item {
+    padding: var(--space-md) var(--space-lg);
+    background: var(--paper);
+    border: 1px solid var(--border);
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: var(--slate);
+  }
+
+  .opp-item strong { color: var(--amber-deep); font-weight: 600; }
+
+  /* ══════════════════ 内容策略 & 受众 ══════════════════ */
+  .mini-card {
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-lg);
+  }
+
+  .pillar-list { display: flex; flex-direction: column; gap: var(--space-sm); margin-top: var(--space-md); }
+
+  .pillar-row {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: var(--paper);
+    border: 1px solid var(--border);
+    align-items: flex-start;
+  }
+
+  .pillar-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+
+  .pillar-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .pillar-desc {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+    margin-top: var(--space-md);
+  }
+
+  .topic-chip {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    padding: 10px 14px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    color: var(--slate);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: border-color 0.2s;
+  }
+
+  .topic-chip:hover { border-color: var(--mist); }
+
+  .topic-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--amber);
+  }
+
+  /* ══════════════════ 时间线 ══════════════════ */
+  .timeline {
+    position: relative;
+    padding-left: 36px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--amber), var(--forest), var(--slate-light));
+  }
+
+  .tl-node {
+    position: relative;
+    margin-bottom: var(--space-xl);
+  }
+
+  .tl-node:last-child { margin-bottom: 0; }
+
+  .tl-dot {
+    position: absolute;
+    left: -29px;
+    top: 6px;
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: var(--paper-card);
+    border: 2px solid var(--amber);
+    z-index: 1;
+  }
+
+  .tl-week {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--amber-deep);
+    margin-bottom: var(--space-sm);
+  }
+
+  .tl-body {
+    padding: var(--space-md) var(--space-lg);
+    background: var(--paper);
+    border: 1px solid var(--border);
+  }
+
+  .tl-steps { list-style: none; }
+
+  .tl-steps li {
+    font-family: var(--font-ui);
+    font-size: 14px;
+    color: var(--slate);
+    padding: 5px 0;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .tl-steps li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 12px;
+    width: 8px; height: 1px;
+    background: var(--forest-soft);
+  }
+
+  .tl-milestone {
+    display: inline-block;
+    margin-top: var(--space-sm);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--amber-deep);
+    padding: 4px 14px;
+    background: rgba(196,132,42,0.06);
+    border: 1px solid rgba(196,132,42,0.15);
+  }
+
+  /* ══════════════════ 洞察回顾 ══════════════════ */
+  .insight-stack { list-style: none; }
+
+  .insight-entry {
+    position: relative;
+    padding: var(--space-lg) var(--space-xl);
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--amber);
+    margin-bottom: var(--space-sm);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--ink);
+  }
+
+  .insight-round {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: var(--slate-light);
+  }
+
+  .insight-glyph { margin-right: var(--space-sm); }
+
+  /* ══════════════════ 页脚 ══════════════════ */
+  .report-footer {
+    text-align: center;
+    padding: var(--space-3xl) 0;
+    border-top: 1px solid var(--border);
+    margin-top: var(--space-3xl);
+  }
+
+  .footer-brand {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--slate-light);
+    letter-spacing: 0.3px;
+  }
+
+  .footer-brand a {
+    color: var(--amber-deep);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(196,132,42,0.25);
+  }
+
+  .footer-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--mist);
+    margin-top: var(--space-sm);
+  }
+
+  /* ══════════════════ 打印按钮 ══════════════════ */
+  .print-btn {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 12px 26px;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border-radius: 2px;
+    box-shadow: 0 4px 20px rgba(26,26,24,0.15);
+    z-index: 100;
+    transition: all 0.2s ease;
+  }
+
+  .print-btn:hover {
+    background: var(--ink-soft);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(26,26,24,0.2);
+  }
+
+  .print-btn:active { transform: translateY(0); }
+
+  /* ══════════════════ 子标题（h3） ══════════════════ */
+  .subhead {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin: var(--space-lg) 0 var(--space-md);
+    letter-spacing: -0.005em;
+  }
+
+  /* ══════════════════ 打印样式 ══════════════════ */
+  @media print {
+    body { background: #fff; }
+    body::before { display: none; }
+    .page-wrap { padding: 0 20px; max-width: 100%; }
+    .print-btn { display: none !important; }
+    .section { opacity: 1; transform: none; page-break-inside: avoid; }
+    .card, .dimension-detail, .solution-card, .timeline, .insight-entry { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ 头部 ══════════════════ -->
+<header class="report-header">
+  <div class="page-wrap">
+    <div class="header-meta">IP Discovery V2 · 六维度画像报告</div>
+    <h1 class="report-title"><span class="name-accent">{{USER_NAME}}</span><br>个人IP画像报告</h1>
+    <p class="report-subtitle">{{REPORT_DATE}} · {{ROUNDS}} 轮深度访谈</p>
+  </div>
+</header>
+
+<div class="page-wrap">
+
+<!-- ══════════════════ 01 核心定位总览 ══════════════════ -->
+<section class="section" id="summary">
+  <div class="section-header">
+    <span class="section-number">01</span>
+    <h2 class="section-title">核心定位总览</h2>
+  </div>
+
+  <div class="card positioning-block">
+    <div class="positioning-statement">
+      {{POSITIONING_STATEMENT}}
+    </div>
+
+    <div class="tag-cloud">
+      {{TAG_CLOUD}}
+      <!-- 示例：
+      <span class="tag tag-primary">#专业标签</span>
+      <span class="tag tag-primary">#风格标签</span>
+      <span class="tag tag-secondary">#领域标签</span>
+      <span class="tag tag-secondary">#受众标签</span>
+      <span class="tag tag-secondary">#价值标签</span>
+      -->
+    </div>
+
+    <div class="ip-formula">
+      <div class="ip-formula-content">
+        {{FORMULA_A}}<span class="op">×</span>{{FORMULA_B}}<span class="op">=</span><span class="result">❝ {{FORMULA_RESULT}}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════ 02 雷达分析 ══════════════════ -->
+<section class="section" id="radar">
+  <div class="section-header">
+    <span class="section-number">02</span>
+    <h2 class="section-title">六维度雷达分析</h2>
+  </div>
+
+  <div class="radar-section">
+    <div class="radar-box">
+      <canvas id="radarChart" width="320" height="320"></canvas>
+    </div>
+
+    <div class="scores-panel">
+      {{DIMENSION_SCORES}}
+      <!-- 示例：
+      <div class="score-row">
+        <span class="score-name">专业基因</span>
+        <div class="score-bar-track"><div class="score-bar-fill fill-high" style="--target-width:80%"></div></div>
+        <span class="score-num num-high">8</span>
+      </div>
+      …重复6个维度
+      -->
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════ 03 六维度深度解析 ══════════════════ -->
+<section class="section" id="dimensions">
+  <div class="section-header">
+    <span class="section-number">03</span>
+    <h2 class="section-title">六维度深度解析</h2>
+    <span class="section-hint">点击展开</span>
+  </div>
+
+  {{DIMENSION_DETAILS}}
+  <!--
+  每个维度一个面板示例：
+
+  <div class="dimension-detail">
+    <div class="dimension-head active" onclick="toggleDim(this)">
+      <div class="dim-label-group">
+        <div class="dim-index">01</div>
+        <div class="dim-text">
+          <h3>专业基因</h3>
+          <span>我是谁 — 出厂设置和能力底座</span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="dim-badge badge-strong">8 / 强</span>
+        <div class="dim-toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+    </div>
+    <div class="dimension-body open">
+      <div class="detail-grid">
+        <div class="detail-cell">
+          <div class="detail-cell-label">能力矩阵</div>
+          <div class="detail-cell-value">[硬技能+软技能]</div>
+        </div>
+        <div class="detail-cell">
+          <div class="detail-cell-label">稀缺性评估</div>
+          <div class="detail-cell-value">[高/中/低 + 理由]</div>
+        </div>
+        <div class="detail-cell">
+          <div class="detail-cell-label">与同行差异化坐标</div>
+          <div class="detail-cell-value">[差异化点]</div>
+        </div>
+        <div class="detail-cell">
+          <div class="detail-cell-label">天赋区识别</div>
+          <div class="detail-cell-value">[投入产出比最高的能力]</div>
+        </div>
+      </div>
+      <div class="evidence-callout">
+        <strong>证据来源：</strong>来自访谈第X轮的具体回答引用
+      </div>
+    </div>
+  </div>
+  ……共6个
+  -->
+</section>
+
+
+<!-- ══════════════════ 04 交叉分析 ══════════════════ -->
+<section class="section" id="cross-analysis">
+  <div class="section-header">
+    <span class="section-number">04</span>
+    <h2 class="section-title">交叉分析与一致性检验</h2>
+  </div>
+
+  <div class="card">
+    <h3 class="subhead">一致性检验矩阵</h3>
+    <div class="matrix-scroll">
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>维度对</th>
+            <th>一致性</th>
+            <th>说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{CONSISTENCY_MATRIX}}
+          <!--
+          <tr><td>专业基因 × 价值主张</td><td><span class="consistency-marker marker-5">5</span></td><td>能力完全支撑价值交付</td></tr>
+          …共6行
+          -->
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subhead">认知张力全景图</h3>
+    <ul class="tension-list">
+      {{TENSION_LIST}}
+      <!--
+      <li class="tension-item">
+        <span class="tension-tag tag-creative">创造性张力</span>
+        <div class="tension-body">
+          <h4>"想做大众内容 vs 最享受深度帮助一个人"</h4>
+          <p>建议：用大众入口获取注意力 + 深度内容建立信任和转化</p>
+        </div>
+      </li>
+      -->
+    </ul>
+
+    <h3 class="subhead">协同效应分析</h3>
+    <div style="padding:var(--space-lg);background:var(--paper);border:1px solid var(--border);font-family:var(--font-ui);font-size:14px;color:var(--slate);line-height:1.7;">
+      {{SYNERGY_ANALYSIS}}
+    </div>
+
+    <h3 class="subhead">IP 定位强度综合评估</h3>
+    <div class="strength-grid">
+      {{STRENGTH_METERS}}
+      <!--
+      <div class="strength-cell">
+        <div class="strength-val">8<small>/10</small></div>
+        <div class="strength-lbl">内部一致性强度</div>
+      </div>
+      <div class="strength-cell overall">
+        <div class="strength-val">7.6<small>/10</small></div>
+        <div class="strength-lbl">综合定位强度</div>
+      </div>
+      -->
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════ 05 方案选择 ══════════════════ -->
+<section class="section" id="solutions">
+  <div class="section-header">
+    <span class="section-number">05</span>
+    <h2 class="section-title">IP 定位方案（三选一）</h2>
+  </div>
+
+  <div class="solutions-list">
+    {{SOLUTION_CARDS}}
+    <!--
+    === 方案 A（推荐） ===
+    <div class="solution-card is-recommended">
+      <span class="rec-badge">推荐方案</span>
+      <span class="sol-type type-rec">精准专家型</span>
+      <div class="sol-positioning">"你是谁 + 用什么独特方式 + 帮谁 + 解决什么问题"</div>
+      <div class="sol-tags">
+        <span class="sol-tag">#标签</span><span class="sol-tag">#标签</span><span class="sol-tag">#标签</span>
+      </div>
+      <div class="sol-grid">
+        <div class="sol-info"><strong>差异化核心</strong>[一句话说明不可替代性]</div>
+        <div class="sol-info"><strong>内容方向</strong>[2-3个主要系列]</div>
+        <div class="sol-info"><strong>平台建议</strong>[首选+理由]</div>
+        <div class="sol-info"><strong>变现路径</strong>[合理预期]</div>
+      </div>
+      <div class="pros-cons-grid">
+        <div class="pros-box"><strong>✦ 优势</strong><p>最匹配你的能力底座</p></div>
+        <div class="cons-box"><strong>⚡ 风险</strong><p>受众面相对窄</p></div>
+      </div>
+      <p class="sol-fit-note">🎯 <b>适合：</b>如果我想建立深度影响力</p>
+    </div>
+
+    === 方案 B（稳健） → 同结构，去掉 is-recommended，改 type-bal
+    === 方案 C（进取） → 同结构，改 type-agr
+    -->
+  </div>
+</section>
+
+
+<!-- ══════════════════ 06 竞品对标 ══════════════════ -->
+<section class="section" id="competitive">
+  <div class="section-header">
+    <span class="section-number">06</span>
+    <h2 class="section-title">竞品对标地图</h2>
+  </div>
+
+  <div class="card">
+    <div class="comp-map-area">
+      <pre>
+           深度 / 专业度
+            ↑
+      竞品A ●  (头部标杆)
+                \
+         你 ●———● 竞品B ——→ 广度 / 大众化
+              /
+      竞品C ●  (差异化参照)
+      </pre>
+      <p class="comp-map-caption">{{COMPETITIVE_POSITION_DESC}}</p>
+    </div>
+
+    <div class="comp-table-scroll">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>IP / 维度</th>
+            <th>专业基因</th>
+            <th>价值主张</th>
+            <th>独特视角</th>
+            <th>目标受众</th>
+            <th>表达风格</th>
+            <th>长期愿景</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{COMPETITIVE_TABLE}}
+          <!--
+          <tr class="you"><td>🎯 你</td><td>8</td><td>7</td><td>8</td><td>6</td><td>7</td><td>6</td></tr>
+          <tr><td>竞品A</td><td>9</td><td>8</td><td>6</td><td>9</td><td>8</td><td>8</td></tr>
+          <tr><td>竞品B</td><td>7</td><td>7</td><td>5</td><td>8</td><td>9</td><td>7</td></tr>
+          <tr><td>竞品C</td><td>6</td><td>8</td><td>9</td><td>5</td><td>6</td><td>7</td></tr>
+          -->
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subhead">差异化机会清单</h3>
+    <ul class="opp-list">
+      {{OPPORTUNITY_LIST}}
+      <!--
+      <li class="opp-item"><strong>空白区：</strong>竞品们都忽略了[什么]</li>
+      -->
+    </ul>
+  </div>
+</section>
+
+
+<!-- ══════════════════ 07 内容策略 ══════════════════ -->
+<section class="section" id="content-strategy">
+  <div class="section-header">
+    <span class="section-number">07</span>
+    <h2 class="section-title">内容策略精简版</h2>
+  </div>
+
+  <div class="mini-card">
+    <h3 class="subhead">三大内容支柱</h3>
+    <div class="pillar-list">
+      {{CONTENT_PILLARS}}
+      <!--
+      <div class="pillar-row">
+        <span class="pillar-icon">🔬</span>
+        <div>
+          <div class="pillar-title">支柱一名称</div>
+          <div class="pillar-desc">描述 + 典型选题方向</div>
+        </div>
+      </div>
+      …3个
+      -->
+    </div>
+
+    <h3 class="subhead">10 个可执行选题</h3>
+    <div class="topic-grid">
+      {{TOPIC_LIST}}
+      <!--
+      <div class="topic-chip"><span class="topic-num">01</span>具体选题标题或方向</div>
+      …10个
+      -->
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════ 08 受众画像 ══════════════════ -->
+<section class="section" id="audience">
+  <div class="section-header">
+    <span class="section-number">08</span>
+    <h2 class="section-title">目标受众画像</h2>
+  </div>
+
+  <div class="card">
+    {{AUDIENCE_PROFILE}}
+  </div>
+</section>
+
+
+<!-- ══════════════════ 09 行动路线图 ══════════════════ -->
+<section class="section" id="action-plan">
+  <div class="section-header">
+    <span class="section-number">09</span>
+    <h2 class="section-title">30 天行动路线图</h2>
+  </div>
+
+  <div class="card">
+    <div class="timeline">
+      {{TIMELINE}}
+      <!--
+      <div class="tl-node">
+        <div class="tl-dot"></div>
+        <div class="tl-week">WEEK 01 · 基础搭建期</div>
+        <div class="tl-body">
+          <ul class="tl-steps">
+            <li>完成账号基础设置（头像、简介、背景图对齐新定位）</li>
+            <li>发布第一篇「宣言式」内容，公开宣布 IP 方向</li>
+            <li>准备 3 篇储备内容</li>
+          </ul>
+          <span class="tl-milestone">⇢ 里程碑：账号定位上线</span>
+        </div>
+      </div>
+      …Week 2/3/4
+      -->
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════ 10 关键洞察回顾 ══════════════════ -->
+<section class="section" id="insights">
+  <div class="section-header">
+    <span class="section-number">10</span>
+    <h2 class="section-title">全程关键洞察回顾</h2>
+  </div>
+
+  <div class="card">
+    <ul class="insight-stack">
+      {{INSIGHT_LIST}}
+      <!--
+      <li class="insight-entry">
+        <span class="insight-round">第 2 轮</span>
+        <span class="insight-glyph">💡</span>
+        你的 IP 核心不是[以为的]，而是[真正的独特之处]。证据：[具体例证]
+      </li>
+      …每轮最重要的洞察
+      -->
+    </ul>
+  </div>
+</section>
+
+
+} <!-- end page-wrap -->
+
+<footer class="report-footer">
+  <p class="footer-brand">本报告由 <a href="#">IP Discovery V2</a> · 六维度个人 IP 定位系统 自动生成</p>
+  <p class="footer-meta">{{ROUNDS}} 轮深度访谈 · {{TOTAL_MESSAGES}} 条对话记录</p>
+</footer>
+
+<button class="print-btn" onclick="window.print()">打印 / 导出 PDF</button>
+
+
+<!-- ==================== JavaScript ==================== -->
+<script>
+/* ═══ 雷达图绘制（暖色调适配） ═══ */
+function drawRadarChart(scores, labels) {
+  const canvas = document.getElementById('radarChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = H / 2;
+  const R = Math.min(W, H) / 2 * 0.62;
+  const sides = 6;
+  const angleStep = (Math.PI * 2) / sides;
+  const startAngle = -Math.PI / 2;
+
+  // 背景网格
+  for (let l = 1; l <= 5; l++) {
+    const r = R * (l / 5);
+    ctx.beginPath();
+    for (let i = 0; i <= sides; i++) {
+      const a = startAngle + i * angleStep;
+      const x = cx + r * Math.cos(a);
+      const y = cy + r * Math.sin(a);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.strokeStyle = 'rgba(107,105,98,0.12)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    if (l % 2 === 0) {
+      ctx.fillStyle = 'rgba(107,105,98,0.025)';
+      ctx.fill();
+    }
+  }
+
+  // 轴线
+  for (let i = 0; i < sides; i++) {
+    const a = startAngle + i * angleStep;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + R * Math.cos(a), cy + R * Math.sin(a));
+    ctx.strokeStyle = 'rgba(107,105,98,0.15)';
+    ctx.stroke();
+  }
+
+  // 数据区域
+  ctx.beginPath();
+  for (let i = 0; i < sides; i++) {
+    const a = startAngle + i * angleStep;
+    const val = scores[i] / 10;
+    const x = cx + R * val * Math.cos(a);
+    const y = cy + R * val * Math.sin(a);
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+
+  // 填充 — 琥珀色渐变
+  const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, R);
+  gradient.addColorStop(0, 'rgba(196,132,42,0.28)');
+  gradient.addColorStop(1, 'rgba(196,132,42,0.06)');
+  ctx.fillStyle = gradient;
+  ctx.fill();
+
+  // 描边
+  ctx.strokeStyle = '#c4842a';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // 数据点
+  for (let i = 0; i < sides; i++) {
+    const a = startAngle + i * angleStep;
+    const val = scores[i] / 10;
+    const x = cx + R * val * Math.cos(a);
+    const y = cy + R * val * Math.sin(a);
+
+    ctx.beginPath();
+    ctx.arc(x, y, 4.5, 0, Math.PI * 2);
+    ctx.fillStyle = '#e6a83c';
+    ctx.fill();
+    ctx.strokeStyle = '#fffdf9';
+    ctx.lineWidth = 1.8;
+    ctx.stroke();
+
+    // 分数标注
+    ctx.font = 'bold 11px "DM Sans", sans-serif';
+    ctx.fillStyle = '#3d3d38';
+    ctx.textAlign = 'center';
+    ctx.fillText(scores[i], x, y - 10);
+  }
+
+  // 维度标签
+  ctx.font = '12px "Noto Serif SC", serif';
+  ctx.fillStyle = '#6b6962';
+  const labelR = R + 24;
+  for (let i = 0; i < sides; i++) {
+    const a = startAngle + i * angleStep;
+    const x = cx + labelR * Math.cos(a);
+    const y = cy + labelR * Math.sin(a);
+    ctx.textAlign = (a === -Math.PI / 2 || a === Math.PI / 2)
+      ? 'center'
+      : (a > Math.PI / 2 || a < -Math.PI / 2 ? 'right' : 'left');
+    ctx.textBaseline = 'middle';
+    ctx.fillText(labels[i], x, y);
+  }
+}
+
+/* ═══ 可折叠面板切换 ═══ */
+function toggleDim(head) {
+  head.classList.toggle('active');
+  const body = head.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+/* ═══ 进度条入场动画 ═══ */
+function animateBars() {
+  const fills = document.querySelectorAll('.score-bar-fill');
+  fills.forEach(function(el) {
+    const w = el.style.getPropertyValue('--target-width');
+    if (w) {
+      requestAnimationFrame(function() {
+        el.style.width = w;
+      });
+    }
+  });
+}
+
+/* ═══ 初始化 ═══ */
+document.addEventListener('DOMContentLoaded', function() {
+  // 默认展开第一个面板
+  const firstHead = document.querySelector('.dimension-detail .dimension-head');
+  if (firstHead && !firstHead.classList.contains('active')) {
+    firstHead.classList.add('active');
+    const firstBody = firstHead.nextElementSibling;
+    if (firstBody) firstBody.classList.add('open');
+  }
+  // 触发进度条动画
+  setTimeout(animateBars, 300);
+});
+
+/* 使用示例（替换为实际数据后调用）
+drawRadarChart(
+  [8, 7, 8, 6, 7, 6],
+  ['专业基因','价值主张','独特视角','目标受众','表达风格','长期愿景']
+);
+*/
+</script>
+
+</body>
+</html>

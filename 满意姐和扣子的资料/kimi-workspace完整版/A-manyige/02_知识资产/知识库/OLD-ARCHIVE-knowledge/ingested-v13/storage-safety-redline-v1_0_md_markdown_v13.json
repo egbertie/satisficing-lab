@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/memory/archive/storage-safety-redline-v1.0.md",
+  "filename": "storage-safety-redline-v1.0.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "0b84557ba663d3ab",
+  "content_length": 1946,
+  "ingested_at": "2026-03-31T17:27:46.495415",
+  "content_preview": "# OpenClaw 存储安全红线 V1.0\n\n> 创建时间: 2026-03-27  \n> 目的: 防止循环备份等存储事故再次发生\n\n---\n\n## 🚫 六大红线（硬约束）\n\n| 红线 | 阈值 | 超限后果 | 自动防护 |\n|------|------|----------|----------|\n| 备份嵌套 | ≤ 1 层 | 无限循环、磁盘耗尽 | ✅ 脚本自动检测终止 |\n| 单次备份大小 | ≤ 2GB | IO阻塞、同步失败 | ✅ 脚本自动跳过 |\n| workspace总占用 | ≤ 20GB | 根目录满、系统崩溃 | ✅ 定时监控告警 |\n| 磁盘剩余空间 | ≥ 5GB | ENOSPC错误 | ✅ 自动清理触发 |\n| 临时文件保留 | ≤ 24小时 | /tmp溢出 | ✅ 自动清理 |\n| 备份频率 | ≥ 1小时 | 资源争抢 | ✅ 当前已禁用手动触发 |\n\n---\n\n## ⚙️ 防护机制清单\n\n### 已部署的防护\n\n| 机制 | 文件路径 | 运行频率 | 作用 |\n|------|----------|----------|------|\n|",
+  "limitations_applied": []
+}

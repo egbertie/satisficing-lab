@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/tavily-search/tavily_search.py",
+  "filename": "tavily_search.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "9abb0faf7d8e3bba",
+  "content_length": 1610,
+  "ingested_at": "2026-03-31T17:27:45.393720",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nTavily Search 简单封装\n\"\"\"\nimport os\nimport requests\nfrom typing import List, Dict, Optional\n\ndef search(query: str, max_results: int = 10, search_depth: str = \"basic\") -> Dict:\n    \"\"\"\n    使用Tavily Search API搜索\n    \n    Args:\n        query: 搜索查询词\n        max_results: 返回结果数量（默认10）\n        search_depth: 搜索深度 basic|advanced\n        \n    Returns:\n        搜索结果字典\n    \"\"\"\n    api_key = os.getenv(\"TAVILY_API_KEY\")\n    if not api_key:\n        raise ValueError(\"TAVILY_API_KEY not s",
+  "limitations_applied": []
+}

@@ -1,0 +1,10 @@
+{
+  "jobs": [
+    {
+      "name": "quality-gate-system-check",
+      "schedule": "12 9 * * *",
+      "command": "cd /root/.openclaw/workspace/skills/quality-gate-system && python3 scripts/quality-gate-system-runner.py status",
+      "description": "quality-gate-system status check"
+    }
+  ]
+}

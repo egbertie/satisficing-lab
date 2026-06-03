@@ -1,0 +1,237 @@
+{
+  "check_time": "2026-03-21T19:24:13.945679",
+  "version": "2.0.0",
+  "categories": {
+    "performance": {
+      "category": "performance",
+      "description": "系统性能指标基线",
+      "check_time": "2026-03-21T19:24:13.945679",
+      "indicators": [
+        {
+          "name": "api_response_time_ms",
+          "description": "API平均响应时间",
+          "severity": "HIGH",
+          "expected": {},
+          "actual": 0.7879734039306641,
+          "status": "PASS",
+          "deviation_percent": 0,
+          "recommendation": null
+        },
+        {
+          "name": "memory_usage_mb",
+          "description": "内存使用量",
+          "severity": "CRITICAL",
+          "expected": {
+            "max": 1024
+          },
+          "actual": 1891.42578125,
+          "status": "VIOLATION",
+          "deviation_percent": 84.70954895019531,
+          "recommendation": "memory_usage_mb 超过最大值 1024MB"
+        },
+        {
+          "name": "cpu_usage_percent",
+          "description": "CPU使用率",
+          "severity": "HIGH",
+          "expected": {},
+          "actual": 4.0,
+          "status": "PASS",
+          "deviation_percent": 0,
+          "recommendation": null
+        },
+        {
+          "name": "disk_usage_percent",
+          "description": "磁盘使用率",
+          "severity": "CRITICAL",
+          "expected": {
+            "target": 70
+          },
+          "actual": 71.6,
+          "status": "WARNING",
+          "deviation_percent": 0,
+          "recommendation": "disk_usage_percent 接近上限，建议优化"
+        }
+      ],
+      "summary": {
+        "total": 4,
+        "pass": 2,
+        "warning": 1,
+        "violation": 1,
+        "skip": 0
+      }
+    },
+    "quality": {
+      "category": "quality",
+      "description": "代码质量指标基线",
+      "check_time": "2026-03-21T19:24:13.945679",
+      "indicators": [
+        {
+          "name": "test_coverage_percent",
+          "description": "测试覆盖率",
+          "severity": "HIGH",
+          "expected": {},
+          "actual": null,
+          "status": "SKIP",
+          "deviation_percent": 0,
+          "recommendation": null
+        },
+        {
+          "name": "bug_density_per_kloc",
+          "description": "Bug密度",
+          "severity": "MEDIUM",
+          "expected": {},
+          "actual": 0.0,
+          "status": "PASS",
+          "deviation_percent": 0,
+          "recommendation": null
+        },
+        {
+          "name": "code_review_coverage",
+          "description": "代码评审覆盖率",
+          "severity": "MEDIUM",
+          "expected": {
+            "target": 100
+          },
+          "actual": 95,
+          "status": "WARNING",
+          "deviation_percent": 0,
+          "recommendation": "code_review_coverage 未达目标值，建议改进"
+        },
+        {
+          "name": "complexity_score",
+          "description": "代码复杂度",
+          "severity": "MEDIUM",
+          "expected": {
+            "target": 5
+          },
+          "actual": 7,
+          "status": "WARNING",
+          "deviation_percent": 0,
+          "recommendation": "complexity_score 接近上限，建议优化"
+        }
+      ],
+      "summary": {
+        "total": 4,
+        "pass": 1,
+        "warning": 2,
+        "violation": 0,
+        "skip": 1
+      }
+    },
+    "compliance": {
+      "category": "compliance",
+      "description": "合规性指标基线",
+      "check_time": "2026-03-21T19:24:13.945679",
+      "indicators": [
+        {
+          "name": "nine_baseline_adherence",
+          "description": "九条底线遵守率",
+          "severity": "CRITICAL",
+          "expected": {},
+          "actual": 100,
+          "status": "PASS",
+          "deviation_percent": 0,
+          "recommendation": null
+        },
+        {
+          "name": "data_privacy_compliance",
+          "description": "数据隐私合规",
+          "severity": "CRITICAL",
+          "expected": {},
+          "actual": true,
+          "status": "PASS",
+          "deviation_percent": 0,
+          "recommendation": null
+        },
+        {
+          "name": "security_scan_pass",
+          "description": "安全扫描通过",
+          "severity": "CRITICAL",
+          "expected": {},
+          "actual": true,
+          "status": "PASS",
+          "deviation_percent": 0,
+          "recommendation": null
+        },
+        {
+          "name": "platform_compliance",
+          "description": "平台规则合规",
+          "severity": "HIGH",
+          "expected": {},
+          "actual": true,
+          "status": "PASS",
+          "deviation_percent": 0,
+          "recommendation": null
+        }
+      ],
+      "summary": {
+        "total": 4,
+        "pass": 4,
+        "warning": 0,
+        "violation": 0,
+        "skip": 0
+      }
+    },
+    "stability": {
+      "category": "stability",
+      "description": "系统稳定性指标基线",
+      "check_time": "2026-03-21T19:24:13.945679",
+      "indicators": [
+        {
+          "name": "uptime_percent",
+          "description": "系统可用性",
+          "severity": "CRITICAL",
+          "expected": {},
+          "actual": 99.9,
+          "status": "PASS",
+          "deviation_percent": 0,
+          "recommendation": null
+        },
+        {
+          "name": "error_rate_percent",
+          "description": "错误率",
+          "severity": "HIGH",
+          "expected": {},
+          "actual": 0.0,
+          "status": "PASS",
+          "deviation_percent": 0,
+          "recommendation": null
+        },
+        {
+          "name": "mttr_minutes",
+          "description": "平均恢复时间",
+          "severity": "HIGH",
+          "expected": {},
+          "actual": 10,
+          "status": "PASS",
+          "deviation_percent": 0,
+          "recommendation": null
+        },
+        {
+          "name": "dependency_health_score",
+          "description": "依赖项健康度",
+          "severity": "MEDIUM",
+          "expected": {},
+          "actual": 100.0,
+          "status": "PASS",
+          "deviation_percent": 0,
+          "recommendation": null
+        }
+      ],
+      "summary": {
+        "total": 4,
+        "pass": 4,
+        "warning": 0,
+        "violation": 0,
+        "skip": 0
+      }
+    }
+  },
+  "summary": {
+    "total": 16,
+    "pass": 11,
+    "warning": 3,
+    "violation": 1,
+    "pass_rate": 68.75
+  }
+}

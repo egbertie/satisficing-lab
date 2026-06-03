@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/ASSOCIATED_CORRECTIONS_REPORT.md",
+  "filename": "ASSOCIATED_CORRECTIONS_REPORT.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "f800d8c969fc7115",
+  "content_length": 3545,
+  "ingested_at": "2026-03-31T17:27:46.530006",
+  "content_preview": "# 同类别信息关联修正报告\n\n> **修正时间**: 2026-03-22  \n> **修正范围**: 文件处理Skill体系 + Token管理 + 休眠协议  \n> **修正状态**: 已完成\n\n---\n\n## 一、关联问题分析\n\n### 1.1 发现的问题链\n\n```\n用户无法读取docx/pdf附件\n    ↓\n发现文件处理Skill\"丢失\"\n    ↓\n发现Skill安装在全局目录(~/.openclaw/skills/)\n    ↓\n发现Token消耗异常(84%)\n    ↓\n发现Cron任务未随休眠指令暂停\n    ↓\n建立休眠协议+Token熔断联动机制\n    ↓\n恢复文件处理Skill并创建统一接口\n```\n\n### 1.2 根本原因\n\n| 问题 | 根本原因 | 影响 |\n|------|----------|------|\n| 文件处理失效 | Skill分散在全局目录，workspace未同步 | 无法处理docx/pdf |\n| Token偷跑 | 休眠指令只控制主会话，Cron子代理继续运行 | 夜间消耗5% Token |\n| 能力丢失 | 无Skil",
+  "limitations_applied": []
+}

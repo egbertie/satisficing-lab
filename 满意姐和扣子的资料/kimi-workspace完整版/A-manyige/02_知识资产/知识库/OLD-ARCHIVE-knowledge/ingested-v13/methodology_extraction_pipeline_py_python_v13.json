@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/methodology_extraction_pipeline.py",
+  "filename": "methodology_extraction_pipeline.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "719d8eda0f7944d5",
+  "content_length": 4850,
+  "ingested_at": "2026-03-31T17:27:46.183603",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n方法论提取流水线 - 一次性处理全量\n用途: 从3,987个历史文件中一次性提取所有方法论\n规则: 这一批次一次处理完，不是每天10个\n\"\"\"\n\nimport os\nimport re\nimport json\nfrom pathlib import Path\nfrom collections import defaultdict\n\n# 扫描目录\nSCAN_DIRS = [\n    \"/root/.openclaw/workspace/memory\",\n    \"/root/.openclaw/workspace/diary\",\n    \"/root/.openclaw/workspace/docs\",\n    \"/root/.openclaw/workspace/skills\",\n    \"/root/.openclaw/workspace/reports\"\n]\n\n# 方法论关键词（扩展版）\nMETHODOLOGY_PATTERNS = {\n    \"first_principles\": [\"第一性原理\", \"物理本质\", \"拆解\"",
+  "limitations_applied": []
+}

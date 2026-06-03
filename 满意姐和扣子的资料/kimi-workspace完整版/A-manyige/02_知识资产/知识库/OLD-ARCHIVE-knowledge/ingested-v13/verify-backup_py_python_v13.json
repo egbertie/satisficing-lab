@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/disaster-recovery/verify-backup.py",
+  "filename": "verify-backup.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "2cf77b1743e219cc",
+  "content_length": 2750,
+  "ingested_at": "2026-03-31T17:27:44.640074",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n备份验证脚本\n\"\"\"\nimport json\nimport sys\nimport os\nimport hashlib\nfrom datetime import datetime\n\ndef calculate_hash(filepath):\n    \"\"\"计算文件hash\"\"\"\n    sha256 = hashlib.sha256()\n    try:\n        with open(filepath, 'rb') as f:\n            for chunk in iter(lambda: f.read(8192), b''):\n                sha256.update(chunk)\n        return sha256.hexdigest()\n    except:\n        return None\n\ndef verify_backup(path=\"/root/.openclaw/workspace\", sample_size=100):\n    \"\"\"验证备份完整性\"\"\"\n    s",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/info-loop-automation.py",
+  "filename": "info-loop-automation.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "9c82efdb4c1d3ea8",
+  "content_length": 5024,
+  "ingested_at": "2026-03-31T17:27:46.174247",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n信息闭环自动化脚本\n触发: 每小时检查 + 任务状态变更 + 定时汇报\n输出: 未闭环任务提醒 + 自动汇报生成\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\n# 配置\nCONFIG = {\n    \"check_interval_hours\": 1,\n    \"report_reminder_hours\": [9, 14, 18],  # 每日汇报时间\n    \"memory_path\": Path(\"/root/.openclaw/workspace/memory\"),\n    \"task_board_file\": \"TASK_BOARD_{date}.md\",\n    \"log_file\": \"info-loop-log.jsonl\"\n}\n\n# 闭环阶段定义\nLOOP_STAGES = [\"confirm\", \"execute\", \"report\", \"verify\"]\n\nclass I",
+  "limitations_applied": []
+}

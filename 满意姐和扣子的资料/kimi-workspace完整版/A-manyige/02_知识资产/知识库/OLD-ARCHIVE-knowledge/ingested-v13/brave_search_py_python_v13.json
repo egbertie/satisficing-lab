@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/brave-search/brave_search.py",
+  "filename": "brave_search.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "47bfbfb12eab7fe4",
+  "content_length": 5194,
+  "ingested_at": "2026-03-31T17:27:45.407158",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"Brave Search 简单封装\"\"\"\nimport os\nimport requests\nfrom typing import List, Dict\n\n# ============ Token消耗预估与效益红线 ============\nTOKEN_COST_ESTIMATE = \"\"\"\nBrave Search Token消耗估算：\n- 单次搜索: ~200-300 tokens\n- 批量搜索: ~1000-1500 tokens\n- API调用: 不消耗AI Token，但消耗API配额\n\"\"\"\n\nTOKEN_RED_LINES = {\n    'max_per_search': 500,      # 单次搜索处理不得超过500 tokens\n    'max_per_hour': 2000,       # 每小时不得超过2K tokens\n    'efficiency_target': 0.95,  # Token利用率目标≥95%\n    'alert_threshold': 0.90,    # 90%时预警\n}\n",
+  "limitations_applied": []
+}

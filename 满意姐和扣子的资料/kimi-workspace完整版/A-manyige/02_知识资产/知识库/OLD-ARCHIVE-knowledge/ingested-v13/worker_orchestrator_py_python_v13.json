@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/worker-orchestrator/worker_orchestrator.py",
+  "filename": "worker_orchestrator.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "6080cfbc80cfa86a",
+  "content_length": 13659,
+  "ingested_at": "2026-03-31T17:27:45.422009",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nworker-orchestrator: 6 Worker分配引擎\n实现DAG任务编排和Worker任务路由\n\n作者: 满意妞\n版本: 1.0.0\n日期: 2026-03-28\n\"\"\"\n\nimport json\nimport uuid\nimport threading\nimport time\nfrom enum import Enum\nfrom typing import Dict, List, Optional, Callable, Any, Set, Tuple\nfrom dataclasses import dataclass, field, asdict\nfrom datetime import datetime\nfrom pathlib import Path\nimport copy\n\n\nclass WorkerType(Enum):\n    \"\"\"6 Worker类型定义\"\"\"\n    META_STRATEGIST = \"meta_strategist\"      # 全局编排\n    SUPERVISOR_BIZ =",
+  "limitations_applied": []
+}

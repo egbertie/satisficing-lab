@@ -1,0 +1,83 @@
+# Token预算配置
+# 全局设置
+global:
+  daily_budget: 50000
+  timezone: "Asia/Shanghai"
+  version: "2.0.0"
+  
+# 三级预算池配置
+budget_pools:
+  strategic_reserve:
+    percentage: 30
+    description: "仅供真人替身[DIRECTOR]使用"
+    daily_limit: 15000  # 50K * 30%
+    use_cases:
+      - "客户紧急沟通"
+      - "关键决策分析"
+      - "危机响应"
+    approval_required: false
+    auto_reset: true
+    reset_time: "00:00"
+    
+  operational_budget:
+    percentage: 50
+    description: "数字人日常使用"
+    daily_limit: 25000  # 50K * 50%
+    use_cases:
+      - "每日情报监测"
+      - "文档初稿生成"
+      - "数据整理与格式化"
+    approval_required: false
+    auto_reset: true
+    reset_time: "00:00"
+    
+  innovation_fund:
+    percentage: 20
+    description: "技能进化与测试"
+    daily_limit: 10000  # 50K * 20%
+    use_cases:
+      - "新Skill开发"
+      - "A/B测试"
+      - "长期记忆优化"
+    approval_required: true
+    auto_reset: true
+    reset_time: "00:00"
+
+# 任务类型分类
+task_types:
+  p0_emergency:
+    description: "P0紧急任务"
+    pool: "strategic_reserve"
+    auto_approve: true
+    max_tokens: 5000
+    
+  research_analysis:
+    description: "研究与分析"
+    pool: "operational_budget"
+    base_multiplier: 3.0
+    
+  document_generation:
+    description: "文档生成"
+    pool: "operational_budget"
+    base_multiplier: 2.0
+    
+  code_development:
+    description: "代码开发"
+    pool: "operational_budget"
+    base_multiplier: 2.5
+    
+  data_processing:
+    description: "数据处理"
+    pool: "operational_budget"
+    base_multiplier: 1.5
+    
+  testing_experiment:
+    description: "测试与实验"
+    pool: "innovation_fund"
+    base_multiplier: 2.0
+    requires_approval: true
+    
+  routine_operation:
+    description: "日常操作"
+    pool: "operational_budget"
+    base_multiplier: 1.0

@@ -1,0 +1,44 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/file_reader.py",
+  "filename": "file_reader.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 14579,
+  "checksum": "7c22f91d620c934f",
+  "ingested_at": "2026-03-31T17:30:32.895233",
+  "line_count": 420,
+  "title": "file_reader",
+  "description": "统一文件读取工具 - file_reader.py\n支持格式：PDF, DOCX, TXT, XLSX, CSV\n自动编码检测，统一输出接口\n\n使用方法：\n    from file_reader import read_file, FileReader\n    \n    # 简单读取\n    content = read_file(\"document.pdf\")\n    \n    # 高级用法\n",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: FileReaderError"
+    },
+    {
+      "level": 2,
+      "title": "Class: FileReader"
+    }
+  ],
+  "entities": [
+    {
+      "name": "FileReaderError",
+      "type": "class"
+    },
+    {
+      "name": "FileReader",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "-*- coding: utf-8 -*-",
+    "首先尝试使用 chardet",
+    "统一处理一些常见的编码别名",
+    "默认使用UTF-8，并忽略错误",
+    "使用pandas读取，自动处理多种格式",
+    "返回DataFrame或字典列表",
+    "如果返回的是列表（如Excel），转换为字符串"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

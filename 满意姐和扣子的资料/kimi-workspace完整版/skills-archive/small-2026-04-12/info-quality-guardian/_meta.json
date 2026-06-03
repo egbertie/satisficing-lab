@@ -1,0 +1,25 @@
+{
+  "name": "info-quality-guardian",
+  "version": "2.0.0",
+  "standard_level": 5,
+  "description": "信息采集质量守护者 - 5-Standard认证",
+  "created": "2026-03-13",
+  "updated": "2026-03-21",
+  "standards": {
+    "S1": "✅ 输入定义(信息源/质量标准/检查范围)",
+    "S2": "✅ 质量守护流程(采集→检测→清洗→验证→报告)",
+    "S3": "✅ 输出规范(质量报告+问题清单+改进建议)",
+    "S4": "✅ 集成规范(信息流自动触发)",
+    "S5": "✅ 检测准确性验证(误报/漏报检查)",
+    "S6": "✅ 局限标注(无法验证主观信息真实性)",
+    "S7": "✅ 对抗测试(故意污染信息测试)"
+  },
+  "files": [
+    "SKILL.md",
+    "config.json",
+    "cron.json",
+    "scripts/info-quality-guardian-runner.py",
+    "tests/validation_dataset.yml",
+    "tests/adversarial_log.yml"
+  ]
+}

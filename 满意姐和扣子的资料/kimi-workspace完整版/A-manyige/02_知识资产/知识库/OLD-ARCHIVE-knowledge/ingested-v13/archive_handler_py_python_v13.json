@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_archive-handler/archive_handler.py",
+  "filename": "archive_handler.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "c50c43bf050e102e",
+  "content_length": 13976,
+  "ingested_at": "2026-03-31T17:27:45.236165",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\nArchive Handler - 安全通用压缩文件处理工具\n版本: 1.0.0\n作者: Satisficing Institute\n\"\"\"\n\nimport os\nimport sys\nimport subprocess\nimport tarfile\nimport zipfile\nimport argparse\nfrom pathlib import Path\nfrom typing import List, Dict, Tuple, Optional\nimport shutil\n\n# 安全配置\nMAX_SINGLE_FILE_SIZE = 100 * 1024 * 1024  # 100MB\nMAX_TOTAL_EXTRACT_SIZE = 1024 * 1024 * 1024  # 1GB\nBLOCKED_PATHS = [\n    '/etc/', '/usr/', '/bin/', '/sbin/', '/lib', '/opt/',\n    '/var/', '/sys/',",
+  "limitations_applied": []
+}

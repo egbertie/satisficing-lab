@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/docs/2026-03/CONTEXT_MANAGEMENT_RULES.md",
+  "filename": "CONTEXT_MANAGEMENT_RULES.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "d41e1f5ae25792f9",
+  "content_length": 1881,
+  "ingested_at": "2026-03-31T17:27:46.626368",
+  "content_preview": "# 上下文管理规则\n\n> **版本**: V1.0  \n> **创建时间**: 2026-03-15  \n> **目的**: 优化上下文加载效率，建立分层管理机制\n\n---\n\n## 上下文分层架构\n\n### 第一层：核心上下文 (Always Load)\n\n**加载时机**: 每次会话启动自动加载  \n**大小限制**: < 1MB  \n**文件清单**:\n\n| 文件 | 用途 | 更新频率 |\n|------|------|----------|\n| `SOUL.md` | AI身份定义 | 极少 |\n| `USER.md` | 用户档案 | 偶尔 |\n| `AGENTS.md` | 工作协议 | 极少 |\n| `MEMORY.md` | 精简长期记忆 | 定期 |\n| `HEARTBEAT.md` | 心跳协议 | 偶尔 |\n\n### 第二层：任务上下文 (On-Demand Load)\n\n**加载时机**: 任务开始时按需加载  \n**大小限制**: < 5MB  \n**文件清单**:\n\n| 文件/目录 | 用途 | 加载触发 |\n|-----------|------|----",
+  "limitations_applied": []
+}

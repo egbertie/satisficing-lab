@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/interrupt-recovery/interrupt_tracker.py",
+  "filename": "interrupt_tracker.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "8d57b3800470072f",
+  "content_length": 6726,
+  "ingested_at": "2026-03-31T17:27:44.994075",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\ninterrupt_tracker.py\n中断状态追踪器 - 保存和恢复任务执行状态\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime\nfrom typing import Dict, Optional, List, Any\n\nSTATE_FILE = os.path.join(os.path.dirname(__file__), 'state', 'interrupt_state.json')\n\nclass InterruptTracker:\n    \"\"\"追踪任务执行状态，支持中断恢复\"\"\"\n    \n    def __init__(self):\n        self.state = self._load_state()\n    \n    def _load_state(self) -> Dict:\n        \"\"\"加载状态文件\"\"\"\n        if os.path.exists(STATE_FILE):\n            try:\n    ",
+  "limitations_applied": []
+}

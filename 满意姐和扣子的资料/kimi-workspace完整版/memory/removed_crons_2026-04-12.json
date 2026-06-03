@@ -1,0 +1,1881 @@
+{
+  "total": 68,
+  "disabled_count": 61,
+  "jobs": [
+    {
+      "id": "8dbc8186-b268-4895-8053-04305c9b28a1",
+      "agentId": "main",
+      "name": "healthcheck:security-audit",
+      "enabled": false,
+      "createdAtMs": 1772758357707,
+      "updatedAtMs": 1774160278137,
+      "schedule": {
+        "expr": "43 9 * * 1,4",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Please disregard the descriptions below that refer to channels other than kimi-claw, as they may be outdated. Additionally, during the next run, please ensure that the message is corrected to be delivered to the kimi-claw channel.\n\n【每日安全检查】请执行安全审计并报告结果\n\n执行步骤：\n1. 运行 openclaw security audit --deep\n2. 运行 openclaw update status  \n3. 生成安全报告\n4. 向我（主控AI）汇报结果\n\n报告内容需包含：\n- 检查时间\n- 发现的风险/问题（如有）\n- 安全状态评估\n- 建议措施（如有）"
+      },
+      "state": {
+        "lastRunAtMs": 1774143780006,
+        "lastStatus": "ok",
+        "lastDurationMs": 63243,
+        "consecutiveErrors": 0
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      }
+    },
+    {
+      "id": "a4e7fe12-b645-4a84-b495-5697df8a3903",
+      "agentId": "main",
+      "name": "每周组织罗盘报告",
+      "enabled": false,
+      "createdAtMs": 1772821630168,
+      "updatedAtMs": 1774156975722,
+      "schedule": {
+        "expr": "37 6 * * 1",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "你是REPORT-组织罗盘官，现在生成本周全组织罗盘扫码报告。\n\n## 任务\n1. 扫描全组织数据（18位AI成员、8个维度）\n2. 生成精华版报告（1页，核心信息）\n3. 生成全要素版报告（详细，全面扫描）\n4. 07:00发送给指挥官\n\n## 报告必须包含\n### 精华版（1页）\n- 📊 健康度仪表盘（8维度）\n- 🎯 本周关键进展（Top 3）\n- ⚠️ 需要关注（Top 3风险/问题）\n- 💡 优化建议（Top 3）\n- 📅 下周重点任务（Top 3）\n\n### 全要素版（详细）\n- 第一部分：战略层扫描\n- 第二部分：文化层扫描（五图腾）\n- 第三部分：执行层扫描\n- 第四部分：员工体系扫描（8组）\n- 第五部分：专家体系扫描（14位）\n- 第六部分：项目扫描\n- 第七部分：财务扫描\n- 第八部分：风险扫描\n- 第九部分：优化建议\n- 第十部分：下周计划\n\n## 数据来源\n- 各角色日站会更新\n- PMO项目看板\n- FIN财务数据\n- 风控组风险状态\n\n## 输出位置\n- 精华版：直接发送对话\n- 全要素版：/data/reports/full/YYYY-MM-DD.md\n\n请生成报告并发送。",
+        "model": "kimi-coding/k2p5",
+        "thinking": "medium",
+        "timeoutSeconds": 300
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {
+        "lastRunAtMs": 1773612000008,
+        "lastStatus": "ok",
+        "lastDurationMs": 240456,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "3d7db435-1497-4b00-9e63-2cd9c34cdf8f",
+      "agentId": "main",
+      "name": "daily-progress-report",
+      "enabled": false,
+      "createdAtMs": 1772990000641,
+      "updatedAtMs": 1775892941055,
+      "schedule": {
+        "expr": "47 21 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "【系统提醒】每日22:00 - 请发送今日进度报告\n\n请ANNOUNCE和满意妞准备：\n1. 今日进度汇总\n2. 风险预警报告\n3. 明日计划\n\n模板已准备，请在本地文档包查看最新模板。"
+      },
+      "state": {
+        "lastRunAtMs": 1775892849599,
+        "lastStatus": "ok",
+        "lastDurationMs": 91456,
+        "consecutiveErrors": 0,
+        "lastRunStatus": "ok",
+        "lastDelivered": true,
+        "lastDeliveryStatus": "delivered"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      }
+    },
+    {
+      "id": "9f314b0d-2e9e-4b07-ba43-633215ebbc6d",
+      "agentId": "main",
+      "name": "milestone-daily-check",
+      "enabled": false,
+      "createdAtMs": 1772990000655,
+      "updatedAtMs": 1774156975334,
+      "schedule": {
+        "expr": "45 9 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "生成满意解研究所每日晨报。请读取MEMORY.md和memory/YYYY-MM-DD.md（今天和昨天），整理以下内容：1)昨日完成事项 2)今日待办事项 3)风险预警 4)倒计时提醒。生成简洁报告发送给用户。",
+        "model": "kimi-coding/k2p5",
+        "thinking": "low",
+        "timeoutSeconds": 120
+      },
+      "state": {
+        "lastRunAtMs": 1773969780006,
+        "lastStatus": "ok",
+        "lastDurationMs": 73448,
+        "consecutiveErrors": 0
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      }
+    },
+    {
+      "id": "462a0736-613f-40b9-add8-ca98005335d3",
+      "agentId": "main",
+      "name": "skill-library-weekly-check",
+      "enabled": false,
+      "createdAtMs": 1772990000664,
+      "updatedAtMs": 1773319296964,
+      "schedule": {
+        "kind": "cron",
+        "expr": "51 8 * * 1",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Please disregard the descriptions below that refer to channels other than kimi-claw, as they may be outdated. Additionally, during the next run, please ensure that the message is corrected to be delivered to the kimi-claw channel.\n\n请检查技能库clawhub是否有新发布的高质量技能，特别是：\n1. project management 相关\n2. productivity 相关\n3. markdown/文档处理相关\n4. image/可视化相关\n\n搜索后向Egbertie报告发现的新技能，包括：\n- 技能名称\n- 功能简介\n- 建议安装理由\n- 预期提升效率\n\n如果rate limit，请说明稍后重试。"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {
+        "lastRunAtMs": 1773018315698,
+        "lastStatus": "error",
+        "lastDurationMs": 61590,
+        "consecutiveErrors": 1
+      }
+    },
+    {
+      "id": "13efe578-0dca-44cf-9917-a8459d6dedbc",
+      "agentId": "main",
+      "name": "夜间经验萃取任务",
+      "enabled": false,
+      "createdAtMs": 1773072488793,
+      "updatedAtMs": 1773625731009,
+      "schedule": {
+        "everyMs": 86400000,
+        "kind": "every",
+        "anchorMs": 1773072488793
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行夜间经验萃取任务：\n\n目标：利用夜间算力充裕期，进行深度分析\n\n任务：\n1. 读取本地专家论文/资料\n2. 使用Kimi深度研究（限额内）\n3. 提取方法论、金句、洞察\n4. 生成结构化笔记\n5. 保存到知识库\n\n明早06:00前完成。",
+        "model": "kimi-coding/k2p5",
+        "thinking": "medium",
+        "timeoutSeconds": 300
+      },
+      "delivery": {
+        "channel": "feishu",
+        "mode": "announce",
+        "to": "ou_aea2e859a6cee1f3a11e8c018eb88ec9"
+      },
+      "state": {
+        "lastRunAtMs": 1773590888803,
+        "lastStatus": "ok",
+        "lastDurationMs": 167282,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "75326d7a-7537-4bba-ba80-27319cc82a33",
+      "agentId": "main",
+      "name": "每日晨报生成",
+      "enabled": false,
+      "createdAtMs": 1773111092728,
+      "updatedAtMs": 1774140693295,
+      "schedule": {
+        "expr": "47 8 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "生成满意解研究所每日晨报。请读取MEMORY.md和memory/YYYY-MM-DD.md（今天和昨天），整理以下内容：1)昨日完成事项 2)今日待办事项 3)风险预警 4)倒计时提醒。生成简洁报告发送给用户。",
+        "model": "kimi-coding/k2p5",
+        "thinking": "off",
+        "timeoutSeconds": 120
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {
+        "lastRunAtMs": 1773967620086,
+        "lastStatus": "ok",
+        "lastDurationMs": 92396,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "bc640356-84e1-4e07-a2d5-cb93dab7e9ef",
+      "agentId": "main",
+      "name": "每日安全检查",
+      "enabled": false,
+      "createdAtMs": 1773111092742,
+      "updatedAtMs": 1774160278105,
+      "schedule": {
+        "expr": "30 9 * * 1,4",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行满意解研究所每日安全检查（精简版）。检查项目：1)OpenClaw Gateway运行状态 2)关键API服务可用性(Kimi/GitHub) 3)磁盘空间使用率 4)GitHub仓库同步状态 5)核心文件备份状态。生成安全检查报告，如有异常立即标记。",
+        "model": "kimi-coding/k2p5",
+        "thinking": "low",
+        "timeoutSeconds": 180
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {
+        "lastRunAtMs": 1774143420006,
+        "lastStatus": "ok",
+        "lastDurationMs": 115137,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "30014b47-8363-4555-b24f-04574dc356a7",
+      "agentId": "main",
+      "name": "API与Skill双周审查",
+      "enabled": false,
+      "createdAtMs": 1773112760217,
+      "updatedAtMs": 1774140693370,
+      "schedule": {
+        "expr": "0 9 */14 * 5",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行满意解研究所API与Skill双周审查。任务：1)统计过去两周所有API调用次数和成功率 2)统计所有Skill使用频率 3)检查费用变化 4)生成审查报告 5)提出优化建议。输出报告到docs/BIWEEKLY_REVIEW_YYYY-MM-DD.md",
+        "model": "kimi-coding/k2p5",
+        "thinking": "off",
+        "timeoutSeconds": 180
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {
+        "lastRunAtMs": 1773968400006,
+        "lastStatus": "ok",
+        "lastDurationMs": 170642,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "f2ddbbb7-2374-4745-b73b-631a53e4f38a",
+      "agentId": "main",
+      "name": "每日站会召开",
+      "enabled": false,
+      "createdAtMs": 1773113042016,
+      "updatedAtMs": 1774156975301,
+      "schedule": {
+        "expr": "0 10 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Please disregard the descriptions below that refer to channels other than kimi-claw, as they may be outdated. Additionally, during the next run, please ensure that the message is corrected to be delivered to the kimi-claw channel.\n\n召开满意解研究所每日站会。参与者：满意妞、CONTENT、PEO、EEO。议程：1)昨日完成事项回顾 2)今日工作计划 3)阻塞问题和风险。生成会议纪要提交给Egbertie。",
+        "model": "kimi-coding/k2p5",
+        "thinking": "medium",
+        "timeoutSeconds": 300
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {
+        "lastRunAtMs": 1774143535143,
+        "lastStatus": "ok",
+        "lastDurationMs": 76897,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "b6428bbd-ff29-48dd-9014-6610710718e5",
+      "agentId": "main",
+      "name": "429错误处理提醒",
+      "enabled": false,
+      "createdAtMs": 1773115099718,
+      "updatedAtMs": 1775892847196,
+      "schedule": {
+        "expr": "0 16 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "【自动提醒】429错误处理机制将于17:00执行。如果Egbertie在17:00前未发送新指令，将自动压缩对话上下文。如需延迟请发送指令。"
+      },
+      "state": {
+        "lastRunAtMs": 1775892808501,
+        "lastStatus": "ok",
+        "lastDurationMs": 38695,
+        "consecutiveErrors": 0,
+        "lastRunStatus": "ok",
+        "lastDelivered": true,
+        "lastDeliveryStatus": "delivered"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      }
+    },
+    {
+      "id": "51d81326-d84b-45cc-b46b-8fad2061fceb",
+      "agentId": "main",
+      "name": "任务协调检查",
+      "enabled": false,
+      "createdAtMs": 1773146780726,
+      "updatedAtMs": 1774137591420,
+      "schedule": {
+        "kind": "every",
+        "everyMs": 7200000,
+        "anchorMs": 1773146780726
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行任务协调检查V2.1（恢复版）：扫描任务状态，识别逾期任务，自动启动补救。如任务协调器已修复则使用协调器，否则直接扫描TASK_MASTER.md。如发现过期任务立即启动子代理并行补救或向用户报告。",
+        "model": "kimi-coding/k2p5",
+        "thinking": "medium",
+        "timeoutSeconds": 180
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {
+        "lastRunAtMs": 1774133180732,
+        "lastStatus": "ok",
+        "lastDurationMs": 80650,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "backup-daily-001",
+      "agentId": "main",
+      "name": "每日自动备份",
+      "enabled": false,
+      "createdAtMs": 1773190200000,
+      "updatedAtMs": 1774156975017,
+      "schedule": {
+        "kind": "cron",
+        "expr": "53 1 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行每日自动备份任务：运行 python3 /root/.openclaw/workspace/scripts/backup-manager-v3.py backup --type daily。备份完成后验证备份完整性，生成备份报告。如备份失败立即告警。强制规则：必须包含A满意哥专属文件夹全部资料。",
+        "model": "kimi-coding/k2p5",
+        "thinking": "low",
+        "timeoutSeconds": 300
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {
+        "lastRunAtMs": 1774115580006,
+        "lastStatus": "ok",
+        "lastDurationMs": 158676,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "backup-weekly-001",
+      "agentId": "main",
+      "name": "每周全量备份",
+      "enabled": false,
+      "createdAtMs": 1773190200001,
+      "updatedAtMs": 1774160278409,
+      "schedule": {
+        "kind": "cron",
+        "expr": "47 2 * * 0",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行每周全量备份任务：运行 python3 /root/.openclaw/workspace/scripts/backup-manager-v3.py backup --type weekly。全量备份包含所有配置、文档、记忆、Skill和脚本，特别是A满意哥专属文件夹全部资料。备份完成后验证完整性并生成报告。",
+        "model": "kimi-coding/k2p5",
+        "thinking": "low",
+        "timeoutSeconds": 600
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {
+        "lastRunAtMs": 1773658800010,
+        "lastStatus": "ok",
+        "lastDurationMs": 84270,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "backup-cleanup-001",
+      "agentId": "main",
+      "name": "备份自动清理",
+      "enabled": false,
+      "createdAtMs": 1773190200002,
+      "updatedAtMs": 1774160278442,
+      "schedule": {
+        "expr": "42 3 * * 0",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行备份自动清理任务：运行 python3 /root/.openclaw/workspace/scripts/backup-manager-v3.py cleanup。清理超过保留策略的过期备份：每日备份保留30天，每周备份保留90天，每月备份保留365天。",
+        "model": "kimi-coding/k2p5",
+        "thinking": "low",
+        "timeoutSeconds": 180
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {
+        "lastRunAtMs": 1774122120006,
+        "lastStatus": "ok",
+        "lastDurationMs": 27130,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "83c4750e-73bb-4c58-8a67-d658357448fb",
+      "agentId": "main",
+      "name": "厂商API能力监控日报",
+      "enabled": false,
+      "createdAtMs": 1773155678143,
+      "updatedAtMs": 1774138728795,
+      "schedule": {
+        "everyMs": 86400000,
+        "anchorMs": 1773196800000,
+        "kind": "every"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Please disregard the descriptions below that refer to channels other than kimi-claw, as they may be outdated. Additionally, during the next run, please ensure that the message is corrected to be delivered to the kimi-claw channel.\n\n执行厂商API能力监控检查：运行 skills/vendor-api-monitor/vendor_api_monitor.py，生成钉钉/企业微信/飞书/Notion API能力对比日报，特别关注文件同步到API功能。如发现可用方案立即报告。"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {
+        "lastRunAtMs": 1774060800006,
+        "lastStatus": "ok",
+        "lastDurationMs": 296972,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "8f0ffafd-1bb0-4503-a637-cd9c7f8cc208",
+      "agentId": "main",
+      "name": "承诺与制度执行保障检查",
+      "enabled": false,
+      "createdAtMs": 1773156195523,
+      "updatedAtMs": 1774150676423,
+      "schedule": {
+        "anchorMs": 1773196800000,
+        "everyMs": 86400000,
+        "kind": "every"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Please disregard the descriptions below that refer to channels other than kimi-claw, as they may be outdated. Additionally, during the next run, please ensure that the message is corrected to be delivered to the kimi-claw channel.\n\n执行承诺与制度执行保障检查：运行 skills/promise-system-guardian/promise_guardian.py，检查所有承诺状态，发送到期预警，触发超期自动补救，生成执行日报。确保所有承诺和制度有约束机制，不掉链子。"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {
+        "lastRunAtMs": 1774147200007,
+        "lastStatus": "ok",
+        "lastDurationMs": 100299,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "ab39d987-dbb5-40af-9f65-a0614115983a",
+      "agentId": "main",
+      "name": "每日晨报生成与任务派发",
+      "enabled": false,
+      "createdAtMs": 1773325471400,
+      "updatedAtMs": 1774137591636,
+      "schedule": {
+        "expr": "17 9 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行每日晨报生成任务：1)检查昨日完成事项; 2)生成今日必做3件事; 3)识别阻塞任务并预警; 4)更新A满意哥专属文件夹/01_🔥今日重点/今日晨报.md; 5)如有紧急事项通过飞书静默通知用户（仅P1级）",
+        "model": "kimi-coding/k2p5",
+        "thinking": "high"
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {
+        "lastRunAtMs": 1774055820010,
+        "lastStatus": "ok",
+        "lastDurationMs": 99793,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "c50fe7c6-4c5c-42cb-89ba-e5a4bdcae3e8",
+      "agentId": "main",
+      "name": "每小时任务协调检查",
+      "enabled": false,
+      "createdAtMs": 1773325471414,
+      "updatedAtMs": 1775890046708,
+      "schedule": {
+        "kind": "every",
+        "everyMs": 3600000,
+        "anchorMs": 1773325471414
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行小时级任务协调检查：1)扫描所有进行中任务状态; 2)识别即将到期任务(<24h); 3)自动启动子代理处理可并行任务; 4)更新进度表; 5)如发现严重阻塞立即标记并准备升级",
+        "model": "kimi-coding/k2p5",
+        "thinking": "high"
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {
+        "lastRunAtMs": 1775889664388,
+        "lastStatus": "ok",
+        "lastDurationMs": 382320,
+        "consecutiveErrors": 0,
+        "lastRunStatus": "ok",
+        "lastDelivered": false,
+        "lastDeliveryStatus": "not-delivered"
+      }
+    },
+    {
+      "id": "d3945c7f-974b-4eb9-be77-2885cd29f907",
+      "agentId": "main",
+      "name": "夜间深度学习进修",
+      "enabled": false,
+      "createdAtMs": 1773325471424,
+      "updatedAtMs": 1775893070853,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 23 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行夜间学习进修任务（算力充裕期）：1)读取当天新增的专家论文/行业报告; 2)使用Kimi深度研究生成洞察; 3)提取方法论和金句; 4)更新知识库; 5)生成学习笔记存入A满意哥专属文件夹/05_📦历史归档/学习笔记/日期.md",
+        "model": "kimi-coding/k2p5",
+        "thinking": "high"
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {
+        "lastRunAtMs": 1775892941055,
+        "lastStatus": "ok",
+        "lastDurationMs": 129798,
+        "consecutiveErrors": 0,
+        "lastRunStatus": "ok",
+        "lastDelivered": false,
+        "lastDeliveryStatus": "not-delivered"
+      }
+    },
+    {
+      "id": "0991f0cf-1c59-4dff-abd6-93b617636077",
+      "agentId": "main",
+      "name": "每周六项目复盘与迭代规划",
+      "enabled": false,
+      "createdAtMs": 1773325471437,
+      "updatedAtMs": 1774140693565,
+      "schedule": {
+        "expr": "7 10 * * 6",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行周复盘任务：1)回顾本周完成的所有任务; 2)分析延期原因和模式; 3)更新下周计划; 4)识别可以自动化的重复任务; 5)生成周复盘报告并存档; 6)如有重大发现静默通知用户",
+        "model": "kimi-coding/k2p5",
+        "thinking": "off",
+        "timeoutSeconds": 180
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {
+        "lastRunAtMs": 1774058820009,
+        "lastStatus": "ok",
+        "lastDurationMs": 269908,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "51c2d37d-9973-486b-8d09-2589c507302d",
+      "agentId": "main",
+      "name": "Kimi Search每日资讯采集",
+      "enabled": false,
+      "createdAtMs": 1773326386613,
+      "updatedAtMs": 1775894944825,
+      "schedule": {
+        "expr": "13 9 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行每日资讯采集任务：1)使用Kimi Search搜索'人工智能 大模型 Agent 硬科技 半导体'关键词; 2)搜索'决策科学 组织管理 合伙人'关键词; 3)搜索'硬科技投资 初创企业 政府补贴'关键词; 4)提取3-5篇有价值的文章摘要; 5)存入行业资讯归档; 6)如有重大发现，标记待深度研究",
+        "model": "kimi-coding/k2p5",
+        "thinking": "off",
+        "timeoutSeconds": 120
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {
+        "lastRunAtMs": 1775894867433,
+        "lastStatus": "ok",
+        "lastDurationMs": 77392,
+        "consecutiveErrors": 0,
+        "lastRunStatus": "ok",
+        "lastDelivered": false,
+        "lastDeliveryStatus": "not-delivered"
+      }
+    },
+    {
+      "id": "502b342d-539d-4c57-881c-96fe04c59cc8",
+      "agentId": "main",
+      "name": "ClawHub Skill安装重试（第3次）",
+      "enabled": false,
+      "deleteAfterRun": true,
+      "createdAtMs": 1773378982056,
+      "updatedAtMs": 1775890163283,
+      "schedule": {
+        "kind": "at",
+        "at": "2026-03-13T06:20:00.000Z"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行ClawHub Skill安装重试任务（第3次尝试）：\n\n需要安装的Skill：\n1. github-integration（GitHub集成）\n2. notion-integration（Notion集成）\n3. slack-integration（Slack增强）\n\n执行步骤：\n1. 尝试安装github-integration（使用--force）\n2. 如成功，继续安装notion-integration\n3. 如成功，继续安装slack-integration\n4. 如仍失败，记录错误并安排下次重试（最多重试5次）\n5. 向创始人发送安装结果报告\n\n注意：如遇到Rate Limit，等待1小时后重试",
+        "timeoutSeconds": 300
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "Egbertie"
+      },
+      "state": {
+        "lastRunAtMs": 1775889863273,
+        "lastStatus": "error",
+        "lastDurationMs": 300010,
+        "consecutiveErrors": 2,
+        "lastRunStatus": "error",
+        "lastError": "cron: job execution timed out",
+        "lastErrorReason": "timeout",
+        "lastDeliveryStatus": "unknown"
+      }
+    },
+    {
+      "id": "5f606b95-e512-42d6-98ec-e8638f598033",
+      "agentId": "main",
+      "name": "ClawHub Skill安装重试（第2次）",
+      "enabled": false,
+      "deleteAfterRun": true,
+      "createdAtMs": 1773461851573,
+      "updatedAtMs": 1775890730098,
+      "schedule": {
+        "kind": "at",
+        "at": "2026-03-14T05:16:00.000Z"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "【ClawHub Skill安装重试 - 第2次】\n\n前次安装遇到Rate Limit和可疑标记问题。\n\n本次执行策略：\n1. github-integration: 使用 --force 安装（VirusTotal标记可疑）\n2. notion-integration: 正常安装（应已解除Rate Limit）\n3. slack-integration: 使用 --force 安装（VirusTotal标记可疑）\n\n执行命令：\nclawhub install github-integration --force\nclawhub install notion-integration\nclawhub install slack-integration --force\n\n注意：如仍失败，记录错误并停止自动重试，转为人工审核。",
+        "model": "kimi-coding/k2p5",
+        "thinking": "medium",
+        "timeoutSeconds": 300
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "feishu"
+      },
+      "state": {
+        "lastRunAtMs": 1775890430088,
+        "lastStatus": "error",
+        "lastDurationMs": 300010,
+        "consecutiveErrors": 2,
+        "lastRunStatus": "error",
+        "lastError": "cron: job execution timed out",
+        "lastErrorReason": "timeout",
+        "lastDeliveryStatus": "unknown"
+      }
+    },
+    {
+      "id": "a19f729a-e9ce-4f4c-9a92-30575d48b8a1",
+      "agentId": "main",
+      "name": "零空置强制执行检查",
+      "enabled": false,
+      "createdAtMs": 1773532327729,
+      "updatedAtMs": 1774133685784,
+      "schedule": {
+        "kind": "every",
+        "everyMs": 1800000,
+        "anchorMs": 1773532327729
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行零空置强制执行检查 V4.0（精简2线模式）。检查规则：1)检测到NO_ACTIVE状态则触发补位；2)Token余量大于30%且距离上次补位大于2小时则执行；3)Token小于30%暂停线1仅保留线2；4)Token小于15%完全暂停；5)用户活跃期间不触发。运行 skills/zero-idle-enforcer/enforcer.py enforce。如检测到违规，激活精简2线补位任务并向用户报告。",
+        "model": "kimi-coding/k2p5",
+        "thinking": "medium",
+        "timeoutSeconds": 120
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {
+        "lastRunAtMs": 1774133527735,
+        "lastStatus": "error",
+        "lastDurationMs": 120015,
+        "consecutiveErrors": 1,
+        "lastError": "Error: cron: job execution timed out"
+      }
+    },
+    {
+      "id": "abd1f4ee-de19-4395-8c4d-04257da57363",
+      "agentId": "main",
+      "name": "info-collection-hourly",
+      "enabled": false,
+      "createdAtMs": 1773550036370,
+      "updatedAtMs": 1775892803422,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 * * * *",
+        "staggerMs": 300000
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "【信息采集通道】自动执行硬科技政策/行业动态/竞品监测信息采集，结果静默入库，仅重要发现通知用户",
+        "thinking": "minimal",
+        "timeoutSeconds": 300
+      },
+      "delivery": {
+        "mode": "announce"
+      },
+      "state": {
+        "lastRunAtMs": 1775892776979,
+        "lastStatus": "ok",
+        "lastDurationMs": 26443,
+        "consecutiveErrors": 0,
+        "lastRunStatus": "ok",
+        "lastDelivered": true,
+        "lastDeliveryStatus": "delivered"
+      }
+    },
+    {
+      "id": "7be218a3-0e29-471b-9bff-d90d947cca9a",
+      "agentId": "main",
+      "name": "learning-morning",
+      "enabled": false,
+      "createdAtMs": 1773550036452,
+      "updatedAtMs": 1773625758538,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * *"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "【学习进化通道-早间】自动学习黎红雷儒商论文/决策科学前沿，精读并更新知识库",
+        "thinking": "minimal",
+        "timeoutSeconds": 600
+      },
+      "delivery": {
+        "mode": "announce"
+      },
+      "state": {
+        "lastRunAtMs": 1773623375918,
+        "lastStatus": "ok",
+        "lastDurationMs": 79077,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "fb7fa3c1-41a2-42c8-9533-493f2164d36a",
+      "agentId": "main",
+      "name": "training-morning",
+      "enabled": false,
+      "createdAtMs": 1773550036527,
+      "updatedAtMs": 1773625728340,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 10 * * *"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "【持续训练通道-上午】数字替身后训练+评估工具压力测试",
+        "thinking": "minimal",
+        "timeoutSeconds": 600
+      },
+      "delivery": {
+        "mode": "announce"
+      },
+      "state": {}
+    },
+    {
+      "id": "a79ff5cf-6d96-414f-86d5-f3396c635611",
+      "agentId": "main",
+      "name": "drill-morning",
+      "enabled": false,
+      "createdAtMs": 1773550036617,
+      "updatedAtMs": 1773625728599,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 11 * * *"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "【模拟演练通道-上午】客户咨询模拟+异议处理演练",
+        "thinking": "minimal",
+        "timeoutSeconds": 600
+      },
+      "delivery": {
+        "mode": "announce"
+      },
+      "state": {}
+    },
+    {
+      "id": "046278c2-977d-4bd2-88b4-6dd41c98a1a9",
+      "agentId": "main",
+      "name": "learning-afternoon",
+      "enabled": false,
+      "createdAtMs": 1773550048228,
+      "updatedAtMs": 1773625729082,
+      "schedule": {
+        "expr": "0 14 * * *",
+        "kind": "cron"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "【学习进化通道-午间】自动学习行业最佳实践/新工具技术研究",
+        "thinking": "minimal",
+        "timeoutSeconds": 600
+      },
+      "delivery": {
+        "mode": "announce"
+      },
+      "state": {
+        "lastRunAtMs": 1773554543343,
+        "lastStatus": "ok",
+        "lastDurationMs": 52469,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "1a9ba978-f570-4599-b3c4-1e40a4b9e02f",
+      "agentId": "main",
+      "name": "sandbox-daily",
+      "enabled": false,
+      "createdAtMs": 1773550048303,
+      "updatedAtMs": 1775892584018,
+      "schedule": {
+        "expr": "0 15 * * *",
+        "kind": "cron"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "【沙盘推演通道】商业模式沙盘+定价策略压力测试+风险情景演练",
+        "thinking": "minimal",
+        "timeoutSeconds": 600
+      },
+      "delivery": {
+        "mode": "announce"
+      },
+      "state": {
+        "lastRunAtMs": 1775892436608,
+        "lastStatus": "ok",
+        "lastDurationMs": 147410,
+        "consecutiveErrors": 0,
+        "lastRunStatus": "ok",
+        "lastDelivered": true,
+        "lastDeliveryStatus": "delivered"
+      }
+    },
+    {
+      "id": "a43ae12f-adba-43b8-8c21-dd83b5533fcb",
+      "agentId": "main",
+      "name": "training-afternoon",
+      "enabled": false,
+      "createdAtMs": 1773550048390,
+      "updatedAtMs": 1775893275195,
+      "schedule": {
+        "expr": "0 16 * * *",
+        "kind": "cron"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "【持续训练通道-下午】数字替身后训练+话术迭代优化",
+        "thinking": "minimal",
+        "timeoutSeconds": 600
+      },
+      "delivery": {
+        "mode": "announce"
+      },
+      "state": {
+        "lastRunAtMs": 1775893070853,
+        "lastStatus": "ok",
+        "lastDurationMs": 204342,
+        "consecutiveErrors": 0,
+        "lastRunStatus": "ok",
+        "lastDelivered": true,
+        "lastDeliveryStatus": "delivered"
+      }
+    },
+    {
+      "id": "2dbb3ef0-9063-4bd3-938b-c19d3a6a8d2d",
+      "agentId": "main",
+      "name": "drill-afternoon",
+      "enabled": false,
+      "createdAtMs": 1773550048455,
+      "updatedAtMs": 1775893324731,
+      "schedule": {
+        "expr": "0 17 * * *",
+        "kind": "cron"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "【模拟演练通道-下午】签约促成练习+危机应对训练",
+        "thinking": "minimal",
+        "timeoutSeconds": 600
+      },
+      "delivery": {
+        "mode": "announce"
+      },
+      "state": {
+        "lastRunAtMs": 1775893275195,
+        "lastStatus": "ok",
+        "lastDurationMs": 49536,
+        "consecutiveErrors": 0,
+        "lastRunStatus": "ok",
+        "lastDelivered": true,
+        "lastDeliveryStatus": "delivered"
+      }
+    },
+    {
+      "id": "e4951e52-889f-4507-8336-ec14003bc14e",
+      "agentId": "main",
+      "name": "learning-evening",
+      "enabled": false,
+      "createdAtMs": 1773550048563,
+      "updatedAtMs": 1775893478960,
+      "schedule": {
+        "expr": "0 20 * * *",
+        "kind": "cron"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "【学习进化通道-晚间】决策科学经典重读+知识沉淀整理",
+        "thinking": "minimal",
+        "timeoutSeconds": 600
+      },
+      "delivery": {
+        "mode": "announce"
+      },
+      "state": {
+        "lastRunAtMs": 1775893324731,
+        "lastStatus": "ok",
+        "lastDurationMs": 154229,
+        "consecutiveErrors": 0,
+        "lastRunStatus": "ok",
+        "lastDelivered": true,
+        "lastDeliveryStatus": "delivered"
+      }
+    },
+    {
+      "id": "ad1fb129-d204-4a66-9b41-490e883d855e",
+      "agentId": "main",
+      "name": "daily-autonomous-summary",
+      "enabled": false,
+      "createdAtMs": 1773550048630,
+      "updatedAtMs": 1775893778966,
+      "schedule": {
+        "expr": "13 22 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "【每日自主执行摘要】汇总今日六通道执行成果，仅重要发现/里程碑通知用户，其他静默归档",
+        "thinking": "minimal",
+        "timeoutSeconds": 300
+      },
+      "delivery": {
+        "mode": "announce"
+      },
+      "state": {
+        "lastRunAtMs": 1775893478960,
+        "lastStatus": "error",
+        "lastDurationMs": 300006,
+        "consecutiveErrors": 1,
+        "lastRunStatus": "error",
+        "lastError": "cron: job execution timed out",
+        "lastErrorReason": "timeout",
+        "lastDeliveryStatus": "unknown"
+      }
+    },
+    {
+      "id": "4e7cddcc-8074-40d6-bf23-b1f9f8f43be7",
+      "agentId": "main",
+      "name": "Token耗尽预警检查",
+      "enabled": false,
+      "createdAtMs": 1773588773523,
+      "updatedAtMs": 1775893805288,
+      "schedule": {
+        "expr": "7 */4 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行Token余量检查，如低于30%则发送预警通知，如低于10%则紧急通知并建议禁用非必要任务",
+        "timeoutSeconds": 60
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {
+        "lastRunAtMs": 1775893778970,
+        "lastStatus": "ok",
+        "lastDurationMs": 26318,
+        "consecutiveErrors": 0,
+        "lastRunStatus": "ok",
+        "lastDelivered": false,
+        "lastDeliveryStatus": "not-delivered"
+      }
+    },
+    {
+      "id": "e73df70d-4eb4-4eb2-8cf2-41d9db49615e",
+      "agentId": "main",
+      "name": "MEMORY.md自动备份",
+      "enabled": false,
+      "createdAtMs": 1773588773774,
+      "updatedAtMs": 1775893905785,
+      "schedule": {
+        "kind": "cron",
+        "expr": "17 */4 * * *"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "备份MEMORY.md到backups/memory/目录，保留最近48个备份，同时提交到GitHub",
+        "timeoutSeconds": 120
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {
+        "lastRunAtMs": 1775893805288,
+        "lastStatus": "ok",
+        "lastDurationMs": 100497,
+        "consecutiveErrors": 0,
+        "lastRunStatus": "ok",
+        "lastDelivered": false,
+        "lastDeliveryStatus": "not-delivered"
+      }
+    },
+    {
+      "id": "0c1c5e75-562b-4edc-8419-f20b06a1bcf5",
+      "agentId": "main",
+      "name": "全局文件治理-结构完整性检查",
+      "enabled": false,
+      "createdAtMs": 1773978620218,
+      "updatedAtMs": 1774138728729,
+      "schedule": {
+        "expr": "23 9 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行全局文件治理-结构完整性检查（4维检查法维度1）：\n\n检查范围: /root/.openclaw/workspace/ 全量363MB/2892文件\n\n检查项:\n1. A满意哥专属文件夹12个必检文件夹是否存在\n2. 空文件夹检测（find -type d -empty）\n3. 孤立文件检测（根目录未分类.md文件）\n4. 命名规范检查（统一格式验证）\n\n输出:\n- 结构完整性报告\n- 发现的问题清单\n- 修复建议\n\n如无异常，静默执行不通知。",
+        "model": "kimi-coding/k2p5",
+        "thinking": "low",
+        "timeoutSeconds": 180
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {}
+    },
+    {
+      "id": "e2724734-6641-421b-84dc-8fe95c250097",
+      "agentId": "main",
+      "name": "全局文件治理-内容时效检查",
+      "enabled": false,
+      "createdAtMs": 1773978620249,
+      "updatedAtMs": 1774137591669,
+      "schedule": {
+        "expr": "17 9 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行全局文件治理-内容时效性检查（4维检查法维度2）：\n\n检查规则:\n1. 日期引用过时（倒计时超过3天未更新）\n2. 版本声明过期（\"最后更新\"超过7天）\n3. 任务状态逾期（进行中但超截止日）\n4. 链接失效检测\n\n输出:\n- 过时内容清单\n- 严重程度分级\n- 修复优先级\n\n仅P1问题通知用户，其他静默归档。",
+        "model": "kimi-coding/k2p5",
+        "thinking": "low",
+        "timeoutSeconds": 180
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {
+        "lastRunAtMs": 1774055919803,
+        "lastStatus": "ok",
+        "lastDurationMs": 103705,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "249ef31e-3fc7-4d45-9a68-681d5deb0b25",
+      "agentId": "main",
+      "name": "全局文件治理-引用一致性检查",
+      "enabled": false,
+      "createdAtMs": 1773978645554,
+      "updatedAtMs": 1774138729013,
+      "schedule": {
+        "expr": "7 10 * * 6",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行全局文件治理-引用一致性检查（4维检查法维度3，每周六执行）：\n\n检查范围:\n1. 内部引用: A满意哥专属文件夹/XX/XX.md\n2. 跨目录引用: skills/XXX/SKILL.md\n3. 文档引用: docs/XXX.md\n4. 记忆引用: MEMORY.md#章节\n\n验证方式:\n- 所有引用路径是否指向存在的文件\n- 引用的版本号是否与实际一致\n- 循环引用检测\n\n输出:\n- 失效引用清单\n- 版本不一致清单\n- 修复建议\n\n周六10:07执行，有异常周日报晨会汇报。",
+        "model": "kimi-coding/k2p5",
+        "thinking": "medium",
+        "timeoutSeconds": 300
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {
+        "lastRunAtMs": 1774059089917,
+        "lastStatus": "ok",
+        "lastDurationMs": 196973,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "2bcfc0c8-24bd-4768-b382-0ed99f767850",
+      "agentId": "main",
+      "name": "每日知识萃取",
+      "enabled": false,
+      "createdAtMs": 1773979214789,
+      "updatedAtMs": 1774156975366,
+      "schedule": {
+        "expr": "47 23 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行每日知识萃取任务：\n1. 读取当日memory文件（memory/YYYY-MM-DD.md）\n2. 提取关键决策、新信息、待办事项\n3. 生成结构化JSON（memory/knowledge_extracted_YYYY-MM-DD.json）\n4. 如有重大知识发现，更新知识图谱\n5. 静默执行，仅异常时通知\n\n脚本: bash scripts/knowledge-extractor.sh",
+        "model": "kimi-coding/k2p5",
+        "thinking": "low",
+        "timeoutSeconds": 120
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {
+        "lastRunAtMs": 1774108020005,
+        "lastStatus": "ok",
+        "lastDurationMs": 87464,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "8b6eba18-8116-4a8e-b6d3-593ff8697c83",
+      "agentId": "main",
+      "name": "每周引用一致性检查",
+      "enabled": false,
+      "createdAtMs": 1773979214822,
+      "updatedAtMs": 1774138729060,
+      "schedule": {
+        "expr": "7 10 * * 6",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行每周引用一致性检查：\n1. 扫描所有.md文件中的引用\n2. 验证引用目标是否存在\n3. 检查版本号一致性\n4. 生成失效引用清单\n5. 发送修复建议报告\n\n如有失效引用，立即报告以便修复。",
+        "model": "kimi-coding/k2p5",
+        "thinking": "medium",
+        "timeoutSeconds": 300
+      },
+      "delivery": {
+        "channel": "kimi-claw",
+        "mode": "announce",
+        "to": "main"
+      },
+      "state": {
+        "lastRunAtMs": 1774059286890,
+        "lastStatus": "ok",
+        "lastDurationMs": 117546,
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "cb5e062f-8a69-4afc-a4e6-5c4eb4bc0d6e",
+      "agentId": "main",
+      "name": "密钥轮换提醒-下周四",
+      "enabled": false,
+      "createdAtMs": 1774052631634,
+      "updatedAtMs": 1774138728875,
+      "schedule": {
+        "kind": "cron",
+        "expr": "13 8 * * 4",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "【提醒】执行Git密钥轮换完整方案（A方案）\n\n根据2026-03-21决策，今日应执行：\n1. 撤销所有已泄露的API密钥\n2. 重新生成新密钥\n3. 使用git-filter-repo清理Git历史\n4. 更新本地配置\n\n请立即开始执行。",
+        "model": "kimi-coding/k2p5",
+        "thinking": "medium"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {}
+    },
+    {
+      "id": "cc3c6180-5839-41c8-be30-44e359eac960",
+      "agentId": "main",
+      "name": "Worry List每日推送",
+      "enabled": false,
+      "createdAtMs": 1774053650015,
+      "updatedAtMs": 1775894867433,
+      "schedule": {
+        "kind": "cron",
+        "expr": "7 9 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行Worry List每日推送任务（09:07）：\n\n1. 读取 skills/worry-list-manager/SKILL.md\n2. 扫描当前所有担忧项：\n   - unresolved_concerns（P0未解决担忧）\n   - upcoming_deadlines（3天内到期）\n   - resource_bottlenecks（资源瓶颈）\n   - knowledge_gaps（知识缺口）\n   - external_dependencies（外部依赖风险）\n3. 生成Worry List报告（按优先级排序）\n4. 推送给用户\n5. 标记已推送项\n\n输出格式：\n- 🔴 P0紧急担忧（需立即处理）\n- 🟡 P1重要担忧（本周处理）\n- 🔵 P2一般担忧（关注即可）\n\n必须诚实报告，不隐瞒、不美化。",
+        "model": "kimi-coding/k2p5",
+        "thinking": "medium",
+        "timeoutSeconds": 180
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {
+        "lastRunAtMs": 1775894744807,
+        "lastStatus": "ok",
+        "lastDurationMs": 122626,
+        "consecutiveErrors": 0,
+        "lastRunStatus": "ok",
+        "lastDelivered": true,
+        "lastDeliveryStatus": "delivered"
+      }
+    },
+    {
+      "id": "0868b47e-3ade-4ba7-8377-7f66b850f7bf",
+      "agentId": "main",
+      "name": "Token预算看板推送",
+      "enabled": false,
+      "createdAtMs": 1774053650201,
+      "updatedAtMs": 1775894744807,
+      "schedule": {
+        "kind": "cron",
+        "expr": "3 9 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行Token预算看板推送（09:03）：\n\n1. 读取 skills/token-budget-enforcer/SKILL.md\n2. 计算昨日Token消耗：\n   - 总消耗量\n   - 按任务分类消耗\n   - 效率指标（产出/Token）\n3. 检查预算状态：\n   - 周预算剩余百分比\n   - 日预算剩余百分比\n   - 是否触发熔断阈值\n4. 生成Token预算看板：\n   - 昨日消耗柱状图（文本版）\n   - 本周趋势\n   - 预警提示（如<30%）\n5. 推送给用户\n\n输出必须包含：\n- 数字准确，不估算\n- 预警明确，不隐瞒\n- 建议具体，可操作",
+        "model": "kimi-coding/k2p5",
+        "thinking": "medium",
+        "timeoutSeconds": 120
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {
+        "lastRunAtMs": 1775894649906,
+        "lastStatus": "ok",
+        "lastDurationMs": 94901,
+        "consecutiveErrors": 0,
+        "lastRunStatus": "ok",
+        "lastDelivered": false,
+        "lastDeliveryStatus": "not-delivered"
+      }
+    },
+    {
+      "id": "bc1eb9e6-da6e-4757-8544-332a4b28b1e2",
+      "agentId": "main",
+      "name": "零空置强制执行器-直接执行",
+      "enabled": false,
+      "createdAtMs": 1774133692947,
+      "updatedAtMs": 1775892776979,
+      "schedule": {
+        "kind": "cron",
+        "expr": "2,17,32,47 * * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "直接执行命令: python3 /root/.openclaw/workspace/skills/zero-idle-enforcer/enforcer.py enforce\n\n命令执行完成后，向用户自然汇报结果。无需复杂推理。",
+        "model": "kimi-coding/k2p5",
+        "thinking": "off",
+        "timeoutSeconds": 120
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {
+        "lastRunAtMs": 1775892765076,
+        "lastStatus": "ok",
+        "lastDurationMs": 11903,
+        "consecutiveErrors": 0,
+        "lastRunStatus": "ok",
+        "lastDeliveryStatus": "delivered",
+        "lastDelivered": true
+      }
+    },
+    {
+      "id": "d8a9e5d7-11c3-4268-a22e-1c1d8ad8a8ea",
+      "agentId": "main",
+      "name": "晨间图腾仪式",
+      "enabled": false,
+      "createdAtMs": 1774156023848,
+      "updatedAtMs": 1774160278072,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行晨间图腾仪式: python3 /root/.openclaw/workspace/skills/totem-system/morning-ritual.py",
+        "model": "kimi-coding/k2p5",
+        "thinking": "off",
+        "timeoutSeconds": 60
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {}
+    },
+    {
+      "id": "dc1e570a-3c29-40d1-801f-bbfedbc744c3",
+      "agentId": "main",
+      "name": "动态权威切换检查",
+      "enabled": false,
+      "createdAtMs": 1774156024127,
+      "updatedAtMs": 1774159714151,
+      "schedule": {
+        "expr": "0 */4 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai",
+        "staggerMs": 300000
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行动态权威切换检查: python3 /root/.openclaw/workspace/skills/authority-switch/dynamic-authority-switch.py",
+        "model": "kimi-coding/k2p5",
+        "thinking": "off",
+        "timeoutSeconds": 30
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {}
+    },
+    {
+      "id": "f0d2e695-2199-4e23-acad-18aac01e716b",
+      "agentId": "main",
+      "name": "每日7浪费追踪",
+      "enabled": false,
+      "createdAtMs": 1774156024163,
+      "updatedAtMs": 1774160277847,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 23 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行每日7浪费追踪: python3 /root/.openclaw/workspace/skills/lean-waste-tracker/waste-tracker.py",
+        "model": "kimi-coding/k2p5",
+        "thinking": "off",
+        "timeoutSeconds": 60
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {}
+    },
+    {
+      "id": "8f56b962-1363-486e-8ecc-c408f8458d82",
+      "agentId": "main",
+      "name": "蓝军自动审计",
+      "enabled": false,
+      "createdAtMs": 1774156024196,
+      "updatedAtMs": 1774159714431,
+      "schedule": {
+        "expr": "0 2 * * 2,4,6",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行蓝军自动审计: python3 /root/.openclaw/workspace/skills/blue-auditor/blue-audit.py",
+        "model": "kimi-coding/k2p5",
+        "thinking": "off",
+        "timeoutSeconds": 120
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {}
+    },
+    {
+      "id": "b04e00db-459d-46d9-99f5-a8da5409fc8c",
+      "agentId": "main",
+      "name": "知识图谱数据提取",
+      "enabled": false,
+      "createdAtMs": 1774156024229,
+      "updatedAtMs": 1774160278172,
+      "schedule": {
+        "expr": "30 1 * * 1,4",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行知识图谱数据提取: python3 /root/.openclaw/workspace/skills/knowledge-graph/scripts/extract-entities.py",
+        "model": "kimi-coding/k2p5",
+        "thinking": "off",
+        "timeoutSeconds": 120
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {}
+    },
+    {
+      "id": "8ae42fce-f29d-4554-802c-1fe52c2c2722",
+      "agentId": "main",
+      "name": "3D情景规划生成",
+      "enabled": false,
+      "createdAtMs": 1774156024283,
+      "updatedAtMs": 1774160278217,
+      "schedule": {
+        "expr": "15 9 */14 * 1",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行3D情景规划: 生成本周4情景分析(Base/Bull/Bear/Black Swan)",
+        "model": "kimi-coding/k2p5",
+        "thinking": "medium",
+        "timeoutSeconds": 180
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {}
+    },
+    {
+      "id": "1a24ec9e-2f50-4c7b-b7b2-fbd03c22fedd",
+      "agentId": "main",
+      "name": "4D-WhatIf会话",
+      "enabled": false,
+      "createdAtMs": 1774156024316,
+      "updatedAtMs": 1774160278249,
+      "schedule": {
+        "expr": "0 15 */14 * 5",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行4D-WhatIf会话: 约束突破与创造性思考",
+        "model": "kimi-coding/k2p5",
+        "thinking": "high",
+        "timeoutSeconds": 180
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {}
+    },
+    {
+      "id": "a37335b8-b652-418c-8e67-6b3d72d71c06",
+      "agentId": "main",
+      "name": "5D元认知改进",
+      "enabled": false,
+      "createdAtMs": 1774156024350,
+      "updatedAtMs": 1774160278284,
+      "schedule": {
+        "expr": "0 10 */14 * 6",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行5D元认知改进: 生成协议修订提案",
+        "model": "kimi-coding/k2p5",
+        "thinking": "medium",
+        "timeoutSeconds": 180
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {}
+    },
+    {
+      "id": "da5ce04b-fbdf-4038-a834-3aea2e616355",
+      "agentId": "main",
+      "name": "S7对抗测试",
+      "enabled": false,
+      "createdAtMs": 1774156024386,
+      "updatedAtMs": 1774160278315,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 3 * * 0",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行S7对抗测试: python3 /root/.openclaw/workspace/skills/adversarial-test/run-adversarial-tests.py",
+        "model": "kimi-coding/k2p5",
+        "thinking": "high",
+        "timeoutSeconds": 300
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "kimi-claw",
+        "to": "main"
+      },
+      "state": {}
+    },
+    {
+      "id": "ea4ef0ad-337b-4e5c-90be-dcb7f3db9f90",
+      "name": "token-optimizer",
+      "enabled": false,
+      "createdAtMs": 1775781699369,
+      "updatedAtMs": 1775881029765,
+      "schedule": {
+        "kind": "cron",
+        "expr": "17 */12 * * *"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Read /root/.openclaw/workspace/memory/hibernation-state.json. If the status field is one of: hibernating, silent, deep-silent, reply ONLY with NO_REPLY and do absolutely nothing else. Otherwise, run token optimization: check level, suggest compression if >80%, suggest hibernation if <15%, adjust frequencies.",
+        "timeoutSeconds": 300
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
+      "state": {
+        "lastRunAtMs": 1775881020011,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 9754,
+        "lastDelivered": false,
+        "lastDeliveryStatus": "not-delivered",
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "6828c851-dc8f-4c04-b942-d6b8d267bc5c",
+      "name": "evening-totem",
+      "enabled": false,
+      "createdAtMs": 1775781701271,
+      "updatedAtMs": 1775816230868,
+      "schedule": {
+        "kind": "cron",
+        "expr": "17 18 * * *"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Read /root/.openclaw/workspace/memory/hibernation-state.json. If the status field is one of: hibernating, silent, deep-silent, reply ONLY with NO_REPLY and do absolutely nothing else. Otherwise, execute evening totem ritual: archive daily insights, check deliverables, identify risks, log to memory.",
+        "timeoutSeconds": 300
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
+      "state": {
+        "lastRunAtMs": 1775816220017,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 10851,
+        "lastDelivered": false,
+        "lastDeliveryStatus": "not-delivered",
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "a8f9fecf-a825-40d0-bab3-5e5165ea20a4",
+      "name": "daily-asset-activation",
+      "enabled": false,
+      "createdAtMs": 1775783304962,
+      "updatedAtMs": 1775870896323,
+      "schedule": {
+        "kind": "cron",
+        "expr": "27 9 * * *"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "python3 /root/.openclaw/workspace/scripts/dual-economy-guard.py --job-id a8f9fecf-a825-40d0-bab3-5e5165ea20a4 --job-name daily-asset-activation && python3 /root/.openclaw/workspace/daily_asset_runner.py",
+        "timeoutSeconds": 600
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
+      "state": {
+        "lastRunAtMs": 1775870820011,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 76312,
+        "lastDelivered": true,
+        "lastDeliveryStatus": "delivered",
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "token-tracker-zero-001",
+      "name": "Token零消耗追踪",
+      "description": "零Token监控 - 每30分钟扫描本地session统计token消耗",
+      "enabled": false,
+      "createdAtMs": 1775870400000,
+      "updatedAtMs": 1775894633108,
+      "schedule": {
+        "kind": "cron",
+        "expr": "*/30 * * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "main",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "systemEvent",
+        "text": "token-tracker-zero"
+      },
+      "state": {
+        "lastRunAtMs": 1775894321684,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 311424,
+        "lastDeliveryStatus": "not-requested",
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "74ca90e2-3564-4f1c-97a4-63aa7b01286e",
+      "agentId": "main",
+      "sessionKey": "agent:main:cron:9f6a9ab4-f367-43c5-8abd-41fcdb257655",
+      "name": "ClawHub Skill安装重试（第4次）",
+      "enabled": false,
+      "deleteAfterRun": true,
+      "createdAtMs": 1775895442727,
+      "updatedAtMs": 1775895442727,
+      "schedule": {
+        "at": "2026-04-11T09:14:00.000Z",
+        "kind": "at"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行ClawHub Skill安装重试任务（第4次尝试）：\n\n需要安装的Skill：\nslack-integration（Slack增强）\n\n执行步骤：\n1. 尝试安装slack-integration（使用--force）\n2. 如仍失败，记录错误并安排第5次重试（最多重试5次）\n3. 向创始人发送安装结果报告\n\n注意：如遇到Rate Limit，等待1小时后重试\n历史上下文：第1次、第2次尝试均因Rate Limit失败；第3次尝试中github-integration和notion-integration安装成功，slack-integration失败。",
+        "timeoutSeconds": 300
+      },
+      "delivery": {
+        "mode": "announce"
+      },
+      "state": {}
+    },
+    {
+      "id": "50a24de2-9f04-45c7-a2ac-5261752f5d57",
+      "agentId": "main",
+      "sessionKey": "agent:main:cron:1cfd7eba-9207-47c0-8505-49f948b7e873",
+      "name": "ClawHub Skill安装重试（第4次）",
+      "enabled": false,
+      "deleteAfterRun": true,
+      "createdAtMs": 1775895553182,
+      "updatedAtMs": 1775895553182,
+      "schedule": {
+        "kind": "at",
+        "at": "2026-04-11T09:17:00.000Z"
+      },
+      "sessionTarget": "main",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "systemEvent",
+        "text": "执行ClawHub Skill安装重试任务（第4次）：\n\n需要安装的Skill：\n1. github-integration（GitHub集成）\n2. notion-integration（Notion集成）\n3. slack-integration（Slack增强）\n\n执行步骤：\n1. 尝试安装github-integration（加--force参数）\n2. 如成功，继续安装notion-integration\n3. 如成功，继续安装slack-integration\n4. 如仍失败，记录错误并安排下次重试（1小时后）\n5. 向创始人发送安装结果报告\n\n这是第4次重试，上次失败原因：Rate limit exceeded\nCurrent time: 请根据当前时间自行判断。"
+      },
+      "state": {}
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/README_AZURE_TEE.md",
+  "filename": "README_AZURE_TEE.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "978a899e9cb37eae",
+  "content_length": 3212,
+  "ingested_at": "2026-03-31T17:27:44.513515",
+  "content_preview": "# Azure TEE机密计算实例部署指南\n\n本文档描述了在Azure上部署Intel TDX机密计算实例（Standard_DC8s_v3）并运行Llama2基准测试的完整流程。\n\n## 概述\n\n此项目完成了以下任务：\n1. ✅ 安装Azure CLI\n2. ✅ 创建资源组 `satisficing-rg`\n3. ✅ 部署Standard_DC8s_v3机密VM（Intel TDX）\n4. ✅ 安装Python环境和大模型推理框架\n5. ✅ 运行Llama2基准测试验证TEE性能损失<10%\n\n## 环境要求\n\n- Azure订阅（支持机密计算）\n- Azure CLI 2.40+\n- SSH客户端\n- Python 3.8+\n\n## 文件说明\n\n| 文件 | 说明 |\n|------|------|\n| `azure_tee_deploy.sh` | Azure VM部署脚本 |\n| `setup_tee_env.sh` | Python环境和推理框架安装脚本 |\n| `run_llama2_benchmark.sh` | Llama2基准测试脚本 |\n| `analyze_tee",
+  "limitations_applied": []
+}

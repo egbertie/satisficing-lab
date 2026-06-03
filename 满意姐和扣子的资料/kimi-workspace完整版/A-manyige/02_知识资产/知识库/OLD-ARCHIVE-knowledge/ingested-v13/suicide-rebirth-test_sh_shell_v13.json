@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/suicide-rebirth-test.sh",
+  "filename": "suicide-rebirth-test.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "2bc36dcac2fc6e57",
+  "content_length": 1445,
+  "ingested_at": "2026-03-31T17:27:46.214371",
+  "content_preview": "#!/bin/bash\n# Suicide-Rebirth Test - 自杀重生测试脚本\n# 模拟实例销毁并从备份恢复\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nSHADOW=\"/root/.openclaw/workspace/shadow-clone\"\nTEST_DIR=\"/tmp/rebirth-test-$(date +%s)\"\nLOG=\"/var/log/rebirth-test.log\"\n\necho \"=== 自杀重生测试 $(date) ===\" | tee -a \"$LOG\"\n\n# 步骤1: 验证影子克隆存在\nif [ ! -d \"$SHADOW\" ]; then\n    echo \"❌ FAIL: Shadow clone not found\" | tee -a \"$LOG\"\n    exit 1\nfi\n\n# 步骤2: 创建测试恢复目录\nmkdir -p \"$TEST_DIR\"\n\n# 步骤3: 从影子克隆恢复\ncp -r \"$SHADOW\" \"$TEST_DIR/restored\"\n\n# 步骤4: 验证关键文件完整性\nKEY_FI",
+  "limitations_applied": []
+}

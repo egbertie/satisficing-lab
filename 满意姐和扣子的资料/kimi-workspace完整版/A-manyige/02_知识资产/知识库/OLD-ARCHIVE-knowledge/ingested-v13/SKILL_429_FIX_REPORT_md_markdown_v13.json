@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/reports/SKILL_429_FIX_REPORT.md",
+  "filename": "SKILL_429_FIX_REPORT.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "8905497c16910207",
+  "content_length": 3110,
+  "ingested_at": "2026-03-31T17:27:46.232293",
+  "content_preview": "# Skill 429修复报告\n\n生成时间: 2026-03-14 14:40:00\n\n## 任务概述\n\n本次任务旨在修复因429错误下载失败的skill文件。共有59个skill的_meta.json文件已接收，但大部分skill文件不完整。\n\n## 当前状态分析\n\n### Meta文件统计\n- **总数**: 59个skill的_meta.json文件\n- **位置**: `/root/openclaw/kimi/downloads/`\n\n### Skill完整度检查\n经过检查，所有59个skill均**不完整**——每个skill仅有_meta.json文件，缺少以下关键文件：\n- SKILL.md / skill.md\n- 脚本文件（*.py, *.js, *.sh等）\n- 配置文件\n\n## P0批次修复结果\n\nP0批次包含9个优先修复的skill:\n\n| Skill | 本地状态 | GitHub克隆尝试 | 结果 |\n|-------|----------|----------------|------|\n| brave-search | ❌ 缺失 | 已尝试 | ❌ 失败",
+  "limitations_applied": []
+}

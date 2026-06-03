@@ -1,0 +1,71 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/metrics-collector.py",
+  "filename": "metrics-collector.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 16038,
+  "checksum": "9a5544ef81218ec1",
+  "ingested_at": "2026-03-31T17:30:32.847285",
+  "line_count": 442,
+  "title": "metrics-collector",
+  "description": "Metrics Collector V1.0\n量化指标自动化收集脚本\n\n功能：\n1. 每日自动统计核心指标数据\n2. 生成 metrics-report.json 报告\n3. 阈值告警检查\n4. 数据持久化存储\n\n使用：\n    python3 metrics-collector.py [--date YYYY-MM-DD] [--output path]",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: CoreMetrics"
+    },
+    {
+      "level": 2,
+      "title": "Class: ThresholdConfig"
+    },
+    {
+      "level": 2,
+      "title": "Class: AlertSystem"
+    },
+    {
+      "level": 2,
+      "title": "Class: MetricsCollector"
+    }
+  ],
+  "entities": [
+    {
+      "name": "CoreMetrics",
+      "type": "class"
+    },
+    {
+      "name": "ThresholdConfig",
+      "type": "class"
+    },
+    {
+      "name": "AlertSystem",
+      "type": "class"
+    },
+    {
+      "name": "MetricsCollector",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "-*- coding: utf-8 -*-",
+    "============ 核心指标定义 ============",
+    "1. ASR - 任务成功率 (Task Success Rate)",
+    "公式: 实际完成任务数 / 承诺完成任务数 × 100%",
+    "2. 幻觉率 (Hallucination Rate)",
+    "公式: 虚假声明数 / 总声明数 × 100%",
+    "3. Token效率 (Token Efficiency)",
+    "公式: 有效产出字数 / 消耗Token数",
+    "4. 响应时间 (Response Time)",
+    "公式: 请求到首token的平均延迟 (毫秒)",
+    "5. 错误重复率 (Error Recurrence Rate)",
+    "公式: 重复错误数 / 总错误数 × 100%",
+    "6. 蓝军发现率 (Red Team Discovery Rate)",
+    "公式: 蓝军发现问题数 / 总问题数 × 100%"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

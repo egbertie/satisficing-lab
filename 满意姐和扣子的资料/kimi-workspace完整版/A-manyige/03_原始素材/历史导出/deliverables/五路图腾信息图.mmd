@@ -1,0 +1,77 @@
+%% 五路图腾体系V2.4 - 五行相生环形信息图
+%% 生成命令: mmdc -i 五路图腾信息图.mmd -o 五路图腾信息图.svg -b white -w 1200 -H 1200
+
+graph TB
+    %% ========== 样式定义 ==========
+    classDef earth fill:#D4A574,stroke:#8B4513,stroke-width:3px,color:#3E2723,font-weight:bold
+    classDef metal fill:#E8E8E8,stroke:#B8860B,stroke-width:3px,color:#212121,font-weight:bold
+    classDef water fill:#87CEEB,stroke:#4682B4,stroke-width:3px,color:#0D47A1,font-weight:bold
+    classDef wood fill:#90EE90,stroke:#228B22,stroke-width:3px,color:#1B5E20,font-weight:bold
+    classDef fire fill:#FF6B6B,stroke:#DC143C,stroke-width:3px,color:#B71C1C,font-weight:bold
+    classDef center fill:#FFF8DC,stroke:#DAA520,stroke-width:4px,color:#4A3728,font-weight:bold
+    classDef arrow stroke-width:2px,stroke-dasharray: 5 5
+
+    %% ========== 中心 ==========
+    CENTER(["⭕\n**五路图腾**\n*WU LU TOTEMS*\n五行相生·生生不息"])
+    class CENTER center
+
+    %% ========== 五个图腾节点 ==========
+    LIU["🏛️\n**LIU**\n刘禹锡\n━━━━━\n🟫 **土**\n*Earth*\n━━━━━\n惟吾德馨\n品德高尚"]
+    class LIU earth
+
+    SIMON["⚖️\n**SIMON**\n赫伯特·西蒙\n━━━━━\n⬜ **金**\n*Metal*\n━━━━━\n满意解\n够用就好"]
+    class SIMON metal
+
+    GUANYIN["🪷\n**GUANYIN**\n观自在菩萨\n━━━━━\n🔵 **水**\n*Water*\n━━━━━\n自在从容\n慈悲智慧"]
+    class GUANYIN water
+
+    CONFUCIUS["🎋\n**CONFUCIUS**\n孔子\n━━━━━\n🟢 **木**\n*Wood*\n━━━━━\n仁者爱人\n生生不息"]
+    class CONFUCIUS wood
+
+    HUINENG["🔥\n**HUINENG**\n六祖慧能\n━━━━━\n🔴 **火**\n*Fire*\n━━━━━\n顿悟/知行合一\n明心见性"]
+    class HUINENG fire
+
+    %% ========== 中心到五个节点的连接 ==========
+    CENTER -.-> LIU
+    CENTER -.-> SIMON
+    CENTER -.-> GUANYIN
+    CENTER -.-> CONFUCIUS
+    CENTER -.-> HUINENG
+
+    %% ========== 五行相生循环连接 ==========
+    LIU ==>|"土生金"| SIMON
+    SIMON ==>|"金生水"| GUANYIN
+    GUANYIN ==>|"水生木"| CONFUCIUS
+    CONFUCIUS ==>|"木生火"| HUINENG
+    HUINENG ==>|"火生土"| LIU
+
+    %% ========== 说明子图 ==========
+    subgraph LEGEND["📜 五行相生原理"]
+        direction TB
+        L1["土 → 金: 土生万物，化育金石"]
+        L2["金 → 水: 金生水露，润泽万物"]
+        L3["水 → 木: 水润草木，生生不息"]
+        L4["木 → 火: 木燃生火，光明普照"]
+        L5["火 → 土: 火尽成灰，归于大地"]
+    end
+
+    %% ========== 版本信息 ==========
+    subgraph VERSION["📌 版本信息"]
+        direction LR
+        V1["版本: V2.4"]
+        V2["更新时间: 2026-03-13"]
+        V3["设计: 五路图腾体系"]
+    end
+
+    %% ========== 链接说明 ==========
+    %% 实线箭头 = 五行相生关系（顺时针循环）
+    %% 虚线 = 与中心的连接
+    %% 粗线 = 相生关系主线
+
+    %% ========== 全局配置 ==========
+    linkStyle default stroke:#666,stroke-width:2px
+    linkStyle 5 stroke:#D4A574,stroke-width:4px
+    linkStyle 6 stroke:#B8860B,stroke-width:4px
+    linkStyle 7 stroke:#4682B4,stroke-width:4px
+    linkStyle 8 stroke:#228B22,stroke-width:4px
+    linkStyle 9 stroke:#DC143C,stroke-width:4px

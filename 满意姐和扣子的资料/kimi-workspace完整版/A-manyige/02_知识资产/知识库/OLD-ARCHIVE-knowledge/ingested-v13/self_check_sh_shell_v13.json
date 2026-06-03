@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/tiered-output/self_check.sh",
+  "filename": "self_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "8a04251b24c6f917",
+  "content_length": 4370,
+  "ingested_at": "2026-03-31T17:27:45.328049",
+  "content_preview": "#!/bin/bash\n# 分级输出系统 - 自检脚本\n# Tiered Output System - Self-Check Script\n# \n# 运行所有检查并输出达标报告\n\nset -e\n\nSKILL_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\ncd \"$SKILL_DIR\"\n\necho \"==========================================\"\necho \"🎯 Tiered-Output Skill 自检程序\"\necho \"==========================================\"\necho \"\"\n\n# 颜色定义\nGREEN='\\033[0;32m'\nRED='\\033[0;31m'\nYELLOW='\\033[1;33m'\nNC='\\033[0m' # No Color\n\nPASS_COUNT=0\nFAIL_COUNT=0\n\n# 检查函数\ncheck_file() {\n    if [ -f \"$1\" ]; then\n        echo -e \"${GR",
+  "limitations_applied": []
+}

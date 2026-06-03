@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/docs/RESILIENCE_DESIGN_STANDARD.md",
+  "filename": "RESILIENCE_DESIGN_STANDARD.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "8cb9dccbe0295084",
+  "content_length": 2071,
+  "ingested_at": "2026-03-31T17:27:44.885468",
+  "content_preview": "# 韧性设计标准 V1.0\n## Resilience Design Standard\n\n**制定时间**: 2026-03-29  \n**适用范围**: 所有机制、流程、规则设计  \n**核心原则**: 任何设计必须考虑失效场景，否则视为不合格\n\n---\n\n## 一、必须考虑的意外因素清单\n\n### 1. 系统级因素\n| 因素 | 检查项 | 设计对策 |\n|------|--------|----------|\n| **系统重启** | 数据会丢失吗？ | 持久化到非/tmp目录 |\n| **内存不足** | OOM会导致崩溃吗？ | 设置内存上限，优雅降级 |\n| **磁盘满了** | 日志会写爆吗？ | 日志轮转，自动清理 |\n| **CPU满载** | 任务会卡住吗？ | 超时机制，资源限流 |\n| **网络中断** | API调用会挂起吗？ | 重试机制，离线缓存 |\n\n### 2. 进程级因素\n| 因素 | 检查项 | 设计对策 |\n|------|--------|----------|\n| **进程崩溃** | 状态会丢失吗？ | 状态持久化，快速恢复 |\n| **权",
+  "limitations_applied": []
+}

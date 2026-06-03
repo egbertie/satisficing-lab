@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/blue_army_self_enforcement_check.sh",
+  "filename": "blue_army_self_enforcement_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "8368bf8211a5b504",
+  "content_length": 1481,
+  "ingested_at": "2026-03-31T17:27:46.205195",
+  "content_preview": "#!/bin/bash\n# 蓝军强制执行检查脚本\n# 每次蓝军审计后必须运行，检查自己是否做到位\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nSELF_AUDIT_LOG=\"$WORKSPACE/diary/blue-army-self-audit-execution.log\"\n\necho \"=== 蓝军自我强制执行检查 ===\" | tee -a \"$SELF_AUDIT_LOG\"\necho \"检查时间: $(date)\" | tee -a \"$SELF_AUDIT_LOG\"\necho \"\" | tee -a \"$SELF_AUDIT_LOG\"\n\n# 检查1: 是否说\"必须\"而不是\"建议\"\necho \"检查1: 语言检查\" | tee -a \"$SELF_AUDIT_LOG\"\necho \"标准: 本次审计是否只使用'必须'、'要求'、'FAIL'，没有'建议'、'可以考虑'\" | tee -a \"$SELF_AUDIT_LOG\"\necho \"结果: 需人工确认\" | tee -a \"$SELF_AUDIT_LOG\"\necho \"\" | tee -a ",
+  "limitations_applied": []
+}

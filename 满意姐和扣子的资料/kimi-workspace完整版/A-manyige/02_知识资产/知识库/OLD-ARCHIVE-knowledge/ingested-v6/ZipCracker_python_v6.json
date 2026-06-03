@@ -1,0 +1,100 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_zipcracker/ZipCracker.py",
+  "filename": "ZipCracker.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 21166,
+  "checksum": "4e50dc31e657a3b2",
+  "ingested_at": "2026-03-31T17:30:32.331005",
+  "line_count": 553,
+  "title": "ZipCracker",
+  "description": "Check if the zip file is encrypted (either traditional or pseudo-encrypted).",
+  "sections": [],
+  "entities": [
+    {
+      "name": "is_zip_encrypted",
+      "type": "function"
+    },
+    {
+      "name": "is_aes_encrypted",
+      "type": "function"
+    },
+    {
+      "name": "auto_install_pyzipper",
+      "type": "function"
+    },
+    {
+      "name": "fix_zip_encrypted",
+      "type": "function"
+    },
+    {
+      "name": "get_crc",
+      "type": "function"
+    },
+    {
+      "name": "crack_crc",
+      "type": "function"
+    },
+    {
+      "name": "_clean_and_create_outdir",
+      "type": "function"
+    },
+    {
+      "name": "crack_password",
+      "type": "function"
+    },
+    {
+      "name": "generate_numeric_dict",
+      "type": "function"
+    },
+    {
+      "name": "display_progress",
+      "type": "function"
+    },
+    {
+      "name": "adjust_thread_count",
+      "type": "function"
+    },
+    {
+      "name": "count_passwords",
+      "type": "function"
+    },
+    {
+      "name": "load_passwords_in_chunks",
+      "type": "function"
+    },
+    {
+      "name": "parse_mask",
+      "type": "function"
+    },
+    {
+      "name": "crack_password_with_mask",
+      "type": "function"
+    },
+    {
+      "name": "crack_password_with_file_or_dir",
+      "type": "function"
+    },
+    {
+      "name": "crack_with_generated_numeric_dict",
+      "type": "function"
+    },
+    {
+      "name": "crack_password_with_file",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "-*- coding: utf-8 -*-",
+    "初始尝试导入 pyzipper",
+    "使用当前运行的 python 环境对应的 pip，确保安装到正确的位置",
+    "即使是人类手动模式，也不再询问，直接高亮提示正在自动碰撞",
+    "Coded By Asaotomo         Version:2.0.0 (Agent Native)",
+    "====== 核心升级: AES 环境热检测与自动依赖安装 ======",
+    "动态将刚安装好的库加载到全局命名空间",
+    "===================================================="
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/shadow-clone-sync.sh",
+  "filename": "shadow-clone-sync.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "15d9cb14d35b00e1",
+  "content_length": 711,
+  "ingested_at": "2026-03-31T17:27:46.134797",
+  "content_preview": "#!/bin/bash\n# Shadow Clone - 影子克隆同步脚本\n# 每10分钟同步一次到备份目录\n\nSOURCE_DIR=\"/root/.openclaw/workspace\"\nSHADOW_DIR=\"/root/.openclaw/workspace/shadow-clone\"\nLOG_FILE=\"/var/log/shadow-clone.log\"\nTIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')\n\n# 确保影子目录存在\nmkdir -p \"$SHADOW_DIR\"\n\n# 执行同步（排除日志、临时文件和备份目录本身）\nrsync -avz --delete \\\n  --exclude='.git/objects' \\\n  --exclude='logs/' \\\n  --exclude='tmp/' \\\n  --exclude='*.log' \\\n  --exclude='shadow-clone/' \\\n  \"$SOURCE_DIR/\" \"$SHADOW_DIR/\" 2>/dev/null\n\n# 记录同步状态\nif [ $? -eq 0 ];",
+  "limitations_applied": []
+}

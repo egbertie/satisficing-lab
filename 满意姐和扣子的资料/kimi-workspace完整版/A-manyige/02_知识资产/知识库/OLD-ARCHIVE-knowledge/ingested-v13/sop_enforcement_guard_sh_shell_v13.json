@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/sop_enforcement_guard.sh",
+  "filename": "sop_enforcement_guard.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "4975c95a307a50ae",
+  "content_length": 2082,
+  "ingested_at": "2026-03-31T17:27:46.193141",
+  "content_preview": "#!/bin/bash\n# SOP强制执行守卫脚本\n# 任何新规则创建前，必须通过此脚本检查\n# 不通过则阻止创建\n\nset -e\n\nRULE_NAME=\"$1\"\nPLAN_FILE=\"$2\"\n\necho \"=== SOP强制执行检查 ===\"\necho \"规则名称: $RULE_NAME\"\necho \"检查时间: $(date)\"\necho \"\"\n\nif [ -z \"$RULE_NAME\" ]; then\n    echo \"❌ 错误: 必须提供规则名称\"\n    echo \"用法: $0 <规则名称> <.plan文件路径>\"\n    exit 1\nfi\n\nif [ -z \"$PLAN_FILE\" ] || [ ! -f \"$PLAN_FILE\" ]; then\n    echo \"❌ 错误: 必须提供.plan文件，且文件必须存在\"\n    echo \".plan文件必须包含完整的SOP思考过程\"\n    exit 1\nfi\n\necho \"【检查1】.plan文件存在 ✅\"\necho \"\"\n\n# 检查韧性检查清单（6类意外因素）\necho \"【检查2】韧性检查清单...\"\nREQ",
+  "limitations_applied": []
+}

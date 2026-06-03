@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_72h-pressure-test/scripts/pressure-test-designer.py",
+  "filename": "pressure-test-designer.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "4a5e27075e19ea8f",
+  "content_length": 806,
+  "ingested_at": "2026-03-31T17:27:45.020166",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n72小时压力测试脚本\n版本: V2.0\n\"\"\"\n\nimport json\nfrom datetime import datetime\n\ndef design_pressure_test(scenario=\"general\"):\n    \"\"\"设计压力测试方案\"\"\"\n    test_plan = {\n        \"scenario\": scenario,\n        \"duration\": \"72h\",\n        \"phases\": [\n            {\"hour\": \"0-24\", \"intensity\": \"high\", \"tasks\": \"基础任务集\"},\n            {\"hour\": \"24-48\", \"intensity\": \"very_high\", \"tasks\": \"复杂任务+干扰\"},\n            {\"hour\": \"48-72\", \"intensity\": \"extreme\", \"tasks\": \"极限挑战+突发情况\"}\n        ],\n        \"mon",
+  "limitations_applied": []
+}

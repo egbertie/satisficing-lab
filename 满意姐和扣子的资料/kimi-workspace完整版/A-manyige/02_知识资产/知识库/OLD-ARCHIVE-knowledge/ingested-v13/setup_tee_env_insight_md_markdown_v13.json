@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/docs/tee_insights/setup_tee_env_insight.md",
+  "filename": "setup_tee_env_insight.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "c1124d5e47623fff",
+  "content_length": 636,
+  "ingested_at": "2026-03-31T17:27:44.945346",
+  "content_preview": "# TEE环境配置脚本深度洞察 (L1-L5)\n\n## 基础信息\n- **脚本名称**: setup_tee_env.sh\n- **功能**: TEE VM环境配置（Python、Intel TDX工具）\n- **风险等级**: 中（系统级配置）\n\n---\n\n## 深度洞察 (L1-L5)\n\n### L1: 表面现象\n脚本实现了：\n- 系统包更新\n- Intel SGX/TDX驱动安装\n- Python虚拟环境创建\n- 基础工具安装\n\n**问题**: \n- 未经安全审计\n- 使用apt-key添加外部源\n- 未验证安装后状态\n\n### L2: 模式识别\n- 有安装逻辑但无验证逻辑\n- 外部依赖未签名验证\n- 缺乏安装失败回滚\n\n### L3: 根因分析\n- 依赖外部源，存在供应链风险\n- 缺乏安装后健康检查\n- 未考虑环境兼容性问题\n\n### L4: 系统关联\n- 环境配置是运行基础\n- 但配置脚本安全性未知\n- 影响整体系统安全\n\n### L5: 未来指导\n- **核心原则**: \"每个配置脚本必须有验证和回滚\"\n- **可执行方案**:\n  1. 添加安装前环境检查\n  2. 验证",
+  "limitations_applied": []
+}

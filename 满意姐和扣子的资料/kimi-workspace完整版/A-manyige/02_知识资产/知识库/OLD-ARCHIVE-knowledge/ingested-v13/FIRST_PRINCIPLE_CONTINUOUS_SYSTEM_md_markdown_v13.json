@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/docs/2026-03/FIRST_PRINCIPLE_CONTINUOUS_SYSTEM.md",
+  "filename": "FIRST_PRINCIPLE_CONTINUOUS_SYSTEM.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "492e11f049811c03",
+  "content_length": 5704,
+  "ingested_at": "2026-03-31T17:27:46.658821",
+  "content_preview": "# 第一性原则持续检视机制\n\n> **机制版本**: v1.0  \n> **生效日期**: 2026-03-15  \n> **检视频率**: 每周六 10:00\n\n---\n\n## 机制概述\n\n基于第一性原则，建立工作空间的持续自我检视和优化机制，确保系统始终保持精简、高效、可进化。\n\n### 核心原则\n\n1. **自动化发现**: 系统自动识别低效项\n2. **用户确认**: 所有优化需用户确认后执行\n3. **渐进优化**: 小步快跑，持续改进\n4. **可回滚**: 所有变更可回滚到之前状态\n\n---\n\n## 检视触发条件\n\n### 定时触发\n- **频率**: 每周六 10:00\n- **任务**: `weekly-first-principle-audit`\n\n### 条件触发\n| 触发条件 | 阈值 | 动作 |\n|---------|-----|-----|\n| Skill数量超过 | 20个 | 触发审计 |\n| 文档版本冲突 | >3组 | 触发审计 |\n| Token消耗突增 | >50K/日 | 触发审计 |\n| 用户手动触发 | - | 随时执行 |\n\n---\n\n",
+  "limitations_applied": []
+}

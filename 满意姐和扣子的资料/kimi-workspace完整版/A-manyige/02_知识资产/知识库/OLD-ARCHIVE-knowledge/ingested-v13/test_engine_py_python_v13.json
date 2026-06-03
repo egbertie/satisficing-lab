@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/universal-task-executor-v3/core/test_engine.py",
+  "filename": "test_engine.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "da502ab94e1b3377",
+  "content_length": 10754,
+  "ingested_at": "2026-03-31T17:27:45.367308",
+  "content_preview": "\"\"\"\nUniversal Task Executor V3.0 - 核心引擎测试\n验证所有核心组件的功能\n\"\"\"\n\nimport asyncio\nimport sys\nimport os\n\n# 添加父目录到路径\nsys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))\n\nfrom core import (\n    TaskEngine, Task, TaskBatch, TaskResult, TaskStatus, TaskPriority,\n    TokenLevel, TokenEngine, TokenBudget, TokenAwareScheduler,\n    TaskRegistry, TaskHandler, TaskTypeConfig,\n    CheckpointManager, FileCheckpointStorage, Checkpoint,\n    StateManager, ExecutorState,\n    create_engine, Ex",
+  "limitations_applied": []
+}

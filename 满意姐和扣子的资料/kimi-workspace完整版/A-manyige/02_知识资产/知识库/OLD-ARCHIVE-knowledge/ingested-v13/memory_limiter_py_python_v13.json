@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_satisficing-web-fetcher/sandbox/memory_limiter.py",
+  "filename": "memory_limiter.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "3c6bc098fa81a1d8",
+  "content_length": 3959,
+  "ingested_at": "2026-03-31T17:27:45.069608",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n内存限制器\n\n功能：\n1. 监控进程内存使用\n2. 超过限制时自动终止\n3. 防止内存泄漏导致的系统不稳定\n\"\"\"\n\nimport psutil\nimport threading\nimport time\nimport signal\nimport os\nfrom typing import Optional\nfrom contextlib import ContextDecorator\n\n\nclass MemoryLimiter(ContextDecorator):\n    \"\"\"\n    内存限制器上下文管理器\n    \n    使用示例：\n        with MemoryLimiter(max_mb=2048):\n            # 浏览器操作\n            pass\n    \"\"\"\n    \n    def __init__(self, max_mb: int = 2048, check_interval: float = 1.0):\n        \"\"\"\n        Args:\n         ",
+  "limitations_applied": []
+}

@@ -1,0 +1,28 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/auto-checkpoint.sh",
+  "filename": "auto-checkpoint.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 2060,
+  "checksum": "c702817dc5d0c441",
+  "ingested_at": "2026-03-31T17:30:47.831497",
+  "line_count": 60,
+  "title": "auto-checkpoint",
+  "description": "智能检查点脚本 - Token优化版",
+  "sections": [],
+  "entities": [],
+  "key_points": [
+    "智能检查点脚本 - Token优化版",
+    "获取当前时间",
+    "===== 智能跳过逻辑 =====",
+    "1. 检查上次检查点时间",
+    "如果距离上次检查点<25分钟，跳过（防止Cron重复执行）",
+    "2. 检查文件变更",
+    "3. 检查Token状态（模拟，实际需读取真实Token）",
+    "===== 执行检查点 =====",
+    "轻量备份（仅关键文件）",
+    "清理旧检查点（保留最近20个）"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

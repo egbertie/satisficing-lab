@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/quality-assurance/tests/unit/test_core.py",
+  "filename": "test_core.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "35efa163b9b84706",
+  "content_length": 4126,
+  "ingested_at": "2026-03-31T17:27:44.999791",
+  "content_preview": "\"\"\"\nUnit Tests for Core Module\n\"\"\"\n\nimport pytest\nfrom qa_system.core import (\n    QualityResult, ConfidenceLevel, GateStatus, \n    QualityMetrics, LimitationRegistry, QUALITY_DISCLAIMER\n)\n\n\n@pytest.mark.unit\nclass TestQualityResult:\n    \"\"\"测试质量结果类\"\"\"\n    \n    def test_quality_result_creation(self):\n        \"\"\"测试质量结果创建\"\"\"\n        result = QualityResult(\n            result=True,\n            confidence=ConfidenceLevel.HIGH,\n            score=85.5,\n            notes=\"Test notes\"\n        )\n        \n",
+  "limitations_applied": []
+}

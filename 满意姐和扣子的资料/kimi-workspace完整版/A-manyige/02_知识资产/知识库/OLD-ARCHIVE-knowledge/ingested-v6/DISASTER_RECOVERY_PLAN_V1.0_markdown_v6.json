@@ -1,0 +1,224 @@
+{
+  "source_path": "/root/.openclaw/workspace/archive/docs/2026-03/DISASTER_RECOVERY_PLAN_V1.0.md",
+  "filename": "DISASTER_RECOVERY_PLAN_V1.0.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 18827,
+  "checksum": "526b49a0e99671a9",
+  "ingested_at": "2026-03-31T17:30:16.979385",
+  "line_count": 588,
+  "title": "满意解研究所灾备重建复刻实施方案 V1.0",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "满意解研究所灾备重建复刻实施方案 V1.0"
+    },
+    {
+      "level": 2,
+      "title": "目录"
+    },
+    {
+      "level": 2,
+      "title": "概述"
+    },
+    {
+      "level": 3,
+      "title": "1.1 目的"
+    },
+    {
+      "level": 3,
+      "title": "1.2 适用范围"
+    },
+    {
+      "level": 3,
+      "title": "1.3 关键指标（SLA）"
+    },
+    {
+      "level": 2,
+      "title": "灾备策略"
+    },
+    {
+      "level": 3,
+      "title": "2.1 备份架构"
+    },
+    {
+      "level": 3,
+      "title": "2.2 备份频率与策略"
+    },
+    {
+      "level": 3,
+      "title": "2.3 定时备份任务配置"
+    },
+    {
+      "level": 3,
+      "title": "2.4 手动备份命令"
+    },
+    {
+      "level": 1,
+      "title": "查看备份管理器帮助"
+    },
+    {
+      "level": 1,
+      "title": "执行每日备份"
+    },
+    {
+      "level": 1,
+      "title": "执行全量备份（所有分类）"
+    },
+    {
+      "level": 1,
+      "title": "查看备份列表"
+    },
+    {
+      "level": 1,
+      "title": "验证最新备份"
+    },
+    {
+      "level": 1,
+      "title": "清理过期备份"
+    },
+    {
+      "level": 1,
+      "title": "查看备份状态"
+    },
+    {
+      "level": 2,
+      "title": "备份清单"
+    },
+    {
+      "level": 3,
+      "title": "3.1 备份存储结构"
+    },
+    {
+      "level": 3,
+      "title": "3.2 核心配置文件清单"
+    },
+    {
+      "level": 3,
+      "title": "3.3 关键文档清单"
+    },
+    {
+      "level": 3,
+      "title": "3.4 当前备份状态"
+    },
+    {
+      "level": 2,
+      "title": "恢复流程"
+    },
+    {
+      "level": 3,
+      "title": "4.1 灾难分级与响应"
+    },
+    {
+      "level": 3,
+      "title": "4.2 P0级灾难恢复流程（完整重建）"
+    },
+    {
+      "level": 4,
+      "title": "阶段1: 灾难确认 (0-15分钟)"
+    },
+    {
+      "level": 4,
+      "title": "阶段2: 恢复准备 (15-30分钟)"
+    },
+    {
+      "level": 4,
+      "title": "阶段3: 数据恢复 (30-60分钟)"
+    },
+    {
+      "level": 1,
+      "title": "恢复到最新备份"
+    },
+    {
+      "level": 1,
+      "title": "或恢复到指定日期"
+    },
+    {
+      "level": 1,
+      "title": "1. 恢复核心配置"
+    },
+    {
+      "level": 1,
+      "title": "2. 恢复.env"
+    },
+    {
+      "level": 1,
+      "title": "3. 恢复openclaw.json"
+    },
+    {
+      "level": 1,
+      "title": "4. 恢复定时任务"
+    },
+    {
+      "level": 1,
+      "title": "5. 恢复Markdown文档"
+    },
+    {
+      "level": 1,
+      "title": "6. 恢复记忆文件"
+    },
+    {
+      "level": 1,
+      "title": "7. 恢复Skills"
+    },
+    {
+      "level": 1,
+      "title": "8. 恢复脚本"
+    },
+    {
+      "level": 4,
+      "title": "阶段4: 服务恢复 (60-75分钟)"
+    },
+    {
+      "level": 1,
+      "title": "1. 重启Gateway服务"
+    },
+    {
+      "level": 1,
+      "title": "2. 验证Gateway状态"
+    },
+    {
+      "level": 1,
+      "title": "3. 验证定时任务"
+    },
+    {
+      "level": 1,
+      "title": "4. 测试API连接"
+    },
+    {
+      "level": 1,
+      "title": "- Kimi API"
+    },
+    {
+      "level": 1,
+      "title": "- GitHub Models"
+    },
+    {
+      "level": 1,
+      "title": "- Jina AI"
+    },
+    {
+      "level": 1,
+      "title": "- Perplexity"
+    },
+    {
+      "level": 4,
+      "title": "阶段5: 功能验证 (75-90分钟)"
+    },
+    {
+      "level": 1,
+      "title": "执行完整验证"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "Markdown文档",
+    "手动分步恢复（如自动恢复失败）：",
+    "场景：.env 或 openclaw.json 丢失"
+  ],
+  "limitations_applied": [
+    "Sections limited to 50"
+  ],
+  "content_truncated": false
+}

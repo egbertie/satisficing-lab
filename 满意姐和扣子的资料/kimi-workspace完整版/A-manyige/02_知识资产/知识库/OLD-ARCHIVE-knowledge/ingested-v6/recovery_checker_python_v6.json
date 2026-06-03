@@ -1,0 +1,36 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/interrupt-recovery/recovery_checker.py",
+  "filename": "recovery_checker.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 6885,
+  "checksum": "e8f7b27279fb276f",
+  "ingested_at": "2026-03-31T17:30:32.083814",
+  "line_count": 198,
+  "title": "recovery_checker",
+  "description": "recovery_checker.py\n恢复条件检查器 - 检查API可用性、Token充足性等",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: RecoveryChecker"
+    }
+  ],
+  "entities": [
+    {
+      "name": "RecoveryChecker",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "这里可以添加实际的API健康检查",
+    "例如：尝试访问一个轻量级端点",
+    "简化：检查环境变量是否存在",
+    "读取token监控状态",
+    "Token低于85%认为充足（留15%缓冲）",
+    "简化实现：等待足够时间后假设已清除",
+    "实际应该检查API返回的rate limit headers"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

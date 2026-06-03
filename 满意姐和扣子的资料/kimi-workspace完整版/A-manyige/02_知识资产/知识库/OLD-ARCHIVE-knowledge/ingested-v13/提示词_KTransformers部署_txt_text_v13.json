@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/A-manyige/99_📦完整下载包/V2.0_技术跃升成果集/提示词_KTransformers部署.txt",
+  "filename": "提示词_KTransformers部署.txt",
+  "file_type": "text",
+  "extension": ".txt",
+  "file_hash": "02cc8a3d308bdef6",
+  "content_length": 5752,
+  "ingested_at": "2026-03-31T17:27:46.378531",
+  "content_preview": "# KTransformers部署 - AI执行提示词\n\n## 🎯 任务目标\n在AMD EPYC 9Y24服务器上部署KTransformers，使用AVX-512引擎实现2.22×推理加速。\n\n## 📋 前置要求\n- AMD EPYC处理器（支持AVX-512，已验证）\n- Python 3.8+\n- 至少32GB内存\n- CUDA可选（CPU推理为主）\n\n## 🔍 硬件验证\n\n首先确认CPU支持AVX-512：\n```bash\ngrep -o 'avx512' /proc/cpuinfo | head -1\n# 应输出: avx512\n```\n\n确认CPU型号：\n```bash\ncat /proc/cpuinfo | grep \"model name\" | head -1\n# 应为: AMD EPYC 9Y24 或类似支持AVX-512的型号\n```\n\n## 🚀 执行步骤\n\n### 步骤1: 环境准备\n```bash\n# 创建虚拟环境（推荐）\npython3 -m venv ~/venv_ktransformers\nsource ~/venv_ktransformers/bin/a",
+  "limitations_applied": []
+}

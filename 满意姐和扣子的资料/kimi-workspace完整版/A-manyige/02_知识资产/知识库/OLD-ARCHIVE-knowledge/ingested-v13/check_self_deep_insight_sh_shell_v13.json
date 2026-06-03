@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/check_self_deep_insight.sh",
+  "filename": "check_self_deep_insight.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "de95daeb2e6fe2f6",
+  "content_length": 1532,
+  "ingested_at": "2026-03-31T17:27:46.145507",
+  "content_preview": "#!/bin/bash\n# 满意妞自我深度洞察模块检查脚本\n\necho \"=== 满意妞自我深度洞察模块检查 ===\"\necho \"\"\n\n# 检查模块文件\necho \"1. 模块文件存在性:\"\nif [ -f \"/root/.openclaw/workspace/skills/self-deep-insight/self_deep_insight.py\" ]; then\n    echo \"   ✅ self_deep_insight.py 存在\"\n    lines=$(wc -l < /root/.openclaw/workspace/skills/self-deep-insight/self_deep_insight.py)\n    echo \"      代码行数: $lines\"\nelse\n    echo \"   ❌ self_deep_insight.py 不存在\"\nfi\n\n# 检查关键方法\necho \"\"\necho \"2. 关键方法存在性:\"\ngrep -q \"generate_insight\" /root/.openclaw/workspace/skills/self",
+  "limitations_applied": []
+}

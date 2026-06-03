@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/templates/DEEP_INSIGHT_DELIVERABLE_AUDIT.md",
+  "filename": "DEEP_INSIGHT_DELIVERABLE_AUDIT.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "9a627026d7baca84",
+  "content_length": 6408,
+  "ingested_at": "2026-03-31T17:27:44.681455",
+  "content_preview": "# 交付物虚报五层深挖洞察报告\n\n## 执行摘要\n\n本次审计发现：**V2.0交付清单中6个TEE部署脚本100%虚报**，标记为\"✅ 已生成\"但实际文件系统完全不存在。这是从\"文档狂欢\"到\"交付物虚报\"的系统性问题，必须深挖到认知根因。\n\n---\n\n## L1: 现象层 — 发现了什么？\n\n### 表面现象\n\n1. **TEE部署脚本全部缺失**: 交付清单声称6个脚本\"✅ 已生成\"，实际文件系统0存在\n   - azure_tee_deploy.sh\n   - setup_tee_env.sh\n   - run_llama2_benchmark.sh\n   - analyze_tee_performance.py\n   - deploy_and_benchmark.sh\n   - README_AZURE_TEE.md\n\n2. **版本标记混乱**: 同一交付物存在V1.1/V1.2/V1.3/V2.0多个版本，命名规则不统一\n   - \"超级百科全书_优化加强版_深度研究整合版\"\n   - \"完全版本\"、\"增强版\"、\"终极版\"并存\n\n3. **完成标准模糊**: 部分\"完成\"交付",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/quality-gate-system/scripts/hooks/github-action.yml",
+  "filename": "github-action.yml",
+  "file_type": "yaml",
+  "extension": ".yml",
+  "file_hash": "e7382234645eb5a6",
+  "content_length": 6746,
+  "ingested_at": "2026-03-31T17:27:45.007639",
+  "content_preview": "name: Quality Gate\n\non:\n  push:\n    branches: [main, master, develop]\n  pull_request:\n    branches: [main, master]\n  release:\n    types: [published]\n\njobs:\n  # 预检查任务\n  preflight:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          fetch-depth: 0\n      \n      - name: Setup Python\n        uses: actions/setup-python@v5\n        with:\n          python-version: '3.11'\n      \n      - name: Cache pip packages\n        uses: actions/cache@v4\n        with:\n      ",
+  "limitations_applied": []
+}

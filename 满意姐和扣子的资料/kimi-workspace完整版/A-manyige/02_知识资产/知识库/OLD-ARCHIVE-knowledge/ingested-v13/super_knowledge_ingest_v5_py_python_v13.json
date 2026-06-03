@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/super-knowledge-ingest/super_knowledge_ingest_v5.py",
+  "filename": "super_knowledge_ingest_v5.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "2d83890b31c525ee",
+  "content_length": 17532,
+  "ingested_at": "2026-03-31T17:27:45.425070",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nsuper-knowledge-ingest V5.0 - 极致能效版\n核心突破：零拷贝 + 内存映射 + 结构缓存 + 批量并行\n目标：接近 0ms（缓存命中），批量处理 100 文件 < 1s\n参考：ZeroMQ 零拷贝理念 + Redis 内存数据结构\n\"\"\"\n\nimport json\nimport gzip\nimport base64\nimport hashlib\nimport re\nimport time\nimport mmap\nimport os\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Optional, Tuple, Set\nfrom dataclasses import dataclass, field, asdict\nfrom functools import lru_cache\nfrom concurrent.futures import ThreadPoolExecutor, as",
+  "limitations_applied": []
+}

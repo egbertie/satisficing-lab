@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/examples/priority_adjustment/demo_scenarios.py",
+  "filename": "demo_scenarios.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "87e2158de5c76984",
+  "content_length": 13407,
+  "ingested_at": "2026-03-31T17:27:44.611887",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\n优先级调整冲突处理 - 示例场景演示\n\n本文件演示三种典型冲突场景的处理方式\n\"\"\"\n\nimport sys\nimport json\nfrom datetime import datetime, timedelta\n\n# 添加到路径\nsys.path.insert(0, '/root/.openclaw/workspace/scripts')\n\nfrom priority_adjustment_handler import (\n    PriorityAdjustmentHandler,\n    TaskManager,\n    ConflictDetector,\n    SubagentSpawner,\n    PriorityReorderer,\n    UserNotifier,\n    Task,\n    Conflict,\n    ConflictType,\n    TaskStatus\n)\n\n\nclass ScenarioDemo:\n    \"\"\"场景演示器\"\"\"\n    ",
+  "limitations_applied": []
+}

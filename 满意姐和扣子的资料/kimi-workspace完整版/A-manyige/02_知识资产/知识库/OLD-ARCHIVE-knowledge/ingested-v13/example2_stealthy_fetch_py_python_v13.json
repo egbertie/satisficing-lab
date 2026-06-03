@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_satisficing-web-fetcher/examples/example2_stealthy_fetch.py",
+  "filename": "example2_stealthy_fetch.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "d49551b1bf06e902",
+  "content_length": 2552,
+  "ingested_at": "2026-03-31T17:27:45.068987",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n示例2: Stealthy抓取 - 反爬绕过\n\n场景：Cloudflare保护页面、有反爬机制的站点\n特点：浏览器自动化、指纹模拟、资源消耗较高\n\"\"\"\n\nimport sys\nfrom pathlib import Path\nsys.path.insert(0, str(Path(__file__).parent.parent))\n\nfrom fetcher import StealthyFetcher\n\n\ndef example_stealthy_fetch():\n    \"\"\"Stealthy抓取示例\"\"\"\n    print(\"=\" * 50)\n    print(\"示例2: Stealthy抓取 - 反爬绕过\")\n    print(\"=\" * 50)\n    \n    # 创建stealthy fetcher\n    fetcher = StealthyFetcher(\n        headless=True,           # 无头模式\n        network_idle=True,       # 等",
+  "limitations_applied": []
+}

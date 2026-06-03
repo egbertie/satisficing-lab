@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/thinking_pattern_enforcement.sh",
+  "filename": "thinking_pattern_enforcement.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "f7548e151710fabf",
+  "content_length": 807,
+  "ingested_at": "2026-03-31T17:27:46.190259",
+  "content_preview": "#!/bin/bash\n# 思维方式强制检查脚本\n# 每次任务执行前必须运行，检查思维方式应用\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nCHECK_LOG=\"$WORKSPACE/diary/thinking_pattern_enforcement.log\"\nTASK_ID=\"${1:-unknown}\"\n\necho \"=== 思维方式强制检查 ===\" | tee -a \"$CHECK_LOG\"\necho \"任务ID: $TASK_ID\" | tee -a \"$CHECK_LOG\"\necho \"检查时间: $(date)\" | tee -a \"$CHECK_LOG\"\necho \"\" | tee -a \"$CHECK_LOG\"\n\necho \"检查清单（6项思维方式）:\" | tee -a \"$CHECK_LOG\"\necho \"1. 五层深挖: 表象→原因→根因→预防→能力\" | tee -a \"$CHECK_LOG\"\necho \"2. 反脆弱设计: 6类意外因素检查\" | tee -a \"$CHECK_LOG\"\necho \"3. 满意解思维: 四可",
+  "limitations_applied": []
+}

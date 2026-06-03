@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/TESTING_FRAMEWORK_GUIDE.md",
+  "filename": "TESTING_FRAMEWORK_GUIDE.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "36b0368ec06f8fb5",
+  "content_length": 11827,
+  "ingested_at": "2026-03-31T17:27:46.534186",
+  "content_preview": "# OpenClaw Skills 测试框架指南\n\n> **参考对象**: pytest官方最佳实践 + Clean Architecture测试模式 + Google测试策略\n\n---\n\n## 1. 测试框架概述\n\n### 1.1 为什么需要测试框架\n\n在L3维护期，我们发现以下问题需要系统化解决：\n\n| 问题 | 影响 | 测试解决方案 |\n|------|------|-------------|\n| zero-idle-enforcer发现3次bug | 系统稳定性风险 | 边界条件测试覆盖 |\n| 缺乏回归测试 | 修复引入新问题 | 自动化测试套件 |\n| 手动验证成本高 | 占用开发时间 | CI/CD自动化 |\n| 代码质量难以量化 | 技术债务累积 | 覆盖率指标 |\n\n### 1.2 测试框架目标\n\n1. **P0-Skill全覆盖** - zero-idle-enforcer、token-budget-enforcer、blue-sentinel\n2. **自动化运行** - 每次更新自动验证\n3. **失败阻断部署** - 测试不通过禁止合并\n4. **覆盖率追",
+  "limitations_applied": []
+}

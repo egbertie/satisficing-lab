@@ -1,0 +1,57 @@
+{
+  "_comment": "飞书API统一配置 - 方案A实施",
+  "_version": "2026-03-26",
+  "_app_name": "满意解研究所-Claw集成",
+  
+  "app_id": "cli_a949c1e2f4f89cb3",
+  "app_secret": "Z8hnq3wLrkjQrCes94N0xEqBlHPHjk6b",
+  
+  "base_url": "https://open.feishu.cn/open-apis",
+  
+  "timeout": 30,
+  "max_retries": 3,
+  "retry_delay": 1.0,
+  "token_refresh_margin": 300,
+  
+  "rate_limit": {
+    "requests_per_second": 20,
+    "burst_size": 50,
+    "batch_size": 50
+  },
+  
+  "sync": {
+    "max_workers": 4,
+    "batch_size": 50,
+    "auto_resume": true,
+    "skip_existing_images": true
+  },
+  
+  "logging": {
+    "level": "INFO",
+    "file": "logs/feishu_sync.log",
+    "max_size": "10MB",
+    "backup_count": 5
+  },
+  
+  "capabilities": {
+    "drive": {
+      "enabled": true,
+      "max_file_size": 20971520,
+      "auto_compress": true,
+      "supported_types": ["txt", "md", "pdf", "docx", "xlsx", "py", "js", "json"]
+    },
+    "bitable": {
+      "enabled": true,
+      "max_records_per_request": 500,
+      "max_fields_per_table": 200,
+      "default_view_type": "grid"
+    },
+    "calendar": {
+      "enabled": true,
+      "timezone": "Asia/Shanghai"
+    },
+    "task": {
+      "enabled": true
+    }
+  }
+}

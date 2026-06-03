@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/validate_five_layers.py",
+  "filename": "validate_five_layers.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "b87583aea58b06fa",
+  "content_length": 1368,
+  "ingested_at": "2026-03-31T17:27:46.164218",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n五层深挖验证脚本\n用途: 自动检查洞察是否完成L5\n规则: 只到L2=检查，不是洞察；必须到L5\n\"\"\"\n\nimport sys\nimport json\nimport re\nfrom datetime import datetime\nfrom pathlib import Path\n\ndef validate_five_layers(file_path):\n    \"\"\"验证五层深挖是否到L5\"\"\"\n    \n    print(f\"=== 五层深挖验证: {file_path} ===\")\n    \n    try:\n        with open(file_path, 'r', encoding='utf-8') as f:\n            content = f.read()\n    except Exception as e:\n        print(f\"❌ 错误: 无法读取文件 - {e}\")\n        return False\n    \n    # 检查5层\n    layers = {\n     ",
+  "limitations_applied": []
+}

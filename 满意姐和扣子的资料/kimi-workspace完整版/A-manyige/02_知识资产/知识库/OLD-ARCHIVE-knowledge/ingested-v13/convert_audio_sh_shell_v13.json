@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_audio-handler/convert_audio.sh",
+  "filename": "convert_audio.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "fab6c8f8416d6d9b",
+  "content_length": 1740,
+  "ingested_at": "2026-03-31T17:27:45.280702",
+  "content_preview": "#!/bin/bash\n# Convert audio between formats\n\nset -e\n\nif [[ $# -lt 2 ]]; then\n    echo \"Usage: $0 <input> <output> [quality]\"\n    echo \"Examples:\"\n    echo \"  $0 recording.wav output.mp3\"\n    echo \"  $0 input.flac output.mp3 192\"\n    echo \"  $0 voice.mp3 podcast.opus\"\n    exit 1\nfi\n\nINPUT=\"$1\"\nOUTPUT=\"$2\"\nQUALITY=\"${3:-}\"\n\nif [[ ! -f \"$INPUT\" ]]; then\n    echo \"Error: Input file not found: $INPUT\" >&2\n    exit 1\nfi\n\nOUT_EXT=\"${OUTPUT##*.}\"\nOUT_EXT=\"${OUT_EXT,,}\"\n\n# Determine codec and quality set",
+  "limitations_applied": []
+}

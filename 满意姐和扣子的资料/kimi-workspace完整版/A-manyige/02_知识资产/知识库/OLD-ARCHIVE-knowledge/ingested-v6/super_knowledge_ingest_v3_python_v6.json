@@ -1,0 +1,75 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/super-knowledge-ingest/super_knowledge_ingest_v3.py",
+  "filename": "super_knowledge_ingest_v3.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 19819,
+  "checksum": "7237940c79bd53b0",
+  "ingested_at": "2026-03-31T17:30:32.740030",
+  "line_count": 546,
+  "title": "super_knowledge_ingest_v3",
+  "description": "super-knowledge-ingest V3.0 - 压缩引用式入库\n核心优化：用位置引用代替内容复制，gzip压缩降低存储\n目标：保证7层标准，输出大小控制在原始文件1-2倍以内",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: ContentPosition"
+    },
+    {
+      "level": 2,
+      "title": "Class: SectionRef"
+    },
+    {
+      "level": 2,
+      "title": "Class: QuoteRef"
+    },
+    {
+      "level": 2,
+      "title": "Class: CaseRef"
+    },
+    {
+      "level": 2,
+      "title": "Class: CompactKnowledgeIngestor"
+    }
+  ],
+  "entities": [
+    {
+      "name": "ContentPosition",
+      "type": "class"
+    },
+    {
+      "name": "SectionRef",
+      "type": "class"
+    },
+    {
+      "name": "QuoteRef",
+      "type": "class"
+    },
+    {
+      "name": "CaseRef",
+      "type": "class"
+    },
+    {
+      "name": "CompactKnowledgeIngestor",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "加载并立即压缩原始内容",
+    "==================== S1: 输入定义（精简版） ====================",
+    "==================== S2: 内容处理（引用式） ====================",
+    "==================== S3: 知识结构化（延迟计算） ====================",
+    "从章节标题提取 - sections是列表，每个元素是字典",
+    "匹配人名（司马贺、西蒙等）",
+    "匹配概念（有限理性、满意解等）",
+    "==================== S4: 自动化集成（压缩存储） ====================",
+    "压缩内容用base64编码",
+    "==================== S5: 准确性验证 ====================",
+    "==================== S6: 局限标注（精简） ====================",
+    "==================== S7: 对抗测试 ====================",
+    "==================== 主流程 ====================",
+    "更新文件添加S5-S7"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

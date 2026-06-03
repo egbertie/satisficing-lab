@@ -1,0 +1,223 @@
+{
+  "source_path": "/root/.openclaw/workspace/archive/skills/Skill部署执行方案.md",
+  "filename": "Skill部署执行方案.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 6020,
+  "checksum": "83c316be40376b06",
+  "ingested_at": "2026-03-31T17:30:17.073167",
+  "line_count": 260,
+  "title": "Skill部署执行方案",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "Skill部署执行方案"
+    },
+    {
+      "level": 2,
+      "title": "一、部署状态"
+    },
+    {
+      "level": 3,
+      "title": "自动安装受阻原因"
+    },
+    {
+      "level": 3,
+      "title": "解决方案"
+    },
+    {
+      "level": 2,
+      "title": "二、手动部署方案"
+    },
+    {
+      "level": 3,
+      "title": "2.1 github-integration 手动部署"
+    },
+    {
+      "level": 1,
+      "title": "步骤1：在GitHub创建私有仓库"
+    },
+    {
+      "level": 1,
+      "title": "仓库名：satisficing-institute-docs"
+    },
+    {
+      "level": 1,
+      "title": "类型：Private"
+    },
+    {
+      "level": 1,
+      "title": "步骤2：本地初始化Git仓库"
+    },
+    {
+      "level": 1,
+      "title": "步骤3：创建.gitignore"
+    },
+    {
+      "level": 1,
+      "title": "OpenClaw敏感数据"
+    },
+    {
+      "level": 1,
+      "title": "临时文件"
+    },
+    {
+      "level": 1,
+      "title": "步骤4：首次提交"
+    },
+    {
+      "level": 1,
+      "title": "在GitHub仓库设置中添加Webhook"
+    },
+    {
+      "level": 1,
+      "title": "Payload URL: [飞书Webhook地址]"
+    },
+    {
+      "level": 1,
+      "title": "Content type: application/json"
+    },
+    {
+      "level": 1,
+      "title": "Events: push, pull_request"
+    },
+    {
+      "level": 3,
+      "title": "2.2 notion-integration 手动部署"
+    },
+    {
+      "level": 1,
+      "title": "步骤1：创建Notion Integration"
+    },
+    {
+      "level": 1,
+      "title": "访问：https://www.notion.so/my-integrations"
+    },
+    {
+      "level": 1,
+      "title": "创建新Integration，获取Token"
+    },
+    {
+      "level": 1,
+      "title": "步骤2：创建Notion工作空间"
+    },
+    {
+      "level": 1,
+      "title": "页面标题：满意解研究所知识库"
+    },
+    {
+      "level": 1,
+      "title": "结构："
+    },
+    {
+      "level": 1,
+      "title": "├── 📚 项目文档"
+    },
+    {
+      "level": 1,
+      "title": "│   ├── 战略核心"
+    },
+    {
+      "level": 1,
+      "title": "│   ├── 组织架构"
+    },
+    {
+      "level": 1,
+      "title": "│   └── 五路图腾"
+    },
+    {
+      "level": 1,
+      "title": "├── 👥 角色档案"
+    },
+    {
+      "level": 1,
+      "title": "│   └── 33人信息表（数据库）"
+    },
+    {
+      "level": 1,
+      "title": "├── 📅 会议记录"
+    },
+    {
+      "level": 1,
+      "title": "│   └── 模板库"
+    },
+    {
+      "level": 1,
+      "title": "└── 📊 执行看板"
+    },
+    {
+      "level": 1,
+      "title": "└── 任务跟踪（看板视图）"
+    },
+    {
+      "level": 1,
+      "title": "步骤3：33角色信息表结构"
+    },
+    {
+      "level": 1,
+      "title": "数据库字段："
+    },
+    {
+      "level": 1,
+      "title": "- 角色编号（标题）"
+    },
+    {
+      "level": 1,
+      "title": "- 角色名称（文本）"
+    },
+    {
+      "level": 1,
+      "title": "- 所属层级（单选）"
+    },
+    {
+      "level": 1,
+      "title": "- 五行属性（单选）"
+    },
+    {
+      "level": 1,
+      "title": "- 核心职责（文本）"
+    },
+    {
+      "level": 1,
+      "title": "- 当前状态（单选：运行中/待命/阻塞）"
+    },
+    {
+      "level": 1,
+      "title": "- 本周任务（多选）"
+    },
+    {
+      "level": 1,
+      "title": "- 负责人（人员）"
+    },
+    {
+      "level": 1,
+      "title": "- 备注（文本）"
+    },
+    {
+      "level": 1,
+      "title": "步骤4：手动安装Notion Skill（延时重试）"
+    },
+    {
+      "level": 1,
+      "title": "等待ClawHub API恢复后执行："
+    },
+    {
+      "level": 1,
+      "title": "clawhub install notion-integration"
+    },
+    {
+      "level": 3,
+      "title": "2.3 slack-integration 手动部署"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "转为手动部署 + 延时重试机制",
+    "Webhook配置"
+  ],
+  "limitations_applied": [
+    "Sections limited to 50"
+  ],
+  "content_truncated": false
+}

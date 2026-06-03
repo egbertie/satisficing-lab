@@ -1,0 +1,49 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/testing-framework/test_quality_checker.py",
+  "filename": "test_quality_checker.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 15153,
+  "checksum": "14295e5ebe52011b",
+  "ingested_at": "2026-03-31T17:30:32.764397",
+  "line_count": 421,
+  "title": "test_quality_checker",
+  "description": "测试质量自检工具 - S5标准实现\n\n功能:\n- 断言完整性检查\n- 测试独立性验证\n- 命名规范检查\n- 重复代码检测\n- 变异测试（Mutation Testing）\n- 生成质量报告\n\n使用方法:\n    python test_quality_checker.py              # 运行所有检查\n    python test_quality_checker.py --muta",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: QualityCheck"
+    },
+    {
+      "level": 2,
+      "title": "Class: TestQualityChecker"
+    }
+  ],
+  "entities": [
+    {
+      "name": "QualityCheck",
+      "type": "class"
+    },
+    {
+      "name": "TestQualityChecker",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "检查是否有assert语句",
+    "测试名应该清晰描述意图",
+    "简单的重复检测：查找相同的代码行",
+    "找出重复超过3次的代码",
+    "这里实现简化的变异测试",
+    "实际项目可以使用 mutpy 或 cosmic-ray",
+    "3. 检查测试是否失败",
+    "模拟结果 (90%检测率)"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

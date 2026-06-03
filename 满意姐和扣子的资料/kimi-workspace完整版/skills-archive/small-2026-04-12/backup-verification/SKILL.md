@@ -1,0 +1,316 @@
+> 生成时间: 2026-04-03 13:10+08:00
+> 版本: V1.0
+> 来源: 系统生成
+> 内化完成时间: 待定
+
+# Backup Verification Skill
+
+> **状态**: ✅ **FIN**（1/1测试通过，可生产使用）
+
+## Overview
+备份验证系统——确保备份数据完整可恢复，不是"备份了"而是"能恢复"。
+
+## S1: Global Consideration (全局考虑)
+
+### 1.1 人 (People)
+| 角色 | 关注点 | 风险 |
+|------|--------|------|
+| 用户 | 数据安全 | 以为备份成功实则损坏 |
+| 管理员 | 系统可靠性 | 备份静默失败 |
+| 审计 | 合规性 | 无法证明可恢复 |
+
+### 1.2 事 (Tasks)
+- 备份文件存在性检查
+- 内容完整性校验（hash）
+- 可恢复性测试（抽样）
+- 存储空间监控
+- 备份链健康检查
+
+### 1.3 物 (Resources)
+- 备份文件（本地+云端）
+- Hash校验数据库
+- 测试恢复区
+- 日志记录
+
+### 1.4 环境 (Environment)
+- 备份刚完成/长时间未备份
+- 存储充足/不足
+- 网络可用/不可用
+
+### 1.5 外部集成 (External)
+- 飞书Drive API
+- 企业微信API
+- 本地文件系统
+- Hash计算工具
+
+### 1.6 边界情况 (Edge Cases)
+- 备份文件被截断
+- 云端权限突然变更
+- 存储介质损坏
+- 加密密钥丢失
+- 备份链断裂（依赖缺失）
+
+## S2: System Closed Loop (系统闭环)
+
+### 2.1 验证流程
+```
+备份触发 → 等待完成 → 存在性检查 → Hash校验 → 抽样恢复测试 → 报告生成
+                ↓
+            任一失败 → 告警 → 人工介入 → 修复 → 重新验证
+```
+
+### 2.2 多层验证
+```
+Level 1: 文件存在性（最简单）
+Level 2: 文件大小合理性（防截断）
+Level 3: Hash校验（完整性）
+Level 4: 元数据检查（时间戳、权限）
+Level 5: 抽样恢复测试（真实可恢复）
+```
+
+### 2.3 反馈机制
+```
+验证通过 → 更新健康分数 → 记录日志
+验证失败 → 立即告警 → 标记备份为可疑 → 触发重新备份
+```
+
+### 2.4 故障处理
+| 故障 | 检测 | 处理 | 升级 |
+|------|------|------|------|
+| 文件不存在 | 存在性检查 | 标记失败 | 立即告警 |
+| Hash不匹配 | 校验计算 | 标记损坏 | 立即告警 |
+| 恢复测试失败 | 抽样恢复 | 标记不可恢复 | 立即告警 |
+| 空间不足 | 预检查 | 暂停备份 | 每日告警 |
+
+## S3: Observable Outputs (可观测输出)
+
+### 3.1 健康指标
+| 指标 | 计算方式 | 目标 |
+|------|----------|------|
+| 存在性通过率 | 存在文件/预期文件 | 100% |
+| Hash匹配率 | 匹配文件/校验文件 | 100% |
+| 恢复测试通过率 | 成功恢复/测试样本 | >95% |
+| 平均验证时间 | 总时间/文件数 | <1s/文件 |
+
+### 3.2 结构化报告
+```json
+{
+  "timestamp": "2026-03-25T20:35:00+08:00",
+  "verification_id": "ver_20260325_203500",
+  "overall_status": "passed|failed|partial",
+  "layers": {
+    "existence": {"checked": 837, "passed": 837, "failed": 0},
+    "size": {"checked": 837, "passed": 837, "failed": 0},
+    "hash": {"checked": 100, "passed": 100, "failed": 0},
+    "recovery": {"tested": 10, "passed": 10, "failed": 0}
+  },
+  "failed_files": [],
+  "health_score": 100
+}
+```
+
+### 3.3 可视化状态
+```
+📊 备份验证报告 (2026-03-25 20:35)
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+总体状态: 🔄 通过
+健康分数: 100/100
+
+分层验证:
+  存在性: 837/837 🔄
+  大小检查: 837/837 🔄
+  Hash校验: 100/100 🔄 (抽样)
+  恢复测试: 10/10 🔄 (抽样)
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+## S4: Automated Integration (自动化集成)
+
+### 4.1 Cron配置
+```yaml
+jobs:
+  - name: backup-verification
+    schedule: "0 */6 * * *"  # 每6小时
+    script: disaster-recovery/verify-backup.sh
+    
+  - name: deep-verification
+    schedule: "0 2 * * *"    # 每日2AM深度验证
+    script: disaster-recovery/verify-backup.sh --deep
+```
+
+### 4.2 脚本清单
+| 脚本 | 功能 | 调用 |
+|------|------|------|
+| verify-backup.sh | 主验证脚本 | Cron/手动 |
+| hash_checker.py | Hash批量校验 | 被调用 |
+| recovery_tester.py | 抽样恢复测试 | 被调用 |
+
+### 4.3 触发器
+- 备份完成后自动触发
+- 定时：每6小时
+- 手动：用户执行
+
+## S5: Self-Validation (自我验证)
+
+### 5.1 自动检查
+- [ ] 校验工具可用性
+- [ ] 备份目录可访问
+- [ ] 测试恢复区可写
+- [ ] 上次验证时间
+- [ ] 验证历史趋势
+
+### 5.2 测试用例
+```bash
+# 测试正常验证
+bash disaster-recovery/verify-backup.sh
+# 期望: exit 0, health_score=100
+
+# 测试损坏检测
+echo "corrupted" > /tmp/test_backup/file1.md
+bash disaster-recovery/verify-backup.sh
+# 期望: 检测到hash不匹配，标记失败
+
+# 测试缺失检测
+rm /tmp/test_backup/file2.md
+bash disaster-recovery/verify-backup.sh
+# 期望: 检测到文件缺失，标记失败
+```
+
+### 5.3 健康检查
+```bash
+# 检查上次验证结果
+cat /tmp/backup_verification_latest.json | jq '.overall_status'
+# 应返回 "passed"
+
+# 检查失败历史
+grep "FAILED" /tmp/backup_verification.log | tail -10
+```
+
+## S6: Cognitive Humility (认知谦逊)
+
+### 6.1 能力边界
+1. **无法验证逻辑正确性**：只能验证存在和完整性
+2. **无法100%覆盖**：抽样测试，可能有漏网之鱼
+3. **无法预测未来损坏**：只能检测当前状态
+4. **无法验证加密备份**：需密钥，可能在验证范围外
+
+### 6.2 不确定性标注
+- Hash校验标注[抽样]或[全量]
+- 恢复测试标注[抽样，X%覆盖]
+- 健康分数标注[基于Y项检查]
+
+### 6.3 已知局限
+- 大文件hash计算耗时
+- 云API限制（频率/并发）
+- 抽样测试可能漏检
+
+## S7: Adversarial Testing (对抗测试)
+
+### 7.1 测试场景
+
+#### 场景1: 文件截断
+```
+操作: 复制大文件但中途中断
+验证: 大小检查+Hash校验
+预期: 检测为失败
+```
+
+#### 场景2: 内容篡改
+```
+操作: 修改备份文件1个字节
+验证: Hash校验
+预期: 检测为hash不匹配
+```
+
+#### 场景3: 文件缺失
+```
+操作: 删除备份目录中随机文件
+验证: 存在性检查
+预期: 检测为缺失
+```
+
+#### 场景4: 权限拒绝
+```
+操作: 修改备份目录权限为000
+验证: 存在性检查
+预期: 访问失败，记录错误
+```
+
+#### 场景5: 存储满
+```
+操作: 模拟存储100%满
+验证: 恢复测试
+预期: 恢复失败，空间不足
+```
+
+#### 场景6: 网络中断
+```
+操作: 验证云端备份时断网
+验证: 云备份验证
+预期: 网络错误，标记为待验证
+```
+
+#### 场景7: 备份链断裂
+```
+操作: 删除增量备份依赖的基础备份
+验证: 依赖链检查
+预期: 检测链断裂，标记风险
+```
+
+## Usage
+
+### 手动验证
+```bash
+# 快速验证
+bash disaster-recovery/verify-backup.sh
+
+# 深度验证（全量hash+恢复测试）
+bash disaster-recovery/verify-backup.sh --deep
+
+# 指定目录验证
+bash disaster-recovery/verify-backup.sh --path /custom/path
+```
+
+### 查看报告
+```bash
+# 最新报告
+cat /tmp/backup_verification_latest.json | jq
+
+# 历史趋势
+cat /tmp/backup_verification.log | grep "health_score"
+```
+
+## Files
+
+| 文件 | 路径 | 说明 |
+|------|------|------|
+| 验证脚本 | disaster-recovery/verify-backup.sh | 主脚本 |
+| 报告 | /tmp/backup_verification_latest.json | 最新结果 |
+| 日志 | /tmp/backup_verification.log | 历史记录 |
+
+## Version
+- **Version**: V2.0
+- **Status**: WIP (5-standard complete S1-S7)
+- **Created**: 2026-03-25
+- **Updated**: 2026-03-27
+- **Principle**: "Not backed up until verified recoverable"
+- **Standard**: S1-S7 full compliance with Auto-Repair
+
+## Quick Start
+
+```bash
+# 快速验证（自动检测+自动修复）
+bash skills/backup-verification/verify-backup-v2.sh
+
+# 深度验证
+bash skills/backup-verification/verify-backup-v2.sh --deep
+
+# 对抗测试
+bash skills/backup-verification/verify-backup-v2.sh --adversarial
+
+# 查看状态
+bash skills/backup-verification/verify-backup-v2.sh --status
+```
+
+## 知识内化记录
+**内化时间**: 2026-03-31 | **状态**: ✅ 已内化

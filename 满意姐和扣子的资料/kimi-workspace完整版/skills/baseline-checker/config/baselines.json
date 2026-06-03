@@ -1,0 +1,179 @@
+{
+  "version": "2.0.0",
+  "last_updated": "2026-03-21",
+  "categories": {
+    "performance": {
+      "description": "系统性能指标基线",
+      "indicators": {
+        "api_response_time_ms": {
+          "max": 2000,
+          "target": 500,
+          "unit": "ms",
+          "severity": "HIGH",
+          "description": "API平均响应时间"
+        },
+        "memory_usage_mb": {
+          "max": 1024,
+          "target": 512,
+          "unit": "MB",
+          "severity": "CRITICAL",
+          "description": "内存使用量"
+        },
+        "cpu_usage_percent": {
+          "max": 80,
+          "target": 50,
+          "unit": "%",
+          "severity": "HIGH",
+          "description": "CPU使用率"
+        },
+        "disk_usage_percent": {
+          "max": 75,
+          "target": 65,
+          "unit": "%",
+          "severity": "CRITICAL",
+          "description": "磁盘使用率"
+        }
+      }
+    },
+    "quality": {
+      "description": "代码质量指标基线",
+      "indicators": {
+        "test_coverage_percent": {
+          "min": 80,
+          "target": 90,
+          "unit": "%",
+          "severity": "HIGH",
+          "description": "测试覆盖率"
+        },
+        "bug_density_per_kloc": {
+          "max": 5,
+          "target": 2,
+          "unit": "个/KLOC",
+          "severity": "MEDIUM",
+          "description": "Bug密度"
+        },
+        "code_review_coverage": {
+          "min": 90,
+          "target": 100,
+          "unit": "%",
+          "severity": "MEDIUM",
+          "description": "代码评审覆盖率"
+        },
+        "complexity_score": {
+          "max": 10,
+          "target": 5,
+          "unit": "分",
+          "severity": "MEDIUM",
+          "description": "代码复杂度"
+        }
+      }
+    },
+    "compliance": {
+      "description": "合规性指标基线",
+      "indicators": {
+        "nine_baseline_adherence": {
+          "min": 100,
+          "target": 100,
+          "unit": "%",
+          "severity": "CRITICAL",
+          "description": "九条底线遵守率"
+        },
+        "data_privacy_compliance": {
+          "required": true,
+          "severity": "CRITICAL",
+          "description": "数据隐私合规"
+        },
+        "security_scan_pass": {
+          "required": true,
+          "severity": "CRITICAL",
+          "description": "安全扫描通过"
+        },
+        "platform_compliance": {
+          "required": true,
+          "severity": "HIGH",
+          "description": "平台规则合规"
+        }
+      }
+    },
+    "stability": {
+      "description": "系统稳定性指标基线",
+      "indicators": {
+        "uptime_percent": {
+          "min": 99.5,
+          "target": 99.9,
+          "unit": "%",
+          "severity": "CRITICAL",
+          "description": "系统可用性"
+        },
+        "error_rate_percent": {
+          "max": 0.1,
+          "target": 0.01,
+          "unit": "%",
+          "severity": "HIGH",
+          "description": "错误率"
+        },
+        "mttr_minutes": {
+          "max": 60,
+          "target": 15,
+          "unit": "分钟",
+          "severity": "HIGH",
+          "description": "平均恢复时间"
+        },
+        "dependency_health_score": {
+          "min": 80,
+          "target": 95,
+          "unit": "分",
+          "severity": "MEDIUM",
+          "description": "依赖项健康度"
+        }
+      }
+    }
+  },
+  "nine_baselines": {
+    "1_真人主体": {
+      "description": "AI是助手，不是替身；真人必须参与核心决策和创作",
+      "check_points": ["关键决策有人类确认", "创作内容有人类审核", "AI不代替人类做最终判断"],
+      "severity": "CRITICAL"
+    },
+    "2_合规优先": {
+      "description": "严格遵守平台规则，不挑战风控系统",
+      "check_points": ["不违反平台服务条款", "不尝试绕过安全限制", "尊重API调用频率限制"],
+      "severity": "CRITICAL"
+    },
+    "3_真实价值": {
+      "description": "创造真实价值，而非投机取巧",
+      "check_points": ["输出内容真实可验证", "不编造数据或案例", "不确定内容标注[待验证]"],
+      "severity": "HIGH"
+    },
+    "4_透明可控": {
+      "description": "所有操作可追溯，用户完全知情",
+      "check_points": ["关键操作有日志记录", "用户知晓AI参与程度", "决策过程可解释"],
+      "severity": "HIGH"
+    },
+    "5_安全第一": {
+      "description": "数据安全、账号安全、资金安全优先于效率",
+      "check_points": ["敏感数据不泄露", "账号权限最小化", "资金操作多重确认"],
+      "severity": "CRITICAL"
+    },
+    "6_风险可控": {
+      "description": "最坏情况可承受，不赌全部身家",
+      "check_points": ["单次损失有上限", "不All-in单一决策", "有止损机制"],
+      "severity": "HIGH"
+    },
+    "7_灵活应变": {
+      "description": "底线是锚，方法是舟；遇水搭桥，遇山开路",
+      "check_points": ["方法随环境调整", "底线不随环境妥协", "定期审视策略有效性"],
+      "severity": "MEDIUM"
+    },
+    "8_商业伦理": {
+      "description": "技术服务于人，赚钱有道，取之有义",
+      "check_points": ["不批量注册账号", "不自动化冒充真人", "不爬虫非公开数据"],
+      "severity": "HIGH"
+    },
+    "9_本能守底": {
+      "description": "灰色地带第一反应说不",
+      "check_points": ["直觉预警立即暂停", "不侥幸试探边界", "有疑问先确认再行动"],
+      "severity": "CRITICAL"
+    }
+  }
+}

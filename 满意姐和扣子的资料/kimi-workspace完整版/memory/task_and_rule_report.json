@@ -1,0 +1,71 @@
+{
+  "run_time": "2026-03-20T10:37:25.960239",
+  "task_board": {
+    "tasks_found": 5,
+    "tasks": [
+      {
+        "id": "WIP-001",
+        "name": "V1.0蓝军意见整理",
+        "status": "✅",
+        "format": "header"
+      },
+      {
+        "id": "WIP-003",
+        "name": "五路图腾信息图制作",
+        "status": "🔄",
+        "format": "table"
+      },
+      {
+        "id": "WIP-001",
+        "name": "V1.0蓝军意见整理",
+        "status": "✅",
+        "format": "table"
+      },
+      {
+        "id": "WIP-003",
+        "name": "五路图腾信息图制作 V1.0",
+        "status": "✅",
+        "format": "table"
+      },
+      {
+        "id": "WIP-006",
+        "name": "官宣文案V1.0定稿",
+        "status": "✅",
+        "format": "table"
+      }
+    ],
+    "consistency_issues": [
+      {
+        "type": "duplicate_id",
+        "id": "WIP-001",
+        "locations": [
+          "header",
+          "table"
+        ]
+      },
+      {
+        "type": "duplicate_id",
+        "id": "WIP-003",
+        "locations": [
+          "table",
+          "table"
+        ]
+      }
+    ],
+    "accuracy_rate": 60.0
+  },
+  "rule_enforcement": {
+    "violations_found": 1,
+    "violations": [
+      {
+        "rule": "承诺洗澡执行",
+        "issue": "存在未启动的P0承诺项",
+        "severity": "high"
+      }
+    ],
+    "fixes_applied": [
+      "标记重复任务: WIP-001",
+      "标记重复任务: WIP-003"
+    ]
+  }
+}

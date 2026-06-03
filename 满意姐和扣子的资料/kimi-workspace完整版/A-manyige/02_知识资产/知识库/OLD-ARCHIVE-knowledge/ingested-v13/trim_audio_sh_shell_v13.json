@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_audio-handler/trim_audio.sh",
+  "filename": "trim_audio.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "08bcb3da6fcb8075",
+  "content_length": 1097,
+  "ingested_at": "2026-03-31T17:27:45.279845",
+  "content_preview": "#!/bin/bash\n# Trim audio file\n\nset -e\n\nif [[ $# -lt 4 ]]; then\n    echo \"Usage: $0 <input> <output> <start> <end>\"\n    echo \"Time format: seconds or HH:MM:SS\"\n    echo \"Examples:\"\n    echo \"  $0 podcast.mp3 clip.mp3 30 90       # From 30s to 90s\"\n    echo \"  $0 interview.mp3 part.mp3 1:30 5:00 # From 1:30 to 5:00\"\n    echo \"  $0 audio.mp3 start.mp3 0 60         # First 60 seconds\"\n    exit 1\nfi\n\nINPUT=\"$1\"\nOUTPUT=\"$2\"\nSTART=\"$3\"\nEND=\"$4\"\n\nif [[ ! -f \"$INPUT\" ]]; then\n    echo \"Error: Input file ",
+  "limitations_applied": []
+}

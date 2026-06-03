@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/MULTI_CLAW_ARCHITECTURE_DESIGN.md",
+  "filename": "MULTI_CLAW_ARCHITECTURE_DESIGN.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "b0f9b82d7d9f0f16",
+  "content_length": 39510,
+  "ingested_at": "2026-03-31T17:27:46.510028",
+  "content_preview": "# 多Claw架构设计方案\n\n## 文档信息\n- **版本**: v1.0\n- **创建时间**: 2026-03-21\n- **作者**: SubAgent (P0-2任务)\n- **状态**: 设计阶段\n\n---\n\n## 目录\n\n1. [执行摘要](#1-执行摘要)\n2. [现状分析](#2-现状分析)\n3. [架构设计](#3-架构设计)\n4. [技术选型](#4-技术选型)\n5. [阶段实施计划](#5-阶段实施计划)\n6. [风险与缓解](#6-风险与缓解)\n7. [附录](#7-附录)\n\n---\n\n## 1. 执行摘要\n\n### 1.1 背景\n\n当前OpenClaw采用单体架构运行，所有任务在单一Claw实例中执行。随着任务复杂度和并发需求的增加，单体架构面临以下挑战：\n\n- **单点故障风险**: 主Claw宕机导致全部服务中断\n- **性能瓶颈**: 复杂任务阻塞简单任务的处理\n- **资源利用率低**: 无法根据任务特性分配资源\n- **扩展性受限**: 难以应对高并发场景\n\n### 1.2 目标\n\n设计从单体架构到多Claw协同的演进方案，实现：\n\n| 目标 | 描",
+  "limitations_applied": []
+}

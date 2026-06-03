@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/rule-execution-engine/rule_execution_engine.py",
+  "filename": "rule_execution_engine.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "19294e2751206f6b",
+  "content_length": 13803,
+  "ingested_at": "2026-03-31T17:27:44.813141",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n制度规则执行引擎\n将管理制度拆解为可执行的小规则\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\nclass RuleExecutionEngine:\n    \"\"\"制度规则执行引擎\"\"\"\n    \n    def __init__(self, workspace_path=\"/root/.openclaw/workspace\"):\n        self.workspace = Path(workspace_path)\n        self.rules_db = self.workspace / \"memory\" / \"rule_execution_db.json\"\n        self.violations_log = self.workspace / \"memory\" / \"rule_violations.json\"\n        self._init_db()\n       ",
+  "limitations_applied": []
+}

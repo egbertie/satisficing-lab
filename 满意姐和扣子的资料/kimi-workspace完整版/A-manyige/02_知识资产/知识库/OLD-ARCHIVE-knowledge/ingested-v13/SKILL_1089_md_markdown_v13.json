@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/knowledge-ingest/ingested/SKILL.1089.md",
+  "filename": "SKILL.1089.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "8f10e822f3c0554b",
+  "content_length": 944,
+  "ingested_at": "2026-03-31T17:27:46.018316",
+  "content_preview": "# duckdb-cli-ai-skills Skill V5标准版本\n\n## S1: 全局考虑\n\n### 输入\n- SQL查询语句\n- 数据文件路径（CSV/JSON/Parquet）\n- 分析需求描述\n\n### 覆盖维度\n| 维度 | 考虑内容 |\n|------|----------|\n| **人** | 数据分析师、开发者 |\n| **事** | SQL查询、数据分析、格式转换 |\n| **物** | 数据文件、查询结果、数据库 |\n| **环境** | 本地文件系统、内存限制 |\n| **外部集成** | DuckDB引擎 |\n| **边界情况** | 大文件、复杂查询、内存不足 |\n\n---\n\n## S2: 系统考虑\n\n### 处理流程\n```\n加载数据 → 执行查询 → 返回结果 → 格式输出\n```\n\n### 故障处理\n- **文件不存在**: 报错提示\n- **SQL错误**: 返回错误信息\n- **内存不足**: 建议分批处理\n- **大文件**: 流式处理\n\n---\n\n## S3: 输出规范\n\n### 查询结果格式\n```json\n{\n  \"query\": \"SE",
+  "limitations_applied": []
+}

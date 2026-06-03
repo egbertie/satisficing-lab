@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/log-rotator.sh",
+  "filename": "log-rotator.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "04e50cb0b3babfbe",
+  "content_length": 2592,
+  "ingested_at": "2026-03-31T17:27:46.155378",
+  "content_preview": "#!/bin/bash\n# Log Rotator - 日志轮转与清理\n# 运行频率: 每日\n\nLOG_DIR=\"/var/log\"\nSENTINEL_LOG_DIR=\"/var/log/sentinel\"\nTIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')\nRETENTION_DAYS=7\nMAX_LOG_SIZE_MB=100\n\nlog() {\n    echo \"[$TIMESTAMP] $1\" >> \"$SENTINEL_LOG_DIR/log-rotator.log\"\n}\n\n# 轮转大日志文件\nrotate_large_logs() {\n    log \"INFO: 开始检查大日志文件\"\n    \n    find \"$LOG_DIR\" -name \"*.log\" -size +${MAX_LOG_SIZE_MB}M 2>/dev/null | while read -r logfile; do\n        local basename=$(basename \"$logfile\" .log)\n        local rotated=\"${lo",
+  "limitations_applied": []
+}

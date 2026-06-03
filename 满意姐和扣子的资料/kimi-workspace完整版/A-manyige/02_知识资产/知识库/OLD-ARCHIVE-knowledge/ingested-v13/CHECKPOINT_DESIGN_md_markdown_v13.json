@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/universal-task-executor-v3/docs/CHECKPOINT_DESIGN.md",
+  "filename": "CHECKPOINT_DESIGN.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "3731bf5bec3ef19b",
+  "content_length": 31466,
+  "ingested_at": "2026-03-31T17:27:45.364686",
+  "content_preview": "# Universal Task Executor V3.0 - 暂停/重启机制设计\n\n**版本**: 3.0.0  \n**设计目标**: 任意时刻可暂停、任意时刻可恢复、支持跨版本恢复  \n**核心机制**: 分层Checkpoint + 状态迁移 + 自动恢复\n\n---\n\n## 1. 设计原则\n\n### 1.1 核心目标\n\n| 目标 | 说明 | 实现方式 |\n|------|------|----------|\n| **随时暂停** | 用户或系统可在任意时刻暂停任务 | 信号机制 + 状态保存 |\n| **随时恢复** | 从任意Checkpoint恢复执行 | 状态重构 + 断点续传 |\n| **防丢失** | 确保已处理的工作不丢失 | 持久化 + 确认机制 |\n| **跨版本** | 支持版本升级后恢复 | 迁移引擎 + 兼容性层 |\n| **Token感知** | 恢复时考虑Token预算 | Token状态保存 |\n\n### 1.2 分层策略\n\n```\n┌─────────────────────────────────────────────────────────",
+  "limitations_applied": []
+}

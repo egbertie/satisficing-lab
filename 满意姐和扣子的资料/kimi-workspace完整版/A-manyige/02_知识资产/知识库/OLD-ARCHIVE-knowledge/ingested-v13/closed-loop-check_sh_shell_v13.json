@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_closed-loop-principles/scripts/closed-loop-check.sh",
+  "filename": "closed-loop-check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "95a189ee902dcffd",
+  "content_length": 1351,
+  "ingested_at": "2026-03-31T17:27:45.162014",
+  "content_preview": "#!/bin/bash\n# 闭环三原则检查脚本\n# skills/closed-loop-principles/scripts/closed-loop-check.sh\n\necho \"=== 闭环三原则检查 ===\"\necho \"检查时间: $(date)\"\necho \"\"\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nSKILL_DIR=\"$WORKSPACE/skills/closed-loop-principles\"\nLOG_DIR=\"$SKILL_DIR/logs\"\n\nmkdir -p \"$LOG_DIR\"\n\n# 检查待确认事项\necho \"1. 检查待确认事项...\"\nPENDING_CONFIRM=$(find \"$WORKSPACE\" -name \"*.md\" -mtime -1 -exec grep -l \"待确认\\|pending\" {} \\; 2>/dev/null | wc -l)\necho \"   发现 $PENDING_CONFIRM 个待确认事项\"\n\n# 检查待落实事项\necho \"2. 检查待落实事项...\"\nPENDING",
+  "limitations_applied": []
+}

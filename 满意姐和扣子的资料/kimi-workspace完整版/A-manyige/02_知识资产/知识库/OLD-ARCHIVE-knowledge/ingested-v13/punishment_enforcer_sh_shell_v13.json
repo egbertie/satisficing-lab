@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/punishment_enforcer.sh",
+  "filename": "punishment_enforcer.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "59dcf30295cbb35f",
+  "content_length": 6336,
+  "ingested_at": "2026-03-31T17:27:46.152087",
+  "content_preview": "#!/bin/bash\n# 蓝军违规检测与惩罚执行脚本\n# 自动检测违规行为并执行相应惩罚\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nRULES_FILE=\"$WORKSPACE/rules/PUNISHMENT_RULES.md\"\nVIOLATIONS_DIR=\"$WORKSPACE/logs/violations\"\nPUNISHMENTS_DIR=\"$WORKSPACE/logs/punishments\"\n\necho \"=== 蓝军违规检测与惩罚执行系统 ===\"\necho \"执行时间: $(date)\"\necho \"\"\n\n# 创建目录\nmkdir -p \"$VIOLATIONS_DIR\"\nmkdir -p \"$PUNISHMENTS_DIR\"\n\n# 检查惩罚规则是否存在\nif [ ! -f \"$RULES_FILE\" ]; then\n    echo \"❌ 错误: 惩罚规则文件不存在\"\n    exit 1\nfi\n\n# 违规检测函数\ndetect_violations() {\n    echo \"【违规检测】扫描潜在违规...\"\n    \n  ",
+  "limitations_applied": []
+}

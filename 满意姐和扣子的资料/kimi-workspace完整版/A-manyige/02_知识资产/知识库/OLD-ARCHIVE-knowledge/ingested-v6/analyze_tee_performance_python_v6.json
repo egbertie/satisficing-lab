@@ -1,0 +1,53 @@
+{
+  "source_path": "/root/.openclaw/workspace/analyze_tee_performance.py",
+  "filename": "analyze_tee_performance.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 6254,
+  "checksum": "839dcd9adc164c0d",
+  "ingested_at": "2026-03-31T17:30:32.904358",
+  "line_count": 172,
+  "title": "analyze_tee_performance",
+  "description": "TEE Performance Analysis Script\nCompares performance metrics for confidential computing (TEE) vs non-TEE environments",
+  "sections": [],
+  "entities": [
+    {
+      "name": "parse_benchmark_results",
+      "type": "function"
+    },
+    {
+      "name": "calculate_overhead",
+      "type": "function"
+    },
+    {
+      "name": "analyze_performance",
+      "type": "function"
+    },
+    {
+      "name": "print_analysis",
+      "type": "function"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "Expected performance baseline (non-TEE Standard_D8s_v3)",
+    "TEE overhead threshold (< 10% as per requirements)",
+    "Parse tokens per second",
+    "Parse memory bandwidth",
+    "Parse model load time",
+    "For metrics where higher is better (tokens/sec, bandwidth)",
+    "Analyze tokens per second",
+    "Analyze memory bandwidth",
+    "Analyze model load time (lower is better)",
+    "For load time, overhead = (tee - baseline) / baseline",
+    "Generate summary",
+    "Save detailed report",
+    "Exit with appropriate code"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

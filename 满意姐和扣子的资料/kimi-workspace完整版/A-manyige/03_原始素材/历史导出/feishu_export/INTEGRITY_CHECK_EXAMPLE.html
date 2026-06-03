@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>INTEGRITY_CHECK_EXAMPLE</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; padding: 40px; max-width: 800px; margin: 0 auto; }
+        h1 { color: #1f2329; border-bottom: 2px solid #3370ff; padding-bottom: 10px; }
+        h2 { color: #1f2329; margin-top: 30px; }
+        h3 { color: #3370ff; }
+        code { background: #f5f6f7; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+        pre { background: #f5f6f7; padding: 16px; border-radius: 6px; overflow-x: auto; }
+        blockquote { border-left: 4px solid #3370ff; margin: 0; padding-left: 16px; color: #646a73; }
+        table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+        th, td { border: 1px solid #dee0e3; padding: 8px 12px; text-align: left; }
+        th { background: #f5f6f7; font-weight: 600; }
+        ul, ol { padding-left: 24px; }
+    </style>
+</head>
+<body>
+<p>============================================================
+文件完整性检查报告
+============================================================
+检查文件: README.md
+检查时间: 2026-03-10T11:20:35.299917
+总体状态: ✅ 通过</p>
+<hr />
+<h2 id="_1">检查详情:</h2>
+<p>[✅ PASS] [关键] 文件存在性
+  消息: 文件存在
+  path: README.md
+  exists: True</p>
+<p>[✅ PASS] [关键] 文件大小
+  消息: 文件大小: 4094 字节
+  size: 4094
+  min_bytes: 1</p>
+<p>[✅ PASS] [关键] 内容可读性
+  消息: 成功使用 utf-8 编码读取 1652 字符
+  encoding: utf-8
+  chars_read: 1652
+  replacement_chars: 0
+  sample: # 文件完整性检查工具</p>
+<h2 id="_2">简介</h2>
+<p>这是一个用于检查文件完整性的命令行工具，支持检查文件存在性、大小、可读性以及关键章节结构。</p>
+<h2 id="_3">功能特性</h2>
+<ul>
+<li>✅ <strong>文件存在性检查</strong> - 确认目标文件存在</li>
+<li>✅ <strong>文件大小检查</strong> - 验证文件非空（可配置最小字节数）</li>
+<li>✅ <strong>内容可读性检查</strong> - 自动检测编码，验证无乱码</li>
+<li>✅ <strong>章节结构检查</strong> - 使用正则表达式匹配必需标题
+-...</li>
+</ul>
+<p>[✅ PASS] 章节结构完整性
+  消息: 找到 2/2 个必需章节
+  found: ['^## ', '^### ']
+  missing: []
+  total_required: 2</p>
+<hr />
+<p>汇总:
+  总计: 4
+  通过: 4
+  失败: 0
+  关键失败: 0
+============================================================</p>
+</body>
+</html>
+<!-- 知识内化记录 -->
+<!-- 内化时间: 2026-03-31 | 状态: 已内化 -->

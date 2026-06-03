@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/testing-framework/tests/conftest.py",
+  "filename": "conftest.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "761e8a41af2e8801",
+  "content_length": 10086,
+  "ingested_at": "2026-03-31T17:27:45.441912",
+  "content_preview": "\"\"\"\nOpenClaw Skills Testing Framework - Shared Fixtures and Utilities\n\n参考对象: pytest官方最佳实践 + Clean Architecture测试模式\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport tempfile\nimport shutil\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import Dict, Any, Generator\nfrom unittest.mock import MagicMock, patch\n\nimport pytest\n\n# 添加项目路径\nPROJECT_ROOT = Path(__file__).parent.parent.parent.parent\nsys.path.insert(0, str(PROJECT_ROOT))\nsys.path.insert(0, str(PROJECT_ROOT / \"skills\")",
+  "limitations_applied": []
+}

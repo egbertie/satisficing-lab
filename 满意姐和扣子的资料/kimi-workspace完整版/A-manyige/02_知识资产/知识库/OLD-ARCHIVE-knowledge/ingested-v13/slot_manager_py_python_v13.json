@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/zero-vacancy-executor/scripts/slot_manager.py",
+  "filename": "slot_manager.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "bdd82497a43c8a20",
+  "content_length": 16870,
+  "ingested_at": "2026-03-31T17:27:45.418847",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nZero-Vacancy Executor - Slot Manager\n槽位管理器：实现S2系统闭环 - 空闲检测→槽位预留→用户响应→释放槽位\n\nWIP状态：当前为概念实现，生产环境需进一步优化\n已知局限：单节点部署，非集群方案\n\"\"\"\n\nimport json\nimport time\nimport threading\nimport logging\nfrom datetime import datetime, timedelta\nfrom dataclasses import dataclass, field\nfrom enum import Enum\nfrom typing import Optional, Dict, List, Callable\nfrom pathlib import Path\n\n# 配置日志\nlogging.basicConfig(\n    level=logging.INFO,\n    format='%(asctime)s - %(name)s - %(levelname)s - %(message)",
+  "limitations_applied": []
+}

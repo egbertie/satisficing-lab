@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/super-knowledge-ingest/super_knowledge_ingest_v6.2.py",
+  "filename": "super_knowledge_ingest_v6.2.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "01af07ca48fd40a0",
+  "content_length": 45176,
+  "ingested_at": "2026-03-31T17:27:45.426160",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nsuper-knowledge-ingest V6.2 - 5标准完整实现版（蓝军验收版）\n核心目标：完整实现5标准（S1-S5），支持9种文件类型，19项测试\n\n5标准化实现：\n- S1 全局考虑: 9种文件类型全覆盖，统一元数据格式\n- S2 系统闭环: 类型识别→内容提取→元数据生成→索引更新\n- S3 可观测输出: 详细的入库报告、统计信息、局限标注\n- S4 自动化集成: --test参数支持（含S5准确性验证）\n- S5 准确性验证: 19项测试（9项核心+6项类型+4项边界）\n\n蓝军验收标准：\n- 9项核心测试通过（S1-S5基础）\n- 6项类型测试通过（.sh/.txt/.yaml/.html/.svg/.log）\n- 4项边界测试通过（空文件/无效JSON/超大文件/不支持类型）\n\"\"\"\n\nimport json\nimport os\nimport re\nimport sys\nimport hashlib\nimport tempfile\nfrom datetime import datetime\nfrom pathl",
+  "limitations_applied": []
+}

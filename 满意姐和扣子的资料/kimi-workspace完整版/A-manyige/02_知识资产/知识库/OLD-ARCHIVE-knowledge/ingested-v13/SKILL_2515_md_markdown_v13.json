@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/knowledge-ingest/ingested/SKILL.2515.md",
+  "filename": "SKILL.2515.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "1508fef79932ea14",
+  "content_length": 904,
+  "ingested_at": "2026-03-31T17:27:45.892463",
+  "content_preview": "# conversation-continuity Skill V5标准版本\n\n## S1: 全局考虑\n\n### 输入\n- 对话上下文历史\n- 当前用户输入\n- 会话状态\n\n### 覆盖维度\n| 维度 | 考虑内容 |\n|------|----------|\n| **人** | 用户、AI助手 |\n| **事** | 对话连续性维护、上下文压缩、关键信息保留 |\n| **物** | 对话历史、摘要、关键决策、待办 |\n| **环境** | Token限制、会话超时、上下文窗口 |\n| **外部集成** | 存储服务（可选） |\n| **边界情况** | 超长对话、主题切换、长时间间隔 |\n\n---\n\n## S2: 系统考虑\n\n### 处理流程\n```\n对话进行 → Token检查 → 阈值触发 → 上下文压缩 → 摘要生成 → 继续对话\n```\n\n### 故障处理\n- **Token超限**: 触发压缩，保留摘要\n- **主题切换**: 检测并标记新主题\n- **长时间间隔**: 主动提供上下文回顾\n\n---\n\n## S3: 输出规范\n\n### 压缩输出\n```\n【对话摘要】\n- 主题",
+  "limitations_applied": []
+}

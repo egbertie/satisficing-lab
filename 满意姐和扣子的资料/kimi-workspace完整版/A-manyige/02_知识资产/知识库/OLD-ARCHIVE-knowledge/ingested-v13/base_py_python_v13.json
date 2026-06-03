@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/testing-framework/tests/base.py",
+  "filename": "base.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "48e0af3012d6b155",
+  "content_length": 8426,
+  "ingested_at": "2026-03-31T17:27:45.441675",
+  "content_preview": "\"\"\"\n测试基类和通用工具\n\n参考对象: xUnit Test Patterns (Gerard Meszaros)\n设计原则: Arrange-Act-Assert, Given-When-Then\n\"\"\"\n\nimport json\nimport time\nfrom abc import ABC, abstractmethod\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import Any, Dict, List, Optional, Callable\nfrom unittest.mock import MagicMock, patch, mock_open\n\n\nclass TestDataBuilder:\n    \"\"\"测试数据构建器模式\"\"\"\n    \n    def __init__(self):\n        self.data = {}\n    \n    def with_field(self, key: str, value: Any) -> \"TestDa",
+  "limitations_applied": []
+}

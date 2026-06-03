@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/knowledge-ingest/ingested/SKILL.388.md",
+  "filename": "SKILL.388.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "200ea79af306ae60",
+  "content_length": 1334,
+  "ingested_at": "2026-03-31T17:27:45.931459",
+  "content_preview": "# automate-excel Skill V5标准版本\n\n## S1: 全局考虑\n\n### 输入\n- Excel文件路径\n- 操作类型（读取/写入/转换/格式化）\n- 数据处理规则\n\n### 覆盖维度\n| 维度 | 考虑内容 |\n|------|----------|\n| **人** | 数据分析师、财务人员、运营人员 |\n| **事** | Excel读取、写入、格式转换、数据清洗、批量处理 |\n| **物** | Excel文件(.xlsx/.xls)、工作表、单元格、公式 |\n| **环境** | 文件系统、内存限制、Excel版本兼容性 |\n| **外部集成** | openpyxl/pandas库 |\n| **边界情况** | 大文件、损坏文件、密码保护、宏病毒 |\n\n---\n\n## S2: 系统考虑\n\n### 处理流程\n```\n文件验证 → 格式识别 → 数据读取 → 规则处理 → 结果输出 → 日志记录\n```\n\n### 故障处理\n- **文件损坏**: 尝试修复，失败则报错\n- **内存不足**: 分块读取，流式处理\n- **密码保护**: 提示输入密码或跳过\n- ",
+  "limitations_applied": []
+}

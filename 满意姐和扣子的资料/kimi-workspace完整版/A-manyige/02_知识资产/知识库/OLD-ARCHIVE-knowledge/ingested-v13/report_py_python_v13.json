@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/vendor-api-monitor/scripts/report.py",
+  "filename": "report.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "c730ecfdc5a7341a",
+  "content_length": 9060,
+  "ingested_at": "2026-03-31T17:27:45.405017",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n监控报告生成脚本 - 生成 API 监控报告\n\"\"\"\n\nimport argparse\nimport json\nimport os\nimport sys\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\nsys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))\n\n\nclass ReportGenerator:\n    \"\"\"报告生成器\"\"\"\n    \n    def __init__(self, data_dir: str = \"data\"):\n        self.data_dir = Path(data_dir)\n        self.reports_dir = Path(\"reports\")\n        self.reports_dir.mkdir(exist_ok=True)\n        \n    def load_metri",
+  "limitations_applied": []
+}

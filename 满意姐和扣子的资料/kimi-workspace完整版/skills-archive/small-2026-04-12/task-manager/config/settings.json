@@ -1,0 +1,49 @@
+{
+  "version": "1.0",
+  "skill_name": "task-manager",
+  "created_at": "2026-03-10",
+  "settings": {
+    "scan_interval_hours": 24,
+    "reminder_days": 3,
+    "auto_archive_days": 30,
+    "default_priority": "中",
+    "default_assignee": "满意妞"
+  },
+  "priority_weights": {
+    "高": 3,
+    "中": 2,
+    "低": 1
+  },
+  "status_options": [
+    "待开始",
+    "进行中",
+    "已完成",
+    "已取消",
+    "已归档"
+  ],
+  "reminder_rules": {
+    "high_priority": {
+      "before_days": [3, 1],
+      "description": "高优先级任务提醒"
+    },
+    "medium_priority": {
+      "before_days": [2, 1],
+      "description": "中优先级任务提醒"
+    },
+    "low_priority": {
+      "before_days": [1],
+      "description": "低优先级任务提醒"
+    }
+  },
+  "forgotten_scan": {
+    "enabled": true,
+    "threshold_days": 7,
+    "max_forgotten": 10,
+    "auto_escalate": true
+  },
+  "integrations": {
+    "workspace_status": "/root/.openclaw/workspace/WORKSPACE_STATUS.md",
+    "task_master": "/root/.openclaw/workspace/docs/TASK_MASTER.md",
+    "memory_dir": "/root/.openclaw/workspace/memory"
+  }
+}

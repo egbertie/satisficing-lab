@@ -1,0 +1,58 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/testing-framework/tests/e2e/test_full_workflow.py",
+  "filename": "test_full_workflow.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 9495,
+  "checksum": "58c9d34fb7f5abfa",
+  "ingested_at": "2026-03-31T17:30:32.756205",
+  "line_count": 290,
+  "title": "test_full_workflow",
+  "description": "端到端测试 - 完整工作流验证\n\n测试目标: 验证从触发到完成的完整流程\n测试类型: E2E测试 (End-to-End Test)",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: TestZeroIdleFullWorkflow"
+    },
+    {
+      "level": 2,
+      "title": "Class: TestTokenBudgetFullWorkflow"
+    },
+    {
+      "level": 2,
+      "title": "Class: TestErrorRecoveryWorkflow"
+    }
+  ],
+  "entities": [
+    {
+      "name": "TestZeroIdleFullWorkflow",
+      "type": "class"
+    },
+    {
+      "name": "TestTokenBudgetFullWorkflow",
+      "type": "class"
+    },
+    {
+      "name": "TestErrorRecoveryWorkflow",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "Step 1: 设置初始状态 - 用户3小时前活跃",
+    "Step 2: 设置Token预算正常",
+    "Step 3: 设置很久前补位",
+    "Step 4: 运行检测逻辑（模拟）",
+    "Step 5: 执行补位（模拟）",
+    "Step 6: 验证状态更新",
+    "Step 1: 初始化每日预算",
+    "Step 2: 模拟Token使用",
+    "Step 3: 检查预算级别",
+    "Step 4: 继续大量使用",
+    "Step 5: 重新检查级别",
+    "检查是否需要重置（跨日）",
+    "故意不创建任何状态文件",
+    "系统应该使用内存默认值继续运行"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

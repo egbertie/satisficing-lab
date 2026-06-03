@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/skill_fraud_scanner.py",
+  "filename": "skill_fraud_scanner.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "7a1f23115ac3b930",
+  "content_length": 10188,
+  "ingested_at": "2026-03-31T17:27:46.135358",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nSkill虚报状态扫描器 - R4整改通道\n全面扫描所有Skill，识别虚报状态\n\"\"\"\n\nimport os\nimport json\nfrom pathlib import Path\nfrom typing import Dict, List, Tuple\nfrom dataclasses import dataclass, asdict\n\nWORKSPACE_ROOT = \"/root/.openclaw/workspace\"\nSKILLS_DIR = f\"{WORKSPACE_ROOT}/skills\"\n\n@dataclass\nclass SkillAuditResult:\n    name: str\n    path: str\n    has_skill_md: bool\n    has_python_code: bool\n    has_test_file: bool\n    skill_md_lines: int\n    code_lines: int\n    test_lines: int\n    is_placeho",
+  "limitations_applied": []
+}

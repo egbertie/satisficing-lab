@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/memory_guardian_v2.py",
+  "filename": "memory_guardian_v2.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "9e762ebf6dc8a16c",
+  "content_length": 13840,
+  "ingested_at": "2026-03-31T17:27:46.142735",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nMemory Guardian V2 - 事件驱动 + 满意解优化\n基于满意解决策框架的内存监控系统\n\n变化:\n- V1: 固定15分钟检查 ❌ 不满意解\n- V2: 场景驱动，对话感知，Token优化 ✅ 满意解\n\"\"\"\n\nimport os\nimport sys\nimport psutil\nimport gc\nimport json\nimport time\nfrom pathlib import Path\nfrom datetime import datetime, timedelta\n\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nSTATE_FILE = WORKSPACE / \".memory-guardian-state.json\"\nLOG_FILE = WORKSPACE / \"logs\" / \"memory-guardian.log\"\nPID_FILE = WORKSPACE / \".memory-guardian.pid\"\n\n# 满意解决策阈值\nSATISFICE_TH",
+  "limitations_applied": []
+}

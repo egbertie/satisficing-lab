@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_change-sync/scripts/change-sync-check.sh",
+  "filename": "change-sync-check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "1aa89949cd7069b9",
+  "content_length": 1336,
+  "ingested_at": "2026-03-31T17:27:45.258739",
+  "content_preview": "#!/bin/bash\n# 变更同步检查脚本\n# skills/change-sync/scripts/change-sync-check.sh\n\necho \"=== 变更同步检查 ===\"\necho \"检查时间: $(date)\"\necho \"\"\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nSKILL_DIR=\"$WORKSPACE/skills/change-sync\"\nLOG_DIR=\"$SKILL_DIR/logs\"\nCHANGE_FILE=\"$LOG_DIR/changes.json\"\nQUEUE_FILE=\"$LOG_DIR/sync-queue.json\"\n\nmkdir -p \"$LOG_DIR\"\n\n# 初始化文件\nif [ ! -f \"$CHANGE_FILE\" ]; then\n    echo \"[]\" > \"$CHANGE_FILE\"\nfi\nif [ ! -f \"$QUEUE_FILE\" ]; then\n    echo \"[]\" > \"$QUEUE_FILE\"\nfi\n\n# 检测变更\necho \"1. 检测变更...\"\n# 检查最近",
+  "limitations_applied": []
+}

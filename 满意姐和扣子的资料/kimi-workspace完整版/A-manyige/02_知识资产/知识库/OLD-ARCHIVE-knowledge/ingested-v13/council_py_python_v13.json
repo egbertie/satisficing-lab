@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/expert-council/council.py",
+  "filename": "council.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "005524b3781544ca",
+  "content_length": 12242,
+  "ingested_at": "2026-03-31T17:27:44.836776",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n专家会诊协议 - 多专家替身协同决策\n冲突检测 → 优先级裁决 → 真人确认\n\"\"\"\n\nimport json\nfrom enum import Enum\nfrom datetime import datetime\nfrom typing import Dict, List, Optional, Tuple\nfrom dataclasses import dataclass\n\n@dataclass\nclass ExpertOpinion:\n    \"\"\"专家意见\"\"\"\n    expert_id: str\n    expert_name: str\n    totem: str  # 五路图腾\n    element: str  # 五行\n    opinion: str\n    confidence: float  # 0-1\n    reasoning: str\n    timestamp: str\n\n@dataclass\nclass Conflict:\n    \"\"\"意见冲突\"\"\"\n    experts_involved: L",
+  "limitations_applied": []
+}

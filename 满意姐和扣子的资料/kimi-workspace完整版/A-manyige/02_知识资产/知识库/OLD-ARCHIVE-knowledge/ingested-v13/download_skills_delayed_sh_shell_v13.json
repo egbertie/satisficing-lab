@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/download_skills_delayed.sh",
+  "filename": "download_skills_delayed.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "8d72ffcbfb7fa151",
+  "content_length": 1667,
+  "ingested_at": "2026-03-31T17:27:46.196244",
+  "content_preview": "#!/bin/bash\n# 延时下载Skill脚本\n# 用途: 通过增加请求间隔避免429错误\n\nDELAY=30  # 每次请求间隔30秒\nSKILLS_DIR=\"/root/openclaw/kimi/downloads\"\nLOG_FILE=\"/root/.openclaw/workspace/logs/skill_download_retry.log\"\n\nmkdir -p \"$(dirname \"$LOG_FILE\")\"\n\necho \"===============================================\"\necho \"    Skill 延时下载脚本\"\necho \"===============================================\"\necho \"开始时间: $(date '+%Y-%m-%d %H:%M:%S')\"\necho \"请求间隔: ${DELAY}秒\"\necho \"日志文件: $LOG_FILE\"\necho \"\"\n\n# 计数器\nTOTAL=0\nSUCCESS=0\nFAILED=0\nSKIPPED=0\n\nfor meta",
+  "limitations_applied": []
+}

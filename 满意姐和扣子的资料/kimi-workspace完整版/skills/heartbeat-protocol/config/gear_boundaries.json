@@ -1,0 +1,104 @@
+{
+  "version": "3.0.0",
+  "description": "Heartbeat Protocol 档位边界配置",
+  "boundaries": {
+    "L5": {
+      "min": 70.0,
+      "max": 100.0,
+      "label": "正常运营",
+      "description": "全功能运营，标准频率"
+    },
+    "L4": {
+      "min": 50.0,
+      "max": 70.0,
+      "label": "轻度节流",
+      "description": "降低轮检频率，减少非必要通知"
+    },
+    "L3": {
+      "min": 30.0,
+      "max": 50.0,
+      "label": "中度节流",
+      "description": "暂停非关键任务，聚焦核心功能"
+    },
+    "L2": {
+      "min": 15.0,
+      "max": 30.0,
+      "label": "重度节流",
+      "description": "仅保留核心功能，大幅削减通知"
+    },
+    "L1": {
+      "min": 0.0,
+      "max": 15.0,
+      "label": "休眠模式",
+      "description": "暂停所有非紧急任务，进入低功耗"
+    }
+  },
+  "hysteresis": {
+    "enabled": true,
+    "percentage": 5.0,
+    "description": "滞后区间，避免边界抖动"
+  },
+  "notification_rules": {
+    "L5": {
+      "frequency": 1.0,
+      "channels": ["all"],
+      "min_interval_minutes": 30
+    },
+    "L4": {
+      "frequency": 0.8,
+      "channels": ["critical", "important", "normal"],
+      "min_interval_minutes": 45,
+      "note": "L4档位可能过多或过少，支持用户微调"
+    },
+    "L3": {
+      "frequency": 0.5,
+      "channels": ["critical", "important"],
+      "min_interval_minutes": 60,
+      "auto_pause_tasks": ["backup", "sync", "report"]
+    },
+    "L2": {
+      "frequency": 0.2,
+      "channels": ["critical"],
+      "min_interval_minutes": 120,
+      "auto_pause_tasks": ["backup", "sync", "report", "monitor"]
+    },
+    "L1": {
+      "frequency": 0.0,
+      "channels": [],
+      "min_interval_minutes": 0,
+      "auto_pause_tasks": ["all_except_critical"],
+      "hibernation": true
+    }
+  },
+  "time_based_adjustments": {
+    "work_hours": {
+      "range": [9, 18],
+      "multiplier": 1.0
+    },
+    "evening": {
+      "range": [18, 23],
+      "multiplier": 0.8,
+      "additional_pause": ["non_urgent_reports"]
+    },
+    "night": {
+      "range": [23, 8],
+      "multiplier": 0.0,
+      "force_gear": "L2_min",
+      "silent_all": true
+    }
+  },
+  "user_adjustments": {
+    "enabled": true,
+    "allow_gear_override": true,
+    "override_duration_minutes": 30,
+    "L4_frequency_adjustable": true,
+    "L4_frequency_range": [0.65, 0.95],
+    "L4_default": 0.8
+  },
+  "safety_limits": {
+    "max_transitions_per_hour": 3,
+    "max_transitions_per_day": 8,
+    "emergency_threshold_pct": 5.0,
+    "force_notification_on_drop": 20.0
+  }
+}

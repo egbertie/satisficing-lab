@@ -1,0 +1,30 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/penalty_auto_check.sh",
+  "filename": "penalty_auto_check.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 3084,
+  "checksum": "00ea68fe47d4136a",
+  "ingested_at": "2026-03-31T17:30:47.803975",
+  "line_count": 83,
+  "title": "penalty_auto_check",
+  "description": "L4惩罚层自动执行脚本",
+  "sections": [],
+  "entities": [],
+  "key_points": [
+    "L4惩罚层自动执行脚本",
+    "自动检测违规并触发惩罚",
+    "初始化信任积分（如果不存在）",
+    "检查1: 虚报检测（声称完成但未创建文件）",
+    "读取今日memory文件中的声称",
+    "检查是否有\"已创建\"但未验证的声称",
+    "这里可以添加更复杂的验证逻辑",
+    "目前记录日志，人工复核",
+    "检查2: 偷工减料检测（搜索次数不足）",
+    "检查3: 未按SOP执行检测",
+    "检查最近创建的.sh文件是否有对应的.plan",
+    "更新信任积分"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

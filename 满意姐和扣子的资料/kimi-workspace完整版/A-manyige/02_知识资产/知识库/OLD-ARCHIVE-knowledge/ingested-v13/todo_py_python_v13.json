@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/todo-management/todo.py",
+  "filename": "todo.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "a04099799cffd92c",
+  "content_length": 6079,
+  "ingested_at": "2026-03-31T17:27:45.340424",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nTODO管理模块\n5标准化实现\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import List, Dict, Optional\n\nclass TodoManager:\n    \"\"\"任务管理器\"\"\"\n    \n    def __init__(self, workspace=\"/root/.openclaw/workspace\"):\n        self.workspace = Path(workspace)\n        self.todo_dir = self.workspace / \"memory\" / \"todos\"\n        self.todo_dir.mkdir(parents=True, exist_ok=True)\n        self.index_file = self.todo_dir / \"index.json\"\n       ",
+  "limitations_applied": []
+}

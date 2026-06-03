@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/task6_enhanced_parser.py",
+  "filename": "task6_enhanced_parser.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "505a40aea9950482",
+  "content_length": 5288,
+  "ingested_at": "2026-03-31T17:27:46.137548",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n任务看板解析器增强版 - 今日执行任务6\n目标: 准确率从60%提升到80%\n\"\"\"\n\nimport re\nimport json\nfrom datetime import datetime\nfrom pathlib import Path\n\ndef parse_tasks_enhanced():\n    \"\"\"增强版任务解析器\"\"\"\n    task_file = Path(\"/root/.openclaw/workspace/TASK_MASTER.md\")\n    if not task_file.exists():\n        return []\n    \n    content = task_file.read_text()\n    tasks = []\n    \n    # 格式1: ### [状态] WIP-XXX: 任务名\n    pattern1 = r'###\\s+([✅⏸️🔄🔴🟡🟢])\\s*WIP-(\\d+):\\s*(.+?)\\n'\n    for match in re.finditer(pattern1",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/data-quality-auditor/config/quality_requirements.yaml",
+  "filename": "quality_requirements.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "f5eb4555a26ef8db",
+  "content_length": 1658,
+  "ingested_at": "2026-03-31T17:27:45.387662",
+  "content_preview": "# 数据质量需求配置文件\n# Data Quality Requirements Configuration\n\nrequirements:\n  # S1: 输入规范\n  input:\n    supported_formats: [\"csv\", \"json\", \"parquet\", \"sqlite\", \"postgresql\"]\n    encoding: \"utf-8\"\n    max_file_size_mb: 1000\n  \n  # S2.1: 完整性要求\n  completeness:\n    min_threshold: 0.95        # 最小完整性95%\n    critical_fields:           # 必填字段\n      - \"id\"\n      - \"created_at\"\n    allow_empty_strings: false\n    \n  # S2.2: 准确性要求  \n  accuracy:\n    outlier_method: \"iqr\"      # 异常值检测方法: iqr, zscore\n    outlier_thre",
+  "limitations_applied": []
+}

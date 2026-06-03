@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_git-workflow-auto/scripts/feature_workflow.sh",
+  "filename": "feature_workflow.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "94348ec0817cdd62",
+  "content_length": 4394,
+  "ingested_at": "2026-03-31T17:27:45.305696",
+  "content_preview": "#!/bin/bash\n# Git Feature Branch Workflow\n# 特性分支工作流脚本\n\nset -e\n\nACTION=\"${1:-help}\"\nFEATURE_NAME=\"${2:-}\"\nSCRIPT_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\n\nshow_help() {\n    cat << EOF\nGit Feature Branch Workflow\n\nUsage: $0 [action] [name]\n\nActions:\n  start [name]     创建并切换到新的特性分支\n  finish           完成特性开发（推送并提示创建PR）\n  status           显示当前工作流状态\n\nExamples:\n  $0 start user-authentication    # 创建 feature/user-authentication 分支\n  $0 finish                       # 推送并准备合并\nEOF\n}\n\n# 检查是否在git仓",
+  "limitations_applied": []
+}

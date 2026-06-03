@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/universal-task-executor-v3/integration/index_manager.py",
+  "filename": "index_manager.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "05c0723cd5bc5477",
+  "content_length": 23677,
+  "ingested_at": "2026-03-31T17:27:45.368237",
+  "content_preview": "\"\"\"\nIndex Manager - 索引管理器\n集成super-knowledge-ingest Skill到Universal Task Executor V3.0\n\n职责：\n1. 维护任务→知识库的索引\n2. 支持快速检索\n3. 支持版本管理\n4. 与Checkpoint系统集成\n\"\"\"\n\nimport os\nimport json\nimport hashlib\nimport logging\nfrom typing import Dict, List, Optional, Any, Set, Tuple\nfrom dataclasses import dataclass, field, asdict\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom enum import Enum\n\nlogger = logging.getLogger(__name__)\n\n\nclass IndexVersionStatus(Enum):\n    \"\"\"索引版本状态\"\"\"\n    ACTIVE = \"a",
+  "limitations_applied": []
+}

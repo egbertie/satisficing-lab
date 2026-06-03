@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_cron-optimization-manager/modules/analyzer.py",
+  "filename": "analyzer.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "2bc4fcfbb3713f65",
+  "content_length": 7747,
+  "ingested_at": "2026-03-31T17:27:45.155399",
+  "content_preview": "# -*- coding: utf-8 -*-\n\"\"\"分析模块\"\"\"\n\nfrom typing import Dict, List, Optional\nfrom datetime import datetime\n\n\nclass CronAnalyzer:\n    \"\"\"Cron分析器\"\"\"\n    \n    def __init__(self, manager):\n        self.manager = manager\n    \n    def audit_all(self, crons: Dict, output_format: str = \"table\") -> str:\n        \"\"\"全面审计所有Cron\"\"\"\n        results = []\n        \n        for cron_id, cron in crons.items():\n            audit = self.audit_cron(cron)\n            results.append(audit)\n        \n        # 按得分排序\n     ",
+  "limitations_applied": []
+}

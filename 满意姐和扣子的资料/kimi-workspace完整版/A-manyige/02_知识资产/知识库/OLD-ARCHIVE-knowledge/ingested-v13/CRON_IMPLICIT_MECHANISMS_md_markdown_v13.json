@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/CRON_IMPLICIT_MECHANISMS.md",
+  "filename": "CRON_IMPLICIT_MECHANISMS.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "ae542330de4d1687",
+  "content_length": 822,
+  "ingested_at": "2026-03-31T17:27:46.513523",
+  "content_preview": "# Cron隐含机制提取与转化\n> **目标**: 将5个Cron隐含机制转化为5标准Skill  \n> **来源**: 定时任务配置中的隐藏规则\n\n---\n\n## 发现的5个Cron隐含机制\n\n### 1. Token分层暂停机制\n**来源**: 零空置V3.0 Cron配置  \n**规则**: \n- Token < 30%: 暂停线1（学习研究）\n- Token < 15%: 全部暂停，等待指令\n\n**转化**: `skills/token-throttle-controller/`\n\n### 2. 极限测试模式\n**来源**: 零空置V3.0 Cron配置  \n**规则**: 周期末最后一日恢复6线全开，验证最大承载量\n\n**转化**: `skills/extreme-test-mode/`\n\n### 3. 三层响应架构\n**来源**: cron-rules.yaml  \n**规则**: 自动执行/确认窗口/强制阻断\n\n**转化**: `skills/three-tier-response/`\n\n### 4. 自动清理机制\n**来源**: management.json  \n**",
+  "limitations_applied": []
+}

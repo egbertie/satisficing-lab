@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/knowledge-distiller/distiller.py",
+  "filename": "distiller.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "09639cf6386ab48d",
+  "content_length": 8305,
+  "ingested_at": "2026-03-31T17:27:44.806141",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n知识蒸馏沉淀器 - Knowledge Distiller\n\n功能：从对话中提取知识并沉淀到知识库\n自动分类：方法论、案例、洞察、金句\n\"\"\"\n\nimport json\nimport re\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import List, Dict, Any\nfrom dataclasses import dataclass\n\n@dataclass\nclass KnowledgeItem:\n    \"\"\"知识条目\"\"\"\n    id: str\n    category: str  # methodology/case/insight/quote\n    content: str\n    source: str\n    timestamp: str\n    tags: List[str]\n    confidence: float\n\n\nclass KnowledgeDistiller:\n    \"\"\"知识蒸馏沉淀器\"\"\"\n  ",
+  "limitations_applied": []
+}

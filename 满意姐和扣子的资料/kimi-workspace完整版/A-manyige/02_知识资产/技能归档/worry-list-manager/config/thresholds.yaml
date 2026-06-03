@@ -1,0 +1,56 @@
+# 阈值配置
+
+# 评估阈值
+evaluation:
+  impact:
+    high: 10
+    medium: 5
+    low: 1
+  urgency:
+    immediate: 10
+    soon: 5
+    later: 1
+  probability:
+    certain: 10
+    likely: 5
+    possible: 1
+  weights:
+    impact: 0.4
+    urgency: 0.4
+    probability: 0.2
+
+# 预警阈值
+alerting:
+  # 资源预警
+  token_usage_high: 0.7
+  token_usage_critical: 0.9
+  api_quota_low: 0.3
+  storage_high: 0.8
+  storage_critical: 0.9
+  cpu_high: 0.85
+  memory_high: 0.85
+
+  # 担忧数量预警
+  new_worries_1h_threshold: 10
+  overdue_rate_threshold: 0.2
+  
+  # 准确性阈值
+  accuracy_target: 0.85
+  recall_target: 0.90
+  false_positive_threshold: 0.15
+
+# 扫描配置
+scanning:
+  # 系统扫描间隔（秒）
+  system_scan_interval: 14400  # 4小时
+  # 外部依赖扫描间隔
+  external_scan_interval: 3600  # 1小时
+  # 资源监控间隔
+  resource_check_interval: 300  # 5分钟
+
+# 归档配置
+archiving:
+  # 自动归档天数
+  auto_archive_days: 7
+  # 保留历史天数
+  history_retention_days: 90

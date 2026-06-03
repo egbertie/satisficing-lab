@@ -1,0 +1,98 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/cron-daily-merge.sh",
+  "filename": "cron-daily-merge.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 14713,
+  "checksum": "2dc4fc3e0fbc6f90",
+  "ingested_at": "2026-03-31T17:30:47.883258",
+  "line_count": 474,
+  "title": "cron-daily-merge",
+  "description": "Cron Daily Merge Script",
+  "sections": [],
+  "entities": [
+    {
+      "name": "log_info",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_success",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_warn",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_error",
+      "type": "shell_function"
+    },
+    {
+      "name": "init_dirs",
+      "type": "shell_function"
+    },
+    {
+      "name": "show_help",
+      "type": "shell_function"
+    },
+    {
+      "name": "analyze_crons",
+      "type": "shell_function"
+    },
+    {
+      "name": "backup_crons",
+      "type": "shell_function"
+    },
+    {
+      "name": "create_morning_cron",
+      "type": "shell_function"
+    },
+    {
+      "name": "create_evening_cron",
+      "type": "shell_function"
+    },
+    {
+      "name": "disable_old_crons",
+      "type": "shell_function"
+    },
+    {
+      "name": "execute_merge",
+      "type": "shell_function"
+    },
+    {
+      "name": "rollback_merge",
+      "type": "shell_function"
+    },
+    {
+      "name": "show_status",
+      "type": "shell_function"
+    },
+    {
+      "name": "cleanup_backups",
+      "type": "shell_function"
+    },
+    {
+      "name": "main",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "# Cron Daily Merge Script",
+    "一键合并Daily Cron脚本 - 基于第一性原理优化",
+    "./cron-daily-merge.sh --analyze     # 仅分析，不执行",
+    "./cron-daily-merge.sh --execute     # 执行合并",
+    "./cron-daily-merge.sh --rollback    # 回滚到合并前状态",
+    "./cron-daily-merge.sh --status      # 查看当前合并状态",
+    "# 版本: 1.2",
+    "创建: 2026-03-15",
+    "Cron配置",
+    "待禁用的旧Cron列表（将被合并的）",
+    "保留的独立Cron",
+    "创建必要目录",
+    "显示帮助信息",
+    "分析当前Cron状态",
+    "统计当前Cron"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

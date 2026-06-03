@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_rss-ai-reader/config_guide.md",
+  "filename": "config_guide.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "0971fb3513351acb",
+  "content_length": 2210,
+  "ingested_at": "2026-03-31T17:27:45.283835",
+  "content_preview": "# 配置指南\n\n## 完整配置示例\n\n```yaml\n# ===== RSS 订阅 =====\nfeeds:\n  - name: \"Hacker News\"\n    url: \"https://hnrss.org/frontpage\"\n    category: \"tech\"\n    \n  - name: \"阮一峰周刊\"\n    url: \"https://www.ruanyifeng.com/blog/atom.xml\"\n    category: \"tech\"\n    \n  - name: \"V2EX\"\n    url: \"https://www.v2ex.com/feed/tab/tech.xml\"\n    category: \"tech\"\n\n# ===== LLM 配置 =====\nllm:\n  # Claude (推荐)\n  provider: \"claude\"\n  model: \"claude-sonnet-4-20250514\"\n  api_key: \"${ANTHROPIC_API_KEY}\"\n  \n  # 或 OpenAI\n  # provider: \"openai\"",
+  "limitations_applied": []
+}

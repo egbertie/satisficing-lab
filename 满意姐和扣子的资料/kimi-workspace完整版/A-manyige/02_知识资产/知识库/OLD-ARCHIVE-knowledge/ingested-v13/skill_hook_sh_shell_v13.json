@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/system-v3/skill_enforcement/skill_hook.sh",
+  "filename": "skill_hook.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "6ec8a1ac67742c0e",
+  "content_length": 1232,
+  "ingested_at": "2026-03-31T17:27:46.126527",
+  "content_preview": "#!/bin/bash\n# Skill强制检查钩子 - 系统级集成\n# 满意妞直接执行 - 2026-03-31\n# \n# 此脚本应在每次执行命令前调用\n# 集成到bashrc或作为pre-exec钩子\n\nCOMMAND=\"$@\"\nWORKSPACE=\"/root/.openclaw/workspace\"\nENFORCER=\"${WORKSPACE}/system-v3/skill_enforcement/skill_enforcer.py\"\nLOG_FILE=\"${WORKSPACE}/logs/skill_enforcement/hook.log\"\n\n# 记录调用\nmkdir -p \"$(dirname \"$LOG_FILE\")\"\necho \"[$(date '+%Y-%m-%d %H:%M:%S')] HOOK: $COMMAND\" >> \"$LOG_FILE\"\n\n# 检查是否应该强制Skill\nif [[ \"$COMMAND\" == *\"python\"* ]] && [[ \"$COMMAND\" == *\".py\"* ]]; then\n    # 检测是否是通过Skill调用\n ",
+  "limitations_applied": []
+}

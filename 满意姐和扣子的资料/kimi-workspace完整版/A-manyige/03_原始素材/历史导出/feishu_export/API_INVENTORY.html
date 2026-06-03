@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>API_INVENTORY</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; padding: 40px; max-width: 800px; margin: 0 auto; }
+        h1 { color: #1f2329; border-bottom: 2px solid #3370ff; padding-bottom: 10px; }
+        h2 { color: #1f2329; margin-top: 30px; }
+        h3 { color: #3370ff; }
+        code { background: #f5f6f7; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+        pre { background: #f5f6f7; padding: 16px; border-radius: 6px; overflow-x: auto; }
+        blockquote { border-left: 4px solid #3370ff; margin: 0; padding-left: 16px; color: #646a73; }
+        table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+        th, td { border: 1px solid #dee0e3; padding: 8px 12px; text-align: left; }
+        th { background: #f5f6f7; font-weight: 600; }
+        ul, ol { padding-left: 24px; }
+    </style>
+</head>
+<body>
+<h1 id="api-v10">满意解研究所 · API 清单 V1.0</h1>
+<p><strong>更新日期</strong>: 2026-03-10<br />
+<strong>维护人</strong>: Egbertie + Kimi Claw<br />
+<strong>用途</strong>: 硬科技合伙人匹配决策系统</p>
+<hr />
+<h2 id="api">API 总览</h2>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>API</th>
+<th>用途</th>
+<th>状态</th>
+<th>免费额度</th>
+<th>使用策略</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Kimi API</strong></td>
+<td>主要对话/中文处理</td>
+<td>✅ 活跃</td>
+<td>Allegretto 限额内</td>
+<td>主要对话接口</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>GitHub Models</strong></td>
+<td>GPT-4o/DeepSeek</td>
+<td>✅ 活跃</td>
+<td>50次/天 (GPT-4o)</td>
+<td>复杂编程任务</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Jina AI</strong></td>
+<td>网页提取/搜索</td>
+<td>✅ 活跃</td>
+<td>100万 tokens</td>
+<td>网页内容提取</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Perplexity</strong></td>
+<td>AI 搜索</td>
+<td>✅ 已配置</td>
+<td>约 300次/月</td>
+<td>实时信息搜索</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Claude (Anthropic)</strong></td>
+<td>复杂推理</td>
+<td>🟡 备用（403地区限制）</td>
+<td>需付费额度</td>
+<td>备用推理引擎</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><strong>注释</strong>: 使用GitHub Models GPT-4o替代，今晚/明天解决403</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Notion</strong></td>
+<td>知识库管理</td>
+<td>✅ 活跃</td>
+<td>无限制</td>
+<td>文档同步</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Figma</strong></td>
+<td>设计协作</td>
+<td>🔗 链接已存</td>
+<td>免费版</td>
+<td>组织架构图</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_1">详细配置</h2>
+<h3 id="1-kimi-api">1. Kimi API</h3>
+<pre><code class="language-yaml">Provider: 月之暗面
+API Key: sk-kimi-Sx52rk... (内置)
+Base URL: https://api.kimi.com/coding
+状态: 使用中 (当前对话)
+用途: 
+  - 主要对话接口
+  - 中文处理
+  - 代码生成
+</code></pre>
+<h3 id="2-github-models">2. GitHub Models</h3>
+<pre><code class="language-yaml">Provider: Microsoft/GitHub
+API Key: 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
+Base URL: https://models.github.ai/inference
+免费额度:
+  - GPT-4o: 10 RPM, 50 RPD
+  - DeepSeek-R1: 15 RPM, 150 RPD
+验证状态: ✅ 已验证并活跃使用中 (2026-03-10)
+测试响应: &quot;你好！有什么可以帮助你的吗？&quot;
+用途:
+  - Claude替代方案（403问题）
+  - 复杂编程任务
+  - GPT-4o主力推理
+</code></pre>
+<h3 id="3-jina-ai">3. Jina AI</h3>
+<pre><code class="language-yaml">Provider: Jina AI
+API Key: jina_448e2c72ff414835b8b35eebf13d7840C9XK6Je9WwRIikSJVfRM44tYoZD8
+免费额度: 100万 tokens
+验证状态: ✅ 已验证并活跃使用中 (2026-03-10)
+验证测试:
+  - r.jina.ai/http://github.com - 成功提取GitHub首页
+  - s.jina.ai/OpenClaw - 成功搜索
+用途:
+  - r.jina.ai/{URL} - 网页提取
+  - s.jina.ai/{query} - 网页搜索
+  - g.jina.ai/{fact} - 事实核查
+</code></pre>
+<h3 id="4-perplexity-api">4. Perplexity API</h3>
+<pre><code class="language-yaml">Provider: Perplexity AI
+API Key: sk-ofRU1F9plRRXyeL6qN5NH3dNXEXp7JaNunA2IEXuSwhY73dd
+Base URL: https://api.perplexity.ai
+免费额度: Pro 用户 $5/月 约 300次搜索
+状态: ✅ 已配置并验证可用
+验证日期: 2026-03-10
+模型: sonar, sonar-pro, sonar-reasoning
+用途:
+  - AI实时搜索
+  - 市场研究
+  - 竞品分析
+</code></pre>
+<h3 id="5-claude-api-anthropic">5. Claude API (Anthropic)</h3>
+<pre><code class="language-yaml">Provider: Anthropic
+API Key: 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
+状态: 🟡 备用（403地区限制）
+用途: 复杂推理/长文本处理 (备用)
+替代方案: 使用GitHub Models GPT-4o替代，今晚/明天解决403问题
+</code></pre>
+<h3 id="6-notion-api">6. Notion API</h3>
+<pre><code class="language-yaml">Provider: Notion
+API Key: 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
+工作空间: 满意解研究所
+验证状态: ✅ 已验证 (2026-03-10)
+用途: 
+  - 知识库双备份
+  - 文档同步
+  - 协作空间
+</code></pre>
+<h3 id="7-github-token">7. GitHub (备用 Token)</h3>
+<pre><code class="language-yaml">Token: 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
+状态: 已保存
+用途: 备用/其他仓库访问
+</code></pre>
+<h3 id="8-figma">8. Figma</h3>
+<pre><code class="language-yaml">URL: https://www.figma.com/board/x6Bk2j76Au9ZKH7RlfPM2k/满意解组织架构V2.2
+用途: 组织架构图可视化
+</code></pre>
+<hr />
+<h2 id="_2">配置文件位置</h2>
+<pre><code>/root/.openclaw/workspace/.env
+</code></pre>
+<h3 id="_3">环境变量加载方式</h3>
+<pre><code class="language-bash"># 手动加载
+export $(cat /root/.openclaw/workspace/.env | xargs)
+
+# 在 Python 中使用
+from dotenv import load_dotenv
+load_dotenv('/root/.openclaw/workspace/.env')
+</code></pre>
+<hr />
+<h2 id="_4">使用优先级</h2>
+<h3 id="_5">对话/中文处理</h3>
+<ol>
+<li>Kimi API (主要)</li>
+<li>GitHub Models GPT-4o (复杂任务)</li>
+<li>Claude (备用)</li>
+</ol>
+<h3 id="_6">信息搜索</h3>
+<ol>
+<li>Perplexity (AI搜索)</li>
+<li>Jina AI (网页提取)</li>
+<li>Kimi Search (内置)</li>
+</ol>
+<h3 id="_7">知识管理</h3>
+<ol>
+<li>Notion (主要)</li>
+<li>GitHub (版本控制)</li>
+<li>飞书 (备用)</li>
+</ol>
+<hr />
+<h2 id="_8">成本控制策略</h2>
+<table>
+<thead>
+<tr>
+<th>优先级</th>
+<th>API</th>
+<th>策略</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P0</td>
+<td>Kimi API</td>
+<td>限额内使用，超额预警</td>
+</tr>
+<tr>
+<td>P1</td>
+<td>GitHub Models</td>
+<td>免费额度优先</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>Perplexity</td>
+<td>$5/月额度规划</td>
+</tr>
+<tr>
+<td>P3</td>
+<td>Claude</td>
+<td>按需使用</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_9">更新日志</h2>
+<table>
+<thead>
+<tr>
+<th>日期</th>
+<th>操作</th>
+<th>操作人</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-03-10</td>
+<td>创建清单，配置所有 API</td>
+<td>Kimi Claw</td>
+</tr>
+<tr>
+<td>2026-03-10</td>
+<td>验证 GitHub Models</td>
+<td>Kimi Claw</td>
+</tr>
+<tr>
+<td>2026-03-10</td>
+<td>验证 Jina AI</td>
+<td>Kimi Claw</td>
+</tr>
+<tr>
+<td>2026-03-10</td>
+<td>验证 Notion</td>
+<td>Kimi Claw</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_10">待办</h2>
+<ul>
+<li>[ ] Perplexity 额度监控</li>
+<li>[ ] Claude 额度充值</li>
+<li>[ ] Notion 同步完成验证</li>
+<li>[ ] GitHub 远程仓库配置</li>
+</ul>
+<hr />
+<p><strong>文档版本</strong>: V1.0<br />
+<strong>下次更新</strong>: 有新增 API 或配置变更时</p>
+</body>
+</html>
+<!-- 知识内化记录 -->
+<!-- 内化时间: 2026-03-31 | 状态: 已内化 -->

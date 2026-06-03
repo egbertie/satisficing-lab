@@ -1,0 +1,93 @@
+{
+  "version": "3.2",
+  "model": "weekly-consumption-tracker",
+  "description": "周Token消耗追踪与预警系统（修正版）",
+  "last_updated": "2026-03-21",
+  "critical_fixes": [
+    "修复：周起点从周一00:00改为周三12:00",
+    "修复：检查时间错峰（避开整点）"
+  ],
+  
+  "budget": {
+    "weekly_total": 490000,
+    "daily_average": 70000,
+    "unit": "tokens",
+    "week_start": "周三 12:00",
+    "week_end": "下周三 12:00"
+  },
+  
+  "time_calculation": {
+    "description": "周三12:00为0%，下周三12:00为100%",
+    "formula": "时间进度 = (当前时间 - 本周三12:00) / 168小时 * 100%",
+    "example": "周六21:47距离周三12:00约81.5小时，进度约48.5%"
+  },
+  
+  "tracking": {
+    "method": "用户主动标记 + session_status验证",
+    "frequency": "每6-8小时检查一次（错峰）",
+    "times": ["06:23", "12:07", "18:17", "23:11"],
+    "note": "避开整点，减少系统负载",
+    "granularity": "周累计消耗百分比"
+  },
+  
+  "thresholds": {
+    "description": "基于时间进度的动态阈值（含20%冗余）",
+    "formula": "允许消耗 = 时间进度 + 20%冗余",
+    "emergency": "时间进度 + 40%冗余",
+    
+    "reference_by_day": {
+      "周三12:00": {"time_progress": 0, "threshold": 20, "emergency": 40},
+      "周三23:00": {"time_progress": 7, "threshold": 27, "emergency": 47},
+      "周四06:23": {"time_progress": 10, "threshold": 30, "emergency": 50},
+      "周四12:07": {"time_progress": 14, "threshold": 34, "emergency": 54},
+      "周四18:17": {"time_progress": 18, "threshold": 38, "emergency": 58},
+      "周四23:11": {"time_progress": 21, "threshold": 41, "emergency": 61},
+      "周五06:23": {"time_progress": 25, "threshold": 45, "emergency": 65},
+      "周五12:07": {"time_progress": 29, "threshold": 49, "emergency": 69},
+      "周五18:17": {"time_progress": 32, "threshold": 52, "emergency": 72},
+      "周五23:11": {"time_progress": 35, "threshold": 55, "emergency": 75},
+      "周六06:23": {"time_progress": 39, "threshold": 59, "emergency": 79},
+      "周六12:07": {"time_progress": 43, "threshold": 63, "emergency": 83},
+      "周六18:17": {"time_progress": 46, "threshold": 66, "emergency": 86},
+      "周六23:11": {"time_progress": 49, "threshold": 69, "emergency": 89},
+      "周日06:23": {"time_progress": 53, "threshold": 73, "emergency": 93},
+      "周日12:07": {"time_progress": 57, "threshold": 77, "emergency": 97},
+      "周日18:17": {"time_progress": 60, "threshold": 80, "emergency": 100},
+      "周日23:11": {"time_progress": 63, "threshold": 83, "emergency": 100},
+      "周一06:23": {"time_progress": 67, "threshold": 87, "emergency": 100},
+      "周一12:07": {"time_progress": 71, "threshold": 91, "emergency": 100},
+      "周一18:17": {"time_progress": 74, "threshold": 94, "emergency": 100},
+      "周一23:11": {"time_progress": 77, "threshold": 97, "emergency": 100},
+      "周二06:23": {"time_progress": 81, "threshold": 100, "emergency": 100},
+      "周二12:07": {"time_progress": 84, "threshold": 100, "emergency": 100},
+      "周二18:17": {"time_progress": 88, "threshold": 100, "emergency": 100},
+      "周二23:11": {"time_progress": 91, "threshold": 100, "emergency": 100},
+      "周三06:23": {"time_progress": 95, "threshold": 100, "emergency": 100},
+      "周三12:00": {"time_progress": 100, "threshold": 100, "emergency": 100}
+    }
+  },
+  
+  "current_status": {
+    "datetime": "2026-03-21 21:47",
+    "day_of_week": "周六",
+    "time_since_start": "81小时47分钟",
+    "time_progress": 48.7,
+    "consumption": 79,
+    "threshold": 68.7,
+    "emergency": 88.7,
+    "status": "🔴 紧急",
+    "note": "消耗79% > 紧急阈值88.7%？不对，重新计算..."
+  },
+  
+  "correction": {
+    "error": "计算错误，周六21:47时间进度应为48.7%",
+    "actual_calculation": "周三12:00到周六21:47 = 3天9小时47分 = 81.78小时 / 168小时 = 48.7%",
+    "revised_status": {
+      "time_progress": 48.7,
+      "threshold": 68.7,
+      "consumption": 79,
+      "status": "🔴 紧急",
+      "reason": "消耗79% > 阈值68.7%，超出10.3个百分点"
+    }
+  }
+}

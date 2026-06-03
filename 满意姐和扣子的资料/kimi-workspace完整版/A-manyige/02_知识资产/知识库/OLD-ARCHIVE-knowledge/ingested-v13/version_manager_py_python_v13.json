@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_optimization-rollback-guard/modules/version_manager.py",
+  "filename": "version_manager.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "928c4938420aef69",
+  "content_length": 7088,
+  "ingested_at": "2026-03-31T17:27:45.028712",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nOptimization Rollback Guard - 优化回滚保障\n优化前自动快照，支持一键回滚\n\"\"\"\n\nimport json\nimport shutil\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Any, Optional\n\nclass VersionManager:\n    \"\"\"版本管理器\"\"\"\n    \n    VERSION_RETENTION = 7  # 保留7个自动版本\n    \n    def __init__(self, \n                 workspace_path: str = '/root/.openclaw/workspace',\n                 versions_dir: str = 'data/versions'):\n        self.workspace = Path(workspace_path)\n        se",
+  "limitations_applied": []
+}

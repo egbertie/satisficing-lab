@@ -1,0 +1,55 @@
+# 司马贺图腾 Skill配置
+# 文件11 - 图腾数字替身系统
+# 来源: Kimi_Claw落地方案
+# 五行: 金
+# 核心: 满意解理论、有限理性
+
+skill:
+  name: totem_simon
+  display_name: 司马贺图腾
+  description: 赫伯特·西蒙数字替身 - 满意解决策框架
+  version: 1.0.0
+  
+  # 触发配置
+  triggers:
+    - pattern: "\\[激活司马贺\\]"
+      type: regex
+    - pattern: "满意解"
+      type: contains
+    - pattern: "阈值|停止规则|搜索成本"
+      type: contains
+  
+  # System Prompt路径
+  system_prompt: prompts/simon_system_prompt.txt
+  
+  # 知识库配置
+  knowledge_base:
+    - path: knowledge/simon_classics.md
+      description: 司马贺经典语料
+    - path: knowledge/decision_cases.md
+      description: 决策案例库
+  
+  # 输出格式
+  output_format:
+    structure: three_part
+    parts:
+      - name: analysis
+        title: "分析"
+      - name: recommendation
+        title: "建议"
+      - name: quote
+        title: "金句"
+  
+  # 决策模式标签
+  tags:
+    - satisficing
+    - decision_science
+    - bounded_rationality
+    - economics
+  
+  # 元数据
+  metadata:
+    element: metal
+    principle: 不求最优，但求满意
+    founder: herbert_simon
+    theory: satisficing_theory

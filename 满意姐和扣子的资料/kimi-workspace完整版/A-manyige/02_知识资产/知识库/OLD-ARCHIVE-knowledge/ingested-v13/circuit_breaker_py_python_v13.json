@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/token-budget-enforcer/scripts/circuit_breaker.py",
+  "filename": "circuit_breaker.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "9f04d70717f40de3",
+  "content_length": 9736,
+  "ingested_at": "2026-03-31T17:27:45.015014",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nToken预算熔断器 (Circuit Breaker)\nS2标准: 预算执行（监控→预警→熔断→调整→报告）\n\"\"\"\n\nimport json\nimport time\nfrom datetime import datetime\nfrom pathlib import Path\nfrom enum import Enum\nfrom typing import Dict, Optional, List\nfrom dataclasses import dataclass, asdict\n\nclass CircuitState(Enum):\n    \"\"\"熔断器状态\"\"\"\n    CLOSED = \"closed\"       # 正常 - 允许通过\n    OPEN = \"open\"          # 熔断 - 阻断\n    HALF_OPEN = \"half_open\" # 半开 - 试探性允许\n\n@dataclass\nclass CircuitBreakerRecord:\n    \"\"\"熔断记录\"\"\"\n    timestamp",
+  "limitations_applied": []
+}

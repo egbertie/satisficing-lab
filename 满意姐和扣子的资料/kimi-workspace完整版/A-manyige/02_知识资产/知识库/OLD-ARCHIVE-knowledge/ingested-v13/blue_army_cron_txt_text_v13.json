@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/config/blue_army_cron.txt",
+  "filename": "blue_army_cron.txt",
+  "file_type": "text",
+  "extension": ".txt",
+  "file_hash": "fdf8218b11747adc",
+  "content_length": 785,
+  "ingested_at": "2026-03-31T17:27:44.518968",
+  "content_preview": "# 蓝军审计机制Cron任务配置\n# 部署到系统crontab\n\n# 每周一 09:00 执行每周审计\n0 9 * * 1 /root/.openclaw/workspace/scripts/blue_army_weekly_audit.sh >> /root/.openclaw/workspace/logs/cron_weekly_audit.log 2>&1\n\n# 每天 09:00 执行违规检测与惩罚\n0 9 * * * /root/.openclaw/workspace/scripts/punishment_enforcer.sh >> /root/.openclaw/workspace/logs/cron_punishment.log 2>&1\n\n# 每月1日 09:00 执行月度深度审计\n0 9 1 * * /root/.openclaw/workspace/scripts/blue_army_weekly_audit.sh --deep >> /root/.openclaw/workspace/logs/cron_monthly_audit.log 2>&1\n\n# 每30分",
+  "limitations_applied": []
+}

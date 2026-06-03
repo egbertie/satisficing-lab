@@ -1,0 +1,35 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/file_management_suite/cleanup.sh",
+  "filename": "cleanup.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 5264,
+  "checksum": "285f3c7350c61279",
+  "ingested_at": "2026-03-31T17:30:47.794281",
+  "line_count": 162,
+  "title": "cleanup",
+  "description": "cleanup.sh - 清理脚本",
+  "sections": [],
+  "entities": [
+    {
+      "name": "log",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "# cleanup.sh - 清理脚本",
+    "功能: 清理临时文件、空目录、过期文件",
+    "用法: ./cleanup.sh [--dry-run] [--all]",
+    "1. 清理pycache",
+    "2. 清理pyc文件",
+    "3. 清理临时文件",
+    "4. 清理空目录",
+    "循环删除直到没有空目录（处理嵌套空目录）",
+    "5. 清理旧日志（如果--all）",
+    "删除超过90天的压缩日志",
+    "6. 清理workspace_optimization备份（如果--all）",
+    "7. 清理downloads中的旧文件（如果--all）"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

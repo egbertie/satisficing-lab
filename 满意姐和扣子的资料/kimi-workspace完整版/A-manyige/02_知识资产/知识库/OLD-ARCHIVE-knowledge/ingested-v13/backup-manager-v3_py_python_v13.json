@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/backup-manager-v3.py",
+  "filename": "backup-manager-v3.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "5b8e313f936b9260",
+  "content_length": 5350,
+  "ingested_at": "2026-03-31T17:27:46.175415",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nBackup Manager - 满意解决策引擎灾备管理脚本\n版本: 3.0\n更新日期: 2026-03-18\n核心规则: 全量灾备必须包含全部完整资料，时间错开整点\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport shutil\nimport hashlib\nimport subprocess\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\n# 强制规则配置\nBACKUP_RULES = {\n    \"version\": \"3.0\",\n    \"last_updated\": \"2026-03-18\",\n    \"critical_paths\": [\n        \"/root/.openclaw/workspace/A满意哥专属文件夹\",  # 全部子目录必须包含\n        \"/root/.openclaw/workspace/SOUL.md\",\n        \"/root/.openclaw/w",
+  "limitations_applied": []
+}

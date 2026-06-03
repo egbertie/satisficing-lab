@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify_m006_worker_swarm.sh",
+  "filename": "verify_m006_worker_swarm.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "68e54b68b0130672",
+  "content_length": 1551,
+  "ingested_at": "2026-03-31T17:27:46.137335",
+  "content_preview": "#!/bin/bash\n# M006 6 Worker蜂群机制验证脚本\n\necho \"=== M006 6 Worker蜂群机制验证 ===\"\necho \"\"\n\n# 检查跟踪器文件\necho \"1. Worker跟踪器:\"\nif [ -f \"/root/.openclaw/workspace/skills/worker-swarm-tracker/worker_swarm_tracker.py\" ]; then\n    echo \"   ✅ worker_swarm_tracker.py 存在\"\n    lines=$(wc -l < /root/.openclaw/workspace/skills/worker-swarm-tracker/worker_swarm_tracker.py)\n    echo \"      代码行数: $lines\"\nelse\n    echo \"   ❌ worker_swarm_tracker.py 不存在\"\n    exit 1\nfi\n\n# 检查关键方法\necho \"\"\necho \"2. 关键方法存在性:\"\ngrep -q \"activate_wo",
+  "limitations_applied": []
+}

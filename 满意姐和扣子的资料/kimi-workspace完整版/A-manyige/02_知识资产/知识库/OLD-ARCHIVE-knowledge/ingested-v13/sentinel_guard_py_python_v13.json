@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/sentinel-guard/sentinel_guard.py",
+  "filename": "sentinel_guard.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "de744cadb15dfa92",
+  "content_length": 3804,
+  "ingested_at": "2026-03-31T17:27:45.424213",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nSentinel Guard - 哨兵守卫系统\n守护系统安全，防止违规操作\n\"\"\"\n\nimport json\nimport os\nimport sys\nfrom pathlib import Path\nfrom datetime import datetime\nfrom typing import Dict, List, Optional, Any\n\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nGUARD_DB = WORKSPACE / \"memory\" / \"sentinel-guard-db.json\"\n\nclass SentinelGuard:\n    \"\"\"哨兵守卫 - 守护系统安全\"\"\"\n    \n    def __init__(self):\n        self.db_path = GUARD_DB\n        self.violations = self._load_db()\n        self.rules = self._load_rules()\n  ",
+  "limitations_applied": []
+}

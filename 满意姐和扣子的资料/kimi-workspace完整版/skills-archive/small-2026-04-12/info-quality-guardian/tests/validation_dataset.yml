@@ -1,0 +1,249 @@
+# 验证测试数据集 - S5: 检测准确性验证
+# 用于测试info-quality-guardian的检测能力
+
+test_cases:
+  # ========== 高可信度来源 (应通过) ==========
+  - id: TC-001
+    description: "Nature学术期刊论文"
+    input:
+      title: "AI in Climate Science Research"
+      author: "Dr. Sarah Chen"
+      url: "https://nature.com/articles/s41586-024-00001"
+      source_type: "academic_journal"
+      publish_date: "2024-01-15"
+      content_snippet: "This paper presents..."
+    expected:
+      rating: 5
+      should_pass: true
+      issues_count: 0
+      
+  - id: TC-002
+    description: "HBR管理文章"
+    input:
+      title: "Strategic Leadership in Digital Age"
+      author: "Michael Porter"
+      url: "https://hbr.org/2024/02/strategic-leadership"
+      source_type: "top_media"
+      publish_date: "2024-02-01"
+      content_snippet: "Leaders must adapt..."
+    expected:
+      rating: 5
+      should_pass: true
+      issues_count: 0
+      
+  - id: TC-003
+    description: "中国政府官网政策"
+    input:
+      title: "关于促进人工智能发展的指导意见"
+      author: "国务院"
+      url: "https://www.gov.cn/zhengce/2024-01/01/content_12345.htm"
+      source_type: "gov_official"
+      publish_date: "2024-01-01"
+      content_snippet: "为深入贯彻落实..."
+    expected:
+      rating: 5
+      should_pass: true
+      issues_count: 0
+      
+  - id: TC-004
+    description: "36氪行业报道"
+    input:
+      title: "2024年AI投资趋势分析"
+      author: "张三"
+      url: "https://36kr.com/p/1234567"
+      source_type: "top_media"
+      publish_date: "2024-03-01"
+      content_snippet: "今年AI投资呈现..."
+    expected:
+      rating: 5
+      should_pass: true
+      issues_count: 0
+
+  # ========== 中等可信度 (应有警告) ==========
+  - id: TC-005
+    description: "行业分析师博客"
+    input:
+      title: "My Thoughts on AI Trends"
+      author: "Tech Analyst"
+      url: "https://tech-analyst.medium.com/ai-trends"
+      source_type: "professional_blog"
+      publish_date: "2024-02-15"
+      content_snippet: "In my opinion..."
+    expected:
+      rating: 3
+      should_pass: true
+      issues_count: 1
+      expected_issues:
+        - category: "source_credibility"
+          severity: "major"
+          
+  - id: TC-006
+    description: "LinkedIn专业文章"
+    input:
+      title: "Management Lessons Learned"
+      author: "CEO John"
+      url: "https://linkedin.com/pulse/management-lessons"
+      source_type: "professional_blog"
+      publish_date: "2024-01-20"
+      content_snippet: "After 20 years..."
+    expected:
+      rating: 3
+      should_pass: true
+      issues_count: 1
+
+  # ========== 低可信度 (应失败或严重警告) ==========
+  - id: TC-007
+    description: "匿名论坛帖子"
+    input:
+      title: "AI Will Replace All Jobs"
+      author: "Anonymous"
+      url: "https://reddit.com/r/random/comments/abc123"
+      source_type: "social_media"
+      publish_date: "2024-03-10"
+      content_snippet: "I think AI will..."
+    expected:
+      rating: 2
+      should_pass: false
+      issues_count: 2
+      expected_issues:
+        - category: "source_credibility"
+          severity: "critical"
+          
+  - id: TC-008
+    description: "未知来源"
+    input:
+      title: "Secret Investment Strategy"
+      author: "Unknown"
+      url: "https://random-site-123.com/secret"
+      source_type: "unknown"
+      publish_date: "2024-03-01"
+      content_snippet: "This secret strategy..."
+    expected:
+      rating: 1
+      should_pass: false
+      issues_count: 2
+
+  # ========== 字段缺失测试 ==========
+  - id: TC-009
+    description: "缺少作者"
+    input:
+      title: "Important Research"
+      author: ""
+      url: "https://nature.com/articles/test"
+      source_type: "academic_journal"
+      publish_date: "2024-01-01"
+      content_snippet: "Research shows..."
+    expected:
+      rating: 2
+      should_pass: false
+      issues_count: 1
+      expected_issues:
+        - category: "missing_fields"
+          severity: "critical"
+          
+  - id: TC-010
+    description: "缺少发布时间"
+    input:
+      title: "Breaking News"
+      author: "Reporter"
+      url: "https://news-site.com/breaking"
+      source_type: "top_media"
+      publish_date: ""
+      content_snippet: "Breaking news..."
+    expected:
+      rating: 3
+      should_pass: false
+      issues_count: 1
+      expected_issues:
+        - category: "missing_fields"
+          severity: "critical"
+
+  # ========== 时效性测试 ==========
+  - id: TC-011
+    description: "过时的技术信息"
+    input:
+      title: "Python 2 Tutorial"
+      author: "Old Author"
+      url: "https://example.com/python2"
+      source_type: "professional_blog"
+      publish_date: "2015-01-01"
+      content_type: "tech"
+      content_snippet: "Python 2 is great..."
+    expected:
+      rating: 2
+      should_pass: false
+      issues_count: 2
+      expected_issues:
+        - category: "freshness"
+          severity: "major"
+          
+  - id: TC-012
+    description: "最新的学术经典"
+    input:
+      title: "Einstein's Theory of Relativity"
+      author: "Albert Einstein"
+      url: "https://example.com/relativity"
+      source_type: "academic_journal"
+      publish_date: "1915-11-25"
+      content_type: "history"
+      content_snippet: "E = mc²..."
+    expected:
+      rating: 5
+      should_pass: true
+      issues_count: 0
+
+  # ========== S7: 对抗测试用例 ==========
+  - id: TC-A01
+    description: "[对抗]虚假权威域名"
+    input:
+      title: "Fake Harvard Article"
+      author: "Fake Author"
+      url: "https://hbr-fake.com/article"
+      source_type: "top_media"
+      publish_date: "2024-03-01"
+      content_snippet: "This looks like HBR..."
+    expected:
+      rating: 2
+      should_pass: false
+      detection_method: "domain_whitelist"
+      
+  - id: TC-A02
+    description: "[对抗]过时信息改日期"
+    input:
+      title: "Old News With New Date"
+      author: "Someone"
+      url: "https://example.com/old-news"
+      source_type: "top_media"
+      publish_date: "2024-03-20"
+      content_type: "industry"
+      content_snippet: "Same old content..."
+    expected:
+      rating: 2
+      should_pass: false
+      detection_method: "content_fingerprint"
+      
+  - id: TC-A03
+    description: "[对抗]AI生成内容伪装"
+    input:
+      title: "AI Generated Analysis"
+      author: "Kimi AI"
+      url: "https://kimi.moonshot.cn/chat/xyz"
+      source_type: "ai_generated"
+      publish_date: "2024-03-21"
+      content_snippet: "Based on my analysis..."
+    expected:
+      rating: 2
+      should_pass: true
+      issues_count: 1
+      expected_issues:
+        - category: "source_credibility"
+          severity: "major"
+
+# 准确性评估指标
+target_metrics:
+  precision: 0.95
+  recall: 0.90
+  f1_score: 0.92
+  
+# 误报/漏报记录
+defect_log: []

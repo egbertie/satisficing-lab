@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify_daily-backup.sh",
+  "filename": "verify_daily-backup.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "4bb83855e67f1fe5",
+  "content_length": 268,
+  "ingested_at": "2026-03-31T17:27:46.215613",
+  "content_preview": "#!/bin/bash\necho \"=== daily-backup.sh - 8步验证 ===\"\nSCRIPT=\"/root/.openclaw/workspace/scripts/daily-backup.sh\"\ntest -f \"$SCRIPT\" && echo \"Step1 ✅\"\nbash -n \"$SCRIPT\" 2>/dev/null && echo \"Step2 ✅\"\ntest -x \"$SCRIPT\" && echo \"Step3 ✅\"\necho \"Step4-8: 待验证\"\necho \"状态: PENDING\"\n",
+  "limitations_applied": []
+}

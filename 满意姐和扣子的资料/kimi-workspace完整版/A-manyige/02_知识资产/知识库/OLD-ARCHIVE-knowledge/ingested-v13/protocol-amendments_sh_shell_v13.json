@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/protocol-amendments.sh",
+  "filename": "protocol-amendments.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "1bbfd6df2f4f7f8f",
+  "content_length": 1904,
+  "ingested_at": "2026-03-31T17:27:46.151899",
+  "content_preview": "#!/bin/bash\n# Protocol Amendment Proposals - 协议修正提案系统\n# 每周自动生成Skill改进提案\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nPROPOSAL_DIR=\"$WORKSPACE/meta-cognitive/proposals\"\nLOG_FILE=\"/var/log/protocol-amendments.log\"\nDATE=$(date +%Y-%m-%d)\nWEEK=$(date +%Y-W%V)\n\nmkdir -p \"$PROPOSAL_DIR/$WEEK\"\n\necho \"=== Protocol Amendment Generation: $DATE ===\" | tee -a \"$LOG_FILE\"\n\n# 分析最近一周的改进机会\ngenerate_proposals() {\n    cat > \"$PROPOSAL_DIR/$WEEK/amendment-proposals.md\" << 'EOF'\n# Protocol Amendment Proposals - Week {WEE",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/namespace-enforcement/scripts/namespace-metrics.py",
+  "filename": "namespace-metrics.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "0b0edb31eb2878c9",
+  "content_length": 10421,
+  "ingested_at": "2026-03-31T17:27:45.396604",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nNamespace Metrics - 指标收集与可视化\nS3: 可观测输出 - 合规率、违规清单、迁移进度\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport argparse\nfrom pathlib import Path\nfrom datetime import datetime\nfrom typing import Dict, Any, List\n\n# 导入检查器\nsys.path.insert(0, str(Path(__file__).parent))\n\nimport importlib.util\nspec = importlib.util.spec_from_file_location(\"namespace_checker\", str(Path(__file__).parent / \"namespace-checker.py\"))\nnamespace_checker_module = importlib.util.module_from_spec(spec)\nspec.loade",
+  "limitations_applied": []
+}

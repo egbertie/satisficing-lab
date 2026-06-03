@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/FILE_SKILL_RECOVERY_REPORT.md",
+  "filename": "FILE_SKILL_RECOVERY_REPORT.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "1b818681421a1115",
+  "content_length": 4992,
+  "ingested_at": "2026-03-31T17:27:46.522202",
+  "content_preview": "# 文件处理Skill全面修复报告\n\n> **修复时间**: 2026-03-22  \n> **修复状态**: 进行中  \n> **问题根源**: Skill安装到全局目录(~/.openclaw/skills/)，但workspace未同步\n\n---\n\n## 一、问题诊断\n\n### 1.1 现状\n\n| 位置 | 状态 | 数量 | 问题 |\n|------|------|------|------|\n| **workspace/skills/** | ⚠️ 缺失 | 30个 | 仅治理类Skill，无文件处理 |\n| **~/.openclaw/skills/** | ✅ 存在 | 26个 | 有文件处理Skill但未激活 |\n| **archive历史** | ❓ 未知 | - | 3月20-21日可能有归档 |\n\n### 1.2 根本原因\n- 文件处理Skill安装到了**全局目录**(`~/.openclaw/skills/`)\n- Workspace目录(`/root/.openclaw/workspace/skills/`)未同步\n- 导致我在workspace中无法调用这",
+  "limitations_applied": []
+}

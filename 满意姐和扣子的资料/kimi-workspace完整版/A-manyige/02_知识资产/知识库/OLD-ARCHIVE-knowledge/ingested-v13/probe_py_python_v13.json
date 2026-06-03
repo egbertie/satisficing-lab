@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/vendor-api-monitor/scripts/probe.py",
+  "filename": "probe.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "0f88e0d7e1b2283a",
+  "content_length": 4658,
+  "ingested_at": "2026-03-31T17:27:45.404181",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nAPI 探测脚本 - 执行单个 API 端点健康检查\n\"\"\"\n\nimport argparse\nimport json\nimport os\nimport sys\nimport time\nimport requests\nfrom datetime import datetime\nfrom typing import Dict, Optional\n\nsys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))\n\n\ndef resolve_env_vars(value):\n    \"\"\"解析环境变量占位符 ${VAR_NAME}\"\"\"\n    if isinstance(value, str) and value.startswith('${') and value.endswith('}'):\n        var_name = value[2:-1]\n        return os.getenv(var_name, value)\n ",
+  "limitations_applied": []
+}

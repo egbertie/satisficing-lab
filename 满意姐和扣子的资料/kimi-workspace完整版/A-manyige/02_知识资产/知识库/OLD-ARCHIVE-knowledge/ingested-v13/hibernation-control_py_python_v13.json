@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/hibernation-protocol/hibernation-control.py",
+  "filename": "hibernation-control.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "080887f9b6ea02f0",
+  "content_length": 11442,
+  "ingested_at": "2026-03-31T17:27:45.447453",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n休眠协议控制器 - Hibernation Protocol Controller\n版本: V1.0\n功能: 管理休眠模式的进入、维持和唤醒\n\"\"\"\n\nimport json\nimport os\nimport sys\nimport time\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\n# 配置路径\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nHIBERNATION_LOG = WORKSPACE / \"memory\" / \"hibernation-log.json\"\nHIBERNATION_STATE = WORKSPACE / \"memory\" / \"hibernation-state.json\"\n\n# 保留任务列表（即使在完全静默模式下也保留）\nESSENTIAL_JOBS = [\n    \"backup-daily-001\",  # 每日自动备份\n    \"278707b5-a688-4d2",
+  "limitations_applied": []
+}

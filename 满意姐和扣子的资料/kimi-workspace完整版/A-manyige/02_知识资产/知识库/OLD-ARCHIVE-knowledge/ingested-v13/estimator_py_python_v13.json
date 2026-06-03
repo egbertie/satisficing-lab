@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/token-budget-enforcer/scripts/estimator.py",
+  "filename": "estimator.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "6c53cf04e81f035f",
+  "content_length": 7605,
+  "ingested_at": "2026-03-31T17:27:45.014186",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nToken消耗预估器 (Estimator)\n基于任务类型和历史数据预估Token消耗\n\"\"\"\n\nimport yaml\nimport json\nimport re\nfrom pathlib import Path\nfrom typing import Dict, Tuple, Optional\nfrom dataclasses import dataclass\n\n@dataclass\nclass Estimation:\n    \"\"\"预估结果\"\"\"\n    tokens: int\n    confidence: float  # 0-1\n    confidence_level: str  # \"high\", \"medium\", \"low\"\n    range_low: int\n    range_high: int\n    method: str\n    notes: str\n\nclass TokenEstimator:\n    \"\"\"Token消耗预估器\"\"\"\n    \n    # 基础Token消耗（基于经验）\n    BA",
+  "limitations_applied": []
+}

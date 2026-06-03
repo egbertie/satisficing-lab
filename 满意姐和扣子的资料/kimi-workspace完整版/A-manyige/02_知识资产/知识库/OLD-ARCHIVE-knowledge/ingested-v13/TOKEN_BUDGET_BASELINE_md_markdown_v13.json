@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/TOKEN_BUDGET_BASELINE.md",
+  "filename": "TOKEN_BUDGET_BASELINE.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "197cfdf909fbf85e",
+  "content_length": 1122,
+  "ingested_at": "2026-03-31T17:27:44.508735",
+  "content_preview": "# TOKEN_BUDGET_BASELINE.md\n# Token预算基准 - 不可更改\n# 创建时间: 2026-03-21\n# 版本: V1.0 (永久)\n\n## 核心基准 (Hardcoded)\n\n### 1. 预算定义\n- **周预算**: 490,000 tokens\n- **日平均**: 70,000 tokens\n- **计算单位**: 消耗百分比（相对于490K）\n\n### 2. 时间基准 (CRITICAL)\n- **周起点**: 每周三 12:00\n- **周终点**: 下周三 12:00\n- **总时长**: 168小时（7天）\n- **时间进度公式**: (当前时间 - 本周三12:00) / 168小时 × 100%\n\n### 3. 检查频率 (错峰)\n- **频率**: 每6-8小时\n- **时间点**: 06:23 / 12:07 / 18:17 / 23:11\n- **原则**: 避开整点（00/15/30/45），减少系统负载\n\n### 4. 预警阈值\n- **正常**: 消耗 ≤ 时间进度 + 20%\n- **预警**: 消耗 > 时间进度 + 2",
+  "limitations_applied": []
+}

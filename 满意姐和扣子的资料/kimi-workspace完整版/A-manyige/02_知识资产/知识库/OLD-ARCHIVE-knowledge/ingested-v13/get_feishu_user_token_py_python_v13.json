@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/get_feishu_user_token.py",
+  "filename": "get_feishu_user_token.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "f42dda81e83a4612",
+  "content_length": 4739,
+  "ingested_at": "2026-03-31T17:27:46.200005",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n获取飞书 User Access Token\n运行此脚本，按提示操作即可\n\"\"\"\n\nimport json\nimport requests\nimport urllib.parse\nimport webbrowser\nimport http.server\nimport socketserver\nimport threading\nimport time\n\n# 配置\nAPP_ID = \"cli_a927c5dfa4381cc6\"\nAPP_SECRET = \"8950yzh6jj17nQkKBjvGIdRocdrslhjI\"\nREDIRECT_URI = \"http://localhost:8080/callback\"\n\n# 全局变量存储code\nauth_code = None\n\nclass CallbackHandler(http.server.SimpleHTTPRequestHandler):\n    \"\"\"处理OAuth回调\"\"\"\n    def do_GET(self):\n        global auth_code\n   ",
+  "limitations_applied": []
+}

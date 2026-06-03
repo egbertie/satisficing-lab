@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/system-v3/task_wrapper/task_wrapper.py",
+  "filename": "task_wrapper.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "84d4c9c6141c7cb7",
+  "content_length": 4347,
+  "ingested_at": "2026-03-31T17:27:46.125918",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n任务包装器 - 强制执行Skill框架\n终极解决方案 - 措施2: 流程层嵌入\n立即执行版 - 2026-03-31\n\"\"\"\n\nimport sys\nimport subprocess\nimport json\nfrom datetime import datetime\nfrom pathlib import Path\n\n# 配置\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nLOG_FILE = WORKSPACE / \"logs/task_wrapper/execution.log\"\nVIOLATION_LOG = WORKSPACE / \"logs/task_wrapper/violations.log\"\n\ndef log(message, level=\"INFO\"):\n    \"\"\"记录日志\"\"\"\n    timestamp = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n    log_entry = f\"[{timestamp}] ",
+  "limitations_applied": []
+}

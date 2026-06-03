@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>爱可可AI前沿推介(4.3)</title>
+  <meta name="description" content="LG - 机器学习 CV - 计算机视觉 CL - 计算与语言 RO - 机器人
+
+1、[CL] Universal YOCO for Efficient Depth Scaling2、[CL] To Memorize or to Retrieve：Scaling Laws for RAG-Considerate Pr">
+  <meta name="author" content="爱可可爱生活">
+  <meta property="og:title" content="爱可可AI前沿推介(4.3)">
+  <meta property="og:description" content="LG - 机器学习 CV - 计算机视觉 CL - 计算与语言 RO - 机器人
+
+1、[CL] Universal YOCO for Efficient Depth Scaling2、[CL] To Memorize or to Retrieve：Scaling Laws for RAG-Considerate Pretraining3、[RO] Generalizable Dense Rewa">
+  <meta property="og:type" content="article">
+  
+  <style>
+    body { max-width: 800px; margin: 0 auto; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: #333; }
+    h1 { font-size: 1.8em; margin-bottom: 0.5em; }
+    .meta { color: #666; margin-bottom: 2em; border-bottom: 1px solid #eee; padding-bottom: 1em; }
+    .meta p { margin: 0.3em 0; }
+    .content { font-size: 1.05em; }
+    .content img { max-width: 100%; height: auto; }
+    .footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #eee; color: #999; font-size: 0.9em; }
+    a { color: #1a73e8; }
+  </style>
+</head>
+<body>
+  <article>
+    <h1>爱可可AI前沿推介(4.3)</h1>
+    <div class="meta">
+      <p><strong>作者：</strong>爱可可爱生活</p>
+      <p><strong>发布时间：</strong>2026-04-03 05:48</p>
+    </div>
+    <div class="content">
+      <p>LG - 机器学习 CV - 计算机视觉 CL - 计算与语言 RO - 机器人</p>
+<p>1、[CL] Universal YOCO for Efficient Depth Scaling2、[CL] To Memorize or to Retrieve：Scaling Laws for RAG-Considerate Pretraining3、[RO] Generalizable Dense Reward for Long-Horizon Robotic Tasks4、[CL] Stochastic Attention：Connectome-Inspired Randomized Routing for Expressive Linear-Time Attention5、[LG] Learning to Hint for Reinforcement Learning</p>
+<p>摘要：用通用型YOCO实现高效的深度扩展、面向 RAG 优化的预训练缩放律、面向长程机器人任务的可泛化稠密奖励、受连接组学启发的随机化路由助力高表达性线性时间注意力机制、强化学习中的提示学习</p>
+<p>1、[CL] Universal YOCO for Efficient Depth Scaling</p>
+<p>Y Sun, L Dong, T Ye, S Huang…[Microsoft Research]</p>
+<p>用通用型YOCO实现高效的深度扩展</p>
+<p>要点:</p>
+<p>挑战了标准Transformer中测试时扩展（Test-time Scaling）的常规方法，在传统架构中循环层会导致计算开销过大以及KV Cache随深度线性爆炸。</p>
+<p>提出了Universal YOCO (YOCO-U)，将YOCO（You Only Cache Once，解码器-解码器架构）与递归计算（Universal Transformer的理念）相结合，实现了极其高效的深度扩展。</p>
+<p>反直觉的架构洞察： 仅仅在浅层、基于高效注意力机制的模块（Self-Decoder）上应用递归计算，其效果与扩展整个网络一样好，在不增加冗余开销的情况下显著增强了模型的表达能力。</p>
+<p>高信息熵机制： 在YOCO-U中，递归循环仅产生基于局部窗口的KV Cache。Cross-Decoder使用的全局KV Cache只生成一次，并且无论循环迭代次数（）多少都保持不变，这使得内存开销相对于严格保持在。</p>
+<p>经验性地证明了隐式推理（内部递归深度）与显式推理（通过思维链的测试时扩展）是正交且协同的。使用数学思考数据对YOCO-U进行微调后，在11个数学基准测试中，其平均准确率比非递归的YOCO基线大幅提升了24.4%。</p>
+<p>在预训练阶段展现出极高的参数和数据效率：与非递归基线相比，YOCO-U仅需减少62%的训练Token或减少50%的参数即可达到相当的损失（Loss）。</p>
+<p>反直觉的消融实验发现： 循环深层网络（Cross-Decoder）带来的边际收益递减，且性能不如循环早期层（Self-Decoder）。这表明早期层充当了迭代的特征提炼器，而深层则充当固定的检索器/解码器。</p>
+<p>推理效率极为惊人：与标准的循环Transformer（如RINS）相比，YOCO-U在处理长上下文（256K）时，预填充吞吐量提升了约10倍，所需的KV Cache内存减少了约38倍。</p>
+<p>表征分析表明，随着循环迭代次数的增加，层与层之间的角距离逐渐减小，这表明隐式表征正逼近一个不动点（即收益递减）。</p>
+<p>主旨： 本文旨在解决大语言模型在进行推理期计算扩展（如测试时扩展、增加计算深度）时，标准Transformer架构面临的计算开销过高和KV Cache随深度线性膨胀的致命瓶颈问题，探索如何在不增加内存负担的前提下，高效地扩展模型的计算深度和推理能力。</p>
+<p>创新：</p>
+<p>局部高效递归架构： 将递归计算（参数共享循环）与YOCO的“自我解码器-交叉解码器”架构创新结合。摒弃了全局循环，仅对使用滑动窗口等高效注意力的浅层（Self-Decoder）进行递归。</p>
+<p>计算与内存解耦： 创新性地利用架构特性，使得循环计算只增加极少量的局部注意力开销，而决定大头内存的全局KV Cache无论循环多少次都只需计算并缓存一次，打破了“深度越深，显存越大”的传统定律。</p>
+<p>贡献：</p>
+<p>提出了一种新型基础大模型架构YOCO-U，为下一代兼具强大推理能力和低廉部署成本的LLM提供了极具潜力的架构范式。</p>
+<p>深入揭示了LLM内部层级的职能分化，证明了在网络浅层进行参数共享的特征迭代，比在深层进行迭代更具性价比。</p>
+<p>首次通过实证（Thinking SFT实验）打通了“隐式计算深度扩展（内部循环）”与“显式测试时扩展（生成CoT）”的关系，证明两者能力不仅不冲突，还能完美叠加。</p>
+<p>提升：</p>
+<p>内存消耗： 在长上下文（如256K）推理时，KV Cache占用量比传统递归Transformer（RINS）降低了约38倍，几乎与非递归模型持平。</p>
+<p>推理速度： 预填充（Prefilling）吞吐量比传统Transformer提升10倍以上，解码速度也远超全量递归的Transformer变体。</p>
+<p>预训练效率： 在相同FLOPs下取得更低的Loss；达到相同性能指标所需的训练数据量减少了62%，或模型参数量减少了50%。</p>
+<p>下游任务表现： 在同等算力预算下，广泛的通用任务和长文本评估中超越了基线模型，数学推理能力（结合CoT）更是获得了平均24.4%的绝对提升。</p>
+<p>不足：</p>
+<p>边际收益递减： 论文自身的分析指出，随着循环次数（）的持续增加，隐层表征会趋向于一个不动点（Fixed point），这意味着无限增加循环次数并不能无限提升模型能力。</p>
+<p>架构迁移成本： YOCO-U是一种全新的底层架构，无法直接热插拔或无缝套用于当前社区广泛存在的大规模开源预训练权重（如LLaMA、Qwen系列），必须从头开始预训练才能享受其红利。</p>
+<p>心得：</p>
+<p>隐式逻辑与显式逻辑的正交性是通向AGI的重要启发： 本文最令人兴奋的发现之一是，模型内部的“深思”（通过层递归增加隐式计算深度）和外部的“多言”（通过Chain-of-Thought输出更多Token）带来的能力提升是完全正交的。这启发我们，未来的大模型设计应当是双管齐下的：在特征提取和潜变量推演阶段让模型内部“多转几圈”（高计算效能），而在复杂任务的逻辑规划阶段让模型“多写几步”（高可解释性）。</p>
+<p>打破Transformer的同质化迷思： 传统观念认为Transformer每一层都是同质的，但YOCO-U的成功（以及消融实验中深层循环失效的现象）深刻表明：浅层本质上是“特征提炼与信息整合区”，深层本质上是“全局检索与词表映射区”。未来的模型优化应高度异构化，把算力好钢用在刀刃（浅层特征加工）上。</p>
+<p>“解耦”是解决Scale系统瓶颈的终极武器： YOCO-U巧妙地将“计算深度”和“状态存储(KV Cache)”解耦。这启发我们，在设计长文本或Agent系统时，必须区分“局部工作记忆”（需要频繁更新但体量小）和“全局长期记忆”（体量大但无需反复重计算）。通过机制设计让消耗资源的组件变为复杂度，是突破Scaling Law物理瓶颈的关键。</p>
+<p>一句话总结: 本文创新性地提出了YOCO-U架构，通过仅在模型的浅层高效注意力模块进行递归循环，成功打破了计算深度与KV Cache爆炸的绑定魔咒；其最反直觉且最具启发性的是，这种极低内存开销的“内部隐式循环”不仅能替代全网递归，还能与“外部显式思维链（CoT）”产生正交叠加效应，为低成本构建具备强大深层推理能力的大模型指明了新路。</p>
+<p>The rise of test-time scaling has remarkably boosted the reasoning and agentic proficiency of Large Language Models (LLMs). Yet, standard Transformers struggle to scale inference-time compute efficiently, as conventional looping strategies suffer from high computational overhead and a KV cache that inflates alongside model depth. We present Universal YOCO (YOCO-U), which combines the YOCO decoder-decoder architecture with recursive computation to achieve a synergistic effect greater than either alone. Built on the YOCO framework, YOCO-U implements a Universal Self-Decoder that performs multiple iterations via parameter sharing, while confining the iterative process to shallow, efficient-attention layers. This combination yields a favorable capability-efficiency tradeoff that neither YOCO nor recursion achieves independently. The YOCO architecture provides a constant global KV cache and linear pre-filling, while partial recursion enhances representational depth with limited overhead. Together, YOCO-U improves token utility and scaling behavior while maintaining efficient inference. Empirical results confirm that YOCO-U remains highly competitive in general and long-context benchmarks, demonstrating that the integration of efficient-attention architectures and recursive computation is a promising direction for scalable LLMs.</p>
+<p>https://arxiv.org/abs/2604.01220</p>
+<p>2、[CL] To Memorize or to Retrieve: Scaling Laws for RAG-Considerate Pretraining</p>
+<p>K Singh, M Yu, V Gangal, Z Tao…[Stanford University &amp; Patronus AI]</p>
+<p>记忆还是检索？面向 RAG 优化的预训练缩放律</p>
+<p>要点:</p>
+<p>引入了一个新的3D缩放定律（Scaling Law），，，量化了在固定总体数据预算下，模型参数量（）、预训练数据Token数（）和检索知识库大小（）之间的权衡关系。</p>
+<p>反直觉的发现： 检索（RAG）的边际效用高度依赖于模型规模。小模型和欠训练模型从RAG中获益巨大；相反，经过充分预训练的大模型（已饱和）从检索中获得的收益急剧递减。RAG并非在所有规模下都是无差别的性能助推器。</p>
+<p>高信息熵机制： 在缩放定律中，将检索的收益建模为一种对数减法增益（Subtractive logarithmic gain），证明了检索是预训练的一种非线性替代方案，而不仅仅是简单的线性加分项。</p>
+<p>确定了一个关键的交叉阈值（约 4.14 个预训练Token/参数）。超过这个临界点后，检索会成为预训练的极高效替代品（增加一个检索Token可以节省多个预训练Token），尽管绝对的Loss下降幅度在缩小。</p>
+<p>任务依赖性行为： 在知识密集型任务（如SimpleQA、NQ-Open）中，RAG能有效替代参数化记忆；但在重度逻辑推理任务（如GSM8K、PIQA）中，RAG几乎没有帮助，甚至可能引入干扰噪声。</p>
+<p>强调了缩放定律研究中的方法论转变：使用困惑度（PPL）代替离散的准确率（Accuracy）来拟合缩放曲线。准确率往往表现出阶跃式的“涌现”假象，从而掩盖了PPL能够成功捕捉到的底层连续能力增长。</p>
+<p>挑战了传统的预训练范式，提出语料库应该被明确划分为用于“内化”（压缩进参数权重）的数据和用于“外部访问”（检索索引）的数据，而不是盲目地将所有数据都压缩进模型权重中。</p>
+<p>主旨： 本文旨在探讨在有限且固定的数据预算下，如何最优地分配数据资源：是将数据用于模型的参数化预训练（让模型记住），还是将其作为外部知识库用于RAG检索（让模型去查）。文章通过大规模实验揭示了预训练与检索在不同规模下的替代与权衡关系。</p>
+<p>创新：</p>
+<p>联合缩放定律（Joint Scaling Law）： 首次打破了预训练和检索相互孤立的研究现状，将预训练数据和外部检索库视为同一数据预算下的竞争接收者，提出了包含模型大小、预训练数据量和检索库大小的三维缩放定律。</p>
+<p>连续性评估方法： 创新性地采用困惑度（Perplexity）替代下游任务中常见的离散准确率（Accuracy）作为缩放分析的核心指标，有效避免了因指标阶跃（即所谓的“能力涌现”）导致的拟合困难，揭示了平滑的能力增长曲线。</p>
+<p>知识存储的经济学视角： 引入了“替代成本（Replacement cost）”和“边际收益（Marginal benefit）”的概念，定量计算出一个检索Token能等效替代多少个预训练Token。</p>
+<p>贡献：</p>
+<p>建立了一个统一的理论框架，定量地描述了参数化知识（预训练）和非参数化知识（检索）之间的互补与替代关系。</p>
+<p>明确界定了RAG的优势区间：通过实证指出检索在小模型、欠训练状态以及知识密集型任务中价值最大，而在大模型、高度饱和状态以及逻辑推理任务中边际效益极低。</p>
+<p>为未来大语言模型系统（尤其是端侧小模型）的数据资源分配、算力规划以及语料库划分提供了极具实用价值的定量指导原则。</p>
+<p>提升：</p>
+<p>资源配置效率： 指出在特定阈值（如训练Token数超过参数量4.14倍）之后，引入检索机制能以极高比例节省预训练所需的Token开销，大幅提升等效训练效率。</p>
+<p>Scaling Law的维度： 将传统的2D Scaling Law（参数+数据）扩展到了3D（参数+训练数据+外挂数据），为AI系统的整体性能预测提供了更丰富、更精确的理论工具。</p>
+<p>不足：</p>
+<p>检索系统设置受限： 实验采用了非常基础的检索设置（固定的FAISS索引、单一Embedding模型、固定的Top-5召回），未探索动态Chunking、重排（Reranking）或联合优化检索器等更先进的RAG技术，这可能低估了检索能带来的性能上限。</p>
+<p>评估指标的局限： 尽管PPL非常适合拟合平滑的缩放定律，但PPL的降低并不总是能完美转化为实际生成任务中用户感知的回答质量或准确率的提升。</p>
+<p>规模与架构局限： 实验的最大模型仅扩展到3B参数，且均基于OLMo-2架构和DCLM数据集。在当今数百甚至数千亿参数的超大模型体系中，该缩放定律的参数（如对数衰减率）是否保持一致，仍有待进一步验证。</p>
+<p>心得：</p>
+<p>打破“数据全部塞进权重”的炼丹迷思： 长期以来，大模型预训练的潜规则是“有多少数据就喂多少数据”。本文深刻启发我们，就像人类将抽象逻辑内化在大脑，而将冷知识记在笔记本上一样，未来的大模型训练应当在数据清洗阶段就进行战略分流——抽象推理数据用于预训练内化，长尾事实数据用于外挂检索，从而实现算力与存储的最优解。</p>
+<p>RAG是“雪中送炭”，而非大模型的“锦上添花”： 论文给出的反直觉结论非常震撼：模型越大、训练越充分，RAG的边际收益越低。这意味着，在算力受限的端侧小模型（SLM）或垂直领域模型中，做好RAG系统的战略价值，远比在GPT-4级别的巨无霸模型上做RAG大得多。小模型+大检索库，可能是未来高性价比AI落地的黄金范式。</p>
+<p>警惕“准确率涌现”的假象，回归连续概率本质： 作者弃用Accuracy而改用Perplexity来推导Scaling Law，不仅解决了曲线阶跃的问题，更提醒了我们在做大模型评测时的方法论——很多时候模型并非突然“顿悟（涌现）”，而是其内部概率（PPL）一直在默默积累，只是在突破某个阈值时才在离散选项上表现出来。寻找底层的连续性指标是发现科学规律的关键。</p>
+<p>一句话总结:本文创新性地提出了结合模型大小、预训练数据量与检索库大小的“三维缩放定律”，反直觉地揭示了RAG并非万能药——它是小模型和欠训练状态的极效补充，但在充分训练的大模型和逻辑推理任务中边际收益骤降；这一发现为未来如何在“参数化记忆”与“外部知识库”之间最优分配数据预算提供了突破性的量化指南。</p>
+<p>Retrieval-augmented generation (RAG) improves language model (LM) performance by providing relevant context at test time for knowledge-intensive situations. However, the relationship between parametric knowledge acquired during pretraining and non-parametric knowledge accessed via retrieval remains poorly understood, especially under fixed data budgets. In this work, we systematically study the trade-off between pretraining corpus size and retrieval store size across a wide range of model and data scales. We train OLMo-2-based LMs ranging from 30M to 3B parameters on up to 100B tokens of DCLM data, while varying both pretraining data scale (1–150× the number of parameters) and retrieval store size (1–20×), and evaluate performance across a diverse suite of benchmarks spanning reasoning, scientific QA, and open-domain QA. We find that retrieval consistently improves performance over parametric-only baselines across model scales and introduce a three-dimensional scaling framework that models performance as a function of model size, pretraining tokens, and retrieval corpus size. This scaling manifold enables us to estimate optimal allocations of a fixed data budget between pretraining and retrieval, revealing that the marginal utility of retrieval depends strongly on model scale, task type, and the degree of pretraining saturation. Our results provide a quantitative foundation for understanding when and how retrieval should complement pretraining, offering practical guidance for allocating data resources in the design of scalable language modeling systems.</p>
+<p>https://arxiv.org/abs/2604.00715</p>
+<p>3、[RO] Generalizable Dense Reward for Long-Horizon Robotic Tasks</p>
+<p>S Yong, S Sheng, C Qi, X Wang…[CMU &amp; Amazon Robotics &amp; UT Austin]</p>
+<p>面向长程机器人任务的可泛化稠密奖励</p>
+<p>要点:</p>
+<p>挑战了长视距（Long-Horizon）机器人任务强化学习中的传统做法——即要么依赖稀疏的最终成功奖励，要么依赖极其脆弱且需要针对特定任务人工设计的密集奖励。</p>
+<p>提出了VLLR（视觉-语言长视距奖励）通用奖励框架，结合了来自LLM/VLM的“外在奖励”和来自策略自身的“内在奖励”。</p>
+<p>反直觉的系统级洞察： VLLR并没有在整个RL微调过程中每步都查询VLM（这在计算上是不可承受的），而是仅仅在极短的第一阶段（占总训练步数不到0.5%）使用VLM进度估计来初始化价值函数（Value Function）。这成功将VLM的语义知识转化为“价值先验”，同时完全避免了后续推理的延迟。</p>
+<p>高信息熵机制（自我确定性）： 将策略自身动作分布的集中度（低信息熵 = 高自我确定性）作为每一步的内在奖励。这一设计的底层逻辑是：基础大模型内部蕴含了“隐式世界模型”，因此策略表现出的高自信度，可以作为任务沿着正确方向推进的有效代理指标。</p>
+<p>解决VLM幻觉问题： 原始的VLM进度信号经常出现虚假的高峰（幻觉），导致奖励的滑动最大值“过早饱和”。VLLR引入了一种对已收集轨迹进行时序滑动窗口（中值滤波）的后处理算法，在PPO更新前剔除VLM幻觉。</p>
+<p>在时间维度上解耦了RL的信用分配（Credit Assignment）问题：LLM/VLM提供粗粒度的语义监督（子目标级），而内在的自我确定性提供细粒度、逐步骤的动作指导。</p>
+<p>反直觉的消融实验发现： 两种奖励组件发挥着完全正交互补的作用。基于VLM的价值初始化主要提升了任务执行的效率（SEL指标，即路径更短、无用动作更少）；而内在的自我确定性主要通过加速收敛和促使动作更加果断，来大幅提升任务的成功率。</p>
+<p>在CHORES基准测试中，相比预训练基础策略（SPOC），绝对成功率提升高达56%；相比SOTA的RL微调方法（如FLaRe），在分布外（OOD）任务上提升高达10%，且全程无需任何人工奖励设计。</p>
+<p>主旨： 本文旨在解决基于模仿学习训练的“机器人基础策略模型（Robotic Foundation Policies）”在执行长视距任务时，因分布偏移和误差累积导致表现不佳，且传统的强化学习（RL）微调方法由于奖励信号稀疏和人工奖励设计难以泛化而无法有效扩展的关键问题。</p>
+<p>创新：</p>
+<p>两阶段高性价比微调范式： 创新性地将高昂的VLM大模型评估过程与海量的PPO微调过程解耦。仅用VLM提供的子目标进度信号预热“价值函数”，随后即抛弃VLM，转而使用轻量级的内在奖励继续训练。</p>
+<p>将“策略熵”逆向转化为内在奖励： 传统RL鼓励高熵以促进探索，而本文基于“大模型具备隐式世界模型”的假设，反其道而行之，将策略输出的低熵（自我确定性）作为内在奖励，直接奖励模型表现出的“自信和果断”。</p>
+<p>抗幻觉的进度过滤算法： 针对VLM在视觉识别中容易产生的突发性幻觉，提出了一种基于轨迹时序一致性的中值滤波算法，解决了长视距任务中进度信号“过早饱和（Premature Saturation）”的致命痛点。</p>
+<p>贡献：</p>
+<p>提出了一种完全无需人工设计任务特定奖励的通用RL微调框架VLLR，打通了从文本指令到密集物理控制奖励的自动化链路。</p>
+<p>在包含移动导航和复杂抓取的CHORES基准上，不仅在分布内任务上刷新了SOTA，更在基础模型从未见过分布外（OOD）任务上展现出强大的泛化能力。</p>
+<p>深入揭示并量化了“外部语义先验（VLM）”与“内部置信度（Self-Certainty）”在强化学习优化动态中所扮演的不同角色（分别主导效率与成功率）。</p>
+<p>提升：</p>
+<p>绝对成功率： 相比直接使用的预训练策略，在部分任务上取得了高达56%的绝对成功率飞跃。</p>
+<p>SOTA对比（成功率）： 在分布内任务上，比依赖稀疏奖励的最新SOTA方法（如FLaRe）高出最高5%；在分布外（OOD）任务上高出最高10%。</p>
+<p>执行效率（SEL）： 通过VLM价值初始化，使得机器人在完成任务时的路径更短、无效探索更少，任务完成效率（Success weighted by Episode Length）相比基线提升达10%。</p>
+<p>不足：</p>
+<p>对环境信息的过度依赖： LLM在进行任务分解时，依然依赖环境的全局场景图（Scene Graph）作为输入，这在真实世界的非结构化环境中很难完美获取。</p>
+<p>内在奖励的脆弱性边界： 论文指出，如果给予“自我确定性”过高的权重，会破坏训练的稳定性，导致模型“盲目自信”并覆盖原本的价值估计，引发灾难性遗忘。</p>
+<p>动作空间与任务维度的局限： 目前的验证主要集中在离散动作空间（20个离散动作）的移动操作任务上，尚未在需要高频连续控制的复杂灵巧手操作任务中证明其有效性。</p>
+<p>心得：</p>
+<p>“外挂大脑”与“肌肉记忆”的极致解耦设计： 最令人拍案叫绝的工程智慧在于：作者没有让VLM在整个训练周期当“裁判”（太贵太慢），而是让VLM在第一阶段给Critic（价值函数）当“导师”。把VLM的语义理解能力压缩进轻量级的Critic网络后，RL算法就能带着这份“价值先验”自行高频迭代。这为具身智能如何低成本利用云端大语言模型提供了绝佳的系统设计范式。</p>
+<p>重新定义RL中的“熵（Entropy）”： 在传统的从零开始训练的RL中，我们总是最大化策略熵以鼓励探索。但这篇论文启发我们：当我们站在“基础大模型（Foundation Models）”的肩膀上微调时，模型已经通过模仿学习内化了世界规律。此时，策略表现出的“低熵（高确定性）”不再是陷入局部最优的标志，而是模型在当前状态下确信自己正走在正确路径上的强信号。依据模型自身的确定性给予奖励，是一种极其优雅的“能力引出”机制。</p>
+<p>长视距问题的破局点在于“不同时间分辨率的奖励组合”： 长视距任务之所以难，是因为宏观的“语义进度”和微观的“物理控制”脱节。本文启发我们，完美的奖励函数不应该是一个单一黑盒，而应是分层的：宏观层面用VLM看“有没有靠近目标”（解决稀疏性，低频更新），微观层面用模型自我置信度看“当前动作是否连贯果断”（解决步态指导，高频更新）。只有时空分辨率匹配，才能真正攻克Long-Horizon难题。</p>
+<p>一句话总结:本文旨在解决长视距机器人任务中RL微调缺乏通用密集奖励的难题，创新性地提出了VLLR框架，其最反直觉的亮点在于：它没有在整个微调中依赖昂贵的VLM，而是巧妙地仅在极短的预热期利用VLM评估子目标来“初始化价值函数”，随后将基础策略自身动作分布的“自我确定性”转化为密集的内在奖励指导整个PPO过程；这种无需人工设计奖励的方法不仅在CHORES基准上实现了最高56%的成功率飞跃，更极具启发性地揭示了“VLM语义先验提升执行效率”与“内在确定性提升动作果断率”的正交互补效应，为具身智能大模型的低成本泛化微调指明了新路。</p>
+<p>Existing robotic foundation policies are trained primarily via large-scale imitation learning. While such models demonstrate strong capabilities, they often struggle with longhorizon tasks due to distribution shift and error accumulation. While reinforcement learning (RL) can finetune these models, it cannot work well across diverse tasks without manual reward engineering. We propose VLLR, a dense reward framework combining (1) an extrinsic reward from Large Language Models (LLMs) and Vision-Language Models (VLMs) for task progress recognition, and (2) an instrinsic reward based on policy selfcertainty. VLLR uses LLMs to decompose tasks into verifiable subtasks and then VLMs to estimate progress to initialize the value function for a brief warm-up phase, avoiding prohibitive inference cost during full training; and self-certainty provides per-step intrinsic guidance throughout PPO finetuning. Ablation studies reveal complementary benefits: VLM-based value initialization primarily improves task completion efficiency, while self-certainty primarily enhances success rates, particularly on out-of-distribution tasks. On the CHORES benchmark covering mobile manipulation and navigation, VLLR achieves up to 56% absolute success rate gains over the pretrained policy, up to 5% gains over state-of-the-art RL finetuning methods on in-distribution tasks, and up to 10% gains on outof-distribution tasks, all without manual reward engineering. Additional visualizations can be found here.</p>
+<p>https://arxiv.org/abs/2604.00055</p>
+<p>4、[CL] Stochastic Attention: Connectome-Inspired Randomized Routing for Expressive Linear-Time Attention</p>
+<p>Z Jin, Y Sui[Tsinghua University]</p>
+<p>随机注意力：受连接组学启发的随机化路由助力高表达性线性时间注意力机制</p>
+<p>要点:</p>
+<p>巧妙地将高效注意力机制与果蝇大脑连接组（Connectome）进行了类比：果蝇大脑连接极度稀疏（0.02%连接概率），但由于存在大量随机的长距离“捷径”（小世界拓扑结构），其平均路径长度仅为4.4跳。</p>
+<p>反直觉的架构洞察： 仅仅在滑动窗口注意力（SWA）之前对Token序列进行随机重排（排列），并在注意力计算后恢复原序，就能产生强大的全局路由效果。这种“随机注意力（SA）”将确定性的局部窗口转化为了均匀分布的随机全局窗口。</p>
+<p>高信息熵的理论特性： 通过在不同网络层使用独立的随机排列，模型的感受野呈指数级增长，而非线性增长。它仅需  层即可覆盖整个序列，彻底打破了传统SWA需要  层的局限，同时计算复杂度依然保持在 。</p>
+<p>“小世界”门控组合机制： 纯粹的SA会破坏序列的局部连贯性，导致语言建模的困惑度（Perplexity）严重恶化。然而，将SA（全局捷径）与标准SWA（局部聚集）通过门控机制并行结合，完美复现了生物学上的“小世界”网络，在零样本下游任务中取得了最佳的准确率。</p>
+<p>惊人的免训练泛化能力： SA可以作为现成的预训练大模型（如Qwen3-8B/30B）Prefill阶段全注意力的直接替代品，完全无需重新训练。随着窗口增大，它比SWA更快地恢复到全注意力的性能水平，并击败了块注意力混合机制（MoBA）。这证明预训练的注意力头对随机Token输入具有极高的鲁棒性，只要维持全局连通性即可。</p>
+<p>硬件友好的实现：不需要编写新的定制CUDA算子。通过现有框架（如FlexAttention）的本地索引收集/分散操作，极其容易吸收O(n)的排列开销，在32K上下文长度下相比全注意力实现了28倍的加速。</p>
+<p>主旨： 本文旨在解决线性时间复杂度注意力机制（特别是滑动窗口注意力SWA）中局部视野受限、难以进行全局信息交互的问题。受生物神经网络“小世界”特性的启发，文章提出了一种计算开销极小且无需增加额外参数的随机注意力路由机制，以实现高效的全局长序列建模。</p>
+<p>创新：</p>
+<p>随机注意力（Stochastic Attention， SA）： 创新性地提出“Permute（重排） -- 仿生双路径小世界架构： 设计了基于独立Sigmoid门控的 SA + SWA 组合架构，SWA负责局部聚集（Local clustering），SA负责全局随机捷径（Global shortcuts），在网络拓扑上完美映射了Watts-Strogatz小世界图模型。</p>
+<p>贡献：</p>
+<p>理论贡献：从图论角度严格证明了SA机制下的多层感受野以  速度呈指数扩张，并分析了其作为全注意力无偏估计的偏差-方差权衡。</p>
+<p>方法贡献：提出了一种真正意义上的“即插即用”注意力增强插件，既可以用于从头预训练，也可以无缝用于现有大模型的免训练推理加速。</p>
+<p>实验贡献：在360M模型的预训练和Qwen3-8B/30B的免训练推理中全面验证了SA的有效性，证明了随机路由机制优于现有的启发式稀疏模式（Sparse Patterns）或块路由（MoBA）。</p>
+<p>提升：</p>
+<p>感受野扩展速度： 从SWA的线性层级依赖  跃升至指数级的 。</p>
+<p>大模型免训练推理能力： 在极小窗口（weff=32/64）下，传统SWA在知识密集型任务（如MMLU）上性能崩溃，而SA成功保留了大量全注意力性能，在同等算力下平均准确率比MoBA高出3-7个百分点。</p>
+<p>计算效率： 在长文本（32K）场景下，前向+反向传播的速度比标准全注意力提升了28倍。</p>
+<p>不足：</p>
+<p>单纯随机破坏局部语义： 纯SA机制会严重破坏语言模型必须的局部语境连贯性（导致PPL极高），必须搭配SWA（导致计算量变为单一SWA的2倍，尽管仍是  复杂度）。</p>
+<p>长文本极限能力未知： 文章在预训练阶段仅测试了2048长度，且模型规模仅为360M，SA机制在超大规模参数（如100B+）及超长原生上下文（如1M token）从头预训练中的Scaling Law表现尚待验证。</p>
+<p>位置编码冲突： 在免训练推理中，由于打乱了Token顺序但RoPE位置编码依旧使用的是原位置，这在一定程度上给预训练模型的内部表征带来了分布偏移（尽管实验证明模型对这种偏移有一定抵抗力）。</p>
+<p>心得：</p>
+<p>大繁至简：随机性是最高效的路由机制。 过去几年，AI界设计了极其复杂的注意力路由、哈希匹配和聚类机制（如Routing Transformer， Reformer）来寻找重要的Token。但本文告诉我们：完全随机的打乱加上多层网络的叠加，自然就会形成图论中的“扩展图（Expander Graph）”，从而保证全局信息的充分混合。有时候，简单的随机算法比复杂的学习算法更符合Scaling的哲学。</p>
+<p>生物学拓扑对AI架构的降维打击。 果蝇大脑仅靠0.02%的连接率就能实现4.4跳的全局通信，这深刻揭示了“局部密集连接 + 全局随机捷径”的小世界网络威力。AI架构设计不应仅仅局限于张量计算的优化，宏观网络拓扑（Topology）的仿生学设计依然是一座金矿。</p>
+<p>预训练注意力头的惊人“鲁棒性”。 文章最令我震撼的实验是，把Qwen3的输入顺序完全随机打乱后丢给局部窗口，模型依然能输出合理的结果。这说明预训练LLM的注意力机制本质上是一种极为强健的“信息检索器”，它不那么在乎信息是如何被粗暴重组的，只要那些关键信息（Key/Value）在视野中出现过，它就能敏锐地捕捉并聚合。</p>
+<p>一句话总结:受果蝇大脑“小世界”连接组启发，本文提出一种零参数增加的“随机注意力（SA）”机制，通过在滑动窗口计算前对Token进行随机重排，将感受野的扩展速度从线性飞跃至指数级，成功在保持线性计算复杂度的前提下，为无论是从头预训练还是免训练推理的大模型提供了卓越的全局信息路由能力。</p>
+<p>The whole-brain connectome of a fruit fly comprises over 130K neurons connected with a probability of merely 0.02%, yet achieves an average shortest path of only 4.4 hops. Despite being highly structured at the circuit level, the network’s long-range connections are broadly distributed across brain regions, functioning as stochastic shortcuts that enable efficient global communication. Inspired by this observation, we propose Stochastic Attention (SA), a drop-in enhancement for sliding-window attention (SWA) that applies a random permutation to the token sequence before windowed attention and restores the original order afterward. This transforms the fixed local window into a stochastic global one within the same O(nw) perlayer budget. Through depth, independently sampled permutations yield exponentially growing receptive fields, achieving full sequence coverage in O(logw n) layers versus O(n/w) for SWA. We validate SA in two settings: pre-training language models from scratch, where a gated SA + SWA combination achieves the best average zero-shot accuracy, and training-free inference on Qwen3-8B and Qwen3-30B-A3B, where SA consistently outperforms SWA and matches or exceeds Mixture of Block Attention at comparable compute budgets. These results suggest that connectome-inspired stochastic routing is a practical primitive for improving the expressivity of efficient attention, complementary to existing linear and sparse approaches.</p>
+<p>https://arxiv.org/abs/2604.00754</p>
+<p>5、[LG] Learning to Hint for Reinforcement Learning</p>
+<p>Y Xia, C Xu, Z Yao, J McAuley…[University of California, San Diego &amp; Snowflake AI Research]</p>
+<p>强化学习中的提示学习</p>
+<p>要点:</p>
+<p>指出了标准GRPO强化学习中的“优势坍塌（Advantage Collapse）”问题：困难问题往往导致所有Rollout全部错误，使得相对优势为零，从而无法提供任何学习信号。</p>
+<p>提出了HiLL（Hint Learning for Reinforcement Learning）框架，创新性地在在线强化学习过程中联合训练一个提示策略（Hinter Policy）和一个推理策略（Reasoner Policy）。</p>
+<p>关于提示（Hinting）的反直觉洞察： 并非所有能创造学习信号（即产生对错参半的Rollout）的提示都是有用的。如果提示把问题变得太简单，模型就会学会依赖提示，这种学到的行为无法迁移到测试时没有提示的真实场景中。</p>
+<p>高信息熵概念（提示依赖度 Hint Reliance）： 形式化地定义了“提示依赖度”，即正确轨迹在有提示输入和无提示输入下的对数概率之差（）。</p>
+<p>在数学上证明了一个迁移性下界：模型在无提示问题上的成功率，其下界等于有提示成功率乘以 提示依赖度。因此，较低的提示依赖度能从数学上保证更好的任务迁移能力。</p>
+<p>利用上述下界为提示策略（Hinter）构建了“基于迁移权重的奖励（Transfer-Weighted Reward）”。Hinter如果能创造出有对有错的Rollout组（信号创造），就会得到奖励；但如果由此产生的正确轨迹过度依赖于提示（信号迁移差），就会受到重罚。</p>
+<p>涌现行为： 由于这种基于迁移权重的奖励机制，Hinter自然而然地学会了生成简短的、概念性的提示（例如“尝试因式分解”），而不是一步步的计算性提示（例如“x^2 - 4 = (x-2)(x+2)”），因为后者会导致推理器对其产生严重的提示依赖。</p>
+<p>能够动态适应推理器不断变化的能力边界：随着推理器能力的提升，Hinter通过“基于失败条件的提示生成（Failure-Conditioned Hint Generation）”，不断从推理器新的错误模式中学习。</p>
+<p>相比于标准GRPO和基于固定提示的基线方法，在分布内数学任务（MATH-500， AIME）和分布外推理任务（GPQA， MMLU-Pro）上均取得了SOTA（最先进）的性能。</p>
+<p>主旨： 本文旨在解决基于GRPO的大语言模型强化学习中，由于困难问题导致全错回放（Rollouts）从而失去梯度更新信号（优势坍塌）的难题。文章探索如何通过动态生成提示（Hints）来恢复学习信号，并确保这些信号能有效转化为模型在无提示真实场景下的推理能力。</p>
+<p>创新：</p>
+<p>在线动态协同训练（Co-training）： 摒弃了以往使用离线、静态提示或外部固定脚手架（Scaffold）的做法，创新地在RL过程中让提示生成器（Hinter）和推理器（Reasoner）共同进化，Hinter根据Reasoner实时的失败轨迹动态生成针对性提示。</p>
+<p>提出并量化“提示依赖度（Hint Reliance）”： 创新性地提出了量化提示副作用的指标，衡量一条正确推理轨迹在多大程度上是因为看了提示才写出来的。</p>
+<p>基于理论下界的迁移权重奖励（Transfer-Weighted Reward）： 在数学上打通了“有提示成功率”和“无提示成功率”的关系，并以此设计出一种绝妙的RL奖励函数，强迫Hinter不仅要让Reasoner做对题，还要让Reasoner学会在没有提示时也能顺理成章地做出这道题。</p>
+<p>贡献：</p>
+<p>提出了一套完整的、用于大模型RL的提示学习框架HiLL（Hint Learning for RL）。</p>
+<p>建立了提示机制在RL中有效性的理论基础，证明了并非所有诱导成功的提示都有益，低“提示依赖度”是实现能力迁移的充要条件。</p>
+<p>通过在Llama-3.2和Qwen2.5等基础模型上的广泛实验，证明了该方法在包括AIME、MATH-500在内的六个数学基准，以及GPQA等分布外复杂推理基准上，全面超越了标准GRPO和其他现有基于提示的改进方法。</p>
+<p>提升：</p>
+<p>模型推理能力上限： 将传统RL无法攻克的“极难问题”（成功率接近0）成功转化为有效的训练数据，从而在AIME24/25等高难度竞赛数学题上显著提升了准确率。</p>
+<p>训练样本的利用率（全错率）： 大幅降低了训练批次中“全错组（All-incorrect groups）”的比例，使得计算资源不再因计算出全零的优势函数（Zero Advantage）而浪费。</p>
+<p>泛化能力（OOD Transfer）： 尽管只在数学数据上进行了训练，但基于HiLL训练的模型在涵盖物理、生物、化学等广泛领域的GPQA和MMLU-Pro上同样获得了显著的能力提升。</p>
+<p>不足：</p>
+<p>计算开销显著增加： 针对每个全错的题目，HiLL需要调用Hinter生成提示，然后Reasoner需要重新采样，接着还要通过两次前向传播（Forward Pass）来计算提示依赖度。这使得每步训练的绝对时间比标准GRPO高出2.6到3.8倍。</p>
+<p>超参数敏感性： 奖励函数中的“迁移温度（Transfer Temperature， ）”对最终性能有较大影响，需要仔细调节以平衡“信号创造”和“信号迁移”。</p>
+<p>对参考答案的依赖： 在训练Hinter时，目前的方法依赖于获取Ground Truth（参考答案）来辅助生成有效且不剧透的提示。如果在缺乏参考答案的完全无监督RL场景中，该框架的有效性将受限。</p>
+<p>心得：</p>
+<p>“授人以鱼不如授人以渔”在AI训练中的绝佳数学具象化： 这篇论文最令我拍案叫绝的设计在于“Transfer-Weighted Reward”。过去我们给大模型加Prompt或Hint，只是为了让它做对；但本文通过  惩罚了那种“直接把饭喂到嘴里”的Hint。Hinter被这个奖励逼着学会了像一个高级人类教师那样说话——只点拨思路，不代替计算。这不仅是RL算法的胜利，更是教育学原理在机器对齐中的精妙映射。</p>
+<p>直面“能力边界”：RLVR（基于可验证奖励的RL）的未来在Hard Examples。 GRPO最怕的就是太难的题（全是负反馈，等于没有反馈）。HiLL框架其实提供了一种自动化的“课程学习（Curriculum Learning）”降维打击机制，它把当前模型绝对做不出的题，通过自适应的Hint拉低难度到模型刚好能做对的边缘（Zone of Proximal Development，最近发展区），这是突破大模型推理能力天花板的必由之路。</p>
+<p>评估AI生成内容的“隐形代价”。“Hint Reliance（提示依赖度）”这个概念极具启发性。在当前大量使用Agent、外部工具或RAG来增强LLM的趋势下，我们常常容易产生“模型能力变强”的错觉。但这篇论文提醒我们，如果高难度任务的成功是高度建立在外部输入条件上的，那么模型本身的内化能力并没有提升。如何设计机制让外接工具的帮助能够真正转化为模型内部参数的权重更新，将是一个极具前景的研究方向。</p>
+<p>一句话总结: 本文针对大语言模型RL训练中难题导致“优势坍塌（梯度为零）”的困境，创新提出HiLL框架，通过联合训练一个“提示生成器（Hinter）”动态指导“推理器（Reasoner）”，并极具启发性地引入了“提示依赖度（Hint Reliance）”进行数学惩罚，逼迫Hinter生成“只给概念指引、不越俎代庖”的高质量提示，从而确保模型在借助提示学到的推理能力能够完美迁移到无提示的真实场景，在各项复杂推理基准上全面刷新了现有强化学习方法的上限。</p>
+<p>Group Relative Policy Optimization (GRPO) is widely used for reinforcement learning with verifiable rewards, but it often suffers from advantage collapse: when all rollouts in a group receive the same reward, the group yields zero relative advantage and thus no learning signal. For example, if a question is too hard for the reasoner, all sampled rollouts can be incorrect and receive zero reward. Recent work addresses this issue by adding hints or auxiliary scaffolds to such hard questions so that the reasoner produces mixed outcomes and recovers a non-zero update. However, existing hints are usually fixed rather than adapted to the current reasoner, and a hint that creates learning signal under the hinted input does not necessarily improve the no-hint policy used at test time. To this end, we propose Hint Learning for Reinforcement Learning (HiLL), a framework that jointly trains a hinter policy and a reasoner policy during RL. For each hard question, the hinter generates hints online conditioned on the current reasoner’s incorrect rollout, allowing hint generation to adapt to the reasoner’s evolving errors. We further introduce hint reliance, which measures how strongly correct hinted trajectories depend on the hint. We derive a transferability result showing that lower hint reliance implies stronger transfer from hinted success to no-hint success, and we use this result to define a transfer-weighted reward for training the hinter. Therefore, HiLL favors hints that not only recover informative GRPO groups, but also produce signals that are more likely to improve the original no-hint policy. Experiments across multiple benchmarks show that HiLL consistently outperforms GRPO and prior hint-based baselines, demonstrating the value of adaptive and transfer-aware hint learning for RL.</p>
+<p>https://arxiv.org/abs/2604.00698</p>
+    </div>
+    
+    <div class="footer" style="margin-top:3em;padding-top:1em;border-top:1px solid #eee;color:#aaa;font-size:0.85em;">
+      <p><strong>原文链接：</strong><a href="https://mp.weixin.qq.com/s/64pCsKhV-LfWOrp_HOjLqg">https://mp.weixin.qq.com/s/64pCsKhV-LfWOrp_HOjLqg</a></p>
+      <p style="margin-top:0.8em;">Powered by <a href="https://readgzh.site" style="color:#aaa;text-decoration:none;">ReadGZH</a> · <a href="https://readgzh.site/docs" style="color:#aaa;text-decoration:none;">开发者文档</a> · <a href="https://readgzh.site/pricing" style="color:#aaa;text-decoration:none;">升级套餐</a></p>
+      <p style="margin-top:0.4em;font-size:0.8em;">💡 免费注册获取每天 30 积分 · Lite ¥9/月 · Pro ¥39/月 → <a href="https://readgzh.site/dashboard" style="color:#aaa;">readgzh.site/dashboard</a></p>
+    </div>
+  </article>
+</body>
+</html>

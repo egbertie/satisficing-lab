@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/docs/2026-03/文件格式读取技术研究报告.md",
+  "filename": "文件格式读取技术研究报告.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "5cbd6d39e17e68f5",
+  "content_length": 3840,
+  "ingested_at": "2026-03-31T17:27:46.656392",
+  "content_preview": "# 常用文件格式读取技术研究报告\n\n## 📋 概述\n\n本报告针对用户频繁遇到的PDF、DOCX、TXT等格式文件读取问题，提供完整的技术解决方案。\n\n---\n\n## P1 - 最高优先级方案\n\n### 1. PDF格式读取\n\n#### 技术方案对比表\n\n| 库名称 | 性能 | 文本提取 | 表格提取 | 安装复杂度 | 推荐指数 |\n|--------|------|----------|----------|------------|----------|\n| **pdfplumber** | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 低 | ⭐⭐⭐⭐⭐ **首选** |\n| **PyMuPDF (fitz)** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | 低 | ⭐⭐⭐⭐⭐ **高性能** |\n| **pdfminer.six** | ⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ | 低 | ⭐⭐⭐⭐ 复杂布局 |\n| **PyPDF2** | ⭐⭐⭐ | ⭐⭐ | ❌ | 最低 | ⭐⭐⭐ 简单操作 |\n\n#### 推荐方案\n\n**主要推荐：pdfplumber**\n- ✅ 表格提取能力",
+  "limitations_applied": []
+}

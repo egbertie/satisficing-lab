@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/token-enforcer-deployment-report.md",
+  "filename": "token-enforcer-deployment-report.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "989c26e40b9f4bfb",
+  "content_length": 6067,
+  "ingested_at": "2026-03-31T17:27:46.536464",
+  "content_preview": "# Token感知调度器部署完成报告\n## 5标准转化验收文档\n\n**部署时间**: 2026-03-23 09:17  \n**部署版本**: v2.1.0+tagging  \n**部署状态**: ✅ 已完成  \n\n---\n\n## 一、部署概览\n\n### 1.1 部署组件清单\n\n| 组件 | 状态 | 路径 | 说明 |\n|-----|------|------|------|\n| 预算分配器 | ✅ | scripts/allocator.py | 三级预算池管理 |\n| 熔断器 | ✅ | scripts/circuit_breaker.py | 150%预警/200%熔断/300%上限 |\n| 消耗预估器 | ✅ | scripts/estimator.py | 任务类型→Token预估 |\n| 实时监控器 | ✅ | scripts/monitor.py | 5秒级监控 |\n| 报告生成器 | ✅ | scripts/reporter.py | 日报/效率分析 |\n| 成本标签器 | ✅ | scripts/cost_tagger.py | 任务成本标签自动生成 |\n| 主控脚",
+  "limitations_applied": []
+}

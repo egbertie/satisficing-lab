@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_auto-redbook-skills/19cec31b-71a2-8b06-8000-00004ad11bea_render_xhs_v2.py",
+  "filename": "19cec31b-71a2-8b06-8000-00004ad11bea_render_xhs_v2.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "f59d20176cff937f",
+  "content_length": 24418,
+  "ingested_at": "2026-03-31T17:27:45.044659",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n小红书卡片渲染脚本 V2 - 智能分页版\n将 Markdown 文件渲染为小红书风格的图片卡片\n\n新特性：\n1. 智能分页：自动检测内容高度，超出时自动拆分到多张卡片\n2. 多种样式：支持多种预设样式主题\n3. 字数预估：基于字数预分配内容，减少渲染次数\n\n使用方法:\n    python render_xhs_v2.py <markdown_file> [options]\n\n依赖安装:\n    pip install markdown pyyaml playwright\n    playwright install chromium\n\"\"\"\n\nimport argparse\nimport asyncio\nimport os\nimport re\nimport sys\nimport tempfile\nfrom pathlib import Path\nfrom typing import List, Dict, Tuple\n\ntry:\n    import markdown\n    import yaml\n    from playwr",
+  "limitations_applied": []
+}

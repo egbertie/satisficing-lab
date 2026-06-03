@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/ZEROTOKEN_OPTIMIZATION_DEPLOYED_2026-03-26.md",
+  "filename": "ZEROTOKEN_OPTIMIZATION_DEPLOYED_2026-03-26.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "f8f878ece18c460a",
+  "content_length": 1842,
+  "ingested_at": "2026-03-31T17:27:46.516253",
+  "content_preview": "# 链接2优化部署完成报告\n## 零Token经济效益方案\n## 时间: 2026-03-26 12:10\n\n---\n\n## ✅ 已部署组件\n\n### 1. 实时文件监控（替代Cron轮询）✅\n**路径**: `scripts/zero-token-monitor.py`\n**技术**: Python Watchdog + inotify\n**PID**: 15786\n\n**优化效果**:\n- 前: 10分钟Cron轮询\n- 后: 事件驱动实时监控\n- 延迟: 10分钟 → 实时（毫秒级）\n\n### 2. 进程守护（中断自动保存）✅\n**路径**: `scripts/zero-token-guardian.py`\n**技术**: psutil进程监控\n**PID**: 15785\n\n**功能**:\n- 监控Claw进程状态\n- 检测到中断自动触发紧急备份\n- 生成<300 tokens微摘要\n\n### 3. 微摘要生成器 ✅\n**路径**: 集成在guardian中\n**目标**: <300 tokens（原5000+）\n**节省**: 95%恢复Token成本\n\n---\n\n## 📊 ",
+  "limitations_applied": []
+}

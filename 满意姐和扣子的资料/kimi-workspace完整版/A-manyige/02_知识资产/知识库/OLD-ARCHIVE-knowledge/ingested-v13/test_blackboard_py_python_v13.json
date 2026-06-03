@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/system-v2/blackboard/tests/test_blackboard.py",
+  "filename": "test_blackboard.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "95e4460af03ad443",
+  "content_length": 6892,
+  "ingested_at": "2026-03-31T17:27:44.539358",
+  "content_preview": "\"\"\"\nBlackboard V2 测试套件\n\"\"\"\n\nimport sys\nimport os\n\n# 添加项目根目录到路径\nsys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))\n\n# 直接从模块导入\nsys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))\nfrom blackboard_manager import BlackboardManager, get_blackboard\nfrom shared_memory import SharedMemory\nfrom event_system import EventSystem\nfrom audit_logger import AuditLogger\n\n\nclass TestRunner:\n    \"\"\"简易测试运行器\"\"\"\n    \n    def __init__(self):\n    ",
+  "limitations_applied": []
+}

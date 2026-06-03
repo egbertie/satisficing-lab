@@ -1,0 +1,41 @@
+{
+  "jobs": [
+    {
+      "name": "baseline-checker-daily",
+      "schedule": "26 12 * * *",
+      "command": "python3 skills/baseline-checker/scripts/baseline-checker-runner.py check",
+      "description": "每日完整基线检查",
+      "enabled": true
+    },
+    {
+      "name": "baseline-checker-weekly",
+      "schedule": "0 9 * * 1",
+      "command": "python3 skills/baseline-checker/scripts/baseline-checker-runner.py trend --days 7",
+      "description": "每周趋势分析",
+      "enabled": true
+    },
+    {
+      "name": "baseline-checker-monthly-validate",
+      "schedule": "0 10 1 * *",
+      "command": "python3 skills/baseline-checker/scripts/baseline-checker-runner.py validate",
+      "description": "每月基线准确性验证",
+      "enabled": true
+    },
+    {
+      "name": "baseline-checker-quarterly-adversarial",
+      "schedule": "0 11 1 1,4,7,10 *",
+      "command": "python3 skills/baseline-checker/scripts/baseline-checker-runner.py adversarial-test",
+      "description": "每季度对抗测试",
+      "enabled": true
+    }
+  ],
+  "settings": {
+    "report_retention_days": 90,
+    "trend_analysis_default_days": 30,
+    "alert_threshold": {
+      "critical_violation": 1,
+      "warning_threshold": 3,
+      "pass_rate_minimum": 90
+    }
+  }
+}

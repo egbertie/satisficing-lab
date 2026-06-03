@@ -1,0 +1,34 @@
+[
+  {
+    "type": "reLaunch",
+    "url": "{{ROUTE_URL}}"
+  },
+  {
+    "type": "waitForRoute",
+    "path": "{{ROUTE_PATH}}",
+    "query": "{{ROUTE_QUERY}}",
+    "timeoutMs": "{{ROUTE_TIMEOUT_MS}}"
+  },
+  {
+    "type": "snapshot",
+    "dataPaths": [
+      "root"
+    ],
+    "path": "{{SNAPSHOT_PATH}}"
+  },
+  {
+    "type": "inspectDataTree",
+    "path": "root",
+    "limit": "{{DATA_TREE_LIMIT}}"
+  },
+  {
+    "type": "suggestSelectors",
+    "path": "root",
+    "limit": "{{SELECTOR_LIMIT}}",
+    "minCount": 1
+  },
+  {
+    "type": "screenshot",
+    "path": "{{SCREENSHOT_PATH}}"
+  }
+]

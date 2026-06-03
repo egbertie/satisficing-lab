@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/ai-meeting-notes/scripts/self_check.py",
+  "filename": "self_check.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "cc739647cdedf755",
+  "content_length": 8421,
+  "ingested_at": "2026-03-31T17:27:45.438110",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nself_check.py\n准确性自检模块 - S5标准实现\n\n功能：\n- 完整性检查\n- 置信度评分\n- 质量报告生成\n\"\"\"\n\nimport json\nimport re\nfrom typing import Dict, List, Tuple\nfrom dataclasses import dataclass\n\n@dataclass\nclass CheckResult:\n    \"\"\"检查结果\"\"\"\n    check_name: str\n    passed: bool\n    score: float\n    weight: float\n    message: str\n\nclass SelfCheckEngine:\n    \"\"\"自检引擎\"\"\"\n    \n    # 检查项定义: (名称, 权重, 检查函数)\n    CHECK_ITEMS = {\n        'title': ('会议主题提取', 0.15),\n        'date': ('日期识别', 0.10),\n        'attendees':",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/super-knowledge-ingest/super_knowledge_ingest_v2.py",
+  "filename": "super_knowledge_ingest_v2.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "ce58ba4339fd14eb",
+  "content_length": 27765,
+  "ingested_at": "2026-03-31T17:27:45.425701",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nsuper-knowledge-ingest V2.0 - 7层标准完整入库\n针对深度研究文件的完整7层标准化入库\n\"\"\"\n\nimport json\nimport os\nimport re\nimport hashlib\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Optional, Tuple\n\nclass KnowledgeIngestor:\n    \"\"\"7层标准知识入库器\"\"\"\n    \n    def __init__(self, source_file: str, output_dir: str = \"/root/.openclaw/workspace/knowledge/7standard\"):\n        self.source_file = Path(source_file)\n        self.output_dir = Path(output_dir)\n        self.",
+  "limitations_applied": []
+}

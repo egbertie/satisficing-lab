@@ -1,0 +1,94 @@
+# Cron调度优化配置 v2.0
+# 优化目标: 减少资源冲突、均衡负载、错峰执行
+
+# ============ 调度时间规范 ============
+# 使用推荐的错峰分钟: 07, 17, 27, 37, 47, 57
+# 避免整点 (00) 和半点 (30) 的高峰期
+
+# ============ 高频任务 (每15分钟) ============
+high_frequency_jobs:
+  - name: "token-monitor"
+    schedule: "07,22,37,52 * * * *"
+    command: "python3 skills/token-budget-enforcer/scripts/monitor.py"
+    tier: 1
+    
+  - name: "health-check"
+    schedule: "12,27,42,57 * * * *"
+    command: "python3 skills/baseline-checker/scripts/baseline-checker-runner.py quick"
+    tier: 1
+
+# ============ 中频任务 (每小时) ============
+medium_frequency_jobs:
+  - name: "quality-assurance-scan"
+    schedule: "17 * * * *"
+    command: "python3 skills/quality-assurance/scripts/qa-review.sh --auto"
+    tier: 2
+    
+  - name: "data-quality-check"
+    schedule: "27 * * * *"
+    command: "python3 skills/data-quality-auditor/scripts/data_quality_auditor.py"
+    tier: 2
+    
+  - name: "vendor-api-health"
+    schedule: "37 * * * *"
+    command: "python3 skills/vendor-api-monitor/scripts/check_apis.py"
+    tier: 2
+    
+  - name: "worry-list-update"
+    schedule: "47 * * * *"
+    command: "python3 skills/worry-list-manager/scripts/update.py"
+    tier: 2
+
+# ============ 低频任务 (每日) ============
+daily_jobs:
+  - name: "daily-summary"
+    schedule: "17 2 * * *"    # 凌晨2:17
+    command: "python3 scripts/generate_daily_summary.py"
+    tier: 3
+    
+  - name: "backup-verification"
+    schedule: "37 3 * * *"    # 凌晨3:37
+    command: "bash disaster-recovery/verify-backup.sh"
+    tier: 3
+    
+  - name: "weekly-token-report"
+    schedule: "47 4 * * 1"    # 每周一 4:47
+    command: "python3 skills/token-weekly-monitor/scripts/weekly_report.py"
+    tier: 3
+    
+  - name: "archive-cleanup"
+    schedule: "17 5 * * 0"    # 每周日 5:17
+    command: "bash scripts/cleanup_archives.sh"
+    tier: 3
+
+# ============ 废弃/待清理任务 ============
+deprecated_jobs:
+  - id: "zero_vacancy_check"
+    reason: "已合并到zero-idle-enforcer"
+    disabled_at: "2026-03-15"
+    
+  - id: "resource_scheduler"
+    reason: "改为事件驱动架构"
+    disabled_at: "2026-03-15"
+    
+  - id: "review_checker"
+    reason: "合并到daily-summary"
+    disabled_at: "2026-03-15"
+    
+  - id: "executor_checker"
+    reason: "集成到baseline-checker"
+    disabled_at: "2026-03-15"
+
+# ============ 调度优化指标 ============
+optimization_targets:
+  max_concurrent_jobs: 3          # 最大并行任务数
+  min_job_interval_minutes: 10    # 任务间最小间隔
+  preferred_minutes: [7, 17, 27, 37, 47, 57]  # 推荐错峰分钟
+  avoid_minutes: [0, 30]          # 避免使用的时间点
+  
+# ============ 监控告警 ============
+monitoring:
+  alert_on_overlap: true          # 任务重叠告警
+  alert_on_failure: true          # 失败告警
+  alert_on_high_load: true        # 高负载告警
+  load_threshold: 80              # 负载阈值(%)

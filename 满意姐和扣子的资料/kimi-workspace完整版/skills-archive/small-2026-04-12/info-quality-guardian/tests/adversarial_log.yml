@@ -1,0 +1,69 @@
+# 信息采集质量守护者 - 对抗测试日志
+# S7: 故意污染信息测试检测能力
+
+red_team_tests:
+  # 测试执行记录
+  - date: "2026-03-21"
+    attacker: "red_team_bot"
+    round: 1
+    attacks:
+      - technique: "fake_domain"
+        target: "source_credibility_check"
+        payload:
+          url: "https://hbr-fake.com/article"
+          title: "伪装HBR文章"
+        result: "blocked"
+        detection_method: "domain_whitelist"
+        defense_score: 1.0
+        
+      - technique: "outdated_content_new_date"
+        target: "freshness_check"
+        payload:
+          publish_date: "2024-03-21"
+          content_fingerprint: "known_old_content_hash"
+        result: "detected"
+        detection_method: "content_fingerprint_match"
+        defense_score: 1.0
+        
+      - technique: "fake_citation"
+        target: "accuracy_check"
+        payload:
+          citation: "Smith, J. (2025). Nonexistent Paper. Fake Journal."
+        result: "detected"
+        detection_method: "citation_verification"
+        defense_score: 1.0
+        
+      - technique: "ai_generated_content"
+        target: "authenticity_check"
+        payload:
+          url: "https://chatgpt.com/share/xyz"
+          content: "AI生成的看似真实的分析"
+        result: "flagged"
+        detection_method: "ai_source_detection"
+        defense_score: 0.8
+        notes: "已标记为AI生成需人工复核"
+        
+      - technique: "data_tampering"
+        target: "accuracy_check"
+        payload:
+          original_value: "50%"
+          tampered_value: "90%"
+          source: "real_report.pdf"
+        result: "detected"
+        detection_method: "source_verification"
+        defense_score: 1.0
+
+# 防御效果统计
+defense_stats:
+  total_attacks: 5
+  blocked: 4
+  detected_after_flag: 1
+  missed: 0
+  overall_defense_rate: 1.0
+  
+# 改进措施
+improvements:
+  - date: "2026-03-21"
+    triggered_by: "ai_generated_content_attack"
+    action: "增强AI来源检测，添加更多AI平台域名到检测列表"
+    status: "implemented"

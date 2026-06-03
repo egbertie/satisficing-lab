@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_video-frames/frame.sh",
+  "filename": "frame.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "00ecc44fd5bc27fe",
+  "content_length": 1347,
+  "ingested_at": "2026-03-31T17:27:45.249293",
+  "content_preview": "#!/usr/bin/env bash\nset -euo pipefail\n\nusage() {\n  cat >&2 <<'EOF'\nUsage:\n  frame.sh <video-file> [--time HH:MM:SS] [--index N] --out /path/to/frame.jpg\n\nExamples:\n  frame.sh video.mp4 --out /tmp/frame.jpg\n  frame.sh video.mp4 --time 00:00:10 --out /tmp/frame-10s.jpg\n  frame.sh video.mp4 --index 0 --out /tmp/frame0.png\nEOF\n  exit 2\n}\n\nif [[ \"${1:-}\" == \"\" || \"${1:-}\" == \"-h\" || \"${1:-}\" == \"--help\" ]]; then\n  usage\nfi\n\nin=\"${1:-}\"\nshift || true\n\ntime=\"\"\nindex=\"\"\nout=\"\"\n\nwhile [[ $# -gt 0 ]]; do\n",
+  "limitations_applied": []
+}

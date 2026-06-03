@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/disaster-recovery-sync-v2.sh",
+  "filename": "disaster-recovery-sync-v2.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "adfb68cc4e9a878e",
+  "content_length": 3552,
+  "ingested_at": "2026-03-31T17:27:46.202012",
+  "content_preview": "#!/bin/bash\n# 灾备复刻V2.0同步脚本 - 全量备份\n# 创建时间: 2026-03-20\n# 修正: 从V1.0的9文件(76KB) → V2.0的全量(363MB)\n# 更新: 2026-03-21 - 集成企微告警通道\n\nset -e\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nBACKUP_DIR=\"$WORKSPACE/backups/disaster-recovery\"\nTIMESTAMP=$(date +%Y%m%d_%H%M%S)\nLOG_FILE=\"$WORKSPACE/memory/disaster_recovery_sync.log\"\nALERT_SCRIPT=\"$WORKSPACE/scripts/emergency-wecom-alert.sh\"\n\n# 企微告警函数（如果已配置）\nsend_wecom_alert() {\n    local level=\"$1\"\n    local template=\"$2\"\n    shift 2\n    \n    if [[ -x \"$ALERT_SCRIPT\" ]]; th",
+  "limitations_applied": []
+}

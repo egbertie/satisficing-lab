@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>DISASTER_RECOVERY_PLAN_V1.0</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; padding: 40px; max-width: 800px; margin: 0 auto; }
+        h1 { color: #1f2329; border-bottom: 2px solid #3370ff; padding-bottom: 10px; }
+        h2 { color: #1f2329; margin-top: 30px; }
+        h3 { color: #3370ff; }
+        code { background: #f5f6f7; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+        pre { background: #f5f6f7; padding: 16px; border-radius: 6px; overflow-x: auto; }
+        blockquote { border-left: 4px solid #3370ff; margin: 0; padding-left: 16px; color: #646a73; }
+        table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+        th, td { border: 1px solid #dee0e3; padding: 8px 12px; text-align: left; }
+        th { background: #f5f6f7; font-weight: 600; }
+        ul, ol { padding-left: 24px; }
+    </style>
+</head>
+<body>
+<h1 id="v10">满意解研究所灾备重建复刻实施方案 V1.0</h1>
+<blockquote>
+<p><strong>文档版本</strong>: V1.0<br />
+<strong>创建日期</strong>: 2026-03-10<br />
+<strong>最后更新</strong>: 2026-03-10<br />
+<strong>文档状态</strong>: 正式发布<br />
+<strong>RTO目标</strong>: 2小时<br />
+<strong>RPO目标</strong>: 24小时（数据丢失不超过1天）</p>
+</blockquote>
+<hr />
+<h2 id="_1">目录</h2>
+<ol>
+<li><a href="#概述">概述</a></li>
+<li><a href="#灾备策略">灾备策略</a></li>
+<li><a href="#备份清单">备份清单</a></li>
+<li><a href="#恢复流程">恢复流程</a></li>
+<li><a href="#版本管理机制">版本管理机制</a></li>
+<li><a href="#每日更新检查清单">每日更新检查清单</a></li>
+<li><a href="#安全管理重点">安全管理重点</a></li>
+<li><a href="#附录">附录</a></li>
+</ol>
+<hr />
+<h2 id="_2">概述</h2>
+<h3 id="11">1.1 目的</h3>
+<p>本文档定义了满意解研究所的灾备重建复刻方案，确保在发生系统故障、数据丢失或其他灾难性事件时，能够快速恢复业务运营，最大限度地减少数据丢失和业务中断。</p>
+<h3 id="12">1.2 适用范围</h3>
+<p>本方案涵盖满意解研究所的所有核心数字资产，包括：
+- AI组织运作所需的全部配置文件
+- 组织架构与角色定义
+- 知识库与研究成果
+- 自动化脚本与定时任务
+- API密钥与访问凭证</p>
+<h3 id="13">1.3 关键指标</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>目标值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RTO</strong> (恢复时间目标)</td>
+<td>≤ 2小时</td>
+<td>从灾难发生到系统完全恢复的时间</td>
+</tr>
+<tr>
+<td><strong>RPO</strong> (恢复点目标)</td>
+<td>≤ 24小时</td>
+<td>允许的最大数据丢失时间窗口</td>
+</tr>
+<tr>
+<td><strong>备份成功率</strong></td>
+<td>≥ 99%</td>
+<td>每月备份任务成功执行的比例</td>
+</tr>
+<tr>
+<td><strong>恢复测试频率</strong></td>
+<td>每月1次</td>
+<td>定期进行恢复演练的频率</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_3">灾备策略</h2>
+<h3 id="21">2.1 备份频率</h3>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>备份频率</th>
+<th>保留策略</th>
+<th>存储位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>核心配置文件</strong> (.env, openclaw.json)</td>
+<td>每日自动 + 变更触发</td>
+<td>保留30天</td>
+<td>本地 + 加密云存储</td>
+</tr>
+<tr>
+<td><strong>Markdown文档</strong> (workspace/*.md)</td>
+<td>每日自动</td>
+<td>保留90天</td>
+<td>本地 + Git仓库</td>
+</tr>
+<tr>
+<td><strong>记忆文件</strong> (memory/*.md, MEMORY.md)</td>
+<td>每日自动</td>
+<td>保留180天</td>
+<td>本地 + 加密云存储</td>
+</tr>
+<tr>
+<td><strong>Skill文件</strong> (skills/)</td>
+<td>每周自动 + 变更触发</td>
+<td>保留60天</td>
+<td>本地 + Git仓库</td>
+</tr>
+<tr>
+<td><strong>定时任务配置</strong> (cron/)</td>
+<td>每日自动 + 变更触发</td>
+<td>保留90天</td>
+<td>本地 + 加密云存储</td>
+</tr>
+<tr>
+<td><strong>脚本文件</strong> (.scripts/, *.py)</td>
+<td>每日自动</td>
+<td>保留90天</td>
+<td>本地 + Git仓库</td>
+</tr>
+<tr>
+<td><strong>知识库</strong> (knowledge_base/)</td>
+<td>每周全量 + 每日增量</td>
+<td>保留90天</td>
+<td>本地 + 云存储</td>
+</tr>
+<tr>
+<td><strong>API密钥与凭证</strong></td>
+<td>每周加密备份</td>
+<td>保留30天</td>
+<td>加密云存储(离线)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="22">2.2 备份策略详解</h3>
+<h4 id="221-daily-auto-backup">2.2.1 每日自动备份 (Daily Auto Backup)</h4>
+<p><strong>执行时间</strong>: 每天 02:00 (Asia/Shanghai)</p>
+<p><strong>包含内容</strong>:
+- 所有Markdown文档 (<em>.md)
+- 记忆文件 (memory/</em>.md, MEMORY.md)
+- 配置文件 (.env, .config/)
+- 定时任务配置 (cron/jobs.json)
+- 脚本文件 (.scripts/)</p>
+<p><strong>存储格式</strong>:</p>
+<pre><code>/backups/daily/YYYY-MM-DD/
+├── workspace-md/
+├── memory/
+├── config/
+├── cron/
+└── scripts/
+</code></pre>
+<h4 id="222-weekly-full-backup">2.2.2 每周全量备份 (Weekly Full Backup)</h4>
+<p><strong>执行时间</strong>: 每周日 03:00 (Asia/Shanghai)</p>
+<p><strong>包含内容</strong>:
+- 每日备份的所有内容
+- Skill文件完整备份 (skills/)
+- 知识库完整备份 (knowledge_base/)
+- personas/ 目录
+- 完整Git仓库状态</p>
+<p><strong>存储格式</strong>:</p>
+<pre><code>/backups/weekly/YYYY-MM-DD/
+├── daily/              # 包含所有日常备份内容
+├── skills/
+├── knowledge_base/
+├── personas/
+└── git-snapshot/
+</code></pre>
+<h4 id="223-change-triggered-backup">2.2.3 变更触发备份 (Change-Triggered Backup)</h4>
+<p><strong>触发条件</strong>:
+- .env 文件修改
+- openclaw.json 修改
+- cron/jobs.json 修改
+- Skill文件修改</p>
+<p><strong>执行方式</strong>:
+通过 Git Hook 或文件系统监控触发即时备份</p>
+<h3 id="23">2.3 保留策略</h3>
+<table>
+<thead>
+<tr>
+<th>备份类型</th>
+<th>保留时长</th>
+<th>自动清理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>每日备份</td>
+<td>30天</td>
+<td>是</td>
+</tr>
+<tr>
+<td>每周备份</td>
+<td>12周</td>
+<td>是</td>
+</tr>
+<tr>
+<td>每月备份</td>
+<td>12个月</td>
+<td>是</td>
+</tr>
+<tr>
+<td>变更触发备份</td>
+<td>30天</td>
+<td>是</td>
+</tr>
+<tr>
+<td>API密钥备份</td>
+<td>30天</td>
+<td>手动</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_4">备份清单</h2>
+<h3 id="31">3.1 核心配置文件清单</h3>
+<table>
+<thead>
+<tr>
+<th>文件路径</th>
+<th>重要性</th>
+<th>备份方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/root/.openclaw/workspace/.env</code></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>每日+变更</td>
+<td>API密钥和核心配置</td>
+</tr>
+<tr>
+<td><code>/root/.openclaw/openclaw.json</code></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>每日+变更</td>
+<td>OpenClaw主配置</td>
+</tr>
+<tr>
+<td><code>/root/.openclaw/openclaw.json.bak*</code></td>
+<td>⭐⭐⭐⭐</td>
+<td>每周</td>
+<td>配置备份历史</td>
+</tr>
+<tr>
+<td><code>/root/.openclaw/workspace/.config/*</code></td>
+<td>⭐⭐⭐⭐</td>
+<td>每日</td>
+<td>外部工具配置</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-markdown">3.2 Markdown文档清单</h3>
+<p><strong>关键文档</strong> (按重要性排序):</p>
+<table>
+<thead>
+<tr>
+<th>文档</th>
+<th>重要性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AGENTS.md</code></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>AI代理工作指南</td>
+</tr>
+<tr>
+<td><code>SOUL.md</code></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>组织精神核心</td>
+</tr>
+<tr>
+<td><code>USER.md</code></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>用户信息</td>
+</tr>
+<tr>
+<td><code>MEMORY.md</code></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>长期记忆</td>
+</tr>
+<tr>
+<td><code>ORGANIZATION.md</code></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>组织架构</td>
+</tr>
+<tr>
+<td><code>ORGANIZATION_RULES.md</code></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>组织规则</td>
+</tr>
+<tr>
+<td><code>WORKSPACE_STATUS.md</code></td>
+<td>⭐⭐⭐⭐</td>
+<td>工作区状态</td>
+</tr>
+<tr>
+<td><code>ROLE-*.md</code> (18个角色)</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>角色定义</td>
+</tr>
+<tr>
+<td><code>组织架构_*.md</code></td>
+<td>⭐⭐⭐⭐</td>
+<td>组织架构文档</td>
+</tr>
+<tr>
+<td><code>完整员工体系*.md</code></td>
+<td>⭐⭐⭐⭐</td>
+<td>员工体系</td>
+</tr>
+<tr>
+<td><code>并行协同机制*.md</code></td>
+<td>⭐⭐⭐⭐</td>
+<td>协同机制</td>
+</tr>
+<tr>
+<td><code>知识管理体系*.md</code></td>
+<td>⭐⭐⭐⭐</td>
+<td>知识管理</td>
+</tr>
+<tr>
+<td><code>全组织罗盘扫码报告机制.md</code></td>
+<td>⭐⭐⭐⭐</td>
+<td>报告机制</td>
+</tr>
+<tr>
+<td><code>*方案*.md</code></td>
+<td>⭐⭐⭐</td>
+<td>各类方案文档</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33">3.3 记忆文件清单</h3>
+<table>
+<thead>
+<tr>
+<th>路径</th>
+<th>重要性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>memory/YYYY-MM-DD.md</code></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>每日记忆记录</td>
+</tr>
+<tr>
+<td><code>memory/YYYY-MM-DD-*.md</code></td>
+<td>⭐⭐⭐⭐</td>
+<td>特殊记忆记录</td>
+</tr>
+<tr>
+<td><code>MEMORY.md</code></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>长期记忆汇总</td>
+</tr>
+</tbody>
+</table>
+<h3 id="34-skill">3.4 Skill文件清单</h3>
+<table>
+<thead>
+<tr>
+<th>Skill名称</th>
+<th>路径</th>
+<th>重要性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kimi-code</td>
+<td><code>skills/kimi-code/</code></td>
+<td>⭐⭐⭐⭐</td>
+<td>Kimi代码助手</td>
+</tr>
+<tr>
+<td>langchain-assistant</td>
+<td><code>skills/langchain-assistant/</code></td>
+<td>⭐⭐⭐</td>
+<td>LangChain助手</td>
+</tr>
+<tr>
+<td>jina-ai-reader</td>
+<td><code>skills/jina-ai-reader/</code></td>
+<td>⭐⭐⭐⭐</td>
+<td>Jina AI阅读器</td>
+</tr>
+<tr>
+<td>data-analyst</td>
+<td><code>skills/data-analyst/</code></td>
+<td>⭐⭐⭐</td>
+<td>数据分析</td>
+</tr>
+<tr>
+<td>playwright-automation</td>
+<td><code>skills/playwright-automation/</code></td>
+<td>⭐⭐⭐</td>
+<td>浏览器自动化</td>
+</tr>
+<tr>
+<td>claude-code</td>
+<td><code>skills/claude-code/</code></td>
+<td>⭐⭐⭐</td>
+<td>Claude代码助手</td>
+</tr>
+<tr>
+<td>github-models</td>
+<td><code>skills/github-models/</code></td>
+<td>⭐⭐⭐⭐</td>
+<td>GitHub模型</td>
+</tr>
+</tbody>
+</table>
+<h3 id="35">3.5 定时任务清单</h3>
+<table>
+<thead>
+<tr>
+<th>任务ID</th>
+<th>任务名称</th>
+<th>频率</th>
+<th>重要性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>8dbc8186-b268-4895-8053-04305c9b28a1</code></td>
+<td>每日安全检查</td>
+<td>每天09:00</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>bc640356-84e1-4e07-a2d5-cb93dab7e9ef</code></td>
+<td>每日安全检查(isolated)</td>
+<td>每天09:00</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>a4e7fe12-b645-4a84-b495-5697df8a3903</code></td>
+<td>每周组织罗盘报告</td>
+<td>每周一06:00</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>3d7db435-1497-4b00-9e63-2cd9c34cdf8f</code></td>
+<td>每日进度报告</td>
+<td>每天22:00</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>9f314b0d-2e9e-4b07-ba43-633215ebbc6d</code></td>
+<td>里程碑检查</td>
+<td>每天09:00</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>462a0736-613f-40b9-add8-ca98005335d3</code></td>
+<td>Skill库检查</td>
+<td>每周一09:00</td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>41f3d606-e5f6-490f-bbb1-d557a64004bf</code></td>
+<td>飞书帮助中心迭代</td>
+<td>每2天</td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>e534f345-cb4f-4d55-8ed6-0ab61105fa4f</code></td>
+<td>ClawHub Skill安装</td>
+<td>每4小时</td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>13efe578-0dca-44cf-9917-a8459d6dedbc</code></td>
+<td>夜间经验萃取</td>
+<td>每天</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>75326d7a-7537-4bba-ba80-27319cc82a33</code></td>
+<td>每日晨报生成</td>
+<td>每天09:00</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>30014b47-8363-4555-b24f-04574dc356a7</code></td>
+<td>API与Skill双周审查</td>
+<td>每2周周五</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>f2ddbbb7-2374-4745-b73b-631a53e4f38a</code></td>
+<td>每日站会召开</td>
+<td>每天09:30</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+</tbody>
+</table>
+<h3 id="36">3.6 脚本文件清单</h3>
+<table>
+<thead>
+<tr>
+<th>脚本</th>
+<th>路径</th>
+<th>重要性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>notion_sync.py</td>
+<td><code>workspace/</code></td>
+<td>⭐⭐⭐⭐</td>
+<td>Notion同步主脚本</td>
+</tr>
+<tr>
+<td>notion_sync_batch1.py</td>
+<td><code>.scripts/</code></td>
+<td>⭐⭐⭐⭐</td>
+<td>Notion批量同步</td>
+</tr>
+<tr>
+<td>sync_all.py</td>
+<td><code>.scripts/</code></td>
+<td>⭐⭐⭐</td>
+<td>全量同步</td>
+</tr>
+<tr>
+<td>sync_batch.py</td>
+<td><code>.scripts/</code></td>
+<td>⭐⭐⭐</td>
+<td>批量同步</td>
+</tr>
+<tr>
+<td>sync_runner.py</td>
+<td><code>.scripts/</code></td>
+<td>⭐⭐⭐</td>
+<td>同步运行器</td>
+</tr>
+<tr>
+<td>classify_files.py</td>
+<td><code>.scripts/</code></td>
+<td>⭐⭐⭐</td>
+<td>文件分类</td>
+</tr>
+</tbody>
+</table>
+<h3 id="37-api">3.7 API密钥清单</h3>
+<blockquote>
+<p>⚠️ <strong>安全提示</strong>: API密钥仅存储于加密备份中，日常备份中不包含明文密钥</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>服务</th>
+<th>环境变量名</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jina AI</td>
+<td><code>JINA_API_KEY</code></td>
+<td>网页提取/搜索</td>
+</tr>
+<tr>
+<td>GitHub Models</td>
+<td><code>GITHUB_TOKEN</code></td>
+<td>GPT-4o/DeepSeek等</td>
+</tr>
+<tr>
+<td>Perplexity</td>
+<td><code>PERPLEXITY_API_KEY</code></td>
+<td>AI搜索</td>
+</tr>
+<tr>
+<td>Claude</td>
+<td><code>ANTHROPIC_API_KEY</code></td>
+<td>Anthropic API</td>
+</tr>
+<tr>
+<td>Notion</td>
+<td><code>NOTION_TOKEN</code></td>
+<td>Notion集成</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_5">恢复流程</h2>
+<h3 id="41">4.1 灾难分级</h3>
+<table>
+<thead>
+<tr>
+<th>级别</th>
+<th>定义</th>
+<th>示例</th>
+<th>响应时间</th>
+<th>RTO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>P0-紧急</strong></td>
+<td>完全不可用</td>
+<td>系统崩溃、数据全部丢失</td>
+<td>15分钟</td>
+<td>1小时</td>
+</tr>
+<tr>
+<td><strong>P1-严重</strong></td>
+<td>核心功能受损</td>
+<td>关键配置丢失、API失效</td>
+<td>30分钟</td>
+<td>2小时</td>
+</tr>
+<tr>
+<td><strong>P2-一般</strong></td>
+<td>非核心功能受损</td>
+<td>部分文档丢失、Skill失效</td>
+<td>2小时</td>
+<td>4小时</td>
+</tr>
+<tr>
+<td><strong>P3-轻微</strong></td>
+<td>轻微影响</td>
+<td>单个文件丢失、格式错误</td>
+<td>24小时</td>
+<td>48小时</td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-p0">4.2 P0级灾难恢复流程</h3>
+<h4 id="1-0-15">步骤1: 灾难确认与通报 (0-15分钟)</h4>
+<ol>
+<li>
+<p><strong>确认灾难范围</strong>
+   <code>bash
+   # 检查系统状态
+   openclaw status
+   df -h
+   ls -la /root/.openclaw/</code></p>
+</li>
+<li>
+<p><strong>启动应急响应</strong></p>
+</li>
+<li>通知相关干系人</li>
+<li>创建灾难恢复工单</li>
+<li>冻结所有非紧急操作</li>
+</ol>
+<h4 id="2-15-30">步骤2: 恢复准备 (15-30分钟)</h4>
+<ol>
+<li>
+<p><strong>确定恢复点</strong>
+   <code>bash
+   # 查看最新可用备份
+   ls -lt /backups/daily/ | head -5
+   ls -lt /backups/weekly/ | head -3</code></p>
+</li>
+<li>
+<p><strong>准备恢复环境</strong></p>
+</li>
+<li>确保目标环境可用</li>
+<li>验证存储空间充足</li>
+<li>准备恢复脚本</li>
+</ol>
+<h4 id="3-30-60">步骤3: 数据恢复 (30-60分钟)</h4>
+<ol>
+<li>
+<p><strong>恢复核心配置</strong>
+   <code>bash
+   # 执行自动恢复脚本
+   python3 /root/.openclaw/workspace/scripts/backup-manager.py restore --date YYYY-MM-DD --type full</code></p>
+</li>
+<li>
+<p><strong>手动验证关键文件</strong>
+   ```bash
+   # 检查.env
+   cat /root/.openclaw/workspace/.env</p>
+</li>
+</ol>
+<p># 检查openclaw.json
+   cat /root/.openclaw/openclaw.json</p>
+<p># 检查定时任务
+   cat /root/.openclaw/cron/jobs.json
+   ```</p>
+<h4 id="4-60-75">步骤4: 服务恢复 (60-75分钟)</h4>
+<ol>
+<li>
+<p><strong>重启服务</strong>
+   <code>bash
+   openclaw gateway restart</code></p>
+</li>
+<li>
+<p><strong>验证定时任务</strong>
+   <code>bash
+   openclaw cron list</code></p>
+</li>
+</ol>
+<h4 id="5-75-90">步骤5: 功能验证 (75-90分钟)</h4>
+<ol>
+<li><strong>执行验证清单</strong></li>
+<li>[ ] API连接测试</li>
+<li>[ ] 定时任务检查</li>
+<li>[ ] 文档完整性检查</li>
+<li>
+<p>[ ] Skill功能测试</p>
+</li>
+<li>
+<p><strong>生成恢复报告</strong>
+   <code>bash
+   python3 /root/.openclaw/workspace/scripts/backup-manager.py verify --report</code></p>
+</li>
+</ol>
+<h3 id="43-p1">4.3 P1级灾难恢复流程</h3>
+<h4 id="_6">场景: 配置文件丢失</h4>
+<pre><code class="language-bash"># 1. 定位最近的配置备份
+BACKUP_DATE=$(ls -lt /backups/daily/ | grep -E '^d' | head -1 | awk '{print $9}')
+
+# 2. 恢复.env
+cp /backups/daily/$BACKUP_DATE/config/.env /root/.openclaw/workspace/.env
+
+# 3. 恢复openclaw.json
+cp /backups/daily/$BACKUP_DATE/config/openclaw.json /root/.openclaw/openclaw.json
+
+# 4. 恢复定时任务
+cp /backups/daily/$BACKUP_DATE/cron/jobs.json /root/.openclaw/cron/jobs.json
+
+# 5. 验证
+openclaw status
+openclaw cron list
+</code></pre>
+<h4 id="_7">场景: 部分文档丢失</h4>
+<pre><code class="language-bash"># 1. 确定丢失的文件
+# 2. 从备份恢复特定文件
+cp /backups/daily/YYYY-MM-DD/workspace-md/MISSING_FILE.md /root/.openclaw/workspace/
+
+# 3. 验证文档完整性
+python3 /root/.openclaw/workspace/scripts/backup-manager.py verify --doc-file MISSING_FILE.md
+</code></pre>
+<h3 id="44">4.4 单文件恢复流程</h3>
+<pre><code class="language-bash"># 使用备份管理器恢复单个文件
+python3 /root/.openclaw/workspace/scripts/backup-manager.py restore-file \
+  --backup-date YYYY-MM-DD \
+  --source-path memory/2026-03-10.md \
+  --target-path /root/.openclaw/workspace/memory/2026-03-10.md
+</code></pre>
+<hr />
+<h2 id="_8">版本管理机制</h2>
+<h3 id="51">5.1 版本号规则</h3>
+<p>采用语义化版本控制 (Semantic Versioning):</p>
+<pre><code>主版本号.次版本号.补丁号
+  X    .    Y    .    Z
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>版本类型</th>
+<th>递增条件</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>主版本号 (X)</strong></td>
+<td>重大架构变更、破坏性更新</td>
+<td>1.0.0 → 2.0.0</td>
+</tr>
+<tr>
+<td><strong>次版本号 (Y)</strong></td>
+<td>功能新增、重大优化</td>
+<td>1.0.0 → 1.1.0</td>
+</tr>
+<tr>
+<td><strong>补丁号 (Z)</strong></td>
+<td>Bug修复、小调整</td>
+<td>1.0.0 → 1.0.1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52">5.2 版本变更记录</h3>
+<h4 id="521">5.2.1 自动版本日志</h4>
+<p>每日自动记录备份版本信息:</p>
+<pre><code class="language-json">{
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;date&quot;: &quot;2026-03-10&quot;,
+  &quot;backup_id&quot;: &quot;daily-2026-03-10-020000&quot;,
+  &quot;changes&quot;: {
+    &quot;added&quot;: [&quot;新文件1.md&quot;, &quot;新文件2.md&quot;],
+    &quot;modified&quot;: [&quot;修改文件1.md&quot;],
+    &quot;deleted&quot;: [],
+    &quot;size_delta&quot;: &quot;+1.2MB&quot;
+  },
+  &quot;integrity&quot;: {
+    &quot;checksum&quot;: &quot;a1b2c3d4...&quot;,
+    &quot;verified&quot;: true
+  }
+}
+</code></pre>
+<h4 id="522">5.2.2 版本历史记录位置</h4>
+<pre><code>/backups/versions/
+├── version-history.json      # 完整版本历史
+├── daily/
+│   ├── 2026-03-10.json
+│   └── 2026-03-09.json
+└── monthly/
+    └── 2026-03.json
+</code></pre>
+<h3 id="53">5.3 版本回滚流程</h3>
+<pre><code class="language-bash"># 查看可用版本
+python3 /root/.openclaw/workspace/scripts/backup-manager.py list-versions
+
+# 回滚到指定版本
+python3 /root/.openclaw/workspace/scripts/backup-manager.py rollback --version 1.0.0 --date 2026-03-10
+
+# 验证回滚结果
+python3 /root/.openclaw/workspace/scripts/backup-manager.py verify --full
+</code></pre>
+<hr />
+<h2 id="_9">每日更新检查清单</h2>
+<h3 id="61-0200">6.1 自动检查项 (每日 02:00 执行)</h3>
+<p>备份管理器自动执行以下检查:</p>
+<ul>
+<li>[ ] 磁盘空间检查 (剩余空间 &gt; 20%)</li>
+<li>[ ] 备份目录可写性检查</li>
+<li>[ ] Git仓库状态检查</li>
+<li>[ ] 配置文件变更检测</li>
+<li>[ ] 完整性校验和生成</li>
+<li>[ ] 过期备份清理</li>
+</ul>
+<h3 id="62-0900">6.2 手动检查项 (每日 09:00 执行)</h3>
+<table>
+<thead>
+<tr>
+<th>检查项</th>
+<th>命令/方法</th>
+<th>正常标准</th>
+<th>异常处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>备份状态</strong></td>
+<td><code>cat /backups/status/latest.json</code></td>
+<td>status: "success"</td>
+<td>查看日志，手动重试</td>
+</tr>
+<tr>
+<td><strong>磁盘空间</strong></td>
+<td><code>df -h</code></td>
+<td>使用率 &lt; 80%</td>
+<td>清理旧备份</td>
+</tr>
+<tr>
+<td><strong>Git同步</strong></td>
+<td><code>git status</code></td>
+<td>working tree clean</td>
+<td>提交未保存更改</td>
+</tr>
+<tr>
+<td><strong>定时任务</strong></td>
+<td><code>openclaw cron list</code></td>
+<td>所有任务enabled</td>
+<td>检查jobs.json</td>
+</tr>
+<tr>
+<td><strong>API状态</strong></td>
+<td><code>openclaw gateway status</code></td>
+<td>running</td>
+<td>重启gateway</td>
+</tr>
+<tr>
+<td><strong>内存文件</strong></td>
+<td><code>ls -la memory/</code></td>
+<td>今日文件存在</td>
+<td>手动创建</td>
+</tr>
+</tbody>
+</table>
+<h3 id="63-0900">6.3 每周检查项 (每周一 09:00 执行)</h3>
+<ul>
+<li>[ ] 验证上周所有每日备份完整性</li>
+<li>[ ] 执行恢复演练测试</li>
+<li>[ ] 检查备份存储容量趋势</li>
+<li>[ ] 更新灾备文档（如有变更）</li>
+<li>[ ] 审查备份日志中的警告和错误</li>
+<li>[ ] 验证加密备份的可解密性</li>
+</ul>
+<h3 id="64">6.4 月度检查项</h3>
+<ul>
+<li>[ ] 完整灾难恢复演练</li>
+<li>[ ] 备份策略审查与优化</li>
+<li>[ ] 存储成本分析</li>
+<li>[ ] RTO/RPO指标评估</li>
+<li>[ ] 灾备文档版本更新</li>
+</ul>
+<hr />
+<h2 id="_10">安全管理重点</h2>
+<h3 id="71-api">7.1 API密钥安全</h3>
+<h4 id="711">7.1.1 存储安全</h4>
+<ul>
+<li>✅ API密钥仅存储于 <code>.env</code> 文件</li>
+<li>✅ <code>.env</code> 文件已添加至 <code>.gitignore</code></li>
+<li>✅ 加密备份中包含 <code>.env</code> 的加密版本</li>
+<li>✅ 定期轮换API密钥 (建议每90天)</li>
+</ul>
+<h4 id="712">7.1.2 传输安全</h4>
+<ul>
+<li>✅ 仅通过加密通道传输备份</li>
+<li>✅ 云存储使用服务端加密</li>
+<li>✅ 本地备份目录设置严格权限 (700)</li>
+</ul>
+<h4 id="713">7.1.3 访问控制</h4>
+<pre><code class="language-bash"># 设置备份目录权限
+chmod 700 /backups
+chmod 600 /backups/daily/*
+chmod 600 /backups/weekly/*
+
+# 设置.env权限
+chmod 600 /root/.openclaw/workspace/.env
+</code></pre>
+<h3 id="72">7.2 备份加密</h3>
+<h4 id="721">7.2.1 加密策略</h4>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>加密方式</th>
+<th>密钥管理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API密钥备份</td>
+<td>AES-256-GCM</td>
+<td>主密钥存储于安全位置</td>
+</tr>
+<tr>
+<td>配置文件备份</td>
+<td>AES-256-GCM</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>一般文档备份</td>
+<td>可选加密</td>
+<td>同上</td>
+</tr>
+</tbody>
+</table>
+<h4 id="722">7.2.2 加密命令</h4>
+<pre><code class="language-bash"># 加密备份
+python3 /root/.openclaw/workspace/scripts/backup-manager.py backup --encrypt
+
+# 解密恢复
+python3 /root/.openclaw/workspace/scripts/backup-manager.py restore --date YYYY-MM-DD --decrypt
+</code></pre>
+<h3 id="73">7.3 审计日志</h3>
+<p>所有备份和恢复操作记录审计日志:</p>
+<pre><code>/backups/audit/
+├── 2026-03-10.log
+├── 2026-03-09.log
+└── archive/
+</code></pre>
+<p>日志格式:</p>
+<pre><code>[2026-03-10 02:00:01] INFO: Daily backup started
+[2026-03-10 02:00:45] INFO: Backup completed: daily-2026-03-10-020001
+[2026-03-10 02:00:46] INFO: Integrity check passed: a1b2c3d4...
+[2026-03-10 02:00:47] INFO: Old backups cleaned: 5 items
+</code></pre>
+<hr />
+<h2 id="_11">附录</h2>
+<h3 id="a">附录A: 应急联系清单</h3>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>联系方式</th>
+<th>职责</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>系统管理员</td>
+<td>[待填写]</td>
+<td>系统恢复决策</td>
+</tr>
+<tr>
+<td>安全负责人</td>
+<td>[待填写]</td>
+<td>安全事件处理</td>
+</tr>
+<tr>
+<td>备份管理员</td>
+<td>[待填写]</td>
+<td>备份与恢复执行</td>
+</tr>
+</tbody>
+</table>
+<h3 id="b">附录B: 常用命令速查</h3>
+<pre><code class="language-bash"># 查看备份状态
+python3 /root/.openclaw/workspace/scripts/backup-manager.py status
+
+# 手动触发备份
+python3 /root/.openclaw/workspace/scripts/backup-manager.py backup --type daily
+
+# 查看备份列表
+python3 /root/.openclaw/workspace/scripts/backup-manager.py list
+
+# 恢复最新备份
+python3 /root/.openclaw/workspace/scripts/backup-manager.py restore --latest
+
+# 验证备份完整性
+python3 /root/.openclaw/workspace/scripts/backup-manager.py verify
+
+# 清理旧备份
+python3 /root/.openclaw/workspace/scripts/backup-manager.py cleanup --days 30
+</code></pre>
+<h3 id="c">附录C: 备份存储计算</h3>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>日均增量</th>
+<th>30天总量</th>
+<th>90天总量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Markdown文档</td>
+<td>~2MB</td>
+<td>~60MB</td>
+<td>~180MB</td>
+</tr>
+<tr>
+<td>记忆文件</td>
+<td>~1MB</td>
+<td>~30MB</td>
+<td>~90MB</td>
+</tr>
+<tr>
+<td>配置文件</td>
+<td>~0.1MB</td>
+<td>~3MB</td>
+<td>~9MB</td>
+</tr>
+<tr>
+<td>Skill文件</td>
+<td>~0.5MB</td>
+<td>~15MB</td>
+<td>~45MB</td>
+</tr>
+<tr>
+<td>知识库</td>
+<td>~5MB</td>
+<td>~150MB</td>
+<td>~450MB</td>
+</tr>
+<tr>
+<td><strong>总计</strong></td>
+<td><strong>~8.6MB</strong></td>
+<td><strong>~258MB</strong></td>
+<td><strong>~774MB</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>建议最小存储空间</strong>: 2GB</p>
+<h3 id="d">附录D: 变更历史</h3>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>日期</th>
+<th>变更内容</th>
+<th>作者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V1.0.0</td>
+<td>2026-03-10</td>
+<td>初始版本发布</td>
+<td>灾备重建项目组</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>文档结束</strong></p>
+<blockquote>
+<p>本文档由满意解研究所灾备重建项目组维护<br />
+如有疑问或建议，请提交至工作区管理团队</p>
+</blockquote>
+</body>
+</html>
+<!-- 知识内化记录 -->
+<!-- 内化时间: 2026-03-31 | 状态: 已内化 -->

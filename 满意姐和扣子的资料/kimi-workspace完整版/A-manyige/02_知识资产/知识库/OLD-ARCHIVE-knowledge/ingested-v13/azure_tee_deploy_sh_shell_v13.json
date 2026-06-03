@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/azure_tee_deploy.sh",
+  "filename": "azure_tee_deploy.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "2d57235287921951",
+  "content_length": 3641,
+  "ingested_at": "2026-03-31T17:27:44.503244",
+  "content_preview": "#!/bin/bash\n# Azure TEE Confidential Computing Instance Deployment Script\n# This script deploys a Standard_DC8s_v3 VM with Intel TDX support\n\nset -e\n\necho \"=== Azure TEE机密计算实例部署脚本 ===\"\n\n# 1. Login to Azure (uncomment the appropriate method)\n# Method 1: Interactive login (for local development)\n# az login\n\n# Method 2: Service Principal (for CI/CD automation)\n# az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID\n\n# Method 3: Managed Identity (for Azur",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/cron-automation/config/alerts.json",
+  "filename": "alerts.json",
+  "file_type": "json",
+  "extension": ".json",
+  "file_hash": "d63b19a4021263c9",
+  "content_length": 2007,
+  "ingested_at": "2026-03-31T17:27:45.381521",
+  "content_preview": "{\n  \"version\": \"1.0.0\",\n  \"rules\": [\n    {\n      \"id\": \"rule_001\",\n      \"name\": \"任务失败告警\",\n      \"description\": \"当任务执行失败时触发\",\n      \"condition\": \"status == 'FAILED'\",\n      \"level\": \"P1\",\n      \"channels\": [\"feishu\", \"email\"],\n      \"cooldown\": 300,\n      \"enabled\": true\n    },\n    {\n      \"id\": \"rule_002\",\n      \"name\": \"任务超时告警\",\n      \"description\": \"当任务执行超时时触发\",\n      \"condition\": \"status == 'TIMEOUT'\",\n      \"level\": \"P1\",\n      \"channels\": [\"feishu\"],\n      \"cooldown\": 600,\n      \"enabled\":",
+  "limitations_applied": []
+}

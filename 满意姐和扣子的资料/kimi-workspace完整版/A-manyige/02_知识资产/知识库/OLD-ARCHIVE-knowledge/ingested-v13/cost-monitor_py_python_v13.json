@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_cost-tier-strategy/scripts/cost-monitor.py",
+  "filename": "cost-monitor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "fc6f7f3533f8f279",
+  "content_length": 1012,
+  "ingested_at": "2026-03-31T17:27:45.272233",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n成本分层监控脚本\n版本: V2.0\n\"\"\"\n\nimport json\nfrom datetime import datetime\n\nMONTHLY_BUDGET = {\n    \"tier_2_limit\": 500,\n    \"tier_3_limit\": 2000\n}\n\ndef get_current_month_cost():\n    \"\"\"获取当月已消耗成本（简化）\"\"\"\n    return 0  # 实际应从API获取\n\ndef check_cost_tier(estimated_cost):\n    \"\"\"检查成本层级\"\"\"\n    current = get_current_month_cost()\n    total = current + estimated_cost\n    \n    if estimated_cost == 0:\n        return \"L1免费\", \"自动通过\"\n    elif total <= MONTHLY_BUDGET[\"tier_2_limit\"]:\n        ret",
+  "limitations_applied": []
+}

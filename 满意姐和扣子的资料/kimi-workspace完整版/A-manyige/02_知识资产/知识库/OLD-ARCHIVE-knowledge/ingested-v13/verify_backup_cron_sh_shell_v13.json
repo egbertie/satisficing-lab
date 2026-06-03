@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify_backup_cron.sh",
+  "filename": "verify_backup_cron.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "e06d64e6096f7776",
+  "content_length": 821,
+  "ingested_at": "2026-03-31T17:27:46.193298",
+  "content_preview": "#!/bin/bash\n# 备份Cron任务8步验证\n# 任务: backup_to_external.py\n\necho \"=== 备份Cron任务 (backup_to_external.py) - 8步验证 ===\"\necho \"\"\n\nSCRIPT_PATH=\"/root/.openclaw/workspace/scripts/backup_to_external.py\"\n\nSTEP1=false; STEP2=false; STEP3=false; STEP4=false\n\n# Step 1\necho \"Step 1: 配置写入验证\"\nif crontab -l | grep -q \"backup_to_external.py\"; then\n    echo \"  ✅ 已写入crontab (0 2 * * *)\"\n    STEP1=true\nelse\n    echo \"  ⚠️  未在当前crontab中找到（可能在系统crontab）\"\nfi\n\n# Step 2\necho \"Step 2: 语法检查\"\nif python3 -m py_compile \"$SCRIPT_P",
+  "limitations_applied": []
+}

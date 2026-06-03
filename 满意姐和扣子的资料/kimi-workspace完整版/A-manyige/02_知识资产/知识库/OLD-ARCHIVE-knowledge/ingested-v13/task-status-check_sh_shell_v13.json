@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_reporting-standards/scripts/task-status-check.sh",
+  "filename": "task-status-check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "077436f10033328a",
+  "content_length": 884,
+  "ingested_at": "2026-03-31T17:27:45.315510",
+  "content_preview": "#!/bin/bash\n# 任务状态检查脚本\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nPROTOCOL_DIR=\"$WORKSPACE/memory/protocol\"\n\necho \"=== 当前任务状态检查 ===\"\necho \"检查时间: $(date '+%Y-%m-%d %H:%M:%S')\"\necho \"\"\n\n# 检查已完成的任务\nCOMPLETED=0\nif [ -d \"$PROTOCOL_DIR\" ]; then\n    COMPLETED=$(find \"$PROTOCOL_DIR\" -name \"*completion.md\" -mtime -1 2>/dev/null | wc -l)\nfi\necho \"✅ 今日已完成: $COMPLETED\"\n\n# 检查进行中\nIN_PROGRESS=0\nif [ -d \"$PROTOCOL_DIR\" ]; then\n    IN_PROGRESS=$(find \"$PROTOCOL_DIR\" -name \"*progress*\" -mtime -1 2>/dev/null | wc -l)\n",
+  "limitations_applied": []
+}

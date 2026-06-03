@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/knowledge_full_index.py",
+  "filename": "knowledge_full_index.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "fd051bd0183bde34",
+  "content_length": 3645,
+  "ingested_at": "2026-03-31T17:27:46.133673",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n全量知识入库脚本 V1.0\n扫描所有知识文件，建立统一索引\n\"\"\"\n\nimport os\nimport json\nfrom pathlib import Path\nfrom datetime import datetime\n\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nKNOWLEDGE_DIR = WORKSPACE / \"knowledge\"\nOUTPUT_FILE = KNOWLEDGE_DIR / \"system\" / \"full_index.json\"\n\ndef scan_all_files():\n    \"\"\"扫描所有知识文件\"\"\"\n    files = []\n    \n    # 扫描目录和文件类型\n    scan_dirs = [\n        (\"docs\", [\".md\"]),\n        (\"skills\", [\".md\", \".yaml\", \".yml\", \".json\"]),\n        (\"memory\", [\".md\"]),\n        ",
+  "limitations_applied": []
+}

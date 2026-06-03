@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/self-deep-insight/self_deep_insight.py",
+  "filename": "self_deep_insight.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "3031389d3522df6e",
+  "content_length": 4010,
+  "ingested_at": "2026-03-31T17:27:45.405813",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n满意妞自我深度洞察模块\n自动生成L1-L5洞察并触发内化流程\n\n来源: 第六类任务整改 - Skill闭环升级\n创建时间: 2026-03-31\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime\nfrom pathlib import Path\n\nclass SelfDeepInsight:\n    \"\"\"自我深度洞察生成器\"\"\"\n    \n    def __init__(self, workspace=\"/root/.openclaw/workspace\"):\n        self.workspace = Path(workspace)\n        self.insight_dir = self.workspace / \"diary\" / \"insights\"\n        self.insight_dir.mkdir(parents=True, exist_ok=True)\n    \n    def generate_insight(self, task",
+  "limitations_applied": []
+}

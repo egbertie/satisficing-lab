@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/notion-enhanced/install.sh",
+  "filename": "install.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "f58d1c1c75a56012",
+  "content_length": 779,
+  "ingested_at": "2026-03-31T17:27:45.285249",
+  "content_preview": "#!/bin/bash\n# Install script for Notion Skill\n\necho \"📝 Installing Notion Skill for OpenClaw...\"\n\ncd \"$(dirname \"$0\")\"\n\n# Check if package.json exists (full version) or use standalone\nif [ -f \"package.json\" ]; then\n    echo \"Installing dependencies...\"\n    npm install\n    npm run build\n    echo \"✅ Full version installed!\"\nelse\n    # Use standalone version\n    mv package-standalone.json package.json\n    echo \"Installing standalone dependencies...\"\n    npm install\n    echo \"✅ Standalone version ins",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/fix_doc_permission.py",
+  "filename": "fix_doc_permission.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "28c200e5ce60cbb7",
+  "content_length": 2728,
+  "ingested_at": "2026-03-31T17:27:46.203736",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n修复文档权限 - 方法2：使用旧版API\n\"\"\"\n\nimport json\nimport requests\n\ndef get_token():\n    with open('/root/.openclaw/workspace/config/feishu_config.json', 'r') as f:\n        config = json.load(f)\n    \n    response = requests.post(\n        f\"{config['base_url']}/auth/v3/tenant_access_token/internal\",\n        json={\"app_id\": config['app_id'], \"app_secret\": config['app_secret']},\n        timeout=30\n    )\n    return response.json()['tenant_access_token']\n\ndef get_my_info():\n    \"\"\"获取当前用",
+  "limitations_applied": []
+}

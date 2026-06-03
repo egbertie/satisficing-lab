@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blue-army-auditor/blue_army_auditor.py",
+  "filename": "blue_army_auditor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "7b99060ae81eaff2",
+  "content_length": 11138,
+  "ingested_at": "2026-03-31T17:27:45.472639",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nblue-army-auditor: 蓝军审计自动化\n质量门禁系统 - 5维度17项检查\n\n作者: 满意妞\n版本: 1.0.0\n日期: 2026-03-28\n\"\"\"\n\nimport json\nimport subprocess\nimport sys\nfrom enum import Enum\nfrom pathlib import Path\nfrom typing import Dict, List, Tuple, Optional\nfrom dataclasses import dataclass, field, asdict\nfrom datetime import datetime\n\n\nclass AuditStatus(Enum):\n    \"\"\"审计状态\"\"\"\n    PASS = \"PASS\"\n    CONDITIONAL = \"CONDITIONAL\"\n    FAIL = \"FAIL\"\n\n\nclass Priority(Enum):\n    \"\"\"优先级\"\"\"\n    P0 = \"P0\"  # 必须通过\n    P",
+  "limitations_applied": []
+}

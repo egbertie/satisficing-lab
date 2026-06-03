@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/docs/SKILL_CREATION_SOP.md",
+  "filename": "SKILL_CREATION_SOP.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "53c1de2a71335538",
+  "content_length": 848,
+  "ingested_at": "2026-03-31T17:27:44.884711",
+  "content_preview": "# Skill创建流程SOP V1.0\n# 创建时间: 2026-03-30\n# 目的: 防止\"有代码无SKILL.md\"的虚假完成\n\n---\n\n## 流程步骤\n\n### 步骤1: 创建Skill目录\n```bash\nmkdir -p /root/.openclaw/workspace/skills/{skill-name}/\n```\n\n### 步骤2: 同时创建SKILL.md（强制）\n```bash\n# 在创建任何代码文件之前，必须先创建SKILL.md\ncat > /root/.openclaw/workspace/skills/{skill-name}/SKILL.md << 'EOF'\n# Skill: {skill-name}\n\n## 触发条件\n[描述什么时候使用这个Skill]\n\n## 功能\n[描述这个Skill做什么]\n\n## 物理文件\n- [列出所有相关文件]\n\n## 状态\n- 创建时间: [日期]\n- 最后验证: [日期]\n\n## 备注\n[其他说明]\nEOF\n```\n\n### 步骤3: 才能创建代码文件\n只有在SKILL.md创建完成后，才能创建代码文件。\n\n###",
+  "limitations_applied": []
+}

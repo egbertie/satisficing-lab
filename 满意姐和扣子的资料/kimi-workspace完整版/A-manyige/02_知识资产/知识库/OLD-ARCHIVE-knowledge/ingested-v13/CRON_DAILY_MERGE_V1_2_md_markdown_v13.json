@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/docs/2026-03/CRON_DAILY_MERGE_V1.2.md",
+  "filename": "CRON_DAILY_MERGE_V1.2.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "54522e999d19b0a3",
+  "content_length": 6871,
+  "ingested_at": "2026-03-31T17:27:46.619594",
+  "content_preview": "# Daily Cron 合并优化方案 V1.2\n\n> **基于第一性原理的Cron优化设计**\n> \n> 创建时间: 2026-03-15  \n> 版本: 1.2  \n> 状态: 🟡 待实施\n\n---\n\n## 📋 执行摘要\n\n### 问题背景\n用户发现多个Daily Cron时间错开（09:00, 09:17, 09:30, 22:00, 22:17），询问是否可以合并以减少Token使用。\n\n### 解决方案\n采用**双Cron架构**（方案A），将9个Daily Cron合并为3个：\n- **晨间统一Cron**（09:00）：合并6个任务\n- **晚间统一Cron**（22:00）：合并3个任务\n- **保留独立**：每日站会（09:30）需人工参与\n\n### 预期收益\n| 指标 | 合并前 | 合并后 | 节省 |\n|------|--------|--------|------|\n| Daily Cron数量 | 9个 | 3个 | **-67%** |\n| 每日调度开销 | 9次 | 3次 | **-67%** |\n| 预估Token/日 | ~35K | ~25K | ",
+  "limitations_applied": []
+}

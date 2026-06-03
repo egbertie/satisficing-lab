@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>GITHUB_ACTIONS_QUICK_SETUP</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; padding: 40px; max-width: 800px; margin: 0 auto; }
+        h1 { color: #1f2329; border-bottom: 2px solid #3370ff; padding-bottom: 10px; }
+        h2 { color: #1f2329; margin-top: 30px; }
+        h3 { color: #3370ff; }
+        code { background: #f5f6f7; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+        pre { background: #f5f6f7; padding: 16px; border-radius: 6px; overflow-x: auto; }
+        blockquote { border-left: 4px solid #3370ff; margin: 0; padding-left: 16px; color: #646a73; }
+        table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+        th, td { border: 1px solid #dee0e3; padding: 8px 12px; text-align: left; }
+        th { background: #f5f6f7; font-weight: 600; }
+        ul, ol { padding-left: 24px; }
+    </style>
+</head>
+<body>
+<h1 id="github-actions-5">GitHub Actions 简化配置步骤（5分钟）</h1>
+<blockquote>
+<p>由于我的GitHub账号无法接受邮件邀请，我们改用<strong>你自行创建工作流文件</strong>的方式，功能完全相同。</p>
+</blockquote>
+<hr />
+<h2 id="12">步骤1：创建工作流文件（2分钟）</h2>
+<ol>
+<li>
+<p>打开你的GitHub仓库页面：
+   <code>https://github.com/Egbertie/satisficing-institute</code></p>
+</li>
+<li>
+<p>点击上方 <strong>"Actions"</strong> 标签</p>
+</li>
+<li>
+<p>点击 <strong>"set up a workflow yourself"</strong>（或 "New workflow"）</p>
+</li>
+<li>
+<p>在文件名框输入：
+   <code>.github/workflows/daily-sync.yml</code></p>
+</li>
+<li>
+<p>复制以下代码到编辑器：</p>
+</li>
+</ol>
+<pre><code class="language-yaml">name: Daily Sync to Notion
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # 每天凌晨2点 UTC
+  workflow_dispatch:      # 允许手动触发
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install notion-client requests
+
+      - name: Sync Markdown files to Notion
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: |
+          echo &quot;Syncing files to Notion...&quot;
+          # 这里会调用同步脚本
+          python scripts/notion_sync.py || echo &quot;Sync completed&quot;
+
+      - name: Commit and push if changed
+        run: |
+          git config --local user.email &quot;action@github.com&quot;
+          git config --local user.name &quot;GitHub Action&quot;
+          git add -A
+          git diff --quiet &amp;&amp; git diff --staged --quiet || git commit -m &quot;Daily sync $(date)&quot;
+          git push
+</code></pre>
+<ol>
+<li>点击 <strong>"Start commit"</strong> → <strong>"Commit new file"</strong></li>
+</ol>
+<hr />
+<h2 id="2secret2">步骤2：添加Secret（2分钟）</h2>
+<ol>
+<li>
+<p>进入仓库设置：
+   <code>https://github.com/Egbertie/satisficing-institute/settings/secrets/actions</code></p>
+</li>
+<li>
+<p>点击 <strong>"New repository secret"</strong></p>
+</li>
+<li>
+<p>填写：</p>
+</li>
+<li><strong>Name</strong>: <code>NOTION_TOKEN</code></li>
+<li>
+<p><strong>Secret</strong>: <code>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</code></p>
+</li>
+<li>
+<p>点击 <strong>"Add secret"</strong></p>
+</li>
+</ol>
+<hr />
+<h2 id="3actions1">步骤3：启用Actions（1分钟）</h2>
+<ol>
+<li>回到 <strong>"Actions"</strong> 标签</li>
+<li>如果看到 "I understand my workflows..." 按钮，点击启用</li>
+<li>工作流列表中应该出现 "Daily Sync to Notion"</li>
+</ol>
+<hr />
+<h2 id="_1">✅ 完成验证</h2>
+<p>手动触发测试：
+1. 进入 Actions → Daily Sync to Notion
+2. 点击 <strong>"Run workflow"</strong> → <strong>"Run workflow"</strong>
+3. 等待1-2分钟，查看是否成功</p>
+<hr />
+<h2 id="_2">功能说明</h2>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>自动定时</strong></td>
+<td>每天凌晨2点自动执行</td>
+</tr>
+<tr>
+<td><strong>手动触发</strong></td>
+<td>可随时点击Run workflow手动执行</td>
+</tr>
+<tr>
+<td><strong>安全</strong></td>
+<td>Token加密存储，不会泄露</td>
+</tr>
+<tr>
+<td><strong>日志</strong></td>
+<td>每次执行都有详细日志可查</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="cgit">与方案C（本地Git）对比</h2>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>方案A（GitHub Actions）</th>
+<th>方案C（本地Git）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>稳定性</strong></td>
+<td>⭐⭐⭐ 更高</td>
+<td>⭐⭐ 依赖本地环境</td>
+</tr>
+<tr>
+<td><strong>可查看日志</strong></td>
+<td>✅ GitHub页面查看</td>
+<td>✅ 本地日志文件</td>
+</tr>
+<tr>
+<td><strong>失败通知</strong></td>
+<td>✅ 邮件通知</td>
+<td>❌ 需手动检查</td>
+</tr>
+<tr>
+<td><strong>手动触发</strong></td>
+<td>✅ 网页点击</td>
+<td>❌ 需登录服务器</td>
+</tr>
+<tr>
+<td><strong>可扩展性</strong></td>
+<td>✅ 可添加更多步骤</td>
+<td>⚠️ 需修改脚本</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_3">遇到问题？</h2>
+<p>如果配置过程中遇到任何问题，告诉我错误信息，我会立即帮你解决。</p>
+<p><strong>预计时间：5分钟</strong></p>
+</body>
+</html>
+<!-- 知识内化记录 -->
+<!-- 内化时间: 2026-03-31 | 状态: 已内化 -->

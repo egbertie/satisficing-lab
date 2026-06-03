@@ -1,0 +1,49 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/token_mode_controller.sh",
+  "filename": "token_mode_controller.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 2351,
+  "checksum": "3b776d4c5df0a39d",
+  "ingested_at": "2026-03-31T17:30:47.886345",
+  "line_count": 76,
+  "title": "token_mode_controller",
+  "description": "###############################################################################",
+  "sections": [],
+  "entities": [
+    {
+      "name": "log",
+      "type": "shell_function"
+    },
+    {
+      "name": "get_current_hour",
+      "type": "shell_function"
+    },
+    {
+      "name": "get_mode_for_hour",
+      "type": "shell_function"
+    },
+    {
+      "name": "get_mode_config",
+      "type": "shell_function"
+    },
+    {
+      "name": "main",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "###############################################################################",
+    "Token智能时段控制器 - 自动切换对话模式",
+    "用途: 根据时间段自动优化Token消耗策略",
+    "###############################################################################",
+    "获取当前小时（北京时间）",
+    "判断当前时段模式",
+    "获取模式配置",
+    "检查状态变化",
+    "发送模式变更通知（可选）",
+    "echo \"Token模式已切换至: $mode\" | wall 2>/dev/null || true"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

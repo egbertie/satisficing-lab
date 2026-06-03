@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/vendor-api-monitor/config.example.yaml",
+  "filename": "config.example.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "4e669b626f9c25f0",
+  "content_length": 2418,
+  "ingested_at": "2026-03-31T17:27:45.402919",
+  "content_preview": "# 厂商 API 监控配置\n# 复制为 config.yaml 并填入实际值\n\nmonitors:\n  - name: \"feishu_drive\"\n    vendor: \"feishu\"\n    display_name: \"飞书云空间\"\n    endpoint: \"https://open.feishu.cn/open-apis/drive/v1/metas/batch_query\"\n    method: \"POST\"\n    headers:\n      Content-Type: \"application/json\"\n    body: '{\"request_docs\": [{\"doc_token\": \"test\", \"doc_type\": \"sheet\"}]}'\n    timeout: 10\n    interval: 60\n    enabled: true\n    \n  - name: \"wecom_token\"\n    vendor: \"wecom\"\n    display_name: \"企业微信 Token\"\n    endpoint: \"https://qy",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/memory/working/superpowers_security_audit.md",
+  "filename": "superpowers_security_audit.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "2118e48a495fb683",
+  "content_length": 1491,
+  "ingested_at": "2026-03-31T17:27:46.487079",
+  "content_preview": "# Superpowers Skill 安全审计报告\n\n> 审计时间: 2026-03-18\n> 审计对象: obra/superpowers 改编版\n> 目标: 创建 satisficing-dev-workflow Skill\n\n---\n\n## 审计维度\n\n### 1. 权限检查 ✅\n\n| 检查项 | 状态 | 说明 |\n|--------|------|------|\n| 文件系统访问 | ✅ 安全 | 仅访问工作区内文件 |\n| 网络请求 | ✅ 无 | 无外部网络调用 |\n| 环境变量读取 | ✅ 无 | 不读取敏感配置 |\n| 执行权限 | ⚠️ 需控制 | `sessions_spawn` 需限制作用域 |\n\n**建议**: 在 Skill 中明确约束子代理的执行范围，禁止访问系统级路径。\n\n### 2. 依赖检查 ✅\n\n| 依赖 | 类型 | 风险等级 |\n|------|------|----------|\n| `sessions_spawn` | OpenClaw原生 | 低 |\n| `exec` (git) | 系统命令 | 中 |\n| `read/write` ",
+  "limitations_applied": []
+}

@@ -1,0 +1,44 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/zombie-hunter.sh",
+  "filename": "zombie-hunter.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 2097,
+  "checksum": "7659743d2c3e3114",
+  "ingested_at": "2026-03-31T17:30:47.792954",
+  "line_count": 72,
+  "title": "zombie-hunter",
+  "description": "Zombie Hunter - 僵尸进程清理",
+  "sections": [],
+  "entities": [
+    {
+      "name": "log",
+      "type": "shell_function"
+    },
+    {
+      "name": "hunt_zombies",
+      "type": "shell_function"
+    },
+    {
+      "name": "orphan_check",
+      "type": "shell_function"
+    },
+    {
+      "name": "main",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "Zombie Hunter - 僵尸进程清理",
+    "运行频率: 每15分钟",
+    "查找并清理僵尸进程",
+    "获取僵尸进程列表",
+    "尝试找到父进程",
+    "检查是否仍存在",
+    "清理孤儿进程（可选，谨慎使用）",
+    "只清理明显异常的孤儿进程（CPU/内存占用高的）",
+    "检查是否为孤儿（PPID=1且不是关键服务）"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

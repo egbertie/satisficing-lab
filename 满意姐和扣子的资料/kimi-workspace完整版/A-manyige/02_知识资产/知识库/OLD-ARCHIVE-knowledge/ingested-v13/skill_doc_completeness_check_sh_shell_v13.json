@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/skill_doc_completeness_check.sh",
+  "filename": "skill_doc_completeness_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "fb704d62b2110b97",
+  "content_length": 2659,
+  "ingested_at": "2026-03-31T17:27:46.150532",
+  "content_preview": "#!/bin/bash\n# 第二项全量任务：Skill文档完整性验证\n# 检查每个Skill是否有完整的SKILL.md文档\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nREPORT_DIR=\"$WORKSPACE/reports\"\nTIMESTAMP=$(date '+%Y%m%d_%H%M%S')\nREPORT_FILE=\"$REPORT_DIR/skill_doc_completeness_report_${TIMESTAMP}.md\"\n\necho \"=== 第二项全量任务：Skill文档完整性验证 ===\"\necho \"时间: $(date)\"\necho \"\"\n\nmkdir -p \"$REPORT_DIR\"\n\n# 获取所有一级Skill目录\nSKILL_DIRS=$(find \"$WORKSPACE/skills\" -maxdepth 1 -type d | tail -n +2 | sort)\nTOTAL_SKILLS=$(echo \"$SKILL_DIRS\" | wc -l)\n\ncat > \"$REPORT_FILE\" << EOF\n# S",
+  "limitations_applied": []
+}

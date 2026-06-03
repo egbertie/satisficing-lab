@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/github-api/test_github_api.py",
+  "filename": "test_github_api.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "a0bb4c5c679e29e5",
+  "content_length": 3603,
+  "ingested_at": "2026-03-31T17:27:45.343373",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nGitHub API Skill 测试套件\nS7: 对抗测试实现\n\"\"\"\n\nimport sys\nimport os\nsys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))\n\nfrom github_client import GitHubClient\n\nclass GitHubAPITestSuite:\n    \"\"\"GitHub API对抗测试套件\"\"\"\n    \n    def __init__(self):\n        self.results = []\n        self.passed = 0\n        self.failed = 0\n    \n    def test(self, name: str, condition: bool, details: str = \"\"):\n        \"\"\"记录测试结果\"\"\"\n        if condition:\n            print(f\"✅ {name}\")\n        ",
+  "limitations_applied": []
+}

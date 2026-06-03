@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/role33-task-manager/role33_task_manager.py",
+  "filename": "role33_task_manager.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "27e5289f117e491c",
+  "content_length": 15655,
+  "ingested_at": "2026-03-31T17:27:44.848967",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n33人任务与目标管理引擎\n将33位AI小伙伴的任务和目标拆解为Skill可管理的小规则\n\"\"\"\n\nimport json\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\nclass Role33TaskManager:\n    \"\"\"33人任务与目标管理引擎\"\"\"\n    \n    def __init__(self, workspace_path=\"/root/.openclaw/workspace\"):\n        self.workspace = Path(workspace_path)\n        self.roles_db = self.workspace / \"memory\" / \"role33_task_db.json\"\n        self._init_db()\n        \n        # 33人角色定义\n        self.roles = {\n            # 核心层（4人）\n        ",
+  "limitations_applied": []
+}

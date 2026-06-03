@@ -1,0 +1,86 @@
+#!/bin/bash
+# pre-commit hook
+# 提交前质量门禁检查 - 快速模式
+
+set -e
+
+echo "🔒 Quality Gate: Pre-commit Check"
+echo "===================================="
+
+# 获取脚本目录
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SKILL_DIR="$(dirname "$SCRIPT_DIR")"
+
+# 检查Python
+if ! command -v python3 &> /dev/null; then
+    echo "❌ Python3 is required but not installed."
+    exit 1
+fi
+
+# 运行快速门禁检查
+echo "Running quick quality gate check on staged files..."
+
+# 获取暂存文件
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
+
+if [ -z "$STAGED_FILES" ]; then
+    echo "No staged files to check."
+    exit 0
+fi
+
+# 检查Python文件
+PYTHON_FILES=$(echo "$STAGED_FILES" | grep '\.py$' || true)
+if [ -n "$PYTHON_FILES" ]; then
+    echo ""
+    echo "📋 Checking Python files..."
+    echo "$PYTHON_FILES"
+    
+    # 代码风格检查
+    if command -v black &> /dev/null; then
+        echo "Checking code formatting..."
+        echo "$PYTHON_FILES" | xargs black --check --diff 2>/dev/null || {
+            echo "❌ Code formatting issues found."
+            echo "Run: echo '\$PYTHON_FILES' | xargs black"
+            exit 1
+        }
+    fi
+    
+    # 基础安全检查
+    for file in $PYTHON_FILES; do
+        if [ -f "$file" ]; then
+            # 检查危险模式
+            if grep -E "(eval\(|exec\(|subprocess\.call.*shell=True)" "$file" &> /dev/null; then
+                echo "⚠️  Warning: Potentially dangerous code in $file"
+            fi
+        fi
+    done
+fi
+
+# 检查文档文件
+MD_FILES=$(echo "$STAGED_FILES" | grep '\.md$' || true)
+if [ -n "$MD_FILES" ]; then
+    echo ""
+    echo "📄 Checking Markdown files..."
+    # 可以添加markdownlint等工具
+fi
+
+# 运行完整门禁检查（可选）
+if [ -f "$SKILL_DIR/scripts/quality-gate-check.py" ]; then
+    echo ""
+    echo "🔍 Running quality gate check..."
+    python3 "$SKILL_DIR/scripts/quality-gate-check.py" \
+        --target . \
+        --level basic \
+        --quick \
+        --format console || {
+        echo ""
+        echo "❌ Quality gate check failed!"
+        echo "Fix the issues above or use --no-verify to bypass (not recommended)"
+        exit 1
+    }
+fi
+
+echo ""
+echo "✅ Pre-commit quality gate passed!"
+echo "===================================="
+exit 0

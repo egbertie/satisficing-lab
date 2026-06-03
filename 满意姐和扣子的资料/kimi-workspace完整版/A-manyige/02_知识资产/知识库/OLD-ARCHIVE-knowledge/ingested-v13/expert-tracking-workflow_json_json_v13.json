@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/n8n-workflows/expert-tracking-workflow.json",
+  "filename": "expert-tracking-workflow.json",
+  "file_type": "json",
+  "extension": ".json",
+  "file_hash": "daf4c8c6fd7cad00",
+  "content_length": 5021,
+  "ingested_at": "2026-03-31T17:27:46.399241",
+  "content_preview": "{\n  \"name\": \"专家动态跟踪工作流\",\n  \"nodes\": [\n    {\n      \"id\": \"trigger\",\n      \"type\": \"n8n-nodes-base.scheduleTrigger\",\n      \"position\": [250, 300],\n      \"parameters\": {\n        \"rule\": {\n          \"interval\": [{\n            \"field\": \"weeks\",\n            \"expression\": \"1\"\n          }],\n          \"timezone\": \"Asia/Shanghai\"\n        }\n      }\n    },\n    {\n      \"id\": \"expert_list\",\n      \"type\": \"n8n-nodes-base.set\",\n      \"position\": [450, 300],\n      \"parameters\": {\n        \"values\": {\n          \"s",
+  "limitations_applied": []
+}

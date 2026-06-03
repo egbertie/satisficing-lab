@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_satisficing-web-fetcher/sandbox/browser_controller.py",
+  "filename": "browser_controller.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "0fd1afba0bdc711b",
+  "content_length": 1959,
+  "ingested_at": "2026-03-31T17:27:45.069805",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n浏览器进程控制器\n\n负责：\n1. 浏览器进程的启动和停止\n2. 进程隔离\n3. 资源清理\n\"\"\"\n\nimport subprocess\nimport signal\nimport os\nimport psutil\nfrom typing import Optional, List\nfrom pathlib import Path\n\n\nclass BrowserController:\n    \"\"\"浏览器进程控制器\"\"\"\n    \n    def __init__(self):\n        self._processes: List[subprocess.Popen] = []\n        self._cleanup_hooks = []\n    \n    def start_browser(self, \n                      headless: bool = True,\n                      extra_args: Optional[List[str]] = None) -> sub",
+  "limitations_applied": []
+}

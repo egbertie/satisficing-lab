@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_task-coordinator/config/rules.json",
+  "filename": "rules.json",
+  "file_type": "json",
+  "extension": ".json",
+  "file_hash": "84f46772d909c13d",
+  "content_length": 1061,
+  "ingested_at": "2026-03-31T17:27:45.075677",
+  "content_preview": "{\n  \"version\": \"1.0\",\n  \"check_intervals\": {\n    \"critical\": 1800,\n    \"normal\": 3600,\n    \"relaxed\": 7200\n  },\n  \"thresholds\": {\n    \"overdue_alert_hours\": 2,\n    \"deadline_warning_hours\": 4,\n    \"max_parallel_tasks\": 5\n  },\n  \"modes\": {\n    \"sequential\": {\n      \"description\": \"顺序执行，专注处理\",\n      \"conditions\": [\"has_overdue_tasks\", \"has_critical_ad_hoc\"],\n      \"max_concurrent\": 1\n    },\n    \"parallel\": {\n      \"description\": \"并行执行，效率优先\",\n      \"conditions\": [\"no_overdue\", \"no_ad_hoc\"],\n      \"",
+  "limitations_applied": []
+}

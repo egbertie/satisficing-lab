@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/depth_marker_processor.py",
+  "filename": "depth_marker_processor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "5e0c412ceb97be72",
+  "content_length": 3210,
+  "ingested_at": "2026-03-31T17:27:46.192156",
+  "content_preview": "#!/usr/bin/env python3\n################################################################################\n# 深度标记协议处理器 - 用户意图快速识别\n# 用途: 解析用户输入的深度标记，自动调整响应策略\n################################################################################\n\nimport sys\nimport json\nimport re\nfrom typing import Dict, Tuple, Optional\n\nclass DepthMarkerProcessor:\n    \"\"\"深度标记处理器\"\"\"\n    \n    MARKERS = {\n        \"[快速]\": {\"depth\": \"minimal\", \"max_tokens\": 200, \"style\": \"one_liner\"},\n        \"[快]\": {\"depth\": \"minimal\", \"max_to",
+  "limitations_applied": []
+}

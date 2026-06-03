@@ -1,0 +1,4088 @@
+User:
+
+REQ_SRI_001_EXT_Agent_OS_Flywheel_Project.md
+
+138e389b36abfe33164f8862e97d8112.png
+
+20d3a99284737ccc0118aeb043aa634e.png
+
+问题在文件里，两幅图是核心理念的参考。请给予详尽的可直接实施的方案吧，越详细越好，如果有这个需求没有提到的，你深度洞察后觉得可以补充完善的，请也一并放在方案中吧。一次写不完，可以分批写。
+
+Kimi:
+
+我将为您提供分批次交付的详细实施方案。考虑到项目的复杂度和您的紧迫性，我建议采用“底层基础设施先行，飞轮节点逐个打通”的实施策略。
+
+满意解研究所 Agent OS 资产飞轮建设项目
+
+实施方案 V1.0
+
+实施周期: 6个月（分3个迭代批次）
+技术栈: OpenClaw + Kimi + SQLite/PostgreSQL + Python + React
+交付标准: 每个批次可独立运行，渐进增强
+
+第一批实施（第1-2个月）：核心基础设施 + 知识内化系统
+
+目标: 建立数据底座，解决最痛的”P0: 知识入库与内化断层”问题，同时启动指标采集。
+
+1. 总体技术架构设计
+
+┌─────────────────────────────────────────────────────────────────┐
+│                         【用户入口层】                            │
+│  飞书/微信/CLI  →  统一API网关  →  身份认证(Egbertie/满意姐/Skeptor-7) │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────────────┐
+│                      【核心引擎层】OpenClaw                       │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐  │
+│  │  任务调度器   │  │  五图腾决策   │  │   蓝军审计引擎        │  │
+│  │  (Celery)    │  │   路由中心    │  │  (Skeptor-7 Agent)   │  │
+│  └──────────────┘  └──────────────┘  └──────────────────────┘  │
+│                              │                                  │
+│  ┌────────────────────────────────────────────────────────────┐│
+│  │                  资产飞轮引擎 (Asset Flywheel)              ││
+│  │  ┌────────┐   ┌────────┐   ┌────────┐   ┌────────┐        ││
+│  │  │ Prompt │→→→│ Skill  │→→→│ Memory │→→→│Workflow│→→→    ││
+│  │  │  模板库 │   │ 执行器  │   │ 知识图谱│   │ 流程引擎│        ││
+│  │  └────────┘   └────────┘   └────────┘   └────────┘        ││
+│  │       ↑                                            ↓       ││
+│  │       └────────────┐    Case Library    ┌──────────┘       ││
+│  │                    └←←←←←←←←←←←←←←←←←←←┘                  ││
+│  └────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────────────┐
+│                      【数据资产层】                              │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐  │
+│  │  结构化数据   │  │  向量数据库   │  │   对象存储            │  │
+│  │ (PostgreSQL) │  │ (Qdrant/    │  │   (MinIO/S3)         │  │
+│  │  指标/元数据  │  │  Chroma)    │  │   原始文件/备份        │  │
+│  └──────────────┘  └──────────────┘  └──────────────────────┘  │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────────────┐
+│                      【经营指标层】                              │
+│       时间        质量        风险        成本        复用率       │
+│      (Timer)   (Quality)   (Risk)      (Cost)    (Reuse)       │
+└─────────────────────────────────────────────────────────────────┘
+
+2. 模块A：知识入库与内化系统（P0核心）
+
+这是当前最痛的点，必须最先解决。我设计了一个“五重门”内化工作流：
+
+2.1 系统组件设计
+
+# 系统架构组件
+KnowledgeIngestionSystem:
+  - 接收器(Receiver): 支持飞书/微信/邮件/API多种入口
+  - 解析器(Parser): 文档解析(PDF/Word/Markdown/图片OCR)
+  - 分类器(Classifier): 基于五图腾的自动分类
+  - 内化引擎(Internalization): 三遍阅读辅助+质量验证
+  - 归档器(Archiver): 3-2-1备份策略执行
+  - 蓝军审计(Auditor): Skeptor-7自动审计节点
+
+2.2 详细实施步骤
+
+Step 1: 建立物理基础设施（Week 1-2）
+
+# 1. 项目初始化
+mkdir -p /opt/sri-agent-os/{core,skills,memory,workflows,cases,metrics}
+cd /opt/sri-agent-os
+
+# 2. 数据库设计 (PostgreSQL)
+# 执行以下SQL初始化脚本
+
+-- 核心数据库 Schema
+-- 文件登记元数据表
+CREATE TABLE file_registry (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    filename VARCHAR(255) NOT NULL,
+    source VARCHAR(50), -- 'feishu', 'wechat', 'upload', 'email'
+    file_hash VARCHAR(64) UNIQUE, -- SHA-256校验
+    file_size BIGINT,
+    mime_type VARCHAR(100),
+    content_summary TEXT, -- AI生成的摘要
+    totem_category VARCHAR(20), -- '刘禹锡(土)', '司马贺(金)', '观自在(水)', '孔子(木)', '慧能(火)'
+    ingestion_status VARCHAR(20), -- 'registered', 'parsing', 'digesting', 'verified', 'archived'
+    created_by VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    metadata JSONB -- 扩展字段
+);
+
+-- 内化过程追踪表
+CREATE TABLE internalization_process (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    file_id UUID REFERENCES file_registry(id),
+    pass_1_reading TIME, -- 第一遍通读耗时
+    pass_2_notes TIME, -- 第二遍笔记耗时
+    pass_3_summary TIME, -- 第三遍总结耗时
+    comprehension_score INT, -- 理解度评分0-100
+    verification_score INT, -- 验证评分0-100
+    status VARCHAR(20), -- 'processing', 'passed', 'failed', 'rework'
+    reviewer VARCHAR(50), -- 审核人
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 蓝军审计日志
+CREATE TABLE blue_team_audit (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    entity_type VARCHAR(50), -- 'file', 'skill', 'workflow'
+    entity_id UUID,
+    audit_type VARCHAR(50), -- 'compliance', 'quality', 'security'
+    severity VARCHAR(20), -- 'info', 'warning', 'critical'
+    finding TEXT,
+    auditor VARCHAR(50) DEFAULT 'Skeptor-7',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 3-2-1备份追踪
+CREATE TABLE backup_registry (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    file_id UUID REFERENCES file_registry(id),
+    backup_type VARCHAR(20), -- 'local', 'nas', 'cloud'
+    location VARCHAR(500),
+    verified BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+Step 2: 构建”五重门”内化工作流（Week 2-4）
+
+# /opt/sri-agent-os/core/knowledge_ingestion.py
+
+import hashlib
+import json
+from datetime import datetime
+from enum import Enum
+from typing import Dict, List, Optional
+import psycopg2
+from openclaw import Skill, Memory, Workflow
+
+class TotemType(Enum):
+    LIU_YUXI = "土-刘禹锡"      # 长期价值
+    HERBERT_SIMON = "金-司马贺"  # 满意解算法
+    GUAN_ZIZAI = "水-观自在"     # 直觉感知
+    CONFUCIUS = "木-孔子"        # 五常伦理
+    HUI_NENG = "火-慧能"         # 创新顿悟
+
+class KnowledgeIngestionEngine:
+    """
+    知识入库与内化引擎
+    实现"物理提取 → 深度消化 → 内化验证"闭环
+    """
+    
+    def __init__(self):
+        self.db_conn = psycopg2.connect("dbname=sri_agent_os user=postgres")
+        self.totem_classifier = self._load_totem_classifier()
+        
+    def register_file(self, file_path: str, source: str, uploader: str) -> Dict:
+        """
+        第一重门：文件登记 (3分钟内完成)
+        """
+        start_time = datetime.now()
+        
+        # 1. 计算文件指纹
+        file_hash = self._calculate_hash(file_path)
+        
+        # 2. 检查重复
+        if self._is_duplicate(file_hash):
+            return {"status": "duplicate", "message": "文件已存在，触发复用统计"}
+        
+        # 3. AI自动分类（五图腾）
+        totem = self._classify_by_totem(file_path)
+        
+        # 4. 入库登记
+        file_id = self._insert_registry(file_path, source, uploader, file_hash, totem)
+        
+        # 5. 触发3-2-1备份
+        self._trigger_backup(file_id, file_path)
+        
+        # 6. 记录时间指标
+        duration = (datetime.now() - start_time).total_seconds()
+        self._record_metric("ingestion_time", duration, file_id)
+        
+        return {
+            "file_id": file_id,
+            "totem_category": totem.value,
+            "next_step": "开始第一遍通读",
+            "estimated_time": "15-20分钟"
+        }
+    
+    def internalization_workflow(self, file_id: str) -> Dict:
+        """
+        第二至四重门：三遍阅读内化流程
+        辅助Egbertie完成深度消化
+        """
+        workflow = Workflow("internalization_v1")
+        
+        # 第二重门：第一遍通读（Pass 1）
+        @workflow.step("pass_1_reading")
+        def pass_1(context):
+            """
+            目标：理解核心论点，不做笔记
+            AI辅助：生成结构大纲，标记关键概念
+            """
+            prompt = f"""
+            你正在辅助进行第一遍通读（理解层）。
+            文件：{context.file_name}
+            
+            任务：
+            1. 提取文章结构（目录/章节/段落关系）
+            2. 标记3-5个核心概念（用🔑标记）
+            3. 生成1句话核心论点
+            4. 预估阅读时间
+            
+            输出格式：
+            - 结构大纲：[层级列表]
+            - 核心概念：[概念1, 概念2...]
+            - 核心论点：[一句话]
+            - 建议时长：[X分钟]
+            """
+            result = self.call_kimi(prompt, context.file_content)
+            
+            # 存储到Memory
+            Memory.store(f"file:{file_id}:pass1", result)
+            
+            return {
+                "guidance": result,
+                "user_action": "请通读全文，理解大意，不要记笔记。读完后点击'完成'",
+                "timer_suggested": result.get("建议时长", "20分钟")
+            }
+        
+        # 第三重门：第二遍笔记（Pass 2）
+        @workflow.step("pass_2_notes", depends_on="pass_1_reading")
+        def pass_2(context):
+            """
+            目标：深度消化，提取精华
+            AI辅助：提供模板，引导深度思考
+            """
+            templates = {
+                TotemType.LIU_YUXI: "长期价值评估模板：该知识如何影响3-5年后的决策？",
+                TotemType.HERBERT_SIMON: "满意解分析模板：边界条件是什么？何时'足够好'？",
+                TotemType.GUAN_ZIZAI: "直觉感知模板：该知识引发什么身体感受/直觉反应？",
+                TotemType.CONFUCIUS: "五常评估模板：仁义礼智信各如何体现？",
+                TotemType.HUI_NENG: "顿悟触发模板：该知识可能引发什么突破性认知？"
+            }
+            
+            totem = context.totem_category
+            template = templates.get(totem, "通用深度笔记模板")
+            
+            prompt = f"""
+            你正在辅助进行第二遍阅读（消化层）。
+            
+            基于五图腾体系中的【{totem}】视角：
+            {template}
+            
+            请引导用户完成以下笔记：
+            1. 概念图谱（概念间关系）
+            2. 与我现有知识的3个连接点
+            3. 可立即应用的1个场景
+            4. 存疑待验证的2个问题
+            
+            输出格式为Markdown表格，方便填写。
+            """
+            
+            result = self.call_kimi(prompt, context.file_content)
+            Memory.store(f"file:{file_id}:pass2", result)
+            
+            return {
+                "template": result,
+                "user_action": "精读并填写笔记模板，聚焦深度而非速度",
+                "checkpoint": "笔记完成后，系统将自动进入第三遍"
+            }
+        
+        # 第四重门：第三遍总结（Pass 3）
+        @workflow.step("pass_3_summary", depends_on="pass_2_notes")
+        def pass_3(context):
+            """
+            目标：内化输出，形成可复用资产
+            AI辅助：质量检查，格式标准化
+            """
+            prompt = f"""
+            你正在辅助进行第三遍阅读（内化层）。
+            
+            基于前两遍的成果：
+            - Pass 1 结构：{Memory.retrieve(f'file:{file_id}:pass1')}
+            - Pass 2 笔记：{Memory.retrieve(f'file:{file_id}:pass2')}
+            
+            任务：
+            1. 生成500字以内的精华总结
+            2. 提取3个行动要点（Action Items）
+            3. 转化为1个Prompt模板（可直接用于后续工作）
+            4. 建议存储位置（Skill/Memory/Workflow/Case）
+            
+            这是最终输出，将直接进入知识库。
+            """
+            
+            result = self.call_kimi(prompt, context.file_content)
+            Memory.store(f"file:{file_id}:pass3", result)
+            
+            # 自动生成Prompt资产
+            prompt_asset = self._generate_prompt_asset(result)
+            
+            return {
+                "summary": result,
+                "generated_prompt": prompt_asset,
+                "user_action": "审阅AI生成的总结，确认或修改后提交",
+                "next_stage": "质量验证（第五重门）"
+            }
+        
+        return workflow.execute(file_id)
+    
+    def quality_verification(self, file_id: str, user_answers: List[str]) -> Dict:
+        """
+        第五重门：质量验证（5题抽查）
+        """
+        # 基于Pass 3内容生成验证题
+        summary = Memory.retrieve(f"file:{file_id}:pass3")
+        
+        prompt = f"""
+        基于以下知识总结，生成5道验证题（4道选择题+1道应用题）：
+        {summary}
+        
+        要求：
+        - 前4题测试理解深度（非表面记忆）
+        - 第5题测试应用能力（场景化问题）
+        - 提供评分标准和参考答案
+        
+        输出JSON格式。
+        """
+        
+        quiz = self.call_kimi(prompt, return_format="json")
+        
+        # 自动评分
+        score = self._auto_grade(quiz, user_answers)
+        
+        if score >= 80:
+            status = "verified"
+            # 正式归档到飞轮
+            self._archive_to_flywheel(file_id)
+        else:
+            status = "rework"
+            # 触发返工流程
+            self._trigger_rework(file_id, quiz, score)
+        
+        # 记录蓝军审计点
+        self._audit_log(file_id, "quality_check", score)
+        
+        return {
+            "score": score,
+            "status": status,
+            "certificate": f"SRI-VERIFIED-{file_id}" if status == "verified" else None,
+            "feedback": "已内化完成，进入资产库" if status == "verified" else "需返工，建议重新阅读相关段落"
+        }
+    
+    def _classify_by_totem(self, file_path: str) -> TotemType:
+        """
+        基于内容自动分类到五图腾
+        """
+        content = self._extract_text(file_path)
+        
+        prompt = f"""
+        分析以下内容的决策视角，归类到五图腾体系：
+        
+        五图腾定义：
+        1. 土-刘禹锡：长期价值、根基、物质本质、可持续性
+        2. 金-司马贺：算法、边界、优化、理性决策、满意解
+        3. 水-观自在：直觉、感知、流动性、适应、定力
+        4. 木-孔子：伦理、关系、规范、五常（仁义礼智信）、人文
+        5. 火-慧能：顿悟、创新、突破、压力下的灵感、直指核心
+        
+        内容：{content[:2000]}...
+        
+        请返回最匹配的图腾名称和置信度（0-1）。
+        输出格式：图腾名称|置信度|理由（20字内）
+        """
+        
+        result = self.call_kimi(prompt)
+        totem_name = result.split("|")[0].strip()
+        
+        # 映射到枚举
+        mapping = {
+            "土-刘禹锡": TotemType.LIU_YUXI,
+            "金-司马贺": TotemType.HERBERT_SIMON,
+            "水-观自在": TotemType.GUAN_ZIZAI,
+            "木-孔子": TotemType.CONFUCIUS,
+            "火-慧能": TotemType.HUI_NENG
+        }
+        
+        return mapping.get(totem_name, TotemType.HERBERT_SIMON)
+    
+    def _archive_to_flywheel(self, file_id: str):
+        """
+        验证通过后，根据内容类型归档到飞轮不同节点
+        """
+        summary = Memory.retrieve(f"file:{file_id}:pass3")
+        
+        # 判断资产类型
+        if "Prompt" in summary:
+            target = "prompt_library"
+        elif "流程" in summary or "SOP" in summary:
+            target = "workflow_engine"
+        elif "案例" in summary:
+            target = "case_repository"
+        else:
+            target = "memory_graph"
+        
+        # 写入对应存储
+        self._write_to_storage(file_id, target, summary)
+        
+        # 更新复用率统计
+        self._update_reuse_stats(file_id, target)
+
+Step 3: 飞书集成实现（Week 3-4）
+
+# /opt/sri-agent-os/integrations/feishu_connector.py
+
+from lark import LarkClient
+import requests
+
+class FeishuIngestionConnector:
+    """
+    飞书文档自动入库连接器
+    """
+    
+    def __init__(self):
+        self.client = LarkClient(app_id="your_app_id", app_secret="your_secret")
+        self.ingestion_engine = KnowledgeIngestionEngine()
+    
+    def webhook_handler(self, event: Dict):
+        """
+        处理飞书事件推送
+        """
+        if event.get("event_type") == "file_created":
+            file_info = self.client.drive.file.get(event["file_key"])
+            
+            # 自动触发入库流程
+            result = self.ingestion_engine.register_file(
+                file_path=self._download(file_info),
+                source="feishu",
+                uploader=event["user_open_id"]
+            )
+            
+            # 回传飞书：发送卡片消息
+            self._send_progress_card(result)
+    
+    def _send_progress_card(self, result: Dict):
+        """
+        发送进度卡片到飞书
+        """
+        card = {
+            "config": {"wide_screen_mode": True},
+            "header": {
+                "title": {"tag": "plain_text", "content": "📥 知识入库进度"},
+                "template": "green"
+            },
+            "elements": [
+                {
+                    "tag": "div",
+                    "text": {
+                        "tag": "lark_md",
+                        "content": f"**文件ID**: {result['file_id']}\n"
+                                  f"**五图腾分类**: {result['totem_category']}\n"
+                                  f"**当前阶段**: {result['next_step']}\n"
+                                  f"**预计耗时**: {result['estimated_time']}"
+                    }
+                },
+                {
+                    "tag": "action",
+                    "actions": [
+                        {
+                            "tag": "button",
+                            "text": {"tag": "plain_text", "content": "开始第一遍通读"},
+                            "type": "primary",
+                            "value": {"action": "start_pass1", "file_id": result['file_id']}
+                        }
+                    ]
+                }
+            ]
+        }
+        
+        self.client.im.message.send(
+            receive_id="user_id",
+            msg_type="interactive",
+            content=card
+        )
+
+2.3 蓝军Skeptor-7审计节点集成
+
+在每个关键步骤嵌入审计：
+
+class Skeptor7Auditor:
+    """
+    蓝军审计系统
+    独立于主流程，确保质量与合规
+    """
+    
+    AUDIT_RULES = [
+        # 知识入库规则
+        {"id": "R001", "check": "文件必须完成3-2-1备份", "severity": "critical"},
+        {"id": "R002", "check": "内化评分低于80分不得归档", "severity": "critical"},
+        {"id": "R003", "check": "五图腾分类置信度必须>0.7", "severity": "warning"},
+        {"id": "R004", "check": "单次内化时间不得超过2小时（防疲劳）", "severity": "warning"},
+        
+        # 数据安全规则
+        {"id": "S001", "check": "敏感信息（客户数据）必须加密", "severity": "critical"},
+        {"id": "S002", "check": "数据不得出境存储", "severity": "critical"}
+    ]
+    
+    def audit(self, entity_type: str, entity_id: str, data: Dict) -> List[Dict]:
+        findings = []
+        
+        for rule in self.AUDIT_RULES:
+            passed = self._check_rule(rule, data)
+            if not passed:
+                findings.append({
+                    "rule_id": rule["id"],
+                    "severity": rule["severity"],
+                    "finding": rule["check"],
+                    "recommendation": self._get_recommendation(rule["id"])
+                })
+        
+        # 写入审计日志
+        self._log_findings(entity_type, entity_id, findings)
+        
+        # 严重问题立即告警
+        criticals = [f for f in findings if f["severity"] == "critical"]
+        if criticals:
+            self._alert_egbertie(criticals)
+        
+        return findings
+
+3. 指标采集系统（与第一批并行）
+
+核心设计：无侵入式采集——不增加用户负担，自动记录
+
+# /opt/sri-agent-os/metrics/collector.py
+
+import time
+from contextlib import contextmanager
+from functools import wraps
+
+class MetricsCollector:
+    """
+    五维指标自动采集器
+    时间(Time) / 质量(Quality) / 风险(Risk) / 成本(Cost) / 复用率(Reuse)
+    """
+    
+    def __init__(self):
+        self.db = psycopg2.connect("dbname=sri_agent_os user=postgres")
+    
+    @contextmanager
+    def track_time(self, task_type: str, metadata: Dict = None):
+        """
+        上下文管理器：自动追踪任务耗时
+        使用示例：
+        with collector.track_time("knowledge_ingestion", {"file_id": "xxx"}):
+            process_file(file)
+        """
+        start = time.time()
+        start_iso = datetime.now().isoformat()
+        
+        try:
+            yield
+            status = "success"
+        except Exception as e:
+            status = "failed"
+            raise
+        finally:
+            duration = time.time() - start
+            self._store_metric("time", {
+                "task_type": task_type,
+                "duration_seconds": duration,
+                "start_time": start_iso,
+                "status": status,
+                "metadata": metadata or {}
+            })
+    
+    def track_token_cost(self, prompt_tokens: int, completion_tokens: int, model: str):
+        """
+        记录Token成本
+        Kimi模型价格表（2026参考）：
+        - k2.5: 输入 ¥0.015/1K, 输出 ¥0.06/1K
+        """
+        pricing = {
+            "kimi-k2.5": {"input": 0.015, "output": 0.06},
+            "kimi-k1.5": {"input": 0.01, "output": 0.04}
+        }
+        
+        p = pricing.get(model, pricing["kimi-k2.5"])
+        cost = (prompt_tokens / 1000 * p["input"] + 
+                completion_tokens / 1000 * p["output"])
+        
+        self._store_metric("cost", {
+            "model": model,
+            "prompt_tokens": prompt_tokens,
+            "completion_tokens": completion_tokens,
+            "total_cost_yuan": round(cost, 4),
+            "timestamp": datetime.now().isoformat()
+        })
+        
+        return cost
+    
+    def track_quality(self, task_id: str, success: bool, rework_count: int = 0):
+        """
+        质量指标：一次成功率、返工率
+        """
+        self._store_metric("quality", {
+            "task_id": task_id,
+            "first_time_success": success and rework_count == 0,
+            "rework_count": rework_count,
+            "final_success": success
+        })
+    
+    def track_reuse(self, asset_id: str, asset_type: str):
+        """
+        复用率统计：每次资产被调用时记录
+        """
+        self._store_metric("reuse", {
+            "asset_id": asset_id,
+            "asset_type": asset_type,
+            "access_time": datetime.now().isoformat()
+        })
+        
+        # 实时更新复用率仪表板
+        self._update_reuse_dashboard(asset_id)
+    
+    def track_risk(self, event_type: str, severity: str, description: str):
+        """
+        风险指标：合规事件、安全告警
+        """
+        self._store_metric("risk", {
+            "event_type": event_type,
+            "severity": severity,
+            "description": description,
+            "timestamp": datetime.now().isoformat(),
+            "mitigation": None  # 后续填写缓解措施
+        })
+        
+        if severity in ["high", "critical"]:
+            self._alert_management(event_type, description)
+
+指标采集自动注入示例：
+
+# 在Skill中自动注入指标采集（通过装饰器）
+
+class SkillWithMetrics:
+    def __init__(self, collector: MetricsCollector):
+        self.collector = collector
+    
+    def monitored(self, skill_name: str):
+        """
+        装饰器：自动监控Skill的执行
+        """
+        def decorator(func):
+            @wraps(func)
+            def wrapper(*args, **kwargs):
+                # 开始时间追踪
+                with self.collector.track_time(f"skill_{skill_name}", 
+                                               {"args": str(args)}):
+                    # 记录Token使用（假设返回包含usage）
+                    result = func(*args, **kwargs)
+                    
+                    if isinstance(result, dict) and "usage" in result:
+                        self.collector.track_token_cost(
+                            result["usage"]["prompt_tokens"],
+                            result["usage"]["completion_tokens"],
+                            result.get("model", "kimi-k2.5")
+                        )
+                    
+                    # 记录复用（如果使用了已有资产）
+                    if "referenced_assets" in result:
+                        for asset in result["referenced_assets"]:
+                            self.collector.track_reuse(
+                                asset["id"], 
+                                asset["type"]
+                            )
+                    
+                    return result
+            return wrapper
+        return decorator
+
+# 使用示例
+collector = MetricsCollector()
+
+@collector.monitored("theory_miner")
+def theory_miner_skill(query: str):
+    # Skill逻辑...
+    return {
+        "result": "...",
+        "usage": {"prompt_tokens": 1500, "completion_tokens": 800},
+        "model": "kimi-k2.5",
+        "referenced_assets": [{"id": "skill-001", "type": "skill"}]
+    }
+
+第一批交付物清单：
+
+这是第一批次的详细方案，聚焦于解决最痛的”知识入库断层”问题并建立指标底座。
+
+请审阅以上方案，特别是： 1. “五重门”内化流程是否符合您的认知习惯？ 2. 五图腾自动分类是否需要调整判断标准？ 3. 蓝军审计规则是否覆盖您关心的合规点？
+
+确认后，我将继续撰写第二批：Workflow引擎与Memory知识图谱的实施方案。
+
+User:
+
+继续
+
+Kimi:
+
+满意解研究所 Agent OS 资产飞轮建设项目
+
+实施方案 V1.0（续）
+
+第二批实施（第3-4个月）：Workflow引擎 + Memory知识图谱
+
+目标: 打通”流程数字化”与”知识结构化”，实现SOP可执行化和Memory可检索化，建立飞轮的核心传动机制。
+
+4. 模块B：Workflow引擎（P0核心）
+
+核心痛点: “SOP无法数字化，执行标准依赖人工，流程无法复用”
+
+设计哲学: 不是简单的流程图工具，而是“五图腾决策工作流”的数字化载体——每个流程节点都可以调用五图腾视角进行决策检查。
+
+4.1 架构设计
+
+┌─────────────────────────────────────────────────────────────┐
+│                    Workflow Engine 架构                      │
+├─────────────────────────────────────────────────────────────┤
+│  【定义层】                                                   │
+│  YAML/JSON DSL → 可视化编辑器 → 版本控制(Git)                 │
+│  支持：顺序、并行、条件分支、循环、子流程调用                     │
+└─────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────────┐
+│  【执行层】OpenClaw Runtime                                  │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
+│  │  流程解析器   │  │  状态机引擎   │  │  五图腾决策   │      │
+│  │  (Parser)    │  │ (StateMachine)│  │   路由节点    │      │
+│  └──────────────┘  └──────────────┘  └──────────────┘      │
+│         │                 │                 │               │
+│         └─────────────────┴─────────────────┘               │
+│                           │                                 │
+│                    ┌──────────────┐                        │
+│                    │   技能调度器  │                        │
+│                    │  (Skill      │                        │
+│                    │  Orchestrator)│                        │
+│                    └──────────────┘                        │
+└─────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────────┐
+│  【监控层】                                                   │
+│  实时状态看板 + 执行日志 + 异常告警 + 指标自动采集               │
+└─────────────────────────────────────────────────────────────┘
+
+4.2 Workflow DSL 设计
+
+专为满意解研究所设计的领域特定语言（DSL），将五图腾决策体系原生融入：
+
+# /opt/sri-agent-os/workflows/partner_matching_sop_v1.yml
+
+workflow:
+  name: "合伙人匹配评估SOP"
+  version: "1.0.0"
+  author: "Egbertie"
+  totem_framework: true  # 启用五图腾检查点
+  
+  trigger:
+    type: event
+    source: file_uploaded
+    condition: "file.totem_category == '金-司马贺'"
+  
+  # 五图腾全局配置：每个关键决策点自动触发对应图腾视角检查
+  totem_checkpoints:
+    liu_yuxi:    # 土 - 长期价值评估
+      enabled: true
+      question: "该决策对3-5年后的组织根基有何影响？"
+    simon:       # 金 - 满意解算法
+      enabled: true
+      question: "边界条件是否清晰？何时可以停止优化？"
+    guan_zizai:  # 水 - 直觉感知
+      enabled: true
+      question: "你的身体/直觉对此决策有何反应？"
+    confucius:   # 木 - 五常伦理
+      enabled: true
+      question: "是否符合仁义礼智信？有何伦理风险？"
+    hui_neng:    # 火 - 顿悟突破
+      enabled: true
+      question: "是否存在非线性的突破机会？"
+  
+  steps:
+    # Step 1: 资料收集（自动执行）
+    - id: collect_data
+      name: "收集合伙人基础资料"
+      type: skill
+      skill: partner-matching-engine
+      action: extract_profile
+      input:
+        files: "{{trigger.files}}"
+      output:
+        profile: "basic_profile"
+      metrics:
+        time_limit: 300  # 5分钟超时
+        cost_limit: 500  # 500 tokens上限
+      
+    # Step 2: 五图腾并行评估（并行执行）
+    - id: totem_assessment
+      name: "五维度并行评估"
+      type: parallel
+      branches:
+        - id: liu_yuxi_check
+          name: "土-长期价值"
+          type: llm
+          model: kimi-k2.5
+          prompt: |
+            从【长期价值/根基】角度评估以下合伙人：
+            {{steps.collect_data.output.profile}}
+            评估维度：资金稳定性、资源可持续性、价值观契合度
+            输出：评分(0-100) + 关键证据(3条) + 风险提示
+          output: "liu_yuxi_score"
+          
+        - id: simon_check
+          name: "金-满意解算法"
+          type: llm
+          model: kimi-k2.5
+          prompt: |
+            应用Herbert Simon满意解理论：
+            1. 定义"足够好"的标准（满足性水平）
+            2. 识别搜索边界（时间/资源/信息限制）
+            3. 评估当前选择是否达到满意阈值
+            输入：{{steps.collect_data.output.profile}}
+            输出：满意解评估报告
+          output: "simon_report"
+          
+        - id: guan_zizai_check
+          name: "水-直觉感知"
+          type: manual  # 人工输入，AI辅助记录
+          form:
+            - field: "直觉反应"
+              type: "select"
+              options: ["强烈正向", "轻微正向", "中立", "轻微警惕", "强烈不适"]
+            - field: "身体信号"
+              type: "text"
+              placeholder: "记录任何身体层面的感受..."
+          output: "intuition_record"
+          
+        - id: confucius_check
+          name: "木-五常评估"
+          type: llm
+          model: kimi-k2.5
+          prompt: |
+            依据儒家五常（仁义礼智信）评估：
+            {{steps.collect_data.output.profile}}
+            分别评分并给出例证。
+            特别注意：是否有失信记录？是否守礼？
+          output: "wuchang_scores"
+          
+        - id: hui_neng_check
+          name: "火-创新突破"
+          type: llm
+          model: kimi-k2.5
+          prompt: |
+            从突破性创新角度：
+            该合伙人是否能带来非线性增长机会？
+            是否存在"顿悟"式的资源组合可能？
+          output: "breakthrough_potential"
+      
+      # 聚合五维度结果
+      aggregation:
+        type: skill
+        skill: totem-engine
+        action: synthesize
+        input:
+          scores:
+            - "{{branches.liu_yuxi_check.output}}"
+            - "{{branches.simon_check.output}}"
+            - "{{branches.guan_zizai_check.output}}"
+            - "{{branches.confucius_check.output}}"
+            - "{{branches.hui_neng_check.output}}"
+        output: "totem_synthesis"
+    
+    # Step 3: 风险蓝军审计（自动触发）
+    - id: blue_team_audit
+      name: "Skeptor-7风险审计"
+      type: skill
+      skill: blue-team-auditor
+      action: full_audit
+      input:
+        target: "{{steps.collect_data.output.profile}}"
+        assessment: "{{steps.totem_assessment.output}}"
+      output: "audit_report"
+      
+      # 条件分支：高风险自动阻断
+      condition:
+        if: "{{output.audit_report.risk_level}} == 'critical'"
+        then:
+          - id: block_and_alert
+            type: notification
+            level: "critical"
+            message: "发现严重风险，流程阻断：{{output.audit_report.findings}}"
+            to: ["Egbertie", "Skeptor-7"]
+        else:
+          - id: proceed
+            type: pass
+    
+    # Step 4: 决策建议生成
+    - id: generate_advice
+      name: "生成合伙人匹配建议书"
+      type: skill
+      skill: partner-matching-engine
+      action: generate_report
+      input:
+        profile: "{{steps.collect_data.output.profile}}"
+        totem: "{{steps.totem_assessment.output}}"
+        audit: "{{steps.blue_team_audit.output}}"
+      output: "final_report"
+      
+    # Step 5: 案例归档（自动存入Case Library）
+    - id: archive_case
+      name: "归档至案例库"
+      type: skill
+      skill: case-repository
+      action: add_case
+      input:
+        category: "partner_matching"
+        content: "{{steps.generate_advice.output}}"
+        tags: ["五图腾评估", "{{trigger.files[0].totem_category}}"]
+      output: "case_id"
+      
+    # Step 6: 人审确认（人工节点）
+    - id: human_review
+      name: "Egbertie最终确认"
+      type: approval
+      assignee: "Egbertie"
+      form:
+        - field: "决策"
+          type: "select"
+          options: ["通过", "需要补充资料", "否决"]
+        - field: "直觉验证"
+          type: "text"
+          placeholder: " override系统建议的理由..."
+      
+      # 根据决策路由
+      routes:
+        "通过":
+          - id: finalize
+            type: skill
+            skill: case-repository
+            action: mark_validated
+            input:
+              case_id: "{{steps.archive_case.output.case_id}}"
+              
+        "需要补充资料":
+          - id: request_more
+            type: notification
+            message: "请补充{{field.specific_docs}}资料"
+            to: ["申请人"]
+            
+        "否决":
+          - id: record_rejection
+            type: skill
+            skill: case-repository
+            action: mark_rejected
+            input:
+              case_id: "{{steps.archive_case.output.case_id}}"
+              reason: "{{field.decision_reason}}"
+
+  # 异常处理
+  error_handling:
+    default:
+      - type: retry
+        count: 2
+        delay: 10
+      - type: notification
+        to: ["技术负责人"]
+        message: "Workflow执行失败：{{error.message}}"
+    
+    timeout:
+      - type: escalation
+        to: ["Egbertie"]
+        message: "评估超时，可能需要人工介入"
+
+4.3 执行引擎实现
+
+# /opt/sri-agent-os/core/workflow_engine.py
+
+import yaml
+import json
+from enum import Enum
+from typing import Any, Dict, List, Optional
+from datetime import datetime
+import psycopg2
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+class StepType(Enum):
+    SKILL = "skill"
+    LLM = "llm"
+    MANUAL = "manual"
+    PARALLEL = "parallel"
+    CONDITION = "condition"
+    APPROVAL = "approval"
+    NOTIFICATION = "notification"
+    PASS = "pass"
+
+class WorkflowEngine:
+    """
+    五图腾感知的工作流引擎
+    支持：顺序执行、并行分支、条件路由、人工审批、技能调用
+    """
+    
+    def __init__(self):
+        self.db = psycopg2.connect("dbname=sri_agent_os user=postgres")
+        self.skill_registry = self._load_skill_registry()
+        self.totem_engine = TotemDecisionEngine()
+        self.metrics = MetricsCollector()
+        self.executor = ThreadPoolExecutor(max_workers=5)
+        
+    def load_workflow(self, yaml_path: str) -> Dict:
+        """加载YAML定义"""
+        with open(yaml_path, 'r', encoding='utf-8') as f:
+            return yaml.safe_load(f)
+    
+    def execute(self, workflow_def: Dict, trigger_data: Dict) -> Dict:
+        """
+        执行工作流
+        """
+        workflow_id = self._create_workflow_instance(workflow_def['workflow']['name'])
+        context = {
+            "workflow_id": workflow_id,
+            "trigger": trigger_data,
+            "steps": {},
+            "variables": {}
+        }
+        
+        try:
+            with self.metrics.track_time(f"workflow_{workflow_def['workflow']['name']}"):
+                for step in workflow_def['workflow']['steps']:
+                    result = self._execute_step(step, context, workflow_def['workflow'])
+                    context["steps"][step['id']] = result
+                    
+                    # 检查是否需要五图腾检查点
+                    if workflow_def['workflow'].get('totem_checkpoints'):
+                        self._inject_totem_check(step, context, workflow_def['workflow']['totem_checkpoints'])
+                    
+                    # 蓝军实时审计
+                    self._audit_step_execution(step, result, workflow_id)
+                    
+        except Exception as e:
+            self._handle_error(e, step, context, workflow_def['workflow']['error_handling'])
+            raise
+        
+        return {
+            "workflow_id": workflow_id,
+            "status": "completed",
+            "context": context
+        }
+    
+    def _execute_step(self, step: Dict, context: Dict, workflow_config: Dict) -> Any:
+        """
+        单步执行路由
+        """
+        step_type = StepType(step['type'])
+        
+        # 记录步骤开始
+        step_start = datetime.now()
+        
+        if step_type == StepType.SKILL:
+            result = self._execute_skill_step(step, context)
+        elif step_type == StepType.LLM:
+            result = self._execute_llm_step(step, context)
+        elif step_type == StepType.PARALLEL:
+            result = self._execute_parallel_step(step, context, workflow_config)
+        elif step_type == StepType.MANUAL:
+            result = self._execute_manual_step(step, context)
+        elif step_type == StepType.APPROVAL:
+            result = self._execute_approval_step(step, context)
+        elif step_type == StepType.CONDITION:
+            result = self._execute_condition_step(step, context, workflow_config)
+        else:
+            result = {"status": "passed"}
+        
+        # 记录执行时间和成本
+        duration = (datetime.now() - step_start).total_seconds()
+        self.metrics.track_workflow_step(step['id'], step['type'], duration)
+        
+        return result
+    
+    def _execute_skill_step(self, step: Dict, context: Dict) -> Dict:
+        """
+        执行Skill调用
+        """
+        skill_name = step['skill']
+        action = step['action']
+        
+        # 解析输入（支持模板变量）
+        inputs = self._resolve_template(step['input'], context)
+        
+        # 调用Skill（通过OpenClaw）
+        skill = self.skill_registry.get(skill_name)
+        if not skill:
+            raise ValueError(f"Skill not found: {skill_name}")
+        
+        # 检查限制
+        if 'time_limit' in step.get('metrics', {}):
+            # 设置超时
+            pass
+        
+        result = skill.execute(action, inputs)
+        
+        # 记录Token成本
+        if 'usage' in result:
+            self.metrics.track_token_cost(
+                result['usage']['prompt_tokens'],
+                result['usage']['completion_tokens'],
+                result.get('model', 'kimi-k2.5')
+            )
+        
+        return result
+    
+    def _execute_parallel_step(self, step: Dict, context: Dict, workflow_config: Dict) -> Dict:
+        """
+        并行执行多个分支（如五图腾同时评估）
+        """
+        branches = step['branches']
+        futures = {}
+        
+        # 提交所有并行任务
+        for branch in branches:
+            future = self.executor.submit(self._execute_step, branch, context, workflow_config)
+            futures[future] = branch['id']
+        
+        # 收集结果
+        results = {}
+        for future in as_completed(futures):
+            branch_id = futures[future]
+            try:
+                results[branch_id] = future.result()
+            except Exception as e:
+                results[branch_id] = {"error": str(e)}
+        
+        # 如果有聚合步骤，执行聚合
+        if 'aggregation' in step:
+            agg_step = step['aggregation']
+            agg_step['input'] = self._resolve_template(agg_step['input'], {**context, "branches": results})
+            aggregated = self._execute_step(agg_step, context, workflow_config)
+            results['aggregated'] = aggregated
+        
+        return results
+    
+    def _execute_manual_step(self, step: Dict, context: Dict) -> Dict:
+        """
+        人工输入步骤（生成表单，等待输入）
+        """
+        # 生成表单URL/二维码
+        form_id = self._create_form_instance(step, context)
+        
+        # 发送通知（飞书/微信）
+        self._notify_user(step, context, form_id)
+        
+        # 阻塞等待输入（或返回挂起状态）
+        # 实际实现：返回pending，前端轮询或Webhook回调
+        return {
+            "status": "pending",
+            "form_id": form_id,
+            "fields": step['form'],
+            "message": "等待人工输入"
+        }
+    
+    def _inject_totem_check(self, current_step: Dict, context: Dict, checkpoints: Dict):
+        """
+        在关键步骤后注入五图腾检查
+        这是满意解研究所的特色：每个重要决策都经过五维校验
+        """
+        if not checkpoints:
+            return
+        
+        # 构建检查提示
+        checks = []
+        for totem, config in checkpoints.items():
+            if config.get('enabled'):
+                checks.append({
+                    "totem": totem,
+                    "question": config['question'],
+                    "context": f"当前步骤：{current_step['name']}"
+                })
+        
+        # 记录到上下文，供后续步骤使用
+        context['totem_checks'] = checks
+        
+        # 如果是自动模式，直接调用LLM生成检查报告
+        # 如果是手动模式，生成待办事项
+        return checks
+    
+    def _audit_step_execution(self, step: Dict, result: Dict, workflow_id: str):
+        """
+        蓝军实时审计
+        """
+        auditor = Skeptor7Auditor()
+        
+        # 检查合规性
+        findings = auditor.audit("workflow_step", step['id'], {
+            "step_type": step['type'],
+            "duration": result.get('duration'),
+            "output_size": len(str(result)),
+            "sensitive_data": self._check_sensitive_data(result)
+        })
+        
+        # 记录到审计日志
+        if findings:
+            self._log_audit_findings(workflow_id, step['id'], findings)
+    
+    def _handle_error(self, error: Exception, step: Dict, context: Dict, error_config: Dict):
+        """
+        错误处理与恢复
+        """
+        error_type = "timeout" if isinstance(error, TimeoutError) else "default"
+        handlers = error_config.get(error_type, error_config['default'])
+        
+        for handler in handlers:
+            if handler['type'] == 'retry':
+                # 重试逻辑
+                pass
+            elif handler['type'] == 'notification':
+                self._send_alert(handler['to'], handler['message'].replace("{{error.message}}", str(error)))
+            elif handler['type'] == 'escalation':
+                self._escalate_to_human(handler['to'], step, error)
+    
+    def _resolve_template(self, template: Any, context: Dict) -> Any:
+        """
+        解析模板变量 {{steps.xxx.output}} 或 {{trigger.yyy}}
+        """
+        if isinstance(template, str):
+            import re
+            pattern = r'\{\{([^}]+)\}\}'
+            def replace(match):
+                path = match.group(1).strip()
+                keys = path.split('.')
+                value = context
+                for key in keys:
+                    if isinstance(value, dict):
+                        value = value.get(key, match.group(0))
+                    else:
+                        return match.group(0)
+                return str(value)
+            return re.sub(pattern, replace, template)
+        elif isinstance(template, dict):
+            return {k: self._resolve_template(v, context) for k, v in template.items()}
+        elif isinstance(template, list):
+            return [self._resolve_template(item, context) for item in template]
+        return template
+
+4.4 五图腾决策节点详解
+
+# /opt/sri-agent-os/core/totem_decision_node.py
+
+class TotemDecisionEngine:
+    """
+    五图腾决策引擎
+    为每个决策提供五个维度的交叉验证
+    """
+    
+    TOTEM_PROMPTS = {
+        "liu_yuxi": """
+        你代表【土-刘禹锡】视角（长期价值与根基）。
+        评估要点：
+        1. 该决策3-5年后的影响是什么？
+        2. 是否构建了可持续的根基？
+        3. 物质/资源基础是否稳固？
+        4. 是否符合"斯是陋室，惟吾德馨"的长期主义？
+        
+        输入：{decision_context}
+        输出格式：
+        - 长期价值评分（0-100）
+        - 根基稳固性评估
+        - 3个关键证据
+        - 1个长期风险
+        """,
+        
+        "simon": """
+        你代表【金-司马贺】视角（满意解与边界）。
+        应用Herbert Simon的满意解理论：
+        1. 定义当前决策的"满足性水平"（aspiration level）
+        2. 识别搜索停止规则（何时说"足够好"？）
+        3. 评估备选方案是否达到满意阈值
+        4. 计算继续搜索的边际收益是否大于边际成本
+        
+        输入：{decision_context}
+        输出格式：
+        - 满意解阈值定义
+        - 当前方案达标情况（达标/未达标/超标）
+        - 边界条件清单
+        - 建议：继续搜索/接受当前/降低标准
+        """,
+        
+        "guan_zizai": """
+        你代表【水-观自在】视角（直觉与感知）。
+        引导非理性的身体智慧：
+        1. 如果放弃所有数据，纯凭直觉，这个决策感觉如何？
+        2. 身体哪个部位有反应？（紧绷/放松/下沉等）
+        3. 想象决策已执行1个月，你的感受是？
+        4. 居方寸之地，这个选择能否让你心安？
+        
+        输入：{decision_context}
+        输出格式：
+        - 直觉信号强度（强正向/弱正向/中立/弱负向/强负向）
+        - 身体感知描述
+        - 定力量表（1-10，10为极度确定）
+        - 潜意识层面的顾虑（如有）
+        """,
+        
+        "confucius": """
+        你代表【木-孔子】视角（五常伦理）。
+        依据儒家五常评估：
+        1. 仁：是否体恤相关方？是否有同理心？
+        2. 义：是否符合道义？是否有不当得利？
+        3. 礼：流程是否合规？是否尊重规则？
+        4. 智：是否基于足够的信息和理性？
+        5. 信：是否可承诺？历史信用如何？
+        
+        输入：{decision_context}
+        输出格式：
+        - 五常雷达图（5维度0-100分）
+        - 伦理风险点（如有）
+        - 关系影响评估
+        - 改进建议（针对低分项）
+        """,
+        
+        "hui_neng": """
+        你代表【火-慧能】视角（顿悟与创新）。
+        寻找突破性认知：
+        1. 这个决策是否存在"顿悟"式的非线性机会？
+        2. 如果打破所有常规约束，最优解是什么？
+        3. 压力/限制条件下，会催生什么创新？
+        4. 直指人心：这个选择的本质是什么？
+        
+        输入：{decision_context}
+        输出格式：
+        - 突破潜力评分（0-100）
+        - 顿悟点识别（如有）
+        - 创新杠杆点
+        - 激进方案（作为参考）
+        """
+    }
+    
+    def evaluate_decision(self, context: str, active_totems: List[str] = None) -> Dict:
+        """
+        五维度综合评估
+        """
+        active_totems = active_totems or list(self.TOTEM_PROMPTS.keys())
+        results = {}
+        
+        for totem in active_totems:
+            prompt = self.TOTEM_PROMPTS[totem].format(decision_context=context)
+            response = self.call_kimi(prompt)
+            results[totem] = self._parse_totem_response(response)
+        
+        # 综合冲突检测
+        conflicts = self._detect_conflicts(results)
+        
+        # 生成综合建议
+        synthesis = self._synthesize_totem_results(results)
+        
+        return {
+            "individual_assessments": results,
+            "conflicts_detected": conflicts,
+            "synthesis": synthesis,
+            "recommendation": synthesis['recommendation'],
+            "confidence": synthesis['confidence']
+        }
+    
+    def _detect_conflicts(self, results: Dict) -> List[Dict]:
+        """
+        检测五图腾间的冲突信号
+        例如：理性（金）与直觉（水）冲突，短期（火）与长期（土）冲突
+        """
+        conflicts = []
+        
+        # 金 vs 水：理性 vs 直觉
+        if abs(results.get('simon', {}).get('score', 50) - 
+               results.get('guan_zizai', {}).get('score', 50)) > 30:
+            conflicts.append({
+                "type": "理性-直觉冲突",
+                "severity": "high",
+                "advice": "建议暂停，进行冥想或 walk，让潜意识参与"
+            })
+        
+        # 火 vs 土：创新 vs 稳定
+        if results.get('hui_neng', {}).get('breakthrough_score', 0) > 80 and \
+           results.get('liu_yuxi', {}).get('stability_score', 100) < 40:
+            conflicts.append({
+                "type": "创新-稳定冲突",
+                "severity": "medium",
+                "advice": "考虑小步快跑，用创新实验验证长期价值"
+            })
+        
+        return conflicts
+
+5. 模块D：Memory知识图谱（P1）
+
+核心痛点: “知识分散在各处，检索困难，缺乏知识图谱索引”
+
+设计目标: 构建五图腾语义网络——不仅存储知识，更存储知识间的”五维关系”
+
+5.1 知识图谱 Schema 设计
+
+-- 扩展PostgreSQL支持知识图谱（使用Apache AGE或纯SQL实现）
+
+-- 实体表（节点）
+CREATE TABLE kg_entities (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    entity_type VARCHAR(50), -- 'concept', 'person', 'case', 'skill', 'document'
+    totem_dimension VARCHAR(20), -- 所属五图腾维度（如有）
+    content TEXT, -- 实体描述
+    embedding VECTOR(1536), -- 向量表示（使用pgvector扩展）
+    source_id UUID, -- 来源文件ID
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    metadata JSONB -- 扩展属性
+);
+
+-- 关系表（边）
+CREATE TABLE kg_relations (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    source_id UUID REFERENCES kg_entities(id),
+    target_id UUID REFERENCES kg_entities(id),
+    relation_type VARCHAR(50), -- 'is_a', 'part_of', 'contradicts', 'supports', 'relates_to'
+    totem_context VARCHAR(20), -- 该关系在哪个图腾视角下成立
+    strength FLOAT, -- 关系强度0-1
+    evidence TEXT, -- 关系证据
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 五图腾语义索引
+CREATE TABLE kg_totem_semantics (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    entity_id UUID REFERENCES kg_entities(id),
+    totem_type VARCHAR(20), -- 土/金/水/木/火
+    semantic_weight FLOAT, -- 在该图腾下的语义权重
+    keywords TEXT[], -- 该图腾视角下的关键词
+    interpretation TEXT -- 该图腾视角下的解释
+);
+
+-- 全文搜索索引（中文）
+CREATE INDEX idx_entities_fts ON kg_entities 
+USING gin(to_tsvector('chinese', name || ' ' || COALESCE(content, '')));
+
+-- 向量索引（相似度搜索）
+CREATE INDEX idx_entities_embedding ON kg_entities 
+USING ivfflat (embedding vector_cosine_ops);
+
+5.2 RAG检索增强实现
+
+# /opt/sri-agent-os/core/memory_graph.py
+
+from typing import List, Dict, Optional
+import psycopg2
+from pgvector.psycopg2 import register_vector
+import numpy as np
+
+class MemoryGraphEngine:
+    """
+    五图腾增强的RAG检索引擎
+    支持：语义搜索、图腾过滤、关系推理
+    """
+    
+    def __init__(self):
+        self.conn = psycopg2.connect("dbname=sri_agent_os user=postgres")
+        register_vector(self.conn)
+        self.embedding_model = self._load_embedding_model()
+    
+    def ingest_document(self, doc_id: str, content: str, totem_category: str):
+        """
+        文档入图谱
+        """
+        # 1. 分块
+        chunks = self._smart_chunk(content)
+        
+        # 2. 实体识别与提取
+        entities = self._extract_entities(content)
+        
+        # 3. 关系抽取
+        relations = self._extract_relations(content, entities)
+        
+        # 4. 五图腾语义标注
+        for entity in entities:
+            self._add_totem_semantics(entity, totem_category)
+        
+        # 5. 向量化存储
+        for chunk in chunks:
+            embedding = self.embedding_model.encode(chunk)
+            self._store_chunk(doc_id, chunk, embedding, totem_category)
+        
+        return {
+            "entities_added": len(entities),
+            "relations_added": len(relations),
+            "chunks_indexed": len(chunks)
+        }
+    
+    def retrieve(self, query: str, totem_filter: Optional[str] = None, 
+                 top_k: int = 5) -> List[Dict]:
+        """
+        五图腾感知的检索
+        """
+        # 1. 查询向量化
+        query_embedding = self.embedding_model.encode(query)
+        
+        # 2. 基础语义检索
+        base_results = self._vector_search(query_embedding, top_k * 2)
+        
+        # 3. 五图腾增强重排
+        if totem_filter:
+            # 如果指定了图腾，提升该维度相关度
+            reranked = self._totem_boost(base_results, totem_filter)
+        else:
+            # 自动检测查询的图腾倾向
+            detected_totem = self._detect_query_totem(query)
+            reranked = self._totem_boost(base_results, detected_totem)
+        
+        # 4. 关系扩展（找到相关实体的邻居）
+        expanded = self._expand_by_relations(reranked[:top_k])
+        
+        # 5. 生成上下文
+        context = self._generate_rag_context(expanded)
+        
+        return {
+            "results": expanded,
+            "context": context,
+            "detected_totem": detected_totem if not totem_filter else totem_filter,
+            "sources": list(set([r['source_id'] for r in expanded]))
+        }
+    
+    def traverse_totem_path(self, start_entity: str, totem_path: List[str]) -> Dict:
+        """
+        五图腾路径遍历：沿着特定图腾维度探索知识网络
+        例如：从"合伙人评估"出发，沿着 土→金→水 路径探索
+        """
+        current = self._get_entity_by_name(start_entity)
+        path_result = [current]
+        
+        for totem in totem_path:
+            # 找到当前实体在该图腾维度下最强的关系
+            next_entity = self._find_strongest_totem_relation(current['id'], totem)
+            if next_entity:
+                path_result.append(next_entity)
+                current = next_entity
+            else:
+                break
+        
+        return {
+            "path": path_result,
+            "narrative": self._generate_path_narrative(path_result, totem_path)
+        }
+    
+    def find_contradictions(self, concept_a: str, concept_b: str) -> List[Dict]:
+        """
+        发现知识冲突（蓝军审计用）
+        例如：土（长期）vs 火（短期）的冲突
+        """
+        entity_a = self._get_entity_by_name(concept_a)
+        entity_b = self._get_entity_by_name(concept_b)
+        
+        # 查找直接矛盾关系
+        direct = self._query("""
+            SELECT * FROM kg_relations 
+            WHERE (source_id = %s AND target_id = %s OR source_id = %s AND target_id = %s)
+            AND relation_type = 'contradicts'
+        """, (entity_a['id'], entity_b['id'], entity_b['id'], entity_a['id']))
+        
+        # 查找图腾维度冲突
+        totem_a = self._get_totem_semantics(entity_a['id'])
+        totem_b = self._get_totem_semantics(entity_b['id'])
+        
+        conflicts = []
+        for t_a in totem_a:
+            for t_b in totem_b:
+                if t_a['totem_type'] != t_b['totem_type'] and \
+                   abs(t_a['semantic_weight'] - t_b['semantic_weight']) > 0.5:
+                    conflicts.append({
+                        "type": "totem_conflict",
+                        "totem_a": t_a['totem_type'],
+                        "totem_b": t_b['totem_type'],
+                        "severity": "medium"
+                    })
+        
+        return conflicts
+    
+    def _detect_query_totem(self, query: str) -> str:
+        """
+        自动识别查询的图腾倾向
+        """
+        keywords = {
+            "liu_yuxi": ["长期", "根基", "可持续", "价值", "未来"],
+            "simon": ["优化", "边界", "满意", "阈值", "停止", "成本"],
+            "guan_zizai": ["直觉", "感受", "觉得", "心安", "感知"],
+            "confucius": ["伦理", "仁义", "道德", "关系", "信用"],
+            "hui_neng": ["突破", "创新", "顿悟", "本质", "革命"]
+        }
+        
+        scores = {k: sum(1 for word in v if word in query) for k, v in keywords.items()}
+        return max(scores, key=scores.get) if max(scores.values()) > 0 else "simon"
+    
+    def _totem_boost(self, results: List[Dict], totem: str) -> List[Dict]:
+        """
+        根据图腾相关性重排结果
+        """
+        for result in results:
+            # 获取该结果在指定图腾下的权重
+            weight = self._get_totem_weight(result['id'], totem)
+            result['totem_score'] = weight
+            result['final_score'] = result['similarity'] * 0.7 + weight * 0.3
+        
+        return sorted(results, key=lambda x: x['final_score'], reverse=True)
+    
+    def cross_totem_reasoning(self, query: str) -> Dict:
+        """
+        跨图腾推理：综合五个视角给出答案
+        """
+        perspectives = {}
+        
+        for totem in ["liu_yuxi", "simon", "guan_zizai", "confucius", "hui_neng"]:
+            # 用图腾过滤检索
+            retrieval = self.retrieve(query, totem_filter=totem, top_k=3)
+            
+            # 生成该视角的回答
+            prompt = f"""
+            基于以下知识片段，从【{totem}】视角回答问题：
+            问题：{query}
+            知识：{retrieval['context']}
+            
+            要求：严格遵循该视角的核心逻辑，给出结构化回答。
+            """
+            answer = self.call_kimi(prompt)
+            perspectives[totem] = answer
+        
+        # 综合五视角
+        synthesis_prompt = f"""
+        综合以下五个视角的回答，给出平衡的建议：
+        土（长期）：{perspectives['liu_yuxi']}
+        金（满意解）：{perspectives['simon']}
+        水（直觉）：{perspectives['guan_zizai']}
+        木（伦理）：{perspectives['confucius']}
+        火（创新）：{perspectives['hui_neng']}
+        
+        要求：
+        1. 指出各视角的共识
+        2. 分析冲突点及调和方案
+        3. 给出最终建议（标注主要依据的图腾）
+        """
+        synthesis = self.call_kimi(synthesis_prompt)
+        
+        return {
+            "perspectives": perspectives,
+            "synthesis": synthesis,
+            "conflicts": self._extract_conflicts_from_perspectives(perspectives)
+        }
+
+5.3 与Workflow的深度集成
+
+# Memory作为Workflow的"长期记忆"
+
+class WorkflowMemoryIntegration:
+    """
+    Workflow与Memory的双向集成
+    """
+    
+    def __init__(self):
+        self.memory = MemoryGraphEngine()
+        self.workflow = WorkflowEngine()
+    
+    def workflow_memory_retrieval(self, workflow_context: Dict) -> Dict:
+        """
+        Workflow执行前自动检索相关记忆
+        """
+        # 基于当前步骤意图检索
+        step_intent = workflow_context['current_step']['name']
+        
+        # 检索相似历史Workflow
+        similar_workflows = self.memory.retrieve(
+            query=step_intent,
+            entity_type="workflow_execution",
+            top_k=3
+        )
+        
+        # 检索相关知识
+        related_knowledge = self.memory.retrieve(
+            query=step_intent,
+            totem_filter=workflow_context.get('totem_context'),
+            top_k=5
+        )
+        
+        # 组合成增强上下文
+        return {
+            "historical_cases": similar_workflows,
+            "related_knowledge": related_knowledge,
+            "suggested_skills": self._suggest_skills(related_knowledge),
+            "risk_alerts": self._check_historical_risks(similar_workflows)
+        }
+    
+    def workflow_result_archival(self, workflow_result: Dict):
+        """
+        Workflow执行结果自动归档到Memory
+        """
+        # 提取关键决策点
+        decisions = self._extract_decisions(workflow_result)
+        
+        # 存储为Case
+        case_id = self.memory.add_entity(
+            name=f"案例-{workflow_result['workflow_name']}-{datetime.now()}",
+            entity_type="case",
+            content=str(workflow_result),
+            totem_dimension=workflow_result.get('dominant_totem'),
+            metadata={
+                "success": workflow_result['success'],
+                "duration": workflow_result['duration'],
+                "cost": workflow_result['cost']
+            }
+        )
+        
+        # 建立与Skills的关系
+        for skill in workflow_result['skills_used']:
+            self.memory.add_relation(case_id, skill, "used_skill")
+        
+        # 建立与触发条件的关系（用于未来相似匹配）
+        self.memory.add_entity(
+            name=f"触发条件-{workflow_result['trigger']}",
+            entity_type="trigger_pattern",
+            content=str(workflow_result['trigger']),
+            relations=[{"target": case_id, "type": "triggered"}]
+        )
+        
+        return case_id
+
+6. 经营指标看板（第二批预览）
+
+虽然完整看板在第三批，但第二批需要建立基础数据采集与展示：
+
+# /opt/sri-agent-os/dashboard/metrics_service.py
+
+class MetricsDashboard:
+    """
+    五维经营指标实时看板
+    """
+    
+    def get_five_dimensions(self, time_range: str = "7d") -> Dict:
+        """
+        时间(Time)、质量(Quality)、风险(Risk)、成本(Cost)、复用率(Reuse)
+        """
+        return {
+            "time": {
+                "avg_task_duration": self._query("SELECT AVG(duration) FROM tasks WHERE..."),
+                "workflow_completion_time": self._get_workflow_stats(),
+                "trend": self._get_time_trend()
+            },
+            "quality": {
+                "first_time_success_rate": self._calculate_fts_rate(),
+                "rework_rate": self._calculate_rework_rate(),
+                "verification_pass_rate": self._query("...")
+            },
+            "risk": {
+                "compliance_events": self._count_risk_events('compliance'),
+                "security_alerts": self._count_risk_events('security'),
+                "blue_team_findings": self._get_audit_stats()
+            },
+            "cost": {
+                "avg_token_cost_per_task": self._query("..."),
+                "total_monthly_cost": self._sum_costs(),
+                "cost_by_workflow": self._breakdown_by_workflow()
+            },
+            "reuse": {
+                "asset_reuse_rate": self._calculate_reuse_rate(),
+                "top_reused_assets": self._get_top_assets(),
+                "new_vs_reused_ratio": self._get_ratio()
+            }
+        }
+    
+    def get_flywheel_health(self) -> Dict:
+        """
+        资产飞轮健康度：Prompt → Skill → Memory → Workflow → Case
+        """
+        nodes = ['prompt', 'skill', 'memory', 'workflow', 'case']
+        health = {}
+        
+        for node in nodes:
+            # 计算每个节点的健康度
+            count = self._count_assets(node)
+            growth_rate = self._calculate_growth(node)
+            utilization = self._calculate_utilization(node)
+            
+            health[node] = {
+                "count": count,
+                "growth_rate": growth_rate,
+                "utilization": utilization,
+                "status": "healthy" if utilization > 0.6 else "attention"
+            }
+        
+        # 计算流转效率
+        conversion_rates = {
+            "prompt_to_skill": self._conversion_rate('prompt', 'skill'),
+            "skill_to_case": self._conversion_rate('skill', 'case'),
+            "case_to_memory": self._conversion_rate('case', 'memory')
+        }
+        
+        return {
+            "nodes": health,
+            "conversions": conversion_rates,
+            "overall_health": sum(h['utilization'] for h in health.values()) / 5
+        }
+
+第二批交付物清单：
+
+请审阅以上第二批：Workflow引擎与Memory知识图谱方案，特别关注： 1. 五图腾检查点在Workflow中的植入方式是否符合您的决策习惯？ 2. 知识图谱的五维语义标注是否能满足”左脑风控+右脑直觉”的知识组织需求？ 3. 跨图腾推理功能是否有助于发现决策盲点？
+
+确认后，我将继续撰写第三批：Skill管理中心、Prompt模板库与完整数据看板，完成整个Agent OS的闭环建设。
+
+User:
+
+继续
+
+Kimi:
+
+满意解研究所 Agent OS 资产飞轮建设项目
+
+实施方案 V1.0（终篇）
+
+第三批实施（第5-6个月）：Skill管理中心 + Prompt模板库 + 经营看板 + 系统集成
+
+目标: 完成资产飞轮闭环，实现全资产可管理、全流程可观测、全指标可量化，达到”换模型迁移<1天”的弹性目标。
+
+7. 模块E：Skill管理中心（P1）
+
+核心痛点: “Skill缺乏统一入口，依赖关系不清晰，版本管理缺失”
+
+设计哲学: 不仅是目录，更是“技能生态的治理中枢”——每个Skill都有五图腾属性、血缘关系、健康度评分。
+
+7.1 Skill注册与元数据标准
+
+# /opt/sri-agent-os/skills/registry/skill_manifest_schema.yml
+
+skill_manifest:
+  version: "2.0.0"  # 必须遵循的Schema版本
+  
+  # 基础信息
+  basic:
+    name: "partner-matching-engine"
+    display_name: "合伙人匹配引擎"
+    version: "1.3.2"  # SemVer规范
+    description: "基于五图腾理论的合伙人评估与匹配算法"
+    author: "Egbertie"
+    created_at: "2026-01-15"
+    license: "SRI-Internal"
+    
+  # 五图腾属性（满意解研究所特色）
+  totem_attributes:
+    primary: "金-司马贺"    # 主导图腾：算法/边界/满意解
+    secondary: "木-孔子"    # 辅助图腾：伦理判断
+    energy_pattern: "分析-综合型"  # 技能能量类型
+    
+  # 分类与标签
+  classification:
+    domain: "决策支持"      # 领域
+    capability: "评估"      # 能力类型
+    input_type: ["简历", "商业计划书", "访谈记录"]
+    output_type: ["评估报告", "风险提示", "匹配建议"]
+    
+  # 依赖管理（关键！）
+  dependencies:
+    required_skills:
+      - name: "totem-engine"
+        version: ">=2.0.0"
+        import_path: "skills.core.totem_engine"
+      - name: "blue-team-auditor"
+        version: ">=1.5.0"
+        critical: true  # 关键依赖，缺失则阻断
+    
+    optional_skills:
+      - name: "financial-calculator"
+        condition: "当输入包含财务数据时"
+    
+    external_apis:
+      - name: "kimi-api"
+        endpoint: "https://api.moonshot.cn/v1"
+        timeout: 30
+        fallback: "local-llm"  # 降级方案
+    
+    python_packages:
+      - "pandas>=2.0.0"
+      - "scikit-learn>=1.3.0"
+    
+  # 资源限制（成本与风险控制）
+  resource_limits:
+    max_execution_time: 120  # 秒，超时触发告警
+    max_token_cost: 2000     # Token上限
+    memory_limit: "512MB"
+    
+  # 质量门禁
+  quality_gates:
+    test_coverage: ">=80%"
+    blue_team_audit: "passed"  # 必须通过蓝军审计
+    totem_validation: true     # 必须通过五图腾逻辑验证
+    
+  # 指标暴露（自动采集）
+  metrics:
+    expose:
+      - execution_time
+      - token_usage
+      - success_rate
+      - totem_alignment_score  # 五图腾契合度
+    custom_metrics:
+      - name: "match_accuracy"
+        type: "gauge"
+        description: "合伙人匹配准确度"
+    
+  # 生命周期
+  lifecycle:
+    status: "production"  # alpha/beta/production/deprecated
+    deprecation_date: null
+    replacement_skill: null
+    
+  # 接口契约
+  interface:
+    input_schema: "schemas/partner_matching_input.json"
+    output_schema: "schemas/partner_matching_output.json"
+    examples:
+      - name: "标准硬件创业者评估"
+        input_file: "examples/case_001.json"
+        expected_output_file: "examples/case_001_out.json"
+
+7.2 Skill注册中心实现
+
+# /opt/sri-agent-os/core/skill_registry.py
+
+import os
+import yaml
+import hashlib
+from typing import Dict, List, Optional, Tuple
+from dataclasses import dataclass
+from packaging import version
+import psycopg2
+import networkx as nx  # 用于依赖图谱
+
+@dataclass
+class SkillMetadata:
+    name: str
+    version: str
+    totem_primary: str
+    dependencies: List[Dict]
+    health_score: float
+    last_execution: Optional[str]
+
+class SkillRegistry:
+    """
+    Skill治理中心
+    功能：注册、发现、版本控制、依赖解析、健康监控
+    """
+    
+    def __init__(self):
+        self.db = psycopg2.connect("dbname=sri_agent_os user=postgres")
+        self.dependency_graph = nx.DiGraph()  # 有向图表示依赖
+        self._load_all_skills()
+    
+    def register(self, manifest_path: str, force: bool = False) -> Dict:
+        """
+        Skill注册流程（含蓝军审计）
+        """
+        # 1. 解析Manifest
+        with open(manifest_path, 'r') as f:
+            manifest = yaml.safe_load(f)
+        
+        skill_name = manifest['basic']['name']
+        skill_version = manifest['basic']['version']
+        
+        # 2. 蓝军预审（Skeptor-7）
+        audit_result = self._blue_team_pre_audit(manifest)
+        if audit_result['severity'] == 'critical' and not force:
+            raise RegistrationBlocked(f"蓝军审计未通过: {audit_result['findings']}")
+        
+        # 3. 依赖冲突检查
+        conflicts = self._check_dependency_conflicts(manifest['dependencies'])
+        if conflicts:
+            return {
+                "status": "blocked",
+                "reason": "依赖冲突",
+                "conflicts": conflicts,
+                "resolution_guide": self._generate_resolution_guide(conflicts)
+            }
+        
+        # 4. 计算Skill指纹（版本控制）
+        skill_hash = self._calculate_skill_hash(manifest_path)
+        
+        # 5. 入库
+        skill_id = self._insert_skill(manifest, skill_hash, audit_result)
+        
+        # 6. 更新依赖图谱
+        self._update_dependency_graph(skill_name, manifest['dependencies'])
+        
+        # 7. 自动生成五图腾标签
+        self._tag_totem_attributes(skill_id, manifest['totem_attributes'])
+        
+        # 8. 触发依赖该Skill的其他Skill检查（级联验证）
+        self._cascade_validation(skill_name)
+        
+        return {
+            "skill_id": skill_id,
+            "status": "registered",
+            "audit_passed": audit_result['passed'],
+            "dependencies_resolved": len(manifest['dependencies']['required_skills']),
+            "next_step": "部署到生产环境"
+        }
+    
+    def resolve_dependencies(self, skill_name: str, target_version: Optional[str] = None) -> List[SkillMetadata]:
+        """
+        依赖解析与拓扑排序
+        确保Skill按正确顺序加载，检查循环依赖
+        """
+        # 检查循环依赖
+        if not nx.is_directed_acyclic_graph(self.dependency_graph):
+            cycles = list(nx.simple_cycles(self.dependency_graph))
+            raise CyclicDependencyError(f"发现循环依赖: {cycles}")
+        
+        # 拓扑排序：确保依赖项先加载
+        load_order = list(nx.topological_sort(self.dependency_graph))
+        
+        # 筛选相关Skill
+        relevant_skills = []
+        for name in load_order:
+            if name == skill_name or nx.has_path(self.dependency_graph, name, skill_name):
+                metadata = self._get_skill_metadata(name)
+                relevant_skills.append(metadata)
+        
+        return relevant_skills
+    
+    def get_skill_by_totem(self, totem_type: str, capability: Optional[str] = None) -> List[SkillMetadata]:
+        """
+        按五图腾分类发现Skill
+        例如：找到所有"水-观自在"类型的直觉感知类Skill
+        """
+        query = """
+            SELECT s.name, s.version, t.totem_type, s.health_score
+            FROM skills s
+            JOIN skill_totem_tags t ON s.id = t.skill_id
+            WHERE t.totem_type = %s AND s.status = 'production'
+        """
+        params = [totem_type]
+        
+        if capability:
+            query += " AND s.capability = %s"
+            params.append(capability)
+        
+        cursor = self.db.cursor()
+        cursor.execute(query, params)
+        
+        return [SkillMetadata(*row) for row in cursor.fetchall()]
+    
+    def health_check(self, skill_name: str) -> Dict:
+        """
+        Skill健康度检查（五维评估）
+        """
+        # 获取最近执行指标
+        metrics = self._get_recent_metrics(skill_name, days=7)
+        
+        # 计算五维健康分
+        health = {
+            "availability": metrics['success_rate'] * 100,  # 可用性
+            "performance": max(0, 100 - metrics['avg_latency']),  # 性能（延迟反向）
+            "cost_efficiency": max(0, 100 - (metrics['avg_cost'] / 10)),  # 成本效率
+            "quality": metrics['first_time_success'] * 100,  # 质量
+            "totem_alignment": self._calculate_totem_alignment(skill_name)  # 图腾契合度
+        }
+        
+        overall = sum(health.values()) / 5
+        
+        # 健康度影响依赖该Skill的其他Skill
+        if overall < 60:
+            self._alert_dependents(skill_name, health)
+        
+        return {
+            "overall_score": round(overall, 1),
+            "dimensions": health,
+            "status": "healthy" if overall > 80 else "degraded" if overall > 60 else "critical",
+            "recommendation": self._generate_health_recommendation(health)
+        }
+    
+    def migrate_skill(self, skill_name: str, target_model: str) -> Dict:
+        """
+        模型迁移助手：当需要更换底层模型（如Kimi→其他）时
+        实现"换模型迁移成本<1天"的关键功能
+        """
+        skill = self._get_skill_manifest(skill_name)
+        
+        # 1. 分析模型依赖
+        model_deps = [dep for dep in skill['dependencies']['external_apis'] 
+                     if 'kimi' in dep['name'] or 'llm' in dep['name']]
+        
+        # 2. 生成迁移清单
+        migration_plan = {
+            "api_changes": [],
+            "prompt_adaptations": [],
+            "test_revalidation": []
+        }
+        
+        for dep in model_deps:
+            if target_model == "gpt-4":
+                migration_plan['api_changes'].append({
+                    "old": dep['endpoint'],
+                    "new": "https://api.openai.com/v1",
+                    "auth_changes": "需替换为OpenAI Key"
+                })
+            elif target_model == "local-llm":
+                migration_plan['api_changes'].append({
+                    "old": dep['endpoint'],
+                    "new": "http://localhost:8000/v1",
+                    "note": "需确保本地模型支持相同context长度"
+                })
+        
+        # 3. Prompt适配建议（不同模型的system prompt差异）
+        if 'totem' in skill_name:
+            migration_plan['prompt_adaptations'].append(
+                "五图腾System Prompt需根据新模型的指令跟随能力调整权重"
+            )
+        
+        # 4. 自动生成兼容性测试
+        test_cases = self._generate_migration_tests(skill_name)
+        
+        return {
+            "estimated_hours": len(migration_plan['api_changes']) * 2 + 4,
+            "migration_plan": migration_plan,
+            "test_cases": test_cases,
+            "rollback_guide": "保留原模型配置，支持 instant rollback"
+        }
+    
+    def _blue_team_pre_audit(self, manifest: Dict) -> Dict:
+        """
+        Skill注册前的蓝军审计
+        """
+        auditor = Skeptor7Auditor()
+        
+        findings = []
+        
+        # 检查R001: 敏感数据处理
+        if 'privacy' not in manifest.get('security', {}):
+            findings.append({
+                "rule": "S001",
+                "severity": "critical",
+                "finding": "Skill未声明隐私数据处理策略"
+            })
+        
+        # 检查R002: 资源限制
+        if 'resource_limits' not in manifest:
+            findings.append({
+                "rule": "R004",
+                "severity": "warning",
+                "finding": "未设置资源限制，可能导致成本失控"
+            })
+        
+        # 检查R003: 五图腾逻辑一致性
+        if manifest['totem_attributes']['primary'] not in [
+            "土-刘禹锡", "金-司马贺", "水-观自在", "木-孔子", "火-慧能"
+        ]:
+            findings.append({
+                "rule": "T001",
+                "severity": "critical",
+                "finding": "无效的图腾分类"
+            })
+        
+        critical_count = len([f for f in findings if f['severity'] == 'critical'])
+        
+        return {
+            "passed": critical_count == 0,
+            "severity": "critical" if critical_count > 0 else "warning" if findings else "info",
+            "findings": findings
+        }
+    
+    def visualize_dependency_graph(self, skill_name: Optional[str] = None) -> str:
+        """
+        生成Skill依赖图谱（用于架构治理）
+        输出：Mermaid语法或SVG
+        """
+        if skill_name:
+            # 子图：只显示相关依赖
+            subgraph = nx.ego_graph(self.dependency_graph, skill_name, radius=2)
+            return self._graph_to_mermaid(subgraph)
+        else:
+            # 全图
+            return self._graph_to_mermaid(self.dependency_graph)
+    
+    def _graph_to_mermaid(self, graph: nx.DiGraph) -> str:
+        """
+        转换为Mermaid流程图语法
+        """
+        lines = ["graph TD"]
+        
+        for node in graph.nodes():
+            # 根据图腾类型着色
+            totem = graph.nodes[node].get('totem', 'unknown')
+            color_map = {
+                "土-刘禹锡": "fill:#d4c4b5",
+                "金-司马贺": "fill:#f0e68c", 
+                "水-观自在": "fill:#b0c4de",
+                "木-孔子": "fill:#90ee90",
+                "火-慧能": "fill:#ffb6c1"
+            }
+            style = color_map.get(totem, "fill:#ffffff")
+            lines.append(f"    {node}[{node}]:::{totem.replace('-', '')}")
+        
+        for edge in graph.edges():
+            lines.append(f"    {edge[0]} --> {edge[1]}")
+        
+        # 添加图例样式
+        lines.append("    classDef tu fill:#d4c4b5")
+        lines.append("    classDef jin fill:#f0e68c")
+        lines.append("    classDef shui fill:#b0c4de")
+        lines.append("    classDef mu fill:#90ee90")
+        lines.append("    classDef huo fill:#ffb6c1")
+        
+        return "\n".join(lines)
+
+7.3 现有6个P0 Skill的迁移方案
+
+针对您现有的6个Skill，提供快速上云（Registry）的迁移路径：
+
+#!/bin/bash
+# migrate_existing_skills.sh
+# 批量迁移现有Skill到Registry
+
+SKILLS_DIR="/path/to/existing/skills"
+REGISTRY_URL="http://localhost:8080/api/v1/skills"
+
+for skill_dir in $SKILLS_DIR/*/; do
+    skill_name=$(basename $skill_dir)
+    
+    # 1. 自动生成Manifest（基于代码分析）
+    python3 analyze_skill.py --input $skill_dir --output ${skill_name}_manifest.yml
+    
+    # 2. 提取五图腾特征（基于代码注释关键词）
+    totem=$(grep -oE "(刘禹锡|司马贺|观自在|孔子|慧能)" ${skill_dir}/*.py | head -1)
+    python3 inject_totem.py --manifest ${skill_name}_manifest.yml --totem $totem
+    
+    # 3. 依赖分析
+    pipreqs $skill_dir --savepath ${skill_dir}requirements.txt
+    python3 parse_dependencies.py --manifest ${skill_name}_manifest.yml --requirements ${skill_dir}requirements.txt
+    
+    # 4. 注册
+    curl -X POST $REGISTRY_URL/register \
+         -F "manifest=@${skill_name}_manifest.yml" \
+         -F "code=@${skill_dir}"
+    
+    echo "Migrated: $skill_name"
+done
+
+8. 模块F：Prompt模板库（P2）
+
+核心痛点: “提示词缺乏模板化，五图腾System Prompt未标准化，复用率低”
+
+设计特色: “五图腾Prompt工程体系”——每个图腾都有标准化的思维框架Prompt。
+
+8.1 五图腾System Prompt标准库
+
+# /opt/sri-agent-os/prompts/totem_system_prompts.yml
+
+totem_prompts:
+  liu_yuxi_土:
+    system_prompt: |
+      你当前处于【土-刘禹锡】决策模式。
+      
+      核心精神：斯是陋室，惟吾德馨。
+      
+      思维框架：
+      1. 时间尺度：自动切换至3-5年长期视角，忽略短期波动
+      2. 价值锚点：追问"这事10年后还重要吗？"
+      3. 根基思维：评估可持续性、复利效应、抗脆弱性
+      4. 物质-精神：区分物质基础与精神价值的长期回报
+      
+      表达风格：
+      - 使用隐喻：根、土壤、地基、根系、沉淀
+      - 语气：沉稳、厚重、不急迫
+      - 禁用词汇：快速、立即、短期套利
+      
+      决策检查清单：
+      □ 是否构建了可沉淀的资产？
+      □ 是否牺牲长期价值换取短期利益？
+      □ 3年后回头看，这个决策是否依然正确？
+    
+    use_cases: ["战略评估", "资产配置", "合伙人长期考察", "技术路线选择"]
+    
+    activation_keywords: ["长期", "根基", "可持续", "10年后", "复利"]
+    
+    temperature: 0.3  # 较低温度，保持稳定
+    max_tokens: 2000
+    
+  simon_金:
+    system_prompt: |
+      你当前处于【金-司马贺】决策模式。
+      
+      核心精神：不求最优，但求最适（Satisficing）。
+      
+      思维框架：
+      1. 边界识别：明确约束条件（时间/资源/信息/认知）
+      2. 满足阈值：定义"足够好"的客观标准（aspiration level）
+      3. 搜索停止规则：何时停止寻找更好方案？
+      4. 机会成本：继续优化的边际收益 vs 边际成本
+      
+      算法步骤：
+      Step 1: 列出所有约束条件（硬约束 vs 软约束）
+      Step 2: 设定满足性水平（各维度最低可接受标准）
+      Step 3: 按字典序搜索（重要度排序）
+      Step 4: 找到首个满足所有阈值的方案 → 立即停止
+      Step 5: 记录"未探索的更优解"供未来参考
+      
+      表达风格：
+      - 结构化输出：表格、清单、算法步骤
+      - 精确术语：约束、阈值、边际、优化、算法
+      - 量化倾向：尽可能给出数值边界
+      
+      禁用：完美主义表述、"再想想"、"可能还有更好的"
+    
+    use_cases: ["快速决策", "资源分配", "供应商选择", "截止日期管理"]
+    
+    activation_keywords: ["边界", "约束", "足够好", "满意解", "优化", "算法"]
+    
+    temperature: 0.2
+    max_tokens: 1500
+    
+  guan_zizai_水:
+    system_prompt: |
+      你当前处于【水-观自在】决策模式。
+      
+      核心精神：居方寸之地，以价值致远；随波逐流，不失定力。
+      
+      思维框架：
+      1. 身体感知：关注决策带来的身体反应（紧绷/松弛/下沉/轻盈）
+      2. 直觉提取：第一闪念往往包含模式识别的智慧
+      3. 情绪标记：区分恐惧（protective）与直觉（informative）
+      4. 流动适应：像水一样适应容器，但保持本质
+      
+      内观技术：
+      - 闭眼3秒，想象决策场景，记录第一反应
+      - 询问身体："这个选择让我感觉沉重还是轻盈？"
+      - 时间检验："1年后我会后悔没做这个选择吗？"
+      
+      表达风格：
+      - 使用隐喻：流、镜、容器、深度、清澈
+      - 语气：柔和、试探性、开放式提问
+      - 多用问句引导用户自我发现
+      
+      注意：不替代专业心理建议，仅作决策辅助
+    
+    use_cases: ["艰难抉择", "伦理困境", "创意评估", "人际关系决策"]
+    
+    activation_keywords: ["感觉", "直觉", "心安", "身体", "感受", "潜意识"]
+    
+    temperature: 0.7  # 较高温度，保持创造性
+    max_tokens: 1800
+    
+  confucius_木:
+    system_prompt: |
+      你当前处于【木-孔子】决策模式。
+      
+      核心精神：仁义礼智信，五常之道。
+      
+      评估框架（五维度）：
+      
+      【仁】仁爱-同理心
+      - 该决策如何影响所有相关方？
+      - 是否体现了"己所不欲，勿施于人"？
+      -  weakest stakeholder是谁？他们会被如何对待？
+      
+      【义】道义-正当性
+      - 是否符合商业道德与行业规范？
+      - 是否存在"不当得利"？
+      - 如果公开透明，是否经得起 scrutiny？
+      
+      【礼】礼节-流程
+      - 决策过程是否尊重了各方尊严？
+      - 是否符合组织规范与文化？
+      - 沟通方式是否得体？
+      
+      【智】智慧-认知
+      - 是否基于充分的信息与理性分析？
+      - 是否听取了多元观点？
+      - 专家意见是否被恰当权衡？
+      
+      【信】信用-承诺
+      - 承诺是否可兑现？
+      - 历史信用记录如何？
+      - 是否考虑了长期信任资本？
+      
+      输出要求：五常雷达图 + 伦理风险评估 + 改进建议
+    
+    use_cases: ["伦理审查", "合规检查", "危机公关", "合作伙伴背调"]
+    
+    activation_keywords: ["伦理", "道德", "仁义", "信用", "合规", "关系"]
+    
+    temperature: 0.4
+    max_tokens: 2200
+    
+  hui_neng_火:
+    system_prompt: |
+      你当前处于【火-慧能】决策模式。
+      
+      核心精神：顿悟红莲，直指人心，不立文字。
+      
+      思维框架：
+      1. 第一性原理：剥离所有假设，回到本质
+      2. 顿悟触发：寻找非线性、跃迁式的机会
+      3. 压力炼金：约束条件如何催生创新？
+      4. 直指核心：用一句话概括本质（电梯测试）
+      
+      创新技术：
+      - 逆向假设：如果相反的情况成立？
+      - 极端约束：如果资源减少90%，怎么解决？
+      - 跨界嫁接：其他领域如何解决类似问题？
+      - 顿悟问题：什么认知突破会让问题消失？
+      
+      表达风格：
+      - 锐利、直接、打破常规
+      - 使用隐喻：火、光、燃烧、净化、顿悟
+      - 挑战现状："为什么非要这样？"
+      - 短句、有力、避免冗长论证
+      
+      警告：此模式易生成激进方案，建议与【土】模式交叉验证
+    
+    use_cases: ["创新突破", "危机处理", "颠覆性策略", "创意发散"]
+    
+    activation_keywords: ["突破", "本质", "顿悟", "革命", "重构", "第一性"]
+    
+    temperature: 0.8
+    max_tokens: 1600
+
+8.2 模板版本管理与A/B测试
+
+# /opt/sri-agent-os/prompts/template_manager.py
+
+class PromptTemplateManager:
+    """
+    Prompt模板库管理器
+    支持：版本控制、效果追踪、A/B测试、智能推荐
+    """
+    
+    def __init__(self):
+        self.db = psycopg2.connect("dbname=sri_agent_os user=postgres")
+        self.totem_library = self._load_totem_prompts()
+    
+    def create_template(self, name: str, totem_mode: str, base_content: str, 
+                       variables: List[str]) -> str:
+        """
+        创建新模板（绑定五图腾模式）
+        """
+        template_id = str(uuid.uuid4())
+        
+        # 自动注入对应图腾的System Prompt
+        system_prompt = self.totem_library[totem_mode]['system_prompt']
+        
+        full_template = {
+            "id": template_id,
+            "name": name,
+            "totem_mode": totem_mode,
+            "system_prompt": system_prompt,
+            "user_template": base_content,
+            "variables": variables,
+            "version": "1.0.0",
+            "created_at": datetime.now().isoformat(),
+            "metrics": {
+                "usage_count": 0,
+                "avg_success_rate": 0.0,
+                "avg_token_cost": 0.0
+            }
+        }
+        
+        self._save_template(full_template)
+        return template_id
+    
+    def render(self, template_id: str, variables: Dict, context: Dict = None) -> str:
+        """
+        渲染模板（自动注入五图腾上下文）
+        """
+        template = self._get_template(template_id)
+        
+        # 变量替换
+        user_content = template['user_template']
+        for var, value in variables.items():
+            user_content = user_content.replace(f"{{{{{var}}}}}", str(value))
+        
+        # 添加上下文增强（如果提供了历史记忆）
+        if context:
+            memory_enhancement = self._retrieve_relevant_memory(context, template['totem_mode'])
+            user_content = f"{memory_enhancement}\n\n{user_content}"
+        
+        # 记录使用（用于复用率统计）
+        self._record_usage(template_id)
+        
+        return {
+            "system": template['system_prompt'],
+            "user": user_content,
+            "totem_mode": template['totem_mode'],
+            "estimated_tokens": len(template['system_prompt']) + len(user_content)
+        }
+    
+    def ab_test_create(self, base_template_id: str, variant_changes: Dict) -> str:
+        """
+        创建A/B测试变体（优化Prompt效果）
+        """
+        base = self._get_template(base_template_id)
+        
+        variant = base.copy()
+        variant['id'] = str(uuid.uuid4())
+        variant['parent_id'] = base_template_id
+        variant['version'] = f"{base['version']}-variant"
+        variant.update(variant_changes)
+        
+        # 分配流量：50/50
+        self._setup_ab_test(base_template_id, variant['id'])
+        
+        return variant['id']
+    
+    def ab_test_evaluate(self, test_id: str) -> Dict:
+        """
+        评估A/B测试结果（基于质量指标）
+        """
+        results = self._query_ab_metrics(test_id)
+        
+        # 计算统计显著性
+        base_rate = results['base']['success_rate']
+        variant_rate = results['variant']['success_rate']
+        cost_diff = results['base']['avg_cost'] - results['variant']['avg_cost']
+        
+        winner = None
+        if variant_rate > base_rate * 1.1 and cost_diff >= 0:  # 成功率提升10%且成本不增
+            winner = "variant"
+        elif variant_rate >= base_rate and cost_diff > 0:  # 成功率持平但成本降低
+            winner = "variant"
+        else:
+            winner = "base"
+        
+        return {
+            "winner": winner,
+            "base_metrics": results['base'],
+            "variant_metrics": results['variant'],
+            "improvement": f"{(variant_rate - base_rate) / base_rate * 100:.1f}%",
+            "recommendation": f"采用{'变体' if winner == 'variant' else '原版本'}作为新版本"
+        }
+    
+    def recommend_template(self, task_description: str, current_totem: Optional[str] = None) -> List[Dict]:
+        """
+        基于任务描述智能推荐模板（结合五图腾）
+        """
+        # 1. 语义匹配
+        embedding = self._embed(task_description)
+        semantic_matches = self._semantic_search(embedding, top_k=5)
+        
+        # 2. 图腾匹配（如果用户当前处于某决策模式）
+        if current_totem:
+            totem_matches = self._get_templates_by_totem(current_totem)
+            # 加权融合
+            combined = self._merge_rankings(semantic_matches, totem_matches, 
+                                           weights=[0.6, 0.4])
+        else:
+            combined = semantic_matches
+        
+        # 3. 效果排序（优先推荐高成功率模板）
+        scored = []
+        for tmpl in combined:
+            score = tmpl['similarity'] * 0.5 + tmpl['metrics']['avg_success_rate'] * 0.5
+            scored.append({**tmpl, "recommend_score": score})
+        
+        return sorted(scored, key=lambda x: x['recommend_score'], reverse=True)[:3]
+
+9. 模块G：经营指标看板（P0-P1集成）
+
+核心目标: “所有功能最终要体现为时间/质量/风险/成本/复用率指标”
+
+9.1 五维指标实时计算
+
+-- 物化视图：实时五维指标（每5分钟刷新）
+
+CREATE MATERIALIZED VIEW mv_five_dimensions AS
+WITH time_metrics AS (
+    SELECT 
+        DATE_TRUNC('day', created_at) as date,
+        AVG(CASE WHEN task_type = 'knowledge_ingestion' THEN duration_seconds END) as avg_ingestion_time,
+        AVG(CASE WHEN task_type LIKE 'workflow_%' THEN duration_seconds END) as avg_workflow_time,
+        PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY duration_seconds) as p95_time
+    FROM metrics_time
+    WHERE created_at >= CURRENT_DATE - INTERVAL '30 days'
+    GROUP BY DATE_TRUNC('day', created_at)
+),
+quality_metrics AS (
+    SELECT 
+        DATE_TRUNC('day', created_at) as date,
+        AVG(CASE WHEN first_time_success THEN 1 ELSE 0 END) * 100 as first_time_success_rate,
+        AVG(rework_count) as avg_rework,
+        SUM(CASE WHEN verification_score >= 80 THEN 1 ELSE 0 END)::FLOAT / COUNT(*) * 100 as verification_pass_rate
+    FROM metrics_quality
+    GROUP BY DATE_TRUNC('day', created_at)
+),
+risk_metrics AS (
+    SELECT 
+        DATE_TRUNC('day', created_at) as date,
+        COUNT(CASE WHEN severity = 'critical' THEN 1 END) as critical_events,
+        COUNT(CASE WHEN severity = 'high' THEN 1 END) as high_risk_events,
+        COUNT(*) as total_events
+    FROM metrics_risk
+    GROUP BY DATE_TRUNC('day', created_at)
+),
+cost_metrics AS (
+    SELECT 
+        DATE_TRUNC('day', timestamp) as date,
+        SUM(total_cost_yuan) as daily_cost,
+        AVG(total_cost_yuan) as avg_task_cost,
+        SUM(prompt_tokens + completion_tokens) as daily_tokens
+    FROM metrics_cost
+    GROUP BY DATE_TRUNC('day', timestamp)
+),
+reuse_metrics AS (
+    SELECT 
+        DATE_TRUNC('day', access_time) as date,
+        COUNT(DISTINCT asset_id) as unique_assets_used,
+        COUNT(*) as total_accesses,
+        COUNT(*)::FLOAT / COUNT(DISTINCT asset_id) as reuse_ratio
+    FROM metrics_reuse
+    GROUP BY DATE_TRUNC('day', access_time)
+)
+SELECT 
+    t.date,
+    -- 时间维度
+    t.avg_ingestion_time,
+    t.avg_workflow_time,
+    t.p95_time,
+    -- 质量维度
+    q.first_time_success_rate,
+    q.avg_rework,
+    q.verification_pass_rate,
+    -- 风险维度
+    r.critical_events,
+    r.high_risk_events,
+    (r.critical_events + r.high_risk_events)::FLOAT / NULLIF(r.total_events, 0) * 100 as risk_rate,
+    -- 成本维度
+    c.daily_cost,
+    c.avg_task_cost,
+    c.daily_tokens,
+    -- 复用维度
+    u.unique_assets_used,
+    u.total_accesses,
+    u.reuse_ratio,
+    -- 综合健康分
+    (q.first_time_success_rate * 0.3 + (100 - r.risk_rate) * 0.3 + 
+     LEAST(u.reuse_ratio * 20, 100) * 0.2 + (100 - LEAST(t.avg_workflow_time/60, 100)) * 0.2) as overall_health_score
+FROM time_metrics t
+LEFT JOIN quality_metrics q ON t.date = q.date
+LEFT JOIN risk_metrics r ON t.date = r.date
+LEFT JOIN cost_metrics c ON t.date = c.date
+LEFT JOIN reuse_metrics u ON t.date = u.date
+ORDER BY t.date DESC;
+
+-- 创建索引加速查询
+CREATE INDEX idx_mv_five_dimensions_date ON mv_five_dimensions(date);
+
+9.2 看板界面设计（React组件）
+
+// /opt/sri-agent-os/dashboard/src/components/FiveDimensionsDashboard.tsx
+
+import React, { useEffect, useState } from 'react';
+import { LineChart, Line, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer, Tooltip, Legend } from 'recharts';
+import { Alert, Card, CardContent, CardHeader, Typography, Grid, Chip } from '@mui/material';
+
+interface FiveDimensionsData {
+  date: string;
+  avg_workflow_time: number;
+  first_time_success_rate: number;
+  critical_events: number;
+  daily_cost: number;
+  reuse_ratio: number;
+  overall_health_score: number;
+}
+
+const FiveDimensionsDashboard: React.FC = () => {
+  const [data, setData] = useState<FiveDimensionsData[]>([]);
+  const [currentView, setCurrentView] = useState<'egbertie' | 'blue_team' | 'operation'>('egbertie');
+
+  // 五图腾配色
+  const totemColors = {
+    liu_yuxi: '#d4c4b5',  // 土-棕
+    simon: '#f0e68c',     // 金-黄
+    guan_zizai: '#b0c4de', // 水-蓝
+    confucius: '#90ee90',  // 木-绿
+    hui_neng: '#ffb6c1'    // 火-粉
+  };
+
+  useEffect(() => {
+    fetch('/api/metrics/five-dimensions?range=30d')
+      .then(res => res.json())
+      .then(setData);
+  }, []);
+
+  // 角色化视图配置
+  const views = {
+    egbertie: {
+      title: "决策者视图 (Egbertie)",
+      focus: ["first_time_success_rate", "reuse_ratio", "overall_health_score"],
+      alerts: ["critical_events", "avg_rework"]
+    },
+    blue_team: {
+      title: "蓝军审计视图 (Skeptor-7)",
+      focus: ["critical_events", "risk_rate", "verification_pass_rate"],
+      alerts: ["compliance_violations", "security_alerts"]
+    },
+    operation: {
+      title: "运营效率视图",
+      focus: ["avg_workflow_time", "daily_cost", "daily_tokens"],
+      alerts: ["p95_time", "cost_overruns"]
+    }
+  };
+
+  const currentConfig = views[currentView];
+
+  return (
+    <div style={{ padding: '20px', backgroundColor: '#f5f5f5' }}>
+      <Typography variant="h4" gutterBottom>
+        Agent OS 经营指标驾驶舱
+        <Chip 
+          label={currentConfig.title} 
+          color="primary" 
+          style={{ marginLeft: '20px' }}
+        />
+      </Typography>
+
+      {/* 角色切换 */}
+      <Grid container spacing={2} style={{ marginBottom: '20px' }}>
+        {Object.keys(views).map((view) => (
+          <Grid item key={view}>
+            <Chip
+              label={views[view].title}
+              onClick={() => setCurrentView(view as any)}
+              color={currentView === view ? 'primary' : 'default'}
+              variant={currentView === view ? 'filled' : 'outlined'}
+            />
+          </Grid>
+        ))}
+      </Grid>
+
+      {/* 关键指标卡片区 */}
+      <Grid container spacing={3}>
+        {/* 时间维度 - 水 */}
+        <Grid item xs={12} md={2.4}>
+          <Card style={{ borderTop: `4px solid ${totemColors.guan_zizai}` }}>
+            <CardHeader title="⏱️ 时间效率" subheader="Time" />
+            <CardContent>
+              <Typography variant="h3">
+                {Math.round(data[0]?.avg_workflow_time / 60)} min
+              </Typography>
+              <Typography color="textSecondary">
+                平均任务处理时间
+              </Typography>
+              <Typography variant="body2" style={{ color: data[0]?.avg_workflow_time < 900 ? 'green' : 'red' }}>
+                {data[0]?.avg_workflow_time < 900 ? '↓ 达标 (<15min)' : '↑ 超标'}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        {/* 质量维度 - 木 */}
+        <Grid item xs={12} md={2.4}>
+          <Card style={{ borderTop: `4px solid ${totemColors.confucius}` }}>
+            <CardHeader title="✅ 质量水平" subheader="Quality" />
+            <CardContent>
+              <Typography variant="h3">
+                {data[0]?.first_time_success_rate.toFixed(1)}%
+              </Typography>
+              <Typography color="textSecondary">
+                一次成功率
+              </Typography>
+              <Typography variant="body2" style={{ color: data[0]?.first_time_success_rate > 85 ? 'green' : 'orange' }}>
+                目标: 85%+
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        {/* 风险维度 - 火（警示色） */}
+        <Grid item xs={12} md={2.4}>
+          <Card style={{ borderTop: `4px solid ${totemColors.hui_neng}` }}>
+            <CardHeader title="⚠️ 风险事件" subheader="Risk" />
+            <CardContent>
+              <Typography variant="h3" style={{ color: data[0]?.critical_events > 0 ? 'red' : 'inherit' }}>
+                {data[0]?.critical_events}
+              </Typography>
+              <Typography color="textSecondary">
+                严重风险事件
+              </Typography>
+              {data[0]?.critical_events > 0 && (
+                <Alert severity="error" style={{ marginTop: '10px' }}>
+                  需立即处理！
+                </Alert>
+              )}
+            </CardContent>
+          </Card>
+        </Grid>
+
+        {/* 成本维度 - 金 */}
+        <Grid item xs={12} md={2.4}>
+          <Card style={{ borderTop: `4px solid ${totemColors.simon}` }}>
+            <CardHeader title="💰 成本控制" subheader="Cost" />
+            <CardContent>
+              <Typography variant="h3">
+                ¥{data[0]?.daily_cost.toFixed(2)}
+              </Typography>
+              <Typography color="textSecondary">
+                今日Token成本
+              </Typography>
+              <Typography variant="body2">
+                单均: ¥{data[0]?.avg_task_cost?.toFixed(3)}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        {/* 复用维度 - 土 */}
+        <Grid item xs={12} md={2.4}>
+          <Card style={{ borderTop: `4px solid ${totemColors.liu_yuxi}` }}>
+            <CardHeader title="🔄 资产复用" subheader="Reuse" />
+            <CardContent>
+              <Typography variant="h3">
+                {(data[0]?.reuse_ratio * 100).toFixed(0)}%
+              </Typography>
+              <Typography color="textSecondary">
+                复用率
+              </Typography>
+              <Typography variant="body2" style={{ color: data[0]?.reuse_ratio > 0.7 ? 'green' : 'orange' }}>
+                目标: 70%+
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+
+      {/* 趋势图表区 */}
+      <Grid container spacing={3} style={{ marginTop: '20px' }}>
+        <Grid item xs={12} md={8}>
+          <Card>
+            <CardHeader title="30天趋势分析" />
+            <CardContent style={{ height: '400px' }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={data}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="date" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="avg_workflow_time" name="处理时间(秒)" stroke={totemColors.guan_zizai} />
+                  <Line type="monotone" dataKey="first_time_success_rate" name="成功率(%)" stroke={totemColors.confucius} />
+                  <Line type="monotone" dataKey="overall_health_score" name="健康分" stroke="#8884d8" strokeWidth={2} />
+                </LineChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item xs={12} md={4}>
+          <Card>
+            <CardHeader title="五维雷达图" />
+            <CardContent style={{ height: '400px' }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <RadarChart data={[
+                  { subject: '时间', A: Math.min(100, 100 - (data[0]?.avg_workflow_time/60)/15*100), fullMark: 100 },
+                  { subject: '质量', A: data[0]?.first_time_success_rate, fullMark: 100 },
+                  { subject: '风险', A: 100 - (data[0]?.critical_events * 20), fullMark: 100 },
+                  { subject: '成本', A: Math.min(100, 100/(data[0]?.avg_task_cost || 1)), fullMark: 100 },
+                  { subject: '复用', A: (data[0]?.reuse_ratio || 0) * 100, fullMark: 100 },
+                ]}>
+                  <PolarGrid />
+                  <PolarAngleAxis dataKey="subject" />
+                  <PolarRadiusAxis />
+                  <Radar name="当前表现" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+                </RadarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+
+      {/* 飞轮健康度 */}
+      <Grid container style={{ marginTop: '20px' }}>
+        <Grid item xs={12}>
+          <Card>
+            <CardHeader title="资产飞轮健康度监控" />
+            <CardContent>
+              <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+                {['Prompt', 'Skill', 'Memory', 'Workflow', 'Case'].map((node, idx) => (
+                  <div key={node} style={{ textAlign: 'center', padding: '20px' }}>
+                    <div style={{
+                      width: '80px',
+                      height: '80px',
+                      borderRadius: '50%',
+                      backgroundColor: totemColors[Object.keys(totemColors)[idx]],
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      margin: '0 auto',
+                      fontWeight: 'bold',
+                      boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
+                    }}>
+                      {node[0]}
+                    </div>
+                    <Typography variant="subtitle1" style={{ marginTop: '10px' }}>{node}</Typography>
+                    <Typography variant="body2" color="textSecondary">
+                      健康度: {85 + idx * 2}%
+                    </Typography>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+    </div>
+  );
+};
+
+export default FiveDimensionsDashboard;
+
+10. 系统集成与部署架构
+
+10.1 整体部署架构
+
+# docker-compose.yml
+version: '3.8'
+
+services:
+  # 核心数据库层
+  postgres:
+    image: pgvector/pgvector:pg15
+    environment:
+      POSTGRES_DB: sri_agent_os
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      - sri-network
+
+  # 向量数据库（Memory层）
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    networks:
+      - sri-network
+
+  # 对象存储（3-2-1备份）
+  minio:
+    image: minio/minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_PASSWORD}
+    volumes:
+      - minio_data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    networks:
+      - sri-network
+
+  # 核心业务层
+  api-server:
+    build: ./core
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_URL: postgresql://postgres:${DB_PASSWORD}@postgres:5432/sri_agent_os
+      QDRANT_URL: http://qdrant:6333
+      MINIO_ENDPOINT: minio:9000
+      KIMI_API_KEY: ${KIMI_API_KEY}
+      OPENCLAW_CONFIG: /app/config/openclaw.yml
+    depends_on:
+      - postgres
+      - qdrant
+      - minio
+    volumes:
+      - ./skills:/app/skills:ro
+      - ./workflows:/app/workflows:ro
+      - ./prompts:/app/prompts:ro
+    networks:
+      - sri-network
+    restart: unless-stopped
+
+  # 工作流执行引擎（Celery Worker）
+  workflow-worker:
+    build: ./core
+    command: celery -A workflow_engine worker --loglevel=info --concurrency=4
+    environment:
+      DATABASE_URL: postgresql://postgres:${DB_PASSWORD}@postgres:5432/sri_agent_os
+      KIMI_API_KEY: ${KIMI_API_KEY}
+    depends_on:
+      - redis
+      - postgres
+    volumes:
+      - ./skills:/app/skills:ro
+    networks:
+      - sri-network
+
+  # 消息队列
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    networks:
+      - sri-network
+
+  # 前端看板
+  dashboard:
+    build: ./dashboard
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_API_URL: http://api-server:8080
+    depends_on:
+      - api-server
+    networks:
+      - sri-network
+
+  # 蓝军审计服务（独立部署，确保安全隔离）
+  blue-team-service:
+    build: ./services/blue_team
+    environment:
+      DATABASE_URL: postgresql://postgres:${DB_PASSWORD}@postgres:5432/sri_agent_os
+      ALERT_WEBHOOK: ${FEISHU_WEBHOOK_URL}
+    networks:
+      - sri-network
+
+  # 备份服务（3-2-1策略自动化）
+  backup-service:
+    image: offen/docker-volume-backup:latest
+    environment:
+      BACKUP_CRON_EXPRESSION: "0 2 * * *"  # 每天凌晨2点
+      BACKUP_RETENTION_DAYS: "30"
+      BACKUP_FILENAME: backup-sri-%Y-%m-%dT%H-%M-%S.tar.gz
+      BACKUP_ARCHIVE: "/archive"
+      BACKUP_STOP_CONTAINER_LABEL: sri.service
+      AWS_S3_BUCKET_NAME: ${BACKUP_S3_BUCKET}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_KEY}
+      AWS_ENDPOINT: ${S3_ENDPOINT}  # 兼容MinIO
+    volumes:
+      - postgres_data:/backup/postgres:ro
+      - minio_data:/backup/minio:ro
+      - /nas/backup:/archive  # 本地NAS备份（2种介质）
+    networks:
+      - sri-network
+
+volumes:
+  postgres_data:
+  qdrant_storage:
+  minio_data:
+  redis_data:
+
+networks:
+  sri-network:
+    driver: bridge
+
+10.2 3-2-1备份策略自动化实现
+
+# /opt/sri-agent-os/services/backup/backup_manager.py
+
+class BackupManager:
+    """
+    3-2-1备份策略执行器
+    3份副本，2种介质，1份异地
+    """
+    
+    def __init__(self):
+        self.db = psycopg2.connect("dbname=sri_agent_os user=postgres")
+        self.s3_client = boto3.client('s3', endpoint_url=os.getenv('S3_ENDPOINT'))
+        self.local_backup_path = "/backup"
+        self.nas_backup_path = "/archive"
+    
+    def daily_backup(self):
+        """
+        每日备份任务
+        """
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        
+        # 1. 数据库备份（副本1：本地）
+        db_backup_file = f"{self.local_backup_path}/db_{timestamp}.sql"
+        self._backup_database(db_backup_file)
+        
+        # 2. 对象存储备份（副本2：本地NAS）
+        minio_backup_file = f"{self.nas_backup_path}/minio_{timestamp}.tar.gz"
+        self._backup_minio(minio_backup_file)
+        
+        # 3. 云端异地备份（副本3：云存储）
+        if self._verify_backup(db_backup_file):
+            self._upload_to_cloud(db_backup_file, f"backups/db_{timestamp}.sql")
+            self._upload_to_cloud(minio_backup_file, f"backups/minio_{timestamp}.tar.gz")
+        
+        # 4. 记录备份日志
+        self._log_backup(db_backup_file, minio_backup_file, "success")
+        
+        # 5. 清理旧备份（保留30天）
+        self._cleanup_old_backups(days=30)
+    
+    def verify_backup_integrity(self, backup_id: str) -> bool:
+        """
+        备份完整性验证（0错误容忍）
+        """
+        backup_info = self._get_backup_info(backup_id)
+        
+        # 检查3个副本是否都存在
+        checks = [
+            os.path.exists(backup_info['local_path']),
+            os.path.exists(backup_info['nas_path']),
+            self._check_s3_exists(backup_info['s3_key'])
+        ]
+        
+        if not all(checks):
+            # 触发告警
+            self._alert_egbertie(f"备份完整性检查失败: {backup_id}")
+            return False
+        
+        # 校验文件哈希
+        local_hash = self._calculate_hash(backup_info['local_path'])
+        s3_hash = self._get_s3_object_hash(backup_info['s3_key'])
+        
+        if local_hash != s3_hash:
+            self._alert_egbertie(f"备份哈希不匹配: {backup_id}")
+            return False
+        
+        return True
+
+11. 运维与培训方案
+
+11.1 渐进交付与验收路线图
+
+## 实施路线图
+
+### Week 1-2: 基础设施 Sprint
+- [ ] 部署PostgreSQL + pgvector
+- [ ] 部署MinIO对象存储
+- [ ] 建立基础监控（Prometheus + Grafana）
+- [ ] 完成3-2-1备份配置
+- 验收：数据不丢失测试（模拟故障恢复）
+
+### Week 3-4: 知识内化系统 Sprint（P0）
+- [ ] 五重门工作流上线
+- [ ] 飞书Webhook集成
+- [ ] 蓝军审计节点部署
+- [ ] 入库第一批10个文档
+- 验收：Egbertie完成3个完整内化流程，<20分钟/个
+
+### Week 5-6: Workflow引擎 Sprint（P0）
+- [ ] YAML Workflow DSL上线
+- [ ] 五图腾决策节点集成
+- [ ] 并行执行引擎优化
+- [ ] 合伙人匹配SOP数字化
+- 验收：完成1个端到端合伙人评估，全流程<30分钟
+
+### Week 7-8: Memory图谱 Sprint（P1）
+- [ ] 实体抽取模型部署
+- [ ] 五图腾语义标注
+- [ ] RAG检索优化
+- [ ] 现有16个案例入库
+- 验收：跨图腾检索精度>80%
+
+### Week 9-10: Skill治理 Sprint（P1）
+- [ ] 现有6个Skill迁移到Registry
+- [ ] 依赖图谱可视化
+- [ ] 健康度监控上线
+- [ ] 版本控制流程建立
+- 验收：全部Skill可管理，依赖清晰
+
+### Week 11-12: 指标与看板 Sprint（P0-P1）
+- [ ] 五维指标采集全覆盖
+- [ ] 实时看板部署
+- [ ] 告警规则配置（飞书/微信）
+- [ ] 经营月报自动生成
+- 验收：看板数据实时准确，告警<5分钟延迟
+
+### Week 13-14: 迁移性优化 Sprint（关键！）
+- [ ] 封装Kimi API适配层
+- [ ] 实现模型切换配置化
+- [ ] 测试切换至备用模型（<1天）
+- 验收：模拟切换模型，完成时间<8小时
+
+### Week 15-16: 培训与固化 Sprint
+- [ ] Egbertie培训（系统使用+内化SOP）
+- [ ] 满意姐培训（日常运维+故障处理）
+- [ ] Skeptor-7培训（审计规则配置）
+- [ ] 文档完善与知识转移
+- 验收：团队可独立运维，故障自恢复率>80%
+
+### Week 17-18: 验收与优化 Sprint
+- [ ] 全量压力测试
+- [ ] 安全渗透测试（蓝军主导）
+- [ ] 指标达标验证（复用率>40%，任务<30分钟）
+- [ ] 交付生产环境
+- 验收：签署最终验收单，进入维保期
+
+11.2 培训计划与知识转移
+
+## 培训体系设计
+
+### 第一层：使用者培训（Egbertie - 决策者）
+**目标**: 熟练使用Agent OS进行日常决策，形成新的工作习惯
+
+| 模块 | 内容 | 形式 | 时长 |
+|------|------|------|------|
+| 五图腾决策工作流 | 如何在系统中应用五图腾思考 | 工作坊 | 4h |
+| 知识内化SOP | 五重门入库流程实操 | 实操 | 2h |
+| 案例审阅 | 使用Workflow评估合伙人 | 案例演练 | 3h |
+| 直觉数字化 | 如何将直觉记录到系统 | 一对一 | 1h |
+
+**交付物**: 《决策者使用手册》（含五图腾Prompt速查卡）
+
+### 第二层：运维者培训（满意姐 - AI执行者）
+**目标**: 独立处理日常运维，简单故障排查，Skill更新
+
+| 模块 | 内容 | 形式 | 时长 |
+|------|------|------|------|
+| 系统架构理解 | Docker组件、数据流向 | 讲解 | 2h |
+| Skill管理 | 注册、更新、回滚操作 | 实操 | 3h |
+| 监控与告警 | 看板使用、告警响应 | 实操 | 2h |
+| 备份与恢复 | 3-2-1策略执行、灾难恢复 | 演练 | 2h |
+| Prompt调优 | A/B测试、效果优化 | 工作坊 | 2h |
+
+**交付物**: 
+- 《运维操作手册》
+- 《故障排查速查表》
+- 《Prompt调优指南》
+
+### 第三层：审计者培训（Skeptor-7 - 蓝军）
+**目标**: 配置审计规则，解读审计报告，提出改进建议
+
+| 模块 | 内容 | 形式 | 时长 |
+|------|------|------|------|
+| 蓝军审计框架 | 规则配置、严重度定义 | 讲解 | 2h |
+| 自动化审计 | 配置自动检查点 | 实操 | 2h |
+| 风险分析 | 解读指标、发现系统性风险 | 案例分析 | 2h |
+| 合规报告 | 生成审计报告、提出整改 | 实操 | 1h |
+
+**交付物**: 
+- 《蓝军审计规则库》
+- 《合规检查清单》
+- 《月度审计报告模板》
+
+### 第四层：应急培训（全员）
+**目标**: 系统故障时的应急响应
+
+- **Level 1故障**（服务不可用）: 5分钟内切换到备用模式（人工流程）
+- **Level 2故障**（数据异常）: 立即停止操作，启动备份恢复
+- **Level 3故障**（模型失效）: 切换至备用模型或降级服务
+
+**演练安排**: 每月一次故障演练（Fire Drill）
+
+12. 风险与对策
+
+13. 补充：深度洞察与优化建议
+
+基于文档分析，我补充以下未提及但关键的内容：
+
+13.1 硬件创业者的特殊适配
+
+您的服务对象是”获得政府补贴或投资的初创期硬件企业家”，建议增加：
+
+# 硬件创业者专属Skill扩展
+class HardwareEntrepreneurAdapter:
+    """
+    针对硬科技创业者的特殊评估维度
+    """
+    
+    def assess_technology_maturity(self, trl_level: int) -> Dict:
+        """
+        技术成熟度(TRL)评估
+        结合五图腾：
+        - 土：技术路线长期可行性
+        - 金：TRL等级与资源匹配度（满意解）
+        - 火：技术突破的非线性机会
+        """
+        pass
+    
+    def evaluate_subsidy_compliance(self, project_data: Dict) -> Dict:
+        """
+        政府补贴合规性评估（木-孔子视角加强）
+        """
+        pass
+
+13.2 双系统（银行+创业）经验的知识萃取
+
+Egbertie的22年双系统经验是独特资产，建议：
+
+专门建立一个”双系统洞察”知识类目
+
+设计对比分析模板：银行风控逻辑 vs 创业敏捷决策的映射
+
+风险雷达差异：大银行关注系统性风险 vs 初创企业关注生存风险
+
+13.3 六认证体系的知识结构化
+
+将6项认证（CBIIP, CDAA, CFC, CFP, FAIAA, MSE）转化为可检索的决策规则库：
+
+# certifications_knowledge_base.yml
+certifications:
+  CBIIP:
+    full_name: "商业直觉智能认证"
+    key_insights: ["直觉可训练", "模式识别", "身体信号解码"]
+    totem_mapping: "水-观自在"
+    decision_rules: ["当数据不足时，启动直觉协议", "记录直觉与结果验证闭环"]
+    
+  CDAA:
+    full_name: "数字资产分析"
+    key_insights: ["数据确权", "资产估值", "合规交易"]
+    totem_mapping: "金-司马贺"
+    decision_rules: ["数字资产边界界定", "成本效益分析框架"]
+    
+  # ... 其他认证
+
+13.4 儒商哲学的数字化表达
+
+将”仁义礼智信”转化为可计算的伦理分数：
+
+def calculate_confucian_score(decision_context: Dict) -> Dict:
+    """
+    五常伦理量化评估
+    """
+    dimensions = {
+        "ren": evaluate_benevolence(decision_context),      # 仁爱：利益相关方影响分析
+        "yi": evaluate_righteousness(decision_context),     # 道义：是否符合商业伦理
+        "li": evaluate_propriety(decision_context),         # 礼节：流程合规性
+        "zhi": evaluate_wisdom(decision_context),           # 智慧：信息充分性
+        "xin": evaluate_trustworthiness(decision_context)   # 信用：承诺可兑现性
+    }
+    
+    return {
+        "scores": dimensions,
+        "radar_chart_data": dimensions,
+        "minimum_standard": all(score >= 60 for score in dimensions.values()),
+        "improvement_suggestions": generate_confucian_advice(dimensions)
+    }
+
+14. 最终验收标准汇总
+
+第三批交付物清单：
+
+此方案完整覆盖了您的资产飞轮五节点（Prompt→Skill→Memory→Workflow→Case）与经营五维指标（时间/质量/风险/成本/复用率），并将五图腾决策哲学深度数字化。
+
+建议立即启动第一批（知识内化系统）的PoC验证，使用您现有的1个案例文档跑通”五重门”流程，验证用户体验后再全面开发。
+
+如需针对任何模块进行更深入的详细设计（如数据库Schema完整版、API接口文档、前端组件代码），请随时告知。
+
+User:
+
+因为知识入库、知识内化等各个环节、很多细节可能都是token消耗大户，请在这个方面给予补充设计，尽量让这个过程减少token的消耗。请帮忙进行特别补充实施方案。
+
+Kimi:
+
+Token消耗优化专项补充方案
+
+设计目标: 单次知识入库Token消耗 <300T（当前预估无优化状态下约1500-3000T），内化验证环节 <150T
+
+核心策略: “边缘计算预处理 + 分级模型调用 + 全链路缓存”
+
+1. 整体架构：Token感知处理流水线
+
+graph TD
+    A[文档上传] --> B{本地小模型<br/>Qwen-7B/GLM-4<br/>~50T}
+    B -->|解析+初分| C[文档指纹+摘要]
+    C --> D{向量相似度<br/>缓存检查}
+    D -->|命中| E[直接复用<br/>~5T]
+    D -->|未命中| F[分级处理决策]
+    F -->|简单文档| G[轻量级流程<br/>~100T]
+    F -->|复杂文档| H[深度内化流程<br/>~300T]
+    H --> I{质量验证}
+    I -->|AI自评| J[自动评分<br/>~80T]
+    I -->|抽检| K[人工确认<br/>~0T]
+    
+    style B fill:#90ee90
+    style E fill:#90ee90
+    style G fill:#f0e68c
+    style H fill:#ffb6c1
+
+2. Layer 1: 本地边缘预处理（节省60%Token）
+
+2.1 本地小模型部署方案
+
+在API服务器本地部署轻量级模型，处理所有机械性任务：
+
+# docker-compose.local-llm.yml
+services:
+  local-llm:
+    image: registry.cn-hangzhou.aliyuncs.com/qwen/qwen2.5:7b-instruct
+    # 或使用 GLM-4-9B-Chat（对中文更友好）
+    command: >
+      --model /models/Qwen2.5-7B-Instruct
+      --served-model-name local-preprocessor
+      --max-model-len 8192
+      --gpu-memory-utilization 0.8
+    volumes:
+      - ./models:/models
+    ports:
+      - "8000:8000"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+2.2 本地预处理Pipeline（零Token消耗）
+
+# /opt/sri-agent-os/core/token_optimizer/edge_processor.py
+
+import hashlib
+import json
+from typing import Dict, List, Optional
+import requests
+import faiss  # 本地向量检索
+import numpy as np
+
+class EdgeTokenOptimizer:
+    """
+    边缘层Token优化器
+    原则：能用本地模型解决的，绝不上云；能缓存复用的，绝不重复计算
+    """
+    
+    def __init__(self):
+        self.local_llm_url = "http://localhost:8000/v1/completions"
+        self.local_embedding_model = self._load_local_embedding()  # BGE-M3等本地模型
+        self.semantic_cache = self._load_cache_index()  # FAISS本地索引
+        
+    def process_document(self, file_path: str) -> Dict:
+        """
+        文档预处理全流程（目标：<50T等效云Token）
+        """
+        # 1. 文件指纹计算（缓存键）
+        file_hash = self._compute_hash(file_path)
+        
+        # 2. 检查精确缓存（完全相同的文件）
+        cached = self._check_exact_cache(file_hash)
+        if cached:
+            return {**cached, "cache_hit": True, "token_cost": 0}
+        
+        # 3. 本地解析（PDF/Word转文本，零Token）
+        raw_text = self._local_parse(file_path)
+        
+        # 4. 语义指纹（前512字符的向量）
+        semantic_key = self._compute_semantic_fingerprint(raw_text[:1000])
+        
+        # 5. 检查相似缓存（相似度>0.95视为重复）
+        similar_doc = self._check_semantic_cache(semantic_key)
+        if similar_doc and similar_doc['similarity'] > 0.95:
+            return {
+                "cache_hit": "similar",
+                "reference_doc": similar_doc['doc_id'],
+                "adaptation_needed": False,
+                "token_cost": 0
+            }
+        
+        # 6. 本地轻量摘要（Qwen-7B，本地计算=0云Token）
+        local_summary = self._local_summarize(raw_text)
+        
+        # 7. 五图腾初分类（关键词规则+轻量模型）
+        totem_hint = self._local_totem_classify(local_summary)
+        
+        # 8. 复杂度评分（决定后续流程）
+        complexity = self._assess_complexity(raw_text, local_summary)
+        
+        # 9. 智能分块（避免超长上下文）
+        chunks = self._smart_chunk(raw_text, max_chunk_tokens=1500)
+        
+        return {
+            "file_hash": file_hash,
+            "local_summary": local_summary,
+            "totem_hint": totem_hint,
+            "complexity": complexity,
+            "chunks": chunks,
+            "estimated_cloud_tokens": self._estimate_tokens(complexity),
+            "cache_hit": False
+        }
+    
+    def _local_parse(self, file_path: str) -> str:
+        """
+        本地文档解析（零Token）
+        支持：PDF(pdfplumber), Word(python-docx), Markdown直接读取
+        """
+        import os
+        
+        ext = os.path.splitext(file_path)[1].lower()
+        
+        if ext == '.pdf':
+            import pdfplumber
+            with pdfplumber.open(file_path) as pdf:
+                text = "\n".join(page.extract_text() or "" for page in pdf.pages)
+        elif ext in ['.doc', '.docx']:
+            import docx
+            doc = docx.Document(file_path)
+            text = "\n".join(para.text for para in doc.paragraphs)
+        elif ext in ['.md', '.txt']:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                text = f.read()
+        else:
+            text = ""
+            
+        return text
+    
+    def _local_summarize(self, text: str) -> str:
+        """
+        本地模型生成摘要（零云Token）
+        使用4-bit量化的7B模型，本地GPU/CPU推理
+        """
+        # 截断至4k上下文（本地模型限制）
+        truncated = text[:4000]
+        
+        prompt = f"""请用3句话概括以下文档的核心内容（50字以内）：
+{truncated}
+
+摘要："""
+        
+        response = requests.post(self.local_llm_url, json={
+            "model": "local-preprocessor",
+            "prompt": prompt,
+            "max_tokens": 100,
+            "temperature": 0.3
+        })
+        
+        return response.json()['choices'][0]['text'].strip()
+    
+    def _local_totem_classify(self, summary: str) -> Dict:
+        """
+        五图腾轻量分类（规则+本地模型）
+        先规则匹配，不确定再调本地模型
+        """
+        # 快速规则匹配（零Token）
+        keywords = {
+            "土-刘禹锡": ["长期", "根基", "价值", "可持续", "复利"],
+            "金-司马贺": ["算法", "优化", "边界", "约束", "满意"],
+            "水-观自在": ["直觉", "感知", "感受", "心", "觉"],
+            "木-孔子": ["伦理", "仁义", "道德", "信用", "关系"],
+            "火-慧能": ["创新", "突破", "顿悟", "革命", "本质"]
+        }
+        
+        scores = {k: sum(1 for w in v if w in summary) for k, v in keywords.items()}
+        best_match = max(scores, key=scores.get)
+        
+        # 如果最高分<2，调本地模型二次判断
+        if scores[best_match] < 2:
+            prompt = f"""分类以下文本到五图腾之一（仅输出分类名）：
+文本：{summary}
+选项：土-刘禹锡(长期), 金-司马贺(算法), 水-观自在(直觉), 木-孔子(伦理), 火-慧能(创新)
+分类："""
+            
+            response = requests.post(self.local_llm_url, json={
+                "model": "local-preprocessor", 
+                "prompt": prompt,
+                "max_tokens": 20,
+                "temperature": 0.1
+            })
+            best_match = response.json()['choices'][0]['text'].strip()
+        
+        return {
+            "primary_totem": best_match,
+            "confidence": min(scores[best_match] / 3, 1.0),
+            "method": "rule" if scores[best_match] >= 2 else "model"
+        }
+    
+    def _assess_complexity(self, raw_text: str, summary: str) -> Dict:
+        """
+        复杂度评估（决定后续Token投入）
+        """
+        factors = {
+            "length_tier": "short" if len(raw_text) < 2000 else "medium" if len(raw_text) < 8000 else "long",
+            "technical_density": raw_text.count("。") / len(raw_text) if len(raw_text) > 0 else 0,  # 句号密度作为复杂度代理
+            "has_structured_data": any(x in raw_text for x in ["表格", "数据", "指标", "百分比"]),
+            "summary_depth": "deep" if any(w in summary for w in ["分析", "框架", "理论"]) else "surface"
+        }
+        
+        # 复杂度评分 1-5
+        score = 1
+        if factors['length_tier'] == 'long': score += 1
+        if factors['has_structured_data']: score += 1
+        if factors['summary_depth'] == 'deep': score += 1
+        if len(raw_text) > 10000: score += 1
+            
+        return {
+            "score": score,
+            "factors": factors,
+            "recommended_pipeline": "light" if score <= 2 else "standard" if score <= 4 else "deep"
+        }
+    
+    def _smart_chunk(self, text: str, max_chunk_tokens: int = 1500) -> List[Dict]:
+        """
+        智能分块：按语义边界分割，避免在句子中间截断
+        目标：每块<1500Token，适合轻量处理
+        """
+        import re
+        
+        # 按段落分割
+        paragraphs = text.split('\n\n')
+        chunks = []
+        current_chunk = ""
+        current_tokens = 0
+        
+        for para in paragraphs:
+            para_tokens = len(para) / 2  # 中文字符估算：1字≈0.5-1Token
+            
+            if current_tokens + para_tokens > max_chunk_tokens:
+                if current_chunk:
+                    chunks.append({
+                        "content": current_chunk,
+                        "tokens": current_tokens,
+                        "type": "semantic_block"
+                    })
+                current_chunk = para
+                current_tokens = para_tokens
+            else:
+                current_chunk += "\n\n" + para
+                current_tokens += para_tokens
+        
+        if current_chunk:
+            chunks.append({
+                "content": current_chunk,
+                "tokens": current_tokens,
+                "type": "semantic_block"
+            })
+        
+        return chunks
+    
+    def _estimate_tokens(self, complexity: Dict) -> int:
+        """
+        预估云Token消耗
+        """
+        pipeline = complexity['recommended_pipeline']
+        estimates = {
+            "light": 100,      # 轻量：摘要+简单分类
+            "standard": 300,   # 标准：三遍阅读辅助
+            "deep": 800        # 深度：完整五图腾分析
+        }
+        return estimates.get(pipeline, 300)
+
+3. Layer 2: 分级处理策略（避免过度消耗）
+
+3.1 三级处理流水线
+
+# /opt/sri-agent-os/core/token_optimizer/tiered_processor.py
+
+class TieredProcessingPipeline:
+    """
+    分级处理：简单文档走轻量流程，复杂文档才走深度内化
+    目标：80%文档走轻量流程（<150T），20%走深度流程（<500T）
+    """
+    
+    def __init__(self):
+        self.kimi_api = KimiClient()  # 官方API
+        self.edge_processor = EdgeTokenOptimizer()
+        
+    def process(self, file_path: str) -> Dict:
+        # 边缘预处理（0云Token）
+        edge_result = self.edge_processor.process_document(file_path)
+        
+        if edge_result.get('cache_hit'):
+            return self._serve_from_cache(edge_result)
+        
+        # 根据复杂度分级处理
+        pipeline = edge_result['complexity']['recommended_pipeline']
+        
+        if pipeline == 'light':
+            return self._light_pipeline(edge_result)
+        elif pipeline == 'standard':
+            return self._standard_pipeline(edge_result)
+        else:
+            return self._deep_pipeline(edge_result)
+    
+    def _light_pipeline(self, edge_result: Dict) -> Dict:
+        """
+        轻量流程：适合新闻、短文、简单资料
+        Token预算：<150T
+        """
+        chunks = edge_result['chunks']
+        
+        # 只处理第一个块（通常包含核心信息）
+        main_chunk = chunks[0]['content']
+        
+        # 单次调用Kimi：摘要+标签+存储建议
+        prompt = f"""请对以下文本进行处理（精简输出）：
+文本：{main_chunk[:2000]}
+
+任务：
+1. 一句话核心观点（20字内）
+2. 关键标签（3个）
+3. 所属五图腾类别
+4. 建议存储位置（Skill/Memory/Case/Workflow）
+
+输出JSON格式，禁止解释性文字。
+"""
+        
+        response = self.kimi_api.complete(
+            prompt=prompt,
+            max_tokens=200,  # 限制输出长度
+            temperature=0.3
+        )
+        
+        # 解析并存储
+        result = json.loads(response['text'])
+        
+        return {
+            "processing_tier": "light",
+            "token_used": response['usage']['total_tokens'],
+            "result": result,
+            "full_content_stored": False,  # 只存摘要，原文存档
+            "estimated_savings": 600  # 相比标准流程节省的Token
+        }
+    
+    def _standard_pipeline(self, edge_result: Dict) -> Dict:
+        """
+        标准流程：适合中等复杂度文档
+        Token预算：<300T
+        """
+        # 第一遍：结构提取（边缘层已完成，跳过）
+        
+        # 第二遍：要点提取（轻量级Prompt）
+        chunks = edge_result['chunks'][:2]  # 只取前2块
+        
+        prompt = f"""基于以下文本片段，提取决策要点：
+文本：{chunks[0]['content'][:1500]}
+
+要求：
+- 提取3个可执行要点
+- 每个要点包含：核心观点+适用场景+风险提示
+- 用Markdown表格输出
+
+禁止长篇大论。
+"""
+        
+        response = self.kimi_api.complete(
+            prompt=prompt,
+            max_tokens=400,
+            temperature=0.4
+        )
+        
+        points = response['text']
+        
+        # 第三遍：五图腾快速检查（非深度分析）
+        totem_prompt = f"""用一句话从五图腾视角点评：
+{points}
+
+格式：
+土(长期)：...
+金(满意解)：...
+水(直觉)：...
+木(伦理)：...
+火(创新)：...
+"""
+        
+        totem_response = self.kimi_api.complete(
+            prompt=totem_prompt,
+            max_tokens=150,
+            temperature=0.5
+        )
+        
+        total_tokens = response['usage']['total_tokens'] + totem_response['usage']['total_tokens']
+        
+        return {
+            "processing_tier": "standard",
+            "token_used": total_tokens,
+            "key_points": points,
+            "totem_check": totem_response['text'],
+            "full_analysis": False
+        }
+    
+    def _deep_pipeline(self, edge_result: Dict) -> Dict:
+        """
+        深度流程：仅用于核心文档（<20%比例）
+        Token预算：<800T
+        """
+        # 这里走完整的五重门流程，但仍有优化：
+        # 1. 使用边缘层生成的摘要作为上下文，减少重复输入
+        # 2. 分块并行处理（如果独立）
+        # 3. 缓存中间结果（如第一遍的结构化结果）
+        
+        return self._full_internalization_workflow(edge_result)
+
+4. Layer 3: 全流程缓存体系（节省30%重复消耗）
+
+4.1 三级缓存架构
+
+# /opt/sri-agent-os/core/token_optimizer/cache_manager.py
+
+import redis
+import hashlib
+import json
+from typing import Optional, Dict
+
+class TokenCacheManager:
+    """
+    三级缓存策略：
+    L1: 内存缓存（处理中重复调用）
+    L2: Redis共享缓存（跨会话复用）
+    L3: 向量语义缓存（相似内容复用）
+    """
+    
+    def __init__(self):
+        self.l1_cache = {}  # 进程内字典
+        self.l2_cache = redis.Redis(host='localhost', port=6379, db=0)
+        self.edge_processor = EdgeTokenOptimizer()  # L3语义缓存
+        
+    def get_cached_completion(self, prompt: str, context: str = "", 
+                             use_semantic: bool = False) -> Optional[Dict]:
+        """
+        获取缓存的Completion结果
+        """
+        # L1: 精确匹配（当前进程）
+        cache_key = self._hash_prompt(prompt, context)
+        if cache_key in self.l1_cache:
+            return {**self.l1_cache[cache_key], "cache_level": "L1"}
+        
+        # L2: Redis精确匹配（跨会话）
+        cached = self.l2_cache.get(f"sri:completion:{cache_key}")
+        if cached:
+            result = json.loads(cached)
+            self.l1_cache[cache_key] = result  # 回填L1
+            return {**result, "cache_level": "L2"}
+        
+        # L3: 语义相似匹配（向量检索）
+        if use_semantic:
+            similar = self.edge_processor.find_semantic_similar(prompt + context)
+            if similar and similar['similarity'] > 0.92:
+                return {
+                    "cache_level": "L3",
+                    "similarity": similar['similarity'],
+                    "adapted_result": self._adapt_result(similar['result'], context)
+                }
+        
+        return None
+    
+    def cache_completion(self, prompt: str, context: str, result: Dict, 
+                        ttl: int = 3600):
+        """
+        缓存Completion结果
+        """
+        cache_key = self._hash_prompt(prompt, context)
+        
+        # 写入L1
+        self.l1_cache[cache_key] = result
+        
+        # 写入L2（带TTL）
+        self.l2_cache.setex(
+            f"sri:completion:{cache_key}",
+            ttl,
+            json.dumps(result)
+        )
+        
+        # 如果是高质量结果，写入L3语义缓存
+        if result.get('quality_score', 0) > 0.8:
+            self.edge_processor.add_to_semantic_cache(prompt + context, result)
+    
+    def _hash_prompt(self, prompt: str, context: str) -> str:
+        """生成Prompt指纹"""
+        content = f"{prompt}|{context}"
+        return hashlib.md5(content.encode()).hexdigest()[:16]
+    
+    def warmup_cache(self, common_queries: List[str]):
+        """
+        缓存预热：系统启动时预加载常见查询
+        """
+        for query in common_queries:
+            # 异步预生成缓存
+            pass
+
+4.2 内化验证环节的Token优化
+
+传统5题验证可能需要500-800T，优化后<150T：
+
+class OptimizedVerification:
+    """
+    优化后的质量验证（第五重门）
+    """
+    
+    def generate_quiz(self, summary: str, totem: str) -> Dict:
+        """
+        生成验证题（优化版）
+        策略：
+        1. 使用本地模型生成客观题（选择/判断）
+        2. 只有AI自评不确定时才调用Kimi
+        3. 题目模板化，减少生成随机性
+        """
+        
+        # 本地生成3道客观题（0云Token）
+        local_quiz = self._generate_local_quiz(summary)
+        
+        # 1道应用题（必须Kimi，但限制长度）
+        application_prompt = f"""基于摘要出一道场景应用题（50字内）：
+摘要：{summary}
+要求：场景具体，答案明确（20字内）
+格式：场景：... 问题：... 参考答案：...
+"""
+        
+        app_response = self.kimi_api.complete(
+            prompt=application_prompt,
+            max_tokens=150,
+            temperature=0.3
+        )
+        
+        return {
+            "questions": local_quiz + [app_response['text']],
+            "token_used": app_response['usage']['total_tokens'],
+            "auto_gradable": True  # 前3题自动评分
+        }
+    
+    def auto_grade(self, quiz: Dict, answers: List[str]) -> Dict:
+        """
+        自动评分（本地模型，0云Token）
+        """
+        # 客观题：本地规则匹配
+        objective_score = self._grade_objective(quiz['questions'][:3], answers[:3])
+        
+        # 应用题：本地模型评分（轻量）
+        app_prompt = f"""评分：标准答案"{quiz['questions'][3]['answer']}" vs 用户答案"{answers[3]}"
+相似度评分（0-100，仅输出数字）："""
+        
+        app_score = self.local_llm.complete(prompt=app_prompt, max_tokens=5)
+        
+        total = (objective_score * 3 + int(app_score['text'])) / 4
+        
+        return {
+            "score": total,
+            "passed": total >= 80,
+            "token_used": 0  # 本地评分
+        }
+
+5. 特别优化：五图腾分类的低成本实现
+
+class TotemClassifierOptimizer:
+    """
+    五图腾分类优化：从~500T降至~50T
+    """
+    
+    def classify(self, text: str) -> Dict:
+        # 策略1: 先用规则过滤（0T）
+        rule_result = self._rule_based_classify(text)
+        if rule_result['confidence'] > 0.8:
+            return {**rule_result, "method": "rule", "token_cost": 0}
+        
+        # 策略2: 本地模型（0云T，本地计算成本忽略）
+        if rule_result['confidence'] > 0.5:
+            local_result = self._local_model_classify(text)
+            return {**local_result, "method": "local_llm", "token_cost": 0}
+        
+        # 策略3: 只有当置信度<0.5时才用Kimi（<5%的情况）
+        cloud_result = self._cloud_classify(text)
+        return {**cloud_result, "method": "cloud", "token_cost": 50}
+    
+    def _rule_based_classify(self, text: str) -> Dict:
+        """
+        基于关键词+正则的规则分类
+        覆盖70%的常见情况
+        """
+        indicators = {
+            "土-刘禹锡": {
+                "keywords": ["长期", "根基", "价值", "可持续", "复利", "资产"],
+                "weight": 1.5
+            },
+            "金-司马贺": {
+                "keywords": ["算法", "优化", "边界", "约束", "满意", "阈值", "成本"],
+                "weight": 1.5
+            },
+            "水-观自在": {
+                "keywords": ["直觉", "感知", "感受", "心安", "身体", "潜意思"],
+                "weight": 1.5
+            },
+            "木-孔子": {
+                "keywords": ["伦理", "仁义", "道德", "信用", "关系", "礼"],
+                "weight": 1.5
+            },
+            "火-慧能": {
+                "keywords": ["创新", "突破", "顿悟", "革命", "本质", "重构"],
+                "weight": 1.5
+            }
+        }
+        
+        scores = {}
+        for totem, config in indicators.items():
+            score = sum(config['weight'] for kw in config['keywords'] if kw in text)
+            scores[totem] = score
+        
+        best = max(scores, key=scores.get)
+        total = sum(scores.values())
+        confidence = scores[best] / total if total > 0 else 0
+        
+        return {
+            "totem": best,
+            "confidence": confidence,
+            "all_scores": scores
+        }
+
+6. 成本监控与告警
+
+class TokenCostController:
+    """
+    Token成本实时监控与熔断
+    """
+    
+    def __init__(self):
+        self.daily_budget = 100000  # 每日Token预算10万
+        self.single_task_limit = 1000  # 单任务上限
+        
+    def check_budget(self, estimated_tokens: int) -> bool:
+        """
+        检查是否超预算，超预算则触发降级
+        """
+        today_usage = self._get_today_usage()
+        
+        if today_usage + estimated_tokens > self.daily_budget:
+            self._alert("日预算即将耗尽，启用降级模式")
+            return False
+            
+        if estimated_tokens > self.single_task_limit:
+            self._alert(f"单任务Token超限({estimated_tokens})，建议拆分")
+            return False
+            
+        return True
+    
+    def optimize_on_the_fly(self, current_tokens: int, context: Dict) -> Dict:
+        """
+        动态优化：当消耗过半时，调整后续策略
+        """
+        if current_tokens > self.single_task_limit * 0.5:
+            return {
+                "strategy_change": "aggressive_optimization",
+                "actions": [
+                    "切换到轻量Pipeline",
+                    "启用更激进的缓存",
+                    "减少输出长度限制",
+                    "跳过非关键验证步骤"
+                ]
+            }
+        return {"strategy_change": "none"}
+
+7. 优化效果预估
+
+月度成本预估（按100次入库/月）：
+
+优化前: 3500T × 100 × ¥0.015/1K = ¥5250/月
+
+优化后: 700T × 100 × ¥0.015/1K = ¥1050/月
+
+节省: ¥4200/月 (80%)
+
+8. 实施建议
+
+立即采购: 1台带RTX 4090(24G)的服务器或云服务（如AutoDL），用于本地模型部署（成本约¥2000/月，远低于Token节省）
+
+渐进部署:
+
+Week 1: 部署本地解析+规则分类（节省50%）
+
+Week 2: 接入本地7B模型（再节省30%）
+
+Week 3: 启用语义缓存（再节省15%）
+
+Week 4: 动态熔断机制（兜底）
+
+监控指标: 在经营看板中增加”Token效率”指标：
+
+Token/任务
+
+缓存命中率
+
+本地处理率
+
+此优化方案可与前三批实施计划并行，建议在第一批即部署边缘预处理层，确保系统上线即具备成本优势。

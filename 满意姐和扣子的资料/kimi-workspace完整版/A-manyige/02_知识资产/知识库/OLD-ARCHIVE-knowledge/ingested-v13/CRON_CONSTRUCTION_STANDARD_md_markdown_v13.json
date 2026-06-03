@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/CRON_CONSTRUCTION_STANDARD.md",
+  "filename": "CRON_CONSTRUCTION_STANDARD.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "6aca4a1d09806524",
+  "content_length": 4289,
+  "ingested_at": "2026-03-31T17:27:46.537182",
+  "content_preview": "# Cron建设审查标准 V1.0（满意解+Token优化）\n\n**创建时间**: 2026-03-28 19:00  \n**依据**: 今日全部Cron设计讨论经验  \n**目标**: 满意解效果下Token最小消耗  \n\n---\n\n## 一、Cron设计6大原则（必须全部满足）\n\n### P1: 错开准点（强制）\n\n| 准点时间 | 修正后 | 原因 |\n|----------|--------|------|\n| 2:00 | **1:47** | 错开2:00高峰 |\n| 6:00 | **6:17** | 错开6:00高峰 |\n| 8:55 | **8:47** | 错开9:00前高峰 |\n| 9:00 | **9:23** | 错开9:00高峰 |\n| 15分钟 | **17分钟** | 15分钟接近准点，17分钟错峰 |\n| 30分钟 | **33分钟** | 30分钟准点，33分钟错峰 |\n| 60分钟 | **67分钟** | 60分钟准点，67分钟错峰 |\n\n**审查标准**: 任何Cron的分钟数不能是00/15/30/45\n\n### P2: 周期合理（根据特性设",
+  "limitations_applied": []
+}

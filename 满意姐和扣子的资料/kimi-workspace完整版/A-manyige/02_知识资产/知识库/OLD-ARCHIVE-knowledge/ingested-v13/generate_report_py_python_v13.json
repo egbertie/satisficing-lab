@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/generate_report.py",
+  "filename": "generate_report.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "913429243cc4e313",
+  "content_length": 3216,
+  "ingested_at": "2026-03-31T17:27:46.197627",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nPerplexity API 测试脚本 - 离线版本\n生成模拟测试结果报告\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime\n\n# 配置文件路径\nCONFIG_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), \"config\", \"perplexity_config.json\")\nREPORT_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), \"scripts\", \"test_report.md\")\nRESULTS_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), \"scripts\", \"test_results.json\")\n\n\ndef load_config():\n    \"\"\"加载配置文件\"\"\"\n    with open(CONFI",
+  "limitations_applied": []
+}

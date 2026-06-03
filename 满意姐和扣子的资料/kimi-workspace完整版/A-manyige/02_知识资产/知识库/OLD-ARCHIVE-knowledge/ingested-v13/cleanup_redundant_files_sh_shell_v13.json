@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/cleanup_redundant_files.sh",
+  "filename": "cleanup_redundant_files.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "d7bf3af3ce44a37c",
+  "content_length": 5183,
+  "ingested_at": "2026-03-31T17:27:46.144960",
+  "content_preview": "#!/bin/bash\n# 冗余文件清理脚本\n# cleanup_redundant_files.sh\n# \n# 功能: 清理临时文件、旧日志、备份文件\n# 使用: ./cleanup_redundant_files.sh [--dry-run|--force]\n\nset -e\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nDRY_RUN=false\nFORCE=false\nREPORT_FILE=\"$WORKSPACE/logs/cleanup_report_$(date +%Y%m%d_%H%M%S).log\"\n\n# 统计变量\nDELETED_FILES=0\nDELETED_SIZE=0\nARCHIVED_FILES=0\nARCHIVED_SIZE=0\n\n# 颜色定义\nGREEN='\\033[0;32m'\nYELLOW='\\033[1;33m'\nRED='\\033[0;31m'\nNC='\\033[0m'\n\n# 解析参数\nwhile [[ $# -gt 0 ]]; do\n    case $1 in\n        --dry-run)\n       ",
+  "limitations_applied": []
+}

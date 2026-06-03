@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/docs/2026-03/FEISHU_TECH_ISSUES_SUMMARY.md",
+  "filename": "FEISHU_TECH_ISSUES_SUMMARY.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "1164e39c435bc3cf",
+  "content_length": 1757,
+  "ingested_at": "2026-03-31T17:27:46.624165",
+  "content_preview": "# 飞书API接入技术问题求助\n\n> 各位大神好，我们是刚接触飞书开放平台的初学者，在接入过程中遇到了几个问题，想请教一下社区里的前辈们。\n\n## 背景介绍\n\n我们正在做一个AI助手项目，希望通过飞书API实现本地Markdown文档自动同步到飞书云文档/多维表格。\n\n- **应用类型**：企业内部应用（已创建）\n- **已申请权限**：drive:file:read/write, docx:document:read/write\n- **开发环境**：Python + requests\n- **目标**：把本地知识库自动同步到飞书，方便团队协作\n\n## 遇到的问题\n\n### 问题1：API创建的文档用户看不到（权限隔离？）\n\n**现象**：\n- 通过API成功创建了文档（返回200，有document_id）\n- 文档确认存在（可以查询到详情）\n- **但是**：在飞书云文档界面里找不到这个文档\n- 文档URL访问也看不到\n\n**我们的代码**：\n```python\nPOST /docx/v1/documents\nBody: {\"title\": \"测试文档\"}\n返回：成功，docum",
+  "limitations_applied": []
+}

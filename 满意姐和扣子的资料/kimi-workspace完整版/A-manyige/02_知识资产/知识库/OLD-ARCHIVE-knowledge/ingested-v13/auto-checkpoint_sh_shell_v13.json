@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/auto-checkpoint.sh",
+  "filename": "auto-checkpoint.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "c702817dc5d0c441",
+  "content_length": 1822,
+  "ingested_at": "2026-03-31T17:27:46.168516",
+  "content_preview": "#!/bin/bash\n# 智能检查点脚本 - Token优化版\n\nset -e\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nVAULT_PATH=\"/root/.openclaw/immortal-state/checkpoints\"\nLOG_FILE=\"/tmp/checkpoint.log\"\nINDEX_FILE=\"$VAULT_PATH/index.json\"\n\nmkdir -p \"$VAULT_PATH\"\n\n# 获取当前时间\nTIMESTAMP=$(date '+%Y%m%d-%H%M%S')\nDATE_STR=$(date '+%Y-%m-%d %H:%M:%S')\n\n# ===== 智能跳过逻辑 =====\n# 1. 检查上次检查点时间\nLAST_CHECKPOINT=0\nif [ -f \"$INDEX_FILE\" ]; then\n    LAST_CHECKPOINT=$(stat -c %Y \"$INDEX_FILE\" 2>/dev/null || echo 0)\nfi\nCURRENT_TIME=$(date +%s)\nTIME_DI",
+  "limitations_applied": []
+}

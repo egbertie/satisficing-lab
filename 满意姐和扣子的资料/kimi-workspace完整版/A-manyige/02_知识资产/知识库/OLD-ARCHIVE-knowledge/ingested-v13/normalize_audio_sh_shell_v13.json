@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_audio-handler/normalize_audio.sh",
+  "filename": "normalize_audio.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "3b0a943486f98b23",
+  "content_length": 658,
+  "ingested_at": "2026-03-31T17:27:45.280417",
+  "content_preview": "#!/bin/bash\n# Normalize audio volume\n\nset -e\n\nif [[ $# -lt 2 ]]; then\n    echo \"Usage: $0 <input> <output> [target_loudness=-16]\"\n    echo \"Target loudness is in LUFS (default -16, standard for podcasts)\"\n    echo \"Examples:\"\n    echo \"  $0 quiet.mp3 normalized.mp3\"\n    echo \"  $0 podcast.mp3 loud.mp3 -14\"\n    exit 1\nfi\n\nINPUT=\"$1\"\nOUTPUT=\"$2\"\nTARGET=\"${3:--16}\"\n\nif [[ ! -f \"$INPUT\" ]]; then\n    echo \"Error: Input file not found: $INPUT\" >&2\n    exit 1\nfi\n\necho \"Normalizing audio to ${TARGET} LU",
+  "limitations_applied": []
+}

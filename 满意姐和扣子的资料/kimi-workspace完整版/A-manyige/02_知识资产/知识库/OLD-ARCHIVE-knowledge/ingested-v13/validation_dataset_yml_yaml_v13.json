@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/info-quality-guardian/tests/validation_dataset.yml",
+  "filename": "validation_dataset.yml",
+  "file_type": "yaml",
+  "extension": ".yml",
+  "file_hash": "f3a2cf8cc2e2048f",
+  "content_length": 6479,
+  "ingested_at": "2026-03-31T17:27:45.461438",
+  "content_preview": "# 验证测试数据集 - S5: 检测准确性验证\n# 用于测试info-quality-guardian的检测能力\n\ntest_cases:\n  # ========== 高可信度来源 (应通过) ==========\n  - id: TC-001\n    description: \"Nature学术期刊论文\"\n    input:\n      title: \"AI in Climate Science Research\"\n      author: \"Dr. Sarah Chen\"\n      url: \"https://nature.com/articles/s41586-024-00001\"\n      source_type: \"academic_journal\"\n      publish_date: \"2024-01-15\"\n      content_snippet: \"This paper presents...\"\n    expected:\n      rating: 5\n      should_pass: true\n      issues_count: 0\n   ",
+  "limitations_applied": []
+}

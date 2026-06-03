@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/deploy_selfbuilt_skills_now.sh",
+  "filename": "deploy_selfbuilt_skills_now.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "02a3dd411ba2f449",
+  "content_length": 2700,
+  "ingested_at": "2026-03-31T17:27:46.179347",
+  "content_preview": "#!/bin/bash\n# 自建替代率冲刺部署 - 立即执行，完成即安装\n# 目标: 从84%提升至90%+\n\necho \"===============================================\"\necho \"    自建替代率冲刺部署\"\necho \"    执行时间: $(date)\"\necho \"    目标: 84% → 90%+\"\necho \"===============================================\"\necho \"\"\n\nSKILLS_DIR=\"/root/.openclaw/workspace/skills\"\ncd \"$SKILLS_DIR\" || exit 1\n\n# 创建统一搜索套件（替代4个外部搜索Skill）\necho \"【1/3】部署 unified-search 套件...\"\nmkdir -p unified-search\ncat > unified-search/skill.json << 'EOF'\n{\n  \"name\": \"unified-search\",\n  \"version\": \"1.0.0\",\n",
+  "limitations_applied": []
+}

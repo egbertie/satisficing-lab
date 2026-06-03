@@ -1,0 +1,223 @@
+{
+  "source_path": "/root/.openclaw/workspace/archive/docs/2026-03/FILE_MANAGEMENT_SOLUTION.md",
+  "filename": "FILE_MANAGEMENT_SOLUTION.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 16875,
+  "checksum": "b8c56635a9772a40",
+  "ingested_at": "2026-03-31T17:30:16.967725",
+  "line_count": 543,
+  "title": "文件管理系统性解决方案",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "文件管理系统性解决方案"
+    },
+    {
+      "level": 2,
+      "title": "执行路线图"
+    },
+    {
+      "level": 2,
+      "title": "一、短期补救措施（立即执行）"
+    },
+    {
+      "level": 3,
+      "title": "1.1 紧急止损措施 ⏰ 1小时内"
+    },
+    {
+      "level": 4,
+      "title": "措施1: 创建Downloads文件索引"
+    },
+    {
+      "level": 1,
+      "title": "/root/.openclaw/workspace/scripts/create-downloads-index.sh"
+    },
+    {
+      "level": 1,
+      "title": "按类型分类"
+    },
+    {
+      "level": 1,
+      "title": "列出所有docx文件"
+    },
+    {
+      "level": 4,
+      "title": "措施2: 建立暂存区"
+    },
+    {
+      "level": 1,
+      "title": "创建说明文件"
+    },
+    {
+      "level": 1,
+      "title": "暂存区说明"
+    },
+    {
+      "level": 2,
+      "title": "目录用途"
+    },
+    {
+      "level": 2,
+      "title": "使用规则"
+    },
+    {
+      "level": 4,
+      "title": "措施3: 防止解读摘要继续分散"
+    },
+    {
+      "level": 1,
+      "title": "创建解读摘要追踪表"
+    },
+    {
+      "level": 1,
+      "title": "研究解读摘要追踪表"
+    },
+    {
+      "level": 2,
+      "title": "新建解读摘要流程"
+    },
+    {
+      "level": 3,
+      "title": "1.2 紧急清理措施 ⏰ 4小时内"
+    },
+    {
+      "level": 4,
+      "title": "清理1: 删除明显的临时文件"
+    },
+    {
+      "level": 1,
+      "title": "/root/.openclaw/workspace/scripts/cleanup-temp.sh"
+    },
+    {
+      "level": 1,
+      "title": "清理temp文件"
+    },
+    {
+      "level": 1,
+      "title": "清理空文件夹（保留.git）"
+    },
+    {
+      "level": 4,
+      "title": "清理2: 合并重复文件夹"
+    },
+    {
+      "level": 1,
+      "title": "处理罗盘指南重复问题"
+    },
+    {
+      "level": 1,
+      "title": "将 罗盘指南/ 内容合并到 00_🧭 罗盘指南/ 后删除旧目录"
+    },
+    {
+      "level": 1,
+      "title": "1. 先检查内容差异"
+    },
+    {
+      "level": 1,
+      "title": "2. 如果旧目录有新内容，合并"
+    },
+    {
+      "level": 1,
+      "title": "3. 备份并删除旧目录"
+    },
+    {
+      "level": 2,
+      "title": "二、中期改进计划（本周内）"
+    },
+    {
+      "level": 3,
+      "title": "2.1 Downloads目录治理 📅 第1-2天"
+    },
+    {
+      "level": 4,
+      "title": "阶段1: 分类整理"
+    },
+    {
+      "level": 1,
+      "title": "/root/.openclaw/workspace/scripts/organize-downloads.sh"
+    },
+    {
+      "level": 1,
+      "title": "创建分类目录"
+    },
+    {
+      "level": 1,
+      "title": "按扩展名分类移动"
+    },
+    {
+      "level": 1,
+      "title": "剩余文件归入others"
+    },
+    {
+      "level": 4,
+      "title": "阶段2: 文档版本整理"
+    },
+    {
+      "level": 1,
+      "title": "/root/.openclaw/workspace/scripts/version-cleanup.sh"
+    },
+    {
+      "level": 1,
+      "title": "识别同一文档的多个版本并建议保留最新版"
+    },
+    {
+      "level": 1,
+      "title": "查找相似名称"
+    },
+    {
+      "level": 3,
+      "title": "2.2 命名规范强制执行 📅 第3-4天"
+    },
+    {
+      "level": 4,
+      "title": "脚本1: 文件名规范化工具"
+    },
+    {
+      "level": 1,
+      "title": "/root/.openclaw/workspace/scripts/normalize-filenames.sh"
+    },
+    {
+      "level": 1,
+      "title": "移除UUID前缀"
+    },
+    {
+      "level": 1,
+      "title": "转换空格为下划线"
+    },
+    {
+      "level": 4,
+      "title": "脚本2: 规范检查器"
+    },
+    {
+      "level": 1,
+      "title": "/root/.openclaw/workspace/scripts/check-naming-convention.sh"
+    },
+    {
+      "level": 1,
+      "title": "检查包含emoji的文件/文件夹名"
+    },
+    {
+      "level": 3,
+      "title": "2.3 自动化检查部署 📅 第5-7天"
+    },
+    {
+      "level": 4,
+      "title": "Cron任务: 每日检查"
+    },
+    {
+      "level": 1,
+      "title": "添加到 crontab"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "建立解读摘要登记制度",
+    "创建标准暂存目录结构"
+  ],
+  "limitations_applied": [
+    "Sections limited to 50"
+  ],
+  "content_truncated": false
+}

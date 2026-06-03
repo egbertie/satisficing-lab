@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/data-quality-auditor/config/pipeline_integration.yaml",
+  "filename": "pipeline_integration.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "37a6c5d3b3a0aa7f",
+  "content_length": 754,
+  "ingested_at": "2026-03-31T17:27:45.387834",
+  "content_preview": "# 管道集成配置\n# Pipeline Integration Configuration\n\ntriggers:\n  # ETL完成后触发\n  post_etl:\n    enabled: true\n    webhook_url: \"http://localhost:8080/dq-audit\"\n    timeout_seconds: 300\n    \n  # 定时触发\n  scheduled:\n    enabled: true\n    cron: \"0 */6 * * *\"  # 每6小时执行一次\n    timezone: \"Asia/Shanghai\"\n    \n  # 数据变更触发\n  on_change:\n    enabled: false\n    min_rows_changed: 100\n    check_interval_minutes: 5\n\n# CI/CD集成\nci_cd:\n  quality_gate:\n    enabled: true\n    min_score: 80           # 质量门禁分数\n    block_on_critical",
+  "limitations_applied": []
+}

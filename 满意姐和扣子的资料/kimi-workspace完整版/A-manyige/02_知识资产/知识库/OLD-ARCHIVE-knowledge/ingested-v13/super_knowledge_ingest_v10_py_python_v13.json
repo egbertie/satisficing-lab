@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/super-knowledge-ingest/super_knowledge_ingest_v10.py",
+  "filename": "super_knowledge_ingest_v10.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "54e4a97196ea2716",
+  "content_length": 3242,
+  "ingested_at": "2026-03-31T17:27:45.426704",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nsuper-knowledge-ingest V10.0 - 光速版\n核心突破：极致内联 + 预计算一切 + CPU亲和性\n目标：稳定 < 2μs\n\"\"\"\n\nimport os\nimport time\nimport threading\nimport queue\nfrom typing import Dict, Tuple\n\n# ============ 预计算全局状态 ============\n# 所有路径、配置提前算好\n_OUT_DIR = \"/root/.openclaw/workspace/knowledge/7standard-v10\"\nos.makedirs(_OUT_DIR, exist_ok=True)\n\n# 写入队列和线程\n_WRITE_Q = queue.Queue()\n_WRITE_THREAD = None\n\ndef _writer():\n    while True:\n        item = _WRITE_Q.get()\n        if item is None:\n            brea",
+  "limitations_applied": []
+}

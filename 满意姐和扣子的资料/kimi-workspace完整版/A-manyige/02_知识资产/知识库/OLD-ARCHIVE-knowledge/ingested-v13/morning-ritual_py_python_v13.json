@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/cron-tasks/morning-ritual.py",
+  "filename": "morning-ritual.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "5d5e00ff7356cd8a",
+  "content_length": 5926,
+  "ingested_at": "2026-03-31T17:27:46.220994",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\n晨间图腾仪式脚本 (Morning Ritual)\n执行时间: 每日 07:00\n功能:\n1. 读取并确认SOUL.md核心身份\n2. 检查系统基础状态\n3. 读取今日MEMORY.md准备\n4. 输出晨间仪式报告\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport logging\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\n# ============ 配置区域 ============\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nLOG_DIR = WORKSPACE / \"logs\" / \"cron-tasks\"\nMEMORY_DIR = WORKSPACE / \"memory\"\nSOUL_FILE = WORKSPACE / \"SOUL.md\"\nUSER_FILE = WORKSPACE / \"USER.",
+  "limitations_applied": []
+}

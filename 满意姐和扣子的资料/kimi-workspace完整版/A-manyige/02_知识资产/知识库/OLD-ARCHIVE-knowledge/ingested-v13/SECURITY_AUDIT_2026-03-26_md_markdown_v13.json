@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/SECURITY_AUDIT_2026-03-26.md",
+  "filename": "SECURITY_AUDIT_2026-03-26.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "18e3f2d085067f05",
+  "content_length": 1914,
+  "ingested_at": "2026-03-31T17:27:46.543988",
+  "content_preview": "# 信息安全审计报告 V1.0\n\n**审计时间**: 2026-03-26 10:30  \n**审计范围**: Git仓库、环境文件、敏感信息  \n**审计结果**: 🟡 **有风险，已修复**\n\n---\n\n## 一、发现的严重问题\n\n### 1. 🚨 明文Token存储（已修复）\n| 位置 | 问题 | 风险等级 | 修复措施 |\n|------|------|----------|----------|\n| MEMORY.md | 明文存储GitHub Token | 🔴 严重 | 已脱敏为`[REDACTED]` |\n| .env | 5个API Key明文存储 | 🔴 严重 | 权限改为600 |\n| .env.github | GitHub Token | 🟡 中等 | 权限改为600，不提交 |\n\n### 2. 🚨 文件权限问题（已修复）\n| 文件 | 原权限 | 新权限 | 说明 |\n|------|--------|--------|------|\n| .env | 644 (全局可读) | 600 (仅所有者) | 包含5个API Key |\n| .env.githu",
+  "limitations_applied": []
+}

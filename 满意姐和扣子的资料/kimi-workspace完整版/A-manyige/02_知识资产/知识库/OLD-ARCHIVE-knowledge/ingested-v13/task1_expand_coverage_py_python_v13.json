@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/task1_expand_coverage.py",
+  "filename": "task1_expand_coverage.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "7dd74dcea1c9d1a3",
+  "content_length": 2943,
+  "ingested_at": "2026-03-31T17:27:46.203429",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n知识内容深度提取器 - 今日执行任务1\n目标: 覆盖率从79.2%提升到85%\n\"\"\"\n\nimport json\nfrom pathlib import Path\n\ndef expand_coverage_to_85():\n    \"\"\"扩展覆盖率到85%\"\"\"\n    \n    # 读取当前Skill索引\n    with open(\"/root/.openclaw/workspace/knowledge/system/skill_knowledge_index.json\", 'r') as f:\n        skill_data = json.load(f)\n    \n    # 读取当前概念覆盖\n    with open(\"/root/.openclaw/workspace/knowledge/system/concept_skill_index_v2.json\", 'r') as f:\n        concept_index = json.load(f)\n    \n    # 当前已覆盖的Skill\n    cov",
+  "limitations_applied": []
+}

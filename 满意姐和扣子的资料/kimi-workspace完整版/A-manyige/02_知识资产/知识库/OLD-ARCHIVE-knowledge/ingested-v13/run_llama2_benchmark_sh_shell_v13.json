@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/run_llama2_benchmark.sh",
+  "filename": "run_llama2_benchmark.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "62771e14703f6780",
+  "content_length": 5859,
+  "ingested_at": "2026-03-31T17:27:44.503618",
+  "content_preview": "#!/bin/bash\n# Llama2 Benchmark Script for Azure TEE (Intel TDX)\n# This script runs comprehensive benchmarks to measure TEE performance overhead\n\nset -e\n\necho \"=== Llama2 Benchmark for Azure TEE (Intel TDX) ===\"\n\n# Configuration\nMODEL_NAME=\"meta-llama/Llama-2-7b-chat-hf\"\nMODEL_NAME_SHORT=\"llama-2-7b\"\nRESULTS_DIR=\"$HOME/results\"\nTIMESTAMP=$(date +%Y%m%d_%H%M%S)\nRESULT_FILE=\"$RESULTS_DIR/benchmark_${TIMESTAMP}.txt\"\n\n# Ensure results directory exists\nmkdir -p $RESULTS_DIR\n\n# Activate virtual environ",
+  "limitations_applied": []
+}

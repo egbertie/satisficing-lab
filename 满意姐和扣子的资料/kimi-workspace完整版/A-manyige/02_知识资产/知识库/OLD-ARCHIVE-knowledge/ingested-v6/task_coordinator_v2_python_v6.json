@@ -1,0 +1,39 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_task-coordinator/task_coordinator_v2.py",
+  "filename": "task_coordinator_v2.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 21735,
+  "checksum": "399c1c789f2c3fd3",
+  "ingested_at": "2026-03-31T17:30:32.154413",
+  "line_count": 558,
+  "title": "task_coordinator_v2",
+  "description": "任务协调管理核心引擎 V2.0 - 具备学习迭代能力\n\n核心能力：\n1. 智能协调 - 分析任务状态，自动选择执行模式\n2. 学习迭代 - 记录决策效果，持续优化策略\n3. 资源调度 - 合理分配算力，最大化团队产出",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: TaskCoordinator"
+    }
+  ],
+  "entities": [
+    {
+      "name": "TaskCoordinator",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "解析任务行 (Markdown表格行)",
+    "检查是否已完成（在行中或备注中）",
+    "已完成，不加入阻塞列表",
+    "用户自行处理，不加入阻塞列表",
+    "二次验证：读取最新的 memory 文件确认状态",
+    "如果 memory 中明确说 WIP-001 已完成，则从阻塞列表移除",
+    "如果 memory 中明确说 WIP-002 用户自行处理，则移除",
+    "解析失败返回空列表，避免误报",
+    "从TASK_MASTER.md动态加载任务状态",
+    "示例：识别\"飞书调试陷阱\""
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "type": "reLaunch",
+    "url": "{{ROUTE_URL}}"
+  },
+  {
+    "type": "waitForRoute",
+    "path": "{{ROUTE_PATH}}",
+    "query": "{{ROUTE_QUERY}}",
+    "timeoutMs": "{{ROUTE_TIMEOUT_MS}}"
+  },
+  {
+    "type": "snapshot",
+    "dataPaths": [
+      "root"
+    ],
+    "path": "{{SNAPSHOT_PATH}}"
+  },
+  {
+    "type": "findInDataTree",
+    "path": "root",
+    "text": "{{SKELETON_TEXT}}",
+    "limit": "{{SKELETON_LIMIT}}"
+  },
+  {
+    "type": "screenshot",
+    "path": "{{SCREENSHOT_PATH}}"
+  }
+]

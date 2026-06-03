@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/docs/cron_insights/backup_insight.md",
+  "filename": "backup_insight.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "ee3a340328176393",
+  "content_length": 426,
+  "ingested_at": "2026-03-31T17:27:44.934830",
+  "content_preview": "# 备份Cron任务深度洞察 (L1-L5)\n\n## 基础信息\n- **任务名称**: backup_to_external.py\n- **Cron表达式**: 0 2 * * * (每日02:00)\n- **功能**: 备份到外部存储\n\n---\n\n## 深度洞察 (L1-L5)\n\n### L1: 表面现象\n备份任务：\n- 每日02:00自动执行\n- 备份关键数据\n- 记录备份日志\n\n**问题**: 未验证备份完整性\n\n### L2: 模式识别\n- 有备份但无恢复测试\n- 缺乏备份成功率统计\n\n### L3: 根因分析\n- 备份后未验证可恢复性\n- 缺乏存储空间监控\n\n### L4: 系统关联\n- 备份是灾备基础\n- 但恢复能力未知\n\n### L5: 未来指导\n- 每月执行恢复测试\n- 监控存储空间使用率\n\n---\n\n## 8步验证状态\n- 语法 ✅ | 权限 ✅\n- 配置/依赖: 待确认\n\n---\n\n*整改时间: 2026-03-31*\n",
+  "limitations_applied": []
+}

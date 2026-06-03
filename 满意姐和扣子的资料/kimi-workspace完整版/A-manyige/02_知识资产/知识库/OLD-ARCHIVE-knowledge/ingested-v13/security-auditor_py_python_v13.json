@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/security-auditor.py",
+  "filename": "security-auditor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "4cec73c0040ae382",
+  "content_length": 5222,
+  "ingested_at": "2026-03-31T17:27:46.173577",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nSecurity Auditor - 安全持续改进机制执行脚本\n版本: 1.0\n创建日期: 2026-03-18\n\"\"\"\n\nimport os\nimport json\nimport subprocess\nfrom datetime import datetime\nfrom pathlib import Path\n\n# 安全检查清单\nSECURITY_CHECKLIST = {\n    \"version\": \"1.0\",\n    \"last_updated\": \"2026-03-18\",\n    \"checks\": [\n        {\n            \"id\": \"SECRETS_AUDIT\",\n            \"name\": \"Secrets审计\",\n            \"command\": \"gh secret list 2>/dev/null || echo 'Not authenticated'\",\n            \"expected\": \"No hardcoded secrets in .gi",
+  "limitations_applied": []
+}

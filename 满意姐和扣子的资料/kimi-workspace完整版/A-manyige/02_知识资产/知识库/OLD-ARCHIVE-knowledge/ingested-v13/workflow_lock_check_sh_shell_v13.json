@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/workflow_lock_check.sh",
+  "filename": "workflow_lock_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "01cc16a0a97b205f",
+  "content_length": 843,
+  "ingested_at": "2026-03-31T17:27:46.136075",
+  "content_preview": "#!/bin/bash\n# 工作流锁定检查脚本\n# 防止并发冲突和状态不一致\n\nLOCK_FILE=\"/root/.openclaw/workspace/.workflow_lock\"\nLOCK_TIMEOUT=300\n\necho \"=== 工作流锁定检查 ===\"\necho \"时间: $(date)\"\necho \"\"\n\nif [ -f \"$LOCK_FILE\" ]; then\n    LOCK_PID=$(cat \"$LOCK_FILE\" 2>/dev/null || echo \"\")\n    LOCK_TIME=$(stat -c %Y \"$LOCK_FILE\" 2>/dev/null || echo \"0\")\n    CURRENT_TIME=$(date +%s)\n    LOCK_AGE=$((CURRENT_TIME - LOCK_TIME))\n    \n    echo \"发现活跃锁:\"\n    echo \"  PID: $LOCK_PID\"\n    echo \"  年龄: ${LOCK_AGE}秒\"\n    \n    if [ -n \"$LOCK_PID\" ] && k",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/knowledge_ingest_conversations.py",
+  "filename": "knowledge_ingest_conversations.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "dfc3395d41709dd0",
+  "content_length": 1022,
+  "ingested_at": "2026-03-31T17:27:46.186330",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n知识入库修正脚本 - 补充对话记录入库\n\n诚实修正：之前只入库了skill文档，遗漏了最重要的对话记录\n\"\"\"\n\nimport shutil\nfrom pathlib import Path\nfrom datetime import datetime\n\n# 源文件\nMEMORY_DIR = Path(\"~/.openclaw/workspace/memory\").expanduser()\n# 目标目录\nOUTPUT_DIR = Path(\"~/.openclaw/workspace/diary/knowledge-ingest/ingested\").expanduser()\n\ndef ingest_conversation_records():\n    \"\"\"入库对话记录\"\"\"\n    count = 0\n    \n    for md_file in MEMORY_DIR.glob(\"*.md\"):\n        if md_file.name in [\"README.md\"]:\n            continue\n   ",
+  "limitations_applied": []
+}

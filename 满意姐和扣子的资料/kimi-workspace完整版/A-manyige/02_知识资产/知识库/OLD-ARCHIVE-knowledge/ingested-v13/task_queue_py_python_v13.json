@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_kimi-cli-task-manager/scripts/task_queue.py",
+  "filename": "task_queue.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "0a83946ff6f78031",
+  "content_length": 2697,
+  "ingested_at": "2026-03-31T17:27:45.027925",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nKimi CLI Task Queue Manager\n任务队列管理器\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport time\nimport argparse\nfrom pathlib import Path\nfrom datetime import datetime\n\nTASKS_DIR = Path(__file__).parent.parent / \"tasks\"\n\ndef ensure_dirs():\n    \"\"\"确保任务目录存在\"\"\"\n    for subdir in [\"pending\", \"running\", \"completed\", \"failed\"]:\n        (TASKS_DIR / subdir).mkdir(parents=True, exist_ok=True)\n\ndef add_task(task_file):\n    \"\"\"添加任务到队列\"\"\"\n    task_path = Path(task_file)\n    if not task_path",
+  "limitations_applied": []
+}

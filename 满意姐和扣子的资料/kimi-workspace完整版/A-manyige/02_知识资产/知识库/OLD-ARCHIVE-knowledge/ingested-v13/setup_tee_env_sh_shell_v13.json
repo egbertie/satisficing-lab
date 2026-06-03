@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/setup_tee_env.sh",
+  "filename": "setup_tee_env.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "db7f1e13ff889fc5",
+  "content_length": 2710,
+  "ingested_at": "2026-03-31T17:27:44.505245",
+  "content_preview": "#!/bin/bash\n# Setup Python environment and LLM inference framework on TEE VM\n# Run this script on the Azure DC8s_v3 VM after deployment\n\nset -e\n\necho \"=== Setting up Python Environment for TEE LLM Inference ===\"\n\n# 1. System update and dependencies\necho \"Updating system packages...\"\nsudo apt-get update\nsudo apt-get install -y \\\n    python3-pip \\\n    python3-venv \\\n    python3-dev \\\n    build-essential \\\n    git \\\n    wget \\\n    curl \\\n    htop \\\n    numactl \\\n    linux-tools-common \\\n    linux-t",
+  "limitations_applied": []
+}

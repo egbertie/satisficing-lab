@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/event-driven-engine/event_driven_engine.py",
+  "filename": "event_driven_engine.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "53fb74eeb8106897",
+  "content_length": 4608,
+  "ingested_at": "2026-03-31T17:27:45.397452",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n事件驱动机制实现 - M004\n自动触发整改和内化流程\n\n创建时间: 2026-03-31\n状态: 整改完成\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport re\nfrom datetime import datetime\nfrom pathlib import Path\n\nclass EventDrivenEngine:\n    \"\"\"事件驱动引擎\"\"\"\n    \n    def __init__(self, workspace=\"/root/.openclaw/workspace\"):\n        self.workspace = Path(workspace)\n        self.events_dir = self.workspace / \"memory\" / \"events\"\n        self.events_dir.mkdir(parents=True, exist_ok=True)\n        self.handlers = {\n            \"us",
+  "limitations_applied": []
+}

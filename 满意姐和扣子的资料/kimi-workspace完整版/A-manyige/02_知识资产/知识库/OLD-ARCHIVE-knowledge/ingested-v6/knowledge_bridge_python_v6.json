@@ -1,0 +1,61 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/universal-task-executor-v3/integration/knowledge_bridge.py",
+  "filename": "knowledge_bridge.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 18084,
+  "checksum": "c8bc589130a3a112",
+  "ingested_at": "2026-03-31T17:30:32.666068",
+  "line_count": 509,
+  "title": "knowledge_bridge",
+  "description": "Knowledge Bridge - 知识入库桥接器\n集成super-knowledge-ingest Skill到Universal Task Executor V3.0\n\n职责：\n1. 统一接口调用super-knowledge-ingest\n2. 支持批量入库\n3. 支持增量更新\n4. Token优化（大任务分批入库）\n5. Checkpoint支持（入库状态可恢复）",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: IngestConfig"
+    },
+    {
+      "level": 2,
+      "title": "Class: IngestResult"
+    },
+    {
+      "level": 2,
+      "title": "Class: BatchIngestResult"
+    },
+    {
+      "level": 2,
+      "title": "Class: KnowledgeBridge"
+    }
+  ],
+  "entities": [
+    {
+      "name": "IngestConfig",
+      "type": "class"
+    },
+    {
+      "name": "IngestResult",
+      "type": "class"
+    },
+    {
+      "name": "BatchIngestResult",
+      "type": "class"
+    },
+    {
+      "name": "KnowledgeBridge",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "添加super-knowledge-ingest路径",
+    "检查文件大小（10MB限制）",
+    "调用super-knowledge-ingest Skill",
+    "分批处理（Token优化）",
+    "保存Checkpoint",
+    "等待Token恢复或继续（这里简化处理）",
+    "每批次保存一次校验和缓存",
+    "保存最终Checkpoint",
+    "使用asyncio运行批量入库"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

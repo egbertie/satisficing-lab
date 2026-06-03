@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/dormancy-protocol/scripts/dormancy_manager.py",
+  "filename": "dormancy_manager.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "1526b4635d86032a",
+  "content_length": 15151,
+  "ingested_at": "2026-03-31T17:27:45.477136",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nDormancy-Protocol 核心管理脚本\n功能: 智能休眠与即时唤醒管理\n版本: 1.0\n作者: OpenClaw\n\"\"\"\n\nimport json\nimport time\nimport sys\nfrom datetime import datetime\nfrom pathlib import Path\n\nclass DormancyManager:\n    \"\"\"休眠管理器 - 实现10分钟无交互自动休眠，即时唤醒响应\"\"\"\n    \n    IDLE_THRESHOLD = 600  # 10分钟\n    WAKE_LATENCY_TARGET = 100  # 100ms目标\n    DORMANCY_STATE_FILE = Path(\"/root/.openclaw/workspace/memory/dormancy_state.json\")\n    \n    def __init__(self):\n        self.state = self.load_state()\n    \n    def load_s",
+  "limitations_applied": []
+}

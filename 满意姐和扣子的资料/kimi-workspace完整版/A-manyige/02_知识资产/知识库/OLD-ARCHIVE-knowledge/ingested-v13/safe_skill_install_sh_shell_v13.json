@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/safe_skill_install.sh",
+  "filename": "safe_skill_install.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "fd984166add0da58",
+  "content_length": 994,
+  "ingested_at": "2026-03-31T17:27:46.165672",
+  "content_preview": "#!/bin/bash\n# Skill安装安全包装脚本\n# 所有skill安装必须通过此脚本\n# 强制嵌入检查点机制\n\nSKILL_NAME=$1\nCHECKPOINT_SCRIPT=\"/root/.openclaw/workspace/scripts/skill_install_checkpoint.sh\"\n\necho \"==============================================\"\necho \"    Skill安装安全通道\"\necho \"==============================================\"\necho \"\"\necho \"⚠️  重要提醒：根据管理规则，所有skill安装前必须完成评估！\"\necho \"\"\n\n# 执行强制检查点\nif [ -f \"$CHECKPOINT_SCRIPT\" ]; then\n    bash \"$CHECKPOINT_SCRIPT\" \"$SKILL_NAME\"\n    CHECKPOINT_RESULT=$?\n    \n    if [ $CHECKPOINT_RESULT -ne 0",
+  "limitations_applied": []
+}

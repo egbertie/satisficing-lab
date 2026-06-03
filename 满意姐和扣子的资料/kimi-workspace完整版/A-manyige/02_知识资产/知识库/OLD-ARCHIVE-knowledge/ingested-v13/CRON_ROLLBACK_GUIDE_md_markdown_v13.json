@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/docs/2026-03/CRON_ROLLBACK_GUIDE.md",
+  "filename": "CRON_ROLLBACK_GUIDE.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "ac5b9a10c2a4713a",
+  "content_length": 2930,
+  "ingested_at": "2026-03-31T17:27:46.648200",
+  "content_preview": "# Daily Cron 合并 - 回滚方案\n\n> 版本: 1.2  \n> 创建: 2026-03-15  \n> 关联文档: [CRON_DAILY_MERGE_V1.2.md](./CRON_DAILY_MERGE_V1.2.md)\n\n---\n\n## 🚨 何时需要回滚\n\n### 必须回滚的情况\n\n| 情况 | 判断标准 | 响应时间 |\n|------|----------|----------|\n| 关键任务失败 | 晨报/日报连续2天未生成 | 立即 |\n| 执行失败率过高 | 任务失败率 > 20% | 24小时内 |\n| 用户体验严重下降 | 用户明确要求恢复 | 立即 |\n| 数据不一致 | 合并后报告数据错误 | 立即 |\n\n### 建议回滚的情况\n\n- Token节省效果未达预期（节省 < 15%）\n- 新Cron执行时间超过预期50%\n- 维护困难度显著增加\n\n---\n\n## 🔄 回滚方法\n\n### 方法1：一键回滚（推荐）\n\n```bash\n# 使用shell脚本\n./scripts/cron-daily-merge.sh --rollback\n\n# 或使用Pyth",
+  "limitations_applied": []
+}

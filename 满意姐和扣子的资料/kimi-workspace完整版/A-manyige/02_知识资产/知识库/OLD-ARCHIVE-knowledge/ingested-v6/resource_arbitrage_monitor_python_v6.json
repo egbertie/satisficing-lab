@@ -1,0 +1,64 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/global-resource-arbitrage/scripts/resource_arbitrage_monitor.py",
+  "filename": "resource_arbitrage_monitor.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 16455,
+  "checksum": "61b6d3792213707c",
+  "ingested_at": "2026-03-31T17:30:32.705382",
+  "line_count": 494,
+  "title": "resource_arbitrage_monitor",
+  "description": "Resource Arbitrage Monitor\n全球资源套利监控系统\n\n功能:\n- 自动资源扫描\n- 套利机会监控\n- 告警通知\n- 报表生成\n- 可观测输出 (S3)\n- 自动化集成 (S4)\n\n作者: OpenClaw Agent\n版本: v1.0\n日期: 2026-03-27",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: MetricsCollector"
+    },
+    {
+      "level": 2,
+      "title": "Class: NotificationManager"
+    },
+    {
+      "level": 2,
+      "title": "Class: ResourceScanner"
+    },
+    {
+      "level": 2,
+      "title": "Class: ArbitrageMonitor"
+    }
+  ],
+  "entities": [
+    {
+      "name": "MetricsCollector",
+      "type": "class"
+    },
+    {
+      "name": "NotificationManager",
+      "type": "class"
+    },
+    {
+      "name": "ResourceScanner",
+      "type": "class"
+    },
+    {
+      "name": "ArbitrageMonitor",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "实际实现中这里会调用飞书/钉钉/Slack API",
+    "简化实现，实际使用时应根据具体平台调整格式",
+    "requests.post(self.webhook_url, json=payload)",
+    "模拟从云平台获取的资源",
+    "套利监控日报 - {datetime.now().strftime('%Y-%m-%d')}",
+    "套利监控周报 - {datetime.now().strftime('%Y年第%W周')}",
+    "默认执行单次扫描并显示结果"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

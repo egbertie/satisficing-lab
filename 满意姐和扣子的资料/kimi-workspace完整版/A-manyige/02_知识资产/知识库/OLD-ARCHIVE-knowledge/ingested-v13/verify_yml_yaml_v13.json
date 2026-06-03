@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/five-level-verification/.github/workflows/verify.yml",
+  "filename": "verify.yml",
+  "file_type": "yaml",
+  "extension": ".yml",
+  "file_hash": "47bb41d18d32d233",
+  "content_length": 6524,
+  "ingested_at": "2026-03-31T17:27:45.465444",
+  "content_preview": "name: Five-Level Verification (S4)\n\non:\n  push:\n    paths:\n      - 'skills/**'\n  pull_request:\n    paths:\n      - 'skills/**'\n  workflow_dispatch:\n    inputs:\n      skill:\n        description: '要验证的Skill名称'\n        required: true\n        type: string\n      level:\n        description: '验证级别'\n        required: false\n        default: 'L4'\n        type: choice\n        options:\n          - L1\n          - L2\n          - L3\n          - L4\n\njobs:\n  discover:\n    runs-on: ubuntu-latest\n    outputs:\n     ",
+  "limitations_applied": []
+}

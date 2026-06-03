@@ -1,0 +1,181 @@
+cron:
+  # ========== Phase 1: P0级Cron（今日部署）==========
+  
+  # 1. Token实时预警
+  token-realtime-alert:
+    schedule: "*/15 * * * *"
+    command: "python3 scripts/token_monitor.py --threshold 20 --notify"
+    tier: 1
+    priority: P0
+    enabled: true
+    
+  # 2. 每日晨报生成
+  daily-morning-report:
+    schedule: "55 8 * * *"
+    command: "python3 skills/daily-report/generate.py --type morning"
+    tier: 1
+    priority: P0
+    enabled: true
+    
+  # 3. 任务逾期提醒
+  task-overdue-alert:
+    schedule: "30 9 * * *"
+    command: "python3 scripts/check_overdue.py --priority P0,P1 --notify"
+    tier: 2
+    priority: P0
+    enabled: true
+    
+  # 4. 备份验证测试
+  backup-verification:
+    schedule: "0 2 * * 3,6"
+    command: "python3 skills/baseline-checker/scripts/baseline-checker-runner.py check --category backup"
+    tier: 1
+    priority: P0
+    enabled: true
+    
+  # 5. 日程前准备提醒
+  calendar-prep-reminder:
+    schedule: "*/30 * * * *"
+    command: "python3 scripts/check_calendar.py --window 30min --notify"
+    tier: 2
+    priority: P0
+    enabled: true
+
+  # ========== Phase 2: P1级Cron（本周部署）==========
+  
+  # 6. Skill市场更新监控
+  skill-market-monitor:
+    schedule: "0 */6 * * *"
+    command: "python3 scripts/check_skillhub.py --notify-new"
+    tier: 1
+    priority: P1
+    enabled: false  # 待部署
+    
+  # 7. 知识库健康检查
+  knowledge-health-check:
+    schedule: "0 */2 * * *"
+    command: "python3 scripts/check_knowledge_links.py --fix-broken"
+    tier: 1
+    priority: P1
+    enabled: false
+    
+  # 8. 外部API可用性检测
+  api-health-check:
+    schedule: "*/30 * * * *"
+    command: "python3 scripts/check_apis.py --services github,feishu"
+    tier: 1
+    priority: P1
+    enabled: false
+    
+  # 9. 会话状态归档
+  session-auto-archive:
+    schedule: "0 * * * *"
+    command: "python3 scripts/archive_sessions.py --older-than 24h"
+    tier: 1
+    priority: P1
+    enabled: false
+    
+  # 10. 每日晚报生成
+  daily-evening-report:
+    schedule: "30 18 * * *"
+    command: "python3 skills/daily-report/generate.py --type evening"
+    tier: 1
+    priority: P1
+    enabled: false
+    
+  # 11. 信任积分日报
+  trust-score-daily:
+    schedule: "0 20 * * *"
+    command: "python3 scripts/report_trust_score.py --daily"
+    tier: 2
+    priority: P1
+    enabled: false
+    
+  # 12. 知识入库进度
+  knowledge-ingest-progress:
+    schedule: "0 22 * * *"
+    command: "python3 scripts/report_knowledge_progress.py"
+    tier: 2
+    priority: P1
+    enabled: false
+    
+  # 13. 周度系统复盘
+  weekly-system-review:
+    schedule: "0 20 * * 0"
+    command: "python3 scripts/weekly_review.py --systems all"
+    tier: 2
+    priority: P1
+    enabled: false
+    
+  # 14. 对抗测试执行
+  adversarial-test-weekly:
+    schedule: "0 4 * * 1"
+    command: "python3 scripts/run_adversarial_tests.py --suite all"
+    tier: 3
+    priority: P1
+    enabled: false
+    
+  # 15. 异常日志聚合
+  error-log-aggregator:
+    schedule: "0 * * * *"
+    command: "python3 scripts/aggregate_errors.py --threshold 5 --window 1h"
+    tier: 2
+    priority: P1
+    enabled: false
+
+  # ========== Phase 3: P2级Cron（下周部署）==========
+  
+  # 16. 月度知识盘点
+  monthly-knowledge-inventory:
+    schedule: "0 9 1 * *"
+    command: "python3 scripts/monthly_knowledge_check.py"
+    tier: 2
+    priority: P2
+    enabled: false
+    
+  # 17. Skill效果评估
+  skill-effectiveness-review:
+    schedule: "0 18 * * 5"
+    command: "python3 scripts/evaluate_skills.py --top 20"
+    tier: 2
+    priority: P2
+    enabled: false
+    
+  # 18. 飞书文档变更同步
+  feishu-doc-sync:
+    schedule: "*/10 * * * *"
+    command: "python3 skills/feishu-drive-self-upload/sync.py --auto-ingest"
+    tier: 2
+    priority: P2
+    enabled: false
+    
+  # 19. GitHub PR审查提醒
+  github-pr-reminder:
+    schedule: "0 9,14 * * *"
+    command: "python3 scripts/check_github_prs.py --notify-pending"
+    tier: 2
+    priority: P2
+    enabled: false
+    
+  # 20. Token耗尽预警（紧急）
+  token-exhaustion-alert:
+    schedule: "*/5 * * * *"
+    command: "python3 scripts/token_monitor.py --threshold 10 --urgent"
+    tier: 3
+    priority: P2
+    enabled: false
+
+# 配置说明
+config:
+  version: "2026-03-28-v1"
+  total_crons: 30
+  phase1_deployed: 5
+  phase2_pending: 10
+  phase3_pending: 5
+  timezone: "Asia/Shanghai"
+  
+# 错峰策略
+timing:
+  preferred_minutes: [17, 37, 47]  # 避免整点
+  high_frequency_limit: 0  # 不允许15分钟以内的高频任务
+  daily_token_budget: 18000

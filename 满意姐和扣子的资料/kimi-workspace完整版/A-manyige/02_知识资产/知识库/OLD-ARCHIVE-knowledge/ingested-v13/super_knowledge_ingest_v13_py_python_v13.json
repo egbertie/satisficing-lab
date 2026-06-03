@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/super-knowledge-ingest/super_knowledge_ingest_v13.py",
+  "filename": "super_knowledge_ingest_v13.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "4b8ddb9d27993c6d",
+  "content_length": 4865,
+  "ingested_at": "2026-03-31T17:27:45.425268",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nSuper Knowledge Ingest V13 - 全量知识入库执行版\n蓝军监督下执行真正的全量知识入库\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport hashlib\nfrom pathlib import Path\nfrom datetime import datetime\n\nWORKSPACE = \"/root/.openclaw/workspace\"\nKNOWLEDGE_DIR = f\"{WORKSPACE}/knowledge/ingested-v13\"\nINDEX_FILE = f\"{WORKSPACE}/knowledge/INDEX-v13.md\"\nLOG_FILE = f\"{WORKSPACE}/knowledge/INGESTION_LOG.md\"\n\n# 文件类型映射\nFILE_TYPES = {\n    '.md': 'markdown',\n    '.py': 'python',\n    '.json': 'json',\n    '.sh': 'shell',\n",
+  "limitations_applied": []
+}

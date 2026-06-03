@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/auto-index-update.sh",
+  "filename": "auto-index-update.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "3e05f65b2b726205",
+  "content_length": 13339,
+  "ingested_at": "2026-03-31T17:27:46.153929",
+  "content_preview": "#!/bin/bash\n#\n# 自动索引更新脚本 (Auto Index Update Script)\n# 版本: 1.0\n# 创建时间: 2026-03-31\n# 用途: 每小时自动扫描workspace，识别变更，更新GLOBAL_INDEX\n#\n\nset -euo pipefail\n\n# ==================== 配置区 ====================\nWORKSPACE_DIR=\"/root/.openclaw/workspace\"\nGLOBAL_INDEX=\"${WORKSPACE_DIR}/GLOBAL_INDEX.md\"\nLOG_DIR=\"${WORKSPACE_DIR}/logs/index-updates\"\nSTATE_DIR=\"${WORKSPACE_DIR}/.state\"\nTIMESTAMP=$(date '+%Y-%m-%d_%H-%M-%S')\nDATE_STR=$(date '+%Y-%m-%d')\nTIME_STR=$(date '+%H:%M:%S')\nREPORT_FILE=\"${LOG_DIR}/update_report",
+  "limitations_applied": []
+}

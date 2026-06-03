@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_feishu-docx-powerwrite/setup.sh",
+  "filename": "setup.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "f4827c0626dac062",
+  "content_length": 638,
+  "ingested_at": "2026-03-31T17:27:45.198551",
+  "content_preview": "#!/usr/bin/env bash\nset -euo pipefail\n\necho \"[feishu-docx-powerwrite] Setup checklist\"\n\necho \"1) Verify OpenClaw sees Feishu skills/tools\"\nopenclaw skills check | sed -n '1,80p' || true\n\necho\ncat <<'EOF'\n2) You must configure YOUR OWN Feishu app credentials.\n   Do NOT copy anyone else's tokens.\n\n   Minimum expectation:\n   - OpenClaw has Feishu channel configured\n   - Feishu OpenAPI tools are available\n   - Your app has Docx/Drive scopes enabled\n\n3) Quick manual test (inside OpenClaw chat):\n   - ",
+  "limitations_applied": []
+}

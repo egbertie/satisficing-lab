@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/analyze_tee_performance.py",
+  "filename": "analyze_tee_performance.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "839dcd9adc164c0d",
+  "content_length": 6246,
+  "ingested_at": "2026-03-31T17:27:44.514872",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nTEE Performance Analysis Script\nCompares performance metrics for confidential computing (TEE) vs non-TEE environments\n\"\"\"\n\nimport json\nimport sys\nimport re\nfrom datetime import datetime\n\n# Expected performance baseline (non-TEE Standard_D8s_v3)\nNON_TEE_BASELINE = {\n    \"llama2_7b\": {\n        \"tokens_per_sec\": 8.5,  # Expected tokens/sec on Standard_D8s_v3\n        \"memory_bandwidth_gb_s\": 25.0,\n        \"model_load_time_sec\": 45.0,\n    }\n}\n\n# TEE overhead threshold (< 10",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/tiered-output/tests/test_s5_s7.py",
+  "filename": "test_s5_s7.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "a9577b9659a390a8",
+  "content_length": 14461,
+  "ingested_at": "2026-03-31T17:27:45.330043",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n分级输出系统 - 完整测试套件\nTiered Output System - Complete Test Suite\n\n覆盖S5-S7标准的测试：\n- S5: 分级准确性验证\n- S6: 局限标注验证  \n- S7: 对抗测试\n\"\"\"\n\nimport sys\nimport yaml\nfrom pathlib import Path\nfrom typing import Dict, List, Tuple\nfrom dataclasses import dataclass, asdict\n\n# 添加父目录到路径\nsys.path.insert(0, str(Path(__file__).parent.parent))\n\nfrom tiered_output import TieredOutputSystem, Context, TieredResponse\n\n\n@dataclass\nclass TestResult:\n    test_name: str\n    category: str  # S5, S6, S7\n    pass",
+  "limitations_applied": []
+}

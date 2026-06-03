@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/task_checkpoint_manager.py",
+  "filename": "task_checkpoint_manager.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "fc3fff44b1517980",
+  "content_length": 2566,
+  "ingested_at": "2026-03-31T17:27:46.158647",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n任务执行Checkpoint管理器\n用途: 为所有任务提供断点续传能力\n规则: 每个长时间任务必须集成此管理器\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime\nfrom pathlib import Path\n\nclass TaskCheckpointManager:\n    \"\"\"任务Checkpoint管理器\"\"\"\n    \n    def __init__(self, task_name):\n        self.task_name = task_name\n        self.checkpoint_dir = Path(f\"/root/.openclaw/workspace/memory/checkpoints/{task_name}\")\n        self.checkpoint_dir.mkdir(parents=True, exist_ok=True)\n        self.checkpoint_file = self.checkpoin",
+  "limitations_applied": []
+}

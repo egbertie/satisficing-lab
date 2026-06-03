@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/deploy_crm_pm_phase1.sh",
+  "filename": "deploy_crm_pm_phase1.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "97f22cb4f333cbbb",
+  "content_length": 1921,
+  "ingested_at": "2026-03-31T17:27:46.172009",
+  "content_preview": "#!/bin/bash\n# 满意解研究所 CRM+PM 系统 Phase 1 部署脚本\n# 执行时间: 2026-03-14\n\nset -e\n\necho \"========================================\"\necho \"🏗️ CRM+PM 系统 Phase 1 部署\"\necho \"========================================\"\necho \"\"\n\n# 颜色定义\nGREEN='\\033[0;32m'\nYELLOW='\\033[1;33m'\nNC='\\033[0m' # No Color\n\necho \"【步骤1/4】检查文件结构...\"\necho \"  ✅ database/crm_pm_schema.sql\"\necho \"  ✅ docs/NOTION_CRM_PM_SETUP.md\"\necho \"  ✅ workflows/n8n-crm-pm-automation.json\"\necho \"\"\n\necho \"【步骤2/4】数据库初始化...\"\nif command -v duckdb &> /dev/null; then",
+  "limitations_applied": []
+}

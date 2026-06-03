@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/system-v3/knowledge_ingest_remediation/P1-multi-agent/ARCHITECTURE_DESIGN.md",
+  "filename": "ARCHITECTURE_DESIGN.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "127a00b6b2e8a732",
+  "content_length": 3976,
+  "ingested_at": "2026-03-31T17:27:46.131433",
+  "content_preview": "# 多子代理并行架构设计 V1.0\n\n> **设计时间**: 2026-03-31 10:56  \n> **目标**: 支持最多8个子代理并行处理知识入库  \n> **安全防范**: Token限制、超时控制、失败重试\n\n---\n\n## 架构设计\n\n```\n┌─────────────────────────────────────────────────────────────┐\n│                    Meta-Scheduler (调度器)                    │\n│                 负责任务分发、结果汇总、异常处理                  │\n└──────────────────────────┬──────────────────────────────────┘\n                           │\n       ┌───────────────────┼───────────────────┐\n       │                   │                   │",
+  "limitations_applied": []
+}

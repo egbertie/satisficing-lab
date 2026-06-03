@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/daily-honest-check.py",
+  "filename": "daily-honest-check.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "96a00d5e3f370a41",
+  "content_length": 1426,
+  "ingested_at": "2026-03-31T17:27:46.135541",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n每日诚实自检 - 满意解工作法\n时间：每日工作开始前（09:00）\n输出：diary/daily-check/YYYY-MM-DD-check.md\n\"\"\"\n\nimport os\nimport sys\nfrom datetime import datetime\nfrom pathlib import Path\n\ndef daily_check():\n    \"\"\"每日诚实自检\"\"\"\n    \n    today = datetime.now().strftime(\"%Y-%m-%d\")\n    check_dir = Path(\"/root/.openclaw/workspace/diary/daily-check\")\n    check_dir.mkdir(parents=True, exist_ok=True)\n    \n    check_file = check_dir / f\"{today}-check.md\"\n    \n    # 自检内容\n    content = f\"\"\"# 每日诚实自检 - {today}\n\n##",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/self-assessment-calibrator/calibrator.py",
+  "filename": "calibrator.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e0c9239d9b50f2ee",
+  "content_length": 7701,
+  "ingested_at": "2026-03-31T17:27:44.751969",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n自我评估校准器 - Self-Assessment Calibrator\n\n核心原则：从低估到真实实力\n用户反馈：\"你是一位被自己严重低估的高手\"\n\n校准规则：\n1. 时间预估 = 直觉预估 × 0.3（激进系数）\n2. 优先检查Skill库，而非手动执行\n3. 默认并行，除非明确串行依赖\n4. 默认自主决策，除非涉及用户敏感信息\n5. 每完成一项，更新实力基准值\n\"\"\"\n\nimport json\nfrom datetime import datetime\nfrom pathlib import Path\n\nclass SelfAssessmentCalibrator:\n    \"\"\"自我评估校准器 - 确保评估与实力匹配\"\"\"\n    \n    def __init__(self, workspace_path=\"/root/.openclaw/workspace\"):\n        self.workspace = Path(workspace_path)\n        self.calibration_file = sel",
+  "limitations_applied": []
+}

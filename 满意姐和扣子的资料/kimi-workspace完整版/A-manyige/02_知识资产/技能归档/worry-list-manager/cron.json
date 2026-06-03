@@ -1,0 +1,46 @@
+{
+  "jobs": [
+    {
+      "name": "worry_list_morning_push",
+      "schedule": "7 9 * * *",
+      "command": "cd /root/.openclaw/workspace/skills/worry-list-manager && python3 scripts/worry_runner.py push",
+      "description": "【S3/S4】每日09:07推送担忧清单简报 (可观测输出+自动化)"
+    },
+    {
+      "name": "worry_list_system_scan",
+      "schedule": "0 */4 * * *",
+      "command": "cd /root/.openclaw/workspace/skills/worry-list-manager && python3 scripts/worry_runner.py scan --auto-alert",
+      "description": "【S1/S4】每4小时扫描系统状态+自动预警 (全局考虑+自动化集成)"
+    },
+    {
+      "name": "worry_list_daily_report",
+      "schedule": "53 23 * * *",
+      "command": "cd /root/.openclaw/workspace/skills/worry-list-manager && python3 scripts/worry_runner.py report",
+      "description": "【S3】每日23:53生成担忧日报 (可观测输出)"
+    },
+    {
+      "name": "worry_list_weekly_review",
+      "schedule": "37 22 * * 0",
+      "command": "cd /root/.openclaw/workspace/skills/worry-list-manager && python3 scripts/worry_runner.py weekly",
+      "description": "【S3/S5】每周日22:37生成周回顾 (可观测输出+自我验证)"
+    },
+    {
+      "name": "worry_list_accuracy_eval",
+      "schedule": "0 2 * * *",
+      "command": "cd /root/.openclaw/workspace/skills/worry-list-manager && python3 scripts/worry_runner.py evaluate",
+      "description": "【S5】每日02:00运行准确性评估 (自我验证)"
+    },
+    {
+      "name": "worry_list_feedback_loop",
+      "schedule": "30 2 * * *",
+      "command": "cd /root/.openclaw/workspace/skills/worry-list-manager && python3 scripts/worry_runner.py loop",
+      "description": "【S2】每日02:30处理反馈闭环 (系统闭环)"
+    },
+    {
+      "name": "worry_list_adversarial_test",
+      "schedule": "0 3 * * 1",
+      "command": "cd /root/.openclaw/workspace/skills/worry-list-manager && python3 scripts/worry_runner.py test",
+      "description": "【S7】每周一03:00运行对抗测试 (对抗验证)"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/knowledge_ingestion_week3.py",
+  "filename": "knowledge_ingestion_week3.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 11628,
+  "checksum": "5b101a3e41df3a49",
+  "ingested_at": "2026-03-31T17:30:32.878988",
+  "line_count": 332,
+  "title": "knowledge_ingestion_week3",
+  "description": "知识入库Week 3执行脚本\n5标准化严格入库 - 诚实执行\n目标: 50个文件 (docs/核心方案)",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: KnowledgeIngestionWeek3"
+    }
+  ],
+  "entities": [
+    {
+      "name": "KnowledgeIngestionWeek3",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "获取待入库文件（排除已入库的）",
+    "去掉\"source: \"前缀",
+    "优先级排序的docs/文件",
+    "直接扫描所有docs/下的MD文件",
+    "提取摘要（前300字符）",
+    "检查是否为二进制或损坏",
+    "S5/S7: 验证和对抗测试",
+    "S3: 输出规范 - 标准元数据头",
+    "知识元数据 (5标准化)",
+    "{metadata['title']}",
+    "S4: 自动化集成 - 记录到日志"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

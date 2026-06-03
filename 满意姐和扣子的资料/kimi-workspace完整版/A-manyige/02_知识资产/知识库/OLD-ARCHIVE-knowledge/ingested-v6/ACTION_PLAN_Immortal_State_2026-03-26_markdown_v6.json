@@ -1,0 +1,161 @@
+{
+  "source_path": "/root/.openclaw/workspace/.pre-restore-backup/docs/ACTION_PLAN_Immortal_State_2026-03-26.md",
+  "filename": "ACTION_PLAN_Immortal_State_2026-03-26.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 10073,
+  "checksum": "82d0d1b5d4c2f32e",
+  "ingested_at": "2026-03-31T17:30:16.700123",
+  "line_count": 336,
+  "title": "行动计划：零Token状态永生系统（务实版）",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "行动计划：零Token状态永生系统（务实版）"
+    },
+    {
+      "level": 2,
+      "title": "决策文档 - 请Egbertie选择执行路径"
+    },
+    {
+      "level": 2,
+      "title": "学习所得核心观点"
+    },
+    {
+      "level": 3,
+      "title": "原文方案的优点"
+    },
+    {
+      "level": 3,
+      "title": "原文方案的挑战（在我们的环境）"
+    },
+    {
+      "level": 3,
+      "title": "我们的务实方案"
+    },
+    {
+      "level": 2,
+      "title": "方案对比矩阵"
+    },
+    {
+      "level": 2,
+      "title": "推荐：三方案并行（三重保护）"
+    },
+    {
+      "level": 3,
+      "title": "保护层次"
+    },
+    {
+      "level": 2,
+      "title": "具体执行计划"
+    },
+    {
+      "level": 3,
+      "title": "立即执行（今天30分钟内完成）"
+    },
+    {
+      "level": 4,
+      "title": "1. 部署文件级检查点系统"
+    },
+    {
+      "level": 1,
+      "title": "零Token自动检查点系统"
+    },
+    {
+      "level": 1,
+      "title": "获取当前会话ID（从环境或生成）"
+    },
+    {
+      "level": 1,
+      "title": "创建检查点"
+    },
+    {
+      "level": 1,
+      "title": "记录元数据"
+    },
+    {
+      "level": 1,
+      "title": "保留最近20个检查点"
+    },
+    {
+      "level": 4,
+      "title": "2. 创建中断恢复摘要机制"
+    },
+    {
+      "level": 1,
+      "title": "读取恢复摘要，生成Claw可理解的上下文"
+    },
+    {
+      "level": 4,
+      "title": "3. 增强Git自动提交"
+    },
+    {
+      "level": 1,
+      "title": "在auto-git-commit.sh中添加："
+    },
+    {
+      "level": 1,
+      "title": "如果文件变化超过10个，立即提交（不等待2小时）"
+    },
+    {
+      "level": 3,
+      "title": "本周执行（完善体系）"
+    },
+    {
+      "level": 4,
+      "title": "4. 创建检查点管理工具"
+    },
+    {
+      "level": 1,
+      "title": "Claw状态管理工具"
+    },
+    {
+      "level": 4,
+      "title": "5. 集成到HEARTBEAT"
+    },
+    {
+      "level": 2,
+      "title": "预期效果"
+    },
+    {
+      "level": 3,
+      "title": "Token节省估算"
+    },
+    {
+      "level": 3,
+      "title": "体验提升"
+    },
+    {
+      "level": 2,
+      "title": "决策请求"
+    },
+    {
+      "level": 3,
+      "title": "Q1：执行范围"
+    },
+    {
+      "level": 3,
+      "title": "Q2：检查点频率"
+    },
+    {
+      "level": 3,
+      "title": "Q3：保留数量"
+    },
+    {
+      "level": 3,
+      "title": "Q4：立即执行"
+    },
+    {
+      "level": 2,
+      "title": "风险与缓解"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "部署到Cron（每5分钟）",
+    "需要OpenClaw底层支持"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

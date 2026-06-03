@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/token-throttle-controller/scripts/throttle-controller.py",
+  "filename": "throttle-controller.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "4aca0d1c9b1b84a0",
+  "content_length": 714,
+  "ingested_at": "2026-03-31T17:27:45.331810",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nToken节流控制器脚本\n版本: V2.0\n\"\"\"\n\nimport sys\nfrom datetime import datetime\n\nTHRESHOLDS = {\n    \"normal\": 30,\n    \"throttle\": 15\n}\n\ndef get_token_level():\n    \"\"\"获取当前Token余量百分比（简化）\"\"\"\n    return 50  # 实际应从API获取\n\ndef log(msg):\n    print(f\"[{datetime.now().strftime('%H:%M:%S')}] {msg}\")\n\ndef main():\n    log(\"=== Token节流控制器 ===\")\n    \n    level = get_token_level()\n    log(f\"当前Token: {level}%\")\n    \n    if level > THRESHOLDS[\"normal\"]:\n        log(\"状态: 正常模式 - 全部6线可用\")\n    elif lev",
+  "limitations_applied": []
+}

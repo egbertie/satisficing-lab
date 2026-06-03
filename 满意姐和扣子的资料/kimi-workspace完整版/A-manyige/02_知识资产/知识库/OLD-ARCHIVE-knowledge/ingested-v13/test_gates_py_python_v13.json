@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/quality-assurance/tests/unit/test_gates.py",
+  "filename": "test_gates.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "a99fdd71b42e2a8a",
+  "content_length": 4545,
+  "ingested_at": "2026-03-31T17:27:44.999974",
+  "content_preview": "\"\"\"\nUnit Tests for Gates Module\n\"\"\"\n\nimport pytest\nfrom qa_system.gates import (\n    QualityGate, PrerequisitesCheck, ComplianceCheck, \n    ResultsCheck, DocumentationCheck, create_gate\n)\nfrom qa_system.core import GateStatus\n\n\n@pytest.mark.unit\nclass TestPrerequisitesCheck:\n    \"\"\"测试前置条件检查\"\"\"\n    \n    def test_prerequisites_check_init(self):\n        \"\"\"测试初始化\"\"\"\n        check = PrerequisitesCheck()\n        \n        assert check.name == \"prerequisites\"\n        assert check.weight == 0.15\n        ",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/backup-safety-check.sh",
+  "filename": "backup-safety-check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "1caab1341a344ab3",
+  "content_length": 960,
+  "ingested_at": "2026-03-31T17:27:46.209121",
+  "content_preview": "#!/bin/bash\n# 循环备份检测器 - 定期扫描防止嵌套\n# 建议每30分钟运行一次\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nLOG_FILE=\"/var/log/backup-safety-check.log\"\nTIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')\n\n# 检测嵌套深度\ndeep_dirs=$(find \"$WORKSPACE\" -type d -name \"shadow-clone\" 2>/dev/null)\ncount=$(echo \"$deep_dirs\" | grep -c \"shadow-clone\" 2>/dev/null || echo \"0\")\ncount=$(echo \"$count\" | tr -d '\\n')\n\nif [ \"$count\" -gt 1 ]; then\n    echo \"[$TIMESTAMP] ALERT: 检测到 $count 层嵌套备份！\" | tee -a \"$LOG_FILE\"\n    echo \"$deep_dirs\" | tee -a \"$LOG_F",
+  "limitations_applied": []
+}

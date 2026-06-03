@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/cron-automation/config/tasks.json",
+  "filename": "tasks.json",
+  "file_type": "json",
+  "extension": ".json",
+  "file_hash": "f891adb1d1763104",
+  "content_length": 3546,
+  "ingested_at": "2026-03-31T17:27:45.381060",
+  "content_preview": "{\n  \"version\": \"1.0.0\",\n  \"timezone\": \"Asia/Shanghai\",\n  \"last_updated\": \"2026-03-27T15:08:00+08:00\",\n  \"tasks\": [\n    {\n      \"id\": \"task_01\",\n      \"name\": \"morning-report\",\n      \"description\": \"每日晨报生成\",\n      \"cron\": \"0 9 * * *\",\n      \"script\": \"scripts/morning-report.py\",\n      \"timeout\": 300,\n      \"retry\": {\n        \"max\": 3,\n        \"intervals\": [60, 300, 600]\n      },\n      \"overlap_policy\": \"skip\",\n      \"enabled\": true,\n      \"priority\": \"P0\"\n    },\n    {\n      \"id\": \"task_02\",\n     ",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/docs/2026-03/GITHUB_MODELS_SETUP.md",
+  "filename": "GITHUB_MODELS_SETUP.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "1fb286236d7d6e37",
+  "content_length": 618,
+  "ingested_at": "2026-03-31T17:27:46.642010",
+  "content_preview": "# GitHub Models 配置指南\n\n## 快速配置（2分钟）\n\n### 1. 获取GitHub Token\n访问 https://github.com/settings/tokens\n- 点击 \"Generate new token (classic)\"\n- 勾选权限：至少包含 `read:packages`\n- 生成后复制Token\n\n### 2. 配置环境变量\n```bash\nexport GITHUB_TOKEN=\"你的GitHub Token\"\n```\n\n### 3. 测试连接\n```bash\ncurl -H \"Authorization: Bearer $GITHUB_TOKEN\" \\\n  https://models.github.com/models\n```\n\n### 4. 可用模型（免费）\n- `gpt-4o` - 主要使用（能力强，免费额度充足）\n- `gpt-4o-mini` - 轻量任务\n- `phi-4` - 微软模型\n- `mistral-large` - Mistral模型\n\n### 5. 在OpenClaw中使用\n在需要调用GitHub Model",
+  "limitations_applied": []
+}

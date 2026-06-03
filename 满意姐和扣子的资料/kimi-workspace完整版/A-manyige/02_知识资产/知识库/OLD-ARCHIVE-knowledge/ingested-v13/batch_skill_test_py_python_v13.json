@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/batch_skill_test.py",
+  "filename": "batch_skill_test.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "206a4fb8d836bf67",
+  "content_length": 2558,
+  "ingested_at": "2026-03-31T17:27:46.209950",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nbatch_skill_test.py - 批量Skill测试\n一次执行所有测试，减少调用次数\n\"\"\"\n\nimport subprocess\nimport sys\nfrom pathlib import Path\n\ndef run_all_tests():\n    \"\"\"批量运行所有核心Skill测试\"\"\"\n    skills_dir = Path(\"/root/.openclaw/workspace/skills\")\n    \n    skills = [\n        (\"checkpoint-manager\", \"test_checkpoint_manager.py\"),\n        (\"blackboard-manager\", \"test_blackboard_manager.py\"),\n        (\"worker-orchestrator\", \"test_worker_orchestrator.py\"),\n        (\"blue-army-auditor\", \"test_blue_army_audito",
+  "limitations_applied": []
+}

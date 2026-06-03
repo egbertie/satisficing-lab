@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/diary/errors/evidence/ERR-20260320-001-verification.md",
+  "filename": "ERR-20260320-001-verification.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "3b815fb73cdc04b3",
+  "content_length": 1058,
+  "ingested_at": "2026-03-31T17:27:46.585949",
+  "content_preview": "# S5验证证据: ERR-20260320-001\n\n## 验证信息\n- **错误ID**: ERR-20260320-001\n- **验证时间**: 2026-03-20 09:30\n- **验证方法**: 自动化检查 + 人工审核\n- **验证人**: Egbertie (用户)\n- **验证结果**: ✅ PASSED\n\n## 验证测试用例\n\n### 测试1: 强制完整汇报模板检查\n**测试步骤**:\n1. 检查是否创建了强制完整汇报模板\n2. 验证模板包含「已完成/进行中/阻塞/风险/未完成」五部分\n\n**预期结果**: 模板存在且结构正确\n**实际结果**: ✅ 模板存在，`docs/required_reporting_template.md`创建成功\n**测试状态**: PASSED\n\n### 测试2: 自动化检查脚本检查\n**测试步骤**:\n1. 运行`scripts/check_management_rules.py`\n2. 验证脚本能检测隐瞒行为\n\n**预期结果**: 脚本正常运行，能识别不完整汇报\n**实际结果**: ✅ 脚本运行正常，测试用例通过\n**测试状态",
+  "limitations_applied": []
+}

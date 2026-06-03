@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/blue_army_audit_upgrade.sh",
+  "filename": "blue_army_audit_upgrade.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "94678718cb60d4d1",
+  "content_length": 2102,
+  "ingested_at": "2026-03-31T17:27:46.178437",
+  "content_preview": "#!/bin/bash\n# 蓝军审计升级机制脚本\n# 实现\"抽查→扩大→全量\"的强制升级\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nAUDIT_UPGRADE_LOG=\"$WORKSPACE/diary/blue-army-audit-upgrade.log\"\n\necho \"=== 蓝军审计升级机制 ===\" | tee -a \"$AUDIT_UPGRADE_LOG\"\necho \"执行时间: $(date)\" | tee -a \"$AUDIT_UPGRADE_LOG\"\necho \"\" | tee -a \"$AUDIT_UPGRADE_LOG\"\n\n# 参数检查\nif [ $# -lt 2 ]; then\n    echo \"用法: $0 <总数> <已抽查数> <发现问题数>\" | tee -a \"$AUDIT_UPGRADE_LOG\"\n    echo \"示例: $0 94 10 3\" | tee -a \"$AUDIT_UPGRADE_LOG\"\n    exit 1\nfi\n\nTOTAL=$1\nSAMPLED=$2\nISSUES=${3:-0}\n\nec",
+  "limitations_applied": []
+}

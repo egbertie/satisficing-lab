@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_7x24-autonomous-system/scripts/autonomous-runner.py",
+  "filename": "autonomous-runner.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "b8babd979dad2267",
+  "content_length": 2228,
+  "ingested_at": "2026-03-31T17:27:45.207118",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n7×24小时自主推进体系执行脚本\n版本: V3.0\n功能: 每日晨报生成、小时协调、夜间学习、周复盘\n\"\"\"\n\nimport os\nimport sys\nimport json\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\nLOG_FILE = \"/tmp/7x24-runner.log\"\nCONFIG_FILE = \"/tmp/7x24-config.json\"\n\ndef log(message):\n    \"\"\"记录日志\"\"\"\n    timestamp = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n    entry = f\"[{timestamp}] {message}\"\n    print(entry)\n    with open(LOG_FILE, \"a\") as f:\n        f.write(entry + \"\\n\")\n\ndef generate_morning_report(",
+  "limitations_applied": []
+}

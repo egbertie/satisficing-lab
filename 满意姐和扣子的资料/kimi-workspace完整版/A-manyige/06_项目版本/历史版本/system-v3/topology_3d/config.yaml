@@ -1,0 +1,66 @@
+# 3D Topology 知识拓扑 配置
+# 3D知识拓扑标注系统
+# 命名空间: NGT-TOPO-v1.0-FIN-260327
+
+version: "1.0"
+description: "1051文档的3D拓扑标签系统"
+
+topology_dimensions:
+  # 维度1: 知识类型（X轴）
+  x_knowledge_type:
+    - "methodology"      # 方法论
+    - "implementation"   # 实施方案
+    - "reference"        # 参考资料
+    - "template"         # 模板工具
+    
+  # 维度2: 专家关联（Y轴）
+  y_expert_association:
+    - "liu_honglei"      # 黎红雷
+    - "luo_han"          # 罗汉
+    - "xie_baojian"      # 谢宝剑
+    - "xu_sir"           # XU先生
+    - "fang_yifeng"      # 方翊沣
+    - "chen_guoxiang"    # 陈国祥
+    - "general"          # 通用
+    
+  # 维度3: 时效性（Z轴）
+  z_temporal:
+    - "archived"         # 已归档（历史）
+    - "active"           # 活跃使用中
+    - "evolving"         # 持续迭代中
+    - "deprecated"       # 已废弃
+
+tagging_rules:
+  # 文件命名规范
+  filename_convention: "[TYPE]-[EXPERT]-[TEMP]-[ID]-[DESC].md"
+  
+  # 元数据头模板
+  metadata_template: |
+    ---
+    knowledge_id: "KNL-XXX-XXX"
+    topo_x: "methodology|implementation|reference|template"
+    topo_y: "liu_honglei|luo_han|...|general"
+    topo_z: "archived|active|evolving|deprecated"
+    created: "YYYY-MM-DD"
+    updated: "YYYY-MM-DD"
+    version: "X.Y.Z"
+    ---
+  
+  # 交叉引用规则
+  cross_reference:
+    - "同类型文档自动关联"
+    - "同专家文档自动关联"
+    - "时序相邻文档自动关联"
+
+# 批量标注计划
+batch_tagging_plan:
+  total_documents: 1051
+  batch_size: 50
+  estimated_batches: 21
+  estimated_time: "3-5天"
+  
+  priority_order:
+    1: "docs/目录（核心文档）"
+    2: "skills/目录（技能文档）"
+    3: "memory/目录（记忆文档）"
+    4: "其他目录"

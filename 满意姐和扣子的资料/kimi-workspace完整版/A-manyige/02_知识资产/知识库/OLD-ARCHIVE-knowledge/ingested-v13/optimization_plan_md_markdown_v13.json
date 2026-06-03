@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_cron-optimization-manager/templates/optimization_plan.md",
+  "filename": "optimization_plan.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "ed7f8809e9ee98c1",
+  "content_length": 1583,
+  "ingested_at": "2026-03-31T17:27:45.156861",
+  "content_preview": "# 优化计划模板\n\n## 优化任务: {{task_name}}\n\n- **任务ID**: {{task_id}}\n- **创建时间**: {{created_at}}\n- **计划执行时间**: {{scheduled_at}}\n- **优先级**: {{priority}}\n\n---\n\n## 优化目标\n\n{{objective}}\n\n---\n\n## 涉及Cron\n\n{{#each crons}}\n### {{name}} ({{id}})\n- 当前层级: Tier {{tier}}\n- 当前频率: {{schedule}}\n- 当前状态: {{status}}\n- 预计变更: {{changes}}\n{{/each}}\n\n---\n\n## 优化措施\n\n{{#each measures}}\n### {{number}}. {{title}}\n- **类型**: {{type}}\n- **描述**: {{description}}\n- **影响范围**: {{impact}}\n- **回滚方案**: {{rollback}}\n{{/each}}\n\n---\n\n## 预期效果\n\n| 指标 |",
+  "limitations_applied": []
+}

@@ -1,0 +1,15 @@
+# 合伙人决策成熟度测评 - Cron配置
+# 添加到 /etc/crontab 或用户的 crontab 中
+
+# 每5分钟检查一次新记录
+*/5 * * * * cd /root/.openclaw/workspace && /usr/bin/python3 scripts/partner_assessment_v1.py >> /tmp/assessment_cron.log 2>&1
+
+# 每小时批量生成PDF报告（将Markdown转换为PDF）
+0 * * * * cd /root/.openclaw/workspace && /usr/bin/python3 scripts/pdf_report_generator.py >> /tmp/pdf_gen_cron.log 2>&1
+
+# 每日清理旧日志（保留最近7天）
+0 3 * * * find /tmp/assessment_cron.log -mtime +7 -delete
+0 3 * * * find /tmp/pdf_gen_cron.log -mtime +7 -delete
+
+# 可选：每30分钟发送飞书通知（需要配置消息推送）
+# */30 * * * * cd /root/.openclaw/workspace && /usr/bin/python3 scripts/send_feishu_notification.py >> /tmp/feishu_notify.log 2>&1

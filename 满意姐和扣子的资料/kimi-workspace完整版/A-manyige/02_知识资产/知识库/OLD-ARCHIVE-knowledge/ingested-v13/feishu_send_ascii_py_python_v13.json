@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_sendfiles-to-feishu/feishu_send_ascii.py",
+  "filename": "feishu_send_ascii.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "14797ecedc87b369",
+  "content_length": 15027,
+  "ingested_at": "2026-03-31T17:27:45.277900",
+  "content_preview": "#!/usr/bin/env python3\nimport sys\nimport io\nif sys.platform == 'win32':\n    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')\n\nimport os\nimport json\nimport uuid\nimport subprocess\nimport tempfile\nimport re\nimport math\nimport zipfile\nimport shutil\n\nPYTHON_DEPS = ['requests']\nSYSTEM_DEPS = ['ffmpeg', 'ffprobe']\n\ndef check_python_package(package):\n    try:\n        __import__(package)\n        return True\n    except ImportError:\n        return False\n\ndef install_pyth",
+  "limitations_applied": []
+}

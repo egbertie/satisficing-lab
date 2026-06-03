@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/REMEDIATION_ORCHESTRATION_V1.0.md",
+  "filename": "REMEDIATION_ORCHESTRATION_V1.0.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "e9b9986c40966685",
+  "content_length": 1550,
+  "ingested_at": "2026-03-31T17:27:44.515316",
+  "content_preview": "# 边整改边推进 - 子代理统筹调配方案 V1.0\n\n> **执行时间**: 2026-03-31 09:00\n> **策略**: 整改与新任务并行，子代理统筹调配\n> **模式**: 全部工作增加深度洞察\n\n---\n\n## 子代理通道分配（8通道并行）\n\n### 整改通道（4个）\n\n| 通道 | 子代理 | 任务 | 优先级 | 预计耗时 |\n|------|--------|------|--------|----------|\n| R1 | fix-cron-deploy | 修正15个Cron虚报任务，真实部署 | P0 | 1小时 |\n| R2 | fix-mechanism | 重建system-v2/blackboard目录 | P0 | 2小时 |\n| R3 | fix-tee-scripts | 真实创建6个TEE部署脚本 | P0 | 3小时 |\n| R4 | fix-skill-fraud | 修正58% Skill虚报状态 | P1 | 4小时 |\n\n### 新任务通道（2个）\n\n| 通道 | 子代理 | 任务 | 优先级 | 预计耗时 |\n|------|--",
+  "limitations_applied": []
+}

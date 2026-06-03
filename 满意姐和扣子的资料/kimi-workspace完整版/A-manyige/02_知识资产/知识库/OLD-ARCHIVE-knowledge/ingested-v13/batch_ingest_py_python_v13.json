@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/super-knowledge-ingest/scripts/batch_ingest.py",
+  "filename": "batch_ingest.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "cf90815fc90a6a3d",
+  "content_length": 7045,
+  "ingested_at": "2026-03-31T17:27:45.430773",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nSuper Knowledge Ingest - 批处理脚本\n执行7层标准化知识入库\n\n用法:\n    python3 batch_ingest.py --batch P0-C --files file1.md file2.md ...\n    python3 batch_ingest.py --scan-all\n    python3 batch_ingest.py --verify KNOW-P0-CORE-001\n\"\"\"\n\nimport argparse\nimport hashlib\nimport json\nimport os\nimport sys\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Optional\n\n# 配置\nWORKSPACE_ROOT = \"/root/.openclaw/workspace\"\nKNOWLEDGE_DIR = f\"{WORKSPACE_ROOT}/knowledge/P",
+  "limitations_applied": []
+}

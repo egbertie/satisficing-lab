@@ -1,0 +1,114 @@
+# 命名空间注册表
+# Global Namespace Registry
+# 命名空间: NGT-NSREG-v1.0-FIN-260327
+
+version: "1.0"
+description: "全量系统命名空间统一注册表"
+
+categories:
+  SKL: 
+    name: "Skill技能"
+    description: "可执行技能单元"
+    path_pattern: "skills/"
+    
+  NGT: 
+    name: "Negentropy治理"
+    description: "系统治理机制"
+    path_pattern: "system-v3/"
+    
+  WLU: 
+    name: "五路图腾"
+    description: "五路图腾体系"
+    path_pattern: "docs/totem/"
+    
+  MGT: 
+    name: "管理机制"
+    description: "管理机制文档"
+    path_pattern: "docs/management/"
+    
+  KNL: 
+    name: "知识资产"
+    description: "知识库文档"
+    path_pattern: "knowledge/"
+    
+  PERS: 
+    name: "专家数字替身"
+    description: "Persona DNA编码"
+    path_pattern: "knowledge/persona_factory/personas/"
+    
+  IMPL: 
+    name: "实施方案"
+    description: "具体实施记录"
+    path_pattern: "A-manyige/"
+    
+  ARCH: 
+    name: "架构文档"
+    description: "系统设计文档"
+    path_pattern: "docs/architecture/"
+
+types:
+  SKILL: "可执行技能"
+  ARCH: "架构设计"
+  IMPL: "实施记录"
+  CONFIG: "配置文件"
+  SCHEMA: "模式定义"
+  DNA: "数字替身编码"
+  INDEX: "索引文档"
+  REPORT: "报告文档"
+  
+status:
+  FIN: 
+    name: "已完成"
+    color: "green"
+    description: "5标准全达标"
+    
+  WIP: 
+    name: "进行中"
+    color: "yellow"
+    description: "正在开发"
+    
+  DEP: 
+    name: "已废弃"
+    color: "gray"
+    description: "不再维护"
+    
+  REV: 
+    name: "审核中"
+    color: "blue"
+    description: "Blue Army审计中"
+
+naming_convention:
+  format: "{CATEGORY}-{TYPE}-v{VERSION}-{STATUS}-{DATE}-{NAME}"
+  example: "SKL-SKILL-v1.0-FIN-260327-KnowledgeIngestion"
+  rules:
+    - "CATEGORY: 大写字母"
+    - "TYPE: 大写字母"
+    - "VERSION: v{major}.{minor}"
+    - "STATUS: 大写字母缩写"
+    - "DATE: YYMMDD格式"
+    - "NAME: PascalCase描述"
+
+date_format: "YYMMDD"
+version_format: "v{major}.{minor}"
+
+# 已注册命名空间
+registered_namespaces:
+  # Skills
+  - "SKL-SKILL-v1.0-FIN-260327-KnowledgeIngestion"
+  - "SKL-SKILL-v1.0-FIN-260327-PersonaFactory"
+  
+  # System
+  - "NGT-CONFIG-v1.0-FIN-260327-CheckpointEngine"
+  - "NGT-CONFIG-v1.0-FIN-260327-ResourceRadar"
+  - "NGT-CONFIG-v1.0-FIN-260327-GitOpsTruth"
+  - "NGT-CONFIG-v1.0-FIN-260327-MetaAgent"
+  - "NGT-CONFIG-v1.0-FIN-260327-Topology3D"
+  - "NGT-CONFIG-v1.0-FIN-260327-SecureDefense"
+  - "NGT-CONFIG-v1.0-FIN-260327-EvolutionEngine"
+  
+  # Personas
+  - "PERS-DNA-v1.0-FIN-260327-LiuHonglei"
+  
+  # Knowledge
+  - "KNL-INDEX-v1.0-FIN-260327-KnowledgeBase"
+  - "KNL-SCHEMA-v1.0-FIN-260327-TopologyAnnotations"

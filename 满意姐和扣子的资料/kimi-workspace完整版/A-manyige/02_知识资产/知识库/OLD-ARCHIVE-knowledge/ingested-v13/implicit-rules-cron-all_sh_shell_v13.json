@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/implicit-rules-cron-all.sh",
+  "filename": "implicit-rules-cron-all.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "396e791d56d85538",
+  "content_length": 2685,
+  "ingested_at": "2026-03-31T17:27:46.184400",
+  "content_preview": "#!/bin/bash\n# 隐性规则12个批量转化 - 整合Cron配置\n# 生成时间: 2026-03-20\n# 包含4个Skill的定时任务配置\n\n# ============================================\n# Skill 1: execution-protocol (执行流程协议)\n# 覆盖规则: 1-4 (安排确认/执行汇报/问题升级/先完成再完美/砍冗余/任务衔接)\n# ============================================\n\n# 任务链检查 - 每5分钟检查一次完成的任务\n*/5 * * * * cd /root/.openclaw/workspace && bash skills/execution-protocol/scripts/task-chain-checker.sh >> /tmp/exec-protocol-chain.log 2>&1\n\n# 协议监控 - 每15分钟检查执行状态\n*/15 * * * * cd /root/.openclaw/workspace && bash skills/",
+  "limitations_applied": []
+}

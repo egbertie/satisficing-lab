@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/memory/system-diagnosis-20260329-1543.md",
+  "filename": "system-diagnosis-20260329-1543.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "43ce9500a6371f2e",
+  "content_length": 1580,
+  "ingested_at": "2026-03-31T17:27:44.564186",
+  "content_preview": "# 系统诊断报告 - 对话延迟根因\n\n**诊断时间**: 2026-03-29 15:43  \n**触发原因**: 用户反馈对话速度变慢\n\n---\n\n## 诊断结果\n\n### 1. 内存压力 ⚠️ 严重\n\n| 指标 | 数值 | 状态 |\n|------|------|------|\n| 总内存 | 7.8 Gi | - |\n| **已用内存** | **7.0 Gi** | **89.7%** ⚠️ |\n| **可用内存** | **819 Mi** | **紧张** ⚠️ |\n| Swap使用 | 0B | 尚未触发 |\n\n**根因**: 内存使用率接近90%，系统可能开始频繁GC或准备使用Swap\n\n### 2. 进程分析\n\n| 进程 | PID | 内存占用 | 说明 |\n|------|-----|----------|------|\n| **openclaw-gateway** | 194249 | **2.3 GB (28.6%)** | **最大消费者** |\n| Chrome浏览器 | 多个 | ~200MB | 辅助进程 |\n| 其他系统进程 | - | ~4.5G",
+  "limitations_applied": []
+}

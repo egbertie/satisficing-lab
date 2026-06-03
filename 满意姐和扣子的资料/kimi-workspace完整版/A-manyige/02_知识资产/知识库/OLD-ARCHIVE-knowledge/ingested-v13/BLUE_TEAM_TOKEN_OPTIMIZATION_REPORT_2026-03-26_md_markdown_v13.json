@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/BLUE_TEAM_TOKEN_OPTIMIZATION_REPORT_2026-03-26.md",
+  "filename": "BLUE_TEAM_TOKEN_OPTIMIZATION_REPORT_2026-03-26.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "a62d5099afab2cb7",
+  "content_length": 6395,
+  "ingested_at": "2026-03-31T17:27:46.541231",
+  "content_preview": "# 🔴 蓝军Token优化专项报告\n## 定时任务与日常使用Token消耗深度审计\n## 报告时间：2026-03-26 12:40\n\n---\n\n## 执行摘要\n\n| 维度 | 当前状态 | 优化潜力 | 优先级 |\n|------|:--------:|:--------:|:------:|\n| **定时任务** | 3个Cron运行中 | 30-50%节省 | P1 |\n| **日常会话** | 高上下文消耗 | 60-70%节省 | P0 |\n| **隐藏消耗** | 重复/冗余 | 70%节省 | P1 |\n| **模型路由** | 配置完成未执行 | 40%节省 | P0 |\n| **检查点频率** | 10分钟/次 | 50%节省 | P1 |\n\n**核心发现**：\n- ✅ Cron已优化至接近极限（721 Token/日）\n- 🔴 日常会话是主要战场（30,000 Token/日，占97%）\n- 🔴 模型路由配置完成但未实际执行\n- 🟡 检查点10分钟频率可优化至30分钟\n\n**立即优化可节省**：**60-70%日常Token消耗**\n\n---\n\n## 一、定时任务T",
+  "limitations_applied": []
+}

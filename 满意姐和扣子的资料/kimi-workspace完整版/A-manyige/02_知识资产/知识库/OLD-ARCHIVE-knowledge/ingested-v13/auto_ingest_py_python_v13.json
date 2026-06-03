@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/universal-task-executor-v3/integration/auto_ingest.py",
+  "filename": "auto_ingest.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "2e36bcec33517f2d",
+  "content_length": 19032,
+  "ingested_at": "2026-03-31T17:27:45.369312",
+  "content_preview": "\"\"\"\nAuto Ingest - 自动入库触发器\n集成super-knowledge-ingest Skill到Universal Task Executor V3.0\n\n职责：\n1. 每处理完任务自动触发入库\n2. 支持配置化入库策略\n3. 入库失败自动重试\n4. 与TaskEngine生命周期集成\n\"\"\"\n\nimport os\nimport json\nimport logging\nimport asyncio\nfrom typing import Dict, List, Optional, Any, Callable, Set\nfrom dataclasses import dataclass, field\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom enum import Enum\n\ntry:\n    from ..core.structures import Task, TaskResult, TaskStatus\nexcept ImportError:\n    # 支持直接运行",
+  "limitations_applied": []
+}

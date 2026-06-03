@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/blue_army_auto_audit.sh",
+  "filename": "blue_army_auto_audit.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "482540b1d42d4085",
+  "content_length": 1150,
+  "ingested_at": "2026-03-31T17:27:46.198063",
+  "content_preview": "#!/bin/bash\n# 蓝军审计自动化Cron脚本\n# 每小时自动审计所有Skill\n\ncd /root/.openclaw/workspace\n\necho \"═══════════════════════════════════════════════════════════\"\necho \"              蓝军自动审计 - $(date '+%Y-%m-%d %H:%M:%S')\"\necho \"═══════════════════════════════════════════════════════════\"\necho \"\"\n\n# 需要审计的Skill列表\nSKILLS=(\n    \"checkpoint-manager\"\n    \"blackboard-manager\"\n    \"worker-orchestrator\"\n    \"blue-army-auditor\"\n    \"secret-manager\"\n    \"disaster-recovery-auditor\"\n)\n\nPASS_COUNT=0\nFAIL_COUNT=0\n\nfor skill in \"$",
+  "limitations_applied": []
+}

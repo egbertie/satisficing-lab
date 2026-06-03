@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/docs/script_insights/auto_checkpoint_insight.md",
+  "filename": "auto_checkpoint_insight.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "3177094f30fd28f1",
+  "content_length": 456,
+  "ingested_at": "2026-03-31T17:27:44.963369",
+  "content_preview": "# auto-checkpoint.sh 深度洞察 (L1-L5)\n\n## 基础信息\n- **脚本名称**: auto-checkpoint.sh\n- **功能**: 自动检查点创建\n- **整改时间**: 2026-03-31\n\n---\n\n## 深度洞察 (L1-L5)\n\n### L1: 表面现象\n自动检查点脚本实现了：\n- 定期创建系统检查点\n- 状态保存和备份\n- 支持任务恢复\n\n**问题**: \n- 检查点是否可恢复未验证\n- 缺乏检查点有效性测试\n\n### L2: 模式识别\n- 有检查点但不测试恢复\n- 有机制但无验证\n\n### L3: 根因分析\n- 假设检查点一定有效\n- 缺乏恢复测试流程\n\n### L4: 系统关联\n- 检查点是灾备基础\n- 但有效性未知\n\n### L5: 未来指导\n- 核心原则: \"每个检查点必须经过恢复测试\"\n- 定期执行恢复演练\n\n---\n\n## 8步验证状态\n- 配置 ✅ | 语法 ✅ | 权限 ✅\n- 恢复测试: 待定期执行\n\n---\n\n*系统脚本整改完成*\n",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_ffmpeg-batch-processor/scripts/video_processor.sh",
+  "filename": "video_processor.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "66d7dd861c88b49b",
+  "content_length": 6472,
+  "ingested_at": "2026-03-31T17:27:45.261765",
+  "content_preview": "#!/bin/bash\n# FFmpeg Video Processor - Main Script\n# 视频处理主控脚本\n\nset -e\n\nSCRIPT_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nOPERATION=\"${1:-help}\"\nINPUT=\"${2:-}\"\n\nshow_help() {\n    cat << EOF\nFFmpeg Video Processor\n\nUsage: $0 [operation] [input] [options]\n\nOperations:\n  cut [input] --start TIME --end TIME    Cut video segment\n  convert [input] [format]               Convert format\n  compress [input] [--quality N]         Compress video\n  resize [input] [WIDTHxHEIGHT]          Resize video\n",
+  "limitations_applied": []
+}

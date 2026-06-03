@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PROJECT_CHARTER</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; padding: 40px; max-width: 800px; margin: 0 auto; }
+        h1 { color: #1f2329; border-bottom: 2px solid #3370ff; padding-bottom: 10px; }
+        h2 { color: #1f2329; margin-top: 30px; }
+        h3 { color: #3370ff; }
+        code { background: #f5f6f7; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+        pre { background: #f5f6f7; padding: 16px; border-radius: 6px; overflow-x: auto; }
+        blockquote { border-left: 4px solid #3370ff; margin: 0; padding-left: 16px; color: #646a73; }
+        table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+        th, td { border: 1px solid #dee0e3; padding: 8px 12px; text-align: left; }
+        th { background: #f5f6f7; font-weight: 600; }
+        ul, ol { padding-left: 24px; }
+    </style>
+</head>
+<body>
+<h1 id="v10">满意解研究所 · 项目章程 V1.0</h1>
+<p><strong>文档编号</strong>: CHARTER-2026-001<br />
+<strong>生效日期</strong>: 2026-03-10<br />
+<strong>最后更新</strong>: 2026-03-10<br />
+<strong>版本</strong>: V1.0<br />
+<strong>审批</strong>: Egbertie (创始人)</p>
+<hr />
+<h2 id="1">1. 项目愿景</h2>
+<h3 id="11">1.1 愿景陈述</h3>
+<blockquote>
+<p><strong>打造满意解研究所，成为中国领先的硬科技创业合伙人匹配决策系统提供商</strong></p>
+</blockquote>
+<p>我们致力于通过AI驱动的决策科学，帮助硬科技创业者找到最适合的投资人和合伙人，显著提高创业成功率，降低错配风险。</p>
+<h3 id="12">1.2 使命宣言</h3>
+<ul>
+<li><strong>短期</strong>: 在2026年Q1完成产品MVP验证，服务首批10个硬科技创业项目</li>
+<li><strong>中期</strong>: 在2026年实现首年80万收入，建立行业口碑</li>
+<li><strong>长期</strong>: 在3年内成为中国硬科技创业服务领域的知名品牌</li>
+</ul>
+<h3 id="13">1.3 核心价值观</h3>
+<table>
+<thead>
+<tr>
+<th>价值观</th>
+<th>解释</th>
+<th>行为准则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>数据驱动</strong></td>
+<td>一切决策基于数据</td>
+<td>收集、分析、验证，拒绝拍脑袋</td>
+</tr>
+<tr>
+<td><strong>专业深度</strong></td>
+<td>硬科技领域专精</td>
+<td>深入理解技术和市场</td>
+</tr>
+<tr>
+<td><strong>客户成功</strong></td>
+<td>客户成功即我们成功</td>
+<td>结果导向，长期陪伴</td>
+</tr>
+<tr>
+<td><strong>敏捷迭代</strong></td>
+<td>快速试错，快速学习</td>
+<td>每周复盘，持续优化</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2">2. 项目范围</h2>
+<h3 id="21">2.1 业务范围</h3>
+<p><strong>核心业务</strong>: 硬科技创业合伙人匹配决策教练</p>
+<h4 id="_1">服务内容</h4>
+<ol>
+<li><strong>投资人匹配评估</strong></li>
+<li>投资人画像分析</li>
+<li>匹配度算法评分</li>
+<li>
+<p>尽职调查辅助</p>
+</li>
+<li>
+<p><strong>合伙人匹配评估</strong></p>
+</li>
+<li>联合创始人适配性分析</li>
+<li>核心团队组建建议</li>
+<li>
+<p>股权架构设计咨询</p>
+</li>
+<li>
+<p><strong>决策支持系统</strong></p>
+</li>
+<li>多维度决策模型</li>
+<li>风险评估与预警</li>
+<li>决策执行跟踪</li>
+</ol>
+<h3 id="22">2.2 技术范围</h3>
+<p><strong>核心产品</strong>: 硬科技合伙人匹配决策系统 (TechPartner AI)</p>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>功能</th>
+<th>技术栈</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据采集</td>
+<td>市场/投资人/项目数据</td>
+<td>Python + Jina AI</td>
+</tr>
+<tr>
+<td>匹配引擎</td>
+<td>算法模型/评分系统</td>
+<td>Python + ML</td>
+</tr>
+<tr>
+<td>对话系统</td>
+<td>客户交互/咨询</td>
+<td>Kimi API + OpenClaw</td>
+</tr>
+<tr>
+<td>知识库</td>
+<td>案例库/方法论</td>
+<td>Notion + Markdown</td>
+</tr>
+<tr>
+<td>报告生成</td>
+<td>决策报告/匹配建议</td>
+<td>Python + 模板</td>
+</tr>
+</tbody>
+</table>
+<h3 id="23">2.3 目标客户</h3>
+<p><strong>主要客户群体</strong>:
+- 硬科技领域天使轮-A轮创业公司
+- 有融资需求的科研院所成果转化项目
+- 寻求联合创始人的连续创业者</p>
+<p><strong>目标市场</strong>: 
+- 地理: 初期聚焦中国（北京/上海/深圳/杭州）
+- 领域: 人工智能、半导体、新材料、生物医药</p>
+<h3 id="24">2.4 项目边界</h3>
+<p><strong>包含</strong>:
+- 合伙人匹配决策服务
+- 投资人对接辅助
+- 决策报告生成
+- 方法论输出</p>
+<p><strong>不包含</strong>:
+- 直接融资撮合（仅提供匹配建议）
+- 法律/财务尽职调查（推荐专业机构）
+- 投后管理服务</p>
+<hr />
+<h2 id="3">3. 干系人</h2>
+<h3 id="31">3.1 核心团队</h3>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>姓名/ID</th>
+<th>职责</th>
+<th>投入比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>创始人/指挥官</strong></td>
+<td>Egbertie</td>
+<td>战略决策、资源协调、客户关系</td>
+<td>全职</td>
+</tr>
+<tr>
+<td><strong>主控AI</strong></td>
+<td>Kimi Claw</td>
+<td>系统运营、任务执行、知识管理</td>
+<td>7×24</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-ai-33">3.2 AI组织团队 (33人)</h3>
+<p><strong>运营组 (4人)</strong>
+| 角色 | ID | 核心职责 |
+|------|-----|----------|
+| 首席运营官 | ANNOUNCE | 整体运营、项目统筹 |
+| PMO | 满意妞 | 项目管理、进度跟踪 |
+| PEO | CONTENT | 流程优化、效能提升 |
+| EEO | - | 员工体验、文化建设 |</p>
+<p><strong>业务组 (14人)</strong>
+| 角色 | ID | 核心职责 |
+|------|-----|----------|
+| 业务架构师 | 业务架构师 | 商业模式设计 |
+| 市场研究专家 | 市场研究专家 | 行业研究 |
+| 数据分析师 | 数据分析师 | 数据分析 |
+| 决策支持专家 | 决策支持专家 | 决策模型 |
+| 风控专员 | 风控专员 | 风险评估 |
+| 客户成功经理 | 客户成功经理 | 客户服务 |
+| 内容策略师 | 内容策略师 | 内容营销 |
+| 品牌策略师 | 品牌策略师 | 品牌建设 |
+| 产品策略师 | 产品策略师 | 产品规划 |
+| 技术顾问 | 技术顾问 | 技术评估 |
+| 财务分析师 | 财务分析师 | 财务分析 |
+| 法务合规官 | 法务合规官 | 合规审查 |
+| 公关传播专员 | 公关传播专员 | 媒体关系 |
+| 行业研究员 | 行业研究员 | 深度研究 |</p>
+<p><strong>支持组 (15人)</strong></p>
+<p><strong>内容创作组 (4人)</strong>
+- 内容策划师、文案撰写员、视觉设计师、视频制作师</p>
+<p><strong>技术开发组 (3人)</strong>
+- 算法工程师、后端开发工程师、测试工程师</p>
+<p><strong>研究支持组 (4人)</strong>
+- 行业研究员×2、竞品分析师、知识管理师</p>
+<p><strong>专家顾问组 (4人)</strong>
+- 投资顾问、技术顾问×2、管理顾问</p>
+<h3 id="33">3.3 外部干系人</h3>
+<table>
+<thead>
+<tr>
+<th>干系人</th>
+<th>关系</th>
+<th>关注点</th>
+<th>沟通频率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>硬科技创业者</td>
+<td>客户</td>
+<td>匹配质量、决策效果</td>
+<td>按需</td>
+</tr>
+<tr>
+<td>投资人</td>
+<td>合作伙伴</td>
+<td>项目质量、匹配效率</td>
+<td>月度</td>
+</tr>
+<tr>
+<td>行业专家</td>
+<td>顾问</td>
+<td>专业背书、资源对接</td>
+<td>季度</td>
+</tr>
+<tr>
+<td>服务提供商</td>
+<td>供应商</td>
+<td>协作效率、服务质量</td>
+<td>按需</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4">4. 里程碑与时间表</h2>
+<h3 id="41">4.1 关键里程碑</h3>
+<pre><code>2026年3月关键里程碑:
+
+03-10 (今天) ────────────────────────────────────────────┐
+    │ 完成重要遗漏6项补救                                  │
+    │ 发布项目章程V1.0                                     │
+    ▼                                                      │
+03-15 ───────────────────────────────────────────────────│
+    │ 官宣文案V1.0定稿                                     │
+    │ 品牌视觉素材完成                                     │
+    │ 官网/落地页上线                                      │
+    ▼                                                      │
+03-20 ───────────────────────────────────────────────────│
+    │ 内测版本发布                                         │
+    │ 首批3个试点客户签约                                  │
+    ▼                                                      │
+03-25 ████████████████████████████████████████████████████│
+    🎯 正式发布/官宣                                       │
+    │ 媒体发布                                             │
+    │ 产品演示                                             │
+    ▼                                                      │
+03-31 ───────────────────────────────────────────────────┘
+    │ 首月运营数据复盘
+    │ 客户反馈收集
+    │ 产品迭代计划
+</code></pre>
+<h3 id="42">4.2 详细里程碑表</h3>
+<table>
+<thead>
+<tr>
+<th>里程碑</th>
+<th>目标日期</th>
+<th>关键成果</th>
+<th>负责人</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M1: 基础架构完成</strong></td>
+<td>2026-03-12</td>
+<td>灾备系统、API配置、自动化部署</td>
+<td>Kimi Claw</td>
+<td>🟡 进行中</td>
+</tr>
+<tr>
+<td><strong>M2: 内容准备完成</strong></td>
+<td>2026-03-15</td>
+<td>官宣文案、品牌素材、官网上线</td>
+<td>CONTENT</td>
+<td>⚪ 待启动</td>
+</tr>
+<tr>
+<td><strong>M3: 产品MVP就绪</strong></td>
+<td>2026-03-20</td>
+<td>决策系统可用、首批客户签约</td>
+<td>满意妞</td>
+<td>⚪ 待启动</td>
+</tr>
+<tr>
+<td><strong>M4: 正式发布</strong></td>
+<td>2026-03-25</td>
+<td>官宣发布、媒体曝光、产品演示</td>
+<td>ANNOUNCE</td>
+<td>⚪ 待启动</td>
+</tr>
+<tr>
+<td><strong>M5: 首月运营</strong></td>
+<td>2026-03-31</td>
+<td>运营数据、客户反馈、迭代计划</td>
+<td>Egbertie</td>
+<td>⚪ 待启动</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43">4.3 倒计时追踪</h3>
+<p><strong>距离3月25日官宣还有: 15天</strong></p>
+<hr />
+<h2 id="5">5. 成功标准</h2>
+<h3 id="51-2026">5.1 首年财务目标 (2026年度)</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>目标值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>总收入</strong></td>
+<td><strong>80万元</strong></td>
+<td>服务收入 + 咨询收入</td>
+</tr>
+<tr>
+<td>服务收入</td>
+<td>50万元</td>
+<td>合伙人匹配服务</td>
+</tr>
+<tr>
+<td>咨询收入</td>
+<td>20万元</td>
+<td>决策咨询/培训</td>
+</tr>
+<tr>
+<td>其他收入</td>
+<td>10万元</td>
+<td>内容/课程/数据产品</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52">5.2 业务运营指标</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>Q1目标</th>
+<th>H1目标</th>
+<th>全年目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>服务客户数</td>
+<td>10家</td>
+<td>30家</td>
+<td>80家</td>
+</tr>
+<tr>
+<td>客户满意度</td>
+<td>≥90%</td>
+<td>≥92%</td>
+<td>≥95%</td>
+</tr>
+<tr>
+<td>匹配成功率</td>
+<td>≥70%</td>
+<td>≥75%</td>
+<td>≥80%</td>
+</tr>
+<tr>
+<td>客户续约率</td>
+<td>-</td>
+<td>≥60%</td>
+<td>≥70%</td>
+</tr>
+<tr>
+<td>NPS评分</td>
+<td>≥40</td>
+<td>≥50</td>
+<td>≥60</td>
+</tr>
+</tbody>
+</table>
+<h3 id="53">5.3 产品技术指标</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>目标值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>系统可用性</td>
+<td>≥99.5%</td>
+<td>全年uptime</td>
+</tr>
+<tr>
+<td>API响应时间</td>
+<td>≤2秒</td>
+<td>平均响应</td>
+</tr>
+<tr>
+<td>报告生成时间</td>
+<td>≤30秒</td>
+<td>标准报告</td>
+</tr>
+<tr>
+<td>数据准确率</td>
+<td>≥95%</td>
+<td>数据源验证</td>
+</tr>
+</tbody>
+</table>
+<h3 id="54">5.4 团队发展指标</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>目标值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI团队成员</td>
+<td>33人</td>
+<td>当前已配置</td>
+</tr>
+<tr>
+<td>决策知识库</td>
+<td>≥500篇</td>
+<td>方法论/案例</td>
+</tr>
+<tr>
+<td>自动化率</td>
+<td>≥80%</td>
+<td>流程自动化</td>
+</tr>
+<tr>
+<td>月度迭代</td>
+<td>≥4次</td>
+<td>持续改进</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6">6. 风险管理</h2>
+<h3 id="61">6.1 关键风险</h3>
+<table>
+<thead>
+<tr>
+<th>风险ID</th>
+<th>风险描述</th>
+<th>可能性</th>
+<th>影响度</th>
+<th>应对策略</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R01</td>
+<td>产品市场契合度不足</td>
+<td>中</td>
+<td>高</td>
+<td>MVP快速验证、客户反馈闭环</td>
+</tr>
+<tr>
+<td>R02</td>
+<td>竞争对手抢先</td>
+<td>中</td>
+<td>中</td>
+<td>速度优先、差异化定位</td>
+</tr>
+<tr>
+<td>R03</td>
+<td>技术实现困难</td>
+<td>低</td>
+<td>高</td>
+<td>分阶段交付、专家支持</td>
+</tr>
+<tr>
+<td>R04</td>
+<td>客户获取成本高</td>
+<td>中</td>
+<td>中</td>
+<td>内容营销、口碑传播</td>
+</tr>
+<tr>
+<td>R05</td>
+<td>关键人员依赖</td>
+<td>中</td>
+<td>高</td>
+<td>知识沉淀、流程标准化</td>
+</tr>
+</tbody>
+</table>
+<h3 id="62">6.2 风险预警机制</h3>
+<ul>
+<li><strong>每周风险评估</strong>: 周一站会识别新风险</li>
+<li><strong>月度风险复盘</strong>: 更新风险登记册</li>
+<li><strong>里程碑风险审查</strong>: 关键节点专项评估</li>
+</ul>
+<hr />
+<h2 id="7">7. 沟通与汇报</h2>
+<h3 id="71">7.1 定期报告</h3>
+<table>
+<thead>
+<tr>
+<th>报告类型</th>
+<th>频率</th>
+<th>受众</th>
+<th>主要内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>每日晨报</td>
+<td>每日09:00</td>
+<td>Egbertie</td>
+<td>昨日完成/今日计划/风险预警</td>
+</tr>
+<tr>
+<td>每日站会</td>
+<td>每日09:30</td>
+<td>核心团队</td>
+<td>进度同步/阻塞问题</td>
+</tr>
+<tr>
+<td>周报</td>
+<td>每周一</td>
+<td>Egbertie</td>
+<td>周进展/下周计划/风险</td>
+</tr>
+<tr>
+<td>月报</td>
+<td>每月末</td>
+<td>Egbertie</td>
+<td>月度复盘/下月重点</td>
+</tr>
+<tr>
+<td>里程碑报告</td>
+<td>里程碑达成</td>
+<td>Egbertie</td>
+<td>阶段成果/经验总结</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72">7.2 决策机制</h3>
+<table>
+<thead>
+<tr>
+<th>决策类型</th>
+<th>决策人</th>
+<th>决策时限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>战略决策</td>
+<td>Egbertie</td>
+<td>24小时内</td>
+</tr>
+<tr>
+<td>运营决策</td>
+<td>ANNOUNCE</td>
+<td>4小时内</td>
+</tr>
+<tr>
+<td>技术决策</td>
+<td>Kimi Claw</td>
+<td>2小时内</td>
+</tr>
+<tr>
+<td>日常决策</td>
+<td>各角色Owner</td>
+<td>即时</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8">8. 附录</h2>
+<h3 id="81">8.1 相关文档</h3>
+<ul>
+<li><a href="./MANAGEMENT_RULES.md">MANAGEMENT_RULES.md</a> - 组织管理规则</li>
+<li><a href="./DISASTER_RECOVERY_PLAN_V1.0.md">DISASTER_RECOVERY_PLAN_V1.0.md</a> - 灾备计划</li>
+<li><a href="./API_INVENTORY.md">API_INVENTORY.md</a> - API清单</li>
+<li><a href="./TASK_MASTER.md">TASK_MASTER.md</a> - 任务管理系统</li>
+</ul>
+<h3 id="82">8.2 变更历史</h3>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>日期</th>
+<th>变更内容</th>
+<th>变更人</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V1.0</td>
+<td>2026-03-10</td>
+<td>初始版本发布</td>
+<td>Kimi Claw</td>
+</tr>
+</tbody>
+</table>
+<h3 id="83">8.3 审批签字</h3>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>签字</th>
+<th>日期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>创始人</td>
+<td>Egbertie</td>
+<td>2026-03-10</td>
+</tr>
+<tr>
+<td>主控AI</td>
+<td>Kimi Claw</td>
+<td>2026-03-10</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>文档结束</strong></p>
+<blockquote>
+<p>满意解研究所 · 项目章程 V1.0
+让每一次匹配，都成为满意解</p>
+</blockquote>
+</body>
+</html>
+<!-- 知识内化记录 -->
+<!-- 内化时间: 2026-03-31 | 状态: 已内化 -->

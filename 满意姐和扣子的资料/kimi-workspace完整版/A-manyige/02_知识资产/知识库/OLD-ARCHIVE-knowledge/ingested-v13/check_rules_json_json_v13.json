@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/file-integrity/config/check_rules.json",
+  "filename": "check_rules.json",
+  "file_type": "json",
+  "extension": ".json",
+  "file_hash": "777cac5dfe735c54",
+  "content_length": 702,
+  "ingested_at": "2026-03-31T17:27:45.399021",
+  "content_preview": "{\n  \"checks\": {\n    \"exists\": {\n      \"enabled\": true,\n      \"critical\": true,\n      \"description\": \"检查文件是否存在\"\n    },\n    \"size\": {\n      \"enabled\": true,\n      \"min_bytes\": 1,\n      \"critical\": true,\n      \"description\": \"检查文件大小是否大于指定字节数\"\n    },\n    \"readable\": {\n      \"enabled\": true,\n      \"lines\": 100,\n      \"critical\": true,\n      \"description\": \"检查文件内容是否可读，无编码错误\"\n    },\n    \"structure\": {\n      \"enabled\": true,\n      \"required_headers\": [\n        \"^## \",\n        \"^### \"\n      ],\n      \"cri",
+  "limitations_applied": []
+}

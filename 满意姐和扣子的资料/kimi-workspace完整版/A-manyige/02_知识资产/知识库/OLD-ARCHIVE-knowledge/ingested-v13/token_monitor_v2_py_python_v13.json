@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/token_monitor_v2.py",
+  "filename": "token_monitor_v2.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "644e8b9bf607650e",
+  "content_length": 4885,
+  "ingested_at": "2026-03-31T17:27:46.216356",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nToken监控机制 V2 - 修正版\n增加偏差检测，不盲目接受数据\n\"\"\"\n\nimport json\nfrom datetime import datetime\nfrom pathlib import Path\n\nclass TokenMonitorV2:\n    \"\"\"Token监控V2 - 带偏差检测\"\"\"\n    \n    def __init__(self):\n        self.data_file = Path(\"/root/.openclaw/workspace/memory/token-weekly-monitor-current.json\")\n        self.data = self._load_data()\n    \n    def _load_data(self):\n        if self.data_file.exists():\n            return json.loads(self.data_file.read_text())\n        return None\n    ",
+  "limitations_applied": []
+}

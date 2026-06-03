@@ -1,0 +1,50 @@
+{
+  "name": "conversation-researcher",
+  "version": "2.0",
+  "level": 5,
+  "description": "多源深度研究专家 - 7-S标准合规",
+  
+  "search": {
+    "min_sources": 3,
+    "max_sources": 10,
+    "freshness": "py",
+    "include_content": true,
+    "timeout_ms": 30000,
+    "queries_per_topic": 3
+  },
+  
+  "validation": {
+    "min_cross_validation": 3,
+    "consensus_threshold": 0.6,
+    "authority_weights": {
+      "academic": 1.0,
+      "official": 0.9,
+      "major_media": 0.8,
+      "industry": 0.75,
+      "blog": 0.5,
+      "unknown": 0.3
+    }
+  },
+  
+  "output": {
+    "dir": "output",
+    "formats": ["markdown", "json"],
+    "files": [
+      "report.md",
+      "summary.md",
+      "sources.json",
+      "validation.md",
+      "limitations.md"
+    ]
+  },
+  
+  "standards": {
+    "S1": {"name": "输入", "description": "研究主题/问题/关键词", "required": true},
+    "S2": {"name": "处理", "description": "多源搜索→信息整合→深度分析", "required": true},
+    "S3": {"name": "输出", "description": "研究报告（摘要→发现→引用→建议）", "required": true},
+    "S4": {"name": "触发", "description": "手动触发", "required": true},
+    "S5": {"name": "准确性", "description": "引用准确性检查", "required": true},
+    "S6": {"name": "局限性", "description": "时效性/来源偏见标注", "required": true},
+    "S7": {"name": "验证", "description": "对抗验证（多源交叉验证）", "required": true}
+  }
+}

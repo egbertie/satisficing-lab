@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/disaster-recovery-wecom/templates/memory_failure.md",
+  "filename": "memory_failure.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "872d72bbcd085148",
+  "content_length": 408,
+  "ingested_at": "2026-03-31T17:27:45.018775",
+  "content_preview": "<font color=\"#FF0000\">**[P0 - 紧急]**</font>\n\n**🧠 记忆系统异常**\n\n**异常时间:** {{TIMESTAMP}}\n**异常类型:** {{ERROR_TYPE}}\n**涉及文件:** {{AFFECTED_FILE}}\n\n---\n\n**异常详情:**\n\n```\n{{ERROR_DETAILS}}\n```\n\n**⚠️ 数据风险:**\n- MEMORY.md 状态: {{MEMORY_STATUS}}\n- 今日日志: {{TODAY_LOG_STATUS}}\n- 任务看板: {{TASK_BOARD_STATUS}}\n\n**紧急恢复:**\n1. 立即停止所有写入操作\n2. 从 Git 恢复 MEMORY.md\n3. 验证文件完整性\n4. 重新生成损坏的日志\n\n---\n\n@所有人\n\n<font color=\"gray\">{{TIMESTAMP}}</font>\n",
+  "limitations_applied": []
+}

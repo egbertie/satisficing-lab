@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/cron-tasks/info-firewall-check.py",
+  "filename": "info-firewall-check.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e21aaa4d61416a80",
+  "content_length": 8312,
+  "ingested_at": "2026-03-31T17:27:46.220773",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\n信息防火墙检查脚本 (Information Firewall Check)\n执行时间: 每日 12:00 和 18:00\n功能:\n1. 检查敏感信息泄露风险\n2. 验证MEMORY.md中无绝对机密\n3. 检查临时文件是否清理\n4. 生成安全检查报告\n\"\"\"\n\nimport os\nimport sys\nimport re\nimport logging\nfrom datetime import datetime\nfrom pathlib import Path\n\n# ============ 配置区域 ============\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nLOG_DIR = WORKSPACE / \"logs\" / \"cron-tasks\"\nMEMORY_DIR = WORKSPACE / \"memory\"\nTMP_DIR = Path(\"/tmp\")\n\n# 敏感信息模式（正则表达式）\nSENSITIVE_PATTERNS",
+  "limitations_applied": []
+}

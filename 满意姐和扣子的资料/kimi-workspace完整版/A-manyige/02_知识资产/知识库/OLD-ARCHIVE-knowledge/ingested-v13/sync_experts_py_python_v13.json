@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/sync_experts.py",
+  "filename": "sync_experts.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "73772329ba3963c4",
+  "content_length": 3773,
+  "ingested_at": "2026-03-31T17:27:46.211744",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n专家档案同步脚本\n从core/专家档案.yaml生成Working层专家文档\n\"\"\"\n\nimport yaml\nimport os\nfrom datetime import datetime\n\ndef sync_experts():\n    # 读取Core定义\n    with open('core/专家档案.yaml', 'r', encoding='utf-8') as f:\n        data = yaml.safe_load(f)\n    \n    experts = data.get('experts', [])\n    metadata = data.get('metadata', {})\n    progress = data.get('progress_tracking', {})\n    \n    # 确保输出目录存在\n    os.makedirs('working/experts', exist_ok=True)\n    \n    # 生成专家索引文档\n    index_content = f\"\"\"#",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify_18_357_completion.sh",
+  "filename": "verify_18_357_completion.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "129717eaf8ed0859",
+  "content_length": 642,
+  "ingested_at": "2026-03-31T17:27:46.218131",
+  "content_preview": "#!/bin/bash\n# 18+357 完成验证脚本\n\necho \"=== 18+357 执行完成验证 ===\"\necho \"时间: $(date)\"\necho \"\"\n\necho \"【18个CORE脚本】\"\nCORE_COUNT=$(ls /root/.openclaw/workspace/CORE/*.sh 2>/dev/null | wc -l)\necho \"已完成: $CORE_COUNT 个脚本\"\necho \"\"\n\necho \"【357个技能验证】\"\nSKILL_COUNT=$(find /root/.openclaw/workspace/skills/ -name \"verified\" -type f 2>/dev/null | wc -l)\necho \"已完成: $SKILL_COUNT 个技能验证\"\necho \"\"\n\necho \"【总体进度】\"\nif [ $CORE_COUNT -ge 18 ] && [ $SKILL_COUNT -ge 357 ]; then\n    echo \"✅ 18+357 全部完成\"\n    echo \"状态: COMPLETED\"\n    ",
+  "limitations_applied": []
+}

@@ -1,0 +1,71 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/tiered-output/tests/test_s5_s7.py",
+  "filename": "test_s5_s7.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 16648,
+  "checksum": "b87816b1fa673a55",
+  "ingested_at": "2026-03-31T17:30:32.433815",
+  "line_count": 491,
+  "title": "test_s5_s7",
+  "description": "分级输出系统 - 完整测试套件\nTiered Output System - Complete Test Suite\n\n覆盖S5-S7标准的测试：\n- S5: 分级准确性验证\n- S6: 局限标注验证  \n- S7: 对抗测试",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: TestResult"
+    },
+    {
+      "level": 2,
+      "title": "Class: TierAccuracyValidator"
+    },
+    {
+      "level": 2,
+      "title": "Class: LimitationTester"
+    },
+    {
+      "level": 2,
+      "title": "Class: AdversarialTester"
+    }
+  ],
+  "entities": [
+    {
+      "name": "TestResult",
+      "type": "class"
+    },
+    {
+      "name": "TierAccuracyValidator",
+      "type": "class"
+    },
+    {
+      "name": "LimitationTester",
+      "type": "class"
+    },
+    {
+      "name": "AdversarialTester",
+      "type": "class"
+    },
+    {
+      "name": "run_all_tests",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "测试L1必须包含的元素",
+    "L1内容不应超过50 tokens",
+    "L2内容应在100-500范围内",
+    "这只是检查逻辑，不是实际输出",
+    "生成L1响应并检查是否应添加局限提示",
+    "在P0优先级下，L1应该有局限提示",
+    "注意：当前实现可能尚未添加此功能",
+    "定义何时应添加局限提示",
+    "模糊请求（避免使用指令关键词如\"分析\"）",
+    "模糊请求（无指令关键词）应根据优先级返回L2（P2默认）",
+    "用户要求L1但内容明显需要L3",
+    "检查是否检测到冲突（内容复杂但要求简短）",
+    "需要详细分析但Token预算极低（不使用包含指令关键词的请求）",
+    "应该强制L1（因为Token<30%且无用户指令覆盖）"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

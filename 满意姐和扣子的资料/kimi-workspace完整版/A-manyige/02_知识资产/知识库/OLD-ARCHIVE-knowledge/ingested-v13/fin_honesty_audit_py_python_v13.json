@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/fin_honesty_audit.py",
+  "filename": "fin_honesty_audit.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "14d3dd5795e7a3f8",
+  "content_length": 4127,
+  "ingested_at": "2026-03-31T17:27:46.153685",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nFIN状态诚实审计脚本\n每日检查声称FIN的系统是否真实有代码\n\"\"\"\n\nimport json\nimport os\nimport sys\nfrom pathlib import Path\nfrom datetime import datetime\n\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nSKILLS_DIR = WORKSPACE / \"skills\"\nREPORT_DIR = WORKSPACE / \"diary\" / \"honesty-audit\"\n\ndef audit_fin_honesty():\n    \"\"\"审计FIN状态诚实性\"\"\"\n    issues = []\n    total_checked = 0\n    \n    for skill_dir in SKILLS_DIR.iterdir():\n        if not skill_dir.is_dir():\n            continue\n        \n        skill_md =",
+  "limitations_applied": []
+}

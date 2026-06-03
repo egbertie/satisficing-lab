@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/hourly_briefing.sh",
+  "filename": "hourly_briefing.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "1818d312169b019a",
+  "content_length": 786,
+  "ingested_at": "2026-03-31T17:27:46.192658",
+  "content_preview": "#!/bin/bash\n# 每小时执行简报脚本 - responses版本\n# 发送执行进度给Egbertie，减少对话Token消耗\n\ncd /root/.openclaw/workspace\n\n# 生成简报\nHOUR=$(date +%H)\nDATE=$(date +%Y-%m-%d)\nTIMESTAMP=$(date +%Y%m%d-%H%M%S)\n\nBRIEFING_FILE=\"responses/briefings/briefing-${TIMESTAMP}.md\"\n\ncat > \"$BRIEFING_FILE\" << EOF\n# 执行简报 - ${DATE} ${HOUR}:00\n\n**生成时间**: $(date '+%Y-%m-%d %H:%M:%S')\n\n## 当前执行项\n$(cat diary/execution/EXECUTION_LOG.md 2>/dev/null | head -40)\n\n## 今日完成统计\n- Skill完成: $(ls skills/*/ 2>/dev/null | grep -c \"SKILL.md\" 2>/dev/null || ec",
+  "limitations_applied": []
+}

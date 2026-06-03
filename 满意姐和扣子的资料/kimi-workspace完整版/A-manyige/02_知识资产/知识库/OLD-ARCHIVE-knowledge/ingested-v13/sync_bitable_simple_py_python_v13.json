@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/sync_bitable_simple.py",
+  "filename": "sync_bitable_simple.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "9f84a5ddc57b0c3e",
+  "content_length": 2495,
+  "ingested_at": "2026-03-31T17:27:46.185797",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n飞书多维表格同步 - 适配现有字段\n\"\"\"\n\nimport json\nimport requests\nimport os\n\nAPP_ID = \"cli_a927c5dfa4381cc6\"\nAPP_SECRET = \"8950yzh6jj17nQkKBjvGIdRocdrslhjI\"\nBASE_ID = \"YVHyblEsDakryasCJpxcrh6xnTb\"\nTABLE_ID = \"tblkrnQJZPbHU5KE\"\nFIELD_ID = \"fldtN7nFBk\"  # \"文本\"字段\n\ndef get_token():\n    url = \"https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal\"\n    response = requests.post(url, json={\n        \"app_id\": APP_ID,\n        \"app_secret\": APP_SECRET\n    }, timeout=30)\n    retu",
+  "limitations_applied": []
+}

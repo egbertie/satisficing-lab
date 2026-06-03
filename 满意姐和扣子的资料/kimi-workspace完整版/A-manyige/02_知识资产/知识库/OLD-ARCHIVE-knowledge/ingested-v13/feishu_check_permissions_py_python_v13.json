@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/feishu_check_permissions.py",
+  "filename": "feishu_check_permissions.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "50787d82af1d98c7",
+  "content_length": 2041,
+  "ingested_at": "2026-03-31T17:27:46.140844",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n验证飞书应用当前权限列表\n\"\"\"\n\nimport json\nimport requests\n\nAPP_ID = \"cli_a927c5dfa4381cc6\"\nAPP_SECRET = \"8950yzh6jj17nQkKBjvGIdRocdrslhjI\"\n\ndef get_tenant_token():\n    url = \"https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal\"\n    resp = requests.post(url, json={\n        \"app_id\": APP_ID,\n        \"app_secret\": APP_SECRET\n    })\n    return resp.json()[\"tenant_access_token\"]\n\ndef check_permissions():\n    \"\"\"检查应用权限列表\"\"\"\n    token = get_tenant_token()\n    \n    url =",
+  "limitations_applied": []
+}

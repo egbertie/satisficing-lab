@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/knowledge-ingest/ingested/SKILL.1048.md",
+  "filename": "SKILL.1048.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "adf3c0508a61a36d",
+  "content_length": 878,
+  "ingested_at": "2026-03-31T17:27:45.998683",
+  "content_preview": "# status-dashboard Skill V5标准版本\n\n## S1: 全局考虑\n\n### 输入\n- 系统状态数据源\n- 监控指标配置\n- 刷新频率\n\n### 覆盖维度\n| 维度 | 考虑内容 |\n|------|----------|\n| **人** | 运维人员、项目经理 |\n| **事** | 状态采集、可视化、告警 |\n| **物** | 指标数据、仪表盘、报告 |\n| **环境** | 系统负载、网络状态 |\n| **外部集成** | 各类服务API |\n| **边界情况** | 数据源失效、大量指标、刷新冲突 |\n\n---\n\n## S2: 系统考虑\n\n### 处理流程\n```\n数据采集 → 指标计算 → 状态聚合 → 可视化渲染 → 告警判断 → 报告生成\n```\n\n### 故障处理\n- **数据源失效**: 标记离线，使用缓存\n- **采集超时**: 重试并记录\n- **告警风暴**: 合并相似告警\n\n---\n\n## S3: 输出规范\n\n### 仪表盘组件\n| 组件 | 说明 |\n|------|------|\n| 健康状态灯 | 系统整体健康度 |\n| 趋势图表",
+  "limitations_applied": []
+}

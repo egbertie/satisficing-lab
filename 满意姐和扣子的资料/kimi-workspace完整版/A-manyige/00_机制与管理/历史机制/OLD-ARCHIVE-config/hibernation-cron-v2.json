@@ -1,0 +1,61 @@
+{
+  "hibernation_mode_v2": {
+    "description": "休眠模式V2.0配置 - Token余量15-30%时激活",
+    "trigger_conditions": {
+      "token_remaining_pct": "15-30",
+      "manual_trigger": "/hibernate",
+      "auto_switch": true
+    },
+    "retained_tasks": [
+      {
+        "name": "token-circuit-breaker",
+        "schedule": "0 */6 * * *",
+        "description": "Token熔断监控，每6小时",
+        "token_estimate": 500,
+        "priority": "P0"
+      },
+      {
+        "name": "evening-totem",
+        "schedule": "0 18 * * *",
+        "description": "黄昏图腾归位",
+        "token_estimate": 1500,
+        "priority": "P0"
+      },
+      {
+        "name": "state-snapshot",
+        "schedule": "0 */2 * * *",
+        "description": "状态快照保存，每2小时",
+        "token_estimate": 200,
+        "priority": "P0"
+      },
+      {
+        "name": "heartbeat",
+        "schedule": "*/30 * * * *",
+        "description": "心跳检查，每30分钟",
+        "token_estimate": 100,
+        "priority": "P0",
+        "silent": true
+      }
+    ],
+    "daily_token_estimate": 10700,
+    "paused_tasks": [
+      "morning-totem",
+      "waste-tracker",
+      "blue-team-audit",
+      "info-intelligence",
+      "external-learning",
+      "dynamic-authority",
+      "disaster-recovery-daily"
+    ],
+    "wake_up": {
+      "response_time": "<1 minute",
+      "commands": ["/wake", "任意消息"],
+      "recovery_steps": [
+        "加载休眠前状态",
+        "显示期间错过的事件",
+        "询问恢复策略",
+        "恢复非核心任务"
+      ]
+    }
+  }
+}

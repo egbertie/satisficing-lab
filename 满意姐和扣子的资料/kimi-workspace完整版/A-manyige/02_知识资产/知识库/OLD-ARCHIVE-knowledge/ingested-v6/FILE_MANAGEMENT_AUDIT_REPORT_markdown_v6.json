@@ -1,0 +1,225 @@
+{
+  "source_path": "/root/.openclaw/workspace/archive/docs/2026-03/FILE_MANAGEMENT_AUDIT_REPORT.md",
+  "filename": "FILE_MANAGEMENT_AUDIT_REPORT.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 14025,
+  "checksum": "4a348a7c3dddbfae",
+  "ingested_at": "2026-03-31T17:30:17.033246",
+  "line_count": 542,
+  "title": "文件管理漏洞诊断报告",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "文件管理漏洞诊断报告"
+    },
+    {
+      "level": 2,
+      "title": "执行摘要"
+    },
+    {
+      "level": 3,
+      "title": "关键发现统计"
+    },
+    {
+      "level": 2,
+      "title": "一、结构层面漏洞"
+    },
+    {
+      "level": 3,
+      "title": "🔴 严重 - V001: 文件夹命名不一致（双轨制混乱）"
+    },
+    {
+      "level": 4,
+      "title": "具体表现"
+    },
+    {
+      "level": 1,
+      "title": "A满意哥专属文件夹内存在两种命名体系："
+    },
+    {
+      "level": 4,
+      "title": "影响范围"
+    },
+    {
+      "level": 4,
+      "title": "根本原因"
+    },
+    {
+      "level": 4,
+      "title": "风险等级"
+    },
+    {
+      "level": 3,
+      "title": "🟠 中等 - V002: 空文件夹堆积"
+    },
+    {
+      "level": 4,
+      "title": "具体表现"
+    },
+    {
+      "level": 4,
+      "title": "根本原因"
+    },
+    {
+      "level": 3,
+      "title": "🟠 中等 - V003: 层级过深且重复"
+    },
+    {
+      "level": 4,
+      "title": "具体表现"
+    },
+    {
+      "level": 4,
+      "title": "影响"
+    },
+    {
+      "level": 3,
+      "title": "🟡 低 - V004: 核心文件夹命名混乱"
+    },
+    {
+      "level": 4,
+      "title": "具体表现"
+    },
+    {
+      "level": 2,
+      "title": "二、流程层面漏洞"
+    },
+    {
+      "level": 3,
+      "title": "🔴 严重 - V005: Downloads目录成为\"文件黑洞\""
+    },
+    {
+      "level": 4,
+      "title": "具体表现"
+    },
+    {
+      "level": 4,
+      "title": "关键问题"
+    },
+    {
+      "level": 4,
+      "title": "根本原因"
+    },
+    {
+      "level": 3,
+      "title": "🔴 严重 - V006: 解读摘要文件位置分散"
+    },
+    {
+      "level": 4,
+      "title": "具体表现"
+    },
+    {
+      "level": 1,
+      "title": "解读摘要文件实际位置:"
+    },
+    {
+      "level": 1,
+      "title": "执行摘要文件分散在:"
+    },
+    {
+      "level": 4,
+      "title": "问题分析"
+    },
+    {
+      "level": 4,
+      "title": "根本原因"
+    },
+    {
+      "level": 3,
+      "title": "🟠 中等 - V007: 文件\"三重存储\"问题"
+    },
+    {
+      "level": 4,
+      "title": "具体表现"
+    },
+    {
+      "level": 4,
+      "title": "影响"
+    },
+    {
+      "level": 3,
+      "title": "🟠 中等 - V008: 暂存区与正式区未区分"
+    },
+    {
+      "level": 4,
+      "title": "具体表现"
+    },
+    {
+      "level": 3,
+      "title": "🟡 低 - V009: 备份与归档策略不一致"
+    },
+    {
+      "level": 4,
+      "title": "具体表现"
+    },
+    {
+      "level": 2,
+      "title": "三、规范层面漏洞"
+    },
+    {
+      "level": 3,
+      "title": "🔴 严重 - V010: 文件命名规范执行不力"
+    },
+    {
+      "level": 4,
+      "title": "具体表现"
+    },
+    {
+      "level": 4,
+      "title": "根本原因"
+    },
+    {
+      "level": 3,
+      "title": "🟠 中等 - V011: 版本控制不规范"
+    },
+    {
+      "level": 4,
+      "title": "具体表现"
+    },
+    {
+      "level": 3,
+      "title": "🟠 中等 - V012: 文件扩展名混乱"
+    },
+    {
+      "level": 4,
+      "title": "具体表现"
+    },
+    {
+      "level": 1,
+      "title": "Markdown文件的不同扩展名"
+    },
+    {
+      "level": 2,
+      "title": "四、技术层面漏洞"
+    },
+    {
+      "level": 3,
+      "title": "🟠 中等 - V013: 缺乏自动化检查机制"
+    },
+    {
+      "level": 4,
+      "title": "具体表现"
+    },
+    {
+      "level": 3,
+      "title": "🟠 中等 - V014: 缺乏文件索引系统"
+    },
+    {
+      "level": 4,
+      "title": "具体表现"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "12个中低风险问题",
+    "downloads目录成为\"黑洞\"",
+    "downloads目录的典型问题命名",
+    "解读摘要文件位置不统一"
+  ],
+  "limitations_applied": [
+    "Sections limited to 50"
+  ],
+  "content_truncated": false
+}

@@ -1,0 +1,155 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/super-knowledge-ingest/super_knowledge_ingest_v6.1.py",
+  "filename": "super_knowledge_ingest_v6.1.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 46484,
+  "checksum": "a3b9f707e1d7ffae",
+  "ingested_at": "2026-03-31T17:30:32.746471",
+  "line_count": 1204,
+  "title": "super_knowledge_ingest_v6.1",
+  "description": "super-knowledge-ingest V6.2 - 5标准完整实现版（蓝军验收版）\n核心目标：完整实现5标准（S1-S5），支持9种文件类型，19项测试\n\n5标准化实现：\n- S1 全局考虑: 9种文件类型全覆盖，统一元数据格式\n- S2 系统闭环: 类型识别→内容提取→元数据生成→索引更新\n- S3 可观测输出: 详细的入库报告、统计信息、局限标注\n- S4 自动化集成: --test参",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: FileMetadata"
+    },
+    {
+      "level": 2,
+      "title": "Class: IngestResult"
+    },
+    {
+      "level": 2,
+      "title": "Class: FileTypeHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: MarkdownHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: PythonHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: JSONHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: ShellHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: TextHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: YAMLHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: HTMLHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: SVGHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: LogHandler"
+    },
+    {
+      "level": 2,
+      "title": "Class: MultiTypeIngestor"
+    },
+    {
+      "level": 2,
+      "title": "Class: TestClass"
+    }
+  ],
+  "entities": [
+    {
+      "name": "FileMetadata",
+      "type": "class"
+    },
+    {
+      "name": "IngestResult",
+      "type": "class"
+    },
+    {
+      "name": "FileTypeHandler",
+      "type": "class"
+    },
+    {
+      "name": "MarkdownHandler",
+      "type": "class"
+    },
+    {
+      "name": "PythonHandler",
+      "type": "class"
+    },
+    {
+      "name": "JSONHandler",
+      "type": "class"
+    },
+    {
+      "name": "ShellHandler",
+      "type": "class"
+    },
+    {
+      "name": "TextHandler",
+      "type": "class"
+    },
+    {
+      "name": "YAMLHandler",
+      "type": "class"
+    },
+    {
+      "name": "HTMLHandler",
+      "type": "class"
+    },
+    {
+      "name": "SVGHandler",
+      "type": "class"
+    },
+    {
+      "name": "LogHandler",
+      "type": "class"
+    },
+    {
+      "name": "MultiTypeIngestor",
+      "type": "class"
+    },
+    {
+      "name": "TestClass",
+      "type": "class"
+    },
+    {
+      "name": "test_func",
+      "type": "function"
+    },
+    {
+      "name": "another_func",
+      "type": "function"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "============ 配置 ============",
+    "============ 数据类 ============",
+    "============ 文件类型处理器 ============",
+    "提取标题（第一个H1）",
+    "提取关键点（限制数量）",
+    "提取顶层键（限制数量）",
+    "提取shebang后的注释作为描述",
+    "提取viewBox等元数据",
+    "提取前5行和后5行作为摘要",
+    "============ 主入库器 ============"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

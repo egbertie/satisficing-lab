@@ -1,0 +1,137 @@
+{
+  "source_path": "/root/.openclaw/workspace/.pre-restore-backup/docs/CRON-ANALYSIS-v1.0-FIN-260322-Time-Conflict.md",
+  "filename": "CRON-ANALYSIS-v1.0-FIN-260322-Time-Conflict.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 7460,
+  "checksum": "8afcacd0a47f1abf",
+  "ingested_at": "2026-03-31T17:30:16.292783",
+  "line_count": 235,
+  "title": "Cron时间冲突分析与资源综合利用方案",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "Cron时间冲突分析与资源综合利用方案"
+    },
+    {
+      "level": 2,
+      "title": "一、时间冲突识别"
+    },
+    {
+      "level": 3,
+      "title": "🔴 严重冲突（同一时间触发多个任务）"
+    },
+    {
+      "level": 3,
+      "title": "🟡 潜在冲突（时间间隔过短）"
+    },
+    {
+      "level": 2,
+      "title": "二、Token消耗综合评估"
+    },
+    {
+      "level": 3,
+      "title": "当前活跃任务Token预算（估算）"
+    },
+    {
+      "level": 3,
+      "title": "Token消耗分布图"
+    },
+    {
+      "level": 2,
+      "title": "三、问题根因分析"
+    },
+    {
+      "level": 3,
+      "title": "1. 错峰机制失效原因"
+    },
+    {
+      "level": 3,
+      "title": "2. 资源浪费点"
+    },
+    {
+      "level": 2,
+      "title": "四、资源综合利用方案"
+    },
+    {
+      "level": 3,
+      "title": "方案A: 时间错峰 + 任务合并"
+    },
+    {
+      "level": 4,
+      "title": "Step 1: 重新分配时间（消除冲突）"
+    },
+    {
+      "level": 4,
+      "title": "Step 2: 任务合并（减少重复）"
+    },
+    {
+      "level": 4,
+      "title": "Step 3: 频率优化"
+    },
+    {
+      "level": 3,
+      "title": "方案B: 智能触发（按需执行）"
+    },
+    {
+      "level": 4,
+      "title": "智能触发规则"
+    },
+    {
+      "level": 1,
+      "title": "不再定时触发，改为事件触发"
+    },
+    {
+      "level": 4,
+      "title": "实现方式"
+    },
+    {
+      "level": 3,
+      "title": "方案C: 批量执行（一次处理多任务）"
+    },
+    {
+      "level": 4,
+      "title": "早间批量任务 (08:30-09:00)"
+    },
+    {
+      "level": 1,
+      "title": "总计: ~32K (比分散执行节省15K)"
+    },
+    {
+      "level": 4,
+      "title": "夜间批量任务 (02:00-02:30)"
+    },
+    {
+      "level": 1,
+      "title": "总计: ~33K (比分散执行节省10K)"
+    },
+    {
+      "level": 2,
+      "title": "五、推荐方案：A+C混合"
+    },
+    {
+      "level": 3,
+      "title": "最终时间表"
+    },
+    {
+      "level": 3,
+      "title": "立即执行动作"
+    },
+    {
+      "level": 2,
+      "title": "六、预期效果"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "Git Hook触发",
+    "09:30(周一)",
+    "合并3: 灾备复刻 + 每日备份",
+    "合并1: 安全检查 + 站会准备",
+    "合并2: 知识图谱 + 蓝军审计",
+    "01:30-02:00"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/docs/2026-03/KIMI_CODE_COLLABORATION.md",
+  "filename": "KIMI_CODE_COLLABORATION.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "bcddee0a628872d3",
+  "content_length": 2484,
+  "ingested_at": "2026-03-31T17:27:46.621242",
+  "content_preview": "# Kimi Code 协同开发工作流\n\n## 概述\n**目标**: 最大化利用Kimi Code的代码生成能力，同时控制token消耗\n\n**核心原则**:\n- 我（Kimi）负责：架构、设计、审查、复杂逻辑\n- Kimi Code负责：代码生成、模板实现、批量任务\n\n---\n\n## Token优化策略\n\n### 1. 任务分解\n```\n大任务 → 拆分为小模块 → 分批提交\n\n示例:\n❌ \"写一个完整的RSS监控器\"\n✅ \"先写RSS监控器的配置文件加载模块\"\n✅ \"再写RSS解析核心函数\"\n✅ \"最后写主控制循环\"\n```\n\n### 2. 模板复用\n```\n标准模板 → 替换关键部分 → 快速生成\n\n所有Skill使用统一模板:\n- templates/skill_template.py (已创建)\n- Kimi Code只需替换占位符\n- 大幅减少生成token\n```\n\n### 3. 增量开发\n```\n已有代码 → 描述修改点 → Kimi Code实现\n\n示例:\n\"在现有RSS监控器基础上，添加邮件通知功能。\n需要在__init__中添加smtp配置，在检测到新文章时调用s",
+  "limitations_applied": []
+}

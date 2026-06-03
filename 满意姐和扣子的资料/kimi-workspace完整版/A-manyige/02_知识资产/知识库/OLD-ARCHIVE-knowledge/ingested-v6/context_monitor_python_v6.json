@@ -1,0 +1,56 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/error-handler/scripts/context_monitor.py",
+  "filename": "context_monitor.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 11889,
+  "checksum": "e97ef5ecc418581e",
+  "ingested_at": "2026-03-31T17:30:32.808873",
+  "line_count": 356,
+  "title": "context_monitor",
+  "description": "上下文大小监控脚本\n\n功能：\n- 监控当前对话上下文大小\n- 超过阈值自动提醒\n- 建议压缩时机\n\n阈值规则：\n- 黄色预警（30KB）：建议压缩\n- 红色预警（50KB）：强制压缩\n- 对话轮数 >100：建议新开会话",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: Colors"
+    }
+  ],
+  "entities": [
+    {
+      "name": "Colors",
+      "type": "class"
+    },
+    {
+      "name": "save_status",
+      "type": "function"
+    },
+    {
+      "name": "log_event",
+      "type": "function"
+    },
+    {
+      "name": "print_report",
+      "type": "function"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "============ 配置 ============",
+    "============ 颜色输出 ============",
+    "============ 核心功能 ============",
+    "尝试从环境变量获取信息",
+    "如果没有环境变量，使用启发式估算",
+    "基于历史日志估算（如果有）",
+    "检查是否有内存文件记录",
+    "估算最近的记忆文件大小",
+    "每个记忆文件约贡献上下文",
+    "检查 AGENTS.md 等上下文文件",
+    "只保留最近 100 条记录"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

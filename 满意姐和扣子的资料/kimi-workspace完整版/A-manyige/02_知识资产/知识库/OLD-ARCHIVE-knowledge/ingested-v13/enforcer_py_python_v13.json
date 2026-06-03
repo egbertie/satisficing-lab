@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/zero-idle-enforcer/scripts/enforcer.py",
+  "filename": "enforcer.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "09b7ec6fef35caaf",
+  "content_length": 1486,
+  "ingested_at": "2026-03-31T17:27:45.479453",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n零空置强制执行器 V4.0 - 精简2线模式\n符合 HEARTBEAT.md V3.0 配置\n\"\"\"\n\nimport sys\nimport os\nfrom datetime import datetime\n\ndef log(msg):\n    timestamp = datetime.now().strftime('%H:%M:%S')\n    print(f\"[{timestamp}] {msg}\")\n\ndef main():\n    log(\"=== 零空置强制执行检查 V4.0（精简2线）===\")\n    \n    # 精简2线配置（来自HEARTBEAT.md V3.0）\n    lines = [\n        {\n            \"name\": \"线1-学习研究\",\n            \"tasks\": [\"专家论文研读\", \"AI模型研究\", \"行业趋势分析\"],\n            \"token_limit\": \"10K/次\",\n            \"trigger\": \"空闲>2h + To",
+  "limitations_applied": []
+}

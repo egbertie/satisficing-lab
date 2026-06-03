@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/notion_sync_old/notion_sync_optimized.py",
+  "filename": "notion_sync_optimized.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "c31a911bdd9ae1f5",
+  "content_length": 24034,
+  "ingested_at": "2026-03-31T17:27:46.665884",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nNotion同步脚本 - 优化版 V4\n特性：\n- 断点续传（保存进度，随时恢复）\n- 智能重试（指数退避，自动恢复）\n- 连接池复用（提高稳定性）\n- 批量处理（每批10个文件）\n- 网络故障自动恢复\n\"\"\"\nimport os\nimport sys\nimport time\nimport json\nimport hashlib\nimport logging\nfrom pathlib import Path\nfrom datetime import datetime\nfrom typing import List, Dict, Optional, Tuple\nimport requests\nfrom requests.adapters import HTTPAdapter\nfrom urllib3.util.retry import Retry\n\n# 配置\nNOTION_TOKEN = os.getenv(\"NOTION_TOKEN\", \"ntn_45265857466alLJNZlDqXX7NS1cTzdO2KpDl7bdvE8K",
+  "limitations_applied": []
+}

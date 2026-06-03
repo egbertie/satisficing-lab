@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/expert-suite/test_expert.py",
+  "filename": "test_expert.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "9666ecd7ca23605c",
+  "content_length": 349,
+  "ingested_at": "2026-03-31T17:27:45.414901",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nexpert-suite测试\n\"\"\"\n\nimport unittest\nfrom pathlib import Path\n\n\nclass TestExpertSuite(unittest.TestCase):\n    \"\"\"专家套件测试\"\"\"\n    \n    def test_structure(self):\n        \"\"\"测试结构\"\"\"\n        skill_dir = Path(__file__).parent\n        self.assertTrue(skill_dir.exists())\n\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+  "limitations_applied": []
+}

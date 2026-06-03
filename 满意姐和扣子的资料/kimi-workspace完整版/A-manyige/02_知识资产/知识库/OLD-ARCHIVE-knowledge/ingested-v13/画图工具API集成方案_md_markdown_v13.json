@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/archive/画图工具API集成方案.md",
+  "filename": "画图工具API集成方案.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "20361fcb80ddc6b4",
+  "content_length": 2801,
+  "ingested_at": "2026-03-31T17:27:46.575065",
+  "content_preview": "# 画图工具API集成方案对比\n\n**目标**：AI完成画图规划，用户实时查看结果  \n**核心需求**：API开放 + 实时协作 + 可嵌入Notion\n\n---\n\n## 方案1：Excalidraw自托管（推荐⭐⭐⭐）\n\n### 实现方式\n```\n自托管Excalidraw服务器\n    ↓ API接口\nAI自动创建/更新图形\n    ↓ WebSocket实时同步\n用户浏览器实时查看\n    ↓ 嵌入Notion\niframe嵌入或图片同步\n```\n\n### 技术架构\n```\n[Excalidraw Server] ←→ [AI Agent] ←→ [Notion]\n       ↓                       ↓\n   实时协作                 自动嵌入\n       ↓                       ↓\n[用户浏览器]              [知识库展示]\n```\n\n### 优点\n- ✅ 完全开源免费\n- ✅ API完全开放\n- ✅ 数据自主掌控\n- ✅ 支持实时协作（WebSocket）\n- ✅ 可嵌入Notion（ifra",
+  "limitations_applied": []
+}

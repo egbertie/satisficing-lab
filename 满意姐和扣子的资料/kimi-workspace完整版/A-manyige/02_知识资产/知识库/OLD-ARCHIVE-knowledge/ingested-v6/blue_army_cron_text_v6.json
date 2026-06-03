@@ -1,0 +1,30 @@
+{
+  "source_path": "/root/.openclaw/workspace/config/blue_army_cron.txt",
+  "filename": "blue_army_cron.txt",
+  "extension": ".txt",
+  "file_type": "text",
+  "size_bytes": 915,
+  "checksum": "fdf8218b11747adc",
+  "ingested_at": "2026-03-31T17:30:48.136892",
+  "line_count": 17,
+  "title": "blue_army_cron",
+  "description": "# 蓝军审计机制Cron任务配置",
+  "sections": [],
+  "entities": [],
+  "key_points": [
+    "# 蓝军审计机制Cron任务配置",
+    "# 部署到系统crontab",
+    "# 每周一 09:00 执行每周审计",
+    "0 9 * * 1 /root/.openclaw/workspace/scripts/blue_army_weekly_audit.sh >> /root/.",
+    "# 每天 09:00 执行违规检测与惩罚",
+    "0 9 * * * /root/.openclaw/workspace/scripts/punishment_enforcer.sh >> /root/.ope",
+    "# 每月1日 09:00 执行月度深度审计",
+    "0 9 1 * * /root/.openclaw/workspace/scripts/blue_army_weekly_audit.sh --deep >> ",
+    "# 每30分钟保存系统状态（Checkpoint机制）",
+    "*/30 * * * * /root/.openclaw/workspace/scripts/auto-checkpoint.sh >> /root/.open",
+    "# 每天 02:00 执行备份",
+    "0 2 * * * /root/.openclaw/workspace/scripts/backup_to_external.py >> /root/.open"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/query_feishu_docs.py",
+  "filename": "query_feishu_docs.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "7fd953efb3f755d1",
+  "content_length": 2290,
+  "ingested_at": "2026-03-31T17:27:46.213294",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n查询飞书文档列表\n\"\"\"\n\nimport json\nimport requests\n\ndef get_token():\n    with open('/root/.openclaw/workspace/config/feishu_config.json', 'r') as f:\n        config = json.load(f)\n    \n    response = requests.post(\n        f\"{config['base_url']}/auth/v3/tenant_access_token/internal\",\n        json={\"app_id\": config['app_id'], \"app_secret\": config['app_secret']},\n        timeout=30\n    )\n    return response.json()['tenant_access_token']\n\ndef list_docs():\n    \"\"\"获取文档列表\"\"\"\n    token",
+  "limitations_applied": []
+}

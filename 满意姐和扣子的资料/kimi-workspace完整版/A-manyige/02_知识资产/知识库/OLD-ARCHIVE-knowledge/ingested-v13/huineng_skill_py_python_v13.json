@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/huineng-skill/huineng_skill.py",
+  "filename": "huineng_skill.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "a1c0fe581f46eaa0",
+  "content_length": 9494,
+  "ingested_at": "2026-03-31T17:27:45.409908",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nhuineng_skill.py\nHUINENG（六祖慧能）- 顿悟与行动转化器\n五路图腾之火 - 顿悟突破，行动转化，从知到行\n\"\"\"\n\nfrom dataclasses import dataclass, field\nfrom typing import Dict, List, Optional, Callable\nfrom enum import Enum\n\n\nclass ActionPriority(Enum):\n    \"\"\"行动优先级\"\"\"\n    CRITICAL = \"关键\"\n    HIGH = \"高\"\n    MEDIUM = \"中\"\n    LOW = \"低\"\n    DEFERRED = \"延后\"\n\n\nclass ActionStatus(Enum):\n    \"\"\"行动状态\"\"\"\n    PENDING = \"待执行\"\n    IN_PROGRESS = \"执行中\"\n    COMPLETED = \"已完成\"\n    BLOCKED = \"阻塞\"\n    ABORTED = \"已中止\"\n\n\n@datacla",
+  "limitations_applied": []
+}

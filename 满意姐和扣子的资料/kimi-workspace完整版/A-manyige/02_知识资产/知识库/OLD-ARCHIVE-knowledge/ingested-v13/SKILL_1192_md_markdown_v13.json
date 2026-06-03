@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/knowledge-ingest/ingested/SKILL.1192.md",
+  "filename": "SKILL.1192.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "15d4aadc7ff355dd",
+  "content_length": 1071,
+  "ingested_at": "2026-03-31T17:27:46.012024",
+  "content_preview": "# file-gateway Skill V5标准版本\n\n## S1: 全局考虑\n\n### 输入\n- 文件源路径(本地/远程URL)\n- 目标操作(读取/上传/转换)\n- 目标渠道(飞书/Notion/邮件等)\n\n### 覆盖维度\n| 维度 | 考虑内容 |\n|------|----------|\n| **人** | 内容创作者、运营人员 |\n| **事** | 多源文件接入、统一处理、多渠道分发 |\n| **物** | 本地文件、网络文件、云端文件 |\n| **环境** | 网络环境、存储空间、API配额 |\n| **外部集成** | 飞书、Notion、Telegram等 |\n| **边界情况** | 网络超时、文件过大、格式不支持 |\n\n---\n\n## S2: 系统考虑\n\n### 处理流程\n```\n接收请求 → 源识别 → 获取文件 → 格式处理 → 目标分发 → 结果反馈\n```\n\n### 故障处理\n- **网络超时**: 重试3次\n- **文件过大**: 压缩或分块\n- **格式不支持**: 转换或报错\n- **目标失败**: 记录并重试\n\n---\n\n## S3: 输出规范\n",
+  "limitations_applied": []
+}

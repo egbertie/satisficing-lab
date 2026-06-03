@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/task_disaster_recovery_wrapper.py",
+  "filename": "task_disaster_recovery_wrapper.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "87e59c125e31d0d3",
+  "content_length": 3233,
+  "ingested_at": "2026-03-31T17:27:46.196791",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n任务执行灾备包装器\n用途: 包装任何任务，提供灾备能力\n规则: 所有任务启动前问自己3个问题\n\"\"\"\n\nimport sys\nimport traceback\nfrom datetime import datetime\nfrom pathlib import Path\n\nclass TaskDisasterRecoveryWrapper:\n    \"\"\"任务灾备包装器\"\"\"\n    \n    def __init__(self, task_name, task_func):\n        self.task_name = task_name\n        self.task_func = task_func\n        self.log_file = Path(f\"/root/.openclaw/workspace/memory/task_logs/{task_name}.json\")\n        self.log_file.parent.mkdir(parents=True, exist_ok=True)\n      ",
+  "limitations_applied": []
+}

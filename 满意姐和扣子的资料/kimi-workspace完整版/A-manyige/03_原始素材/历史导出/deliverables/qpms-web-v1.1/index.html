@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QPMS - 全球首创合伙人匹配决策系统 | 满意解研究所</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Noto Sans SC', sans-serif;
+                background-color: #FAF7F2;
+                color: #1a1a1a;
+            }
+            h1, h2, h3, h4, .serif {
+                font-family: 'Noto Serif SC', serif;
+            }
+        }
+        @layer components {
+            .brand-primary { color: #E85D4E; }
+            .brand-secondary { color: #8B4513; }
+            .bg-brand-primary { background-color: #E85D4E; }
+            .bg-brand-secondary { background-color: #8B4513; }
+            .border-brand-primary { border-color: #E85D4E; }
+            .border-brand-secondary { border-color: #8B4513; }
+            
+            /* 量子粒子动画 */
+            .quantum-particle {
+                position: absolute;
+                width: 4px;
+                height: 4px;
+                background: radial-gradient(circle, #E85D4E 0%, transparent 70%);
+                border-radius: 50%;
+                animation: float 8s infinite ease-in-out;
+                opacity: 0.6;
+            }
+            @keyframes float {
+                0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+                33% { transform: translate(30px, -30px) scale(1.2); opacity: 0.8; }
+                66% { transform: translate(-20px, 20px) scale(0.8); opacity: 0.4; }
+            }
+            
+            /* 图腾hover效果 */
+            .totem-card {
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .totem-card:hover {
+                transform: scale(1.15) translateY(-8px);
+                box-shadow: 0 20px 40px rgba(232, 93, 78, 0.3);
+            }
+            .totem-card:hover .totem-spirit {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .totem-spirit {
+                opacity: 0;
+                transform: translateY(10px);
+                transition: all 0.3s ease;
+            }
+            
+            /* 连接线动画 */
+            .connection-line {
+                stroke-dasharray: 5, 5;
+                animation: dash 2s linear infinite;
+            }
+            @keyframes dash {
+                to { stroke-dashoffset: -20; }
+            }
+            
+            /* 步骤进度条 */
+            .step-active {
+                background: linear-gradient(135deg, #E85D4E 0%, #8B4513 100%);
+                transform: scale(1.1);
+            }
+            .step-completed {
+                background: #E85D4E;
+            }
+            
+            /* 脉冲效果 */
+            .pulse-ring {
+                animation: pulse-ring 2s infinite;
+            }
+            @keyframes pulse-ring {
+                0% { box-shadow: 0 0 0 0 rgba(232, 93, 78, 0.7); }
+                70% { box-shadow: 0 0 0 20px rgba(232, 93, 78, 0); }
+                100% { box-shadow: 0 0 0 0 rgba(232, 93, 78, 0); }
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen overflow-x-hidden">
+    <!-- 量子粒子背景 -->
+    <div id="quantum-bg" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- 导航栏 -->
+    <nav class="relative z-50 backdrop-blur-md bg-white/70 border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-brand-primary rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl serif">QP</span>
+                    </div>
+                    <span class="text-xl font-bold brand-primary serif">满意解研究所</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-stone-600 hover:text-brand-primary transition">六大维度</a>
+                    <a href="#totems" class="text-stone-600 hover:text-brand-primary transition">五路图腾</a>
+                    <a href="#assessment" class="text-stone-600 hover:text-brand-primary transition">评估流程</a>
+                    <a href="#about" class="text-stone-600 hover:text-brand-primary transition">关于</a>
+                </div>
+                <button class="bg-brand-primary text-white px-6 py-2 rounded-full font-medium hover:bg-red-600 transition shadow-lg hover:shadow-xl">
+                    开始评估
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative z-10 pt-20 pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <!-- 五创新标签 -->
+            <div class="flex flex-wrap justify-center gap-3 mb-8">
+                <span class="px-4 py-2 bg-gradient-to-r from-red-50 to-orange-50 border border-brand-primary/30 rounded-full text-sm font-medium brand-primary">
+                    QPMS 量子匹配
+                </span>
+                <span class="px-4 py-2 bg-gradient-to-r from-orange-50 to-amber-50 border border-brand-secondary/30 rounded-full text-sm font-medium brand-secondary">
+                    ETDS 涌现动态
+                </span>
+                <span class="px-4 py-2 bg-gradient-to-r from-amber-50 to-yellow-50 border border-yellow-600/30 rounded-full text-sm font-medium text-yellow-700">
+                    ECBM 具身认知
+                </span>
+                <span class="px-4 py-2 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-600/30 rounded-full text-sm font-medium text-green-700">
+                    NIMA 叙事身份
+                </span>
+                <span class="px-4 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border border-indigo-600/30 rounded-full text-sm font-medium text-indigo-700">
+                    REPA 儒商伦理
+                </span>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                <span class="block text-stone-800 serif">全球首创</span>
+                <span class="block brand-primary serif mt-2">合伙人匹配决策系统</span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-stone-600 max-w-3xl mx-auto mb-12 leading-relaxed">
+                基于<span class="brand-primary font-semibold">神经科学</span>·
+                <span class="brand-secondary font-semibold">复杂系统</span>·
+                <span class="brand-primary font-semibold">量子认知</span>的
+                六维深度评估体系
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <button onclick="startAssessment()" class="group bg-brand-primary text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-red-600 transition shadow-xl hover:shadow-2xl flex items-center gap-2 pulse-ring">
+                    <span>开始六维评估</span>
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </button>
+                <button onclick="scrollToDemo()" class="px-8 py-4 rounded-full text-lg font-semibold border-2 border-brand-secondary text-brand-secondary hover:bg-brand-secondary hover:text-white transition">
+                    查看演示
+                </button>
+            </div>
+
+            <!-- 统计数据 -->
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                <div class="text-center">
+                    <div class="text-3xl font-bold brand-primary serif">6</div>
+                    <div class="text-sm text-stone-500 mt-1">评估维度</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold brand-secondary serif">500+</div>
+                    <div class="text-sm text-stone-500 mt-1">决策案例</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold brand-primary serif">92%</div>
+                    <div class="text-sm text-stone-500 mt-1">匹配准确率</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold brand-secondary serif">22年</div>
+                    <div class="text-sm text-stone-500 mt-1">双系统经验</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 六图腾系统 -->
+    <section id="totems" class="relative z-10 py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-stone-800 mb-4 serif">五路图腾体系</h2>
+                <p class="text-lg text-stone-600 max-w-2xl mx-auto">
+                    源自中华五千年智慧与现代决策科学的融合，六个维度循环相生，构建完整决策生态
+                </p>
+            </div>
+
+            <!-- 六边形图腾排列 -->
+            <div class="relative max-w-4xl mx-auto">
+                <!-- SVG 连接线 -->
+                <svg class="absolute inset-0 w-full h-full" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#E85D4E;stop-opacity:0.6" />
+                            <stop offset="100%" style="stop-color:#8B4513;stop-opacity:0.6" />
+                        </linearGradient>
+                    </defs>
+                    <!-- 连接线 -->
+                    <path d="M 400 100 L 550 200" stroke="url(#lineGradient)" stroke-width="2" fill="none" class="connection-line"/>
+                    <path d="M 550 200 L 550 380" stroke="url(#lineGradient)" stroke-width="2" fill="none" class="connection-line"/>
+                    <path d="M 550 380 L 400 480" stroke="url(#lineGradient)" stroke-width="2" fill="none" class="connection-line"/>
+                    <path d="M 400 480 L 250 380" stroke="url(#lineGradient)" stroke-width="2" fill="none" class="connection-line"/>
+                    <path d="M 250 380 L 250 200" stroke="url(#lineGradient)" stroke-width="2" fill="none" class="connection-line"/>
+                    <path d="M 250 200 L 400 100" stroke="url(#lineGradient)" stroke-width="2" fill="none" class="connection-line"/>
+                </svg>
+
+                <!-- 图腾卡片 -->
+                <div class="relative grid grid-cols-2 md:grid-cols-3 gap-8 py-12">
+                    <!-- LIU - 土 -->
+                    <div class="totem-card bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl p-6 border border-amber-200 cursor-pointer relative overflow-hidden">
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+                                土
+                            </div>
+                            <h3 class="text-xl font-bold text-amber-800 serif">LIU</h3>
+                            <p class="text-sm text-amber-600 font-medium">刘禹锡</p>
+                            <p class="text-xs text-stone-500 mt-2">惟吾德馨</p>
+                        </div>
+                        <div class="totem-spirit absolute inset-x-0 bottom-0 bg-amber-800/95 p-4 text-white text-sm">
+                            <p class="font-semibold mb-1">核心精神：惟吾德馨</p>
+                            <p class="text-xs opacity-90">以德为本，坚守初心，在纷扰中保持内在定力</p>
+                        </div>
+                    </div>
+
+                    <!-- SIMON - 金 -->
+                    <div class="totem-card bg-gradient-to-br from-gray-50 to-slate-100 rounded-2xl p-6 border border-gray-200 cursor-pointer relative overflow-hidden">
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-gray-400 to-slate-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+                                金
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 serif">SIMON</h3>
+                            <p class="text-sm text-slate-600 font-medium">司马贺</p>
+                            <p class="text-xs text-stone-500 mt-2">满意解</p>
+                        </div>
+                        <div class="totem-spirit absolute inset-x-0 bottom-0 bg-slate-800/95 p-4 text-white text-sm">
+                            <p class="font-semibold mb-1">核心精神：满意解</p>
+                            <p class="text-xs opacity-90">有限理性下的最优决策，追求足够好而非完美</p>
+                        </div>
+                    </div>
+
+                    <!-- GUANYIN - 水 -->
+                    <div class="totem-card bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border border-blue-200 cursor-pointer relative overflow-hidden">
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+                                水
+                            </div>
+                            <h3 class="text-xl font-bold text-blue-800 serif">GUANYIN</h3>
+                            <p class="text-sm text-blue-600 font-medium">观自在</p>
+                            <p class="text-xs text-stone-500 mt-2">自在从容</p>
+                        </div>
+                        <div class="totem-spirit absolute inset-x-0 bottom-0 bg-blue-800/95 p-4 text-white text-sm">
+                            <p class="font-semibold mb-1">核心精神：自在从容</p>
+                            <p class="text-xs opacity-90">在变化中保持内心平静，以柔克刚的智慧</p>
+                        </div>
+                    </div>
+
+                    <!-- NEURO - 脑 -->
+                    <div class="totem-card bg-gradient-to-br from-purple-50 to-violet-50 rounded-2xl p-6 border border-purple-200 cursor-pointer relative overflow-hidden">
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-purple-400 to-violet-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+                                脑
+                            </div>
+                            <h3 class="text-xl font-bold text-purple-800 serif">NEURO</h3>
+                            <p class="text-sm text-purple-600 font-medium">方翊沣</p>
+                            <p class="text-xs text-stone-500 mt-2">感知觉醒</p>
+                        </div>
+                        <div class="totem-spirit absolute inset-x-0 bottom-0 bg-purple-800/95 p-4 text-white text-sm">
+                            <p class="font-semibold mb-1">核心精神：感知觉醒</p>
+                            <p class="text-xs opacity-90">神经科学训练，唤醒身体智慧与直觉力量</p>
+                        </div>
+                    </div>
+
+                    <!-- CONFUCIUS - 木 -->
+                    <div class="totem-card bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-200 cursor-pointer relative overflow-hidden">
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+                                木
+                            </div>
+                            <h3 class="text-xl font-bold text-green-800 serif">CONFUCIUS</h3>
+                            <p class="text-sm text-green-600 font-medium">孔子</p>
+                            <p class="text-xs text-stone-500 mt-2">仁者爱人</p>
+                        </div>
+                        <div class="totem-spirit absolute inset-x-0 bottom-0 bg-green-800/95 p-4 text-white text-sm">
+                            <p class="font-semibold mb-1">核心精神：仁者爱人</p>
+                            <p class="text-xs opacity-90">儒商伦理核心，以仁爱之心建立可持续合伙关系</p>
+                        </div>
+                    </div>
+
+                    <!-- HUINENG - 火 -->
+                    <div class="totem-card bg-gradient-to-br from-red-50 to-rose-50 rounded-2xl p-6 border border-red-200 cursor-pointer relative overflow-hidden">
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-red-400 to-rose-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+                                火
+                            </div>
+                            <h3 class="text-xl font-bold text-red-800 serif">HUINENG</h3>
+                            <p class="text-sm text-red-600 font-medium">六祖</p>
+                            <p class="text-xs text-stone-500 mt-2">顿悟知行</p>
+                        </div>
+                        <div class="totem-spirit absolute inset-x-0 bottom-0 bg-red-800/95 p-4 text-white text-sm">
+                            <p class="font-semibold mb-1">核心精神：顿悟知行</p>
+                            <p class="text-xs opacity-90">知行合一，在行动中觉悟，在觉悟中行动</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 五行相生说明 -->
+            <div class="mt-12 text-center">
+                <p class="text-stone-600 mb-4">五行相生循环</p>
+                <div class="flex flex-wrap justify-center items-center gap-2 text-sm">
+                    <span class="px-3 py-1 bg-amber-100 text-amber-800 rounded-full">土生金</span>
+                    <span class="text-stone-400">→</span>
+                    <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full">金生水</span>
+                    <span class="text-stone-400">→</span>
+                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">水生木</span>
+                    <span class="text-stone-400">→</span>
+                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full">木生火</span>
+                    <span class="text-stone-400">→</span>
+                    <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full">火生土</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 六维评估流程 -->
+    <section id="assessment" class="relative z-10 py-24 bg-gradient-to-b from-stone-50 to-stone-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-stone-800 mb-4 serif">六维深度评估流程</h2>
+                <p class="text-lg text-stone-600 max-w-2xl mx-auto">
+                    基于量子认知与神经科学的革命性评估体系，超越传统问卷的表面分析
+                </p>
+            </div>
+
+            <!-- 进度步骤 -->
+            <div class="flex justify-between items-center max-w-4xl mx-auto mb-16 relative">
+                <div class="absolute inset-x-0 top-1/2 h-1 bg-stone-200 -z-10"></div>
+                <div class="absolute inset-x-0 top-1/2 h-1 bg-gradient-to-r from-brand-primary to-brand-secondary w-full -z-10 transition-all duration-1000" id="progress-line"></div>
+                
+                <div class="step-item flex flex-col items-center cursor-pointer" onclick="showLayer(0)">
+                    <div class="w-12 h-12 rounded-full bg-brand-primary text-white flex items-center justify-center font-bold text-lg shadow-lg step-active transition-all">1</div>
+                    <span class="mt-2 text-sm font-medium text-stone-700">量子感知</span>
+                </div>
+                <div class="step-item flex flex-col items-center cursor-pointer" onclick="showLayer(1)">
+                    <div class="w-12 h-12 rounded-full bg-stone-200 text-stone-600 flex items-center justify-center font-bold text-lg shadow transition-all">2</div>
+                    <span class="mt-2 text-sm font-medium text-stone-500">涌现匹配</span>
+                </div>
+                <div class="step-item flex flex-col items-center cursor-pointer" onclick="showLayer(2)">
+                    <div class="w-12 h-12 rounded-full bg-stone-200 text-stone-600 flex items-center justify-center font-bold text-lg shadow transition-all">3</div>
+                    <span class="mt-2 text-sm font-medium text-stone-500">具身认知</span>
+                </div>
+                <div class="step-item flex flex-col items-center cursor-pointer" onclick="showLayer(3)">
+                    <div class="w-12 h-12 rounded-full bg-stone-200 text-stone-600 flex items-center justify-center font-bold text-lg shadow transition-all">4</div>
+                    <span class="mt-2 text-sm font-medium text-stone-500">叙事分析</span>
+                </div>
+                <div class="step-item flex flex-col items-center cursor-pointer" onclick="showLayer(4)">
+                    <div class="w-12 h-12 rounded-full bg-stone-200 text-stone-600 flex items-center justify-center font-bold text-lg shadow transition-all">5</div>
+                    <span class="mt-2 text-sm font-medium text-stone-500">多样性优化</span>
+                </div>
+                <div class="step-item flex flex-col items-center cursor-pointer" onclick="showLayer(5)">
+                    <div class="w-12 h-12 rounded-full bg-stone-200 text-stone-600 flex items-center justify-center font-bold text-lg shadow transition-all">6</div>
+                    <span class="mt-2 text-sm font-medium text-stone-500">伦理对齐</span>
+                </div>
+            </div>
+
+            <!-- 六层详情卡片 -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="layer-cards">
+                <!-- Layer 1 -->
+                <div class="layer-card bg-white rounded-2xl p-6 shadow-lg border-2 border-brand-primary transform transition-all hover:-translate-y-2" data-layer="0">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-brand-primary rounded-xl flex items-center justify-center text-white font-bold text-xl">1</div>
+                        <div>
+                            <h3 class="font-bold text-lg text-stone-800">量子感知引擎</h3>
+                            <p class="text-sm text-stone-500">Quantum Perception</p>
+                        </div>
+                    </div>
+                    <p class="text-stone-600 text-sm mb-4">
+                        抛弃传统Likert量表，使用量子叠加态评估。测量导致认知坍缩，捕捉真实的决策倾向。
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-red-50 text-red-700 text-xs rounded">波函数</span>
+                        <span class="px-2 py-1 bg-red-50 text-red-700 text-xs rounded">纠缠态</span>
+                        <span class="px-2 py-1 bg-red-50 text-red-700 text-xs rounded">概率幅</span>
+                    </div>
+                </div>
+
+                <!-- Layer 2 -->
+                <div class="layer-card bg-white rounded-2xl p-6 shadow-lg border border-stone-200 transform transition-all hover:-translate-y-2" data-layer="1">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-brand-secondary rounded-xl flex items-center justify-center text-white font-bold text-xl">2</div>
+                        <div>
+                            <h3 class="font-bold text-lg text-stone-800">涌现匹配算法</h3>
+                            <p class="text-sm text-stone-500">Emergent Matching</p>
+                        </div>
+                    </div>
+                    <p class="text-stone-600 text-sm mb-4">
+                        多智能体模拟预测团队心智的涌现结构，识别协作模式（同步/互补/冲突/创造）。
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-amber-50 text-amber-700 text-xs rounded">复杂系统</span>
+                        <span class="px-2 py-1 bg-amber-50 text-amber-700 text-xs rounded">吸引子</span>
+                        <span class="px-2 py-1 bg-amber-50 text-amber-700 text-xs rounded">创造性</span>
+                    </div>
+                </div>
+
+                <!-- Layer 3 -->
+                <div class="layer-card bg-white rounded-2xl p-6 shadow-lg border border-stone-200 transform transition-all hover:-translate-y-2" data-layer="2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">3</div>
+                        <div>
+                            <h3 class="font-bold text-lg text-stone-800">具身认知测评</h3>
+                            <p class="text-sm text-stone-500">Embodied Cognition</p>
+                        </div>
+                    </div>
+                    <p class="text-stone-600 text-sm mb-4">
+                        分析HRV心率变异性、语音共鸣、微表情，识别潜意识层面的共鸣或排斥信号。
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-purple-50 text-purple-700 text-xs rounded">HRV同步</span>
+                        <span class="px-2 py-1 bg-purple-50 text-purple-700 text-xs rounded">语音分析</span>
+                        <span class="px-2 py-1 bg-purple-50 text-purple-700 text-xs rounded">微表情</span>
+                    </div>
+                </div>
+
+                <!-- Layer 4 -->
+                <div class="layer-card bg-white rounded-2xl p-6 shadow-lg border border-stone-200 transform transition-all hover:-translate-y-2" data-layer="3">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">4</div>
+                        <div>
+                            <h3 class="font-bold text-lg text-stone-800">叙事身份分析</h3>
+                            <p class="text-sm text-stone-500">Narrative Identity</p>
+                        </div>
+                    </div>
+                    <p class="text-stone-600 text-sm mb-4">
+                        基于McAdams理论，理解"你正在成为谁"。分析生命故事主题、救赎序列、转折点。
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded">生命故事</span>
+                        <span class="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded">救赎序列</span>
+                        <span class="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded">意义建构</span>
+                    </div>
+                </div>
+
+                <!-- Layer 5 -->
+                <div class="layer-card bg-white rounded-2xl p-6 shadow-lg border border-stone-200 transform transition-all hover:-translate-y-2" data-layer="4">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">5</div>
+                        <div>
+                            <h3 class="font-bold text-lg text-stone-800">认知多样性优化</h3>
+                            <p class="text-sm text-stone-500">Cognitive Diversity</p>
+                        </div>
+                    </div>
+                    <p class="text-stone-600 text-sm mb-4">
+                        找到最优差异区——创造张力但不破裂。基于Page《The Difference》的集体智慧研究。
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-green-50 text-green-700 text-xs rounded">差异区</span>
+                        <span class="px-2 py-1 bg-green-50 text-green-700 text-xs rounded">冲突风险</span>
+                        <span class="px-2 py-1 bg-green-50 text-green-700 text-xs rounded">创新收益</span>
+                    </div>
+                </div>
+
+                <!-- Layer 6 -->
+                <div class="layer-card bg-white rounded-2xl p-6 shadow-lg border border-stone-200 transform transition-all hover:-translate-y-2" data-layer="5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">6</div>
+                        <div>
+                            <h3 class="font-bold text-lg text-stone-800">伦理价值对齐</h3>
+                            <p class="text-sm text-stone-500">Ethical Alignment</p>
+                        </div>
+                    </div>
+                    <p class="text-stone-600 text-sm mb-4">
+                        儒商伦理与Haidt道德基础理论融合。义利情境测试，价值观压力下的重排模式分析。
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-red-50 text-red-700 text-xs rounded">儒商伦理</span>
+                        <span class="px-2 py-1 bg-red-50 text-red-700 text-xs rounded">义利之辨</span>
+                        <span class="px-2 py-1 bg-red-50 text-red-700 text-xs rounded">道德基础</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 雷达图演示 -->
+    <section id="demo" class="relative z-10 py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-stone-800 mb-6 serif">六维雷达图分析</h2>
+                    <p class="text-lg text-stone-600 mb-8">
+                        每个维度0-100分，综合评估合伙人的匹配度。不是简单的平均分，而是分析六维之间的动态关系——某些维度的组合会产生1+1>2的涌现效应。
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-4 h-4 bg-brand-primary rounded-full"></div>
+                            <div class="flex-1">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-stone-700">技术创始人</span>
+                                    <span class="text-sm text-stone-500">张伟</span>
+                                </div>
+                                <div class="text-xs text-stone-500">强：量子感知、叙事分析 | 弱：伦理对齐</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-4 h-4 bg-brand-secondary rounded-full"></div>
+                            <div class="flex-1">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-stone-700">商业创始人</span>
+                                    <span class="text-sm text-stone-500">李娜</span>
+                                </div>
+                                <div class="text-xs text-stone-500">强：伦理对齐、多样性 | 弱：量子感知</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 p-6 bg-gradient-to-r from-red-50 to-orange-50 rounded-2xl border border-red-100">
+                        <h4 class="font-bold text-brand-primary mb-2">匹配分析结论</h4>
+                        <p class="text-sm text-stone-700">
+                            综合兼容度 <span class="font-bold text-2xl brand-primary">78%</span> —— 在最优差异区内，认知多样性带来创新收益，冲突风险可控。建议重点关注伦理价值观的深度对齐。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <canvas id="radarChart" width="400" height="400"></canvas>
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none">
+                        <div class="text-3xl font-bold brand-primary serif">78%</div>
+                        <div class="text-sm text-stone-500">匹配度</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 品牌故事 -->
+    <section id="about" class="relative z-10 py-24 bg-gradient-to-b from-stone-100 to-stone-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-stone-800 mb-4 serif">22年双系统经验</h2>
+                <p class="text-lg text-stone-600">银行风控 + 创业实战，打造独特的决策教练体系</p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-bold text-stone-800 mb-4 serif flex items-center gap-3">
+                            <span class="w-10 h-10 bg-blue-100 text-blue-700 rounded-lg flex items-center justify-center text-lg">左</span>
+                            左脑风控体系
+                        </h3>
+                        <ul class="space-y-3 text-stone-600">
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-brand-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>11年银行总分支全链条经验</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-brand-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>8证5学金融专业资质</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-brand-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>3亿融资项目实战退出</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-bold text-stone-800 mb-4 serif flex items-center gap-3">
+                            <span class="w-10 h-10 bg-orange-100 text-orange-700 rounded-lg flex items-center justify-center text-lg">右</span>
+                            右脑直觉体系
+                        </h3>
+                        <ul class="space-y-3 text-stone-600">
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-brand-secondary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>11年创业体感与实战</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-brand-secondary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>方翊沣博士脑科学训练</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-brand-secondary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>黎红雷教授儒商哲学研修</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-8 border-t border-stone-200 text-center">
+                    <p class="text-stone-600 italic">
+                        "左脑风控的严谨 + 右脑直觉的敏锐，<br class="hidden md:block">让我在合伙人选择这道人生大题上，既能看见数据，也能感知人心。"
+                    </p>
+                    <p class="mt-4 font-bold text-stone-800">— Egbertie，满意解研究所创始人</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="relative z-10 py-24 bg-gradient-to-br from-brand-primary to-red-700 text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 serif">开启你的合伙人决策之旅</h2>
+            <p class="text-xl text-red-100 mb-8">
+                全球首创六维评估体系，为硬科技创业者找到真正契合的合伙人
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="startAssessment()" class="bg-white text-brand-primary px-8 py-4 rounded-full text-lg font-bold hover:bg-red-50 transition shadow-xl">
+                    立即预约评估
+                </button>
+                <button onclick="downloadReport()" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-white/10 transition">
+                    下载方法论白皮书
+                </button>
+            </div>
+            <p class="mt-8 text-sm text-red-200">
+                首批30位创始人免费体验 | 不满意全额退款
+            </p>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="relative z-10 bg-stone-900 text-stone-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 bg-brand-primary rounded flex items-center justify-center">
+                            <span class="text-white font-bold serif">QP</span>
+                        </div>
+                        <span class="text-white font-bold serif">满意解研究所</span>
+                    </div>
+                    <p class="text-sm">
+                        专注硬科技转化的合伙人匹配决策教练，让科学遇见美学。
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">产品服务</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition">六维评估系统</a></li>
+                        <li><a href="#" class="hover:text-white transition">合伙人匹配</a></li>
+                        <li><a href="#" class="hover:text-white transition">决策教练</a></li>
+                        <li><a href="#" class="hover:text-white transition">专家会诊</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">资源</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition">方法论白皮书</a></li>
+                        <li><a href="#" class="hover:text-white transition">案例研究</a></li>
+                        <li><a href="#" class="hover:text-white transition">五路图腾</a></li>
+                        <li><a href="#" class="hover:text-white transition">专家网络</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">联系</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>公众号：满意解研究所</li>
+                        <li>邮箱：contact@satisficing.institute</li>
+                        <li>地点：深圳/香港/广州</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-stone-800 text-center text-sm">
+                <p>&copy; 2026 满意解研究所 Satisficing Research Institute. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 量子粒子背景
+        function createQuantumParticles() {
+            const container = document.getElementById('quantum-bg');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'quantum-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (5 + Math.random() * 5) + 's';
+                container.appendChild(particle);
+            }
+        }
+        createQuantumParticles();
+
+        // 雷达图
+        const ctx = document.getElementById('radarChart').getContext('2d');
+        const radarChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['量子感知', '涌现匹配', '具身认知', '叙事分析', '多样性', '伦理对齐'],
+                datasets: [{
+                    label: '技术创始人',
+                    data: [85, 70, 65, 80, 55, 60],
+                    borderColor: '#E85D4E',
+                    backgroundColor: 'rgba(232, 93, 78, 0.2)',
+                    pointBackgroundColor: '#E85D4E',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#E85D4E'
+                }, {
+                    label: '商业创始人',
+                    data: [55, 75, 70, 65, 85, 90],
+                    borderColor: '#8B4513',
+                    backgroundColor: 'rgba(139, 69, 19, 0.2)',
+                    pointBackgroundColor: '#8B4513',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#8B4513'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            display: false
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        },
+                        angleLines: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // 步骤切换
+        let currentLayer = 0;
+        function showLayer(index) {
+            currentLayer = index;
+            const steps = document.querySelectorAll('.step-item > div');
+            const labels = document.querySelectorAll('.step-item > span');
+            const cards = document.querySelectorAll('.layer-card');
+            
+            steps.forEach((step, i) => {
+                if (i <= index) {
+                    step.classList.remove('bg-stone-200', 'text-stone-600');
+                    step.classList.add('bg-brand-primary', 'text-white');
+                } else {
+                    step.classList.remove('bg-brand-primary', 'text-white');
+                    step.classList.add('bg-stone-200', 'text-stone-600');
+                }
+            });
+
+            cards.forEach((card, i) => {
+                if (i === index) {
+                    card.classList.add('border-2', 'border-brand-primary');
+                    card.classList.remove('border-stone-200');
+                } else {
+                    card.classList.remove('border-2', 'border-brand-primary');
+                    card.classList.add('border-stone-200');
+                }
+            });
+        }
+
+        // 平滑滚动
+        function scrollToDemo() {
+            document.getElementById('demo').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 开始评估
+        function startAssessment() {
+            alert('评估系统即将开放，敬请期待！\n\n首批30位创始人可免费体验六维深度评估。');
+        }
+
+        // 下载白皮书
+        function downloadReport() {
+            alert('方法论白皮书即将发布！\n\n包含：\n• 六层评估模型详解\n• 五路图腾决策哲学\n• 22年双系统经验萃取\n• 合伙人选择实操指南');
+        }
+    </script>
+</body>
+</html>

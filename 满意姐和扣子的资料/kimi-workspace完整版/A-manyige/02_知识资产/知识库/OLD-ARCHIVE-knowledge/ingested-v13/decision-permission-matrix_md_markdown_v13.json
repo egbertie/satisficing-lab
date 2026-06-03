@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/A-manyige/00_🧭 罗盘指南/P0P1协作套件/decision-permission-matrix.md",
+  "filename": "decision-permission-matrix.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "b07fbff27bfe14bf",
+  "content_length": 2172,
+  "ingested_at": "2026-03-31T17:27:46.294956",
+  "content_preview": "# Decision Permission Matrix\n## 满意解研究所决策权限规则 V1.0\n\n---\n\n## 风险分级标准\n\n### 低风险（AI自主）\n**特征**: 只读操作、内部数据、可逆操作\n**权限**: AI自主执行，无需确认\n**通知**: 仅记录日志\n**典型场景**:\n- 搜索查询（网页、学术、专利）\n- 数据分析（内部数据库）\n- 报告草稿生成（未发送）\n- 内部文件读取\n\n### 中风险（执行后告知）\n**特征**: 影响内部状态、可撤销、不涉及外部\n**权限**: AI执行，事后告知\n**通知**: 每日摘要\n**典型场景**:\n- 生成报告（保存到本地/Notion）\n- 定时任务调整\n- 内部文件修改/删除\n- 仪表盘数据更新\n\n### 高风险（事前确认）\n**特征**: 对外影响、不可逆、涉及敏感信息\n**权限**: AI建议，必须确认\n**通知**: 即时推送，等待确认\n**典型场景**:\n- 发送消息（飞书/邮件/短信）\n- 对外发布内容\n- 删除关键文件\n- API密钥操作\n\n---\n\n## 决策规则表\n\n| 操作类型 | 风险等级 | 决策",
+  "limitations_applied": []
+}

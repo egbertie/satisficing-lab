@@ -1,0 +1,34 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/task2_multi_hop.py",
+  "filename": "task2_multi_hop.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 4886,
+  "checksum": "4b81c601e6f6feb7",
+  "ingested_at": "2026-03-31T17:30:32.862582",
+  "line_count": 137,
+  "title": "task2_multi_hop",
+  "description": "知识图谱多跳推理 - 今日执行任务2\n目标: 支持两跳查询（概念→Skill→相关Skill）",
+  "sections": [],
+  "entities": [
+    {
+      "name": "build_multi_hop_graph",
+      "type": "function"
+    },
+    {
+      "name": "test_multi_hop_query",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "构建Skill→概念映射（反向）",
+    "构建两跳关联（Skill → 共享概念的Skill）",
+    "添加边（一跳：概念→Skill）",
+    "添加边（两跳：Skill→共享概念的Skill）",
+    "测试1: 概念→Skill→相关Skill",
+    "测试2: Skill→概念→相关Skill"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

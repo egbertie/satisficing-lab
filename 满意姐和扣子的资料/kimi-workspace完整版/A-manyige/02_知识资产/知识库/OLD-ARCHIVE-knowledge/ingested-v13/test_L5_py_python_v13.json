@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/five-level-verification/tests/test_L5.py",
+  "filename": "test_L5.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e4c5ac77d2496358",
+  "content_length": 1657,
+  "ingested_at": "2026-03-31T17:27:45.464723",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nL5 Test Cases - 端到端验证测试\n\"\"\"\n\nimport os\nimport sys\nimport tempfile\nimport shutil\nimport unittest\n\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'scripts'))\nfrom verify import FiveLevelVerifier\n\n\nclass TestL5EndToEnd(unittest.TestCase):\n    \"\"\"L5: 端到端验证测试\"\"\"\n    \n    def setUp(self):\n        self.temp_dir = tempfile.mkdtemp()\n        self.skill_name = \"test_skill\"\n        self.skill_path = os.path.join(self.temp_dir, self.skill_name)\n        os.makedir",
+  "limitations_applied": []
+}

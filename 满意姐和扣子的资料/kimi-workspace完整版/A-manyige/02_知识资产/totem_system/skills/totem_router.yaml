@@ -1,0 +1,87 @@
+# 主控路由 Skill配置
+# 文件11 - 图腾数字替身系统
+# 功能: 意图识别与图腾调度
+
+skill:
+  name: totem_router
+  display_name: 图腾路由系统
+  description: 五图腾数字替身系统的主控路由，负责意图识别和图腾调度
+  version: 1.0.0
+  
+  # 主控配置
+  router:
+    # 支持的图腾
+    totems:
+      - id: simon
+        name: 司马贺
+        element: metal
+        keywords: ["满意解", "阈值", "决策", "理性"]
+      - id: liuyuxi
+        name: 刘禹锡
+        element: earth
+        keywords: ["团队", "凝聚", "德馨", "聚贤"]
+      - id: guanzizai
+        name: 观自在
+        element: water
+        keywords: ["洞察", "风险", "定力", "自由"]
+      - id: confucius
+        name: 孔子
+        element: wood
+        keywords: ["伦理", "仁义", "道德", "五常"]
+      - id: huineng
+        name: 慧能
+        element: fire
+        keywords: ["顿悟", "直觉", "压力", "突破"]
+    
+    # 路由规则
+    routing_rules:
+      # 显式激活指令
+      - pattern: "\\[激活(\\w+)\\]"
+        action: activate_totem
+        priority: 10
+      
+      # 关键词匹配
+      - pattern: "关键词匹配"
+        action: keyword_match
+        priority: 5
+      
+      # 默认路由
+      - pattern: ".*"
+        action: default_route
+        priority: 1
+        default_totem: simon
+  
+  # 意图识别配置
+  intent_recognition:
+    methods:
+      - regex_matching
+      - keyword_extraction
+      - context_analysis
+    
+    confidence_threshold: 0.6
+  
+  # 对话历史管理
+  context_management:
+    history_length: 5
+    context_preservation: true
+    
+  # 输出格式化
+  output_format:
+    add_totem_header: true
+    add_visual_separator: true
+    structure: three_part
+  
+  # 激活指令映射
+  activation_commands:
+    "[激活司马贺]": simon
+    "[激活刘禹锡]": liuyuxi
+    "[激活观自在]": guanzizai
+    "[激活孔子]": confucius
+    "[激活慧能]": huineng
+  
+  # 元数据
+  metadata:
+    system_name: 五路图腾决策系统
+    version: 1.0.0
+    default_mode: simon
+    emergency_contact: huineng

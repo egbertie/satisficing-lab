@@ -1,0 +1,75 @@
+{
+  "version": "1.0.0",
+  "strategies": {
+    "default": {
+      "max_retries": 3,
+      "retry_intervals": [60, 300, 600],
+      "backoff": "exponential",
+      "on_final_failure": "suspend_and_alert",
+      "description": "默认策略：失败后60s、300s、600s重试，最终失败暂停任务"
+    },
+    "aggressive": {
+      "max_retries": 5,
+      "retry_intervals": [30, 60, 120, 300, 600],
+      "backoff": "exponential",
+      "on_final_failure": "suspend_and_alert",
+      "description": "激进策略：失败后30s、60s、120s、300s、600s重试"
+    },
+    "conservative": {
+      "max_retries": 1,
+      "retry_intervals": [300],
+      "backoff": "fixed",
+      "on_final_failure": "suspend_and_alert",
+      "description": "保守策略：失败后300s重试一次"
+    },
+    "notification_only": {
+      "max_retries": 0,
+      "retry_intervals": [],
+      "backoff": "none",
+      "on_final_failure": "alert_only",
+      "description": "仅通知策略：失败后只发送告警，不重试"
+    }
+  },
+  "task_specific": {
+    "task_01": {
+      "strategy": "aggressive",
+      "reason": "晨报生成，重要程度高"
+    },
+    "task_02": {
+      "strategy": "default",
+      "reason": "健康检查，标准重试"
+    },
+    "task_03": {
+      "strategy": "conservative",
+      "reason": "备份验证，资源消耗大"
+    },
+    "task_04": {
+      "strategy": "default",
+      "reason": "Token监控，频繁执行"
+    },
+    "task_05": {
+      "strategy": "notification_only",
+      "reason": "日志清理，非关键任务"
+    },
+    "task_06": {
+      "strategy": "default",
+      "reason": "依赖检查"
+    },
+    "task_07": {
+      "strategy": "notification_only",
+      "reason": "磁盘监控，频率高"
+    },
+    "task_08": {
+      "strategy": "default",
+      "reason": "心跳检查"
+    },
+    "task_09": {
+      "strategy": "conservative",
+      "reason": "指标收集"
+    },
+    "task_10": {
+      "strategy": "aggressive",
+      "reason": "周报生成，重要"
+    }
+  }
+}

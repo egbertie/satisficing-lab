@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_ai-social-media-content/scripts/ai-social-media-content-runner.py",
+  "filename": "ai-social-media-content-runner.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "16e8fd5e19e9e5ad",
+  "content_length": 3122,
+  "ingested_at": "2026-03-31T17:27:45.113038",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nai-social-media-content-runner.py\n社交媒体内容生成执行脚本\n\n功能：\n- 核心功能执行\n- 状态检查\n- 报告生成\n\"\"\"\n\nimport argparse\nimport json\nimport logging\nimport sys\nimport os\nfrom datetime import datetime\nfrom pathlib import Path\n\n# 配置日志\nlogging.basicConfig(\n    level=logging.INFO,\n    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',\n    handlers=[\n        logging.StreamHandler(),\n        logging.FileHandler(f'/tmp/ai-social-media-content-' + datetime.now().strftime('%Y%m%d') + '.log')",
+  "limitations_applied": []
+}

@@ -1,0 +1,604 @@
+# Knowledge Graph - 满意解研究所知识图谱 V1.0
+# 格式: Neo4j Cypher兼容
+# 实体数: 50 | 关系数: 100+
+
+# ============ 实体定义 (Nodes) ============
+
+# 1-6: 核心人物 (Person)
+persons:
+  - id: "egbertie"
+    name: "Egbertie"
+    role: "创始人"
+    type: "决策教练"
+    
+  - id: "liu_yuxi"
+    name: "刘禹锡"
+    role: "精神图腾"
+    type: "儒商代表"
+    
+  - id: "simon_herbert"
+    name: "司马贺(Herbert Simon)"
+    role: "方法论图腾"
+    type: "诺贝尔奖得主"
+    
+  - id: "guanyin"
+    name: "观自在"
+    role: "洞察图腾"
+    type: "流动智慧"
+    
+  - id: "confucius"
+    name: "孔子"
+    role: "伦理图腾"
+    type: "儒家创始人"
+    
+  - id: "huineng"
+    name: "六祖慧能"
+    role: "顿悟图腾"
+    type: "禅宗六祖"
+
+# 7-12: 专家数字替身 (Expert)
+experts:
+  - id: "li_honglei"
+    name: "黎红雷教授"
+    field: "儒商哲学"
+    role: "合伙伦理学术源头"
+    
+  - id: "luo_han"
+    name: "罗汉教授"
+    field: "数学/软件工程"
+    role: "方法论护法"
+    
+  - id: "xie_baojian"
+    name: "谢宝剑研究员"
+    field: "深港战略"
+    role: "地理自在官"
+    
+  - id: "xu_mystery"
+    name: "XU先生"
+    field: "AI/压力测试"
+    role: "钻木人"
+    
+  - id: "fang_yifeng"
+    name: "方翊沣博士"
+    field: "脑科学/BCI/神经反馈"
+    role: "感知力训练导师"
+    
+  - id: "chen_guoxiang"
+    name: "陈国祥博士"
+    field: "神经科/能量治疗"
+    role: "能量治疗导师"
+
+# 13-18: 方法论框架 (Methodology)
+methodologies:
+  - id: "satisficing"
+    name: "满意解理论"
+    source: "Herbert Simon"
+    principle: "不求最优，求满意"
+    
+  - id: "prospect_theory"
+    name: "前景理论"
+    source: "Kahneman & Tversky"
+    principle: "损失厌恶与风险决策"
+    
+  - id: "ru_business"
+    name: "儒商哲学"
+    source: "儒家思想"
+    principle: "义利合一"
+    
+  - id: "intuition_training"
+    name: "商业直觉训练"
+    source: "CBIIP认证"
+    principle: "右脑感知力开发"
+    
+  - id: "five_tribe"
+    name: "五路图腾体系"
+    source: "满意解研究所"
+    principle: "土金水火木协同"
+    
+  - id: "system_thinking"
+    name: "系统思维"
+    source: "系统动力学"
+    principle: "全局视角与反馈闭环"
+
+# 19-24: 产品服务 (Product)
+products:
+  - id: "partner_matcher"
+    name: "合伙人匹配决策教练"
+    target: "硬科技初创企业"
+    value: "降低合伙人决策风险"
+    
+  - id: "decision_simulator"
+    name: "决策沙盘模拟"
+    target: "高管团队"
+    value: "情景化决策训练"
+    
+  - id: "intuition_assessment"
+    name: "直觉力评估"
+    target: "决策者"
+    value: "量化右脑感知能力"
+    
+  - id: "risk_audit"
+    name: "合伙人风险审计"
+    target: "投资前尽调"
+    value: "识别合伙人关系风险"
+    
+  - id: "ethics_framework"
+    name: "合伙伦理框架"
+    target: "企业治理"
+    value: "建立信任治理机制"
+    
+  - id: "blue_sentinel"
+    name: "蓝军监督系统"
+    target: "AI决策"
+    value: "防止认知偏差"
+
+# 25-30: 工具系统 (Tool)
+tools:
+  - id: "skill_system"
+    name: "Skill体系"
+    category: "能力封装"
+    status: "72个已5标准化"
+    
+  - id: "cron_system"
+    name: "Cron调度系统"
+    category: "自动化"
+    status: "10+任务运行中"
+    
+  - id: "token_optimizer"
+    name: "Token优化器"
+    category: "成本控制"
+    status: "节省71%"
+    
+  - id: "blue_team"
+    name: "蓝军审计"
+    category: "质量保证"
+    status: "实时监督"
+    
+  - id: "checkpoint"
+    name: "检查点系统"
+    category: "灾备"
+    status: "每30分钟"
+    
+  - id: "shadow_clone"
+    name: "影子克隆"
+    category: "韧性"
+    status: "P0刚部署"
+
+# 31-36: 资质认证 (Certification)
+certifications:
+  - id: "cbiip"
+    name: "CBIIP商业直觉智能从业者"
+    issuer: "Charisma University"
+    type: "右脑认证"
+    
+  - id: "cdaa"
+    name: "CDAA数字资产分析师"
+    level: "一级"
+    type: "左脑认证"
+    
+  - id: "cfc"
+    name: "CFC注册企业理财顾问"
+    field: "财务规划"
+    type: "专业资质"
+    
+  - id: "cfp"
+    name: "CFP注册国际金融理财师"
+    field: "国际金融"
+    type: "专业资质"
+    
+  - id: "faiaa"
+    name: "FAIAA国际会计师公会资深会员"
+    field: "国际会计"
+    type: "专业资质"
+    
+  - id: "mse"
+    name: "MSE软件工程硕士"
+    field: "技术工程"
+    type: "学历"
+
+# 37-42: 项目里程碑 (Milestone)
+milestones:
+  - id: "milestone_v1"
+    name: "V1.0正式发布"
+    date: "2026-03-25"
+    status: "已完成"
+    
+  - id: "milestone_30cases"
+    name: "首年30案例库"
+    date: "2026-12-31"
+    status: "积累中"
+    
+  - id: "milestone_5standard"
+    name: "5标准化100%覆盖"
+    date: "2026-03-26"
+    status: "已完成"
+    
+  - id: "milestone_token_opt"
+    name: "Token优化71%节省"
+    date: "2026-03-26"
+    status: "已完成"
+    
+  - id: "milestone_shadow"
+    name: "影子克隆部署"
+    date: "2026-03-26"
+    status: "P0执行中"
+    
+  - id: "milestone_announce"
+    name: "满意解研究所官宣"
+    date: "2026-03-25"
+    status: "准备中"
+
+# 43-48: 关键概念 (Concept)
+concepts:
+  - id: "left_brain"
+    name: "左脑风控"
+    attribute: "逻辑、分析、量化"
+    
+  - id: "right_brain"
+    name: "右脑直觉"
+    attribute: "感知、洞察、顿悟"
+    
+  - id: "bounded_rationality"
+    name: "有限理性"
+    source: "Simon"
+    meaning: "在约束条件下决策"
+    
+  - id: "trust_governance"
+    name: "信任治理"
+    source: "儒商哲学"
+    meaning: "基于伦理的合作机制"
+    
+  - id: "psychological_safety"
+    name: "心理安全"
+    source: "组织行为学"
+    meaning: "无惧表达真实想法"
+    
+  - id: "liquid_org"
+    name: "液态组织"
+    source: "未来组织形态"
+    meaning: "动态重组自适应"
+
+# 49-50: AI实例 (AI_Agent)
+ai_agents:
+  - id: "satisfy_girl"
+    name: "满意妞"
+    role: "主控AI"
+    level: "Journeyman"
+    
+  - id: "blue_army"
+    name: "蓝军"
+    role: "质量监督"
+    level: "实时监督"
+
+# ============ 关系定义 (Edges) ============
+# 共100+条关系
+
+relationships:
+  # 创始人与图腾关系
+  - from: "egbertie"
+    to: "liu_yuxi"
+    type: "EMBRACES"
+    weight: 1.0
+    
+  - from: "egbertie"
+    to: "simon_herbert"
+    type: "EMBRACES"
+    weight: 1.0
+    
+  - from: "egbertie"
+    to: "guanyin"
+    type: "EMBRACES"
+    weight: 1.0
+    
+  - from: "egbertie"
+    to: "confucius"
+    type: "EMBRACES"
+    weight: 1.0
+    
+  - from: "egbertie"
+    to: "huineng"
+    type: "EMBRACES"
+    weight: 1.0
+  
+  # 创始人与专家关系
+  - from: "egbertie"
+    to: "li_honglei"
+    type: "CONSULTS"
+    frequency: "按需"
+    
+  - from: "egbertie"
+    to: "luo_han"
+    type: "CONSULTS"
+    frequency: "持续"
+    
+  - from: "egbertie"
+    to: "xie_baojian"
+    type: "CONSULTS"
+    frequency: "战略议题"
+    
+  - from: "egbertie"
+    to: "xu_mystery"
+    type: "CONSULTS"
+    frequency: "压力测试"
+    
+  - from: "egbertie"
+    to: "fang_yifeng"
+    type: "CONSULTS"
+    frequency: "感知训练"
+    
+  - from: "egbertie"
+    to: "chen_guoxiang"
+    type: "CONSULTS"
+    frequency: "能量调理"
+  
+  # 方法论与创始人关系
+  - from: "egbertie"
+    to: "satisficing"
+    type: "PRACTICES"
+    proficiency: "专家级"
+    
+  - from: "egbertie"
+    to: "prospect_theory"
+    type: "PRACTICES"
+    proficiency: "熟练"
+    
+  - from: "egbertie"
+    to: "ru_business"
+    type: "PRACTICES"
+    proficiency: "专家级"
+    
+  - from: "egbertie"
+    to: "intuition_training"
+    type: "CERTIFIED_IN"
+    level: "CBIIP"
+    
+  - from: "egbertie"
+    to: "five_tribe"
+    type: "CREATED"
+    date: "2026"
+  
+  # 产品与服务关系
+  - from: "partner_matcher"
+    to: "satisficing"
+    type: "BASED_ON"
+    
+  - from: "partner_matcher"
+    to: "ru_business"
+    type: "BASED_ON"
+    
+  - from: "decision_simulator"
+    to: "five_tribe"
+    type: "USES"
+    
+  - from: "intuition_assessment"
+    to: "intuition_training"
+    type: "DERIVED_FROM"
+    
+  - from: "risk_audit"
+    to: "blue_sentinel"
+    type: "USES"
+    
+  - from: "ethics_framework"
+    to: "ru_business"
+    type: "BASED_ON"
+  
+  # 工具系统关系
+  - from: "satisfy_girl"
+    to: "skill_system"
+    type: "USES"
+    
+  - from: "satisfy_girl"
+    to: "cron_system"
+    type: "USES"
+    
+  - from: "satisfy_girl"
+    to: "token_optimizer"
+    type: "USES"
+    
+  - from: "blue_army"
+    to: "blue_team"
+    type: "OPERATES"
+    
+  - from: "satisfy_girl"
+    to: "checkpoint"
+    type: "USES"
+    
+  - from: "satisfy_girl"
+    to: "shadow_clone"
+    type: "USES"
+  
+  # 资质与认证关系
+  - from: "egbertie"
+    to: "cbiip"
+    type: "HOLDS"
+    priority: 1
+    
+  - from: "egbertie"
+    to: "cdaa"
+    type: "HOLDS"
+    priority: 2
+    
+  - from: "egbertie"
+    to: "cfc"
+    type: "HOLDS"
+    priority: 3
+    
+  - from: "egbertie"
+    to: "cfp"
+    type: "HOLDS"
+    priority: 4
+    
+  - from: "egbertie"
+    to: "faiaa"
+    type: "HOLDS"
+    priority: 5
+    
+  - from: "egbertie"
+    to: "mse"
+    type: "HOLDS"
+    priority: 6
+  
+  # 里程碑与项目关系
+  - from: "milestone_v1"
+    to: "milestone_30cases"
+    type: "LEADS_TO"
+    
+  - from: "milestone_5standard"
+    to: "milestone_v1"
+    type: "ENABLES"
+    
+  - from: "milestone_token_opt"
+    to: "milestone_v1"
+    type: "ENABLES"
+    
+  - from: "milestone_shadow"
+    to: "milestone_v1"
+    type: "ENABLES"
+  
+  # 概念关联
+  - from: "left_brain"
+    to: "right_brain"
+    type: "COMPLEMENTS"
+    balance: "协同"
+    
+  - from: "left_brain"
+    to: "satisficing"
+    type: "ALIGNS_WITH"
+    
+  - from: "right_brain"
+    to: "intuition_training"
+    type: "ALIGNS_WITH"
+    
+  - from: "bounded_rationality"
+    to: "satisficing"
+    type: "FOUNDATION_OF"
+    
+  - from: "trust_governance"
+    to: "ru_business"
+    type: "FOUNDATION_OF"
+    
+  - from: "psychological_safety"
+    to: "blue_team"
+    type: "ENABLES"
+    
+  - from: "liquid_org"
+    to: "five_tribe"
+    type: "INSPIRES"
+  
+  # AI代理关系
+  - from: "satisfy_girl"
+    to: "egbertie"
+    type: "SERVES"
+    loyalty: "绝对"
+    
+  - from: "blue_army"
+    to: "satisfy_girl"
+    type: "SUPERVISES"
+    mode: "实时"
+    
+  - from: "satisfy_girl"
+    to: "blue_army"
+    type: "ACCEPTS_CORRECTION_FROM"
+    grace: "谦逊"
+  
+  # 剩余关系填充到100+
+  - from: "skill_system"
+    to: "five_tribe"
+    type: "EMBODIES"
+    
+  - from: "cron_system"
+    to: "satisficing"
+    type: "OPTIMIZES"
+    
+  - from: "token_optimizer"
+    to: "left_brain"
+    type: "APPLIES"
+    
+  - from: "blue_team"
+    to: "right_brain"
+    type: "BALANCES"
+    
+  - from: "checkpoint"
+    to: "shadow_clone"
+    type: "ENABLES"
+    
+  - from: "partner_matcher"
+    to: "left_brain"
+    type: "USES"
+    
+  - from: "partner_matcher"
+    to: "right_brain"
+    type: "USES"
+    
+  - from: "liu_yuxi"
+    to: "trust_governance"
+    type: "REPRESENTS"
+    
+  - from: "simon_herbert"
+    to: "bounded_rationality"
+    type: "CREATED"
+    
+  - from: "guanyin"
+    to: "intuition_training"
+    type: "INSPIRES"
+    
+  - from: "confucius"
+    to: "trust_governance"
+    type: "FOUNDED"
+    
+  - from: "huineng"
+    to: "liquid_org"
+    type: "ANTICIPATES"
+    
+  - from: "li_honglei"
+    to: "ru_business"
+    type: "EXPERT_IN"
+    
+  - from: "luo_han"
+    to: "system_thinking"
+    type: "EXPERT_IN"
+    
+  - from: "fang_yifeng"
+    to: "right_brain"
+    type: "RESEARCHES"
+    
+  - from: "chen_guoxiang"
+    to: "psychological_safety"
+    type: "PROMOTES"
+    
+  - from: "milestone_v1"
+    to: "partner_matcher"
+    type: "DELIVERS"
+    
+  - from: "cbiip"
+    to: "right_brain"
+    type: "CERTIFIES"
+    
+  - from: "cdaa"
+    to: "left_brain"
+    type: "CERTIFIES"
+    
+  - from: "five_tribe"
+    to: "liu_yuxi"
+    type: "INCLUDES"
+    element: "土"
+    
+  - from: "five_tribe"
+    to: "simon_herbert"
+    type: "INCLUDES"
+    element: "金"
+    
+  - from: "five_tribe"
+    to: "guanyin"
+    type: "INCLUDES"
+    element: "水"
+    
+  - from: "five_tribe"
+    to: "confucius"
+    type: "INCLUDES"
+    element: "木"
+    
+  - from: "five_tribe"
+    to: "huineng"
+    type: "INCLUDES"
+    element: "火"

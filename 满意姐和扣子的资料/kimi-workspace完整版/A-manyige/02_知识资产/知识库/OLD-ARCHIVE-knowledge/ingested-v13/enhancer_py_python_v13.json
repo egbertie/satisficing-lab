@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/intent-recognition-enhancer/enhancer.py",
+  "filename": "enhancer.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "2c6fcd709cc883e6",
+  "content_length": 8251,
+  "ingested_at": "2026-03-31T17:27:44.807101",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n意图识别增强器 - Intent Recognition Enhancer\n\n功能：精准识别用户真实意图\n支持：简化指令映射、模糊意图澄清、多意图分解\n\"\"\"\n\nimport json\nimport re\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import List, Dict, Any, Optional\nfrom dataclasses import dataclass\n\n@dataclass\nclass IntentResult:\n    \"\"\"意图识别结果\"\"\"\n    primary_intent: str\n    confidence: float\n    sub_intents: List[str]\n    matched_keywords: List[str]\n    suggested_response: str\n    needs_clarification: bool\n    clarification_questi",
+  "limitations_applied": []
+}

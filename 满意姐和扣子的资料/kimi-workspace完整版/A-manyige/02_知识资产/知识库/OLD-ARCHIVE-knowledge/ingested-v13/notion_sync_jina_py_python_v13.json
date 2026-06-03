@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/notion_sync_old/notion_sync_jina.py",
+  "filename": "notion_sync_jina.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "be112810dc83338c",
+  "content_length": 25383,
+  "ingested_at": "2026-03-31T17:27:46.665093",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nNotion同步脚本 - Jina AI + Notion API方案\n使用Jina AI进行内容预处理和Markdown转换，提高同步稳定性\n\n特性：\n- Jina AI处理Markdown转换和格式优化\n- 自动分块和结构化处理\n- 异步批量处理提高效率\n- 智能重试和故障恢复\n\"\"\"\nimport os\nimport sys\nimport time\nimport json\nimport asyncio\nimport aiohttp\nimport hashlib\nimport logging\nfrom pathlib import Path\nfrom datetime import datetime\nfrom typing import List, Dict, Optional, Set\nfrom dataclasses import dataclass, asdict\n\n# 配置\nNOTION_TOKEN = os.getenv(\"NOTION_TOKEN\", \"ntn_45265857466alLJNZlDqXX7NS1cT",
+  "limitations_applied": []
+}

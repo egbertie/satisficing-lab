@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/config/resource-arbitrage.yaml",
+  "filename": "resource-arbitrage.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "d452876101705836",
+  "content_length": 2651,
+  "ingested_at": "2026-03-31T17:27:44.520241",
+  "content_preview": "version: \"2026-03-26\"\ndescription: \"全球资源套利 - 时区/价格/能力套利\"\n\n# 3.1 时区套利 - 24小时不间断\ntimezone_arbitrage:\n  primary_timezone: \"Asia/Shanghai\"\n  \n  time_windows:\n    asia_hours:\n      range: \"09:00-18:00\"\n      timezone: \"Asia/Shanghai\"\n      mode: \"interactive\"\n      description: \"亚洲工作时间 - 主交互时段\"\n      \n    eu_hours:\n      range: \"02:00-11:00\"\n      timezone: \"Europe/London\"\n      mode: \"async\"\n      description: \"欧洲工作时间 - 异步处理\"\n      \n    us_hours:\n      range: \"21:00-06:00\"\n      timezone: \"America/N",
+  "limitations_applied": []
+}

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>爱可可AI前沿推介(2.2)</title>
+  <meta name="description" content="LG - 机器学习 CV - 计算机视觉 CL - 计算与语言
+
+1、[CV] Advancing Open-source World Models2、[LG] XGuardian：Towards Explainable and Generalized AI Anti-Cheat on FPS Games3、[LG] ">
+  <meta name="author" content="爱可可爱生活">
+  <meta property="og:title" content="爱可可AI前沿推介(2.2)">
+  <meta property="og:description" content="LG - 机器学习 CV - 计算机视觉 CL - 计算与语言
+
+1、[CV] Advancing Open-source World Models2、[LG] XGuardian：Towards Explainable and Generalized AI Anti-Cheat on FPS Games3、[LG] Teaching LLMs to Ask：Self-Querying Categ">
+  <meta property="og:type" content="article">
+  
+  <style>
+    body { max-width: 800px; margin: 0 auto; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: #333; }
+    h1 { font-size: 1.8em; margin-bottom: 0.5em; }
+    .meta { color: #666; margin-bottom: 2em; border-bottom: 1px solid #eee; padding-bottom: 1em; }
+    .meta p { margin: 0.3em 0; }
+    .content { font-size: 1.05em; }
+    .content img { max-width: 100%; height: auto; }
+    .footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #eee; color: #999; font-size: 0.9em; }
+    a { color: #1a73e8; }
+  </style>
+</head>
+<body>
+  <article>
+    <h1>爱可可AI前沿推介(2.2)</h1>
+    <div class="meta">
+      <p><strong>作者：</strong>爱可可爱生活</p>
+      <p><strong>发布时间：</strong>2026-02-02 07:09</p>
+    </div>
+    <div class="content">
+      <p>LG - 机器学习 CV - 计算机视觉 CL - 计算与语言</p>
+<p>1、[CV] Advancing Open-source World Models2、[LG] XGuardian：Towards Explainable and Generalized AI Anti-Cheat on FPS Games3、[LG] Teaching LLMs to Ask：Self-Querying Category-Theoretic Planning for Under-Specified Reasoning4、[CL] Insight Agents：An LLM-Based Multi-Agent System for Data Insights5、[LG] Shaping capabilities with token-level data filtering</p>
+<p>摘要：推进开源世界模型、面向FPS游戏的可解释与泛化AI反作弊系统研究、推进开源世界模型、面向FPS游戏的可解释与泛化AI反作弊系统研究、教大语言模型提问</p>
+<p>1、[CV] Advancing Open-source World Models</p>
+<p>R T Z Gao, Q Wang, Y Zeng, J Zhu...[Robbyant Team]</p>
+<p>推进开源世界模型</p>
+<p>要点：</p>
+<p>发布LingBot-World框架： 提出了一个全面的开源世界模型框架，旨在弥合闭源与开源世界模型之间的技术鸿沟。</p>
+<p>“模拟器”与“梦想家”的区分： 深刻地将世界模型定义为能够理解因果与交互的“模拟器”，区别于仅仅是“幻想”像素变化的传统视频生成器（“梦想家”）。</p>
+<p>三大核心支柱： 整个框架构建于三大战略支柱之上：（1）具有层级化语义的可扩展数据引擎，（2）多阶段进化式训练流程，以及（3）面向具身智能的多功能应用。</p>
+<p>精密的数据引擎： 通过混合使用真实视频、游戏录屏和虚幻引擎合成数据来解决数据瓶颈。采用了新的层级化字幕策略（叙事级、场景静态级、密集时间级），以解耦运动控制与场景生成。</p>
+<p>多阶段进化式训练： 提出了一种创新的三阶段流程，将基础视频生成器“进化”为实时模拟器：</p>
+<p>第一阶段（预训练）： 使用强大的基础模型（Wan2.2 14B）建立一个强大的通用视频先验，以保证高保真纹理和时空一致性。</p>
+<p>第二阶段（中间训练）： 采用专家混合（MoE）架构，通过自适应归一化（AdaLN）注入动作条件，并进行长序列训练，以实现长期一致性和可控性。</p>
+<p>第三阶段（后训练）： 通过将双向模型适配为高效的自回归模型（使用因果注意力和少步蒸馏技术，如结合对抗性优化的DMD），实现了实时交互能力（&lt;1秒延迟，16fps）。</p>
+<p>涌现的长时记忆能力： 模型展现出一种涌现能力，即在不依赖显式3D表示的情况下，能长时间（长达60秒）维持对视野外物体的空间一致性和记忆。</p>
+<p>对未观察动态的推理能力： 模型能够模拟世界中未被观察部分的合理状态演化，例如一辆汽车驶出画面后继续沿轨迹行驶，或在前进后返回时远处的桥梁显得更近。</p>
+<p>实时性能与高动态度： 在实现实时交互的同时，在VBench基准测试的“动态度”和“整体一致性”指标上，其性能在量化比较中优于其他顶尖模型。</p>
+<p>多功能应用平台： 该模型可作为下游任务的平台，支持可提示的世界事件（全局和局部）、训练动作智能体，以及为3D重建生成一致性视频。</p>
+<p>开源贡献： 核心贡献是公开发布了整个框架，包括代码和模型权重，以推动该领域的民主化研究。</p>
+<p>坦诚的局限性： 论文清晰地讨论了当前存在的局限性，包括记忆不稳定性、高计算成本、有限的动作空间、超长时间生成中的场景“漂移”问题，以及仅限于单智能体模拟。</p>
+<p>主旨： 本文旨在解决当前先进世界模型技术主要由闭源主导、阻碍社区创新与研究的问题。为此，论文提出了一个名为LingBot-World的全面、高性能且完全开源的世界模型框架，该框架不仅能生成高保真、长达数分钟的视频，更核心的是，它是一个能实时响应用户操控、具备长时记忆和物理一致性的交互式世界模拟器。</p>
+<p>创新：</p>
+<p>系统性框架创新： 首次提出了一个从数据引擎、训练范式到应用验证的端到端、可复现的开源世界模型构建蓝图，而不只是发布一个模型。</p>
+<p>进化式训练范式： 提出了一个创新的“预训练-中间训练-后训练”三阶段进化式流程，巧妙地将一个通用的视频生成大模型，逐步改造和优化成一个专用于实时交互的世界模拟器，有效平衡了生成质量、可控性和推理效率。</p>
+<p>层级化数据处理： 设计了一套包含叙事级、场景静态级和密集时间级字幕的层级化数据标注策略，有效解决了在训练中解耦场景环境与智能体动作控制的难题。</p>
+<p>实时化改造技术： 综合运用了因果注意力适配、结合对抗性优化的分布匹配蒸馏（DMD）等技术，成功将计算密集的双向扩散模型转化为轻量、高效的自回归模型，实现了实时交互能力。</p>
+<p>贡献：</p>
+<p>开源社区贡献： 最大的贡献是发布了LingBot-World的代码、模型权重和技术报告，打破了高性能世界模型被闭源垄断的局面，极大地降低了研究者和开发者进入该领域的门槛，将推动整个社区的创新浪潮。</p>
+<p>方法论贡献： 提供了构建交互式世界模型的完整方法论，特别是其“进化式”训练思想和精细的数据处理流程，为未来相关研究提供了宝贵的实践指南。</p>
+<p>实证贡献： 通过大量的定性和定量实验，验证了所提出框架的有效性，并展示了其在长时记忆、推理未见动态等方面的涌现能力，为“视频模型作为世界模拟器”这一论点提供了强有力的证据。</p>
+<p>应用生态贡献： 展示了其作为平台在可提示世界事件、智能体训练和3D重建等方面的应用潜力，为下游的具身智能、游戏、内容创作等领域提供了新的基础设施。</p>
+<p>提升：</p>
+<p>交互动态性： 在VBench基准测试中，“动态度”（Dynamic Degree）指标显著优于其他模型，表明其生成的虚拟世界对用户输入的响应更丰富、动态变化更复杂。</p>
+<p>长期一致性： 能够生成长达数分钟乃至十分钟的连贯视频，并在60秒时间尺度上保持对场景和物体的记忆，远超普通视频模型数秒的“记忆”极限。</p>
+<p>综合性能与开放性： 在保持高图像质量和时间平滑度的同时，实现了高动态度、长时程、实时交互和完全开源的独特组合，这是现有模型难以兼得的。</p>
+<p>推理效率： 通过后训练阶段的蒸馏，实现了在单GPU节点上以16fps处理480p视频的实时性能，将强大的世界模型从离线渲染带入了实时交互的范畴。</p>
+<p>不足：</p>
+<p>记忆稳定性： 模型的记忆能力是涌现的，而非基于显式记忆模块，因此在超长时程模拟中缺乏稳定性，可能出现不一致。</p>
+<p>计算资源门槛： 尽管实现了实时推理，但运行模型仍需企业级GPU，对普通消费者硬件不友好。</p>
+<p>动作空间局限： 当前支持的交互动作主要限于导航和基本移动，缺乏与环境中特定物体进行精细交互（如拾取）的能力。</p>
+<p>场景漂移问题： 在极长的视频生成（如超过十分钟）中，环境会逐渐失去其原始结构，出现“漂移”现象。</p>
+<p>单智能体限制： 目前的框架仅支持单智能体视角，尚未实现多智能体之间的互动模拟。</p>
+<p>心得：</p>
+<p>“进化”而非“创造”是构建复杂AI系统的新范式： 本文没有从零开始构建一个世界模拟器，而是巧妙地将一个强大的视频生成基础模型，通过多阶段的适配与优化，“进化”成一个新物种。这揭示了一种高效的AI工程哲学：站在巨人的肩膀上，通过“微调”和“改造”而非“重造”，可以更快地实现更复杂的目标。</p>
+<p>数据工程的深度决定了模型能力的上限： 论文花费大量篇幅介绍其数据引擎，特别是层级化字幕策略。这深刻地提醒我们，对于需要精细控制和复杂理解的任务，模型的上限不仅由架构决定，更由数据的质量、结构和语义丰富度决定。精巧的数据工程是解锁模型高级能力的关键钥匙。</p>
+<p>开源是推动前沿技术跨越式发展的核心动力： LingBot-World最大的亮点在于其“开源”精神。它不仅展示了技术实力，更通过分享工具和知识，赋能整个社区共同探索世界模型的未来。这表明，在人工智能的前沿领域，开放合作是打破技术壁垒、加速创新的最有效途径。</p>
+<p>一句话总结: 本文发布了LingBot-World，一个全面的开源世界模型框架，其通过创新的三阶段“进化式”训练流程和精细的数据引擎，将一个视频生成器成功转化为能实现分钟级长时一致、实时交互的世界模拟器，并展现出令人惊讶的、无需显式3D建模即可涌现的空间记忆与物理推理能力，显著缩小了开源与闭源技术间的差距。</p>
+<p>We present LingBot-World, an open-sourced world simulator stemming from video generation. Positioned as a top-tier world model, LingBot-World offers the following features. (1) It maintains high fidelity and robust dynamics in a broad spectrum of environments, including realism, scientific contexts, cartoon styles, and beyond. (2) It enables a minute-level horizon while preserving contextual consistency over time, which is also known as &quot;long-term memory&quot;. (3) It supports real-time interactivity, achieving a latency of under 1 second when producing 16 frames per second. We provide public access to the code and model in an effort to narrow the divide between open-source and closed-source technologies. We believe our release will empower the community with practical applications across areas like content creation, gaming, and robot learning.</p>
+<p>https://arxiv.org/abs/2601.20540</p>
+<p>2、[LG] XGuardian: Towards Explainable and Generalized AI Anti-Cheat on FPS Games</p>
+<p>J Zhang, C Sun, C Qian[The University of Hong Kong]</p>
+<p>XGuardian：面向FPS游戏的可解释与泛化AI反作弊系统研究</p>
+<p>要点:</p>
+<p>直击现有反作弊系统的核心缺陷： 论文指出现有FPS游戏反作弊方案的四大局限性（L1-L4）：对客户端的依赖及其脆弱性、在真实世界中表现不佳、跨游戏通用性差，以及缺乏可解释性。</p>
+<p>提出XGUARDIAN系统： 一个部署在服务器端、具有通用性且可解释的反作弊系统，专门用于检测第一人称射击（FPS）游戏中的瞄准辅助类作弊。</p>
+<p>极简且通用的输入数据： XGUARDIAN一个核心且反直觉的优势是，它仅依赖于两个最基础的数据输入：pitch（俯仰角）和yaw（偏航角）。论文论证了这两个参数是所有FPS游戏的“必需品”，从而确保了其广泛的通用性。</p>
+<p>基于瞄准轨迹的创新特征工程： 系统没有使用原始坐标或游戏特定数据，而是对瞄准行为的“动态”进行建模。它从俯仰角和偏航角数据中提取出全新的时序特征，如准星的瞬时速度、加速度和速度向量的角度变化。</p>
+<p>聚焦“击杀窗口”： 系统巧妙地将其分析聚焦于“击杀事件”前后的一小段时间窗口。这是一种高信息熵的方法，有效过滤了非战斗阶段的噪声数据，并集中分析最关键、作弊者无法回避的玩家行为。</p>
+<p>混合GRU-CNN模型架构： 系统采用GRU-CNN模型来分析瞄准轨迹的时序特征，旨在同时捕捉作弊行为特有的时间依赖性和局部模式。最后通过随机森林模型聚合单次击杀的预测，做出整场比赛的最终判决。</p>
+<p>通过改进SHAP实现可解释性： 为解决可解释性缺失的问题，XGUARDIAN集成了SHAP方法。并通过提出一种“时间压缩”（temporal squeezing）机制，创新性地将SHAP应用于其时序滑窗模型，生成了连贯的特征重要性分数（XGUARDIAN值）。</p>
+<p>反直觉的“透视”外挂检测： 一个关键发现是，XGUARDIAN不仅能检测自动瞄准，还能检测“透视”外挂。它通过识别“反常的静止”来实现这一点——使用透视的作弊者会隔着墙提前瞄准敌人，在交战前表现出极低的速度和加速度，这成为了其拥有非法预知信息的有力证据。</p>
+<p>卓越的性能与通用性验证： 该系统在大型、真实的CS2游戏数据集上达到了业界顶尖的性能（在4.1%的误报率下实现了90.7%的召回率）。更重要的是，论文通过在另外两款完全不同的游戏（CS:GO和Farlight84，它们使用不同游戏引擎、分属PC和移动平台）上的实验，成功验证了其通用性。</p>
+<p>实用性与高效性： 作为一个在服务器端异步分析赛后录像文件的系统，它对玩家不产生任何实时开销。同时，它的计算效率极高，相比之前的顶尖服务器端方案，显著降低了分析时间和内存占用。</p>
+<p>对开放科学的贡献： 作者公开了XGUARDIAN的框架代码以及他们使用的大规模真实世界数据集，这对反作弊研究社区是一个重大的贡献。</p>
+<p>主旨： 本文旨在解决当前第一人称射击（FPS）游戏中瞄准辅助类作弊检测方法存在的通用性差、依赖不可靠的客户端、缺乏可解释性以及在真实世界场景下性能不足等核心问题。为此，论文提出了一个名为XGUARDIAN的服务器端反作弊系统，该系统通过分析所有FPS游戏共通的“俯仰角”和“偏航角”数据来构建瞄准轨迹的动态特征，从而实现高效、通用且可解释的作弊检测。</p>
+<p>创新：</p>
+<p>特征设计的通用性： 彻底摆脱了对游戏特定特征的依赖，创新地提出仅使用所有FPS游戏都具备的pitch和yaw两个基础输入，并从中提取出速度、加速度、角度变化等物理动态特征。这种“第一性原理”的特征设计是其实现跨游戏通用性的基石。</p>
+<p>可解释性方法的适配与应用： 首次在游戏反作弊领域引入并成功适配了SHAP可解释性框架。特别是针对时序滑窗模型提出了“时间压缩”方法，解决了SHAP直接应用于此类数据时的困难，使得系统不仅能“判决”还能“解释”，极大地提升了实用价值。</p>
+<p>反常行为的逆向检测逻辑： 提出了一个反直觉但极为有效的检测逻辑，即通过识别“反常的静止”（unnatural lack of movement）来检测“透视”类作弊，扩展了基于瞄准轨迹分析所能检测的作弊类型范围。</p>
+<p>端到端的系统化设计： 提供了一个从数据预处理（聚焦击杀窗口）、模型设计（GRU-CNN+RF）、到结果解释（SHAP）的完整、高效的服务器端解决方案，并用大规模真实世界数据验证了其有效性。</p>
+<p>贡献：</p>
+<p>实践贡献： 提出了一个性能超越现有技术、计算开销极低、且具备高度实用性的反作弊系统（XGUARDIAN），为游戏行业提供了一个可以直接借鉴或部署的高效解决方案，有望显著提升反作弊的效率和准确性。</p>
+<p>学术贡献： 通过实验证明了基于普适性物理动态特征进行作弊检测的可行性与优越性，为行为分析领域的安全研究提供了新的思路。同时，适配SHAP的方法也为时序数据分析的可解释性研究提供了参考。</p>
+<p>社区贡献： 开源了完整的系统代码和两个大规模、经人工验证的真实世界FPS游戏作弊数据集（CS2和Farlight84），极大地丰富了该领域的研究资源，降低了后续研究的门槛，将推动整个反作弊研究社区的发展。</p>
+<p>提升：</p>
+<p>检测性能： 在大型真实数据集上，XGUARDIAN的召回率（90.7%）和F1分数（90.7%）显著优于之前最先进的服务器端方法HAWK（F1分数77.2%）及其他基线方法，同时保持了更低的误报率。</p>
+<p>通用性： 首次通过在三款不同引擎、不同平台、不同子类型的FPS游戏上的实验，有力地证明了其方法的广泛通用性，解决了现有方法通常“一个游戏一套方案”的局限性。</p>
+<p>效率： 在服务器端进行异步分析，单场比赛的平均预测时间仅需不到10秒，相比HAWK的超过400秒，效率提升了超过40倍，且内存占用更低，使其在大规模部署上更具可行性。</p>
+<p>可解释性： 从“黑盒”检测升级为“白盒”分析，系统能够以可视化方式清晰展示每个可疑击杀片段中具体是哪些特征（如异常的加速度）导致了作弊判决，将人工审核时间从数小时缩短至分钟级。</p>
+<p>不足：</p>
+<p>检测范围局限： 系统设计强依赖于“击杀事件”，因此无法检测那些不产生击杀的作弊行为，例如仅为队友提供信息而自己不开枪的“透视”玩家。</p>
+<p>作弊类型局限： 该方法专注于检测影响“瞄准轨迹”的作弊行为。对于不改变瞄准轨迹的作弊（如某些不常见的、通过信息共享的作弊方式），该系统无能为力。</p>
+<p>游戏类型局限： 理论上适用于所有使用“俯仰-偏航角”控制视角的FPS游戏，但对于不采用此机制或未来可能出现新操控方式的游戏，需要对坐标转换算法进行适配。</p>
+<p>心得：</p>
+<p>从第一性原理出发是实现系统通用性的金钥匙： 这篇论文最令人印象深刻的一点是，它没有陷入为特定游戏设计复杂特征的泥潭，而是回归到“玩家如何瞄准”这一物理本质，仅用pitch和yaw这两个最基本的变量就构建了强大的检测系统。这启示我们，在解决看似复杂且多变的问题时，寻找其背后不变的“第一性原理”，往往是通往通用解决方案的最佳路径。</p>
+<p>可解释性是AI系统从“可用”到“可信赖”的桥梁： XGUARDIAN将可解释性（Explainability）作为核心功能，直接解决了反作弊流程中人工审核效率低下的痛点。这表明，在安全等高风险决策领域，AI的可解释性不再是锦上添花的学术追求，而是决定系统能否被实际部署、信赖和高效运作的关键工程要素。</p>
+<p>“无为”亦是“异常”： 传统观念认为作弊是“做出”了异常行为（如超人反应），而本文揭示了作弊也可能是“未做出”正常行为（如缺乏人类瞄准时的微调）。这种对“异常静止”的洞察，不仅巧妙地解决了“透视”外挂的检测难题，也为所有异常检测领域提供了一个深刻的启示：正常信号的缺失，本身就是一种强烈的异常信号。</p>
+<p>一句话总结: 本文提出了一个名为XGUARDIAN的服务器端游戏反作弊系统，它创新地仅利用所有FPS游戏共通的俯仰和偏航角数据，通过分析瞄准轨迹的动态物理特征（如速度和加速度）来实现高效、通用的作弊检测，并首次引入可解释性AI技术来阐明判决依据，其最精妙之处在于反直觉地通过识别“反常的静止”来有效检测“透视”外挂，极大地提升了反作弊系统的实战能力与可信度。</p>
+<p>Aim-assist cheats are the most prevalent and infamous form of cheating in First-Person Shooter (FPS) games, which help cheaters illegally reveal the opponent&#039;s location and auto-aim and shoot, and thereby pose significant threats to the game industry. Although a considerable research effort has been made to automatically detect aim-assist cheats, existing works suffer from unreliable frameworks, limited generalizability, high overhead, low detection performance, and a lack of explainability of detection results. In this paper, we propose XGuardian, a server-side generalized and explainable system for detecting aim-assist cheats to overcome these limitations. It requires only two raw data inputs, pitch and yaw, which are all FPS games&#039; must-haves, to construct novel temporal features and describe aim trajectories, which are essential for distinguishing cheaters and normal players. XGuardian is evaluated with the latest mainstream FPS game CS2, and validates its generalizability with another two different games. It achieves high detection performance and low overhead compared to prior works across different games with real-world and large-scale datasets, demonstrating wide generalizability and high effectiveness. It is able to justify its predictions and thereby shorten the ban cycle. We make XGuardian as well as our datasets publicly available.</p>
+<p>https://arxiv.org/abs/2601.18068</p>
+<p>3、[LG] Teaching LLMs to Ask: Self-Querying Category-Theoretic Planning for Under-Specified Reasoning</p>
+<p>S Qu[Stanford University]</p>
+<p>教大语言模型提问：面向欠指定推理的范畴论自查询规划</p>
+<p>要点:</p>
+<p>解决部分可观测性下的规划问题： 论文解决了LLM规划器的一个关键失败模式：当关键前置条件（如资源可用性、约束）在初始提示中未明确时，模型倾向于幻觉或生成不可行的计划。</p>
+<p>提出SQ-BCP框架： 引入了一个名为“自查询双向范畴规划”（SQ-BCP）的新颖框架，该框架将前置条件推理作为规划过程中的核心要素。</p>
+<p>显式的前置条件不确定性建模： 一项核心创新是使用明确的标签来表示每个前置条件的状态：Sat（满足）、Viol（违反）或Unk（未知）。这可以防止LLM在没有根据的情况下做出高风险的假设。</p>
+<p>双模式不确定性解决机制： 当遇到Unk（未知）前置条件时，SQ-BCP采用一种确定性策略，通过两种机制来解决它：</p>
+<p>自查询（Self-Querying）： 向预言机（oracle）或用户提出一个目标明确、基于事实的问题（例如，“你有一把锯子吗？”）。</p>
+<p>桥接假设（Bridging Hypotheses）： 自主地生成一个新的子动作来创造缺失的条件（例如，在“从圆柱形桌腿上切割轮子”之前，先提出“将方形桌腿打磨成圆柱形”）。</p>
+<p>启发式与验证的分离（反直觉的观点）： 与依赖相似度分数来接受计划的典型LLM规划器不同，SQ-BCP仅在搜索过程中使用启发式距离函数来对候选计划进行排序和剪枝。</p>
+<p>基于形式化验证的计划接受机制： 一个计划只有在通过两个严格的检查后才被接受：</p>
+<p>确定性硬约束检查： 用精确的谓词逻辑验证资源限制和逻辑要求等规则。</p>
+<p>基于“拉回”的范畴论验证器： 一种源自范畴论的形式化、黑盒的“证书”，保证最终计划状态在组合上与目标要求兼容。</p>
+<p>集成双向搜索： 将局部的不确定性解决机制（查询和桥接）整合到一个高效的双向搜索框架中，该框架同时从初始状态和目标状态出发探索计划。</p>
+<p>受控的评估协议： 论文在WikiHow和RecipeNLG数据集上引入了一种“k-reveal”评估协议，通过系统性地隐藏受控数量的前置条件，来严格测试规划器处理部分可观测性的能力。</p>
+<p>卓越的可执行性： 实验结果表明，SQ-BCP极大地降低了资源违规率（在WikiHow上降至14.9%，在RecipeNLG上降至5.8%），显著优于Self-Ask等强大基线（分别为26.0%和15.7%），同时在ROUGE和BLEU等标准文本相似度指标上保持了竞争力。</p>
+<p>理论完备性： 论文提供了理论分析，证明了其前置条件精化过程是可终止的，其验证步骤能保证正确性，并且其搜索在有界条件下能保证找到解。</p>
+<p>主旨： 本文旨在解决大型语言模型（LLMs）在面对信息不完整、前置条件未明确的任务时，容易产生不可执行的幻觉计划这一核心问题。为此，论文提出了SQ-BCP框架，一个在推理时显式地建模、查询和解决前置条件不确定性的规划系统，并通过严格的形式化验证来确保最终生成计划的全局可行性和正确性。</p>
+<p>创新：</p>
+<p>前置条件状态的显式化： 创新地将规划中的前置条件状态分为“满足/违反/未知”（Sat/Viol/Unk）三类，将隐性的不确定性转化为显式的、可操作的对象，这是解决问题的关键一步。</p>
+<p>自主的“桥接假设”： 当遇到未知条件时，系统不仅能像人类一样“提问”（自查询），还能创新地自主生成一个“桥接”子计划来主动满足该条件，展现了更高层次的规划智能。</p>
+<p>验证与排序的分离范式： 颠覆了传统LLM规划中依赖启发式分数（如相似度）来决定计划好坏的模式。SQ-BCP将启发式距离仅用于搜索过程中的引导（排序和剪枝），而将计划的最终“录用”交由一个独立的、严格的、基于范畴论的形式化验证器来决定，实现了“启发式引导，确定性验收”的新范式。</p>
+<p>受控实验设计： 设计了“k-reveal”实验协议，能够量化地控制任务的不确定性程度，为评估LLM在部分可观测环境下的规划能力提供了一个科学、可复现的基准。</p>
+<p>贡献：</p>
+<p>方法论贡献： 提出了SQ-BCP，一个将显式不确定性建模、主动信息获取、自主问题解决和形式化验证相结合的LLM规划框架，为构建更可靠、更具鲁棒性的AI规划器提供了全新的设计蓝图。</p>
+<p>实践贡献： 大幅提升了LLM在不完整信息下生成计划的“可执行性”，显著降低了资源和约束的违规率。这使得LLM规划器在现实世界应用（如机器人任务、DIY指导）中变得更加安全和可靠。</p>
+<p>理论贡献： 为LLM规划提供了理论上的正确性保证。通过证明其算法的终止性、验证的正确性和搜索的有界性，为看似“黑盒”的LLM推理过程引入了形式化的严谨性。</p>
+<p>评估体系贡献： 提出的“k-reveal”协议为社区提供了一个标准化的方法，用于评估和比较不同规划器在处理信息不完整问题时的能力。</p>
+<p>提升：</p>
+<p>计划的可执行性（约束遵守率）： 这是最显著的提升。在WikiHow和RecipeNLG任务上，SQ-BCP将资源违规率分别降低到14.9%和5.8%，相比最强的基线Self-Ask（26.0%和15.7%），实现了近乎减半甚至更好的效果。</p>
+<p>鲁棒性： 随着未知前置条件的增多（k-reveal中k值变小），SQ-BCP能够通过增加查询和假设探索来适应不确定性的增加，表现出比其他方法更强的鲁棒性。</p>
+<p>可靠性： 由于采用了硬约束检查和范畴论验证器，SQ-BCP输出的计划具有更高的可靠性保证，不仅仅是“看起来像”一个好计划，而是经过了形式化检验的“兼容”计划。</p>
+<p>不足：</p>
+<p>依赖模拟预言机（Oracle）： 实验依赖于一个能提供真实、无噪声答案的模拟用户/预言机。在现实世界中，用户的回答可能不准确、不完整或有延迟，这会影响系统的性能。</p>
+<p>依赖LLM的标注能力： 整个框架的起点依赖于LLM能准确地从任务中抽取出前置条件并正确地初步标注其状态。如果LLM在这一步出错，后续的查询和验证可能也无法纠正。</p>
+<p>推理开销： 相较于直接生成，SQ-BCP增加了查询、桥接和验证等多个环节，导致推理时间和计算开销增加，可能不适用于对延迟要求极高的应用。</p>
+<p>验证范围有限： 当前的验证器主要处理离散的硬约束。对于涉及连续空间（如几何约束）、随机性或模糊成功标准的复杂现实任务，验证能力有限。</p>
+<p>心得：</p>
+<p>让AI“承认无知”是通往真正智能的关键一步： 这篇论文最深刻的启发是，与其让LLM在信息不足时“硬猜”，不如设计一个机制让它能坦然地承认“我不知道”（即Unk状态）。这种对不确定性的显式建模，是系统从盲目生成转向理性决策的分水岭，也是构建更安全、更可信赖AI系统的核心思想。</p>
+<p>“验证”而非“感觉”应成为AI输出的最终标准： SQ-BCP将启发式评分和形式化验证彻底分离，强调了“看起来好”和“确实对”是两回事。这对于所有追求高可靠性的AI应用都具有指导意义：我们不能仅仅满足于生成流畅、看似合理的输出，而必须建立独立的、严格的验证机制来确保其正确性，这标志着LLM应用从“生成艺术”向“可靠工程”的转变。</p>
+<p>真正的自主性不仅是执行，更是解决执行中的障碍：“桥接假设”的概念极具启发性。它表明一个高级的AI规划器不应在遇到障碍时就停止或求助，而应具备自主分析障碍（未满足的前置条件）并生成子计划来移除障碍的能力。这才是迈向更高级自主智能的重要体现。</p>
+<p>一句话总结: 本文提出了SQ-BCP框架，通过让大型语言模型在规划时显式地将前置条件标注为“满足、违反或未知”，并创新地通过“自查询”提问或“桥接假设”自主解决未知条件，最终利用一个独立于启发式评分的形式化验证器来确保计划的可执行性，极大地提升了LLM在信息不完整现实场景下的规划可靠性。</p>
+<p>Inference-time planning with large language models frequently breaks under partial observability: when task-critical preconditions are not specified at query time, models tend to hallucinate missing facts or produce plans that violate hard constraints. We introduce SelfQuerying Bidirectional Categorical Planning (SQ-BCP), which explicitly represents precondition status (Sat/Viol/Unk) and resolves unknowns via (i) targeted self-queries to an oracle/user or (ii) bridging hypotheses that establish the missing condition through an additional action. SQ-BCP performs bidirectional search and invokes a pullback-based verifier as a categorical certificate of goal compatibility, while using distance-based scores only for ranking and pruning. We prove that when the verifier succeeds and hard constraints pass deterministic checks, accepted plans are compatible with goal requirements; under bounded branching and finite resolution depth, SQ-BCP finds an accepting plan when one exists. Across WikiHow and RecipeNLG tasks with withheld preconditions, SQ-BCP reduces resourceviolation rates to 14.9% and 5.8% (vs. 26.0% and 15.7% for the best baseline), while maintaining competitive reference quality.</p>
+<p>https://arxiv.org/abs/2601.20014</p>
+<p>4、[CL] Insight Agents: An LLM-Based Multi-Agent System for Data Insights</p>
+<p>J Bai, Z Zhang, J Zhang, Z Zhu[Amazon]</p>
+<p>Insight Agents：基于 LLM 的多智能体数据洞察系统</p>
+<p>要点:</p>
+<p>发布“洞察智能体”（Insight Agents, IA）： 一个基于LLM的、对话式的、分层多智能体系统，旨在为电商卖家提供个性化的数据和商业洞察。</p>
+<p>解决真实的商业痛点： 该系统的核心动机是解决电商卖家在发现和利用现有数据与工具以制定明智商业决策时所面临的困难。</p>
+<p>分层的“管理者-工作者”架构： IA采用多智能体结构，由一个“管理者智能体”协调两个专门的“工作者智能体”：一个负责数据呈现，另一个负责洞察生成。这遵循了经典的“分而治之”策略。</p>
+<p>务实的混合ML/LLM方法（反直觉的观点）： 一个关键的设计决策是，并不是为每个任务都使用大型语言模型。管理者智能体为高频、简单的任务使用了轻量级、专门的机器学习模型，以优化延迟和准确性：</p>
+<p>使用基于自编码器的模型进行域外（OOD）检测。</p>
+<p>使用一个经过微调的、轻量级的BERT模型进行分类，将查询路由到正确的工作者智能体。 -“规划-执行”范式： 系统基于“规划-执行”模型运作。LLM扮演规划者的角色，将复杂的用户查询分解为一系列可执行的步骤。</p>
+<p>基于API的RAG处理表格数据（高信息熵内容）： 系统没有采用更常见但往往更脆弱的Text-to-SQL方法，而是使用一个更鲁棒的、基于API的模型来进行数据检索。这是一个关键的权衡，优先考虑了准确性和可靠性，而非Text-to-SQL的更高灵活性。LLM负责规划调用哪些API以及使用何种参数。</p>
+<p>系统级的延迟优化： 为实现低延迟，系统采用了并行化策略。域外检测、智能体路由，甚至两个工作者智能体分支的初始执行都是并发启动的，并对不相关的路径进行提前终止。这是一个重要的工程决策，通过增加计算成本来换取更快的用户响应。</p>
+<p>动态注入领域知识：“洞察生成器”智能体能根据查询动态地注入特定领域的知识和少样本示例，使得生成的洞察更具相关性和上下文感知能力。</p>
+<p>真实的生产部署与指标： 该系统已在美国面向亚马逊卖家上线，并通过真实世界的性能指标进行了评估，在人工评估中达到了90%的准确率，且P90延迟低于15秒。</p>
+<p>主旨： 本文旨在解决电商卖家在利用海量数据和工具进行商业决策时面临的认知负荷高、效率低下的问题。为此，论文设计并实现了一个名为“洞察智能体”（Insight Agents）的LLM驱动的多智能体对话系统。该系统通过一个分层的“管理者-工作者”架构，结合高效的轻量级模型和强大的LLM规划能力，实现了对用户自然语言查询的自动化数据检索、聚合和洞察生成，从而赋能卖家，帮助他们更快地做出更优的商业决策。</p>
+<p>创新：</p>
+<p>混合智能架构： 创新地将轻量级、高效率的传统机器学习模型（用于OOD检测和路由）与功能强大的大型语言模型（用于规划和生成）相结合，构建了一个在成本、延迟和性能之间取得精妙平衡的混合智能体系统。</p>
+<p>可靠优先的RAG范式： 针对表格数据，没有追随流行的Text-to-SQL路线，而是独创性地采用了基于API的RAG（检索增强生成）模式。这种模式通过LLM规划API调用序列，牺牲了一定的灵活性，但换来了更高的准确性、可靠性和可维护性，是面向生产环境的务实创新。</p>
+<p>延迟驱动的并行执行策略： 在多智能体工作流中引入了并发执行和提前终止机制。这种系统级的工程优化，将多个串行步骤并行化，是降低复杂Agent系统端到端延迟的一个创新且有效的解决方案。</p>
+<p>分层任务分解： 采用“管理者-工作者”的层级结构，将复杂的“数据洞察”任务清晰地分解为“意图理解与分发”（管理者）和“具体执行”（工作者）两个层面，使得系统逻辑清晰，易于扩展和维护。</p>
+<p>贡献：</p>
+<p>实践蓝图贡献： 提供了构建一个生产级别的、面向商业应用的、多智能体数据分析系统的端到端实现蓝图。论文详细阐述了从架构设计、模型选型到工程优化的全过程，为业界构建类似系统提供了宝贵的实践参考。</p>
+<p>实证价值贡献： 成功将一个复杂的多智能体系统在真实的商业环境（亚马逊卖家平台）中落地，并用实际数据验证了其有效性（90%准确率，&lt;15秒延迟），证明了该技术路线的商业可行性和巨大价值。</p>
+<p>设计哲学贡献： 倡导了一种务实、高效的AI系统设计哲学——“为合适的任务选择合适的工具”。它证明了在LLM驱动的系统中，明智地集成更轻量、更专业的传统模型，是实现性能与成本最佳平衡的关键。</p>
+<p>提升：</p>
+<p>决策效率： 通过自动化数据检索和洞察生成，极大地缩短了卖家从提出问题到获得可行性见解的时间，将原本可能需要数小时的手动分析过程缩短至十几秒。</p>
+<p>系统延迟： 通过采用轻量级模型和并行化执行策略，将一个多步骤、可能涉及多次API调用的复杂Agent系统的P90延迟控制在了15秒以内，达到了生产可用的水平。</p>
+<p>准确性与可靠性： 基于API的数据检索方式相比Text-to-SQL，能有效避免SQL语法错误和字段幻觉，从而显著提升了数据检索的准确性和整个系统的可靠性，人工评估准确率高达90%。</p>
+<p>用户体验： 将复杂的数据工具和指标通过一个简单的对话界面提供给用户，极大地降低了用户的使用门槛和认知负荷，提升了数据驱动决策的可及性。</p>
+<p>不足：</p>
+<p>可扩展性挑战： 基于API的方法虽然可靠，但其可扩展性依赖于预定义的API集合。当需要接入新的数据源或分析工具时，需要手动开发和注册新的API，这可能比Text-to-SQL适应新数据库的灵活性要差。</p>
+<p>模型泛化性： 系统中的OOD和路由模型是针对特定领域的查询数据训练的。当需要将系统扩展到全新的商业领域时，这些轻量级模型可能需要重新收集数据和训练，泛化能力有限。</p>
+<p>交互深度有限： 从论文描述来看，该系统似乎更侧重于处理单轮的、明确的查询。对于需要多轮澄清、持续探索的复杂分析场景，其交互能力可能不足。</p>
+<p>评估数据集未公开： 用于训练和评估的数据集是内部收集的，并未公开，这给社区进行公平的比较和复现带来了困难。</p>
+<p>心得：</p>
+<p>“杀鸡焉用牛刀”——务实主义是AI工程的黄金法则： 这篇论文最核心的启发在于其“恰如其分”的技术选型。在AI Agent的热潮中，它没有盲目地将所有任务都交给一个庞大的LLM，而是清醒地为简单的分类和路由任务选择了轻量级的专用模型。这深刻地揭示了，一个成功的AI产品，其精髓不仅在于利用最前沿的技术，更在于如何以最经济、高效的方式组合多种技术来解决实际问题。</p>
+<p>在生产环境中，可靠性往往比灵活性更重要： 论文中对API调用和Text-to-SQL的权衡选择极具洞察力。在学术研究中，灵活性和通用性常被置于首位；但在直接影响用户决策和商业结果的生产系统中，保证每一次数据检索的准确无误（可靠性）才是不可动摇的基石。这是一个从实验室走向市场的关键思维转变。</p>
+<p>Agent的性能瓶颈不仅是模型，更是系统工程： IA通过并行化来优化延迟，这提醒我们，构建高性能的Agent系统，远不止是prompt工程或模型微调。它是一个复杂的系统工程问题，需要从架构层面思考任务流、并发、资源调度等，通过巧妙的系统设计来弥补单个模型或组件的性能短板。</p>
+<p>一句话总结: 本文展示了一个名为“洞察智能体”的生产级多智能体系统蓝图，它通过务实地结合轻量级模型进行高效任务路由和LLM进行复杂规划，并创新地采用更可靠的API调用范式替代Text-to-SQL，成功为电商卖家打造了一个低延迟、高准确的自动化数据洞察对话助手。</p>
+<p>Today, E-commerce sellers face several key challenges, including difficulties in discovering and effectively utilizing available programs and tools, and struggling to understand and utilize rich data from various tools. We therefore aim to develop Insight Agents (IA), a conversational multi-agent Data Insight system, to provide E-commerce sellers with personalized data and business insights through automated information retrieval. Our hypothesis is that IA will serve as a force multiplier for sellers, thereby driving incremental seller adoption by reducing the effort required and increase speed at which sellers make good business decisions. In this paper, we introduce this novel LLM-backed end-to-end agentic system built on a plan-and-execute paradigm and designed for comprehensive coverage, high accuracy, and low latency. It features a hierarchical multi-agent structure, consisting of manager agent and two worker agents: data presentation and insight generation, for efficient information retrieval and problem-solving. We design a simple yet effective ML solution for manager agent that combines Outof-Domain (OOD) detection using a lightweight encoder-decoder model and agent routing through a BERT-based classifier, optimizing both accuracy and latency. Within the two worker agents, a strategic planning is designed for API-based data model that breaks down queries into granular components to generate more accurate responses, and domain knowledge is dynamically injected to to enhance the insight generator. IA has been launched for Amazon sellers in US, which has achieved high accuracy of 90% based on human evaluation, with latency of P90 below 15s.</p>
+<p>https://arxiv.org/abs/2601.20048</p>
+<p>5、[LG] Shaping capabilities with token-level data filtering</p>
+<p>N Rathi, A Radford[Anthropic]</p>
+<p>以词元级数据过滤塑造模型能力</p>
+<p>要点:</p>
+<p>直击“事后”安全措施的脆弱性： 论文指出，当前减少模型不期望能力的方法（如RLHF或机器学习遗忘）都是在预训练之后应用的，很容易被绕过。因此，它提倡在预训练阶段本身就塑造模型的能力。</p>
+<p>“令牌级过滤”是帕累托改进： 这是最反直觉也是最核心的论点。相比于过滤掉包含不期望内容的整个文档，仅仅过滤掉与该内容相关的特定令牌效果更好。它能在同等程度上削弱“遗忘”能力，同时对相关的“保留”能力造成的损害更小。</p>
+<p>过滤效果随模型规模增长而增强： 一个关键发现是，随着模型变大，数据过滤的效果变得更加显著。对于最大的1.8B参数模型，令牌级过滤在医疗领域造成了高达7000倍的“计算效率放缓”，这意味着一个未经过滤的模型需要7000倍的计算资源才能在该主题上达到与过滤后模型同样差的性能。</p>
+<p>对恶意微调的鲁棒性： 经过数据过滤预训练的模型，在面对试图重新训练“遗忘”能力的恶意微调攻击时，其鲁棒性远超当前顶尖的机器学习遗忘方法（RMU）。并且，这种鲁棒性优势随模型规模的增大而扩大。</p>
+<p>对齐能力非但未受损，反而得到提升： 与毒性研究的发现相反，过滤掉某个能力领域的数据并不会使模型更难在该领域学会“拒绝”回答。事实上，经过令牌级过滤训练的模型在“拒绝训练”上的泛化能力比未经过滤的基线模型更好，而文档级过滤的模型则表现不佳。</p>
+<p>弱监督、低成本、可扩展的标注方法： 论文承认高质量标注是瓶颈，为此引入了一套新颖实用的令牌级标注流程。它利用稀疏自编码器（SAE）在大型模型中识别和解释“概念”（特征），将这些概念分类为期望或不期望，然后利用这些分类后的特征自动、高质量地标注数百万个令牌。</p>
+<p>通过蒸馏获得高效分类器： 由SAE流程生成的高质量但有噪声的标签，被用来蒸馏出小巧、高效的双向分类器。论文证明了小型的、领域特定的分类器性能优于大型通用分类器。</p>
+<p>通过规模化克服标签噪声： 虽然标签噪声会降低过滤效果，但论文证明了这一点可以被弥补。通过激进地设置分类器阈值（牺牲精确率换取高召回率）并增大模型规模，即使是一个性能不佳的分类器也能成为有效的过滤器。</p>
+<p>分类器的“弱到强”泛化能力： 论文表明，令牌级分类器可以在粗粒度（句子或文档级）的标签上训练并表现良好。更重要的是，它们展现了“弱到强”的泛化能力：一个强大的分类器在由一个弱分类器生成的标签上训练后，其性能能超越这个弱分类器。而文档级分类器则不具备这种能力。</p>
+<p>主旨： 本文旨在挑战当前主要通过“事后”手段（如对齐训练）来限制大型语言模型不期望能力的范式，并提出了一种更根本、更鲁棒的替代方案——在预训练阶段通过数据过滤来直接“塑造”模型的能力。核心论证是，相比于传统的文档级过滤，更精细的“令牌级”过滤是一种帕累托更优的策略，它能在最小化对有益能力损害的同时，最大化地削弱不期望的能力，并且这种优势会随着模型规模的增长而愈发显著。</p>
+<p>创新：</p>
+<p>令牌级过滤的提出与验证： 首次系统性地提出并证明了“令牌级”数据过滤相比“文档级”过滤是一种帕累托更优的策略。这是一个反直觉但影响深远的创新，它将数据干预的粒度从文档级推进到了令牌级。</p>
+<p>过滤效果的“正向尺度效应”： 发现了数据过滤效果随模型规模增长而增强的“正向尺度定律”。这与许多AI安全措施可能随规模增大而失效的担忧相反，为大规模模型的能力控制提供了一个非常有前景的方向。</p>
+<p>令牌级标注的自动化流程： 创新性地将稀疏自编码器（SAE）用于弱监督的令牌级数据标注，并结合蒸馏技术训练出小巧高效的分类器。这套流程解决了令牌级过滤中最关键的工程瓶颈——如何低成本、大规模地获取细粒度标签。</p>
+<p>对齐能力的意外增益： 反直觉地发现，令牌级过滤不仅没有像毒性过滤那样损害模型在特定领域的对齐能力（如学会拒绝），反而使其更容易对齐。这揭示了能力移除和行为对齐之间存在着比之前理解的更复杂且更有利的关系。</p>
+<p>贡献：</p>
+<p>实践贡献： 为AI安全和模型开发领域提供了一种经过验证的、高效且鲁棒的能力塑造方法。令牌级过滤在成本、效果和可扩展性上均表现出色，为构建更安全的AI基础模型提供了具体的、可操作的工程蓝图。</p>
+<p>理论贡献： 揭示了数据过滤效果与模型规模之间的正相关关系（尺度定律），为理解和预测大规模模型在不同数据分布下的行为提供了新的理论视角。</p>
+<p>方法论贡献： 提出了一套完整的、从标注到分类再到过滤的令牌级数据处理方法论，特别是利用SAE进行自动化标注，为未来处理大规模非结构化文本数据提供了新的工具和思路。</p>
+<p>提升：</p>
+<p>能力塑造的精确性： 令牌级过滤相比文档级过滤，能够在达到相同“遗忘”效果的同时，更好地保留相关良性领域（如生物学）的能力，实现了更精准的能力“手术刀”。</p>
+<p>鲁棒性： 预训练阶段的过滤比“事后”的机器学习遗忘方法（RMU）在对抗恶意微调时表现出高达10倍以上的鲁棒性，且这种优势随模型规模增大而增强。</p>
+<p>对齐效率： 令牌级过滤后的模型在“拒绝训练”上表现出比基线模型更好的泛化能力，使得在不期望领域内的行为控制变得更加容易。</p>
+<p>工程可行性： 通过SAE标注和分类器蒸馏，将令牌级过滤的成本控制在可接受范围内，证明了该方法在工业界大规模预训练中的可行性。</p>
+<p>不足：</p>
+<p>代理任务的局限性： 实验使用的是“遗忘医疗能力，保留生物学能力”作为代理任务。虽然具有代表性，但其结论是否能完全泛化到更复杂、更危险的能力领域（如生物武器、网络攻击）尚需进一步验证。</p>
+<p>对SAE质量的依赖： 自动化标注流程的质量高度依赖于稀疏自编码器（SAE）能否抽取出清晰、可解释的特征。对于某些更抽象或纠缠的能力，SAE的性能可能成为瓶颈。</p>
+<p>过滤的“钝器”本质： 尽管比文档级过滤更精确，但令牌级过滤仍然是一种“一刀切”的移除方法。对于那些具有“双重用途”的知识（即在良性场景中有用，在恶意场景中有害），简单的过滤可能不是最佳解决方案。</p>
+<p>可能存在“U型”尺度效应： 论文承认，尽管当前观察到过滤效果随规模增强，但不能排除在更大规模的模型上出现“U型”尺度效应，即模型变得足够聪明以至于能从极少数泄露的样本中重新学习能力。</p>
+<p>心得：</p>
+<p>源头治理远胜于末端补救： 这篇论文最有力的信息是，与其在模型训练完成后费力地进行各种“修复”和“打补丁”，不如从最开始的“喂料”阶段就进行精细化控制。这不仅是AI安全领域的深刻洞见，也适用于许多复杂的系统工程：在源头（数据）上进行一次高质量的干预，其效果和鲁棒性远胜于在末端（模型）进行无数次低效的修补。</p>
+<p>粒度决定精度，细节是魔鬼： 从“文档级”到“令牌级”的跨越，看似只是粒度的变化，实则带来了性能的帕累托改进。这深刻地提醒我们，在处理大规模数据和复杂模型时，提升操作的粒度往往是解锁更高性能和效率的关键。对细节的极致追求，是区分平庸与卓越的关键。</p>
+<p>AI能力的“可塑性”远超想象，且遵循规模法则： 论文展示了模型能力不仅可以被塑造，而且塑造的难易程度还与模型规模本身有关。过滤在更大模型上效果更好，这一发现令人振奋。它暗示着我们驾驭AI能力的工具箱，其效力可能会随着AI自身的发展而增强，这为AI安全领域带来了乐观的信号。</p>
+<p>一句话总结: 本文颠覆性地证明，在预训练阶段通过精细化的“令牌级”数据过滤，而非粗糙的“文档级”过滤，是一种帕累托更优的能力塑造方法；该方法不仅效果随模型规模增长而急剧增强，能以7000倍的计算效率削弱不期望能力，而且在对抗恶意微 new tuning 时比事后“遗忘”方法更鲁棒，甚至反直觉地让模型在特定领域更容易学会“拒绝”，为构建更安全的AI基础模型提供了一条根本且高效的路径。</p>
+<p>Current approaches to reducing undesired capabilities in language models are largely post hoc, and can thus be easily bypassed by adversaries. A natural alternative is to shape capabilities during pretraining itself. On the proxy task of removing medical capabilities, we show that the simple intervention of filtering pretraining data is highly effective, robust, and inexpensive at scale. Inspired by work on data attribution, we show that filtering tokens is more effective than filtering documents, achieving the same hit to undesired capabilities at a lower cost to benign ones. Training models spanning two orders of magnitude, we then demonstrate that filtering gets more effective with scale: for our largest models, token filtering leads to a 7000x compute slowdown on the forget domain. We also show that models trained with token filtering can still be aligned on the forget domain. Along the way, we introduce a methodology for labeling tokens with sparse autoencoders and distilling cheap, high-quality classifiers. We also demonstrate that filtering can be robust to noisy labels with sufficient pretraining compute.</p>
+<p>https://arxiv.org/abs/2601.21571</p>
+    </div>
+    
+    <div class="footer" style="margin-top:3em;padding-top:1em;border-top:1px solid #eee;color:#aaa;font-size:0.85em;">
+      <p><strong>原文链接：</strong><a href="https://mp.weixin.qq.com/s/ECUCGm5KbWzBuVmvkT1WZg">https://mp.weixin.qq.com/s/ECUCGm5KbWzBuVmvkT1WZg</a></p>
+      <p style="margin-top:0.8em;">Powered by <a href="https://readgzh.site" style="color:#aaa;text-decoration:none;">ReadGZH</a> · <a href="https://readgzh.site/docs" style="color:#aaa;text-decoration:none;">开发者文档</a> · <a href="https://readgzh.site/pricing" style="color:#aaa;text-decoration:none;">升级套餐</a></p>
+      <p style="margin-top:0.4em;font-size:0.8em;">💡 免费注册获取每天 30 积分 · Lite ¥9/月 · Pro ¥39/月 → <a href="https://readgzh.site/dashboard" style="color:#aaa;">readgzh.site/dashboard</a></p>
+    </div>
+  </article>
+</body>
+</html>

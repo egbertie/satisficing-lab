@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/docs/2026-03/cron_optimization_summary.md",
+  "filename": "cron_optimization_summary.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "66ec6720246849a7",
+  "content_length": 1564,
+  "ingested_at": "2026-03-31T17:27:46.646495",
+  "content_preview": "# Cron合并优化评估 — 执行摘要\n\n> **日期**: 2026-03-15  \n> **评估**: 完成  \n> **状态**: ⏳ 等待用户确认后实施\n\n---\n\n## 问题\n\n4个高频率Cron任务每日检查1,656次，90%为空转，Token持续消耗。\n\n| 任务 | 频率 | 状态 |\n|------|------|------|\n| 零空置强制执行检查 | 每10分钟 | ❌ 已禁用 |\n| 第一性原则资源调度检查 | 每30分钟 | ❌ 已禁用 |\n| 每小时快速复盘检查 | 每小时 | ❌ 已禁用 |\n| 自主执行器检查 | 每分钟 | ❌ 已禁用 |\n\n---\n\n## 推荐方案: C（事件驱动+人工确认）\n\n**核心**: 取消固定检查，只在事件发生时执行，所有补位需用户确认。\n\n**效果对比**:\n```\n        检查次数        Token消耗       产出率\n当前    1,656/天        ~16,560        ~10%\n方案C   ~8/天           ~800           ~80%\n─────────",
+  "limitations_applied": []
+}

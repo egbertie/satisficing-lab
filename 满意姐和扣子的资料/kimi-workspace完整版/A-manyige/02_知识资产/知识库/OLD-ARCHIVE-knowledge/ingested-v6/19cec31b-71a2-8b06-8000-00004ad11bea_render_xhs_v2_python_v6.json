@@ -1,0 +1,42 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_auto-redbook-skills/19cec31b-71a2-8b06-8000-00004ad11bea_render_xhs_v2.py",
+  "filename": "19cec31b-71a2-8b06-8000-00004ad11bea_render_xhs_v2.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 26155,
+  "checksum": "9f8231c4f7da32a5",
+  "ingested_at": "2026-03-31T17:30:32.130797",
+  "line_count": 747,
+  "title": "19cec31b-71a2-8b06-8000-00004ad11bea_render_xhs_v2",
+  "description": "小红书卡片渲染脚本 V2 - 智能分页版\n将 Markdown 文件渲染为小红书风格的图片卡片\n\n新特性：\n1. 智能分页：自动检测内容高度，超出时自动拆分到多张卡片\n2. 多种样式：支持多种预设样式主题\n3. 字数预估：基于字数预分配内容，减少渲染次数\n\n使用方法:\n    python render_xhs_v2.py <markdown_file> [options]\n\n依赖安装:\n    ",
+  "sections": [],
+  "entities": [
+    {
+      "name": "list_styles",
+      "type": "function"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "卡片尺寸配置 (3:4 比例)",
+    "内容区域安全高度（考虑 padding 和 margin）",
+    "card-inner padding: 60px * 2 = 120px",
+    "card-container padding: 50px * 2 = 100px",
+    "页码区域: ~80px",
+    "安全边距: ~40px",
+    "一行约25-30个中文字，行高1.7，字体42px",
+    "首先尝试识别内容块（以标题或空行分隔）",
+    "新标题开始新块（除非是第一个）",
+    "如果没有明显的块边界，按段落拆分",
+    "合并块到卡片，确保每张卡片高度不超过限制",
+    "如果单个块就超过限制，需要进一步拆分",
+    "如果当前卡片有内容，先保存",
+    "如果当前卡片加上这个块会超，先保存当前卡片"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

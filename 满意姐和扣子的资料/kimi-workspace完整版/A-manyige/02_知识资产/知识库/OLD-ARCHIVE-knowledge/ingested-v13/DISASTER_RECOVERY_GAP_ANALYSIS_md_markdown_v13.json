@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/DISASTER_RECOVERY_GAP_ANALYSIS.md",
+  "filename": "DISASTER_RECOVERY_GAP_ANALYSIS.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "e624bfef3b6e62ea",
+  "content_length": 2483,
+  "ingested_at": "2026-03-31T17:27:46.535170",
+  "content_preview": "# 灾备系统漏洞扫描报告\n\n**扫描时间**: 2026-03-25 20:35  \n**扫描工具**: verify-backup.sh + 人工审计  \n**风险等级**: 🔴 **高危** (发现3个关键漏洞)\n\n---\n\n## 🔴 关键漏洞 (立即修复)\n\n### 漏洞1: 779个未提交变更 (数据丢失风险)\n\n**状态**: ❌ **高危**  \n**发现**: Git工作区有779个未提交变更  \n**风险**: 系统崩溃/断电时，这些变更将完全丢失  \n**RPO**: 无法满足24小时目标\n\n**影响文件类型**:\n- Memory日志 (memory/2026-03-*.md)\n- Skill文档 (skills/*/SKILL.md)\n- 配置文件 (docs/*.md)\n- 脚本文件 (scripts/*.py)\n\n**修复方案**:\n```bash\n# 立即执行\n1. git add memory/ docs/ skills/ scripts/\n2. git commit -m \"DR-SYNC: $(date +%Y%m%d-%H%M) 灾备同步\"\n3. g",
+  "limitations_applied": []
+}

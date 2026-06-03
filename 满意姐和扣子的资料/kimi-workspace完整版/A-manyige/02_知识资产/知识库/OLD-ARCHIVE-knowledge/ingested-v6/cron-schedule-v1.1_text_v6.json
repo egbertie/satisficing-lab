@@ -1,0 +1,32 @@
+{
+  "source_path": "/root/.openclaw/workspace/.pre-restore-backup/docs/archive/cron-schedule-v1.1.txt",
+  "filename": "cron-schedule-v1.1.txt",
+  "extension": ".txt",
+  "file_type": "text",
+  "size_bytes": 2588,
+  "checksum": "80b62880e3ab127c",
+  "ingested_at": "2026-03-31T17:30:48.271652",
+  "line_count": 54,
+  "title": "cron-schedule-v1.1",
+  "description": "# Cron任务配置 - 第一性原理升级方案 V1.1",
+  "sections": [],
+  "entities": [],
+  "key_points": [
+    "# Cron任务配置 - 第一性原理升级方案 V1.1",
+    "# 满意解研究所自动化运营体系",
+    "# ============================================================",
+    "# ============================================================",
+    "# 每日经济环境监测（错峰09:17，幸运数字17）",
+    "# 任务：生成环境日报、监测政策/融资/供应链动态",
+    "0 9 * * * openclaw agent --skill economic-intelligence --task daily-report --tar",
+    "# 每周环境周报（周五17:17）",
+    "# 任务：汇总本周环境动态、生成周报、识别风险与机会",
+    "0 17 * * 5 openclaw agent --skill economic-intelligence --task weekly-report --t",
+    "# 每月环境月报（次月3日09:17）",
+    "# 任务：深度分析、趋势研判、策略建议",
+    "0 9 3 * * openclaw agent --skill economic-intelligence --task monthly-report --t",
+    "# ============================================================"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

@@ -1,0 +1,162 @@
+{
+  "source_path": "/root/.openclaw/workspace/.pre-restore-backup/docs/API_KEY_ROTATION_PLAN_A.md",
+  "filename": "API_KEY_ROTATION_PLAN_A.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 5681,
+  "checksum": "3cdace7eeb57118a",
+  "ingested_at": "2026-03-31T17:30:16.286709",
+  "line_count": 232,
+  "title": "API密钥轮换完整方案（方案A）",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "API密钥轮换完整方案（方案A）"
+    },
+    {
+      "level": 2,
+      "title": "📋 轮换前准备清单"
+    },
+    {
+      "level": 3,
+      "title": "必须提前准备的"
+    },
+    {
+      "level": 2,
+      "title": "🔑 当前API密钥清单"
+    },
+    {
+      "level": 3,
+      "title": "1. GitHub Token（最高优先级）"
+    },
+    {
+      "level": 3,
+      "title": "2. Kimi API Key（月之暗面）"
+    },
+    {
+      "level": 3,
+      "title": "3. Jina AI API Key"
+    },
+    {
+      "level": 3,
+      "title": "4. Claude API Key（Anthropic）"
+    },
+    {
+      "level": 3,
+      "title": "5. GitHub Models 专用Token"
+    },
+    {
+      "level": 2,
+      "title": "🧹 Git历史清理步骤（关键）"
+    },
+    {
+      "level": 3,
+      "title": "方案C（当前执行）：基础保护"
+    },
+    {
+      "level": 3,
+      "title": "方案A（下周四执行）：完整清理"
+    },
+    {
+      "level": 4,
+      "title": "步骤1：安装必要工具"
+    },
+    {
+      "level": 1,
+      "title": "Ubuntu/Debian"
+    },
+    {
+      "level": 1,
+      "title": "或使用Python pip"
+    },
+    {
+      "level": 4,
+      "title": "步骤2：创建安全备份"
+    },
+    {
+      "level": 1,
+      "title": "备份当前仓库"
+    },
+    {
+      "level": 4,
+      "title": "步骤3：执行Git历史清理"
+    },
+    {
+      "level": 1,
+      "title": "清理.env文件历史"
+    },
+    {
+      "level": 1,
+      "title": "清理config目录下所有.env"
+    },
+    {
+      "level": 4,
+      "title": "步骤4：强制推送（危险操作）"
+    },
+    {
+      "level": 1,
+      "title": "这会重写GitHub历史，协作者需重新clone"
+    },
+    {
+      "level": 4,
+      "title": "步骤5：验证清理结果"
+    },
+    {
+      "level": 1,
+      "title": "确认历史中无密钥"
+    },
+    {
+      "level": 1,
+      "title": "应返回空"
+    },
+    {
+      "level": 2,
+      "title": "⚠️ 风险提示"
+    },
+    {
+      "level": 3,
+      "title": "执行前必须知道"
+    },
+    {
+      "level": 3,
+      "title": "最低风险路径"
+    },
+    {
+      "level": 2,
+      "title": "✅ 执行检查清单"
+    },
+    {
+      "level": 3,
+      "title": "下周四执行时按此清单操作"
+    },
+    {
+      "level": 4,
+      "title": "阶段1：密钥轮换（15分钟）"
+    },
+    {
+      "level": 4,
+      "title": "阶段2：旧密钥撤销（10分钟）"
+    },
+    {
+      "level": 4,
+      "title": "阶段3：Git历史清理（20分钟）"
+    },
+    {
+      "level": 4,
+      "title": "阶段4：系统验证（15分钟）"
+    },
+    {
+      "level": 2,
+      "title": "📞 紧急联系"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "清理期间仓库将不可用（约5-15分钟）",
+    "Git历史重写后，所有协作者需重新clone仓库",
+    "如果仓库是public且已被fork，泄露的密钥可能已被他人保存"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

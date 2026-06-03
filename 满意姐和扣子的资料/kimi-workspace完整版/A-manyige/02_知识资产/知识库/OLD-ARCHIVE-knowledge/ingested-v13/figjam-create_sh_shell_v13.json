@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.config/figjam-create.sh",
+  "filename": "figjam-create.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "053d9aab35211dd3",
+  "content_length": 1753,
+  "ingested_at": "2026-03-31T17:27:44.618550",
+  "content_preview": "#!/bin/bash\n# FigJam快速启动脚本\n\nFIGMA_TOKEN=\"YOUR_TOKEN_HERE\"\n\n# 创建FigJam文件\ncreate_figjam_file() {\n    local file_name=$1\n    local file_type=${2:-\"jam\"}\n    \n    curl -s -X POST \\\n        -H \"X-Figma-Token: $FIGMA_TOKEN\" \\\n        -H \"Content-Type: application/json\" \\\n        -d \"{\\\"name\\\": \\\"$file_name\\\", \\\"type\\\": \\\"$file_type\\\"}\" \\\n        https://api.figma.com/v1/files\n}\n\n# 添加矩形节点\nadd_rectangle() {\n    local file_key=$1\n    local x=$2\n    local y=$3\n    local width=$4\n    local height=$5\n    lo",
+  "limitations_applied": []
+}

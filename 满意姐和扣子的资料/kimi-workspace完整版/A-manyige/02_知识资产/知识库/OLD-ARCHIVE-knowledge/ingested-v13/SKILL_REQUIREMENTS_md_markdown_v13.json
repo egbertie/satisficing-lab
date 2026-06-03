@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/testing-framework/SKILL_REQUIREMENTS.md",
+  "filename": "SKILL_REQUIREMENTS.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "ab36247989202ee1",
+  "content_length": 3515,
+  "ingested_at": "2026-03-31T17:27:45.440998",
+  "content_preview": "# Skill Testing Requirements & Test Plans\n\n本文件记录所有被测Skill的测试需求和测试计划（S1标准）。\n\n---\n\n## Skill: zero-idle-enforcer\n\n### 基本信息\n- **风险等级**: P0\n- **版本**: 1.0.0\n- **测试负责人**: Satisficing Institute\n- **最后更新**: 2026-03-21\n\n### 测试需求\n\n#### 功能点清单\n\n| ID | 功能点 | 优先级 | 测试类型 | 依赖 |\n|----|--------|--------|----------|------|\n| F1 | 读取用户活动时间 | P0 | 单元 | 无 |\n| F2 | 判断Token级别（NORMAL/LOW/CRITICAL） | P0 | 单元 | F1 |\n| F3 | 检查触发条件（空闲+Token+补位间隔） | P0 | 单元 | F1,F2 |\n| F4 | 执行补位任务生成 | P0 | 单元 | F3 |\n| F5 | 状态持久化（zero-idle-st",
+  "limitations_applied": []
+}

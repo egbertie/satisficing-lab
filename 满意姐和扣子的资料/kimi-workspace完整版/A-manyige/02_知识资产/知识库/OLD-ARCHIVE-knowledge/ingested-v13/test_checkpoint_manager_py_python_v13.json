@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/checkpoint-manager/test_checkpoint_manager.py",
+  "filename": "test_checkpoint_manager.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "ff6e37f28b2ff492",
+  "content_length": 8964,
+  "ingested_at": "2026-03-31T17:27:45.451626",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\ncheckpoint-manager 单元测试\n覆盖率目标: >80%\n\"\"\"\n\nimport unittest\nimport tempfile\nimport shutil\nimport os\nimport json\nfrom pathlib import Path\nfrom unittest.mock import patch, MagicMock\nimport sys\n\n# 添加被测模块路径\nsys.path.insert(0, str(Path(__file__).parent))\nfrom checkpoint_manager import CheckpointManager\n\n\nclass TestCheckpointManager(unittest.TestCase):\n    \"\"\"CheckpointManager单元测试\"\"\"\n    \n    def setUp(self):\n        \"\"\"每个测试前创建临时目录\"\"\"\n        self.temp_dir = tempfile.mkdtemp()\n",
+  "limitations_applied": []
+}

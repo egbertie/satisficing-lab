@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify_analyze_tee_performance.sh",
+  "filename": "verify_analyze_tee_performance.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "d0420c261f4a33b8",
+  "content_length": 632,
+  "ingested_at": "2026-03-31T17:27:46.171451",
+  "content_preview": "#!/bin/bash\n# TEE性能分析脚本安全审计和8步验证\n# 任务: analyze_tee_performance.py\n\necho \"=== TEE性能分析脚本安全审计和8步验证 ===\"\necho \"\"\n\nSCRIPT_PATH=\"/root/.openclaw/workspace/analyze_tee_performance.py\"\n\n# 安全审计\necho \"【安全审计】\"\npython3 -m py_compile \"$SCRIPT_PATH\" 2>/dev/null && echo \"语法 ✅\"\ngrep -n \"password\\|secret\\|key\\|token\" \"$SCRIPT_PATH\" 2>/dev/null | head -3 && echo \"⚠️ 需审查\" || echo \"密钥检查 ✅\"\n\n# 8步验证\necho \"\"\necho \"【8步验证】\"\ntest -f \"$SCRIPT_PATH\" && echo \"Step1 ✅\"\npython3 -m py_compile \"$SCRIPT_PATH\" 2>/dev/null && echo",
+  "limitations_applied": []
+}

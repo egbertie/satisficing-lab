@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/skill-ab-testing.sh",
+  "filename": "skill-ab-testing.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "e29cb4b1314b2d68",
+  "content_length": 4459,
+  "ingested_at": "2026-03-31T17:27:46.217317",
+  "content_preview": "#!/bin/bash\n# Skill A/B Testing Framework - Skill进化A/B测试框架\n# 每月对比2个Skill版本效果\n\nSKILL_DIR=\"/root/.openclaw/workspace/skills\"\nTEST_DIR=\"/root/.openclaw/workspace/skills/.ab-testing\"\nLOG_FILE=\"/var/log/skill-ab-test.log\"\nDATE=$(date +%Y-%m-%d)\n\nmkdir -p \"$TEST_DIR\"\n\n# A/B测试配置\ninit_ab_test() {\n    local skill_name=$1\n    local variant_a=$2\n    local variant_b=$3\n    \n    echo \"=== Skill A/B Test Init: $skill_name ===\" | tee -a \"$LOG_FILE\"\n    echo \"Date: $DATE\" | tee -a \"$LOG_FILE\"\n    echo \"Variant ",
+  "limitations_applied": []
+}

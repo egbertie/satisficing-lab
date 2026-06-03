@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/file-handler-universal/file_handler.py",
+  "filename": "file_handler.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "fd16fb393e268b62",
+  "content_length": 9481,
+  "ingested_at": "2026-03-31T17:27:45.475180",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n统一文件处理器 - Universal File Handler\n整合所有文件处理能力：DOCX、PDF、Excel、CSV等\n\"\"\"\n\nimport os\nimport sys\nimport subprocess\nimport tempfile\nfrom pathlib import Path\nfrom typing import Optional\n\n# 支持的文件类型\nSUPPORTED_TYPES = {\n    '.md': 'markdown',\n    '.txt': 'text',\n    '.docx': 'docx',\n    '.pdf': 'pdf',\n    '.xlsx': 'excel',\n    '.csv': 'csv',\n    '.png': 'image',\n    '.jpg': 'image',\n    '.jpeg': 'image',\n    '.gif': 'image',\n}\n\nclass FileHandler:\n    \"\"\"统一文件处理器\"\"\"\n    \n    def __i",
+  "limitations_applied": []
+}

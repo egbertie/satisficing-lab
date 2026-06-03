@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/quality-assurance/qa_system/red_team_generator.py",
+  "filename": "red_team_generator.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "5fe7b9d3258801cd",
+  "content_length": 24491,
+  "ingested_at": "2026-03-31T17:27:44.997873",
+  "content_preview": "\"\"\"\nRed Team Generator\n红队缺陷生成器\n\n使用AI驱动的红队策略生成更隐蔽、更复杂的缺陷，\n用于测试质量保障系统的检测极限。\n\"\"\"\n\nimport ast\nimport re\nimport random\nimport hashlib\nfrom typing import List, Dict, Any, Optional, Tuple, Callable\nfrom dataclasses import dataclass, field\nfrom enum import Enum\nimport copy\n\n\nclass ObfuscationLevel(Enum):\n    \"\"\"混淆等级\"\"\"\n    LOW = \"low\"         # 简单缺陷，易检测\n    MEDIUM = \"medium\"   # 中等隐蔽\n    HIGH = \"high\"       # 高度隐蔽\n    EXTREME = \"extreme\" # 极难检测\n\n\nclass AttackVector(Enum):\n    \"\"\"攻击向量类型\"\"\"\n    SYNTAX_EVA",
+  "limitations_applied": []
+}

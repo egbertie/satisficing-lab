@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blue-army-interceptor/test_blue_army_interceptor.py",
+  "filename": "test_blue_army_interceptor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "b6a44615fd750560",
+  "content_length": 1048,
+  "ingested_at": "2026-03-31T17:27:44.990870",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nblue-army-interceptor测试文件\n\"\"\"\n\nimport unittest\nimport sys\nfrom pathlib import Path\n\nsys.path.insert(0, str(Path(__file__).parent))\n\nimport importlib.util\nspec = importlib.util.spec_from_file_location(\"blue_army_interceptor\", \n    str(Path(__file__).parent / 'blue_army_interceptor.py'))\ninterceptor_module = importlib.util.module_from_spec(spec)\nspec.loader.exec_module(interceptor_module)\n\n\nclass TestBlueArmyInterceptor(unittest.TestCase):\n    \"\"\"蓝军拦截器测试\"\"\"\n    \n    def ",
+  "limitations_applied": []
+}

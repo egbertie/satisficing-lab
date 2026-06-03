@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/validate_first_time_understanding.py",
+  "filename": "validate_first_time_understanding.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "8be29d570c4839eb",
+  "content_length": 1326,
+  "ingested_at": "2026-03-31T17:27:46.180766",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n第一次理解检查验证脚本\n用途: 自动检查是否完成5层理解\n规则: 没过5层就执行 = 违规\n\"\"\"\n\nimport sys\nimport re\n\ndef validate_first_time_understanding(file_path):\n    \"\"\"验证第一次理解检查是否完成5层\"\"\"\n    \n    print(f\"=== 第一次理解检查验证: {file_path} ===\")\n    \n    try:\n        with open(file_path, 'r', encoding='utf-8') as f:\n            content = f.read()\n    except Exception as e:\n        print(f\"❌ 错误: 无法读取文件 - {e}\")\n        return False\n    \n    # 检查5层\n    checks = {\n        \"表面意思\": bool(re.search(r\"表面意思|字面意思\", content)),",
+  "limitations_applied": []
+}

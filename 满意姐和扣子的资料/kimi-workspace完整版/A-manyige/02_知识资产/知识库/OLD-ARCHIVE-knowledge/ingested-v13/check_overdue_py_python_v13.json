@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/check_overdue.py",
+  "filename": "check_overdue.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "f58f58636c6138e0",
+  "content_length": 1092,
+  "ingested_at": "2026-03-31T17:27:46.165046",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n逾期任务检查脚本\n检查P0/P1任务的逾期情况\n\"\"\"\nimport sys\nfrom pathlib import Path\nimport json\nfrom datetime import datetime, timedelta\n\nsys.path.insert(0, str(Path(\"/root/.openclaw/workspace\")))\n\ndef check_overdue_tasks(priorities=\"P0,P1\", notify=False):\n    \"\"\"检查逾期任务\"\"\"\n    priorities = priorities.split(\",\")\n    \n    # 从任务清单中读取任务\n    task_master = Path(\"/root/.openclaw/workspace/docs/TASK_MASTER.md\")\n    \n    overdue_count = 0\n    \n    if task_master.exists():\n        content = task_ma",
+  "limitations_applied": []
+}

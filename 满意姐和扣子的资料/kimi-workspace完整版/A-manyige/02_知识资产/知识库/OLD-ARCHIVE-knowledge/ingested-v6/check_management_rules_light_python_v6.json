@@ -1,0 +1,61 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/check_management_rules_light.py",
+  "filename": "check_management_rules_light.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 3640,
+  "checksum": "3fdde9ccdb0004ff",
+  "ingested_at": "2026-03-31T17:30:32.860068",
+  "line_count": 130,
+  "title": "check_management_rules_light",
+  "description": "轻量级管理规则检查脚本 - Token优化版\n预计Token消耗: ~50-100/次\n\n使用方法:\n    python3 check_management_rules_light.py",
+  "sections": [],
+  "entities": [
+    {
+      "name": "get_file_mtime",
+      "type": "function"
+    },
+    {
+      "name": "get_file_hash",
+      "type": "function"
+    },
+    {
+      "name": "load_cache",
+      "type": "function"
+    },
+    {
+      "name": "save_cache",
+      "type": "function"
+    },
+    {
+      "name": "check_truth_redline",
+      "type": "function"
+    },
+    {
+      "name": "check_task_deadline",
+      "type": "function"
+    },
+    {
+      "name": "check_memory_update",
+      "type": "function"
+    },
+    {
+      "name": "run_light_check",
+      "type": "function"
+    },
+    {
+      "name": "format_report",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "只检查错误档案中是否有未纠正的",
+    "只检查文件修改时间，不解析内容",
+    "如果超过24小时未更新，提醒检查",
+    "如果距离上次检查不到1小时，使用缓存",
+    "轻量检查（只检查时间戳，不读全文）"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

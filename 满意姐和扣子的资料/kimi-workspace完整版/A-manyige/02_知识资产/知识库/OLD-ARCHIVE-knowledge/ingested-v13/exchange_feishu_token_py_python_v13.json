@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/exchange_feishu_token.py",
+  "filename": "exchange_feishu_token.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "f0e6b5a1cb6ad959",
+  "content_length": 2514,
+  "ingested_at": "2026-03-31T17:27:46.153473",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n飞书 OAuth2 Token 换取脚本\n使用 Authorization Code 换取 User Access Token\n\"\"\"\n\nimport os\nimport sys\nimport requests\nfrom typing import Dict, Any\n\n# 配置\nAPP_ID = \"cli_a927c5dfa4381cc6\"\nAPP_SECRET = \"8950yzh6jj17nQkKBjvGIdRocdrslhjI\"\n\ndef exchange_code_for_token(code: str) -> Dict[str, Any]:\n    \"\"\"\n    使用 Authorization Code 换取 User Access Token\n    \"\"\"\n    url = \"https://open.feishu.cn/open-apis/oauthen/v1/access_token\"\n    \n    payload = {\n        \"grant_type\": \"authorization_cod",
+  "limitations_applied": []
+}

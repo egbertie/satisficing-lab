@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/docs/2026-03/GITHUB_ACTIONS_QUICK_SETUP.md",
+  "filename": "GITHUB_ACTIONS_QUICK_SETUP.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "3c3dd44ce33581e8",
+  "content_length": 2488,
+  "ingested_at": "2026-03-31T17:27:46.633502",
+  "content_preview": "# GitHub Actions 简化配置步骤（5分钟）\n\n> 由于我的GitHub账号无法接受邮件邀请，我们改用**你自行创建工作流文件**的方式，功能完全相同。\n\n---\n\n## 步骤1：创建工作流文件（2分钟）\n\n1. 打开你的GitHub仓库页面：\n   `https://github.com/Egbertie/satisficing-institute`\n\n2. 点击上方 **\"Actions\"** 标签\n\n3. 点击 **\"set up a workflow yourself\"**（或 \"New workflow\"）\n\n4. 在文件名框输入：\n   `.github/workflows/daily-sync.yml`\n\n5. 复制以下代码到编辑器：\n\n```yaml\nname: Daily Sync to Notion\n\non:\n  schedule:\n    - cron: '0 2 * * *'  # 每天凌晨2点 UTC\n  workflow_dispatch:      # 允许手动触发\n\njobs:\n  sync:\n    runs-on: ubuntu-late",
+  "limitations_applied": []
+}

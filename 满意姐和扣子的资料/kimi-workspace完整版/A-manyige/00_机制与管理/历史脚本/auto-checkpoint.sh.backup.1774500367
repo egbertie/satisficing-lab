@@ -1,0 +1,44 @@
+#!/bin/bash
+# 零Token自动检查点系统 - 每10分钟执行
+# 部署时间: 2026-03-26
+
+VAULT_DIR="$HOME/.openclaw/immortal-state"
+CHECKPOINT_DIR="$VAULT_DIR/checkpoints"
+TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+
+mkdir -p "$CHECKPOINT_DIR"
+
+# 获取当前会话ID
+SESSION_ID=${CLAW_SESSION_ID:-"main"}
+CHECKPOINT_NAME="cpt-${SESSION_ID}-${TIMESTAMP}"
+
+# 创建检查点
+cd "$HOME/.openclaw" 2>/dev/null || exit 1
+
+tar czf "$CHECKPOINT_DIR/${CHECKPOINT_NAME}.tar.gz" \
+  --exclude='*.log' \
+  --exclude='checkpoints/*' \
+  --exclude='immortal-state/checkpoints/*' \
+  workspace/ \
+  config/ \
+  2>/dev/null
+
+TAR_SIZE=$(stat -c%s "$CHECKPOINT_DIR/${CHECKPOINT_NAME}.tar.gz" 2>/dev/null || echo 0)
+FILE_COUNT=$(find "$HOME/.openclaw/workspace" -type f 2>/dev/null | wc -l)
+
+# 记录元数据
+cat > "$CHECKPOINT_DIR/${CHECKPOINT_NAME}.meta" << EOF
+{
+  "id": "${CHECKPOINT_NAME}",
+  "timestamp": "$(date -Iseconds)",
+  "session": "$SESSION_ID",
+  "size": ${TAR_SIZE},
+  "files": ${FILE_COUNT}
+}
+EOF
+
+# 保留最近20个检查点
+ls -t "$CHECKPOINT_DIR"/cpt-*.tar.gz 2>/dev/null | tail -n +21 | xargs -r rm -f
+ls -t "$CHECKPOINT_DIR"/cpt-*.meta 2>/dev/null | tail -n +21 | xargs -r rm -f
+
+echo "[$(date '+%H:%M:%S')] ✅ 检查点: ${CHECKPOINT_NAME} (${TAR_SIZE} bytes, ${FILE_COUNT} files)"

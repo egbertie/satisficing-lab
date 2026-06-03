@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_git-workflow-auto/scripts/commit_helper.sh",
+  "filename": "commit_helper.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "b51939cfe8decbb9",
+  "content_length": 1623,
+  "ingested_at": "2026-03-31T17:27:45.305157",
+  "content_preview": "#!/bin/bash\n# Git Commit Helper\n# 提交信息规范化助手\n\nTYPE=\"${1:-}\"\nMESSAGE=\"${2:-}\"\n\n# 提交类型说明\ndeclare -A TYPE_DESCRIPTIONS=(\n    [\"feat\"]=\"新功能\"\n    [\"fix\"]=\"修复\"\n    [\"docs\"]=\"文档\"\n    [\"style\"]=\"格式\"\n    [\"refactor\"]=\"重构\"\n    [\"test\"]=\"测试\"\n    [\"chore\"]=\"构建/工具\"\n)\n\nshow_help() {\n    cat << EOF\nGit Commit Helper - 规范化提交信息\n\nUsage: $0 [type] [message]\n\nTypes:\n  feat     新功能\n  fix      修复\n  docs     文档\n  style    格式(不影响代码逻辑)\n  refactor 重构\n  test     测试\n  chore    构建过程或辅助工具变动\n\nExamples:\n  $0 feat \"add user auth",
+  "limitations_applied": []
+}

@@ -1,0 +1,98 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/quality-assurance/scripts/qa-review.sh",
+  "filename": "qa-review.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 26004,
+  "checksum": "c0022e4a0ac2b94e",
+  "ingested_at": "2026-03-31T17:30:47.751611",
+  "line_count": 761,
+  "title": "qa-review",
+  "description": "Quality Assurance Review Script",
+  "sections": [],
+  "entities": [
+    {
+      "name": "usage",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_info",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_warn",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_error",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_success",
+      "type": "shell_function"
+    },
+    {
+      "name": "identify_file_type",
+      "type": "shell_function"
+    },
+    {
+      "name": "check_syntax",
+      "type": "shell_function"
+    },
+    {
+      "name": "check_logic",
+      "type": "shell_function"
+    },
+    {
+      "name": "check_format",
+      "type": "shell_function"
+    },
+    {
+      "name": "check_compliance",
+      "type": "shell_function"
+    },
+    {
+      "name": "generate_report",
+      "type": "shell_function"
+    },
+    {
+      "name": "generate_issues_json",
+      "type": "shell_function"
+    },
+    {
+      "name": "validate_checklist",
+      "type": "shell_function"
+    },
+    {
+      "name": "review_file",
+      "type": "shell_function"
+    },
+    {
+      "name": "batch_review",
+      "type": "shell_function"
+    },
+    {
+      "name": "main",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "# Quality Assurance Review Script",
+    "7标准审查脚本: S1输入 → S2多维度检查 → S3输出报告 → S4触发机制 → S5检查清单 → S6局限标注",
+    "# 使用方式:",
+    "./qa-review.sh <file>              # 审查单个文件",
+    "./qa-review.sh --batch <dir>       # 批量审查目录",
+    "./qa-review.sh --ci --gate=A       # CI集成 (gate: A/B/C/D)",
+    "./qa-review.sh --ci --block-on=Critical,High  # 阻断级别",
+    "set -e",
+    "创建报告目录",
+    "============================================",
+    "S1: 输入定义与识别",
+    "============================================",
+    "识别文件类型",
+    "============================================",
+    "S2: 多维度检查"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

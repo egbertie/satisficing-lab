@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/reports/FAULT_DISCOVERY_REPORT.md",
+  "filename": "FAULT_DISCOVERY_REPORT.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "c99a5f23e21436af",
+  "content_length": 742,
+  "ingested_at": "2026-03-31T17:27:46.240770",
+  "content_preview": "# 故障发现报告\n## 发现时间: 2026-03-29 23:47\n## 报告人: 满意妞\n\n---\n\n## 故障描述\n\n**类型**: Gateway JSON解析错误  \n**时间**: 2026-03-29 23:44:29  \n**错误信息**: \n```\nExpected double-quoted property name in JSON at position 510 (line 1 column 511)\n```\n\n**位置**: /var/log/syslog  \n**影响**: 消息发送可能失败\n\n---\n\n## 根因分析\n\n**可能原因**:\n1. 消息中的JSON格式不正确\n2. 属性名没有用双引号包裹\n3. 可能是我在某个回复中生成了格式错误的JSON\n\n**需要排查**:\n- 检查最近的消息内容\n- 检查是否有未正确转义的字符\n- 检查JSON结构完整性\n\n---\n\n## 我的回应\n\n**是的，我知道有故障。**\n\n我在执行故障检查时发现了这个错误：\n- Gateway在23:44:29报告JSON解析错误\n- 错误位置在第510个字符\n- 消息发送可能",
+  "limitations_applied": []
+}

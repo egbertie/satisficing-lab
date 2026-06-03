@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/quality-gate-system/scripts/quality-gate-check.py",
+  "filename": "quality-gate-check.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "989ea61eb27a9a48",
+  "content_length": 29419,
+  "ingested_at": "2026-03-31T17:27:45.006496",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nquality-gate-check.py\n完整的质量门禁检查脚本\n支持：代码/文档/配置的多维度质量检查\n\nUsage:\n    python3 quality-gate-check.py --target ./src --level standard\n    python3 quality-gate-check.py --target commit:abc123 --format json\n    python3 quality-gate-check.py --quick  # 快速检查模式\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport time\nimport hashlib\nimport argparse\nimport logging\nimport subprocess\nfrom pathlib import Path\nfrom datetime import datetime\nfrom dataclasses import dataclass, field, asdict\nfrom",
+  "limitations_applied": []
+}

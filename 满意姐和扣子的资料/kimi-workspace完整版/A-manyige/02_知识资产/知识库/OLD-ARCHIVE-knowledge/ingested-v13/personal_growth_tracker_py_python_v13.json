@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/personal-growth-tracker/personal_growth_tracker.py",
+  "filename": "personal_growth_tracker.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "3f1fd61de5347f3a",
+  "content_length": 16002,
+  "ingested_at": "2026-03-31T17:27:44.762404",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n个人成长追踪器 V1.0\n为每位AI小伙伴量身定制，追踪其成长为全球顶级专家的路径\n\n核心职责:\n1. 追踪每位小伙伴的成长进度\n2. 制定个性化提升计划\n3. 评估与全球顶尖水平的差距\n4. 提供持续学习的资源和路径\n\"\"\"\n\nimport json\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import Dict, List, Optional\nfrom dataclasses import dataclass, asdict\n\n\n@dataclass\nclass GrowthGoal:\n    \"\"\"成长目标\"\"\"\n    goal_id: str\n    description: str\n    target_date: str\n    metrics: Dict  # 评估指标\n    status: str = \"active\"  # active/completed/paused\n    progress:",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_satisficing-web-fetcher/examples/example1_basic_fetch.py",
+  "filename": "example1_basic_fetch.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "5be6093cc6913408",
+  "content_length": 2444,
+  "ingested_at": "2026-03-31T17:27:45.068540",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n示例1: 基础HTTP抓取\n\n场景：抓取静态页面、API端点\n特点：轻量级、快速、低资源消耗\n\"\"\"\n\nimport sys\nfrom pathlib import Path\nsys.path.insert(0, str(Path(__file__).parent.parent))\n\nfrom fetcher import HTTPFetcher\n\n\ndef example_basic_fetch():\n    \"\"\"基础抓取示例\"\"\"\n    print(\"=\" * 50)\n    print(\"示例1: 基础HTTP抓取\")\n    print(\"=\" * 50)\n    \n    # 创建fetcher实例\n    fetcher = HTTPFetcher(\n        impersonate=\"chrome\",  # 模拟Chrome浏览器\n        stealth_headers=True,   # 使用stealth请求头\n        rate_limit=1.0,         # 每秒1个请求\n  ",
+  "limitations_applied": []
+}

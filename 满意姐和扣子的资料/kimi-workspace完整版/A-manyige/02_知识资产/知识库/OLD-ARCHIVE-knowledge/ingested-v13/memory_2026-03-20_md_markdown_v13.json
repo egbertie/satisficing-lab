@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/knowledge-ingest/ingested/memory_2026-03-20.md",
+  "filename": "memory_2026-03-20.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "d0c8a8012f8b6b77",
+  "content_length": 3612,
+  "ingested_at": "2026-03-31T17:27:45.666931",
+  "content_preview": "\n\n---\n\n## 2026-03-20 23:35 - 零空置机制+全面承诺5标准转化完成\n\n### 一、零空置用户对话保留规则（关键发现）\n\n**问题**: 配置`subagents.maxConcurrent: 8`全开，无用户对话预留  \n**风险**: 用户发起对话时可能无可用子代理  \n**解决**: ✅ 已创建`user-conversation-reservation` Skill\n\n**5标准实现**:\n- 全局考虑: 监控所有子代理，确保用户优先级\n- 系统考虑: 检测→预留→分配→释放闭环\n- 迭代机制: 根据活跃度调整策略\n- Skill化: 标准化接口\n- 自动化: 每2分钟监控，自动预留\n\n### 二、全面丢失承诺转化（5项新Skill）\n\n| # | 承诺 | 原状态 | 5标准Skill | Cron频率 |\n|---|------|--------|-----------|----------|\n| 1 | 用户对话预留 | ❌ 无机制 | user-conversation-reservation | 每2分钟 |\n| 2 | API配置管理 | ❌",
+  "limitations_applied": []
+}

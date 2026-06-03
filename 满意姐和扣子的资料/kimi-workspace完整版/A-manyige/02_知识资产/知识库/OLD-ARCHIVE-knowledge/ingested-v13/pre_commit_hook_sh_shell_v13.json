@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/testing-framework/scripts/pre_commit_hook.sh",
+  "filename": "pre_commit_hook.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "155e59bda015e2a6",
+  "content_length": 2078,
+  "ingested_at": "2026-03-31T17:27:45.445588",
+  "content_preview": "#!/bin/bash\n# 预提交钩子 - S4标准实现\n# 在git commit前自动运行基本检查\n\nset -e\n\nSCRIPT_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nPROJECT_DIR=\"$(dirname \"$SCRIPT_DIR\")\"\n\n# 颜色定义\nRED='\\033[0;31m'\nGREEN='\\033[0;32m'\nYELLOW='\\033[1;33m'\nBLUE='\\033[0;34m'\nNC='\\033[0m'\n\necho -e \"${BLUE}============================================${NC}\"\necho -e \"${BLUE}  OpenClaw Skills 预提交检查${NC}\"\necho -e \"${BLUE}============================================${NC}\"\n\n# 检查是否在正确目录\nif [ ! -f \"$PROJECT_DIR/run_tests.py\" ]; then\n    ec",
+  "limitations_applied": []
+}

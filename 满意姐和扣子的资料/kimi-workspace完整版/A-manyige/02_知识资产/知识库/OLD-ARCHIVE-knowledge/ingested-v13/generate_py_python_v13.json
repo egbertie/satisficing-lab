@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/daily-report/generate.py",
+  "filename": "generate.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "a0cdb848ed2cc237",
+  "content_length": 969,
+  "ingested_at": "2026-03-31T17:27:45.420350",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n周报生成脚本\n生成每日晨报和晚报\n\"\"\"\nimport sys\nfrom pathlib import Path\nfrom datetime import datetime\n\nsys.path.insert(0, str(Path(\"/root/.openclaw/workspace\")))\n\ndef generate_report(report_type=\"morning\"):\n    \"\"\"生成报告\"\"\"\n    now = datetime.now()\n    \n    if report_type == \"morning\":\n        print(f\"📰 晨报生成 ({now.strftime('%Y-%m-%d %H:%M')})\")\n        sections = [\"📅 今日日程\", \"⚠️ 风险预警\", \"📌 P0/P1任务\", \"📊 系统状态\"]\n    else:\n        print(f\"📰 晚报生成 ({now.strftime('%Y-%m-%d %H:%M')})\")\n        s",
+  "limitations_applied": []
+}

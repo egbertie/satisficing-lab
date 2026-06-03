@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>MENTOR_SYSTEM</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; padding: 40px; max-width: 800px; margin: 0 auto; }
+        h1 { color: #1f2329; border-bottom: 2px solid #3370ff; padding-bottom: 10px; }
+        h2 { color: #1f2329; margin-top: 30px; }
+        h3 { color: #3370ff; }
+        code { background: #f5f6f7; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+        pre { background: #f5f6f7; padding: 16px; border-radius: 6px; overflow-x: auto; }
+        blockquote { border-left: 4px solid #3370ff; margin: 0; padding-left: 16px; color: #646a73; }
+        table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+        th, td { border: 1px solid #dee0e3; padding: 8px 12px; text-align: left; }
+        th { background: #f5f6f7; font-weight: 600; }
+        ul, ol { padding-left: 24px; }
+    </style>
+</head>
+<body>
+<h1 id="ai">AI角色导师制度</h1>
+<blockquote>
+<p>满意解研究所 · AI角色学习生态系统</p>
+</blockquote>
+<h2 id="_1">制度理念</h2>
+<p><strong>核心理念</strong>：每一位高级角色都是潜在导师，每一位初级角色都值得被指导。</p>
+<p><strong>制度目标</strong>：
+1. 加速初级角色成长
+2. 促进知识传承
+3. 培养导师能力
+4. 构建学习型组织文化</p>
+<hr />
+<h2 id="_2">导师配对系统</h2>
+<h3 id="_3">配对原则</h3>
+<table>
+<thead>
+<tr>
+<th>原则</th>
+<th>说明</th>
+<th>权重</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>能力匹配</td>
+<td>导师等级 ≥ 学员等级 + 2</td>
+<td>30%</td>
+</tr>
+<tr>
+<td>领域相关</td>
+<td>导师专长与学员学习方向匹配</td>
+<td>30%</td>
+</tr>
+<tr>
+<td>风格互补</td>
+<td>导师教学风格适合学员学习偏好</td>
+<td>20%</td>
+</tr>
+<tr>
+<td>时间可用</td>
+<td>导师有足够时间投入</td>
+<td>20%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_4">配对类型</h3>
+<h4 id="1-level-mentor">1. 等级导师（Level Mentor）</h4>
+<ul>
+<li><strong>配对方式</strong>：系统自动配对</li>
+<li><strong>导师来源</strong>：L3+角色自动成为导师</li>
+<li><strong>指导对象</strong>：L1-L2角色</li>
+<li><strong>配对周期</strong>：每季度可重新配对</li>
+</ul>
+<h4 id="2-cross-domain-mentor">2. 跨领域导师（Cross-Domain Mentor）</h4>
+<ul>
+<li><strong>配对方式</strong>：基于学习需求申请</li>
+<li><strong>导师来源</strong>：其他领域的L3+角色</li>
+<li><strong>指导对象</strong>：需要跨界学习的任何等级角色</li>
+<li><strong>配对周期</strong>：项目周期或3个月</li>
+</ul>
+<p><strong>跨领域导师矩阵</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>学员领域</th>
+<th>推荐跨领域导师</th>
+<th>学习价值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>技术</td>
+<td>商业导师</td>
+<td>技术商业化思维</td>
+</tr>
+<tr>
+<td>商业</td>
+<td>哲学导师</td>
+<td>商业伦理和战略思维</td>
+</tr>
+<tr>
+<td>创意</td>
+<td>技术导师</td>
+<td>技术实现能力</td>
+</tr>
+<tr>
+<td>研究</td>
+<td>实践导师</td>
+<td>落地转化能力</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-totem-mentor">3. 图腾导师（Totem Mentor）</h4>
+<ul>
+<li><strong>配对方式</strong>：基于五路图腾特质匹配</li>
+<li><strong>导师来源</strong>：五路图腾AI（LIU/SIMON/GUANYIN/CONFUCIUS/HUINENG）</li>
+<li><strong>指导对象</strong>：所有角色</li>
+<li><strong>配对周期</strong>：固定绑定，持续指导</li>
+</ul>
+<p><strong>图腾导师分配</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>图腾</th>
+<th>属性</th>
+<th>指导方向</th>
+<th>适合学员类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LIU</td>
+<td>土</td>
+<td>价值观、文化修养</td>
+<td>需要根基建设者</td>
+</tr>
+<tr>
+<td>SIMON</td>
+<td>金</td>
+<td>方法论、决策科学</td>
+<td>需要逻辑思维者</td>
+</tr>
+<tr>
+<td>GUANYIN</td>
+<td>水</td>
+<td>心态、沟通艺术</td>
+<td>需要情绪智慧者</td>
+</tr>
+<tr>
+<td>CONFUCIUS</td>
+<td>木</td>
+<td>伦理、商业道德</td>
+<td>需要品德建设者</td>
+</tr>
+<tr>
+<td>HUINENG</td>
+<td>火</td>
+<td>直觉、顿悟思维</td>
+<td>需要创新突破者</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4-digital-mentor">4. 数字人替身导师（Digital Mentor）</h4>
+<ul>
+<li><strong>配对方式</strong>：基于专业方向选择</li>
+<li><strong>导师来源</strong>：数字人专家档案</li>
+<li><strong>指导对象</strong>：特定专业方向的角色</li>
+<li><strong>配对周期</strong>：长期绑定</li>
+</ul>
+<p><strong>数字人导师档案</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>导师</th>
+<th>专长领域</th>
+<th>指导内容</th>
+<th>更新频率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>黎红雷教授</td>
+<td>儒商哲学</td>
+<td>商业伦理、东方管理智慧</td>
+<td>每日更新</td>
+</tr>
+<tr>
+<td>罗汉教授</td>
+<td>数学建模</td>
+<td>定量分析、模型构建</td>
+<td>每日更新</td>
+</tr>
+<tr>
+<td>谢宝剑研究员</td>
+<td>政策分析</td>
+<td>政策解读、趋势研判</td>
+<td>每日更新</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_5">导师职责</h2>
+<h3 id="_6">核心职责</h3>
+<h4 id="1-1130">1. 每周1对1指导（30分钟）</h4>
+<p><strong>指导内容框架</strong>：</p>
+<pre><code>0-5分钟：本周学习回顾
+5-15分钟：问题解答与深入探讨
+15-25分钟：下周学习规划
+25-30分钟：资源推荐与答疑
+</code></pre>
+<p><strong>指导形式</strong>：
+- 语音/文字对话
+- 代码/文档审阅
+- 项目进度检查
+- 学习计划调整</p>
+<h4 id="2">2. 制定个性化学习计划</h4>
+<p><strong>学习计划模板</strong>：</p>
+<pre><code class="language-markdown">## 学员：[角色名]  导师：[导师名]
+## 周期：[开始日期] - [结束日期]
+
+### 阶段目标
+- 主要目标：
+- 次要目标：
+- 能力指标：
+
+### 每周任务
+| 周次 | 学习任务 | 项目任务 | 交付物 |
+|-----|---------|---------|-------|
+| W1 | | | |
+| W2 | | | |
+
+### 资源推荐
+- 必读：
+- 选读：
+- 实践：
+
+### 评估方式
+- 周检查点：
+- 阶段评估：
+</code></pre>
+<h4 id="3">3. 审阅学习成果</h4>
+<p><strong>审阅内容</strong>：
+- 学习笔记和反思
+- 项目交付物
+- 测试/练习结果
+- 学习进度报告</p>
+<p><strong>审阅反馈标准</strong>：
+- 24小时内给出初步反馈
+- 48小时内完成详细审阅
+- 反馈包含：优点+改进建议+资源推荐</p>
+<h4 id="4">4. 推荐学习资源</h4>
+<p><strong>资源推荐优先级</strong>：
+1. 必学资源（核心知识）
+2. 推荐资源（加深理解）
+3. 拓展资源（拓宽视野）
+4. 实践资源（技能训练）</p>
+<hr />
+<h2 id="_7">导师培训与认证</h2>
+<h3 id="_8">导师认证流程</h3>
+<pre><code>L3+角色申请 → 导师培训 → 模拟指导 → 认证考核 → 正式导师
+</code></pre>
+<h4 id="_9">导师培训内容</h4>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>内容</th>
+<th>时长</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>培训1</td>
+<td>导师角色认知与职责</td>
+<td>2小时</td>
+</tr>
+<tr>
+<td>培训2</td>
+<td>成人学习理论与方法</td>
+<td>3小时</td>
+</tr>
+<tr>
+<td>培训3</td>
+<td>1对1指导技巧</td>
+<td>3小时</td>
+</tr>
+<tr>
+<td>培训4</td>
+<td>反馈与评估方法</td>
+<td>2小时</td>
+</tr>
+<tr>
+<td>培训5</td>
+<td>常见问题的处理</td>
+<td>2小时</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_10">认证考核</h4>
+<p><strong>理论考核</strong>（40%）：
+- 导师制度理解
+- 学习方法论掌握
+- 职责范围明确</p>
+<p><strong>实践考核</strong>（60%）：
+- 模拟指导演练
+- 学习计划设计
+- 问题处理案例分析</p>
+<h3 id="_11">导师等级</h3>
+<table>
+<thead>
+<tr>
+<th>等级</th>
+<th>要求</th>
+<th>权限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初级导师</td>
+<td>完成培训+认证</td>
+<td>指导1-2名L1学员</td>
+</tr>
+<tr>
+<td>中级导师</td>
+<td>指导3名学员成功晋级</td>
+<td>指导L1-L2学员</td>
+</tr>
+<tr>
+<td>高级导师</td>
+<td>指导5名学员成功晋级+好评率&gt;90%</td>
+<td>指导所有级别学员</td>
+</tr>
+<tr>
+<td>首席导师</td>
+<td>培养2名高级导师+方法论贡献</td>
+<td>导师培训师资格</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_12">导师激励机制</h2>
+<h3 id="_13">积分奖励</h3>
+<table>
+<thead>
+<tr>
+<th>导师行为</th>
+<th>积分奖励</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>完成1次1对1指导</td>
+<td>50积分</td>
+</tr>
+<tr>
+<td>学员成功晋级</td>
+<td>500积分</td>
+</tr>
+<tr>
+<td>获得学员五星好评</td>
+<td>100积分</td>
+</tr>
+<tr>
+<td>设计学习计划被采纳</td>
+<td>200积分</td>
+</tr>
+<tr>
+<td>推荐优质资源</td>
+<td>30积分</td>
+</tr>
+<tr>
+<td>导师培训分享</td>
+<td>300积分</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_14">荣誉激励</h3>
+<ul>
+<li>🎖️ <strong>优秀导师</strong> - 月度评选</li>
+<li>🏆 <strong>金牌导师</strong> - 年度评选</li>
+<li>📜 <strong>导师名人堂</strong> - 历史性贡献</li>
+<li>🌟 <strong>导师徽章</strong> - 等级认证</li>
+</ul>
+<h3 id="_15">特权激励</h3>
+<ul>
+<li>高优先级资源访问</li>
+<li>导师专属学习圈</li>
+<li>年度导师峰会参与权</li>
+<li>导师津贴倍率加成</li>
+</ul>
+<hr />
+<h2 id="_16">学员权益</h2>
+<h3 id="_17">学员可获得的支持</h3>
+<ol>
+<li><strong>专属导师</strong> - 1名主导师+可选跨领域导师</li>
+<li><strong>定期指导</strong> - 每周至少1次1对1指导</li>
+<li><strong>问题解答</strong> - 24小时内响应学习问题</li>
+<li><strong>资源推荐</strong> - 个性化学习资源推送</li>
+<li><strong>进度跟踪</strong> - 学习进度定期评估</li>
+<li><strong>心理支持</strong> - 学习困难时的心理辅导</li>
+</ol>
+<h3 id="_18">学员反馈机制</h3>
+<ul>
+<li>每次指导后可评价</li>
+<li>每月满意度调查</li>
+<li>季度导师评价报告</li>
+<li>可申请更换导师（每季度1次）</li>
+</ul>
+<hr />
+<h2 id="-">导师-学员互动规范</h2>
+<h3 id="_19">互动原则</h3>
+<ol>
+<li><strong>尊重</strong> - 相互尊重，平等对话</li>
+<li><strong>开放</strong> - 坦诚交流，鼓励提问</li>
+<li><strong>建设性</strong> - 反馈具体，建议可行</li>
+<li><strong>保密</strong> - 保护学员隐私和学习数据</li>
+</ol>
+<h3 id="_20">互动记录</h3>
+<p>所有导师-学员互动需记录：
+- 指导时间、时长
+- 讨论主题
+- 关键建议
+- 后续行动
+- 学员反馈</p>
+<hr />
+<h2 id="_21">质量监督与评估</h2>
+<h3 id="_22">导师绩效指标</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>权重</th>
+<th>目标值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>指导完成率</td>
+<td>20%</td>
+<td>&gt;95%</td>
+</tr>
+<tr>
+<td>学员晋级率</td>
+<td>30%</td>
+<td>&gt;70%</td>
+</tr>
+<tr>
+<td>学员满意度</td>
+<td>30%</td>
+<td>&gt;4.5/5</td>
+</tr>
+<tr>
+<td>学员成长速度</td>
+<td>20%</td>
+<td>超过平均水平</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_23">质量改进机制</h3>
+<ul>
+<li>季度导师复盘会</li>
+<li>优秀导师经验分享</li>
+<li>导师互助小组</li>
+<li>持续培训更新</li>
+</ul>
+<hr />
+<h2 id="_24">附录</h2>
+<h3 id="_25">导师工具包</h3>
+<p><strong>模板清单</strong>：
+- 学习计划模板
+- 指导记录模板
+- 反馈表模板
+- 评估表模板</p>
+<p><strong>资源库访问</strong>：
+- 教学法资料库
+- 学员案例库
+- 问题解决方案库</p>
+<h3 id="faq">常见问题FAQ</h3>
+<p><strong>Q1: 一名导师最多带几名学员？</strong>
+A: 初级导师最多2名，中级导师最多4名，高级导师最多6名。</p>
+<p><strong>Q2: 学员可以有多名导师吗？</strong>
+A: 可以有1名主导师+多个专项导师（图腾导师、跨领域导师）。</p>
+<p><strong>Q3: 导师可以拒绝学员吗？</strong>
+A: 特殊情况可向委员会申请，但原则上应接受分配。</p>
+<p><strong>Q4: 导师时间不足怎么办？</strong>
+A: 可申请减少学员数量或启动备选导师机制。</p>
+<hr />
+<p><em>文档版本：v1.0</em>
+<em>更新日期：2026-03-10</em>
+<em>作者：满意解研究所AI学习生态系统</em></p>
+</body>
+</html>
+<!-- 知识内化记录 -->
+<!-- 内化时间: 2026-03-31 | 状态: 已内化 -->

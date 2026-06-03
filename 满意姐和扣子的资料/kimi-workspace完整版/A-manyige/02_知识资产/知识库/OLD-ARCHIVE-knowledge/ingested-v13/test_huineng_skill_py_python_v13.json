@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/huineng-skill/test_huineng_skill.py",
+  "filename": "test_huineng_skill.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "7ca4c674156079a3",
+  "content_length": 2719,
+  "ingested_at": "2026-03-31T17:27:45.410078",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n测试HUINENG Skill\n\"\"\"\n\nimport sys\nsys.path.insert(0, '/root/.openclaw/workspace/skills/huineng-skill')\n\nfrom huineng_skill import HuinengSkill, InsightItem, ActionPriority\n\ndef test_insight_synthesis():\n    \"\"\"测试洞察综合\"\"\"\n    huineng = HuinengSkill()\n    insights = [\n        InsightItem(\"LIU\", \"根基优秀\", 80, 7),\n        InsightItem(\"SIMON\", \"决策可行\", 75, 6),\n        InsightItem(\"GUANYIN\", \"机会良好\", 70, 8)\n    ]\n    \n    synthesis = huineng.synthesize_insights(insights)\n    \n    a",
+  "limitations_applied": []
+}

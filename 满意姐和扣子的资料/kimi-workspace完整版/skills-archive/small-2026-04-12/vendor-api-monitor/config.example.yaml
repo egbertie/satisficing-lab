@@ -1,0 +1,104 @@
+# 厂商 API 监控配置
+# 复制为 config.yaml 并填入实际值
+
+monitors:
+  - name: "feishu_drive"
+    vendor: "feishu"
+    display_name: "飞书云空间"
+    endpoint: "https://open.feishu.cn/open-apis/drive/v1/metas/batch_query"
+    method: "POST"
+    headers:
+      Content-Type: "application/json"
+    body: '{"request_docs": [{"doc_token": "test", "doc_type": "sheet"}]}'
+    timeout: 10
+    interval: 60
+    enabled: true
+    
+  - name: "wecom_token"
+    vendor: "wecom"
+    display_name: "企业微信 Token"
+    endpoint: "https://qyapi.weixin.qq.com/cgi-bin/gettoken"
+    method: "GET"
+    params:
+      corpid: "${WECOM_CORPID}"
+      corpsecret: "${WECOM_SECRET}"
+    timeout: 10
+    interval: 300
+    enabled: true
+    
+  - name: "dingtalk_token"
+    vendor: "dingtalk"
+    display_name: "钉钉 Token"
+    endpoint: "https://oapi.dingtalk.com/gettoken"
+    method: "GET"
+    params:
+      appkey: "${DINGTALK_APP_KEY}"
+      appsecret: "${DINGTALK_APP_SECRET}"
+    timeout: 10
+    interval: 300
+    enabled: false  # 默认禁用，需配置后启用
+    
+  - name: "notion_search"
+    vendor: "notion"
+    display_name: "Notion Search"
+    endpoint: "https://api.notion.com/v1/search"
+    method: "POST"
+    headers:
+      Authorization: "Bearer ${NOTION_TOKEN}"
+      Notion-Version: "2022-06-28"
+    body: '{"query": "test", "page_size": 1}'
+    timeout: 10
+    interval: 60
+    enabled: false  # 默认禁用，需配置后启用
+
+# 监控指标配置
+metrics:
+  availability:
+    target: 99.9  # % SLA目标
+    check_interval: 60  # 秒
+    
+  performance:
+    response_time_p95: 2000  # ms
+    response_time_p99: 5000  # ms
+    
+  error_rate:
+    threshold: 1.0  # %
+    window: 300     # 5分钟窗口
+    
+  quota:
+    warning_threshold: 80   # %
+    critical_threshold: 95  # %
+
+# 告警配置
+alerts:
+  enabled: true
+  channels:
+    - type: "file"
+      path: "reports/alerts.json"
+    - type: "console"
+      format: "text"
+      
+  rules:
+    - name: "api_down"
+      condition: "availability < 100"
+      severity: "critical"
+      message: "{vendor} API 不可达"
+      cooldown: 300  # 秒
+      
+    - name: "slow_response"
+      condition: "p95_latency > 2000"
+      severity: "warning"
+      message: "{vendor} API 响应缓慢 (P95: {p95_latency}ms)"
+      cooldown: 600
+      
+    - name: "high_error_rate"
+      condition: "error_rate > 1.0"
+      severity: "critical"
+      message: "{vendor} API 错误率过高 ({error_rate}%)"
+      cooldown: 300
+
+# 数据保留
+data_retention:
+  metrics_days: 30
+  reports_days: 90
+  alerts_days: 30

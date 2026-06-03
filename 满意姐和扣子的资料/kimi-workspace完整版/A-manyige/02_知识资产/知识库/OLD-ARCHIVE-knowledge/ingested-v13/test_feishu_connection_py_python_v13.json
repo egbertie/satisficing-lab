@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/test_feishu_connection.py",
+  "filename": "test_feishu_connection.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "0863efb6cb18a124",
+  "content_length": 2639,
+  "ingested_at": "2026-03-31T17:27:46.159811",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n飞书API连接测试脚本\n\"\"\"\n\nimport json\nimport requests\nimport sys\n\ndef test_connection():\n    # 读取配置\n    with open('/root/.openclaw/workspace/config/feishu_config.json', 'r') as f:\n        config = json.load(f)\n    \n    app_id = config['app_id']\n    app_secret = config['app_secret']\n    base_url = config['base_url']\n    \n    print(\"=\"*60)\n    print(\"飞书API连接测试\")\n    print(\"=\"*60)\n    print(f\"App ID: {app_id}\")\n    print(f\"Base URL: {base_url}\")\n    print(\"-\"*60)\n    \n    # 1. 获取T",
+  "limitations_applied": []
+}

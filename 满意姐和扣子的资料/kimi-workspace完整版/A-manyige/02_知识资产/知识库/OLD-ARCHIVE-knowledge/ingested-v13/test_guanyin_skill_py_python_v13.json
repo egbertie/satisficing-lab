@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/guanyin-skill/test_guanyin_skill.py",
+  "filename": "test_guanyin_skill.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e459e8f7aae11fd4",
+  "content_length": 2412,
+  "ingested_at": "2026-03-31T17:27:45.353798",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n测试GUANYIN Skill\n\"\"\"\n\nimport sys\nsys.path.insert(0, '/root/.openclaw/workspace/skills/guanyin-skill')\n\nfrom guanyin_skill import GuanyinSkill, EnvironmentData, EnvironmentSignal, ResponseStrategy\n\ndef test_accelerate_scenario():\n    \"\"\"测试加速推进场景\"\"\"\n    guanyin = GuanyinSkill()\n    data = EnvironmentData(\n        market_trend=8.5,\n        team_morale=8.0,\n        risk_level=3.0,\n        opportunity_score=9.0,\n        resource_availability=7.0\n    )\n    \n    insight = guan",
+  "limitations_applied": []
+}

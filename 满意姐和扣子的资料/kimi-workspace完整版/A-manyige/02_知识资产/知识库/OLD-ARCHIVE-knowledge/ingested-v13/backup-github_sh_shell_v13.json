@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/disaster-recovery/02-自动化备份脚本/backup-github.sh",
+  "filename": "backup-github.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "e6c93b970b8b145d",
+  "content_length": 7805,
+  "ingested_at": "2026-03-31T17:27:44.643113",
+  "content_preview": "#!/bin/bash\n################################################################################\n# GitHub 仓库备份脚本\n# 功能: 备份所有GitHub仓库到本地，并推送到镜像源\n################################################################################\n\nset -euo pipefail\n\n# 配置\nSCRIPT_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nsource \"${SCRIPT_DIR}/common.sh\"\n\n# GitHub配置 (需根据实际情况修改)\nGITHUB_USER=\"${GITHUB_USER:-your-username}\"\nGITHUB_TOKEN=\"${GITHUB_TOKEN:-}\"  # 从环境变量或配置文件读取\nBACKUP_BASE_DIR=\"${BACKUP_BASE_DIR:-${HOME}/Ba",
+  "limitations_applied": []
+}

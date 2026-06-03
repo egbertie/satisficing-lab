@@ -1,0 +1,38 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/disaster-recovery-sync-v2.sh",
+  "filename": "disaster-recovery-sync-v2.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 4371,
+  "checksum": "adfb68cc4e9a878e",
+  "ingested_at": "2026-03-31T17:30:47.874201",
+  "line_count": 135,
+  "title": "disaster-recovery-sync-v2",
+  "description": "灾备复刻V2.0同步脚本 - 全量备份",
+  "sections": [],
+  "entities": [
+    {
+      "name": "send_wecom_alert",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "灾备复刻V2.0同步脚本 - 全量备份",
+    "创建时间: 2026-03-20",
+    "修正: 从V1.0的9文件(76KB) → V2.0的全量(363MB)",
+    "更新: 2026-03-21 - 集成企微告警通道",
+    "企微告警函数（如果已配置）",
+    "L1 关键节点：开始备份 - 发送通知",
+    "1. 统计工作区状态",
+    "2. 创建核心文件清单",
+    "Tier 1: 核心身份 (P0)",
+    "Tier 2: 项目状态 (P0)",
+    "Tier 3: 关键配置",
+    "3. 备份核心交付物索引",
+    "4. 生成恢复清单",
+    "灾备恢复清单 V2.0",
+    "# 生成时间: $(date)"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

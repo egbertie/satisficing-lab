@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/file_management_suite/organize.sh",
+  "filename": "organize.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "badd6e8d911ee8d3",
+  "content_length": 3095,
+  "ingested_at": "2026-03-31T17:27:46.219229",
+  "content_preview": "#!/bin/bash\n#\n# organize.sh - 自动整理脚本\n# 功能: 按规则自动整理文件到对应目录\n# 用法: ./organize.sh [--dry-run]\n\nset -e\n\nDRY_RUN=false\nif [ \"$1\" == \"--dry-run\" ]; then\n    DRY_RUN=true\n    echo \"🔍 试运行模式（不会实际移动文件）\"\nfi\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nDOWNLOADS=\"/root/openclaw/kimi/downloads\"\n\necho \"🗂️  开始自动整理...\"\n\n# 1. 整理pycache\necho \"→ 清理 __pycache__ 目录...\"\nif [ \"$DRY_RUN\" = false ]; then\n    find \"$WORKSPACE\" -type d -name \"__pycache__\" -exec rm -rf {} + 2>/dev/null || true\n    echo \"  ✓ 已清理\"\nelse\n    count=$(",
+  "limitations_applied": []
+}

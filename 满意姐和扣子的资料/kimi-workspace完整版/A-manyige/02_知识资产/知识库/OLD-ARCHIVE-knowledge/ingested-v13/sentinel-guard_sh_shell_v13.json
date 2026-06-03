@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/sentinel-guard.sh",
+  "filename": "sentinel-guard.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "e64a6a0e18fca3fa",
+  "content_length": 5584,
+  "ingested_at": "2026-03-31T17:27:46.202689",
+  "content_preview": "#!/bin/bash\n# Sentinel Guard - 哨兵守卫系统主监控\n# 全维度系统监控与自动响应\n# 运行频率: 每5分钟\n\nSCRIPT_DIR=\"/root/.openclaw/workspace/scripts\"\nLOG_DIR=\"/var/log/sentinel\"\nCONFIG_FILE=\"/root/.openclaw/workspace/config/sentinel-guard.conf\"\nTIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')\n\n# 确保日志目录存在\nmkdir -p \"$LOG_DIR\"\n\n# 加载配置（如果不存在则使用默认值）\nload_config() {\n    DISK_THRESHOLD=${DISK_THRESHOLD:-80}\n    DISK_CRITICAL=${DISK_CRITICAL:-90}\n    CPU_THRESHOLD=${CPU_THRESHOLD:-70}\n    CPU_CRITICAL=${CPU_CRITICAL:-85}\n    MEM_THRESHOLD=${MEM_",
+  "limitations_applied": []
+}

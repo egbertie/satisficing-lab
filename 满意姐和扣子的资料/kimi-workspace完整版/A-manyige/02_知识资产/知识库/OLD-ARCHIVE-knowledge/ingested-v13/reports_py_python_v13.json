@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/quality-assurance/qa_system/reports.py",
+  "filename": "reports.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "03a483ec2b061299",
+  "content_length": 10785,
+  "ingested_at": "2026-03-31T17:27:44.998360",
+  "content_preview": "\"\"\"\nReport Generation Module\n生成质量报告和完成报告\n\"\"\"\n\nimport json\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, Any, List\nfrom dataclasses import dataclass, field\n\nfrom .core import QualityMetrics, LimitationRegistry\nfrom .adversarial import run_adversarial_tests\nfrom .gates import create_gate\n\n\n@dataclass\nclass Standard5Report:\n    \"\"\"5标准完成报告\"\"\"\n    \n    version: str = \"5.0.0\"\n    timestamp: datetime = field(default_factory=datetime.now)\n    \n    s1_global: Dict[str, A",
+  "limitations_applied": []
+}

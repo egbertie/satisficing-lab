@@ -1,0 +1,106 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_presentation-helper/presentation-helper.sh",
+  "filename": "presentation-helper.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 13644,
+  "checksum": "e3fc496d5ce25749",
+  "ingested_at": "2026-03-31T17:30:47.759573",
+  "line_count": 410,
+  "title": "presentation-helper",
+  "description": "presentation-helper.sh — Safe operations for AI Presentation Maker",
+  "sections": [],
+  "entities": [
+    {
+      "name": "sanitize_string",
+      "type": "shell_function"
+    },
+    {
+      "name": "sanitize_filename",
+      "type": "shell_function"
+    },
+    {
+      "name": "validate_path",
+      "type": "shell_function"
+    },
+    {
+      "name": "validate_json",
+      "type": "shell_function"
+    },
+    {
+      "name": "cmd_init",
+      "type": "shell_function"
+    },
+    {
+      "name": "cmd_save_meta",
+      "type": "shell_function"
+    },
+    {
+      "name": "cmd_save_deck",
+      "type": "shell_function"
+    },
+    {
+      "name": "cmd_get_meta",
+      "type": "shell_function"
+    },
+    {
+      "name": "cmd_get_deck",
+      "type": "shell_function"
+    },
+    {
+      "name": "cmd_list",
+      "type": "shell_function"
+    },
+    {
+      "name": "cmd_delete",
+      "type": "shell_function"
+    },
+    {
+      "name": "cmd_archive",
+      "type": "shell_function"
+    },
+    {
+      "name": "cmd_duplicate",
+      "type": "shell_function"
+    },
+    {
+      "name": "cmd_export_pdf",
+      "type": "shell_function"
+    },
+    {
+      "name": "cmd_export_pptx",
+      "type": "shell_function"
+    },
+    {
+      "name": "cmd_export_html",
+      "type": "shell_function"
+    },
+    {
+      "name": "cmd_export_gamma",
+      "type": "shell_function"
+    },
+    {
+      "name": "cmd_sanitize_string",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "presentation-helper.sh — Safe operations for AI Presentation Maker",
+    "All user-provided input passes through code-enforced sanitization.",
+    "# Usage:",
+    "bash presentation-helper.sh <command> [args...]",
+    "# Commands:",
+    "init                        — Create workspace directories",
+    "save-meta                   — Validate and save presentation JSON from stdin",
+    "save-deck <pres_id>        — Save markdown deck from stdin",
+    "get-meta <pres_id>         — Read presentation metadata",
+    "get-deck <pres_id>         — Read markdown deck",
+    "list                        — List all presentations",
+    "delete <pres_id>           — Delete a presentation (metadata + deck)",
+    "archive <pres_id>          — Move to archive",
+    "duplicate <pres_id>        — Copy presentation with new ID",
+    "export-pdf <pres_id>       — Export to PDF via pandoc"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/archive/多维表格创建指南.md",
+  "filename": "多维表格创建指南.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "d5d94a5687482af9",
+  "content_length": 2048,
+  "ingested_at": "2026-03-31T17:27:46.575282",
+  "content_preview": "# 飞书多维表格创建与协作指南（方案B）\n\n**目标**：创建应用空间的多维表格，实现双向协作\n**验证时间**：2026-03-09\n\n---\n\n## 第一步：创建多维表格（应用空间）\n\n### 1.1 进入API调试台\n- 登录：https://open.feishu.cn/app/cli_a9208a79e2b99cc4\n- 找到「API调试台」\n\n### 1.2 选择接口\n- **分类**：`base`（多维表格）\n- **接口**：`POST /open-apis/base/v1/apps`\n- **名称**：「创建多维表格」/「Create App」\n\n### 1.3 填写请求体\n```json\n{\n  \"name\": \"满意解研究所_案例库V2\",\n  \"description\": \"应用空间创建的案例管理表格\"\n}\n```\n\n### 1.4 发送请求\n- 点击「发送」\n- **预期成功响应**：\n```json\n{\n  \"code\": 0,\n  \"data\": {\n    \"app\": {\n      \"app_token\": \"xxxxxxxxxx\",  // 重要！",
+  "limitations_applied": []
+}

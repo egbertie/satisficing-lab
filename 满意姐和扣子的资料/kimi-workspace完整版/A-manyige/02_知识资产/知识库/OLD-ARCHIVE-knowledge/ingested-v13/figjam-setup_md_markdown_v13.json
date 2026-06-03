@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.config/figjam-setup.md",
+  "filename": "figjam-setup.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "ba1b9ecdf6715a5e",
+  "content_length": 749,
+  "ingested_at": "2026-03-31T17:27:44.619142",
+  "content_preview": "# FigJam API 配置指南\n\n## 1. 注册Figma账号\n- 访问：https://www.figma.com\n- 点击 \"Sign up\"\n- 使用邮箱或Google账号注册\n- 用户名建议：egbertie\n\n## 2. 获取Personal Access Token\n1. 登录Figma后，访问：https://www.figma.com/developers/api#access-tokens\n2. 点击 \"Personal access tokens\"\n3. 点击 \"Create new token\"\n4. 名称：满意解研究所\n5. 复制Token（格式：figd_xxxxxxxx）\n\n## 3. 创建FigJam文件\n使用API创建：\n```bash\ncurl -X POST \\\n  -H \"X-Figma-Token: YOUR_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"name\": \"满意解组织架构\", \"type\": \"jam\"}' \\\n  https://api.figma.com/",
+  "limitations_applied": []
+}

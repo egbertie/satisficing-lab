@@ -1,0 +1,76 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_satisficing-web-fetcher/fetcher.py",
+  "filename": "fetcher.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 22104,
+  "checksum": "8c827085b4a56c9e",
+  "ingested_at": "2026-03-31T17:30:32.148668",
+  "line_count": 649,
+  "title": "fetcher",
+  "description": "Satisficing Web Fetcher - 满意解Web抓取器主模块\n\n核心设计原则：\n1. 安全第一：所有操作都有边界和审计\n2. 渐进增强：从简单到复杂，按需升级\n3. 透明可控：用户清楚知道发生了什么",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: FetchResult"
+    },
+    {
+      "level": 2,
+      "title": "Class: SelectorResult"
+    },
+    {
+      "level": 2,
+      "title": "Class: BaseFetcher"
+    },
+    {
+      "level": 2,
+      "title": "Class: HTTPFetcher"
+    },
+    {
+      "level": 2,
+      "title": "Class: StealthyFetcher"
+    },
+    {
+      "level": 2,
+      "title": "Class: AdaptiveParser"
+    }
+  ],
+  "entities": [
+    {
+      "name": "FetchResult",
+      "type": "class"
+    },
+    {
+      "name": "SelectorResult",
+      "type": "class"
+    },
+    {
+      "name": "BaseFetcher",
+      "type": "class"
+    },
+    {
+      "name": "HTTPFetcher",
+      "type": "class"
+    },
+    {
+      "name": "StealthyFetcher",
+      "type": "class"
+    },
+    {
+      "name": "AdaptiveParser",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "简单的文本提取，移除script和style",
+    "延迟导入playwright，避免不必要的依赖加载",
+    "添加stealth脚本",
+    "处理Cloudflare（如果启用）",
+    "基础stealth注入",
+    "简单等待策略，实际可能需要更复杂的处理",
+    "简化的自适应逻辑：基于标签和属性查找"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

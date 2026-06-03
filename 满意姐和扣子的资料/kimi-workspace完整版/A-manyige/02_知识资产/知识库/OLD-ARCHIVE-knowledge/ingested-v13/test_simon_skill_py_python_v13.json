@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/simon-skill/test_simon_skill.py",
+  "filename": "test_simon_skill.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e85b57ccc513aec0",
+  "content_length": 3449,
+  "ingested_at": "2026-03-31T17:27:45.481860",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n测试SIMON Skill\n\"\"\"\n\nimport sys\nsys.path.insert(0, '/root/.openclaw/workspace/skills/simon-skill')\n\nfrom simon_skill import SIMONSkill, CandidateProfile, DecisionStatus\n\ndef test_recommended_candidate():\n    \"\"\"测试推荐候选人\"\"\"\n    simon = SIMONSkill()\n    candidate = CandidateProfile(\n        name=\"推荐候选人\",\n        liu_score=85,\n        capability_match=9.0,\n        cost_benefit=8.0,\n        risk_controllability=8.5,\n        stakeholder_satisfaction=8.0,\n        time_feasibili",
+  "limitations_applied": []
+}

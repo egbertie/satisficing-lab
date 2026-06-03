@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_user-conversation-reservation/scripts/user-conversation-reservation.py",
+  "filename": "user-conversation-reservation.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "f76fca5afd251dc1",
+  "content_length": 702,
+  "ingested_at": "2026-03-31T17:27:45.263969",
+  "content_preview": "#!/usr/bin/env python3\n\\\"\\\"\\\"\nuser-conversation-reservation runner\n5-Standard Skill Implementation\n\\\"\\\"\\\"\n\nimport sys\nimport json\nfrom datetime import datetime\n\ndef main():\n    if len(sys.argv) < 2:\n        print(f\"Usage: python3 {sys.argv[0]} [command]\")\n        sys.exit(1)\n    \n    command = sys.argv[1]\n    timestamp = datetime.now().isoformat()\n    \n    log_entry = {\n        \"skill\": \"user-conversation-reservation\",\n        \"command\": command,\n        \"timestamp\": timestamp,\n        \"status\":",
+  "limitations_applied": []
+}

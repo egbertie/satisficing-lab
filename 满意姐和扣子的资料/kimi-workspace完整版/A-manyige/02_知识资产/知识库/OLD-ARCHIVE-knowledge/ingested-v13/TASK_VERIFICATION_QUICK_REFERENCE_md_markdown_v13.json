@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/templates/TASK_VERIFICATION_QUICK_REFERENCE.md",
+  "filename": "TASK_VERIFICATION_QUICK_REFERENCE.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "a0ef2726337a59b3",
+  "content_length": 3653,
+  "ingested_at": "2026-03-31T17:27:44.678617",
+  "content_preview": "# 任务验证快速参考表\n\n**生成时间**: 2026-03-31 08:50  \n**数据范围**: config/、scripts/、crontab  \n**状态说明**: 🔴=虚报/缺失 🟡=待验证 🟢=已验证 ✅=完整\n\n---\n\n## Cron任务验证表\n\n| 任务名称 | 声称状态 | 脚本存在 | Cron条目 | 执行权限 | 执行日志 | 真实状态 | 差距 |\n|----------|----------|----------|----------|----------|----------|----------|------|\n| **已部署（8个）** ||||||||\n| external_supervision.sh | 部署 | ✅ | ✅ | ✅ | - | 🟢 运行中 | - |\n| morning_report.sh | 部署 | ✅ | ✅ | ✅ | - | 🟢 运行中 | - |\n| morning-ritual.py | 今日部署 | ✅ | ✅ | ✅ | 🟡 | 🟡 待首次调度 | 未经历真实Cron |\n| evening-ritual",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/docs/BACKUP_RECOVERY_PLAN.md",
+  "filename": "BACKUP_RECOVERY_PLAN.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "5ed1b916026e1055",
+  "content_length": 1197,
+  "ingested_at": "2026-03-31T17:27:44.883727",
+  "content_preview": "# 磁盘损坏备份恢复计划\n# 时间: 2026-03-30\n# 用途: 磁盘损坏后的恢复步骤\n\n---\n\n## 极端事件: 磁盘损坏\n\n### 事件描述\n- 工作目录磁盘损坏\n- 所有文件无法访问\n- 需要从备份恢复\n\n### 恢复前提\n- 备份文件存在于外部存储: `backups/YYYY-MM-DD/`\n- 备份包括: 关键文件 + 关键目录压缩包\n\n---\n\n## 恢复步骤\n\n### 步骤1: 确认备份存在\n\n```bash\nls -la /root/.openclaw/workspace/backups/\n# 应看到最近7天的备份目录\n```\n\n### 步骤2: 选择恢复日期\n\n- 优先选择: 最近一天的备份\n- 如果最近备份损坏: 选择前一天\n- 命令: `cd backups/2026-03-30/`\n\n### 步骤3: 恢复关键文件\n\n```bash\n# 恢复SOUL.md等核心文件\ncp SOUL.md /root/.openclaw/workspace/\ncp USER.md /root/.openclaw/workspace/\ncp MEMORY.md /root",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/tests/integration/test_skill_interactions.py",
+  "filename": "test_skill_interactions.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "8c6bb0b348df7dcc",
+  "content_length": 12471,
+  "ingested_at": "2026-03-31T17:27:44.870288",
+  "content_preview": "\"\"\"L4 集成测试套件\"\"\"\nimport pytest\nimport time\nimport random\nfrom pathlib import Path\nfrom datetime import datetime, timedelta\nfrom typing import Dict, Any, List\nimport sys\n\nPROJECT_ROOT = Path(__file__).parent.parent.parent\nSKILLS_DIR = PROJECT_ROOT / \"skills\"\nsys.path.insert(0, str(PROJECT_ROOT))\n\n\n@pytest.mark.skill_integration\n@pytest.mark.scenario1\nclass TestScenario1_ResourceConstrainedFillDecision:\n    \"\"\"场景1: zero-idle-enforcer + token-budget-enforcer联动测试\"\"\"\n    \n    def test_token_sufficient",
+  "limitations_applied": []
+}

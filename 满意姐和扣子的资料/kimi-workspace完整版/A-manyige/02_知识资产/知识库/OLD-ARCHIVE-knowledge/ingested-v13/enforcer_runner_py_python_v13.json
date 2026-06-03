@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/token-budget-enforcer/scripts/enforcer_runner.py",
+  "filename": "enforcer_runner.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "05e81c524f0ed643",
+  "content_length": 6679,
+  "ingested_at": "2026-03-31T17:27:45.014741",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nToken Budget Enforcer - 主运行脚本\n整合所有模块的统一入口\n\"\"\"\n\nimport sys\nimport json\nimport os\nfrom pathlib import Path\n\n# 添加scripts目录到路径\nsys.path.insert(0, str(Path(__file__).parent))\n\nfrom allocator import BudgetAllocator\nfrom circuit_breaker import TokenCircuitBreaker\nfrom estimator import TokenEstimator\nfrom monitor import TokenMonitor\nfrom reporter import BudgetReporter\n\nclass TokenBudgetEnforcer:\n    \"\"\"Token预算强制执行器主类\"\"\"\n    \n    def __init__(self):\n        self.allocator = Bud",
+  "limitations_applied": []
+}

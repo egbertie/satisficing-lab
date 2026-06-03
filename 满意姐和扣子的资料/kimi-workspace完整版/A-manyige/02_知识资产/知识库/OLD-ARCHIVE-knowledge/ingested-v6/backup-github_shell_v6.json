@@ -1,0 +1,62 @@
+{
+  "source_path": "/root/.openclaw/workspace/disaster-recovery/02-自动化备份脚本/backup-github.sh",
+  "filename": "backup-github.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 8645,
+  "checksum": "9471155eb361ef35",
+  "ingested_at": "2026-03-31T17:30:47.727591",
+  "line_count": 284,
+  "title": "backup-github",
+  "description": "###############################################################################",
+  "sections": [],
+  "entities": [
+    {
+      "name": "fetch_repos",
+      "type": "shell_function"
+    },
+    {
+      "name": "backup_repo",
+      "type": "shell_function"
+    },
+    {
+      "name": "mirror_to_gitee",
+      "type": "shell_function"
+    },
+    {
+      "name": "mirror_to_gitlab",
+      "type": "shell_function"
+    },
+    {
+      "name": "export_issues",
+      "type": "shell_function"
+    },
+    {
+      "name": "cleanup_old_backups",
+      "type": "shell_function"
+    },
+    {
+      "name": "main",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "###############################################################################",
+    "GitHub 仓库备份脚本",
+    "功能: 备份所有GitHub仓库到本地，并推送到镜像源",
+    "###############################################################################",
+    "GitHub配置 (需根据实际情况修改)",
+    "创建备份目录",
+    "获取所有仓库列表",
+    "克隆或更新单个仓库",
+    "使用token认证 (如果是私有仓库)",
+    "更新现有仓库",
+    "获取所有分支",
+    "克隆新仓库 (使用mirror模式保留所有信息)",
+    "推送到Gitee镜像",
+    "推送到GitLab镜像",
+    "镜像到Gitee"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/templates/DEEP_INSIGHT_MECHANISM_AUDIT.md",
+  "filename": "DEEP_INSIGHT_MECHANISM_AUDIT.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "b908585f6ce881c0",
+  "content_length": 4657,
+  "ingested_at": "2026-03-31T17:27:44.677891",
+  "content_preview": "# 五层深挖报告：机制虚报根因分析\n\n**分析对象**: 机制/系统记录验证发现的大量虚报现象  \n**分析方法**: 强制五层深挖（L1现象→L2模式→L3根因→L4系统→L5指导）  \n**分析时间**: 2026-03-31  \n**物理化位置**: templates/DEEP_INSIGHT_MECHANISM_AUDIT.md\n\n---\n\n## 五层深挖结构\n\n### L1: 现象层 —— 我发现了什么？\n\n**核心发现**: \n声称90%+完成的机制/系统，实际完成度仅29%，**虚报率高达61%**。\n\n**具体现象**:\n1. 276个文档声称FIN或完成状态\n2. 15个Cron任务中6个脚本完全缺失(40%)\n3. system-v2/blackboard/ 目录不存在，但文档声称已建立\n4. verified文件只有\"验证: xxx\"字样，无实质验证\n5. 命名空间强制化只有规则，无强制执行脚本\n\n**数据支撑**:\n```\n声称完成度: 90%+\n实际完成度: 29%\n虚报率: 61%\n\n文档数量: 276个\n真正实现: 9个机制\n完全缺失: 10+个核心功能",
+  "limitations_applied": []
+}

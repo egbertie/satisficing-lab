@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/expand_concept_coverage.py",
+  "filename": "expand_concept_coverage.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "34c24fa1177a7a28",
+  "content_length": 5447,
+  "ingested_at": "2026-03-31T17:27:46.135741",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n知识图谱优化器 - 扩展概念覆盖\n将覆盖率从38.9%提升至≥80%\n\"\"\"\n\nimport json\n\ndef expand_concept_coverage():\n    \"\"\"扩展概念覆盖\"\"\"\n    \n    # 读取现有Skill索引\n    with open(\"/root/.openclaw/workspace/knowledge/system/skill_knowledge_index.json\", 'r') as f:\n        skill_data = json.load(f)\n    \n    # 扩展概念维度（从8个扩展到15个）\n    expanded_concepts = {\n        # 原有概念\n        \"五路图腾\": {\"type\": \"methodology\", \"keywords\": [\"五路\", \"图腾\", \"LIU\", \"SIMON\", \"GUANYIN\", \"CONFUCIUS\", \"HUINENG\", \"satisficing\", \"partner\", \"deci",
+  "limitations_applied": []
+}

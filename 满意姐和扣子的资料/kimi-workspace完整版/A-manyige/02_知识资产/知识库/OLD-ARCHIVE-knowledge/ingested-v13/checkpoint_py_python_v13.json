@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/universal-task-executor-v3/core/checkpoint.py",
+  "filename": "checkpoint.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "75720d3dd91fd163",
+  "content_length": 20241,
+  "ingested_at": "2026-03-31T17:27:45.366209",
+  "content_preview": "\"\"\"\nUniversal Task Executor V3.0 - Checkpoint管理器\n支持暂停/重启、分层检查点、版本迁移\n\"\"\"\n\nimport os\nimport json\nimport logging\nimport asyncio\nfrom typing import Dict, List, Optional, Any, Callable\nfrom dataclasses import dataclass, field\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\nfrom .structures import Checkpoint, CheckpointIndex, Task, TaskBatch, TaskResult\n\nlogger = logging.getLogger(__name__)\n\n\n@dataclass\nclass ResumeResult:\n    \"\"\"恢复结果\"\"\"\n    success: bool\n    checkpoint: Optional[Ch",
+  "limitations_applied": []
+}

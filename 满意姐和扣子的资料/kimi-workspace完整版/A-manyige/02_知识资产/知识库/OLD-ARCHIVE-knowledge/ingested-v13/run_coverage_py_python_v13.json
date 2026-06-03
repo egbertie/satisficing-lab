@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/testing-framework/run_coverage.py",
+  "filename": "run_coverage.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "688b2f1f4c450350",
+  "content_length": 9177,
+  "ingested_at": "2026-03-31T17:27:45.439638",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n覆盖率报告生成器 - S3标准实现\n\n功能:\n- 生成多格式覆盖率报告（HTML/XML/JSON）\n- 检查覆盖率阈值\n- 趋势分析\n- 未覆盖代码高亮\n\n使用方法:\n    python run_coverage.py                    # 生成默认报告\n    python run_coverage.py --threshold 80     # 设置阈值\n    python run_coverage.py --skill zero_idle  # 单Skill报告\n    python run_coverage.py --trend            # 显示趋势\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport argparse\nimport subprocess\nfrom pathlib import Path\nfrom datetime import datetime\nfrom typing import Dict, List, Any, Optiona",
+  "limitations_applied": []
+}

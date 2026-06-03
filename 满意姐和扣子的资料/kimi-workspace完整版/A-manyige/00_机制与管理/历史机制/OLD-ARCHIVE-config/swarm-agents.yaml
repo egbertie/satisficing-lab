@@ -1,0 +1,124 @@
+version: "2026-03-26"
+description: "数字人蜂群系统 - Meta-Agent → Supervisor → Worker"
+
+meta_agent:
+  name: "Egbertie-Proxy"
+  role: "任务分解与路由"
+  model: "k2p5"
+  capabilities:
+    - 意图识别
+    - 任务分解
+    - 路由决策
+    - 结果汇总
+
+supervisors:
+  code_supervisor:
+    name: "CodeMaster"
+    icon: "⚒️"
+    specialty: ["Python", "Bash", "Git", "SQL", "JavaScript"]
+    description: "代码相关任务的总管"
+    workers: ["py_worker", "shell_worker", "git_worker"]
+    
+  research_supervisor:
+    name: "DeepResearch"
+    icon: "🔬"
+    specialty: ["WebSearch", "Academic", "Finance", "News", "Legal"]
+    description: "研究类任务的总管"
+    workers: ["search_worker", "paper_worker", "finance_worker"]
+    
+  content_supervisor:
+    name: "ContentForge"
+    icon: "✍️"
+    specialty: ["Markdown", "Docx", "PDF", "Presentation", "Email"]
+    description: "内容生成任务的总管"
+    workers: ["writer_worker", "format_worker", "translate_worker"]
+    
+  external_supervisor:
+    name: "ExternalOps"
+    icon: "🌐"
+    specialty: ["Feishu", "WeCom", "GitHub", "Calendar", "Drive"]
+    description: "外部平台操作的总管"
+    workers: ["feishu_worker", "wecom_worker", "github_worker"]
+
+workers:
+  # Code Workers
+  py_worker:
+    model: "k2p5-flash"
+    max_tokens_per_task: 4000
+    specialization: "Python脚本与数据处理"
+    tools: ["exec", "read", "write", "edit"]
+    
+  shell_worker:
+    model: "k2p5-flash"
+    max_tokens_per_task: 3000
+    specialization: "Bash脚本与系统操作"
+    
+  git_worker:
+    model: "k2p5"
+    max_tokens_per_task: 2000
+    specialization: "Git操作与版本管理"
+    
+  # Research Workers
+  search_worker:
+    model: "k2p5-flash"
+    tools: ["kimi_search", "web_fetch"]
+    max_results: 5
+    specialization: "快速信息检索"
+    
+  paper_worker:
+    model: "k2p5"
+    thinking: "high"
+    specialization: "学术论文深度分析"
+    
+  finance_worker:
+    model: "k2p5"
+    tools: ["kimi_finance"]
+    specialization: "金融数据分析"
+    
+  # Content Workers
+  writer_worker:
+    model: "k2p5"
+    specialization: "长文本写作"
+    
+  format_worker:
+    model: "k2p5-flash"
+    specialization: "格式转换与排版"
+    
+  translate_worker:
+    model: "k2p5"
+    specialization: "中英翻译"
+    
+  # External Workers
+  feishu_worker:
+    tools: ["feishu_*"]
+    specialization: "飞书平台操作"
+    
+  wecom_worker:
+    tools: ["wecom_mcp"]
+    specialization: "企业微信操作"
+    
+  github_worker:
+    tools: ["exec"]
+    commands: ["git", "gh"]
+    specialization: "GitHub操作"
+
+routing_rules:
+  - pattern: "写.*(代码|脚本|程序|Python|Bash)"
+    supervisor: "code_supervisor"
+    priority: 1
+    
+  - pattern: "搜索|查.*资料|研究|论文|新闻"
+    supervisor: "research_supervisor"
+    priority: 1
+    
+  - pattern: "写.*(文档|报告|邮件|文章)"
+    supervisor: "content_supervisor"
+    priority: 1
+    
+  - pattern: "飞书|企微|GitHub|日历|云盘"
+    supervisor: "external_supervisor"
+    priority: 1
+    
+  - pattern: "分析|对比|评估|推荐"
+    supervisor: "research_supervisor"
+    priority: 2

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/task-manager/scripts/task_manager.py",
+  "filename": "task_manager.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "29a98db08bd4d7e3",
+  "content_length": 5143,
+  "ingested_at": "2026-03-31T17:27:45.379086",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\n满意解研究所 - 任务管理脚本\n功能：任务创建、追踪、遗忘扫描、优先级管理\n版本：1.0\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import List, Dict, Optional\n\n\nclass TaskManager:\n    \"\"\"任务管理器核心类\"\"\"\n    \n    def __init__(self, config_path: Optional[str] = None):\n        self.base_path = Path(\"/root/.openclaw/workspace\")\n        self.config_path = Path(config_path or \"/root/.openclaw/skills/task-manager/config/settings.json\")\n ",
+  "limitations_applied": []
+}

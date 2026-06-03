@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/partner-match-system/docs/API.md",
+  "filename": "API.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "277f748c3ab49e0e",
+  "content_length": 6621,
+  "ingested_at": "2026-03-31T17:27:44.532626",
+  "content_preview": "# API 文档\n\n## 核心类\n\n### `EntanglementMatchingSystem`\n\n主系统类，整合所有6层评估引擎。\n\n```python\nsystem = EntanglementMatchingSystem()\nresult = system.comprehensive_match(partner_a, partner_b)\n```\n\n#### 方法\n\n##### `comprehensive_match(partner_a: PartnerProfile, partner_b: PartnerProfile) -> Dict`\n\n执行完整的六层匹配评估。\n\n**参数:**\n- `partner_a`: 第一位合伙人档案\n- `partner_b`: 第二位合伙人档案\n\n**返回:**\n```python\n{\n    'overall_compatibility': float,  # 0-1 综合兼容度\n    'layer_results': {\n        'quantum_perception': Dict,     # Layer 1 结果\n   ",
+  "limitations_applied": []
+}

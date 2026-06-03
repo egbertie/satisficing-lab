@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/CORE/AGENTS.sh",
+  "filename": "AGENTS.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "7810d5b9ddffb62a",
+  "content_length": 263,
+  "ingested_at": "2026-03-31T17:27:44.539759",
+  "content_preview": "#!/bin/bash\n# AGENTS机制执行脚本\n# 检查agents配置和执行状态\n\necho \"=== AGENTS机制检查 ===\"\necho \"时间: $(date)\"\n\n# 检查AGENTS.md是否存在\nif [ -f \"/root/.openclaw/workspace/CORE/AGENTS.md\" ]; then\n    echo \"✅ AGENTS.md 存在\"\nelse\n    echo \"❌ AGENTS.md 不存在\"\n    exit 1\nfi\n\n# 检查关键配置\necho \"检查完成\"\n",
+  "limitations_applied": []
+}

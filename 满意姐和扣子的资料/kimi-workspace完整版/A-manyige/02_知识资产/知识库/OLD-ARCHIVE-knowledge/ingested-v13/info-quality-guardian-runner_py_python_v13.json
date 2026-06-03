@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/info-quality-guardian/scripts/info-quality-guardian-runner.py",
+  "filename": "info-quality-guardian-runner.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "080a0260a0421f0e",
+  "content_length": 27969,
+  "ingested_at": "2026-03-31T17:27:45.461924",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\ninfo-quality-guardian-runner.py\n信息采集质量守护者 - 5-Standard 完整实现\n\n标准覆盖:\n- S1: 输入定义(信息源/质量标准/检查范围)\n- S2: 质量守护(采集→检测→清洗→验证→报告)\n- S3: 输出规范(质量报告+问题清单+改进建议)\n- S4: 集成规范(信息流自动触发)\n- S5: 检测准确性验证(误报/漏报检查)\n- S6: 局限标注(无法验证主观信息真实性)\n- S7: 对抗测试(故意污染信息测试检测能力)\n\nGenerated: 2026-03-21\nVersion: 2.0.0\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport logging\nimport argparse\nimport hashlib\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom dataclasses import dataclass, field, asdi",
+  "limitations_applied": []
+}

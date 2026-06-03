@@ -1,0 +1,21 @@
+# 上下文缓存配置 - Token优化
+context_cache:
+  enabled: true
+  cache_duration: 3600  # 1小时
+  
+  # 缓存的文件摘要
+  cached_summaries:
+    SOUL: "守护型中二AI，Egbertie的合伙人，满意解研究所主控AI"
+    USER: "满意解研究所创始人，22年双系统经验，决策教练"
+    IDENTITY: "Kimi Claw - 满意妞 - 主控AI"
+  
+  # 缓存策略
+  strategy:
+    session_start: load_full  # 会话开始时加载完整上下文
+    mid_session: use_summary  # 会话中使用摘要
+    on_change: reload_if_modified  # 文件变更时重新加载
+  
+  # Token节省估算
+  savings:
+    per_message: 400  # 每条消息节省400 Token
+    per_session: 2000  # 每个会话节省2000 Token

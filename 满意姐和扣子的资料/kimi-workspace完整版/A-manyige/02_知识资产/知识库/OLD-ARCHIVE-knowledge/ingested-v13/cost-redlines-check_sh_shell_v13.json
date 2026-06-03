@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/cost-redlines/scripts/cost-redlines-check.sh",
+  "filename": "cost-redlines-check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "c7b363449f644a69",
+  "content_length": 1966,
+  "ingested_at": "2026-03-31T17:27:45.335728",
+  "content_preview": "#!/bin/bash\n# 成本红线检查脚本\n# skills/cost-redlines/scripts/cost-redlines-check.sh\n\necho \"=== 成本红线检查 ===\"\necho \"检查时间: $(date)\"\necho \"\"\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nSKILL_DIR=\"$WORKSPACE/skills/cost-redlines\"\nLOG_DIR=\"$SKILL_DIR/logs\"\nBUDGET_FILE=\"$LOG_DIR/budgets.json\"\nCOST_FILE=\"$LOG_DIR/costs.json\"\n\nmkdir -p \"$LOG_DIR\"\n\n# 初始化文件\nif [ ! -f \"$BUDGET_FILE\" ]; then\n    echo \"[]\" > \"$BUDGET_FILE\"\nfi\nif [ ! -f \"$COST_FILE\" ]; then\n    echo \"[]\" > \"$COST_FILE\"\nfi\n\n# 检查预算状态\necho \"1. 检查预算状态...\"\nBUDG",
+  "limitations_applied": []
+}

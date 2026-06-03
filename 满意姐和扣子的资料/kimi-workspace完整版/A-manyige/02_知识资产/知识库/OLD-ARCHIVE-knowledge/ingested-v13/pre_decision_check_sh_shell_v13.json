@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/pre_decision_check.sh",
+  "filename": "pre_decision_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "a4deb1da2ba468cc",
+  "content_length": 341,
+  "ingested_at": "2026-03-31T17:27:46.134607",
+  "content_preview": "#!/bin/bash\n# 自动计时器\nTARGET=\"${1:-蓝军}\"\nSTART=$(date +%s)\necho \"计时开始: $(date '+%H:%M:%S')\"\n\nwhile true; do\n    NOW=$(date +%s)\n    ELAPSED=$((NOW - START))\n    \n    if [ $ELAPSED -eq 60 ]; then\n        echo \"⚠️  1分钟到，请再次通知\"\n    fi\n    \n    if [ $ELAPSED -eq 120 ]; then\n        echo \"❌ 2分钟到，请申请用户介入\"\n        break\n    fi\n    \n    sleep 1\ndone\n",
+  "limitations_applied": []
+}

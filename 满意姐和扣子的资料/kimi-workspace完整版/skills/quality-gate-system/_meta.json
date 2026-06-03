@@ -1,0 +1,54 @@
+{
+  "name": "quality-gate-system",
+  "version": "5.0.0",
+  "description": "完整的CI/CD质量门禁系统 - 7标准实现",
+  "author": "Satisficing Institute",
+  "created": "2026-03-20",
+  "updated": "2026-03-21",
+  "source": "7-standard-implementation",
+  "standards": {
+    "s1_input_standardization": {
+      "implemented": true,
+      "coverage": ["被测对象", "质量门禁标准", "通过准则", "豁免规则"]
+    },
+    "s2_inspection_process": {
+      "implemented": true,
+      "dimensions": ["前置条件", "过程合规", "结果验收", "文档完整"]
+    },
+    "s3_output_standardization": {
+      "implemented": true,
+      "formats": ["JSON", "JUnit XML", "HTML", "Markdown", "Console"]
+    },
+    "s4_ci_cd_integration": {
+      "implemented": true,
+      "integrations": ["GitHub Actions", "Git Hooks", "GitLab CI"]
+    },
+    "s5_standard_consistency": {
+      "implemented": true,
+      "features": ["版本控制", "漂移检测", "变更审批"]
+    },
+    "s6_limitations": {
+      "implemented": true,
+      "covered": ["自动化局限", "上下文理解", "工具可靠性", "安全边界"]
+    },
+    "s7_adversarial_testing": {
+      "implemented": true,
+      "tests": ["缺陷植入", "假阳性/假阴性分析", "边界条件测试"]
+    }
+  },
+  "scripts": {
+    "check": "scripts/quality-gate-check.py",
+    "report": "scripts/generate-report.py",
+    "pre-commit": "scripts/hooks/pre-commit",
+    "pre-push": "scripts/hooks/pre-push"
+  },
+  "config": {
+    "main": "config/quality-gate.yaml",
+    "optional": []
+  },
+  "requires": {
+    "python": ">=3.8",
+    "tools": ["git", "python3"],
+    "optional": ["black", "flake8", "pytest", "bandit"]
+  }
+}

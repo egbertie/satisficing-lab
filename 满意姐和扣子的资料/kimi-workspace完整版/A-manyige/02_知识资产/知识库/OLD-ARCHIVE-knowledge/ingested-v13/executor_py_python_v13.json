@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/cron-automation/scripts/executor.py",
+  "filename": "executor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "b65d2cab84b0caf6",
+  "content_length": 16540,
+  "ingested_at": "2026-03-31T17:27:45.384204",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n任务执行器 - Cron-Automation System核心组件\n负责加载任务配置、管理任务生命周期、处理执行和错误恢复\n\nS1-S7覆盖:\n- S1: 全局考虑（人/事/物/环境/外部/边界）\n- S2: 系统闭环（输入→处理→输出→反馈）\n- S3: 可观测输出（日志、状态记录）\n- S4: 自动化集成（错误恢复、通知）\n- S5: 自我验证（配置校验）\n- S6: 认知谦逊（局限标注）\n- S7: 对抗测试（错误处理）\n\"\"\"\n\nimport json\nimport os\nimport sys\nimport time\nimport signal\nimport logging\nimport subprocess\nimport hashlib\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import Dict, List, Optional, Any\nfrom dataclasses import dataclass",
+  "limitations_applied": []
+}

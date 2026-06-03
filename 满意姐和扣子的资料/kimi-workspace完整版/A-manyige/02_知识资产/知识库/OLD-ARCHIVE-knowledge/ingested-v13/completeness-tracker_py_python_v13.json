@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/completeness-tracker.py",
+  "filename": "completeness-tracker.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "63967d6fb35e62f5",
+  "content_length": 3024,
+  "ingested_at": "2026-03-31T17:27:46.161377",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n5标准完成度实时追踪器\n版本: V2.0\n\"\"\"\n\nimport os\nimport json\nfrom pathlib import Path\nfrom datetime import datetime\n\ndef check_skill_completeness(skill_path):\n    \"\"\"检查单个Skill的5标准完成度\"\"\"\n    skill_path = Path(skill_path)\n    name = skill_path.name\n    \n    checks = {\n        \"has_skill_md\": False,\n        \"has_scripts\": False,\n        \"has_cron\": False,\n        \"script_count\": 0\n    }\n    \n    # 检查SKILL.md\n    if (skill_path / \"SKILL.md\").exists():\n        checks[\"has_skill_md\"] = T",
+  "limitations_applied": []
+}

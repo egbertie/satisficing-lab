@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_satisficing-web-fetcher/cli.py",
+  "filename": "cli.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "5f8f3f4b504581ad",
+  "content_length": 7628,
+  "ingested_at": "2026-03-31T17:27:45.067497",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nSatisficing Web Fetcher - CLI\n\n简化命令行接口，提供核心抓取功能。\n\"\"\"\n\nimport sys\nimport json\nimport argparse\nfrom pathlib import Path\n\n# 添加父目录到路径\nsys.path.insert(0, str(Path(__file__).parent))\n\nfrom fetcher import HTTPFetcher, StealthyFetcher, AdaptiveParser, fetch\nfrom security.audit_logger import AuditLogger, get_recent_audit\nfrom security.domain_whitelist import DomainWhitelist\n\n\ndef cmd_fetch(args):\n    \"\"\"执行抓取命令\"\"\"\n    url = args.url\n    mode = args.mode\n    \n    print(f\"Fetching",
+  "limitations_applied": []
+}

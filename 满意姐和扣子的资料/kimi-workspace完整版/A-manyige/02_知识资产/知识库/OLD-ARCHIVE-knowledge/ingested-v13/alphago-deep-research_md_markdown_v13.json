@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/research/alphago-deep-research.md",
+  "filename": "alphago-deep-research.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "5c94feb5604b0d32",
+  "content_length": 3757,
+  "ingested_at": "2026-03-31T17:27:46.402847",
+  "content_preview": "# AlphaGo深度研究报告\n\n> 参考：DeepMind AlphaGo/AlphaZero/MuZero论文，Gemini Deep Think技术报告\n> 研究对象：从AlphaGo Fan到Gemini Deep Think的完整演进\n\n---\n\n## 一、核心方法论解构\n\n### 1.1 技术架构三要素\n\n| 组件 | 功能 | 算法/机制 | 神经科学基础 |\n|------|------|-----------|--------------|\n| **策略网络** (Policy Network) | 落子选择 | 13层CNN，SL+RL训练 | 模式识别、直觉生成 |\n| **价值网络** (Value Network) | 局面评估 | 15层CNN，回归训练 | 价值判断、预期计算 |\n| **蒙特卡洛树搜索** (MCTS) | 深度搜索 | UCT算法、PUCT变种 | 工作记忆、认知控制 |\n\n### 1.2 训练流程四阶段\n\n```\n阶段1：监督学习 (SL)\n- 输入：KGS围棋服务器16万局棋谱\n- 输出：策略网络 p_σ\n- 目标：模仿人类高手落子",
+  "limitations_applied": []
+}

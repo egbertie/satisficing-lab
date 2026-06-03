@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/info-collection-quality/config/pipeline.json",
+  "filename": "pipeline.json",
+  "file_type": "json",
+  "extension": ".json",
+  "file_hash": "5ae0477eae1a46a7",
+  "content_length": 826,
+  "ingested_at": "2026-03-31T17:27:45.456925",
+  "content_preview": "{\n  \"pipeline_hooks\": {\n    \"post_collection\": {\n      \"enabled\": true,\n      \"trigger\": \"auto\",\n      \"action\": \"quality_check\",\n      \"params\": {\n        \"min_score\": 70,\n        \"auto_retry\": true,\n        \"retry_count\": 2\n      }\n    },\n    \"quality_gate\": {\n      \"enabled\": true,\n      \"block_threshold\": 65,\n      \"action\": \"block_and_alert\",\n      \"alert_channels\": [\"log\", \"webhook\"]\n    },\n    \"pre_storage\": {\n      \"enabled\": true,\n      \"required_grade\": \"B+\",\n      \"action\": \"verify_an",
+  "limitations_applied": []
+}

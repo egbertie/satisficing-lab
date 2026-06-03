@@ -1,0 +1,74 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/hibernation-protocol/hibernation-control.py",
+  "filename": "hibernation-control.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 13447,
+  "checksum": "e0bed0198e575f6a",
+  "ingested_at": "2026-03-31T17:30:32.767153",
+  "line_count": 433,
+  "title": "hibernation-control",
+  "description": "休眠协议控制器 - Hibernation Protocol Controller\n版本: V1.0\n功能: 管理休眠模式的进入、维持和唤醒",
+  "sections": [],
+  "entities": [
+    {
+      "name": "log_message",
+      "type": "function"
+    },
+    {
+      "name": "get_hibernation_state",
+      "type": "function"
+    },
+    {
+      "name": "set_hibernation_state",
+      "type": "function"
+    },
+    {
+      "name": "append_hibernation_log",
+      "type": "function"
+    },
+    {
+      "name": "sleep",
+      "type": "function"
+    },
+    {
+      "name": "wake",
+      "type": "function"
+    },
+    {
+      "name": "status",
+      "type": "function"
+    },
+    {
+      "name": "auto_check",
+      "type": "function"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    },
+    {
+      "name": "run_tests",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "保留任务列表（即使在完全静默模式下也保留）",
+    "高风险任务列表（休眠时必须暂停）",
+    "============ Token消耗预估与效益红线 ============",
+    "Token效益红线 - 硬性约束",
+    "Token优化空间评估",
+    "2. 获取当前Cron任务状态",
+    "3. 确定要暂停的任务",
+    "这里应该调用cron update来暂停任务",
+    "简化版：记录状态，实际暂停由调用方执行",
+    "2. 恢复Cron任务",
+    "这里应该调用cron update来恢复任务",
+    "S7: 对抗测试模式 - 使用模拟状态，不进入真实休眠",
+    "模拟休眠（不实际调用sleep函数）",
+    "测试2: 唤醒（模拟）"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

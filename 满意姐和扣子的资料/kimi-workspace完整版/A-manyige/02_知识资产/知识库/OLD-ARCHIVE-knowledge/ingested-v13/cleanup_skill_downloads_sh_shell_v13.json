@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/cleanup_skill_downloads.sh",
+  "filename": "cleanup_skill_downloads.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "9af3e2415387cda9",
+  "content_length": 2024,
+  "ingested_at": "2026-03-31T17:27:46.205931",
+  "content_preview": "#!/bin/bash\n# Skill下载文件清理脚本\n# 位置: /root/.openclaw/workspace/scripts/cleanup_skill_downloads.sh\n# 用途: 定期清理不再使用的skill上传文件\n\nset -e\n\n# 配置\nDOWNLOAD_DIR=\"/root/openclaw/kimi/downloads\"\nRETENTION_DAYS=7\nLOG_FILE=\"/var/log/skill_cleanup.log\"\nDRY_RUN=false\n\n# 解析参数\nwhile [[ $# -gt 0 ]]; do\n  case $1 in\n    --dry-run)\n      DRY_RUN=true\n      shift\n      ;;\n    --days)\n      RETENTION_DAYS=\"$2\"\n      shift 2\n      ;;\n    *)\n      echo \"未知参数: $1\"\n      exit 1\n      ;;\n  esac\ndone\n\n# 确保日志目录存在\nmkdir -p \"$(dir",
+  "limitations_applied": []
+}

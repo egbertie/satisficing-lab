@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify_self_assessment_cron.sh",
+  "filename": "verify_self_assessment_cron.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "4ffe525039227984",
+  "content_length": 811,
+  "ingested_at": "2026-03-31T17:27:46.150858",
+  "content_preview": "#!/bin/bash\n# 自我评估Cron任务8步验证\n# 任务: self-assessment-calibrator.py\n\necho \"=== 自我评估Cron任务 (self-assessment-calibrator.py) - 8步验证 ===\"\necho \"\"\n\nSCRIPT_PATH=\"/root/.openclaw/workspace/scripts/cron-tasks/self-assessment-calibrator.py\"\n\nSTEP1=false; STEP2=false; STEP3=false; STEP4=false\n\n# Step 1\necho \"Step 1: 配置写入验证\"\nif crontab -l | grep -q \"self-assessment-calibrator.py\"; then\n    echo \"  ✅ 已写入crontab (0 14 * * *)\"\n    STEP1=true\nfi\n\n# Step 2\necho \"Step 2: 语法检查\"\nif python3 -m py_compile \"$SCRIPT_PATH",
+  "limitations_applied": []
+}

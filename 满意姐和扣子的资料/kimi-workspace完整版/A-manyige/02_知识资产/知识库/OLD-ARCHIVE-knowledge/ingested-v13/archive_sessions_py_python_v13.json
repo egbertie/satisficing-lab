@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/archive_sessions.py",
+  "filename": "archive_sessions.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "099316627a158033",
+  "content_length": 1084,
+  "ingested_at": "2026-03-31T17:27:46.212495",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n会话归档脚本\n自动归档旧会话\n\"\"\"\nimport sys\nfrom pathlib import Path\nfrom datetime import datetime, timedelta\n\nsys.path.insert(0, str(Path(\"/root/.openclaw/workspace\")))\n\ndef archive_sessions(older_than_hours=24):\n    \"\"\"归档旧会话\"\"\"\n    memory_dir = Path(\"/root/.openclaw/workspace/memory\")\n    archive_dir = Path(\"/root/.openclaw/workspace/memory/archive\")\n    archive_dir.mkdir(exist_ok=True)\n    \n    cutoff = datetime.now() - timedelta(hours=older_than_hours)\n    archived = 0\n    \n    ",
+  "limitations_applied": []
+}

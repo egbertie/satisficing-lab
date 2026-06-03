@@ -1,0 +1,47 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/five-level-verification/scripts/verify.py",
+  "filename": "verify.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 22243,
+  "checksum": "832ef908dda9060b",
+  "ingested_at": "2026-03-31T17:30:32.787132",
+  "line_count": 633,
+  "title": "verify",
+  "description": "Five-Level Verification System V5.0\n7-Standard Implementation: S1-S7\n\n五级验证系统 - 代码/Skill验证框架\n- L1: 存在验证 (Existence)\n- L2: 语法验证 (Syntax)\n- L3: 可执行验证 (Executable)\n- L4: 集成验证 (Integration)\n- L5: 端到端验证 (En",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: FiveLevelVerifier"
+    }
+  ],
+  "entities": [
+    {
+      "name": "FiveLevelVerifier",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "========== L1: 存在验证 ==========",
+    "检查SKILL.md非空",
+    "========== L2: 语法验证 ==========",
+    "1. Python语法检查 (排除fixtures目录)",
+    "2. JSON格式检查",
+    "3. YAML格式检查",
+    "========== L3: 可执行验证 ==========",
+    "尝试运行 --help",
+    "========== L4: 集成验证 ==========",
+    "1. 检查config.yaml",
+    "2. 检查SKILL.md内容完整性",
+    "3. 检查是否有测试目录",
+    "========== L5: 端到端验证 ==========",
+    "1. 检查是否有完整的CI/CD配置"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

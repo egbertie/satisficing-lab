@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_agentic-workflow-automation/19ceceb4-d872-8c0a-8000-0000c6bd748b_generate_workflow_blueprint.py",
+  "filename": "19ceceb4-d872-8c0a-8000-0000c6bd748b_generate_workflow_blueprint.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "733d47511de42f62",
+  "content_length": 3609,
+  "ingested_at": "2026-03-31T17:27:45.094149",
+  "content_preview": "#!/usr/bin/env python3\nfrom __future__ import annotations\n\nimport argparse\nimport csv\nimport json\nfrom pathlib import Path\n\nMAX_INPUT_BYTES = 1_048_576\n\n\ndef parse_args() -> argparse.Namespace:\n    parser = argparse.ArgumentParser(description=\"Generate a workflow automation blueprint.\")\n    parser.add_argument(\"--input\", required=False, help=\"Path to JSON input.\")\n    parser.add_argument(\"--output\", required=True, help=\"Path to output artifact.\")\n    parser.add_argument(\"--format\", choices=[\"jso",
+  "limitations_applied": []
+}

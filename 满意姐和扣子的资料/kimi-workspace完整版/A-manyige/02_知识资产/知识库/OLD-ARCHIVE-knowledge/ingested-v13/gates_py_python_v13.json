@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/quality-assurance/qa_system/gates.py",
+  "filename": "gates.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "c914e0a21c8cc24f",
+  "content_length": 12684,
+  "ingested_at": "2026-03-31T17:27:44.997539",
+  "content_preview": "\"\"\"\nQuality Gates Module\n质量门禁定义与执行\n\"\"\"\n\nimport subprocess\nimport sys\nfrom pathlib import Path\nfrom typing import List, Dict, Any, Optional\nfrom dataclasses import dataclass, field\n\nfrom .core import (\n    GateCheck, GateResult, GateStatus, QualityResult, ConfidenceLevel\n)\n\n\nclass PrerequisitesCheck(GateCheck):\n    \"\"\"前置条件检查 - S2.2\"\"\"\n    \n    def __init__(self):\n        super().__init__(\n            name=\"prerequisites\",\n            description=\"检查前置条件\",\n            weight=0.15,\n            bloc",
+  "limitations_applied": []
+}

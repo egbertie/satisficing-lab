@@ -1,0 +1,61 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/cron-automation/scripts/executor.py",
+  "filename": "executor.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 17834,
+  "checksum": "4a03a5f56561960b",
+  "ingested_at": "2026-03-31T17:30:32.686675",
+  "line_count": 478,
+  "title": "executor",
+  "description": "任务执行器 - Cron-Automation System核心组件\n负责加载任务配置、管理任务生命周期、处理执行和错误恢复\n\nS1-S7覆盖:\n- S1: 全局考虑（人/事/物/环境/外部/边界）\n- S2: 系统闭环（输入→处理→输出→反馈）\n- S3: 可观测输出（日志、状态记录）\n- S4: 自动化集成（错误恢复、通知）\n- S5: 自我验证（配置校验）\n- S6: 认知谦逊（局限标注）\n",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: TaskStatus"
+    },
+    {
+      "level": 2,
+      "title": "Class: ExecutionResult"
+    },
+    {
+      "level": 2,
+      "title": "Class: TaskState"
+    },
+    {
+      "level": 2,
+      "title": "Class: TaskExecutor"
+    }
+  ],
+  "entities": [
+    {
+      "name": "TaskStatus",
+      "type": "class"
+    },
+    {
+      "name": "ExecutionResult",
+      "type": "class"
+    },
+    {
+      "name": "TaskState",
+      "type": "class"
+    },
+    {
+      "name": "TaskExecutor",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "parallel策略继续执行",
+    "S3输出: 记录执行结果",
+    "S4反馈: 更新状态并触发后续处理",
+    "简化实现，实际应调用通知服务"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

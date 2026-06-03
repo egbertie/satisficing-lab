@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/docs/2026-03/FEISHU_ALTERNATIVE_SOLUTIONS.md",
+  "filename": "FEISHU_ALTERNATIVE_SOLUTIONS.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "e7e9c02b11740d80",
+  "content_length": 4251,
+  "ingested_at": "2026-03-31T17:27:46.643047",
+  "content_preview": "# 飞书同步替代方案（无需OAuth2用户授权）\n\n> 问题：AI无法完成OAuth2登录流程，需要无需用户授权的替代方案\n\n---\n\n## 方案1：Webhook方式（推荐）\n\n**原理**：用户一次性授权，获得长期有效的user_token，存储后我后续使用\n\n### 实施步骤：\n\n```python\n# Step 1: 用户手动执行（一次性）\n# 用户运行此脚本，完成授权，获得token\n\nimport requests\n\nAPP_ID = \"cli_a927c5dfa4381cc6\"\nAPP_SECRET = \"8950yzh6jj17nQkKBjvGIdRocdrslhjI\"\nREDIRECT_URI = \"http://localhost:8080/callback\"\n\n# 1. 生成授权URL\nauth_url = f\"https://open.feishu.cn/open-apis/oauthen/authorize?app_id={APP_ID}&redirect_uri={REDIRECT_URI}\"\nprint(f\"请访问此URL并授权：{auth_url}\")\n",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/conversation-researcher/scripts/self-check.py",
+  "filename": "self-check.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "45e227b3817ed287",
+  "content_length": 4761,
+  "ingested_at": "2026-03-31T17:27:45.338091",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nself-check.py\nConversation Researcher 自检脚本\n验证7-S标准合规性\n\"\"\"\n\nimport os\nimport sys\nimport json\nfrom pathlib import Path\n\n# 添加lib路径\nsys.path.insert(0, str(Path(__file__).parent.parent / \"lib\"))\n\nclass StandardChecker:\n    \"\"\"7-S标准检查器\"\"\"\n    \n    def __init__(self):\n        self.base_dir = Path(__file__).parent.parent\n        self.results = []\n        self.passed = 0\n        self.failed = 0\n    \n    def check(self, standard: str, name: str, condition: bool, detail: str = \"\"",
+  "limitations_applied": []
+}

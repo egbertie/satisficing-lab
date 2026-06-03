@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/system-v3/knowledge_ingest_remediation/P0-core-framework/skill.yaml",
+  "filename": "skill.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "c181067a06a1f082",
+  "content_length": 1136,
+  "ingested_at": "2026-03-31T17:27:46.132050",
+  "content_preview": "---\nname: super-knowledge-ingest\nversion: \"7.0.0\"\ndescription: |\n  知识入库Skill - 高标准整改版\n  支持9种文件类型，完整实现5标准（S1-S5），通过蓝军19项测试\n  新增：大规模SOP整合、多子代理并行、Skill框架化\n\n# Skill配置\nruntime: python3.10\nentry: run.py\n\n# 输入参数\ninputs:\n  - name: input_path\n    type: string\n    required: true\n    description: 输入文件或目录路径\n  \n  - name: batch_size\n    type: integer\n    default: 50\n    description: 每批次处理文件数\n  \n  - name: max_workers\n    type: integer\n    default: 4\n    description: 最大并行子代理数（安全防范）\n  \n  - name: test_mode\n    ty",
+  "limitations_applied": []
+}

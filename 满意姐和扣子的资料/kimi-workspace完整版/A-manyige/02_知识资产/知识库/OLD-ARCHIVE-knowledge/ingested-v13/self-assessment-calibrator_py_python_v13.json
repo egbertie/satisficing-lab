@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/cron-tasks/self-assessment-calibrator.py",
+  "filename": "self-assessment-calibrator.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "5bef1dcd150336e7",
+  "content_length": 8175,
+  "ingested_at": "2026-03-31T17:27:46.221612",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\n自我评估校准脚本 (Self-Assessment Calibrator)\n执行时间: 每日 14:00 和 20:00\n功能:\n1. 检查SOUL.md是否被修改\n2. 验证核心工作准则是否执行\n3. 统计今日诚实度指标\n4. 生成校准报告\n\"\"\"\n\nimport os\nimport sys\nimport hashlib\nimport json\nimport logging\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\n# ============ 配置区域 ============\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nLOG_DIR = WORKSPACE / \"logs\" / \"cron-tasks\"\nMEMORY_DIR = WORKSPACE / \"memory\"\nSTATE_FILE = LOG_DIR / \".calibrator",
+  "limitations_applied": []
+}

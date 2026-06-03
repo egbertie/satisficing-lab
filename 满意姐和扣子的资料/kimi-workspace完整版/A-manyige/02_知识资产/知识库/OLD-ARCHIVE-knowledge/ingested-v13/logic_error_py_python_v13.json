@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/five-level-verification/fixtures/logic_error.py",
+  "filename": "logic_error.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "7c4f1fd351af1ca0",
+  "content_length": 274,
+  "ingested_at": "2026-03-31T17:27:45.465910",
+  "content_preview": "# 逻辑错误示例\n# 用于测试L5端到端验证\n\ndef calculate_sum(a, b):\n    \"\"\"错误的加法实现\"\"\"\n    return a - b  # 应该是加法\n\ndef calculate_product(a, b):\n    \"\"\"错误的乘法实现\"\"\"\n    return a + b  # 应该是乘法\n\nif __name__ == \"__main__\":\n    result = calculate_sum(5, 3)\n    print(f\"5 + 3 = {result}\")  # 会输出 2 而不是 8\n",
+  "limitations_applied": []
+}

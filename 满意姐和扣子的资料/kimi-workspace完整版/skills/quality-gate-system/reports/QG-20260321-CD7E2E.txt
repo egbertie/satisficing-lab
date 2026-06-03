@@ -1,0 +1,33 @@
+============================================================
+QUALITY GATE REPORT
+============================================================
+Gate ID: QG-20260321-CD7E2E
+Timestamp: 2026-03-21T19:46:42.981417
+
+SUMMARY
+----------------------------------------
+Total Score: 50.75/100
+Grade: BLOCK
+Blocked: YES
+
+DIMENSIONS
+----------------------------------------
+
+PREREQUISITES: 100.0% (weight: 15%)
+  ✓ env_vars: 100 - All required env vars set
+  ✓ dependencies: 100 - Python dependencies available
+  ✓ permissions: 100 - Read: True, Write: True
+  ✓ config_files: 100 - Config exists
+
+COMPLIANCE: 65.0% (weight: 25%)
+  ✓ code_style: 100 - Code style check completed
+  ✓ commit_message: 90 - Commit message check completed
+  ✗ security_scan: 10 - Security scan completed
+  ✓ static_analysis: 70 - Static analysis completed
+
+RESULTS: 48.8% (weight: 40%)
+  ✓ unit_tests: 100 - No tests found, assuming pass
+  ✓ coverage: 75 - Coverage: 75.0%
+
+🚫 Quality gate BLOCKED - Critical issues found
+============================================================

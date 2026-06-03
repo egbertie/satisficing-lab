@@ -1,0 +1,50 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/external_supervision.sh",
+  "filename": "external_supervision.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 3291,
+  "checksum": "8d04d35873daf9ef",
+  "ingested_at": "2026-03-31T17:30:47.859631",
+  "line_count": 120,
+  "title": "external_supervision",
+  "description": "外部监督脚本",
+  "sections": [],
+  "entities": [
+    {
+      "name": "log_msg",
+      "type": "shell_function"
+    },
+    {
+      "name": "init_score",
+      "type": "shell_function"
+    },
+    {
+      "name": "punish",
+      "type": "shell_function"
+    },
+    {
+      "name": "check",
+      "type": "shell_function"
+    },
+    {
+      "name": "supervise",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "外部监督脚本",
+    "他律约束，不是自律",
+    "自动记录问题，自动扣分，自动通知",
+    "初始化信任积分（如果不存在）",
+    "读取当前分数",
+    "如果积分过低，发出警告",
+    "检查1: 是否有知行不一记录",
+    "检查2: 是否有未完成的任务",
+    "检查3: 是否有逾期的任务",
+    "监督模式（定期运行）",
+    "每30分钟检查一次"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

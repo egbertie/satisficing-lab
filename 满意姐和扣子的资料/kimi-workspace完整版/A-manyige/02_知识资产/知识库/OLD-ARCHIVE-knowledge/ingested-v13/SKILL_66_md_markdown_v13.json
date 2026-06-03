@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/knowledge-ingest/ingested/SKILL.66.md",
+  "filename": "SKILL.66.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "ef8a27e2261ee393",
+  "content_length": 1080,
+  "ingested_at": "2026-03-31T17:27:45.744847",
+  "content_preview": "# mermaid-diagrams Skill V5标准版本\n\n## S1: 全局考虑\n\n### 输入\n- 图表类型（流程图/时序图/类图等）\n- 图表定义文本\n- 输出格式（SVG/PNG/PDF）\n\n### 覆盖维度\n| 维度 | 考虑内容 |\n|------|----------|\n| **人** | 文档编写者、系统设计师 |\n| **事** | 图表生成、格式转换、嵌入文档 |\n| **物** | Mermaid代码、图表文件 |\n| **环境** | Node.js环境、浏览器渲染 |\n| **外部集成** | Mermaid CLI |\n| **边界情况** | 语法错误、复杂图表、渲染超时 |\n\n---\n\n## S2: 系统考虑\n\n### 处理流程\n```\n接收代码 → 语法检查 → 渲染生成 → 格式输出 → 嵌入文档（可选）\n```\n\n### 故障处理\n- **语法错误**: 返回错误位置\n- **渲染超时**: 简化图表或分块\n- **依赖缺失**: 提示安装\n\n---\n\n## S3: 输出规范\n\n### 输出格式\n- SVG（默认，矢量）\n- PNG（位图）\n",
+  "limitations_applied": []
+}

@@ -1,0 +1,34 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/backup_to_external.py",
+  "filename": "backup_to_external.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 3513,
+  "checksum": "b456ab942593b3e6",
+  "ingested_at": "2026-03-31T17:30:32.882688",
+  "line_count": 113,
+  "title": "backup_to_external",
+  "description": "磁盘损坏备份机制\n用途: 每日自动备份关键文件到外部存储\n规则: 保留7天历史版本，磁盘损坏时可恢复",
+  "sections": [],
+  "entities": [
+    {
+      "name": "create_backup",
+      "type": "function"
+    },
+    {
+      "name": "cleanup_old_backups",
+      "type": "function"
+    },
+    {
+      "name": "verify_backup",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "备份目录（使用/tmp作为示例，实际应该使用外部存储）",
+    "清理旧备份（保留7天）"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

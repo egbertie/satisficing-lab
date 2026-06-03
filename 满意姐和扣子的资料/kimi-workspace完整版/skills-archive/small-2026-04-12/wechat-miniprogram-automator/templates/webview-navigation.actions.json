@@ -1,0 +1,27 @@
+[
+  {
+    "type": "waitForSelector",
+    "selector": "{{TRIGGER_SELECTOR}}",
+    "timeoutMs": "{{TRIGGER_TIMEOUT_MS}}"
+  },
+  {
+    "type": "tap",
+    "selector": "{{TRIGGER_SELECTOR}}",
+    "selectorIndex": "{{TRIGGER_SELECTOR_INDEX}}"
+  },
+  {
+    "type": "waitForRoute",
+    "path": "{{WEBVIEW_ROUTE_PATH}}",
+    "query": "{{WEBVIEW_ROUTE_QUERY}}",
+    "timeoutMs": "{{WEBVIEW_ROUTE_TIMEOUT_MS}}"
+  },
+  {
+    "type": "waitForSelector",
+    "selector": "{{WEBVIEW_READY_SELECTOR}}",
+    "timeoutMs": "{{WEBVIEW_READY_TIMEOUT_MS}}"
+  },
+  {
+    "type": "screenshot",
+    "path": "{{SCREENSHOT_PATH}}"
+  }
+]

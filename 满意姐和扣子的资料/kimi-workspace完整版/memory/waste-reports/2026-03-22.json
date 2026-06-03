@@ -1,0 +1,72 @@
+{
+  "date": "2026-03-22",
+  "timestamp": "2026-03-22T13:07:16.216501",
+  "efficiency": 85.71,
+  "total_waste_percent": 14.29,
+  "waste_breakdown": {
+    "Overproduction": {
+      "name": "过度生产",
+      "matches": 0,
+      "ratio": 0.0,
+      "threshold": 0.15,
+      "exceeded": false,
+      "description": "生成用户未要求的细节"
+    },
+    "Waiting": {
+      "name": "等待浪费",
+      "matches": 0,
+      "ratio": 0.0,
+      "threshold": 0.3,
+      "exceeded": false,
+      "description": "思考不相关内容"
+    },
+    "Transportation": {
+      "name": "运输浪费",
+      "matches": 8142,
+      "ratio": 1.0,
+      "threshold": 0.1,
+      "exceeded": true,
+      "description": "格式来回转换"
+    },
+    "OverProcessing": {
+      "name": "过度处理",
+      "matches": 0,
+      "ratio": 0.0,
+      "threshold": 0.2,
+      "exceeded": false,
+      "description": "简单问题复杂推理"
+    },
+    "Inventory": {
+      "name": "库存浪费",
+      "matches": 0,
+      "ratio": 0.0,
+      "threshold": 0.1,
+      "exceeded": false,
+      "description": "上下文堆积"
+    },
+    "Motion": {
+      "name": "动作浪费",
+      "matches": 0,
+      "ratio": 0.0,
+      "threshold": 0.05,
+      "exceeded": false,
+      "description": "礼貌用语、装饰性格式"
+    },
+    "Defects": {
+      "name": "缺陷浪费",
+      "matches": 0,
+      "ratio": 0.0,
+      "threshold": 0.01,
+      "exceeded": false,
+      "description": "幻觉导致返工"
+    }
+  },
+  "recommendations": [
+    {
+      "waste_type": "Transportation",
+      "current_ratio": 1.0,
+      "target": 0.1,
+      "action": "降低运输浪费"
+    }
+  ]
+}

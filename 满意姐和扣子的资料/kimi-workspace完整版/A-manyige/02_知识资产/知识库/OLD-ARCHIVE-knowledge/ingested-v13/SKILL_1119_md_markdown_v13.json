@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/knowledge-ingest/ingested/SKILL.1119.md",
+  "filename": "SKILL.1119.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "f28f05d9db7a4d13",
+  "content_length": 960,
+  "ingested_at": "2026-03-31T17:27:45.798324",
+  "content_preview": "# markdown-converter Skill V5标准版本\n\n## S1: 全局考虑\n\n### 输入\n- Markdown文件或内容\n- 目标格式(HTML/PDF/DOCX等)\n- 转换选项(样式、模板)\n\n### 覆盖维度\n| 维度 | 考虑内容 |\n|------|----------|\n| **人** | 文档编写者、内容创作者 |\n| **事** | Markdown多格式转换、样式渲染 |\n| **物** | Markdown文件、目标格式文件 |\n| **环境** | 依赖库(pandoc) |\n| **外部集成** | pandoc |\n| **边界情况** | 复杂表格、数学公式、图片链接 |\n\n---\n\n## S2: 系统考虑\n\n### 处理流程\n```\n读取MD → 语法解析 → 格式转换 → 样式应用 → 输出文件\n```\n\n### 故障处理\n- **依赖缺失**: 提示安装pandoc\n- **转换失败**: 降级为纯文本\n- **图片丢失**: 使用绝对路径或内嵌\n\n---\n\n## S3: 输出规范\n\n### 支持格式\n| 输入 | 输出 |\n|--",
+  "limitations_applied": []
+}

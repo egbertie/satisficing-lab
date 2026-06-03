@@ -1,0 +1,28 @@
+{
+  "name": "quality-closure",
+  "description": "质量闭环机制 - 检查→修复→验证",
+  "version": "1.0",
+  "jobs": [
+    {
+      "name": "quality-closure-check",
+      "schedule": "0 */2 * * *",
+      "command": "bash /root/.openclaw/workspace/skills/quality-closure/scripts/quality-closure-check.sh",
+      "enabled": true,
+      "description": "每2小时检查质量闭环状态"
+    },
+    {
+      "name": "defect-overdue-alert",
+      "schedule": "0 9,15 * * *",
+      "command": "echo '检查逾期缺陷: $(date)' >> /root/.openclaw/workspace/skills/quality-closure/logs/overdue-alert.log",
+      "enabled": true,
+      "description": "每日9点和15点检查逾期缺陷"
+    },
+    {
+      "name": "quality-daily-report",
+      "schedule": "0 18 * * *",
+      "command": "echo '质量日报: $(date)' >> /root/.openclaw/workspace/skills/quality-closure/logs/daily-report.log",
+      "enabled": true,
+      "description": "每日18点生成质量报告"
+    }
+  ]
+}

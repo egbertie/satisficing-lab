@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blue-auditor/TIGHTENING_SPELL_FOR_BLUE_ARMY.md",
+  "filename": "TIGHTENING_SPELL_FOR_BLUE_ARMY.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "24d1480866154eec",
+  "content_length": 3328,
+  "ingested_at": "2026-03-31T17:27:45.372897",
+  "content_preview": "# 满意妞给蓝军设计的紧箍咒方案\n\n**设计原则**: 约束独立性缺失，保护审计严谨性，不限制技术能力\n**核心洞察**: 蓝军怕冲突、怕拖慢进度、容易懈怠、标准执行松懈\n\n---\n\n## 紧箍咒一：即时审计锁（技术强制）\n\n### 机制\n蓝军每延迟审计1小时，系统自动记录并累积\"延迟积分\"。\n\n```python\n# 延迟积分系统\nclass AuditDelayTracker:\n    def track_delay(self, task_name, submit_time):\n        delay_hours = (now - submit_time).hours\n        if delay_hours > 1:\n            self.delay_points += delay_hours\n            \n        # 积分阈值触发惩罚\n        if self.delay_points >= 3:\n            self.trigger_punishment(\"连续延迟审计\")\n    \n    def trigger_p",
+  "limitations_applied": []
+}

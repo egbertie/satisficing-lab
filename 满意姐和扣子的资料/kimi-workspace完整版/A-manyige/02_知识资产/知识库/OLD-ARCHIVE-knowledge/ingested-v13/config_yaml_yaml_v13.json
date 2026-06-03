@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/system-v3/checkpoint_engine/config.yaml",
+  "filename": "config.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "3d771c9d00f1fbbd",
+  "content_length": 1320,
+  "ingested_at": "2026-03-31T17:27:46.129984",
+  "content_preview": "# Checkpoint Engine 配置\n# 检查点引擎 — 零Token断电续传\n# 命名空间: NGT-CHECK-v1.0-FIN-260327\n\nversion: \"1.0\"\ndescription: \"差分持久化检查点引擎，确保状态永生\"\n\ncheckpoint:\n  # 触发条件\n  triggers:\n    - type: \"token_threshold\"\n      value: 80  # Token消耗达80%时自动触发\n    - type: \"time_interval\"\n      value: 300  # 每5分钟检查一次\n    - type: \"manual\"\n      command: \"/checkpoint save\"\n  \n  # 存储层级\n  storage_tiers:\n    tier_1_hot:\n      location: \"ram_disk\"\n      format: \"binary_diff\"\n      retention: \"session\"\n      wal_enabled: true\n      \n   ",
+  "limitations_applied": []
+}

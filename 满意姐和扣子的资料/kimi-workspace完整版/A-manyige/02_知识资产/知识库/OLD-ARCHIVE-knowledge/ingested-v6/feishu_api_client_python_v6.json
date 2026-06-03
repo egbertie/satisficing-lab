@@ -1,0 +1,82 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/feishu_api_client.py",
+  "filename": "feishu_api_client.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 15113,
+  "checksum": "56009ee149b4a9ff",
+  "ingested_at": "2026-03-31T17:30:32.836890",
+  "line_count": 466,
+  "title": "feishu_api_client",
+  "description": "飞书API客户端基类\n提供Token管理、自动刷新、请求重试和错误处理功能",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: FeishuConfig"
+    },
+    {
+      "level": 2,
+      "title": "Class: FeishuAPIError"
+    },
+    {
+      "level": 2,
+      "title": "Class: TokenExpiredError"
+    },
+    {
+      "level": 2,
+      "title": "Class: RateLimitError"
+    },
+    {
+      "level": 2,
+      "title": "Class: FeishuTokenManager"
+    },
+    {
+      "level": 2,
+      "title": "Class: FeishuAPIClient"
+    },
+    {
+      "level": 2,
+      "title": "Class: FeishuDriveAPI"
+    }
+  ],
+  "entities": [
+    {
+      "name": "FeishuConfig",
+      "type": "class"
+    },
+    {
+      "name": "FeishuAPIError",
+      "type": "class"
+    },
+    {
+      "name": "TokenExpiredError",
+      "type": "class"
+    },
+    {
+      "name": "RateLimitError",
+      "type": "class"
+    },
+    {
+      "name": "FeishuTokenManager",
+      "type": "class"
+    },
+    {
+      "name": "FeishuAPIClient",
+      "type": "class"
+    },
+    {
+      "name": "FeishuDriveAPI",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "-*- coding: utf-8 -*-",
+    "提前5分钟刷新Token",
+    "Token过期，尝试刷新并重试",
+    "Token过期，重试一次",
+    "移除Content-Type，让requests自动设置"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

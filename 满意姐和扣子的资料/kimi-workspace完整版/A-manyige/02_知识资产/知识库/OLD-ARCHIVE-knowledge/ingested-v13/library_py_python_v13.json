@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/A-manyige/00_🧭 罗盘指南/case-library/library.py",
+  "filename": "library.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "2c530bce11a6aef9",
+  "content_length": 16132,
+  "ingested_at": "2026-03-31T17:27:46.293454",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n满意解研究所 - 案例库管理系统 V1.0\n案例采集 → 结构化存储 → 标签检索 → 洞察生成\n\"\"\"\n\nimport json\nimport sqlite3\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Optional, Any\nfrom dataclasses import dataclass, asdict\nfrom enum import Enum\n\nclass CaseStatus(Enum):\n    RAW = \"raw\"              # 原始采集\n    PROCESSING = \"processing\" # 处理中\n    STRUCTURED = \"structured\" # 已结构化\n    ANALYZED = \"analyzed\"     # 已分析\n    PUBLISHED = \"published\"   # 已发布\n\nclass PartnershipStag",
+  "limitations_applied": []
+}

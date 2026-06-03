@@ -1,0 +1,109 @@
+# 执行规则配置
+# 预算执行与熔断规则
+
+rules:
+  # 任务启动前检查
+  pre_execution:
+    - name: "budget_availability_check"
+      description: "检查预算池是否有足够余额"
+      action: "block_if_insufficient"
+      message: "预算不足，任务暂停"
+      
+    - name: "estimation_confidence_check"
+      description: "检查预估置信度"
+      action: "warn_if_low_confidence"
+      threshold: 0.7
+      
+    - name: "concurrency_limit_check"
+      description: "检查并发任务数"
+      action: "queue_if_exceeded"
+      
+  # 执行中监控
+  during_execution:
+    - name: "realtime_consumption_monitor"
+      description: "实时监控消耗"
+      interval_seconds: 5
+      action: "track_and_alert"
+      
+    - name: "progressive_disclosure"
+      description: "渐进式披露"
+      action: "provide_minimal_first"
+      condition: "estimated_tokens > 500"
+      
+  # 熔断规则
+  circuit_breaker_rules:
+    - name: "soft_limit_breach"
+      trigger: "consumption > 150% estimation"
+      action: "warn_and_continue"
+      notification: true
+      
+    - name: "hard_limit_breach"
+      trigger: "consumption > 200% estimation"
+      action: "pause_and_request_approval"
+      notification: true
+      escalation: true
+      
+    - name: "emergency_override"
+      trigger: "p0_task AND consumption < 300% estimation"
+      action: "allow_with_audit"
+      requires_tag: "P0_EMERGENCY"
+      
+    - name: "daily_budget_exhausted"
+      trigger: "daily_usage >= 100%"
+      action: "block_non_p0"
+      message: "日预算已耗尽，仅P0任务可继续"
+      
+    - name: "loop_detection"
+      trigger: "3_consecutive_similar_tasks"
+      action: "force_exit_and_diagnose"
+      similarity_threshold: 0.8
+      
+  # 后执行处理
+  post_execution:
+    - name: "consumption_record"
+      description: "记录实际消耗"
+      action: "update_consumption_log"
+      
+    - name: "estimation_accuracy_update"
+      description: "更新预估准确率"
+      action: "recalculate_accuracy"
+      
+    - name: "efficiency_calculation"
+      description: "计算任务效率"
+      action: "calculate_efficiency_score"
+      
+  # 通知规则
+  notifications:
+    - name: "budget_warning"
+      trigger: "usage > 70%"
+      channels: ["console", "log"]
+      
+    - name: "budget_critical"
+      trigger: "usage > 90%"
+      channels: ["console", "log", "alert"]
+      
+    - name: "circuit_breaker_triggered"
+      trigger: "circuit_breaker_activated"
+      channels: ["console", "log", "alert", "escalation"]
+      
+    - name: "daily_report"
+      trigger: "schedule_18:37"
+      channels: ["console", "log"]
+      format: "efficiency_report"
+      
+  # 审计规则
+  audit:
+    - name: "p0_usage_audit"
+      trigger: "p0_task_executed"
+      fields: ["task_id", "pool", "tokens_used", "justification", "timestamp"]
+      retention_days: 90
+      
+    - name: "circuit_breaker_audit"
+      trigger: "circuit_breaker_triggered"
+      fields: ["task_id", "reason", "triggered_at", "resolved_at", "resolution"]
+      retention_days: 90
+      
+    - name: "estimation_deviation_audit"
+      trigger: "deviation > 50%"
+      fields: ["task_id", "estimated", "actual", "deviation_percent", "model_version"]
+      retention_days: 30

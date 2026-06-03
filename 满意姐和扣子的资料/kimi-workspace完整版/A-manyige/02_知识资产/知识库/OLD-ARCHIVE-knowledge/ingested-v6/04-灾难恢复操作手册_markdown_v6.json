@@ -1,0 +1,237 @@
+{
+  "source_path": "/root/.openclaw/workspace/disaster-recovery/04-灾难恢复操作手册.md",
+  "filename": "04-灾难恢复操作手册.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 14729,
+  "checksum": "15163188069d0eab",
+  "ingested_at": "2026-03-31T17:30:10.721410",
+  "line_count": 601,
+  "title": "灾难恢复操作手册 V1.0",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "灾难恢复操作手册 V1.0"
+    },
+    {
+      "level": 2,
+      "title": "⚠️ 紧急联系卡"
+    },
+    {
+      "level": 2,
+      "title": "1. 快速判断：你现在面临什么情况？"
+    },
+    {
+      "level": 3,
+      "title": "1.1 症状对照表"
+    },
+    {
+      "level": 3,
+      "title": "1.2 30秒决策树"
+    },
+    {
+      "level": 2,
+      "title": "2. 通用恢复流程"
+    },
+    {
+      "level": 3,
+      "title": "2.1 标准响应流程 (STOP)"
+    },
+    {
+      "level": 3,
+      "title": "2.2 恢复流程模板"
+    },
+    {
+      "level": 2,
+      "title": "3. 场景化恢复指南"
+    },
+    {
+      "level": 3,
+      "title": "3.1 GitHub 服务中断"
+    },
+    {
+      "level": 4,
+      "title": "检查清单"
+    },
+    {
+      "level": 4,
+      "title": "恢复操作"
+    },
+    {
+      "level": 1,
+      "title": "1. 查看当前remote"
+    },
+    {
+      "level": 1,
+      "title": "2. 切换到Gitee镜像 (如果已设置)"
+    },
+    {
+      "level": 1,
+      "title": "3. 验证推送/拉取"
+    },
+    {
+      "level": 1,
+      "title": "继续使用本地仓库"
+    },
+    {
+      "level": 1,
+      "title": "等GitHub恢复后推送"
+    },
+    {
+      "level": 1,
+      "title": "切换到GHE实例"
+    },
+    {
+      "level": 4,
+      "title": "事后操作"
+    },
+    {
+      "level": 3,
+      "title": "3.2 GitHub 仓库数据异常"
+    },
+    {
+      "level": 4,
+      "title": "检查清单"
+    },
+    {
+      "level": 4,
+      "title": "恢复操作"
+    },
+    {
+      "level": 1,
+      "title": "1. 进入本地仓库"
+    },
+    {
+      "level": 1,
+      "title": "2. 确保有所有分支的最新代码"
+    },
+    {
+      "level": 1,
+      "title": "3. 强制推送恢复GitHub"
+    },
+    {
+      "level": 1,
+      "title": "4. 推送标签"
+    },
+    {
+      "level": 1,
+      "title": "1. 克隆镜像"
+    },
+    {
+      "level": 1,
+      "title": "2. 推送到GitHub"
+    },
+    {
+      "level": 1,
+      "title": "3. 验证"
+    },
+    {
+      "level": 1,
+      "title": "1. 解压备份"
+    },
+    {
+      "level": 1,
+      "title": "2. 恢复"
+    },
+    {
+      "level": 4,
+      "title": "事后操作"
+    },
+    {
+      "level": 3,
+      "title": "3.3 Notion 服务中断"
+    },
+    {
+      "level": 4,
+      "title": "检查清单"
+    },
+    {
+      "level": 4,
+      "title": "恢复操作"
+    },
+    {
+      "level": 1,
+      "title": "1. 找到最近备份"
+    },
+    {
+      "level": 1,
+      "title": "2. 解压查看"
+    },
+    {
+      "level": 1,
+      "title": "3. 解压使用"
+    },
+    {
+      "level": 1,
+      "title": "使用 Markdown 文件继续工作"
+    },
+    {
+      "level": 3,
+      "title": "3.4 Notion 数据误删除"
+    },
+    {
+      "level": 4,
+      "title": "检查清单"
+    },
+    {
+      "level": 4,
+      "title": "恢复操作"
+    },
+    {
+      "level": 1,
+      "title": "1. 解压备份"
+    },
+    {
+      "level": 1,
+      "title": "2. 手动导入Notion"
+    },
+    {
+      "level": 1,
+      "title": "创建新页面 → Import → 上传Markdown/HTML"
+    },
+    {
+      "level": 3,
+      "title": "3.5 本地开发环境崩溃"
+    },
+    {
+      "level": 4,
+      "title": "检查清单"
+    },
+    {
+      "level": 4,
+      "title": "恢复操作"
+    },
+    {
+      "level": 1,
+      "title": "使用Live USB启动"
+    },
+    {
+      "level": 1,
+      "title": "挂载原硬盘"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "场景A: 本地有完整仓库",
+    "选项C: 从备份导入",
+    "预防措施 (恢复后执行)",
+    "阶段4: 复盘 (恢复后24小时内)",
+    "阶段3: 恢复 (按RTO执行)",
+    "选项B: 纯本地工作",
+    "选项A: 切换到镜像源 (推荐)",
+    "Notion 验证",
+    "阶段3: 从离线备份恢复",
+    "场景B: 从镜像源恢复",
+    "GitHub 账号恢复",
+    "选项A: 使用离线缓存",
+    "阶段1: 隔离 (立即)",
+    "选项C: 使用GitHub Enterprise Server (如有)",
+    "场景C: 从本地备份恢复"
+  ],
+  "limitations_applied": [
+    "Sections limited to 50",
+    "Key points limited to 15"
+  ],
+  "content_truncated": false
+}

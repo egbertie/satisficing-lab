@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/learning_output/avatars/T02_SIMON/math_verification.md",
+  "filename": "math_verification.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "36c42c48c329687d",
+  "content_length": 983,
+  "ingested_at": "2026-03-31T17:27:44.634753",
+  "content_preview": "# T02_SIMON（司马贺·金）今晚学习：满意解QPMS引擎数学验证\n# 角色: 文化层-金（理性决策）\n# 时间: 2026-03-27 22:05\n# 诚实红线: 逻辑验证可完成，实际计算需软件支持\n\n---\n\n## 学习内容：罗汉数学模型验证\n\n### 核心输入\n- 数学建模五步法→QPMS映射\n- 满意解（Satisficing）形式化定义\n- 匹配函数与约束集设计\n\n### 数学验证要点\n\n#### 1. 满意解vs最优解\n**最优解问题**:\n```\nmax Score(p)  s.t. C(p) ≤ 0\n```\n- 计算复杂度高（NP-hard可能）\n- 需要完整搜索空间\n- 实践中难以实现\n\n**满意解方案**:\n```\nFind p where Score(p) ≥ threshold\n```\n- 计算复杂度O(n)（贪婪策略）\n- 启发式搜索，快速收敛\n- 实践中足够好\n\n**验证结论**: 满意解策略在合伙人匹配场景下计算可行 ✅\n\n#### 2. 匹配函数设计验证\n**设计**:\n```\nMatchScore(p) = Σᵢ wᵢ × similarity(",
+  "limitations_applied": []
+}

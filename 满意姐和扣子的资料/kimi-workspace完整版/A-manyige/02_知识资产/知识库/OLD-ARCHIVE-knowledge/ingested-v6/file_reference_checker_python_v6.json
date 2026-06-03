@@ -1,0 +1,41 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/file_reference_checker.py",
+  "filename": "file_reference_checker.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 10691,
+  "checksum": "0df85cb68c98fa67",
+  "ingested_at": "2026-03-31T17:30:32.871178",
+  "line_count": 285,
+  "title": "file_reference_checker",
+  "description": "全局文件引用一致性检查脚本\n4维检查法 - 维度3：文件引用一致性",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: ReferenceChecker"
+    }
+  ],
+  "entities": [
+    {
+      "name": "ReferenceChecker",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "排除.archive_开头的存档目录",
+    "尝试从source_file的目录解析",
+    "查找Markdown链接",
+    "查找SKILL.md引用",
+    "查找MEMORY.md引用",
+    "检查是否有引用版本与实际文件版本不匹配的情况",
+    "这需要更复杂的逻辑，暂时跳过详细实现",
+    "简化实现：检查A引用B，B引用A的情况",
+    "实际循环引用检测需要构建完整的引用图",
+    "## 高优先级（P0）",
+    "## 中优先级（P1）",
+    "sed -i 's/旧路径/新路径/g' 文件.md"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

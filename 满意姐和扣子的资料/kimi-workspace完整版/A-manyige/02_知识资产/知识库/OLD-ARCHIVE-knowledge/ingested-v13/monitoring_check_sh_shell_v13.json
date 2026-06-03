@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/monitoring_check.sh",
+  "filename": "monitoring_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "c34e433b1ead50c0",
+  "content_length": 2585,
+  "ingested_at": "2026-03-31T17:27:46.181543",
+  "content_preview": "#!/bin/bash\n# 监控中心 - 定期检查脚本\n# 执行时间: 每30分钟\n# 用途: 自动检查各任务进展并更新仪表板\n\nDASHBOARD=\"/root/.openclaw/workspace/dashboard/MONITORING_CENTER_STATUS.md\"\nLOG_FILE=\"/root/.openclaw/workspace/logs/monitoring_$(date +%Y%m%d).log\"\nREPORT_DIR=\"/root/.openclaw/workspace/reports\"\n\nmkdir -p \"$(dirname \"$LOG_FILE\")\"\n\necho \"===============================================\" | tee -a \"$LOG_FILE\"\necho \"    监控中心 - 定期检查 ($(date '+%Y-%m-%d %H:%M:%S'))\"\necho \"===============================================\" | tee -a \"$LOG_FIL",
+  "limitations_applied": []
+}

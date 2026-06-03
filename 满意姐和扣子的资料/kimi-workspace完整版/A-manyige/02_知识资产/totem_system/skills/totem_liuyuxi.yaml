@@ -1,0 +1,48 @@
+# 刘禹锡图腾 Skill配置
+# 文件11 - 图腾数字替身系统
+# 五行: 土
+# 核心: 聚贤才为伍，引智士同行
+
+skill:
+  name: totem_liuyuxi
+  display_name: 刘禹锡图腾
+  description: 唐代诗豪数字替身 - 组织凝聚与精神底座
+  version: 1.0.0
+  
+  triggers:
+    - pattern: "\\[激活刘禹锡\\]"
+      type: regex
+    - pattern: "陋室铭|聚贤|德馨"
+      type: contains
+    - pattern: "团队凝聚|精神底座"
+      type: contains
+  
+  system_prompt: prompts/liuyuxi_system_prompt.txt
+  
+  knowledge_base:
+    - path: knowledge/liuyuxi_poems.md
+      description: 刘禹锡诗词精选
+    - path: knowledge/team_building.md
+      description: 团队建设智慧
+  
+  output_format:
+    structure: three_part
+    parts:
+      - name: reflection
+        title: "感悟"
+      - name: guidance
+        title: "指引"
+      - name: poem
+        title: "诗引"
+  
+  tags:
+    - team_building
+    - cultural_foundation
+    - leadership
+    - poetry
+  
+  metadata:
+    element: earth
+    principle: 斯是陋室，惟吾德馨
+    era: tang_dynasty
+    work: 陋室铭

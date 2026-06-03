@@ -1,0 +1,157 @@
+{
+  "version": "1.0.0",
+  "timezone": "Asia/Shanghai",
+  "last_updated": "2026-03-27T15:08:00+08:00",
+  "tasks": [
+    {
+      "id": "task_01",
+      "name": "morning-report",
+      "description": "每日晨报生成",
+      "cron": "0 9 * * *",
+      "script": "scripts/morning-report.py",
+      "timeout": 300,
+      "retry": {
+        "max": 3,
+        "intervals": [60, 300, 600]
+      },
+      "overlap_policy": "skip",
+      "enabled": true,
+      "priority": "P0"
+    },
+    {
+      "id": "task_02",
+      "name": "health-check",
+      "description": "系统健康检查",
+      "cron": "0 6 * * *",
+      "script": "scripts/health-check.py",
+      "timeout": 120,
+      "retry": {
+        "max": 2,
+        "intervals": [60, 300]
+      },
+      "overlap_policy": "skip",
+      "enabled": true,
+      "priority": "P0"
+    },
+    {
+      "id": "task_03",
+      "name": "backup-verify",
+      "description": "备份验证",
+      "cron": "0 2 * * *",
+      "script": "scripts/backup-verify.py",
+      "timeout": 1800,
+      "retry": {
+        "max": 1,
+        "intervals": [300]
+      },
+      "overlap_policy": "skip",
+      "enabled": true,
+      "priority": "P1"
+    },
+    {
+      "id": "task_04",
+      "name": "token-monitor",
+      "description": "Token消耗监控",
+      "cron": "*/15 * * * *",
+      "script": "scripts/token-monitor.py",
+      "timeout": 60,
+      "retry": {
+        "max": 2,
+        "intervals": [30, 60]
+      },
+      "overlap_policy": "skip",
+      "enabled": true,
+      "priority": "P1"
+    },
+    {
+      "id": "task_05",
+      "name": "log-cleanup",
+      "description": "日志清理",
+      "cron": "0 3 * * 0",
+      "script": "scripts/log-cleanup.py",
+      "timeout": 300,
+      "retry": {
+        "max": 1,
+        "intervals": [60]
+      },
+      "overlap_policy": "skip",
+      "enabled": true,
+      "priority": "P2"
+    },
+    {
+      "id": "task_06",
+      "name": "dependency-check",
+      "description": "依赖检查",
+      "cron": "0 4 * * 1",
+      "script": "scripts/dependency-check.py",
+      "timeout": 600,
+      "retry": {
+        "max": 2,
+        "intervals": [60, 300]
+      },
+      "overlap_policy": "skip",
+      "enabled": true,
+      "priority": "P2"
+    },
+    {
+      "id": "task_07",
+      "name": "disk-monitor",
+      "description": "磁盘监控",
+      "cron": "*/30 * * * *",
+      "script": "scripts/disk-monitor.py",
+      "timeout": 30,
+      "retry": {
+        "max": 1,
+        "intervals": [30]
+      },
+      "overlap_policy": "parallel",
+      "enabled": true,
+      "priority": "P1"
+    },
+    {
+      "id": "task_08",
+      "name": "heartbeat",
+      "description": "心跳检查",
+      "cron": "0 */6 * * *",
+      "script": "scripts/heartbeat.py",
+      "timeout": 30,
+      "retry": {
+        "max": 2,
+        "intervals": [60, 120]
+      },
+      "overlap_policy": "skip",
+      "enabled": true,
+      "priority": "P2"
+    },
+    {
+      "id": "task_09",
+      "name": "metrics-collect",
+      "description": "指标收集",
+      "cron": "0 * * * *",
+      "script": "scripts/metrics-collect.py",
+      "timeout": 120,
+      "retry": {
+        "max": 2,
+        "intervals": [30, 60]
+      },
+      "overlap_policy": "skip",
+      "enabled": true,
+      "priority": "P3"
+    },
+    {
+      "id": "task_10",
+      "name": "weekly-report",
+      "description": "周报生成",
+      "cron": "0 18 * * 5",
+      "script": "scripts/weekly-report.py",
+      "timeout": 600,
+      "retry": {
+        "max": 2,
+        "intervals": [300, 600]
+      },
+      "overlap_policy": "skip",
+      "enabled": true,
+      "priority": "P2"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_retrospective-system/scripts/retro-generator.py",
+  "filename": "retro-generator.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "1d864a6016d5b9dc",
+  "content_length": 958,
+  "ingested_at": "2026-03-31T17:27:45.102987",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n复盘报告生成脚本\n版本: V2.0\n\"\"\"\n\nimport sys\nfrom datetime import datetime\n\ndef log(msg):\n    print(f\"[{datetime.now().strftime('%H:%M:%S')}] {msg}\")\n\ndef generate_daily_retro():\n    log(\"生成日复盘\")\n    today = datetime.now().strftime(\"%Y-%m-%d\")\n    content = f\"\"\"# 日复盘 - {today}\n\n## 今日完成\n- [ ] 待填充\n\n## 今日问题\n- 待填充\n\n## 明日计划\n- 待填充\n\"\"\"\n    print(content)\n    return 0\n\ndef generate_weekly_retro():\n    log(\"生成周复盘\")\n    return 0\n\ndef generate_monthly_retro():\n    log(\"生成月复盘\")\n    return 0\n",
+  "limitations_applied": []
+}

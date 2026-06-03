@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/memory_guardian.py",
+  "filename": "memory_guardian.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "987d6dd221f3b505",
+  "content_length": 9781,
+  "ingested_at": "2026-03-31T17:27:46.210147",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nMemory Guardian - 内存守护者\n自动内存监控、预警、清理机制\n防止系统因内存不足而崩溃\n\"\"\"\n\nimport os\nimport sys\nimport psutil\nimport gc\nimport subprocess\nfrom pathlib import Path\nfrom datetime import datetime\n\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nLOG_FILE = WORKSPACE / \"logs\" / \"memory-guardian.log\"\nPID_FILE = WORKSPACE / \".memory-guardian.pid\"\n\n# 内存红线阈值 (MB)\nMEMORY_RED_LINES = {\n    \"yellow\": 1024,   # 黄牌警告 - 基线限制\n    \"orange\": 1536,   # 橙牌警告 - 75%危险区\n    \"red\": 2048,      # 红牌警告 - 可能崩溃\n    \"",
+  "limitations_applied": []
+}

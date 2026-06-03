@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/config/monitoring-status-check.md",
+  "filename": "monitoring-status-check.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "dd7335f1056b2501",
+  "content_length": 1407,
+  "ingested_at": "2026-03-31T17:27:44.518800",
+  "content_preview": "# 监控机制状态检查报告\n\n**检查时间**: 2026-03-29 18:30  \n**检查内容**: 内存监控机制运行状态\n\n---\n\n## 现状：部署不完整\n\n| 监控机制 | 脚本存在？ | Cron配置？ | 日志输出？ | 状态 |\n|----------|-----------|-----------|-----------|------|\n| 系统资源监控 (comprehensive-monitor.sh) | ✅ 存在 | ❌ **未配置** | ❌ 无 | **未运行** |\n| Token监控 (token_monitor.py) | ✅ 存在 | ✅ 已配置 | ✅ 有 | 运行中 |\n| 小时简报 (hourly_briefing.sh) | ✅ 存在 | ✅ 已配置 | ✅ 有 | 运行中 |\n| 诚实审计 (honesty_audit.py) | ✅ 存在 | ✅ 已配置 | ✅ 有 | 运行中 |\n\n---\n\n## 问题根因\n\n我之前创建的两个监控脚本：\n- `/root/.openclaw/scripts/system-monitor.sh` \n- ",
+  "limitations_applied": []
+}

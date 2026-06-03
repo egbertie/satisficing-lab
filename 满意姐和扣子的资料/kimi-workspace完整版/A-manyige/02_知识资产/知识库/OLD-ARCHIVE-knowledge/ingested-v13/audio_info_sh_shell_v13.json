@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_audio-handler/audio_info.sh",
+  "filename": "audio_info.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "86f76209a490f4f1",
+  "content_length": 1247,
+  "ingested_at": "2026-03-31T17:27:45.279266",
+  "content_preview": "#!/bin/bash\n# Get comprehensive audio metadata\n\nset -e\n\nif [[ $# -lt 1 ]]; then\n    echo \"Usage: $0 <audio_file>\"\n    exit 1\nfi\n\nAUDIO=\"$1\"\n\nif [[ ! -f \"$AUDIO\" ]]; then\n    echo \"Error: Audio file not found: $AUDIO\" >&2\n    exit 1\nfi\n\necho \"=== Audio: $AUDIO ===\"\necho \"\"\n\n# File info\necho \"--- File ---\"\nls -lh \"$AUDIO\" | awk '{print \"Size:\", $5}'\necho \"\"\n\n# Format info\necho \"--- Format ---\"\nffprobe -v quiet -print_format json -show_format \"$AUDIO\" 2>/dev/null | \\\n    jq -r '.format | \"Format: \\",
+  "limitations_applied": []
+}

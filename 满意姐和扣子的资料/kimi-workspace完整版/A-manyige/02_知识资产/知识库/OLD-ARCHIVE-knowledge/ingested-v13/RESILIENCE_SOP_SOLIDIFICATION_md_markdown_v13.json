@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blue-auditor/RESILIENCE_SOP_SOLIDIFICATION.md",
+  "filename": "RESILIENCE_SOP_SOLIDIFICATION.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "82f143624aa240b9",
+  "content_length": 2504,
+  "ingested_at": "2026-03-31T17:27:45.376975",
+  "content_preview": "# 韧性设计SOP固化\n## 固化时间: 2026-03-29\n\n---\n\n## 一、满意妞SOP更新\n\n### 新增章节: 韧性设计强制检查\n\n**位置**: SOUL.md \"执行前强制自检\"之后\n\n**内容**:\n```markdown\n### 韧性设计强制检查（新增）\n\n**任何机制、流程、规则设计前，必须回答:**\n\n□ 1. 数据持久化\n   - 不存储在/tmp（重启丢失）\n   - 使用持久化目录: /root/.openclaw/persistent/\n   - 有自动备份机制\n\n□ 2. 内存安全\n   - 有内存上限设置\n   - 无无限循环（必须有退出条件）\n   - OOM时优雅降级\n\n□ 3. 容错处理\n   - 依赖失效有降级方案\n   - 网络中断有重试机制\n   - 磁盘满了有检查\n\n□ 4. 恢复机制\n   - 系统重启后自动恢复\n   - 数据一致性保证\n   - 恢复时间可接受\n\n□ 5. 失效可观测\n   - 有健康检查端点\n   - 失效会通知\n   - 有日志记录\n\n**违规惩罚**:\n- 发现未过韧性检查的设计: 立即退回，不得进入审计\n",
+  "limitations_applied": []
+}

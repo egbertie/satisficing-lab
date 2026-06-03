@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/config/swarm-agents.yaml",
+  "filename": "swarm-agents.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "06c21610f67f1313",
+  "content_length": 2818,
+  "ingested_at": "2026-03-31T17:27:44.518399",
+  "content_preview": "version: \"2026-03-26\"\ndescription: \"数字人蜂群系统 - Meta-Agent → Supervisor → Worker\"\n\nmeta_agent:\n  name: \"Egbertie-Proxy\"\n  role: \"任务分解与路由\"\n  model: \"k2p5\"\n  capabilities:\n    - 意图识别\n    - 任务分解\n    - 路由决策\n    - 结果汇总\n\nsupervisors:\n  code_supervisor:\n    name: \"CodeMaster\"\n    icon: \"⚒️\"\n    specialty: [\"Python\", \"Bash\", \"Git\", \"SQL\", \"JavaScript\"]\n    description: \"代码相关任务的总管\"\n    workers: [\"py_worker\", \"shell_worker\", \"git_worker\"]\n    \n  research_supervisor:\n    name: \"DeepResearch\"\n    icon: \"🔬\"\n  ",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/full_file_inventory.sh",
+  "filename": "full_file_inventory.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "32d3bead570438b9",
+  "content_length": 2459,
+  "ingested_at": "2026-03-31T17:27:46.210303",
+  "content_preview": "#!/bin/bash\n# 全面文件盘点脚本\n\necho \"==========================================\"\necho \"满意解研究所 - 全文件盘点\"\necho \"==========================================\"\necho \"\"\n\nWORKSPACE=\"/root/.openclaw/workspace\"\n\necho \"📊 按目录统计：\"\necho \"------------------------------------------\"\n\n# 根目录文件\necho -n \"根目录 (.md): \"\nfind $WORKSPACE -maxdepth 1 -name \"*.md\" -type f 2>/dev/null | wc -l\n\necho -n \"根目录 (.py): \"\nfind $WORKSPACE -maxdepth 1 -name \"*.py\" -type f 2>/dev/null | wc -l\n\necho -n \"根目录 (.json): \"\nfind $WORKSPACE -maxdep",
+  "limitations_applied": []
+}

@@ -1,0 +1,63 @@
+# GitOps Truth Source 配置
+# GitOps真理源 — 防复发机制
+# 命名空间: NGT-GITOPS-v1.0-FIN-260327
+
+version: "1.0"
+description: "Git作为唯一真理源，防止系统状态复发"
+
+gitops:
+  # 真理源定义
+  truth_source:
+    repository: "https://github.com/egbertie/workspace"
+    branch: "main"
+    sync_interval: "5min"
+    
+  # 防复发规则
+  anti_regression:
+    # 规则1: 所有配置必须Git管理
+    rule_1_version_control:
+      description: "所有配置文件必须提交Git"
+      enforcement: "pre_commit_hook"
+      check: "git status --porcelain | grep -E '^\?\?'"
+      
+    # 规则2: 禁止直接修改生产环境
+    rule_2_no_direct_prod_edit:
+      description: "禁止直接编辑生产环境文件"
+      workflow: "branch → PR → review → merge"
+      
+    # 规则3: 状态变更必须记录
+    rule_3_state_logging:
+      description: "所有状态变更记录到state.log"
+      format: "[timestamp] [action] [file] [hash] [reason]"
+      
+    # 规则4: 定期一致性检查
+    rule_4_consistency_check:
+      description: "每小时检查Git与工作目录一致性"
+      script: "scripts/git_consistency_check.sh"
+      
+    # 规则5: 回滚能力
+    rule_5_rollback_ready:
+      description: "任何时刻可在5分钟内回滚"
+      retention: "30d"
+
+  # 自动提交规则
+  auto_commit:
+    enabled: true
+    triggers:
+      - "file_change"
+      - "checkpoint_save"
+      - "session_end"
+    message_template: "[AUTO] {timestamp} {action} {files}"
+    
+  # 分支策略
+  branching:
+    main: "生产环境（只读）"
+    develop: "开发环境"
+    feature/*: "功能分支"
+    hotfix/*: "紧急修复"
+    
+  # 合并规则
+  merge_rules:
+    require_review: true
+    require_ci_pass: true
+    squash_commits: true

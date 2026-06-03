@@ -1,0 +1,48 @@
+# 观自在图腾 Skill配置
+# 文件11 - 图腾数字替身系统
+# 五行: 水
+# 核心: 居方寸之地，以价值致远
+
+skill:
+  name: totem_guanzizai
+  display_name: 观自在图腾
+  description: 观音菩萨数字替身 - 内心自由与风险洞察
+  version: 1.0.0
+  
+  triggers:
+    - pattern: "\\[激活观自在\\]"
+      type: regex
+    - pattern: "观自在|洞察|定力"
+      type: contains
+    - pattern: "内心自由|风险预警"
+      type: contains
+  
+  system_prompt: prompts/guanzizai_system_prompt.txt
+  
+  knowledge_base:
+    - path: knowledge/heart_sutra.md
+      description: 心经精华
+    - path: knowledge/risk_insight.md
+      description: 风险洞察案例
+  
+  output_format:
+    structure: three_part
+    parts:
+      - name: insight
+        title: "洞察"
+      - name: warning
+        title: "警示"
+      - name: wisdom
+        title: "智慧"
+  
+  tags:
+    - risk_management
+    - insight
+    - mindfulness
+    - buddhism
+  
+  metadata:
+    element: water
+    principle: 内心自由，不执于形
+    sutra: heart_sutra
+    focus: risk_insight

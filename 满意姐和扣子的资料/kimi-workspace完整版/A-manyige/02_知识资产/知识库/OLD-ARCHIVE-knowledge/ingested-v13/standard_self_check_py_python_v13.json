@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/standard_self_check.py",
+  "filename": "standard_self_check.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "0a09881085754169",
+  "content_length": 11679,
+  "ingested_at": "2026-03-31T17:27:46.160703",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n标准自检框架 - Standard Self-Check Framework\n统一的S1-S7标准检查器，适用于所有Skills\n\n使用方法:\n    python3 standard_self_check.py <skill_path>\n    \n示例:\n    python3 standard_self_check.py ../quality-assurance\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport re\nfrom pathlib import Path\nfrom typing import Dict, List, Tuple, Optional\nfrom dataclasses import dataclass, asdict\n\n@dataclass\nclass CheckResult:\n    \"\"\"检查结果数据类\"\"\"\n    standard: str\n    name: str\n    passed: bool\n    message: str\n    details",
+  "limitations_applied": []
+}

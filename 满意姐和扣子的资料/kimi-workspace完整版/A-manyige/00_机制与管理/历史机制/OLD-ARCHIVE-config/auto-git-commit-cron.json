@@ -1,0 +1,8 @@
+{
+  "name": "auto-git-commit-v2",
+  "schedule": "0 */2 * * *",
+  "command": "cd /root/.openclaw/workspace && export GITHUB_TOKEN=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 && bash scripts/auto-git-commit.sh",
+  "sessionTarget": "isolated",
+  "enabled": true,
+  "description": "每2小时自动提交Git变更并推送到GitHub"
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/AUTOMATION_PIPELINE_FIX_PLAN.md",
+  "filename": "AUTOMATION_PIPELINE_FIX_PLAN.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "aa3b2abccb96903e",
+  "content_length": 2095,
+  "ingested_at": "2026-03-31T17:27:46.520697",
+  "content_preview": "# 自动化管道修复执行报告\n> **阶段**: Phase 2 - 承诺洗澡  \n> **执行时间**: 2026-03-20  \n> **目标**: 修复监控+执行完整性，达成50%关键任务自动修复率\n\n---\n\n## 一、当前管道状态诊断\n\n### 1.1 任务健康度扫描\n\n| 类别 | 数量 | 状态 |\n|------|------|------|\n| **总Cron任务** | 46个 | - |\n| ✅ 正常运行 | 18个 | 39% |\n| ⚠️ 运行超时 | 2个 | 4% |\n| ⏸️ 已禁用 | 26个 | 57% |\n\n### 1.2 问题识别\n\n| 问题 | 影响 | 紧急度 |\n|------|------|--------|\n| 每日安全检查超时 | 安全风险无法及时发现 | P1 |\n| 飞书信息迭代超时 | 飞书能力更新滞后 | P2 |\n| 高频监控任务全部禁用 | 无法自动检测和修复 | P1 |\n| 零空置检查禁用 | 资源空置无法自动补位 | P1 |\n\n---\n\n## 二、修复方案\n\n### 2.1 超时任务修复\n\n#### 每日安全检查 (",
+  "limitations_applied": []
+}

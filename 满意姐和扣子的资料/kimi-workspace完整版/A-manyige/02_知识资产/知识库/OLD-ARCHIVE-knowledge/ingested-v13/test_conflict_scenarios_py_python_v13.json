@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/namespace-enforcement/scripts/test_conflict_scenarios.py",
+  "filename": "test_conflict_scenarios.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "ec311ede0c34e144",
+  "content_length": 11063,
+  "ingested_at": "2026-03-31T17:27:45.396290",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nConflict Scenario Tests - 对抗测试\nS7: 模拟命名冲突场景\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport tempfile\nimport shutil\nfrom pathlib import Path\nfrom typing import List, Dict, Any, Tuple\n\n# 导入检查器\nimport importlib.util\nspec = importlib.util.spec_from_file_location(\"namespace_checker\", str(Path(__file__).parent / \"namespace-checker.py\"))\nnamespace_checker_module = importlib.util.module_from_spec(spec)\nspec.loader.exec_module(namespace_checker_module)\nNamespaceChecker = namespace",
+  "limitations_applied": []
+}

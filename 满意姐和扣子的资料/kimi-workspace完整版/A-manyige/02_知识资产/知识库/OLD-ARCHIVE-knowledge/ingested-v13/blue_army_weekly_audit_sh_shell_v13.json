@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/blue_army_weekly_audit.sh",
+  "filename": "blue_army_weekly_audit.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "8069c387bf61cee1",
+  "content_length": 3702,
+  "ingested_at": "2026-03-31T17:27:46.152713",
+  "content_preview": "#!/bin/bash\n# 蓝军每周审计流程脚本\n# 自动化执行每周审计任务\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nREPORT_DIR=\"$WORKSPACE/reports\"\nAUDIT_LOG=\"$WORKSPACE/skills/blue-auditor/audit_logs/weekly_audit_$(date +%Y%m%d).log\"\n\necho \"==========================================\"\necho \"蓝军每周审计流程 - $(date)\"\necho \"==========================================\"\necho \"\"\n\n# 创建目录\nmkdir -p \"$REPORT_DIR\"\nmkdir -p \"$WORKSPACE/skills/blue-auditor/audit_logs\"\n\n# 记录开始时间\necho \"[$(date '+%Y-%m-%d %H:%M:%S')] 开始每周审计\" >> \"$AUDIT_LOG\"\n\n# 1. 检查所有关键文",
+  "limitations_applied": []
+}

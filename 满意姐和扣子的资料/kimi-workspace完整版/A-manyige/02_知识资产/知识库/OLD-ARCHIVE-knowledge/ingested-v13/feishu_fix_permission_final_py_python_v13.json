@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/feishu_fix_permission_final.py",
+  "filename": "feishu_fix_permission_final.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "72f4028647c3713c",
+  "content_length": 3504,
+  "ingested_at": "2026-03-31T17:27:46.143947",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n飞书文档权限修复方案 - 添加用户访问权限\n\"\"\"\n\nimport json\nimport requests\n\nAPP_ID = \"cli_a927c5dfa4381cc6\"\nAPP_SECRET = \"8950yzh6jj17nQkKBjvGIdRocdrslhjI\"\nBASE_URL = \"https://open.feishu.cn/open-apis\"\n\n# 已创建的文档ID\nDOCUMENT_ID = \"GDtmdVaxroOf7jxR80ycb3Kcnhb\"\n\n# 用户ID（从metadata中获取）\nUSER_ID = \"ou_aea2e859a6cee1f3a11e8c018eb88ec9\"\n\ndef get_tenant_token():\n    url = f\"{BASE_URL}/auth/v3/tenant_access_token/internal\"\n    resp = requests.post(url, json={\n        \"app_id\": APP_ID,\n        \"app_sec",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/CORE/ERROR_PREVENTION_MECHANISM.sh",
+  "filename": "ERROR_PREVENTION_MECHANISM.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "2c9cec9102fe8678",
+  "content_length": 315,
+  "ingested_at": "2026-03-31T17:27:44.541204",
+  "content_preview": "#!/bin/bash\n# ERROR_PREVENTION_MECHANISM机制执行脚本\necho \"=== ERROR_PREVENTION_MECHANISM机制检查 ===\"\necho \"时间: $(date)\"\nif [ -f \"/root/.openclaw/workspace/CORE/ERROR_PREVENTION_MECHANISM.md\" ]; then\n    echo \"✅ ERROR_PREVENTION_MECHANISM.md 存在\"\nelse\n    echo \"❌ ERROR_PREVENTION_MECHANISM.md 不存在\"\n    exit 1\nfi\necho \"检查完成\"\n",
+  "limitations_applied": []
+}

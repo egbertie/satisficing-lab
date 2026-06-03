@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/honesty-tagging-protocol/STANDARDS_CHECK.md",
+  "filename": "STANDARDS_CHECK.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "60aeb70b76ea9112",
+  "content_length": 2926,
+  "ingested_at": "2026-03-31T17:27:45.003462",
+  "content_preview": "# Honesty Tagging Protocol - 5 Standard Self-Check\n# 标准: 5/7 (Production-Ready)\n\n## 标准合规性检查清单\n\n### S1: 输入处理 ✅\n- [x] parse_input() 函数实现\n- [x] 支持待标注内容输入\n- [x] 支持标注场景参数 (general/technical/news/prediction)\n- [x] 支持置信度要求配置\n- [x] 关键声明自动检测 (detect_key_claims)\n- [x] 配置文件: config/tags.json\n\n**验证命令:**\n```bash\npython3 scripts/honesty_runner.py tag \"content\" KNOWN \"source\"\npython3 scripts/honesty_runner.py auto \"content\"\n```\n\n### S2: 诚实标注 ✅\n- [x] tag_content() 函数实现\n- [x] 四级标签体系 (KNOWN/INFERRED/UNKNOWN/CONTR",
+  "limitations_applied": []
+}

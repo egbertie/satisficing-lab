@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/skill-evolution-tracker/tracker.py",
+  "filename": "tracker.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "a60ecf4bbc2bc792",
+  "content_length": 8123,
+  "ingested_at": "2026-03-31T17:27:44.816339",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n技能进化追踪器 - Skill Evolution Tracker\n\n功能：追踪每个Skill的使用频率和效果\n指标：调用次数、成功率、用户满意度、迭代次数\n\"\"\"\n\nimport json\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import List, Dict, Any, Optional\nfrom dataclasses import dataclass\n\n@dataclass\nclass SkillMetrics:\n    \"\"\"Skill指标\"\"\"\n    skill_name: str\n    call_count: int\n    success_count: int\n    fail_count: int\n    last_used: str\n    avg_duration_ms: float\n    user_satisfaction: float\n    iteration_count: int",
+  "limitations_applied": []
+}

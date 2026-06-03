@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/error-handler/429_PREVENTION.md",
+  "filename": "429_PREVENTION.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "fbb58ee71c5b7096",
+  "content_length": 3318,
+  "ingested_at": "2026-03-31T17:27:45.489098",
+  "content_preview": "# 429 错误预防机制文档\n\n## 📋 概述\n\nHTTP 429 (Too Many Requests) 错误是 OpenClaw 系统中最常见的限流错误。本文档提供根本原因分析、预防措施和自动化监控方案。\n\n---\n\n## 🔍 根本原因分析\n\n### 1. 上下文大小超限\n| 阈值 | 状态 | 影响 |\n|------|------|------|\n| 30KB | 黄色预警 | API 调用效率下降 |\n| 50KB | 红色预警 | 触发限流，返回 429 错误 |\n| >50KB | 危险区 | 频繁触发，会话中断 |\n\n**根本原因：**\n- 长对话累积大量历史消息\n- 工具调用结果占用过多 tokens\n- 系统提示词和上下文重复累加\n\n### 2. 工具调用频率过高\n| 单轮调用数 | 风险等级 |\n|-----------|----------|\n| ≤3 | 安全 |\n| 4-5 | 建议优化 |\n| >5 | 高风险，可能触发 429 |\n\n**根本原因：**\n- 单轮对话中并行发起过多工具调用\n- 循环调用未设置上限\n- 递归操作无终止条件\n\n### 3. 对",
+  "limitations_applied": []
+}

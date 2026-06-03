@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/lean-waste-tracker/waste-tracker.py",
+  "filename": "waste-tracker.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "1cee8bef6365df98",
+  "content_length": 3946,
+  "ingested_at": "2026-03-31T17:27:45.485855",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n7浪费追踪自动化脚本\n功能: 自动分析对话/输出，分类统计7种浪费\n触发: 每轮对话后 + 每日汇总\n\"\"\"\n\nimport json\nimport re\nimport os\nfrom datetime import datetime\n\nWASTE_TYPES = {\n    \"Overproduction\": {\n        \"name\": \"过度生产\",\n        \"description\": \"生成用户未要求的细节\",\n        \"indicators\": [\"顺便\", \"额外\", \"还有\", \"补充说明\"],\n        \"threshold\": 0.15\n    },\n    \"Waiting\": {\n        \"name\": \"等待浪费\",\n        \"description\": \"思考不相关内容\",\n        \"indicators\": [\"从基础开始\", \"让我们先理解\", \"首先介绍\"],\n        \"threshold\": 0.30\n    },\n    \"Transp",
+  "limitations_applied": []
+}

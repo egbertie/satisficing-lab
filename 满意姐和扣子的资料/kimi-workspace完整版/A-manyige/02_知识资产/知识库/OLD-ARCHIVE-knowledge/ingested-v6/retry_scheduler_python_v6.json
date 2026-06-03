@@ -1,0 +1,40 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/interrupt-recovery/retry_scheduler.py",
+  "filename": "retry_scheduler.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 8812,
+  "checksum": "904e1a5e893d7213",
+  "ingested_at": "2026-03-31T17:30:32.084468",
+  "line_count": 276,
+  "title": "retry_scheduler",
+  "description": "retry_scheduler.py\n重试调度器 - 实现指数退避重试策略",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: RetryStatus"
+    },
+    {
+      "level": 2,
+      "title": "Class: RetryScheduler"
+    }
+  ],
+  "entities": [
+    {
+      "name": "RetryStatus",
+      "type": "class"
+    },
+    {
+      "name": "RetryScheduler",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "重试间隔（秒）：30s, 2min, 5min, 15min",
+    "添加随机抖动，避免多个任务同时重试",
+    "检查是否超过最大重试次数"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_smart-web-scraper/smart_web_scraper.py",
+  "filename": "smart_web_scraper.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "b06e02cf7ac105ad",
+  "content_length": 9976,
+  "ingested_at": "2026-03-31T17:27:45.167241",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n智能网页抓取器 V1.0\n统一封装所有网页抓取能力\n\n核心功能：\n1. 支持Jina AI API（推荐）\n2. 支持本地抓取（requests+beautifulsoup）\n3. 内容智能提取\n4. 批量抓取\n5. 自动重试和容错\n\"\"\"\n\nimport json\nimport time\nimport requests\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Optional, Union\nfrom urllib.parse import urlparse\n\nclass SmartWebScraper:\n    \"\"\"\n    智能网页抓取器\n    统一封装多种网页抓取方式\n    \"\"\"\n    \n    def __init__(self, workspace_path=\"/root/.openclaw/workspace\"):\n        self.workspace = Path(wor",
+  "limitations_applied": []
+}

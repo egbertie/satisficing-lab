@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/mechanism_m005_prevent_stupidity_check.sh",
+  "filename": "mechanism_m005_prevent_stupidity_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "f30a5e53926d986e",
+  "content_length": 592,
+  "ingested_at": "2026-03-31T17:27:46.184549",
+  "content_preview": "#!/bin/bash\n# 防愚蠢→能动性机制检查脚本\n# 虚假完成机制整改 - M005\n\necho \"=== 防愚蠢→能动性机制检查 ===\"\necho \"\"\n\n# 检查错误记录\necho \"1. 错误记录系统:\"\nls /root/.openclaw/workspace/diary/errors/ 2>/dev/null | wc -l\necho \"   个错误记录文件\"\n\n# 检查复发预防\necho \"\"\necho \"2. 复发预防机制:\"\ngrep -r \"复发\\|prevent\\|recurrence\" /root/.openclaw/workspace/CORE/*.md 2>/dev/null | wc -l\necho \"   个预防机制引用\"\n\n# 检查能力提升记录\necho \"\"\necho \"3. 能力提升记录:\"\ngrep -c \"能力\\|成长\\|进化\" /root/.openclaw/workspace/SOUL.md 2>/dev/null || echo \"   0\"\n\necho \"\"\necho \"能动性度量标准:\"\necho \"  [ ] 主动发现问题？\"",
+  "limitations_applied": []
+}

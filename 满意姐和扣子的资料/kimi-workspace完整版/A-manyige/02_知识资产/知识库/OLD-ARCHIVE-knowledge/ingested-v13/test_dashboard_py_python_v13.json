@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/dashboard-manager/test_dashboard.py",
+  "filename": "test_dashboard.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "2230abfd016d6613",
+  "content_length": 360,
+  "ingested_at": "2026-03-31T17:27:45.419730",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\ndashboard-manager测试\n\"\"\"\n\nimport unittest\nfrom pathlib import Path\n\n\nclass TestDashboardManager(unittest.TestCase):\n    \"\"\"仪表盘管理测试\"\"\"\n    \n    def test_structure(self):\n        \"\"\"测试结构\"\"\"\n        skill_dir = Path(__file__).parent\n        self.assertTrue(skill_dir.exists())\n\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/system_integration_test.py",
+  "filename": "system_integration_test.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "28c79d8cf836fc60",
+  "content_length": 3735,
+  "ingested_at": "2026-03-31T17:27:46.142915",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n系统集成验证脚本\n验证6 Worker系统联调\n\n质量验证：实际运行，非静态检查\n\"\"\"\n\nimport sys\nfrom pathlib import Path\n\n# 添加所有Skill目录到路径\nSKILLS_DIR = Path(\"/root/.openclaw/workspace/skills\")\nfor skill_dir in SKILLS_DIR.iterdir():\n    if skill_dir.is_dir():\n        sys.path.insert(0, str(skill_dir))\n\nfrom worker_orchestrator import WorkerOrchestrator, WorkerType, TaskStatus\nfrom blackboard_manager import BlackboardManager\nfrom checkpoint_manager import CheckpointManager\n\n\ndef test_worker_blackboard_integra",
+  "limitations_applied": []
+}

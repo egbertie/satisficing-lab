@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blue-sentinel/blue-sentinel.sh",
+  "filename": "blue-sentinel.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "c767c2656d7adbc6",
+  "content_length": 15612,
+  "ingested_at": "2026-03-31T17:27:45.483541",
+  "content_preview": "#!/bin/bash\n# Blue-Sentinel 统一入口脚本\n# 蓝军哨兵主控脚本\n# 版本: 2.0.0\n# 用法: ./blue-sentinel.sh [command] [options]\n\nset -e\n\n# 配置\nSCRIPT_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nCONFIG_FILE=\"${SCRIPT_DIR}/blue-sentinel.yaml\"\nLOG_DIR=\"${SCRIPT_DIR}/logs\"\nREPORT_DIR=\"${SCRIPT_DIR}/reports\"\nPID_FILE=\"${SCRIPT_DIR}/.blue-sentinel.pid\"\n\n# 颜色定义\nRED='\\033[0;31m'\nYELLOW='\\033[1;33m'\nGREEN='\\033[0;32m'\nBLUE='\\033[0;34m'\nCYAN='\\033[0;36m'\nNC='\\033[0m' # No Color\n\n# 日志函数\nlog_info() {\n    echo -e \"${BLUE}[INF",
+  "limitations_applied": []
+}

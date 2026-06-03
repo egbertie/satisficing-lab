@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/disk-monitor.sh",
+  "filename": "disk-monitor.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "ce07c5258e26791d",
+  "content_length": 1060,
+  "ingested_at": "2026-03-31T17:27:46.166519",
+  "content_preview": "#!/bin/bash\n# 磁盘空间监控与自动清理\n# 当磁盘使用超过80%时自动清理临时文件\n\nDISK_USAGE=$(df / | tail -1 | awk '{print $5}' | sed 's/%//')\nLOG_FILE=\"/var/log/disk-monitor.log\"\nTIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')\n\nif [ \"$DISK_USAGE\" -gt 80 ]; then\n    echo \"[$TIMESTAMP] ALERT: 磁盘使用率 ${DISK_USAGE}%，开始自动清理...\" | tee -a \"$LOG_FILE\"\n    \n    # 清理1: 临时文件\n    find /tmp -type f -mtime +1 -delete 2>/dev/null\n    \n    # 清理2: 回收站（shadow-clone 嵌套）\n    find /tmp -name \"trash-shadow-clone-*\" -type d -mtime +1 -exec rm -rf {} + 2>/dev",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/super-knowledge-ingest/super_knowledge_ingest_v14.py",
+  "filename": "super_knowledge_ingest_v14.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "2969d6e1e4a94b1e",
+  "content_length": 3082,
+  "ingested_at": "2026-03-31T17:27:45.428710",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nsuper-knowledge-ingest V14.0 - 批量缓冲版\n核心突破：批量缓冲 + 延迟写入 + 合并系统调用\n目标：压榨最后一点性能\n\"\"\"\n\nimport os\nimport time\nimport threading\nimport io\nfrom queue import Queue\n\n# ============ 批量缓冲写入器 ============\n_OUT = \"/root/.openclaw/workspace/knowledge/7standard-v14\"\nos.makedirs(_OUT, exist_ok=True)\n\n_WRITE_Q = Queue()\n_BATCH_SIZE = 100  # 批量大小\n_FLUSH_INTERVAL = 0.01  # 10ms 刷新\n\n# 写入缓冲区\n_buffer = {}\n_buf_lock = threading.Lock()\n\ndef _writer():\n    \"\"\"批量写入线程\"\"\"\n    while True:\n        ite",
+  "limitations_applied": []
+}

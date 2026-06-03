@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/config/model-router.json",
+  "filename": "model-router.json",
+  "file_type": "json",
+  "extension": ".json",
+  "file_hash": "dcd8721576d6f311",
+  "content_length": 1334,
+  "ingested_at": "2026-03-31T17:27:44.517800",
+  "content_preview": "{\n  \"version\": \"2026-03-26\",\n  \"description\": \"Token优化 - 模型路由分层配置\",\n  \"routing_policy\": {\n    \"simple_queries\": {\n      \"model\": \"kimi-k2p5-flash\",\n      \"description\": \"简单查询，低Token消耗\",\n      \"examples\": [\"天气查询\", \"简单计算\", \"事实确认\", \"文件列表\"],\n      \"max_tokens\": 2000,\n      \"cost_saving\": \"60%\"\n    },\n    \"standard_tasks\": {\n      \"model\": \"kimi-k2p5\",\n      \"description\": \"标准任务，常规Token消耗\",\n      \"examples\": [\"代码编写\", \"文档编辑\", \"数据分析\", \"Skill调用\"],\n      \"max_tokens\": 8000,\n      \"cost_saving\": \"0%\"\n    ",
+  "limitations_applied": []
+}

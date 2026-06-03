@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/gpg-vault.sh",
+  "filename": "gpg-vault.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "8b829e61ebf3e8d6",
+  "content_length": 1638,
+  "ingested_at": "2026-03-31T17:27:46.142513",
+  "content_preview": "#!/bin/bash\n# GPG加密环境变量文件\n# 用于加密敏感配置文件\n\nVAULT_DIR=\"$HOME/.openclaw/security/vault\"\nmkdir -p \"$VAULT_DIR\"\n\nencrypt_file() {\n    local file=\"$1\"\n    if [ -f \"$file\" ]; then\n        # 使用GPG对称加密（AES-256）\n        gpg --symmetric --cipher-algo AES256 --compress-algo 0 --batch --yes \\\n            --passphrase-file \"$VAULT_DIR/.gpg-passphrase\" \\\n            -o \"$file.gpg\" \"$file\" 2>/dev/null\n        \n        if [ $? -eq 0 ]; then\n            # 设置严格权限\n            chmod 600 \"$file.gpg\"\n            # 安全擦除原",
+  "limitations_applied": []
+}

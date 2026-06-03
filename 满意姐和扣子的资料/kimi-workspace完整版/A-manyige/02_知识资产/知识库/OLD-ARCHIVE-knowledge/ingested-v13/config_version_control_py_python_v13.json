@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/config_version_control.py",
+  "filename": "config_version_control.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "93c534f323524b63",
+  "content_length": 3659,
+  "ingested_at": "2026-03-31T17:27:46.184737",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n配置版本控制\n用途: 对核心文件进行版本控制，每次修改前自动备份\n规则: 保留最近10个版本，可回滚\n\"\"\"\n\nimport os\nimport shutil\nimport json\nfrom datetime import datetime\nfrom pathlib import Path\n\n# 需要版本控制的核心文件\nVERSIONED_FILES = [\n    \"/root/.openclaw/workspace/SOUL.md\",\n    \"/root/.openclaw/workspace/USER.md\",\n    \"/root/.openclaw/workspace/MEMORY.md\",\n    \"/root/.openclaw/workspace/HEARTBEAT.md\"\n]\n\n# 版本控制目录\nVERSION_DIR = \"/root/.openclaw/workspace/.versions\"\nMAX_VERSIONS = 10\n\ndef create_version(file_path):\n    \"\"\"",
+  "limitations_applied": []
+}

@@ -1,0 +1,45 @@
+{
+  "routes": [
+    {
+      "task_id": "8a772cf7aee9",
+      "task_summary": "将Egbertie的管理哲学固化成可执行检查机制并立即嵌入主工作流",
+      "route": "llm",
+      "confidence": 1.0,
+      "estimated_tokens_local": 0,
+      "estimated_tokens_hybrid": 200,
+      "estimated_tokens_llm": 800,
+      "savings_vs_llm": 0.0,
+      "gate_check": {
+        "q1_local": false,
+        "q2_light": false,
+        "q3_compress": true,
+        "c1_reusable": true,
+        "c2_parallel": false,
+        "c3_boundary_clear": true
+      },
+      "fallback": "hybrid",
+      "timestamp": "2026-04-09T13:10:14.169226"
+    },
+    {
+      "task_id": "61547039050d",
+      "task_summary": "撰写Egbertie管理哲学闭环方案",
+      "route": "hybrid",
+      "confidence": 0.6,
+      "estimated_tokens_local": 0,
+      "estimated_tokens_hybrid": 200,
+      "estimated_tokens_llm": 800,
+      "savings_vs_llm": 0.75,
+      "gate_check": {
+        "q1_local": true,
+        "q2_light": true,
+        "q3_compress": true,
+        "c1_reusable": true,
+        "c2_parallel": false,
+        "c3_boundary_clear": true
+      },
+      "fallback": "llm",
+      "timestamp": "2026-04-09T13:24:51.972747"
+    }
+  ],
+  "weekly_summary": {}
+}

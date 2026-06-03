@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/cron-automation/scripts/health-check.py",
+  "filename": "health-check.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "ab23deeb0368dad0",
+  "content_length": 15681,
+  "ingested_at": "2026-03-31T17:27:45.383150",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n健康检查脚本 - Cron-Automation System S5自我验证组件\n\n功能:\n- 检查配置完整性\n- 验证Cron表达式\n- 检查脚本存在性和可执行性\n- 检查资源状态\n- 生成健康报告\n\nS5标准: 自我验证 - 质量指标、自检脚本、健康检查\n\"\"\"\n\nimport json\nimport os\nimport sys\nimport subprocess\nimport shutil\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Any, Tuple\nfrom dataclasses import dataclass, asdict\nfrom enum import Enum\nimport re\n\n# 路径配置\nBASE_DIR = Path(__file__).parent.parent\nCONFIG_DIR = BASE_DIR / \"config\"\nLOGS_DIR = BASE_DIR /",
+  "limitations_applied": []
+}

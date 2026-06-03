@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/disaster-recovery/02-自动化备份脚本/backup-configs.sh",
+  "filename": "backup-configs.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "c8ee820b80c81e1d",
+  "content_length": 8364,
+  "ingested_at": "2026-03-31T17:27:44.643305",
+  "content_preview": "#!/bin/bash\n################################################################################\n# 配置和密钥备份脚本\n# 功能: 安全备份敏感配置和API密钥\n################################################################################\n\nset -euo pipefail\n\nSCRIPT_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nsource \"${SCRIPT_DIR}/common.sh\"\n\n# 配置\nBACKUP_BASE_DIR=\"${BACKUP_BASE_DIR:-${HOME}/Backups/Configs}\"\nENCRYPTION_KEY=\"${ENCRYPTION_KEY:-}\"  # GPG密钥ID或密码\n\n# 日志\nlog_info \"配置和密钥备份任务开始\"\n\n# 创建备份目录\nmkdir -p \"${BACKUP_BASE",
+  "limitations_applied": []
+}

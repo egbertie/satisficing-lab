@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/feishu_bitable_sync.py",
+  "filename": "feishu_bitable_sync.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e97d5b681e23970e",
+  "content_length": 17761,
+  "ingested_at": "2026-03-31T17:27:46.188766",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\n飞书多维表格同步脚本\n\n功能：\n- 将本地 Markdown 文件同步到飞书多维表格（Bitable）\n- 支持双向同步（本地 → 飞书 / 飞书 → 本地）\n- 适合结构化知识管理\n\n使用方法：\n    python scripts/feishu_bitable_sync.py --mode push --source ./notes --table_url \"https://...\"\n    python scripts/feishu_bitable_sync.py --mode pull --target ./backup --table_url \"https://...\"\n\n环境变量：\n    FEISHU_APP_ID - 飞书应用 ID\n    FEISHU_APP_SECRET - 飞书应用密钥\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport re\nimport argparse\nfrom pathlib import Path\n",
+  "limitations_applied": []
+}

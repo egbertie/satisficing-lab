@@ -1,0 +1,81 @@
+# 自媒体行业配置
+
+# 行业模板标识
+industry_template: "self-media"
+
+# 财务阈值
+monthly_living_expenses: 5000  # 月生活费（元）
+emergency_fund_months: 3
+
+# 提醒时段
+reminder_hours:
+  morning: 9
+  afternoon: 14
+  evening: 20
+
+# 健康阈值
+max_continuous_work_hours: 4
+min_sleep_hours: 6
+min_weekly_exercise: 3
+
+# 自定义关键词（自媒体专用）
+business_keywords:
+  - 内容
+  - 选题
+  - 粉丝
+  - 阅读
+  - 播放
+  - 点赞
+  - 广告
+  - 变现
+
+# 外部系统集成
+integrations:
+  calendar:
+    google_calendar:
+      enabled: false
+      api_key: ""
+      calendar_id: ""
+      sync_direction: "bidirectional"
+    outlook:
+      enabled: false
+      api_key: ""
+      sync_direction: "bidirectional"
+
+  analytics:
+    wechat_official_account:
+      enabled: false
+      app_id: ""
+      app_secret: ""
+      sync_frequency: "daily"  # daily/weekly
+    douyin:
+      enabled: false
+      access_token: ""
+      sync_frequency: "daily"
+    xiaohongshu:
+      enabled: false
+      access_token: ""
+      sync_frequency: "daily"
+
+# 智能决策配置
+ai_decisions:
+  enabled: true
+  auto_analysis_frequency: "weekly"
+  content_suggestion_enabled: true
+  trend_analysis_enabled: true
+  income_optimization_enabled: true
+
+# 自媒体专用配置
+content_planning:
+  default_publish_frequency: 3  # 每周发布次数
+  content_types:
+    - 图文
+    - 视频
+    - 直播
+  platforms:
+    - 微信公众号
+    - 抖音
+    - 小红书
+
+# 其他配置
+default_timezone: Asia/Shanghai

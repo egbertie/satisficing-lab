@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/universal-task-executor-v3/integration/knowledge_bridge.py",
+  "filename": "knowledge_bridge.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "865d76d4677a721e",
+  "content_length": 16822,
+  "ingested_at": "2026-03-31T17:27:45.368470",
+  "content_preview": "\"\"\"\nKnowledge Bridge - 知识入库桥接器\n集成super-knowledge-ingest Skill到Universal Task Executor V3.0\n\n职责：\n1. 统一接口调用super-knowledge-ingest\n2. 支持批量入库\n3. 支持增量更新\n4. Token优化（大任务分批入库）\n5. Checkpoint支持（入库状态可恢复）\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport asyncio\nimport logging\nimport subprocess\nfrom typing import Dict, List, Optional, Any, Callable\nfrom dataclasses import dataclass, field\nfrom datetime import datetime\nfrom pathlib import Path\n\n# 添加super-knowledge-ingest路径\nSKILL_PATH = Path(__file__).parent.paren",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/extract_skill_knowledge.py",
+  "filename": "extract_skill_knowledge.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "c4649237e8516414",
+  "content_length": 2555,
+  "ingested_at": "2026-03-31T17:27:46.156786",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nSkill知识提取器 - 承诺洗澡Phase 1\n提取全部144个Skill的核心内容，建立知识索引\n\"\"\"\n\nimport os\nimport json\nimport re\nfrom pathlib import Path\n\ndef extract_skill_knowledge(skill_path):\n    \"\"\"从单个SKILL.md提取核心知识\"\"\"\n    try:\n        with open(skill_path, 'r', encoding='utf-8') as f:\n            content = f.read()\n        \n        skill_name = skill_path.parent.name\n        \n        # 提取描述\n        desc_match = re.search(r'description:\\s*\\|\\s*\\n(.*?)(?=triggers:|---|\\n\\n)', content, re.DOTALL)\n        d",
+  "limitations_applied": []
+}

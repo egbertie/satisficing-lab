@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/check_management_rules_light.py",
+  "filename": "check_management_rules_light.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "3fdde9ccdb0004ff",
+  "content_length": 3172,
+  "ingested_at": "2026-03-31T17:27:46.186170",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n轻量级管理规则检查脚本 - Token优化版\n预计Token消耗: ~50-100/次\n\n使用方法:\n    python3 check_management_rules_light.py\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport time\nimport hashlib\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nCACHE_FILE = WORKSPACE / \".cache\" / \"check_cache.json\"\n\ndef get_file_mtime(filepath):\n    \"\"\"获取文件修改时间（轻量）\"\"\"\n    try:\n        return os.path.getmtime(filepath)\n    except:\n        return 0\n\ndef get_fi",
+  "limitations_applied": []
+}

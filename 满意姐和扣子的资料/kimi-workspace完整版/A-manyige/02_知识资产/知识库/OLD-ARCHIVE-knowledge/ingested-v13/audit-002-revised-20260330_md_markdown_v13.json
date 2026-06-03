@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/blue-audit/audit-002-revised-20260330.md",
+  "filename": "audit-002-revised-20260330.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "92ae2df1d6558013",
+  "content_length": 1680,
+  "ingested_at": "2026-03-31T17:27:45.511919",
+  "content_preview": "# 蓝军紧急修正审计报告 #002-REVISED\n\n**审计时间**: 2026-03-30 06:47  \n**审计对象**: 满意妞全量代码存在性验证结果（修正版）  \n**审计方法**: 独立抽查验证，检查完整目录树\n\n---\n\n## 重要发现：之前报告有误\n\n**满意妞主动发现的问题**:\n- 第一版验证脚本只检查了Skill根目录\n- 遗漏了子目录中的代码（scripts/, modules/, tests/等）\n- 导致误判\"43个仅文档Skill\"\n\n**修正后的验证**:\n- 94个一级Skill目录\n- **94个都有代码（100%）**\n- **0个仅文档**\n\n---\n\n## 审计结论（修正后）\n\n| 审计项 | 修正前声称 | 修正后实际 | 结果 |\n|--------|-----------|-----------|------|\n| 一级Skill数 | 357 | ✅ 94 | **通过** |\n| 有代码Skill | 314 | ✅ 94 | **通过** |\n| 仅文档Skill | 43 | ✅ 0 | **修正** |\n\n**关键区别**:\n",
+  "limitations_applied": []
+}

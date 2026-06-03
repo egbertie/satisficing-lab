@@ -1,0 +1,46 @@
+{
+  "jobs": [
+    {
+      "id": "metacognitive-weekly-review",
+      "name": "Metacognitive Loop Weekly Review",
+      "description": "元认知循环周度自动复盘 - 每周六22:00执行",
+      "schedule": "0 22 * * 6",
+      "enabled": true,
+      "sessionTarget": "isolated",
+      "payload": {
+        "kind": "agentTurn",
+        "prompt": "执行元认知循环周度复盘任务。\n\n请运行以下命令：\n```\ncd /root/.openclaw/workspace && python3 skills/metacognitive-loop-enforcer/loop-tracker.py --weekly-review\n```\n\n然后检查是否有告警需要处理：\n1. 如果重复率>20%，生成红色告警\n2. 如果重复率>10%，生成黄色告警\n3. 如果有待验证项超过7天，提醒验证\n\n将执行结果和任何告警信息保存到 memory/reports/weekly/execution-log-{date}.txt"
+      }
+    },
+    {
+      "id": "metacognitive-daily-check",
+      "name": "Metacognitive Loop Daily Check",
+      "description": "元认知循环每日检查 - 检查待验证项和重复告警",
+      "schedule": "0 9 * * *",
+      "enabled": true,
+      "sessionTarget": "isolated",
+      "payload": {
+        "kind": "agentTurn",
+        "prompt": "执行元认知循环每日检查。\n\n1. 检查error-registry.yaml中status为\"verifying\"且超过7天的错误\n2. 检查重复率是否超过阈值\n3. 如有异常，生成简要报告\n\n命令参考：\n```\ncd /root/.openclaw/workspace && python3 skills/metacognitive-loop-enforcer/loop-tracker.py --stats\n```"
+      }
+    },
+    {
+      "id": "metacognitive-monthly-pattern",
+      "name": "Metacognitive Monthly Pattern Analysis",
+      "description": "月度错误模式分析 - 每月1号执行",
+      "schedule": "0 10 1 * *",
+      "enabled": true,
+      "sessionTarget": "isolated",
+      "payload": {
+        "kind": "agentTurn",
+        "prompt": "执行元认知循环月度模式分析。\n\n分析过去一个月的错误数据，生成模式分析报告：\n1. 高频错误类别\n2. 重复错误模式\n3. 认知局限分布\n4. 改进措施有效性\n\n报告保存到 memory/patterns/{YYYY-MM}.md"
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "created": "2026-03-21",
+    "skill": "metacognitive-loop-enforcer",
+    "description": "元认知循环机制的定时任务配置"
+  }
+}

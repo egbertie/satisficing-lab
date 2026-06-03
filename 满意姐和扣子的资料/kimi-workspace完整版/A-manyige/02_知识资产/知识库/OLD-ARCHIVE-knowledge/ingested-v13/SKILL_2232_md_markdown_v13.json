@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/knowledge-ingest/ingested/SKILL.2232.md",
+  "filename": "SKILL.2232.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "63fbc7c6c5d214a3",
+  "content_length": 1229,
+  "ingested_at": "2026-03-31T17:27:45.839123",
+  "content_preview": "# cron-scheduling Skill V5标准版本\n\n## S1: 全局考虑\n\n### 输入\n- 任务脚本路径\n- 执行时间表（Cron表达式）\n- 任务优先级\n\n### 覆盖维度\n| 维度 | 考虑内容 |\n|------|----------|\n| **人** | 开发者配置任务、运维人员监控 |\n| **事** | 定时任务调度、执行监控、失败重试 |\n| **物** | Cron表达式、脚本、日志、状态 |\n| **环境** | 时区、系统时间、资源限制 |\n| **外部集成** | Cron服务、通知渠道 |\n| **边界情况** | 任务重叠、执行超时、系统重启 |\n\n---\n\n## S2: 系统考虑\n\n### 处理流程\n```\n配置解析 → 时间计算 → 触发执行 → 状态记录 → 结果通知\n    ↑           ↓           ↓           ↓\n    └──── 冲突检测 ← 超时处理 ← 失败重试 ←────┘\n```\n\n### 故障处理\n- **执行超时**: 强制终止，标记失败\n- **脚本错误**: 记录错误日志，发送告警",
+  "limitations_applied": []
+}

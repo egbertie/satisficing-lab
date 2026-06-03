@@ -1,0 +1,75 @@
+{
+  "source_path": "/root/.openclaw/workspace/archive/notion_sync_old/notion_complete_sync.py",
+  "filename": "notion_complete_sync.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 20048,
+  "checksum": "77aab230c2910205",
+  "ingested_at": "2026-03-31T17:30:32.913621",
+  "line_count": 569,
+  "title": "notion_complete_sync",
+  "description": "Notion 完整同步脚本 - 批量处理所有文档\n创建于: 2026-03-10\n目标: 同步 /root/.openclaw/workspace/ 下所有文档到 Notion",
+  "sections": [],
+  "entities": [
+    {
+      "name": "notion_request",
+      "type": "function"
+    },
+    {
+      "name": "create_page",
+      "type": "function"
+    },
+    {
+      "name": "content_to_blocks",
+      "type": "function"
+    },
+    {
+      "name": "read_file_content",
+      "type": "function"
+    },
+    {
+      "name": "get_file_type",
+      "type": "function"
+    },
+    {
+      "name": "find_all_files",
+      "type": "function"
+    },
+    {
+      "name": "get_existing_pages",
+      "type": "function"
+    },
+    {
+      "name": "sync_file",
+      "type": "function"
+    },
+    {
+      "name": "batch_sync",
+      "type": "function"
+    },
+    {
+      "name": "save_progress",
+      "type": "function"
+    },
+    {
+      "name": "generate_report",
+      "type": "function"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "Notion API 配置",
+    "限制 block 数量",
+    "跳过同步脚本自身和进度文件",
+    "每 batch_size 个文件保存一次进度",
+    "2. 查找或创建父页面",
+    "3. 获取已存在的页面",
+    "保存 Markdown 格式报告"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

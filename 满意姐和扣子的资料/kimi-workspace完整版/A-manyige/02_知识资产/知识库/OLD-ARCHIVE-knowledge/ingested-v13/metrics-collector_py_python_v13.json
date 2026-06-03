@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/metrics-collector.py",
+  "filename": "metrics-collector.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "2e87224462f74d98",
+  "content_length": 14227,
+  "ingested_at": "2026-03-31T17:27:46.166362",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\nMetrics Collector V1.0\n量化指标自动化收集脚本\n\n功能：\n1. 每日自动统计核心指标数据\n2. 生成 metrics-report.json 报告\n3. 阈值告警检查\n4. 数据持久化存储\n\n使用：\n    python3 metrics-collector.py [--date YYYY-MM-DD] [--output path]\n\"\"\"\n\nimport json\nimport os\nimport sys\nimport argparse\nfrom datetime import datetime, timedelta\nfrom dataclasses import dataclass, asdict\nfrom typing import Dict, List, Optional, Any\nfrom pathlib import Path\nimport logging\n\n# 配置日志\nlogging.basicConfig(\n    level=logging.",
+  "limitations_applied": []
+}

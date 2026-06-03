@@ -1,0 +1,229 @@
+name: Quality Gate
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master]
+  release:
+    types: [published]
+
+jobs:
+  # 预检查任务
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+  
+  # 提交前门禁 - 基础级别
+  pre-commit-gate:
+    runs-on: ubuntu-latest
+    needs: preflight
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt 2>/dev/null || true
+          pip install black flake8 pytest
+      
+      - name: Run pre-commit gate
+        run: |
+          python3 skills/quality-gate-system/scripts/quality-gate-check.py \
+            --target . \
+            --level basic \
+            --quick \
+            --format junit \
+            --output reports/gate-basic.xml
+        continue-on-error: true
+      
+      - name: Upload basic gate report
+        uses: actions/upload-artifact@v4
+        with:
+          name: gate-basic-report
+          path: reports/gate-basic.xml
+  
+  # 合并前门禁 - 标准级别
+  merge-gate:
+    runs-on: ubuntu-latest
+    needs: pre-commit-gate
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt 2>/dev/null || true
+          pip install black flake8 pytest pytest-cov
+      
+      - name: Run standard gate
+        id: gate
+        run: |
+          python3 skills/quality-gate-system/scripts/quality-gate-check.py \
+            --target . \
+            --level standard \
+            --format json \
+            --output reports/gate-standard.json
+          
+          # 提取结果
+          SCORE=$(jq -r '.summary.total_score' reports/gate-standard.json)
+          BLOCKED=$(jq -r '.summary.blocked' reports/gate-standard.json)
+          echo "score=$SCORE" >> $GITHUB_OUTPUT
+          echo "blocked=$BLOCKED" >> $GITHUB_OUTPUT
+          
+          if [ "$BLOCKED" = "true" ]; then
+            echo "❌ Quality gate blocked!"
+            exit 1
+          fi
+      
+      - name: Comment PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = JSON.parse(fs.readFileSync('reports/gate-standard.json', 'utf8'));
+            const summary = report.summary;
+            
+            const emoji = summary.blocked ? '❌' : summary.grade === 'PASS' ? '✅' : '⚠️';
+            
+            const body = `## ${emoji} Quality Gate Report
+            
+            | Metric | Value |
+            |--------|-------|
+            | Score | **${summary.total_score.toFixed(2)}** / 100 |
+            | Grade | ${summary.grade} |
+            | Status | ${summary.blocked ? '🚫 BLOCKED' : '✅ PASSED'} |
+            
+            ### Dimensions
+            ${Object.entries(report.dimensions).map(([name, dim]) => 
+              `- **${name}**: ${dim.score.toFixed(1)}%`
+            ).join('\n')}
+            
+            ${summary.blocked ? '\n⚠️ **Please fix the issues before merging.**' : ''}
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+      
+      - name: Upload standard gate report
+        uses: actions/upload-artifact@v4
+        with:
+          name: gate-standard-report
+          path: reports/gate-standard.json
+  
+  # 发布前门禁 - 关键级别
+  release-gate:
+    runs-on: ubuntu-latest
+    needs: [pre-commit-gate, merge-gate]
+    if: github.event_name == 'release'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install black flake8 pytest pytest-cov bandit safety
+      
+      - name: Run critical gate
+        run: |
+          python3 skills/quality-gate-system/scripts/quality-gate-check.py \
+            --target . \
+            --level critical \
+            --format json \
+            --output reports/gate-critical.json
+          
+          # 严格检查，任何失败都阻断
+          BLOCKED=$(jq -r '.summary.blocked' reports/gate-critical.json)
+          if [ "$BLOCKED" = "true" ]; then
+            echo "❌ Critical quality gate blocked! Release aborted."
+            exit 1
+          fi
+      
+      - name: Security scan
+        run: |
+          bandit -r . -f json -o reports/security-scan.json || true
+          safety check --json > reports/dependency-check.json || true
+      
+      - name: Generate release report
+        run: |
+          python3 skills/quality-gate-system/scripts/generate-report.py \
+            --input reports/gate-critical.json \
+            --format html \
+            --output reports/release-report.html
+      
+      - name: Upload release reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-quality-reports
+          path: reports/
+  
+  # 趋势分析 - 定时任务
+  trend-analysis:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Download historical reports
+        uses: actions/download-artifact@v4
+        with:
+          pattern: gate-*-report
+          path: reports/historical
+          continue-on-error: true
+      
+      - name: Generate trend report
+        run: |
+          python3 skills/quality-gate-system/scripts/generate-report.py \
+            --trend \
+            --days 30 \
+            --output reports/trend-report.html
+      
+      - name: Upload trend report
+        uses: actions/upload-artifact@v4
+        with:
+          name: quality-trend-report
+          path: reports/trend-report.html

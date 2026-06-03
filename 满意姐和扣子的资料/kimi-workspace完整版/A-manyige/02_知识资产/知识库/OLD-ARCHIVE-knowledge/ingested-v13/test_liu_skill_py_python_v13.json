@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/liu-skill/test_liu_skill.py",
+  "filename": "test_liu_skill.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "c25b8e7da0be05dd",
+  "content_length": 2803,
+  "ingested_at": "2026-03-31T17:27:45.413598",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n测试LIU Skill\n\"\"\"\n\nimport sys\nsys.path.insert(0, '/root/.openclaw/workspace/skills/liu-skill')\n\nfrom liu_skill import LIUSkill, CandidateData, TrustLevel, Recommendation\n\ndef test_excellent_candidate():\n    \"\"\"测试优秀候选人\"\"\"\n    liu = LIUSkill()\n    candidate = CandidateData(\n        name=\"优秀候选人\",\n        values_alignment=9.0,\n        integrity_history=8.5,\n        long_term_commitment=8.0,\n        cultural_fit=8.5,\n        reputation_score=9.0\n    )\n    \n    result = liu.ev",
+  "limitations_applied": []
+}

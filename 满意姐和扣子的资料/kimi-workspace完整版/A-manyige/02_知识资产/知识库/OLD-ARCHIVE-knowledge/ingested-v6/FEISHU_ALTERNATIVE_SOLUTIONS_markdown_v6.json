@@ -1,0 +1,135 @@
+{
+  "source_path": "/root/.openclaw/workspace/archive/docs/2026-03/FEISHU_ALTERNATIVE_SOLUTIONS.md",
+  "filename": "FEISHU_ALTERNATIVE_SOLUTIONS.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 6127,
+  "checksum": "e7e9c02b11740d80",
+  "ingested_at": "2026-03-31T17:30:16.997943",
+  "line_count": 223,
+  "title": "飞书同步替代方案（无需OAuth2用户授权）",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "飞书同步替代方案（无需OAuth2用户授权）"
+    },
+    {
+      "level": 2,
+      "title": "方案1：Webhook方式（推荐）"
+    },
+    {
+      "level": 3,
+      "title": "实施步骤："
+    },
+    {
+      "level": 1,
+      "title": "Step 1: 用户手动执行（一次性）"
+    },
+    {
+      "level": 1,
+      "title": "用户运行此脚本，完成授权，获得token"
+    },
+    {
+      "level": 1,
+      "title": "1. 生成授权URL"
+    },
+    {
+      "level": 1,
+      "title": "2. 用户授权后，复制code"
+    },
+    {
+      "level": 1,
+      "title": "3. 用code换token"
+    },
+    {
+      "level": 1,
+      "title": "4. 保存token（这个token我可以长期使用！）"
+    },
+    {
+      "level": 2,
+      "title": "方案2：飞书机器人@方式（最简单）"
+    },
+    {
+      "level": 3,
+      "title": "实施步骤："
+    },
+    {
+      "level": 1,
+      "title": "通过群机器人发送消息，触发文档创建"
+    },
+    {
+      "level": 1,
+      "title": "机器人在群内的操作，文档默认在群空间，群成员可见"
+    },
+    {
+      "level": 1,
+      "title": "调用群机器人webhook"
+    },
+    {
+      "level": 2,
+      "title": "方案3：云盘共享文件夹方式（立即可用）"
+    },
+    {
+      "level": 3,
+      "title": "实施步骤："
+    },
+    {
+      "level": 1,
+      "title": "1. 用户手动创建一个共享文件夹"
+    },
+    {
+      "level": 1,
+      "title": "2. 将文件夹token给我"
+    },
+    {
+      "level": 1,
+      "title": "3. 我上传文件到该文件夹"
+    },
+    {
+      "level": 1,
+      "title": "上传后，文件在共享文件夹，成员可见"
+    },
+    {
+      "level": 2,
+      "title": "方案4：多维表格 - 应用权限方式"
+    },
+    {
+      "level": 3,
+      "title": "需要的权限："
+    },
+    {
+      "level": 3,
+      "title": "实施步骤："
+    },
+    {
+      "level": 1,
+      "title": "申请权限后，可以直接用tenant_token操作"
+    },
+    {
+      "level": 1,
+      "title": "创建记录"
+    },
+    {
+      "level": 2,
+      "title": "📊 方案对比"
+    },
+    {
+      "level": 2,
+      "title": "🎯 我的建议"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "在群里@机器人创建文档",
+    "方案1 - Webhook",
+    "添加\"Kimi决策助手-满意妞\"机器人进群",
+    "你选择哪个方案？我可以立即提供完整代码。",
+    "长期（本周内配置）",
+    "使用tenant_token直接操作",
+    "方案3 - 云盘上传",
+    "在飞书开放平台申请上述权限"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

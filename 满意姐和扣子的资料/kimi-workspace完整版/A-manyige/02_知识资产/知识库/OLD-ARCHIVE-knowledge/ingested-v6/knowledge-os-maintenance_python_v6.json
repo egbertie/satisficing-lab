@@ -1,0 +1,72 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/cron-tasks/knowledge-os-maintenance.py",
+  "filename": "knowledge-os-maintenance.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 8987,
+  "checksum": "80f8daa1c62135e0",
+  "ingested_at": "2026-03-31T17:30:32.868159",
+  "line_count": 270,
+  "title": "knowledge-os-maintenance",
+  "description": "知识OS维护脚本 (Knowledge OS Maintenance)\n执行时间: 每日 02:00（深夜低峰期）\n功能:\n1. 清理过期临时文件\n2. 压缩归档旧日志\n3. 优化文件系统索引\n4. 生成维护报告",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: TimeoutError"
+    }
+  ],
+  "entities": [
+    {
+      "name": "TimeoutError",
+      "type": "class"
+    },
+    {
+      "name": "timeout_handler",
+      "type": "function"
+    },
+    {
+      "name": "set_timeout",
+      "type": "function"
+    },
+    {
+      "name": "clear_timeout",
+      "type": "function"
+    },
+    {
+      "name": "cleanup_old_logs",
+      "type": "function"
+    },
+    {
+      "name": "cleanup_memory_files",
+      "type": "function"
+    },
+    {
+      "name": "cleanup_temporary_files",
+      "type": "function"
+    },
+    {
+      "name": "optimize_file_index",
+      "type": "function"
+    },
+    {
+      "name": "perform_maintenance",
+      "type": "function"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "-*- coding: utf-8 -*-",
+    "============ 配置区域 ============",
+    "===================================",
+    "压缩较旧但未过期的文件",
+    "归档到压缩文件而不是直接删除",
+    "这里简化处理，实际应该累积归档",
+    "2. 清理过期memory"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

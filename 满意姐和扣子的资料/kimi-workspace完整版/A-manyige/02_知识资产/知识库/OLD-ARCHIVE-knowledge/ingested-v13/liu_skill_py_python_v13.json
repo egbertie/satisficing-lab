@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/liu-skill/liu_skill.py",
+  "filename": "liu_skill.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "ba777a90e527c082",
+  "content_length": 9061,
+  "ingested_at": "2026-03-31T17:27:45.413291",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nliu_skill.py\nLIU（刘禹锡）- 根基与信任评估器\n五路图腾之土 - 聚贤才为伍，引智士同行\n\"\"\"\n\nfrom dataclasses import dataclass, field\nfrom typing import Dict, List, Optional, Tuple\nfrom enum import Enum\nimport json\n\n\nclass TrustLevel(Enum):\n    \"\"\"信任等级 L1-L5\"\"\"\n    L1_UNTRUSTED = \"L1\"\n    L2_CAUTIOUS = \"L2\"\n    L3_NEUTRAL = \"L3\"\n    L4_TRUSTED = \"L4\"\n    L5_FULL_TRUST = \"L5\"\n\n\nclass Recommendation(Enum):\n    \"\"\"合作建议\"\"\"\n    RECOMMEND = \"推荐\"\n    CAUTIOUS = \"谨慎\"\n    NOT_RECOMMEND = \"不推荐\"\n\n\n@dataclass\nclass",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/feishu_permission_test_20260327.sh",
+  "filename": "feishu_permission_test_20260327.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "2c67eb43ac6e7812",
+  "content_length": 1177,
+  "ingested_at": "2026-03-31T17:27:46.143069",
+  "content_preview": "#!/bin/bash\n# 飞书日历/任务权限测试脚本 - 2026-03-27 09:00执行\n\necho \"===== 飞书权限测试 $(date) =====\" > /tmp/feishu_permission_test_20260327.log\n\n# 测试1: 日历API\necho \"[TEST 1] 日历列表...\" >> /tmp/feishu_permission_test_20260327.log\ncd /root/.openclaw/workspace/plugins && python3 -c \"\nimport sys\nsys.path.insert(0, '.')\nfrom feishu_drive_uploader import FeishuDriveUploader\nuploader = FeishuDriveUploader()\ntoken = uploader._get_token()\nprint(f'Token获取成功: {token[:20]}...')\n\" 2>&1 >> /tmp/feishu_permission_test_20260327.lo",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/satisfied_girl_self_check.sh",
+  "filename": "satisfied_girl_self_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "c4b517c240ae9dfa",
+  "content_length": 1502,
+  "ingested_at": "2026-03-31T17:27:46.178287",
+  "content_preview": "#!/bin/bash\n# 满意妞自我检查脚本\n# 执行前强制检查\n\nset -e\n\necho \"=== 满意妞执行前强制检查 ===\"\necho \"时间: $(date)\"\necho \"\"\n\nPASS=0\nFAIL=0\n\n# 检查1: 用户明确说过\"不要等决策，直接做\"吗？\necho \"【检查1】用户授权检查\"\necho \"用户明确说过'不要等决策，直接做'吗？\"\necho \"  如果是新任务/重大变更，需要确认\"\necho \"  如果是自己的遗漏/错误，直接执行\"\necho \"  ✅ 请确认后继续\"\necho \"\"\n\n# 检查2: 结果/效果/成本负责\necho \"【检查2】三重责任检查\"\n\necho \"  结果责任 - 能验证实际效果吗？\"\nif [ -z \"$VERIFICATION_COMMAND\" ]; then\n    echo \"    ❌ 未提供验证命令\"\n    FAIL=$((FAIL + 1))\nelse\n    echo \"    ✅ 已提供验证命令\"\n    PASS=$((PASS + 1))\nfi\n\necho \"  效果责任 - 能长期运行吗？\"\nif ",
+  "limitations_applied": []
+}

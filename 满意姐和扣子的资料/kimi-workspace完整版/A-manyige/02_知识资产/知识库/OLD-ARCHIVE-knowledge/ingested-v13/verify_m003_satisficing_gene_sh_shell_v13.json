@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify_m003_satisficing_gene.sh",
+  "filename": "verify_m003_satisficing_gene.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "f38c15fda198ebc7",
+  "content_length": 1586,
+  "ingested_at": "2026-03-31T17:27:46.185514",
+  "content_preview": "#!/bin/bash\n# M003满意解基因内化机制验证脚本\n\necho \"=== M003满意解基因内化机制验证 ===\"\necho \"\"\n\n# 检查引擎文件\necho \"1. 满意解基因引擎:\"\nif [ -f \"/root/.openclaw/workspace/skills/satisficing-gene-engine/satisficing_gene_engine.py\" ]; then\n    echo \"   ✅ satisficing_gene_engine.py 存在\"\n    lines=$(wc -l < /root/.openclaw/workspace/skills/satisficing-gene-engine/satisficing_gene_engine.py)\n    echo \"      代码行数: $lines\"\nelse\n    echo \"   ❌ satisficing_gene_engine.py 不存在\"\n    exit 1\nfi\n\n# 检查关键方法\necho \"\"\necho \"2. 关键方法存在性:\"\ngrep -q \"eval",
+  "limitations_applied": []
+}

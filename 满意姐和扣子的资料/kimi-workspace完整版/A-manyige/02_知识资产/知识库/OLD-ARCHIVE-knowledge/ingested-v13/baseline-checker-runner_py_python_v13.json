@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/baseline-checker/scripts/baseline-checker-runner.py",
+  "filename": "baseline-checker-runner.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "d88aa1040045e84d",
+  "content_length": 26180,
+  "ingested_at": "2026-03-31T17:27:45.453811",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nbaseline-checker-runner.py\n基线检查器 - 5 Standard 完整实现\n\n功能:\n- S1: 输入基线定义/检查范围/历史数据\n- S2: 基线检查（性能→质量→合规→稳定性）\n- S3: 输出偏离报告+趋势分析+预警\n- S4: 定时自动执行（每日/每周）\n- S5: 基线准确性验证\n- S6: 局限标注\n- S7: 对抗测试\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport argparse\nimport subprocess\nimport psutil\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import Dict, List, Any, Optional, Tuple\n\n# 配置路径\nSKILL_DIR = Path(__file__).parent.parent\nCONFIG_DIR = SKILL_DIR / \"config\"\nREPOR",
+  "limitations_applied": []
+}

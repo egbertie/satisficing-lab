@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/daily-file-check.sh",
+  "filename": "daily-file-check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "2a2ae05dabcd26ee",
+  "content_length": 3644,
+  "ingested_at": "2026-03-31T17:27:46.134434",
+  "content_preview": "#!/bin/bash\n# daily-file-check.sh - 每日文件系统检查脚本\n# 用途: 自动化检查文件系统健康状态\n# 执行频率: 每日 23:00 (通过Cron)\n\nset -e\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nDOWNLOADS=\"/root/openclaw/kimi/downloads\"\nLOG_DIR=\"$WORKSPACE/logs\"\nREPORT=\"$LOG_DIR/file-check-$(date +%Y%m%d).md\"\n\necho \"开始每日文件检查...\"\n\n# 确保日志目录存在\nmkdir -p \"$LOG_DIR\"\n\n# 创建报告头\ncat > \"$REPORT\" << EOF\n# 每日文件检查报告\n\n**检查时间**: $(date '+%Y-%m-%d %H:%M:%S')\n\n---\n\n## 1. 空文件夹检查\n\nEOF\n\n# 检查空文件夹（排除.git和备份目录）\nEMPTY_FOLDERS=$(find \"$WORKSPACE\" -type d -empty 2>/dev/null |",
+  "limitations_applied": []
+}

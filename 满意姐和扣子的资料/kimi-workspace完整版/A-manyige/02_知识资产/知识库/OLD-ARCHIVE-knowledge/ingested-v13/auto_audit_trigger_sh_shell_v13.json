@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/auto_audit_trigger.sh",
+  "filename": "auto_audit_trigger.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "03b5b0c680d10b05",
+  "content_length": 1775,
+  "ingested_at": "2026-03-31T17:27:46.176377",
+  "content_preview": "#!/bin/bash\n# 自动审计触发脚本\n# 当检测到任务完成标记时，自动启动审计\n\nWATCH_DIR=\"/root/.openclaw/workspace/diary/\"\nPATTERN=\"*_completed\"\nLOG_FILE=\"/root/.openclaw/workspace/diary/auto_audit.log\"\n\necho \"=== 自动审计触发器启动 ===\"\necho \"监控目录: $WATCH_DIR\"\necho \"监控模式: $PATTERN\"\necho \"启动时间: $(date)\"\necho \"\"\n\nlog_msg() {\n    echo \"[$(date '+%Y-%m-%d %H:%M:%S')] $1\" | tee -a \"$LOG_FILE\"\n}\n\nlog_msg \"自动审计触发器已启动\"\n\n# 检查是否有audit脚本\nAUDIT_SCRIPT=\"/root/.openclaw/workspace/scripts/blue_army_auto_audit.sh\"\nif [ ! -x \"$AUDIT_SCRIPT\" ]; then\n   ",
+  "limitations_applied": []
+}

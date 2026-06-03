@@ -1,0 +1,97 @@
+{
+  "skill": "five-level-verification",
+  "timestamp": "2026-03-21T20:20:27.403678",
+  "overall_level": "L4",
+  "standard_version": "7-Standard-v5",
+  "results": {
+    "L1": {
+      "level": "L1",
+      "name": "存在验证",
+      "passed": true,
+      "score": 100,
+      "checks": {
+        "SKILL.md": true,
+        "config.yaml": true,
+        "scripts/": true,
+        "SKILL.md非空": true
+      }
+    },
+    "L2": {
+      "level": "L2",
+      "name": "语法验证",
+      "passed": true,
+      "score": 100,
+      "checks": {
+        "python_syntax": true,
+        "json_valid": true,
+        "yaml_valid": true
+      },
+      "files_checked": {
+        "python": 13,
+        "json": 1,
+        "yaml": 3
+      }
+    },
+    "L3": {
+      "level": "L3",
+      "name": "可执行验证",
+      "passed": true,
+      "score": 100,
+      "checks": {
+        "entry_point_exists": true,
+        "help_works": true
+      },
+      "entry_point": "/root/.openclaw/workspace/skills/five-level-verification/scripts/main.py"
+    },
+    "L4": {
+      "level": "L4",
+      "name": "集成验证",
+      "passed": true,
+      "score": 100,
+      "checks": {
+        "has_config": true,
+        "skill_doc_complete": true,
+        "has_tests": true
+      }
+    },
+    "L5": {
+      "level": "L5",
+      "name": "端到端验证",
+      "passed": false,
+      "score": 80,
+      "checks": {
+        "has_ci_config": true,
+        "has_readme": true,
+        "has_version": true
+      },
+      "warnings": [
+        "L5需要真实环境验证，当前为预检查",
+        "请在生产环境运行完整流程测试"
+      ],
+      "requires_manual": true
+    },
+    "S5_compliance": {
+      "standard": "7-Standard",
+      "compliance": {
+        "S1_输入规范": true,
+        "S2_五级跃迁": true,
+        "S3_输出报告": true,
+        "S4_CI_CD": true,
+        "S5_一致性": true,
+        "S6_局限标注": true,
+        "S7_对抗测试": true
+      },
+      "score": 100,
+      "passed": true
+    }
+  },
+  "summary": {
+    "total_checks": 15,
+    "passed_checks": 15,
+    "issues": [],
+    "recommendations": []
+  },
+  "next_steps": [
+    "在生产环境验证以通过L5"
+  ]
+}

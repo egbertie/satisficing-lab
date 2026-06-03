@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/templates/tiered_prompt_templates.md",
+  "filename": "tiered_prompt_templates.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "70b4bf377428cc6d",
+  "content_length": 3565,
+  "ingested_at": "2026-03-31T17:27:44.680680",
+  "content_preview": "---\nname: tiered-prompt-templates\nversion: 1.0.0\ndescription: 分级提示词模板系统 - 降低Token消耗\n---\n\n# 分级提示词模板系统\n\n## 使用指南\n\n根据任务复杂度和Token预算选择合适级别：\n- **L1**: 极简版 (<100 tokens) - 日常简单任务\n- **L2**: 标准版 (200-400 tokens) - 常规任务\n- **L3**: 完整版 (按需) - 复杂任务/首次使用\n\n---\n\n## L1 - 极简模板\n\n### 通用执行模板\n```markdown\n# {task_type}\n**输入**: {input}\n**输出**: {expected_output}\n**约束**: {constraints}\n执行。\n```\n*Token: ~60*\n\n### Skill执行模板\n```markdown\n# {skill_name} - 执行\n输入: {input_data}\n要求: {requirements}\n输出格式: {format}\n```\n*Token: ~50*\n\n##",
+  "limitations_applied": []
+}

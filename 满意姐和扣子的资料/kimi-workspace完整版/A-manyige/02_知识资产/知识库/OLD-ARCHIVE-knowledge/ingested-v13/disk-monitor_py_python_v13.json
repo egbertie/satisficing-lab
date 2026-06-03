@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/cron-automation/scripts/disk-monitor.py",
+  "filename": "disk-monitor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "d3a2987c7769ba4d",
+  "content_length": 353,
+  "ingested_at": "2026-03-31T17:27:45.382948",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n磁盘监控任务\n\"\"\"\nfrom datetime import datetime\nimport shutil\n\nprint(f\"[{datetime.now().isoformat()}] 磁盘监控任务\")\ndisk = shutil.disk_usage('/')\nusage_pct = (disk.used / disk.total) * 100\nprint(f\"- 磁盘使用率: {usage_pct:.1f}%\")\nprint(f\"- 可用空间: {disk.free / (1024**3):.1f} GB\")\nif usage_pct > 85:\n    print(\"⚠️ 警告: 磁盘使用率超过85%\")\nprint(\"任务完成\")\n",
+  "limitations_applied": []
+}

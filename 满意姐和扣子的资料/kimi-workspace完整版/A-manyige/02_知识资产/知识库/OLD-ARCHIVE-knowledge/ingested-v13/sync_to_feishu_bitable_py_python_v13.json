@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/sync_to_feishu_bitable.py",
+  "filename": "sync_to_feishu_bitable.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "0580cb73b4f0cc02",
+  "content_length": 3770,
+  "ingested_at": "2026-03-31T17:27:46.134237",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n飞书多维表格同步 - 适配用户提供的表格\n\"\"\"\n\nimport json\nimport requests\nimport os\nfrom pathlib import Path\n\n# 飞书配置\nAPP_ID = \"cli_a927c5dfa4381cc6\"\nAPP_SECRET = \"8950yzh6jj17nQkKBjvGIdRocdrslhjI\"\nBASE_URL = \"https://open.feishu.cn/open-apis\"\n\n# 表格信息\nBASE_ID = \"YVHyblEsDakryasCJpxcrh6xnTb\"\nTABLE_ID = \"tblkrnQJZPbHU5KE\"\n\ndef get_token():\n    \"\"\"获取Tenant Access Token\"\"\"\n    url = f\"{BASE_URL}/auth/v3/tenant_access_token/internal\"\n    response = requests.post(url, json={\n        \"app_id\": AP",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/disaster-recovery/02-自动化备份脚本/backup-notion.sh",
+  "filename": "backup-notion.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "7bfd183fe289e2ab",
+  "content_length": 8708,
+  "ingested_at": "2026-03-31T17:27:44.642734",
+  "content_preview": "#!/bin/bash\n################################################################################\n# Notion 数据备份脚本\n# 功能: 导出所有Notion页面和数据库\n################################################################################\n\nset -euo pipefail\n\nSCRIPT_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nsource \"${SCRIPT_DIR}/common.sh\"\n\n# 配置\nNOTION_TOKEN=\"${NOTION_TOKEN:-}\"  # Notion Integration Token\nNOTION_VERSION=\"2022-06-28\"\nBACKUP_BASE_DIR=\"${BACKUP_BASE_DIR:-${HOME}/Backups/Notion}\"\nEXPORT_FORMAT=\"${EX",
+  "limitations_applied": []
+}

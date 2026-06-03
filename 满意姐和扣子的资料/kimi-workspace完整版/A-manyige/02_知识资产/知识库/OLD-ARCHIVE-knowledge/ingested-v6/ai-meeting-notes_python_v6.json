@@ -1,0 +1,86 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/ai-meeting-notes/scripts/ai-meeting-notes.py",
+  "filename": "ai-meeting-notes.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 24585,
+  "checksum": "7134a9ee042e4aeb",
+  "ingested_at": "2026-03-31T17:30:32.751401",
+  "line_count": 694,
+  "title": "ai-meeting-notes",
+  "description": "ai-meeting-notes.py\nAI会议笔记处理系统 - Level 5 生产级\n\n功能：\n- 多种输入格式支持 (文本/VTT/录音)\n- 智能信息提取 (要点/行动项/责任人/截止时间)\n- 准确性自检\n- 局限标注\n- 对抗测试",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: ActionItem"
+    },
+    {
+      "level": 2,
+      "title": "Class: MeetingResult"
+    },
+    {
+      "level": 2,
+      "title": "Class: InputParser"
+    },
+    {
+      "level": 2,
+      "title": "Class: InformationExtractor"
+    },
+    {
+      "level": 2,
+      "title": "Class: SelfChecker"
+    },
+    {
+      "level": 2,
+      "title": "Class: OutputFormatter"
+    },
+    {
+      "level": 2,
+      "title": "Class: MeetingProcessor"
+    }
+  ],
+  "entities": [
+    {
+      "name": "ActionItem",
+      "type": "class"
+    },
+    {
+      "name": "MeetingResult",
+      "type": "class"
+    },
+    {
+      "name": "InputParser",
+      "type": "class"
+    },
+    {
+      "name": "InformationExtractor",
+      "type": "class"
+    },
+    {
+      "name": "SelfChecker",
+      "type": "class"
+    },
+    {
+      "name": "OutputFormatter",
+      "type": "class"
+    },
+    {
+      "name": "MeetingProcessor",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "移除VTT/SRT时间戳和标记",
+    "提取主题（简化版：取前50个字符或第一行）",
+    "提取参会人员（简化版：查找@或常见人名）",
+    "检查是否包含行动关键词",
+    "匹配 \"XX负责/做/来\" 格式"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

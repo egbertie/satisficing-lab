@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/file_management_suite/index.sh",
+  "filename": "index.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "710c0c52f5359f2e",
+  "content_length": 3122,
+  "ingested_at": "2026-03-31T17:27:46.219999",
+  "content_preview": "#!/bin/bash\n#\n# index.sh - 索引生成脚本\n# 功能: 为每个目录生成README索引\n# 用法: ./index.sh [--all] [target_dir]\n\nset -e\n\nGENERATE_ALL=false\nTARGET_DIR=\"${1:-/root/.openclaw/workspace}\"\n\nif [ \"$1\" == \"--all\" ]; then\n    GENERATE_ALL=true\n    TARGET_DIR=\"${2:-/root/.openclaw/workspace}\"\nfi\n\necho \"📑 索引生成工具\"\necho \"目标目录: $TARGET_DIR\"\necho \"\"\n\n# 生成目录的README内容\ngenerate_readme() {\n    local dir=\"$1\"\n    local dirname=$(basename \"$dir\")\n    local parent=$(dirname \"$dir\")\n    \n    # 统计信息\n    local file_count=$(find \"$dir\" ",
+  "limitations_applied": []
+}

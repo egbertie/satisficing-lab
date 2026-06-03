@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>API_SETUP_GUIDE</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; padding: 40px; max-width: 800px; margin: 0 auto; }
+        h1 { color: #1f2329; border-bottom: 2px solid #3370ff; padding-bottom: 10px; }
+        h2 { color: #1f2329; margin-top: 30px; }
+        h3 { color: #3370ff; }
+        code { background: #f5f6f7; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+        pre { background: #f5f6f7; padding: 16px; border-radius: 6px; overflow-x: auto; }
+        blockquote { border-left: 4px solid #3370ff; margin: 0; padding-left: 16px; color: #646a73; }
+        table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+        th, td { border: 1px solid #dee0e3; padding: 8px 12px; text-align: left; }
+        th { background: #f5f6f7; font-weight: 600; }
+        ul, ol { padding-left: 24px; }
+    </style>
+</head>
+<body>
+<h1 id="api">API 配置指南</h1>
+<h2 id="1-github-models-api">1. GitHub Models API (免费)</h2>
+<h3 id="_1">获取步骤：</h3>
+<ol>
+<li>登录 GitHub → 右上角头像 → <strong>Settings</strong></li>
+<li>左侧菜单 → <strong>Developer settings</strong> → <strong>Personal access tokens</strong> → <strong>Tokens (classic)</strong></li>
+<li>点击 <strong>Generate new token (classic)</strong></li>
+<li>填写：</li>
+<li><strong>Note</strong>: <code>GitHub Models API</code></li>
+<li><strong>Expiration</strong>: 90 days (或更长)</li>
+<li><strong>Scopes</strong>: 勾选 <code>models</code> (关键！)</li>
+<li>点击 <strong>Generate token</strong> → <strong>立即复制保存</strong>（只显示一次！）</li>
+</ol>
+<h3 id="_2">配置信息：</h3>
+<pre><code class="language-bash">export GITHUB_TOKEN=&quot;你的token&quot;
+export GITHUB_MODELS_BASE_URL=&quot;https://models.github.ai/inference&quot;
+</code></pre>
+<h3 id="_3">支持模型：</h3>
+<ul>
+<li><code>gpt-4o</code> (推荐)</li>
+<li><code>gpt-4o-mini</code></li>
+<li><code>deepseek-r1</code></li>
+<li><code>llama-3.1-405b</code></li>
+<li><code>phi-4</code></li>
+</ul>
+<h3 id="_4">速率限制：</h3>
+<ul>
+<li>GPT-4o: 10次/分钟, 50次/天</li>
+<li>DeepSeek-R1: 15次/分钟, 150次/天</li>
+</ul>
+<hr />
+<h2 id="2-perplexity-api-5">2. Perplexity API (每月$5免费积分)</h2>
+<h3 id="_5">获取步骤：</h3>
+<ol>
+<li>访问 https://www.perplexity.ai/settings/api</li>
+<li>登录 Perplexity 账号（Pro 用户每月自动获 $5 积分）</li>
+<li>绑定信用卡（验证用，不会扣费）</li>
+<li>点击 <strong>Generate API Key</strong></li>
+<li>复制保存 Key</li>
+</ol>
+<h3 id="_6">配置信息：</h3>
+<pre><code class="language-bash">export PERPLEXITY_API_KEY=&quot;你的key&quot;
+export PERPLEXITY_BASE_URL=&quot;https://api.perplexity.ai&quot;
+</code></pre>
+<h3 id="_7">支持模型：</h3>
+<ul>
+<li><code>sonar</code> (轻量级搜索)</li>
+<li><code>sonar-pro</code> (高级搜索)</li>
+<li><code>sonar-reasoning</code> (推理增强)</li>
+</ul>
+<h3 id="_8">免费额度：</h3>
+<ul>
+<li>Pro 用户：每月 $5 免费积分</li>
+<li>约 300 次搜索/月</li>
+</ul>
+<hr />
+<h2 id="3-jina-ai-api">3. Jina AI API (免费，无需注册)</h2>
+<h3 id="_9">获取步骤（最简单）：</h3>
+<ol>
+<li>访问 https://jina.ai/reader</li>
+<li>点击 <strong>Get API Key for Free</strong></li>
+<li>无需注册，直接显示 API Key</li>
+<li>复制保存</li>
+</ol>
+<h3 id="_10">配置信息：</h3>
+<pre><code class="language-bash">export JINA_API_KEY=&quot;你的key&quot;
+</code></pre>
+<h3 id="_11">功能：</h3>
+<ul>
+<li><strong>Reader API</strong>: <code>r.jina.ai/https://网址</code> → 提取网页内容为 Markdown</li>
+<li><strong>Search API</strong>: <code>s.jina.ai/搜索词</code> → AI 搜索</li>
+<li><strong>Fact Check</strong>: <code>g.jina.ai/陈述</code> → 事实核查</li>
+</ul>
+<h3 id="_12">免费额度：</h3>
+<ul>
+<li>新用户：100万 tokens</li>
+<li>无 API Key：每分钟 20 次请求</li>
+<li>有 API Key：每分钟 200 次请求</li>
+</ul>
+<hr />
+<h2 id="_13">一键配置脚本</h2>
+<p>获取所有 Key 后，运行以下命令配置到环境：</p>
+<pre><code class="language-bash"># 添加到 ~/.bashrc
+echo 'export GITHUB_TOKEN=&quot;你的github_token&quot;' &gt;&gt; ~/.bashrc
+echo 'export PERPLEXITY_API_KEY=&quot;你的perplexity_key&quot;' &gt;&gt; ~/.bashrc
+echo 'export JINA_API_KEY=&quot;你的jina_key&quot;' &gt;&gt; ~/.bashrc
+
+# 立即生效
+source ~/.bashrc
+</code></pre>
+<hr />
+<h2 id="_14">验证配置</h2>
+<pre><code class="language-bash"># 测试 GitHub Models
+curl -X POST &quot;https://models.github.ai/inference/chat/completions&quot; \
+  -H &quot;Authorization: Bearer $GITHUB_TOKEN&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;model&quot;:&quot;gpt-4o&quot;,&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;你好&quot;}]}'
+
+# 测试 Jina Reader
+curl &quot;https://r.jina.ai/https://github.com&quot;
+
+# 测试 Perplexity
+curl -X POST &quot;https://api.perplexity.ai/chat/completions&quot; \
+  -H &quot;Authorization: Bearer $PERPLEXITY_API_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;model&quot;:&quot;sonar&quot;,&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;你好&quot;}]}'
+</code></pre>
+</body>
+</html>
+<!-- 知识内化记录 -->
+<!-- 内化时间: 2026-03-31 | 状态: 已内化 -->

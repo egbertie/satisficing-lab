@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/feishu-drive-backup/feishu_drive_backup.py",
+  "filename": "feishu_drive_backup.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "0e3b477fb3509f19",
+  "content_length": 3649,
+  "ingested_at": "2026-03-31T17:27:45.385868",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nFeishu Drive Backup - 飞书云盘备份系统\n自动备份飞书云盘文件到本地\n\"\"\"\n\nimport json\nimport os\nimport sys\nfrom pathlib import Path\nfrom datetime import datetime\nfrom typing import Dict, List, Optional, Any\n\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nBACKUP_DB = WORKSPACE / \"memory\" / \"feishu-drive-backup-db.json\"\n\nclass FeishuDriveBackup:\n    \"\"\"飞书云盘备份系统\"\"\"\n    \n    def __init__(self):\n        self.db_path = BACKUP_DB\n        self.backups = self._load_db()\n    \n    def _load_db(self) -> D",
+  "limitations_applied": []
+}

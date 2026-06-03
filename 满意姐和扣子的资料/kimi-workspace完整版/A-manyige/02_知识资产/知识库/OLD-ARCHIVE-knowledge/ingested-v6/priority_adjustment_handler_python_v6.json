@@ -1,0 +1,113 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/priority_adjustment_handler.py",
+  "filename": "priority_adjustment_handler.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 24857,
+  "checksum": "de323bebf75fabb0",
+  "ingested_at": "2026-03-31T17:30:32.881599",
+  "line_count": 668,
+  "title": "priority_adjustment_handler",
+  "description": "优先级调整冲突处理器\nPriority Adjustment Conflict Handler\n\n核心原则: 新指令覆盖旧指令时，不暂停，而是子代理承接 + 冲突说明 + 次序调整",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: ConflictType"
+    },
+    {
+      "level": 2,
+      "title": "Class: TaskStatus"
+    },
+    {
+      "level": 2,
+      "title": "Class: Task"
+    },
+    {
+      "level": 2,
+      "title": "Class: Conflict"
+    },
+    {
+      "level": 2,
+      "title": "Class: TaskManager"
+    },
+    {
+      "level": 2,
+      "title": "Class: ConflictDetector"
+    },
+    {
+      "level": 2,
+      "title": "Class: SubagentSpawner"
+    },
+    {
+      "level": 2,
+      "title": "Class: PriorityReorderer"
+    },
+    {
+      "level": 2,
+      "title": "Class: UserNotifier"
+    },
+    {
+      "level": 2,
+      "title": "Class: PriorityAdjustmentHandler"
+    }
+  ],
+  "entities": [
+    {
+      "name": "ConflictType",
+      "type": "class"
+    },
+    {
+      "name": "TaskStatus",
+      "type": "class"
+    },
+    {
+      "name": "Task",
+      "type": "class"
+    },
+    {
+      "name": "Conflict",
+      "type": "class"
+    },
+    {
+      "name": "TaskManager",
+      "type": "class"
+    },
+    {
+      "name": "ConflictDetector",
+      "type": "class"
+    },
+    {
+      "name": "SubagentSpawner",
+      "type": "class"
+    },
+    {
+      "name": "PriorityReorderer",
+      "type": "class"
+    },
+    {
+      "name": "UserNotifier",
+      "type": "class"
+    },
+    {
+      "name": "PriorityAdjustmentHandler",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "-*- coding: utf-8 -*-",
+    "如果新任务已保存到task_manager，需要排除它自己",
+    "两者都是P0，需要处理P0独占",
+    "简化的依赖检查：检查任务描述中是否提到依赖",
+    "实际实现可能需要更复杂的依赖图",
+    "检查任务是否已经开始执行",
+    "P0限制：只能有一个P0",
+    "按创建时间排序，最早的降级",
+    "2. 检测冲突 (排除新任务自身)",
+    "无冲突，直接标记为运行中",
+    "3. 有冲突，执行调整流程",
+    "3.1 子代理承接现有任务"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

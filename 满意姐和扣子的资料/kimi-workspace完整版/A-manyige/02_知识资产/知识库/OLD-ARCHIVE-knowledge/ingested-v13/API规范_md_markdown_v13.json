@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/A-manyige/03_🎯四产品超级工具包_V2.0/05_交叉对照与接口/API规范.md",
+  "filename": "API规范.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "0e580ebe398cb70e",
+  "content_length": 8509,
+  "ingested_at": "2026-03-31T17:27:46.322467",
+  "content_preview": "# 四产品API规范\n\n> 产品间数据交互与系统集成接口标准\n\n---\n\n## 🔌 接口设计原则\n\n### 核心原则\n1. **单一数据源**：每个实体只有一个真相源\n2. **最小权限**：仅传输必要的最小数据集\n3. **版本控制**：API版本化，向后兼容\n4. **异步优先**：长耗时操作采用异步模式\n5. **幂等性**：重复调用不造成副作用\n\n### 技术标准\n- **协议**：HTTPS + RESTful\n- **数据格式**：JSON\n- **认证**：OAuth 2.0 + JWT\n- **限流**：每分钟100次（标准），1000次（企业）\n- **超时**：30秒（同步），24小时（异步回调）\n\n---\n\n## 📡 核心API列表\n\n### 1. 客户档案接口\n\n#### 获取客户决策档案\n```http\nGET /api/v1/customers/{customer_id}/decision-profile\nAuthorization: Bearer {jwt_token}\n```\n\n**响应示例**：\n```json\n{\n  \"customer_id\": \"",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/vendor-api-monitor/vendor_api_monitor.py",
+  "filename": "vendor_api_monitor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "2694aa87f0c14799",
+  "content_length": 8467,
+  "ingested_at": "2026-03-31T17:27:45.403727",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n厂商API能力监控脚本 - Vendor API Monitor\n监控钉钉/企业微信/飞书/Notion API能力，特别关注文件同步功能\n\"\"\"\n\nimport json\nfrom datetime import datetime\nfrom typing import Dict, List, Optional\nimport subprocess\nimport os\n\nclass VendorAPIMonitor:\n    \"\"\"厂商API能力监控器\"\"\"\n    \n    VENDORS = {\n        \"dingtalk\": {\n            \"name\": \"钉钉\",\n            \"website\": \"https://open.dingtalk.com/document/\",\n            \"file_sync_api\": {\n                \"available\": True,\n                \"method\": \"钉盘文件上传/下载API\",\n   ",
+  "limitations_applied": []
+}

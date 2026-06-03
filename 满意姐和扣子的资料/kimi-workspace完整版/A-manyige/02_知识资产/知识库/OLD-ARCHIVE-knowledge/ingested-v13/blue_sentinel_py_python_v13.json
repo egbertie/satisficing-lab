@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blue-sentinel/blue_sentinel.py",
+  "filename": "blue_sentinel.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "ee28589a26c16fab",
+  "content_length": 4023,
+  "ingested_at": "2026-03-31T17:27:45.483769",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nBlue Sentinel - 蓝军哨兵系统\n持续监控系统健康状态，主动发现问题\n\"\"\"\n\nimport json\nimport os\nimport sys\nfrom pathlib import Path\nfrom datetime import datetime\nfrom typing import Dict, List, Optional, Any\n\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nSENTINEL_DB = WORKSPACE / \"memory\" / \"blue-sentinel-db.json\"\n\nclass BlueSentinel:\n    \"\"\"蓝军哨兵 - 持续监控系统健康\"\"\"\n    \n    def __init__(self):\n        self.db_path = SENTINEL_DB\n        self.alerts = self._load_db()\n    \n    def _load_db(self) -> Dict:\n",
+  "limitations_applied": []
+}

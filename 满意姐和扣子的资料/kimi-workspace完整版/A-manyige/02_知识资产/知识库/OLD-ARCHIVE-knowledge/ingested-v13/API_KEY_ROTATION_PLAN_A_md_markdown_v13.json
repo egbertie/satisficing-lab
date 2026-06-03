@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/API_KEY_ROTATION_PLAN_A.md",
+  "filename": "API_KEY_ROTATION_PLAN_A.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "3cdace7eeb57118a",
+  "content_length": 3725,
+  "ingested_at": "2026-03-31T17:27:46.520007",
+  "content_preview": "# API密钥轮换完整方案（方案A）\n> 准备时间：2026-03-21\n> 执行状态：待用户有空时执行\n> 下周四提醒：2026-03-27 08:13\n\n---\n\n## 📋 轮换前准备清单\n\n### 必须提前准备的\n- [ ] 预留30-60分钟 uninterrupted time\n- [ ] 确保能接收验证邮件/短信\n- [ ] 备用网络环境（部分服务可能需海外IP）\n\n---\n\n## 🔑 当前API密钥清单\n\n### 1. GitHub Token（最高优先级）\n**当前状态**: 已泄露到Git历史\n**文件位置**: `.config/github.env`\n**用途**: \n- GitHub API调用\n- GitHub Models (GPT-4o等)\n- 代码推送/拉取\n\n**重新获取步骤**:\n1. 访问 https://github.com/settings/tokens\n2. 点击 \"Generate new token (classic)\"\n3. 选择有效期（建议90天）\n4. 权限勾选：\n   - ✅ repo (完整仓库访问)\n   - ✅ workfl",
+  "limitations_applied": []
+}

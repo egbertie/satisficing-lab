@@ -1,0 +1,180 @@
+{
+  "source_path": "/root/.openclaw/workspace/archive/docs/2026-03/文件格式读取技术研究报告.md",
+  "filename": "文件格式读取技术研究报告.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 6130,
+  "checksum": "5cbd6d39e17e68f5",
+  "ingested_at": "2026-03-31T17:30:17.045314",
+  "line_count": 236,
+  "title": "常用文件格式读取技术研究报告",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "常用文件格式读取技术研究报告"
+    },
+    {
+      "level": 2,
+      "title": "📋 概述"
+    },
+    {
+      "level": 2,
+      "title": "P1 - 最高优先级方案"
+    },
+    {
+      "level": 3,
+      "title": "1. PDF格式读取"
+    },
+    {
+      "level": 4,
+      "title": "技术方案对比表"
+    },
+    {
+      "level": 4,
+      "title": "推荐方案"
+    },
+    {
+      "level": 4,
+      "title": "安装命令"
+    },
+    {
+      "level": 3,
+      "title": "2. TXT/文本文件读取（编码自动检测）"
+    },
+    {
+      "level": 4,
+      "title": "技术方案对比表"
+    },
+    {
+      "level": 4,
+      "title": "推荐方案"
+    },
+    {
+      "level": 4,
+      "title": "安装命令"
+    },
+    {
+      "level": 3,
+      "title": "3. DOCX/Word格式读取"
+    },
+    {
+      "level": 4,
+      "title": "技术方案对比表"
+    },
+    {
+      "level": 4,
+      "title": "推荐方案"
+    },
+    {
+      "level": 4,
+      "title": "安装命令"
+    },
+    {
+      "level": 2,
+      "title": "P2 - 中期实现方案"
+    },
+    {
+      "level": 3,
+      "title": "4. Excel/XLSX格式读取"
+    },
+    {
+      "level": 4,
+      "title": "技术方案对比表"
+    },
+    {
+      "level": 4,
+      "title": "推荐方案"
+    },
+    {
+      "level": 4,
+      "title": "安装命令"
+    },
+    {
+      "level": 3,
+      "title": "5. 图片OCR（可选）"
+    },
+    {
+      "level": 4,
+      "title": "技术方案对比表"
+    },
+    {
+      "level": 4,
+      "title": "推荐方案"
+    },
+    {
+      "level": 4,
+      "title": "安装命令"
+    },
+    {
+      "level": 1,
+      "title": "EasyOCR"
+    },
+    {
+      "level": 1,
+      "title": "PaddleOCR"
+    },
+    {
+      "level": 2,
+      "title": "🎯 推荐实施路径"
+    },
+    {
+      "level": 3,
+      "title": "第一阶段（立即实施）"
+    },
+    {
+      "level": 3,
+      "title": "第二阶段（按需实施）"
+    },
+    {
+      "level": 2,
+      "title": "📦 集成到工作流的建议"
+    },
+    {
+      "level": 3,
+      "title": "1. 统一接口设计"
+    },
+    {
+      "level": 1,
+      "title": "统一读取接口"
+    },
+    {
+      "level": 3,
+      "title": "2. 错误处理策略"
+    },
+    {
+      "level": 3,
+      "title": "3. 性能优化建议"
+    },
+    {
+      "level": 2,
+      "title": "📊 性能基准测试参考"
+    },
+    {
+      "level": 2,
+      "title": "✅ 总结"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "pdfplumber",
+    "高性能场景：PyMuPDF",
+    "pywin32 (COM)",
+    "openpyxl (read_only)",
+    "PaddleOCR",
+    "主要推荐：pandas + openpyxl",
+    "主要推荐：pdfplumber",
+    "组合方案：chardet + 多编码尝试法",
+    "charset-normalizer",
+    "pandas + openpyxl",
+    "pdfminer.six",
+    "中文场景：PaddleOCR",
+    "PyMuPDF (fitz)",
+    "Tesseract",
+    "主要推荐：python-docx"
+  ],
+  "limitations_applied": [
+    "Key points limited to 15"
+  ],
+  "content_truncated": false
+}

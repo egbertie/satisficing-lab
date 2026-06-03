@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/token-budget-enforcer/scripts/allocator.py",
+  "filename": "allocator.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "72a2c57621b2d360",
+  "content_length": 9422,
+  "ingested_at": "2026-03-31T17:27:45.013858",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nToken预算分配器 (Allocator)\n三级预算池分配管理\n\"\"\"\n\nimport yaml\nimport json\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, Optional, Tuple\nfrom dataclasses import dataclass\n\n@dataclass\nclass PoolStatus:\n    \"\"\"预算池状态\"\"\"\n    name: str\n    allocated: int\n    used: int\n    remaining: int\n    usage_percent: float\n    status: str  # normal, warning, critical, exhausted\n\nclass BudgetAllocator:\n    \"\"\"Token预算分配器\"\"\"\n    \n    def __init__(self, config_dir: str",
+  "limitations_applied": []
+}

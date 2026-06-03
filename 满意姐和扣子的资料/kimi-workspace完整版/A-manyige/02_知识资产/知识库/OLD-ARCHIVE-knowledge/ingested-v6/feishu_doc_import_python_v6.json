@@ -1,0 +1,56 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/feishu_doc_import.py",
+  "filename": "feishu_doc_import.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 18478,
+  "checksum": "ef58245c66e280b0",
+  "ingested_at": "2026-03-31T17:30:32.884385",
+  "line_count": 526,
+  "title": "feishu_doc_import",
+  "description": "飞书云文档导入脚本\n\n功能：\n- 将本地 Markdown 文件转换为飞书可导入的格式\n- 生成导入包供用户手动导入\n- 作为权限受限时的保底方案\n\n使用方法：\n    python scripts/feishu_doc_import.py export ./notes --output ./feishu_export\n    python scripts/feishu_doc_import.py",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: FeishuDoc"
+    },
+    {
+      "level": 2,
+      "title": "Class: MarkdownToFeishuConverter"
+    },
+    {
+      "level": 2,
+      "title": "Class: FeishuDocImporter"
+    }
+  ],
+  "entities": [
+    {
+      "name": "FeishuDoc",
+      "type": "class"
+    },
+    {
+      "name": "MarkdownToFeishuConverter",
+      "type": "class"
+    },
+    {
+      "name": "FeishuDocImporter",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "-*- coding: utf-8 -*-",
+    "转换为 HTML（飞书支持 HTML 导入）",
+    "转义 HTML 特殊字符",
+    "创建 HTML 导出目录",
+    "创建 Markdown 备份目录",
+    "保存 HTML 版本（飞书可直接导入）",
+    "保存原始 Markdown"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

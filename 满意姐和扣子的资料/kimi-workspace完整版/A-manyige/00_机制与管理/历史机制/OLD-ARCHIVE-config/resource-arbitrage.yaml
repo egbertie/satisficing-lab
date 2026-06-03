@@ -1,0 +1,127 @@
+version: "2026-03-26"
+description: "全球资源套利 - 时区/价格/能力套利"
+
+# 3.1 时区套利 - 24小时不间断
+timezone_arbitrage:
+  primary_timezone: "Asia/Shanghai"
+  
+  time_windows:
+    asia_hours:
+      range: "09:00-18:00"
+      timezone: "Asia/Shanghai"
+      mode: "interactive"
+      description: "亚洲工作时间 - 主交互时段"
+      
+    eu_hours:
+      range: "02:00-11:00"
+      timezone: "Europe/London"
+      mode: "async"
+      description: "欧洲工作时间 - 异步处理"
+      
+    us_hours:
+      range: "21:00-06:00"
+      timezone: "America/New_York"
+      mode: "async"
+      description: "美洲工作时间 - 异步处理"
+  
+  async_tasks:
+    long_research:
+      description: "长时间研究任务"
+      run_during: ["eu_hours", "us_hours"]
+      max_duration: "4h"
+      
+    batch_processing:
+      description: "批量数据处理"
+      run_during: ["eu_hours"]
+      batch_size: 100
+      
+    content_generation:
+      description: "内容生成"
+      run_during: ["us_hours"]
+      types: ["报告", "总结", "翻译"]
+      
+    data_sync:
+      description: "数据同步与备份"
+      run_during: ["eu_hours", "us_hours"]
+      targets: ["GitHub", "Feishu", "WeCom"]
+
+# 3.2 价格套利 - 成本最优
+price_arbitrage:
+  models:
+    kimi-k2p5:
+      cost_per_1k_tokens: 0.015
+      capability: "high"
+      use_for:
+        - complex
+        - critical
+        - creative
+        - first_attempt
+      
+    kimi-k2p5-flash:
+      cost_per_1k_tokens: 0.006
+      capability: "medium"
+      use_for:
+        - routine
+        - simple
+        - verified_patterns
+        - batch_processing
+      cost_saving: "60%"
+  
+  auto_switching:
+    enabled: true
+    
+    downgrade:
+      trigger: "token_budget < 30%"
+      action: "switch_to_flash"
+      notification: true
+      
+    upgrade:
+      trigger: "error_rate > 20% with flash"
+      consecutive_errors: 3
+      action: "upgrade_to_k2p5"
+      
+    hybrid:
+      description: "混合模式 - 先用flash尝试，失败再用k2p5"
+      enabled: true
+      retry_on_error: true
+
+# 3.3 能力套利 - 最优执行路径
+capability_arbitrage:
+  search:
+    primary:
+      tool: "kimi_search"
+      reason: "中文搜索优化，国内访问快"
+    fallback:
+      tool: "web_search"
+      reason: "Brave搜索，备用方案"
+    
+  code:
+    generation:
+      tool: "kimi-k2p5"
+      mode: "thinking"
+    verification:
+      tool: "local_lint"
+      commands: ["python3 -m py_compile", "shellcheck"]
+    
+  document:
+    feishu:
+      tool: "feishu_*"
+      priority: 1
+    wecom:
+      tool: "wecom_mcp"
+      priority: 2
+    local:
+      tool: "file_operations"
+      priority: 3
+      
+  scheduling:
+    cron:
+      tool: "openclaw_cron"
+    immediate:
+      tool: "exec"
+
+# 套利策略执行顺序
+arbitrage_priority:
+  1. "capability"    # 先选最优工具
+  2. "price"         # 再选成本最优模型
+  3. "timezone"      # 最后安排执行时间

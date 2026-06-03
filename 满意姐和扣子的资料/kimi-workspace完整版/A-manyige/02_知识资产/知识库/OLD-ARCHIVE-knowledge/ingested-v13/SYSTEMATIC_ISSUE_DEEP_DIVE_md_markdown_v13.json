@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/SYSTEMATIC_ISSUE_DEEP_DIVE.md",
+  "filename": "SYSTEMATIC_ISSUE_DEEP_DIVE.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "337e48476b124223",
+  "content_length": 2125,
+  "ingested_at": "2026-03-31T17:27:46.526408",
+  "content_preview": "# 系统性问题深挖报告 - 准点定时问题\n> **深挖时间**: 2026-03-20  \n> **触发**: 定时准点问题第二次犯  \n> **范围**: 全部29个定时任务\n\n---\n\n## 一、发现的问题\n\n### 1.1 准点定时任务（未错峰）\n\n| 任务ID | 任务名称 | 当前时间 | 问题 |\n|--------|----------|----------|------|\n| 4e7cddcc-8074-40d6-bf23-b1f9f8f43be7 | Token耗尽预警检查 | `0 */4 * * *` | 🚨 **准点（每4小时整点）** |\n| 51c2d37d-9973-486b-8d09-2589c507302d | Kimi Search每日资讯采集 | `0 9 * * *` | 🚨 **准点（09:00）** |\n| 0991f0cf-1c59-4dff-abd6-93b617636077 | 每周六项目复盘 | `0 10 * * 6` | 🚨 **准点（周六10:00）** |\n\n### 1.2 已错峰的任务（正确示例）\n\n| 任务ID | 任务名",
+  "limitations_applied": []
+}

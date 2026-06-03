@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_satisficing-web-fetcher/sandbox/timeout_guard.py",
+  "filename": "timeout_guard.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "5dd674a459e3828d",
+  "content_length": 3603,
+  "ingested_at": "2026-03-31T17:27:45.070010",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n超时守护\n\n功能：\n1. 监控操作执行时间\n2. 超时时强制终止\n3. 防止长时间挂起\n\"\"\"\n\nimport signal\nimport threading\nimport time\nfrom typing import Optional, Type, Callable\nfrom contextlib import ContextDecorator\nfrom types import FrameType\n\n\nclass TimeoutError(Exception):\n    \"\"\"超时异常\"\"\"\n    pass\n\n\nclass TimeoutGuard(ContextDecorator):\n    \"\"\"\n    超时守护上下文管理器\n    \n    使用示例：\n        with TimeoutGuard(timeout=30):\n            # 可能耗时的操作\n            result = long_running_operation()\n    \"\"\"\n    \n    def __init",
+  "limitations_applied": []
+}

@@ -1,0 +1,85 @@
+{
+  "version": "3.0",
+  "mode": "精简2线",
+  "status": "运行中",
+  "updated_at": "2026-03-15T21:15:00+08:00",
+  
+  "lines": [
+    {
+      "id": "line_1",
+      "name": "学习研究合并线",
+      "tasks": [
+        "专家论文研读",
+        "决策模型研究",
+        "知识沉淀与模式提炼",
+        "学习笔记归档"
+      ],
+      "trigger": {
+        "type": "idle_time",
+        "min_idle_minutes": 120,
+        "token_threshold_percent": 30,
+        "user_task_active": false
+      },
+      "token_limit": {
+        "per_trigger": 10000,
+        "daily_max": 30000
+      },
+      "priority": "P2"
+    },
+    {
+      "id": "line_2",
+      "name": "优化复盘合并线",
+      "tasks": [
+        "已完成事项复盘改进",
+        "系统优化建议整理",
+        "轻量级维护任务",
+        "文档整理与归档"
+      ],
+      "trigger": {
+        "type": "scheduled",
+        "cron": "0 22 * * *",
+        "alternative_trigger": "post_task_idle"
+      },
+      "token_limit": {
+        "per_trigger": 5000,
+        "daily_max": 5000
+      },
+      "priority": "P3"
+    }
+  ],
+  
+  "pause_rules": [
+    {
+      "name": "token_30",
+      "condition": "token_percent < 30",
+      "action": "pause_line_1",
+      "retain_line": ["line_2"]
+    },
+    {
+      "name": "token_15",
+      "condition": "token_percent < 15",
+      "action": "pause_all",
+      "wait_for": "user_command"
+    },
+    {
+      "name": "user_active",
+      "condition": "user_explicit_task",
+      "action": "suppress_fill",
+      "duration": "while_user_active"
+    }
+  ],
+  
+  "stress_test": {
+    "enabled": true,
+    "trigger": "cycle_last_day",
+    "restore_mode": "6_line_full",
+    "token_reserve_percent": 20,
+    "purpose": "验证最大承载量，收集消耗数据"
+  },
+  
+  "logging": {
+    "level": "info",
+    "output": "memory/zero-idle-log.jsonl",
+    "metrics": ["trigger_count", "token_consumed", "task_completed"]
+  }
+}

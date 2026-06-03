@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/knowing_doing_blocker.sh",
+  "filename": "knowing_doing_blocker.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "e83dcaae5ea3a7d4",
+  "content_length": 951,
+  "ingested_at": "2026-03-31T17:27:46.149729",
+  "content_preview": "#!/bin/bash\n# 知行不一阻断脚本\n# 每次行动前检查：是否知行合一\n# 不一致就exit 1，强制阻断\n\nKNOWING=\"$1\"      # 我知道应该做什么\nDOING=\"$2\"        # 我实际在做什么\nACTION_NAME=\"$3\"  # 行动名称\n\nLOG_FILE=\"/root/.openclaw/workspace/diary/knowing_doing_gap.log\"\nBLOCK_FILE=\"/tmp/knowing_doing_blocked\"\n\necho \"=== 知行不一检查 ===\"\necho \"行动: $ACTION_NAME\"\necho \"我知道应该: $KNOWING\"\necho \"我实际在做: $DOING\"\necho \"时间: $(date)\"\necho \"\"\n\nif [ \"$KNOWING\" != \"$DOING\" ]; then\n    echo \"❌ 知行不一阻断！\"\n    echo \"我知道应该: $KNOWING\"\n    echo \"我实际在做: $DOING\"\n    echo \"必须纠正后才能继续！\"\n   ",
+  "limitations_applied": []
+}

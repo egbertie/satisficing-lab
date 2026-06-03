@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/knowledge-extractor.sh",
+  "filename": "knowledge-extractor.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "3ec02860c5c8c133",
+  "content_length": 1439,
+  "ingested_at": "2026-03-31T17:27:46.173761",
+  "content_preview": "#!/bin/bash\n# 知识萃取脚本 - 每日对话自动提炼\n# 创建时间: 2026-03-20\n# 用途: 从每日对话中提取知识入图谱\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nTODAY=$(date +%Y-%m-%d)\nLOG_FILE=\"$WORKSPACE/logs/knowledge-extraction.log\"\nOUTPUT_FILE=\"$WORKSPACE/memory/knowledge_extracted_$TODAY.json\"\n\necho \"=== 每日知识萃取 ===\" | tee -a $LOG_FILE\necho \"日期: $TODAY\" | tee -a $LOG_FILE\n\n# 读取今日memory文件\nMEMORY_FILE=\"$WORKSPACE/memory/$TODAY.md\"\n\nif [ ! -f \"$MEMORY_FILE\" ]; then\n    echo \"⚠️ 今日memory文件不存在\" | tee -a $LOG_FILE\n    exit 0\nfi\n\n# 提取关键信息\necho \"提取",
+  "limitations_applied": []
+}

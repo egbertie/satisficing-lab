@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/feishu_docx_sync.py",
+  "filename": "feishu_docx_sync.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "605def3658b6ef6b",
+  "content_length": 23870,
+  "ingested_at": "2026-03-31T17:27:46.136297",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\nMarkdown转飞书云文档同步工具\n支持图片上传、断点续传、批量处理\n\"\"\"\n\nimport hashlib\nimport json\nimport logging\nimport os\nimport re\nimport time\nfrom concurrent.futures import ThreadPoolExecutor, as_completed\nfrom dataclasses import dataclass, field\nfrom pathlib import Path\nfrom typing import Any, Dict, Iterator, List, Optional, Tuple\nfrom urllib.parse import urlparse\n\nfrom feishu_api_client import FeishuDriveAPI, FeishuConfig, FeishuAPIError, create_client\n\nlogger = logging",
+  "limitations_applied": []
+}

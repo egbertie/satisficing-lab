@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/five-level-verification/scripts/verifier_v2.py",
+  "filename": "verifier_v2.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "6c54c8dab8d6d466",
+  "content_length": 12545,
+  "ingested_at": "2026-03-31T17:27:45.467844",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nFive-Level Verification System V2.0\n五级验证自动化脚本 - Phase 4深挖迭代\n支持L1-L5全自动化验证\n\"\"\"\n\nimport sys\nimport json\nimport os\nimport re\nimport subprocess\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Tuple, Optional\n\n# 五级定义 - 深挖迭代后全部支持自动化\nLEVELS = {\n    \"L1\": {\n        \"name\": \"动作层 (Action)\",\n        \"requirements\": [\"动作ID\", \"执行内容\", \"执行证据\", \"自检结果\"],\n        \"auto_check\": True,\n        \"check_script\": \"check_l1_action\"\n    },\n    \"L2\": {\n      ",
+  "limitations_applied": []
+}

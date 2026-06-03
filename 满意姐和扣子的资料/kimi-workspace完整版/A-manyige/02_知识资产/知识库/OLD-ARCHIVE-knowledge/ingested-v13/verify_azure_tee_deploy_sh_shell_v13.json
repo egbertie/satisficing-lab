@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify_azure_tee_deploy.sh",
+  "filename": "verify_azure_tee_deploy.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "f7a8e93d20dc3fdf",
+  "content_length": 1663,
+  "ingested_at": "2026-03-31T17:27:46.213030",
+  "content_preview": "#!/bin/bash\n# TEE脚本安全审计和8步验证\n# 任务: azure_tee_deploy.sh\n\necho \"=== Azure TEE部署脚本安全审计和8步验证 ===\"\necho \"\"\n\nSCRIPT_PATH=\"/root/.openclaw/workspace/azure_tee_deploy.sh\"\n\n# 安全审计\necho \"【安全审计开始】\"\necho \"\"\n\n# 检查1: 密钥硬编码\necho \"检查1: 密钥硬编码\"\nif grep -n \"password\\|secret\\|key\\|token\" \"$SCRIPT_PATH\" 2>/dev/null | grep -v \"^#\" | head -5; then\n    echo \"  ⚠️  发现潜在密钥引用，需审查\"\n    SECURITY_1=false\nelse\n    echo \"  ✅ 未发现明显密钥硬编码\"\n    SECURITY_1=true\nfi\necho \"\"\n\n# 检查2: 敏感信息泄露\necho \"检查2: 敏感信息泄露风险\"\nif grep -n \"echo.*\\$\\|pr",
+  "limitations_applied": []
+}

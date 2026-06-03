@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify_auto_checkpoint.sh",
+  "filename": "verify_auto_checkpoint.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "3ea81a89fc475f62",
+  "content_length": 527,
+  "ingested_at": "2026-03-31T17:27:46.150065",
+  "content_preview": "#!/bin/bash\n# auto-checkpoint.sh - 8步验证和深度洞察\n\necho \"=== auto-checkpoint.sh - 8步验证 ===\"\n\nSCRIPT=\"/root/.openclaw/workspace/scripts/auto-checkpoint.sh\"\n\n# 8步验证\nSTEP1=false; STEP2=false; STEP3=false; STEP4=false\n\n# Step 1: 配置\ntest -f \"$SCRIPT\" && echo \"Step1 ✅ 配置存在\" && STEP1=true\n\n# Step 2: 语法\nbash -n \"$SCRIPT\" 2>/dev/null && echo \"Step2 ✅ 语法正确\" && STEP2=true\n\n# Step 3: 权限\ntest -x \"$SCRIPT\" && echo \"Step3 ✅ 可执行\" && STEP3=true\n\n# Step 4: 依赖\necho \"Step4 ⚠️  依赖检查点目录\"\nSTEP4=true\n\necho \"Step5-8: 待执行验证\"\n",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/false_claim_circuit_breaker.py",
+  "filename": "false_claim_circuit_breaker.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "ba8d8c5a0fdb478b",
+  "content_length": 4370,
+  "ingested_at": "2026-03-31T17:27:46.141796",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n虚报熔断机制 - False Claim Circuit Breaker\n当虚报率超过阈值时自动触发熔断，暂停新任务\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime\nfrom pathlib import Path\n\nclass FalseClaimCircuitBreaker:\n    \"\"\"虚报熔断机制\"\"\"\n    \n    THRESHOLD = 0.20  # 20%虚报率触发熔断\n    COOLDOWN_MINUTES = 60  # 熔断后冷却时间\n    \n    def __init__(self, workspace=\"/root/.openclaw/workspace\"):\n        self.workspace = Path(workspace)\n        self.state_file = self.workspace / \"memory\" / \"circuit_breaker_state.json\"\n        self.",
+  "limitations_applied": []
+}

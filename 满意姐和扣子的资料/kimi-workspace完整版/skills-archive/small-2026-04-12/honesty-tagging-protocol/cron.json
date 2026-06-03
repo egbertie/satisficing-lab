@@ -1,0 +1,22 @@
+{
+  "jobs": [
+    {
+      "name": "honesty-daily-audit",
+      "schedule": "23 18 * * *",
+      "command": "cd /root/.openclaw/workspace/skills/honesty-tagging-protocol && python3 scripts/honesty_runner.py report",
+      "description": "每日诚实性审计报告"
+    },
+    {
+      "name": "honesty-validation",
+      "schedule": "0 */6 * * *",
+      "command": "cd /root/.openclaw/workspace/skills/honesty-tagging-protocol && python3 scripts/honesty_runner.py validate",
+      "description": "每6小时抽检验证"
+    },
+    {
+      "name": "honesty-adversarial-test",
+      "schedule": "0 2 * * 0",
+      "command": "cd /root/.openclaw/workspace/skills/honesty-tagging-protocol && python3 scripts/honesty_runner.py adversarial-test",
+      "description": "每周日凌晨对抗测试"
+    }
+  ]
+}

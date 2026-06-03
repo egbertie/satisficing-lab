@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/knowledge_ingest.py",
+  "filename": "knowledge_ingest.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "98a7b27ada539eba",
+  "content_length": 3340,
+  "ingested_at": "2026-03-31T17:27:46.216142",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n知识入库执行脚本\n按重要性顺序处理文件入库\n\n质量第一：逐文件验证，确保入库准确\n\"\"\"\n\nimport json\nimport shutil\nfrom pathlib import Path\nfrom datetime import datetime\n\n# 配置\nINVENTORY_FILE = Path(\"~/.openclaw/workspace/diary/knowledge-ingest/inventory.json\").expanduser()\nOUTPUT_DIR = Path(\"~/.openclaw/workspace/diary/knowledge-ingest/ingested\").expanduser()\nWORKSPACE = Path(\"~/.openclaw/workspace\").expanduser()\n\nOUTPUT_DIR.mkdir(parents=True, exist_ok=True)\n\n\ndef load_inventory():\n    \"\"\"加载清单\"\"\"\n    with open",
+  "limitations_applied": []
+}

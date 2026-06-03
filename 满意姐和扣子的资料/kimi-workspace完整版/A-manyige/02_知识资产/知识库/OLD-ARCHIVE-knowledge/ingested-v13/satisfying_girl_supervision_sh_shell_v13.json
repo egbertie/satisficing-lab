@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/satisfying_girl_supervision.sh",
+  "filename": "satisfying_girl_supervision.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "6d53aaa43b416a6c",
+  "content_length": 1640,
+  "ingested_at": "2026-03-31T17:27:46.188173",
+  "content_preview": "#!/bin/bash\n# 满意妞执行监督脚本\n# 监督满意妞是否执行蓝军的要求\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nSUPERVISION_LOG=\"$WORKSPACE/diary/satisfying-girl-execution-supervision.log\"\n\necho \"=== 满意妞执行监督 ===\" | tee -a \"$SUPERVISION_LOG\"\necho \"监督时间: $(date)\" | tee -a \"$SUPERVISION_LOG\"\necho \"\" | tee -a \"$SUPERVISION_LOG\"\n\n# 要求清单（从之前的审计中提取）\ndeclare -A REQUIREMENTS\ndeclare -A DEADLINES\ndeclare -A STATUS\n\nREQUIREMENTS[\"cron_list\"]=\"提交真实Cron部署清单\"\nDEADLINES[\"cron_list\"]=\"2026-03-31 07:47\"\nSTATUS[\"cron_list\"]=\"🔴 已超期\"\n\nREQUIREMENT",
+  "limitations_applied": []
+}

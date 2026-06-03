@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/namespace-enforcement/scripts/namespace-auto-fix.py",
+  "filename": "namespace-auto-fix.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "449c5ed29a57dadf",
+  "content_length": 10434,
+  "ingested_at": "2026-03-31T17:27:45.395973",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nNamespace Auto-Fix - 自动修复脚本\nS4: 自动化集成 - 自动修复建议\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport argparse\nfrom pathlib import Path\nfrom typing import List, Optional, Dict, Any\n\n# 导入检查器\nsys.path.insert(0, str(Path(__file__).parent))\n\nimport importlib.util\nspec = importlib.util.spec_from_file_location(\"namespace_checker\", str(Path(__file__).parent / \"namespace-checker.py\"))\nnamespace_checker_module = importlib.util.module_from_spec(spec)\nspec.loader.exec_module(namespace_chec",
+  "limitations_applied": []
+}

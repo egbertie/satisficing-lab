@@ -1,0 +1,72 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/info-collection-quality/scripts/info-collection-quality-runner.py",
+  "filename": "info-collection-quality-runner.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 25283,
+  "checksum": "f9e486512fdfccab",
+  "ingested_at": "2026-03-31T17:30:32.776255",
+  "line_count": 679,
+  "title": "info-collection-quality-runner",
+  "description": "info-collection-quality-runner.py\n信息采集与质量控制体系 - 5-Standard Skill Runner\n\n功能: 全流程质量管控 (S1-S7)\n- S1: 输入信息源/采集任务定义\n- S2: 质量检查（完整性→准确性→时效性→一致性）\n- S3: 输出质量报告+改进建议\n- S4: 可集成到采集流程自动触发\n- S5: 质量指标量化\n- S6: 局限标注",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: QualityGrade"
+    },
+    {
+      "level": 2,
+      "title": "Class: DimensionScore"
+    },
+    {
+      "level": 2,
+      "title": "Class: QualityReport"
+    },
+    {
+      "level": 2,
+      "title": "Class: QualityChecker"
+    },
+    {
+      "level": 2,
+      "title": "Class: InfoCollectionQualityRunner"
+    }
+  ],
+  "entities": [
+    {
+      "name": "QualityGrade",
+      "type": "class"
+    },
+    {
+      "name": "DimensionScore",
+      "type": "class"
+    },
+    {
+      "name": "QualityReport",
+      "type": "class"
+    },
+    {
+      "name": "QualityChecker",
+      "type": "class"
+    },
+    {
+      "name": "InfoCollectionQualityRunner",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "S1: 输入标准 - 信息源分级",
+    "检测数值异常 (S7: 对抗测试 - 虚假数据注入)",
+    "检测来源不明 (S7: 对抗测试)",
+    "构造污染数据 - 根据测试类型构造不同数据",
+    "默认使用有效来源，除非测试来源问题",
+    "判断是否检测到预期问题",
+    "测试通过标准：检测到预期问题 或 总分低于70"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

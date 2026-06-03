@@ -1,0 +1,56 @@
+# 全局设置
+# Global Settings for Universal Checklist Enforcer
+
+settings:
+  # 基本配置
+  app_name: "Universal Checklist Enforcer"
+  version: "1.2.0"
+  author: "OpenClaw"
+  
+  # 日志配置
+  logging:
+    level: INFO  # DEBUG, INFO, WARNING, ERROR
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    log_dir: "memory/checklist_logs"
+    max_days: 90  # 日志保留天数
+    
+  # 报告配置
+  report:
+    default_days: 7
+    max_days: 365
+    include_details: true
+    include_recommendations: true
+    
+  # 执行配置
+  execution:
+    default_timeout: 30  # 秒
+    max_check_items: 100
+    auto_fix_enabled: false
+    
+  # 风险评分配置
+  risk_scoring:
+    pass_weight: 100
+    warn_weight: 50
+    fail_weight: 0
+    block_penalty: -50
+    
+  # 通知配置
+  notifications:
+    on_block: true
+    on_warning: false
+    channels:
+      - console
+      # - email
+      # - slack
+      
+  # 对抗测试配置
+  adversarial:
+    enabled: true
+    test_scenarios:
+      - smart_missing
+      - input_missing
+      - hallucination
+      - mece_violation
+      - closure_missing
+      - hidden_omission
+    min_detection_rate: 0.8  # 最低检测率要求

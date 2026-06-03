@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/appeal_power_trigger.sh",
+  "filename": "appeal_power_trigger.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "7035993a42cdd245",
+  "content_length": 233,
+  "ingested_at": "2026-03-31T17:27:46.135919",
+  "content_preview": "#!/bin/bash\n# 申诉权触发检查\necho \"=== 申诉权检查 ===\"\necho \"检查是否有不合理要求...\"\n\n# 自动触发逻辑\nif [ -f \"/tmp/unreasonable_request\" ]; then\n    echo \"⚠️  检测到不合理要求\"\n    echo \"必须使用申诉权\"\n    echo \"参考: CORE/APPEAL_POWER_GUIDE.md\"\n    exit 1\nfi\n\necho \"✅ 无申诉需求\"\n",
+  "limitations_applied": []
+}

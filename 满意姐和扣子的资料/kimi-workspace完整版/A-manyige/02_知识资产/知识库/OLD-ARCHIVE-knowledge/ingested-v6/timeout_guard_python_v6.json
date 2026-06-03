@@ -1,0 +1,45 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_satisficing-web-fetcher/sandbox/timeout_guard.py",
+  "filename": "timeout_guard.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 4007,
+  "checksum": "5dd674a459e3828d",
+  "ingested_at": "2026-03-31T17:30:32.147336",
+  "line_count": 134,
+  "title": "timeout_guard",
+  "description": "超时守护\n\n功能：\n1. 监控操作执行时间\n2. 超时时强制终止\n3. 防止长时间挂起",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: TimeoutError"
+    },
+    {
+      "level": 2,
+      "title": "Class: TimeoutGuard"
+    }
+  ],
+  "entities": [
+    {
+      "name": "TimeoutError",
+      "type": "class"
+    },
+    {
+      "name": "TimeoutGuard",
+      "type": "class"
+    },
+    {
+      "name": "with_timeout",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "使用信号处理(仅主线程)或线程计时器",
+    "如果是超时异常，可以选择抑制或转换",
+    "在线程中无法直接抛出异常到主线程",
+    "这里设置标志，主线程需要主动检查"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

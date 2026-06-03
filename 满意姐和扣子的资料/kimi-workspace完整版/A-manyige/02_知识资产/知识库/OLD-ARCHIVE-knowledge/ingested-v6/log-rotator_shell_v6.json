@@ -1,0 +1,52 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/log-rotator.sh",
+  "filename": "log-rotator.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 2886,
+  "checksum": "04e50cb0b3babfbe",
+  "ingested_at": "2026-03-31T17:30:47.817264",
+  "line_count": 97,
+  "title": "log-rotator",
+  "description": "Log Rotator - 日志轮转与清理",
+  "sections": [],
+  "entities": [
+    {
+      "name": "log",
+      "type": "shell_function"
+    },
+    {
+      "name": "rotate_large_logs",
+      "type": "shell_function"
+    },
+    {
+      "name": "cleanup_old_archives",
+      "type": "shell_function"
+    },
+    {
+      "name": "cleanup_specific_logs",
+      "type": "shell_function"
+    },
+    {
+      "name": "repair_journald",
+      "type": "shell_function"
+    },
+    {
+      "name": "main",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "Log Rotator - 日志轮转与清理",
+    "运行频率: 每日",
+    "轮转大日志文件",
+    "清理特定日志",
+    "清理shadow-clone.log（如果超过50MB）",
+    "清理cloud-monitor-agent.log（如果超过10MB）",
+    "修复日志系统",
+    "检查磁盘空间",
+    "重启journald（如果需要）"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

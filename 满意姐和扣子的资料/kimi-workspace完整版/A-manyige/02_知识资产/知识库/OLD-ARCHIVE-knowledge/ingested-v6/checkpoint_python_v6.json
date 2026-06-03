@@ -1,0 +1,75 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/universal-task-executor-v3/core/checkpoint.py",
+  "filename": "checkpoint.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 22935,
+  "checksum": "5df3c4d152803c8f",
+  "ingested_at": "2026-03-31T17:30:32.467788",
+  "line_count": 637,
+  "title": "checkpoint",
+  "description": "Universal Task Executor V3.0 - Checkpoint管理器\n支持暂停/重启、分层检查点、版本迁移",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: ResumeResult"
+    },
+    {
+      "level": 2,
+      "title": "Class: RecoveryResult"
+    },
+    {
+      "level": 2,
+      "title": "Class: CheckpointStorage"
+    },
+    {
+      "level": 2,
+      "title": "Class: FileCheckpointStorage"
+    },
+    {
+      "level": 2,
+      "title": "Class: CheckpointManager"
+    }
+  ],
+  "entities": [
+    {
+      "name": "ResumeResult",
+      "type": "class"
+    },
+    {
+      "name": "RecoveryResult",
+      "type": "class"
+    },
+    {
+      "name": "CheckpointStorage",
+      "type": "class"
+    },
+    {
+      "name": "FileCheckpointStorage",
+      "type": "class"
+    },
+    {
+      "name": "CheckpointManager",
+      "type": "class"
+    }
+  ],
+  "key_points": [
+    "同步写入（文件IO不需要async）",
+    "─────────────────────────────────────────────────────────────────",
+    "Checkpoint创建",
+    "─────────────────────────────────────────────────────────────────",
+    "─────────────────────────────────────────────────────────────────",
+    "Checkpoint恢复",
+    "─────────────────────────────────────────────────────────────────",
+    "1. 加载Checkpoint",
+    "按创建时间排序（最新的在前）",
+    "─────────────────────────────────────────────────────────────────",
+    "─────────────────────────────────────────────────────────────────",
+    "实际项目中可能需要更复杂的迁移逻辑",
+    "─────────────────────────────────────────────────────────────────",
+    "Checkpoint管理",
+    "─────────────────────────────────────────────────────────────────"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

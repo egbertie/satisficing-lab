@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/test_create_docx_v2.py",
+  "filename": "test_create_docx_v2.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "380aa167713e88b3",
+  "content_length": 1901,
+  "ingested_at": "2026-03-31T17:27:46.162890",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n飞书云文档创建测试 - 使用正确端点\n\"\"\"\n\nimport json\nimport requests\n\ndef get_token():\n    with open('/root/.openclaw/workspace/config/feishu_config.json', 'r') as f:\n        config = json.load(f)\n    \n    response = requests.post(\n        f\"{config['base_url']}/auth/v3/tenant_access_token/internal\",\n        json={\"app_id\": config['app_id'], \"app_secret\": config['app_secret']},\n        timeout=30\n    )\n    return response.json()['tenant_access_token']\n\ndef create_docx(title=\"测试文档\"):\n  ",
+  "limitations_applied": []
+}

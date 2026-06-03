@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/backup_to_external.py",
+  "filename": "backup_to_external.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "b456ab942593b3e6",
+  "content_length": 3142,
+  "ingested_at": "2026-03-31T17:27:46.206296",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n磁盘损坏备份机制\n用途: 每日自动备份关键文件到外部存储\n规则: 保留7天历史版本，磁盘损坏时可恢复\n\"\"\"\n\nimport os\nimport shutil\nimport json\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\n# 关键文件列表\nCRITICAL_FILES = [\n    \"/root/.openclaw/workspace/SOUL.md\",\n    \"/root/.openclaw/workspace/USER.md\",\n    \"/root/.openclaw/workspace/MEMORY.md\",\n    \"/root/.openclaw/workspace/AGENTS.md\",\n    \"/root/.openclaw/workspace/TOOLS.md\"\n]\n\nCRITICAL_DIRS = [\n    \"/root/.openclaw/workspace/memory\",\n    \"/root/.open",
+  "limitations_applied": []
+}

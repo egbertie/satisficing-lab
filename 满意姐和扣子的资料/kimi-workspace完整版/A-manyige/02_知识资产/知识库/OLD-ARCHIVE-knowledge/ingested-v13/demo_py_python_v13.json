@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/digital-avatar-swarm/demo.py",
+  "filename": "demo.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "fa29f51cc2335b6c",
+  "content_length": 3118,
+  "ingested_at": "2026-03-31T17:27:44.989667",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nDigital-Avatar-Swarm 快速演示\n运行: python3 demo.py\n\"\"\"\n\nimport asyncio\nimport sys\nfrom pathlib import Path\n\n# 添加父目录到路径\nsys.path.insert(0, str(Path(__file__).parent))\n\nfrom avatar_swarm import SwarmOrchestrator, Task, SwarmTester\n\n\nasync def main():\n    print(\"=\" * 70)\n    print(\"  Digital-Avatar-Swarm (数字人蜂群) - 快速演示\")\n    print(\"=\" * 70)\n    print()\n    \n    # 初始化蜂群\n    print(\"🚀 初始化蜂群 (5个数字人代理)...\")\n    swarm = SwarmOrchestrator(\n        max_avatars=5,\n        token_budget=",
+  "limitations_applied": []
+}

@@ -1,0 +1,102 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/auto-index-update.sh",
+  "filename": "auto-index-update.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 16198,
+  "checksum": "1c76eb7b92a75e7a",
+  "ingested_at": "2026-03-31T17:30:47.814774",
+  "line_count": 579,
+  "title": "auto-index-update",
+  "description": "自动索引更新脚本 (Auto Index Update Script)",
+  "sections": [],
+  "entities": [
+    {
+      "name": "log",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_info",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_warn",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_error",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_section",
+      "type": "shell_function"
+    },
+    {
+      "name": "init_report",
+      "type": "shell_function"
+    },
+    {
+      "name": "scan_workspace",
+      "type": "shell_function"
+    },
+    {
+      "name": "detect_changes",
+      "type": "shell_function"
+    },
+    {
+      "name": "update_global_index",
+      "type": "shell_function"
+    },
+    {
+      "name": "generate_category_index",
+      "type": "shell_function"
+    },
+    {
+      "name": "generate_status_index",
+      "type": "shell_function"
+    },
+    {
+      "name": "generate_expert_index",
+      "type": "shell_function"
+    },
+    {
+      "name": "save_state",
+      "type": "shell_function"
+    },
+    {
+      "name": "update_index_files",
+      "type": "shell_function"
+    },
+    {
+      "name": "finalize_report",
+      "type": "shell_function"
+    },
+    {
+      "name": "cleanup_old_files",
+      "type": "shell_function"
+    },
+    {
+      "name": "main",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "# 自动索引更新脚本 (Auto Index Update Script)",
+    "版本: 1.0",
+    "创建时间: 2026-03-31",
+    "用途: 每小时自动扫描workspace，识别变更，更新GLOBAL_INDEX",
+    "set -euo pipefail",
+    "==================== 配置区 ====================",
+    "创建必要目录",
+    "==================== 日志函数 ====================",
+    "==================== 初始化报告 ====================",
+    "索引更新报告",
+    "==================== 扫描workspace目录 ====================",
+    "扫描关键目录",
+    "==================== 识别变更 ====================",
+    "如果没有之前的扫描，保存当前扫描并退出",
+    "比较两次扫描结果"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

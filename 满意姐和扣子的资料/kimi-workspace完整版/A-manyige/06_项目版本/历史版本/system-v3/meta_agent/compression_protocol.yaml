@@ -1,0 +1,72 @@
+# Compression Protocol 配置
+# 压缩通信协议 — 结构化JSON替代自然语言
+# 命名空间: NGT-COMPRESS-v1.0-FIN-260327
+
+version: "1.0"
+description: "Agent间压缩通信协议，节省80% Token"
+
+protocol:
+  # 消息格式（极简JSON）
+  message_format:
+    type: "compressed_json"
+    schema: |
+      {
+        "v": "version",
+        "t": "task_type",      // 任务类型编码
+        "p": "priority",       // 优先级 0-9
+        "s": "sender_id",      // 发送者ID
+        "r": "receiver_id",    // 接收者ID
+        "d": "data_hash",      // 数据SHA256前8位
+        "st": "status",        // 状态: todo/doing/done/fail
+        "rs": "result_summary", // 结果摘要（<50字符）
+        "ts": "timestamp",     // 时间戳
+        "meta": {}             // 扩展元数据
+      }
+    
+  # 编码表（Token压缩）
+  encoding_table:
+    # 任务类型编码
+    task_types:
+      "T1": "file_operation"
+      "T2": "api_call"
+      "T3": "data_query"
+      "T4": "analysis"
+      "T5": "generation"
+      "T6": "review"
+      "T7": "deploy"
+      "T8": "monitor"
+      
+    # 状态编码
+    statuses:
+      "0": "todo"
+      "1": "doing"
+      "2": "done"
+      "3": "fail"
+      "4": "blocked"
+      
+    # 优先级编码
+    priorities:
+      "0": "P0-critical"
+      "1": "P1-urgent"
+      "2": "P2-important"
+      "3": "P3-normal"
+      "4": "P4-low"
+
+  # 压缩示例
+  examples:
+    before: "请帮我查询一下昨天新增的文件，优先处理高优先级的，完成后告诉我结果"
+    after: '{"v":"1.0","t":"T3","p":"2","s":"meta","r":"worker_1","d":"a3f7b2d9","st":"0","rs":"","ts":1711536000}'
+    token_saving: "85%"
+
+  # 传输优化
+  transport:
+    batching: true
+    batch_size: 10
+    compression: "gzip"
+    encryption: "aes256"
+    
+  # 错误处理
+  error_handling:
+    retry: 3
+    timeout: 30
+    fallback: "natural_language"

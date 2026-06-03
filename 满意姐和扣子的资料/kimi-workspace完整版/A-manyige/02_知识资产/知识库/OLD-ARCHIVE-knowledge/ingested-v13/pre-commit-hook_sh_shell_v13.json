@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/system-v3/gitops_truth_source/pre-commit-hook.sh",
+  "filename": "pre-commit-hook.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "cdc4d9628accbbb4",
+  "content_length": 3015,
+  "ingested_at": "2026-03-31T17:27:46.128701",
+  "content_preview": "#!/bin/bash\n# 防复发Git Hooks — Pre-commit Hook\n# 命名空间: NGT-HOOKS-v1.0-FIN-260327\n\n# 颜色定义\nRED='\\033[0;31m'\nGREEN='\\033[0;32m'\nYELLOW='\\033[1;33m'\nNC='\\033[0m' # No Color\n\necho \"🔍 Running pre-commit checks...\"\n\n# 检查1: 敏感信息扫描\necho \"📋 Check 1: Scanning for sensitive information...\"\nSENSITIVE_PATTERNS=(\n    \"api_key\"\n    \"apikey\"\n    \"api-key\"\n    \"password\"\n    \"passwd\"\n    \"secret\"\n    \"token\"\n    \"ghp_\"\n    \"sk-\"\n    \"AKIA\"  # AWS Key\n)\n\nFOUND_SENSITIVE=false\nfor pattern in \"${SENSITIVE_PATTERNS[@]}",
+  "limitations_applied": []
+}

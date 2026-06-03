@@ -1,0 +1,119 @@
+{
+  "ingestion_id": "INGEST-20260401-04",
+  "filename": "04技术方案全手册.docx",
+  "file_path": "/root/.openclaw/workspace/.kimi/downloads/19d49ba0-3f72-8e7c-8000-000042556249_04技术方案全手册.docx",
+  "file_type": "docx",
+  "processed_as": "text",
+  "file_size_bytes": 61079,
+  "content_chars": 54758,
+  "ingestion_time": "2026-04-01T23:48:00+08:00",
+  "version": "v6.4",
+  "content_summary": {
+    "title": "五大技术支柱实战手册",
+    "tech_pillars": [
+      {
+        "name": "Neo4j图数据库",
+        "purpose": "知识图谱底座",
+        "components": [
+          "Docker部署",
+          "Python集成",
+          "云服务",
+          "数据建模",
+          "性能优化"
+        ]
+      },
+      {
+        "name": "事件驱动架构",
+        "purpose": "触发器-流水线核心",
+        "components": [
+          "消息队列选型(Kafka/RabbitMQ/Redis)",
+          "CloudEvents",
+          "Saga编排"
+        ]
+      },
+      {
+        "name": "自动化工作流",
+        "purpose": "Skill自动测试部署",
+        "components": [
+          "GitOps",
+          "CI/CD",
+          "A/B测试",
+          "自动回滚",
+          "多环境管理"
+        ]
+      },
+      {
+        "name": "多层级存储",
+        "purpose": "7层状态栈分层存储",
+        "components": [
+          "热/温/冷存储",
+          "加密策略",
+          "3-2-1-1-0备份法则"
+        ]
+      },
+      {
+        "name": "全链路监控",
+        "purpose": "灾备健康监控",
+        "components": [
+          "Metrics",
+          "Logs",
+          "Traces",
+          "告警",
+          "异常检测"
+        ]
+      }
+    ],
+    "code_snippets": 20,
+    "implementation_ready": true
+  },
+  "deep_insight": {
+    "l1_facts": "五大技术支柱完整方案: Neo4j(图数据库)、事件驱动(Kafka/RabbitMQ/Redis)、GitOps(CI/CD)、多层级存储(7层)、全链路监控(OpenTelemetry/ELK/Prometheus)",
+    "l2_patterns": "五层技术栈解耦、生产级vs原型级差距、可观测性三角、分层存储成本优化(100,000倍)、GitOps声明式配置",
+    "l3_associations": "优先级排序(P0多层级存储/P1 Neo4j+监控/P2事件驱动+GitOps)、5个PoC建议、专家角色增强(XU先生/罗汉教授/方翊沣博士)、5个Skill开发建议、与36案例库/专家档案/蓝军审计的关联"
+  },
+  "internalization_status": {
+    "tech_debt_priority": [
+      "P0: 多层级存储(1周)",
+      "P1: Neo4j知识图谱(2周)",
+      "P1: 全链路监控(1周)",
+      "P2: 事件驱动架构(2周)",
+      "P2: GitOps工作流(1周)"
+    ],
+    "poc_ready": [
+      "Neo4j+36案例库导入",
+      "S3生命周期策略配置",
+      "OpenTelemetry基础监控"
+    ],
+    "skills_suggested": [
+      "neo4j-graph-manager",
+      "event-driven-automator",
+      "multi-tier-storage",
+      "gitops-deployer",
+      "health-monitor"
+    ]
+  },
+  "blue_army_verified": {
+    "verified_by": "Skeptor-7",
+    "verification_time": "2026-04-01T23:48:00+08:00",
+    "file_integrity": "PASS",
+    "deep_insight_quality": "PASS - 3遍完整",
+    "implementation_ready": "PASS - 可直接执行"
+  },
+  "storage": {
+    "extracted_text": "A-manyige/对话/2026-04-01/04技术方案全手册_extracted.txt",
+    "insight_report": "A-manyige/对话/2026-04-01/04技术方案全手册_insight.md",
+    "metadata": "knowledge/ingested-v6/04技术方案全手册_v6.json"
+  },
+  "retrieval_tags": [
+    "neo4j",
+    "knowledge-graph",
+    "event-driven",
+    "kafka",
+    "gitops",
+    "ci-cd",
+    "multi-tier-storage",
+    "monitoring",
+    "observability",
+    "disaster-recovery"
+  ]
+}

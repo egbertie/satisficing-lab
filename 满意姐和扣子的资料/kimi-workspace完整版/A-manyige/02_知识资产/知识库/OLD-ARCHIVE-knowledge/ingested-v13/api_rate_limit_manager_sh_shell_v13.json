@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/api_rate_limit_manager.sh",
+  "filename": "api_rate_limit_manager.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "234fc57c2342170a",
+  "content_length": 867,
+  "ingested_at": "2026-03-31T17:27:46.180194",
+  "content_preview": "#!/bin/bash\n# API调用节流管理器\n# 防止触发rate limit\n\nRATE_LIMIT_LOG=\"/root/.openclaw/workspace/diary/api_rate_limit_manager.log\"\nCALL_COUNT=0\nMAX_CALLS_PER_MINUTE=30\n\necho \"=== API调用节流管理器 ===\" | tee -a \"$RATE_LIMIT_LOG\"\necho \"启动时间: $(date)\" | tee -a \"$RATE_LIMIT_LOG\"\necho \"最大调用频率: $MAX_CALLS_PER_MINUTE 次/分钟\" | tee -a \"$RATE_LIMIT_LOG\"\necho \"\" | tee -a \"$RATE_LIMIT_LOG\"\n\n# 节流函数\nthrottle() {\n    CALL_COUNT=$((CALL_COUNT + 1))\n    \n    if [ $CALL_COUNT -ge $MAX_CALLS_PER_MINUTE ]; then\n        echo \"达到频率限制，暂",
+  "limitations_applied": []
+}

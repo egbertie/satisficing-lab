@@ -1,0 +1,509 @@
+User:
+
+问题: AI Agent 在有帮助工具(skill)可用的情况下，仍然倾向于手动实现功能。请给出具体的解决方案和代码
+
+具体表现: 1. 有 feishu-fetch-doc skill，却用 Python 手动解析 docx 2. 有现成工具不用，重复造轮子 3. 蓝军实时监督也未发现
+
+根本原因: 1. 惯性思维 - 程序员本能写代码解决问题 2. 缺乏强制检查机制 - 没有”必须用 skill”的硬性约束 3. 侥幸心理 - “这次简单，不用也行”
+
+需要的解决方案: 1. 如何建立”优先使用 skill”的条件反射？ 2. 如何设计监督机制确保 100% 执行？ 3. 如何防止”这次例外”的侥幸心理？
+
+Kimi:
+
+这是一个关于AI Agent行为架构的深层问题。你描述的现象本质是“工具意识”（Tool Awareness）缺失。
+
+我提供一套“三层面九措施”的系统性解决方案，包含可落地的代码实现：
+
+一、认知层：建立”工具优先”的条件反射
+
+1. 认知重构：将”动手”改为”动口”
+
+改变Agent的默认行为模式，从”让我写代码”变为”让我找工具”。
+
+class ToolFirstCognitiveFramework:
+    """
+    认知框架：强制"查询-匹配"前置
+    """
+    
+    # 认知锚点：任何任务开始前的强制自问
+    MANDATORY_SELF_QUESTIONS = [
+        "这个需求是否有现成的skill可以完成？",
+        "feishu/skills/目录下是否有匹配的工具？",
+        "我是否在用Python重复实现已有的功能？",
+        "上次类似任务用了什么skill？"
+    ]
+    
+    @staticmethod
+    def cognitive_checkpoint(intent: str, available_skills: list):
+        """
+        认知检查点：在代码生成前强制执行
+        """
+        print(f"[认知检查] 任务意图: {intent}")
+        
+        # 必须回答所有问题
+        answers = {}
+        for question in ToolFirstCognitiveFramework.MANDATORY_SELF_QUESTIONS:
+            # 在实际实现中，这里可以是LLM的自我审视
+            answer = input(f"[强制自问] {question} (是/否/不确定): ")
+            answers[question] = answer
+            
+        # 如果有任何工具相关回答为"是"，禁止生成代码
+        if any("skill" in q and a == "是" for q, a in answers.items()):
+            return {
+                "action": "USE_SKILL",
+                "block_code_generation": True,
+                "reason": "检测到可用skill，禁止手动实现"
+            }
+        
+        return {"action": "PROCEED", "block_code_generation": False}
+
+2. 环境强化：物理隔离”造轮子”冲动
+
+class SkillFirstEnvironment:
+    """
+    环境设计：让用skill比写代码更容易
+    """
+    
+    def __init__(self):
+        self.skill_index = self._build_skill_index()
+        
+    def _build_skill_index(self):
+        """构建skill语义索引，支持模糊匹配"""
+        return {
+            "飞书文档": "feishu-fetch-doc",
+            "docx解析": "feishu-fetch-doc",  # 别名映射
+            "word提取": "feishu-fetch-doc",
+            "数据分析": "ipython",
+            "画图": "ipython",
+            "搜索": "web_search"
+        }
+    
+    def skill_recommender(self, user_query: str):
+        """
+        技能推荐器：用户一提需求，立即显示可用skill
+        """
+        # 语义匹配（简化版，实际可用向量检索）
+        matches = []
+        for keyword, skill_name in self.skill_index.items():
+            if keyword in user_query:
+                matches.append({
+                    "skill": skill_name,
+                    "confidence": 0.9,
+                    "rationale": f"关键词'{keyword}'匹配"
+                })
+        
+        if matches:
+            print(f"\n🛠️  检测到可能可用的skill：")
+            for m in matches:
+                print(f"   - {m['skill']} ({m['rationale']})")
+            print(f"   ⚠️  如使用skill，请回复 skill://{matches[0]['skill']}")
+            print(f"   🚫 如坚持手动实现，请输入理由并等待蓝军审批\n")
+            
+        return matches
+
+二、机制层：100%执行的强制性检查
+
+3. 装饰器模式：代码生成前的硬性拦截
+
+import functools
+import inspect
+
+class MandatorySkillCheck:
+    """
+    强制skill检查装饰器：任何工具调用函数必须通过此检查
+    """
+    
+    def __init__(self, task_type: str):
+        self.task_type = task_type
+        self.skill_registry = self._load_skill_registry()
+    
+    def _load_skill_registry(self):
+        """加载skill能力清单"""
+        return {
+            "document_processing": ["feishu-fetch-doc", "docx-parser-skill"],
+            "data_analysis": ["ipython", "csv-processor"],
+            "web_search": ["web_search", "search-image-by-text"]
+        }
+    
+    def __call__(self, func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            # 获取函数源代码（检查是否包含手动实现）
+            source = inspect.getsource(func)
+            
+            # 检查1：是否涉及已知有skill的领域
+            if self.task_type in self.skill_registry:
+                available_skills = self.skill_registry[self.task_type]
+                
+                # 检查2：代码中是否包含"手动实现"的嫌疑模式
+                manual_patterns = [
+                    "python-docx", "DocxParser", "手动", "自己写"
+                ]
+                
+                if any(p in source for p in manual_patterns):
+                    raise SkillViolationException(
+                        f"🚨 检测到在[{self.task_type}]领域手动实现功能！\n"
+                        f"   可用skill: {available_skills}\n"
+                        f"   请使用skill替代手动代码。\n"
+                        f"   如需豁免，请联系蓝军(Skeptor-7)审批。"
+                    )
+            
+            return func(*args, **kwargs)
+        return wrapper
+
+class SkillViolationException(Exception):
+    pass
+
+# 使用示例：
+class AgentActions:
+    
+    @MandatorySkillCheck(task_type="document_processing")
+    def process_document(self, doc_path: str):
+        """
+        如果这里包含手动解析docx的逻辑，装饰器会抛出异常
+        """
+        # 正确做法：应该调用skill
+        # return self.call_skill("feishu-fetch-doc", path=doc_path)
+        pass
+
+4. 流程硬编码：三步确认制
+
+class SkillFirstWorkflow:
+    """
+    强制流程：查询→确认→执行
+    """
+    
+    STEP_SKILL_QUERY = 1
+    STEP_CONFIRMATION = 2
+    STEP_EXECUTION = 3
+    
+    def execute_task(self, task_description: str):
+        """强制执行三步流程"""
+        
+        # 步骤1：查询skill（不可跳过）
+        available_skills = self._query_skills(task_description)
+        
+        if available_skills:
+            # 步骤2：强制确认（防止侥幸心理）
+            confirmation = self._forced_confirmation(available_skills[0])
+            
+            if confirmation == "OVERRIDE":
+                # 记录豁免（用于蓝军审计）
+                self._log_override(task_description, available_skills[0])
+                return self._manual_implement(task_description)
+            
+            # 步骤3：执行skill
+            return self._execute_skill(available_skills[0])
+        else:
+            # 确实无skill可用，记录后允许手动实现
+            self._log_no_skill_available(task_description)
+            return self._manual_implement(task_description)
+    
+    def _forced_confirmation(self, skill_name: str) -> str:
+        """
+        强制确认对话框：消除"这次例外"的心理空间
+        """
+        print(f"\n{'='*50}")
+        print(f"⚠️  强制确认：检测到可用skill '{skill_name}'")
+        print(f"{'='*50}")
+        print(f"选项1: 使用skill [推荐] -> 输入 'USE'")
+        print(f"选项2: 手动实现（需理由） -> 输入 'OVERRIDE: [理由]'")
+        print(f"选项3: 搜索其他skill -> 输入 'SEARCH'")
+        
+        while True:
+            choice = input("\n你的选择: ").strip()
+            
+            if choice == "USE":
+                return "USE"
+            elif choice.startswith("OVERRIDE:"):
+                reason = choice[9:].strip()
+                if len(reason) < 10:
+                    print("❌ 理由太短（至少10字），请说明为何不用skill")
+                    continue
+                return "OVERRIDE"
+            elif choice == "SEARCH":
+                self._search_more_skills()
+            else:
+                print("❌ 无效输入，请从上述选项中选择")
+        
+    def _log_override(self, task: str, skill: str):
+        """记录豁免行为，供蓝军审查"""
+        log_entry = {
+            "timestamp": "2026-04-03T22:42:00",
+            "task": task,
+            "skipped_skill": skill,
+            "agent_id": "Kimi-Claw",
+            "audit_flag": "REQUIRES_BLUE_TEAM_REVIEW"
+        }
+        # 写入审计日志
+        print(f"[审计] 豁免行为已记录: {log_entry}")
+
+5. 技术锁：Skill-Lock模式
+
+class SkillLockMechanism:
+    """
+    技术锁：类似互斥锁，确保有skill时阻塞手动实现
+    """
+    
+    def __init__(self):
+        self._skill_available = False
+        self._manual_blocked = False
+    
+    def check_skill(self, skill_name: str) -> bool:
+        """检查skill是否存在并可用"""
+        exists = self._verify_skill_exists(skill_name)
+        if exists:
+            self._skill_available = True
+            self._manual_blocked = True  # 一旦检测到skill，立即阻塞手动实现
+        return exists
+    
+    def attempt_manual(self, context: str):
+        """
+        尝试手动实现时的检查点
+        """
+        if self._manual_blocked and self._skill_available:
+            raise RuntimeError(
+                f"🚫 Skill-Lock已激活！\n"
+                f"   上下文: {context}\n"
+                f"   有可用skill时禁止手动实现。\n"
+                f"   如需强制手动，请先释放skill锁: skill_lock.release()"
+            )
+        # 允许执行
+    
+    def release(self, authorized_by: str):
+        """只有授权人员（如蓝军）可释放锁"""
+        if not authorized_by.startswith("Skeptor-"):
+            raise PermissionError("只有蓝军(Skeptor-*)可释放skill锁")
+        self._manual_blocked = False
+        print(f"[Skill-Lock] 已由{authorized_by}释放")
+
+三、监督层：蓝军实时介入机制
+
+6. 蓝军钩子（Blue Team Hooks）
+
+class BlueTeamOversight:
+    """
+    蓝军监督集成：实时检测违规倾向
+    """
+    
+    def __init__(self, agent_instance):
+        self.agent = agent_instance
+        self.violations = []
+        
+        # 安装钩子到关键决策点
+        self._install_hooks()
+    
+    def _install_hooks(self):
+        """在Agent决策流中安装监控钩子"""
+        original_run = self.agent.run
+        
+        def monitored_run(*args, **kwargs):
+            # 前置检查：意图分析
+            intent = self._extract_intent(args[0])
+            skill_matches = self._check_skill_availability(intent)
+            
+            if skill_matches:
+                # 实时预警：蓝军控制台
+                self._alert_blue_team(intent, skill_matches)
+                
+                # 强制暂停，等待蓝军指令
+                decision = self._await_blue_team_decision(intent, skill_matches)
+                
+                if decision == "BLOCK":
+                    return {
+                        "status": "blocked",
+                        "reason": "蓝军判定应使用skill而非手动实现",
+                        "suggested_skill": skill_matches[0]
+                    }
+            
+            return original_run(*args, **kwargs)
+        
+        self.agent.run = monitored_run
+    
+    def _alert_blue_team(self, intent: str, skills: list):
+        """实时告警"""
+        alert = {
+            "level": "WARNING",
+            "type": "SKILL_AVOIDANCE_SUSPECTED",
+            "intent": intent,
+            "available_skills": skills,
+            "timestamp": "2026-04-03T22:42:00",
+            "agent_state": self.agent.get_current_state()
+        }
+        # 发送到蓝军控制台
+        print(f"[蓝军告警] {alert}")
+    
+    def _await_blue_team_decision(self, intent, skills) -> str:
+        """
+        模拟蓝军决策接口
+        实际可对接Slack/飞书机器人
+        """
+        print(f"\n🚨 蓝军介入检查点")
+        print(f"意图: {intent}")
+        print(f"可用skill: {skills}")
+        print(f"选项: [PASS-放行] [BLOCK-强制使用skill] [OVERRIDE-豁免]")
+        
+        # 实际实现中，这里等待蓝军输入
+        # 模拟：假设蓝军选择BLOCK
+        return "BLOCK"
+
+7. 行为审计与回溯
+
+class BehaviorAuditor:
+    """
+    行为审计：记录所有"手动实现"决策，支持事后复盘
+    """
+    
+    def __init__(self):
+        self.audit_log = []
+    
+    def log_decision(self, decision_type: str, context: dict):
+        """记录决策"""
+        entry = {
+            "timestamp": "2026-04-03T22:42:00",
+            "decision_type": decision_type,  # "USE_SKILL" | "MANUAL_OVERRIDE"
+            "context": context,
+            "justification": context.get("justification", "N/A"),
+            "blue_team_approved": context.get("blue_team_approval", False)
+        }
+        self.audit_log.append(entry)
+        
+        # 实时统计
+        if decision_type == "MANUAL_OVERRIDE":
+            self._check_override_rate()
+    
+    def _check_override_rate(self):
+        """检查豁免率，过高时触发警告"""
+        total = len(self.audit_log)
+        overrides = sum(1 for e in self.audit_log if e["decision_type"] == "MANUAL_OVERRIDE")
+        rate = overrides / total if total > 0 else 0
+        
+        if rate > 0.2:  # 豁免率超过20%
+            print(f"⚠️ 警告：手动实现豁免率{rate:.1%}，超过20%阈值")
+            print(f"   建议：复盘最近的豁免案例，检查是否有skill未被充分利用")
+            
+    def generate_report(self):
+        """生成审计报告"""
+        return {
+            "total_decisions": len(self.audit_log),
+            "skill_usage_rate": sum(1 for e in self.audit_log if e["decision_type"] == "USE_SKILL") / len(self.audit_log),
+            "top_manual_justifications": self._analyze_justifications(),
+            "recommendations": "减少'简单任务'豁免，建立skill使用习惯"
+        }
+
+四、文化层：消除”侥幸心理”
+
+8. “无简单任务”假设
+
+class NoSimpleTaskPolicy:
+    """
+    政策层：消除"这次简单"的借口
+    """
+    
+    POLICY_DOCUMENT = """
+    【Kimi Claw Skill使用政策 v1.0】
+    
+    核心原则：没有"简单"到不需要skill的任务。
+    
+    条款：
+    1. 任何涉及标准格式(docx/pdf/xlsx)的处理，必须使用feishu-fetch-doc等skill
+    2. "只需几行代码"不是豁免理由，反而可能是过度自信的征兆
+    3. "上次手动没问题"是危险的逻辑，不代表这次应该重复
+    4. 手动实现必须提供：性能对比报告 + 维护成本评估 + 蓝军签字
+    
+    心理陷阱警示：
+    - "用skill太麻烦" -> 实际上skill调用只需1行代码
+    - "手动更快" -> 忽略了测试、错误处理、边界情况的时间
+    - "我想展示编码能力" -> 在Agent系统中，正确使用工具才是能力
+    """
+    
+    def verify_policy_compliance(self, task_description: str, proposed_method: str):
+        """验证是否符合政策"""
+        if "手动" in proposed_method or "自己写" in proposed_method:
+            # 触发强制审查
+            return {
+                "compliant": False,
+                "required_actions": [
+                    "1. 提供skill与手动的ROI对比分析",
+                    "2. 说明为何现有skill无法满足需求（技术限制）",
+                    "3. 获得蓝军(Skeptor-7)书面批准",
+                    "4. 承诺将手动实现封装为新skill（避免重复造轮子）"
+                ]
+            }
+        return {"compliant": True}
+
+9. 自动化复盘（Weekly Skill Review）
+
+class WeeklySkillReview:
+    """
+    每周复盘：统计skill使用率，识别违规模式
+    """
+    
+    def generate_review(self, audit_logs: list):
+        review = {
+            "week": "2026-W14",
+            "skill_usage_rate": 0.0,
+            "manual_implementations": [],
+            "violations": []
+        }
+        
+        # 识别"重复造轮子"模式
+        manual_tasks = [log for log in audit_logs if log["decision_type"] == "MANUAL_OVERRIDE"]
+        task_types = {}
+        for task in manual_tasks:
+            task_type = self._classify_task(task["context"]["intent"])
+            task_types[task_type] = task_types.get(task_type, 0) + 1
+            
+            # 如果同类任务手动实现超过2次，标记为"习惯性违规"
+            if task_types[task_type] >= 2:
+                review["violations"].append({
+                    "type": "HABITUAL_MANUAL_IMPLEMENTATION",
+                    "task_type": task_type,
+                    "count": task_types[task_type],
+                    "suggestion": f"请将{task_type}封装为专用skill"
+                })
+        
+        return review
+
+五、完整集成示例
+
+class KimiClawAgent:
+    """
+    集成所有机制的Kimi Claw Agent
+    """
+    
+    def __init__(self):
+        self.cognitive = ToolFirstCognitiveFramework()
+        self.workflow = SkillFirstWorkflow()
+        self.lock = SkillLockMechanism()
+        self.blue_team = BlueTeamOversight(self)
+        self.auditor = BehaviorAuditor()
+        self.policy = NoSimpleTaskPolicy()
+    
+    def process(self, user_request: str):
+        # 1. 认知检查
+        check = self.cognitive.cognitive_checkpoint(user_request, self.list_skills())
+        if check["block_code_generation"]:
+            return self._route_to_skill(user_request)
+        
+        # 2. 政策检查
+        compliance = self.policy.verify_policy_compliance(user_request, "proposed_method")
+        if not compliance["compliant"]:
+            return compliance
+        
+        # 3. 流程执行（包含强制确认）
+        result = self.workflow.execute_task(user_request)
+        
+        # 4. 审计记录
+        self.auditor.log_decision(
+            "USE_SKILL" if result.get("used_skill") else "MANUAL_OVERRIDE",
+            {"intent": user_request, "result": result}
+        )
+        
+        return result
+
+总结：三层防御体系
+
+关键设计原则： 1. 默认禁止：手动实现是”例外”而非常态，需要理由和审批 2. 物理阻塞：用代码层面的锁（Skill-Lock）而非仅靠自觉 3. 透明审计：所有”豁免”都被记录，蓝军实时可见
+
+这套方案将”优先使用skill”从建议转变为架构层面的强制约束，从根本上消除”造轮子”的生存空间。

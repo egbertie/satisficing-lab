@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/generate_report.sh",
+  "filename": "generate_report.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "fd74031eea2fa9cd",
+  "content_length": 5400,
+  "ingested_at": "2026-03-31T17:27:46.139831",
+  "content_preview": "#!/bin/bash\n# 完整的skill检查和报告生成脚本\n\nDOWNLOAD_DIR=\"/root/openclaw/kimi/downloads\"\nFIXED_DIR=\"/root/openclaw/kimi/downloads/fixed_skills\"\nREPORT_FILE=\"/root/.openclaw/workspace/reports/SKILL_429_FIX_REPORT.md\"\n\n# P0批次\nP0_SKILLS=(\"brave-search\" \"automate-excel\" \"csvtoexcel\" \"copywriting\" \"duckdb-cli-ai-skills\" \"cron-scheduling\" \"markdown-converter\" \"markdown-exporter\" \"mermaid-diagrams\")\n\n# 初始化统计\np0_total=9\np0_success=0\np0_failed=0\n\nall_slugs=()\nincomplete_slugs=()\n\necho \"# Skill 429修复报告\" > \"$REPORT_F",
+  "limitations_applied": []
+}

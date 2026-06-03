@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/token_monitor.py",
+  "filename": "token_monitor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "23423725bfa3cc24",
+  "content_length": 2831,
+  "ingested_at": "2026-03-31T17:27:46.166714",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nToken监控脚本\n每小时检查Token使用情况，触发告警或熔断\n\n质量+Token效益优先\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime\nfrom pathlib import Path\n\n# Token红线配置\nTOKEN_RED_LINES = {\n    \"hourly_limit\": 5000,      # 每小时上限\n    \"daily_limit\": 50000,      # 每日上限\n    \"alert_threshold\": 0.7,    # 70%告警\n    \"fuse_threshold\": 0.9,     # 90%熔断\n}\n\n# 状态文件\nSTATE_FILE = Path(\"~/.openclaw/system-v2/token-monitor/state.json\").expanduser()\nSTATE_FILE.parent.mkdir(parents=True, exist_ok=True)\n\n\ndef load_s",
+  "limitations_applied": []
+}

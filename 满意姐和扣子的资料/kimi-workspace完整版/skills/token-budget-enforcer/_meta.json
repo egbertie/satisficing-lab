@@ -1,0 +1,37 @@
+{
+  "name": "token-budget-enforcer",
+  "version": "2.1.0",
+  "description": "Token预算强制执行器 - 5标准完整实现",
+  "author": "Satisficing Institute",
+  "tags": ["token", "budget", "enforcement", "monitoring", "circuit-breaker"],
+  "standard_level": 5,
+  "implements": {
+    "S1": "输入Token预算/任务队列/消耗预测 - 三级预算池、任务分类预估",
+    "S2": "预算执行闭环 - 监控→预警→熔断→调整→报告",
+    "S3": "输出规范 - 预算报告、预警通知、调整建议",
+    "S4": "实时监控自动触发 - Monitor模块支持持续监控",
+    "S5": "预算核算准确性验证 - Reporter包含完整性验证",
+    "S6": "局限标注 - 预估置信度、预算机制失效场景",
+    "S7": "对抗测试 - adversarial_test.py模拟预算耗尽等场景"
+  },
+  "requires": {
+    "model": "kimi-coding/k2p5",
+    "local_tools": ["python3", "pyyaml"]
+  },
+  "entry_points": {
+    "budget": "scripts/enforcer_runner.py budget",
+    "estimate": "scripts/enforcer_runner.py estimate",
+    "report": "scripts/enforcer_runner.py report",
+    "monitor": "scripts/enforcer_runner.py monitor",
+    "test": "scripts/enforcer_runner.py test"
+  },
+  "structure": {
+    "SKILL.md": "主文档",
+    "_meta.json": "元数据",
+    "config/": "配置目录",
+    "scripts/": "脚本目录",
+    "data/": "数据目录",
+    "logs/": "日志目录",
+    "tests/": "测试目录"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/checkpoint-manager/checkpoint_manager.py",
+  "filename": "checkpoint_manager.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 14587,
+  "checksum": "43656c711f67bac6",
+  "ingested_at": "2026-03-31T17:30:32.772740",
+  "line_count": 401,
+  "title": "checkpoint_manager",
+  "description": "checkpoint-manager: Token耗尽时的状态检查点管理\n实现零Token状态永生\n\n作者: 满意妞\n版本: 1.0.0\n日期: 2026-03-28",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: CheckpointManager"
+    }
+  ],
+  "entities": [
+    {
+      "name": "CheckpointManager",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    },
+    {
+      "name": "run_tests",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "检查磁盘空间（需要至少100MB）",
+    "恢复文件（备份当前状态先）",
+    "复制检查点文件到工作区",
+    "按时间排序（最新的在前）",
+    "注意：在测试环境中恢复可能失败（工作区路径问题），所以只打印结果",
+    "测试5: 清理旧检查点"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

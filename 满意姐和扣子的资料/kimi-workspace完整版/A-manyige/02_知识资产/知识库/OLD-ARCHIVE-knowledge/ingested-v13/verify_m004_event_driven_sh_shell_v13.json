@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify_m004_event_driven.sh",
+  "filename": "verify_m004_event_driven.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "d8ff2c42c833f068",
+  "content_length": 1358,
+  "ingested_at": "2026-03-31T17:27:46.210966",
+  "content_preview": "#!/bin/bash\n# M004事件驱动机制验证脚本\n\necho \"=== M004事件驱动机制验证 ===\"\necho \"\"\n\n# 检查引擎文件\necho \"1. 事件驱动引擎:\"\nif [ -f \"/root/.openclaw/workspace/skills/event-driven-engine/event_driven_engine.py\" ]; then\n    echo \"   ✅ event_driven_engine.py 存在\"\n    lines=$(wc -l < /root/.openclaw/workspace/skills/event-driven-engine/event_driven_engine.py)\n    echo \"      代码行数: $lines\"\nelse\n    echo \"   ❌ event_driven_engine.py 不存在\"\n    exit 1\nfi\n\n# 检查关键方法\necho \"\"\necho \"2. 关键方法存在性:\"\ngrep -q \"detect_event\" /root/.openclaw/works",
+  "limitations_applied": []
+}

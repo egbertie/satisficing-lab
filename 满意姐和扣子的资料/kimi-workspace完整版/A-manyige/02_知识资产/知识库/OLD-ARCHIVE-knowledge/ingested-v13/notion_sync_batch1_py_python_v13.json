@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/notion_legacy/notion_sync_batch1.py",
+  "filename": "notion_sync_batch1.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "50235c238214a894",
+  "content_length": 13517,
+  "ingested_at": "2026-03-31T17:27:46.224340",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nNotion知识库第1批同步脚本 - 超小批次方案A\n核心文档优先批次\n\"\"\"\nimport json\nimport os\nimport time\nimport requests\nfrom pathlib import Path\nfrom datetime import datetime\n\n# 配置\nNOTION_TOKEN = \"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\"\nPARENT_PAGE_ID = \"31fa8a0e-2bba-81fa-b98a-d61da835051e\"\nRATE_LIMIT_MS = 350\nWORKSPACE_DIR = Path(\"/root/.openclaw/workspace\")\nPROGRESS_FILE = WORKSPACE_DIR / \".notion_sync_v2_progress.json\"\nREPORT_FILE = WORKSPACE_DIR / \"docs\" / \"NOTION_SYNC_BATCH_1_REPO",
+  "limitations_applied": []
+}

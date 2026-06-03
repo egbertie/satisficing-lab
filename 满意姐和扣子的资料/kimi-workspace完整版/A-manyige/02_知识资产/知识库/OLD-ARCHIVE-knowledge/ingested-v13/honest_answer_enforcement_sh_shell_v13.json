@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/honest_answer_enforcement.sh",
+  "filename": "honest_answer_enforcement.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "abbc0de084f37716",
+  "content_length": 1065,
+  "ingested_at": "2026-03-31T17:27:46.194263",
+  "content_preview": "#!/bin/bash\n# 诚实回答强制检查脚本\n# 每次回答前运行，确保符合诚实回答标准\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nANSWER_LOG=\"$WORKSPACE/diary/honest_answer_enforcement.log\"\nTASK_ID=\"${1:-unknown}\"\n\necho \"=== 诚实回答强制检查 ===\" | tee -a \"$ANSWER_LOG\"\necho \"任务ID: $TASK_ID\" | tee -a \"$ANSWER_LOG\"\necho \"检查时间: $(date)\" | tee -a \"$ANSWER_LOG\"\necho \"\" | tee -a \"$ANSWER_LOG\"\n\necho \"思维方式应用检查（6项）:\" | tee -a \"$ANSWER_LOG\"\necho \"[ ] 五层深挖: 表象→原因→根因→预防→能力\" | tee -a \"$ANSWER_LOG\"\necho \"[ ] 反脆弱设计: 6类意外因素检查\" | tee -a \"$ANSWER_LOG\"\necho \"[ ] 满意解",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/error_periodic_check.py",
+  "filename": "error_periodic_check.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "d855b33238d5b868",
+  "content_length": 3145,
+  "ingested_at": "2026-03-31T17:27:46.165498",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n错误记录周期检查脚本\n每日执行，防止错误复发\n\"\"\"\n\nimport json\nimport os\nimport sys\nfrom pathlib import Path\nfrom datetime import datetime, timedelta\n\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nERRORS_DIR = WORKSPACE / \"diary\" / \"errors\"\nREPORT_FILE = WORKSPACE / \"diary\" / \"errors\" / \"weekly-review.md\"\n\ndef load_error_files():\n    \"\"\"加载所有错误记录文件\"\"\"\n    errors = []\n    if not ERRORS_DIR.exists():\n        return errors\n    \n    for file in ERRORS_DIR.glob(\"ERR-*.md\"):\n        content = file.",
+  "limitations_applied": []
+}

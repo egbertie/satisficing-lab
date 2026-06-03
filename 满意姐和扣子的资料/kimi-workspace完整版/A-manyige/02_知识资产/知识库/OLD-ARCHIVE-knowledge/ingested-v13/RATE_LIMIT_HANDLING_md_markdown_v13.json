@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/error-handler/RATE_LIMIT_HANDLING.md",
+  "filename": "RATE_LIMIT_HANDLING.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "93e2fb48d1f51bd9",
+  "content_length": 702,
+  "ingested_at": "2026-03-31T17:27:45.488523",
+  "content_preview": "# 429错误处理机制 [RULE]\n\n## 问题定义\n频繁遇到 `429 {\"error\":{\"type\":\"rate_limit_error\",\"message\":\"The engine is currently overloaded\"}}`，严重影响对话流畅性。\n\n## 触发条件\n- 对话历史过长（上下文超过50KB）\n- 短时间内多次工具调用\n- 并发任务过多\n- API服务负载过高\n\n## 处理规则\n\n### 规则1：自动上下文压缩 [MUST]\n当检测到上下文超过阈值时，自动请求压缩：\n- 上下文 > 30KB：提示用户进行压缩\n- 上下文 > 50KB：强制压缩，只保留最近10轮对话\n\n### 规则2：错误恢复流程 [MUST]\n遇到429错误时：\n1. **立即停止当前操作**\n2. **等待5秒后重试**（最多3次）\n3. **如果仍失败**：\n   - 简化请求内容\n   - 拆分任务为更小批次\n   - 或建议用户压缩上下文\n\n### 规则3：预防性措施 [SHOULD]\n- 单轮对话工具调用不超过5个\n- 复杂任务使用`sessions_spawn`后台执行\n-",
+  "limitations_applied": []
+}

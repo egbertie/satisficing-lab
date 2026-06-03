@@ -1,0 +1,198 @@
+{
+  "source_path": "/root/.openclaw/workspace/docs/CRON_DEPLOYMENT_8STEP_STANDARD.md",
+  "filename": "CRON_DEPLOYMENT_8STEP_STANDARD.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 7140,
+  "checksum": "a890f464195ade4f",
+  "ingested_at": "2026-03-31T17:30:11.409860",
+  "line_count": 340,
+  "title": "Cron部署8步验证标准 V1.0",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "Cron部署8步验证标准 V1.0"
+    },
+    {
+      "level": 2,
+      "title": "核心原则"
+    },
+    {
+      "level": 2,
+      "title": "8步验证流程"
+    },
+    {
+      "level": 3,
+      "title": "第1步：配置写入验证 ✅"
+    },
+    {
+      "level": 1,
+      "title": "检查crontab"
+    },
+    {
+      "level": 1,
+      "title": "检查配置文件"
+    },
+    {
+      "level": 3,
+      "title": "第2步：语法检查通过 ✅"
+    },
+    {
+      "level": 1,
+      "title": "检查cron语法"
+    },
+    {
+      "level": 1,
+      "title": "检查JSON语法"
+    },
+    {
+      "level": 1,
+      "title": "检查YAML语法"
+    },
+    {
+      "level": 1,
+      "title": "检查Shell脚本"
+    },
+    {
+      "level": 3,
+      "title": "第3步：权限验证通过 ✅"
+    },
+    {
+      "level": 1,
+      "title": "检查文件权限"
+    },
+    {
+      "level": 1,
+      "title": "测试执行权限（不实际执行）"
+    },
+    {
+      "level": 3,
+      "title": "第4步：依赖检查通过 ✅"
+    },
+    {
+      "level": 1,
+      "title": "检查API密钥"
+    },
+    {
+      "level": 1,
+      "title": "检查网络"
+    },
+    {
+      "level": 1,
+      "title": "检查依赖文件"
+    },
+    {
+      "level": 1,
+      "title": "检查环境变量"
+    },
+    {
+      "level": 3,
+      "title": "第5步：首次执行触发 ✅"
+    },
+    {
+      "level": 1,
+      "title": "手动执行任务"
+    },
+    {
+      "level": 1,
+      "title": "或使用Python"
+    },
+    {
+      "level": 1,
+      "title": "检查执行状态"
+    },
+    {
+      "level": 3,
+      "title": "第6步：输出接收确认 ✅"
+    },
+    {
+      "level": 1,
+      "title": "检查日志文件"
+    },
+    {
+      "level": 1,
+      "title": "检查输出大小"
+    },
+    {
+      "level": 1,
+      "title": "测试通知渠道（如配置了）"
+    },
+    {
+      "level": 3,
+      "title": "第7步：结果验证通过 ✅"
+    },
+    {
+      "level": 1,
+      "title": "检查JSON输出格式"
+    },
+    {
+      "level": 1,
+      "title": "检查关键字段存在"
+    },
+    {
+      "level": 1,
+      "title": "检查无错误信息"
+    },
+    {
+      "level": 1,
+      "title": "内容验证（示例：检查输出非空）"
+    },
+    {
+      "level": 3,
+      "title": "第8步：日志记录完成 ✅"
+    },
+    {
+      "level": 1,
+      "title": "写入验证日志"
+    },
+    {
+      "level": 2,
+      "title": "快速验证脚本"
+    },
+    {
+      "level": 1,
+      "title": "scripts/verify_cron_deployment.sh"
+    },
+    {
+      "level": 1,
+      "title": "Step 1: 配置写入验证"
+    },
+    {
+      "level": 1,
+      "title": "Step 2: 语法检查"
+    },
+    {
+      "level": 1,
+      "title": "Step 3: 权限验证"
+    },
+    {
+      "level": 1,
+      "title": "Step 4-8: 根据具体任务扩展..."
+    },
+    {
+      "level": 2,
+      "title": "状态定义"
+    },
+    {
+      "level": 2,
+      "title": "违规处理"
+    },
+    {
+      "level": 2,
+      "title": "版本历史"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "配置只是开始，验证才是完成。",
+    "记住：配置≠完成，验证才是终点。",
+    "PENDING_VERIFICATION",
+    "COMPLETED",
+    "未通过8步验证就声称\"完成\" = 虚报",
+    "CONFIGURING",
+    "配置≠完成，验证才是终点。"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

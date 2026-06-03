@@ -1,0 +1,74 @@
+{
+  "report_id": "RPT-20260321-7952",
+  "task_id": "ICQ-20260321-003",
+  "overall_score": 74.5,
+  "grade": "C",
+  "status": "PASSED_WITH_WARNINGS",
+  "dimensions": {
+    "completeness": {
+      "name": "completeness",
+      "score": 100.0,
+      "weight": 0.35,
+      "status": "PASS",
+      "findings": []
+    },
+    "accuracy": {
+      "name": "accuracy",
+      "score": 35.0,
+      "weight": 0.3,
+      "status": "FAIL",
+      "findings": [
+        "数值异常大(可能虚假): 999999亿 - 超出合理范围",
+        "来源等级为L4(未经验证)，可信度低",
+        "来源不明: 缺少URL和发布者信息"
+      ]
+    },
+    "timeliness": {
+      "name": "timeliness",
+      "score": 70.0,
+      "weight": 0.2,
+      "status": "PASS",
+      "findings": [
+        "科技数据已过时(2271天)"
+      ]
+    },
+    "consistency": {
+      "name": "consistency",
+      "score": 100.0,
+      "weight": 0.15,
+      "status": "PASS",
+      "findings": []
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "HIGH",
+      "dimension": "accuracy",
+      "issue": "数值异常大(可能虚假): 999999亿 - 超出合理范围",
+      "action": "使用kimi_search查找至少2个独立来源确认",
+      "auto_fixable": false
+    },
+    {
+      "priority": "HIGH",
+      "dimension": "accuracy",
+      "issue": "来源等级为L4(未经验证)，可信度低",
+      "action": "使用kimi_search查找至少2个独立来源确认",
+      "auto_fixable": false
+    },
+    {
+      "priority": "HIGH",
+      "dimension": "accuracy",
+      "issue": "来源不明: 缺少URL和发布者信息",
+      "action": "使用kimi_search查找至少2个独立来源确认",
+      "auto_fixable": false
+    }
+  ],
+  "limitations": [
+    "主观观点无法自动验证",
+    "预测性数据依赖未来事件",
+    "需要领域专业知识的数据需人工复核",
+    "多来源引用同一原始数据时交叉验证可能失效"
+  ],
+  "generated_at": "2026-03-21T18:44:03.583713",
+  "generator_version": "2.0.0"
+}

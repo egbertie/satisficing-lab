@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/plugins/feishu_drive_upload_tool.py",
+  "filename": "feishu_drive_upload_tool.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "18c81c044c43277c",
+  "content_length": 3615,
+  "ingested_at": "2026-03-31T17:27:44.610613",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nFeishu Drive Upload Tool - OpenClaw Tool Registration\n飞书云盘上传工具 - OpenClaw工具注册脚本\n\n此脚本将 feishu_drive_uploader.py 注册为 OpenClaw 工具\n\"\"\"\n\nimport os\nimport sys\nimport json\n\n# 工具定义\nTOOL_DEFINITION = {\n    \"name\": \"feishu_drive_upload\",\n    \"label\": \"飞书云盘上传\",\n    \"description\": \"\"\"【飞书云盘上传】上传本地文件到飞书云空间。\n\n功能:\n- 上传文件到飞书云空间\n- 自动压缩大文件 (>20MB)\n- 支持指定文件夹位置\n- 列出云空间文件\n\n参数:\n- action: upload/list\n- file_path: 本地文件路径 (upload时需要)\n- parent_node: 目标文件夹token (可选)\n- file_name: 自定义文件名 (可选)\n- com",
+  "limitations_applied": []
+}

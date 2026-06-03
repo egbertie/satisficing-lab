@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/worker-swarm-tracker/worker_swarm_tracker.py",
+  "filename": "worker_swarm_tracker.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "a513a7d31f90631c",
+  "content_length": 6427,
+  "ingested_at": "2026-03-31T17:27:45.469318",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n6 Worker蜂群激活记录系统 - M006\n记录每次任务前的Worker选择和激活状态\n\n创建时间: 2026-03-31\n状态: 整改完成\n\"\"\"\n\nimport json\nfrom datetime import datetime\nfrom pathlib import Path\nfrom enum import Enum\n\nclass WorkerType(Enum):\n    META_STRATEGIST = \"Meta-Strategist\"\n    SUPERVISOR_BIZ = \"Supervisor-Biz\"\n    SUPERVISOR_TECH = \"Supervisor-Tech\"\n    WORKER_ANALYSIS = \"Worker-Analysis\"\n    WORKER_EXECUTION = \"Worker-Execution\"\n    WORKER_CREATIVE = \"Worker-Creative\"\n\nclass WorkerSwarmTracker:\n    \"\"\"Worker蜂",
+  "limitations_applied": []
+}

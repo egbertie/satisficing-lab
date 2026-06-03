@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blue-auditor/tightening_spell_data/restore_on_reboot.sh",
+  "filename": "restore_on_reboot.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "53c8e62fe3e49045",
+  "content_length": 566,
+  "ingested_at": "2026-03-31T17:27:45.377329",
+  "content_preview": "#!/bin/bash\necho \"=== 紧箍咒数据恢复 ===\"\nPERSIST_DIR=\"/root/.openclaw/workspace/skills/blue-auditor/tightening_spell_data\"\n\n[ -f \"$PERSIST_DIR/blue_army/blue_army_delay_points\" ] && cp \"$PERSIST_DIR/blue_army/blue_army_delay_points\" /tmp/ && echo \"✅ 恢复延迟积分\"\n[ -f \"$PERSIST_DIR/satisfied_girl/satisfied_girl_credit\" ] && cp \"$PERSIST_DIR/satisfied_girl/satisfied_girl_credit\" /tmp/ && echo \"✅ 恢复信用额度\"\n[ -f \"$PERSIST_DIR/satisfied_girl/satisfied_girl_daily_quota\" ] && cp \"$PERSIST_DIR/satisfied_girl/satisfi",
+  "limitations_applied": []
+}

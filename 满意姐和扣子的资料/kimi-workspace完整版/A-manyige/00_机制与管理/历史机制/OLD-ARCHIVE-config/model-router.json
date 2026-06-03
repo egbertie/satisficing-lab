@@ -1,0 +1,59 @@
+{
+  "version": "2026-03-26",
+  "description": "Token优化 - 模型路由分层配置",
+  "routing_policy": {
+    "simple_queries": {
+      "model": "kimi-k2p5-flash",
+      "description": "简单查询，低Token消耗",
+      "examples": ["天气查询", "简单计算", "事实确认", "文件列表"],
+      "max_tokens": 2000,
+      "cost_saving": "60%"
+    },
+    "standard_tasks": {
+      "model": "kimi-k2p5",
+      "description": "标准任务，常规Token消耗",
+      "examples": ["代码编写", "文档编辑", "数据分析", "Skill调用"],
+      "max_tokens": 8000,
+      "cost_saving": "0%"
+    },
+    "complex_reasoning": {
+      "model": "kimi-k2p5",
+      "thinking": "high",
+      "description": "复杂推理，高Token消耗但高质量",
+      "examples": ["架构设计", "战略规划", "深度分析", "方案评估"],
+      "max_tokens": 16000,
+      "cost_saving": "-20%"
+    }
+  },
+  "auto_switching": {
+    "enabled": true,
+    "downgrade_when": {
+      "token_budget_percent": 30,
+      "action": "switch_to_flash"
+    },
+    "upgrade_when": {
+      "error_rate_percent": 20,
+      "consecutive_errors": 3,
+      "action": "switch_to_k2p5"
+    }
+  },
+  "context_compression": {
+    "enabled": true,
+    "trigger_at": {
+      "token_percent": 80,
+      "turn_count": 25
+    },
+    "preserve": [
+      "用户明确标记'重要'的内容",
+      "决策点和结论",
+      "待办任务和截止日期",
+      "代码片段和配置"
+    ],
+    "compress": [
+      "中间推导过程",
+      "已完成的调试日志",
+      "临时文件内容",
+      "重复确认的对话"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/promise-system-guardian/test_runner.py",
+  "filename": "test_runner.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "df94fb44ea27db7f",
+  "content_length": 1902,
+  "ingested_at": "2026-03-31T17:27:45.489538",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nPromise System Guardian - 快速测试入口\n\"\"\"\nimport sys\nfrom datetime import datetime\n\nclass PromiseGuardian:\n    def __init__(self):\n        self.promises = {}\n    \n    def record_promise(self, promise_id, description, deadline):\n        self.promises[promise_id] = {\n            \"description\": description,\n            \"deadline\": deadline,\n            \"status\": \"active\"\n        }\n        return True\n    \n    def check_overdue(self):\n        return [p for p in self.promises.va",
+  "limitations_applied": []
+}

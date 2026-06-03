@@ -1,0 +1,128 @@
+{
+  "skill_name": "tiered-output",
+  "version": "2.0.0",
+  "tier": 5,
+  "description": "三级输出长度控制系统，支持L1极简/L2标准/L3详细三级输出",
+  
+  "standards": {
+    "S1_input_processing": {
+      "status": "implemented",
+      "description": "输入用户请求/上下文/输出级别指令",
+      "components": [
+        "用户指令解析",
+        "Token预算检测",
+        "优先级映射",
+        "用户偏好学习"
+      ]
+    },
+    "S2_tiered_processing": {
+      "status": "implemented", 
+      "description": "输出分级处理（L1极简/L2标准/L3详细）",
+      "tiers": {
+        "L1": {
+          "name": "极简版",
+          "token_limit": "<50",
+          "format": "一句话",
+          "time_target": "<1s"
+        },
+        "L2": {
+          "name": "标准版",
+          "token_limit": "100-500",
+          "format": "摘要+发现+行动",
+          "time_target": "<3s"
+        },
+        "L3": {
+          "name": "详细版",
+          "token_limit": ">1000",
+          "format": "完整报告",
+          "time_target": "<10s"
+        }
+      }
+    },
+    "S3_expand_mechanism": {
+      "status": "implemented",
+      "description": "输出分级内容+完整版链接/展开选项",
+      "features": [
+        "L1/L2显示展开提示",
+        "支持/expand /detail展开",
+        "24小时历史缓存"
+      ]
+    },
+    "S4_auto_triggers": {
+      "status": "implemented",
+      "description": "自动触发机制",
+      "triggers": {
+        "token_budget": {
+          "critical_10%": "强制L1 + 警告",
+          "low_30%": "强制L1 + 提示",
+          "medium_70%": "默认L2"
+        },
+        "user_commands": {
+          "L1": ["/brief", "/b", "简短"],
+          "L2": ["/normal", "/n", "标准"],
+          "L3": ["/detail", "/d", "详细"]
+        },
+        "priority_mapping": {
+          "P0": "复杂分析→L3, 简单→L1",
+          "P1": "L2",
+          "P2": "L2",
+          "P3": "L1"
+        }
+      }
+    },
+    "S5_accuracy_validation": {
+      "status": "implemented",
+      "description": "分级准确性验证（级别匹配度检查）",
+      "checks": [
+        "内容完整性检查",
+        "Token准确性检查",
+        "级别匹配度检查",
+        "格式合规性检查"
+      ]
+    },
+    "S6_limitation_notices": {
+      "status": "implemented",
+      "description": "局限标注（L1可能丢失关键细节）",
+      "limitations": {
+        "L1": ["关键细节丢失", "上下文缺失", "行动项模糊"],
+        "L2": ["证据省略", "单一方案", "背景简化"]
+      }
+    },
+    "S7_adversarial_tests": {
+      "status": "implemented",
+      "description": "对抗测试（复杂请求测试分级合理性）",
+      "test_cases": [
+        "模糊复杂度请求",
+        "级别与内容不匹配",
+        "Token预算与需求冲突",
+        "快速级别切换",
+        "复杂vs简单请求分级"
+      ]
+    }
+  },
+  
+  "files": {
+    "SKILL.md": "完整技能文档（7标准）",
+    "config.yaml": "系统配置",
+    "tiered_output.py": "主模块实现",
+    "QUICK_REFERENCE.md": "快速参考卡片",
+    "tests/test_validation.py": "基础测试（Token限制、触发规则）",
+    "tests/test_s5_s7.py": "S5-S7标准测试"
+  },
+  
+  "usage": {
+    "cli_commands": {
+      "/brief": "生成L1极简版输出",
+      "/normal": "生成L2标准版输出",
+      "/detail": "生成L3详细版输出",
+      "/expand": "展开上一条为详细版"
+    },
+    "python_api": "from tiered_output import TieredOutputSystem, Context"
+  },
+  
+  "compliance": {
+    "skill_standard": 5,
+    "standards_count": 7,
+    "test_coverage": "S1-S7全覆盖"
+  }
+}

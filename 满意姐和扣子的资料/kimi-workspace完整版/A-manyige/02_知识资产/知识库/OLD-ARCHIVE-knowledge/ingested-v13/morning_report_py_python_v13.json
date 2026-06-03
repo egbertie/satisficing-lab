@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/todo-management/morning_report.py",
+  "filename": "morning_report.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "295805096e0855bf",
+  "content_length": 2345,
+  "ingested_at": "2026-03-31T17:27:45.339351",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n每日晨报生成器\n生成包含日程、TODO、提醒的晨报\n\"\"\"\n\nimport json\nimport sys\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\n# 添加TODO管理器路径\nsys.path.insert(0, '/root/.openclaw/workspace/skills/todo-management')\nfrom todo_manager import todo_manager\n\n\ndef get_calendar_events():\n    \"\"\"获取今日日程（预留接口）\"\"\"\n    # TODO: 集成飞书日历API\n    return []\n\n\ndef generate_morning_report():\n    \"\"\"生成晨报\"\"\"\n    now = datetime.now()\n    today_str = now.strftime('%Y年%m月%d日')\n    weekday = ['一', '二', '",
+  "limitations_applied": []
+}

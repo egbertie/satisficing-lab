@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/sync_skills.py",
+  "filename": "sync_skills.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "43d0238180d98844",
+  "content_length": 3117,
+  "ingested_at": "2026-03-31T17:27:46.187118",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nSkill注册表同步脚本\n从core/技能注册.yaml生成Working层Skill目录\n\"\"\"\n\nimport yaml\nimport os\nfrom datetime import datetime\n\ndef sync_skills():\n    # 读取Core定义\n    with open('core/技能注册.yaml', 'r', encoding='utf-8') as f:\n        data = yaml.safe_load(f)\n    \n    metadata = data.get('metadata', {})\n    registry = data.get('skill_registry', {})\n    stats = data.get('statistics', {})\n    \n    # 确保输出目录存在\n    os.makedirs('working/skills', exist_ok=True)\n    \n    # 生成Skill目录文档\n    content = f\"\"\"#",
+  "limitations_applied": []
+}

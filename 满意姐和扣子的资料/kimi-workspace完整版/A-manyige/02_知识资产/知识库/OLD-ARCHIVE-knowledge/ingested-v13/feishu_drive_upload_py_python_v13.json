@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/plugins/feishu_drive_upload.py",
+  "filename": "feishu_drive_upload.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "f51526f60c03bb9e",
+  "content_length": 5419,
+  "ingested_at": "2026-03-31T17:27:44.610800",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n飞书云盘文件上传插件\n支持上传本地文件到飞书云空间\n\n用法:\n  python3 feishu_drive_upload.py <本地文件路径> [目标文件夹token]\n  \n示例:\n  python3 feishu_drive_upload.py /path/to/file.pdf\n  python3 feishu_drive_upload.py /path/to/file.pdf fldbcO1UuPz8VwnpPx5a92abcef\n\"\"\"\n\nimport sys\nimport os\nimport json\nimport base64\nimport requests\nfrom pathlib import Path\n\n# 配置 - 从OpenClaw配置读取\nFEISHU_CONFIG = {\n    \"app_id\": \"cli_a949c1e2f4f89cb3\",\n    \"app_secret\": \"Z8hnq3wLrkjQrCes94N0xEqBlHPHjk6b\"\n}\n\n# API端点\nFEISHU_API_BASE",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/state_checkpoint.py",
+  "filename": "state_checkpoint.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "cc1788f2cbe48eb0",
+  "content_length": 3069,
+  "ingested_at": "2026-03-31T17:27:46.207106",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n系统状态Checkpoint - 定期保存机制\n用途: 每30分钟保存一次系统状态，防止极端事件丢失\n保存: 当前任务、进度、验证状态、执行日志位置\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime\nfrom pathlib import Path\n\ndef save_checkpoint():\n    \"\"\"保存系统状态Checkpoint\"\"\"\n    \n    checkpoint = {\n        \"timestamp\": datetime.now().isoformat(),\n        \"version\": \"1.0\",\n        \"system_state\": {\n            \"active_tasks\": [],\n            \"running_validators\": [],\n            \"last_execution_logs\": [],\n            \"pending_escalation",
+  "limitations_applied": []
+}

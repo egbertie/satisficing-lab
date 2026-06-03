@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/security-audit.py",
+  "filename": "security-audit.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "6909151cc4b586d8",
+  "content_length": 5267,
+  "ingested_at": "2026-03-31T17:27:46.171293",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n安全审计脚本 - 企业级安全基线检查\n7x24可执行，纯本地操作（零Token）\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport subprocess\nimport hashlib\nfrom datetime import datetime\nfrom pathlib import Path\n\nclass SecurityAuditor:\n    def __init__(self):\n        self.workspace = Path.home() / \".openclaw\" / \"workspace\"\n        self.vault = Path.home() / \".openclaw\" / \"security\" / \"vault\"\n        self.results = {\n            \"timestamp\": datetime.now().isoformat(),\n            \"checks\": [],\n            \"score\"",
+  "limitations_applied": []
+}

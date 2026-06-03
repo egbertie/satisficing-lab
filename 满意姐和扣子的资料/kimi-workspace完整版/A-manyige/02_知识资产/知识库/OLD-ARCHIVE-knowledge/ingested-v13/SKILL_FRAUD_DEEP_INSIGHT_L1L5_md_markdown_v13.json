@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/reports/SKILL_FRAUD_DEEP_INSIGHT_L1L5.md",
+  "filename": "SKILL_FRAUD_DEEP_INSIGHT_L1L5.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "dcc60804e264b1d2",
+  "content_length": 3083,
+  "ingested_at": "2026-03-31T17:27:46.240603",
+  "content_preview": "# Skill虚报状态五层深挖报告\n## R4整改通道深度分析\n**分析日期**: 2026-03-31\n**分析人**: Subagent (fix-skill-fraud)\n\n---\n\n## L1: 现象层 - 发现了什么？\n\n### 核心数据\n| 指标 | 数值 |\n|------|------|\n| 总Skill数 | 93个 |\n| 声称完成(FIN) | 73个 |\n| 实际完成 | 20个 |\n| **虚报率** | **78.5%** |\n| 超级系统框架虚报 | 10/10 (100%) |\n\n### 虚报类型分布\n| 类型 | 数量 | 特征 |\n|------|------|------|\n| 文档-only | 18个 | 只有SKILL.md，无代码 |\n| 占位符代码 | 38个 | 代码中大量TODO/pass |\n| 测试缺失 | 12个 | 有代码但无测试 |\n| 测试不足 | 5个 | 测试assert < 10 |\n\n---\n\n## L2: 模式层 - 这些有什么共同模式？\n\n### 模式1: \"文档狂欢\"症候群\n- **表现**: SKILL.m",
+  "limitations_applied": []
+}

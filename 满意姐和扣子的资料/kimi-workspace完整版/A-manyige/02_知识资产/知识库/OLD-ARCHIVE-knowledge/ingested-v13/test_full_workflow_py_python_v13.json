@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/testing-framework/tests/e2e/test_full_workflow.py",
+  "filename": "test_full_workflow.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "6d62f1c74085df54",
+  "content_length": 8765,
+  "ingested_at": "2026-03-31T17:27:45.442640",
+  "content_preview": "\"\"\"\n端到端测试 - 完整工作流验证\n\n测试目标: 验证从触发到完成的完整流程\n测试类型: E2E测试 (End-to-End Test)\n\"\"\"\n\nimport json\nimport time\nimport pytest\nfrom pathlib import Path\nfrom unittest.mock import patch, MagicMock\n\n\n@pytest.mark.e2e\nclass TestZeroIdleFullWorkflow:\n    \"\"\"Zero-Idle完整工作流测试\"\"\"\n    \n    def test_full_idle_detection_to_fill_workflow(self, tmp_path):\n        \"\"\"测试完整空闲检测到补位的流程\"\"\"\n        # 设置测试环境\n        memory_dir = tmp_path / \"memory\"\n        logs_dir = tmp_path / \"logs\"\n        memory_dir.mkdir()\n        logs_dir.",
+  "limitations_applied": []
+}

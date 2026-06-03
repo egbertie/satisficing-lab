@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/weather-query/weather_client.py",
+  "filename": "weather_client.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "1d15ba7390c534f7",
+  "content_length": 8293,
+  "ingested_at": "2026-03-31T17:27:45.473866",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nWeather Query Skill\n5标准化实现 - 天气查询\n\"\"\"\n\nimport requests\nimport json\nfrom typing import Dict, Optional, Tuple\nfrom datetime import datetime\n\nclass WeatherClient:\n    \"\"\"天气查询客户端\"\"\"\n    \n    GEOCODING_URL = \"https://geocoding-api.open-meteo.com/v1/search\"\n    WEATHER_URL = \"https://api.open-meteo.com/v1/forecast\"\n    \n    # 天气代码映射 (WMO Weather interpretation codes)\n    WEATHER_CODES = {\n        0: (\"晴朗\", \"☀️\"),\n        1: (\"主要晴朗\", \"🌤️\"),\n        2: (\"部分多云\", \"⛅\"),\n        3",
+  "limitations_applied": []
+}

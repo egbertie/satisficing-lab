@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/super-knowledge-ingest/super_knowledge_ingest_v8.py",
+  "filename": "super_knowledge_ingest_v8.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "74e6c8b27eb1f72d",
+  "content_length": 3889,
+  "ingested_at": "2026-03-31T17:27:45.428342",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nsuper-knowledge-ingest V8.0 - 量子极速版\n核心突破：超极速模式 + 预加载 + 零开销返回\n目标：缓存命中 0.05ms (50μs)\n策略：把一切都提前算好，运行时只做内存复制\n\"\"\"\n\nimport os\nimport time\nimport threading\nfrom typing import Dict, Tuple, Optional\n\n# ============ 超极速缓存 ============\n# 格式: filepath -> (precomputed_output_bytes, precomputed_size)\n_ULTRA_CACHE: Dict[str, Tuple[bytes, int]] = {}\n_ULTRA_LOCK = threading.Lock()\n\nOUT_DIR = \"/root/.openclaw/workspace/knowledge/7standard-v8\"\nos.makedirs(OUT_DIR, exist_ok=True)\n\n\n# ====",
+  "limitations_applied": []
+}

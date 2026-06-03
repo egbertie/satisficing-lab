@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/quality-assessment/scripts/assess-skill.sh",
+  "filename": "assess-skill.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "fa04aaab8326c510",
+  "content_length": 13334,
+  "ingested_at": "2026-03-31T17:27:45.433535",
+  "content_preview": "#!/bin/bash\n#\n# assess-skill.sh - 质量评估主脚本\n# 支持: 单Skill评估、批量评估、版本对比、回归测试、CI集成\n#\n\nset -e\n\nSCRIPT_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nSKILL_DIR=\"$(dirname \"$SCRIPT_DIR\")\"\nWORKSPACE_DIR=\"$(dirname \"$(dirname \"$SKILL_DIR\")\")\"\nREPORT_DIR=\"$WORKSPACE_DIR/reports/assessment\"\nCONFIG_DIR=\"$SKILL_DIR/config\"\n\n# 颜色定义\nRED='\\033[0;31m'\nGREEN='\\033[0;32m'\nYELLOW='\\033[1;33m'\nBLUE='\\033[0;34m'\nNC='\\033[0m' # No Color\n\n# 日志函数\nlog_info() { echo -e \"${BLUE}[INFO]${NC} $1\"; }\nlog_warn() { echo -e \"$",
+  "limitations_applied": []
+}

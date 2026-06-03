@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/task8_validate_all.py",
+  "filename": "task8_validate_all.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "ead46b93327eb8ae",
+  "content_length": 5252,
+  "ingested_at": "2026-03-31T17:27:46.172964",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n今日修复验证脚本 - 任务8\n验证今天全部8项修复\n\"\"\"\n\nimport json\nimport subprocess\nfrom pathlib import Path\n\ndef run_all_validations():\n    \"\"\"运行全部8个验证\"\"\"\n    \n    validations = []\n    \n    # 验证1: 知识内容提取\n    print(\"=== 验证1: 知识内容提取 ===\")\n    try:\n        with open(\"/root/.openclaw/workspace/memory/task1_report.json\", 'r') as f:\n            report = json.load(f)\n        coverage = report.get(\"actual_coverage\", 0)\n        if coverage >= 85:\n            validations.append((\"知识内容提取\", True, f\"覆盖率",
+  "limitations_applied": []
+}

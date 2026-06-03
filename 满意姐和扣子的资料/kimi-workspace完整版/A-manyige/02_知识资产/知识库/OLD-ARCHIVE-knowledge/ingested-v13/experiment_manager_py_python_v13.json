@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_evolution-experiment-lab/modules/experiment_manager.py",
+  "filename": "experiment_manager.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "3f03540c96eff3f7",
+  "content_length": 6970,
+  "ingested_at": "2026-03-31T17:27:45.265698",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nEvolution Experiment Lab - 进化实验实验室\n支持隔离测试、小范围试点、数据驱动决策\n\"\"\"\n\nimport json\nimport shutil\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Any, Optional\nfrom enum import Enum\n\nclass ExperimentStatus(Enum):\n    DESIGN = \"design\"           # 设计阶段\n    ISOLATION_TEST = \"isolation\"  # 隔离测试\n    PILOT = \"pilot\"             # 小范围试点\n    EVALUATION = \"evaluation\"   # 评估阶段\n    PROMOTED = \"promoted\"       # 已推广\n    ROLLED_BACK = \"rolled_back\" # 已回滚",
+  "limitations_applied": []
+}

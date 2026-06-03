@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_satisficing-web-fetcher/security/content_filter.py",
+  "filename": "content_filter.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "408aec2805e4d950",
+  "content_length": 5889,
+  "ingested_at": "2026-03-31T17:27:45.070852",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n内容过滤器\n\n功能：\n1. PII检测与脱敏\n2. 敏感内容过滤\n3. 内容大小限制\n\n安全要求：\n- 自动检测身份证号、手机号、银行卡\n- 可选脱敏或拒绝\n- 响应内容日志脱敏\n\"\"\"\n\nimport re\nimport hashlib\nfrom typing import List, Dict, Pattern, Optional, Tuple\nfrom dataclasses import dataclass\nfrom enum import Enum\n\n\nclass SensitivityLevel(Enum):\n    \"\"\"敏感度级别\"\"\"\n    LOW = \"low\"\n    MEDIUM = \"medium\"\n    HIGH = \"high\"\n    CRITICAL = \"critical\"\n\n\n@dataclass\nclass SensitivePattern:\n    \"\"\"敏感信息模式\"\"\"\n    name: str\n    pattern: Pattern\n    level: Sensitivity",
+  "limitations_applied": []
+}

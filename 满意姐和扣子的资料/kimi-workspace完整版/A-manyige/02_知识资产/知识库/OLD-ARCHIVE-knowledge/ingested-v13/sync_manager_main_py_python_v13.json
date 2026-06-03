@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/sync-manager/sync_manager_main.py",
+  "filename": "sync_manager_main.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "a9eea0354f759f9c",
+  "content_length": 1997,
+  "ingested_at": "2026-03-31T17:27:45.486636",
+  "content_preview": "\ndef main():\n    parser = argparse.ArgumentParser(description=\"Sync Manager - Data Synchronization Tool\")\n    parser.add_argument(\"command\", nargs='?', choices=[\"sync-all\", \"sync\", \"status\", \"clean\"],\n                       help=\"Command to execute\")\n    parser.add_argument(\"--target\", choices=[\"notion\", \"github\", \"local\"],\n                       help=\"Target for sync command\")\n    parser.add_argument(\"--test\", action=\"store_true\",\n                       help=\"Run S5/S7 validation tests\")\n    \n ",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/five-level-verification/tests/test_L2.py",
+  "filename": "test_L2.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "f396850520c815ce",
+  "content_length": 3818,
+  "ingested_at": "2026-03-31T17:27:45.465080",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nL2 Test Cases - 语法验证测试\n\"\"\"\n\nimport os\nimport sys\nimport tempfile\nimport shutil\nimport unittest\n\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'scripts'))\nfrom verify import FiveLevelVerifier\n\n\nclass TestL2Syntax(unittest.TestCase):\n    \"\"\"L2: 语法验证测试\"\"\"\n    \n    def setUp(self):\n        self.temp_dir = tempfile.mkdtemp()\n        self.skill_name = \"test_skill\"\n        self.skill_path = os.path.join(self.temp_dir, self.skill_name)\n        os.makedirs(se",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/cleanup-temp.sh",
+  "filename": "cleanup-temp.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "1ac1092e3bd342b6",
+  "content_length": 1434,
+  "ingested_at": "2026-03-31T17:27:46.170591",
+  "content_preview": "#!/bin/bash\n# cleanup-temp.sh - 清理临时文件脚本\n# 用途: 清理各类临时文件和空文件夹\n# 执行频率: 按需或每日\n\nset -e\n\nWORKSPACE=\"/root/.openclaw/workspace\"\n\necho \"开始清理临时文件...\"\n\n# 1. 清理临时文件\nTEMP_COUNT=0\nfor pattern in \"*.tmp\" \"*.temp\" \"*~\" \"*.swp\" \"*.swo\"; do\n    COUNT=$(find \"$WORKSPACE\" -name \"$pattern\" -type f 2>/dev/null | wc -l)\n    TEMP_COUNT=$((TEMP_COUNT + COUNT))\n    find \"$WORKSPACE\" -name \"$pattern\" -type f -delete 2>/dev/null || true\ndone\necho \"✅ 清理临时文件: $TEMP_COUNT 个\"\n\n# 2. 清理空文件夹（排除.git、backup、隐藏目录）\nEMPTY_BEFORE=$(f",
+  "limitations_applied": []
+}

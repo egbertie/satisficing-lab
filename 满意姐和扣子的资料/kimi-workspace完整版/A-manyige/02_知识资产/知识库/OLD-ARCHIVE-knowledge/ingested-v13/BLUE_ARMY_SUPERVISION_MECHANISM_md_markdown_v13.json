@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/docs/BLUE_ARMY_SUPERVISION_MECHANISM.md",
+  "filename": "BLUE_ARMY_SUPERVISION_MECHANISM.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "ac10b89227a93afc",
+  "content_length": 721,
+  "ingested_at": "2026-03-31T17:27:44.917774",
+  "content_preview": "# 蓝军监督与不作为报告机制\n\n**建立时间**: 2026-03-30 06:58  \n**建立原因**: 用户要求\"如果蓝军不作为，满意妞要告诉我\"\n\n---\n\n## 机制设计\n\n### 监督原则\n- 蓝军必须实时审计（每项任务后30分钟内）\n- 超过2小时无审计 = 不作为\n- 满意妞有权、有义务向用户报告\n\n### 报告条件\n\n| 情况 | 满意妞行动 | 报告方式 |\n|------|-----------|----------|\n| 蓝军超过2小时未审计 | 立即向用户报告 | 直接文字说明 |\n| 蓝军审计质量差 | 立即向用户报告 | 举例说明 |\n| 蓝军包庇问题 | 立即向用户报告 | 提供证据 |\n| 蓝军自身违规 | 立即向用户报告 | 提供证据 |\n\n### 监控脚本\n\n**位置**: `scripts/blue_army_monitor.sh`\n\n**功能**:\n- 每30分钟检查一次蓝军审计记录\n- 超过2小时无审计 → 警告满意妞\n- 满意妞收到警告后立即向用户报告\n\n---\n\n## 历史记录\n\n| 时间 | 事件 | 满意妞行动 |\n|------|-",
+  "limitations_applied": []
+}

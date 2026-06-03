@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/super-knowledge-ingest/scripts/batch_p3_ingest.py",
+  "filename": "batch_p3_ingest.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "bebc284ece009de5",
+  "content_length": 3685,
+  "ingested_at": "2026-03-31T17:27:45.431195",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nP3层漏电文件批量入库\n384个文件高效处理\n\"\"\"\n\nimport os\nimport hashlib\nimport json\nfrom datetime import datetime\nfrom pathlib import Path\n\nWORKSPACE = \"/root/.openclaw/workspace\"\nOUTPUT_DIR = f\"{WORKSPACE}/knowledge/P3_leak_ingested\"\nINDEX_FILE = f\"{WORKSPACE}/knowledge/INDEX.md\"\n\ndef get_file_info(filepath):\n    stat = os.stat(filepath)\n    with open(filepath, 'rb') as f:\n        file_hash = hashlib.sha256(f.read()).hexdigest()\n    try:\n        lines = sum(1 for _ in open(filepath, 'r'",
+  "limitations_applied": []
+}

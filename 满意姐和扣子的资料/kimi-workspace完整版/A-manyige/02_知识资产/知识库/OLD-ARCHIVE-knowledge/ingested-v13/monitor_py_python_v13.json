@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/cron-automation/scripts/monitor.py",
+  "filename": "monitor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "a17d0b9c68936b3e",
+  "content_length": 10215,
+  "ingested_at": "2026-03-31T17:27:45.384949",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n监控服务 - Cron-Automation System S3可观测输出组件\n\n功能:\n- 实时任务状态监控\n- 资源使用监控\n- 告警检测与通知\n- 生成监控报告\n\nS3标准: 可观测输出 - 监控面板、告警机制\n\"\"\"\n\nimport json\nimport os\nimport sys\nimport time\nimport psutil\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import Dict, List, Any, Optional\nfrom dataclasses import dataclass\n\n# 路径配置\nBASE_DIR = Path(__file__).parent.parent\nCONFIG_DIR = BASE_DIR / \"config\"\nLOGS_DIR = BASE_DIR / \"logs\"\nMONITOR_DIR = BASE_DIR / \"monitor\"\nSTATE_DIR ",
+  "limitations_applied": []
+}

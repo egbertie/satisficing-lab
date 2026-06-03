@@ -1,0 +1,230 @@
+{
+  "source_path": "/root/.openclaw/workspace/archive/docs/2026-03/DEEP_OPTIMIZATION_V2.0_PLAN.md",
+  "filename": "DEEP_OPTIMIZATION_V2.0_PLAN.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 51385,
+  "checksum": "3b9c38d8d953fbbe",
+  "ingested_at": "2026-03-31T17:30:16.981977",
+  "line_count": 1028,
+  "title": "深度优化方案 V2.0",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "深度优化方案 V2.0"
+    },
+    {
+      "level": 2,
+      "title": "🎯 执行摘要"
+    },
+    {
+      "level": 3,
+      "title": "优化目标"
+    },
+    {
+      "level": 3,
+      "title": "优化策略矩阵"
+    },
+    {
+      "level": 2,
+      "title": "第一部分：架构优化（宏观层）"
+    },
+    {
+      "level": 3,
+      "title": "1.1 系统架构重构：从单体到分层"
+    },
+    {
+      "level": 4,
+      "title": "当前问题"
+    },
+    {
+      "level": 4,
+      "title": "优化方案：四层架构"
+    },
+    {
+      "level": 4,
+      "title": "实施步骤"
+    },
+    {
+      "level": 3,
+      "title": "1.2 核心记忆多副本架构"
+    },
+    {
+      "level": 4,
+      "title": "当前问题"
+    },
+    {
+      "level": 4,
+      "title": "优化方案：三层记忆架构"
+    },
+    {
+      "level": 4,
+      "title": "自动备份机制"
+    },
+    {
+      "level": 1,
+      "title": "backup-memory.sh - 每小时执行"
+    },
+    {
+      "level": 1,
+      "title": "创建备份"
+    },
+    {
+      "level": 1,
+      "title": "保留最近168个（7天）"
+    },
+    {
+      "level": 1,
+      "title": "提交到Git（如配置了自动提交）"
+    },
+    {
+      "level": 3,
+      "title": "1.3 Token耗尽防御体系"
+    },
+    {
+      "level": 4,
+      "title": "当前问题"
+    },
+    {
+      "level": 4,
+      "title": "优化方案：四级防御体系"
+    },
+    {
+      "level": 4,
+      "title": "监控脚本"
+    },
+    {
+      "level": 1,
+      "title": "token-guardian.py"
+    },
+    {
+      "level": 2,
+      "title": "第二部分：流程优化（中观层）"
+    },
+    {
+      "level": 3,
+      "title": "2.1 决策流程优化：理解先于建议"
+    },
+    {
+      "level": 4,
+      "title": "当前问题"
+    },
+    {
+      "level": 4,
+      "title": "优化方案：三阶确认模型"
+    },
+    {
+      "level": 4,
+      "title": "检查清单（Checklist）"
+    },
+    {
+      "level": 2,
+      "title": "建议前必问清单 [RULE-SUGGESTION-002]"
+    },
+    {
+      "level": 3,
+      "title": "2.2 外部依赖处理流程：内部优先70%"
+    },
+    {
+      "level": 4,
+      "title": "当前问题"
+    },
+    {
+      "level": 4,
+      "title": "优化方案：双路径执行模型"
+    },
+    {
+      "level": 4,
+      "title": "自动化实现"
+    },
+    {
+      "level": 1,
+      "title": "dependency-handler.py"
+    },
+    {
+      "level": 3,
+      "title": "2.3 一致性治理流程"
+    },
+    {
+      "level": 4,
+      "title": "当前问题"
+    },
+    {
+      "level": 4,
+      "title": "优化方案：单一真相源（Single Source of Truth）"
+    },
+    {
+      "level": 4,
+      "title": "一致性检查规则"
+    },
+    {
+      "level": 1,
+      "title": "consistency-rules.yaml"
+    },
+    {
+      "level": 2,
+      "title": "第三部分：机制优化（微观层）"
+    },
+    {
+      "level": 3,
+      "title": "3.1 自动健康度扫描机制"
+    },
+    {
+      "level": 4,
+      "title": "当前问题"
+    },
+    {
+      "level": 4,
+      "title": "优化方案：四维健康度扫描"
+    },
+    {
+      "level": 4,
+      "title": "健康度评分算法"
+    },
+    {
+      "level": 1,
+      "title": "health-scanner.py"
+    },
+    {
+      "level": 3,
+      "title": "3.2 第一性原则审计机制"
+    },
+    {
+      "level": 4,
+      "title": "当前问题"
+    },
+    {
+      "level": 4,
+      "title": "优化方案：原则审计Cron"
+    },
+    {
+      "level": 4,
+      "title": "审计检查表"
+    },
+    {
+      "level": 1,
+      "title": "first-principle-auditor.py"
+    },
+    {
+      "level": 3,
+      "title": "3.3 优化建议分级处理机制"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "Notion备份恢复",
+    "满意解文档体系 V1.0",
+    "如果以上任一问题无法回答，必须先询问，再提建议。",
+    "阶段2：Skill整合（3月18-25日）",
+    "立即切换至备选模型",
+    "紧急采购Token",
+    "仅执行Tier 1任务",
+    "阶段1：建立统一注册中心（3月16-17日）"
+  ],
+  "limitations_applied": [
+    "Content truncated to 50000 bytes for scanning",
+    "Sections limited to 50"
+  ],
+  "content_truncated": true
+}

@@ -1,0 +1,232 @@
+{
+  "source_path": "/root/.openclaw/workspace/archive/docs/2026-03/BACKUP_CHECKLIST_DAILY.md",
+  "filename": "BACKUP_CHECKLIST_DAILY.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 14840,
+  "checksum": "6288bf9e847bf122",
+  "ingested_at": "2026-03-31T17:30:16.966367",
+  "line_count": 612,
+  "title": "每日备份检查清单",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "每日备份检查清单"
+    },
+    {
+      "level": 2,
+      "title": "目录"
+    },
+    {
+      "level": 2,
+      "title": "每日检查流程概览"
+    },
+    {
+      "level": 3,
+      "title": "检查时间"
+    },
+    {
+      "level": 3,
+      "title": "检查范围"
+    },
+    {
+      "level": 2,
+      "title": "自动检查脚本"
+    },
+    {
+      "level": 3,
+      "title": "脚本位置"
+    },
+    {
+      "level": 3,
+      "title": "每日自动检查 (02:00 执行)"
+    },
+    {
+      "level": 1,
+      "title": "/root/.openclaw/workspace/scripts/daily-check.sh"
+    },
+    {
+      "level": 1,
+      "title": "创建日志目录"
+    },
+    {
+      "level": 1,
+      "title": "1. 磁盘空间检查"
+    },
+    {
+      "level": 1,
+      "title": "2. 备份目录检查"
+    },
+    {
+      "level": 1,
+      "title": "3. Git状态检查"
+    },
+    {
+      "level": 1,
+      "title": "4. 关键文件存在性检查"
+    },
+    {
+      "level": 1,
+      "title": "5. 今日记忆文件检查"
+    },
+    {
+      "level": 1,
+      "title": "6. 生成状态报告"
+    },
+    {
+      "level": 3,
+      "title": "快速健康检查脚本"
+    },
+    {
+      "level": 1,
+      "title": "快速健康检查 - 每日09:00执行"
+    },
+    {
+      "level": 1,
+      "title": "颜色定义"
+    },
+    {
+      "level": 1,
+      "title": "1. 系统资源"
+    },
+    {
+      "level": 1,
+      "title": "CPU"
+    },
+    {
+      "level": 1,
+      "title": "内存"
+    },
+    {
+      "level": 1,
+      "title": "磁盘"
+    },
+    {
+      "level": 1,
+      "title": "2. 备份状态"
+    },
+    {
+      "level": 1,
+      "title": "3. 关键文件"
+    },
+    {
+      "level": 1,
+      "title": "4. 服务状态"
+    },
+    {
+      "level": 1,
+      "title": "Gateway状态"
+    },
+    {
+      "level": 1,
+      "title": "5. Git状态"
+    },
+    {
+      "level": 2,
+      "title": "手动检查清单"
+    },
+    {
+      "level": 3,
+      "title": "每日09:00检查清单"
+    },
+    {
+      "level": 4,
+      "title": "基础检查"
+    },
+    {
+      "level": 4,
+      "title": "核心文件检查"
+    },
+    {
+      "level": 4,
+      "title": "服务检查"
+    },
+    {
+      "level": 3,
+      "title": "每日22:00检查清单"
+    },
+    {
+      "level": 2,
+      "title": "异常处理流程"
+    },
+    {
+      "level": 3,
+      "title": "异常分级"
+    },
+    {
+      "level": 3,
+      "title": "常见异常及处理"
+    },
+    {
+      "level": 4,
+      "title": "🔴 异常1: 备份失败"
+    },
+    {
+      "level": 1,
+      "title": "1. 检查日志"
+    },
+    {
+      "level": 1,
+      "title": "2. 检查磁盘空间"
+    },
+    {
+      "level": 1,
+      "title": "3. 手动触发备份"
+    },
+    {
+      "level": 1,
+      "title": "4. 验证备份"
+    },
+    {
+      "level": 4,
+      "title": "🟠 异常2: 磁盘空间不足"
+    },
+    {
+      "level": 1,
+      "title": "1. 查看磁盘使用详情"
+    },
+    {
+      "level": 1,
+      "title": "2. 清理旧备份（保留最近30天）"
+    },
+    {
+      "level": 1,
+      "title": "3. 清理日志文件"
+    },
+    {
+      "level": 1,
+      "title": "4. 再次检查"
+    },
+    {
+      "level": 4,
+      "title": "🟠 异常3: 关键文件丢失"
+    },
+    {
+      "level": 1,
+      "title": "1. 确认文件确实丢失"
+    },
+    {
+      "level": 1,
+      "title": "2. 从最新备份恢复"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "1. 查看备份状态",
+    "7. 检查定时任务",
+    "3. 检查今日记忆文件",
+    "3. 确认无异常警告",
+    "4. 验证核心配置文件",
+    "2. 检查日志文件",
+    "2. 检查磁盘空间",
+    "1. 确认今日备份完成",
+    "5. 验证关键文档",
+    "6. 检查角色定义文件",
+    "8. 检查Git同步状态"
+  ],
+  "limitations_applied": [
+    "Sections limited to 50"
+  ],
+  "content_truncated": false
+}

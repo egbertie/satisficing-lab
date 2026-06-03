@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/backups/layer2_automation/immortality_protocol.py",
+  "filename": "immortality_protocol.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "37d46816d77429d5",
+  "content_length": 6250,
+  "ingested_at": "2026-03-31T17:27:46.425872",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nClaw Immortality Protocol - 永生协议自动化脚本\n全量灾备自动化系统\n\"\"\"\n\nimport sys\nimport json\nimport os\nimport hashlib\nimport tarfile\nfrom datetime import datetime\n\nBACKUP_ROOT = \"/root/.openclaw/workspace/backups\"\nLAYERS = [\"layer1_meta\", \"layer2_automation\", \"layer3_collaboration\", \n          \"layer4_identity\", \"layer5_knowledge\", \"layer6_memory\", \"layer7_runtime\"]\n\ndef generate_manifest():\n    \"\"\"生成全量清单，包含所有文件的哈希值\"\"\"\n    timestamp = datetime.now().isoformat()\n    manifest = {\n       ",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/file_reference_checker.py",
+  "filename": "file_reference_checker.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "999fb44f4923294e",
+  "content_length": 9348,
+  "ingested_at": "2026-03-31T17:27:46.191780",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n全局文件引用一致性检查脚本\n4维检查法 - 维度3：文件引用一致性\n\"\"\"\n\nimport os\nimport re\nimport json\nfrom pathlib import Path\nfrom collections import defaultdict\nfrom datetime import datetime\n\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\n\n# 引用模式定义\nPATTERNS = {\n    'markdown_link': re.compile(r'\\[([^\\]]+)\\]\\(([^)]+)\\)'),  # [text](path)\n    'wiki_link': re.compile(r'\\[\\[([^\\]]+)\\]\\]'),  # [[path]]\n    'skill_ref': re.compile(r'skills/([^/\\s]+)/SKILL\\.md', re.IGNORECASE),  # skills/XXX/SKILL.md\n    ",
+  "limitations_applied": []
+}

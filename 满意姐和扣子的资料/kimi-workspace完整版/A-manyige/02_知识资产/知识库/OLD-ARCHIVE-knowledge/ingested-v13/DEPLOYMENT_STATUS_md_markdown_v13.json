@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/DEPLOYMENT_STATUS.md",
+  "filename": "DEPLOYMENT_STATUS.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "6f78fcf6e0698911",
+  "content_length": 3164,
+  "ingested_at": "2026-03-31T17:27:44.510885",
+  "content_preview": "# Azure TEE机密计算实例部署 - 完成状态报告\n\n## 任务概览\n\n✅ **已完成的工作**\n\n### 1. Azure CLI 安装\n- **状态**: ✓ 完成\n- **版本**: Azure CLI 2.84.0\n- **安装方式**: pip安装（适用于此环境）\n- **验证**: `az --version` 成功运行\n\n### 2. 资源组创建脚本\n- **状态**: ✓ 脚本已创建\n- **资源组名称**: `satisficing-rg`\n- **位置**: `eastus` (DCsv3系列可用区域)\n- **脚本**: `azure_tee_deploy.sh`\n\n### 3. Standard_DC8s_v3 机密VM部署\n- **状态**: ✓ 脚本已创建，待执行\n- **VM规格**: Standard_DC8s_v3 (8 vCPU, 32GB内存)\n- **TEE技术**: Intel TDX (Trust Domain Extensions)\n- **安全特性**:\n  - ConfidentialVM类型\n  - vTPM启用\n  - Sec",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blue-auditor/audit_checklist.sh",
+  "filename": "audit_checklist.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "fa7f32bf1a261541",
+  "content_length": 2573,
+  "ingested_at": "2026-03-31T17:27:45.375692",
+  "content_preview": "#!/bin/bash\n# 蓝军审计checklist脚本\n# 使用方法: ./audit_checklist.sh <skill_name>\n\nSKILL_NAME=$1\nSKILL_DIR=\"/root/.openclaw/workspace/skills/$SKILL_NAME\"\nAUDIT_LOG=\"/root/.openclaw/workspace/skills/blue-auditor/audit_logs/${SKILL_NAME}_$(date +%Y%m%d_%H%M%S).log\"\n\nmkdir -p \"$(dirname $AUDIT_LOG)\"\n\necho \"=== 蓝军审计: $SKILL_NAME ===\" | tee -a $AUDIT_LOG\necho \"审计时间: $(date)\" | tee -a $AUDIT_LOG\necho \"\" | tee -a $AUDIT_LOG\n\nPASS_COUNT=0\nFAIL_COUNT=0\n\n# Check 1: 目录存在\necho \"[Check 1] 目录存在...\" | tee -a $AUDIT_LOG\n",
+  "limitations_applied": []
+}

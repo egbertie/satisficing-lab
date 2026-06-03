@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/A-manyige/daily_reports/2026-03-27_cron_optimization_c.md",
+  "filename": "2026-03-27_cron_optimization_c.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "51730f09ad8430ac",
+  "content_length": 2915,
+  "ingested_at": "2026-03-31T17:27:46.279712",
+  "content_preview": "# AI驱动动态调度系统 - 部署报告\n# 命名空间: MGT-CRON-AI-DYNAMIC-v1.0-FIN-260327\n# 部署时间: 2026-03-27 21:00\n\n## 执行摘要\n\n| 项目 | 原配置 | 新配置 | 优化效果 |\n|------|--------|--------|----------|\n| 定时任务数 | 8个 | 4个 | **-50%** |\n| 日程提醒频率 | 每30分钟 | 事件前15分钟单次 | **-95%** |\n| 专家更新频率 | 每日 | 每周 | **-85%** |\n| 晨报时间 | 08:55 | 08:47 | **错峰成功** |\n\n## 新系统架构\n\n### 核心组件\n1. **AI动态调度器** (`dynamic_scheduler.sh`)\n   - 每30分钟检测用户模式\n   - 根据模式动态决定执行哪些任务\n   - 三种模式：深度工作/协作/空闲\n\n2. **事件驱动日程提醒** (`calendar_reminder.sh`)\n   - 不再定时轮询\n   - 事件前15分钟单次提醒\n   - 避免",
+  "limitations_applied": []
+}

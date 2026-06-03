@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/corrected_code_existence_check.sh",
+  "filename": "corrected_code_existence_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "e08286abd894f148",
+  "content_length": 2768,
+  "ingested_at": "2026-03-31T17:27:46.160872",
+  "content_preview": "#!/bin/bash\n# 修正版：全量代码存在性验证脚本\n# 检查整个Skill目录树是否有代码\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nREPORT_DIR=\"$WORKSPACE/reports\"\nTIMESTAMP=$(date '+%Y%m%d_%H%M%S')\nREPORT_FILE=\"$REPORT_DIR/code_existence_corrected_report_${TIMESTAMP}.md\"\n\necho \"=== 修正版全量代码存在性验证开始 ===\"\necho \"时间: $(date)\"\necho \"\"\n\nmkdir -p \"$REPORT_DIR\"\n\n# 获取所有一级Skill目录\nSKILL_DIRS=$(find \"$WORKSPACE/skills\" -maxdepth 1 -type d | tail -n +2 | sort)\nTOTAL_SKILLS=$(echo \"$SKILL_DIRS\" | wc -l)\n\necho \"发现 $TOTAL_SKILLS 个一级Skill目录\"\necho \"\"\n\n# 开始",
+  "limitations_applied": []
+}

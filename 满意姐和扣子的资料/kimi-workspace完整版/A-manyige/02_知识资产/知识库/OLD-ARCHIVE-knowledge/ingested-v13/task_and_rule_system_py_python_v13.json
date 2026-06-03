@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/task_and_rule_system.py",
+  "filename": "task_and_rule_system.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "450e1e0def91d06b",
+  "content_length": 6426,
+  "ingested_at": "2026-03-31T17:27:46.146334",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n任务看板修复器 + 管理规则执行器 - 承诺洗澡Phase 5&6\n修复任务识别准确性，加强规则执行深度\n\"\"\"\n\nimport re\nimport json\nfrom datetime import datetime\nfrom pathlib import Path\n\ndef parse_tasks_v2():\n    \"\"\"增强版任务解析器 - 支持复杂格式\"\"\"\n    task_file = Path(\"/root/.openclaw/workspace/TASK_MASTER.md\")\n    if not task_file.exists():\n        return []\n    \n    content = task_file.read_text()\n    \n    # 多种任务格式识别\n    tasks = []\n    \n    # 格式1: ### [状态] 任务名\n    pattern1 = r'###\\s+([✅⏸️🔄🔴🟡🟢])\\s*WIP-(\\d+):\\s*(.+?)\\n'\n    for m",
+  "limitations_applied": []
+}

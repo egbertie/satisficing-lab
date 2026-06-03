@@ -1,0 +1,164 @@
+# Workflow DSL 示例：合伙人匹配SOP
+# 展示五图腾检查点如何集成到业务流程中
+
+workflow:
+  name: "合伙人匹配评估SOP"
+  version: "1.0"
+  description: "基于满意解理论的合伙人匹配标准操作流程"
+  
+  # 五图腾检查点配置
+  # 每个关键决策点自动触发五维视角检查
+  totem_checkpoints:
+    liu_yuxi_土:
+      question: "该决策对3-5年后的组织根基有何影响？"
+      trigger: "final_decision"
+      weight: 0.25
+    simon_金:
+      question: "边界条件是否清晰？何时可以停止优化？"
+      trigger: "scoring_complete"
+      weight: 0.25
+    guan_zizai_水:
+      question: "直觉反应如何？是否有说不出的顾虑？"
+      trigger: "data_collected"
+      weight: 0.15
+    confucius_木:
+      question: "五常合规性如何？是否有伦理风险？"
+      trigger: "scoring_complete"
+      weight: 0.25
+    hui_neng_火:
+      question: "是否有被忽视的突破机会？"
+      trigger: "alternatives_generated"
+      weight: 0.10
+  
+  # 工作流程步骤
+  steps:
+    - id: "step_1_data_collection"
+      name: "数据收集"
+      type: skill
+      skill: partner-matching-engine
+      action: collect_profiles
+      inputs:
+        founder_profile: "{{ input.founder }}"
+        candidate_profiles: "{{ input.candidates }}"
+      outputs:
+        founder_data: "step_1.founder"
+        candidates_data: "step_1.candidates"
+      
+    - id: "step_2_totem_water"
+      name: "观自在直觉检查"
+      type: totem_check
+      totem: guan_zizai
+      condition: "data_collected"
+      inputs:
+        founder_intuition: "{{ input.founder_intuition_notes }}"
+      outputs:
+        intuition_report: "step_2.intuition"
+      
+    - id: "step_3_scoring"
+      name: "满意解评分"
+      type: skill
+      skill: partner-matching-engine
+      action: evaluate_match
+      inputs:
+        founder: "{{ step_1.founder }}"
+        candidates: "{{ step_1.candidates }}"
+      outputs:
+        scores: "step_3.scores"
+        explanations: "step_3.explanations"
+      
+    - id: "step_4_totem_metal"
+      name: "司马贺满意解检查"
+      type: totem_check
+      totem: simon
+      condition: "scoring_complete"
+      inputs:
+        scores: "{{ step_3.scores }}"
+        threshold: "{{ config.satisficing_threshold }}"
+      outputs:
+        satisficing_report: "step_4.satisficing"
+      
+    - id: "step_5_totem_wood"
+      name: "孔子伦理检查"
+      type: totem_check
+      totem: confucius
+      condition: "scoring_complete"
+      inputs:
+        candidate_ethics: "{{ step_1.candidates.ethics_profile }}"
+      outputs:
+        ethics_report: "step_5.ethics"
+      
+    - id: "step_6_alternatives"
+      name: "生成备选方案"
+      type: skill
+      skill: partner-matching-engine
+      action: generate_alternatives
+      inputs:
+        current_match: "{{ step_3.scores.top_candidate }}"
+      outputs:
+        alternatives: "step_6.alternatives"
+      
+    - id: "step_7_totem_fire"
+      name: "慧能突破检查"
+      type: totem_check
+      totem: hui_neng
+      condition: "alternatives_generated"
+      inputs:
+        alternatives: "{{ step_6.alternatives }}"
+      outputs:
+        breakthrough_report: "step_7.breakthrough"
+      
+    - id: "step_8_totem_earth"
+      name: "刘禹锡长期视角检查"
+      type: totem_check
+      totem: liu_yuxi
+      condition: "final_decision"
+      inputs:
+        selected_candidate: "{{ decision.selected_candidate }}"
+        partnership_terms: "{{ decision.terms }}"
+      outputs:
+        long_term_report: "step_8.long_term"
+      
+    - id: "step_9_final_decision"
+      name: "综合决策"
+      type: decision
+      inputs:
+        scores: "{{ step_3.scores }}"
+        totem_reports: [
+          "{{ step_2.intuition }}",
+          "{{ step_4.satisficing }}",
+          "{{ step_5.ethics }}",
+          "{{ step_7.breakthrough }}",
+          "{{ step_8.long_term }}"
+        ]
+      decision_logic: |
+        # 综合五图腾报告和量化评分
+        # 任一图腾提出严重警告 → 否决或重新评估
+        # 所有图腾通过 + 评分达标 → 推荐
+      outputs:
+        recommendation: "output.recommendation"
+        confidence: "output.confidence"
+        risk_factors: "output.risks"
+        next_steps: "output.next_steps"
+  
+  # 决策规则
+  decision_rules:
+    - condition: "{{ step_5.ethics.veto }}"
+      action: reject
+      reason: "伦理红线，一票否决"
+    - condition: "{{ step_3.scores.top_score }} < {{ config.min_score }}"
+      action: reject
+      reason: "未达满意解阈值"
+    - condition: "{{ step_4.satisficing.stop_search }} and {{ step_8.long_term.positive }}"
+      action: accept
+      reason: "满足满意解条件且长期视角通过"
+  
+  # 输出配置
+  outputs:
+    - name: recommendation
+      description: "最终推荐：接受/拒绝/暂缓"
+    - name: confidence
+      description: "置信度：0-100"
+    - name: detailed_report
+      description: "包含五图腾评估详情的完整报告"
+    - name: action_items
+      description: "后续行动清单"

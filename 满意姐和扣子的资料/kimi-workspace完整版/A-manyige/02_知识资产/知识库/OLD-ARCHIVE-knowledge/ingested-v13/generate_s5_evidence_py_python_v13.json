@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/generate_s5_evidence.py",
+  "filename": "generate_s5_evidence.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "212c620aa8085c7a",
+  "content_length": 6363,
+  "ingested_at": "2026-03-31T17:27:46.183866",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nS5 Verification Evidence Generator - S5验证证据生成器\n为错误进化系统中的每个错误生成验证证据\n\"\"\"\n\nimport json\nimport os\nimport sys\nfrom pathlib import Path\nfrom datetime import datetime\n\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nERRORS_DIR = WORKSPACE / \"diary\" / \"errors\"\nEVIDENCE_DIR = ERRORS_DIR / \"evidence\"\n\ndef generate_verification_evidence():\n    \"\"\"为每个已验证错误生成详细验证证据\"\"\"\n    \n    EVIDENCE_DIR.mkdir(exist_ok=True)\n    \n    # ERR-20260320-001 验证证据\n    evidence_001 = f\"\"\"# S5验证证据: ERR-2026",
+  "limitations_applied": []
+}

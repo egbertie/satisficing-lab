@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/feishu_create_doc_user_folder.py",
+  "filename": "feishu_create_doc_user_folder.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "6c61fea0423bd722",
+  "content_length": 3197,
+  "ingested_at": "2026-03-31T17:27:46.191972",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n飞书文档创建方案 - 使用用户个人文件夹（无需OAuth2）\n\n原理：\n1. 使用 tenant_token 获取用户的文件夹列表\n2. 找到 parent_type=\"user\" 的文件夹（用户的个人文件夹）\n3. 在该文件夹下创建文档，用户就能看到了\n\"\"\"\n\nimport json\nimport requests\n\n# 飞书配置\nAPP_ID = \"cli_a927c5dfa4381cc6\"\nAPP_SECRET = \"8950yzh6jj17nQkKBjvGIdRocdrslhjI\"\nBASE_URL = \"https://open.feishu.cn/open-apis\"\n\ndef get_tenant_token():\n    \"\"\"获取 Tenant Access Token\"\"\"\n    url = f\"{BASE_URL}/auth/v3/tenant_access_token/internal\"\n    resp = requests.post(url, json={\n        \"app_id\": APP_",
+  "limitations_applied": []
+}

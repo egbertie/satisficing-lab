@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/vendor-api-monitor/scripts/daemon.py",
+  "filename": "daemon.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "ce69fb9ea4ab7f00",
+  "content_length": 5923,
+  "ingested_at": "2026-03-31T17:27:45.404618",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n监控守护进程 - 持续执行 API 监控\n\"\"\"\n\nimport argparse\nimport json\nimport os\nimport signal\nimport sys\nimport time\nfrom datetime import datetime\nfrom pathlib import Path\nimport yaml\n\nsys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))\n\nfrom scripts.probe import APIProbe\n\n\nclass MonitorDaemon:\n    \"\"\"监控守护进程\"\"\"\n    \n    def __init__(self, config_path: str = \"config.yaml\"):\n        self.config_path = config_path\n        self.config = self._load_config()\n    ",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/category6_audit_progress.sh",
+  "filename": "category6_audit_progress.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "653556f94d3ae2be",
+  "content_length": 1130,
+  "ingested_at": "2026-03-31T17:27:46.173941",
+  "content_preview": "#!/bin/bash\n# 第6类历史审计执行脚本 - 满意妞\n\necho \"=== 第6类历史审计进度报告 ===\"\necho \"执行者: 满意妞\"\necho \"时间: $(date)\"\necho \"\"\n\n# 创建进度目录\nmkdir -p /root/.openclaw/workspace/diary/category6_progress\n\n# 统计总体数量\necho \"【总体统计】\"\nDIARY_COUNT=$(find /root/.openclaw/workspace/diary/ -name \"*.md\" -type f 2>/dev/null | wc -l)\nSCRIPT_COUNT=$(find /root/.openclaw/workspace/scripts/ -name \"*.sh\" -type f 2>/dev/null | wc -l)\nSKILL_COUNT=$(find /root/.openclaw/workspace/skills/ -name \"SKILL.md\" -type f 2>/dev/null | wc -l)\n\necho \"日记文件: ",
+  "limitations_applied": []
+}

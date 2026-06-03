@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify_backup-safety-check.sh",
+  "filename": "verify_backup-safety-check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "9c4763d14f8c0219",
+  "content_length": 282,
+  "ingested_at": "2026-03-31T17:27:46.143640",
+  "content_preview": "#!/bin/bash\necho \"=== backup-safety-check.sh - 8步验证 ===\"\nSCRIPT=\"/root/.openclaw/workspace/scripts/backup-safety-check.sh\"\ntest -f \"$SCRIPT\" && echo \"Step1 ✅\"\nbash -n \"$SCRIPT\" 2>/dev/null && echo \"Step2 ✅\"\ntest -x \"$SCRIPT\" && echo \"Step3 ✅\"\necho \"Step4-8: 待验证\"\necho \"状态: PENDING\"\n",
+  "limitations_applied": []
+}

@@ -1,0 +1,51 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/token-budget-enforcer/scripts/circuit_breaker.py",
+  "filename": "circuit_breaker.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 10625,
+  "checksum": "9d4c0daf1c0c90e3",
+  "ingested_at": "2026-03-31T17:30:32.110304",
+  "line_count": 305,
+  "title": "circuit_breaker",
+  "description": "Token预算熔断器 (Circuit Breaker)\nS2标准: 预算执行（监控→预警→熔断→调整→报告）",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: CircuitState"
+    },
+    {
+      "level": 2,
+      "title": "Class: CircuitBreakerRecord"
+    },
+    {
+      "level": 2,
+      "title": "Class: TokenCircuitBreaker"
+    }
+  ],
+  "entities": [
+    {
+      "name": "CircuitState",
+      "type": "class"
+    },
+    {
+      "name": "CircuitBreakerRecord",
+      "type": "class"
+    },
+    {
+      "name": "TokenCircuitBreaker",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "即使在熔断状态，P0任务超过emergency_limit也应该被阻断",
+    "P0任务可以覆盖硬限制（但不能超过紧急限制）"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

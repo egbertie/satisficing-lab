@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/notion_legacy/classify_files.py",
+  "filename": "classify_files.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "78148b381f8b132d",
+  "content_length": 3589,
+  "ingested_at": "2026-03-31T17:27:46.224501",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nMarkdown文件分类器 - 按优先级将文件分成5批（优化版）\n\"\"\"\nimport json\nimport os\nfrom pathlib import Path\n\ndef get_all_md_files(workspace):\n    \"\"\"获取所有markdown文件\"\"\"\n    files = []\n    for root, dirs, filenames in os.walk(workspace):\n        # 跳过隐藏目录\n        dirs[:] = [d for d in dirs if not d.startswith('.') and d != '.git']\n        for f in filenames:\n            if f.endswith('.md'):\n                files.append(os.path.join(root, f))\n    return sorted(files)\n\ndef classify_files(files, wo",
+  "limitations_applied": []
+}

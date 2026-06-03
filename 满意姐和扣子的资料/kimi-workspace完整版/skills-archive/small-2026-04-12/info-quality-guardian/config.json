@@ -1,0 +1,92 @@
+{
+  "skill_name": "info-quality-guardian",
+  "version": "2.0.0",
+  "standard_level": 5,
+  "description": "信息采集质量守护者 - 5-Standard认证",
+  
+  "s1_input": {
+    "source_rating": {
+      "academic_journal": 5,
+      "gov_official": 5,
+      "top_media": 4,
+      "industry_report": 4,
+      "professional_blog": 3,
+      "social_media": 2,
+      "ai_generated": 2,
+      "unknown": 1
+    },
+    "premium_domains": [
+      "nature.com", "science.org", "cell.com", "pnas.org",
+      "arxiv.org", "scholar.google.com",
+      "cnki.net", "wanfangdata.com.cn",
+      "hbr.org", "mit.edu", "stanford.edu",
+      "a16z.com", "sequoiacap.com", "bessemer.com",
+      "36kr.com", "pingwest.com", "geekpark.net",
+      "gov.cn", "gov.hk", "whitehouse.gov",
+      "gartner.com", "idc.com", "forrester.com"
+    ],
+    "required_fields": [
+      "title", "author", "source", "publish_date",
+      "url", "content_snippet"
+    ]
+  },
+  
+  "s2_pipeline": {
+    "stages": ["collect", "detect", "clean", "verify", "report"],
+    "freshness_thresholds": {
+      "tech": 730,
+      "industry": 90,
+      "policy": 365,
+      "academic": 1825,
+      "history": -1
+    }
+  },
+  
+  "s3_output": {
+    "report_format": "json",
+    "include_issues": true,
+    "include_suggestions": true,
+    "auto_save": true
+  },
+  
+  "s4_integration": {
+    "triggers": [
+      "before_info_collection",
+      "before_record_creation",
+      "periodic_audit"
+    ],
+    "feishu_webhook": null,
+    "auto_update_fields": ["quality_score", "quality_status", "check_report"]
+  },
+  
+  "s5_accuracy": {
+    "target_precision": 0.95,
+    "target_recall": 0.90,
+    "target_f1": 0.92,
+    "max_human_review_rate": 0.10
+  },
+  
+  "s6_limitations": {
+    "cannot_verify": ["subjective_opinion", "personal_experience", "future_prediction"],
+    "warning_labels": ["主观观点", "待验证", "AI生成"]
+  },
+  
+  "s7_adversarial": {
+    "enabled": true,
+    "test_frequency": "monthly",
+    "red_team_size": 1,
+    "attack_types": [
+      "fake_domain",
+      "outdated_content",
+      "fake_citation",
+      "ai_generated_fake",
+      "data_tampering"
+    ]
+  },
+  
+  "logging": {
+    "level": "INFO",
+    "max_days": 30,
+    "max_reports": 100
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "version": "1.0.0",
+  "framework": "SKILL",
+  "outputFormat": "docx",
+  "bmc": {
+    "blocks": [
+      {"key": "cs", "name": "客户细分", "en": "Customer Segments", "question": "为谁创造价值？"},
+      {"key": "vp", "name": "价值主张", "en": "Value Propositions", "question": "提供什么价值？"},
+      {"key": "ch", "name": "渠道通路", "en": "Channels", "question": "如何触达用户？"},
+      {"key": "cr", "name": "客户关系", "en": "Customer Relationships", "question": "如何维系关系？"},
+      {"key": "rs", "name": "收入来源", "en": "Revenue Streams", "question": "如何赚钱？"},
+      {"key": "kr", "name": "核心资源", "en": "Key Resources", "question": "拥有什么资产？"},
+      {"key": "ka", "name": "关键业务", "en": "Key Activities", "question": "必须做什么？"},
+      {"key": "kp", "name": "重要伙伴", "en": "Key Partnerships", "question": "谁在帮你？"},
+      {"key": "cost", "name": "成本结构", "en": "Cost Structure", "question": "钱花在哪？"}
+    ]
+  },
+  "dimensions": {
+    "logic": {
+      "name": "逻辑四维",
+      "dimensions": [
+        {"key": "value_creation", "name": "价值创造", "focus": "VP与CS的匹配度（PMF）"},
+        {"key": "value_delivery", "name": "价值传递", "focus": "CH与CR的运营效率"},
+        {"key": "value_capture", "name": "价值获取", "focus": "RS与CS的盈利可持续性"},
+        {"key": "system_synergy", "name": "系统协同", "focus": "KR/KA/KP的资源匹配"}
+      ]
+    },
+    "deep": {
+      "name": "深化三维",
+      "dimensions": [
+        {"key": "culture", "name": "文化价值观", "focus": "价值主张的道德边界"},
+        {"key": "emotion", "name": "情感连接", "focus": "用户粘性的非理性因素"},
+        {"key": "resilience", "name": "组织韧性", "focus": "文化对长期战略的支撑"}
+      ]
+    }
+  },
+  "position": {
+    "levels": [
+      {"key": "upstream", "name": "上游", "role": "资源/技术掌控者", "pricing_power": "高"},
+      {"key": "midstream", "name": "中游", "role": "整合/制造者", "pricing_power": "中"},
+      {"key": "downstream", "name": "下游", "role": "触点/服务者", "pricing_power": "低-中"},
+      {"key": "ecosystem", "name": "生态", "role": "规则/系统定义者", "pricing_power": "极高"}
+    ]
+  },
+  "cultural": {
+    "4c": {
+      "name": "4C框架",
+      "elements": [
+        {"key": "conviction", "name": "信念", "solves": "信仰什么"},
+        {"key": "community", "name": "社群", "solves": "归属感"},
+        {"key": "convenience", "name": "便利", "solves": "时间贫困"},
+        {"key": "content", "name": "内容", "solves": "意义空虚"}
+      ]
+    },
+    "cognitive": {
+      "name": "认知路径",
+      "levels": [
+        {"key": "awareness", "name": "感知层", "transition": "不知道→知道"},
+        {"key": "understanding", "name": "理解层", "transition": "不理解→理解"},
+        {"key": "identity", "name": "认同层", "transition": "不认同→认同"},
+        {"key": "action", "name": "行动层", "transition": "不行动→行动"},
+        {"key": "advocacy", "name": "传播层", "transition": "行动→推荐"}
+      ]
+    }
+  },
+  "checklist": {
+    "structure": [
+      "9大板块是否闭环？",
+      "VP与CS是否匹配？",
+      "RS与CS是否对应？"
+    ],
+    "dimension": [
+      "是否只关注价值获取？",
+      "文化价值认同是否充分？",
+      "系统协同是否高效？"
+    ],
+    "position": [
+      "产业链位置是否有定价权？",
+      "能否向上/下延伸？",
+      "生态构建是否可能？"
+    ],
+    "cultural": [
+      "解决了哪个层面的认知问题？",
+      "能否让用户从知道升级到传播？",
+      "4C价值主张是否清晰？"
+    ]
+  }
+}

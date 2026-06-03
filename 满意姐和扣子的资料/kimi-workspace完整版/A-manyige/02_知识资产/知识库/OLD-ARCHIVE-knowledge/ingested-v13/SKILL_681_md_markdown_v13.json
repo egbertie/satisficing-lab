@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/knowledge-ingest/ingested/SKILL.681.md",
+  "filename": "SKILL.681.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "6b7e9044b38779b2",
+  "content_length": 1612,
+  "ingested_at": "2026-03-31T17:27:45.694788",
+  "content_preview": "# blackboard-manager Skill 设计文档\n\n**Skill名称**: blackboard-manager  \n**功能**: 共享内存状态管理，Worker间状态共享  \n**版本**: 1.0.0  \n**状态**: 设计中  \n**依赖**: checkpoint-manager（状态持久化）\n\n---\n\n## S1: 输入定义\n\n### 功能需求\n- Worker间状态共享（通过Blackboard模式）\n- 状态读写（键值对形式）\n- 状态版本控制（乐观锁）\n- 状态订阅/通知（变更时通知订阅者）\n\n### 输入数据\n- 状态键（字符串）\n- 状态值（任意JSON序列化对象）\n- Worker ID（谁写入的）\n- 版本号（乐观锁）\n\n---\n\n## S2: 处理流程\n\n### Blackboard模式\n```\n┌─────────────────────────────────────┐\n│           Blackboard                │\n│  ┌─────────┐ ┌─────────┐           │\n│  │",
+  "limitations_applied": []
+}

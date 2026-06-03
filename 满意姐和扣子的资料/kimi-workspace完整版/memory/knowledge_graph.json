@@ -1,0 +1,145 @@
+{
+  "version": "1.0",
+  "created_at": "2026-03-20T23:47:00+08:00",
+  "last_updated": "2026-03-20T23:47:00+08:00",
+  "entities": {
+    "skills": [
+      {
+        "id": "skill-001",
+        "name": "user-conversation-reservation",
+        "category": "system_resource_management",
+        "description": "零空置机制用户对话保留规则，确保用户发起对话时有可用子代理",
+        "five_standards": true,
+        "cron_frequency": "每2分钟",
+        "created_at": "2026-03-20",
+        "status": "active"
+      },
+      {
+        "id": "skill-002",
+        "name": "api-configuration-manager",
+        "category": "configuration_management",
+        "description": "API配置管理，处理4项丢失的配置承诺",
+        "five_standards": true,
+        "cron_frequency": "每日08:17",
+        "created_at": "2026-03-20",
+        "status": "active"
+      },
+      {
+        "id": "skill-003",
+        "name": "case-library-expander",
+        "category": "content_management",
+        "description": "案例库扩展，目标30个案例",
+        "five_standards": true,
+        "cron_frequency": "每周一/三",
+        "created_at": "2026-03-20",
+        "status": "active"
+      },
+      {
+        "id": "skill-004",
+        "name": "role-profile-completer",
+        "category": "role_management",
+        "description": "33角色档案完成",
+        "five_standards": true,
+        "cron_frequency": "每周二",
+        "created_at": "2026-03-20",
+        "status": "active"
+      },
+      {
+        "id": "skill-005",
+        "name": "maintenance-scheduler",
+        "category": "system_maintenance",
+        "description": "持续维护任务调度",
+        "five_standards": true,
+        "cron_frequency": "每日+每季度",
+        "created_at": "2026-03-20",
+        "status": "active"
+      }
+    ],
+    "projects": [
+      {
+        "id": "proj-001",
+        "name": "EEO首次访谈",
+        "status": "suspended",
+        "suspended_at": "2026-03-20",
+        "reminder_frequency": "每周",
+        "reason": "用户要求暂停待定"
+      },
+      {
+        "id": "proj-002",
+        "name": "官宣物料就绪",
+        "status": "suspended",
+        "suspended_at": "2026-03-20",
+        "reminder_frequency": "每周",
+        "reason": "用户要求暂停待定"
+      },
+      {
+        "id": "proj-003",
+        "name": "专家网络搭建",
+        "status": "suspended",
+        "suspended_at": "2026-03-20",
+        "reminder_frequency": "每周",
+        "reason": "用户要求暂停待定"
+      }
+    ],
+    "milestones": [
+      {
+        "id": "ms-001",
+        "date": "2026-03-20",
+        "event": "零空置机制完成",
+        "description": "解决subagents.maxConcurrent全开后无用户预留问题",
+        "status": "achieved",
+        "impact": "high"
+      },
+      {
+        "id": "ms-002",
+        "date": "2026-03-20",
+        "event": "丢失承诺全部转化",
+        "description": "13项丢失承诺全部转化为5标准Skill（8+5）",
+        "status": "achieved",
+        "impact": "high"
+      },
+      {
+        "id": "ms-003",
+        "date": "2026-03-20",
+        "event": "系统里程碑",
+        "description": "Skill总数241，Cron覆盖率100%，5标准Skill 22个",
+        "status": "achieved",
+        "impact": "medium"
+      }
+    ]
+  },
+  "relationships": [
+    {
+      "source": "skill-001",
+      "target": "ms-001",
+      "type": "contributes_to"
+    },
+    {
+      "source": "skill-002",
+      "target": "ms-002",
+      "type": "contributes_to"
+    },
+    {
+      "source": "skill-003",
+      "target": "ms-002",
+      "type": "contributes_to"
+    },
+    {
+      "source": "skill-004",
+      "target": "ms-002",
+      "type": "contributes_to"
+    },
+    {
+      "source": "skill-005",
+      "target": "ms-002",
+      "type": "contributes_to"
+    }
+  ],
+  "statistics": {
+    "total_skills": 5,
+    "active_skills": 5,
+    "suspended_projects": 3,
+    "milestones_achieved": 3,
+    "five_standard_compliance": "100%"
+  }
+}

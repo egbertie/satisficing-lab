@@ -1,0 +1,109 @@
+# Five-Level Verification Configuration
+# 7-Standard Configuration
+
+skill:
+  name: five-level-verification
+  version: "5.0.0"
+  standard: 7-standard-level5
+
+# 验证级别配置
+levels:
+  L1:
+    name: "存在验证"
+    name_en: "Existence"
+    auto_check: true
+    required_files:
+      - SKILL.md
+      - config.yaml
+      - scripts/
+    optional_files:
+      - README.md
+      - tests/
+    
+  L2:
+    name: "语法验证"
+    name_en: "Syntax"
+    auto_check: true
+    checks:
+      - python_syntax
+      - json_valid
+      - yaml_valid
+      - import_check
+    
+  L3:
+    name: "可执行验证"
+    name_en: "Executable"
+    auto_check: true
+    checks:
+      - entry_point_help
+      - imports_resolvable
+      - basic_functionality
+    
+  L4:
+    name: "集成验证"
+    name_en: "Integration"
+    auto_check: true
+    checks:
+      - env_variables
+      - dependencies
+      - config_loading
+      - permissions
+    
+  L5:
+    name: "端到端验证"
+    name_en: "End-to-End"
+    auto_check: false  # 需要真实环境
+    manual_required: true
+    checks:
+      - full_workflow
+      - boundary_conditions
+      - performance
+      - error_recovery
+    limitations:
+      - "需要真实API密钥"
+      - "需要网络访问"
+      - "需要预置数据"
+
+# S7: 对抗测试配置
+adversarial:
+  enabled: true
+  test_cases:
+    - name: "missing_file"
+      level: "L1"
+      description: "删除必需文件"
+      expected_detection: "L1"
+      
+    - name: "syntax_error"
+      level: "L2"
+      description: "植入语法错误"
+      expected_detection: "L2"
+      
+    - name: "import_error"
+      level: "L3"
+      description: "植入导入错误"
+      expected_detection: "L3"
+      
+    - name: "config_missing"
+      level: "L4"
+      description: "删除配置项"
+      expected_detection: "L4"
+      
+    - name: "logic_error"
+      level: "L5"
+      description: "植入逻辑错误"
+      expected_detection: "L5"
+
+# CI/CD配置
+ci:
+  auto_trigger:
+    - push
+    - pull_request
+  max_level_auto: "L4"  # CI自动运行到L4
+  required_pass: ["L1", "L2", "L3"]
+  
+# 报告配置
+report:
+  format: json
+  output_dir: "./reports"
+  include_recommendations: true
+  include_fix_suggestions: true

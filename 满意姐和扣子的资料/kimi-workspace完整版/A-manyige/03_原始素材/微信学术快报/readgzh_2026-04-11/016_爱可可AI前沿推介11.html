@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>爱可可AI前沿推介(1.1)</title>
+  <meta name="description" content="LG - 机器学习 CV - 计算机视觉 CL - 计算与语言
+
+1、[LG] The Bayesian Geometry of Transformer Attention2、[LG] S&amp;P 500 Stock&#039;s Movement Prediction using CNN3、[LG] Pruning as a Ga">
+  <meta name="author" content="爱可可爱生活">
+  <meta property="og:title" content="爱可可AI前沿推介(1.1)">
+  <meta property="og:description" content="LG - 机器学习 CV - 计算机视觉 CL - 计算与语言
+
+1、[LG] The Bayesian Geometry of Transformer Attention2、[LG] S&amp;P 500 Stock&#039;s Movement Prediction using CNN3、[LG] Pruning as a Game： Equilibrium-Driven Sparsification of">
+  <meta property="og:type" content="article">
+  
+  <style>
+    body { max-width: 800px; margin: 0 auto; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: #333; }
+    h1 { font-size: 1.8em; margin-bottom: 0.5em; }
+    .meta { color: #666; margin-bottom: 2em; border-bottom: 1px solid #eee; padding-bottom: 1em; }
+    .meta p { margin: 0.3em 0; }
+    .content { font-size: 1.05em; }
+    .content img { max-width: 100%; height: auto; }
+    .footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #eee; color: #999; font-size: 0.9em; }
+    a { color: #1a73e8; }
+  </style>
+</head>
+<body>
+  <article>
+    <h1>爱可可AI前沿推介(1.1)</h1>
+    <div class="meta">
+      <p><strong>作者：</strong>爱可可爱生活</p>
+      <p><strong>发布时间：</strong>2026-01-01 06:57</p>
+    </div>
+    <div class="content">
+      <p>LG - 机器学习 CV - 计算机视觉 CL - 计算与语言</p>
+<p>1、[LG] The Bayesian Geometry of Transformer Attention2、[LG] S&amp;P 500 Stock&#039;s Movement Prediction using CNN3、[LG] Pruning as a Game： Equilibrium-Driven Sparsification of Neural Networks4、[LG] Completed Hyperparameter Transfer across Modules， Width， Depth， Batch and Duration</p>
+<p>摘要：Transformer 注意力机制的贝叶斯几何、用CNN预测标准普尔500指数走势、博弈视角下的剪枝、实现了跨模块/宽度/深度/批量及训练时长的超参数全面迁移</p>
+<p>1、[LG] The Bayesian Geometry of Transformer Attention</p>
+<p>N Aggarwal, S R. Dalal, V Misra[Dream Sports &amp; Columbia University]</p>
+<p>Transformer 注意力机制的贝叶斯几何</p>
+<p>要点:</p>
+<p>挑战了“大语言模型能进行贝叶斯推理”这一无法验证的论断，通过创建“贝叶斯风洞”——一种具有解析、闭式解后验概率且可证明无法记忆的受控任务环境。</p>
+<p>首次提供了实证证据，证明小型Transformer能够执行精确的贝叶斯推理，以近乎机器精度的误差（10⁻³–10⁻⁵比特）追踪真实的后验熵，而同等参数容量的多层感知机（MLP）则彻底失败。</p>
+<p>揭示了一个Transformer实现贝叶斯推理的一致性、三阶段几何机制：</p>
+<p>基础绑定（第0层）：注意力机制为其假设空间构建了一个近似正交的键（key）基底，形成一个计算“框架”。</p>
+<p>逐步排除（中间层）：查询（query）向量逐步与对应于可行假设的键对齐，在几何上模拟了对不一致证据的抑制过程。</p>
+<p>精度精炼（高层）：模型学习到一个由后验熵参数化的低维“值（value）流形”，该流形在训练过程中“展开”，以实现对信念状态的精细编码。</p>
+<p>证明了Transformer架构对于实现此功能是必需的，而不仅仅是有益的，因为经过相同训练且参数量匹配的MLP完全无法学习底层的递归算法。</p>
+<p>在训练过程中揭示了一种“框架-精度解离”现象：注意力模式（即路由“框架”）在早期就稳定下来，而值流形（即数值“精度”）则持续进行精炼，这与梯度动力学分析的预测相符。</p>
+<p>明确了Transformer模块内的劳动分工：注意力作为一种内容寻址的路由机制，用于检索相关的信念状态成分；而前馈网络（FFN）则执行贝叶斯更新的核心数值计算。</p>
+<p>表明Transformer学习到了真正的递归算法，而非有限长度的计算模式，通过在隐马尔可夫模型（HMM）任务中，模型能稳健地泛化到比训练时所见序列长2.5倍的长度来证明。</p>
+<p>强调了深度的组合必要性，因为消融任何单层都会严重降低性能，表明每一层都执行着一个关键且不可冗余的精炼步骤。</p>
+<p>反直觉的发现在于，像贝叶斯推理这样复杂的算法行为，并不仅仅是规模带来的涌现特性，而是通过标准Transformer架构内部特定的、可学习的、可解释的几何结构来实现的。</p>
+<p>主旨： 本文旨在解决一个核心问题：Transformers究竟是在进行真正的贝叶斯推理，还是仅仅通过模式匹配来模仿它？由于自然语言数据缺乏真实的后验概率作为基准，且大模型将推理与记忆混为一谈，这个问题一直难以被严格验证。为此，论文构建了名为“贝叶斯风洞”的受控实验环境，以量化、可验证的方式探究Transformer实现贝叶斯推理的能力及其内部的几何机制。</p>
+<p>创新：</p>
+<p>方法论创新（贝叶斯风洞）：设计了两种具有精确解析后验概率且假设空间巨大以杜绝记忆的受控任务（双射消除和HMM状态追踪），将“模型是否执行贝叶斯推理”这一定性问题转化为“模型预测熵与真实后验熵是否匹配”的定量测试。</p>
+<p>机制发现创新：首次识别并阐述了Transformer实现贝叶斯推理的、统一的三阶段几何机制：利用第0层注意力的正交键构建“假设框架”，通过中间层的“查询-键对齐锐化”进行“逐步排除”，并在高层通过“值流形展开”实现“精度精炼”。</p>
+<p>训练动力学洞察：发现了“框架-精度解离”现象，即注意力路由结构在训练早期稳定，而表征数值精度的值流形则持续优化，为理解Transformer的学习过程提供了新的视角。</p>
+<p>架构的必要性证明：通过与同等参数容量的MLP进行严格对比实验，强有力地证明了注意力机制对于学习上下文中的贝叶斯结构是架构上必需的，而非仅仅是性能上的优势。</p>
+<p>贡献：</p>
+<p>实证贡献：首次提供了确凿的实证证据，证明标准Transformer架构能够以极高的精度实现精确的贝叶斯推理，为“Transformer作为推理引擎”的观点提供了坚实的微观基础。</p>
+<p>理论贡献：揭示了Transformer的注意力几何与其执行贝叶斯算法能力之间的深刻联系，阐明了深度、残差连接和注意力机制如何协同工作，以实现分步、组合式的概率推理。</p>
+<p>可解释性贡献：提出了一套可用于分析模型内部工作原理的几何诊断工具（如键的正交性、查询-键对齐、值流形分析），将抽象的概率计算与具体的、可观察的内部表征联系起来，推动了机械可解释性研究。</p>
+<p>方法论贡献：“贝叶斯风洞”作为一个研究范式，为未来在可控环境中验证和剖析大型模型更复杂推理能力的研究提供了蓝图。</p>
+<p>提升：</p>
+<p>推理保真度：在受控任务中，Transformer模型追踪贝叶斯后验熵的平均绝对误差（MAE）低至10⁻³到10⁻⁵比特，达到了近乎机器精度的水平。</p>
+<p>架构优势：相较于同等参数容量、经过相同训练的MLP基线，Transformer在贝叶斯推理任务上的性能高出数百甚至数千倍（例如，在双射任务中误差小618倍，在HMM任务中误差小5467倍），清晰地展示了架构上的质变优势。</p>
+<p>泛化能力：在HMM任务中，模型能够成功泛化到比训练长度长2.5倍的序列，且误差平滑增长，证明其学习到的是通用的递归更新算法，而非特定长度的模式。</p>
+<p>不足：</p>
+<p>任务的简化性：实验中使用的“贝叶斯风洞”任务（双射消除、HMM）虽然结构清晰，但相较于自然语言处理的复杂性，仍然是高度简化的。</p>
+<p>模型规模局限：实验采用的是小型（2-3M参数）Transformer，其发现的几何机制是否能直接、无损地扩展到拥有数千亿参数的大型语言模型中，仍是一个开放问题。</p>
+<p>假设空间维度：尽管任务的假设空间组合上很大，但其表征的维度相对较低（例如HMM中只有5个隐藏状态），机制在高维隐变量空间中的可扩展性有待验证。</p>
+<p>架构的普适性：研究仅限于标准的Transformer架构，对于其他序列模型（如状态空间模型Mamba、卷积网络等）是否或如何实现类似功能，并未涉及。</p>
+<p>心得：</p>
+<p>架构即算法的深刻体现：本文最令人振奋的启发是，Transformer的成功远不止是“大力出奇迹”。其特定的架构设计（多头注意力、残差连接、深度堆叠）蕴含了强大的归纳偏置，使其天然地适合学习和实现像贝叶斯推理这样的组合式、递归式算法。这提醒我们，对架构本身的几何特性和计算功能进行深入研究，是理解和超越现有模型能力的关键。</p>
+<p>从“行为模拟”到“机制复现”的研究范式转变：长期以来，我们观察到LLM的“上下文学习”行为很像贝叶斯推理，但无法证实。本文的“风洞”方法论提供了一个强有力的范式，即通过设计可控、可验证的环境，将对模型“做什么”（行为）的观察，转化为对“如何做”（机制）的剖析。这对于未来研究更复杂的推理、规划等高级认知能力具有极高的借鉴价值。</p>
+<p>“路由”与“计算”的分工是理解Transformer的核心：论文清晰地揭示了注意力主要负责构建计算框架和进行信息“路由”，而FFN负责具体的数值“计算”（贝叶斯更新）。这种功能上的解耦，特别是“框架-精度解离”的发现，为我们理解模型训练过程、进行模型压缩或干预提供了全新的视角。模型可能首先学会“该看哪里”，然后才慢慢学会“看懂了之后该怎么算”。</p>
+<p>一句话总结: 本文通过创新的“贝叶斯风洞”实验，首次以近乎机器精度的量化证据证明了小型Transformer能够执行精确的贝叶斯推理，并揭示了其成功的核心在于一个反直觉的几何机制：注意力机制首先构建一个正交的“假设框架”用于信息路由，随后模型在深度上逐步精炼信念，这一过程在训练中表现为“框架”先稳定、“精度”后提升的解离现象，从而证明了注意力的架构对于实现算法推理是必不可少的。</p>
+<p>Transformers often appear to perform Bayesian reasoning in context, but verifying this rigorously has been impossible: natural data lack analytic posteriors, and large models conflate reasoning with memorization. We address this by constructing \emph{Bayesian wind tunnels} -- controlled environments where the true posterior is known in closed form and memorization is provably impossible. In these settings, small transformers reproduce Bayesian posteriors with \mbox{10−310^{-3}--10−410^{-4}} bit accuracy, while capacity-matched MLPs fail by orders of magnitude, establishing a clear architectural separation. Across two tasks -- bijection elimination and Hidden Markov Model (HMM) state tracking -- we find that transformers implement Bayesian inference through a consistent geometric mechanism: residual streams serve as the belief substrate, feed-forward networks perform the posterior update, and attention provides content-addressable routing. Geometric diagnostics reveal orthogonal key bases, progressive query--key alignment, and a low-dimensional value manifold parameterized by posterior entropy. During training this manifold unfurls while attention patterns remain stable, a \emph{frame--precision dissociation} predicted by recent gradient analyses. Taken together, these results demonstrate that hierarchical attention realizes Bayesian inference by geometric design, explaining both the necessity of attention and the failure of flat architectures. Bayesian wind tunnels provide a foundation for mechanistically connecting small, verifiable systems to reasoning phenomena observed in large language models.</p>
+<p>https://arxiv.org/abs/2512.22471</p>
+<p>2、[LG] S&amp;P 500 Stock&#039;s Movement Prediction using CNN</p>
+<p>R Gupta[Stanford University]</p>
+<p>用CNN预测标准普尔500指数走势</p>
+<p>要点：</p>
+<p>提出使用卷积神经网络（CNN）进行股票走势预测，而该任务传统上由LSTM等时间序列模型主导。</p>
+<p>将问题框架化为图像分类：将多变量的原始股票历史数据（开盘价、最高价、最低价、收盘价、成交量及其复权对应值）视为一个二维矩阵或“图像”，让CNN来学习其中的“空间”模式。</p>
+<p>反常规地使用原始未复权数据：一个关键且反直觉的亮点是，论文特意将未经送股/分红调整的原始价格数据与复权后数据一同作为输入。其目的是让CNN直接从视觉上学习这些复杂公司行为（如股票分割）的模式，而不是在预处理阶段就将这些信息消除掉。</p>
+<p>主张CNN是比LSTM更适合金融数据的“自然选择”，理由是CNN能更好地处理噪声和波动性，并且能够通过卷积“直观地”处理股票分割/分红等事件。</p>
+<p>采用滑动窗口方法进行数据增强，从历史时间序列中创建更多的“图像”样本，以加强模型的模式学习能力。</p>
+<p>报告了极高的预测准确率，声称对摩根大通（JPM）股票走势的预测准确率高达91%，暗示其达到了顶尖水平。</p>
+<p>模型方法基于一维CNN架构，包含多个卷积层、Leaky ReLU激活函数和批量归一化层，通过Softmax函数输出看涨/看跌的分类结果。</p>
+<p>存在严重的方法论红旗：论文提到使用“分割和打乱技术来处理训练数据”，这对于时间序列预测是根本性错误，因为它破坏了数据的时间依赖性，极有可能导致数据泄露和模型评估结果虚高。</p>
+<p>主旨： 本文旨在探索一种新的方法，即应用卷积神经网络（CNN）直接对原始、多变量的S&amp;P 500股票时间序列数据进行建模，以预测其未来的涨跌趋势（看涨/看跌）。文章的核心思路是将金融时间序列数据视作“图像”，利用CNN强大的特征提取能力来自动学习市场中的复杂模式，特别是包括股票分割和分红在内的、通常在预处理中被平滑掉的“视觉”突变事件。</p>
+<p>创新：</p>
+<p>问题重构：将传统的时间序列预测问题创造性地重构为图像分类问题，从而能够应用在计算机视觉领域取得巨大成功的CNN架构。</p>
+<p>数据处理理念：最具创新性的一点是坚持使用包含“断点”的原始未复权价格数据。这与传统金融建模中普遍使用连续的复权价格数据的做法形成鲜明对比，其背后逻辑是相信CNN能够学习到这些“断点”背后所蕴含的特定市场事件信息。</p>
+<p>模型应用：将1D-CNN应用于多通道（10个特征）的金融时间序列，论证其在处理噪声和捕捉局部模式方面的潜力，挑战了LSTM在该领域的主导地位。</p>
+<p>贡献：</p>
+<p>实证探索：提供了一个将CNN直接应用于原始、多维金融数据的案例研究，并报告了极具吸引力的实验结果（尽管其有效性存疑）。</p>
+<p>方法启发：展示了一种无需复杂特征工程，直接从原始数据中学习的端到端深度学习范式，为金融领域的AI应用提供了新的思路。</p>
+<p>概念验证：试图验证深度学习模型（特别是CNN）能够理解并利用传统上被视为噪音或需要特殊处理的复杂市场事件（如股票分割）。</p>
+<p>提升：</p>
+<p>预测准确率：论文声称其提出的模型在对摩根大通（JPM）股票进行为期30天的走势预测时，准确率达到了91%。相比其引用的基准模型（准确率约在50-60%区间）和其改进的初始模型（准确率69%），这是一个巨大的性能提升。</p>
+<p>不足：</p>
+<p>严重的方法论缺陷：论文提到对训练数据进行“分割和打乱（split and shuffle）”，这是处理时间序列数据时的致命错误。这种操作破坏了数据的时序性，导致模型在训练时能够“看到”未来的信息（数据泄露），从而使得报告的超高准确率（91%）几乎可以肯定是虚假的、不可信的，模型很可能严重过拟合，在真实预测中会失效。</p>
+<p>理论依据薄弱：关于“CNN比LSTM更适合处理噪声和波动性”的论断缺乏有力的理论或实验支持，更多是基于作者的“直觉”，说服力不强。</p>
+<p>实验细节模糊：对如何定义“看涨/看跌”标签、具体的训练/验证/测试集划分策略（除了错误的“打乱”）等关键实验细节描述不清，影响了结果的可复现性和可信度。</p>
+<p>结果过于理想化：在随机性极强的股票市场中，持续达到91%的预测准确率是不现实的。如此高的数字本身就应引起审慎的怀疑，它很可能源于上述的方法论错误而非模型本身的优越性。</p>
+<p>心得：</p>
+<p>跨界思维的价值与风险：将图像识别的CNN范式迁移到金融时间序列预测，这是一个极具创意的想法，体现了跨领域方法论融合的潜力。它启发我们，对于一个老问题，转换视角和表征方式可能会开辟全新的解决路径。</p>
+<p>原始数据中亦有宝藏：论文大胆使用未复权数据的思路值得深思。在数据预处理中，我们常常为了模型的便利性而“清洗”掉我们认为的“噪音”或“异常”，但这些被丢弃的信息可能恰恰包含了对特定事件的独特签名。如何让模型智能地处理而非粗暴地删除这些信息，是一个重要的研究方向。</p>
+<p>方法论的严谨性是科学研究的生命线：本文是一个绝佳的反面教材，它深刻地揭示了在应用机器学习时，尤其是对于具有特定属性（如时序性）的数据，遵循正确的方法论是多么重要。一个看似微小的错误，如“打乱”时间序列数据，就足以让整个研究的结论变得毫无意义。这警示我们，无论模型多么先进，结果多么诱人，都必须首先确保研究过程的科学性和严谨性。</p>
+<p>一句话总结: 本文创造性地将股票预测重构为图像分类问题，通过让CNN直接学习包含股票分割等事件的原始多维时间序列“图像”，并报告了高达91%的惊人准确率；然而，这一结果因其提及对时序数据进行“打乱”处理这一致命方法论缺陷而极有可能无效，但其利用原始数据和跨界建模的思路仍具启发性。</p>
+<p>This paper is about predicting the movement of stock consist of S&amp;P 500 index. Historically there are many approaches have been tried using various methods to predict the stock movement and being used in the market currently for algorithm trading and alpha generating systems using traditional mathematical approaches. The success of artificial neural network recently created a lot of interest and paved the way to enable prediction using cutting-edge research in the machine learning and deep learning. Some of these papers have done a great job in implementing and explaining benefits of these new technologies. Although most these papers do not go into the complexity of the financial data and mostly utilize single dimension data, still most of these papers were successful in creating the ground for future research in this comparatively new phenomenon. In this paper, I am trying to use multivariate raw data including stock split/dividend events (as-is) present in real-world market data instead of engineered financial data. Convolution Neural Network (CNN), the best-known tool so far for image classification, is used on the multi-dimensional stock numbers taken from the market mimicking them as a vector of historical data matrices (read images) and the model achieves promising results. The predictions can be made stock by stock, i.e., a single stock, sector-wise or for the portfolio of stocks.</p>
+<p>https://arxiv.org/abs/2512.21804</p>
+<p>3、[LG] Pruning as a Game: Equilibrium-Driven Sparsification of Neural Networks</p>
+<p>Z Shah, N Khan[Hamad Bin Khalifa University]</p>
+<p>博弈视角下的剪枝：均衡驱动的神经网络稀疏化</p>
+<p>要点:</p>
+<p>提出了一种网络剪枝的根本性范式转变：不再将剪枝视为一个外部施加的优化约束，而是将其重构为模型各组件之间进行策略性博弈后达到的均衡结果。</p>
+<p>将参数组（如神经元、滤波器）建模为非合作博弈中的“玩家”。每个玩家的策略是其“参与度”（s_i，一个在[0, 1]区间的连续变量），该变量控制着它对网络的贡献程度。</p>
+<p>为每个玩家定义了一个效用函数，该函数平衡了收益项与成本项：</p>
+<p>收益：玩家对降低训练损失的边际贡献，通过其参数与损失梯度之间的对齐程度（⟨∇θi L, θi⟩）来衡量。</p>
+<p>成本：由自身成本（对参与度的LL2式惩罚）和一种新的竞争成本组成，后者惩罚那些与其它活跃玩家参数高度相关的玩家，从而显式地对冗余进行建模。</p>
+<p>核心理论洞见：稀疏性是在玩家的最优策略收敛到零参与度（s_i = 0）时自然涌现的。这种情况发生在“参与”成为一个劣势策略（dominated strategy）时，意味着无论其他玩家采取何种行动，其成本总是稳定地超过其收益。</p>
+<p>基于博弈动态推导出了一个简单、端到端的剪枝算法。该算法联合优化网络权重（通过对损失函数进行梯度下降）和参与度变量（通过对效用函数进行梯度上升），无需离散的剪枝步骤或外部的重要性评分。</p>
+<p>一个关键的实验发现：在成功的剪枝配置下，参与度变量的最终分布呈现出强烈的双峰形态，大部分值聚集在0（被剪枝）或1（被保留）附近。这为“博弈动态驱使玩家做出稳定的、近乎二元的均衡决策”这一理论提供了支持。</p>
+<p>该方法统一了现有的剪枝启发式方法：基于幅度、梯度和冗余度的剪枝都可以被解释为这个统一、有原则的博弈论框架下的特例或组成部分。</p>
+<p>本工作的重点是建立一个有原则的理论公式并验证均衡的概念，而非在大型基准上实现最先进的性能。</p>
+<p>主旨： 本文旨在从根本上重新定义神经网络剪枝问题。它挑战了将剪枝视为使用启发式指标进行外部优化的传统观念，提出了一种全新的博弈论视角：将网络中的参数组（如神经元）视为理性的“玩家”，它们通过策略性互动（竞争与合作）来决定各自在网络中的“参与度”，而网络的稀疏性则是这场博弈达到纳什均衡时自然涌现的稳定状态。</p>
+<p>创新：</p>
+<p>概念框架创新：首次将非合作博弈论引入神经网络剪枝，将剪枝从一个“自上而下”的优化问题，转变为一个“自下而上”的、由局部互动驱动的均衡过程，为理解稀疏性的产生提供了全新的理论解释。</p>
+<p>效用函数设计：设计的玩家效用函数尤为新颖，特别是引入了直接建模冗余的“竞争成本”项（ηsi Σ ⟨θi, θj⟩），使得参数之间的相关性成为决定其生存与否的关键因素，这比间接的启发式指标更为根本。</p>
+<p>剪枝机制的理论解释：创新性地将剪枝行为与博弈论中的“劣势策略”（dominated strategy）概念联系起来。一个神经元被剪掉，不是因为它“不重要”，而是因为在与其他神经元的竞争中，“参与网络”成为了一个无论如何都得不偿失的策略。</p>
+<p>算法设计：提出了一种简单且优雅的均衡驱动剪枝算法，通过对权重和参与度进行交替的梯度优化，实现了剪枝与训练的无缝集成，避免了传统方法中复杂的“训练-剪枝-微调”流程。</p>
+<p>贡献：</p>
+<p>理论贡献：为神经网络剪枝提供了一个坚实的、可解释的理论基础，深刻揭示了稀疏性作为网络内部组件竞争与冗余权衡结果的本质。</p>
+<p>统一性贡献：该博弈论框架能够自然地统一和解释多种现有的剪枝启发式方法（如基于幅度、梯度、相关性的剪枝），将它们视为该框架下不同效用函数设定的特例，提升了该领域的理论整合度。</p>
+<p>算法贡献：提供了一种源于理论、简单实用的端到端剪枝算法，其动态过程和结果（如参与度的双峰分布）有力地验证了理论的正确性。</p>
+<p>视角贡献：为机器学习领域中其他涉及模型压缩和结构学习的问题提供了新的思考范式，即通过设计组件间的互动规则，使期望的结构（如稀疏性、模块化）作为系统的均衡态自然浮现。</p>
+<p>提升：</p>
+<p>可解释性与理论基础：相比于依赖启发式指标的传统方法，该方法在“为何剪枝”上提供了根本性的理论解释，大大提升了剪枝过程的可解释性。</p>
+<p>剪枝与训练的集成度：通过联合优化，实现了剪枝的自动化和动态化，流程比传统的多阶段“训练-剪枝-微调”方法更为简洁和一体化。</p>
+<p>稀疏性与准确率的权衡：在MNIST实验中，该方法能够在剪掉超过98%神经元的情况下，依然保持91.5%的测试准确率，展示了其在识别和移除网络冗余方面的有效性，实现了良好的稀疏性-准确率权衡。</p>
+<p>不足：</p>
+<p>可扩展性与计算成本：实验仅在小规模的MNIST数据集和简单的MLP上进行验证。将此方法扩展到大型网络（如CNN、Transformers）时，计算成本可能成为一个问题，特别是包含两两交互的“竞争成本”项，其计算复杂度可能很高。</p>
+<p>超参数敏感性：模型的最终稀疏程度和性能高度依赖于效用函数中的成本系数（β, γ, η）。如何为不同架构和任务有效地设置这些超参数，可能需要大量的调试和经验，这增加了应用的复杂性。</p>
+<p>收敛性问题：虽然理论上分析了均衡的稳定性，但在复杂的、非凸的神经网络优化环境中，博弈动态能否稳定收敛到高质量的稀疏均衡点，尤其是在大规模模型中，尚需更多实证研究。</p>
+<p>心得：</p>
+<p>视角转换的力量：本文最深刻的启发在于，通过将问题从一个领域（优化理论）映射到另一个领域（博弈论），可以获得全新的洞察和更根本的解释。它告诉我们，一个问题的“最优解”可能不是通过强制施加约束找到的，而是通过设计一套合理的互动规则，让系统自发演化到的稳定状态。</p>
+<p>从“设计结果”到“设计过程”：传统的剪枝是直接设计剪枝的“结果”（哪些神经元该被移除），而本文则是设计一个“过程”（神经元之间的博弈规则）。让期望的属性（稀疏性）作为这个过程的“涌现”现象，这种设计哲学在复杂系统建模中非常强大，也更接近生物系统的演化方式。</p>
+<p>显式建模“互动”的重要性：机器学习模型中的组件并非孤立存在。本文通过效用函数中的“竞争成本”项，显式地建模了神经元之间的冗余关系，这种直接抓住问题核心（互动与冗余）的设计，远比依赖单一组件属性（如权重大小）的启发式方法来得深刻和有效。</p>
+<p>一句话总结: 本文颠覆性地将神经网络剪枝重构为一个战略博弈过程，其中神经元作为玩家通过权衡自身贡献与冗余竞争来动态调整其参与度，最终，网络的稀疏性并非人为强制，而是在这场博弈中因部分神经元的“参与”策略变为劣势而自然涌现的稳定均衡状态。</p>
+<p>Neural network pruning is widely used to reduce model size and computational cost. Yet, most existing methods treat sparsity as an externally imposed constraint, enforced through heuristic importance scores or training-time regularization. In this work, we propose a fundamentally different perspective: pruning as an equilibrium outcome of strategic interaction among model components. We model parameter groups such as weights, neurons, or filters as players in a continuous non-cooperative game, where each player selects its level of participation in the network to balance contribution against redundancy and competition. Within this formulation, sparsity emerges naturally when continued participation becomes a dominated strategy at equilibrium. We analyze the resulting game and show that dominated players collapse to zero participation under mild conditions, providing a principled explanation for pruning behavior. Building on this insight, we derive a simple equilibrium-driven pruning algorithm that jointly updates network parameters and participation variables without relying on explicit importance scores. This work focuses on establishing a principled formulation and empirical validation of pruning as an equilibrium phenomenon, rather than exhaustive architectural or large-scale benchmarking. Experiments on standard benchmarks demonstrate that the proposed approach achieves competitive sparsity– accuracy trade-offs while offering an interpretable, theory-grounded alternative to existing pruning methods.</p>
+<p>https://arxiv.org/abs/2512.22106</p>
+<p>4、[LG] Completed Hyperparameter Transfer across Modules, Width, Depth, Batch and Duration</p>
+<p>B Mlodozeniec, P Ablin, L Béthune, D Busbridge...[Apple]</p>
+<p>实现了跨模块、宽度、深度、批量及训练时长的超参数全面迁移</p>
+<p>要点:</p>
+<p>提出了“Complete(d)P”，一个统一的参数化框架，该框架扩展了先前的工作（如μP和CompleteP），使得超参数（HP）能够在所有主要的缩放维度上进行迁移：模型宽度、深度、批量大小和训练时长。</p>
+<p>首创了一种受SDE（随机微分方程）启发的、针对训练时长的缩放规则。 一个反直觉的发现是，扩展训练token数量的最优方式并非简单地增加训练步数，而是调整超参数以改善底层训练SDE的信噪比，同时保持其“积分时间”不变。</p>
+<p>将基于SDE的迁移规则扩展到了AdamW的权重衰减（weight decay）项。 论文为权重衰减提供了一个平方根缩放规则（λ&#039; = √κλ，当批量大小缩放κ倍时）的理论依据，从而补全了AdamW所有参数的迁移规则。</p>
+<p>攻克了“模块级”超参数优化与迁移这一高难度问题。 论文证明，在一个小型模型上进行精细化的、分模块的超参数调优，能带来显著的性能提升（例如，在一个50M参数模型上实现2.3倍的训练加速）。</p>
+<p>首次提供了强有力的实证证据，证明这些粒度极细的“模块级”超参数能够成功迁移到大规模模型上。 在计算预算扩大约600倍后，这种加速效应依然存在，为一个7.2B参数模型的训练带来了1.32倍的加速。</p>
+<p>揭示了“模块级”超参数的优化“地形”极其险峻。 这个高维空间充满了训练不稳定的“悬崖峭壁”和复杂的边界，使得随机搜索、标准贝叶斯优化等常规方法效率低下。</p>
+<p>为寻找优秀的模块级超参数提供了一套实用方案。 该方案通过“深度-类型克罗内克积参数化”来控制搜索空间的维度，并使用一种简单的“信任域随机搜索”来探索这个困难的优化地形。</p>
+<p>对现有的参数化方法进行了精炼，将其扩展到支持如Query-Key Normalization等现代Transformer组件，并修正了先前工作（CompleteP）中的一些小错误。</p>
+<p>主旨： 本文旨在解决大规模模型训练中超参数调优成本过高这一核心痛点。为此，文章提出了一个名为“Complete(d)P”的统一参数化框架，使得在一台小型、廉价的模型上精细化（模块级）调优的超参数，能够被可靠地、自动地迁移到横跨所有关键缩放维度（宽度、深度、批量大小、训练时长）的大型模型上，从而在不增加调优成本的情况下，显著提升大模型训练的效率和最终性能。</p>
+<p>创新：</p>
+<p>框架的完备性：首次将模型宽度/深度（μP思想）、批量大小（SDE思想）和训练时长（新提出的SDE思想）这四大缩放维度的超参数迁移规则整合到一个统一的框架“Complete(d)P”中。</p>
+<p>训练时长迁移的新理论：提出了一个反直觉且新的“SDE等效积分时间”缩放规则来处理训练时长的变化。这为如何随着训练数据增多而调整超参数提供了全新的、有理论依据的视角。</p>
+<p>对AdamW的完整SDE扩展：首次基于SDE原理推导并验证了AdamW中权重衰减项随批量大小变化的缩放规则，补全了自适应优化器迁移理论的关键一环。</p>
+<p>模块级超参数迁移的实证突破：首次系统性地证明了在极高维度下的“模块级”超参数（不仅是学习率，还包括Adam参数、权重衰减等）不仅可以被有效优化，并且其带来的性能优势能够通过该框架成功迁移到规模悬殊的大模型上。</p>
+<p>贡献：</p>
+<p>实践贡献：提供了一套可以直接应用于实践的、端到端的超参数迁移方法论，能够为训练大型语言模型节省大量的计算资源和时间（文中展示了1.32倍的加速），并提升最终模型性能。</p>
+<p>理论贡献：通过统一和扩展现有的缩放理论，使超参数迁移的理论基础更加完备和强大，特别是关于训练时长的SDE解释，为理解长期训练动态开辟了新方向。</p>
+<p>实证贡献：对高维、模块级的超参数优化“地形”进行了深入的实证探索，揭示了其复杂性和挑战性，并验证了“克罗内克积参数化+信任域搜索”这一组合的有效性。</p>
+<p>工程贡献：通过修正和扩展CompleteP等先前工作，为社区提供了更鲁棒、更适用于现代Transformer架构的参数化实现细节（如支持QK-Norm）。</p>
+<p>提升：</p>
+<p>训练效率：在大型模型（7.2B参数）上，使用迁移过来的模块级超参数相比于迁移过来的最优全局超参数，训练速度提升了1.32倍，意味着达到相同的损失所需的训练时间减少了约24%。在小型模型（50M参数）上，这个加速比更是高达2.3倍。</p>
+<p>最终性能：除了训练更快，使用模块级超参数训练的模型在下游基准测试（如MMLU, HellaSwag等）上也表现出更好的性能。</p>
+<p>迁移的维度：相较于之前仅关注宽度和/或深度的μP等工作，Complete(d)P将迁移能力扩展到了批量大小和训练时长，极大地增强了在实际工程场景中的适用性。</p>
+<p>不足：</p>
+<p>泛化性验证有限：所有实验均在单一的自回归Transformer架构和RedPajama数据集上进行。该框架在其他架构（如ViT、混合专家模型MoE）或其他领域（如语音、蛋白质折叠）上的有效性尚待验证。</p>
+<p>学习率调度器固定：研究全程使用固定的余弦衰减学习率调度器。新提出的训练时长迁移规则可能与其它类型的调度器（如线性、逆平方根）存在复杂的相互作用，这一点未被探讨。</p>
+<p>超参数搜索仍有优化空间：虽然提出的信任域随机搜索是有效的，但它仍然需要大量的试验次数。未来可以探索更高效的、能利用训练过程结构的贝叶斯优化等方法。</p>
+<p>加速效应的衰减趋势：作者观察到，模块级超参数带来的加速效应似乎随着模型和数据规模的增大而缓慢减弱，其背后的原因（是迁移不完美还是大模型的渐进行为）仍是未解之谜。</p>
+<p>心得：</p>
+<p>将神经网络训练视为一个“物理系统”：本文的SDE方法论极具启发性，它将离散的优化步骤抽象为连续的随机过程，从而找到了独立于具体步长（批量大小）或时长（训练步数）的“不变量”。这种思想将调参从“炼金术”般的试错，提升到了寻找普适“物理定律”的高度，是深度学习理论走向成熟的标志。</p>
+<p>粒度与结构化的权衡之美：面对“模块级”超参数这一“维数灾难”，本文没有退缩，而是通过“克罗内克积”这一巧妙的结构化假设，在保持强大表达能力的同时，极大地约束了搜索空间。这启示我们，在处理复杂问题时，找到正确的结构化分解方式，往往是通往成功的捷径。</p>
+<p>小模型的“模拟飞行”价值巨大：本文雄辩地证明了，只要掌握了正确的“缩放定律”，在小型模型上进行的“模拟飞行”（即超参数搜索）能够为大型模型的“真实飞行”提供极其宝贵的导航数据，从而避免昂贵的坠机和试错。这为AI的“工程化”和“可负担化”提供了坚实的路线图。</p>
+<p>一句话总结: 本文通过构建一个名为“Complete(d)P”的完备参数化框架，首次实现了将小型模型上精细调优的“模块级”超参数，成功迁移至横跨宽度、深度、批量大小和训练时长所有缩放维度的大型模型，其中一个反直觉的创新是基于SDE理论为训练时长变化提供了新的缩放规则，最终显著加速了大规模语言模型的训练。</p>
+<p>Hyperparameter tuning can dramatically impact training stability and final performance of large-scale models. Recent works on neural network parameterisations, such as μ\muP, have enabled transfer of optimal global hyperparameters across model sizes. These works propose an empirical practice of search for optimal global base hyperparameters at a small model size, and transfer to a large size. We extend these works in two key ways. To handle scaling along most important scaling axes, we propose the Complete(d)^{(d)} Parameterisation that unifies scaling in width and depth -- using an adaptation of CompleteP -- as well as in batch-size and training duration. Secondly, with our parameterisation, we investigate per-module hyperparameter optimisation and transfer. We characterise the empirical challenges of navigating the high-dimensional hyperparameter landscape, and propose practical guidelines for tackling this optimisation problem. We demonstrate that, with the right parameterisation, hyperparameter transfer holds even in the per-module hyperparameter regime. Our study covers an extensive range of optimisation hyperparameters of modern models: learning rates, AdamW parameters, weight decay, initialisation scales, and residual block multipliers. Our experiments demonstrate significant training speed improvements in Large Language Models with the transferred per-module hyperparameters.</p>
+<p>https://arxiv.org/abs/2512.22382</p>
+    </div>
+    
+    <div class="footer" style="margin-top:3em;padding-top:1em;border-top:1px solid #eee;color:#aaa;font-size:0.85em;">
+      <p><strong>原文链接：</strong><a href="https://mp.weixin.qq.com/s/_6s8wOIqVXAmVTPPiRsSqw">https://mp.weixin.qq.com/s/_6s8wOIqVXAmVTPPiRsSqw</a></p>
+      <p style="margin-top:0.8em;">Powered by <a href="https://readgzh.site" style="color:#aaa;text-decoration:none;">ReadGZH</a> · <a href="https://readgzh.site/docs" style="color:#aaa;text-decoration:none;">开发者文档</a> · <a href="https://readgzh.site/pricing" style="color:#aaa;text-decoration:none;">升级套餐</a></p>
+      <p style="margin-top:0.4em;font-size:0.8em;">💡 免费注册获取每天 30 积分 · Lite ¥9/月 · Pro ¥39/月 → <a href="https://readgzh.site/dashboard" style="color:#aaa;">readgzh.site/dashboard</a></p>
+    </div>
+  </article>
+</body>
+</html>

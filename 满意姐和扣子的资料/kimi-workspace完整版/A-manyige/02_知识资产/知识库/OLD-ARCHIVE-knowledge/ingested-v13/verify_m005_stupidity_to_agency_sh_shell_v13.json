@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify_m005_stupidity_to_agency.sh",
+  "filename": "verify_m005_stupidity_to_agency.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "ca4863879e0260a0",
+  "content_length": 1860,
+  "ingested_at": "2026-03-31T17:27:46.169371",
+  "content_preview": "#!/bin/bash\n# M005防愚蠢→能动性机制验证脚本\n\necho \"=== M005防愚蠢→能动性机制验证 ===\"\necho \"\"\n\n# 检查引擎文件\necho \"1. 能动性引擎:\"\nif [ -f \"/root/.openclaw/workspace/skills/stupidity-to-agency-engine/stupidity_to_agency_engine.py\" ]; then\n    echo \"   ✅ stupidity_to_agency_engine.py 存在\"\n    lines=$(wc -l < /root/.openclaw/workspace/skills/stupidity-to-agency-engine/stupidity_to_agency_engine.py)\n    echo \"      代码行数: $lines\"\nelse\n    echo \"   ❌ stupidity_to_agency_engine.py 不存在\"\n    exit 1\nfi\n\n# 检查关键方法\necho \"\"\necho \"2. 关键方法存在性",
+  "limitations_applied": []
+}

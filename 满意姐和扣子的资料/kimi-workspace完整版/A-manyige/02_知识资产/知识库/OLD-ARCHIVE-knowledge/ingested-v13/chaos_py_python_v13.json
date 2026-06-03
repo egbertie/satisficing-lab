@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/vendor-api-monitor/scripts/chaos.py",
+  "filename": "chaos.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "7ddb2ceb4d34a598",
+  "content_length": 5321,
+  "ingested_at": "2026-03-31T17:27:45.404814",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n对抗测试脚本 - 模拟 API 故障场景\n\"\"\"\n\nimport argparse\nimport json\nimport os\nimport sys\nimport time\nfrom datetime import datetime\nfrom http.server import HTTPServer, BaseHTTPRequestHandler\nfrom threading import Thread\n\nsys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))\n\n\nclass ChaosHTTPHandler(BaseHTTPRequestHandler):\n    \"\"\"模拟故障的 HTTP 处理器\"\"\"\n    \n    config = {\n        'fault_type': 'none',\n        'latency_ms': 0,\n        'error_rate': 0,\n        'sta",
+  "limitations_applied": []
+}

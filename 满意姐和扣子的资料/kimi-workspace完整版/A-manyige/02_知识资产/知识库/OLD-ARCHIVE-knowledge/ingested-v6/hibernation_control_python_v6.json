@@ -1,0 +1,63 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/hibernation_control.py",
+  "filename": "hibernation_control.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 8749,
+  "checksum": "4632232ca87a541f",
+  "ingested_at": "2026-03-31T17:30:32.833764",
+  "line_count": 279,
+  "title": "hibernation_control",
+  "description": "休眠协议控制器 V1.0\n支持完全静默模式和标准休眠模式",
+  "sections": [],
+  "entities": [
+    {
+      "name": "log_event",
+      "type": "function"
+    },
+    {
+      "name": "get_hibernation_state",
+      "type": "function"
+    },
+    {
+      "name": "save_hibernation_state",
+      "type": "function"
+    },
+    {
+      "name": "enter_complete_silence",
+      "type": "function"
+    },
+    {
+      "name": "enter_standard_hibernation",
+      "type": "function"
+    },
+    {
+      "name": "wake_from_hibernation",
+      "type": "function"
+    },
+    {
+      "name": "show_status",
+      "type": "function"
+    },
+    {
+      "name": "auto_check_hibernation",
+      "type": "function"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "关键任务ID（休眠期间需要禁用）",
+    "核心备份任务（标准休眠模式保留）",
+    "2. 禁用所有Cron任务（包括备份）",
+    "实际禁用逻辑需要根据openclaw输出解析",
+    "3. 显式禁用关键任务",
+    "3. 禁用关键任务但保留备份",
+    "这里需要与主控AI交互，暂时返回False"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

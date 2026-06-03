@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/memory/working/token_optimization_strategy.md",
+  "filename": "token_optimization_strategy.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "67dd6f0e4a9228c4",
+  "content_length": 3831,
+  "ingested_at": "2026-03-31T17:27:46.485471",
+  "content_preview": "# Token优化策略 V1.0\n\n> 创建日期: 2026-03-18\n> 核心原则: 质量>数量，统一调度，预留通道\n\n---\n\n## 当前问题诊断\n\n### 问题1: 高频定时任务消耗过大\n**现状**: \n- 每小时任务协调检查\n- 每小时Token预警检查\n- 每小时MEMORY.md备份\n- 每小时任务状态扫描\n\n**后果**: \n- 日均检查120次\n- Token消耗约16,560/日\n- 产出率仅10%\n\n**解决方案**: ✅ 已部署Cron优化方案C\n- 禁用4个高频任务\n- 预期节省95%检查Token\n\n---\n\n## 优化策略\n\n### 策略1: 子代理统一调度\n\n**核心思想**: 将不紧急的任务统一时间按次序启动，视同一次调动\n\n**执行方式**:\n```\n统一调度时间: 每日22:00-06:00（夜间模式）\n\n批次1: 22:00-23:00\n├── 专家能力建设计划任务\n├── 知识图谱构建任务\n└── 文档整理归档任务\n\n批次2: 23:00-00:00\n├── 学术论文验证优化任务\n├── 深度研究内容整合任务\n└── 工具包开发任务\n\n批次3",
+  "limitations_applied": []
+}

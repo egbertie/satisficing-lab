@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>五维雷达图 - 满意解研究所</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        /* 满意解研究所VI标准色系 */
+        :root {
+            --primary: #C23B22;  /* 赭石红 */
+            --bg: #F5F0E6;       /* 米白 */
+            --gold: #B8860B;     /* 暗金 */
+        }
+        
+        body { 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            background: var(--bg);
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        
+        .container {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        #chart { 
+            width: 600px; 
+            height: 600px;
+            background: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(42, 42, 42, 0.06);
+        }
+        
+        .brand-mark {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        
+        .brand-name {
+            font-size: 14px;
+            color: var(--primary);
+            letter-spacing: 3px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="brand-mark"><img src="logo.png" alt="满意解研究所"></div>
+        <div id="chart"></div>
+        <div class="brand-name">满意解研究所</div>
+    </div>
+    <script>
+        var chart = echarts.init(document.getElementById('chart'));
+        
+        var option = {
+            title: {
+                text: '五维画像',
+                left: 'center',
+                textStyle: { 
+                    fontSize: 24, 
+                    fontWeight: 'bold', 
+                    color: '#2A2A2A'
+                }
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                data: ['用户五维', '标准线'],
+                bottom: 10,
+                textStyle: { color: '#4A4A4A' }
+            },
+            radar: {
+                indicator: [
+                    { name: '时间轴', max: 100 },
+                    { name: '可行域', max: 100 },
+                    { name: '身心流', max: 100 },
+                    { name: '信义观', max: 100 },
+                    { name: '直觉阈', max: 100 }
+                ],
+                center: ['50%', '55%'],
+                radius: '65%',
+                name: {
+                    textStyle: { fontSize: 14, color: '#4A4A4A', fontWeight: 'bold' }
+                },
+                splitLine: {
+                    lineStyle: { color: 'rgba(194, 59, 34, 0.15)' }
+                },
+                splitArea: {
+                    areaStyle: { color: ['rgba(194, 59, 34, 0.02)', 'transparent'] }
+                },
+                axisLine: {
+                    lineStyle: { color: 'rgba(194, 59, 34, 0.2)' }
+                }
+            },
+            series: [{
+                type: 'radar',
+                data: [
+                    {
+                        value: [85, 78, 90, 72, 68],
+                        name: '用户五维',
+                        lineStyle: { color: '#C23B22', width: 2 },
+                        areaStyle: { color: 'rgba(194, 59, 34, 0.2)' },
+                        itemStyle: { color: '#C23B22' }
+                    },
+                    {
+                        value: [80, 80, 80, 80, 80],
+                        name: '标准线',
+                        lineStyle: { color: '#B8860B', width: 1, type: 'dashed' },
+                        areaStyle: { color: 'rgba(184, 134, 11, 0.05)' },
+                        itemStyle: { color: '#B8860B' }
+                    }
+                ]
+            }]
+        };
+        
+        chart.setOption(option);
+    </script>
+</body>
+</html>

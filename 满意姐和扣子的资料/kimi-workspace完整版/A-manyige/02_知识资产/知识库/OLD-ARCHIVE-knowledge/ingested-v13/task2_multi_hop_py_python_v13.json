@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/task2_multi_hop.py",
+  "filename": "task2_multi_hop.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "4b81c601e6f6feb7",
+  "content_length": 4470,
+  "ingested_at": "2026-03-31T17:27:46.188518",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n知识图谱多跳推理 - 今日执行任务2\n目标: 支持两跳查询（概念→Skill→相关Skill）\n\"\"\"\n\nimport json\n\ndef build_multi_hop_graph():\n    \"\"\"构建多跳推理图\"\"\"\n    \n    # 读取概念索引\n    with open(\"/root/.openclaw/workspace/knowledge/system/concept_skill_index_v3.json\", 'r') as f:\n        concept_index = json.load(f)\n    \n    # 读取Skill索引\n    with open(\"/root/.openclaw/workspace/knowledge/system/skill_knowledge_index.json\", 'r') as f:\n        skill_data = json.load(f)\n    \n    # 构建Skill→概念映射（反向）\n    skill_to_concepts = {",
+  "limitations_applied": []
+}

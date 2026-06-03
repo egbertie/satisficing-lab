@@ -1,0 +1,42 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/super-knowledge-ingest/scripts/knowledge_leak_scan.py",
+  "filename": "knowledge_leak_scan.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 8729,
+  "checksum": "bde5aafcf9828e79",
+  "ingested_at": "2026-03-31T17:30:32.742140",
+  "line_count": 279,
+  "title": "knowledge_leak_scan",
+  "description": "全盘知识漏电深度排查 - 2-3天周期执行\n扫描工作空间所有.md文件，发现未入库知识，执行7层标准化入库",
+  "sections": [],
+  "entities": [
+    {
+      "name": "save_scan_log",
+      "type": "function"
+    },
+    {
+      "name": "save_daily_report",
+      "type": "function"
+    },
+    {
+      "name": "trigger_skill_ingest",
+      "type": "function"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "已入库文件模式（用于匹配已入库文档）",
+    "检查文件名是否匹配已入库模式",
+    "检查INDEX.md中是否已有记录",
+    "提取文件名（不含扩展名）",
+    "扫描子目录（learning_output, docs等）",
+    "触发入库（如果有漏电文件）"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

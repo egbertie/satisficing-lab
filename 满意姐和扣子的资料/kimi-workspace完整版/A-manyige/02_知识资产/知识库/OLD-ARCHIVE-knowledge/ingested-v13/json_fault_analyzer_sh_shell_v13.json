@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/json_fault_analyzer.sh",
+  "filename": "json_fault_analyzer.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "a7a6eb27007d36fa",
+  "content_length": 1668,
+  "ingested_at": "2026-03-31T17:27:46.209614",
+  "content_preview": "#!/bin/bash\n# JSON故障深入排查脚本\n# 分析JSON错误根因\n\necho \"=== JSON故障深入排查 ===\"\necho \"时间: $(date)\"\necho \"\"\n\n# 分析1: 统计错误发生频率\necho \"【分析1】错误发生频率\"\nERROR_COUNT=$(grep -c \"Expected double-quoted property name\" /var/log/syslog 2>/dev/null || echo \"0\")\necho \"  今日JSON错误次数: $ERROR_COUNT\"\n\n# 分析2: 提取错误详情\necho \"\"\necho \"【分析2】错误详情分析\"\ngrep \"Expected double-quoted property name\" /var/log/syslog 2>/dev/null | tail -3 | while read line; do\n    echo \"  错误: $line\"\n    # 提取时间\n    error_time=$(echo \"$line\" | grep -oP '\\d{4}-\\d{2}-",
+  "limitations_applied": []
+}

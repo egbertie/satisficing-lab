@@ -1,0 +1,221 @@
+{
+  "version": "5.0.0",
+  "description": "质量评估标准配置 - S1-S7",
+  "dimensions": {
+    "compliance": {
+      "name": "符合性评估",
+      "description": "验证Skill是否满足基础规范要求",
+      "weight": 0.30,
+      "sub_dimensions": {
+        "positive_test": {
+          "name": "正例测试",
+          "weight": 0.40,
+          "thresholds": {
+            "A": 95,
+            "B": 85,
+            "C": 70,
+            "D": 0
+          }
+        },
+        "negative_test": {
+          "name": "负例测试",
+          "weight": 0.30,
+          "thresholds": {
+            "A": 5,
+            "B": 15,
+            "C": 30,
+            "D": 100
+          }
+        },
+        "boundary_test": {
+          "name": "边界测试",
+          "weight": 0.30,
+          "thresholds": {
+            "A": 95,
+            "B": 85,
+            "C": 70,
+            "D": 0
+          }
+        }
+      }
+    },
+    "effectiveness": {
+      "name": "有效性评估",
+      "description": "验证Skill是否有效达成业务目标",
+      "weight": 0.25,
+      "sub_dimensions": {
+        "completion_rate": {
+          "name": "任务完成率",
+          "weight": 0.50,
+          "thresholds": {
+            "A": 95,
+            "B": 85,
+            "C": 70,
+            "D": 0
+          }
+        },
+        "accuracy_rate": {
+          "name": "结果准确率",
+          "weight": 0.30,
+          "thresholds": {
+            "A": 95,
+            "B": 85,
+            "C": 70,
+            "D": 0
+          }
+        },
+        "satisfaction_rate": {
+          "name": "用户满意度",
+          "weight": 0.20,
+          "thresholds": {
+            "A": 90,
+            "B": 80,
+            "C": 70,
+            "D": 0
+          }
+        }
+      }
+    },
+    "reliability": {
+      "name": "可靠性评估",
+      "description": "验证Skill在异常情况下的稳定运行能力",
+      "weight": 0.25,
+      "sub_dimensions": {
+        "stress_test": {
+          "name": "压力测试",
+          "weight": 0.40,
+          "thresholds": {
+            "A": 100,
+            "B": 90,
+            "C": 70,
+            "D": 0
+          }
+        },
+        "fault_recovery": {
+          "name": "故障恢复",
+          "weight": 0.30,
+          "thresholds": {
+            "A": 95,
+            "B": 85,
+            "C": 70,
+            "D": 0
+          }
+        },
+        "stability": {
+          "name": "长期稳定",
+          "weight": 0.30,
+          "thresholds": {
+            "A": 95,
+            "B": 85,
+            "C": 70,
+            "D": 0
+          }
+        }
+      }
+    },
+    "maintainability": {
+      "name": "可维护性评估",
+      "description": "评估Skill代码和文档的可维护程度",
+      "weight": 0.20,
+      "sub_dimensions": {
+        "code_quality": {
+          "name": "代码质量",
+          "weight": 0.25,
+          "thresholds": {
+            "A": 90,
+            "B": 80,
+            "C": 70,
+            "D": 0
+          }
+        },
+        "documentation": {
+          "name": "文档完整性",
+          "weight": 0.25,
+          "thresholds": {
+            "A": 90,
+            "B": 80,
+            "C": 70,
+            "D": 0
+          }
+        },
+        "error_handling": {
+          "name": "错误处理",
+          "weight": 0.25,
+          "thresholds": {
+            "A": 90,
+            "B": 80,
+            "C": 70,
+            "D": 0
+          }
+        },
+        "testability": {
+          "name": "可测试性",
+          "weight": 0.25,
+          "thresholds": {
+            "A": 90,
+            "B": 80,
+            "C": 70,
+            "D": 0
+          }
+        }
+      }
+    }
+  },
+  "grading": {
+    "A+": { "min": 95, "description": "卓越" },
+    "A": { "min": 90, "description": "优秀" },
+    "B+": { "min": 85, "description": "良好" },
+    "B": { "min": 80, "description": "合格" },
+    "C": { "min": 70, "description": "及格" },
+    "D": { "max": 69, "description": "不合格" }
+  },
+  "performance_thresholds": {
+    "response_time_ms": {
+      "A": 100,
+      "B": 500,
+      "C": 1000
+    },
+    "memory_usage_mb": {
+      "A": 50,
+      "B": 100,
+      "C": 200
+    },
+    "cpu_usage_percent": {
+      "A": 30,
+      "B": 50,
+      "C": 70
+    }
+  },
+  "S7_cross_validation": {
+    "consistency_thresholds": {
+      "high": { "max_diff": 5, "description": "高度一致" },
+      "good": { "max_diff": 10, "description": "基本一致" },
+      "fair": { "max_diff": 15, "description": "存在差异" },
+      "poor": { "max_diff": 100, "description": "严重分歧" }
+    },
+    "min_assessors": 2,
+    "target_consistency": "high"
+  },
+  "checklist": {
+    "skill_assessment": [
+      "S1: 评估对象明确 (名称/版本/路径)",
+      "S1: 评估范围定义 (功能/性能/可靠性/可维护性)",
+      "S2: 符合性评估完成 (正例/负例/边界)",
+      "S2: 有效性评估完成 (完成率/准确性/满意度)",
+      "S2: 可靠性评估完成 (压力/故障/稳定)",
+      "S2: 可维护性评估完成 (代码/文档/错误/测试)",
+      "S3: 评估报告生成 (等级评定/问题清单/改进建议)",
+      "S4: 触发机制配置 (手动/批量/定时)",
+      "S5: 本检查清单通过验证",
+      "S6: 局限性已标注",
+      "S7: 对抗验证完成 (交叉评估一致性)"
+    ]
+  },
+  "limitations": [
+    "主观评估偏差: 部分维度依赖评估者经验判断，存在主观性",
+    "测试覆盖不足: 测试用例无法穷尽所有场景",
+    "环境依赖: 性能评估受测试环境影响",
+    "业务场景变化: 评估标准需随业务演进",
+    "AIGC输出波动: AI生成内容的稳定性无法完全保证"
+  ]
+}

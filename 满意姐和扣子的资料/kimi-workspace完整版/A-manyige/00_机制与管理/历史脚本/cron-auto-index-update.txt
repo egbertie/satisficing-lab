@@ -1,0 +1,49 @@
+# Cron配置 - 自动索引更新
+# 文件: scripts/cron-auto-index-update.txt
+# 用途: 每小时执行自动索引更新
+
+# ==================== 主Cron配置 ====================
+
+# 每小时执行一次索引更新（错峰17分钟，避免整点竞争）
+17 * * * * /root/.openclaw/workspace/scripts/auto-index-update.sh >> /root/.openclaw/workspace/logs/index-updates/cron.log 2>&1
+
+# 或者使用OpenClaw的cron命令:
+# openclaw cron create --name "auto-index-update" \
+#   --schedule "17 * * * *" \
+#   --command "/root/.openclaw/workspace/scripts/auto-index-update.sh" \
+#   --description "每小时自动扫描workspace并更新索引"
+
+# ==================== 安装命令 ====================
+
+# 方法1: 直接添加到系统crontab
+# crontab -e
+# 添加上面的配置行
+
+# 方法2: 使用OpenClaw的cron命令
+# openclaw cron create \
+#   --name "auto-index-update" \
+#   --schedule "17 * * * *" \
+#   --command "/root/.openclaw/workspace/scripts/auto-index-update.sh" \
+#   --log-path "/root/.openclaw/workspace/logs/index-updates/cron.log"
+
+# ==================== 手动测试命令 ====================
+
+# 立即执行一次测试
+# /root/.openclaw/workspace/scripts/auto-index-update.sh
+
+# 查看最近报告
+# ls -lt /root/.openclaw/workspace/logs/index-updates/ | head -5
+
+# 查看最新报告内容
+# cat /root/.openclaw/workspace/logs/index-updates/update_report_$(date +%Y-%m-%d)_*.md
+
+# ==================== 监控命令 ====================
+
+# 查看cron日志
+# tail -f /root/.openclaw/workspace/logs/index-updates/cron.log
+
+# 查看状态文件
+# cat /root/.openclaw/workspace/.state/index_state.json | jq .
+
+# 检查索引文件
+# ls -la /root/.openclaw/workspace/INDEX*.md

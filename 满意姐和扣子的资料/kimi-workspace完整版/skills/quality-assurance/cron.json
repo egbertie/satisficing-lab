@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "skill_name": "quality-assurance",
+  "description": "质量保证协议 - 7标准审查 + 对抗测试 + 定时统计 + 周报",
+  "jobs": [
+    {
+      "name": "quality-stats-update",
+      "schedule": "0 */6 * * *",
+      "enabled": true,
+      "command": "/root/.openclaw/workspace/skills/quality-assurance/scripts/confidence-stats.sh",
+      "timeout": 60,
+      "description": "每6小时更新质量统计数据"
+    },
+    {
+      "name": "weekly-quality-report",
+      "schedule": "0 20 * * 0",
+      "enabled": true,
+      "command": "/root/.openclaw/workspace/skills/quality-assurance/scripts/quality-report.sh weekly",
+      "timeout": 120,
+      "description": "每周日20:00生成质量周报"
+    },
+    {
+      "name": "daily-adversarial-test",
+      "schedule": "0 3 * * *",
+      "enabled": true,
+      "command": "/root/.openclaw/workspace/skills/quality-assurance/scripts/qa-adversarial-test.sh --quick",
+      "timeout": 180,
+      "description": "每日凌晨运行对抗测试(快速模式)"
+    },
+    {
+      "name": "skill-quality-scan",
+      "schedule": "0 9 * * 1",
+      "enabled": true,
+      "command": "/root/.openclaw/workspace/skills/quality-assurance/scripts/qa-review.sh --batch /root/.openclaw/workspace/skills/",
+      "timeout": 300,
+      "description": "每周一扫描所有Skill质量"
+    },
+    {
+      "name": "weekly-full-adversarial",
+      "schedule": "0 2 * * 0",
+      "enabled": true,
+      "command": "/root/.openclaw/workspace/skills/quality-assurance/scripts/qa-adversarial-test.sh",
+      "timeout": 300,
+      "description": "每周日完整对抗测试"
+    }
+  ]
+}

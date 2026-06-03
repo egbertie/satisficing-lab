@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/fix_skills.sh",
+  "filename": "fix_skills.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "728d383e9cee2731",
+  "content_length": 4267,
+  "ingested_at": "2026-03-31T17:27:46.180466",
+  "content_preview": "#!/bin/bash\n# 检查skill完整度并尝试从GitHub克隆\n\nDOWNLOAD_DIR=\"/root/openclaw/kimi/downloads\"\nFIXED_DIR=\"/root/openclaw/kimi/downloads/fixed_skills\"\nREPORT_FILE=\"/root/.openclaw/workspace/reports/SKILL_429_FIX_REPORT.md\"\n\n# P0批次 - 优先修复\nP0_SKILLS=(\"brave-search\" \"automate-excel\" \"csvtoexcel\" \"copywriting\" \"duckdb-cli-ai-skills\" \"cron-scheduling\" \"markdown-converter\" \"markdown-exporter\" \"mermaid-diagrams\")\n\necho \"# Skill 429修复报告\" > \"$REPORT_FILE\"\necho \"\" >> \"$REPORT_FILE\"\necho \"生成时间: $(date '+%Y-%m-%d %H:%M:",
+  "limitations_applied": []
+}

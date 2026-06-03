@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/extract_slugs.sh",
+  "filename": "extract_slugs.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "6733418bada5b05c",
+  "content_length": 772,
+  "ingested_at": "2026-03-31T17:27:46.167727",
+  "content_preview": "#!/bin/bash\n# 提取所有skill的slug并检查完整度\n\nDOWNLOAD_DIR=\"/root/openclaw/kimi/downloads\"\nREPORT_FILE=\"/root/.openclaw/workspace/reports/SKILL_429_FIX_REPORT.md\"\n\n# 清空报告\necho \"# Skill 429修复报告\" > \"$REPORT_FILE\"\necho \"\" >> \"$REPORT_FILE\"\necho \"生成时间: $(date)\" >> \"$REPORT_FILE\"\necho \"\" >> \"$REPORT_FILE\"\n\n# 提取所有slug\necho \"## 提取的Skill Slug列表\" >> \"$REPORT_FILE\"\necho \"\" >> \"$REPORT_FILE\"\n\nfor meta_file in \"$DOWNLOAD_DIR\"/*_meta.json; do\n    if [ -f \"$meta_file\" ]; then\n        slug=$(jq -r '.slug' \"$meta_file\" 2",
+  "limitations_applied": []
+}

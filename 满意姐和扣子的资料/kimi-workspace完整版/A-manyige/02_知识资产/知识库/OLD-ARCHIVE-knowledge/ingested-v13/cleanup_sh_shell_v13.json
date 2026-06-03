@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/file_management_suite/cleanup.sh",
+  "filename": "cleanup.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "285f3c7350c61279",
+  "content_length": 4558,
+  "ingested_at": "2026-03-31T17:27:46.219404",
+  "content_preview": "#!/bin/bash\n#\n# cleanup.sh - 清理脚本\n# 功能: 清理临时文件、空目录、过期文件\n# 用法: ./cleanup.sh [--dry-run] [--all]\n\nset -e\n\nDRY_RUN=false\nCLEAN_ALL=false\n\n# 解析参数\nfor arg in \"$@\"; do\n    case $arg in\n        --dry-run)\n            DRY_RUN=true\n            ;;\n        --all)\n            CLEAN_ALL=true\n            ;;\n    esac\ndone\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nLOG_FILE=\"$WORKSPACE/logs/cleanup_$(date +%Y%m%d_%H%M%S).log\"\n\nmkdir -p \"$WORKSPACE/logs\"\n\nlog() {\n    echo \"$1\"\n    echo \"[$(date '+%Y-%m-%d %H:%M:%S')",
+  "limitations_applied": []
+}

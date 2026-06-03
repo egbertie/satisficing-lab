@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/quality-assurance/tests/integration/test_pipeline.py",
+  "filename": "test_pipeline.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "f93b38bca69e395b",
+  "content_length": 6613,
+  "ingested_at": "2026-03-31T17:27:44.999586",
+  "content_preview": "\"\"\"\nIntegration Tests - Pipeline Integration\n\"\"\"\n\nimport pytest\nimport time\nfrom qa_system.gates import create_gate\nfrom qa_system.core import GateStatus\n\n\n@pytest.mark.integration\nclass TestQualityGateIntegration:\n    \"\"\"质量门禁集成测试\"\"\"\n    \n    def test_standard_gate_full_execution(self):\n        \"\"\"测试标准门禁完整执行\"\"\"\n        gate = create_gate(\"standard\")\n        result = gate.execute(None)\n        \n        # 验证结果结构\n        assert result.gate_name == \"standard-gate\"\n        assert isinstance(result.st",
+  "limitations_applied": []
+}

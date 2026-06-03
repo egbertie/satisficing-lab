@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/A-manyige/00_🧭 罗盘指南/partnership-model/model.py",
+  "filename": "model.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "8737c9df00838424",
+  "content_length": 15674,
+  "ingested_at": "2026-03-31T17:27:46.294585",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n满意解研究所 - 合伙人决策建模体系 V1.0\n基于10个案例数据构建的评估模型\n\"\"\"\n\nimport json\nimport math\nfrom typing import Dict, List, Tuple, Optional\nfrom dataclasses import dataclass\nfrom enum import Enum\n\nclass RiskLevel(Enum):\n    CRITICAL = \"critical\"    # 必须否决\n    HIGH = \"high\"           # 需要专家会诊\n    MEDIUM = \"medium\"       # 需要关注\n    LOW = \"low\"             # 正常范围\n    EXCELLENT = \"excellent\" # 优势特征\n\n@dataclass\nclass DimensionScore:\n    \"\"\"维度评分\"\"\"\n    dimension: str\n    score: float  # 0-10\n    w",
+  "limitations_applied": []
+}

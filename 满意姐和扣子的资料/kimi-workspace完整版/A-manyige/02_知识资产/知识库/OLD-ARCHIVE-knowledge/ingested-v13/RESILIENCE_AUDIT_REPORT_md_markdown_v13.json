@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blue-auditor/RESILIENCE_AUDIT_REPORT.md",
+  "filename": "RESILIENCE_AUDIT_REPORT.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "34410583dea81eed",
+  "content_length": 2755,
+  "ingested_at": "2026-03-31T17:27:45.373916",
+  "content_preview": "# 现有机制全量韧性检查报告\n## 检查时间: 2026-03-29 21:15\n## 检查标准: 韧性设计标准V1.0\n\n---\n\n## 一、检查范围\n\n| 类别 | 数量 | 位置 |\n|------|------|------|\n| Skill脚本 | 约50个 | /root/.openclaw/workspace/skills/*/ |\n| 系统脚本 | 约15个 | /root/.openclaw/scripts/ |\n| Cron任务 | 7个 | crontab |\n| 紧箍咒机制 | 11个 | tightening_spell_data/ |\n| 监控机制 | 5个 | 各monitor脚本 |\n\n---\n\n## 二、发现的问题（诚实报告）\n\n### 🔴 严重问题（必须立即修复）\n\n| # | 问题 | 位置 | 影响 | 修复方案 |\n|---|------|------|------|----------|\n| 1 | 使用/tmp存储 | 多个脚本 | 重启数据丢失 | 迁移到持久化目录 |\n| 2 | 无限循环无退出 | comprehensive-moni",
+  "limitations_applied": []
+}

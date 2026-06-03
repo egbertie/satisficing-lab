@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/promise-system-guardian/promise_guardian.py",
+  "filename": "promise_guardian.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e8f56e1c23d67a03",
+  "content_length": 19328,
+  "ingested_at": "2026-03-31T17:27:45.490238",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n承诺与制度执行保障系统 V1.0\n核心功能：承诺记录→到期预警→超期补救→如实报告\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import Dict, List, Any, Optional\n\nclass PromiseAndSystemGuardian:\n    \"\"\"\n    承诺与制度执行保障系统\n    确保所有承诺、计划、制度都有约束机制\n    \"\"\"\n    \n    def __init__(self, workspace_path=\"/root/.openclaw/workspace\"):\n        self.workspace = Path(workspace_path)\n        \n        # 核心数据文件\n        self.promise_db = self.workspace / \"memory\" / \"promi",
+  "limitations_applied": []
+}

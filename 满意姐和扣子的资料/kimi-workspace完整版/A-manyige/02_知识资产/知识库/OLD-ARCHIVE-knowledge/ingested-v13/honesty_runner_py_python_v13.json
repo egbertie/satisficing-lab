@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/honesty-tagging-protocol/scripts/honesty_runner.py",
+  "filename": "honesty_runner.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "dc6c8e51fee68c8a",
+  "content_length": 21238,
+  "ingested_at": "2026-03-31T17:27:45.004582",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nHonesty Tagging Protocol - 5 Standard Implementation\n诚实性标注协议 - 完整实现 S1-S7\n\n标准: 5/7 (Production-Ready)\n- S1: 输入待标注内容/标注场景/置信度要求\n- S2: 诚实标注（来源标注→置信度→局限说明→对抗验证）\n- S3: 输出标注后内容+诚实标签+验证建议\n- S4: 可手动触发或自动检测关键声明\n- S5: 标注准确性验证（抽检机制）\n- S6: 局限标注（无法识别所有虚假声明）\n- S7: 对抗测试（故意虚假信息测试发现率）\n\"\"\"\n\nimport sys\nimport json\nimport re\nimport os\nfrom datetime import datetime\nfrom pathlib import Path\n\n# 配置路径\nSCRIPT_DIR = Path(__file__).parent\nCONFIG_DIR = SCRIPT_DIR.parent / \"config\"\nDATA_DIR = SCRI",
+  "limitations_applied": []
+}

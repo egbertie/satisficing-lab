@@ -1,0 +1,39 @@
+{
+  "version": "3.0",
+  "model": "global-consumption",
+  "description": "全局Token消耗追踪模型",
+  
+  "daily_budget": 70000,
+  "weekly_budget": 490000,
+  
+  "tracking_method": {
+    "source": "session_status工具",
+    "frequency": "每次用户询问时",
+    "granularity": "主session累积"
+  },
+  
+  "calculation": {
+    "total_consumption": "session.context_used / session.context_max * 100%",
+    "remaining": "100% - consumption_percentage",
+    "note": "这是OpenClaw内部上下文压缩后的估算，非精确计费"
+  },
+  
+  "user_marked_data": [
+    {"time": "20:06", "percentage": 75, "note": "晚间开始"},
+    {"time": "20:21", "percentage": 76, "note": "zero-idle完成"},
+    {"time": "20:42", "percentage": 77, "note": "确认继续"},
+    {"time": "20:57", "percentage": 78, "note": "blue-sentinel完成"},
+    {"time": "21:27", "percentage": 79, "note": "当前标记"}
+  ],
+  
+  "consumption_rate": {
+    "per_hour": "约4% (21小时从0%→79%)",
+    "per_task_batch": "3个子代理约1-2%"
+  },
+  
+  "prediction_accuracy": {
+    "method": "线性外推",
+    "confidence": "高 (短期)",
+    "formula": "current% + (tasks * 0.5%) + (hours * 4%)"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/daily-backup.sh",
+  "filename": "daily-backup.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "57b618621ab43a11",
+  "content_length": 615,
+  "ingested_at": "2026-03-31T17:27:46.149279",
+  "content_preview": "#!/bin/bash\n# 满意解研究所 - 每日自动备份脚本\n# 运行时间：每天凌晨2点\n\nBACKUP_DIR=\"/root/.openclaw/workspace\"\nLOG_FILE=\"/root/.openclaw/workspace/logs/backup.log\"\nDATE=$(date '+%Y-%m-%d %H:%M:%S')\n\necho \"[$DATE] 开始每日备份...\" >> $LOG_FILE\n\ncd $BACKUP_DIR\n\n# 检查是否有变更\nif [ -z \"$(git status --porcelain)\" ]; then\n    echo \"[$DATE] 无变更，跳过备份\" >> $LOG_FILE\n    exit 0\nfi\n\n# 添加所有变更\ngit add -A\n\n# 提交\ngit commit -m \"Daily backup $DATE\n\n自动备份内容：\n- 所有Markdown文档\n- 记忆文件\n- 配置文件\n- Skill文件\n\n备份系统：满意解研究所灾备重建方案V1.0\"\n\n# 推送到GitHub\nif git push orig",
+  "limitations_applied": []
+}

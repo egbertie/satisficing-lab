@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_git/advanced.md",
+  "filename": "advanced.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "94a104aed432b8e2",
+  "content_length": 3643,
+  "ingested_at": "2026-03-31T17:27:45.146800",
+  "content_preview": "# Advanced Operations\n\n## Interactive Rebase\n\n```bash\ngit rebase -i HEAD~5        # edit last 5 commits\ngit rebase -i main          # edit all since diverging from main\n```\n\nCommands in editor:\n- `pick` = keep as-is\n- `reword` = edit message\n- `squash` = merge into previous, keep message\n- `fixup` = merge into previous, discard message\n- `drop` = remove commit\n\n```bash\ngit rebase --continue       # after resolving conflicts\ngit rebase --abort          # cancel and restore\ngit rebase --skip      ",
+  "limitations_applied": []
+}

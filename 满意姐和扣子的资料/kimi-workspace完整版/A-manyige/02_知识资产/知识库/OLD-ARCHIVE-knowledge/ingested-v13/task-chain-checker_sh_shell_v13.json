@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_execution-protocol/scripts/task-chain-checker.sh",
+  "filename": "task-chain-checker.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "98c0c921ea9a4127",
+  "content_length": 1063,
+  "ingested_at": "2026-03-31T17:27:45.021494",
+  "content_preview": "#!/bin/bash\n# 任务链检查脚本 - 检查完成的任务并触发下一任务\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nPROTOCOL_DIR=\"$WORKSPACE/memory/protocol\"\n\necho \"=== 任务链检查 ===\"\necho \"检查时间: $(date '+%Y-%m-%d %H:%M:%S')\"\necho \"\"\n\n# 创建目录\nmkdir -p \"$PROTOCOL_DIR\"\n\n# 查找最近完成的但未触发下一任务的任务\nRECENTLY_COMPLETED=$(find \"$PROTOCOL_DIR\" -name \"*completion.md\" -mmin -30 2>/dev/null)\n\nTRIGGER_COUNT=0\n\nif [ -z \"$RECENTLY_COMPLETED\" ]; then\n    echo \"📭 无新完成任务（过去30分钟内）\"\nelse\n    for completion_file in $RECENTLY_COMPLETED; do\n        task_id=$(basena",
+  "limitations_applied": []
+}

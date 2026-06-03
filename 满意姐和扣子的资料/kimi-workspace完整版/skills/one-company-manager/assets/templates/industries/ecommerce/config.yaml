@@ -1,0 +1,73 @@
+# 电商行业配置
+
+# 行业模板标识
+industry_template: "ecommerce"
+
+# 财务阈值
+monthly_living_expenses: 8000  # 月生活费（元）
+emergency_fund_months: 3
+
+# 提醒时段
+reminder_hours:
+  morning: 9
+  afternoon: 14
+  evening: 21
+
+# 健康阈值
+max_continuous_work_hours: 5
+min_sleep_hours: 6
+min_weekly_exercise: 2
+
+# 自定义关键词（电商专用）
+business_keywords:
+  - 商品
+  - 订单
+  - 库存
+  - 供应商
+  - 客户
+  - 物流
+  - 促销
+  - 复购
+
+# 外部系统集成
+integrations:
+  calendar:
+    google_calendar:
+      enabled: false
+      api_key: ""
+      calendar_id: ""
+      sync_direction: "bidirectional"
+
+  ecommerce_platforms:
+    taobao:
+      enabled: false
+      app_key: ""
+      app_secret: ""
+      sync_frequency: "daily"
+    jd:
+      enabled: false
+      app_key: ""
+      app_secret: ""
+      sync_frequency: "daily"
+    pinduoduo:
+      enabled: false
+      app_key: ""
+      app_secret: ""
+      sync_frequency: "daily"
+
+# 智能决策配置
+ai_decisions:
+  enabled: true
+  auto_analysis_frequency: "daily"
+  inventory_optimization_enabled: true
+  sales_prediction_enabled: true
+  customer_retention_enabled: true
+
+# 电商专用配置
+inventory_management:
+  low_stock_threshold: 10  # 库存低于此数量时提醒
+  auto_reorder_enabled: false
+  supplier_payment_terms: 30  # 供应商付款周期（天）
+
+# 其他配置
+default_timezone: Asia/Shanghai

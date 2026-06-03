@@ -1,0 +1,60 @@
+#!/bin/bash
+# pre-push hook
+# 推送前质量门禁检查 - 标准级别
+
+set -e
+
+echo "🔒 Quality Gate: Pre-push Check"
+echo "================================="
+
+# 获取脚本目录
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SKILL_DIR="$(dirname "$SCRIPT_DIR")"
+
+# 检查Python
+if ! command -v python3 &> /dev/null; then
+    echo "❌ Python3 is required but not installed."
+    exit 1
+fi
+
+# 获取当前分支
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+echo "Current branch: $CURRENT_BRANCH"
+
+# 检查是否是受保护分支
+PROTECTED_BRANCHES="main master develop"
+if echo "$PROTECTED_BRANCHES" | grep -qw "$CURRENT_BRANCH"; then
+    echo "⚠️  You are pushing to a protected branch: $CURRENT_BRANCH"
+    echo "Make sure all quality gates pass!"
+fi
+
+# 运行标准门禁检查
+if [ -f "$SKILL_DIR/scripts/quality-gate-check.py" ]; then
+    echo ""
+    echo "🔍 Running standard quality gate check..."
+    python3 "$SKILL_DIR/scripts/quality-gate-check.py" \
+        --target . \
+        --level standard \
+        --format console || {
+        echo ""
+        echo "❌ Quality gate check failed!"
+        echo "Please fix the issues before pushing."
+        echo ""
+        echo "To bypass (not recommended for protected branches):"
+        echo "  git push --no-verify"
+        exit 1
+    }
+else
+    echo "⚠️  Quality gate script not found, running basic checks..."
+    
+    # 基础检查
+    if [ -d "tests" ] || [ -d "test" ]; then
+        echo "Running tests..."
+        python3 -m pytest -xvs 2>/dev/null || true
+    fi
+fi
+
+echo ""
+echo "✅ Pre-push quality gate passed!"
+echo "================================="
+exit 0

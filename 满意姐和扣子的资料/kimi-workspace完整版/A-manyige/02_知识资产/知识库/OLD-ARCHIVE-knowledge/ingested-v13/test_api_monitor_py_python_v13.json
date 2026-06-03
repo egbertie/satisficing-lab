@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/api-monitor/test_api_monitor.py",
+  "filename": "test_api_monitor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "30e408cac07ac0d5",
+  "content_length": 408,
+  "ingested_at": "2026-03-31T17:27:45.357105",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\napi-monitor测试\n\"\"\"\n\nimport unittest\nfrom pathlib import Path\n\n\nclass TestApiMonitor(unittest.TestCase):\n    \"\"\"API监控测试\"\"\"\n    \n    def test_module_exists(self):\n        \"\"\"测试模块存在\"\"\"\n        skill_dir = Path(__file__).parent\n        py_files = list(skill_dir.glob(\"*.py\"))\n        self.assertGreaterEqual(len(py_files), 1)\n\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+  "limitations_applied": []
+}

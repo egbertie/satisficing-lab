@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/deep_analysis_check.sh",
+  "filename": "deep_analysis_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "517377862a60cded",
+  "content_length": 3432,
+  "ingested_at": "2026-03-31T17:27:46.151302",
+  "content_preview": "#!/bin/bash\n# 深度分析检查脚本\n# 自动验证深度分析是否符合DEEP_ANALYSIS_CHECKLIST.md要求\n\nset -e\n\nCHECKLIST_FILE=\"/root/.openclaw/workspace/checklists/DEEP_ANALYSIS_CHECKLIST.md\"\nREPORT_FILE=\"/root/.openclaw/workspace/reports/deep_analysis_audit_$(date +%Y%m%d_%H%M%S).md\"\n\necho \"=== 深度分析强制检查 ===\"\necho \"检查时间: $(date)\"\necho \"\"\n\n# 创建报告目录\nmkdir -p /root/.openclaw/workspace/reports\n\n# 初始化检查结果\nPASS_COUNT=0\nFAIL_COUNT=0\nCHECK_ITEMS=()\n\n# 检查函数\ncheck_item() {\n    local name=\"$1\"\n    local condition=\"$2\"\n    \n    if eval \"$cond",
+  "limitations_applied": []
+}

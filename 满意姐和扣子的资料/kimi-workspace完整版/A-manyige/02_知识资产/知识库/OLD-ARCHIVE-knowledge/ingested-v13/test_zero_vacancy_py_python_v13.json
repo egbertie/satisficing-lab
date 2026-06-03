@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/test_zero_vacancy.py",
+  "filename": "test_zero_vacancy.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "9ff09e62ef48e380",
+  "content_length": 2582,
+  "ingested_at": "2026-03-31T17:27:46.206760",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n零空置机制验证测试\n测试场景：模拟6个并发子代理任务 + 验证1个预留槽位\n\"\"\"\n\nimport json\nimport time\nimport concurrent.futures\nfrom datetime import datetime\n\n# 读取配置\nwith open('/root/.openclaw/workspace/openclaw.json', 'r') as f:\n    config = json.load(f)\n\nmax_concurrent = config.get('subagents', {}).get('maxConcurrent', 7)\nreserve_for_user = config.get('subagents', {}).get('reserveForUser', 1)\navailable_slots = max_concurrent - reserve_for_user\n\nprint(\"=\" * 60)\nprint(\"🧪 零空置机制验证测试\")\nprint(\"=\" * 60)\nprin",
+  "limitations_applied": []
+}

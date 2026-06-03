@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/config/hibernation-cron-v2.json",
+  "filename": "hibernation-cron-v2.json",
+  "file_type": "json",
+  "extension": ".json",
+  "file_hash": "b7595c4c2297cb8e",
+  "content_length": 1451,
+  "ingested_at": "2026-03-31T17:27:44.518250",
+  "content_preview": "{\n  \"hibernation_mode_v2\": {\n    \"description\": \"休眠模式V2.0配置 - Token余量15-30%时激活\",\n    \"trigger_conditions\": {\n      \"token_remaining_pct\": \"15-30\",\n      \"manual_trigger\": \"/hibernate\",\n      \"auto_switch\": true\n    },\n    \"retained_tasks\": [\n      {\n        \"name\": \"token-circuit-breaker\",\n        \"schedule\": \"0 */6 * * *\",\n        \"description\": \"Token熔断监控，每6小时\",\n        \"token_estimate\": 500,\n        \"priority\": \"P0\"\n      },\n      {\n        \"name\": \"evening-totem\",\n        \"schedule\": \"0 18 *",
+  "limitations_applied": []
+}

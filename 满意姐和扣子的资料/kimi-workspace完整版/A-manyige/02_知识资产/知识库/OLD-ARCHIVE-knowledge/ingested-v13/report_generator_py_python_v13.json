@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/five-level-verification/scripts/report_generator.py",
+  "filename": "report_generator.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "b5a363c45b0481c5",
+  "content_length": 8765,
+  "ingested_at": "2026-03-31T17:27:45.468492",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nReport Generator\n生成格式化的验证报告\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime\nfrom typing import Dict, Any\n\n\nclass ReportGenerator:\n    \"\"\"验证报告生成器\"\"\"\n    \n    def __init__(self, verification_result: Dict):\n        self.result = verification_result\n    \n    def generate_markdown(self) -> str:\n        \"\"\"生成Markdown格式报告\"\"\"\n        skill = self.result.get(\"skill\", \"Unknown\")\n        timestamp = self.result.get(\"timestamp\", datetime.now().isoformat())\n        overall",
+  "limitations_applied": []
+}

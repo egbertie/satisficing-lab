@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/auto-git-commit.sh",
+  "filename": "auto-git-commit.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "0ac74e39f3e1b356",
+  "content_length": 2224,
+  "ingested_at": "2026-03-31T17:27:46.161197",
+  "content_preview": "#!/bin/bash\n# Auto Git Commit Script - Secure Version\n# 深度记忆: GITHUB_TOKEN已固化，无需重复询问，除非Token失效\n\nREPO_DIR=\"/root/.openclaw/workspace\"\nLOCK_FILE=\"/tmp/auto-git-commit.lock\"\nLOG_FILE=\"/tmp/auto-git-commit.log\"\n\n# 加载环境变量（优先从文件，否则硬编码）\nif [ -f \"$REPO_DIR/.env.github\" ]; then\n    source \"$REPO_DIR/.env.github\"\nfi\n\n# 深度记忆: Token固化（2026-03-26验证有效）\nGITHUB_TOKEN=\"${GITHUB_TOKEN:-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}\"\nGITHUB_USER=\"${GITHUB_USER:-egber",
+  "limitations_applied": []
+}

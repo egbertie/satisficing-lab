@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_cron-optimization-manager/modules/reporter.py",
+  "filename": "reporter.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "46d5be4b78cd9c0b",
+  "content_length": 7022,
+  "ingested_at": "2026-03-31T17:27:45.155648",
+  "content_preview": "# -*- coding: utf-8 -*-\n\"\"\"报告模块\"\"\"\n\nimport json\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import Dict\n\n\nclass CronReporter:\n    \"\"\"Cron报告生成器\"\"\"\n    \n    def __init__(self, manager):\n        self.manager = manager\n        self.templates_dir = manager.templates_dir\n        self.reports_dir = Path(\"/root/.openclaw/workspace/reports/cron\")\n        self.reports_dir.mkdir(parents=True, exist_ok=True)\n    \n    def generate_report(self, period: str, crons: Dict) -> st",
+  "limitations_applied": []
+}

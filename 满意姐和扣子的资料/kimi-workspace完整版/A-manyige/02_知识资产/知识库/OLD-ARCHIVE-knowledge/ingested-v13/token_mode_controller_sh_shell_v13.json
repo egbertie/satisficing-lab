@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/token_mode_controller.sh",
+  "filename": "token_mode_controller.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "3b776d4c5df0a39d",
+  "content_length": 2143,
+  "ingested_at": "2026-03-31T17:27:46.207687",
+  "content_preview": "#!/bin/bash\n################################################################################\n# Token智能时段控制器 - 自动切换对话模式\n# 用途: 根据时间段自动优化Token消耗策略\n################################################################################\n\nset -euo pipefail\n\nCONFIG_FILE=\"/root/.openclaw/workspace/config/token_mode_config.json\"\nSTATE_FILE=\"/tmp/token_mode_state.json\"\nLOG_FILE=\"/tmp/token_mode_controller.log\"\n\nlog() {\n    echo \"[$(date '+%Y-%m-%d %H:%M:%S')] $1\" | tee -a \"$LOG_FILE\"\n}\n\n# 获取当前小时（北京时间）\nget_curren",
+  "limitations_applied": []
+}

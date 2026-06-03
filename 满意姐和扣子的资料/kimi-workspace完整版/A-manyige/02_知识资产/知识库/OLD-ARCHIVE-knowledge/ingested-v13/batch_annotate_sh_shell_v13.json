@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/system-v3/topology_3d/batch_annotate.sh",
+  "filename": "batch_annotate.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "935f18328d7ba2dd",
+  "content_length": 3774,
+  "ingested_at": "2026-03-31T17:27:46.128447",
+  "content_preview": "#!/bin/bash\n# 3D知识拓扑批量标注脚本\n# 命名空间: NGT-TOPO-BATCH-v1.0-FIN-260327\n\n# 配置\nBATCH_SIZE=50\nTOPOLOGY_DIR=\"system-v3/topology_3d/annotations\"\nLOG_FILE=\"system-v3/topology_3d/batch_progress.log\"\n\n# 创建目录\nmkdir -p \"$TOPOLOGY_DIR\"\n\n# 分类定义\nKNOWLEDGE_TYPES=(\"methodology\" \"implementation\" \"reference\" \"template\")\nEXPERTS=(\"liu_honglei\" \"luo_han\" \"xie_baojian\" \"xu_sir\" \"fang_yifeng\" \"chen_guoxiang\" \"general\")\nTEMPORAL=(\"archived\" \"active\" \"evolving\" \"deprecated\")\n\n# 优先级目录（按优先级排序）\nPRIORITY_DIRS=(\n    \"docs\"\n    ",
+  "limitations_applied": []
+}

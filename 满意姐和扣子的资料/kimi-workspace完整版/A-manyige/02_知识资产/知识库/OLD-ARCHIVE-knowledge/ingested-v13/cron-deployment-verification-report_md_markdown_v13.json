@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/cron-deployment-verification-report.md",
+  "filename": "cron-deployment-verification-report.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "aa4bb9a9029938aa",
+  "content_length": 849,
+  "ingested_at": "2026-03-31T17:27:45.504450",
+  "content_preview": "# Cron补部署验证报告\n\n> **部署时间**: 2026-03-31 13:27  \n> **蓝军监督**: 实时验证  \n\n---\n\n## 验证结果\n\n### 发现的问题\n\n| 任务 | 声称状态 | 实际状态 | 问题 | 整改 |\n|------|----------|----------|------|------|\n| punishment_enforcer.sh | 已部署 | ✅ 已部署+可执行 | 无 | - |\n| checkpoint-health-check.py | 已部署 | ✅ 已部署+可执行 | 无 | - |\n| backup_to_external.py | 已部署 | ⚠️ 已部署但**无执行权限** | 权限缺失 | ✅ 已修复 |\n| token_monitor.py | 已部署 | ✅ 已部署+可执行 | 无 | - |\n\n### 整改措施\n\n```bash\nchmod +x /root/.openclaw/workspace/scripts/backup_to_external.py\n```\n\n**状态**: ✅ 已修复\n\n### 最终",
+  "limitations_applied": []
+}

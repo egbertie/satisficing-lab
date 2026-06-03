@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/knowledge_ingestion_week2.py",
+  "filename": "knowledge_ingestion_week2.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "cc6f0e7dc32eb70d",
+  "content_length": 6458,
+  "ingested_at": "2026-03-31T17:27:46.141419",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n知识入库Week 2执行脚本\n5标准化批量入库\n目标: 50个文件（memory/archive/）\n\"\"\"\n\nimport os\nimport json\nimport hashlib\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List\n\nclass KnowledgeIngestionWeek2:\n    \"\"\"知识入库Week 2\"\"\"\n    \n    def __init__(self, workspace=\"/root/.openclaw/workspace\"):\n        self.workspace = Path(workspace)\n        self.knowledge_dir = self.workspace / \"knowledge\"\n        self.ingested_dir = self.knowledge_dir / \"week2_ingested\"\n        s",
+  "limitations_applied": []
+}

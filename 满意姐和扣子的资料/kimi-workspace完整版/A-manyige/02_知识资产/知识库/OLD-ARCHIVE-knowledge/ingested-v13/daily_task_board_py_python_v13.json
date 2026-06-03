@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/daily_task_board.py",
+  "filename": "daily_task_board.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "6f6a63403f7bdea2",
+  "content_length": 3936,
+  "ingested_at": "2026-03-31T17:27:46.134070",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n每日任务看板生成脚本 V2.0\n准确识别所有任务状态\n\"\"\"\n\nimport re\nfrom datetime import datetime\nfrom pathlib import Path\n\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\n\ndef parse_task_master():\n    \"\"\"解析TASK_MASTER.md提取所有任务\"\"\"\n    task_file = WORKSPACE / \"TASK_MASTER.md\"\n    if not task_file.exists():\n        return []\n    \n    content = task_file.read_text()\n    tasks = []\n    \n    # 按###分割任务块\n    sections = content.split('###')\n    \n    for section in sections[1:]:  # 跳过第一个空部分\n        lines",
+  "limitations_applied": []
+}

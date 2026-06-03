@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/docs/TASK_COMPLETION_VERIFICATION_STANDARD.md",
+  "filename": "TASK_COMPLETION_VERIFICATION_STANDARD.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "7382f804637c88c2",
+  "content_length": 3862,
+  "ingested_at": "2026-03-31T17:27:44.899955",
+  "content_preview": "# 任务完成验证标准 V1.0\n\n**生效日期**: 2026-03-31  \n**制定依据**: 配置/任务类记录验证发现的问题  \n**核心原则**: **\"只有可验证的执行记录才算完成\"**\n\n---\n\n## 一、Cron任务完成标准（8步验证）\n\n### Step 1: 脚本创建验证\n- [ ] 脚本文件存在于 `scripts/` 目录\n- [ ] 文件有正确的扩展名 (`.sh` / `.py`)\n- [ ] 文件内容非空且语法正确\n- **验证命令**: `ls -la scripts/<script-name>`\n- **通过标准**: 文件存在且大小 > 0\n\n### Step 2: 执行权限验证\n- [ ] 脚本有执行权限\n- **验证命令**: `ls -la scripts/<script-name> | grep x`\n- **通过标准**: 权限包含 `x` (如 `-rwxr-xr-x`)\n\n### Step 3: 手动执行测试\n- [ ] 脚本可以手动执行\n- [ ] 执行输出符合预期\n- [ ] 无报错信息\n- **验证命令**: `./scripts",
+  "limitations_applied": []
+}

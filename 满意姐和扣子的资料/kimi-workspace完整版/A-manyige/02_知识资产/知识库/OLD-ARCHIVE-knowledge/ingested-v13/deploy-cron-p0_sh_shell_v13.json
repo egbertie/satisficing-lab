@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/deploy-cron-p0.sh",
+  "filename": "deploy-cron-p0.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "0f82cbb1b4345d2f",
+  "content_length": 2322,
+  "ingested_at": "2026-03-31T17:27:46.191221",
+  "content_preview": "#!/bin/bash\n# Cron P0任务部署脚本\n# 5个高优先级任务：Token预警、晨报、逾期提醒、备份验证、日程提醒\n\nOPENCLAW_CONFIG=\"$HOME/.openclaw/config.json\"\nCRON_DIR=\"$HOME/.openclaw/cron\"\n\necho \"==========================================\"\necho \"部署Cron P0任务 (5个)\"\necho \"==========================================\"\n\n# 1. Token实时预警 (每15分钟)\necho \"[1/5] 创建: Token实时预警 (每15分钟)\"\ncat > \"$CRON_DIR/token-alert.sh\" << 'EOF'\n#!/bin/bash\n# Token实时预警 - 低于20%触发通知\nTHRESHOLD=20\n# 实际实现需要调用API获取当前Token\n# 这里先创建占位脚本\necho \"$(date): Token check placeholder\" >> /tm",
+  "limitations_applied": []
+}

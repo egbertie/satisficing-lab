@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/backups/cron/init-20260315-223523/config/cron_rules.yaml",
+  "filename": "cron_rules.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "fc6593316bd885be",
+  "content_length": 5393,
+  "ingested_at": "2026-03-31T17:27:46.421898",
+  "content_preview": "# Cron规则配置\n# 方案C+ 三层响应架构\n\ncrons:\n  # ============================================================\n  # Tier 1: 自动执行（低风险）\n  # ============================================================\n  \n  - id: auto_maintenance\n    name: \"自动维护任务\"\n    tier: 1\n    schedule: \"17 */2 * * *\"  # 每2小时17分\n    tasks:\n      - backup_check\n      - disk_monitor\n      - log_archive\n      - token_tracking\n    risk_level: low\n    auto_execute: true\n    enabled: true\n    description: \"系统自动维护，无需人工干预\"\n    created_at: \"2026-03-1",
+  "limitations_applied": []
+}

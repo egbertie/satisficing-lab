@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/docs/DEEP_INSIGHT_AUTO_INDEX.md",
+  "filename": "DEEP_INSIGHT_AUTO_INDEX.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "881debb1d157ef97",
+  "content_length": 5481,
+  "ingested_at": "2026-03-31T17:27:44.875212",
+  "content_preview": "# 自动索引更新脚本 - 五层深度洞察报告\n\n**报告生成时间**: 2026-03-31  \n**分析对象**: auto-index-update.sh 自动索引更新脚本  \n**分析维度**: L1现象 → L2模式 → L3根因 → L4系统 → L5未来指导\n\n---\n\n## L1: 现象层 - 脚本功能和实现\n\n### 1.1 表面现象\n\n开发了一个bash脚本，每小时自动执行以下操作：\n- 扫描workspace的6个关键目录\n- 对比前后两次扫描结果，识别变更\n- 更新GLOBAL_INDEX.md的最后更新时间\n- 生成3个分类索引文件（分类/状态/专家）\n- 输出详细的执行报告\n- 自动清理30天前的旧文件\n\n### 1.2 技术实现\n\n| 组件 | 技术选型 | 原因 |\n|------|----------|------|\n| 脚本语言 | Bash | 无需依赖，兼容性好 |\n| 状态存储 | 文本文件 | 简单可靠，无需数据库 |\n| 变更检测 | 文件时间戳对比 | 轻量级，无需哈希计算 |\n| 报告格式 | Markdown | 易读，兼容性好 |\n| ",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/data/weekly-token-tracker-v3.1.json",
+  "filename": "weekly-token-tracker-v3.1.json",
+  "file_type": "json",
+  "extension": ".json",
+  "file_hash": "dc2f314b3b161b98",
+  "content_length": 2900,
+  "ingested_at": "2026-03-31T17:27:44.534619",
+  "content_preview": "{\n  \"version\": \"3.1\",\n  \"model\": \"weekly-consumption-tracker\",\n  \"description\": \"周Token消耗追踪与预警系统\",\n  \"last_updated\": \"2026-03-21\",\n  \n  \"budget\": {\n    \"weekly_total\": 490000,\n    \"daily_average\": 70000,\n    \"unit\": \"tokens\"\n  },\n  \n  \"tracking\": {\n    \"method\": \"用户主动标记 + session_status验证\",\n    \"frequency\": \"每6小时检查一次（每日4次）\",\n    \"times\": [\"06:00\", \"12:00\", \"18:00\", \"23:00\"],\n    \"granularity\": \"周累计消耗百分比\"\n  },\n  \n  \"thresholds\": {\n    \"description\": \"基于时间进度的动态阈值（含20%冗余）\",\n    \"formula\": \"允许消耗 = 时",
+  "limitations_applied": []
+}

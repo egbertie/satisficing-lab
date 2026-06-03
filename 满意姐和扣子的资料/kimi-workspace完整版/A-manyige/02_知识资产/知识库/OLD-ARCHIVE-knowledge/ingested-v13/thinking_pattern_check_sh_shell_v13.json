@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/thinking_pattern_check.sh",
+  "filename": "thinking_pattern_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "b426c068ebb1a470",
+  "content_length": 366,
+  "ingested_at": "2026-03-31T17:27:46.178139",
+  "content_preview": "#!/bin/bash\n# 思维方式强制检查脚本\n# 每次对话前强制检查是否应用了思维方式\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nLOG_FILE=\"$WORKSPACE/diary/thinking_pattern_check.log\"\n\n# 记录检查时间\necho \"=== 思维方式检查 ===\" >> \"$LOG_FILE\"\necho \"检查时间: $(date)\" >> \"$LOG_FILE\"\n\necho \"思维方式强制检查提醒:\"\necho \"1. 本次对话是否应用了至少3项思维方式？\"\necho \"2. 是否展示思考过程（不是只给结果）？\"\necho \"3. 是否提供可验证的证据（文件路径/数据）？\"\necho \"\"\necho \"如果以上任何一项不满足，请停止并补充。\"\n",
+  "limitations_applied": []
+}

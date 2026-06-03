@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/simon-skill/simon_skill.py",
+  "filename": "simon_skill.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "df8aecdff60a26be",
+  "content_length": 11242,
+  "ingested_at": "2026-03-31T17:27:45.481400",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nsimon_skill.py\nSIMON（司马贺）- 理性决策与满意解计算器\n五路图腾之金 - 不求最优，但求最适；结果为本，满意为尺\n\"\"\"\n\nfrom dataclasses import dataclass\nfrom typing import Dict, List, Optional, Tuple\nfrom enum import Enum\nimport json\n\n\nclass DecisionStatus(Enum):\n    \"\"\"决策状态\"\"\"\n    RECOMMENDED = \"推荐\"\n    ACCEPTABLE = \"可接受\"\n    MARGINAL = \"边缘\"\n    REJECTED = \"不推荐\"\n\n\n@dataclass\nclass CandidateProfile:\n    \"\"\"候选人档案\"\"\"\n    name: str\n    liu_score: float  # LIU根基评分 (0-100)\n    capability_match: float  # 能力匹配度 (0-10)\n  ",
+  "limitations_applied": []
+}

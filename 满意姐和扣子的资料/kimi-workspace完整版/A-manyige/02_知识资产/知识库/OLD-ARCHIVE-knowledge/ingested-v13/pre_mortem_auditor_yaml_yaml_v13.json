@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blue-sentinel/pre_mortem_auditor.yaml",
+  "filename": "pre_mortem_auditor.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "ab9efa8dc2305200",
+  "content_length": 4948,
+  "ingested_at": "2026-03-31T17:27:45.482670",
+  "content_preview": "# Blue-Sentinel Pre-Mortem Auditor\n# 蓝军事前质疑官 - 7标准达标Skill\n# 版本: 1.0.0\n# 最后更新: 2026-03-21\n\nskill_name: \"pre_mortem_auditor\"\ndisplay_name: \"蓝军事前质疑官\"\nversion: \"1.0.0\"\ntype: \"adversarial_audit\"\nauthor: \"Blue-Sentinel-01\"\ncreated_date: \"2026-03-21\"\n\n---\n\n## S1 全局考虑 (Global Coverage)\n\n覆盖范围:\n  - 所有主Claw执行计划提交前强制审计\n  - 覆盖事实/逻辑/假设/失败场景四维度\n  - 无豁免条款，100%审计\n\n全局规则:\n  - 主Claw提交计划后自动触发\n  - 强制30分钟等待期（防止冲动执行）\n  - 审计通过后方可进入执行阶段\n\n---\n\n## S2 系统闭环 (System Closed-Loop)\n\naudit_workflow:\n  step_1_trigger:\n    conditio",
+  "limitations_applied": []
+}

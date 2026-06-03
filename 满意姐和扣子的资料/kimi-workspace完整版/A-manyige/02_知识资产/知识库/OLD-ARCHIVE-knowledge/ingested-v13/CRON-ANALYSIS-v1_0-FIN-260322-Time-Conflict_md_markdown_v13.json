@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/CRON-ANALYSIS-v1.0-FIN-260322-Time-Conflict.md",
+  "filename": "CRON-ANALYSIS-v1.0-FIN-260322-Time-Conflict.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "8afcacd0a47f1abf",
+  "content_length": 4726,
+  "ingested_at": "2026-03-31T17:27:46.521733",
+  "content_preview": "# Cron时间冲突分析与资源综合利用方案\n\n> **分析时间**: 2026-03-22  \n> **分析对象**: 全部Cron任务时间分布  \n> **问题**: 错峰机制失效，多任务同时触发\n\n---\n\n## 一、时间冲突识别\n\n### 🔴 严重冲突（同一时间触发多个任务）\n\n| 时间 | 冲突任务数 | 任务列表 | Token风险 |\n|------|-----------|----------|-----------|\n| **09:00** | 2个 | 晨间图腾仪式 + 3D情景规划(周一) | 🔴 高 |\n| **09:37** | 3个 | 每日站会 + 每日安全检查 + milestone-daily-check | 🔴 极高 |\n| **01:30-02:00** | 3个 | 知识图谱(01:30) + 蓝军审计(02:00) + 备份清理 | 🟡 中 |\n\n### 🟡 潜在冲突（时间间隔过短）\n\n| 时间段 | 任务密集度 | 说明 |\n|--------|-----------|------|\n| 09:00-09:47 | 6个任务/47分钟 | 早间",
+  "limitations_applied": []
+}

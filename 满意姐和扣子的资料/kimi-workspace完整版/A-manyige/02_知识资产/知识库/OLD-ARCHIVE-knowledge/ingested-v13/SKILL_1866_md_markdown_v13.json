@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/knowledge-ingest/ingested/SKILL.1866.md",
+  "filename": "SKILL.1866.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "139d64d047eecee9",
+  "content_length": 939,
+  "ingested_at": "2026-03-31T17:27:45.713367",
+  "content_preview": "# file-integrity Skill V5标准版本\n\n## S1: 全局考虑\n\n### 输入\n- 文件路径或目录\n- 校验算法(MD5/SHA256等)\n- 基准哈希值(可选)\n\n### 覆盖维度\n| 维度 | 考虑内容 |\n|------|----------|\n| **人** | 系统管理员、安全人员 |\n| **事** | 文件完整性校验、篡改检测、版本比对 |\n| **物** | 文件、哈希值、校验记录 |\n| **环境** | 文件系统权限、存储空间 |\n| **外部集成** | 日志系统(可选) |\n| **边界情况** | 权限不足、大文件、哈希碰撞 |\n\n---\n\n## S2: 系统考虑\n\n### 处理流程\n```\n选择算法 → 计算哈希 → 比对基准 → 生成报告 → 记录日志\n```\n\n### 故障处理\n- **权限不足**: 跳过并记录\n- **大文件**: 分块哈希\n- **哈希碰撞**: 使用SHA256替代MD5\n\n---\n\n## S3: 输出规范\n\n### 校验报告\n```json\n{\n  \"file\": \"path/to/file\",\n  \"al",
+  "limitations_applied": []
+}

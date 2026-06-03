@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify-core-skills.sh",
+  "filename": "verify-core-skills.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "c2a9da3a65ad9df6",
+  "content_length": 1188,
+  "ingested_at": "2026-03-31T17:27:46.141606",
+  "content_preview": "#!/bin/bash\n# 6个核心治理Skill验收脚本\n\necho \"==========================================\"\necho \"核心治理Skill 5标准验收\"\necho \"==========================================\"\necho \"\"\n\nSKILLS=(\n    \"role-federation\"\n    \"worry-list-manager\"\n    \"honesty-tagging-protocol\"\n    \"token-budget-enforcer\"\n    \"quality-gate-system\"\n    \"management-rules\"\n)\n\nPASS_COUNT=0\nFAIL_COUNT=0\n\nfor skill in \"${SKILLS[@]}\"; do\n    echo \"--- 检验: $skill ---\"\n    RESULT=$(python3 /root/.openclaw/workspace/skills/five-standard-auditor/scrip",
+  "limitations_applied": []
+}

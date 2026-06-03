@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/system_restart_recovery.py",
+  "filename": "system_restart_recovery.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "0e0d6dc038603753",
+  "content_length": 3134,
+  "ingested_at": "2026-03-31T17:27:46.211122",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n系统重启恢复脚本\n用途: 系统重启后自动运行，恢复上次状态\n触发: 系统启动时自动运行\n\"\"\"\n\nimport json\nimport os\nimport sys\nfrom datetime import datetime\nfrom pathlib import Path\n\ndef recover_from_restart():\n    \"\"\"系统重启后恢复\"\"\"\n    \n    print(\"=\" * 60)\n    print(\"SYSTEM RESTART RECOVERY\")\n    print(f\"Time: {datetime.now().isoformat()}\")\n    print(\"=\" * 60)\n    print()\n    \n    # 1. 读取Checkpoint\n    checkpoint_file = Path(\"/root/.openclaw/workspace/memory/system_state_checkpoint.json\")\n    if not checkpoint_file.",
+  "limitations_applied": []
+}

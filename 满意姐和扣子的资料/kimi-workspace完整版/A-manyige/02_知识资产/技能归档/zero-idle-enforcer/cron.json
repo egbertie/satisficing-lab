@@ -1,0 +1,33 @@
+{
+  "version": "2.0.0",
+  "skill_name": "zero-idle-enforcer",
+  "description": "零空置强制执行器 - 每15分钟检查（S4: 错峰执行）",
+  "standard": "7-standard",
+  "schedule_note": "使用随机分钟偏移避免整点拥堵",
+  "jobs": [
+    {
+      "name": "idle-check",
+      "schedule": "2,17,32,47 * * * *",
+      "enabled": true,
+      "command": "python3 /root/.openclaw/workspace/skills/zero-idle-enforcer/enforcer.py enforce",
+      "timeout": 180,
+      "description": "每15分钟检查并消除空置状态（错峰: +2分钟）"
+    },
+    {
+      "name": "daily-report",
+      "schedule": "0 23 * * *",
+      "enabled": true,
+      "command": "python3 /root/.openclaw/workspace/skills/zero-idle-enforcer/enforcer.py report --daily",
+      "timeout": 60,
+      "description": "每日23:00生成补位执行日报"
+    },
+    {
+      "name": "weekly-validation",
+      "schedule": "0 0 * * 1",
+      "enabled": true,
+      "command": "python3 /root/.openclaw/workspace/skills/zero-idle-enforcer/scripts/adversarial-test.py",
+      "timeout": 300,
+      "description": "每周一运行对抗测试验证准确性 (S5/S7)"
+    }
+  ]
+}

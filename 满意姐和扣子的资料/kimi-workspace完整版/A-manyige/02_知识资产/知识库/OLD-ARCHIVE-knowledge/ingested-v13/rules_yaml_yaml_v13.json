@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/token-budget-enforcer/config/rules.yaml",
+  "filename": "rules.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "f1d3ebfad69d3974",
+  "content_length": 3039,
+  "ingested_at": "2026-03-31T17:27:45.010994",
+  "content_preview": "# 执行规则配置\n# 预算执行与熔断规则\n\nrules:\n  # 任务启动前检查\n  pre_execution:\n    - name: \"budget_availability_check\"\n      description: \"检查预算池是否有足够余额\"\n      action: \"block_if_insufficient\"\n      message: \"预算不足，任务暂停\"\n      \n    - name: \"estimation_confidence_check\"\n      description: \"检查预估置信度\"\n      action: \"warn_if_low_confidence\"\n      threshold: 0.7\n      \n    - name: \"concurrency_limit_check\"\n      description: \"检查并发任务数\"\n      action: \"queue_if_exceeded\"\n      \n  # 执行中监控\n  during_execution:\n    - name: \"realtim",
+  "limitations_applied": []
+}

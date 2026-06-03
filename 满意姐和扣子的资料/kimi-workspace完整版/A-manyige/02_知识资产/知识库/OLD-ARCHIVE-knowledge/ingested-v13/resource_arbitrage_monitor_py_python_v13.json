@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/global-resource-arbitrage/scripts/resource_arbitrage_monitor.py",
+  "filename": "resource_arbitrage_monitor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "ff4f73c66edac1ff",
+  "content_length": 15203,
+  "ingested_at": "2026-03-31T17:27:45.400759",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nResource Arbitrage Monitor\n全球资源套利监控系统\n\n功能:\n- 自动资源扫描\n- 套利机会监控\n- 告警通知\n- 报表生成\n- 可观测输出 (S3)\n- 自动化集成 (S4)\n\n作者: OpenClaw Agent\n版本: v1.0\n日期: 2026-03-27\n\"\"\"\n\nimport json\nimport logging\nimport os\nimport sys\nimport time\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import Dict, List, Optional, Tuple\nfrom dataclasses import asdict\nimport threading\n\n# 添加父目录到路径\nsys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))\n\nfrom reso",
+  "limitations_applied": []
+}

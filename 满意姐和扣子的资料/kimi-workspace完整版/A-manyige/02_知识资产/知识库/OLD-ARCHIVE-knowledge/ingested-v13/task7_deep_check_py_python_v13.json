@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/task7_deep_check.py",
+  "filename": "task7_deep_check.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "dab0cd7ad9c84ad7",
+  "content_length": 3733,
+  "ingested_at": "2026-03-31T17:27:46.167042",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n管理规则深度检查 - 今日执行任务7\n目标: 4项深度检查，执行深度60%→90%\n\"\"\"\n\nimport re\nimport json\nfrom pathlib import Path\n\ndef deep_check_rules():\n    \"\"\"执行4项深度检查\"\"\"\n    \n    checks = {\n        \"完整性检查\": False,\n        \"真实性检查\": False,\n        \"一致性检查\": False,\n        \"可追溯检查\": False\n    }\n    \n    results = []\n    \n    # 检查1: 完整性检查（必含项完整）\n    print(\"=== 检查1: 完整性检查 ===\")\n    task_file = Path(\"/root/.openclaw/workspace/TASK_MASTER.md\")\n    content = task_file.read_text()\n    \n    required_sections = [",
+  "limitations_applied": []
+}

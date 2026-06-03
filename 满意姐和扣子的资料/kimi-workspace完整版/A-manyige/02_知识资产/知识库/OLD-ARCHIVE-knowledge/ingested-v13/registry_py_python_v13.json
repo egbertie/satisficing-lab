@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/universal-task-executor-v3/core/registry.py",
+  "filename": "registry.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "faeeead3222dbac5",
+  "content_length": 17459,
+  "ingested_at": "2026-03-31T17:27:45.365989",
+  "content_preview": "\"\"\"\nUniversal Task Executor V3.0 - 任务注册表\n支持1-6类任务的动态注册和配置管理\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport logging\nimport importlib.util\nfrom typing import Dict, List, Optional, Type, Any, Callable\nfrom dataclasses import dataclass, field\nfrom pathlib import Path\n\nfrom .structures import Task, HandlerInfo, HandlerRegistration, TaskResult\n\nlogger = logging.getLogger(__name__)\n\n\n@dataclass\nclass TaskTypeConfig:\n    \"\"\"任务类型配置\"\"\"\n    category: str\n    name: str\n    display_name: str\n    description: s",
+  "limitations_applied": []
+}

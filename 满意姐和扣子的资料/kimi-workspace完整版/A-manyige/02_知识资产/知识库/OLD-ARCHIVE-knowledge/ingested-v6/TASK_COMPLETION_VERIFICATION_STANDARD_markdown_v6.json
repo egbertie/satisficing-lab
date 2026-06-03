@@ -1,0 +1,129 @@
+{
+  "source_path": "/root/.openclaw/workspace/docs/TASK_COMPLETION_VERIFICATION_STANDARD.md",
+  "filename": "TASK_COMPLETION_VERIFICATION_STANDARD.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 6240,
+  "checksum": "7382f804637c88c2",
+  "ingested_at": "2026-03-31T17:30:11.505693",
+  "line_count": 210,
+  "title": "任务完成验证标准 V1.0",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "任务完成验证标准 V1.0"
+    },
+    {
+      "level": 2,
+      "title": "一、Cron任务完成标准（8步验证）"
+    },
+    {
+      "level": 3,
+      "title": "Step 1: 脚本创建验证"
+    },
+    {
+      "level": 3,
+      "title": "Step 2: 执行权限验证"
+    },
+    {
+      "level": 3,
+      "title": "Step 3: 手动执行测试"
+    },
+    {
+      "level": 3,
+      "title": "Step 4: Cron条目添加"
+    },
+    {
+      "level": 3,
+      "title": "Step 5: 环境变量配置"
+    },
+    {
+      "level": 3,
+      "title": "Step 6: 日志目录准备"
+    },
+    {
+      "level": 3,
+      "title": "Step 7: 首次自动调度验证（关键）"
+    },
+    {
+      "level": 3,
+      "title": "Step 8: 周期性执行验证（长期）"
+    },
+    {
+      "level": 2,
+      "title": "二、配置类任务完成标准"
+    },
+    {
+      "level": 3,
+      "title": "配置文件任务"
+    },
+    {
+      "level": 3,
+      "title": "数据库/状态文件任务"
+    },
+    {
+      "level": 2,
+      "title": "三、脚本类任务完成标准"
+    },
+    {
+      "level": 3,
+      "title": "可执行脚本"
+    },
+    {
+      "level": 2,
+      "title": "四、任务状态定义"
+    },
+    {
+      "level": 3,
+      "title": "状态流转"
+    },
+    {
+      "level": 3,
+      "title": "状态定义"
+    },
+    {
+      "level": 3,
+      "title": "状态变更规则"
+    },
+    {
+      "level": 2,
+      "title": "五、虚报检测规则"
+    },
+    {
+      "level": 3,
+      "title": "虚报定义"
+    },
+    {
+      "level": 3,
+      "title": "虚报处理"
+    },
+    {
+      "level": 2,
+      "title": "六、验证自动化"
+    },
+    {
+      "level": 3,
+      "title": "推荐脚本"
+    },
+    {
+      "level": 1,
+      "title": "task-completion-verifier.sh"
+    },
+    {
+      "level": 2,
+      "title": "七、文档维护"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "任何状态 → 已阻塞",
+    "\"只有可验证的执行记录才算完成\"",
+    "任何状态 → 已废弃",
+    "进行中 → 待验证",
+    "待验证 → 进行中",
+    "待验证 → 已完成"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/feishu_doc_import.py",
+  "filename": "feishu_doc_import.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "0c3b1cdf6b7c6481",
+  "content_length": 16903,
+  "ingested_at": "2026-03-31T17:27:46.208932",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\n飞书云文档导入脚本\n\n功能：\n- 将本地 Markdown 文件转换为飞书可导入的格式\n- 生成导入包供用户手动导入\n- 作为权限受限时的保底方案\n\n使用方法：\n    python scripts/feishu_doc_import.py export ./notes --output ./feishu_export\n    python scripts/feishu_doc_import.py preview ./notes/article.md\n\n环境变量：\n    FEISHU_APP_ID - 飞书应用 ID（可选，用于直接导入）\n    FEISHU_APP_SECRET - 飞书应用密钥（可选）\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport re\nimport zipfile\nimport argparse\nfrom pathlib import Path\nfrom datetime import datetime\nfrom t",
+  "limitations_applied": []
+}

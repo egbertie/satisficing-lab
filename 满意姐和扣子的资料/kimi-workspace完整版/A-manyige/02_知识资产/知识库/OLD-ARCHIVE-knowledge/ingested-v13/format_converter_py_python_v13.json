@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_multi-format-delivery/format_converter.py",
+  "filename": "format_converter.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "77335dca935a44fc",
+  "content_length": 4068,
+  "ingested_at": "2026-03-31T17:27:45.064771",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\n多格式交付能力 - 格式转换器\nMulti-Format Delivery Converter\n\n功能：\n- 文本转Mermaid图表\n- 数据转可视化\n- PPT大纲生成\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport re\nfrom pathlib import Path\n\nclass FormatConverter:\n    \"\"\"格式转换器\"\"\"\n    \n    # Mermaid模板库\n    TEMPLATES = {\n        \"flowchart\": \"\"\"graph TD\n    {nodes}\n    {edges}\n    \n    {styles}\"\"\",\n        \n        \"gantt\": \"\"\"gantt\n    title {title}\n    dateFormat YYYY-MM-DD\n    \n    {tasks}\"\"\",\n        \n        \"pie\": \"\"\"pie",
+  "limitations_applied": []
+}

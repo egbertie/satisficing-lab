@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_task-coordinator/DATABASE_FIX_REPORT.md",
+  "filename": "DATABASE_FIX_REPORT.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "4cfdb77ab6bc2c11",
+  "content_length": 1782,
+  "ingested_at": "2026-03-31T17:27:45.074132",
+  "content_preview": "# 任务协调器数据库同步修复报告\n\n## 修复时间\n2026-03-13 11:47\n\n## 问题描述\n\n### 现象\n- 协调器脚本检测到2项\"过期任务\"：URG-001灾备重建、URG-002内部会议机制\n- 实际核查发现这两项任务均已完成\n- 数据文件缺失：`skills/task-coordinator/data/tasks.json` 不存在\n\n### 根本原因\n1. **硬编码任务状态**：`task_coordinator.py` 中的 `load_current_tasks()` 方法硬编码了过期任务列表，而非动态读取任务状态\n2. **缺少数据层**：没有 `data/tasks.json` 文件来存储和同步最新任务状态\n3. **状态不同步**：脚本中的任务状态与实际文件系统状态不一致\n\n## 解决方案\n\n### 1. 创建数据文件 `skills/task-coordinator/data/tasks.json`\n- 包含正确的任务状态（URG-001和URG-002标记为已完成）\n- 同步来自 `docs/TASK_MASTER.md` 的最新任务信息\n- 包含",
+  "limitations_applied": []
+}

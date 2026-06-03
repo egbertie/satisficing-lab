@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify_morning_report_cron.sh",
+  "filename": "verify_morning_report_cron.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "4ff3c484b80dbc03",
+  "content_length": 1943,
+  "ingested_at": "2026-03-31T17:27:46.185358",
+  "content_preview": "#!/bin/bash\n# 晨报Cron任务深度洞察和8步验证\n# 任务: morning_report.sh\n# 整改时间: 2026-03-31\n\necho \"=== 晨报Cron任务 (morning_report.sh) - 深度洞察与8步验证 ===\"\necho \"\"\n\n# 8步验证执行\necho \"【8步验证开始】\"\necho \"\"\n\n# Step 1: 配置写入验证\necho \"Step 1: 配置写入验证\"\nif crontab -l | grep -q \"morning_report.sh\"; then\n    echo \"  ✅ 配置已写入crontab\"\n    STEP1=true\nelse\n    echo \"  ❌ 配置未找到\"\n    STEP1=false\nfi\necho \"\"\n\n# Step 2: 语法检查\necho \"Step 2: 语法检查\"\nSCRIPT_PATH=\"/root/.openclaw/workspace/scripts/morning_report.sh\"\nif bash -n \"$SCRIPT_PATH\" 2>/dev/null;",
+  "limitations_applied": []
+}

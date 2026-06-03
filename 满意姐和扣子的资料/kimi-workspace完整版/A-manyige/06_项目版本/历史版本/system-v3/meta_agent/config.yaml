@@ -1,0 +1,79 @@
+# Meta-Agent 战略中枢 配置
+# Meta-Agent战略中枢 — 分层-蜂群混合架构
+# 命名空间: NGT-META-v1.0-FIN-260327
+# 注意: 此为配置方案，物理部署需Kimi Agent平台权限
+
+version: "1.0"
+description: "Meta-Agent战略中枢配置文件（三层架构）"
+
+architecture:
+  # 三层架构
+  layers:
+    # 战略层（Meta-Agent）
+    strategic:
+      role: "监督者"
+      model: "kimi-k2p5-thinking"  # 推理模式
+      responsibilities:
+        - "任务分解与分配"
+        - "质量审计（Blue Army）"
+        - "异常处理决策"
+      token_budget: "30% of total"
+      
+    # 监督层（Supervisor）
+    supervisory:
+      role: "协调者"
+      model: "kimi-k2p5-standard"
+      responsibilities:
+        - "进度监控"
+        - "资源调度"
+        - "子Agent管理"
+      token_budget: "20% of total"
+      
+    # 执行层（Worker）
+    execution:
+      role: "执行者"
+      model: "kimi-k2p5-efficient"
+      responsibilities:
+        - "具体任务执行"
+        - "文件操作"
+        - "数据收集"
+      token_budget: "50% of total"
+
+  # 压缩通信协议
+  communication:
+    protocol: "compressed_json"
+    format: |
+      {
+        "t": "task_type",
+        "p": "priority",
+        "d": "data_hash",
+        "s": "status",
+        "r": "result_summary"
+      }
+    token_saving: "80% vs natural language"
+    
+  # 三体制衡
+  three_body_balance:
+    green_army:
+      role: "生产执行"
+      action: "submit_report"
+      
+    blue_army:
+      role: "实时审计"
+      action: "challenge_with_3_questions"
+      veto_power: "30% token reserve"
+      
+    grey_army:
+      role: "混沌测试"
+      action: "inject_faults_randomly"
+      frequency: "weekly"
+
+  # 部署说明（诚实标注）
+  deployment:
+    status: "configuration_only"
+    physical_deployment_requirements:
+      - "Kimi Agent平台账户"
+      - "Docker运行时环境"
+      - "API密钥配置"
+      - "网络访问权限"
+    user_action_required: "根据此配置在Kimi Agent平台部署"

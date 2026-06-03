@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/cron_task_status_check.sh",
+  "filename": "cron_task_status_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "1f5494e59ec71a6c",
+  "content_length": 1968,
+  "ingested_at": "2026-03-31T17:27:46.218578",
+  "content_preview": "#!/bin/bash\n# 第三项全量任务：Cron任务实际运行状态验证\n# 验证所有配置的Cron任务是否真正运行\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nREPORT_DIR=\"$WORKSPACE/reports\"\nTIMESTAMP=$(date '+%Y%m%d_%H%M%S')\nREPORT_FILE=\"$REPORT_DIR/cron_task_status_report_${TIMESTAMP}.md\"\n\necho \"=== 第三项全量任务：Cron任务运行状态验证 ===\"\necho \"时间: $(date)\"\necho \"\"\n\nmkdir -p \"$REPORT_DIR\"\n\n# 获取当前cron配置\ncrontab -l > /tmp/current_cron.txt 2>/dev/null || echo \"NO_CRON\" > /tmp/current_cron.txt\n\ncat > \"$REPORT_FILE\" << EOF\n# Cron任务运行状态验证报告\n\n**验证时间**: $(date)\n**验证方法**: 检查c",
+  "limitations_applied": []
+}

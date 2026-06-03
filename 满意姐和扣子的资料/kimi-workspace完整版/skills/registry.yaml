@@ -1,0 +1,141 @@
+# Kimi Claw Skill 注册中心
+# 来源: Kimi_Claw_Skill生态系统全栈操作手册.docx 实用化改造
+# 功能: 统一元数据注册、血缘追踪、健康度评分
+# 创建时间: 2026-04-04
+# 版本: 1.0
+
+meta:
+  version: "1.0"
+  last_updated: "2026-04-04"
+  total_skills: 119
+  registry_path: "/root/.openclaw/workspace/skills/registry.yaml"
+  auto_generate: true
+
+# 核心Skill注册表（示例+框架，逐步扩展至全量119个）
+skills:
+  # ===== P0 核心系统Skill =====
+  baseline-checker:
+    name: "基线检查器"
+    version: "1.0"
+    author: "满意姐"
+    tags: ["system", "health", "audit"]
+    path: "skills/baseline-checker"
+    constraints:
+      requiredFirstTool: "exec"
+      maxTokensPerTurn: 4000
+      allowedFileTypes: [".py", ".md", ".json", ".sh"]
+    capabilities:
+      description: "验证9项系统基线健康指标"
+      entry_point: "scripts/baseline-checker-runner.py"
+    health_score: 0.95
+    last_verified: "2026-04-04"
+    dependencies: []
+
+  blue-army-deep-insight-auditor:
+    name: "蓝军深度洞察审计器"
+    version: "1.0"
+    author: "Skeptor-7"
+    tags: ["audit", "adversarial", "quality"]
+    path: "skills/blue-army-deep-insight-auditor"
+    constraints:
+      verificationCommands: ["read docs/", "exec grep"]
+    capabilities:
+      description: "对抗性审计，防止幻觉与逻辑跳跃"
+    health_score: 0.92
+    last_verified: "2026-04-04"
+    dependencies: ["blue-army-auditor"]
+
+  intelligence-collection-system:
+    name: "情报采集系统"
+    version: "1.0"
+    author: "满意姐"
+    tags: ["intelligence", "automation", "external-api"]
+    path: "intelligence_collection_system.py"
+    constraints:
+      requiredFirstTool: "kimi_search"
+      blockedTools: ["browser_upload_without_confirm"]
+    capabilities:
+      description: "36Kr/IT桔子/arXiv等多源情报自动采集"
+    health_score: 0.88
+    last_verified: "2026-04-04"
+    dependencies: ["kr36_collector", "itjuzi_collector", "academic_collector"]
+
+  # ===== 五路图腾Skill =====
+  simon-skill:
+    name: "司马贺满意解Skill"
+    version: "1.0"
+    author: "满意姐"
+    tags: ["totem", "decision", "simon"]
+    path: "skills/simon-skill"
+    capabilities:
+      description: "基于赫伯特·西蒙满意解理论的决策辅助"
+    health_score: 0.90
+
+  confucius-skill:
+    name: "孔子儒商Skill"
+    version: "1.0"
+    author: "满意姐"
+    tags: ["totem", "ethics", "confucius"]
+    path: "skills/confucius-skill"
+    capabilities:
+      description: "仁义礼智信五常伦理评估"
+    health_score: 0.85
+
+  # ===== 外部集成Skill =====
+  feishu-suite:
+    name: "飞书套件"
+    version: "1.0"
+    author: "满意姐"
+    tags: ["integration", "feishu", " productivity"]
+    path: "skills/feishu-suite"
+    capabilities:
+      description: "飞书文档/日程/多维表格/IM统一管理"
+    health_score: 0.87
+
+# Skill评分标准（映射自文档中的tool-scorecard.yaml）
+scoring_dimensions:
+  functionality:
+    weight: 0.4
+    criteria:
+      - accuracy: "输出正确性（通过运行验证）"
+      - coverage: "边界情况处理"
+      - reliability: "错误率<0.1%"
+  efficiency:
+    weight: 0.3
+    criteria:
+      - token_cost: "平均Token消耗"
+      - latency: "响应延迟"
+      - cacheability: "可缓存性"
+  security:
+    weight: 0.2
+    criteria:
+      - sandbox_level: "沙盒隔离"
+      - data_privacy: "数据隐私"
+      - auditability: "操作可审计"
+  ecosystem:
+    weight: 0.1
+    criteria:
+      - documentation: "SKILL.md完整性"
+      - maintainability: "维护状态"
+
+# 质量门禁（映射自文档Stop Hooks）
+stop_hooks:
+  - id: "command-verification"
+    name: "命令验证门"
+    check: "verificationCommands是否全部执行且exit_code=0"
+  - id: "red-flag-language"
+    name: "红旗语言检测"
+    red_flags: ["处理完成", "好的！", "没问题！", "should work", "probably"]
+  - id: "diff-verification"
+    name: "变更验证门"
+    check: "git diff --stat 是否有实际文件变更"
+  - id: "blue-team-audit"
+    name: "蓝军审计门"
+    check: "Skeptor-7是否发现≥1个问题"
+
+# 自动维护配置
+maintenance:
+  health_check_schedule: "0 2 * * 0"  # 每周日凌晨2点
+  unused_threshold_days: 30
+  auto_score_update: true
+  report_path: "A-manyige/汇报/skill-registry-health-report.md"

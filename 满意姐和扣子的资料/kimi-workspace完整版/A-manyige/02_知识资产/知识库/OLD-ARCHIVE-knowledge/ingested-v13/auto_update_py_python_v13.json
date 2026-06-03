@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/auto-update-profile/auto_update.py",
+  "filename": "auto_update.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "523f2fd65bd08bfa",
+  "content_length": 9411,
+  "ingested_at": "2026-03-31T17:27:45.324682",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n自动更新管理哲学和用户档案\n5标准化实现\n\"\"\"\n\nimport json\nimport re\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Tuple\n\n# ============ Token消耗预估与效益红线 ============\nTOKEN_COST_ESTIMATE = \"\"\"\n自动更新Token消耗估算：\n- 单次消息检测: ~100 tokens\n- 内容提取与分类: ~200 tokens\n- 文件更新: ~300 tokens\n- 批量处理（10条）: ~2000 tokens\n\"\"\"\n\nTOKEN_RED_LINES = {\n    'max_per_message': 500,     # 单条消息处理不得超过500 tokens\n    'max_per_batch': 3000,      # 批量处理不得超过3K tokens\n    'efficiency_target': ",
+  "limitations_applied": []
+}

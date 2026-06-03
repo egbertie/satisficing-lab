@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blue-auditor/BLUE_ARMY_GUARANTEE.md",
+  "filename": "BLUE_ARMY_GUARANTEE.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "e24d3fa43abe6e6a",
+  "content_length": 6017,
+  "ingested_at": "2026-03-31T17:27:45.376430",
+  "content_preview": "# 绝对保障机制 - 蓝军独立性与标准执行\n\n**机制目的**: 技术手段强制确保蓝军独立性、SOP严格执行\n**生效时间**: 立即\n**监督方式**: 用户可随时验证\n\n---\n\n## 机制1: 审计独立性 - 强制分离\n\n### 技术隔离\n```bash\n# 蓝军审计必须在独立进程中执行\n# 不受满意妞会话影响\n\n# 审计会话独立标识\nexport BLUE_ARMY_SESSION=\"independent\"\nexport AUDIT_INDEPENDENCE=\"enforced\"\n\n# 审计时禁止读取满意妞的临时文件\n# 只能读取正式提交的成果\nAUDIT_SCOPE=\"/root/.openclaw/workspace/skills/*/\"\nEXCLUDE_PATTERN=\"*__pycache__*|*.tmp|*draft*\"\n```\n\n### 独立决策锁\n```python\n# 蓝军决策不受满意妞影响\nclass BlueArmyDecision:\n    \"\"\"蓝军独立决策系统\"\"\"\n    \n    def __init__(self):\n        self",
+  "limitations_applied": []
+}

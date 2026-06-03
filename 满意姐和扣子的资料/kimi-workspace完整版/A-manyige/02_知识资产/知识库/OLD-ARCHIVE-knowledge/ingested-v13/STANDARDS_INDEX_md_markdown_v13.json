@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/STANDARDS_INDEX.md",
+  "filename": "STANDARDS_INDEX.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "9324a1e73818acf9",
+  "content_length": 2305,
+  "ingested_at": "2026-03-31T17:27:46.514970",
+  "content_preview": "# 今日建立标准全索引 V1.0\n\n**时间**: 2026-03-28  \n**背景**: 7轮讨论后建立  \n**目的**: 防止经验丢失，作为唯一真相源  \n\n---\n\n## Skill建设标准（3轮）\n\n### 标准1: 7标准化（S1-S7）\n- 文件: `skills/*/SKILL.md` 模板\n- 核心: S1全局→S2闭环→S3输出→S4自动→S5验证→S6谦逊→S7对抗\n- 检查: `--test` CLI参数必须可用\n\n### 标准2: D6运行时验证\n- 文件: `skills/blue-auditor/runtime_verifier.py`\n- 核心: 代码必须能实际运行，不是静态检查\n- 检查: Python导入成功 + --test通过\n\n### 标准3: 蓝军审计SOP V1.1\n- 文件: `skills/blue-auditor/blue_army_sop.py`\n- 核心: 5维度17项检查，P0失败即FAIL\n- 原则: H0诚实审计\"宁可FAIL，不虚报PASS\"\n- 输出: `.audit_record.json` + SKILL.md版本",
+  "limitations_applied": []
+}

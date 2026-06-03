@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/token-prediction-calibrator.py",
+  "filename": "token-prediction-calibrator.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "dcb2945459fbafdb",
+  "content_length": 4409,
+  "ingested_at": "2026-03-31T17:27:46.214200",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nToken预测校准器 V2.0\n基于实际数据修正预测模型\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime\n\n# 实际观测数据（2026-03-21）\nOBSERVED_DATA = {\n    \"date\": \"2026-03-21\",\n    \"tasks\": [\n        {\"name\": \"元认知循环机制\", \"predicted\": 25, \"actual\": 25.1},\n        {\"name\": \"元审计官实战\", \"predicted\": 20, \"actual\": 84.2},  # 偏高\n        {\"name\": \"量化指标体系\", \"predicted\": 15, \"actual\": 25.8},\n        {\"name\": \"灾备企微通道\", \"predicted\": 15, \"actual\": 48.6},  # 偏高\n        {\"name\": \"专家档案搜索\", \"predicted\": 15, \"actu",
+  "limitations_applied": []
+}

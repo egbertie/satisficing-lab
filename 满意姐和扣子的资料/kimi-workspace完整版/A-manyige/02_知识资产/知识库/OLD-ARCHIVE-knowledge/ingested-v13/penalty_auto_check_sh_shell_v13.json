@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/penalty_auto_check.sh",
+  "filename": "penalty_auto_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "00ea68fe47d4136a",
+  "content_length": 2594,
+  "ingested_at": "2026-03-31T17:27:46.148122",
+  "content_preview": "#!/bin/bash\n# L4惩罚层自动执行脚本\n# 自动检测违规并触发惩罚\n\nPENALTY_LOG=\"/root/.openclaw/workspace/logs/penalty_log.jsonl\"\nTRUST_SCORE_FILE=\"/root/.openclaw/workspace/logs/trust_score\"\nmkdir -p /root/.openclaw/workspace/logs\n\n# 初始化信任积分（如果不存在）\nif [ ! -f \"$TRUST_SCORE_FILE\" ]; then\n    echo \"50\" > \"$TRUST_SCORE_FILE\"\nfi\n\nCURRENT_SCORE=$(cat \"$TRUST_SCORE_FILE\")\nTODAY=$(date +%Y%m%d)\n\necho \"=== L4惩罚层自动执行 ===\"\necho \"时间: $(date)\"\necho \"当前信任积分: $CURRENT_SCORE\"\necho \"\"\n\nPENALTY_TRIGGERED=0\n\n# 检查1: 虚报检测（声称完成但未创建文件）\necho \"",
+  "limitations_applied": []
+}

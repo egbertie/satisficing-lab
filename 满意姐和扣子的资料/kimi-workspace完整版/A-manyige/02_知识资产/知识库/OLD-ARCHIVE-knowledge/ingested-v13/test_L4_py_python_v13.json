@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/five-level-verification/tests/test_L4.py",
+  "filename": "test_L4.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "bf5dd930f64f613f",
+  "content_length": 2240,
+  "ingested_at": "2026-03-31T17:27:45.464917",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nL4 Test Cases - 集成验证测试\n\"\"\"\n\nimport os\nimport sys\nimport tempfile\nimport shutil\nimport unittest\n\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'scripts'))\nfrom verify import FiveLevelVerifier\n\n\nclass TestL4Integration(unittest.TestCase):\n    \"\"\"L4: 集成验证测试\"\"\"\n    \n    def setUp(self):\n        self.temp_dir = tempfile.mkdtemp()\n        self.skill_name = \"test_skill\"\n        self.skill_path = os.path.join(self.temp_dir, self.skill_name)\n        os.makedi",
+  "limitations_applied": []
+}

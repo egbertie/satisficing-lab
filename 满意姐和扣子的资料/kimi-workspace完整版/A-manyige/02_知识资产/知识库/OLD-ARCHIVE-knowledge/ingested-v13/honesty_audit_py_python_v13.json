@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/honesty_audit.py",
+  "filename": "honesty_audit.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "6e3eacd44d6953a7",
+  "content_length": 3713,
+  "ingested_at": "2026-03-31T17:27:46.148292",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n每日诚实审计脚本\n自动检查虚报、记录偏差、生成审计报告\n\n质量+诚实第一\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\n# 审计配置\nAUDIT_CONFIG = {\n    \"check_skills\": True,      # 检查Skill完成情况\n    \"check_crons\": True,       # 检查Cron运行状态\n    \"check_docs\": True,        # 检查文档完整性\n}\n\n# 输出目录\nOUTPUT_DIR = Path(\"~/.openclaw/workspace/diary/honesty-audit\").expanduser()\nOUTPUT_DIR.mkdir(parents=True, exist_ok=True)\n\n\ndef audit_skills():\n    \"\"\"审计Skill完成情况\"\"\"\n    skills_d",
+  "limitations_applied": []
+}

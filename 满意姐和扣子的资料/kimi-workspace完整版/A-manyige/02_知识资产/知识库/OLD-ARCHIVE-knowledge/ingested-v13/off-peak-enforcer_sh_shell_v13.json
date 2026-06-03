@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_off-peak-enforcer/scripts/off-peak-enforcer.sh",
+  "filename": "off-peak-enforcer.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "1f5a4a7c02190f09",
+  "content_length": 1862,
+  "ingested_at": "2026-03-31T17:27:45.214185",
+  "content_preview": "#!/bin/bash\n# 错峰规则强制执行脚本\n# skills/off-peak-enforcer/scripts/off-peak-enforcer.sh\n\necho \"=== 错峰规则强制执行 ===\"\necho \"检查时间: $(date)\"\necho \"\"\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nSKILL_DIR=\"$WORKSPACE/skills/off-peak-enforcer\"\nLOG_DIR=\"$SKILL_DIR/logs\"\nQUEUE_FILE=\"$LOG_DIR/off-peak-queue.json\"\n\nmkdir -p \"$LOG_DIR\"\n\n# 获取当前小时\nHOUR=$(date +%H)\nHOUR=${HOUR#0}  # 去除前导零\n\n# 定义高峰时段\nis_peak_hour() {\n    if [ $HOUR -ge 9 ] && [ $HOUR -lt 11 ]; then\n        return 0  # 是高峰\n    elif [ $HOUR -ge 14 ] && [ $HOUR -",
+  "limitations_applied": []
+}

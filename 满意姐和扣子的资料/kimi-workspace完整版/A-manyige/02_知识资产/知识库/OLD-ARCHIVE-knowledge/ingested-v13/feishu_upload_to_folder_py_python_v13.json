@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/feishu_upload_to_folder.py",
+  "filename": "feishu_upload_to_folder.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "4cb59a53ec6d8a01",
+  "content_length": 2185,
+  "ingested_at": "2026-03-31T17:27:46.216854",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n上传文件到飞书云盘共享文件夹\n\"\"\"\n\nimport os\nimport json\nimport requests\nfrom pathlib import Path\n\nAPP_ID = \"cli_a927c5dfa4381cc6\"\nAPP_SECRET = \"8950yzh6jj17nQkKBjvGIdRocdrslhjI\"\nFOLDER_TOKEN = \"DNKFfMXLGlIEp7dE6sFcPYJFnih\"\n\nBASE_URL = \"https://open.feishu.cn/open-apis\"\nFILE_DIR = \"/root/.openclaw/workspace/feishu_export\"\n\ndef get_tenant_token():\n    url = f\"{BASE_URL}/auth/v3/tenant_access_token/internal\"\n    resp = requests.post(url, json={\n        \"app_id\": APP_ID,\n        \"app_se",
+  "limitations_applied": []
+}

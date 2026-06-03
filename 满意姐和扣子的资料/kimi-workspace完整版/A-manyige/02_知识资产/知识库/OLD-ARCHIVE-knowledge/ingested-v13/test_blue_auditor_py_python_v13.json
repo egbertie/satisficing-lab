@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blue-auditor/test_blue_auditor.py",
+  "filename": "test_blue_auditor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "c31f4d68d495b3a0",
+  "content_length": 981,
+  "ingested_at": "2026-03-31T17:27:45.374071",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nblue-auditor测试文件\n\"\"\"\n\nimport unittest\nimport sys\nfrom pathlib import Path\n\nsys.path.insert(0, str(Path(__file__).parent))\n\nimport importlib.util\nspec = importlib.util.spec_from_file_location(\"blue_auditor\", \n    str(Path(__file__).parent / 'blue_auditor.py'))\nblue_auditor_module = importlib.util.module_from_spec(spec)\nspec.loader.exec_module(blue_auditor_module)\n\n\nclass TestBlueAuditor(unittest.TestCase):\n    \"\"\"蓝军审计测试\"\"\"\n    \n    def test_module_import(self):\n        ",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/OPTIMIZATION_4_SCHEMES_DEPLOYED_2026-03-26.md",
+  "filename": "OPTIMIZATION_4_SCHEMES_DEPLOYED_2026-03-26.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "5adc40b5d5024ffa",
+  "content_length": 6823,
+  "ingested_at": "2026-03-31T17:27:46.546639",
+  "content_preview": "# Kimi对话4个优化方案实施文档\n## 执行时间: 2026-03-26\n## 状态: 已部署\n\n---\n\n## 方案1: Token优化终极方案 ✅ 已部署\n\n### 实施内容\n\n#### 1.1 上下文裁剪策略\n```yaml\ncompression_triggers:\n  token_threshold: 80%      # Token使用达80%时触发\n  turn_threshold: 30        # 30轮对话后触发\n  \ncompression_strategy:\n  preserve:\n    - 用户明确标记\"重要\"的内容\n    - 决策点和结论\n    - 待办任务和截止日期\n    - 代码片段和配置\n  archive:\n    - 中间推导过程\n    - 已完成的调试日志\n    - 临时文件内容\n    - 重复确认的对话\n  \noutput: memory/YYYY-MM-DD-compact.md\n```\n\n#### 1.2 模型路由分层 (config/model-router.json)\n```json\n{\n  \"routing_p",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/knowledge-ingest/ingested/SKILL.1382.md",
+  "filename": "SKILL.1382.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "5ebe86144d95d189",
+  "content_length": 4742,
+  "ingested_at": "2026-03-31T17:27:46.023009",
+  "content_preview": "# 飞书云盘自服务上传 Skill\n\n> **Skill ID**: `feishu-drive-self-upload`  \n> **版本**: v1.0 FIN  \n> **创建时间**: 2026-03-26  \n> **核心机制**: 用户分享云盘链接 → AI自调试 → 完成上传\n\n---\n\n## 1. 问题背景 (S1 - 输入)\n\n### 1.1 场景描述\n- 默认飞书插件工具无法直接上传文件到云盘\n- 需要自定义Python插件调用飞书Drive API\n- 每次调试上传都需要用户手动干预\n\n### 1.2 解决目标\n建立**自服务上传机制**：用户提供云盘分享链接，AI自动完成调试并上传测试文件，验证通路后深度记忆配置。\n\n---\n\n## 2. 解决方案 (S2 - 处理)\n\n### 2.1 核心组件\n\n| 组件 | 路径 | 功能 |\n|------|------|------|\n| **上传器** | `plugins/feishu_drive_uploader.py` | 完整的云盘上传CLI工具 |\n| **测试文件** | `/tmp/test_upload",
+  "limitations_applied": []
+}

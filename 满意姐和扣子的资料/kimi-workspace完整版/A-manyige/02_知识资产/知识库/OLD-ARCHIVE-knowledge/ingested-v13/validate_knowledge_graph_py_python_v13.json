@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/validate_knowledge_graph.py",
+  "filename": "validate_knowledge_graph.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e19a38b14f977ff2",
+  "content_length": 2686,
+  "ingested_at": "2026-03-31T17:27:46.188011",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n知识图谱验证器 - 承诺洗澡Phase 1验证\n验证知识图谱是否可用，支持推理\n\"\"\"\n\nimport json\n\ndef validate_knowledge_graph():\n    \"\"\"验证知识图谱可用性\"\"\"\n    \n    # 读取图谱\n    with open(\"/root/.openclaw/workspace/knowledge/system/knowledge_graph_v2.json\", 'r') as f:\n        graph = json.load(f)\n    \n    # 验证1: 节点数量\n    total_nodes = len(graph[\"nodes\"])\n    concept_nodes = sum(1 for n in graph[\"nodes\"] if n[\"type\"] == \"concept\")\n    skill_nodes = sum(1 for n in graph[\"nodes\"] if n[\"type\"] == \"skill\")\n    \n    print",
+  "limitations_applied": []
+}

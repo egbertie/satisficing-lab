@@ -1,0 +1,112 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/honesty-tagging-protocol/scripts/honesty_runner.py",
+  "filename": "honesty_runner.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 23818,
+  "checksum": "72f5259ef887f06d",
+  "ingested_at": "2026-03-31T17:30:32.098446",
+  "line_count": 727,
+  "title": "honesty_runner",
+  "description": "Honesty Tagging Protocol - 5 Standard Implementation\n诚实性标注协议 - 完整实现 S1-S7\n\n标准: 5/7 (Production-Ready)\n- S1: 输入待标注内容/标注场景/置信度要求\n- S2: 诚实标注（来源标注→置信度→局限说明→对抗验证）\n- S3: 输出标注后内容+诚实标签+验证建议\n- S4: 可手动触发或自动检测关键",
+  "sections": [],
+  "entities": [
+    {
+      "name": "load_config",
+      "type": "function"
+    },
+    {
+      "name": "load_trust_data",
+      "type": "function"
+    },
+    {
+      "name": "save_trust_data",
+      "type": "function"
+    },
+    {
+      "name": "parse_input",
+      "type": "function"
+    },
+    {
+      "name": "detect_key_claims",
+      "type": "function"
+    },
+    {
+      "name": "tag_content",
+      "type": "function"
+    },
+    {
+      "name": "auto_detect_tag",
+      "type": "function"
+    },
+    {
+      "name": "generate_limitations",
+      "type": "function"
+    },
+    {
+      "name": "format_output",
+      "type": "function"
+    },
+    {
+      "name": "generate_verification_suggestions",
+      "type": "function"
+    },
+    {
+      "name": "auto_detect_and_tag",
+      "type": "function"
+    },
+    {
+      "name": "record_annotation",
+      "type": "function"
+    },
+    {
+      "name": "validate_annotation",
+      "type": "function"
+    },
+    {
+      "name": "get_recent_annotations",
+      "type": "function"
+    },
+    {
+      "name": "validate_single_annotation",
+      "type": "function"
+    },
+    {
+      "name": "generate_limitation_statement",
+      "type": "function"
+    },
+    {
+      "name": "run_adversarial_tests",
+      "type": "function"
+    },
+    {
+      "name": "show_status",
+      "type": "function"
+    },
+    {
+      "name": "cmd_tag",
+      "type": "function"
+    },
+    {
+      "name": "cmd_validate",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "==================== S1: 输入处理 ====================",
+    "==================== S2: 诚实标注 ====================",
+    "数字类默认KNOWN（但需要验证）",
+    "==================== S3: 输出处理 ====================",
+    "==================== S4: 自动化 ====================",
+    "==================== S5: 标注准确性验证 ====================",
+    "==================== S6: 局限标注 ====================",
+    "==================== S7: 对抗测试 ====================",
+    "简化验证：检查置信度范围",
+    "==================== 命令行接口 ===================="
+  ],
+  "limitations_applied": [
+    "Functions limited to 20"
+  ],
+  "content_truncated": true
+}

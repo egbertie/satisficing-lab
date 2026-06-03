@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/super-knowledge-ingest/super_knowledge_ingest_v6.py",
+  "filename": "super_knowledge_ingest_v6.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "eff0c7924f4f7976",
+  "content_length": 22595,
+  "ingested_at": "2026-03-31T17:27:45.427164",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nsuper-knowledge-ingest V6.0 - 多类型文件支持版\n核心目标：支持9种文件类型，达到满意解和4标准化\n设计理念：稳定可靠 > 极致性能，满意解 > 最优解\n\n支持的文件类型：\n- .md - Markdown文档（原文处理）\n- .py - Python脚本（提取注释、函数、类）\n- .json - JSON配置（结构化存储）\n- .sh - Shell脚本（提取注释、函数）\n- .txt - 文本文件（原文存储）\n- .yaml/.yml - YAML配置（结构化存储）\n- .html - HTML文档（提取文本内容）\n- .svg - SVG图形（元数据提取）\n- .log - 日志文件（摘要存储）\n\n4标准化实现：\n- S1 全局考虑：9种文件类型全覆盖，统一元数据格式\n- S2 系统闭环：类型识别→内容提取→元数据生成→索引更新\n- S3 可观测输出：详细的入库报告和统计\n- S4 自动化集成：--test参数支持，批量处理，索引自动更新\n\"\"\"\n\nimport json\nimport os\nimp",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/system-v3/q1_q2_execute.sh",
+  "filename": "q1_q2_execute.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "46cc1963255cc51f",
+  "content_length": 1799,
+  "ingested_at": "2026-03-31T17:27:46.125386",
+  "content_preview": "#!/bin/bash\n# Q1: Skill重命名执行脚本\n# 命名空间: NGT-Q1-SKILL-RENAME-v1.0-FIN-260327\n\necho \"🚀 开始Skill重命名（稳健执行）\"\necho \"================================\"\n\n# 统计信息\necho \"📊 统计当前Skill目录...\"\nSKILL_DIR=\"/root/.openclaw/workspace/skills\"\nTOTAL_DIRS=$(find \"$SKILL_DIR\" -maxdepth 1 -type d | wc -l)\nARCHIVE_DIRS=$(find \"$SKILL_DIR\" -maxdepth 1 -type d -name \".archive_*\" | wc -l)\nACTIVE_DIRS=$((TOTAL_DIRS - ARCHIVE_DIRS - 1))  # -1 for skills/ itself\n\necho \"   总目录数: $TOTAL_DIRS\"\necho \"   Archive目录: $ARCHIVE_DIRS\"\necho",
+  "limitations_applied": []
+}

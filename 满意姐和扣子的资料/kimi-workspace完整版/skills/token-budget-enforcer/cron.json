@@ -1,0 +1,22 @@
+{
+  "jobs": [
+    {
+      "name": "token-morning-brief",
+      "schedule": "7 9 * * *",
+      "command": "cd /root/.openclaw/workspace/skills/token-budget-enforcer && python3 scripts/enforcer_runner.py budget",
+      "description": "每日09:07显示Token预算看板"
+    },
+    {
+      "name": "token-realtime-monitor",
+      "schedule": "*/10 * * * *",
+      "command": "cd /root/.openclaw/workspace/skills/token-budget-enforcer && python3 scripts/enforcer_runner.py monitor status",
+      "description": "每10分钟检查Token监控状态"
+    },
+    {
+      "name": "token-daily-report",
+      "schedule": "37 18 * * *",
+      "command": "cd /root/.openclaw/workspace/skills/token-budget-enforcer && python3 scripts/enforcer_runner.py report daily",
+      "description": "每日18:37生成Token效率报告"
+    }
+  ]
+}

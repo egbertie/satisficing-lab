@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/mechanism_m003_satisficing_gene_check.sh",
+  "filename": "mechanism_m003_satisficing_gene_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "f89f2c2bc9659cbc",
+  "content_length": 648,
+  "ingested_at": "2026-03-31T17:27:46.154537",
+  "content_preview": "#!/bin/bash\n# 满意解基因内化检查脚本\n# 虚假完成机制整改 - M003\n\necho \"=== 满意解基因内化检查 ===\"\necho \"\"\necho \"检查SOUL.md中是否包含满意解基因定义:\"\necho \"\"\n\nif grep -q \"满意解基因\\|满意妞\\|防愚蠢\" /root/.openclaw/workspace/SOUL.md 2>/dev/null; then\n    echo \"✅ SOUL.md包含满意解基因定义\"\nelse\n    echo \"❌ SOUL.md缺少满意解基因定义\"\nfi\n\necho \"\"\necho \"检查是否触发内化SOP:\"\necho \"  [ ] 识别到内化需求？\"\necho \"  [ ] 固写到SOUL.md/USER.md？\"\necho \"  [ ] 物理化创建文件？\"\necho \"  [ ] 建立标准和检查清单？\"\necho \"  [ ] 创建自动化验证脚本？\"\necho \"  [ ] 创建执行日志？\"\necho \"  [ ] 创建Checkpoint机制？\"\necho \"  [ ] 创建极端事件恢复机制？\"\necho ",
+  "limitations_applied": []
+}

@@ -1,0 +1,71 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/blue-auditor/blue_army_sop.py",
+  "filename": "blue_army_sop.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 20991,
+  "checksum": "fcbb9b67f4e9ff35",
+  "ingested_at": "2026-03-31T17:30:32.678778",
+  "line_count": 586,
+  "title": "blue_army_sop",
+  "description": "蓝军审计SOP - Blue Army Audit Standard Operating Procedure V1.1\n\n目的：将审计经验固化为标准流程，确保每次审计一致、完整、无疏漏\n\n核心原则：\n1.  🔴 诚实审计 - 最大的底线，宁可FAIL，不虚报PASS\n2.  checklist驱动 - 每个Skill必须过 checklist\n3.  零容忍 - 任何一项不通过即FAIL\n4.  ",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: AuditItem"
+    },
+    {
+      "level": 2,
+      "title": "Class: AuditResult"
+    },
+    {
+      "level": 2,
+      "title": "Class: AuditReport"
+    },
+    {
+      "level": 2,
+      "title": "Class: BlueArmyAuditor"
+    }
+  ],
+  "entities": [
+    {
+      "name": "AuditItem",
+      "type": "class"
+    },
+    {
+      "name": "AuditResult",
+      "type": "class"
+    },
+    {
+      "name": "AuditReport",
+      "type": "class"
+    },
+    {
+      "name": "BlueArmyAuditor",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "============ 蓝军审计标准 V1.1 ============",
+    "任何变更必须更新版本号并记录变更日志",
+    "🔴 诚实审计是最大的底线 - 宁可FAIL，不虚报PASS",
+    "核心审计维度（5维度17项）",
+    "易遗漏项清单（历史教训）",
+    "============ 数据类 ============",
+    "============ 蓝军审计器 ============",
+    "D3: Token管理（易遗漏！）",
+    "D1-01: 代码行数≥150行",
+    "D1-02: 非占位符实现（检查是否有pass、TODO、# TODO等）",
+    "D1-03: 错误处理完善",
+    "D2-01: 存在run_tests函数",
+    "D2-02: 支持--test CLI参数",
+    "D2-03: 测试数量≥10项（检查assert数量）"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

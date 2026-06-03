@@ -1,0 +1,62 @@
+{
+  "test_time": "2026-03-21T19:29:41.621774",
+  "summary": {
+    "total": 5,
+    "passed": 2,
+    "failed": 3,
+    "pass_rate": 0.4
+  },
+  "results": [
+    {
+      "scenario": "渐进式增长",
+      "scenario_id": "S1",
+      "passed": true,
+      "total_cost": 13287.769500602659,
+      "execution_rate": 1.328776950060266,
+      "redline_triggered": true,
+      "redline_day": 25,
+      "message": "执行率132.9%, 触红成功"
+    },
+    {
+      "scenario": "突发激增",
+      "scenario_id": "S2",
+      "passed": true,
+      "normal_cost": 4000,
+      "spike_cost": 5000,
+      "total_cost": 9000,
+      "execution_rate": 0.9,
+      "alert_level": "orange",
+      "message": "执行率90.0%, 系统正常响应突发成本"
+    },
+    {
+      "scenario": "单级别溢出",
+      "scenario_id": "S3",
+      "passed": false,
+      "level": "L1_BASE",
+      "level_budget": 4500,
+      "level_actual": 0,
+      "level_rate": 0.0,
+      "overflow": false,
+      "message": "L1执行率0.0%, 溢出检测失败"
+    },
+    {
+      "scenario": "多级联锁超支",
+      "scenario_id": "S4",
+      "passed": false,
+      "total_cost": 0,
+      "total_rate": 0.984,
+      "l1_overflow": false,
+      "message": "L1溢出且总执行率98.4%"
+    },
+    {
+      "scenario": "准确性验证",
+      "scenario_id": "S5",
+      "passed": false,
+      "expected": 751.5,
+      "actual": 0,
+      "variance": 751.5,
+      "status": "inconsistent",
+      "message": "偏差751.5000, 存在偏差"
+    }
+  ]
+}

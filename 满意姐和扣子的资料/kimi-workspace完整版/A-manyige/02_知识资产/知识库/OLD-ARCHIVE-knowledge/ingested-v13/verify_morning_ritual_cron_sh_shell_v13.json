@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify_morning_ritual_cron.sh",
+  "filename": "verify_morning_ritual_cron.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "7af8ce51ccc41bf2",
+  "content_length": 1053,
+  "ingested_at": "2026-03-31T17:27:46.206113",
+  "content_preview": "#!/bin/bash\n# 晨间仪式Cron任务深度洞察和8步验证\n# 任务: morning-ritual.py\n\necho \"=== 晨间仪式Cron任务 (morning-ritual.py) - 8步验证 ===\"\necho \"\"\n\nSCRIPT_PATH=\"/root/.openclaw/workspace/scripts/cron-tasks/morning-ritual.py\"\nLOG_DIR=\"/root/.openclaw/workspace/logs/cron-tasks\"\n\n# 8步验证\nSTEP1=false; STEP2=false; STEP3=false; STEP4=false\nSTEP5=false; STEP6=false; STEP7=false; STEP8=false\n\n# Step 1\necho \"Step 1: 配置写入验证\"\nif crontab -l | grep -q \"morning-ritual.py\"; then\n    echo \"  ✅ 已写入crontab (0 7 * * *)\"\n    STEP1=true\nfi\n\n#",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/task_core_goal_confirmation.sh",
+  "filename": "task_core_goal_confirmation.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "c0f1e897228f939c",
+  "content_length": 1106,
+  "ingested_at": "2026-03-31T17:27:46.175951",
+  "content_preview": "#!/bin/bash\n# 满意妞任务核心目标确认脚本\n# 2026-03-30 强制固化\n# 用途: 接到任何任务后，必须先回答两个问题，经用户确认后才能执行\n\nTASK_NAME=\"$1\"\nif [ -z \"$TASK_NAME\" ]; then\n    echo \"❌ 错误: 必须提供任务名称\"\n    echo \"用法: $0 <任务名称>\"\n    exit 1\nfi\n\necho \"==================================\"\necho \"任务核心目标确认机制\"\necho \"任务: $TASK_NAME\"\necho \"时间: $(date)\"\necho \"==================================\"\necho \"\"\n\necho \"【强制要求】接到任务后，必须先回答这两个问题:\"\necho \"\"\necho \"问题1: 我为什么要做这个事情?\"\necho \"  - 表面原因:\"\necho \"  - 深层原因:\"\necho \"  - 如果不做，会有什么后果:\"\necho \"\"\necho \"问题2: 本来做这个事情是要解决什么问题?",
+  "limitations_applied": []
+}

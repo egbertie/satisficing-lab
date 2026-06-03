@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/notion_sync_old/notion_sync_multi_strategy.md",
+  "filename": "notion_sync_multi_strategy.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "1aa9a027b1c5fd10",
+  "content_length": 7080,
+  "ingested_at": "2026-03-31T17:27:46.665639",
+  "content_preview": "# Notion同步保障方案 - 多策略并行文档\n\n> 文档版本: 1.0  \n> 更新日期: 2026-03-10  \n> 适用场景: 263个文件批量同步到Notion\n\n---\n\n## 一、现状概述\n\n### 同步任务状态\n| 指标 | 数值 |\n|------|------|\n| 总文件数 | 263 |\n| 已成功 | 8 |\n| 已失败 | 14 |\n| 待同步 | 255 |\n\n### 主要问题\n1. **连接中断** - `RemoteDisconnected` 远程连接被关闭\n2. **速率限制** - 429 Too Many Requests\n3. **API格式错误** - 400 Bad Request（内容块结构问题）\n4. **网络超时** - 请求响应时间过长\n\n---\n\n## 二、三策略并行方案\n\n### 方案A：GitHub Actions自动化 ⭐推荐\n\n#### 特点\n- **长期稳定**: 基于GitHub基础设施，网络环境稳定\n- **定时执行**: 每日凌晨自动运行\n- **自动重试**: 失败自动重试，无需人工干预\n- **历史记录**:",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/memory/archive/logs/2026-03-15.md",
+  "filename": "2026-03-15.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "b80e749419e4719d",
+  "content_length": 2107,
+  "ingested_at": "2026-03-31T17:27:46.498819",
+  "content_preview": "\n\n---\n\n## 23:00 - 第一性原则全面优化执行记录\n\n### 22:30-23:00 关键进展\n\n**1. Daily Cron合并优化完成**\n- 产出：`docs/CRON_DAILY_MERGE_V1.2.md`\n- 方案：双Cron架构（晨间09:00 + 晚间22:00）\n- 收益：9个Daily Cron → 3个（-67%），Token节省28%\n- 脚本：`scripts/cron-daily-merge.sh`（支持analyze/execute/rollback/status）\n\n**2. 第一版全面检视完成**\n- 产出：`docs/FIRST_PRINCIPLE_AUDIT_FULL_2026-03-15.md`\n- 核心发现：\n  - Skill：176个 → 15个核心套件（-91%）\n  - 文档：134个 → 40个核心文档（-70%）\n  - Cron：1,656次/日 → ~8次/日（-99.5%）\n  - Token：~210K/日 → ~15K/日（-93%）\n- 新架构：7个Unified套件 + 7个业务套件 + 2个工具套件\n-",
+  "limitations_applied": []
+}

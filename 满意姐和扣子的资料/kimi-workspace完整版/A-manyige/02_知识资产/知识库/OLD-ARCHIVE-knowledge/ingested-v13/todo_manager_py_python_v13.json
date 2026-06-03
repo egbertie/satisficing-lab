@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/todo-management/todo_manager.py",
+  "filename": "todo_manager.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "a3630df5ec28c1d6",
+  "content_length": 18210,
+  "ingested_at": "2026-03-31T17:27:45.339586",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n五路图腾 · TODO管理系统\nWLU-TODO-v1.0-FIN-260328\n\"\"\"\n\nimport json\nimport os\nimport re\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import Dict, List, Optional, Tuple\n\n# 配置路径\nTODO_DIR = Path(\"/root/.openclaw/workspace/data/todo\")\nACTIVE_DIR = TODO_DIR / \"active\"\nCOMPLETED_DIR = TODO_DIR / \"completed\"\nARCHIVED_DIR = TODO_DIR / \"archived\"\nMASTER_FILE = TODO_DIR / \"todo-master.json\"\n\n# 有效值定义\nVALID_STATUSES = ['pending', 'in_progress', 'completed', ",
+  "limitations_applied": []
+}

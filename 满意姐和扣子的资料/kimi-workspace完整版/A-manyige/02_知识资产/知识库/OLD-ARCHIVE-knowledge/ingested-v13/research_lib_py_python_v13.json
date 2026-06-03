@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/conversation-researcher/lib/research_lib.py",
+  "filename": "research_lib.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "245782cdfd045d4f",
+  "content_length": 2512,
+  "ingested_at": "2026-03-31T17:27:45.337896",
+  "content_preview": "\"\"\"\nresearch_lib.py\nConversation Researcher 共享库\n\"\"\"\n\nfrom typing import Dict, List, Any, Optional\nimport json\nfrom dataclasses import dataclass\n\n@dataclass\nclass ResearchConfig:\n    \"\"\"研究配置\"\"\"\n    min_sources: int = 3\n    max_sources: int = 10\n    freshness: str = \"py\"\n    include_content: bool = True\n    timeout_ms: int = 30000\n\n@dataclass\nclass ValidationConfig:\n    \"\"\"验证配置\"\"\"\n    min_cross_validation: int = 3\n    consensus_threshold: float = 0.6\n\nclass SourceAssessor:\n    \"\"\"来源评估器\"\"\"\n    \n   ",
+  "limitations_applied": []
+}

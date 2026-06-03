@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/backup-suite/backup_suite.py",
+  "filename": "backup_suite.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "90819b993bd6d70c",
+  "content_length": 8293,
+  "ingested_at": "2026-03-31T17:27:45.459359",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nBackup Suite - 备份管理套件 - 全量备份、增量备份、恢复、校验\n高标准完整实现（V2.0）\n\n归属: backup-suite\nToken成本: 单次备份约600 tokens/GB\n核心功能: full, incremental, restore, verify\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport time\nfrom typing import Dict, List, Optional, Any\nfrom dataclasses import dataclass, asdict\nfrom datetime import datetime\nfrom pathlib import Path\n\n# Token管理\nTOKEN_COST_ESTIMATE = \"\"\"\nToken消耗估算：\n- 单次调用: ~500-1000 tokens\n- 批量处理: ~2000-5000 tokens\n\"\"\"\n\nTOKEN_RED_LINES = dict(\n    max_per_",
+  "limitations_applied": []
+}

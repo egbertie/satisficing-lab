@@ -1,0 +1,40 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/feishu_create_doc_user_folder.py",
+  "filename": "feishu_create_doc_user_folder.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 3849,
+  "checksum": "6c61fea0423bd722",
+  "ingested_at": "2026-03-31T17:30:32.871676",
+  "line_count": 132,
+  "title": "feishu_create_doc_user_folder",
+  "description": "飞书文档创建方案 - 使用用户个人文件夹（无需OAuth2）\n\n原理：\n1. 使用 tenant_token 获取用户的文件夹列表\n2. 找到 parent_type=\"user\" 的文件夹（用户的个人文件夹）\n3. 在该文件夹下创建文档，用户就能看到了",
+  "sections": [],
+  "entities": [
+    {
+      "name": "get_tenant_token",
+      "type": "function"
+    },
+    {
+      "name": "get_user_folder",
+      "type": "function"
+    },
+    {
+      "name": "create_doc_in_folder",
+      "type": "function"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "2. 查找 parent_type=\"user\" 的文件夹（用户的个人文件夹）",
+    "如果没找到，返回第一个文件夹（通常是用户根目录）",
+    "Step 1: 获取用户文件夹",
+    "Step 2: 在该文件夹下创建文档"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

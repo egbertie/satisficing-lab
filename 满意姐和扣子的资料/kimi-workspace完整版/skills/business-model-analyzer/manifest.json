@@ -1,0 +1,27 @@
+{
+  "id": "business-model-analyzer",
+  "name": "business-model-analyzer",
+  "displayName": "商业模式分析器",
+  "version": "1.0.0",
+  "description": "基于SKILL框架的商业模式分析工具，帮助用户系统性地研究和构建商业模式。整合商业模式画布9大板块、逻辑四维与深化三维研究视角、产业链定位、文化主张与认知解决四大模块。适用于商业分析、BP撰写、战略规划、投资决策等场景。输出成果为Word文档格式的完整商业模式调研报告。",
+  "type": "skill",
+  "author": "your-name",
+  "tags": ["business-model", "canvas", "strategy", "analysis", "planning", "investment", "framework", "docx"],
+  "category": "business",
+  "entry": "SKILL.md",
+  "output": ["docx"],
+  "scripts": {
+    "generate": "scripts/generate_report.py",
+    "install": "scripts/install_dependencies.py"
+  },
+  "examples": [
+    "examples/xiaomi_example.json"
+  ],
+  "config": {
+    "file": "config.json",
+    "schema": {
+      "framework": "string",
+      "outputFormat": "string"
+    }
+  }
+}

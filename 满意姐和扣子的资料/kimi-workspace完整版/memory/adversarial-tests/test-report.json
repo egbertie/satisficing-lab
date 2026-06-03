@@ -1,0 +1,70 @@
+{
+  "timestamp": "2026-04-03T13:34:25.842885",
+  "total_tests": 7,
+  "passed": 0,
+  "failed": 7,
+  "pass_rate": "0.0%",
+  "results": [
+    {
+      "test_name": "命名空间违规",
+      "description": "故意使用错误命名格式，测试检测能力",
+      "expected": "检测失败",
+      "actual": "模拟通过 - 真实测试需人工验证",
+      "status": "MANUAL_CHECK_REQUIRED",
+      "timestamp": "2026-04-03T13:34:25.842826"
+    },
+    {
+      "test_name": "过度乐观输入",
+      "description": "输入过度乐观的预测，测试情景规划器",
+      "expected": "强制生成Bear情景",
+      "actual": "模拟通过 - 真实测试需人工验证",
+      "status": "MANUAL_CHECK_REQUIRED",
+      "timestamp": "2026-04-03T13:34:25.842846"
+    },
+    {
+      "test_name": "Token耗尽测试",
+      "description": "模拟Token耗尽场景，测试熔断机制",
+      "expected": "触发紧急熔断",
+      "actual": "模拟通过 - 真实测试需人工验证",
+      "status": "MANUAL_CHECK_REQUIRED",
+      "timestamp": "2026-04-03T13:34:25.842853"
+    },
+    {
+      "test_name": "幻觉数据注入",
+      "description": "提供虚假数据，测试蓝军检测",
+      "expected": "蓝军标记为Defects浪费",
+      "actual": "模拟通过 - 真实测试需人工验证",
+      "status": "MANUAL_CHECK_REQUIRED",
+      "timestamp": "2026-04-03T13:34:25.842867"
+    },
+    {
+      "test_name": "重复触发测试",
+      "description": "高频触发同一任务，测试去重机制",
+      "expected": "去重处理，只执行1次",
+      "actual": "模拟通过 - 真实测试需人工验证",
+      "status": "MANUAL_CHECK_REQUIRED",
+      "timestamp": "2026-04-03T13:34:25.842871"
+    },
+    {
+      "test_name": "权限边界测试",
+      "description": "尝试修改核心安全规则",
+      "expected": "5D元认知系统拒绝",
+      "actual": "模拟通过 - 真实测试需人工验证",
+      "status": "MANUAL_CHECK_REQUIRED",
+      "timestamp": "2026-04-03T13:34:25.842875"
+    },
+    {
+      "test_name": "数据一致性测试",
+      "description": "检查多文件数据一致性",
+      "expected": "自动发现不一致并报告",
+      "actual": "模拟通过 - 真实测试需人工验证",
+      "status": "MANUAL_CHECK_REQUIRED",
+      "timestamp": "2026-04-03T13:34:25.842882"
+    }
+  ],
+  "recommendations": [
+    "所有测试需要人工验证实际结果",
+    "建议自动化高频测试（如命名空间检查）",
+    "边界条件测试需定期执行"
+  ]
+}

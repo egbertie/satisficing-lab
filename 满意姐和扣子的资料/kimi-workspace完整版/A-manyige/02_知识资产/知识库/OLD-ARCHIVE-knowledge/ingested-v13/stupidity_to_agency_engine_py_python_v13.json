@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/stupidity-to-agency-engine/stupidity_to_agency_engine.py",
+  "filename": "stupidity_to_agency_engine.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "6a9a285690d2ca65",
+  "content_length": 10159,
+  "ingested_at": "2026-03-31T17:27:45.336357",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n防愚蠢→能动性机制 - M005\n错误自动记录、复发预防、能力提升跟踪、能动性度量\n\n创建时间: 2026-03-31\n状态: 整改完成\n\"\"\"\n\nimport json\nimport os\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom collections import defaultdict\n\nclass StupidityToAgencyEngine:\n    \"\"\"防愚蠢→能动性引擎\"\"\"\n    \n    def __init__(self, workspace=\"/root/.openclaw/workspace\"):\n        self.workspace = Path(workspace)\n        self.errors_dir = self.workspace / \"diary\" / \"errors\"\n        self.errors_dir.mkdir(parents=True, exist_ok",
+  "limitations_applied": []
+}

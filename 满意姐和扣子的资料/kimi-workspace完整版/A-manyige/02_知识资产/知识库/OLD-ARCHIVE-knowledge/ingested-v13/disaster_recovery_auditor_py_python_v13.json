@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/disaster-recovery-auditor/disaster_recovery_auditor.py",
+  "filename": "disaster_recovery_auditor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "85f21a2f58c6597c",
+  "content_length": 11816,
+  "ingested_at": "2026-03-31T17:27:45.450204",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\ndisaster-recovery-auditor: 灾备审计\n检查点恢复验证，RPO/RTO合规检查\n\n作者: 满意妞\n版本: 1.0.0\n日期: 2026-03-28\n\"\"\"\n\nimport json\nimport time\nimport hashlib\nfrom pathlib import Path\nfrom typing import Dict, List, Optional, Tuple\nfrom dataclasses import dataclass, field\nfrom datetime import datetime, timedelta\n\n\n@dataclass\nclass CheckpointAudit:\n    \"\"\"检查点审计记录\"\"\"\n    checkpoint_id: str\n    timestamp: str\n    integrity_check: bool\n    file_count: int\n    total_size: int\n    rpo_seconds: float\n    ",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_github-ci-monitor/scripts/workflow_monitor.sh",
+  "filename": "workflow_monitor.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "60ca2b8b61ffb510",
+  "content_length": 3009,
+  "ingested_at": "2026-03-31T17:27:45.192967",
+  "content_preview": "#!/bin/bash\n# GitHub Workflow Monitor\n# 工作流监控脚本\n\nset -e\n\nREPO=\"${1:-}\"\nFAILED_ONLY=false\n\n# 解析参数\nshift || true\nwhile [[ $# -gt 0 ]]; do\n    case $1 in\n        --failed-only)\n            FAILED_ONLY=true\n            shift\n            ;;\n        *)\n            shift\n            ;;\n    esac\ndone\n\nif [ -z \"$REPO\" ]; then\n    echo \"🔍 GitHub Workflow Monitor\"\n    echo \"\"\n    echo \"Usage: $0 [owner/repo] [--failed-only]\"\n    echo \"\"\n    echo \"Options:\"\n    echo \"  --failed-only    仅显示失败的工作流\"\n    exit 1",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_unified-search/search.py",
+  "filename": "search.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e2277b3d57f4f598",
+  "content_length": 707,
+  "ingested_at": "2026-03-31T17:27:45.247954",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nUnified Search Suite - 统一搜索入口\n替代: brave-search, tavily, firecrawl-search, openclaw-tavily-search\n\"\"\"\nimport sys\nimport argparse\n\ndef main():\n    parser = argparse.ArgumentParser(description='统一搜索套件')\n    parser.add_argument('query', help='搜索查询')\n    parser.add_argument('--engine', choices=['brave', 'tavily', 'kimi', 'auto'], \n                       default='auto', help='搜索引擎')\n    parser.add_argument('--deep', action='store_true', help='深度搜索')\n    args = parser.parse_a",
+  "limitations_applied": []
+}

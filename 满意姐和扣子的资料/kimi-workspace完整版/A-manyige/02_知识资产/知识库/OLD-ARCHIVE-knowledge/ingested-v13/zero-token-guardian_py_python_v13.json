@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/zero-token-guardian.py",
+  "filename": "zero-token-guardian.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "e8bde4c671c90889",
+  "content_length": 5838,
+  "ingested_at": "2026-03-31T17:27:46.185193",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n零Token进程守护 - 检测Claw中断并自动保存\n零API调用，纯本地psutil监控\n\"\"\"\n\nimport os\nimport time\nimport json\nimport signal\nimport tarfile\nfrom datetime import datetime\n\ntry:\n    import psutil\n    PSUTIL_AVAILABLE = True\nexcept ImportError:\n    PSUTIL_AVAILABLE = False\n    print(\"[GUARDIAN] 警告: psutil未安装，进程监控不可用\")\n\ntry:\n    import zstandard as zstd\n    ZSTD_AVAILABLE = True\nexcept ImportError:\n    ZSTD_AVAILABLE = False\n\nclass ZeroTokenGuardian:\n    def __init__(self):\n        self.claw_pid = ",
+  "limitations_applied": []
+}

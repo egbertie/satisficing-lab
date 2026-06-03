@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify_cron_deployment.sh",
+  "filename": "verify_cron_deployment.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "9b7ae8c945f219ad",
+  "content_length": 1381,
+  "ingested_at": "2026-03-31T17:27:46.158840",
+  "content_preview": "#!/bin/bash\n# Cron部署验证脚本\n# 用法: ./scripts/verify_cron_deployment.sh [任务名]\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nLOG_DIR=\"$WORKSPACE/logs/cron\"\n\n# 颜色定义\nRED='\\033[0;31m'\nGREEN='\\033[0;32m'\nYELLOW='\\033[1;33m'\nNC='\\033[0m' # No Color\n\n# 确保日志目录存在\nmkdir -p \"$LOG_DIR\"\n\n# 定义已部署任务\nDEPLOYED_TASKS=(\n    \"blue_army_weekly_audit.sh\"\n    \"punishment_enforcer.sh\"\n    \"auto-checkpoint.sh\"\n    \"backup_to_external.py\"\n    \"token_monitor.py\"\n)\n\nverify_task() {\n    local task=\"$1\"\n    if crontab -l 2>/dev/null | g",
+  "limitations_applied": []
+}

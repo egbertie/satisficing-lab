@@ -1,0 +1,64 @@
+metadata:
+  version: 1.0.0
+  last_updated: '2026-03-21T18:41:39.601090'
+  total_count: 1
+errors:
+  ERR-202603-0001:
+    error_id: ERR-202603-0001
+    timestamp: '2026-03-21T18:41:39.601021'
+    category: logic
+    severity: high
+    description: 边界条件未处理导致数组越界：在处理用户输入列表时未检查空值
+    source_file: ''
+    line_number: 0
+    related_skill: ''
+    session_id: ''
+    impact: 功能崩溃
+    root_cause: 缺少边界检查
+    status: new
+    improvement_plan: {}
+    verification_result: {}
+    repeat_count: 0
+    similar_errors: []
+    cognitive_limitation: boundary
+    tags: []
+stats:
+  total_errors: 1
+  resolved: 0
+  reopened: 0
+  by_category:
+    logic: 1
+  by_severity:
+    high: 1
+  repeat_rate: 0.0
+cognitive_limitations:
+  boundary:
+    name: 边界条件忽略
+    description: 极端输入、空值、超长内容
+    prevention: 使用边界检查清单
+    risk_level: high
+  concurrency:
+    name: 并发处理缺陷
+    description: 竞态条件、资源死锁
+    prevention: 强制并发测试
+    risk_level: high
+  semantic:
+    name: 语义理解偏差
+    description: 用户意图误判
+    prevention: 确认式追问机制
+    risk_level: medium
+  context:
+    name: 上下文遗漏
+    description: 会话历史丢失
+    prevention: 自动上下文加载
+    risk_level: medium
+  tool_usage:
+    name: 工具使用错误
+    description: 参数格式、调用顺序
+    prevention: 工具使用模板
+    risk_level: low
+  overconfidence:
+    name: 过度自信
+    description: 未经验证的假设
+    prevention: 强制验证步骤
+    risk_level: medium

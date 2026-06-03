@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>GITHUB_ACTIONS_SETUP</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; padding: 40px; max-width: 800px; margin: 0 auto; }
+        h1 { color: #1f2329; border-bottom: 2px solid #3370ff; padding-bottom: 10px; }
+        h2 { color: #1f2329; margin-top: 30px; }
+        h3 { color: #3370ff; }
+        code { background: #f5f6f7; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+        pre { background: #f5f6f7; padding: 16px; border-radius: 6px; overflow-x: auto; }
+        blockquote { border-left: 4px solid #3370ff; margin: 0; padding-left: 16px; color: #646a73; }
+        table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+        th, td { border: 1px solid #dee0e3; padding: 8px 12px; text-align: left; }
+        th { background: #f5f6f7; font-weight: 600; }
+        ul, ol { padding-left: 24px; }
+    </style>
+</head>
+<body>
+<h1 id="github-actions">GitHub Actions配置指南</h1>
+<h2 id="1">步骤1：确认仓库访问</h2>
+<p>你的GitHub仓库：<code>satisficing-institute</code><br />
+Token权限：已验证可访问</p>
+<h2 id="2github-actions">步骤2：配置GitHub Actions工作流</h2>
+<p>在你的本地workspace中创建以下文件：</p>
+<pre><code class="language-bash">mkdir -p /root/.openclaw/workspace/.github/workflows
+</code></pre>
+<p>创建文件：<code>/root/.openclaw/workspace/.github/workflows/sync-to-notion.yml</code></p>
+<pre><code class="language-yaml">name: Sync to Notion
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # 每天凌晨2点自动同步
+  workflow_dispatch:      # 支持手动触发
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install requests notion-client
+
+      - name: Sync to Notion
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: |
+          python scripts/notion_sync.py
+</code></pre>
+<h2 id="3github-secrets">步骤3：设置GitHub Secrets</h2>
+<p>在GitHub仓库页面操作：
+1. 访问 https://github.com/Egbertie/satisficing-institute/settings/secrets/actions
+2. 点击 "New repository secret"
+3. 添加以下secrets：
+   - <code>NOTION_TOKEN</code>: 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</p>
+<h2 id="4actions">步骤4：启用Actions</h2>
+<p>在GitHub仓库页面：
+1. 点击 "Actions" 标签
+2. 点击 "I understand my workflows, go ahead and enable them"</p>
+<h2 id="github-settings">备选方案（无法访问GitHub Settings）</h2>
+<p>如果你没有仓库的admin权限，使用以下方案：</p>
+<h3 id="agit-github">方案A：本地Git推送 + GitHub监控</h3>
+<pre><code class="language-bash"># 每天自动推送
+0 2 * * * cd /root/.openclaw/workspace &amp;&amp; git add . &amp;&amp; git commit -m &quot;Daily backup $(date)&quot; &amp;&amp; git push origin main
+</code></pre>
+<h3 id="bcollaborator">方案B：你提供Collaborator权限</h3>
+<ol>
+<li>在GitHub仓库添加我为Collaborator</li>
+<li>我可以直接配置Actions</li>
+</ol>
+<p>选择哪个方案？</p>
+</body>
+</html>
+<!-- 知识内化记录 -->
+<!-- 内化时间: 2026-03-31 | 状态: 已内化 -->

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/hibernation_control.py",
+  "filename": "hibernation_control.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "f6c16bd1b942f0ae",
+  "content_length": 7519,
+  "ingested_at": "2026-03-31T17:27:46.148475",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n休眠协议控制器 V1.0\n支持完全静默模式和标准休眠模式\n\"\"\"\n\nimport json\nimport os\nimport sys\nimport subprocess\nfrom datetime import datetime\n\n# 休眠状态文件\nHIBERNATION_STATE_FILE = \"/tmp/openclaw/hibernation_state.json\"\nHIBERNATION_LOG_FILE = \"/tmp/openclaw/hibernation.log\"\n\n# 关键任务ID（休眠期间需要禁用）\nCRITICAL_JOBS_TO_DISABLE = [\n    \"8f0ffafd-1bb0-4503-a637-cd9c7f8cc208\",  # 承诺检查\n    \"51d81326-d84b-45cc-b46b-8fad2061fceb\",  # 任务协调\n    \"a19f729a-e9ce-4f4c-9a92-30575d48b8a1\",  # 零空置\n    \"83c4750e-73bb-4c58-8",
+  "limitations_applied": []
+}

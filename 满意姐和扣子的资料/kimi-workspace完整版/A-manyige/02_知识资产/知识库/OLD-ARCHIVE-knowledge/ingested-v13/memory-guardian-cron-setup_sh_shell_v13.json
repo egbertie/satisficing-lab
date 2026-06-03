@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/memory-guardian-cron-setup.sh",
+  "filename": "memory-guardian-cron-setup.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "605c3a131ac7044b",
+  "content_length": 3177,
+  "ingested_at": "2026-03-31T17:27:46.181320",
+  "content_preview": "#!/bin/bash\n# Memory Guardian Cron Setup - 5标准化Cron配置\n# 创建时间: 2026-03-28 13:00\n# 版本: V1.0\n# 状态: FIN\n\n# S1: 全局考虑 - 错峰设置，避免整点竞争\n# S2: 系统闭环 - 检查→执行→日志→报告\n# S3: 输出规范 - 日志文件+状态报告\n# S4: 自动化集成 - Cron定时执行\n# S5: 准确性验证 - 执行后验证状态\n# S6: 局限标注 - 依赖系统crontab服务\n# S7: 对抗测试 - 模拟Cron环境测试\n\necho \"========================================\"\necho \"Memory Guardian Cron 配置\"\necho \"========================================\"\n\nWORKSPACE=\"/root/.openclaw/workspace\"\nCRON_JOB=\"*/15 * * * * cd ${WORKSPACE} && python3 scripts/memor",
+  "limitations_applied": []
+}

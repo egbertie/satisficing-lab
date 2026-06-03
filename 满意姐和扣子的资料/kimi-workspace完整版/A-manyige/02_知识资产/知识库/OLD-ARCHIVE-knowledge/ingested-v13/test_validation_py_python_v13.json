@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/tiered-output/tests/test_validation.py",
+  "filename": "test_validation.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "c7a86126ad0d41e9",
+  "content_length": 9673,
+  "ingested_at": "2026-03-31T17:27:45.330354",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n分级输出系统 - 测试验证脚本\nTiered Output System - Test Validation Script\n\n用于验证三级输出长度机制的正确性和效果\n\"\"\"\n\nimport json\nimport yaml\nfrom pathlib import Path\nfrom dataclasses import dataclass\nfrom typing import Dict, List, Optional\n\n@dataclass\nclass TestResult:\n    test_name: str\n    tier: str\n    token_count: int\n    passed: bool\n    issues: List[str]\n    sample_output: str\n\nclass TieredOutputTester:\n    def __init__(self, config_path: str = \"../config.yaml\"):\n        with open(config_pat",
+  "limitations_applied": []
+}

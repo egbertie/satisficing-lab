@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/super-knowledge-ingest/super_knowledge_ingest_v9.py",
+  "filename": "super_knowledge_ingest_v9.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "fc6f4c95dee67c7e",
+  "content_length": 4489,
+  "ingested_at": "2026-03-31T17:27:45.425439",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nsuper-knowledge-ingest V9.0 - 线程池极速版\n核心突破：线程池复用 + 批量写入 + 无锁队列\n目标：稳定 < 0.1ms\n\"\"\"\n\nimport os\nimport time\nimport threading\nimport queue\nfrom concurrent.futures import ThreadPoolExecutor\nfrom typing import Dict, Tuple, Optional\n\n# ============ 线程池写入器 ============\n_WRITE_QUEUE = queue.Queue()\n_WORKER_THREAD = None\n_STOP_SIGNAL = object()\n\ndef _writer_worker():\n    \"\"\"后台写入线程 - 单线程顺序写入，避免竞争\"\"\"\n    while True:\n        item = _WRITE_QUEUE.get()\n        if item is _STOP_SIGNAL:\n",
+  "limitations_applied": []
+}

@@ -1,0 +1,54 @@
+{
+  "name": "cost-redlines",
+  "description": "成本红线机制 - 7标准完整实现（S1输入/S2监控/S3输出/S4自动/S5验证/S6局限/S7对抗测试）",
+  "version": "5.0",
+  "standards": {
+    "5_standard": true,
+    "7_standard": {
+      "S1": "输入成本数据/预算限制/预警阈值",
+      "S2": "成本监控（实时→趋势→预测→告警）",
+      "S3": "输出成本报告+超预警分析+优化建议",
+      "S4": "实时监控自动触发",
+      "S5": "成本核算准确性验证",
+      "S6": "局限标注（无法预测突发成本）",
+      "S7": "对抗测试（模拟成本突增测试响应）"
+    }
+  },
+  "jobs": [
+    {
+      "name": "cost-redline-check",
+      "schedule": "0 */4 * * *",
+      "command": "python3 /root/.openclaw/workspace/skills/cost-redlines/scripts/cost-redlines-runner.py check",
+      "enabled": true,
+      "description": "S2/S4: 每4小时检查成本红线"
+    },
+    {
+      "name": "cost-daily-report",
+      "schedule": "0 18 * * *",
+      "command": "python3 /root/.openclaw/workspace/skills/cost-redlines/scripts/cost-redlines-runner.py report --type daily",
+      "enabled": true,
+      "description": "S3: 每日18点生成成本日报"
+    },
+    {
+      "name": "cost-forecast",
+      "schedule": "0 9 * * *",
+      "command": "python3 /root/.openclaw/workspace/skills/cost-redlines/scripts/cost-redlines-runner.py forecast",
+      "enabled": true,
+      "description": "S2: 每日9点生成成本预测"
+    },
+    {
+      "name": "cost-reconcile",
+      "schedule": "0 2 * * 0",
+      "command": "python3 /root/.openclaw/workspace/skills/cost-redlines/scripts/cost-redlines-runner.py reconcile",
+      "enabled": true,
+      "description": "S5: 每周日凌晨2点进行预算对账"
+    },
+    {
+      "name": "cost-adversarial-test",
+      "schedule": "0 3 1 * *",
+      "command": "python3 /root/.openclaw/workspace/skills/cost-redlines/scripts/adversarial-test.py",
+      "enabled": true,
+      "description": "S7: 每月1日凌晨3点运行对抗测试"
+    }
+  ]
+}

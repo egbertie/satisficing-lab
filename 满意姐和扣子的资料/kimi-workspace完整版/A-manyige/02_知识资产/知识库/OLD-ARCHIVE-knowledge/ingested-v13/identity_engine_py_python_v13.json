@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/identity_engine.py",
+  "filename": "identity_engine.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "db99d5183de4e4a8",
+  "content_length": 16255,
+  "ingested_at": "2026-03-31T17:27:46.146907",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n满意妞身份执行引擎 V1.0\n将SOP转化为可执行代码\n\n文档: docs/NGT-SOP-v1.0-FIN-260328.md\n\"\"\"\n\nimport os\nimport sys\nimport yaml\nimport json\nfrom datetime import datetime\nfrom enum import Enum\nfrom typing import Dict, List, Optional, Tuple\nfrom dataclasses import dataclass, asdict\n\n# 工作目录\nWORKSPACE = \"/root/.openclaw/workspace\"\nBLACKBOARD_DIR = f\"{WORKSPACE}/.system/blackboard\"\nCHECKPOINT_DIR = f\"{WORKSPACE}/.system/checkpoints\"\nMEMORY_DIR = f\"{WORKSPACE}/memory\"\nERROR_DIR = f\"{WORKSPACE}/diary",
+  "limitations_applied": []
+}

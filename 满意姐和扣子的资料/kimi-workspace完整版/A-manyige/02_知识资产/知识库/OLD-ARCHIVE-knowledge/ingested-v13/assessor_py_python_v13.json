@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.workspace_optimization/backup_critical/skills/task-priority-intelligence/assessor.py",
+  "filename": "assessor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "4bbaf70307f8601e",
+  "content_length": 12036,
+  "ingested_at": "2026-03-31T17:27:44.838287",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n任务优先级智能判定器 - Task Priority Intelligence\n\n功能：自动判定任务优先级（P0/P1/P2/P3）\n算法：多因子评分（紧急度×0.4 + 重要度×0.3 + 依赖度×0.2 + 资源匹配度×0.1）\n\"\"\"\n\nimport json\nimport re\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nfrom typing import List, Dict, Any, Optional\nfrom dataclasses import dataclass\n\n@dataclass\nclass TaskInput:\n    \"\"\"任务输入\"\"\"\n    description: str\n    deadline: Optional[str] = None  # ISO格式日期\n    dependencies: List[str] = None\n    resource_requirements: List[str] =",
+  "limitations_applied": []
+}

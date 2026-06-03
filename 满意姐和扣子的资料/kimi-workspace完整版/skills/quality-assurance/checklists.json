@@ -1,0 +1,234 @@
+{
+  "version": "2.0.0",
+  "description": "QA检查清单配置 (S5)",
+  "checklists": {
+    "skill_md": {
+      "name": "SKILL.md检查清单",
+      "description": "Skill文档的7标准和5标准检查",
+      "items": [
+        {
+          "id": "S1",
+          "name": "输入定义",
+          "description": "S1: 明确输入待审查文档/代码/交付物",
+          "keywords": ["S1", "输入定义", "Input", "待审查"],
+          "required": true,
+          "severity": "High"
+        },
+        {
+          "id": "S2",
+          "name": "多维度检查",
+          "description": "S2: 语法→逻辑→格式→标准合规",
+          "keywords": ["S2", "多维度检查", "Check", "语法", "逻辑", "格式", "合规"],
+          "required": true,
+          "severity": "High"
+        },
+        {
+          "id": "S3",
+          "name": "输出报告",
+          "description": "S3: 审查报告+问题清单+修复建议",
+          "keywords": ["S3", "输出", "Output", "审查报告", "问题清单", "修复建议"],
+          "required": true,
+          "severity": "High"
+        },
+        {
+          "id": "S4",
+          "name": "触发机制",
+          "description": "S4: 可手动触发或集成到发布流程",
+          "keywords": ["S4", "触发", "Trigger", "手动触发", "CI", "发布"],
+          "required": true,
+          "severity": "Medium"
+        },
+        {
+          "id": "S5",
+          "name": "检查清单",
+          "description": "S5: 检查清单完整性验证",
+          "keywords": ["S5", "检查清单", "Checklist"],
+          "required": true,
+          "severity": "Medium"
+        },
+        {
+          "id": "S6",
+          "name": "局限性标注",
+          "description": "S6: 无法判断业务逻辑正确性等局限",
+          "keywords": ["S6", "局限性", "Limitations", "局限"],
+          "required": true,
+          "severity": "Medium"
+        },
+        {
+          "id": "S7",
+          "name": "对抗测试",
+          "description": "S7: 故意植入错误测试发现率",
+          "keywords": ["S7", "对抗测试", "Adversarial", "对抗"],
+          "required": true,
+          "severity": "Medium"
+        },
+        {
+          "id": "5S-1",
+          "name": "全局考虑",
+          "description": "5标准: 全局考虑",
+          "keywords": ["全局考虑", "全局"],
+          "required": true,
+          "severity": "High"
+        },
+        {
+          "id": "5S-2",
+          "name": "系统考虑",
+          "description": "5标准: 系统考虑",
+          "keywords": ["系统考虑", "系统"],
+          "required": true,
+          "severity": "High"
+        },
+        {
+          "id": "5S-3",
+          "name": "迭代机制",
+          "description": "5标准: 迭代机制",
+          "keywords": ["迭代机制", "迭代", "PDCA"],
+          "required": true,
+          "severity": "High"
+        },
+        {
+          "id": "5S-4",
+          "name": "Skill化",
+          "description": "5标准: Skill化",
+          "keywords": ["Skill化", "可执行", "触发条件", "执行流程"],
+          "required": true,
+          "severity": "High"
+        },
+        {
+          "id": "5S-5",
+          "name": "流程自动化",
+          "description": "5标准: 流程自动化",
+          "keywords": ["流程自动化", "自动化", "Cron"],
+          "required": true,
+          "severity": "High"
+        },
+        {
+          "id": "R8",
+          "name": "规则8-置信度标注",
+          "description": "隐性规则8: 所有AI输出必须标注置信度",
+          "keywords": ["置信度", "confidence", "规则8"],
+          "required": true,
+          "severity": "Medium"
+        },
+        {
+          "id": "R9",
+          "name": "规则9-交叉验证",
+          "description": "隐性规则9: 重要决策建议需至少2个模型交叉验证",
+          "keywords": ["交叉验证", "cross.validation", "规则9"],
+          "required": true,
+          "severity": "Medium"
+        },
+        {
+          "id": "OUTPUT",
+          "name": "产出标准",
+          "description": "明确的产出物定义",
+          "keywords": ["产出标准", "产出物"],
+          "required": false,
+          "severity": "Low"
+        }
+      ]
+    },
+    "python": {
+      "name": "Python代码检查清单",
+      "items": [
+        {
+          "id": "PY-1",
+          "name": "语法正确",
+          "check": "python3 -m py_compile",
+          "severity": "Critical"
+        },
+        {
+          "id": "PY-2",
+          "name": "无未定义变量",
+          "pattern": "undefined",
+          "severity": "High"
+        },
+        {
+          "id": "PY-3",
+          "name": "异常处理",
+          "pattern": "except\\s*:",
+          "severity": "Medium"
+        },
+        {
+          "id": "PY-4",
+          "name": "使用logging",
+          "pattern": "^print\\(",
+          "severity": "Low"
+        },
+        {
+          "id": "PY-5",
+          "name": "4空格缩进",
+          "check": "indent",
+          "severity": "Medium"
+        }
+      ]
+    },
+    "shell": {
+      "name": "Shell脚本检查清单",
+      "items": [
+        {
+          "id": "SH-1",
+          "name": "语法正确",
+          "check": "bash -n",
+          "severity": "Critical"
+        },
+        {
+          "id": "SH-2",
+          "name": "错误处理",
+          "pattern": "set -e",
+          "severity": "Medium"
+        },
+        {
+          "id": "SH-3",
+          "name": "变量引用",
+          "pattern": "\\$\\{",
+          "severity": "Low"
+        }
+      ]
+    },
+    "json": {
+      "name": "JSON配置检查清单",
+      "items": [
+        {
+          "id": "JSON-1",
+          "name": "格式正确",
+          "check": "json.load",
+          "severity": "Critical"
+        },
+        {
+          "id": "JSON-2",
+          "name": "无重复键",
+          "severity": "High"
+        }
+      ]
+    },
+    "yaml": {
+      "name": "YAML配置检查清单",
+      "items": [
+        {
+          "id": "YAML-1",
+          "name": "格式正确",
+          "check": "yaml.safe_load",
+          "severity": "Critical"
+        },
+        {
+          "id": "YAML-2",
+          "name": "缩进正确",
+          "severity": "Medium"
+        }
+      ]
+    }
+  },
+  "severity_levels": {
+    "Critical": {"score": 10, "description": "必须立即修复"},
+    "High": {"score": 5, "description": "影响功能或合规"},
+    "Medium": {"score": 2, "description": "建议修复"},
+    "Low": {"score": 1, "description": "可选修复"}
+  },
+  "grading": {
+    "A": {"max_critical": 0, "max_high": 0, "max_medium": 2, "description": "优秀"},
+    "B": {"max_critical": 0, "max_high": 2, "max_medium": 5, "description": "良好"},
+    "C": {"max_critical": 0, "max_high": 5, "max_medium": 10, "description": "需改进"},
+    "D": {"max_critical": 0, "max_high": 999, "max_medium": 999, "description": "不合格"}
+  }
+}

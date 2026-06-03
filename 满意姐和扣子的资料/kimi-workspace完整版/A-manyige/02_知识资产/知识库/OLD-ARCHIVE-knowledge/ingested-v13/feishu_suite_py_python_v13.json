@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/feishu-suite/feishu_suite.py",
+  "filename": "feishu_suite.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "811de06254cfffd2",
+  "content_length": 8314,
+  "ingested_at": "2026-03-31T17:27:45.356519",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nFeishu Suite - 飞书集成套件 - 消息、日程、文档、任务统一管理\n高标准完整实现（V2.0）\n\n归属: feishu-suite\nToken成本: Token按飞书API调用官方计费\n核心功能: message, calendar, doc, task\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport time\nfrom typing import Dict, List, Optional, Any\nfrom dataclasses import dataclass, asdict\nfrom datetime import datetime\nfrom pathlib import Path\n\n# Token管理\nTOKEN_COST_ESTIMATE = \"\"\"\nToken消耗估算：\n- 单次调用: ~500-1000 tokens\n- 批量处理: ~2000-5000 tokens\n\"\"\"\n\nTOKEN_RED_LINES = dict(\n    max_per_call=20",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/priority_adjustment_handler.py",
+  "filename": "priority_adjustment_handler.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "6e29376086e377a3",
+  "content_length": 22500,
+  "ingested_at": "2026-03-31T17:27:46.204829",
+  "content_preview": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\n优先级调整冲突处理器\nPriority Adjustment Conflict Handler\n\n核心原则: 新指令覆盖旧指令时，不暂停，而是子代理承接 + 冲突说明 + 次序调整\n\"\"\"\n\nimport json\nimport uuid\nimport logging\nfrom datetime import datetime, timedelta\nfrom enum import Enum\nfrom typing import List, Dict, Optional, Any\nfrom dataclasses import dataclass, field, asdict\nfrom pathlib import Path\n\n# 配置日志\nlogging.basicConfig(\n    level=logging.INFO,\n    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'\n)\nlogger = lo",
+  "limitations_applied": []
+}

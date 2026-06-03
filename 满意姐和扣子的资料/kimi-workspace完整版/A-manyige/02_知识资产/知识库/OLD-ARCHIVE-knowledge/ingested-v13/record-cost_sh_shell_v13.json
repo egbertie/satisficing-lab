@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_cost-control/scripts/record-cost.sh",
+  "filename": "record-cost.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "084e2de7b20ce4f8",
+  "content_length": 1113,
+  "ingested_at": "2026-03-31T17:27:45.151649",
+  "content_preview": "#!/bin/bash\n# 成本记录脚本\n# 使用方式: ./record-cost.sh <model> <cost> [usage]\n\nMODEL=$1\nCOST=$2\nUSAGE=${3:-\"未记录\"}\nDATE=$(date +%Y%m%d)\nTIME=$(date '+%Y-%m-%d %H:%M:%S')\nWORKSPACE=\"/root/.openclaw/workspace\"\nCOST_DIR=\"$WORKSPACE/memory/cost\"\n\nif [ -z \"$MODEL\" ] || [ -z \"$COST\" ]; then\n    echo \"使用方式: $0 <model> <cost> [usage]\"\n    echo \"示例: $0 claude-opus 25 '复杂代码分析'\"\n    exit 1\nfi\n\nmkdir -p \"$COST_DIR\"\n\n# 记录到JSONL日志\nLOG_ENTRY=\"{\\\"time\\\":\\\"$TIME\\\",\\\"model\\\":\\\"$MODEL\\\",\\\"cost\\\":$COST,\\\"usage\\\":\\\"$USAGE\\\",\\",
+  "limitations_applied": []
+}

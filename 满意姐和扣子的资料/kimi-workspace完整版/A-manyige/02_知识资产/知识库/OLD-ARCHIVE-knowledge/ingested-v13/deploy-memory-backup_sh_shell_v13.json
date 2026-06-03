@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/deploy-memory-backup.sh",
+  "filename": "deploy-memory-backup.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "5ab1f41b8ce60906",
+  "content_length": 1812,
+  "ingested_at": "2026-03-31T17:27:46.202475",
+  "content_preview": "#!/bin/bash\n# MEMORY.md自动备份机制部署脚本\n# 部署时间: 2026-03-15\n# 优先级: P0-紧急\n\necho \"💾 部署MEMORY.md自动备份机制...\"\n\n# 1. 创建备份目录\nmkdir -p /root/.openclaw/workspace/backups/memory\nmkdir -p /root/.openclaw/workspace/logs/backups\n\n# 2. 创建备份脚本\ncat > /root/.openclaw/workspace/scripts/backup-memory.sh << 'EOF'\n#!/bin/bash\n# MEMORY.md每小时自动备份脚本\n\nSOURCE=\"/root/.openclaw/workspace/MEMORY.md\"\nBACKUP_DIR=\"/root/.openclaw/workspace/backups/memory\"\nLOG=\"/root/.openclaw/workspace/logs/backups/memory-backup.log\"\n\n# 生成时间戳\nTIMESTAM",
+  "limitations_applied": []
+}

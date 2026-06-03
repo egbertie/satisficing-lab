@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_mermaid-chart-generator/scripts/validate_syntax.py",
+  "filename": "validate_syntax.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "ac46d91d3499cf31",
+  "content_length": 2808,
+  "ingested_at": "2026-03-31T17:27:45.080348",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nMermaid语法验证器\n用法: python3 validate_syntax.py --file [filename] 或 --code \"code\"\n\"\"\"\n\nimport argparse\nimport re\nimport sys\n\ndef validate_mermaid(content):\n    \"\"\"验证Mermaid代码基本语法\"\"\"\n    errors = []\n    warnings = []\n    \n    lines = content.strip().split('\\n')\n    if not lines:\n        return False, [\"空内容\"], []\n    \n    # 检查图表类型声明\n    first_line = lines[0].strip()\n    valid_starts = ['graph ', 'sequenceDiagram', 'gantt', 'pie ', 'classDiagram', \n                    'erDiag",
+  "limitations_applied": []
+}

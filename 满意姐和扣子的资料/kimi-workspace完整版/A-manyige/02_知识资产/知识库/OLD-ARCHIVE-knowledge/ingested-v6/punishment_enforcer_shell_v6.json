@@ -1,0 +1,70 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/punishment_enforcer.sh",
+  "filename": "punishment_enforcer.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 7509,
+  "checksum": "59dcf30295cbb35f",
+  "ingested_at": "2026-03-31T17:30:47.811983",
+  "line_count": 256,
+  "title": "punishment_enforcer",
+  "description": "蓝军违规检测与惩罚执行脚本",
+  "sections": [],
+  "entities": [
+    {
+      "name": "detect_violations",
+      "type": "shell_function"
+    },
+    {
+      "name": "record_violation",
+      "type": "shell_function"
+    },
+    {
+      "name": "execute_punishment",
+      "type": "shell_function"
+    },
+    {
+      "name": "apply_p0_punishment",
+      "type": "shell_function"
+    },
+    {
+      "name": "apply_p1_punishment",
+      "type": "shell_function"
+    },
+    {
+      "name": "apply_p2_punishment",
+      "type": "shell_function"
+    },
+    {
+      "name": "check_active_punishments",
+      "type": "shell_function"
+    },
+    {
+      "name": "generate_stats",
+      "type": "shell_function"
+    },
+    {
+      "name": "main",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "蓝军违规检测与惩罚执行脚本",
+    "自动检测违规行为并执行相应惩罚",
+    "检查惩罚规则是否存在",
+    "违规检测函数",
+    "检测1: 检查虚报完成度（对比审计报告和实际状态）",
+    "这里应该对比声称和实际，简化版本检查标记文件",
+    "检测2: 检查遗漏易忽略项",
+    "简化检查：检查是否有Token管理相关文件",
+    "检测3: 检查重复违规（简化版本）",
+    "检查过去7天的违规记录",
+    "查找待执行的违规",
+    "根据代码确定惩罚",
+    "创建惩罚标记",
+    "创建系统标记",
+    "检查当前是否有执行中的惩罚"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_cron-optimization-manager/modules/optimizer.py",
+  "filename": "optimizer.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "b0e239555f46e16f",
+  "content_length": 7263,
+  "ingested_at": "2026-03-31T17:27:45.156200",
+  "content_preview": "# -*- coding: utf-8 -*-\n\"\"\"优化模块\"\"\"\n\nimport shutil\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Optional\n\n\nclass CronOptimizer:\n    \"\"\"Cron优化器\"\"\"\n    \n    def __init__(self, manager):\n        self.manager = manager\n    \n    def get_suggestions(self, cron) -> List[Dict]:\n        \"\"\"获取优化建议\"\"\"\n        suggestions = []\n        \n        # 空转率优化\n        if cron.empty_rate > 0.8:\n            suggestions.append({\n                'type': 'frequency',\n              ",
+  "limitations_applied": []
+}

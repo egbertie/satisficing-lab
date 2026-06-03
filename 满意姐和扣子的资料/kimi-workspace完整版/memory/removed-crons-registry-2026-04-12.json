@@ -1,0 +1,724 @@
+{
+  "generated_at": "2026-04-12T22:38:00+08:00",
+  "source_file": "/root/.openclaw/cron/jobs.json.bak-2026-04-12",
+  "total_removed": 61,
+  "jobs": [
+    {
+      "id": "8dbc8186-b268-4895-8053-04305c9b28a1",
+      "name": "healthcheck:security-audit",
+      "agentId": "main",
+      "schedule": {
+        "expr": "43 9 * * 1,4",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "a4e7fe12-b645-4a84-b495-5697df8a3903",
+      "name": "每周组织罗盘报告",
+      "agentId": "main",
+      "schedule": {
+        "expr": "37 6 * * 1",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "3d7db435-1497-4b00-9e63-2cd9c34cdf8f",
+      "name": "daily-progress-report",
+      "agentId": "main",
+      "schedule": {
+        "expr": "47 21 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "9f314b0d-2e9e-4b07-ba43-633215ebbc6d",
+      "name": "milestone-daily-check",
+      "agentId": "main",
+      "schedule": {
+        "expr": "45 9 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "462a0736-613f-40b9-add8-ca98005335d3",
+      "name": "skill-library-weekly-check",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "51 8 * * 1",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "13efe578-0dca-44cf-9917-a8459d6dedbc",
+      "name": "夜间经验萃取任务",
+      "agentId": "main",
+      "schedule": {
+        "everyMs": 86400000,
+        "kind": "every",
+        "anchorMs": 1773072488793
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "75326d7a-7537-4bba-ba80-27319cc82a33",
+      "name": "每日晨报生成",
+      "agentId": "main",
+      "schedule": {
+        "expr": "47 8 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "bc640356-84e1-4e07-a2d5-cb93dab7e9ef",
+      "name": "每日安全检查",
+      "agentId": "main",
+      "schedule": {
+        "expr": "30 9 * * 1,4",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "30014b47-8363-4555-b24f-04574dc356a7",
+      "name": "API与Skill双周审查",
+      "agentId": "main",
+      "schedule": {
+        "expr": "0 9 */14 * 5",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "f2ddbbb7-2374-4745-b73b-631a53e4f38a",
+      "name": "每日站会召开",
+      "agentId": "main",
+      "schedule": {
+        "expr": "0 10 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "b6428bbd-ff29-48dd-9014-6610710718e5",
+      "name": "429错误处理提醒",
+      "agentId": "main",
+      "schedule": {
+        "expr": "0 16 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "51d81326-d84b-45cc-b46b-8fad2061fceb",
+      "name": "任务协调检查",
+      "agentId": "main",
+      "schedule": {
+        "kind": "every",
+        "everyMs": 7200000,
+        "anchorMs": 1773146780726
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "backup-daily-001",
+      "name": "每日自动备份",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "53 1 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "backup-weekly-001",
+      "name": "每周全量备份",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "47 2 * * 0",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "backup-cleanup-001",
+      "name": "备份自动清理",
+      "agentId": "main",
+      "schedule": {
+        "expr": "42 3 * * 0",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "83c4750e-73bb-4c58-8a67-d658357448fb",
+      "name": "厂商API能力监控日报",
+      "agentId": "main",
+      "schedule": {
+        "everyMs": 86400000,
+        "anchorMs": 1773196800000,
+        "kind": "every"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "8f0ffafd-1bb0-4503-a637-cd9c7f8cc208",
+      "name": "承诺与制度执行保障检查",
+      "agentId": "main",
+      "schedule": {
+        "anchorMs": 1773196800000,
+        "everyMs": 86400000,
+        "kind": "every"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "ab39d987-dbb5-40af-9f65-a0614115983a",
+      "name": "每日晨报生成与任务派发",
+      "agentId": "main",
+      "schedule": {
+        "expr": "17 9 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "c50fe7c6-4c5c-42cb-89ba-e5a4bdcae3e8",
+      "name": "每小时任务协调检查",
+      "agentId": "main",
+      "schedule": {
+        "kind": "every",
+        "everyMs": 3600000,
+        "anchorMs": 1773325471414
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "d3945c7f-974b-4eb9-be77-2885cd29f907",
+      "name": "夜间深度学习进修",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 23 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "0991f0cf-1c59-4dff-abd6-93b617636077",
+      "name": "每周六项目复盘与迭代规划",
+      "agentId": "main",
+      "schedule": {
+        "expr": "7 10 * * 6",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "51c2d37d-9973-486b-8d09-2589c507302d",
+      "name": "Kimi Search每日资讯采集",
+      "agentId": "main",
+      "schedule": {
+        "expr": "13 9 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "502b342d-539d-4c57-881c-96fe04c59cc8",
+      "name": "ClawHub Skill安装重试（第3次）",
+      "agentId": "main",
+      "schedule": {
+        "kind": "at",
+        "at": "2026-03-13T06:20:00.000Z"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "5f606b95-e512-42d6-98ec-e8638f598033",
+      "name": "ClawHub Skill安装重试（第2次）",
+      "agentId": "main",
+      "schedule": {
+        "kind": "at",
+        "at": "2026-03-14T05:16:00.000Z"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "a19f729a-e9ce-4f4c-9a92-30575d48b8a1",
+      "name": "零空置强制执行检查",
+      "agentId": "main",
+      "schedule": {
+        "kind": "every",
+        "everyMs": 1800000,
+        "anchorMs": 1773532327729
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "abd1f4ee-de19-4395-8c4d-04257da57363",
+      "name": "info-collection-hourly",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 * * * *",
+        "staggerMs": 300000
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "7be218a3-0e29-471b-9bff-d90d947cca9a",
+      "name": "learning-morning",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * *"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "fb7fa3c1-41a2-42c8-9533-493f2164d36a",
+      "name": "training-morning",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 10 * * *"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "a79ff5cf-6d96-414f-86d5-f3396c635611",
+      "name": "drill-morning",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 11 * * *"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "046278c2-977d-4bd2-88b4-6dd41c98a1a9",
+      "name": "learning-afternoon",
+      "agentId": "main",
+      "schedule": {
+        "expr": "0 14 * * *",
+        "kind": "cron"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "1a9ba978-f570-4599-b3c4-1e40a4b9e02f",
+      "name": "sandbox-daily",
+      "agentId": "main",
+      "schedule": {
+        "expr": "0 15 * * *",
+        "kind": "cron"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "a43ae12f-adba-43b8-8c21-dd83b5533fcb",
+      "name": "training-afternoon",
+      "agentId": "main",
+      "schedule": {
+        "expr": "0 16 * * *",
+        "kind": "cron"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "2dbb3ef0-9063-4bd3-938b-c19d3a6a8d2d",
+      "name": "drill-afternoon",
+      "agentId": "main",
+      "schedule": {
+        "expr": "0 17 * * *",
+        "kind": "cron"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "e4951e52-889f-4507-8336-ec14003bc14e",
+      "name": "learning-evening",
+      "agentId": "main",
+      "schedule": {
+        "expr": "0 20 * * *",
+        "kind": "cron"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "ad1fb129-d204-4a66-9b41-490e883d855e",
+      "name": "daily-autonomous-summary",
+      "agentId": "main",
+      "schedule": {
+        "expr": "13 22 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "4e7cddcc-8074-40d6-bf23-b1f9f8f43be7",
+      "name": "Token耗尽预警检查",
+      "agentId": "main",
+      "schedule": {
+        "expr": "7 */4 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "e73df70d-4eb4-4eb2-8cf2-41d9db49615e",
+      "name": "MEMORY.md自动备份",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "17 */4 * * *"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "0c1c5e75-562b-4edc-8419-f20b06a1bcf5",
+      "name": "全局文件治理-结构完整性检查",
+      "agentId": "main",
+      "schedule": {
+        "expr": "23 9 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "e2724734-6641-421b-84dc-8fe95c250097",
+      "name": "全局文件治理-内容时效检查",
+      "agentId": "main",
+      "schedule": {
+        "expr": "17 9 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "249ef31e-3fc7-4d45-9a68-681d5deb0b25",
+      "name": "全局文件治理-引用一致性检查",
+      "agentId": "main",
+      "schedule": {
+        "expr": "7 10 * * 6",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "2bcfc0c8-24bd-4768-b382-0ed99f767850",
+      "name": "每日知识萃取",
+      "agentId": "main",
+      "schedule": {
+        "expr": "47 23 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "8b6eba18-8116-4a8e-b6d3-593ff8697c83",
+      "name": "每周引用一致性检查",
+      "agentId": "main",
+      "schedule": {
+        "expr": "7 10 * * 6",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "cb5e062f-8a69-4afc-a4e6-5c4eb4bc0d6e",
+      "name": "密钥轮换提醒-下周四",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "13 8 * * 4",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "cc3c6180-5839-41c8-be30-44e359eac960",
+      "name": "Worry List每日推送",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "7 9 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "0868b47e-3ade-4ba7-8377-7f66b850f7bf",
+      "name": "Token预算看板推送",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "3 9 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "bc1eb9e6-da6e-4757-8544-332a4b28b1e2",
+      "name": "零空置强制执行器-直接执行",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "2,17,32,47 * * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "d8a9e5d7-11c3-4268-a22e-1c1d8ad8a8ea",
+      "name": "晨间图腾仪式",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "dc1e570a-3c29-40d1-801f-bbfedbc744c3",
+      "name": "动态权威切换检查",
+      "agentId": "main",
+      "schedule": {
+        "expr": "0 */4 * * *",
+        "kind": "cron",
+        "tz": "Asia/Shanghai",
+        "staggerMs": 300000
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "f0d2e695-2199-4e23-acad-18aac01e716b",
+      "name": "每日7浪费追踪",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 23 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "8f56b962-1363-486e-8ecc-c408f8458d82",
+      "name": "蓝军自动审计",
+      "agentId": "main",
+      "schedule": {
+        "expr": "0 2 * * 2,4,6",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "b04e00db-459d-46d9-99f5-a8da5409fc8c",
+      "name": "知识图谱数据提取",
+      "agentId": "main",
+      "schedule": {
+        "expr": "30 1 * * 1,4",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "8ae42fce-f29d-4554-802c-1fe52c2c2722",
+      "name": "3D情景规划生成",
+      "agentId": "main",
+      "schedule": {
+        "expr": "15 9 */14 * 1",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "1a24ec9e-2f50-4c7b-b7b2-fbd03c22fedd",
+      "name": "4D-WhatIf会话",
+      "agentId": "main",
+      "schedule": {
+        "expr": "0 15 */14 * 5",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "a37335b8-b652-418c-8e67-6b3d72d71c06",
+      "name": "5D元认知改进",
+      "agentId": "main",
+      "schedule": {
+        "expr": "0 10 */14 * 6",
+        "kind": "cron",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "da5ce04b-fbdf-4038-a834-3aea2e616355",
+      "name": "S7对抗测试",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 3 * * 0",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "ea4ef0ad-337b-4e5c-90be-dcb7f3db9f90",
+      "name": "token-optimizer",
+      "agentId": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "17 */12 * * *"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "6828c851-dc8f-4c04-b942-d6b8d267bc5c",
+      "name": "evening-totem",
+      "agentId": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "17 18 * * *"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "a8f9fecf-a825-40d0-bab3-5e5165ea20a4",
+      "name": "daily-asset-activation",
+      "agentId": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "27 9 * * *"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "token-tracker-zero-001",
+      "name": "Token零消耗追踪",
+      "agentId": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "*/30 * * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "payload_kind": "systemEvent",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "74ca90e2-3564-4f1c-97a4-63aa7b01286e",
+      "name": "ClawHub Skill安装重试（第4次）",
+      "agentId": "main",
+      "schedule": {
+        "at": "2026-04-11T09:14:00.000Z",
+        "kind": "at"
+      },
+      "payload_kind": "agentTurn",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    },
+    {
+      "id": "50a24de2-9f04-45c7-a2ac-5261752f5d57",
+      "name": "ClawHub Skill安装重试（第4次）",
+      "agentId": "main",
+      "schedule": {
+        "kind": "at",
+        "at": "2026-04-11T09:17:00.000Z"
+      },
+      "payload_kind": "systemEvent",
+      "removed_reason": "disabled_cleanup_2026-04-12"
+    }
+  ]
+}

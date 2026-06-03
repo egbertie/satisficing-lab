@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/disaster-recovery/rpo_monitor.py",
+  "filename": "rpo_monitor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "c5601351d9722fae",
+  "content_length": 2906,
+  "ingested_at": "2026-03-31T17:27:44.642137",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nRPO/RTO监控脚本\n\"\"\"\nimport json\nimport sys\nimport subprocess\nfrom datetime import datetime, timedelta\nimport os\n\ndef get_last_git_commit_time():\n    \"\"\"获取最后一次Git提交时间\"\"\"\n    try:\n        result = subprocess.run(\n            [\"git\", \"log\", \"-1\", \"--format=%ct\"],\n            capture_output=True,\n            text=True,\n            cwd=\"/root/.openclaw/workspace\"\n        )\n        if result.returncode == 0:\n            timestamp = int(result.stdout.strip())\n            return d",
+  "limitations_applied": []
+}

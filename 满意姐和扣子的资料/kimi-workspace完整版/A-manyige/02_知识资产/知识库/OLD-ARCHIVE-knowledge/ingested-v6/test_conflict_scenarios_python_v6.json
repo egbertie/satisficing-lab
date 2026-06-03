@@ -1,0 +1,47 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/namespace-enforcement/scripts/test_conflict_scenarios.py",
+  "filename": "test_conflict_scenarios.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 12711,
+  "checksum": "d8e1f35635ca182b",
+  "ingested_at": "2026-03-31T17:30:32.700377",
+  "line_count": 345,
+  "title": "test_conflict_scenarios",
+  "description": "Conflict Scenario Tests - 对抗测试\nS7: 模拟命名冲突场景",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: ConflictScenarioTester"
+    }
+  ],
+  "entities": [
+    {
+      "name": "ConflictScenarioTester",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "S7.1: 大小写冲突",
+    "S7.2: 空格与连字符混淆",
+    "S7.3: 相似名称冲突",
+    "S7.4: 特殊字符导致的冲突",
+    "S7.5: 前缀重叠冲突",
+    "S7.6: 版本号歧义",
+    "在Linux（大小写敏感）上，这些是不同的文件",
+    "但应该检测到大小写违规",
+    "应该有大写违规（README.md 和 ReadMe.md 包含大写）",
+    "通过条件：检测到至少2个大写违规（README.md和ReadMe.md）",
+    "或者检测到冲突风险（在大小写不敏感系统上）",
+    "检查是否检测到相似名称",
+    "创建包含特殊字符的文件",
+    "创建不同版本号格式的文件"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

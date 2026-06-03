@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_satisficing-web-fetcher/SECURITY_POLICY.md",
+  "filename": "SECURITY_POLICY.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "aba07cb0b7d06834",
+  "content_length": 2254,
+  "ingested_at": "2026-03-31T17:27:45.066801",
+  "content_preview": "# 安全策略文档\n\n## 1. 安全红线\n\n以下行为**严格禁止**：\n\n1. ❌ **抓取登录后才能访问的内容**\n   - 不得使用保存的Cookie/Token访问受保护资源\n   - 不得绕过身份验证机制\n\n2. ❌ **抓取个人隐私数据**\n   - 身份证号、手机号、银行卡号\n   - 家庭住址、个人行程\n   - 社交媒体私信内容\n\n3. ❌ **高频/大规模抓取**\n   - 速率限制：默认1请求/秒\n   - 单域名并发限制：最大2\n   - 禁止分布式爬取\n\n4. ❌ **自动绕过验证码**\n   - 禁止识别和自动填写验证码\n   - 禁止破解图形验证、滑块验证\n\n5. ❌ **使用代理隐藏身份**\n   - 禁止通过代理服务器匿名抓取\n   - 系统级代理除外（需审批）\n\n以下行为**必须执行**：\n\n1. ✅ **所有请求记录审计日志**\n   - URL、时间、结果、错误信息\n   - 保留30天\n\n2. ✅ **浏览器进程沙箱隔离**\n   - 独立进程运行\n   - 内存限制2GB\n   - 超时自动终止\n\n3. ✅ **域名白名单校验**\n   - 仅",
+  "limitations_applied": []
+}

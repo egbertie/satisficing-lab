@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/A-manyige/auto_convert.sh",
+  "filename": "auto_convert.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "7face23030fcf16d",
+  "content_length": 2782,
+  "ingested_at": "2026-03-31T17:27:46.253380",
+  "content_preview": "#!/bin/bash\n# A满意哥专属文件夹 - 自动格式转换脚本\n# 用法: ./auto_convert.sh [文件夹路径]\n\nTARGET_DIR=\"${1:-/root/.openclaw/workspace/A满意哥专属文件夹}\"\n\necho \"=== 自动格式转换系统 ===\"\necho \"目标文件夹: $TARGET_DIR\"\necho \"\"\n\n# 函数：转换 Markdown → Word/Excel/PDF\nconvert_markdown() {\n    local file=\"$1\"\n    local dir=$(dirname \"$file\")\n    local filename=$(basename \"$file\" .md)\n    \n    # 确保目录存在\n    mkdir -p \"${dir}/📄 源文件\" \"${dir}/📑 Word成品\" 2>/dev/null\n    \n    # 移动源文件\n    if [[ ! \"$file\" =~ \"📄 源文件\" ]]; then\n        cp \"$file\" \"${dir}/📄 源文件/",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/batch_skill_fixer.py",
+  "filename": "batch_skill_fixer.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "10ee438e923acec5",
+  "content_length": 3292,
+  "ingested_at": "2026-03-31T17:27:46.182395",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n批量Skill修复脚本\n自动添加Token管理和run_tests\n\"\"\"\n\nimport re\nimport os\nfrom pathlib import Path\n\nSKILLS_DIR = Path(\"/root/.openclaw/workspace/skills\")\n\nTOKEN_TEMPLATE = '''\n# ============ Token消耗预估与效益红线 ============\nTOKEN_COST_ESTIMATE = \"\"\"\nToken消耗估算：\n- 单次调用: ~200-500 tokens\n- 批量处理: ~1000-2000 tokens\n- 平均: ~300 tokens/次\n\"\"\"\n\nTOKEN_RED_LINES = {\n    'max_per_call': 1000,       # 单次调用不得超过1K tokens\n    'max_per_hour': 5000,       # 每小时不得超过5K tokens\n    'efficiency_target': 0.85,  # ",
+  "limitations_applied": []
+}

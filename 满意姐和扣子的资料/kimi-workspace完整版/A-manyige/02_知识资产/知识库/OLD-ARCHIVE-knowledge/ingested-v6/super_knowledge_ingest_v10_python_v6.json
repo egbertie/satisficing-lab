@@ -1,0 +1,35 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/super-knowledge-ingest/super_knowledge_ingest_v10.py",
+  "filename": "super_knowledge_ingest_v10.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 3664,
+  "checksum": "54e4a97196ea2716",
+  "ingested_at": "2026-03-31T17:30:32.736426",
+  "line_count": 134,
+  "title": "super_knowledge_ingest_v10",
+  "description": "super-knowledge-ingest V10.0 - 光速版\n核心突破：极致内联 + 预计算一切 + CPU亲和性\n目标：稳定 < 2μs",
+  "sections": [],
+  "entities": [
+    {
+      "name": "_writer",
+      "type": "function"
+    },
+    {
+      "name": "preload_v10",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "============ 预计算全局状态 ============",
+    "所有路径、配置提前算好",
+    "缓存: filepath -> (data, size, out_path)  预计算out_path",
+    "============ 预加载（计算一切） ============",
+    "存入缓存（包含预计算的out_path）",
+    "============ 光速入库（极致内联） ============",
+    "单次查找+解包+入队（全部内联）"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

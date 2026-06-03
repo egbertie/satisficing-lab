@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/docs/2026-03/SKILL_INTEGRATION_PLAN_V1.md",
+  "filename": "SKILL_INTEGRATION_PLAN_V1.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "46391a2906833528",
+  "content_length": 5258,
+  "ingested_at": "2026-03-31T17:27:46.648442",
+  "content_preview": "# Skill整合优化方案 V1.0\n## 第一性原理：从104个到12个核心套件\n\n**核心原则**: \n- 一个功能只保留一个最优实现\n- 特色功能独立保留\n- 接口统一，内部可替换\n- 全自建，可控可迭代\n\n---\n\n## 🎯 第一性分析\n\n### Skill的本质\n```\nSkill = 输入 → 处理 → 输出\n      = API封装 + 业务逻辑 + 输出格式化\n```\n\n### 我们的问题\n| 问题 | 现状 | 目标 |\n|------|------|------|\n| 重复造轮子 | 6个搜索skill | 1个统一搜索 |\n| 功能碎片化 | 6个飞书skill | 1个飞书套件 |\n| 接口不统一 | 每个skill语法不同 | 统一调用方式 |\n| 维护困难 | 104个skill | 12个核心套件 |\n\n---\n\n## 📦 整合方案：12个核心套件\n\n### 1. unified-search（统一搜索）\n**整合**: brave-search + tavily + firecrawl + multi-search + exa-web-search\n\n",
+  "limitations_applied": []
+}

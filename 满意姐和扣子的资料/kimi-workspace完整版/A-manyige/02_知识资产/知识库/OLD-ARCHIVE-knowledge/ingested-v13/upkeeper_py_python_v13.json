@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_knowledge-upkeep/scripts/upkeeper.py",
+  "filename": "upkeeper.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "1f712dd431099170",
+  "content_length": 13242,
+  "ingested_at": "2026-03-31T17:27:45.131200",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nknowledge-upkeep 执行脚本\n知识维护者 - 专家档案标注+记忆维护周期\n\"\"\"\n\nimport json\nimport os\nimport sys\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\n# 配置\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nDATA_DIR = WORKSPACE / \"data\" / \"knowledge-upkeep\"\nLOG_FILE = Path(\"/tmp/knowledge-upkeep.log\")\n\n# 确保数据目录存在\nDATA_DIR.mkdir(parents=True, exist_ok=True)\n\nclass KnowledgeUpkeep:\n    \"\"\"知识维护者\"\"\"\n    \n    def __init__(self):\n        self.experts_file = DATA_DIR / \"experts.json",
+  "limitations_applied": []
+}

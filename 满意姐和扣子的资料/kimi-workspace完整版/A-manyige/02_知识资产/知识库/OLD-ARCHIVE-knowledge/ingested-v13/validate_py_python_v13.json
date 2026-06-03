@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/vendor-api-monitor/scripts/validate.py",
+  "filename": "validate.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "921e476acded1300",
+  "content_length": 8136,
+  "ingested_at": "2026-03-31T17:27:45.405202",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n数据验证脚本 - 验证监控数据的准确性\n\"\"\"\n\nimport argparse\nimport json\nimport os\nimport sys\nfrom datetime import datetime\nfrom pathlib import Path\n\nsys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))\n\n\nclass DataValidator:\n    \"\"\"数据验证器\"\"\"\n    \n    def __init__(self, data_dir: str = \"data\"):\n        self.data_dir = Path(data_dir)\n        self.errors = []\n        self.warnings = []\n    \n    def _load_metrics(self) -> list:\n        \"\"\"加载所有指标数据\"\"\"\n        metrics",
+  "limitations_applied": []
+}

@@ -1,0 +1,79 @@
+{
+  "version": "3.1",
+  "model": "weekly-consumption-tracker",
+  "description": "周Token消耗追踪与预警系统",
+  "last_updated": "2026-03-21",
+  
+  "budget": {
+    "weekly_total": 490000,
+    "daily_average": 70000,
+    "unit": "tokens"
+  },
+  
+  "tracking": {
+    "method": "用户主动标记 + session_status验证",
+    "frequency": "每6小时检查一次（每日4次）",
+    "times": ["06:00", "12:00", "18:00", "23:00"],
+    "granularity": "周累计消耗百分比"
+  },
+  
+  "thresholds": {
+    "description": "基于时间进度的动态阈值（含20%冗余）",
+    "formula": "允许消耗 = 时间进度 + 20%冗余",
+    "emergency": "时间进度 + 40%冗余",
+    
+    "daily_reference": {
+      "周一06:00": {"time_progress": 0, "threshold": 20, "emergency": 40},
+      "周一18:00": {"time_progress": 11, "threshold": 31, "emergency": 51},
+      "周二06:00": {"time_progress": 14, "threshold": 34, "emergency": 54},
+      "周二18:00": {"time_progress": 25, "threshold": 45, "emergency": 65},
+      "周三06:00": {"time_progress": 29, "threshold": 49, "emergency": 69},
+      "周三18:00": {"time_progress": 39, "threshold": 59, "emergency": 79},
+      "周四06:00": {"time_progress": 43, "threshold": 63, "emergency": 83},
+      "周四18:00": {"time_progress": 54, "threshold": 74, "emergency": 94},
+      "周五06:00": {"time_progress": 57, "threshold": 77, "emergency": 97},
+      "周五18:00": {"time_progress": 68, "threshold": 88, "emergency": 100},
+      "周六06:00": {"time_progress": 71, "threshold": 91, "emergency": 100},
+      "周六18:00": {"time_progress": 82, "threshold": 100, "emergency": 100},
+      "周日06:00": {"time_progress": 86, "threshold": 100, "emergency": 100},
+      "周日18:00": {"time_progress": 96, "threshold": 100, "emergency": 100}
+    }
+  },
+  
+  "status_levels": {
+    "green": {
+      "label": "🟢 正常",
+      "condition": "消耗 <= 时间进度 + 20%",
+      "action": "无需干预"
+    },
+    "yellow": {
+      "label": "🟡 预警",
+      "condition": "消耗 > 时间进度 + 20%",
+      "action": "建议减速，启用分级输出L1/L2"
+    },
+    "red": {
+      "label": "🔴 紧急",
+      "condition": "消耗 > 时间进度 + 40% 或 消耗 > 90%",
+      "action": "强制L1输出，暂停非关键任务"
+    }
+  },
+  
+  "weekly_reset": {
+    "time": "周一 00:00",
+    "action": "消耗百分比归零，重新计算",
+    "note": "周末剩余token不累积到下周"
+  },
+  
+  "user_marked_history": [
+    {"datetime": "2026-03-21 20:06", "day_of_week": "周六", "time_progress": 79, "consumption": 75, "status": "🟢 正常"},
+    {"datetime": "2026-03-21 20:21", "day_of_week": "周六", "time_progress": 80, "consumption": 76, "status": "🟢 正常"},
+    {"datetime": "2026-03-21 20:42", "day_of_week": "周六", "time_progress": 82, "consumption": 77, "status": "🟢 正常"},
+    {"datetime": "2026-03-21 20:57", "day_of_week": "周六", "time_progress": 84, "consumption": 78, "status": "🟢 正常"},
+    {"datetime": "2026-03-21 21:27", "day_of_week": "周六", "time_progress": 87, "consumption": 79, "status": "🟢 正常"}
+  ],
+  
+  "quick_check": {
+    "description": "用户询问时快速回答模板",
+    "template": "当前{day_of_week} {time}，周Token消耗约{consumption}%，时间进度{time_progress}%，状态{status}。"
+  }
+}

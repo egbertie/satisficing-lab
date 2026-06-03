@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/SECURITY_BASELINE_DEPLOYED_2026-03-26.md",
+  "filename": "SECURITY_BASELINE_DEPLOYED_2026-03-26.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "e21bade10e01c40b",
+  "content_length": 1877,
+  "ingested_at": "2026-03-31T17:27:46.514454",
+  "content_preview": "# 企业级安全基础部署完成报告\n## 部署时间: 2026-03-26 12:07\n## 决策: B+严格模式+立即执行\n\n---\n\n## ✅ 已部署组件\n\n### 1. Git Pre-commit Hook（严格模式）✅\n**路径**: `.git/hooks/pre-commit`\n**模式**: 严格（发现密钥即阻断提交）\n\n**检测能力**:\n- API密钥（OpenAI/Kimi格式: sk-xxx）\n- GitHub Token（ghp_xxx, github_pat_xxx）\n- AWS密钥（AKIAxxx）\n- Bearer Token\n- 私钥文件（-----BEGIN PRIVATE KEY-----）\n- 硬编码密码（password/secret/token = 'xxx'）\n- 高熵字符串（base64编码密钥）\n- 禁止路径（.vault-keys/, .env文件）\n- 大文件检测（>100KB）\n\n**阻断级别**:\n- SEVERITY >= 1000: 禁止提交（密钥文件）\n- SEVERITY >= 100: 禁止提交（疑似密钥）\n- SEVER",
+  "limitations_applied": []
+}

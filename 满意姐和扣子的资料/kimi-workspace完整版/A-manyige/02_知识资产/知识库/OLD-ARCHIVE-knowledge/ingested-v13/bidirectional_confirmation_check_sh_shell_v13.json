@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/bidirectional_confirmation_check.sh",
+  "filename": "bidirectional_confirmation_check.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "106da2f3cf78a95e",
+  "content_length": 186,
+  "ingested_at": "2026-03-31T17:27:46.157099",
+  "content_preview": "#!/bin/bash\n# 双向确认检查\necho \"=== 双向确认检查 ===\"\necho \"检查是否完成双向确认...\"\n\nif [ ! -f \"/tmp/confirmation_received\" ]; then\n    echo \"❌ 未完成双向确认\"\n    echo \"必须@对方并等待确认\"\n    exit 1\nfi\n\necho \"✅ 双向确认完成\"\n",
+  "limitations_applied": []
+}

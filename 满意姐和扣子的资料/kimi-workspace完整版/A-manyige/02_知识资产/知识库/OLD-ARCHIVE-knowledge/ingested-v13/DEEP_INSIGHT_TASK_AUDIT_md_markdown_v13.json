@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/templates/DEEP_INSIGHT_TASK_AUDIT.md",
+  "filename": "DEEP_INSIGHT_TASK_AUDIT.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "f7881feab85d5e92",
+  "content_length": 6892,
+  "ingested_at": "2026-03-31T17:27:44.679703",
+  "content_preview": "# 配置/任务类记录验证 + 五层深挖报告\n\n**审计时间**: 2026-03-31 08:34  \n**审计范围**: config/、memory/、scripts/目录中的配置和任务记录  \n**审计人员**: Subagent (通道5)  \n**报告状态**: ✅ 完成\n\n---\n\n## 一、任务验证总表\n\n### 1.1 Cron配置类任务验证\n\n| 配置来源 | 声称内容 | 实际状态 | 差距 | 证据 |\n|----------|----------|----------|------|------|\n| **cron-master-v1.yaml** | 30个Cron任务，分3阶段部署 | Phase1: 5个enabled=true，但仅2个实际部署 | 23个任务未部署 | crontab仅显示2个旧任务+6个新任务 |\n| **daily-cron-v2.json** | 日常模式V2.0，分层任务管理 | 配置文件完整，但无对应Cron条目 | 配置≠实际执行 | 无独立Cron调度 |\n| **hibernation-cron-v2.json** | ",
+  "limitations_applied": []
+}

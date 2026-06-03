@@ -1,0 +1,235 @@
+{
+  "source_path": "/root/.openclaw/workspace/.pre-restore-backup/docs/BLUE_TEAM_TOKEN_OPTIMIZATION_REPORT_2026-03-26.md",
+  "filename": "BLUE_TEAM_TOKEN_OPTIMIZATION_REPORT_2026-03-26.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 10330,
+  "checksum": "0524ea4836caeb81",
+  "ingested_at": "2026-03-31T17:30:16.724038",
+  "line_count": 362,
+  "title": "🔴 蓝军Token优化专项报告",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "🔴 蓝军Token优化专项报告"
+    },
+    {
+      "level": 2,
+      "title": "定时任务与日常使用Token消耗深度审计"
+    },
+    {
+      "level": 2,
+      "title": "报告时间：2026-03-26 12:40"
+    },
+    {
+      "level": 2,
+      "title": "执行摘要"
+    },
+    {
+      "level": 2,
+      "title": "一、定时任务Token消耗分析"
+    },
+    {
+      "level": 3,
+      "title": "1.1 当前Cron任务清单"
+    },
+    {
+      "level": 3,
+      "title": "1.2 定时任务优化建议"
+    },
+    {
+      "level": 4,
+      "title": "🔴 P0 - 立即执行"
+    },
+    {
+      "level": 1,
+      "title": "问题：第31行多余'fi'"
+    },
+    {
+      "level": 1,
+      "title": "影响：自动提交失败，需手动提交"
+    },
+    {
+      "level": 1,
+      "title": "优化：修复后可节省手动操作Token"
+    },
+    {
+      "level": 1,
+      "title": "当前：*/10 * * * * (144次/天)"
+    },
+    {
+      "level": 1,
+      "title": "优化：*/30 * * * * (48次/天)"
+    },
+    {
+      "level": 1,
+      "title": "节省：7200 - 2400 = 4800 Token/日"
+    },
+    {
+      "level": 1,
+      "title": "当无文件变更时跳过检查点"
+    },
+    {
+      "level": 1,
+      "title": "节省：约50%空运行Token"
+    },
+    {
+      "level": 4,
+      "title": "🟡 P1 - 本周执行"
+    },
+    {
+      "level": 1,
+      "title": "当前：token-monitor每6小时单独运行"
+    },
+    {
+      "level": 1,
+      "title": "优化：合并到hibernation-check，一次检查多状态"
+    },
+    {
+      "level": 1,
+      "title": "节省：约30%重复检查Token"
+    },
+    {
+      "level": 1,
+      "title": "当Token>80%时自动暂停非关键Cron"
+    },
+    {
+      "level": 1,
+      "title": "避免周期末期无Token可用"
+    },
+    {
+      "level": 2,
+      "title": "二、日常使用Token消耗分析"
+    },
+    {
+      "level": 3,
+      "title": "2.1 当前消耗模式（基于最近3天数据）"
+    },
+    {
+      "level": 3,
+      "title": "2.2 日常使用优化建议"
+    },
+    {
+      "level": 4,
+      "title": "🔴 P0 - 立即部署"
+    },
+    {
+      "level": 4,
+      "title": "🟡 P1 - 本周部署"
+    },
+    {
+      "level": 2,
+      "title": "三、隐藏消耗优化"
+    },
+    {
+      "level": 3,
+      "title": "3.1 当前隐藏消耗"
+    },
+    {
+      "level": 3,
+      "title": "3.2 隐藏消耗优化"
+    },
+    {
+      "level": 1,
+      "title": "缓存SOUL.md + USER.md摘要"
+    },
+    {
+      "level": 1,
+      "title": "仅当文件修改时重新加载"
+    },
+    {
+      "level": 2,
+      "title": "四、需要用户协助的事项"
+    },
+    {
+      "level": 3,
+      "title": "4.1 🔴 P0 - 需要立即确认"
+    },
+    {
+      "level": 3,
+      "title": "4.2 🟡 P1 - 需要本周确认"
+    },
+    {
+      "level": 3,
+      "title": "4.3 🟢 P2 - 需要本月确认"
+    },
+    {
+      "level": 2,
+      "title": "五、预期效果"
+    },
+    {
+      "level": 3,
+      "title": "5.1 优化前后对比"
+    },
+    {
+      "level": 3,
+      "title": "5.2 周期末Token状态预测"
+    },
+    {
+      "level": 3,
+      "title": "5.3 用户体验影响"
+    },
+    {
+      "level": 2,
+      "title": "六、立即执行清单（无需用户确认）"
+    },
+    {
+      "level": 1,
+      "title": "1. 修复git提交脚本"
+    },
+    {
+      "level": 1,
+      "title": "2. 降低检查点频率"
+    },
+    {
+      "level": 1,
+      "title": "3. 添加上下文缓存机制"
+    },
+    {
+      "level": 1,
+      "title": "4. 激活模型路由"
+    },
+    {
+      "level": 2,
+      "title": "七、一句话总结"
+    },
+    {
+      "level": 2,
+      "title": "附录：快速参考"
+    },
+    {
+      "level": 3,
+      "title": "当前Cron一览"
+    },
+    {
+      "level": 3,
+      "title": "优化后Cron一览"
+    },
+    {
+      "level": 3,
+      "title": "Token消耗监控命令"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "1. 修复auto-git-commit.sh语法错误",
+    "60-70%日常Token消耗",
+    "1. 激活模型路由配置",
+    "2. 降低检查点频率（10分钟→30分钟）",
+    "5. 添加Token预算熔断",
+    "3. 按需深度输出",
+    "5. 智能休眠决策",
+    "4. 批量处理任务",
+    "3. 添加检查点智能跳过",
+    "4. 合并相关任务",
+    "2. 非必要确认消除",
+    "3. 启用分层输出模式",
+    "1. 系统消息缓存",
+    "2. 实施上下文压缩协议"
+  ],
+  "limitations_applied": [
+    "Sections limited to 50"
+  ],
+  "content_truncated": false
+}

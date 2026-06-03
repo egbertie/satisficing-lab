@@ -1,0 +1,38 @@
+[
+  {
+    "type": "waitForSelector",
+    "selector": "{{OPEN_SELECTOR}}",
+    "timeoutMs": "{{OPEN_TIMEOUT_MS}}"
+  },
+  {
+    "type": "tap",
+    "selector": "{{OPEN_SELECTOR}}",
+    "selectorIndex": "{{OPEN_SELECTOR_INDEX}}"
+  },
+  {
+    "type": "wait",
+    "ms": "{{PREVIEW_WAIT_MS}}"
+  },
+  {
+    "type": "screenshot",
+    "path": "{{OPEN_SCREENSHOT_PATH}}"
+  },
+  {
+    "type": "waitForSelector",
+    "selector": "{{CLOSE_SELECTOR}}",
+    "timeoutMs": "{{CLOSE_TIMEOUT_MS}}"
+  },
+  {
+    "type": "tap",
+    "selector": "{{CLOSE_SELECTOR}}",
+    "selectorIndex": "{{CLOSE_SELECTOR_INDEX}}"
+  },
+  {
+    "type": "wait",
+    "ms": "{{CLOSE_WAIT_MS}}"
+  },
+  {
+    "type": "screenshot",
+    "path": "{{CLOSE_SCREENSHOT_PATH}}"
+  }
+]

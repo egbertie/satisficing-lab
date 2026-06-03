@@ -1,0 +1,347 @@
+# 检查清单模板定义
+# Universal Checklist Enforcer - Template Definitions
+
+templates:
+  # ============================================
+  # 通用检查清单 (general-v1)
+  # ============================================
+  general-v1:
+    version: "1.0"
+    description: "通用任务检查清单 - 适用于所有任务类型"
+    author: "universal-checklist-enforcer"
+    last_updated: "2026-03-21"
+    
+    items:
+      - id: C1
+        name: "任务定义SMART检查"
+        description: "目标是否具体/可衡量/可实现/相关/有时限"
+        criteria:
+          - "Specific: 明确说明要解决什么问题"
+          - "Measurable: 有明确的完成标准"
+          - "Achievable: 在给定资源内可完成"
+          - "Relevant: 与战略目标相关"
+          - "Time-bound: 有明确的deadline"
+        block_on_fail: true
+        weight: 1.0
+        tags: ["planning", "baseline", "required"]
+        help_text: "SMART原则是确保任务可执行的基础"
+        
+      - id: C2
+        name: "输入完整性检查"
+        description: "是否提供了所有必要文件/数据/上下文"
+        criteria:
+          - "列出所有必需的输入项"
+          - "明确标注缺失项（如有）"
+          - "缺失项风险评估（阻塞/可延后）"
+        block_on_fail: true
+        weight: 0.9
+        tags: ["input", "baseline", "required"]
+        help_text: "输入不完整是任务失败的首要原因"
+        
+      - id: C3
+        name: "幻觉预防检查"
+        description: "关键数据是否标注来源和置信度"
+        criteria:
+          - "每个事实标注来源（文档/网页/记忆/推理）"
+          - "每个事实标注置信度（高/中/低）"
+          - "置信度<中 的信息明确标注[待验证]"
+        block_on_fail: false
+        warning_threshold: 1
+        weight: 0.8
+        tags: ["quality", "trust"]
+        help_text: "区分事实与推理，降低幻觉风险"
+        
+      - id: C4
+        name: "深度检查"
+        description: "是否使用MECE原则，无遗漏无重叠"
+        criteria:
+          - "Mutually Exclusive: 各部分相互独立"
+          - "Collectively Exhaustive: 完全穷尽无遗漏"
+          - "至少3个维度分析"
+          - "每个维度至少3个要点"
+        block_on_fail: false
+        weight: 0.7
+        tags: ["analysis", "depth"]
+        help_text: "MECE确保分析全面且不冗余"
+        
+      - id: C5
+        name: "闭环设计检查"
+        description: "产出物的下一步行动明确"
+        criteria:
+          - "明确下一步行动（Action）"
+          - "明确负责人（Owner）"
+          - "明确截止时间（Deadline）"
+          - "明确成功标准（Success Criteria）"
+        block_on_fail: true
+        weight: 1.0
+        tags: ["execution", "required"]
+        help_text: "闭环设计确保任务有始有终"
+
+  # ============================================
+  # 代码审查清单 (code-review-v1)
+  # ============================================
+  code-review-v1:
+    extends: general-v1
+    version: "1.0"
+    description: "代码审查专用检查清单"
+    author: "universal-checklist-enforcer"
+    last_updated: "2026-03-21"
+    
+    items:
+      # 继承通用清单后添加代码专项
+      - id: CR1
+        name: "代码质量检查"
+        description: "代码是否符合团队规范和质量标准"
+        criteria:
+          - "通过 linter 静态检查"
+          - "命名规范符合团队约定"
+          - "圈复杂度在合理范围 (<10)"
+          - "无明显的代码坏味道"
+        block_on_fail: false
+        weight: 0.8
+        tags: ["code", "quality"]
+        
+      - id: CR2
+        name: "测试覆盖检查"
+        description: "变更是否有充分的测试覆盖"
+        criteria:
+          - "新增代码有对应的单元测试"
+          - "测试覆盖率达到团队阈值"
+          - "边界情况和异常路径被覆盖"
+          - "测试用例命名清晰可读"
+        block_on_fail: true
+        weight: 0.9
+        tags: ["code", "test", "required"]
+        
+      - id: CR3
+        name: "安全审查"
+        description: "代码是否存在安全漏洞"
+        criteria:
+          - "无硬编码敏感信息"
+          - "输入经过验证和过滤"
+          - "无SQL注入/XSS等常见漏洞"
+          - "权限检查完整"
+        block_on_fail: true
+        weight: 1.0
+        tags: ["code", "security", "required"]
+        
+      - id: CR4
+        name: "性能影响评估"
+        description: "变更对系统性能的影响"
+        criteria:
+          - "评估时间复杂度变化"
+          - "评估空间使用变化"
+          - "大数据量场景考虑"
+          - "性能测试计划明确"
+        block_on_fail: false
+        weight: 0.6
+        tags: ["code", "performance"]
+
+  # ============================================
+  # 部署发布清单 (deployment-v1)
+  # ============================================
+  deployment-v1:
+    extends: general-v1
+    version: "1.0"
+    description: "部署发布专用检查清单"
+    author: "universal-checklist-enforcer"
+    last_updated: "2026-03-21"
+    
+    items:
+      - id: D1
+        name: "预发布验证"
+        description: "部署前的必要验证"
+        criteria:
+          - "所有自动化测试通过"
+          - "手动验收测试完成"
+          - "配置项已确认正确"
+          - "数据库迁移脚本已测试"
+        block_on_fail: true
+        weight: 1.0
+        tags: ["deploy", "required"]
+        
+      - id: D2
+        name: "回滚方案"
+        description: "部署失败的应对方案"
+        criteria:
+          - "回滚步骤已文档化"
+          - "回滚时间目标(RTO)明确"
+          - "数据回滚策略确认"
+          - "回滚责任人明确"
+        block_on_fail: true
+        weight: 1.0
+        tags: ["deploy", "risk", "required"]
+        
+      - id: D3
+        name: "监控与告警"
+        description: "部署后的监控配置"
+        criteria:
+          - "关键指标监控已配置"
+          - "告警阈值已设置"
+          - "告警接收人确认"
+          - "on-call 值班表更新"
+        block_on_fail: false
+        weight: 0.8
+        tags: ["deploy", "monitoring"]
+
+  # ============================================
+  # 文档编写清单 (document-v1)
+  # ============================================
+  document-v1:
+    extends: general-v1
+    version: "1.0"
+    description: "文档编写专用检查清单"
+    author: "universal-checklist-enforcer"
+    last_updated: "2026-03-21"
+    
+    items:
+      - id: F1
+        name: "文档结构检查"
+        description: "文档结构是否清晰合理"
+        criteria:
+          - "有清晰的目录结构"
+          - "标题层级正确"
+          - "段落长度适中"
+        block_on_fail: false
+        weight: 0.6
+        tags: ["doc", "structure"]
+        
+      - id: F2
+        name: "可读性检查"
+        description: "文档是否易于理解"
+        criteria:
+          - "语言简洁明了"
+          - "专业术语有解释"
+          - "示例充分且相关"
+        block_on_fail: false
+        weight: 0.7
+        tags: ["doc", "readability"]
+        
+      - id: F3
+        name: "完整性检查"
+        description: "文档内容是否完整"
+        criteria:
+          - "涵盖了必要的背景信息"
+          - "步骤说明完整"
+          - "常见问题有解答"
+        block_on_fail: false
+        weight: 0.8
+        tags: ["doc", "completeness"]
+
+  # ============================================
+  # 调研分析清单 (research-v1)
+  # ============================================
+  research-v1:
+    extends: general-v1
+    version: "1.0"
+    description: "调研分析专用检查清单"
+    author: "universal-checklist-enforcer"
+    last_updated: "2026-03-21"
+    
+    items:
+      - id: R1
+        name: "来源多样性"
+        description: "信息来源是否多样可靠"
+        criteria:
+          - "至少3个不同来源"
+          - "包含权威来源"
+          - "来源时间较新"
+        block_on_fail: false
+        weight: 0.8
+        tags: ["research", "source"]
+        
+      - id: R2
+        name: "偏见识别"
+        description: "是否识别并标注潜在偏见"
+        criteria:
+          - "标注来源潜在立场"
+          - "平衡不同观点"
+          - "区分事实与观点"
+        block_on_fail: false
+        weight: 0.7
+        tags: ["research", "bias"]
+
+  # ============================================
+  # 方案设计清单 (design-v1)
+  # ============================================
+  design-v1:
+    extends: general-v1
+    version: "1.0"
+    description: "方案设计专用检查清单"
+    author: "universal-checklist-enforcer"
+    last_updated: "2026-03-21"
+    
+    items:
+      - id: N1
+        name: "架构合理性"
+        description: "架构设计是否合理"
+        criteria:
+          - "满足非功能性需求"
+          - "考虑可扩展性"
+          - "考虑可维护性"
+        block_on_fail: true
+        weight: 0.9
+        tags: ["design", "architecture", "required"]
+        
+      - id: N2
+        name: "风险评估"
+        description: "设计风险是否充分识别"
+        criteria:
+          - "技术风险已识别"
+          - "业务风险已识别"
+          - "有相应的缓解措施"
+        block_on_fail: false
+        weight: 0.8
+        tags: ["design", "risk"]
+
+  # ============================================
+  # 紧急响应清单 (emergency-v1) - 简化版
+  # ============================================
+  emergency-v1:
+    version: "1.0"
+    description: "紧急响应专用简化清单"
+    author: "universal-checklist-enforcer"
+    last_updated: "2026-03-21"
+    
+    items:
+      - id: E1
+        name: "影响范围确认"
+        description: "快速确认事件影响范围"
+        criteria:
+          - "受影响系统/用户已识别"
+          - "影响程度已评估"
+        block_on_fail: false
+        weight: 1.0
+        tags: ["emergency", "impact"]
+        
+      - id: E2
+        name: "止损措施"
+        description: "已采取或计划止损措施"
+        criteria:
+          - "立即止损动作已执行/计划"
+          - "止损效果可验证"
+        block_on_fail: false
+        weight: 1.0
+        tags: ["emergency", "mitigation"]
+        
+      - id: E3
+        name: "升级路径"
+        description: "必要时升级的路径"
+        criteria:
+          - "已知何时需要升级"
+          - "升级联系人已确认"
+        block_on_fail: false
+        weight: 0.8
+        tags: ["emergency", "escalation"]
+
+# ============================================
+# 场景到模板的映射
+# ============================================
+scenario_mapping:
+  general: general-v1
+  code-review: code-review-v1
+  deployment: deployment-v1
+  document: document-v1
+  research: research-v1
+  design: design-v1
+  emergency: emergency-v1

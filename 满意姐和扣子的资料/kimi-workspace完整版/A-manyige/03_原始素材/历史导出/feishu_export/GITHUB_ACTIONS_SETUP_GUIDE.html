@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>GITHUB_ACTIONS_SETUP_GUIDE</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; padding: 40px; max-width: 800px; margin: 0 auto; }
+        h1 { color: #1f2329; border-bottom: 2px solid #3370ff; padding-bottom: 10px; }
+        h2 { color: #1f2329; margin-top: 30px; }
+        h3 { color: #3370ff; }
+        code { background: #f5f6f7; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+        pre { background: #f5f6f7; padding: 16px; border-radius: 6px; overflow-x: auto; }
+        blockquote { border-left: 4px solid #3370ff; margin: 0; padding-left: 16px; color: #646a73; }
+        table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+        th, td { border: 1px solid #dee0e3; padding: 8px 12px; text-align: left; }
+        th { background: #f5f6f7; font-weight: 600; }
+        ul, ol { padding-left: 24px; }
+    </style>
+</head>
+<body>
+<h1 id="github-actions">GitHub Actions 配置指引</h1>
+<h2 id="1github-personal-access-token">步骤1：创建GitHub Personal Access Token</h2>
+<ol>
+<li>登录 https://github.com</li>
+<li>点击右上角头像 → Settings</li>
+<li>左侧菜单最下方 → Developer settings</li>
+<li>左侧 → Personal access tokens → Tokens (classic)</li>
+<li>点击 Generate new token (classic)</li>
+<li>填写信息：</li>
+<li>Note: <code>满意解研究所-Actions部署</code></li>
+<li>Expiration: <code>No expiration</code> (或自定义)</li>
+<li>
+<p>勾选权限：</p>
+<ul>
+<li>✅ <code>repo</code> (完整仓库访问)</li>
+<li>✅ <code>workflow</code> (Actions工作流)</li>
+<li>✅ <code>write:packages</code> (如果需要)</li>
+</ul>
+</li>
+<li>
+<p>点击 Generate token</p>
+</li>
+<li><strong>复制生成的Token</strong>（只显示一次！）</li>
+</ol>
+<h2 id="2token">步骤2：将Token提供给我</h2>
+<p>将Token发送给我，我会立即配置到环境变量中：</p>
+<pre><code class="language-bash">export GITHUB_TOKEN=ghp_xxxxxxxxxxxx
+</code></pre>
+<h2 id="3">步骤3：我将自动完成的工作</h2>
+<p>收到Token后，我会立即：</p>
+<ol>
+<li><strong>创建工作流文件</strong>：<code>.github/workflows/</code> 目录下</li>
+<li><strong>配置自动化任务</strong>：</li>
+<li>每日自动备份所有文档到GitHub Release</li>
+<li>自动同步Notion（每日02:00执行）</li>
+<li>Markdown文件自动检查（链接、格式）</li>
+<li>
+<p>自动通知（同步成功/失败）</p>
+</li>
+<li>
+<p><strong>配置Secrets</strong>：</p>
+</li>
+<li>NOTION_TOKEN</li>
+<li>其他API Keys</li>
+</ol>
+<h2 id="4">步骤4：验证配置</h2>
+<p>配置完成后，你可以在GitHub仓库页面：
+1. 点击 Actions 标签
+2. 查看工作流运行状态
+3. 检查首次运行结果</p>
+<h2 id="_1">安全配置建议</h2>
+<p>⚠️ <strong>重要</strong>：
+- Token不要分享给第三方
+- 定期轮换Token（建议每3个月）
+- 仅授予最小必要权限
+- 在GitHub Secrets中存储，不硬编码</p>
+<h2 id="_2">预计完成时间</h2>
+<ul>
+<li>你提供Token：1分钟</li>
+<li>我完成配置：5分钟</li>
+<li><strong>总计：10分钟内完成GitHub Actions配置</strong></li>
+</ul>
+<hr />
+<p><em>准备就绪后立即发送Token，我会立即处理</em></p>
+</body>
+</html>
+<!-- 知识内化记录 -->
+<!-- 内化时间: 2026-03-31 | 状态: 已内化 -->

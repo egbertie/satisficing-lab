@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/error-handler/scripts/context_monitor.py",
+  "filename": "context_monitor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "5ef20c5a16631a80",
+  "content_length": 10339,
+  "ingested_at": "2026-03-31T17:27:45.489343",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n上下文大小监控脚本\n\n功能：\n- 监控当前对话上下文大小\n- 超过阈值自动提醒\n- 建议压缩时机\n\n阈值规则：\n- 黄色预警（30KB）：建议压缩\n- 红色预警（50KB）：强制压缩\n- 对话轮数 >100：建议新开会话\n\"\"\"\n\nimport os\nimport sys\nimport json\nfrom datetime import datetime\nfrom pathlib import Path\n\n# ============ 配置 ============\n\n# 阈值配置（字节）\nYELLOW_THRESHOLD = int(os.getenv(\"CONTEXT_YELLOW_THRESHOLD\", 30720))  # 30KB\nRED_THRESHOLD = int(os.getenv(\"CONTEXT_RED_THRESHOLD\", 51200))        # 50KB\nMAX_THRESHOLD = int(os.getenv(\"CONTEXT_MAX_THRESHOLD\", 65536))        #",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_satisficing-web-fetcher/examples/example4_security.py",
+  "filename": "example4_security.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "d158e9168a2ca00a",
+  "content_length": 4274,
+  "ingested_at": "2026-03-31T17:27:45.069193",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n示例4: 安全功能演示\n\n场景：生产环境使用、数据保护、审计合规\n特点：审计日志、PII脱敏、域名白名单\n\"\"\"\n\nimport sys\nfrom pathlib import Path\nsys.path.insert(0, str(Path(__file__).parent.parent))\n\nfrom security.audit_logger import AuditLogger, log_request\nfrom security.domain_whitelist import DomainWhitelist, allow, is_allowed\nfrom security.content_filter import ContentFilter, mask_sensitive, contains_pii\n\n\ndef example_audit_logging():\n    \"\"\"审计日志示例\"\"\"\n    print(\"=\" * 50)\n    print(\"示例4: 安全功能 - 审计日志\")\n    print(\"=\" ",
+  "limitations_applied": []
+}

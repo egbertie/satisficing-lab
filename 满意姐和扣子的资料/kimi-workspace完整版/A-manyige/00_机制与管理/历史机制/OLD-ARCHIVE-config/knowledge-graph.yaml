@@ -1,0 +1,264 @@
+# 知识关联图谱 V0.1
+
+> **版本**: V0.1  
+> **创建时间**: 2026-03-24  
+003e **用途**: 文件变更影响分析 + 一致性检查  
+003e **说明**: 基础关联映射，5标准化Skill后续迭代
+
+---
+
+## 一、核心信息节点定义
+
+### 1. 专家档案节点
+
+```yaml
+fang_yifeng_v2:
+  type: expert_profile
+  display_name: "方翊沣博士"
+  version: "2.0"
+  last_updated: "2026-03-24"
+  source_file: "memory/experts/fang_yifeng_v2.md"
+  
+  affects:
+    # P0级影响（必须同步更新）
+    - file: "feishu-personas/13_ANNOUNCE_官宣官.md"
+      fields: 
+        - "关键里程碑.方翊沣博士档案确认"
+        - "工作日志.专家资料补充状态"
+      priority: P0
+      
+    - file: "feishu-personas/项目_官宣执行手册.md"
+      fields:
+        - "关键里程碑.专家档案"
+        - "风险登记册.R01专家背书"
+      priority: P0
+      
+    - file: "product2-partner-matching/PFI-2.0-Ultimate-Handbook.md"
+      fields:
+        - "第1篇.1.5创始人资质.专家网络"
+        - "第6篇.数据资产.专家背书"
+      priority: P0
+      
+    # P1级影响（建议同步更新）
+    - file: "docs/WLU-ARCH-v1.0-FIN-260322-Totem-System.md"
+      fields:
+        - "六大图腾对应关系.HUINENG.状态"
+        - "六大图腾对应关系.HUINENG.专家资质"
+        - "HUINENG图腾.credentials"
+      priority: P1
+      
+    - file: "memory/working/totem_expert_integration.md"
+      fields:
+        - "专家能力深化.方翊沣"
+        - "五路图腾×五大学科.水维度"
+      priority: P1
+      
+    - file: "memory/working/encyclopedia_v1.1_text.md"
+      fields:
+        - "专家网络.方翊沣"
+      priority: P1
+      
+    # P2级影响（可选更新）
+    - file: "feishu-personas/14_CONTENT_内容总监.md"
+      fields:
+        - "参考素材.专家档案"
+      priority: P2
+```
+
+### 2. 用户资质节点
+
+```yaml
+dual_certification:
+  type: user_credential
+  display_name: "Egbertie双认证"
+  credentials:
+    - name: "CDAA 数字资产分析师一级认证"
+      type: "左脑能力"
+      meaning: "数字资产量化分析"
+    - name: "CBIIP 认证商业直觉智能从业者"
+      type: "右脑能力"
+      meaning: "商业直觉系统训练"
+  last_updated: "2026-03-24"
+  
+  affects:
+    # P0级影响
+    - file: "USER.md"
+      fields:
+        - "双认证体系"
+        - "创始人资质认证"
+      priority: P0
+      
+    - file: "MEMORY.md"
+      fields:
+        - "核心关系.创始人资质"
+        - "双认证对称"
+      priority: P0
+      
+    - file: "product2-partner-matching/PFI-2.0-Ultimate-Handbook.md"
+      fields:
+        - "第1篇.1.5创始人资质.双认证"
+        - "第1篇.1.4核心差异化.创始人背景"
+      priority: P0
+      
+    # P1级影响
+    - file: "feishu-personas/00_指挥官_Egbertie.md"
+      fields:
+        - "资质认证"
+      priority: P1
+      
+    - file: "memory/working/decision_retreat_v2_simplified.md"
+      fields:
+        - "产品定位.创始人资质"
+      priority: P1
+```
+
+### 3. 方法论节点
+
+```yaml
+align_complement_framework:
+  type: methodology
+  display_name: "对齐-互补框架"
+  source: "AAAI 2026顶会论文"
+  paper_title: "Align When They Want, Complement When They Need!"
+  integrated: "2026-03-24"
+  
+  affects:
+    # P0级影响
+    - file: "memory/methodology/align-complement-framework.md"
+      fields:
+        - "完整方法论文档"
+      priority: P0
+      
+    - file: "product2-partner-matching/PFI-2.0-Ultimate-Handbook.md"
+      fields:
+        - "第1篇.1.5创始人资质.方法论"
+        - "第2篇.评估体系.对齐-互补诊断"
+      priority: P0
+      
+    # P1级影响
+    - file: "docs/WLU-ARCH-v1.0-FIN-260322-Totem-System.md"
+      fields:
+        - "方法论映射.对齐-互补"
+      priority: P1
+      
+    - file: "memory/working/encyclopedia_v1.1_text.md"
+      fields:
+        - "方法论章节.对齐-互补"
+        - "五路图腾与对齐-互补映射"
+      priority: P1
+      
+    - file: "memory/archive/culture_dingyu_jin_wulu.md"
+      fields:
+        - "方法论关联.对齐-互补与双系统"
+      priority: P1
+      
+    # P2级影响
+    - file: "feishu-personas/13_ANNOUNCE_官宣官.md"
+      fields:
+        - "官宣文案.方法论卖点"
+      priority: P2
+```
+
+### 4. 产品方案节点
+
+```yaml
+decision_retreat_v2:
+  type: product_scheme
+  display_name: "2天1夜决策体验营V2.0"
+  version: "2.0"
+  last_updated: "2026-03-24"
+  
+  affects:
+    - file: "product2-partner-matching/PFI-2.0-Ultimate-Handbook.md"
+      fields:
+        - "第5篇.产品矩阵.体验营"
+      priority: P1
+      
+    - file: "feishu-personas/13_ANNOUNCE_官宣官.md"
+      fields:
+        - "官宣产品.体验营"
+      priority: P1
+```
+
+---
+
+## 二、文件更新一致性检查清单模板
+
+```yaml
+consistency_check_template:
+  source_update:
+    file: "[源文件路径]"
+    change_type: "[新增/修改/删除]"
+    change_summary: "[简要描述]"
+    timestamp: "[ISO-8601]"
+    
+  affected_files:
+    - file: "[受影响文件1]"
+      priority: P0
+      check_items:
+        - "[检查项1]"
+        - "[检查项2]"
+      status: "[待检查/已更新/无需更新]"
+      updated_by: "[更新人]"
+      updated_at: "[时间戳]"
+      
+    - file: "[受影响文件2]"
+      priority: P1
+      check_items:
+        - "[检查项1]"
+      status: "[待检查/已更新/无需更新]"
+      
+  validation:
+    p0_all_checked: false
+    p1_all_checked: false
+    consistency_passed: false
+    checked_by: "[检查人]"
+    checked_at: "[时间戳]"
+    notes: "[备注]"
+```
+
+---
+
+## 三、使用流程
+
+### 3.1 更新前查询
+
+```bash
+# 查询某个文件更新会影响哪些文件
+python3 scripts/knowledge_graph_query.py --source fang_yifeng_v2
+
+# 输出示例：
+# 源文件: memory/experts/fang_yifeng_v2.md
+# P0级影响文件: 3个
+#   - feishu-personas/13_ANNOUNCE_官宣官.md
+#   - feishu-personas/项目_官宣执行手册.md
+#   - product2-partner-matching/PFI-2.0-Ultimate-Handbook.md
+# P1级影响文件: 3个
+# P2级影响文件: 1个
+```
+
+### 3.2 更新后检查
+
+```bash
+# 生成一致性检查清单
+python3 scripts/consistency_check_generator.py \
+  --source fang_yifeng_v2 \
+  --output checklists/2026-03-24_fang_yifeng_update.yaml
+
+# 执行检查
+python3 scripts/consistency_validator.py \
+  --checklist checklists/2026-03-24_fang_yifeng_update.yaml \
+  --report report.md
+```
+
+---
+
+## 四、更新记录
+
+| 日期 | 版本 | 更新内容 |
+|------|------|----------|
+| 2026-03-24 | V0.1 | 初版建立，定义4个核心节点 |
+
+---
+
+*本文件为知识关联图谱基础配置，后续迭代增加自动化查询和验证功能。*

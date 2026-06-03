@@ -1,0 +1,53 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/feishu_bitable_sync.py",
+  "filename": "feishu_bitable_sync.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 19554,
+  "checksum": "a64837301882bee9",
+  "ingested_at": "2026-03-31T17:30:32.863511",
+  "line_count": 516,
+  "title": "feishu_bitable_sync",
+  "description": "飞书多维表格同步脚本\n\n功能：\n- 将本地 Markdown 文件同步到飞书多维表格（Bitable）\n- 支持双向同步（本地 → 飞书 / 飞书 → 本地）\n- 适合结构化知识管理\n\n使用方法：\n    python scripts/feishu_bitable_sync.py --mode push --source ./notes --table_url \"https://...\"\n    ",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: NoteRecord"
+    },
+    {
+      "level": 2,
+      "title": "Class: FeishuBitableSync"
+    }
+  ],
+  "entities": [
+    {
+      "name": "NoteRecord",
+      "type": "class"
+    },
+    {
+      "name": "FeishuBitableSync",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "-*- coding: utf-8 -*-",
+    "https://xxx.feishu.cn/base/APP_TOKEN?table=TABLE_ID",
+    "https://xxx.feishu.cn/wiki/WIKI_TOKEN?table=TABLE_ID",
+    "提取标题（第一个 # 开头的行）",
+    "提取 YAML frontmatter（如果有）",
+    "提取标签（从 frontmatter 或内容中的 #标签）",
+    "从内容中提取 #标签 格式",
+    "分类（从 frontmatter 或文件夹名）",
+    "先 pull 再 push，根据时间戳合并",
+    "目前简单实现：先 pull 到临时目录，再 push",
+    "推送本地笔记到多维表格",
+    "预览模式（不实际执行）"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

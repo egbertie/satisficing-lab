@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/checkpoint-manager/checkpoint_manager.py",
+  "filename": "checkpoint_manager.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "60f2409e737a7509",
+  "content_length": 13146,
+  "ingested_at": "2026-03-31T17:27:45.451844",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\ncheckpoint-manager: Token耗尽时的状态检查点管理\n实现零Token状态永生\n\n作者: 满意妞\n版本: 1.0.0\n日期: 2026-03-28\n\"\"\"\n\nimport os\nimport json\nimport shutil\nimport hashlib\nfrom datetime import datetime\nfrom pathlib import Path\nfrom typing import Dict, List, Optional, Tuple\n\n\nclass CheckpointManager:\n    \"\"\"检查点管理器 - 实现零Token状态永生\"\"\"\n    \n    def __init__(self, base_dir: str = \"~/.openclaw/immortal-state/checkpoints\"):\n        \"\"\"初始化检查点管理器\"\"\"\n        self.base_dir = Path(base_dir).expanduser()\n        s",
+  "limitations_applied": []
+}

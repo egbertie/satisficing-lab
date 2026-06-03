@@ -1,0 +1,91 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/quality-gate-system/scripts/quality-gate-check.py",
+  "filename": "quality-gate-check.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 30428,
+  "checksum": "3edd392132ef0c17",
+  "ingested_at": "2026-03-31T17:30:32.100362",
+  "line_count": 846,
+  "title": "quality-gate-check",
+  "description": "quality-gate-check.py\n完整的质量门禁检查脚本\n支持：代码/文档/配置的多维度质量检查\n\nUsage:\n    python3 quality-gate-check.py --target ./src --level standard\n    python3 quality-gate-check.py --target commit:abc123 --format json\n ",
+  "sections": [
+    {
+      "level": 2,
+      "title": "Class: Grade"
+    },
+    {
+      "level": 2,
+      "title": "Class: GateLevel"
+    },
+    {
+      "level": 2,
+      "title": "Class: CheckItem"
+    },
+    {
+      "level": 2,
+      "title": "Class: DimensionResult"
+    },
+    {
+      "level": 2,
+      "title": "Class: GateDecision"
+    },
+    {
+      "level": 2,
+      "title": "Class: GateReport"
+    },
+    {
+      "level": 2,
+      "title": "Class: QualityGateChecker"
+    }
+  ],
+  "entities": [
+    {
+      "name": "Grade",
+      "type": "class"
+    },
+    {
+      "name": "GateLevel",
+      "type": "class"
+    },
+    {
+      "name": "CheckItem",
+      "type": "class"
+    },
+    {
+      "name": "DimensionResult",
+      "type": "class"
+    },
+    {
+      "name": "GateDecision",
+      "type": "class"
+    },
+    {
+      "name": "GateReport",
+      "type": "class"
+    },
+    {
+      "name": "QualityGateChecker",
+      "type": "class"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "2. 提交规范检查 (非快速模式)",
+    "3. 安全扫描 (简化版)",
+    "4. 静态分析 (简化版)",
+    "简化的风格检查：检查是否有明显的格式问题",
+    "简单的静态分析：检查文件结构",
+    "3. 集成测试 (仅在非快速模式)",
+    "4. 性能测试 (仅在CRITICAL级别)",
+    "简化实现，实际应该调用coverage工具",
+    "1. CHANGELOG检查",
+    "2. README检查"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

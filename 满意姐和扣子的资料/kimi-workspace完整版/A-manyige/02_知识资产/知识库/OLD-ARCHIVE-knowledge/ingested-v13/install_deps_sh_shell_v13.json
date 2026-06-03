@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/install_deps.sh",
+  "filename": "install_deps.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "efb772029dbea998",
+  "content_length": 2878,
+  "ingested_at": "2026-03-31T17:27:46.182957",
+  "content_preview": "#!/bin/bash\n# 文件格式读取工具安装脚本\n# 一键安装所有必要依赖\n\necho \"==========================================\"\necho \"  文件格式读取工具安装脚本\"\necho \"==========================================\"\necho \"\"\n\n# 检查Python版本\necho \"[1/5] 检查Python环境...\"\npython3 --version 2>/dev/null || python --version\n\nif [ $? -ne 0 ]; then\n    echo \"错误: 未找到Python，请先安装Python 3.8或更高版本\"\n    exit 1\nfi\n\n# 安装核心依赖\necho \"\"\necho \"[2/5] 安装核心依赖...\"\npip install -q --upgrade pip\n\n# P1 - 最高优先级依赖\necho \"  - 安装PDF处理库 (pdfplumber, PyMuPDF)...\"\npip install -q pdfplumber",
+  "limitations_applied": []
+}

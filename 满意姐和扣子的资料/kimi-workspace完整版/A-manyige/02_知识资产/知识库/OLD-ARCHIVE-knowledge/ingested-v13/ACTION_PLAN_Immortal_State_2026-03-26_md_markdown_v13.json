@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/ACTION_PLAN_Immortal_State_2026-03-26.md",
+  "filename": "ACTION_PLAN_Immortal_State_2026-03-26.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "a4bbccac5c1ecb92",
+  "content_length": 7607,
+  "ingested_at": "2026-03-31T17:27:46.538541",
+  "content_preview": "# 行动计划：零Token状态永生系统（务实版）\n## 决策文档 - 请Egbertie选择执行路径\n\n---\n\n## 学习所得核心观点\n\n### 原文方案的优点\n1. **零Token唤醒** - 纯本地操作，恢复时不消耗API Token\n2. **精确恢复** - 事件溯源可到任意操作点\n3. **自动保存** - 无需人工干预，每5分钟自动检查点\n\n### 原文方案的挑战（在我们的环境）\n1. **需要OpenClaw底层支持** - 事件Hook、内存持久化等需要修改核心\n2. **对话上下文在云端** - Kimi管理对话历史，本地无法直接干预\n3. **进程监控权限** - 无法直接监控Claw进程生命周期\n\n### 我们的务实方案\n保留核心思想（本地持久化、零Token恢复、自动保存），但用我们**实际可控**的方式实现：\n\n---\n\n## 方案对比矩阵\n\n| 维度 | 方案A：文件级检查点 | 方案B：Git增强版 | 方案C：智能摘要 |\n|------|-------------------|-----------------|----------------|\n",
+  "limitations_applied": []
+}

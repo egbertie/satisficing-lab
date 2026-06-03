@@ -1,0 +1,48 @@
+{
+  "version": "1.0.0",
+  "framework": "三步反向分析",
+  "outputFormat": "docx",
+  "steps": {
+    "step1": {
+      "name": "定义正面",
+      "key": "define-positive",
+      "color": "#228B22",
+      "dimensions": ["结果维度", "过程维度", "条件维度", "时间维度"]
+    },
+    "step2": {
+      "name": "搜索反面",
+      "key": "search-counter",
+      "color": "#DC143C",
+      "caseStructure": ["基本信息", "背景情境", "决策过程", "执行细节", "结果呈现", "后续影响"]
+    },
+    "step3": {
+      "name": "总结建议",
+      "key": "summarize-recommend",
+      "color": "#4169E1",
+      "categories": ["战略层面", "战术层面", "认知层面", "环境层面"]
+    }
+  },
+  "recommendationFramework": {
+    "redLines": {
+      "name": "必须避免的红线",
+      "icon": "🚫",
+      "description": "绝对不能做的事"
+    },
+    "conditions": {
+      "name": "必须满足的条件",
+      "icon": "✅",
+      "description": "必须具备的要素"
+    },
+    "strategies": {
+      "name": "建议采取的策略",
+      "icon": "🎯",
+      "description": "具体行动建议"
+    },
+    "warnings": {
+      "name": "风险预警指标",
+      "icon": "⚠️",
+      "description": "早期预警信号"
+    }
+  },
+  "actionPeriods": ["短期行动（1-2周）", "中期行动（1-3月）", "长期关注（3月以上）"]
+}

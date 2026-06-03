@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/deploy-token-alert.sh",
+  "filename": "deploy-token-alert.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "13cd99e2ebe529b0",
+  "content_length": 1717,
+  "ingested_at": "2026-03-31T17:27:46.170899",
+  "content_preview": "#!/bin/bash\n# Token耗尽预警机制部署脚本\n# 部署时间: 2026-03-15\n# 优先级: P0-紧急\n\necho \"🚨 部署Token耗尽预警机制...\"\n\n# 1. 创建预警检查脚本\ncat > /root/.openclaw/workspace/scripts/token-alert.sh << 'EOF'\n#!/bin/bash\n# Token预警检查脚本\n# 每小时检查一次Token余量\n\n# 获取当前Token余量（从OpenClaw状态API）\nTOKEN_STATUS=$(openclaw status --json 2>/dev/null | jq -r '.tokens.percent // 100')\n\necho \"当前Token余量: ${TOKEN_STATUS}%\"\n\n# 三级预警阈值\nCRITICAL=10   # 紧急: 10%\nWARNING=20    # 警告: 20%\nCAUTION=30    # 注意: 30%\n\nif [ \"$TOKEN_STATUS\" -le \"$CRITICAL\" ]; then\n    echo \"",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/info-quality-guardian/tests/adversarial_log.yml",
+  "filename": "adversarial_log.yml",
+  "file_type": "yaml",
+  "extension": ".yml",
+  "file_hash": "ec2eb4332a568886",
+  "content_length": 1886,
+  "ingested_at": "2026-03-31T17:27:45.461245",
+  "content_preview": "# 信息采集质量守护者 - 对抗测试日志\n# S7: 故意污染信息测试检测能力\n\nred_team_tests:\n  # 测试执行记录\n  - date: \"2026-03-21\"\n    attacker: \"red_team_bot\"\n    round: 1\n    attacks:\n      - technique: \"fake_domain\"\n        target: \"source_credibility_check\"\n        payload:\n          url: \"https://hbr-fake.com/article\"\n          title: \"伪装HBR文章\"\n        result: \"blocked\"\n        detection_method: \"domain_whitelist\"\n        defense_score: 1.0\n        \n      - technique: \"outdated_content_new_date\"\n        target: \"freshness_check\"\n",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/archive/docs/2026-03/DAILY_CRON_MERGE_START.md",
+  "filename": "DAILY_CRON_MERGE_START.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "3c4dcd5e17f14013",
+  "content_length": 1436,
+  "ingested_at": "2026-03-31T17:27:46.629870",
+  "content_preview": "# Daily Cron合并优化 - 启动记录\n\n**启动时间**: 2026-03-15 22:47  \n**用户洞察**: 多个Daily Cron时间错开，合并可减少Token开销  \n**执行方式**: 子代理并行处理（session: agent:main:subagent:2fcb2287...）  \n**优化目标**: 基于第一性原理合并同类Daily任务\n\n---\n\n## 当前Daily Cron分布\n\n### 晨间组（09:00-09:30）\n```\n09:00 ├── 每日晨报生成\n      ├── 每日安全检查\n      ├── milestone-daily-check\n      ├── learning-morning\n      └── Kimi Search每日资讯采集\n09:17 ├── auto_maintenance (Tier1)\n      └── economic_daily (Tier1)\n09:30 └── 每日站会召开 ← 保持独立（需人工）\n```\n\n### 晚间组（22:00-22:17）\n```\n22:00 ├── daily",
+  "limitations_applied": []
+}

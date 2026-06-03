@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/diary/knowledge-ingest/ingested/SKILL.2568.md",
+  "filename": "SKILL.2568.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "c7cf5a9621632506",
+  "content_length": 1002,
+  "ingested_at": "2026-03-31T17:27:45.809669",
+  "content_preview": "# pdf-handler-temp Skill V5标准版本\n\n## S1: 全局考虑\n\n### 输入\n- PDF文件路径\n- 操作类型(读取/提取/转换)\n- 页码范围(可选)\n\n### 覆盖维度\n| 维度 | 考虑内容 |\n|------|----------|\n| **人** | 文档处理人员、研究人员 |\n| **事** | PDF文本提取、图片提取、格式转换 |\n| **物** | PDF文件、提取的文本/图片 |\n| **环境** | 文件系统、内存限制 |\n| **外部集成** | pypdf/pdfplumber |\n| **边界情况** | 扫描件(图片PDF)、加密PDF、大文件 |\n\n---\n\n## S2: 系统考虑\n\n### 处理流程\n```\n文件验证 → 格式检测 → 内容提取 → 结果输出\n```\n\n### 故障处理\n- **扫描件**: 提示OCR不可用，返回空\n- **加密PDF**: 提示输入密码\n- **大文件**: 分页处理\n- **损坏文件**: 尝试修复，失败报错\n\n---\n\n## S3: 输出规范\n\n### 提取结果\n```json\n{\n ",
+  "limitations_applied": []
+}

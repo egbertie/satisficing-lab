@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/blue-auditor/blue-audit.py",
+  "filename": "blue-audit.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "7b6781d612106bd2",
+  "content_length": 4739,
+  "ingested_at": "2026-03-31T17:27:45.375863",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n蓝军自动化审计脚本\n功能: 自动执行10项认知审计检查\n触发: 任务完成后24小时 + 用户要求时\n\"\"\"\n\nimport json\nimport os\nimport re\nfrom datetime import datetime, timedelta\n\nAUDIT_CHECKLIST = [\n    {\n        \"id\": 1,\n        \"name\": \"信源独立性\",\n        \"question\": \"关键数据是否单一来源？\",\n        \"check\": lambda text: len(set(re.findall(r'来源[：:]\\s*(\\S+)', text))) > 1\n    },\n    {\n        \"id\": 2,\n        \"name\": \"时效性\",\n        \"question\": \"数据是否过期（>6个月）？\",\n        \"check\": lambda text: not re.search(r'20(1[0-9]|20[0-5])', text",
+  "limitations_applied": []
+}

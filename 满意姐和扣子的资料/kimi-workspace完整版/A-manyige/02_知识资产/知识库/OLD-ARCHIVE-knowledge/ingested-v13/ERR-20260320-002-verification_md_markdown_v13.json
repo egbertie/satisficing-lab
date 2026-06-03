@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/diary/errors/evidence/ERR-20260320-002-verification.md",
+  "filename": "ERR-20260320-002-verification.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "56477e631d7e580f",
+  "content_length": 826,
+  "ingested_at": "2026-03-31T17:27:46.586148",
+  "content_preview": "# S5验证证据: ERR-20260320-002\n\n## 验证信息\n- **错误ID**: ERR-20260320-002\n- **验证时间**: 2026-03-20 10:00\n- **验证方法**: 观察cron执行成功率\n- **验证人**: system (自动监控)\n- **验证结果**: ✅ PASSED\n\n## 验证测试用例\n\n### 测试1: 错峰设置验证\n**测试步骤**:\n1. 检查所有cron任务是否避开整点\n2. 验证是否使用±15分钟随机偏移\n\n**预期结果**: 无整点任务，全部错峰\n\n**实际结果**:\n```\n# 优化前（整点）\n0 10 * * * task1\n0 14 * * * task2\n\n# 优化后（错峰）\n17 10 * * * task1  # 10:17\n43 14 * * * task2  # 14:43\n```\n\n**测试状态**: PASSED\n\n### 测试2: 执行成功率监控\n**测试步骤**:\n1. 监控优化前后cron执行成功率\n2. 对比失败率变化\n\n**预期结果**: 失败率降低\n\n**实际结果**:\n| 时间段",
+  "limitations_applied": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_cost-control/scripts/cost-stats.sh",
+  "filename": "cost-stats.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "d2b00f77b9a813a6",
+  "content_length": 3408,
+  "ingested_at": "2026-03-31T17:27:45.152035",
+  "content_preview": "#!/bin/bash\n# 成本统计脚本\n# 使用方式: ./cost-stats.sh [daily|weekly|monthly]\n\nPERIOD=$1\nWORKSPACE=\"/root/.openclaw/workspace\"\nCOST_DIR=\"$WORKSPACE/memory/cost\"\n\nmkdir -p \"$COST_DIR\"\n\nif [ -z \"$PERIOD\" ] || [ \"$PERIOD\" == \"daily\" ]; then\n    DATE=$(date +%Y%m%d)\n    echo \"=== 今日成本统计 ($DATE) ===\"\n    \n    if [ -f \"$COST_DIR/cost-log.jsonl\" ]; then\n        TODAY_LINES=$(grep \"\\\"date\\\":\\\"$DATE\\\"\" \"$COST_DIR/cost-log.jsonl\" 2>/dev/null)\n        \n        if [ -n \"$TODAY_LINES\" ]; then\n            # 按模型统计\n     ",
+  "limitations_applied": []
+}

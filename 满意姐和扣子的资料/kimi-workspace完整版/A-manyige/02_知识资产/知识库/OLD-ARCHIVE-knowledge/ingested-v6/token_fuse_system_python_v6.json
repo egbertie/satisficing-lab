@@ -1,0 +1,56 @@
+{
+  "source_path": "/root/.openclaw/workspace/skills/token-fuse-system/token_fuse_system.py",
+  "filename": "token_fuse_system.py",
+  "extension": ".py",
+  "file_type": "python",
+  "size_bytes": 8040,
+  "checksum": "6353e8689b35200f",
+  "ingested_at": "2026-03-31T17:30:32.707194",
+  "line_count": 224,
+  "title": "token_fuse_system",
+  "description": "Token消耗监控与熔断系统 V2.0\n基于周预算进度比例的分级熔断机制",
+  "sections": [],
+  "entities": [
+    {
+      "name": "get_week_progress_percentage",
+      "type": "function"
+    },
+    {
+      "name": "determine_fuse_level",
+      "type": "function"
+    },
+    {
+      "name": "get_task_tiers",
+      "type": "function"
+    },
+    {
+      "name": "trigger_fuse",
+      "type": "function"
+    },
+    {
+      "name": "monitor_loop",
+      "type": "function"
+    },
+    {
+      "name": "status",
+      "type": "function"
+    },
+    {
+      "name": "main",
+      "type": "function"
+    }
+  ],
+  "key_points": [
+    "!/usr/bin/env python3",
+    "熔断阈值配置 - 基于周预算进度比例",
+    "假设每周预算100%，按7天平均分配，每天约14.3%",
+    "超额10%触发预警（即当天消耗超过24.3%）",
+    "预期进度（每天结束时）",
+    "读取Token监控数据",
+    "计算预期进度（基于当前是周几）",
+    "根据熔断等级确定保留任务",
+    "检查是否已经处于熔断状态"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

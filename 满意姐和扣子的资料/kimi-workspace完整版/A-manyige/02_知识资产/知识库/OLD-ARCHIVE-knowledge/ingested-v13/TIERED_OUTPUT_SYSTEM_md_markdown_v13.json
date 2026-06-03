@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/.pre-restore-backup/docs/TIERED_OUTPUT_SYSTEM.md",
+  "filename": "TIERED_OUTPUT_SYSTEM.md",
+  "file_type": "markdown",
+  "extension": ".md",
+  "file_hash": "6df8fc62b604072b",
+  "content_length": 8289,
+  "ingested_at": "2026-03-31T17:27:46.524069",
+  "content_preview": "# 分级输出系统 (Tiered Output System)\n\n> **版本**: v1.0  \n> **创建时间**: 2026-03-21  \n> **状态**: 生产就绪  \n> **优先级**: P0\n\n---\n\n## 1. 系统概述\n\n### 1.1 设计目标\n\n分级输出系统旨在优化Token使用效率，通过三级输出长度机制，在不同场景下提供恰到好处的信息量。\n\n**核心原则**:\n- **效率优先**: 避免过度输出，节省Token消耗\n- **灵活可控**: 支持用户主动选择或系统自动判断\n- **渐进展开**: 保留完整版，支持需要时展开详情\n\n### 1.2 三级输出定义\n\n| 级别 | 名称 | Token范围 | 适用场景 | 响应时间目标 |\n|------|------|-----------|----------|--------------|\n| L1 | 极简版 | <50 tokens | 紧急响应、简单确认 | <1秒 |\n| L2 | 标准版 | 200-500 tokens | 常规任务汇报 | <3秒 |\n| L3 | 详细版 | 1000+ ",
+  "limitations_applied": []
+}

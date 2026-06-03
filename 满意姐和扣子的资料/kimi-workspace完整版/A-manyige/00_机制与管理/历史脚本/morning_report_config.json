@@ -1,0 +1,106 @@
+{
+  "workspace_path": "/root/.openclaw/workspace",
+  "output_path": "/root/.openclaw/workspace/A满意哥专属文件夹/01_🔥今日重点",
+  "long_term_goals": {
+    "官宣日期": "2026-03-25",
+    "里程碑提醒": "距3/25官宣还有{}天"
+  },
+  "time_allocation_rules": {
+    "P0任务数>=3": {
+      "深度工作": "4小时",
+      "沟通协作": "1小时",
+      "学习研究": "0.5小时"
+    },
+    "P0任务数=2": {
+      "深度工作": "3小时",
+      "沟通协作": "1小时",
+      "学习研究": "1小时"
+    },
+    "P0任务数=1": {
+      "深度工作": "2小时",
+      "沟通协作": "1.5小时",
+      "学习研究": "1.5小时"
+    },
+    "P0任务数=0": {
+      "深度工作": "1小时",
+      "沟通协作": "2小时",
+      "学习研究": "2小时"
+    }
+  },
+  "greetings": {
+    "周一": "新的一周，元气满满！",
+    "周二": "保持节奏，稳步推进。",
+    "周三": "周中冲刺，再接再厉！",
+    "周四": "胜利在望，坚持就是胜利。",
+    "周五": "收官之日，完美结束本周。",
+    "周六": "周末时光，充电蓄能。",
+    "周日": "休整之余，规划下周。"
+  },
+  "weekday_names": {
+    "Monday": "周一",
+    "Tuesday": "周二",
+    "Wednesday": "周三",
+    "Thursday": "周四",
+    "Friday": "周五",
+    "Saturday": "周六",
+    "Sunday": "周日"
+  },
+  "priority_emojis": {
+    "P0": "🔥",
+    "P1": "⭐",
+    "P2": "📌",
+    "P3": "💭"
+  },
+  "status_emojis": {
+    "todo": "⬜",
+    "doing": "🔄",
+    "done": "✅",
+    "blocked": "🚫"
+  },
+  "task_patterns": {
+    "todo": "- \\[ \\] (.+)",
+    "done": "- \\[x\\] (.+)",
+    "priority": "(P\\d).*:?\\s*(.+)"
+  },
+  "data_sources": {
+    "memory_md": {
+      "enabled": true,
+      "path": "MEMORY.md",
+      "description": "主记忆文件中的待办事项"
+    },
+    "daily_logs": {
+      "enabled": true,
+      "path": "memory/YYYY-MM-DD.md",
+      "description": "每日日志文件中的任务"
+    },
+    "skill_tracker": {
+      "enabled": true,
+      "path": "skill.json",
+      "description": "Skill进化追踪器状态"
+    },
+    "task_master": {
+      "enabled": false,
+      "path": "docs/TASK_MASTER.md",
+      "description": "任务总清单（可选）"
+    }
+  },
+  "report_settings": {
+    "max_focus_tasks": 5,
+    "show_skill_summary": true,
+    "show_time_suggestions": true,
+    "show_long_term_reminder": true,
+    "auto_save": true,
+    "backup_previous": true
+  },
+  "custom_rules": {
+    "focus_task_selection": {
+      "include_blocked": false,
+      "include_done": false,
+      "priority_order": ["P0", "P1", "P2", "P3"]
+    },
+    "completion_calculation": {
+      "period_days": 7,
+      "include_today": true
+    }
+  }
+}

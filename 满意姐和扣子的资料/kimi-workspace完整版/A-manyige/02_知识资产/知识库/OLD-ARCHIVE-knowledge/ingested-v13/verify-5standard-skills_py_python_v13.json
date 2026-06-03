@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/verify-5standard-skills.py",
+  "filename": "verify-5standard-skills.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "102a5c86976ed756",
+  "content_length": 5482,
+  "ingested_at": "2026-03-31T17:27:46.217825",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n5标准Skill验证脚本\n版本: V2.0\n验证所有完整5标准的Skill是否真正能运行\n\"\"\"\n\nimport os\nimport sys\nimport subprocess\nimport json\nfrom pathlib import Path\nfrom datetime import datetime\n\ndef log(msg):\n    timestamp = datetime.now().strftime('%H:%M:%S')\n    print(f\"[{timestamp}] {msg}\")\n\ndef find_complete_skills():\n    \"\"\"找到所有完整5标准的Skill\"\"\"\n    skills_dir = Path(\"/root/.openclaw/workspace/skills\")\n    complete_skills = []\n    \n    for skill_dir in skills_dir.iterdir():\n        if not skill_dir.is_di",
+  "limitations_applied": []
+}

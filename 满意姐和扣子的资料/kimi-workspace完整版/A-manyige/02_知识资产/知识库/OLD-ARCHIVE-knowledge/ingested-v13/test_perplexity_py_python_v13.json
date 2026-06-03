@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/test_perplexity.py",
+  "filename": "test_perplexity.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "5cb1e80368068c09",
+  "content_length": 7474,
+  "ingested_at": "2026-03-31T17:27:46.182749",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nPerplexity API 测试脚本\n功能：测试Perplexity AI搜索功能\n\"\"\"\n\nimport json\nimport os\nimport sys\nfrom datetime import datetime\nimport requests\n\n# 配置文件路径\nCONFIG_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), \"config\", \"perplexity_config.json\")\nRESULTS_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), \"scripts\", \"test_results.json\")\n\n\ndef load_config():\n    \"\"\"加载配置文件\"\"\"\n    try:\n        with open(CONFIG_PATH, 'r', encoding='utf-8') as f:\n            config",
+  "limitations_applied": []
+}

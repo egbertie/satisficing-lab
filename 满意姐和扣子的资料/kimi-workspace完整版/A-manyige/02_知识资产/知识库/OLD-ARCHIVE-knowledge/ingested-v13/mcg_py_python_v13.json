@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_marketing-content-generator/scripts/mcg.py",
+  "filename": "mcg.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "f83d5a621fe77ddf",
+  "content_length": 637,
+  "ingested_at": "2026-03-31T17:27:45.293104",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nMarketing Content Generator - 营销内容生成统一入口\n替代: adwords, copywriting, copywriting-zh-pro\n\"\"\"\nimport sys\nimport argparse\n\ndef main():\n    parser = argparse.ArgumentParser(description='营销内容生成套件')\n    parser.add_argument('command', choices=['ad', 'landing', 'social', 'ecommerce'])\n    parser.add_argument('--product', required=True, help='产品名称')\n    parser.add_argument('--platform', default='google', help='平台')\n    args = parser.parse_args()\n    \n    print(f\"[mcg] 命令: {args.c",
+  "limitations_applied": []
+}

@@ -1,0 +1,21 @@
+[
+  {
+    "type": "reLaunch",
+    "url": "{{ROUTE_URL}}"
+  },
+  {
+    "type": "waitForRoute",
+    "path": "{{ROUTE_PATH}}",
+    "query": "{{ROUTE_QUERY}}",
+    "timeoutMs": "{{ROUTE_TIMEOUT_MS}}"
+  },
+  {
+    "type": "waitForSelector",
+    "selector": "{{READY_SELECTOR}}",
+    "timeoutMs": "{{READY_TIMEOUT_MS}}"
+  },
+  {
+    "type": "screenshot",
+    "path": "{{SCREENSHOT_PATH}}"
+  }
+]

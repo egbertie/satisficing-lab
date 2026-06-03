@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/config/context-cache.yaml",
+  "filename": "context-cache.yaml",
+  "file_type": "yaml",
+  "extension": ".yaml",
+  "file_hash": "2bb0e8430f0b9fe3",
+  "content_length": 501,
+  "ingested_at": "2026-03-31T17:27:44.517470",
+  "content_preview": "# 上下文缓存配置 - Token优化\ncontext_cache:\n  enabled: true\n  cache_duration: 3600  # 1小时\n  \n  # 缓存的文件摘要\n  cached_summaries:\n    SOUL: \"守护型中二AI，Egbertie的合伙人，满意解研究所主控AI\"\n    USER: \"满意解研究所创始人，22年双系统经验，决策教练\"\n    IDENTITY: \"Kimi Claw - 满意妞 - 主控AI\"\n  \n  # 缓存策略\n  strategy:\n    session_start: load_full  # 会话开始时加载完整上下文\n    mid_session: use_summary  # 会话中使用摘要\n    on_change: reload_if_modified  # 文件变更时重新加载\n  \n  # Token节省估算\n  savings:\n    per_message: 400  # 每条消息节省400 Token\n    per_session: 2000  # 每个会话节省2000 Token",
+  "limitations_applied": []
+}

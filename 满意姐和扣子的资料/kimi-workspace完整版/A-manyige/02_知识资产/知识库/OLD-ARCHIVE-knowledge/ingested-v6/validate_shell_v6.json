@@ -1,0 +1,46 @@
+{
+  "source_path": "/root/.openclaw/workspace/scripts/file_management_suite/validate.sh",
+  "filename": "validate.sh",
+  "extension": ".sh",
+  "file_type": "shell",
+  "size_bytes": 6158,
+  "checksum": "8e2b50fd071a7490",
+  "ingested_at": "2026-03-31T17:30:47.794829",
+  "line_count": 220,
+  "title": "validate",
+  "description": "validate.sh - 完整性验证脚本",
+  "sections": [],
+  "entities": [
+    {
+      "name": "log_error",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_warning",
+      "type": "shell_function"
+    },
+    {
+      "name": "log_ok",
+      "type": "shell_function"
+    }
+  ],
+  "key_points": [
+    "# validate.sh - 完整性验证脚本",
+    "功能: 验证文件系统是否符合规范",
+    "用法: ./validate.sh [--fix]",
+    "1. 检查核心文件",
+    "2. 检查目录层级",
+    "3. 检查空目录",
+    "4. 检查README覆盖率",
+    "5. 检查缓存文件",
+    "6. 检查重复文件（快速检查）",
+    "只检查最大的10个文件",
+    "7. 检查敏感信息（基本检查）",
+    "8. 检查文件命名规范",
+    "检查包含空格的文件名",
+    "9. 检查大文件",
+    "10. 检查目录结构完整性"
+  ],
+  "limitations_applied": [],
+  "content_truncated": false
+}

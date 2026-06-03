@@ -1,0 +1,1 @@
+# cognitive ecosystem package

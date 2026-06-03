@@ -1,0 +1,86 @@
+{
+  "version": "1.0.0",
+  "rules": [
+    {
+      "id": "rule_001",
+      "name": "任务失败告警",
+      "description": "当任务执行失败时触发",
+      "condition": "status == 'FAILED'",
+      "level": "P1",
+      "channels": ["feishu", "email"],
+      "cooldown": 300,
+      "enabled": true
+    },
+    {
+      "id": "rule_002",
+      "name": "任务超时告警",
+      "description": "当任务执行超时时触发",
+      "condition": "status == 'TIMEOUT'",
+      "level": "P1",
+      "channels": ["feishu"],
+      "cooldown": 600,
+      "enabled": true
+    },
+    {
+      "id": "rule_003",
+      "name": "连续失败暂停",
+      "description": "连续失败3次后暂停任务",
+      "condition": "consecutive_failures >= 3",
+      "level": "P0",
+      "channels": ["feishu", "email"],
+      "cooldown": 0,
+      "action": "suspend_task",
+      "enabled": true
+    },
+    {
+      "id": "rule_004",
+      "name": "成功率下降警告",
+      "description": "24小时内成功率低于90%",
+      "condition": "success_rate_24h < 0.9",
+      "level": "P2",
+      "channels": ["feishu"],
+      "cooldown": 3600,
+      "enabled": true
+    },
+    {
+      "id": "rule_005",
+      "name": "磁盘空间警告",
+      "description": "磁盘使用率超过85%",
+      "condition": "disk_usage > 0.85",
+      "level": "P3",
+      "channels": ["email"],
+      "cooldown": 7200,
+      "enabled": true
+    },
+    {
+      "id": "rule_006",
+      "name": "内存使用警告",
+      "description": "内存使用率超过80%",
+      "condition": "memory_usage > 0.8",
+      "level": "P2",
+      "channels": ["feishu"],
+      "cooldown": 1800,
+      "enabled": true
+    },
+    {
+      "id": "rule_007",
+      "name": "任务恢复通知",
+      "description": "任务从失败中恢复后通知",
+      "condition": "status == 'SUCCESS' and previous_status == 'FAILED'",
+      "level": "P3",
+      "channels": ["feishu"],
+      "cooldown": 60,
+      "enabled": true
+    },
+    {
+      "id": "rule_008",
+      "name": "系统启动通知",
+      "description": "系统启动后发送通知",
+      "condition": "event == 'system_start'",
+      "level": "P3",
+      "channels": ["feishu"],
+      "cooldown": 0,
+      "enabled": true
+    }
+  ]
+}

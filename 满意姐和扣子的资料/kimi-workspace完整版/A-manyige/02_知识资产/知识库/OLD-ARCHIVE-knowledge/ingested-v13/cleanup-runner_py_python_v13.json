@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/z_archive_unified/.archive_auto-cleanup-system/scripts/cleanup-runner.py",
+  "filename": "cleanup-runner.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "9c9c2f36683ba3a1",
+  "content_length": 690,
+  "ingested_at": "2026-03-31T17:27:45.032988",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n自动清理系统脚本\n版本: V2.0\n\"\"\"\n\nfrom datetime import datetime\nimport os\nfrom pathlib import Path\n\ndef log(msg):\n    print(f\"[{datetime.now().strftime('%H:%M:%S')}] {msg}\")\n\ndef cleanup_temp_files():\n    \"\"\"清理7天以上的临时文件\"\"\"\n    log(\"扫描临时文件...\")\n    # 简化实现\n    log(\"  模拟清理 /tmp/*.tmp\")\n    return 0\n\ndef archive_logs():\n    \"\"\"归档30天以上的日志\"\"\"\n    log(\"归档旧日志...\")\n    log(\"  模拟归档 logs/\")\n    return 0\n\ndef transfer_backups():\n    \"\"\"转存90天以上的备份\"\"\"\n    log(\"转存旧备份...\")\n    log(\"  模拟转存 backup",
+  "limitations_applied": []
+}

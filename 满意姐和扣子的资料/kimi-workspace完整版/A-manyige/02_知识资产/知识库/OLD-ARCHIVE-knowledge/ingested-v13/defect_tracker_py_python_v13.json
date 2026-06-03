@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/testing-framework/defect_tracker.py",
+  "filename": "defect_tracker.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "cd276690f24f924f",
+  "content_length": 10543,
+  "ingested_at": "2026-03-31T17:27:45.439019",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\n缺陷追踪管理器 - S3标准实现\n\n功能:\n- 记录测试发现的缺陷\n- 追踪缺陷状态\n- 生成缺陷报告\n- 统计缺陷指标\n\n使用方法:\n    python defect_tracker.py --list              # 列出所有缺陷\n    python defect_tracker.py --report            # 生成缺陷报告\n    python defect_tracker.py --add \"描述\"        # 添加新缺陷\n    python defect_tracker.py --close DEF-001     # 关闭缺陷\n    python defect_tracker.py --metrics           # 显示统计指标\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport argparse\nfrom pathlib import Path\nfrom datetime import datetime\nfrom typing",
+  "limitations_applied": []
+}

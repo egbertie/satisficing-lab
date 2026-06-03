@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/api-monitor/scripts/api_monitor.py",
+  "filename": "api_monitor.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "3ef36ff4434be834",
+  "content_length": 4039,
+  "ingested_at": "2026-03-31T17:27:45.357313",
+  "content_preview": "#!/usr/bin/env python3\n\"\"\"\nAPI监控脚本 - 5标准实现\n功能：监控API可用性、响应时间、错误率\n\"\"\"\n\nimport json\nimport os\nimport sys\nimport time\nimport requests\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\n\nWORKSPACE = Path(\"/root/.openclaw/workspace\")\nCONFIG_FILE = WORKSPACE / \"skills\" / \"api-monitor\" / \"config\" / \"endpoints.json\"\nLOG_DIR = WORKSPACE / \"skills\" / \"api-monitor\" / \"logs\"\nSTATE_FILE = WORKSPACE / \"memory\" / \"api-monitor-state.json\"\n\ndef load_config():\n    \"\"\"加载配置\"\"\"\n    if not CONFIG_FILE.e",
+  "limitations_applied": []
+}

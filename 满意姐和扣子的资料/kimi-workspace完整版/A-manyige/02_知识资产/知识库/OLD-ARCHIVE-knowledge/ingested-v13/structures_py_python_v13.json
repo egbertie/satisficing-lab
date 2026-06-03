@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/skills/universal-task-executor-v3/core/structures.py",
+  "filename": "structures.py",
+  "file_type": "python",
+  "extension": ".py",
+  "file_hash": "ec9f3c00cb65f934",
+  "content_length": 22766,
+  "ingested_at": "2026-03-31T17:27:45.366424",
+  "content_preview": "\"\"\"\nUniversal Task Executor V3.0 - 数据结构定义\n基于 DATA_STRUCTURES.md 实现\n\"\"\"\n\nfrom dataclasses import dataclass, field\nfrom typing import Dict, List, Optional, Any, Callable\nfrom datetime import datetime, timedelta\nfrom enum import Enum\nimport uuid\nimport json\n\n\nclass TaskStatus(Enum):\n    \"\"\"任务状态枚举\"\"\"\n    PENDING = \"pending\"           # 待处理\n    RUNNING = \"running\"           # 执行中\n    PAUSED = \"paused\"             # 已暂停\n    COMPLETED = \"completed\"       # 已完成\n    FAILED = \"failed\"             # 失败\n   ",
+  "limitations_applied": []
+}

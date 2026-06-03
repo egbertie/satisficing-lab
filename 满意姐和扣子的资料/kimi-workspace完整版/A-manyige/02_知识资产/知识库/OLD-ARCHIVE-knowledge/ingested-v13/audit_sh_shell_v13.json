@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/scripts/file_management_suite/audit.sh",
+  "filename": "audit.sh",
+  "file_type": "shell",
+  "extension": ".sh",
+  "file_hash": "1575515c8e032c43",
+  "content_length": 3736,
+  "ingested_at": "2026-03-31T17:27:46.219814",
+  "content_preview": "#!/bin/bash\n#\n# audit.sh - 全面审计脚本\n# 功能: 扫描文件系统，生成审计报告\n# 用法: ./audit.sh [workspace_path]\n\nset -e\n\nWORKSPACE=\"${1:-/root/.openclaw/workspace}\"\nDOWNLOADS=\"/root/openclaw/kimi/downloads\"\nREPORT_DIR=\"$WORKSPACE/docs\"\nTIMESTAMP=$(date +\"%Y-%m-%d_%H-%M-%S\")\nREPORT_FILE=\"$REPORT_DIR/AUDIT_REPORT_$TIMESTAMP.md\"\n\necho \"🔍 开始全面文件审计...\"\necho \"工作空间: $WORKSPACE\"\necho \"报告文件: $REPORT_FILE\"\n\n# 创建报告\nmkdir -p \"$REPORT_DIR\"\n\ncat > \"$REPORT_FILE\" << EOF\n# 文件系统审计报告\n\n**审计时间**: $(date '+%Y-%m-%d %H:%M:%S')  \n**审计路径**: $",
+  "limitations_applied": []
+}

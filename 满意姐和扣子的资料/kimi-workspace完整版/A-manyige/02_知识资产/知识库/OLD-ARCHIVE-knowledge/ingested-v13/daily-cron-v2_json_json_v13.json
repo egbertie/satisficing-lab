@@ -1,0 +1,11 @@
+{
+  "source_file": "/root/.openclaw/workspace/config/daily-cron-v2.json",
+  "filename": "daily-cron-v2.json",
+  "file_type": "json",
+  "extension": ".json",
+  "file_hash": "0e34a8fa8630fa7e",
+  "content_length": 4574,
+  "ingested_at": "2026-03-31T17:27:44.516651",
+  "content_preview": "{\n  \"daily_mode_v2\": {\n    \"description\": \"日常模式V2.0配置 - 分层管理，动态频率\",\n    \"trigger_conditions\": {\n      \"token_remaining_pct\": \">30\",\n      \"default_mode\": true\n    },\n    \"task_layers\": {\n      \"P0_critical\": {\n        \"description\": \"生存必需，任何情况下都执行\",\n        \"daily_token_estimate\": 6900,\n        \"tasks\": [\n          {\n            \"name\": \"token-monitor\",\n            \"schedule\": \"0 */4 * * *\",\n            \"description\": \"Token监控，每4小时\",\n            \"token_estimate\": 375,\n            \"adaptive\": fal",
+  "limitations_applied": []
+}

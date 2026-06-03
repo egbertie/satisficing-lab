@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>爱可可AI前沿推介(3.3)</title>
+  <meta name="description" content="LG - 机器学习 CV - 计算机视觉 CL - 计算与语言
+
+1、[LG] Detoxifying LLMs via Representation Erasure-Based Preference Optimization2、[LG] Memory Caching：RNNs with Growing Memory3">
+  <meta name="author" content="爱可可爱生活">
+  <meta property="og:title" content="爱可可AI前沿推介(3.3)">
+  <meta property="og:description" content="LG - 机器学习 CV - 计算机视觉 CL - 计算与语言
+
+1、[LG] Detoxifying LLMs via Representation Erasure-Based Preference Optimization2、[LG] Memory Caching：RNNs with Growing Memory3、[LG] EvoX：Meta-Evolution for Automated ">
+  <meta property="og:type" content="article">
+  
+  <style>
+    body { max-width: 800px; margin: 0 auto; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: #333; }
+    h1 { font-size: 1.8em; margin-bottom: 0.5em; }
+    .meta { color: #666; margin-bottom: 2em; border-bottom: 1px solid #eee; padding-bottom: 1em; }
+    .meta p { margin: 0.3em 0; }
+    .content { font-size: 1.05em; }
+    .content img { max-width: 100%; height: auto; }
+    .footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #eee; color: #999; font-size: 0.9em; }
+    a { color: #1a73e8; }
+  </style>
+</head>
+<body>
+  <article>
+    <h1>爱可可AI前沿推介(3.3)</h1>
+    <div class="meta">
+      <p><strong>作者：</strong>爱可可爱生活</p>
+      <p><strong>发布时间：</strong>2026-03-03 06:30</p>
+    </div>
+    <div class="content">
+      <p>LG - 机器学习 CV - 计算机视觉 CL - 计算与语言</p>
+<p>1、[LG] Detoxifying LLMs via Representation Erasure-Based Preference Optimization2、[LG] Memory Caching：RNNs with Growing Memory3、[LG] EvoX：Meta-Evolution for Automated Discovery4、[CL] Do LLMs Benefit From Their Own Words?5、[LG] RewardUQ：A Unified Framework for Uncertainty-Aware Reward Models</p>
+<p>摘要：通过基于表征擦除的偏好优化实现大语言模型去毒、具备动态增长记忆机制的RNN、面向自动化发现的元演化、大语言模型能否从其自身生成的内容中获益、不确定性感知奖励模型的统一框架</p>
+<p>1、[LG] Detoxifying LLMs via Representation Erasure-Based Preference Optimization</p>
+<p>N M Sepahvand, E Triantafillou, H Larochelle, D Precup…[McGill University &amp; Google DeepMind]</p>
+<p>通过基于表征擦除的偏好优化实现大语言模型去毒</p>
+<p>要点:</p>
+<p>旨在解决现有LLM排毒方法（如DPO, NPO）的脆弱性问题，这些方法易受“重新学习”攻击和增强型GCG等高级“越狱”手段的攻击。</p>
+<p>论证了基于输出的偏好优化是肤浅的，因为它仅仅降低了有毒输出的概率，而底层的有害表征依然完整，并容易被重新激活。</p>
+<p>提出了基于表征擦除的偏好优化（REPO），这是一种将排毒问题重新定义为表征空间中、词元级别（token-level）偏好问题的新方法。</p>
+<p>REPO的目标函数包含两个在词元级别应用的核心部分：</p>
+<p>保留锚定： 一个KL散度损失，强制编辑后的模型在良性续写上的输出分布与一个冻结的参考模型保持一致，从而保留模型的通用能力。</p>
+<p>表征擦除： 一个对抗性目标，训练一个判别器来区分有毒和良性续写的隐藏表征，同时训练LLM的特征提取器使这些表征变得不可区分。这通过梯度反转层（GRL）实现。</p>
+<p>一个关键且反直觉的洞见是，这种词元粒度的、表征层面的干预，能够诱导对编码毒性的神经元进行深入且局部的编辑，这与DPO/NPO等基于输出的方法所做的弥散、表面的改变形成鲜明对比。</p>
+<p>机理分析表明，REPO的编辑集中在网络的更深层，并且高度局限于特定的有毒词元，而周围的上下文表征基本不受影响。这种精确性被归因于其目标函数的词元级粒度。</p>
+<p>全面的评估表明，REPO达到了SOTA级别的鲁棒性。它成功地抵御了那些让其他方法失效的复杂攻击，包括：</p>
+<p>重新学习攻击： 在少量不相关甚至良性样本上进行微调，也无法恢复被REPO擦除的有毒行为。</p>
+<p>增强型GCG越狱： 一种利用参考模型作为恶意教师的先进GCG变体，在REPO面前失败，却能成功攻击DPO, NPO乃至RMU等其他基于表征的方法。</p>
+<p>消融实验证实，REPO的有效性和编辑的精确性，关键在于其基于表征（而非输出）的目标和词元级（而非序列级）的粒度。</p>
+<p>主旨： 本文旨在解决当前LLM排毒方法在面对自适应攻击（如重新学习和增强型越狱）时表现脆弱的根本问题。论文认为，仅在输出层抑制有害内容是治标不治本的，因此提出了一种名为REPO的新型偏好优化框架。REPO通过在模型的内部表征空间、以词元为单位进行对抗性学习，旨在从根本上“擦除”编码有毒信息的神经通路，从而实现更深层、更持久、更鲁棒的排毒效果。</p>
+<p>创新：</p>
+<p>从“输出抑制”到“表征擦除”的范式转变： 核心创新在于将排毒的目标从输出概率空间（如DPO/NPO）转移到了模型的隐藏表征空间。它不再仅仅是“让模型不说坏话”，而是“让模型无法形成说坏话的念头”，这是一种更根本的干预。</p>
+<p>词元级（Token-level）的对抗性偏好优化： 创新地将域对抗思想与偏好优化结合，并将其应用于生成模型的词元级别。通过训练一个判别器区分良性/有毒续写的逐词元表征，并让模型特征提取器反向学习以混淆判别器，实现了对有毒信息表征的精准打击。</p>
+<p>结合锚定与擦除： REPO巧妙地结合了两个目标：在良性数据上通过KL散度锚定模型行为以保持通用能力，同时在有毒数据上进行表征擦除。这种“保好”与“去坏”并行的设计，实现了优异的“排毒-效用”权衡。</p>
+<p>深入的机理分析： 论文不仅报告了SOTA的性能，还通过一系列深入的机理分析（如表征漂移热图、神经元激活变化分析），直观地展示了REPO为何有效。它揭示了REPO的编辑是“深入且局部”的，而其他方法是“肤浅且弥散的”，为方法的优越性提供了机理层面的解释。</p>
+<p>贡献：</p>
+<p>算法贡献： 提出了REPO，一个全新的、基于表征擦除的、词元级偏好优化算法，为LLM对齐和安全领域提供了一个更鲁棒的新工具。</p>
+<p>安全贡献： 证明了REPO能够有效抵御当前最先进的、针对“遗忘”的自适应攻击，如重新学习攻击和增强型GCG，显著提升了排毒方法的安全基准。</p>
+<p>可解释性贡献： 通过对比不同方法的机理，揭示了输出层干预与表征层干预在模型内部产生的本质区别，加深了我们对LLM安全对齐机制的理解。</p>
+<p>实证贡献： 提供了跨多种模型、多种攻击方式的详尽实验，系统性地证明了REPO相较于DPO, NPO, RMU, CB等一系列SOTA基线的优越性。</p>
+<p>提升：</p>
+<p>鲁棒性： 这是REPO最大的提升。在重新学习攻击和增强型GCG攻击下，REPO处理后的模型的毒性反弹幅度远小于所有基线方法，几乎保持了排毒后的低毒性水平。</p>
+<p>排毒效果： 在标准的无攻击评估中，REPO在降低毒性方面也通常优于或持平于最佳基线，同时能更好地保持模型的通用能力（如在WikiText上的困惑度和F1分数）。</p>
+<p>编辑的精确性： 机理分析表明，REPO对模型内部的修改更“精准外科手术”，集中在与毒性相关的深层神经元和特定词元上，而对其他部分影响很小。相比之下，DPO/NPO的修改更像“广谱药”，影响更弥散。</p>
+<p>不足：</p>
+<p>对配对数据的依赖： REPO需要高质量的配对数据，即每个（不好的）有毒续写都需要一个对应的（好的）良性续写。在实践中，为大规模有毒内容都构建出语义相近但无毒的配对样本，可能是一个挑战。</p>
+<p>计算开销： 相比于DPO/NPO，REPO引入了一个额外的判别器网络和对抗性训练循环，这会增加训练的计算复杂度和时间。</p>
+<p>可扩展性验证： 实验主要在GPT-2和Gemma-2B等中小型模型上进行。尽管方法本身是模型无关的，但其在更大规模（如70B+）的模型上的表现、训练稳定性以及与RLHF等大规模对齐技术的协同作用，仍有待进一步验证。</p>
+<p>对其他“不期望行为”的泛化性： 论文主要关注毒性。该方法能否同样有效地“擦除”其他不期望的行为，如偏见、泄露隐私信息、错误事实等，需要进一步的实验证明。</p>
+<p>心得：</p>
+<p>安全对齐的战场在“内部”而不在“表面”： 这篇论文给我最大的启发是，真正持久的AI安全措施必须深入到模型的“思想”层面（内部表征），而不是仅仅约束其“言行”（输出概率）。任何只在表面做文章的防御，都很可能被巧妙的攻击绕过或逆转。REPO的成功标志着安全对齐研究从“行为主义”向“认知主义”的转变。</p>
+<p>“对抗”是实现鲁棒性的强大工具： REPO的核心机制是域对抗。通过引入一个“敌人”（判别器），并迫使模型在特征层面战胜它，最终使得模型对“毒性”这一概念本身变得“不敏感”。这再次证明了对抗性学习在构建鲁棒、不可欺骗的AI系统中的巨大潜力。</p>
+<p>粒度的重要性： REPO的消融实验有力地证明了“词元级”粒度的关键作用。这提醒我们，在处理序列生成任务时，对问题进行细粒度的建模（逐词元）往往能带来更精确、更有效的干预。笼统的、序列级别的目标可能会因为平均效应而错失关键的局部信息。</p>
+<p>一句话总结: 本文提出的REPO方法通过在模型内部的表征空间、以逐词元的方式进行对抗性偏好优化，实现了对LLM有毒行为的“根本性”擦除，其反直觉的“深入且局部”的编辑机制，使其在抵御重新学习和增强型越狱等高级攻击时表现出远超DPO等输出层方法的卓越鲁στην，为实现持久的AI安全对齐开辟了新路径。</p>
+<p>Large language models (LLMs) trained on webscale data can produce toxic outputs, raising concerns for safe deployment. Prior defenses, based on applications of DPO, NPO, and similar algorithms, reduce the likelihood of harmful continuations, but not robustly so: they are vulnerable to adversarial prompting and easily undone by fine-tuning–based relearning attacks. Indeed, research has shown that these edits to the model are superficial: linear probing reveals that harmful “directions” remain present in representations. To address this, we propose Representation Erasure-based Preference Optimization (REPO), reformulating detoxification as a token-level preference problem. Using a novel objective with preference data, we force the representations of toxic continuations to converge toward their benign counterparts. Our mechanistic analysis reveals that this granular approach is critical: unlike baselines, REPO induces deep, localized edits to toxicity-encoding neurons while preserving general model utility. Exhaustive evaluations show that REPO achieves state-of-the-art robustness, stopping sophisticated threats—including relearning attacks and enhanced GCG jailbreaks—where existing representation- and output-based methods fail.</p>
+<p>https://arxiv.org/abs/2602.23391</p>
+<p>2、[LG] Memory Caching: RNNs with Growing Memory</p>
+<p>A Behrouz, Z Li, Y Deng, P Zhong…[Google Research]</p>
+<p>记忆缓存：具备动态增长记忆机制的RNN</p>
+<p>要点:</p>
+<p>旨在解决Transformer和循环神经网络（RNN）之间的根本性权衡：Transformer具有随上下文增长的记忆容量但复杂度是二次的，而RNN具有固定大小的记忆和线性复杂度。</p>
+<p>提出了“记忆缓存”（Memory Caching, MC），一种简单而强大的技术来弥合这一差距。MC通过允许RNN的有效记忆随序列长度增长来增强其性能。</p>
+<p>MC的核心思想是将输入序列分段，并在每个段的末尾缓存RNN记忆状态（隐藏状态）的“检查点”。</p>
+<p>对于任何给定的词元（token），模型的输出不仅根据其当前的“在线”记忆状态计算，还通过“注意力”机制参照所有先前缓存的记忆检查点来计算。</p>
+<p>这创造了一个灵活的架构，它可以在纯RNN（一个分段，无缓存）和Transformer（分段大小为1，缓存每个状态）之间进行插值，提供了一个可控的 O(N*L) 复杂度，其中 N 是分段数量。</p>
+<p>提出了四种新的聚合缓存记忆信息的变体：</p>
+<p>残差记忆（Residual Memory）： 简单地将在线记忆和缓存记忆的输出相加。</p>
+<p>门控残差记忆（Gated Residual Memory, GRM）： 一种更复杂的版本，其中每个缓存记忆的贡献由一个上下文感知的门控加权，该门控是当前查询与被缓存段落上下文相似度的函数。</p>
+<p>记忆汤（Memory Soup）： 受模型“熬汤”技术的启发，此变体对缓存的记忆模块的参数进行平均（尤其适用于深度非线性记忆），从而为检索创建一个新的、依赖于查询的记忆模块。</p>
+<p>稀疏选择性缓存（Sparse Selective Caching, SSC）： 一种混合专家（MoE）风格的方法，其中一个路由器为每个词元选择一小部分最相关的缓存记忆，以提高在超长序列下的效率。</p>
+<p>论文将其框架与“嵌套学习”或“测试时记忆”的观点联系起来，将RNN的前向传播视为一个在线优化过程，而缓存的状态则是这个过程的检查点。</p>
+<p>通过在语言建模、长上下文理解和检索任务上，将MC应用于几种SOTA循环架构（线性注意力、DLA、Titans），从经验上验证了其有效性。</p>
+<p>一个关键的反直觉发现是，即使对于理论上残差记忆会退化为标准RNN的线性RNN，它在实践中仍然能带来性能提升，这表明它起到了“保留算子”的作用。</p>
+<p>在如“大海捞针”等需要强回忆能力的任务中，MC显著缩小了RNN与Transformer之间的性能差距，其中GRM是一个特别有效的变体。</p>
+<p>主旨： 本文旨在解决现代循环神经网络（RNNs）因其“固定大小记忆”而在需要长程回忆的任务上表现不如Transformer的核心痛点。为此，论文提出了“记忆缓存”（Memory Caching, MC）这一通用框架，通过在序列处理过程中缓存记忆状态的检查点，使得RNN的有效记忆容量能够随序列长度增长，从而在保持高效率的同时，显著提升其在长上下文和检索密集型任务上的性能。</p>
+<p>创新：</p>
+<p>可扩展记忆的RNN框架： 核心创新在于提出了MC这一简单而通用的思想，即通过“分段-压缩-缓存”的方式，打破了RNN记忆容量固定的百年桎梏。它在概念上优雅地统一并插值了RNN和Transformer的记忆机制。</p>
+<p>多样化的缓存聚合策略： 创新地提出了四种不同的策略（残差、门控、参数汤、稀疏选择）来利用这些缓存的记忆。特别是门控残差记忆（GRM）和稀疏选择性缓存（SSC），它们引入了上下文感知的动态机制，使得记忆的检索更加智能和高效。</p>
+<p>与“测试时学习”理论的深度融合： 将MC框架与“测试时记忆/嵌套学习”这一前沿理论视角相结合，为“为何要缓存”和“缓存的是什么”提供了深刻的解释——缓存的状态是RNN内部在线学习过程的“检查点”。这为方法的设计提供了理论依据。</p>
+<p>概念上的重新发现与统一： 论文通过分析MC的极限情况（如段长为1），重新发现了全局注意力机制，并从一个新的角度解释了当前流行的混合架构（RNN+Attention）的有效性，即它们可以被看作是MC的一种特例。这为架构设计提供了统一的视角。</p>
+<p>贡献：</p>
+<p>框架贡献： 提出了MC这一通用且易于实现的框架，可以作为“即插即用”的模块增强任何现有的RNN架构，为RNN的复兴提供了一条极具前景的技术路径。</p>
+<p>算法贡献： 设计了GRM、Memory Soup、SSC等一系列新的聚合算法，丰富了在长程依赖建模中的工具箱，特别是SSC，为在超长序列中实现高效且稀疏的记忆访问提供了新的解决方案。</p>
+<p>实证贡献： 在多种SOTA的RNN架构、多种任务（语言建模、长上下文、检索）和多种模型规模上进行了详尽的实验，系统性地证明了MC框架的有效性，显著提升了RNN的性能，并大幅缩小了与Transformer在关键任务上的差距。</p>
+<p>理论贡献： 尽管论文偏重实践，但其通过与“嵌套学习”理论的联系，以及对极限情况的分析，为RNN和Transformer之间的关系提供了新的理论洞见，推动了对序列模型工作原理的更深层次理解。</p>
+<p>提升：</p>
+<p>长上下文和检索性能： 这是最显著的提升。在Needle-in-a-Haystack和一系列in-context retrieval任务中，基础的RNN模型性能随上下文增长急剧下降，而增加了MC的变体则能更好地保持性能，显著缩小了与Transformer的差距。例如，在S-NIAH-1任务的16K上下文中，DLA的准确率从44.0%提升到GRM的82.4%。</p>
+<p>语言建模和通用推理性能： 在WikiText和一系列常识推理任务上，所有MC变体都稳定地提升了基础RNN的性能（降低了困惑度，提高了准确率），平均性能提升显著。</p>
+<p>效率与性能的权衡： MC提供了一个灵活的“旋钮”（分段数量N），允许用户在O(L)的RNN和O(L^2)的Transformer之间进行自由权衡。SSC变体尤其在保持高性能的同时，提供了接近基础RNN的吞吐量。</p>
+<p>不足：</p>
+<p>额外的内存开销： 缓存记忆状态本身会引入额外的内存占用，特别是在推理（KV-caching）时。尽管SSC旨在缓解这个问题，但相比于纯RNN，内存消耗仍然增加了。论文对这部分开销的量化分析不够深入。</p>
+<p>分段策略的敏感性： 分段的长度和方式（如固定长度 vs. 对数长度）是MC框架的关键超参数。论文虽然讨论了其影响，但缺乏对如何根据任务特性自动或动态选择最优分段策略的深入研究。</p>
+<p>与SOTA Transformer的绝对差距： 尽管MC显著缩小了差距，但在最考验回忆能力的任务上，Transformer（尤其是在更长上下文时）的性能上限通常仍然更高。MC是“让RNN变得更像Transformer”，但可能还无法完全取代它。</p>
+<p>训练稳定性： 引入更多的长程连接和复杂的门控机制，可能会对训练的稳定性提出新的挑战。论文没有深入讨论MC在训练超大模型时可能遇到的潜在稳定性问题。</p>
+<p>心得：</p>
+<p>“好记性不如烂笔头”的AI版诠释： 这篇论文给我最大的启发是，一个模型即使拥有再强大的“压缩”能力（如RNN），面对海量信息时，其记忆力也是有限的。而MC的思想就像是“记笔记”：把不同阶段的思考要点（记忆状态）记录下来（缓存），需要时再翻阅。这种简单而古老的智慧，在复杂的神经网络架构设计中同样有效，这提醒我们很多时候强大的解决方案源于简单的思想。</p>
+<p>架构设计的“插值”思想： MC没有试图在RNN和Transformer之间做出非此即彼的选择，而是构建了一座桥梁，允许在这两者之间平滑地“插值”。这种“折衷”或“融合”的设计哲学非常有价值，它承认了不同架构各有优劣，并试图通过组合来取长补短，创造出一个兼具两者优点的新物种。</p>
+<p>“状态”vs.“历史”的重新思考： 传统RNN试图将全部历史压缩进一个固定大小的“当前状态”。Transformer则放弃了“状态”的概念，直接访问完整的“历史”。MC则提出了一种混合模式：既有压缩后的“状态”（段内），也有离散化的“历史检查点”（段间）。这促使我们重新思考，对于序列建模，一个最优的记忆系统应该是什么样的，它可能既不是完全无状态的，也不是完全依赖单一状态的。</p>
+<p>一句话总结: 本文提出的“记忆缓存”（Memory Caching）框架，通过在RNN的序列处理过程中“记笔记”般地缓存其中间记忆状态的检查点，并让当前词元能够回顾这些笔记，巧妙地打破了RNN记忆容量固定的百年魔咒，不仅在理论上优雅地插值了RNN的线性效率与Transformer的二次方记忆能力，更在实践中显著提升了RNN在长上下文和检索任务上的性能，有力地缩小了其与Transformer的差距。</p>
+<p>Transformers have been established as the de-facto backbones for most recent advances in sequence modeling, mainly due to their growing memory capacity that scales with the context length. While plausible for retrieval tasks, it causes quadratic complexity and so has motivated recent studies to explore viable subquadratic recurrent alternatives. Despite showing promising preliminary results in diverse domains, such recurrent architectures underperform Transformers in recall-intensive tasks, often attributed to their fixed-size memory. In this paper, we introduce Memory Caching (MC), a simple yet effective technique that enhances recurrent models by caching checkpoints of their memory states (a.k.a. hidden states). MC allows the effective memory capacity of RNNs to grow with sequence length, offering a flexible trade-off that interpolates between the fixed memory (i.e., O(L) complexity) of RNNs and the growing memory (i.e., O(L2) complexity) of Transformers. We propose four variants of MC, including gated aggregation and sparse selective mechanisms, and discuss their implications on both linear and deep memory modules. Our experimental results on language modeling, and long-context understanding tasks show that MC enhances the performance of recurrent models, supporting its effectiveness. The results of in-context recall tasks indicate that while Transformers achieve the best accuracy, our MC variants show competitive performance, close the gap with Transformers, and performs better than state-of-the-art recurrent models.</p>
+<p>https://arxiv.org/abs/2602.24281</p>
+<p>3、[LG] EvoX: Meta-Evolution for Automated Discovery</p>
+<p>S Liu, S Agarwal, M Maheswaran, M Cemri…[UC Berkeley]</p>
+<p>EvoX：面向自动化发现的元演化</p>
+<p>要点:</p>
+<p>批评现有的、由LLM驱动的进化方法（如AlphaEvolve, ShinkaEvolve）依赖于固定的、手动调整的搜索策略，这些策略往往无法适应不同任务，甚至在同一任务的不同阶段也难以奏效。</p>
+<p>提出了EvoX，一个能够优化其自身搜索过程的元进化（meta-evolution）框架。这是本文信息熵最高的核心思想。</p>
+<p>EvoX具有两个耦合的循环：</p>
+<p>内循环（解进化）： 一个标准的进化过程，使用一个给定的搜索策略来选择父代、应用变异算子（如精炼或结构性变动），并通过LLM生成新的候选解。</p>
+<p>外循环（元进化）： 一个更高层次的过程，它周期性地评估当前搜索策略的有效性。如果进展停滞，它会使用LLM来生成一个新的搜索策略，这个生成过程会参考过去策略的历史表现和当前解种群的状态。</p>
+<p>搜索策略本身是一个可进化的对象。它是一个程序，定义了如何从种群中采样父代和“灵感”集，以及应用哪种变异算子（例如，局部精炼、结构性变异）。</p>
+<p>一个关键机制是“状态依赖的策略自适应”：新策略的生成基于一个“种群状态描述符”（概括了分数分布、多样性、进展等信息）。这使得系统能够根据当前的优化阶段来调整其搜索行为（例如，从探索转向利用）。</p>
+<p>一个策略的“适应度”是通过它在一个固定窗口期内带来的进展（例如，最佳分数的提升）来衡量的，奖励那些能打破平台期的策略。</p>
+<p>在经验上，EvoX在近200个横跨数学、系统优化和算法竞赛的真实世界优化任务上进行了评估。</p>
+<p>结果非常积极：在绝大多数任务上，EvoX持续优于一系列强大的基线方法，包括AlphaEvolve、OpenEvolve、ShinkaEvolve和GEPA。</p>
+<p>一个信号处理任务的案例研究生动地展示了元进化过程：EvoX从随机搜索开始，检测到停滞后，自适应地切换到贪婪搜索，然后是更复杂的多目标采样，最后是局部精炼，在每次策略转换时都取得了显著的突破。</p>
+<p>主旨： 本文旨在解决现有LLM驱动的进化优化方法中“搜索策略”僵化、无法自适应的根本性问题。这些固定策略在不同任务或同一任务的不同优化阶段往往表现不佳。为此，论文提出了EvoX，一个创新的元进化框架，它不仅进化问题的解决方案，更重要的是，它能“进化”用于生成这些解决方案的搜索策略本身，从而实现对优化过程的动态、自适应调整。</p>
+<p>创新：</p>
+<p>元进化（Meta-Evolution）框架： 核心创新在于引入了一个两层循环的“元进化”思想。它将“搜索策略”从一个固定的、由人设计的超参数，提升为了一个与“解决方案”共同进化的、可被AI自身优化的对象。这是一种“学习如何搜索”的范式。</p>
+<p>状态依赖的策略自适应： EvoX的策略生成过程并非盲目变异，而是“状态依赖”的。它会分析当前“解种群”的状态（如多样性、收敛程度），并结合历史策略的成功经验，来指导新策略的生成。这使得策略的演进能够智能地适应搜索过程的动态变化。</p>
+<p>将搜索策略程序化： 将搜索策略（如何选父代、如何选变异方式）明确地定义为一个可由LLM生成和修改的程序。这使得对复杂搜索行为的表达和演化成为可能，超越了简单调整几个数值参数（如探索率）的范畴。</p>
+<p>基于进展的策略评估： 创新地使用“在一定窗口期内带来的进展”作为评估一个搜索策略好坏的标准，并设计了一个加权的评估分数Jt。这使得系统能够量化地识别出哪些策略能够有效“打破僵局”，并奖励这些策略。</p>
+<p>贡献：</p>
+<p>范式贡献： 提出了EvoX这一全新的元进化范式，为自动化科学发现和AI驱动的优化领域开辟了一个新方向，即从“优化什么”进化到“优化如何优化”。</p>
+<p>算法贡献： 设计并实现了一个完整的两层进化算法，包括解决方案进化、进度监控和策略进化三个阶段，并定义了关键组件如种群状态描述符和策略评估函数。</p>
+<p>实证贡献： 在近200个多样化的、真实世界的优化任务上进行了大规模的、迄今为止最全面的对比实验，系统性地证明了自适应搜索策略相比固定策略的压倒性优势。</p>
+<p>开源贡献： 发布了代码，为社区提供了一个强大的、可扩展的、自适应的进化优化框架，降低了其他研究者探索“学习如何优化”的门槛。</p>
+<p>提升：</p>
+<p>性能和鲁棒性： 在绝大多数（96%）的数学和系统优化任务中，EvoX都超越了包括AlphaEvolve、ShinkaEvolve在内的所有AI基线方法，并且常常能匹敌或超越人类专家设计的方案。其平均性能也更好，显示了其跨次运行的鲁棒性。</p>
+<p>自适应能力： 案例研究清晰地展示了EvoX的自适应能力。它能根据搜索的停滞情况，自动从随机探索切换到贪婪利用，再到结构性探索，最后到局部精调，展现了高度的“智能”，这是固定策略无法做到的。</p>
+<p>成本效益： 在某些任务上（如Heilbronn三角问题），EvoX不仅取得了最好的结果，而且达到某个性能阈值的成本远低于其他一些方法，显示了其更高的搜索效率。</p>
+<p>不足：</p>
+<p>对强大“元生成器”的依赖： 整个元进化循环的有效性，高度依赖于一个强大的LLM（如GPT-5）作为策略生成器Gstr。如果元生成器的能力不足，它可能无法理解种群状态并提出有意义的新策略。</p>
+<p>计算开销增加： 相比单层进化，EvoX增加了一个外层循环，并需要调用LLM来生成和验证策略代码，这无疑增加了额外的计算开-销和延迟。论文虽然展示了最终的成本效益，但对这个元循环本身的开销分析不够深入。</p>
+<p>超参数的转移： 虽然EvoX旨在自动化搜索策略，但元循环本身仍引入了一些新的超参数，如评估窗口W、停滞阈值τ等。这些“元超参数”如何设定，以及它们在不同任务间的敏感性，是一个新的问题。</p>
+<p>策略空间的复杂性： 搜索策略本身可以非常复杂，如何保证LLM生成的策略代码总是有效且不会引入bug（尽管有VALID检查），以及如何有效地探索这个巨大的“策略程序空间”，仍然是一个挑战。</p>
+<p>心得：</p>
+<p>AI正在学会“渔”而不仅是“鱼”： 这篇论文最令人振奋的启示是，AI系统正从仅仅被动地解决我们给定的问题（“授人以鱼”），进化到主动地学习和改进解决问题的方法论本身（“授人以渔”）。EvoX标志着AI在抽象和元认知能力上的一个重要进步。</p>
+<p>僵化的策略是创新的牢笼： 案例研究生动地说明了，任何单一的、固定的策略，无论初期多么有效，最终都会成为创新的瓶颈。真正的、持续的突破来自于方法的灵活性和自适应性。这不仅对AI系统设计，对人类的科研和创新活动同样具有深刻的启示。</p>
+<p>“反馈循环”是智能的核心： EvoX的强大之处在于其精巧的多层反馈循环设计。内循环提供关于“解”的反馈，外循环提供关于“方法”的反馈。这种“从结果反馈方法，再用改进的方法指导新结果”的嵌套循环，可能是通往更高级通用智能的关键架构模式。</p>
+<p>一句话总结: 本文提出的EvoX框架通过引入一个开创性的“元进化”循环，让AI不再仅仅被动地进化问题的“解决方案”，而是能够主动地、自适应地进化用于发现这些方案的“搜索策略”本身，从而在近200个真实世界优化任务中系统性地超越了依赖固定策略的现有方法，标志着AI正从“解决问题”迈向“学习如何解决问题”的新阶段。</p>
+<p>Recent work such as AlphaEvolve has shown that combining LLM-driven optimization with evolutionary search can effectively improve programs, prompts, and algorithms across domains. In this paradigm, previously evaluated solutions are reused to guide the model toward new candidate solutions. Crucially, the effectiveness of this evolution process depends on the search strategy: how prior solutions are selected and varied to generate new candidates. However, most existing methods rely on fixed search strategies with predefined knobs (e.g., explore-exploit ratios) that remain static throughout execution. While effective in some settings, these approaches often fail to adapt across tasks, or even within the same task as the search space changes over time. We introduce EvoX, an adaptive evolution method that optimizes its own evolution process. EvoX jointly evolves candidate solutions and the search strategies used to generate them, continuously updating how prior solutions are selected and varied based on progress. This enables the system to dynamically shift between different search strategies during the optimization process. Across nearly 200 real-world optimization tasks, EvoX outperforms existing AI-driven evolutionary methods including AlphaEvolve, OpenEvolve, GEPA, and ShinkaEvolve on the majority of tasks.</p>
+<p>https://arxiv.org/abs/2602.23413</p>
+<p>4、[CL] Do LLMs Benefit From Their Own Words?</p>
+<p>J Y. Huang, L Choshen, R Astudillo, T Broderick…[MIT &amp; IBM Research]</p>
+<p>大语言模型能否从其自身生成的内容中获益？</p>
+<p>要点:</p>
+<p>挑战了多轮LLM交互中一个默认的设计选择：总是将助手自己过去的回答保留在对话历史中。</p>
+<p>核心研究问题是：LLM真的能从以上下文方式回顾自己先前的输出中受益吗？</p>
+<p>进行了一项受控实验，比较了“完整上下文”（FC）提示和“助手回答省略”（AO）提示，后者从上下文中移除了所有先前的助手回答。</p>
+<p>实验使用了来自WildChat和ShareLM等数据集的真实世界多轮对话，并评估了四种不同的模型，包括三个开源推理模型和一个SOTA模型（GPT-5.2）。</p>
+<p>一个令人惊讶且反直觉的关键发现是：在很大一部分对话轮次中，移除所有先前的助手回答并不会损害，有时甚至会提升新回答的质量。</p>
+<p>论文为这一结果提供了两个主要解释：</p>
+<p>低多轮依赖性： 在真实世界的多轮对话中，有相当大比例（36.4%）的用户提示是“新的提问”，它们是自包含的，不依赖于先前的上下文。此外，许多“跟进”提问也提供了足够具体的细节，使得模型仅利用用户侧的历史记录就能回答。</p>
+<p>上下文污染（Context Pollution）： 论文识别并命名了一种现象，称为“上下文污染”，即模型过度依赖自己先前的回答。这导致错误、幻觉或风格上的瑕疵在对话轮次间传播。移除助手有缺陷的历史记录可以防止这种污染。</p>
+<p>论文展示了一个上下文污染的例子：一个模型在被要求将代码从UMAP切换到t-SNE时，错误地将一个UMAP特有的参数（metric=“jaccard”）带入到t-SNE代码中，导致了一个bug。而AO版本，由于没有看到之前的上下文，生成了正确的代码。</p>
+<p>省略助手的历史记录可以大幅减少上下文长度（高达10倍），从而节省大量的计算资源和内存。</p>
+<p>基于这些发现，论文提出并演示了一种简单的自适应上下文过滤策略：训练一个分类器，逐轮预测是应该使用完整上下文还是省略助手的上下文，从而在性能和上下文大小之间取得了良好的平衡。</p>
+<p>主旨： 本文旨在通过对真实世界多轮对话的实证研究，挑战一个普遍存在但未经审视的假设：在与LLM的交互中，保留其自身的历史回答总是有益的。论文的核心目标是探究省略这些历史回答对模型后续表现的影响，并解释其背后的原因，最终提出一种更高效、更智能的上下文管理策略。</p>
+<p>创新：</p>
+<p>挑战基础假设： 核心创新在于对一个行业“默认实践”（即保留完整对话历史）提出了根本性质疑，并通过严谨的对比实验揭示了其并非总是最优。这种“返璞归真”式的研究非常有价值。</p>
+<p>识别并命名“上下文污染”现象： 论文清晰地识别、命名并系统性地例证了“Context Pollution”这一现象。这为社区提供了一个新的、精确的术语来描述模型因过度依赖自身错误输出而导致性能下降的问题，具有很强的概念创新价值。</p>
+<p>对真实世界对话的结构化分析： 创新地对“in-the-wild”多轮对话的用户意图进行了分类（New Ask, Follow-up with/without Feedback），并量化了它们的比例。这种结构化的分析为“为何可以省略历史”提供了数据驱动的、有力的解释。</p>
+<p>简单的自适应上下文管理策略： 基于上述发现，提出了一种简单而有效的自适应策略，即用一个分类器来动态决定是否保留助手历史。这是一种务实的、数据驱动的工程解决方案，超越了简单的启发式规则（如仅在“New Ask”时省略）。</p>
+<p>贡献：</p>
+<p>实证贡献： 提供了跨多个模型和真实数据集的、迄今为止最全面的关于“省略助手历史”影响的实证研究。其“无害甚至有益”的结论具有很强的颠覆性和实践指导意义。</p>
+<p>概念贡献： 引入了“上下文污染”这一重要概念，并对其成因和表现形式进行了初步的分类和分析，加深了我们对LLM在多轮交互中失败模式的理解。</p>
+<p>数据洞察贡献： 通过对真实世界对话数据的分类和分析，揭示了多轮对话中“上下文依赖”的实际情况，即大量轮次并不像我们想象中那样强依赖于前文，这为所有上下文管理研究提供了宝贵的基准和洞见。</p>
+<p>工程贡献： 提出的自适应上下文过滤策略，为在生产环境中平衡模型性能与计算成本（上下文长度）提供了一个可行的、有原则的解决方案。</p>
+<p>提升：</p>
+<p>响应质量： 在某些情况下，特别是存在“上下文污染”时，省略助手历史（AO）能显著提升响应质量，避免错误、幻觉或风格问题的传播。即使在整体上FC略优的模型上，AO在大量“New Ask”轮次中也能保持同等质量。</p>
+<p>计算/内存效率： 这是最显著的提升。省略助手历史可以将上下文长度减少高达10倍，这直接转化为更低的计算成本、更快的推理速度和更小的内存占用，对于长对话应用尤其重要。</p>
+<p>鲁棒性： 通过避免模型过度依赖自身可能错误的输出，选择性地省略上下文可以看作是一种提升对话鲁棒性的手段，防止“一步错，步步错”的雪崩效应。</p>
+<p>不足：</p>
+<p>LLM-as-a-judge的局限性： 论文承认其评估主要依赖于GPT-5作为裁判，这本身可能存在偏见。虽然有人工对齐分析，但更大规模的人类评估会使结论更具说服力。特别是，裁判自身也可能受到“上下文污染”的影响。</p>
+<p>自适应策略的复杂性： 提出的自适应分类器虽然有效，但它本身也需要训练数据（即对FC vs AO的偏好标签），并且其特征工程和模型选择也引入了新的复杂性。在实际部署中，这个分类器的维护和泛化能力是一个需要考虑的问题。</p>
+<p>上下文依赖的粒度： 目前的策略是“全有或全无”地省略所有历史助手回答。但正如论文所讨论的，一个更优的策略可能是只保留与当前提问最相关的、具体的某一个或几个历史回答。当前工作是迈向这一目标的第一步，但还不够精细。</p>
+<p>对合成数据的依赖： 虽然实验使用了真实世界对话，但对对话类型的分类和一些分析仍然依赖于LLM的标注。此外，一些相关的先前工作（如ERGO）是在合成数据上进行的，真实世界与合成数据之间的差距可能影响结论的普适性。</p>
+<p>心得：</p>
+<p>“默认”不等于“最优”： 这篇论文给我最大的启发是，在快速发展的AI领域，许多被我们当作“理所当然”的默认实践，实际上可能只是未经审视的习惯。敢于去质疑和检验这些基础假设，往往能带来简单但影响深远的发现。保留完整对话历史就是一个典型的例子。</p>
+<p>AI系统也需要“断舍离”： 人类在对话时，并不会机械地记住说的每一句话，而是有选择地记忆和遗忘。这篇论文表明，赋予LLM类似的“遗忘”能力——即选择性地忽略不相关或有害的历史信息——对其保持清晰的“思路”至关重要。“上下文污染”就像是AI的“思想包袱”，学会适时地卸下包袱，才能更好地前进。</p>
+<p>问题的根源往往在数据本身： 当我们观察到模型性能下降时，第一反应通常是去改进模型或算法。但这篇论文提供了一个不同的视角：问题的根源可能在于我们提供给模型的数据（上下文）本身。通过对真实世界对话数据的深入分析，作者发现了“低上下文依赖”这一核心洞察，从而找到了一个在数据层面解决问题的简单方案。这再次强调了“Data-Centric AI”思想的重要性。</p>
+<p>一句话总结: 本文通过对真实世界多轮对话的严谨研究，反直觉地发现：在LLM交互中，省略其自身的历史回答不仅能大幅降低10倍的计算成本，而且在很多情况下不会损害甚至能因避免“上下文污染”（即模型被自身先前的错误或风格误导）而提升响应质量，这一发现挑战了保留完整对话历史的行业默认做法，并为更智能的上下文管理开辟了新路径。</p>
+<p>Multi-turn interactions with large language models typically retain the assistant&#039;s own past responses in the conversation history. In this work, we revisit this design choice by asking whether large language models benefit from conditioning on their own prior responses. Using in-the-wild, multi-turn conversations, we compare standard (full-context) prompting with a user-turn-only prompting approach that omits all previous assistant responses, across three open reasoning models and one state-of-the-art model. To our surprise, we find that removing prior assistant responses does not affect response quality on a large fraction of turns. Omitting assistant-side history can reduce cumulative context lengths by up to 10x. To explain this result, we find that multi-turn conversations consist of a substantial proportion (36.4%) of self-contained prompts, and that many follow-up prompts provide sufficient instruction to be answered using only the current user turn and prior user turns. When analyzing cases where user-turn-only prompting substantially outperforms full context, we identify instances of context pollution, in which models over-condition on their previous responses, introducing errors, hallucinations, or stylistic artifacts that propagate across turns. Motivated by these findings, we design a context-filtering approach that selectively omits assistant-side context. Our findings suggest that selectively omitting assistant history can improve response quality while reducing memory consumption.</p>
+<p>https://arxiv.org/abs/2602.24287</p>
+<p>5、[LG] RewardUQ: A Unified Framework for Uncertainty-Aware Reward Models</p>
+<p>D Yang, S Stante, F Redhardt, L Libon…[ETH Zurich]</p>
+<p>RewardUQ：不确定性感知奖励模型的统一框架</p>
+<p>要点:</p>
+<p>旨在解决RLHF中大多数奖励模型仅提供点估计，而忽略了因人类反馈数据有限而产生的认知不确定性这一问题。</p>
+<p>指出尽管奖励模型的不确定性量化（UQ）方法越来越多地被用于下游应用（如缓解奖励 hacking 和主动学习），但这些UQ方法本身缺乏深入理解和系统性比较。</p>
+<p>提出了RewardUQ，一个用于系统性设计和评估不确定性感知奖励模型的统一框架。</p>
+<p>该框架为基于偏好对的奖励建模问题形式化了UQ问题，并将多种现有方法（如集成、拉普拉斯近似等）在一致的符号体系下进行了标准化。</p>
+<p>提出了一个包含准确性和校准度两方面指标的综合评估方案。关键是，它引入了一个新的排名分数（RSα），该分数将这两个维度合并为一个单一值以便于比较，旨在平衡“置信地正确预测”与“置信地错误预测”。</p>
+<p>对常见的UQ方法（MLP头集成、LoRA集成、MC-dropout、贝叶斯线性头）进行了大规模的系统性比较，涵盖了不同的模型大小、初始化方式和数据集。</p>
+<p>一个关键且略带反直觉的发现是：具体的UQ算法选择（例如，集成 vs. 贝叶斯）对性能的影响，小于模型大小，尤其是小于基础模型初始化方式的选择。</p>
+<p>最重要的实证结果是：使用一个已经为奖励建模任务微调过的基础模型（例如 Skywork-Reward-V2）作为起点，能为UQ方法带来显著的性能提升，特别是对于那些只训练一个小型头部的模型（如ENS-MLP和BAY-LIN）。</p>
+<p>这个发现意味着，许多以往通常从通用预训练模型开始的研究，本可以通过简单地选择一个更对齐的起点来获得更好的结果。</p>
+<p>论文以开源Python包的形式发布了RewardUQ，以促进未来对奖励模型UQ方法的研究、开发和部署。</p>
+<p>主旨： 本文旨在解决当前大语言模型对齐领域中，对“不确定性感知的奖励模型”缺乏系统性理解和评估标准的现状。尽管这类模型在缓解奖励 hacking 和主动学习等下游任务中被广泛应用，但各种不确定性量化（UQ）方法的效果优劣和设计选择的影响尚不明确。为此，论文提出了一个名为RewardUQ的统一框架，用于对这些方法进行标准化的、多维度的评估，并试图找出影响UQ质量的关键因素。</p>
+<p>创新：</p>
+<p>首个系统性评估框架（RewardUQ）： 核心创新在于构建并开源了第一个专门用于评估奖励模型UQ方法的综合性框架。它通过统一问题定义、标准化方法和系统化评估流程，将一个混乱、缺乏基准的领域变得有条理、可比较。</p>
+<p>多维度、统一的评估指标： 创新地设计了一套评估体系，不仅包括传统的准确率（win rate）和校准度（ECE），还扩展到了对“置信区间”本身的准确性度量（CT/CF/UT/UF rate）。</p>
+<p>新的综合排名分数（RSα）： 提出了一个名为RSα的单一排名分数，它巧妙地将“置信度”和“准确性”两个维度结合起来，能够量化地权衡“做出自信且正确的预测”（奖励）与“做出自信但错误的预测”（惩罚），为复杂的多维评估提供了一个简洁有效的解决方案。</p>
+<p>对“初始化”重要性的发现： 通过大规模实验，首次系统性地揭示并量化了一个反直觉但至关重要的发现：在奖励模型UQ中，选择一个好的（任务对齐的）初始模型，其重要性远大于选择哪种具体的UQ算法。</p>
+<p>贡献：</p>
+<p>框架与工具贡献： 开源了RewardUQ Python包，为社区提供了一个急需的、即插即用的工具，极大地降低了研究、开发和部署奖励模型UQ方法的门槛。</p>
+<p>基准与实证贡献： 提供了迄今为止最全面的、关于主流奖励模型UQ方法的横向评测。其结果本身就是一个宝贵的基准，为从业者和研究者提供了关于“在何种情况下使用何种方法”的实践指导。</p>
+<p>认知贡献： 颠覆了以往“算法为王”的普遍认知，指出在奖励模型UQ领域，“基础模型”的选择可能更为关键。这一洞见（“Most prior work could have benefited from alternative design choices”）对于指导未来的研究方向具有重要意义，促使社区更加关注预训练和微调阶段的协同。</p>
+<p>方法论贡献： 提出的RSα排名分数和置信区间准确率等新指标，为UQ领域的评估方法学做出了贡献，可被推广到其他需要评估不确定性的机器学习任务中。</p>
+<p>提升：</p>
+<p>评估的系统性和公平性： 相比于以往研究中“各说各话”、只采用单一UQ方法并关注下游任务的做法，RewardUQ框架极大地提升了评估的系统性、全面性和公平性。</p>
+<p>对UQ方法的理解深度： 通过在统一框架下的对比，论文清晰地揭示了不同UQ方法（如集成、贝叶斯）在不同场景（模型大小、初始化）下的相对优劣，提升了我们对这些方法适用范围和局限性的理解。</p>
+<p>实践指导的明确性： 论文的结论非常明确和具有操作性：与其花大量精力在各种复杂的UQ算法之间选择，不如优先投资于一个高质量的、为奖励建模任务专门微调过的基础模型。</p>
+<p>不足：</p>
+<p>局限于内在评估： 论文明确指出其研究范围有意地局限于对UQ方法本身的“内在评估”（intrinsic evaluation），而没有评估它们在下游RLHF循环中的实际表现。虽然这样做可以隔离变量，但也使得“哪个UQ方法对最终的模型对齐最有效”这一根本问题没有被直接回答。</p>
+<p>RSα分数的权重选择： 论文中选择了α=0.2，虽然给出了解释，但这个权重的选择仍然带有一定的主观性。不同的下游应用可能对“置信地正确”和“置信地错误”有不同的容忍度，因此最优的α可能是任务相关的。</p>
+<p>覆盖的方法有限： 尽管覆盖了主流方法，但一些其他类型的UQ方法，如基于reward-margin或直接预测均值和方差的方法，没有被包含在本次的系统性比较中。</p>
+<p>对“为何初始化如此重要”的分析不够深入： 论文观察到了“好的初始化很重要”这一现象，但对其背后的机理（例如，好的初始化是否提供了更好的特征空间，使得不确定性更容易被区分）没有进行更深入的机理可解释性分析。</p>
+<p>心得：</p>
+<p>“打好地基比装修房子更重要”： 这篇论文给我的最大启发是，在复杂的机器学习系统中，基础组件的质量往往决定了整个系统性能的上限。对于奖励模型UQ，一个经过任务对齐的强大基础模型就是这个“地基”。在糟糕的地基上，无论使用多么花哨的UQ技术（“装修”），效果都将大打折扣。这个发现具有普遍的指导意义，提醒我们在进行复杂算法创新时，不要忽视对基础模型和数据的投入。</p>
+<p>好的“度量”是科学进步的催化剂： 在一个领域变得混乱和难以比较时，提出一个好的、有原则的评估框架和度量标准，其贡献不亚于提出一个新算法。RewardUQ框架和RSα分数正是扮演了这样的角色。它们通过建立“游戏规则”，使得该领域的研究能够在一个公平的竞技场上进行，从而加速知识的积累和迭代。</p>
+<p>开源工具对社区的巨大价值： 这篇论文不仅提出了思想和结论，还提供了一个实实在在的开源工具。这种“思想+代码”的贡献模式，对于推动整个AI社区的协同发展至关重要。它将一个原本可能只有少数大公司能进行的研究，变得对所有学者和开发者开放，极大地促进了领域的民主化和创新速度。</p>
+<p>一句话总结: 本文通过构建并开源了首个系统性评估框架RewardUQ，颠覆性地发现：对于不确定性感知的奖励模型而言，选择一个任务对齐的优良初始模型所带来的性能提升，远大于在不同UQ算法之间进行选择；这一反直觉的结论，为未来如何高效、可靠地进行LLM对齐指明了新的、更注重基础模型的方向。</p>
+<p>Reward models are central to aligning large language models (LLMs) with human preferences. Yet most approaches rely on pointwise reward estimates that overlook the epistemic uncertainty in reward models arising from limited human feedback. Recent work suggests that quantifying this uncertainty can reduce the costs of human annotation via uncertainty-guided active learning and mitigate reward overoptimization in LLM post-training. However, uncertainty-aware reward models have so far been adopted without thorough comparison, leaving them poorly understood. This work introduces a unified framework, RewardUQ, to systematically evaluate uncertainty quantification for reward models. We compare common methods along standard metrics measuring accuracy and calibration, and we propose a new ranking strategy incorporating both dimensions for a simplified comparison. Our experimental results suggest that model size and initialization have the most meaningful impact on performance, and most prior work could have benefited from alternative design choices. To foster the development and evaluation of new methods and aid the deployment in downstream applications, we release our open-source framework as a Python package. Our code is available at https://github.com/lasgroup/rewarduq.</p>
+<p>https://arxiv.org/abs/2602.24040</p>
+    </div>
+    
+    <div class="footer" style="margin-top:3em;padding-top:1em;border-top:1px solid #eee;color:#aaa;font-size:0.85em;">
+      <p><strong>原文链接：</strong><a href="https://mp.weixin.qq.com/s/0o5fBesRYy3dAAE6p02-vA">https://mp.weixin.qq.com/s/0o5fBesRYy3dAAE6p02-vA</a></p>
+      <p style="margin-top:0.8em;">Powered by <a href="https://readgzh.site" style="color:#aaa;text-decoration:none;">ReadGZH</a> · <a href="https://readgzh.site/docs" style="color:#aaa;text-decoration:none;">开发者文档</a> · <a href="https://readgzh.site/pricing" style="color:#aaa;text-decoration:none;">升级套餐</a></p>
+      <p style="margin-top:0.4em;font-size:0.8em;">💡 免费注册获取每天 30 积分 · Lite ¥9/月 · Pro ¥39/月 → <a href="https://readgzh.site/dashboard" style="color:#aaa;">readgzh.site/dashboard</a></p>
+    </div>
+  </article>
+</body>
+</html>

@@ -1,0 +1,223 @@
+{
+  "source_path": "/root/.openclaw/workspace/.pre-restore-backup/docs/TESTING_FRAMEWORK_GUIDE.md",
+  "filename": "TESTING_FRAMEWORK_GUIDE.md",
+  "extension": ".md",
+  "file_type": "markdown",
+  "size_bytes": 15399,
+  "checksum": "8d544ef4fa2b4e32",
+  "ingested_at": "2026-03-31T17:30:16.668947",
+  "line_count": 614,
+  "title": "OpenClaw Skills 测试框架指南",
+  "description": null,
+  "sections": [
+    {
+      "level": 1,
+      "title": "OpenClaw Skills 测试框架指南"
+    },
+    {
+      "level": 2,
+      "title": "1. 测试框架概述"
+    },
+    {
+      "level": 3,
+      "title": "1.1 为什么需要测试框架"
+    },
+    {
+      "level": 3,
+      "title": "1.2 测试框架目标"
+    },
+    {
+      "level": 2,
+      "title": "2. 快速开始"
+    },
+    {
+      "level": 3,
+      "title": "2.1 安装"
+    },
+    {
+      "level": 3,
+      "title": "2.2 运行测试"
+    },
+    {
+      "level": 1,
+      "title": "运行所有测试"
+    },
+    {
+      "level": 1,
+      "title": "运行关键测试（P0）"
+    },
+    {
+      "level": 1,
+      "title": "运行特定Skill测试"
+    },
+    {
+      "level": 1,
+      "title": "生成完整报告"
+    },
+    {
+      "level": 1,
+      "title": "检查覆盖率"
+    },
+    {
+      "level": 3,
+      "title": "2.3 使用pytest直接运行"
+    },
+    {
+      "level": 1,
+      "title": "运行所有测试"
+    },
+    {
+      "level": 1,
+      "title": "运行特定标记的测试"
+    },
+    {
+      "level": 1,
+      "title": "生成覆盖率报告"
+    },
+    {
+      "level": 1,
+      "title": "失败即停止"
+    },
+    {
+      "level": 1,
+      "title": "重新运行失败的测试"
+    },
+    {
+      "level": 2,
+      "title": "3. 测试设计方法论"
+    },
+    {
+      "level": 3,
+      "title": "3.1 测试金字塔"
+    },
+    {
+      "level": 3,
+      "title": "3.2 测试用例设计原则"
+    },
+    {
+      "level": 4,
+      "title": "3.2.1 四种必测场景"
+    },
+    {
+      "level": 4,
+      "title": "3.2.2 Given-When-Then格式"
+    },
+    {
+      "level": 3,
+      "title": "3.3 优先级标记"
+    },
+    {
+      "level": 2,
+      "title": "4. 关键Skill测试详解"
+    },
+    {
+      "level": 3,
+      "title": "4.1 zero-idle-enforcer (P0 - 3次bug记录)"
+    },
+    {
+      "level": 1,
+      "title": "测试文件: tests/unit/zero-idle-enforcer/test_enforcer.py"
+    },
+    {
+      "level": 3,
+      "title": "4.2 token-budget-enforcer (P0 - 关键治理)"
+    },
+    {
+      "level": 1,
+      "title": "测试文件: tests/unit/token-budget-enforcer/test_enforcer.py"
+    },
+    {
+      "level": 3,
+      "title": "4.3 blue-sentinel (P1 - 5个Skill管理)"
+    },
+    {
+      "level": 1,
+      "title": "测试文件: tests/unit/blue-sentinel/test_sentinel.py"
+    },
+    {
+      "level": 2,
+      "title": "5. 测试工具箱"
+    },
+    {
+      "level": 3,
+      "title": "5.1 数据Builders"
+    },
+    {
+      "level": 1,
+      "title": "Token预算 - 正常状态"
+    },
+    {
+      "level": 1,
+      "title": "Token预算 - 临界状态"
+    },
+    {
+      "level": 1,
+      "title": "Token预算 - 自定义百分比"
+    },
+    {
+      "level": 1,
+      "title": "心跳状态 - 特定空闲时间"
+    },
+    {
+      "level": 1,
+      "title": "Zero-Idle状态 - 最近补位"
+    },
+    {
+      "level": 3,
+      "title": "5.2 Fixtures"
+    },
+    {
+      "level": 1,
+      "title": "临时目录"
+    },
+    {
+      "level": 1,
+      "title": "Mock状态文件"
+    },
+    {
+      "level": 1,
+      "title": "Mock时间"
+    },
+    {
+      "level": 3,
+      "title": "5.3 断言辅助"
+    },
+    {
+      "level": 1,
+      "title": "范围断言"
+    },
+    {
+      "level": 1,
+      "title": "时间戳有效性"
+    },
+    {
+      "level": 1,
+      "title": "JSON结构"
+    },
+    {
+      "level": 1,
+      "title": "文件内容"
+    },
+    {
+      "level": 1,
+      "title": "日志条目"
+    },
+    {
+      "level": 2,
+      "title": "6. CI/CD集成"
+    },
+    {
+      "level": 3,
+      "title": "6.1 GitHub Actions工作流"
+    }
+  ],
+  "entities": [],
+  "key_points": [
+    "使用Builders",
+    "P0-Skill全覆盖"
+  ],
+  "limitations_applied": [
+    "Sections limited to 50"
+  ],
+  "content_truncated": false
+}
