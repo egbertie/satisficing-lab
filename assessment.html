@@ -2,9 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" href="assets/favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>衡·观局 | 五维快速自评 | 满意解研究所" >满意解研究所</title>
+<title>衡·观局 | 五维快速自评 | 满意解研究所</title>
   <meta name="description" content="满意解研究所 · 衡·观局 | 五维快速自评 | 满意解研究所">
 <link rel="stylesheet" href="vi_quick_ref.css">
 <style>
@@ -81,7 +80,9 @@
   .cta-box p { font-size:13px; color:var(--muted); margin-bottom:16px; }
   
   .footer { text-align:center; padding:24px 16px 8px; font-size:11px; color:#4A4A4A; }
+@media(max-width:480px){body{font-size:14px}}
 </style>
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
@@ -119,20 +120,12 @@
 </script>
 
 <body>
-<div style="background:linear-gradient(135deg,#B8860B,#C2780A);color:#fff;padding:10px 18px;text-align:center;font-size:12px;letter-spacing:.5px">⭐优质·11/12门·缺B3(Delighter)·AI增强推荐 · v5.0统一框架</div>
-
-<div style="background:linear-gradient(135deg,#B8860B,#C2780A);color:#fff;padding:10px 18px;text-align:center;font-size:12px;letter-spacing:.5px">⭐优质·11/12门·缺B3(Delighter)·AI增强推荐 · v5.0统一框架</div>
-
-
-<a href="index.html" style="display:inline-block;padding:8px 16px;margin:10px 0 0 16px;font-size:13px;color:var(--brand);text-decoration:none;font-weight:500;border:1px solid var(--brand);border-radius:6px">← 返回首页</a>
 
 <div class="progress-wrap"><div class="progress-bar" id="prog"></div></div>
 
 <div class="hero" id="heroSection">
-  <a href="index.html"><img src="assets/logo-small.png" alt="满意解研究所" style="width:60px;height:auto;margin-bottom:10px"></a>
-  <h1>五维决策自评</h1>
-  <p>3分钟 · 19题 · 看清你的决策模式</p>
-  <p style="font-size:12px;opacity:0.7;margin-top:4px">你已经隐约感觉跟合伙人之间有些不对劲——从看清自己开始</p>
+  <h1>五维决策测评</h1>
+  <p>满意解研究所 · 快速踩雷检测 · 15题</p>
 </div>
 
 <!-- 欢迎页 -->
@@ -311,7 +304,7 @@ function showResult() {
   document.getElementById('prog').style.width = '100%';
   document.getElementById('heroSection').style.display = 'none';
   
-  // 水月观音审核: 展示诊断前先做深呼吸缓冲
+  // 观自在审核: 展示诊断前先做深呼吸缓冲
   document.getElementById('alerts').innerHTML = '<div class="card" style="text-align:center;padding:24px;background:#C23B2204;border:1px solid var(--brand);border-radius:16px"><p style="font-size:18px;color:var(--brand)">✋ 你刚做完19道题</p><p style="font-size:13px;color:var(--muted);margin-top:8px">在结果出来前——察觉一下身体:<br>手心暖还是凉？心跳快还是慢？胃松还是紧？</p><p style="font-size:11px;color:var(--muted);margin-top:8px">这是一个诊断·不是判决·是让你们关系更好的起点</p></div>';
   setTimeout(() => { renderFullResult(); }, 5000);
 }
@@ -618,6 +611,7 @@ buildQuestions();
 
 <p style="margin-top:16px;font-size:11px;text-align:center;color:#4A4A4A;"><a href="privacy.html" style="color:#4A4A4A;">隐私政策</a> · <a href="terms.html" style="color:#4A4A4A;">用户协议</a></p>
 
+<p style="text-align:center;font-size:10px;opacity:0.35;padding:4px;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</p>
 <div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
   <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">

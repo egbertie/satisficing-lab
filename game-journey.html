@@ -5,48 +5,187 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>觉·地点|寻根之旅地点卡|满意解研究所</title>
 <style>
-  :root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0}
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
-  .hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
-  .hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
-  .article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}
-  .article h2{font-size:18px;color:var(--title-color);margin:24px 0 10px}
-  .article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}
-  .article p{margin:8px 0}
-  .article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}
-  .article .highlight{color:var(--sri-red);font-weight:600}
-  .article ul{padding-left:20px}
-  .article li{margin:6px 0;font-size:14px}
+:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0;--sri-green:#4A8C5C}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
+.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
+.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
+
+/* ── 地图选择区 ── */
+.journey-zone{max-width:560px;margin:0 auto;padding:24px 16px 32px;text-align:center}
+.journey-zone .intro{font-size:14px;line-height:2;margin-bottom:24px;text-align:center}
+.journey-zone .intro em{color:var(--sri-red);font-style:normal;font-weight:600}
+
+/* 5个地点卡 */
+.place-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:20px}
+.place-card{background:#fff;border-radius:14px;padding:20px 14px;cursor:pointer;border:2px solid #f0e8d8;transition:all 0.25s;text-align:center;position:relative;overflow:hidden}
+.place-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.08)}
+.place-card.selected{border-color:var(--sri-red);box-shadow:0 4px 16px rgba(194,59,34,0.12);transform:translateY(-2px)}
+.place-card .place-icon{font-size:32px;margin-bottom:8px}
+.place-card .place-name{font-size:14px;font-weight:700;color:var(--title-color)}
+.place-card .place-loc{font-size:11px;color:#999;margin-top:3px}
+.place-card .place-tag{display:inline-block;padding:2px 10px;border-radius:10px;font-size:10px;margin-top:6px;background:#F5F0E6;color:var(--sri-gold)}
+
+/* 展开区 */
+.detail-panel{display:none;background:#fff;border-radius:14px;padding:24px 20px;margin-top:16px;text-align:left;border:2px solid var(--sri-gold);animation:fadeIn 0.4s}
+.detail-panel.show{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.detail-panel .d-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #f0e8d8}
+.detail-panel .d-icon{font-size:36px}
+.detail-panel .d-name{font-size:18px;font-weight:700;color:var(--title-color)}
+.detail-panel .d-loc{font-size:12px;color:var(--sri-gold)}
+.detail-panel .d-section{margin:14px 0}
+.detail-panel .d-section h4{font-size:13px;color:var(--sri-red);margin-bottom:6px}
+.detail-panel .d-section p{font-size:14px;line-height:2;color:var(--text)}
+.detail-panel .d-section .d-poem{padding:8px 14px;background:rgba(184,134,11,0.06);border-radius:8px;font-style:italic;color:var(--sri-gold);margin-top:8px;font-size:13px;line-height:1.8}
+.detail-panel textarea{width:100%;height:64px;border:1.5px solid var(--border);border-radius:10px;padding:10px;font-size:13px;font-family:inherit;resize:vertical;line-height:1.6;margin-top:8px}
+.detail-panel .btn-save{padding:8px 20px;border-radius:18px;border:1.5px solid var(--sri-red);background:#fff;color:var(--sri-red);font-size:13px;font-weight:600;cursor:pointer;margin-top:8px;font-family:inherit;transition:all 0.2s}
+.detail-panel .btn-save:hover{background:var(--sri-red);color:#fff}
+.detail-panel .saved-hint{font-size:11px;color:var(--sri-green);margin-left:8px;opacity:0;transition:opacity 0.3s}
+.detail-panel .saved-hint.show{opacity:1}
+
+.journey-log{max-width:500px;margin:0 auto;padding:16px;text-align:center}
+.journey-log h3{font-size:15px;color:var(--title-color);margin-bottom:8px}
+.visited-badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.visited-badge{padding:4px 12px;border-radius:12px;font-size:11px;background:#f0e8d8;color:#999}
+.visited-badge.done{background:rgba(74,140,92,0.1);color:var(--sri-green);font-weight:600}
+
+.back-link{text-align:center;padding:20px;font-size:11px;color:#999}
+.back-link a{color:var(--sri-red);text-decoration:none}
+.feedback-zone{max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px}
+@media(max-width:480px){body{font-size:14px}}
 </style>
-<link rel="stylesheet" href="vi_quick_ref.css">
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
 <body>
-<div class="hero"><h1>🎮 觉·地点</h1><p>游戏工厂·寻根之旅·地点卡</p></div>
-<div class="article"><h2>寻根之旅·地点卡</h2><p>五路图腾的五个物理地点——每个地点是一张卡，一段故事，一种体验。</p>
-<h3>五个地点</h3><p><strong>常德·司马楼</strong>（刘禹锡）：柳叶湖畔·"沉舟侧畔千帆过"<br><strong>卡内基梅隆</strong>（司马贺）：有限理性诞生的地方<br><strong>普陀山</strong>（水月观音）：海边寺院·自在从容<br><strong>曲阜·杏坛</strong>（孔子）：儒商哲学的源头<br><strong>曹溪·南华寺</strong>（六祖慧能）："本来无一物"</p>
-<p>满意姐在54天里走过这五个地方。她用身体丈量了五条通道。这些地点卡——是她在那些地方记录的所见、所感、所悟。</p>
-<div class="quote">有些东西，不在书里。<br>在脚踩到那片土地的那一刻。<br>—— 满意姐·寻根之旅</div></div>
+<div class="hero"><h1>🗺️ 觉·地点</h1><p>游戏工厂·寻根之旅·地点卡</p></div>
 
-<div style="text-align:center;padding:24px 16px 40px;font-size:11px;color:#999;">
-  <p><a href="go.html" style="color:#C23B22;text-decoration:none;">← 返回决策通道</a></p>
-  <p style="margin-top:4px;">满意解研究所 · 硬科技创始人的决策教练</p>
+<div class="journey-zone">
+  <div class="intro">
+    <p>五路图腾的五个物理地点。<br><em>有些东西，不在书里——在脚踩到那片土地的那一刻。</em></p>
+  </div>
+
+  <div class="place-grid" id="placeGrid"></div>
+  <div class="detail-panel" id="detailPanel"></div>
 </div>
 
-<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
-  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个内容对你有用吗？</div>
+<div class="journey-log" id="journeyLog">
+  <h3>📍 你的寻根地图</h3>
+  <div class="visited-badges" id="visitedBadges"></div>
+</div>
+
+<div class="back-link"><a href="go.html">← 返回决策通道</a></div>
+
+<div class="feedback-zone">
+  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
     <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
     <button onclick="showFeedbackText()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">💬</span>有建议</button>
   </div>
   <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
   <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
-  <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
+  <div id="fbThanks" style="display:none;color:var(--sri-green);font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
   <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
 </div>
+
 <script>
+var PLACES = [
+  {id:'changde', icon:'🏯', name:'常德·司马楼', loc:'湖南常德·柳叶湖', tag:'🪨 土·时间轴', color:'#8B6914',
+   see:'满意姐站在司马楼上，柳叶湖平如镜。她想起刘禹锡在这里写的："沉舟侧畔千帆过，病树前头万木春。"——不是乐观，是客观。时间往前走，不管你愿不愿意。',
+   feel:'湖风吹过来的时候，她忽然明白：时间不是敌人。时间是一条河——你要做的不是拦住它，是顺它走。',
+   ask:'湖畔之问：五年后回头看，今天你最担心的这件事——还成立吗？'},
+  {id:'cmu', icon:'🏛️', name:'卡内基梅隆', loc:'美国匹兹堡·CMU', tag:'⚙️ 金·可行域', color:'#6B7B8D',
+   see:'Simon在这里提出了"有限理性"。他证明：人类不可能做出完全理性的决策——因为我们永远信息不全、时间不够、算力有限。',
+   feel:'满意姐站在Simon的办公室外，看着窗外的树。她忽然懂了：不是"做最好的决定"——是"做一个足够好的决定，然后继续往前走"。',
+   ask:'CMU之问：你手头这件事——有没有一个更简单的方法？够用就好的最低线在哪？'},
+  {id:'putuo', icon:'🌊', name:'普陀山·观音道场', loc:'浙江舟山·普陀山', tag:'💧 水·身心流', color:'#3A6B8C',
+   see:'海边寺院，潮音洞。观音"观自在"——不是向外求，是向内看。看自己当下的感受，不逃避，不放大。',
+   feel:'满意姐在观音像前坐了很久。她感到身体里有些东西在松动——那些被她压下去的、藏在日程表下面的感受。',
+   ask:'普陀之问：闭上眼睛10秒。你的身体在告诉你什么？手心·心跳·胃——它们怎么说？'},
+  {id:'qufu', icon:'📚', name:'曲阜·杏坛', loc:'山东曲阜·孔庙', tag:'🌿 木·信义观', color:'#5A7A4A',
+   see:'孔子在这里讲学。他说的"仁"——不是善良，是"把人当人"。在商业里——就是把合伙人当人，把客户当人，把对手当人。',
+   feel:'满意姐摸了摸杏坛的石头。她想起那些因为"不好意思谈钱"而散伙的团队，那些因为"关系好就不用签协议"而后悔的创始人。',
+   ask:'杏坛之问：这个决定涉及谁？你的原则是什么？如果钱和原则冲突——你站在哪一边？'},
+  {id:'caoxi', icon:'🌸', name:'曹溪·南华寺', loc:'广东韶关·曹溪', tag:'🔥 火·直觉阈', color:'#C23B22',
+   see:'六祖慧能在这里说："本来无一物，何处惹尘埃。"——不是否定问题，是说你给自己加的东西太多了。',
+   feel:'满意姐在寺里走了三圈。每走一圈，脑子里的声音就少一点。走到第三圈——一个念头冒出来，她认得它：这是直觉，不是噪音。',
+   ask:'曹溪之问：把分析放一边。心里第一个冒出来的方向——是什么？别改它。'}
+];
+
+var STORAGE_KEY = 'sri_journey';
+var detailId = null;
+
+function loadState(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{}}catch(e){return{};}}
+function saveState(s){localStorage.setItem(STORAGE_KEY,JSON.stringify(s));}
+
+function renderGrid(){
+  var grid = document.getElementById('placeGrid');
+  var state = loadState();
+  var html = '';
+  PLACES.forEach(function(p){
+    var sel = detailId===p.id?' selected':'';
+    var visited = state[p.id]?' ✓':'';
+    html += '<div class="place-card'+sel+'" id="pc-'+p.id+'" onclick="openPlace(\''+p.id+'\')">';
+    html += '<div class="place-icon">'+p.icon+'</div>';
+    html += '<div class="place-name">'+p.name+visited+'</div>';
+    html += '<div class="place-loc">'+p.loc+'</div>';
+    html += '<div class="place-tag">'+p.tag+'</div>';
+    html += '</div>';
+  });
+  grid.innerHTML = html;
+}
+
+function openPlace(id){
+  detailId = id;
+  renderGrid();
+  var p = PLACES.find(function(x){return x.id===id;});
+  var state = loadState();
+  var saved = state[id]||'';
+
+  var panel = document.getElementById('detailPanel');
+  var html = '';
+  html += '<div class="d-header"><div class="d-icon">'+p.icon+'</div><div><div class="d-name">'+p.name+'</div><div class="d-loc">'+p.loc+'</div></div></div>';
+  html += '<div class="d-section"><h4>👁️ 所见</h4><p>'+p.see+'</p></div>';
+  html += '<div class="d-section"><h4>❤️ 所感</h4><p>'+p.feel+'</p></div>';
+  html += '<div class="d-section"><h4>❓ '+p.name.split('·')[0]+'之问</h4><p style="font-weight:600;color:var(--title-color)">'+p.ask+'</p></div>';
+  html += '<div class="d-section"><h4>✏️ 你的回答</h4><textarea id="jAnswer" placeholder="在这里写下你的答案...">'+escHtml(saved)+'</textarea><br><button class="btn-save" onclick="saveAnswer(\''+id+'\')">💾 保存这一站</button><span class="saved-hint" id="saveHint">✓ 已保存</span></div>';
+  panel.innerHTML = html;
+  panel.classList.add('show');
+  panel.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function saveAnswer(id){
+  var text = document.getElementById('jAnswer').value.trim();
+  var state = loadState();
+  state[id] = text;
+  saveState(state);
+  var hint = document.getElementById('saveHint');
+  hint.classList.add('show');
+  setTimeout(function(){hint.classList.remove('show');},1500);
+  renderGrid();
+  renderBadges();
+}
+
+function renderBadges(){
+  var state = loadState();
+  var container = document.getElementById('visitedBadges');
+  var html = '';
+  PLACES.forEach(function(p){
+    if(state[p.id]) html += '<span class="visited-badge done">✅ '+p.name+'</span>';
+    else html += '<span class="visited-badge">📍 '+p.name+'</span>';
+  });
+  container.innerHTML = html;
+}
+
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+// init
+renderGrid();
+renderBadges();
+
+// ===== 反馈组件（完整保留） =====
 (function(){
   let page=location.pathname.split('/').pop()||'index';
   let key='sri_fb_'+page;
@@ -83,6 +222,6 @@
 })();
 </script>
 
+<div style="text-align:center;padding:8px 0;font-size:10px;opacity:0.25;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</div>
 </body>
-
 </html>

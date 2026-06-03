@@ -3,20 +3,96 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>衡·话术|销售话术手册|满意解研究所</title>
-<style>:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}.article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}.article h2{font-size:18px;color:var(--title-color);margin:24px 0 10px}.article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}.article p{margin:8px 0}.article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}.article .highlight{color:var(--sri-red);font-weight:600}li{margin:6px 0;font-size:14px}ul{padding-left:20px}</style>
-<link rel="stylesheet" href="vi_quick_ref.css">
+<title>衡·话术|对话训练官|满意解研究所</title>
+<style>:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.85;margin-top:4px}.article{max-width:600px;margin:0 auto;padding:24px 16px 20px;font-size:15px;line-height:2}.article h2{font-size:18px;color:var(--title-color);margin:0 0 10px 0}.article h3{font-size:14px;color:var(--sri-red);margin:16px 0 6px;text-transform:none}.article p{margin:6px 0;font-size:14px}.article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}.article .highlight{color:var(--sri-red);font-weight:600}.article li{margin:4px 0;font-size:14px;line-height:1.7}.article ul{padding-left:20px}.opening-box{background:#fff;border-radius:12px;padding:16px 20px;margin:16px 0 4px;border:1px solid #D4C5A0;box-shadow:0 2px 8px rgba(0,0,0,0.04)}.opening-box h3{font-size:14px;color:var(--sri-gold);margin:0 0 8px 0;display:flex;align-items:center;gap:6px}.opening-box .opening-quote{font-size:14px;color:var(--text);font-style:italic;line-height:1.8;padding:6px 0;border:none;background:none;margin:0}.opening-box .opening-note{font-size:12px;color:#999;margin-top:6px;line-height:1.6}
+
+/* === 场景对话模拟器 === */
+.sim-section{max-width:600px;margin:0 auto;padding:0 16px 32px}.sim-header{text-align:center;margin:20px 0 12px}.sim-header h2{font-size:18px;color:var(--title-color);margin-bottom:2px}.sim-header .sim-subtitle{font-size:12px;color:#999}
+.scene-tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:20px}.scene-tab{flex:0 0 auto;padding:8px 14px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;font-size:13px;color:var(--text);cursor:pointer;transition:all 0.2s ease;white-space:nowrap}.scene-tab:hover{border-color:var(--sri-gold)}.scene-tab.active{background:var(--sri-red);color:#fff;border-color:var(--sri-red);font-weight:600}.scene-tab.completed{position:relative}.scene-tab.completed::after{content:' ✓';font-weight:700;color:var(--sri-gold)}
+.dialogue-card{background:#fff;border-radius:14px;padding:24px 20px 20px;margin-bottom:16px;border:1px solid #D4C5A0;box-shadow:0 2px 12px rgba(0,0,0,0.05);transition:all 0.3s ease}.dialogue-card .customer-bubble{background:#F5F0E6;border-radius:12px 12px 12px 4px;padding:14px 18px;margin-bottom:20px;font-size:15px;line-height:1.7;color:var(--title-color);position:relative;font-weight:500}.customer-bubble::after{content:'客户';position:absolute;top:-8px;left:16px;background:var(--sri-gold);color:#fff;font-size:10px;padding:2px 10px;border-radius:10px;font-weight:600}
+.options-list{display:flex;flex-direction:column;gap:10px}.option-btn{display:block;width:100%;text-align:left;padding:14px 18px;border-radius:10px;border:2px solid #E8E0D0;background:#fff;font-size:14px;line-height:1.7;color:var(--text);cursor:pointer;transition:all 0.2s ease;position:relative}.option-btn:hover{border-color:var(--sri-gold);background:#FFFDF7;transform:translateX(4px)}.option-btn:active{transform:scale(0.985)}.option-btn .opt-label{position:absolute;top:-8px;left:14px;background:#E8E0D0;color:var(--text);font-size:10px;padding:2px 10px;border-radius:10px;font-weight:600}.option-btn.selected-correct{border-color:#8BA870;background:#F5FAF2}.option-btn.selected-wrong{border-color:var(--sri-red);background:#FFF5F5}
+
+/* 反馈面板 */
+.feedback-panel{display:none;margin-top:16px;padding:16px 18px;border-radius:10px;font-size:13px;line-height:1.7;animation:fadeIn 0.3s ease}.feedback-panel.show{display:block}.feedback-panel.correct{background:#F5FAF2;border-left:3px solid #8BA870}.feedback-panel.partial{background:#FFFDF7;border-left:3px solid var(--sri-gold)}.feedback-panel .fb-label{font-size:12px;font-weight:700;margin-bottom:6px}.feedback-panel.correct .fb-label{color:#6B8A5E}.feedback-panel.partial .fb-label{color:var(--sri-gold)}.feedback-panel .fb-highlight{font-weight:600;color:var(--sri-red)}.feedback-panel .fb-tip{margin-top:8px;font-size:12px;color:#888}.feedback-note{margin-top:8px;font-size:12px;color:#999;font-style:italic}
+.next-btn{display:none;margin-top:12px;text-align:center}.next-btn.show{display:block}.next-btn button{padding:10px 28px;border-radius:20px;border:2px solid var(--sri-red);background:#fff;color:var(--sri-red);font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s ease}.next-btn button:hover{background:var(--sri-red);color:#fff}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* 进度条 */
+.progress-bar{display:flex;gap:4px;justify-content:center;margin:16px 0 0}.progress-dot{width:8px;height:8px;border-radius:50%;background:#D4C5A0;transition:all 0.3s ease}.progress-dot.done{background:var(--sri-gold)}.progress-dot.current{background:var(--sri-red);box-shadow:0 0 0 4px rgba(194,59,34,0.2)}.progress-dot.active{animation:pulse 1.5s infinite}@keyframes pulse{0%,100%{box-shadow:0 0 0 4px rgba(194,59,34,0.2)}50%{box-shadow:0 0 0 8px rgba(194,59,34,0)}} 
+.completion-banner{display:none;text-align:center;background:#fff;border-radius:14px;padding:28px 20px;margin:20px 0;border:2px solid var(--sri-gold);box-shadow:0 4px 16px rgba(0,0,0,0.06)}.completion-banner .trophy{font-size:48px;margin-bottom:8px}.completion-banner h3{font-size:18px;color:var(--title-color);margin:0 0 8px}.completion-banner p{font-size:13px;color:var(--text);line-height:1.7}.completion-banner .stats{margin:12px 0;font-size:12px;color:#999}
+.reset-link{display:inline-block;margin-top:12px;font-size:12px;color:var(--sri-red);cursor:pointer;text-decoration:underline;font-weight:500}@media(max-width:480px){body{font-size:14px}}
+</style>
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
-<body><div class="hero"><h1>💼 衡·话术</h1><p>满意解·销售话术手册</p></div><div class="article"><h2>满意解决策教练·销售话术手册</h2>
-<h3>开场白（30秒电梯演讲）</h3>
-<p>"我们做的事很简单——<span class="highlight">帮硬科技创始人别因为合伙人的问题把自己数到的钱都赔回去。</span>"</p>
-<h3>常见问题应对</h3>
-<p><strong>"你们和培训公司有什么区别？"</strong><br>"培训公司教你'怎么管理'——我们帮你诊断'为什么你的合伙关系在出问题'。不是上课——是CT扫描+开方子。"</p>
-<p><strong>"免费工具靠谱吗？"</strong><br>"工具免费是因为我们想让更多人在问题还不严重的时候看到信号。深度服务收费——但免费工具本身就有价值。"</p>
-<p><strong>"有必要吗？我们关系挺好的。"</strong><br>"Gottman研究了40年——91%的关系终结在出问题之前有信号。不是'关系好不好'——是'信号有没有被忽视'。"</p></div>
+<body>
+
+<!-- ===== Hero: 保持不动 ===== -->
+<div class="hero">
+  <h1>🎯 衡·话术</h1>
+  <p>对话训练官 · 不是教你背话术，是让你准备好面对真实对话</p>
+</div>
+
+<!-- ===== 原有开场白：作为背景知识保留在顶部 ===== -->
+<div class="article">
+  <h2>满意解决策教练·销售话术手册</h2>
+
+  <h3>开场白（30秒电梯演讲）</h3>
+  <div class="opening-box">
+    <h3>📖 背景知识</h3>
+    <p class="opening-quote">"我们做的事很简单——<span class="highlight">帮硬科技创始人别因为合伙人的问题把自己数到的钱都赔回去。</span>"</p>
+    <p class="opening-note">💡 这是你的核心开场白。读完它，再到下面的场景里练练手——看你在真实对话中会怎么接。</p>
+  </div>
+</div>
+
+<!-- ===== 新核心：场景对话模拟器 ===== -->
+<div class="sim-section">
+  <div class="sim-header">
+    <h2>🎭 场景对话模拟器</h2>
+    <p class="sim-subtitle">选择一个场景，在真实对话中练习你的回答</p>
+  </div>
+
+  <!-- 场景分类标签 -->
+  <div class="scene-tabs" id="sceneTabs">
+    <button class="scene-tab active" data-scene="0">🛡️ 质疑定位</button>
+    <button class="scene-tab" data-scene="1">🔧 质疑工具</button>
+    <button class="scene-tab" data-scene="2">🤷 质疑必要</button>
+    <button class="scene-tab" data-scene="3">💰 质疑价格</button>
+    <button class="scene-tab" data-scene="4">😟 顾虑合伙人</button>
+  </div>
+
+  <!-- 对话卡片 -->
+  <div class="dialogue-card" id="dialogueCard">
+    <div class="customer-bubble" id="customerSpeech"></div>
+    <div class="options-list" id="optionsList"></div>
+    <div class="feedback-panel" id="feedbackPanel">
+      <div class="fb-label" id="fbLabel"></div>
+      <div id="fbContent"></div>
+      <div class="feedback-note" id="fbNote"></div>
+    </div>
+    <div class="next-btn" id="nextBtn">
+      <button onclick="nextAction()">好的，下一个场景 →</button>
+    </div>
+  </div>
+
+  <!-- 进度条 -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- 完成横幅 -->
+  <div class="completion-banner" id="completionBanner">
+    <div class="trophy">🏆</div>
+    <h3>五关通关！</h3>
+    <p>你已经体验了5个最常见的销售场景。<br>记住这种感觉——<span class="highlight">真实对话不是背出来的，是练出来的。</span></p>
+    <div class="stats" id="completionStats"></div>
+    <p style="margin-top:8px;font-size:12px;color:#999;">你可以随时回到任一场景重新练习。</p>
+    <span class="reset-link" onclick="resetAll()">🔄 重新开始训练</span>
+  </div>
+</div>
+
+<!-- ===== 返回链接 + 反馈组件：保持不动 ===== -->
 <p style="text-align:center;padding:20px;font-size:11px;color:#999"><a href="go.html" style="color:#C23B22;text-decoration:none">← 返回决策通道</a></p>
+<p style="text-align:center;font-size:10px;opacity:0.35;padding:4px;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</p>
 <div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
   <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个内容对你有用吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
@@ -28,6 +104,324 @@
   <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
   <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
 </div>
+
+<!-- ===== 数据模型 ===== -->
+<script>
+// 5个场景数据
+const scenes = [
+  {
+    id: 0,
+    label: '🛡️ 质疑定位',
+    customer: '「你们和培训公司有什么区别？」',
+    options: [
+      {
+        id: 'a',
+        text: '培训公司教你"怎么管理"——我们帮你诊断"为什么你的合伙关系在出问题"。不是上课——是CT扫描+开方子。',
+        best: true,
+        highlight: '✅ 用「CT扫描+开方子」的类比巧妙区分了咨询和培训的本质——培训公司给知识，我们给诊断。',
+        improve: '⚡ 可以进一步——比如加一句「培训公司给的是地图，我们给的是你脚下那片地的地质报告」，让画面感更强。'
+      },
+      {
+        id: 'b',
+        text: '我们做的事情完全不一样。培训公司就是讲课，我们做的是深度咨询，帮创始人解决实际问题。',
+        best: false,
+        highlight: '✅ 方向是对的——你在强调差异化。',
+        improve: '⚡ 但「完全不一样」「深度咨询」这些词太抽象了，客户听完可能还是不知道你到底做什么。试试用具体场景来区分，比如「培训公司教你怎么开会，我们帮你弄清楚为什么每次开会都吵不起来。」'
+      },
+      {
+        id: 'c',
+        text: '培训公司也很好，但我们的优势在于更了解硬科技行业，而且我们的方法论有学术研究支撑。',
+        best: false,
+        highlight: '✅ 提到了学术支撑，这个加分。',
+        improve: '⚡ 但开头说「培训公司也很好」会削弱你的定位——客户需要的是差异化，不是比较级。直接说出你的独特价值，别给自己设参照系。'
+      }
+    ]
+  },
+  {
+    id: 1,
+    label: '🔧 质疑工具',
+    customer: '「免费工具靠谱吗？」',
+    options: [
+      {
+        id: 'a',
+        text: '工具免费是因为我们想让更多人在问题还不严重的时候看到信号。深度服务收费——但免费工具本身就有价值。',
+        best: true,
+        highlight: '✅ 这个回答把「免费」从质疑点变成了信任点——「我们想让更多人在问题还不严重的时候看到信号」展现了使命驱动的格局。',
+        improve: '⚡ 可以更具体地举例——「就像体检是免费的，但手术收费。免费工具帮你发现：你们的合伙关系可能在发烧。」'
+      },
+      {
+        id: 'b',
+        text: '当然靠谱。我们的工具是专业团队开发的，很多创始人都在用，而且我们会持续更新。',
+        best: false,
+        highlight: '✅ 提到了「很多创始人都在用」，这是一个社会证明。',
+        improve: '⚡ 但「当然靠谱」这个开头容易激起防御心理——客户会觉得你在回避问题。不如先承认这是个好问题，再解释免费的逻辑。'
+      },
+      {
+        id: 'c',
+        text: '免费的是基础版，付费的才有完整功能。你试试看，不满意也没关系。',
+        best: false,
+        highlight: '✅ 降低了试用门槛，「不满意也没关系」降低了客户的心理负担。',
+        improve: '⚡ 但这个回答把免费定位成了「阉割版」，反而强化了「免费=不靠谱」的印象。不要急着引流付费，先让免费工具本身站得住。'
+      }
+    ]
+  },
+  {
+    id: 2,
+    label: '🤷 质疑必要',
+    customer: '「有必要吗？我们关系挺好的。」',
+    options: [
+      {
+        id: 'a',
+        text: 'Gottman研究了40年——91%的关系终结在出问题之前有信号。不是「关系好不好」——是「信号有没有被忽视」。',
+        best: true,
+        highlight: '✅ 引用权威研究（Gottman）建立可信度，「信号有没有被忽视」把论述从感情层面拉到了理性层面。',
+        improve: '⚡ 「91%的关系终结在出问题之前有信号」已经很强了。可以再加一句共鸣——「我见过太多创始人说『我们关系挺好的』，三个月后发消息说『散了』。」让数据有了体温。'
+      },
+      {
+        id: 'b',
+        text: '关系好当然好啊，但合伙就像婚姻，有时候需要第三方的视角来帮助双方更好地沟通。',
+        best: false,
+        highlight: '✅ 「合伙就像婚姻」这个类比容易引起共鸣。',
+        improve: '⚡ 但这个回答有点鸡汤感——客户听到「第三方视角」会觉得是套路。不如用数据说话，或者用一个具体的信号问题反问：「那你们最近一次关于股权分配的讨论，是什么时候？」'
+      },
+      {
+        id: 'c',
+        text: '很多觉得关系好的团队，其实都在回避关键问题。你越觉得没问题，越需要检查一下。',
+        best: false,
+        highlight: '✅ 指出了「回避」这个关键洞察。',
+        improve: '⚡ 但语气有点居高临下——「你越觉得没问题，越需要检查一下」像是在说你错了。换成提问的方式会更好：「如果你们的合伙关系有3个隐藏风险，你会想知道是什么吗？」引导对方主动思考。'
+      }
+    ]
+  },
+  {
+    id: 3,
+    label: '💰 质疑价格',
+    customer: '「太贵了，能便宜点吗？」',
+    options: [
+      {
+        id: 'a',
+        text: '我理解价格是个重要的考量。不过我想反过来问你一个问题——如果你的合伙关系出了问题，修复的成本是多少？可能是一个合伙人离开、一轮融资失败、或者团队分裂。比起那个成本，这笔投资可能反而是最便宜的。',
+        best: true,
+        highlight: '✅ 你没有直接砍价，而是用「反问+未来成本」的框架重新定义了「贵」——把价格问题转化成了风险投资问题。格局一下子就拉开了。',
+        improve: '⚡ 可以收尾加一句「我们不便宜，但我们帮你避免的东西更贵」，形成一个有力的结束句。'
+      },
+      {
+        id: 'b',
+        text: '我们的价格在行业里其实不算高，很多培训课程都要几十万。而且我们提供的是定制化服务，性价比很高。',
+        best: false,
+        highlight: '✅ 提到了定制化服务，这确实是支撑价格的理据。',
+        improve: '⚡ 但一上来就比价格很容易陷入价格战的泥潭——客户会觉得「那我去找更便宜的培训课好了」。不要跟别人比价格，要比「不做的代价」。'
+      },
+      {
+        id: 'c',
+        text: '我们可以谈。你说个预算，我看看能不能调整方案。',
+        best: false,
+        highlight: '✅ 展现了灵活性，给了客户议价的空间。',
+        improve: '⚡ 但这个回答太早退出价值讨论了——一开口就谈价格会让你失去定价权。先让客户理解「不做这件事的代价」，再聊价格，对方的心理预期会完全不同。'
+      }
+    ]
+  },
+  {
+    id: 4,
+    label: '😟 顾虑合伙人',
+    customer: '「我不确定我的合伙人愿不愿意来。」',
+    options: [
+      {
+        id: 'a',
+        text: '这个顾虑很真实。其实你不需要替合伙人做决定——你只需要把信息带回去。比如你可以跟他说：「我遇到了一个团队，他们专门研究硬科技公司的合伙问题。我觉得有些东西值得我们一起看看。」——这就不是你在推销，是你在邀请。',
+        best: true,
+        highlight: '✅ 你没有跳过客户的顾虑，也没有替他保证什么。你给了他一杆「传话的棍子」——一句他可以照搬的原话。这降低了他的行动门槛，同时把决定权还给了他和他的合伙人。',
+        improve: '⚡ 可以再加一句放松的话：「如果他不愿意，也没关系。至少你自己看到了这些信号——这本身就有价值。」这会让客户觉得你不是绑定了成交，你的建议本身就有价值。'
+      },
+      {
+        id: 'b',
+        text: '那正好说明你们需要啊！很多时候合伙人之间的问题就是因为沟通不够。你可以跟他说，这是一次团队建设的机会。',
+        best: false,
+        highlight: '✅ 「沟通不够」这个洞察是对的，而且你试图给客户一个说服合伙人的理由。',
+        improve: '⚡ 但「那正好说明你们需要啊」听起来像是硬做需求——客户会觉得你没理解他的难处。与其替他找理由，不如给他工具。帮他想一句他跟合伙人开口的第一句话是什么。'
+      },
+      {
+        id: 'c',
+        text: '你先自己来试试看，你觉得好再拉合伙人来，不着急。',
+        best: false,
+        highlight: '✅ 降低了即时的行动门槛，让客户可以一个人先行动。',
+        improve: '⚡ 但如果客户只自己来，你其实只解决了一半的问题——合伙关系是两个人的事。不如说「你一个人先来，带不走方案，但能带走一张地图」——暗示最终需要两个人，但不给压力。'
+      }
+    ]
+  }
+];
+
+// 状态管理
+const STORAGE_KEY = 'sri_sales_trainer';
+let state = { currentScene: 0, answers: {}, completed: [] };
+
+function loadState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (saved && Array.isArray(saved.completed)) {
+      state = saved;
+    }
+  } catch(e) {}
+}
+function saveState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+// 初始化
+loadState();
+let selectedOption = null;
+
+function renderScene() {
+  const scene = scenes[state.currentScene];
+  const answered = state.answers[scene.id];
+  
+  document.getElementById('customerSpeech').textContent = scene.customer;
+  
+  // 渲染选项
+  const optionsList = document.getElementById('optionsList');
+  const labels = ['A', 'B', 'C'];
+  optionsList.innerHTML = scene.options.map((opt, i) => {
+    let cls = 'option-btn';
+    if (answered && answered.chosen === opt.id) {
+      cls += opt.best ? ' selected-correct' : ' selected-wrong';
+    }
+    const disabled = answered ? 'disabled' : '';
+    return `<button class="${cls}" data-opt="${opt.id}" ${disabled}>
+      <span class="opt-label">选项 ${labels[i]}</span>
+      ${opt.text}
+    </button>`;
+  }).join('');
+  
+  // 绑定点击
+  if (!answered) {
+    optionsList.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', () => selectOption(btn.dataset.opt));
+    });
+  }
+  
+  // 渲染反馈
+  const fbPanel = document.getElementById('feedbackPanel');
+  if (answered) {
+    const chosenOpt = scene.options.find(o => o.id === answered.chosen);
+    fbPanel.className = 'feedback-panel show ' + (chosenOpt.best ? 'correct' : 'partial');
+    document.getElementById('fbLabel').textContent = chosenOpt.best ? '💡 这个回答很棒' : '💡 还可以更好';
+    document.getElementById('fbContent').innerHTML = 
+      `<p style="margin-bottom:4px">${chosenOpt.highlight}</p>` +
+      `<p>${chosenOpt.improve}</p>`;
+    document.getElementById('fbNote').textContent = '不是打分，是温和的提醒。真实对话中没有标准答案。';
+    document.getElementById('nextBtn').className = 'next-btn show';
+  } else {
+    fbPanel.className = 'feedback-panel';
+    document.getElementById('nextBtn').className = 'next-btn';
+  }
+  
+  // 更新标签状态
+  updateTabs();
+  updateProgress();
+}
+
+function selectOption(optId) {
+  if (state.answers[state.currentScene] !== undefined) return;
+  const scene = scenes[state.currentScene];
+  const opt = scene.options.find(o => o.id === optId);
+  
+  state.answers[scene.id] = { chosen: optId, best: opt.best };
+  if (!state.completed.includes(scene.id)) {
+    state.completed.push(scene.id);
+  }
+  saveState();
+  renderScene();
+  
+  // 滚动到反馈区
+  setTimeout(() => {
+    document.getElementById('feedbackPanel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 200);
+}
+
+function nextAction() {
+  const remaining = scenes.filter(s => !state.completed.includes(s.id));
+  if (remaining.length > 0) {
+    state.currentScene = remaining[0].id;
+    saveState();
+    renderScene();
+    document.getElementById('dialogueCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    showCompletion();
+  }
+}
+
+function switchScene(sceneId) {
+  state.currentScene = sceneId;
+  saveState();
+  renderScene();
+  document.getElementById('dialogueCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function updateTabs() {
+  document.querySelectorAll('.scene-tab').forEach(tab => {
+    const sid = parseInt(tab.dataset.scene);
+    tab.classList.remove('active', 'completed');
+    if (sid === state.currentScene) tab.classList.add('active');
+    if (state.completed.includes(sid)) tab.classList.add('completed');
+  });
+}
+
+function updateProgress() {
+  const bar = document.getElementById('progressBar');
+  bar.innerHTML = scenes.map((s, i) => {
+    let cls = 'progress-dot';
+    if (state.completed.includes(s.id)) cls += ' done';
+    if (s.id === state.currentScene) cls += ' current';
+    return `<div class="${cls}"></div>`;
+  }).join('');
+  
+  // 检查是否全部完成
+  if (state.completed.length === scenes.length) {
+    showCompletion();
+  } else {
+    document.getElementById('completionBanner').style.display = 'none';
+  }
+}
+
+function showCompletion() {
+  const banner = document.getElementById('completionBanner');
+  banner.style.display = 'block';
+  document.getElementById('dialogueCard').style.display = 'none';
+  
+  const bestCount = scenes.filter(s => state.answers[s.id] && state.answers[s.id].best).length;
+  const msg = bestCount === 5 
+    ? '全部选到了最佳回答！你就是对话高手。' 
+    : bestCount >= 3 
+      ? `你选了 ${bestCount}/5 个最佳回答。已经很不错了——剩下的是成长空间。`
+      : `你选了 ${bestCount}/5 个最佳回答。没关系——每一次选择都在帮你建立直觉。`;
+  document.getElementById('completionStats').textContent = msg;
+  
+  banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function resetAll() {
+  state = { currentScene: 0, answers: {}, completed: [] };
+  saveState();
+  document.getElementById('dialogueCard').style.display = '';
+  document.getElementById('completionBanner').style.display = 'none';
+  renderScene();
+  document.getElementById('dialogueCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// 标签点击
+document.getElementById('sceneTabs').addEventListener('click', (e) => {
+  const tab = e.target.closest('.scene-tab');
+  if (!tab) return;
+  const sceneId = parseInt(tab.dataset.scene);
+  if (sceneId === state.currentScene) return;
+  switchScene(sceneId);
+});
+
+// 启动
+renderScene();
+</script>
+
+<!-- ===== 反馈组件脚本（保持不动）===== -->
 <script>
 (function(){
   let page=location.pathname.split('/').pop()||'index';
@@ -65,4 +459,5 @@
 })();
 </script>
 
-</body></html>
+</body>
+</html>

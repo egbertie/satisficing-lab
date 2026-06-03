@@ -22,6 +22,7 @@ body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;backgroun
 .footer a{color:var(--red);text-decoration:none}
 @media(max-width:600px){.cards{grid-template-columns:1fr}}
 </style>
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
@@ -69,6 +70,17 @@ body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;backgroun
 
 <div class="footer">
   满意解研究所 · 管理后台 · <a href="index.html">返回首页</a>
+</div>
+
+
+<div style="text-align:center;padding:8px 0;font-size:10px;opacity:0.25;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</div>
+
+<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px">
+  <div id="fbQ" style="color:#4A4A4A;font-weight:600;margin-bottom:10px">这个页面对你有用吗？</div>
+  <div id="fbBtns" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px">
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'up');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">👍 有用</button>
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'text');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">💬 有建议</button>
+  </div>
 </div>
 
 </body>

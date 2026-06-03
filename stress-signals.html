@@ -2,196 +2,171 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="12张身体压力信号识别卡——在决策前识别身体发出的预警信号。满意解研究所出品。">
-<title>压力信号卡 · 满意解研究所</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>镜·信号卡|压力信号识别卡|满意解研究所</title>
 <style>
-:root{--red:#C23B22;--gold:#B8860B;--bg:#FAF7F2;--white:#fff;--text:#2D2D2D;--text2:#5C5C5C;--border:#E8E0D5}
+:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0;--sri-green:#4A8C5C}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
-.header{text-align:center;padding:40px 20px 20px;background:linear-gradient(180deg,var(--white),var(--bg))}
-.header .badge{display:inline-block;padding:4px 12px;background:rgba(96,128,160,.12);color:#6080A0;border-radius:16px;font-size:11px;font-weight:600;margin-bottom:10px}
-.header h1{font-size:clamp(22px,4vw,32px);font-weight:700;margin-bottom:6px}
-.header .sub{font-size:14px;color:var(--text2);max-width:400px;margin:0 auto}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
+.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
+.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
+.main{max-width:560px;margin:0 auto;padding:24px 16px 40px}
+.intro{text-align:center;font-size:14px;line-height:2;margin-bottom:20px}
 
-.main{max-width:560px;margin:0 auto;padding:0 16px 40px}
+.signal-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+@media(max-width:400px){.signal-grid{grid-template-columns:1fr}}
+.signal-card{background:#fff;border-radius:12px;padding:14px;cursor:pointer;border:2px solid #f0e8d8;transition:all 0.2s;text-align:center}
+.signal-card:hover{border-color:var(--sri-gold)}
+.signal-card.checked{background:rgba(194,59,34,0.04);border-color:var(--sri-red)}
+.signal-card .s-emoji{font-size:24px;margin-bottom:4px}
+.signal-card .s-name{font-size:13px;font-weight:600;color:var(--title-color)}
+.signal-card .s-desc{font-size:11px;color:#999;margin-top:2px}
 
-/* 进度 */
-.progress{display:flex;align-items:center;gap:8px;justify-content:center;margin:20px 0;font-size:13px;color:var(--text2)}
-.progress-bar{flex:1;max-width:200px;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
-.progress-fill{height:100%;background:var(--gold);transition:width .3s}
+.stats-bar{display:flex;justify-content:center;gap:20px;padding:16px;background:#fff;border-radius:12px;margin-bottom:20px}
+.stat-item{text-align:center}
+.stat-num{font-size:28px;font-weight:800;color:var(--sri-red)}
+.stat-label{font-size:11px;color:#999}
+.severity{text-align:center;padding:12px;background:rgba(184,134,11,0.06);border-radius:12px;font-size:14px;line-height:2;margin-bottom:16px;display:none}
+.severity.show{display:block}
+.btn-reset{padding:8px 20px;border-radius:18px;border:1.5px solid var(--border);background:#fff;color:var(--text);font-size:12px;cursor:pointer;font-family:inherit;margin-top:8px}
 
-/* 卡片 */
-.card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:28px 24px;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,.04);margin-bottom:16px}
-.card .signal-emoji{font-size:56px;margin-bottom:12px}
-.card .signal-name{font-size:22px;font-weight:700;margin-bottom:4px;color:var(--text)}
-.card .signal-body{font-size:14px;color:var(--gold);font-weight:600;margin-bottom:12px}
-.card .signal-desc{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:20px}
-.card .signal-question{font-size:16px;font-weight:600;color:var(--text);margin-bottom:20px;padding:12px;background:var(--bg);border-radius:8px}
-
-/* 按钮 */
-.btn-row{display:flex;gap:10px;justify-content:center}
-.btn{padding:12px 24px;border-radius:20px;font-size:15px;font-weight:600;cursor:pointer;border:none;transition:all .2s}
-.btn-yes{background:rgba(96,128,160,.12);color:#6080A0;border:1.5px solid rgba(96,128,160,.3)}
-.btn-yes:hover,.btn-yes.active{background:#6080A0;color:#fff;border-color:#6080A0}
-.btn-no{background:rgba(194,59,34,.06);color:var(--red);border:1.5px solid rgba(194,59,34,.2)}
-.btn-no:hover,.btn-no.active{background:var(--red);color:#fff;border-color:var(--red)}
-
-/* 结果 */
-.result{text-align:center;padding:32px 16px}
-.result .result-icon{font-size:64px;margin-bottom:16px}
-.result .result-title{font-size:24px;font-weight:700;margin-bottom:8px}
-.result .result-body{font-size:15px;color:var(--text2);line-height:2;margin-bottom:24px}
-.result .result-body strong{color:var(--text)}
-.result .signals-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px}
-.result .signal-tag{padding:6px 14px;border-radius:16px;font-size:12px;font-weight:600}
-.tag-active{background:rgba(194,59,34,.1);color:var(--red)}
-.tag-calm{background:rgba(112,160,96,.1);color:#70A060}
-
-.btn-restart{display:inline-block;padding:12px 28px;border-radius:24px;background:var(--red);color:#fff;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;border:none;margin-right:8px;transition:all .2s}
-.btn-restart:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(194,59,34,.25)}
-
-.footer{text-align:center;padding:20px;font-size:11px;color:var(--text2)}
-.footer a{color:var(--red);text-decoration:none}
-
-.hidden{display:none!important}
+.back-link{text-align:center;padding:20px;font-size:11px;color:#999}
+.back-link a{color:var(--sri-red);text-decoration:none}
+.feedback-zone{max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px}
 </style>
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
 <body>
-<div style="background:linear-gradient(135deg,#B8860B,#C2780A);color:#fff;padding:10px 18px;text-align:center;font-size:12px;letter-spacing:.5px">⭐优质·10/12门·缺D1/D2·水L5💧体验型 · v5.0统一框架</div>
-
-
-<div class="header">
-  <div class="badge">🧠 右脑 · 体验型 · 水85 🔥60</div>
-  <h1>压力信号卡</h1>
-  <div class="sub">12张身体信号卡。你的身体在压力来临前就会预警——学会认读这些信号。</div>
-</div>
-
+<div class="hero"><h1>🩺 镜·信号卡</h1><p>12张身体压力信号识别卡</p></div>
 <div class="main">
+  <p class="intro">逐项检查——你最近两周出现过哪些身体信号？<br><span style="color:var(--sri-red);font-weight:600">身体比大脑早6-12个月知道。</span></p>
 
-  <div class="progress">
-    <span id="progressText">1/12</span>
-    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:8%"></div></div>
+  <div class="signal-grid" id="signalGrid"></div>
+
+  <div class="stats-bar" id="statsBar">
+    <div class="stat-item"><div class="stat-num" id="signalCount">0</div><div class="stat-label">信号数</div></div>
+    <div class="stat-item"><div class="stat-num" id="severityLevel">--</div><div class="stat-label">严重度</div></div>
   </div>
-
-  <!-- 卡片区 -->
-  <div class="card" id="cardArea">
-    <div class="signal-emoji" id="signalEmoji">😤</div>
-    <div class="signal-name" id="signalName">咬紧牙关</div>
-    <div class="signal-body" id="signalBody">下巴·颞颌关节</div>
-    <div class="signal-desc" id="signalDesc">在重要会议或决策前，你是否会不自觉地咬紧牙关？<br>这是身体最古老的防御信号之一——它在帮你"咬住阵地"。</div>
-    <div class="signal-question" id="signalQuestion">过去一周，你有过这种感觉吗？</div>
-    <div class="btn-row">
-      <button class="btn btn-yes" onclick="answer(true)">✓ 有过</button>
-      <button class="btn btn-no" onclick="answer(false)">✗ 没有</button>
-    </div>
-  </div>
-
-  <!-- 结果区 -->
-  <div class="result hidden" id="resultArea">
-    <div class="result-icon" id="resultIcon">🌊</div>
-    <div class="result-title" id="resultTitle"></div>
-    <div class="result-body" id="resultBody"></div>
-    <div class="signals-list" id="signalsList"></div>
-    <button class="btn-restart" onclick="restart()">🔄 再测一次</button>
-    <a href="go.html" style="font-size:14px;color:var(--red);text-decoration:none;margin-left:8px">← 决策通道</a>
-  </div>
-
+  <div class="severity" id="severityBox"></div>
+  <div style="text-align:center"><button class="btn-reset" onclick="resetSignals()">清空重来</button></div>
 </div>
-
-<div class="footer">
-  满意解研究所 · 身体智慧系列<br>
-  <a href="index.html">首页</a> · <a href="body-scan.html">五分钟身体扫描</a> · <a href="pre0.html">PRE-0深度版</a> · <a href="dashboard-v3.html">🧠 产品大脑</a>
+<div class="back-link"><a href="go.html">← 返回决策通道</a></div>
+<div class="feedback-zone">
+  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
+  <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
+    <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
+    <button onclick="showFeedbackText()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">💬</span>有建议</button>
+  </div>
+  <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
+  <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
+  <div id="fbThanks" style="display:none;color:var(--sri-green);font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
+  <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
 </div>
 
 <script>
-var signals = [
-  {emoji:'😤',name:'咬紧牙关',body:'下巴·颞颌关节',desc:'在重要会议或决策前，你是否会不自觉地咬紧牙关？<br>这是身体最古老的防御信号之一——它在帮你"咬住阵地"。',q:'过去一周，你有过这种感觉吗？'},
-  {emoji:'🫀',name:'心跳加速',body:'心脏·胸腔',desc:'当你想到那个决定时，心跳是不是变快了？<br>心脏是最诚实的决策顾问——它几乎从不说谎。',q:'最近做决定时，心跳有变化吗？'},
-  {emoji:'🤲',name:'手心出汗',body:'手掌·指尖',desc:'手心出汗不是软弱——是远古的"准备战斗"信号。<br>身体在告诉你：这件事很重要。',q:'想到重要决定时，手心会潮湿吗？'},
-  {emoji:'🫃',name:'胃部紧缩',body:'胃·腹部',desc:''我胃里有个结'——这是肠道神经系统在说话。<br>科学家称它为'第二大脑'，有5亿个神经元。',q:'做决定前，胃部有没有不适？'},
-  {emoji:'🦴',name:'肩颈僵硬',body:'肩膀·颈部',desc:'肩膀扛着全世界的重量？<br>身体的压力最先储存在肩颈——它像一个气压计。',q:'最近肩膀或脖子特别僵硬吗？'},
-  {emoji:'😮‍💨',name:'呼吸变浅',body:'胸腔·横膈膜',desc:'注意你的呼吸——是不是不知不觉变浅了？<br>浅呼吸是身体进入'警戒模式'的第一个信号。',q:'你注意到自己的呼吸变浅了吗？'},
-  {emoji:'😴',name:'不明疲倦',body:'全身·能量',desc:'不是没睡好，是一种'重'。<br>决策疲劳在身体上表现为无法解释的疲惫。',q:'最近有没有莫名特别累的时候？'},
-  {emoji:'🤯',name:'头脑空白',body:'大脑·前额叶',desc:'压力之下，前额叶皮层会暂时'离线'。<br>这就是为什么你会在关键时刻'脑子一片空白'。',q:'做决定时，脑子有没有卡住过？'},
-  {emoji:'👂',name:'耳鸣或听力变化',body:'耳朵·听觉',desc:'压力会让听觉系统变得敏感。<br>有些人在高压决策前会听到嗡嗡声或耳朵堵塞。',q:'耳鸣或听力有变化吗？'},
-  {emoji:'🦵',name:'腿部躁动',body:'双腿·脚',desc:'不自觉抖腿？脚趾蜷缩？<br>腿是身体的'逃跑引擎'，它知道什么时候想跑。',q:'坐着的时候，腿会不自觉动吗？'},
-  {emoji:'💧',name:'口干或喉咙紧',body:'口腔·喉咙',desc:''话卡在嗓子眼'——喉咙紧张是身体在说'我需要表达但不敢'。',q:'说话前有没有喉咙发紧的感觉？'},
-  {emoji:'❄️',name:'手脚冰凉',body:'手脚末端',desc:'压力让血液回流到核心器官，四肢先冷。<br>这是身体在'节能模式'下的自我保护。',q:'手脚经常冰凉吗？'}
+var SIGNALS = [
+  {emoji:'🦷', name:'咬牙/紧咬', desc:'睡觉或专注时无意识咬紧'},
+  {emoji:'💓', name:'心跳加速', desc:'没有运动但心跳明显加快'},
+  {emoji:'💧', name:'手心出汗', desc:'紧张或安静时手心湿润'},
+  {emoji:'🤢', name:'胃紧/不适', desc:'胃部拧紧感或食欲变化'},
+  {emoji:'🫁', name:'肩颈酸痛', desc:'肩膀不自觉耸起·脖子僵硬'},
+  {emoji:'😤', name:'呼吸浅短', desc:'容易喘或感觉呼吸不深'},
+  {emoji:'😴', name:'异常疲劳', desc:'睡了还是累·醒不过来'},
+  {emoji:'🧠', name:'头脑空白', desc:'突然想不起要说什么'},
+  {emoji:'👂', name:'耳鸣', desc:'安静时有嗡嗡声'},
+  {emoji:'🦵', name:'腿不自主动', desc:'抖腿·脚趾扣地'},
+  {emoji:'👄', name:'口干', desc:'经常觉得口干想喝水'},
+  {emoji:'🥶', name:'手冷/脚冷', desc:'手脚冰凉但身体不冷'}
 ];
 
-var current = 0;
-var activeSignals = [];
+var SIG_KEY = '***';
+var checked = {};
 
-function renderCard() {
-  if(current >= signals.length) {
-    showResult();
-    return;
-  }
-  var s = signals[current];
-  document.getElementById('signalEmoji').textContent = s.emoji;
-  document.getElementById('signalName').textContent = s.name;
-  document.getElementById('signalBody').textContent = s.body;
-  document.getElementById('signalDesc').innerHTML = s.desc;
-  document.getElementById('signalQuestion').textContent = s.q;
-  document.getElementById('progressText').textContent = (current+1)+'/'+signals.length;
-  document.getElementById('progressFill').style.width = ((current+1)/signals.length*100)+'%';
+function loadSignals(){try{checked=JSON.parse(localStorage.getItem(SIG_KEY))||{};}catch(e){}}
+
+function renderSignals(){
+  var html = '';
+  SIGNALS.forEach(function(s,i){
+    var isChecked = !!checked[i];
+    html += '<div class="signal-card'+(isChecked?' checked':'')+'" onclick="toggleSignal('+i+')">';
+    html += '<div class="s-emoji">'+s.emoji+'</div>';
+    html += '<div class="s-name">'+s.name+'</div>';
+    html += '<div class="s-desc">'+s.desc+'</div>';
+    html += '</div>';
+  });
+  document.getElementById('signalGrid').innerHTML = html;
+  updateStats();
 }
 
-function answer(yes) {
-  if(yes) activeSignals.push(signals[current]);
-  current++;
-  renderCard();
+function toggleSignal(i){
+  checked[i] = !checked[i];
+  localStorage.setItem(SIG_KEY, JSON.stringify(checked));
+  renderSignals();
 }
 
-function showResult() {
-  document.getElementById('cardArea').classList.add('hidden');
-  document.getElementById('resultArea').classList.remove('hidden');
-  
-  var count = activeSignals.length;
-  var icon, title, body;
-  
-  if(count === 0) {
-    icon = '🌟'; title = '身体信号：平静';
-    body = '你当前的身体状态非常好。<strong>没有检测到明显的压力信号。</strong><br>这是一个做重要决定的好时机——身体给了你绿灯。';
-  } else if(count <= 3) {
-    icon = '🌤️'; title = '身体信号：轻度';
-    body = '你的身体发出了<strong>'+count+'个轻微信号</strong>。<br>这些信号提醒你：在重要决定前，花5分钟做一次身体扫描。';
-  } else if(count <= 6) {
-    icon = '🌧️'; title = '身体信号：中度';
-    body = '你的身体发出了<strong>'+count+'个明确的压力信号</strong>。<br>这些信号不是障碍——是导航。它们告诉你在哪些方面需要额外关注。';
-  } else {
-    icon = '⛈️'; title = '身体信号：高度';
-    body = '你的身体发出了<strong>'+count+'个强烈的预警信号</strong>。<br>你的身体正在大声说话。在做重大决策前，强烈建议先做PRE-0身体觉察。';
-  }
-  
-  document.getElementById('resultIcon').textContent = icon;
-  document.getElementById('resultTitle').textContent = title;
-  document.getElementById('resultBody').innerHTML = body;
-  
-  var tags = '';
-  for(var i=0;i<activeSignals.length;i++) {
-    tags += '<span class="signal-tag tag-active">'+activeSignals[i].emoji+' '+activeSignals[i].name+'</span>';
-  }
-  for(var i=0;i<signals.length;i++) {
-    if(activeSignals.indexOf(signals[i])<0) {
-      tags += '<span class="signal-tag tag-calm">'+signals[i].emoji+' '+signals[i].name+'</span>';
-    }
-  }
-  document.getElementById('signalsList').innerHTML = tags;
+function updateStats(){
+  var count = Object.values(checked).filter(Boolean).length;
+  document.getElementById('signalCount').textContent = count + '/12';
+
+  var level = '';
+  var box = document.getElementById('severityBox');
+  if(count === 0){level = '--'; box.classList.remove('show');}
+  else if(count <= 3){level = '🟢 轻度'; box.innerHTML = '你的身体在轻声说话。注意到就好了——不用急着做什么。'; box.classList.add('show');}
+  else if(count <= 6){level = '🟡 中度'; box.innerHTML = '身体已经在提高音量了。考虑：今天能不能少做一件事？'; box.classList.add('show');}
+  else if(count <= 9){level = '🟠 显著'; box.innerHTML = '身体的警报在响。建议：做一次Pre-0身体觉察，或者约个靠谱的人聊聊。'; box.classList.add('show');}
+  else {level = '🔴 严重'; box.innerHTML = '你的身体在大声呼救。先停下来——身体不会说谎。去看看<a href="pre0.html" style="color:var(--sri-red);font-weight:600">Pre-0身体觉察 →</a>'; box.classList.add('show');}
+  document.getElementById('severityLevel').textContent = level;
 }
 
-function restart() {
-  current = 0;
-  activeSignals = [];
-  document.getElementById('cardArea').classList.remove('hidden');
-  document.getElementById('resultArea').classList.add('hidden');
-  renderCard();
+function resetSignals(){
+  if(!confirm('清空所有信号记录？')) return;
+  checked = {};
+  localStorage.removeItem(SIG_KEY);
+  renderSignals();
 }
 
-renderCard();
+loadSignals();
+renderSignals();
+
+// feedback
+(function(){
+  let page=location.pathname.split('/').pop()||'index';
+  let key='sri_fb_'+page;
+  let data=JSON.parse(localStorage.getItem(key)||'{}');
+  if(data.sent){document.getElementById('fbQuestion').textContent='感谢你的反馈！';document.getElementById('fbActions').style.display='none';}
+  let tally=JSON.parse(localStorage.getItem('sri_fb_tally_'+page)||'{"up":0,"text":0}');
+  if(tally.up+tally.text>0) document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  window.submitFeedback=function(type){
+    tally[type]=(tally[type]||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type=type;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbQuestion').textContent='感谢你的反馈！';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+  window.showFeedbackText=function(){
+    document.getElementById('fbText').style.display='block';
+    document.getElementById('fbSubmit').style.display='inline-block';
+  };
+  window.submitFeedbackText=function(){
+    let text=document.getElementById('fbText').value.trim();
+    if(!text)return;
+    tally.text=(tally.text||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type='text';data.text=text;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbText').style.display='none';
+    document.getElementById('fbSubmit').style.display='none';
+    document.getElementById('fbQuestion').textContent='收到！感谢你的建议。';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+})();
 </script>
+
+<div style="text-align:center;padding:8px 0;font-size:10px;opacity:0.25;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</div>
 </body>
 </html>

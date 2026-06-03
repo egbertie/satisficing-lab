@@ -3,55 +3,80 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>章·蓝军 | 蓝军搭建手册 | 满意解研究所</title>
+<title>章·蓝军|蓝军搭建向导|满意解研究所</title>
 <style>
-  :root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title:#2A2A2A;--border:#D4C5A0}
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
-  .hero{background:linear-gradient(135deg,var(--title),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
-  .hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
-  .article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}
-  .article h2{font-size:18px;color:var(--title);margin:24px 0 10px}
-  .article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}
-  .article p{margin:8px 0}
-  .article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}
-  .article .highlight{color:var(--sri-red);font-weight:600}
-  .article ul{padding-left:20px}
-  .article li{margin:6px 0;font-size:14px}
-  .footer{text-align:center;padding:24px 16px 40px;font-size:11px;color:#999}
-  .footer a{color:var(--sri-red);text-decoration:none}
+:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0;--sri-green:#4A8C5C}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
+.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
+.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
+
+.wizard-zone{max-width:560px;margin:0 auto;padding:24px 16px 40px}
+.wizard-intro{text-align:center;font-size:14px;line-height:2;margin-bottom:24px}
+.wizard-intro em{color:var(--sri-red);font-style:normal;font-weight:600}
+
+/* 步骤导航 */
+.step-dots{display:flex;justify-content:center;gap:8px;margin-bottom:24px}
+.step-dot{width:32px;height:32px;border-radius:50%;border:2px solid #f0e8d8;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#ccc;transition:all 0.3s}
+.step-dot.done{background:var(--sri-gold);border-color:var(--sri-gold);color:#fff}
+.step-dot.current{background:var(--sri-red);border-color:var(--sri-red);color:#fff;transform:scale(1.15)}
+
+/* 步骤卡片 */
+.step-card{background:#fff;border-radius:16px;padding:28px 24px;box-shadow:0 2px 8px rgba(0,0,0,0.04);margin-bottom:16px;display:none;animation:fadeIn 0.4s}
+.step-card.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.step-card .step-num{font-size:12px;color:var(--sri-gold);font-weight:600;letter-spacing:1px;margin-bottom:8px}
+.step-card .step-title{font-size:17px;color:var(--title-color);font-weight:700;margin-bottom:16px;line-height:1.5}
+.step-card .step-body{font-size:14px;line-height:2;color:var(--text)}
+.step-card .step-body .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0;line-height:1.8}
+.step-card .step-body strong{color:var(--sri-red)}
+.step-card .step-body ul{padding-left:20px}
+.step-card .step-body li{margin:6px 0}
+
+.step-card textarea{width:100%;height:64px;border:1.5px solid var(--border);border-radius:10px;padding:10px;font-size:13px;font-family:inherit;resize:vertical;line-height:1.6;margin-top:8px}
+.step-card .btn-save{padding:6px 18px;border-radius:16px;border:1.5px solid var(--sri-gold);background:#fff;color:var(--sri-gold);font-size:12px;cursor:pointer;margin-top:8px;font-family:inherit;transition:all 0.2s}
+.step-card .btn-save:hover{background:var(--sri-gold);color:#fff}
+
+.nav-row{display:flex;justify-content:space-between;margin-top:24px}
+.btn-nav{padding:10px 24px;border-radius:20px;border:1.5px solid var(--border);background:#fff;color:var(--text);font-size:14px;cursor:pointer;font-family:inherit;transition:all 0.2s}
+.btn-nav:hover{border-color:var(--sri-gold)}
+.btn-nav.primary{background:var(--title-color);color:#fff;border:none}
+.btn-nav.primary:hover{background:var(--sri-gold)}
+
+.checklist{display:none;margin-top:20px;padding:16px;background:rgba(74,140,92,0.06);border-radius:12px;font-size:13px;line-height:2;animation:fadeIn 0.4s}
+.checklist.show{display:block}
+.checklist .cl-item{padding:4px 0;display:flex;align-items:center;gap:8px}
+.checklist .cl-item .cb{font-size:16px}
+
+.back-link{text-align:center;padding:20px;font-size:11px;color:#999}
+.back-link a{color:var(--sri-red);text-decoration:none}
+.feedback-zone{max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px}
+@media(max-width:480px){body{font-size:14px}}
 </style>
-<link rel="stylesheet" href="vi_quick_ref.css">
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
 <body>
-<div class="hero"><h1>🛡️ 章·蓝军</h1><p>如何构建独立蓝军AI · 免疫系统搭建手册</p></div>
-<div class="article"><h2>为什么需要独立蓝军？</h2>
-<p>满意姐说："蓝军不是来挑错的——是来照镜子的。"</p>
-<p>满意解研究所说："蓝军的核心价值是<span class="highlight">独立批判视角</span>——不能被合并到同一session内。"</p>
-<p>一个独立的蓝军AI能够：不看你的面子，不看你的数据，<span class="highlight">只看你的逻辑</span>。</p>
+<div class="hero"><h1>🛡️ 章·蓝军</h1><p>蓝军搭建向导 · 五步建立你的免疫系统</p></div>
 
-<h2>搭建五步</h2>
-<h3>第一步：独立Session</h3>
-<p>蓝军必须是独立的session——独立的context window，独立的人格定义。不和主AI共享记忆——这样才能保证批判的独立性。</p>
+<div class="wizard-zone">
+  <div class="wizard-intro">
+    <p>蓝军不是来挑错的——是来<em>照镜子的</em>。<br>按五步搭建，每一步走完再走下一步。</p>
+  </div>
 
-<h3>第二步：批判性人格定义</h3>
-<p>Skeptor-7的核心人格：<span class="highlight">"我的工作是找出你逻辑中的漏洞。不是为了否定你——是让决策经过压力测试。"</span></p>
+  <div class="step-dots" id="stepDots"></div>
+  <div id="stepContainer"></div>
 
-<h3>第三步：审计维度</h3>
-<p>数字敏感度·假设压力测试·反事实推演·DUKE CUDOS审计</p>
+  <div class="checklist" id="checklist">
+    <h4 style="font-size:14px;color:var(--title-color);margin-bottom:8px">✅ 你的蓝军搭建清单</h4>
+    <div id="clItems"></div>
+  </div>
+</div>
 
-<h3>第四步：触发机制</h3>
-<p>自动哨兵触发：涉及外部承诺的建议、带数字的预测、第三层以上推断。</p>
+<div class="back-link"><a href="go.html">← 返回决策通道</a></div>
 
-<h3>第五步：日毕课审计</h3>
-<p>每日日毕课结束后，蓝军自动触发对当天关键产出的快速审计。</p>
-
-<div class="quote">蓝军会让你发烧、让你不舒服<br>但发烧是你的身体在杀死病毒<br>—— Skeptor-7</div></div>
-<div class="footer"><p><a href="go.html">← 返回决策通道</a></p><p style="margin-top:4px">满意解研究所 · 章·蓝军 · 满意姐+蓝军Skeptor-7</p></div>
-
-<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
+<div class="feedback-zone">
   <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
     <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
@@ -59,11 +84,107 @@
   </div>
   <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
   <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
-  <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
+  <div id="fbThanks" style="display:none;color:var(--sri-green);font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
   <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
-  <p style="font-size:10px;opacity:0.4;margin-top:8px;"><a href="go.html" style="color:inherit;">返回决策通道</a></p>
 </div>
+
 <script>
+var STEPS = [
+  {icon:'🔒', title:'第一步：独立Session', body:'蓝军必须是<strong>独立的session</strong>——独立的context window，独立的人格定义。不和主AI共享记忆——这样才能保证批判的独立性。<br><br><em>为什么必须独立？</em>同一个session里的AI会受到已有上下文的影响——你让它挑错，它看到的是你让它看到的东西。独立的蓝军看到的是<strong>你没让它看到的东西</strong>。<div class="quote">"我的工作是找出你逻辑中的漏洞。不是为了否定你——是让决策经过压力测试。"<br>—— Skeptor-7</div>'},
+  {icon:'🎭', title:'第二步：批判性人格定义', body:'蓝军的人格不是"温和的建议者"——是<strong>不妥协的质疑者</strong>。<br><br>核心人格要素：<br><ul><li>不看重你的面子，只看你的逻辑</li><li>对数字敏感——任何带数字的推断都要追溯来源</li><li>假设压力测试——"如果这个假设不成立呢？"</li><li>反事实推演——"如果走了另一条路会怎样？"</li></ul>'},
+  {icon:'🔍', title:'第三步：审计维度', body:'蓝军需要明确的<strong>审计检查表</strong>——不是"帮忙看看"这种模糊请求。<br><br>五个审计维度：<br><ul><li><strong>数字敏感度</strong>：这个数字从哪里来的？置信度多少？</li><li><strong>假设测试</strong>：如果最核心的假设错了——结论还成立吗？</li><li><strong>反事实</strong>：选了A——有没有认真想过不选A会怎样？</li><li><strong>DUKE CUDOS</strong>：决策是否经过足够的讨论(Communalism)、是否有普遍性(Universalism)、是否无私利(Disinterestedness)、是否有组织性怀疑(Organized Skepticism)</li><li><strong>情绪检查</strong>：这个决定是思考做的——还是恐惧/焦虑做的？</li></ul>'},
+  {icon:'⚡', title:'第四步：触发机制', body:'蓝军不是24小时在线——是<strong>特定信号的自动哨兵</strong>。<br><br>何时触发蓝军审计：<br><ul><li>任何涉及<strong>外部承诺</strong>的建议（发给客户、合作伙伴、公开发布）</li><li>任何带<strong>具体数字的预测</strong>（"下个月增长30%"）</li><li>任何<strong>第三层以上推断</strong>（从A推到B推到C→到C时触发）</li><li>每日日毕课结束后——对当天关键产出做快速扫描</li></ul><div class="quote">蓝军会让你发烧、让你不舒服<br>但发烧是你的身体在杀死病毒<br>—— Skeptor-7</div>'},
+  {icon:'📋', title:'第五步：你的蓝军宪章', body:'最后一步——写下你的蓝军工作规则。<br><br>蓝军最怕的不是太严厉——是<strong>被绕过</strong>。所以你需要一个宪章。'}
+];
+
+var STORAGE_KEY = 'sri_bluea…izard';
+var currentStep = 0;
+
+function loadState(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{};}catch(e){return{};}}
+function saveState(s){localStorage.setItem(STORAGE_KEY,JSON.stringify(s));}
+
+function renderSteps(){
+  var dots = document.getElementById('stepDots');
+  var html = '';
+  for(var i=0;i<STEPS.length;i++){
+    var cls = i<currentStep?'done':i===currentStep?'current':'';
+    html += '<div class="step-dot '+cls+'">'+STEPS[i].icon+'</div>';
+  }
+  dots.innerHTML = html;
+
+  var container = document.getElementById('stepContainer');
+  html = '';
+  STEPS.forEach(function(s,i){
+    var active = i===currentStep?' active':'';
+    html += '<div class="step-card'+active+'" id="sc-'+i+'">';
+    html += '<div class="step-num">步骤 '+(i+1)+'/'+STEPS.length+'</div>';
+    html += '<div class="step-title">'+s.icon+' '+s.title+'</div>';
+    html += '<div class="step-body">'+s.body+'</div>';
+
+    if(i===4){
+      html += '<textarea id="charterText" placeholder="写下你的蓝军宪章——例：每次我向外部发送决策建议前，蓝军必须审计。不审计不可发送。">'+escHtml(loadState().charter||'')+'</textarea>';
+      html += '<button class="btn-save" onclick="saveCharter()">💾 保存宪章</button>';
+    }
+
+    html += '<div class="nav-row">';
+    if(i>0) html += '<button class="btn-nav" onclick="goStep('+(i-1)+')">← 上一步</button>';
+    else html += '<div></div>';
+    if(i<STEPS.length-1) html += '<button class="btn-nav primary" onclick="goStep('+(i+1)+')">下一步 →</button>';
+    else html += '<button class="btn-nav primary" onclick="finishWizard()">✅ 完成搭建</button>';
+    html += '</div></div>';
+  });
+  container.innerHTML = html;
+
+  updateChecklist();
+}
+
+function goStep(n){
+  currentStep = Math.max(0, Math.min(STEPS.length-1, n));
+  renderSteps();
+  document.getElementById('sc-'+currentStep).scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function saveCharter(){
+  var text = document.getElementById('charterText').value.trim();
+  var st = loadState();
+  st.charter = text;
+  saveState(st);
+  updateChecklist();
+  alert('✅ 蓝军宪章已保存');
+}
+
+function finishWizard(){
+  currentStep = STEPS.length;
+  renderSteps();
+  document.getElementById('checklist').classList.add('show');
+  document.getElementById('checklist').scrollIntoView({behavior:'smooth'});
+}
+
+function updateChecklist(){
+  var st = loadState();
+  var items = [
+    {done: currentStep>=0, label:'理解蓝军为什么必须独立Session'},
+    {done: currentStep>=1, label:'定义了蓝军的批判性人格'},
+    {done: currentStep>=2, label:'明确了五大审计维度'},
+    {done: currentStep>=3, label:'设定了蓝军触发机制'},
+    {done: !!st.charter, label:'写下了蓝军宪章'}
+  ];
+  var html = '';
+  items.forEach(function(it){
+    html += '<div class="cl-item"><span class="cb">'+(it.done?'✅':'⬜')+'</span>'+it.label+'</div>';
+  });
+  document.getElementById('clItems').innerHTML = html;
+  if(currentStep>=STEPS.length || loadState().charter){
+    document.getElementById('checklist').classList.add('show');
+  }
+}
+
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+renderSteps();
+updateChecklist();
+
+// ===== 反馈组件 =====
 (function(){
   let page=location.pathname.split('/').pop()||'index';
   let key='sri_fb_'+page;
@@ -100,5 +221,6 @@
 })();
 </script>
 
+<div style="text-align:center;padding:8px 0;font-size:10px;opacity:0.25;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</div>
 </body>
 </html>

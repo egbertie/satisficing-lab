@@ -45,13 +45,13 @@ body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;backgroun
 .customer-card .cust-meta{font-size:11px;color:var(--sri-dark);opacity:0.65;margin-top:6px}
 
 .footer{text-align:center;padding:32px 16px;font-size:11px;color:var(--sri-dark);opacity:0.4}
+@media(max-width:480px){body{font-size:14px}}
 </style>
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
 <body>
-<a href="go.html" style="display:inline-block;padding:6px 14px;margin:8px 0 0 12px;font-size:12px;color:#C23B22;text-decoration:none;border:1px solid #C23B22;border-radius:6px">← 返回决策通道</a>
-
 
 <div class="header">
 <h1>🎭 数字替身</h1>
@@ -302,5 +302,17 @@ body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;backgroun
 契·晋 · 红莲淬火 · 凌晨一点的创始人是全部的理由
 </div>
 
+<p style="text-align:center;font-size:10px;opacity:0.35;padding:4px;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</p>
+
+<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px">
+  <div id="fbQ" style="color:#4A4A4A;font-weight:600;margin-bottom:10px">这个页面对你有用吗？</div>
+  <div id="fbBtns" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px">
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'up');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">👍 有用</button>
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'text');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">💬 有建议</button>
+  </div>
+</div>
+
+
+<p style="text-align:center;padding:10px;font-size:11px"><a href="go.html" style="color:#C23B22;text-decoration:none">← 返回决策通道</a></p>
 </body>
 </html>

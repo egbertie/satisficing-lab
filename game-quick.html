@@ -5,48 +5,268 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>觉·快反|0.3秒觉察快反卡|满意解研究所</title>
 <style>
-  :root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0}
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
-  .hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
-  .hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
-  .article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}
-  .article h2{font-size:18px;color:var(--title-color);margin:24px 0 10px}
-  .article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}
-  .article p{margin:8px 0}
-  .article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}
-  .article .highlight{color:var(--sri-red);font-weight:600}
-  .article ul{padding-left:20px}
-  .article li{margin:6px 0;font-size:14px}
+:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0;--sri-green:#4A8C5C;--sri-water:#3A6B8C}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
+.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
+.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
+.article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}
+.article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}
+
+/* ── 训练区 ── */
+.train-zone{max-width:500px;margin:0 auto;padding:20px 16px 32px;text-align:center}
+.speed-control{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px;font-size:13px}
+.speed-control input[type=range]{width:120px;accent-color:var(--sri-red)}
+.speed-label{font-weight:600;color:var(--sri-red)}
+
+.flash-stage{position:relative;height:200px;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.flash-word{font-size:64px;font-weight:900;color:var(--sri-red);opacity:0;transition:opacity 0s;user-select:none;pointer-events:none}
+.flash-word.reveal{opacity:1}
+.flash-word.hidden{opacity:0}
+
+.flash-placeholder{font-size:15px;color:#999}
+
+/* 按钮 */
+.btn-primary{padding:12px 36px;border-radius:24px;border:none;background:var(--title-color);color:#fff;font-size:16px;font-weight:600;cursor:pointer;font-family:inherit;transition:background 0.2s,transform 0.15s}
+.btn-primary:hover{background:var(--sri-gold)}
+.btn-primary:active{transform:scale(0.97)}
+.btn-primary:disabled{background:#ccc;cursor:not-allowed}
+
+/* 答题区 */
+.answer-zone{display:none;margin-top:16px;text-align:left;animation:fadeIn 0.4s}
+.answer-zone.show{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.answer-zone label{font-size:14px;font-weight:600;color:var(--title-color)}
+.answer-zone textarea{width:100%;height:72px;border:1.5px solid var(--border);border-radius:10px;padding:12px;font-size:14px;font-family:inherit;background:#fff;resize:vertical;line-height:1.7;margin:8px 0}
+.answer-zone textarea::placeholder{color:#bbb}
+.answer-zone .reveal-card{margin-top:12px;padding:16px;background:#fff;border-radius:12px;border:1.5px solid var(--sri-gold);text-align:center}
+.answer-zone .reveal-card .reveal-word{font-size:24px;font-weight:700;color:var(--sri-red)}
+.answer-zone .reveal-card .reveal-q{font-size:14px;color:var(--text);margin-top:8px;line-height:1.7}
+.answer-zone .btn-done{padding:8px 24px;border-radius:20px;border:1.5px solid var(--sri-gold);background:#fff;color:var(--sri-gold);font-size:13px;cursor:pointer;font-family:inherit;margin-top:8px}
+.answer-zone .btn-done:hover{background:var(--sri-gold);color:#fff}
+
+/* 统计 */
+.stats-zone{max-width:440px;margin:0 auto;padding:16px;text-align:center;font-size:13px;color:#999}
+.stats-zone .stat-row{display:flex;justify-content:center;gap:24px;margin-bottom:8px}
+.stats-zone .stat-item{text-align:center}
+.stats-zone .stat-num{font-size:22px;font-weight:700;color:var(--title-color)}
+.stats-zone .stat-label{font-size:11px;color:#999}
+.history-list{list-style:none;text-align:left;max-height:240px;overflow-y:auto;margin-top:12px}
+.history-list li{padding:8px 12px;margin:4px 0;background:#fff;border-radius:8px;font-size:12px;display:flex;align-items:center;gap:8px;border:1px solid #f0e8d8}
+.history-list li .hw{font-weight:700;color:var(--sri-red);font-size:16px;white-space:nowrap}
+.history-list li .hr{flex:1;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.history-list li .ht{font-size:10px;color:#ccc;white-space:nowrap}
+.clear-link{font-size:11px;color:#999;cursor:pointer;text-decoration:underline;margin-top:8px;display:inline-block}
+
+.feedback-zone{max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px}
+.back-link{text-align:center;padding:20px;font-size:11px;color:#999}
+.back-link a{color:var(--sri-red);text-decoration:none}
+@media(max-width:480px){body{font-size:14px}}
 </style>
-<link rel="stylesheet" href="vi_quick_ref.css">
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
 <body>
 <div class="hero"><h1>🎮 觉·快反</h1><p>游戏工厂·0.3秒觉察·快反卡</p></div>
-<div class="article"><h2>0.3秒觉察·快反卡</h2><p>在决策的<span class="highlight">0.3秒</span>——你的身体已经投了票。快反卡让你在那一瞬间捕捉自己的真实反应。</p>
-<h3>设计逻辑</h3><p>Damasio的躯体标记理论：身体在理性判断之前就已经产生了"好/坏"的信号。快反卡强迫你在0.3秒内做出选择——绕过理性防御，直达身体直觉。</p>
-<h3>使用场景</h3><ul><li>重大决策前——先做快反，再做分析</li><li>合伙人讨论中——各自快反，对比分歧</li><li>每日自检——今天的直觉在说什么</li></ul>
-<div class="quote">0.3秒——身体比你诚实<br>游戏工厂V2.0·满意姐</div></div>
-
-<div style="text-align:center;padding:24px 16px 40px;font-size:11px;color:#999;">
-  <p><a href="go.html" style="color:#C23B22;text-decoration:none;">← 返回决策通道</a></p>
-  <p style="margin-top:4px;">满意解研究所 · 硬科技创始人的决策教练</p>
+<div class="article">
+  <p style="text-align:center">在决策的一瞬间——你的身体已经投了票。<br><span style="color:var(--sri-red);font-weight:600">快反卡让你绕过理性防御，直达身体直觉。</span></p>
+  <div class="quote">0.3秒——身体比你诚实<br>Damasio躯体标记·游戏工厂V2.0</div>
 </div>
 
-<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
-  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个内容对你有用吗？</div>
+<div class="train-zone">
+  <div class="speed-control">
+    <span>速度：</span><input type="range" id="speedSlider" min="1" max="10" value="3" oninput="updateSpeed()">
+    <span class="speed-label" id="speedLabel">0.3秒</span>
+  </div>
+
+  <div class="flash-stage">
+    <div class="flash-word" id="flashWord">信任</div>
+    <div class="flash-placeholder" id="flashPlaceholder">👆 点击下方按钮开始</div>
+  </div>
+
+  <button class="btn-primary" id="startBtn" onclick="startFlash()">⚡ 闪现</button>
+
+  <div class="answer-zone" id="answerZone">
+    <label>你看到了什么？感受到了什么？</label>
+    <textarea id="answerText" placeholder="写下你的第一反应..."></textarea>
+    <div class="reveal-card" id="revealCard" style="display:none">
+      <div style="font-size:12px;color:#999;margin-bottom:4px">▼ 揭晓</div>
+      <div class="reveal-word" id="revealWord"></div>
+      <div class="reveal-q" id="revealQ"></div>
+    </div>
+    <button class="btn-done" id="doneBtn" onclick="submitAnswer()" style="display:none">✓ 记录这一轮</button>
+  </div>
+</div>
+
+<div class="stats-zone" id="statsZone">
+  <div class="stat-row">
+    <div class="stat-item"><div class="stat-num" id="statTotal">0</div><div class="stat-label">总轮次</div></div>
+    <div class="stat-item"><div class="stat-num" id="statFastest">--</div><div class="stat-label">最快反应</div></div>
+    <div class="stat-item"><div class="stat-num" id="statAvoid">--</div><div class="stat-label">最常回避词</div></div>
+  </div>
+  <div class="history-list" id="historyList"></div>
+  <div class="clear-link" onclick="clearHistory()">清空记录</div>
+</div>
+
+<div class="back-link"><a href="go.html">← 返回决策通道</a></div>
+
+<div class="feedback-zone">
+  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
     <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
     <button onclick="showFeedbackText()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">💬</span>有建议</button>
   </div>
   <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
   <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
-  <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
+  <div id="fbThanks" style="display:none;color:var(--sri-green);font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
   <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
 </div>
+
 <script>
+// ========== 18张快反卡 ==========
+const CARDS = [
+  {w:'信任', q:'信任在你的关系里——是第几个想起来的词？'},
+  {w:'背叛', q:'你经历过的最小的背叛是什么？'},
+  {w:'底线', q:'你的底线——是写下来的，还是心里的？'},
+  {w:'放手', q:'最让你难放手的是什么？'},
+  {w:'等待', q:'你在等什么？值得等吗？'},
+  {w:'冒险', q:'上一次冒险——你后悔了吗？'},
+  {w:'坦白', q:'你欠谁一句坦白？'},
+  {w:'沉默', q:'你的沉默里藏着什么？'},
+  {w:'坚持', q:'最该放手却还在坚持的——是什么？'},
+  {w:'妥协', q:'你妥协过的最大的事——现在怎么看？'},
+  {w:'公平', q:'你觉得目前最不公平的是什么？'},
+  {w:'责任', q:'你扛着的责任——哪些其实不该你扛？'},
+  {w:'自由', q:'你现在自由吗？什么在绑着你？'},
+  {w:'安全', q:'你最有安全感的是什么？最缺安全感的是什么？'},
+  {w:'改变', q:'你最近一次主动改变——是为了什么？'},
+  {w:'承诺', q:'你许过的最难的承诺——兑现了吗？'},
+  {w:'失去', q:'最怕失去什么？'},
+  {w:'收获', q:'最近最大的收获——你庆祝了吗？'}
+];
+
+var speedMs = 300;
+var currentWord = '';
+var currentIdx = -1;
+var flashTimer = null;
+var started = false;
+
+function updateSpeed(){
+  var v = parseInt(document.getElementById('speedSlider').value);
+  var speeds = [50,100,200,300,400,500,600,800,1000,1500];
+  speedMs = speeds[v-1];
+  document.getElementById('speedLabel').textContent = (speedMs/1000).toFixed(1)+'秒';
+}
+
+function startFlash(){
+  if(started) return;
+  started = true;
+
+  // 随机抽卡
+  currentIdx = Math.floor(Math.random() * CARDS.length);
+  currentWord = CARDS[currentIdx].w;
+
+  var el = document.getElementById('flashWord');
+  el.textContent = currentWord;
+  el.classList.add('reveal');
+
+  document.getElementById('flashPlaceholder').style.display = 'none';
+  document.getElementById('startBtn').disabled = true;
+  document.getElementById('answerZone').classList.remove('show');
+  document.getElementById('doneBtn').style.display = 'none';
+  document.getElementById('revealCard').style.display = 'none';
+  document.getElementById('answerText').value = '';
+
+  // 定时消失
+  flashTimer = setTimeout(function(){
+    el.classList.remove('reveal');
+    el.classList.add('hidden');
+    document.getElementById('startBtn').textContent = '再来一次 ⚡';
+    document.getElementById('startBtn').disabled = false;
+    started = false;
+
+    // 显示答题区
+    document.getElementById('answerZone').classList.add('show');
+    document.getElementById('answerText').focus();
+    // 揭晓
+    document.getElementById('revealWord').textContent = currentWord;
+    document.getElementById('revealQ').textContent = CARDS[currentIdx].q;
+    document.getElementById('revealCard').style.display = 'block';
+    document.getElementById('doneBtn').style.display = 'inline-block';
+  }, speedMs);
+}
+
+function submitAnswer(){
+  var text = document.getElementById('answerText').value.trim();
+  var history = loadHistory();
+  history.push({
+    word: currentWord,
+    answer: text || '(空白)',
+    time: new Date().toISOString(),
+    speed: speedMs
+  });
+  saveHistory(history);
+  renderHistory();
+  document.getElementById('answerZone').classList.remove('show');
+  document.getElementById('startBtn').textContent = '⚡ 闪现下一个词';
+  document.getElementById('flashWord').classList.remove('hidden');
+  document.getElementById('flashPlaceholder').style.display = 'block';
+}
+
+// ===== 历史 =====
+var STORAGE_KEY = 'sri_quick_hist';
+
+function loadHistory(){
+  try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||[];}catch(e){return [];}
+}
+function saveHistory(h){localStorage.setItem(STORAGE_KEY,JSON.stringify(h));}
+
+function renderHistory(){
+  var h = loadHistory();
+  document.getElementById('statTotal').textContent = h.length;
+
+  // 最快反应词
+  if(h.length>0){
+    var fastest = h.reduce(function(a,b){return a.speed<b.speed?a:b;});
+    document.getElementById('statFastest').textContent = fastest.word;
+
+    // 最常回避（出现次数最多的词）
+    var count = {};
+    h.forEach(function(r){count[r.word]=(count[r.word]||0)+1;});
+    var maxW='',maxC=0;
+    for(var w in count){if(count[w]>maxC){maxC=count[w];maxW=w;}}
+    document.getElementById('statAvoid').textContent = maxW;
+  }
+
+  var list = document.getElementById('historyList');
+  var html = '';
+  h.slice().reverse().forEach(function(r){
+    var d = new Date(r.time);
+    var ts = (d.getMonth()+1)+'/'+d.getDate()+' '+
+             String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+    html += '<li><span class="hw">'+escHtml(r.word)+'</span> <span class="hr">'+escHtml(r.answer)+'</span> <span class="ht">'+ts+'</span></li>';
+  });
+  list.innerHTML = html || '<div style="text-align:center;color:#ccc;padding:12px;">还没有记录</div>';
+}
+
+function clearHistory(){
+  if(!confirm('确定清空所有训练记录？')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  renderHistory();
+  document.getElementById('statTotal').textContent='0';
+  document.getElementById('statFastest').textContent='--';
+  document.getElementById('statAvoid').textContent='--';
+}
+
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+// init
+document.getElementById('flashWord').classList.add('hidden');
+updateSpeed();
+renderHistory();
+
+// ===== 反馈组件（完整保留） =====
 (function(){
   let page=location.pathname.split('/').pop()||'index';
   let key='sri_fb_'+page;
@@ -83,6 +303,6 @@
 })();
 </script>
 
+<div style="text-align:center;padding:8px 0;font-size:10px;opacity:0.25;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</div>
 </body>
-
 </html>

@@ -2,267 +2,201 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="双人密室逃脱式决策体验——和你的合伙人一起，在沉浸式场景中面对真实决策困境。满意解研究所出品。">
-<title>合伙人密室 · 满意解研究所</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>觉·密室|合伙人密室|满意解研究所</title>
 <style>
-:root{--red:#C23B22;--gold:#B8860B;--bg:#FAF7F2;--white:#fff;--text:#2D2D2D;--text2:#5C5C5C;--border:#E8E0D5;--green:#3D7A4F}
+:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0;--sri-green:#4A8C5C}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
-.header{text-align:center;padding:44px 20px 20px;background:linear-gradient(180deg,var(--white),var(--bg))}
-.header .badge{display:inline-block;padding:4px 12px;background:rgba(255,107,107,.12);color:#FF6B6B;border-radius:16px;font-size:11px;font-weight:600;margin-bottom:10px}
-.header h1{font-size:clamp(22px,4vw,32px);font-weight:700;margin-bottom:6px}
-.header .sub{font-size:14px;color:var(--text2)}
-.main{max-width:560px;margin:0 auto;padding:0 16px 40px}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
+.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
+.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
+.main{max-width:560px;margin:0 auto;padding:24px 16px 40px}
+.intro{text-align:center;font-size:14px;line-height:2;margin-bottom:20px}
 
-/* 密室门 */
-.door{background:linear-gradient(135deg,#2D2D2D,#4A4A4A);color:var(--white);border-radius:14px;padding:40px 24px;text-align:center;margin-bottom:20px;box-shadow:0 4px 24px rgba(0,0,0,.12)}
-.door .door-icon{font-size:64px;margin-bottom:12px}
-.door h2{font-size:24px;margin-bottom:8px}
-.door p{font-size:13px;opacity:.7;max-width:360px;margin:0 auto 20px}
-.door .key-input{display:flex;gap:10px;justify-content:center}
-.door input{padding:12px 16px;border-radius:10px;border:none;font-size:16px;text-align:center;width:200px;background:rgba(255,255,255,.15);color:#fff;outline:none}
-.door input::placeholder{color:rgba(255,255,255,.3)}
-.door input:focus{background:rgba(255,255,255,.25)}
-.door .btn-enter{padding:12px 24px;border-radius:10px;border:none;background:var(--gold);color:#fff;font-weight:600;cursor:pointer;font-size:15px;transition:all .2s}
-.door .btn-enter:hover{background:#A0780A}
+.room-grid{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
+.room-card{background:#fff;border-radius:14px;padding:20px;cursor:pointer;border:2px solid #f0e8d8;transition:all 0.25s;text-align:center;position:relative;overflow:hidden}
+.room-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.08)}
+.room-card.locked{opacity:0.7;cursor:default}
+.room-card.locked:hover{transform:none;box-shadow:none}
+.room-card.unlocked{border-color:var(--sri-gold)}
+.room-card.unlocked:hover{border-color:var(--sri-red)}
+.room-card .r-icon{font-size:36px;margin-bottom:6px}
+.room-card .r-name{font-size:16px;font-weight:700;color:var(--title-color);margin-bottom:4px}
+.room-card .r-hint{font-size:12px;color:#999}
 
-/* 场景卡片 */
-.scene-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:16px;box-shadow:0 2px 12px rgba(0,0,0,.03);transition:all .3s}
-.scene-card.locked{opacity:.4;pointer-events:none;filter:grayscale(.5)}
-.scene-card .scene-num{font-size:11px;font-weight:600;color:var(--gold);margin-bottom:6px}
-.scene-card .scene-title{font-size:20px;font-weight:700;margin-bottom:6px}
-.scene-card .scene-setup{font-size:13px;color:var(--text2);margin-bottom:16px;line-height:1.8;padding:12px;background:var(--bg);border-radius:8px}
-.scene-card .choices{display:flex;flex-direction:column;gap:8px}
-.choice-btn{padding:14px 18px;border:1.5px solid var(--border);border-radius:10px;background:var(--white);cursor:pointer;text-align:left;font-size:14px;transition:all .2s;display:flex;align-items:center;gap:10px}
-.choice-btn:hover{border-color:var(--gold)}
-.choice-btn .choice-icon{font-size:20px}
-.choice-btn .choice-text{flex:1}
-.choice-btn.selected{border-color:var(--green);background:rgba(61,122,79,.04)}
-.choice-btn .choice-result{font-size:13px;color:var(--text2);margin-top:4px;display:none}
-.choice-btn.revealed .choice-result{display:block}
+.challenge-panel{display:none;background:#fff;border-radius:14px;padding:24px;border:2px solid var(--sri-gold);margin-bottom:16px;animation:fadeIn 0.4s}
+.challenge-panel.show{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.challenge-panel .c-title{font-size:16px;font-weight:700;color:var(--title-color);margin-bottom:12px}
+.challenge-panel .c-desc{font-size:14px;line-height:2;margin-bottom:16px}
+.challenge-panel .c-choices{display:flex;flex-direction:column;gap:8px}
+.c-choice{padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;background:#fff;cursor:pointer;font-size:14px;text-align:center;transition:all 0.2s;font-family:inherit}
+.c-choice:hover{background:rgba(194,59,34,0.04);border-color:var(--sri-red)}
+.c-choice.chosen{background:rgba(194,59,34,0.06);border-color:var(--sri-red);font-weight:600}
+.c-feedback{padding:14px;margin-top:12px;border-radius:10px;font-size:14px;line-height:2;display:none;animation:fadeIn 0.3s}
+.c-feedback.show{display:block}
 
-/* 进度条 */
-.progress-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
-.progress-header .ph-label{font-size:12px;color:var(--text2)}
-.progress-track{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
-.progress-fill{height:100%;background:var(--gold);transition:width .3s}
+.badge-row{display:flex;justify-content:center;gap:12px;margin-top:20px}
+.badge{padding:8px 16px;border-radius:12px;font-size:13px;font-weight:600;background:#f0e8d8;color:#999}
+.badge.earned{background:rgba(74,140,92,0.1);color:var(--sri-green)}
+.btn-reset{padding:8px 20px;border-radius:18px;border:1.5px solid var(--border);background:#fff;color:var(--text);font-size:12px;cursor:pointer;font-family:inherit;margin-top:12px}
 
-/* 密室外结果 */
-.result-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:28px 24px;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,.04);margin-bottom:20px}
-.result-card .result-icon{font-size:56px;margin-bottom:12px}
-.result-card h3{font-size:22px;margin-bottom:8px}
-.result-card .result-summary{font-size:14px;color:var(--text2);line-height:1.9;margin-bottom:20px}
-.result-card .result-summary strong{color:var(--text)}
-
-/* 五维反馈 */
-.dim-feedback{display:flex;flex-direction:column;gap:8px;margin:20px 0}
-.dim-row{display:flex;align-items:center;gap:8px;font-size:13px}
-.dim-row .dim-label{width:100px;text-align:right;color:var(--text2)}
-.dim-row .dim-track{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
-.dim-row .dim-fill{height:100%;border-radius:3px}
-
-.btn{display:inline-block;padding:14px 32px;border-radius:24px;font-size:16px;font-weight:600;cursor:pointer;text-decoration:none;border:none;transition:all .2s}
-.btn-primary{background:var(--red);color:#fff}
-.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(194,59,34,.25)}
-.btn-secondary{background:var(--white);color:var(--red);border:1.5px solid var(--red);margin-left:8px}
-.btn-secondary:hover{background:rgba(194,59,34,.04)}
-
-.footer{text-align:center;padding:24px;font-size:11px;color:var(--text2)}
-.footer a{color:var(--red);text-decoration:none}
-.hidden{display:none!important}
+.back-link{text-align:center;padding:20px;font-size:11px;color:#999}
+.back-link a{color:var(--sri-red);text-decoration:none}
+.feedback-zone{max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px}
+@media(max-width:480px){body{font-size:14px}}
 </style>
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
 <body>
-<div style="background:linear-gradient(135deg,#B8860B,#C2780A);color:#fff;padding:10px 18px;text-align:center;font-size:12px;letter-spacing:.5px">⭐优质·10/12门·缺D1/D2·🔥L5体验型 · v5.0统一框架</div>
-
-
-<div class="header">
-  <div class="badge">🧠 右脑 · 体验型 · 🔥80 💧70</div>
-  <h1>合伙人密室</h1>
-  <div class="sub">和你的合伙人一起，走进三个决策密室。<br>只要走出来，你们的关系会不一样。</div>
-</div>
-
+<div class="hero"><h1>🔐 觉·密室</h1><p>合伙人密室 · 三间密室·每次进入都有新发现</p></div>
 <div class="main">
+  <p class="intro">三间密室——股权分配·退出条款·危机时刻。<br><span style="color:var(--sri-red);font-weight:600">每一间只有一个问题，但这个问题可能会改变一切。</span></p>
 
-  <!-- 密室入口门 -->
-  <div class="door" id="roomDoor">
-    <div class="door-icon">🚪</div>
-    <h2>第一间密室</h2>
-    <p>你和合伙人正在经历一次关键决策。准备好了吗？</p>
-    <div class="key-input">
-      <input type="text" id="partnerName" placeholder="合伙人名字（可选）" maxlength="10">
-      <button class="btn-enter" onclick="enterRoom()">进入密室 →</button>
-    </div>
-  </div>
+  <div class="room-grid" id="roomGrid"></div>
+  <div class="challenge-panel" id="challengePanel"></div>
 
-  <!-- 场景区 -->
-  <div class="hidden" id="sceneArea">
-    <div class="progress-header">
-      <span class="ph-label">密室进度</span>
-      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-      <span id="progressLabel" style="font-size:12px;color:var(--text2)">0/3</span>
-    </div>
-    <div id="sceneContainer"></div>
-  </div>
-
-  <!-- 结果区 -->
-  <div class="hidden" id="resultArea"></div>
-
+  <div class="badge-row" id="badgeRow"></div>
+  <div style="text-align:center"><button class="btn-reset" onclick="resetRooms()">🔄 重置密室</button></div>
 </div>
-
-<div class="footer">
-  满意解研究所 · 沉浸体验系列<br>
-  <a href="index.html">首页</a> · <a href="decision-theatre.html">决策剧场</a> · <a href="crisis-sim.html">危机模拟</a> · <a href="dashboard-v3.html">🧠 产品大脑</a>
+<div class="back-link"><a href="go.html">← 返回决策通道</a></div>
+<div class="feedback-zone">
+  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
+  <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
+    <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
+    <button onclick="showFeedbackText()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">💬</span>有建议</button>
+  </div>
+  <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
+  <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
+  <div id="fbThanks" style="display:none;color:var(--sri-green);font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
+  <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
 </div>
 
 <script>
-var scenes = [
-  {
-    num:'第一间', title:'股权分配', setup:'公司注册在即。你和合伙人需要决定股权分配。<br><br>A方说："我出技术，股权应该多。"<br>B方说："我出钱出资源，凭什么少？"<br><br>气氛开始紧张。你怎么选？',
-    choices:[
-      {text:'55/45，技术主导', result:'短期效率高，但资源方可能逐渐失去动力。创业圈数据显示：技术主导型公司在融资时估值平均低18%。', dims:{土:40,金:30,水:20,木:50,火:25}},
-      {text:'50/50，对等分配', result:'表面公平，但最容易在决策僵局时破裂。YC数据：50/50股权是解散率最高的结构。', dims:{土:35,金:20,水:30,木:65,火:15}},
-      {text:'搁置争议，先干起来', result:'最危险的"鸵鸟策略"。3个月内必回谈判桌——届时情况更糟，因为已有沉没成本。', dims:{土:15,金:10,水:25,木:20,火:60}},
-      {text:'引入第三方估值+Slicing Pie模型', result:'参考你的真实贡献（时间/资金/IP/关系），用Slicing Pie动态记账。<br><br>满意姐说："不急于定死，先确定算账的规则。"', dims:{土:70,金:75,水:35,木:70,火:30}}
-    ]
-  },
-  {
-    num:'第二间', title:'退出条款', setup:'一年后，公司发展不错。但一个合伙人说想退出，另一个想继续。<br><br>"当初说好了——谁中途走，股份自动归零。"<br>"但这一年我几乎没拿工资！我的贡献呢？"<br><br>这件事从来没写进协议。',
-    choices:[
-      {text:'严格执行口头约定', result:'短期"公正"，但失去的是信任。另一个合伙人会开始思考："下一个会不会轮到我？"', dims:{土:20,金:30,水:15,木:40,火:10}},
-      {text:'重新谈判，各让一步', result:'维系了关系，但耗时耗力。更关键的是：这次改了口子，下次呢？', dims:{土:45,金:40,水:55,木:60,火:30}},
-      {text:'引入第三方调解', result:'专业但成本高。律师/调解员的费用通常吃掉小公司的现金流。', dims:{土:50,金:45,水:40,木:75,火:20}},
-      {text:'启动"契·善别"机制——分阶段退出', result:'约定退出触发条件→估值方法→支付节奏。离场不是翻脸，是给彼此台阶。<br><br>不是"你走我就制裁你"，是"好聚好散，也是一种能力"。', dims:{土:75,金:70,水:60,木:85,火:35}}
-    ]
-  },
-  {
-    num:'第三间', title:'危机时刻', setup:'一场重大危机来了。客户要求赔偿，媒体开始报道，团队人心惶惶。<br><br>A方选择沉默，等待风波过去。<br>B方选择面对，但要透明公开。<br><br>两种完全相反的本能。你和合伙人开始互相指责。',
-    choices:[
-      {text:'保持沉默，等风头过', result:'有时有效——但风头过后，用户会记住你躲了。信任像冰，化了就没了。', dims:{土:25,金:20,水:15,木:30,火:5}},
-      {text:'先内部统一口径再出面', result:'传统PR策略。但"统一口径"容易被解读为"串供"。', dims:{土:40,金:55,水:25,木:50,火:15}},
-      {text:'让一方全权处理', result:'效率最高。但另一方会觉得自己"被代表"了——怨恨会在事后慢慢发酵。', dims:{土:30,金:60,水:20,木:35,火:25}},
-      {text:'共同面对——先承认不知道答案，但承诺透明更新', result:'现代危机管理的黄金法则。坦诚=力量，不是弱点。<br><br>"不确定的真相"比"确定的谎言"更能赢得尊重。<br>很多用户后来成了最忠实的推广者。', dims:{土:55,金:50,水:70,木:80,火:60}}
-    ]
-  }
+var ROOMS = [
+  {id:'equity', icon:'💰', name:'股权分配密室', lock:'先思考：你和合伙人谈过股权吗？<br>如果答案是"谈过但没写下来"——那你需要这间密室。',
+    q:'你们最初的股权比例——如果回到第一天，你会怎么分？',
+    choices:['按出钱比例','按出力时间','各一半·公平最重要','5:3:2·留期权池'],
+    feedbacks:['钱会花完，但人在继续——贡献会变，比例不能不变。','出力的人往往低估了自己。你出的力可能比你以为的更多。','公平是一种感觉，不是数字。各一半不一定公平——取决于谁做了什么。','你已经在为未来考虑了。期权池是给还没来的人留的位置——说明你相信团队会变大。']},
+  {id:'exit', icon:'🚪', name:'退出条款密室', lock:'先思考：如果明天你的合伙人说"我累了，想走"——你们有规则吗？',
+    q:'合伙人想退出——你怎么办？',
+    choices:['按原始出价回购','按当前估值回购','分期回购+竞业','让他留股·只退出管理'],
+    feedbacks:['公平，但对方可能觉得亏了——公司已经比当初值钱了。','对方高兴，但团队现金流可能扛不住。','折中方案——既公平又不会一次压垮公司。','保留了老朋友的体面，但他不会再为公司拼命了。']},
+  {id:'crisis', icon:'⚡', name:'危机时刻密室', lock:'先思考：如果公司账上只剩3个月的钱——谁来做那个最难的决定？',
+    q:'公司面临裁员——你必须在两个核心员工中选择一个留下。你选谁？',
+    choices:['技术最强的那个','跟你最久的那个','最能带团队的那个','让团队投票决定'],
+    feedbacks:['技术是硬实力，但危机关头最需要的常常不是技术。','忠诚不会背叛你——但忠诚不等于能力。危机关头你需要两种都有的那个人。','危机时刻=领导力时刻。能带人的那个人会帮你扛过最难的部分。','把决定权交给团队——这是一个勇敢的选择。但注意：投票的结果你要能接受。']}
 ];
 
-var currentScene = 0;
-var answers = [];
+var ESC_KEY = '***';
+var cleared = {};
 
-function enterRoom() {
-  document.getElementById('roomDoor').classList.add('hidden');
-  document.getElementById('sceneArea').classList.remove('hidden');
-  renderScene(0);
+function loadState(){try{cleared=JSON.parse(localStorage.getItem(ESC_KEY))||{};}catch(e){}}
+
+function renderRooms(){
+  var html = '';
+  ROOMS.forEach(function(r){
+    var done = !!cleared[r.id];
+    var cls = done ? 'locked' : 'unlocked';
+    html += '<div class="room-card '+cls+'" onclick="'+(done?'':'enterRoom(\''+r.id+'\')')+'">';
+    html += '<div class="r-icon">'+r.icon+(done?' ✅':'')+'</div>';
+    html += '<div class="r-name">'+r.name+'</div>';
+    html += '<div class="r-hint">'+(done?'✅ 已通关':r.lock)+'</div>';
+    html += '</div>';
+  });
+  document.getElementById('roomGrid').innerHTML = html;
+  renderBadges();
 }
 
-function renderScene(idx) {
-  currentScene = idx;
-  var s = scenes[idx];
-  var h = '<div class="scene-card">';
-  h += '<div class="scene-num">'+s.num+'密室</div>';
-  h += '<div class="scene-title">'+s.title+'</div>';
-  h += '<div class="scene-setup">'+s.setup+'</div>';
-  h += '<div class="choices">';
-  for(var i=0;i<s.choices.length;i++){
-    var c = s.choices[i];
-    h += '<button class="choice-btn" id="choice'+i+'" onclick="selectChoice('+idx+','+i+')">';
-    h += '<span class="choice-icon">'+(String.fromCharCode(65+i))+'</span>';
-    h += '<div class="choice-text">'+c.text+'</div>';
-    h += '</button>';
-  }
-  h += '</div></div>';
-  
-  // 后续场景锁住
-  for(var j=idx+1;j<scenes.length;j++){
-    h += '<div class="scene-card locked"><div class="scene-num">'+scenes[j].num+'密室</div><div class="scene-title">'+scenes[j].title+'</div><p style="text-align:center;color:var(--text2);font-size:13px;padding:20px">🔒 完成上一间密室后解锁</p></div>';
-  }
-  
-  document.getElementById('sceneContainer').innerHTML = h;
-  document.getElementById('progressFill').style.width = (idx/scenes.length*100)+'%';
-  document.getElementById('progressLabel').textContent = idx+'/'+scenes.length;
+function enterRoom(id){
+  var r = ROOMS.find(function(x){return x.id===id});
+  if(!r) return;
+  var panel = document.getElementById('challengePanel');
+  var html = '<div class="c-title">'+r.icon+' '+r.name+'</div>';
+  html += '<div class="c-desc">'+r.q+'</div>';
+  html += '<div class="c-choices">';
+  r.choices.forEach(function(c,i){
+    html += '<button class="c-choice" onclick="chooseAnswer(\''+id+'\','+i+')">'+c+'</button>';
+  });
+  html += '</div>';
+  html += '<div class="c-feedback" id="cFeedback"></div>';
+  panel.innerHTML = html;
+  panel.classList.add('show');
+  panel.scrollIntoView({behavior:'smooth',block:'center'});
 }
 
-function selectChoice(sceneIdx, choiceIdx) {
-  var s = scenes[sceneIdx];
-  var c = s.choices[choiceIdx];
-  answers[sceneIdx] = {scene:s, choice:c, idx:choiceIdx};
-  
-  // 高亮选中
-  var btns = document.querySelectorAll('.choice-btn');
-  for(var i=0;i<btns.length;i++) btns[i].classList.remove('selected');
-  document.getElementById('choice'+choiceIdx).classList.add('selected');
-  
+function chooseAnswer(roomId, choiceIdx){
+  var r = ROOMS.find(function(x){return x.id===roomId});
+  var fb = document.getElementById('cFeedback');
+  fb.innerHTML = '💬 '+r.feedbacks[choiceIdx];
+  fb.classList.add('show');
+
+  cleared[roomId] = choiceIdx;
+  localStorage.setItem(ESC_KEY, JSON.stringify(cleared));
+
+  // 1.5秒后自动关闭面板
   setTimeout(function(){
-    if(sceneIdx < scenes.length - 1){
-      renderScene(sceneIdx+1);
-      document.getElementById('progressFill').style.width = ((sceneIdx+1)/scenes.length*100)+'%';
-      document.getElementById('progressLabel').textContent = (sceneIdx+1)+'/'+scenes.length;
-    } else {
-      showResult();
-    }
-  }, 600);
+    document.getElementById('challengePanel').classList.remove('show');
+    renderRooms();
+  }, 2000);
 }
 
-function showResult() {
-  document.getElementById('sceneArea').classList.add('hidden');
-  document.getElementById('resultArea').classList.remove('hidden');
-  
-  // 计算五维总分
-  var dims = {土:0,金:0,水:0,木:0,火:0};
-  for(var i=0;i<answers.length;i++){
-    var d = answers[i].choice.dims;
-    for(var k in d) dims[k] += d[k];
-  }
-  for(var k in dims) dims[k] = Math.round(dims[k]/answers.length);
-  
-  var bestPaths = answers.filter(function(a){return a.idx===3}).length;
-  var icon,title,summary;
-  if(bestPaths >= 2){
-    icon='🌟';title='你们是成熟的合伙人';
-    summary='你们在关键时刻选择了<strong>结构化、有韧性</strong>的路径。<br>不是没有分歧——而是有处理分歧的方法。<br><br>关系的韧性 = 不逃避困难对话的能力。';
-  }else if(bestPaths === 1){
-    icon='🌤️';title='在路上';
-    summary='你们在部分决策上做出了很好的选择，<strong>但有些时刻可以用更好的方式处理</strong>。<br><br>合伙人关系不需完美——需要的是在关键时刻坐下来谈的意愿。';
-  }else{
-    icon='🌧️';title='需要更好的工具';
-    summary='你们在关键时刻倾向于<strong>短期回避或独断</strong>。<br>这些模式在压力下很自然——但长期会积累风险。<br><br>好消息是：你们已经看到了问题。第一步，就是走进这个密室。';
-  }
-  
-  var colorMap = {土:'#A08060',金:'#C0C0C0',水:'#6080A0',木:'#70A060',火:'#C23B22'};
-  var nameMap = {土:'土·时间轴',金:'金·可行域',水:'水·身心流',木:'木·信义观',火:'火·直觉阈'};
-  var dimsHtml = '';
-  for(var k in dims){
-    dimsHtml += '<div class="dim-row">';
-    dimsHtml += '<span class="dim-label">'+nameMap[k]+'</span>';
-    dimsHtml += '<div class="dim-track"><div class="dim-fill" style="width:'+dims[k]+'%;background:'+colorMap[k]+'"></div></div>';
-    dimsHtml += '<span style="font-size:12px;color:var(--text2);min-width:28px">'+dims[k]+'</span>';
-    dimsHtml += '</div>';
-  }
-  
-  var h = '<div class="result-card">';
-  h += '<div class="result-icon">'+icon+'</div>';
-  h += '<h3>'+title+'</h3>';
-  h += '<div class="result-summary">'+summary+'</div>';
-  h += '<div class="dim-feedback">'+dimsHtml+'</div>';
-  h += '</div>';
-  h += '<div style="text-align:center">';
-  h += '<button class="btn btn-primary" onclick="restart()">🔄 再走一遍</button>';
-  h += '<a href="go.html" class="btn btn-secondary">← 决策通道</a>';
-  h += '</div>';
-  
-  document.getElementById('resultArea').innerHTML = h;
+function renderBadges(){
+  var html = '';
+  ROOMS.forEach(function(r){
+    html += '<div class="badge'+(cleared[r.id]?' earned':'')+'">'+(cleared[r.id]?'✅':'🔒')+' '+r.name+'</div>';
+  });
+  document.getElementById('badgeRow').innerHTML = html;
 }
 
-function restart() {
-  currentScene = 0;
-  answers = [];
-  document.getElementById('sceneArea').classList.remove('hidden');
-  document.getElementById('resultArea').classList.add('hidden');
-  renderScene(0);
+function resetRooms(){
+  if(!confirm('重置所有密室进度？')) return;
+  cleared = {};
+  localStorage.removeItem(ESC_KEY);
+  renderRooms();
 }
+
+loadState();
+renderRooms();
+
+(function(){
+  let page=location.pathname.split('/').pop()||'index';
+  let key='sri_fb_'+page;
+  let data=JSON.parse(localStorage.getItem(key)||'{}');
+  if(data.sent){document.getElementById('fbQuestion').textContent='感谢你的反馈！';document.getElementById('fbActions').style.display='none';}
+  let tally=JSON.parse(localStorage.getItem('sri_fb_tally_'+page)||'{"up":0,"text":0}');
+  if(tally.up+tally.text>0) document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  window.submitFeedback=function(type){
+    tally[type]=(tally[type]||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type=type;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbQuestion').textContent='感谢你的反馈！';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+  window.showFeedbackText=function(){
+    document.getElementById('fbText').style.display='block';
+    document.getElementById('fbSubmit').style.display='inline-block';
+  };
+  window.submitFeedbackText=function(){
+    let text=document.getElementById('fbText').value.trim();
+    if(!text)return;
+    tally.text=(tally.text||0)+1;
+    localStorage.setItem('sri_fb_tally_'+page,JSON.stringify(tally));
+    data.sent=true;data.type='text';data.text=text;data.time=new Date().toISOString();
+    localStorage.setItem(key,JSON.stringify(data));
+    document.getElementById('fbActions').style.display='none';
+    document.getElementById('fbText').style.display='none';
+    document.getElementById('fbSubmit').style.display='none';
+    document.getElementById('fbQuestion').textContent='收到！感谢你的建议。';
+    document.getElementById('fbTally').textContent='♡'+tally.up+' 💬'+tally.text;
+  };
+})();
 </script>
+
+<div style="text-align:center;padding:8px 0;font-size:10px;opacity:0.25;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</div>
 </body>
 </html>

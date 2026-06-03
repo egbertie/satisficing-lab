@@ -3,16 +3,173 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>📝 五维决策·教学练习 | 满意解研究所</title>
-<style>:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}.article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}.article h2{font-size:18px;color:var(--title-color);margin:24px 0 10px}.article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}.article p{margin:8px 0}.article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}.article .highlight{color:var(--sri-red);font-weight:600}li{margin:6px 0;font-size:14px}ul{padding-left:20px}table{width:100%;font-size:12px;border-collapse:collapse;margin:12px 0}th{padding:6px;border-bottom:1px solid #D4C5A0;color:var(--sri-gold);text-align:left}td{padding:6px;border-bottom:1px solid #f0e8d8}</style>
-<link rel="stylesheet" href="vi_quick_ref.css">
+<title>🎋 五路行者 | 满意解研究所</title>
+<style>
+:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--sri-green:#4A8C5C;--sri-earth:#8B6914;--sri-metal:#6B7B8D;--sri-water:#3A6B8C;--sri-wood:#5A7A4A;--sri-fire:#C23B22}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
+
+/* ===== Hero ===== */
+.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:42px 20px 32px;text-align:center}
+.hero h1{font-size:22px;font-weight:700;margin-bottom:6px;letter-spacing:0.02em}
+.hero p{font-size:13px;opacity:.85;line-height:1.7;max-width:360px;margin:0 auto}
+
+/* ===== Main Container ===== */
+.main-container{max-width:600px;margin:0 auto;padding:28px 16px 40px}
+
+/* ===== Intro ===== */
+.intro{text-align:center;margin-bottom:28px}
+.intro p{font-size:15px;line-height:2;color:var(--text)}
+
+/* ===== Path Cards ===== */
+.path-card{background:#fff;border-radius:12px;padding:24px 20px;margin-bottom:20px;box-shadow:0 1px 6px rgba(0,0,0,0.04);position:relative;overflow:hidden;transition:box-shadow 0.2s}
+.path-card:focus-within{box-shadow:0 2px 16px rgba(0,0,0,0.08)}
+
+.path-card .path-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:14px}
+.path-badge.earth{background:#FFF8E7;color:var(--sri-earth)}
+.path-badge.metal{background:#F0F3F6;color:var(--sri-metal)}
+.path-badge.water{background:#EBF3F8;color:var(--sri-water)}
+.path-badge.wood{background:#F0F6ED;color:var(--sri-wood)}
+.path-badge.fire{background:#FDF2F0;color:var(--sri-fire)}
+
+.path-card .q{font-size:15px;color:var(--title-color);font-weight:600;margin-bottom:6px;line-height:1.6}
+.path-card .q-sub{font-size:13px;color:var(--text);opacity:.7;margin-bottom:12px;line-height:1.5}
+
+.path-card textarea{width:100%;min-height:80px;border:1.5px solid #e0d8c8;border-radius:10px;padding:12px 14px;font-size:14px;font-family:inherit;line-height:1.7;resize:vertical;background:#FCFAF6;color:var(--text);transition:border-color 0.2s}
+.path-card textarea:focus{outline:none;border-color:var(--sri-gold);background:#fff}
+
+.path-card .hint{font-size:11px;color:#999;margin-top:8px;font-style:italic}
+
+/* ===== Action Row ===== */
+.action-row{display:flex;gap:10px;justify-content:center;align-items:center;margin:28px 0 8px;flex-wrap:wrap}
+.btn-primary{padding:12px 32px;border-radius:24px;border:none;background:var(--title-color);color:#fff;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:background 0.2s,transform 0.15s}
+.btn-primary:hover{background:var(--sri-gold)}
+.btn-primary:active{transform:scale(0.97)}
+.btn-secondary{padding:10px 20px;border-radius:24px;border:1.5px solid #D4C5A0;background:transparent;color:var(--text);font-size:13px;cursor:pointer;font-family:inherit;transition:background 0.2s}
+.btn-secondary:hover{background:rgba(212,197,160,0.15)}
+
+.saved-indicator{font-size:11px;color:var(--sri-green);opacity:0;transition:opacity 0.3s}
+.saved-indicator.show{opacity:1}
+
+/* ===== Result Overlay ===== */
+.result-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:100;align-items:flex-start;justify-content:center;padding:48px 16px;overflow-y:auto}
+.result-overlay.open{display:flex}
+.result-card{background:#fff;border-radius:16px;max-width:560px;width:100%;padding:28px 24px;position:relative;box-shadow:0 8px 40px rgba(0,0,0,0.15)}
+.result-card h2{font-size:19px;color:var(--title-color);margin-bottom:4px;text-align:center}
+.result-card .result-sub{font-size:12px;color:#999;text-align:center;margin-bottom:20px}
+
+.result-list .result-item{padding:14px 16px;margin-bottom:10px;border-radius:10px;background:#FCFAF6;border:1px solid #f0e8d8}
+.result-item .result-label{font-size:11px;font-weight:600;text-transform:uppercase;margin-bottom:4px}
+.result-item .result-text{font-size:14px;line-height:1.7;color:var(--title-color)}
+
+.result-item.conflict{border-color:var(--sri-red);background:rgba(194,59,34,0.04)}
+.result-item.conflict .result-label{color:var(--sri-red)}
+
+.result-verdict{text-align:center;margin-top:20px;padding:16px;border-radius:12px;font-size:15px;font-weight:600;line-height:1.7}
+.result-verdict.go{background:rgba(74,140,92,0.08);color:var(--sri-green)}
+.result-verdict.pause{background:rgba(194,59,34,0.06);color:var(--sri-red)}
+
+.result-close{margin-top:20px;text-align:center}
+.result-close .btn-secondary{font-size:14px;padding:10px 28px}
+
+/* ===== Back Link ===== */
+.back-link{text-align:center;padding:20px;font-size:11px;color:#999}
+.back-link a{color:var(--sri-red);text-decoration:none}
+.back-link a:hover{text-decoration:underline}
+
+/* ===== Footer Source ===== */
+.source-line{text-align:center;font-size:10px;opacity:.5;padding:10px}
+@media(max-width:480px){body{font-size:14px}}
+</style>
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
-<body><div class="hero"><h1>📝 五维决策·教学练习</h1><p>理论教学·交互练习</p></div><div class="article"><h2>五维决策·教学练习</h2><p>选一个你正在面对的真实决策——走完五条通道。</p>
-<h3>练习步骤</h3><p><strong>第一步·土</strong>：写下这个决策。然后问自己：五年后回头看，这个决定还成立吗？（1-10分）<br><strong>第二步·金</strong>：列出3个替代方案。每个方案标出"够用就好"的最低线。<br><strong>第三步·水</strong>：闭上眼睛10秒。感受身体——手心温度、心跳、胃部松紧。身体的答案是什么？<br><strong>第四步·木</strong>：这个决定涉及谁？如果涉及钱和原则的冲突——你的原则是什么？<br><strong>第五步·火</strong>：把分析放一边。心里第一个冒出来的方向——是什么？</p>
-<h3>交卷</h3><p>五步走完——看看五个答案。如果一致——行动。如果不一致——在分歧最大的那个维度上，多花10分钟。</p></div>
-<p style="text-align:center;padding:20px;font-size:11px;color:#999"><a href="go.html" style="color:#C23B22;text-decoration:none">← 返回决策通道</a></p>
+<body>
+
+<!-- ===== Hero ===== -->
+<div class="hero">
+  <h1>🎋 五路行者</h1>
+  <p>不是教你怎么想，是陪你看见自己的答案</p>
+</div>
+
+<!-- ===== Main ===== -->
+<div class="main-container">
+  <div class="intro">
+    <p>选一个你正在面对的真实决策——<br>五条通道，各走一遍。走完，答案自现。</p>
+  </div>
+
+  <!-- 土 -->
+  <div class="path-card" id="card-earth">
+    <div class="path-badge earth">🪨 土 · 根基</div>
+    <div class="q">写下这个决策</div>
+    <div class="q-sub">五年后回头看，这个决定还成立吗？</div>
+    <textarea id="a-earth" placeholder="在这里写下你的决策…" oninput="autoSave()"></textarea>
+    <div class="hint">写下来，它就从一个模糊的感觉变成了一个具体的东西。</div>
+  </div>
+
+  <!-- 金 -->
+  <div class="path-card" id="card-metal">
+    <div class="path-badge metal">⚙️ 金 · 精要</div>
+    <div class="q">如果只能做一件事，你会做什么？</div>
+    <div class="q-sub">够用就好的最低线在哪？</div>
+    <textarea id="a-metal" placeholder="在这里写下你的答案…" oninput="autoSave()"></textarea>
+    <div class="hint">不是越多越好——找到那个刚刚好的点。</div>
+  </div>
+
+  <!-- 水 -->
+  <div class="path-card" id="card-water">
+    <div class="path-badge water">💧 水 · 感知</div>
+    <div class="q">闭上眼睛10秒。感受身体——手心温度·心跳·胃部松紧。</div>
+    <div class="q-sub">身体在说什么？</div>
+    <textarea id="a-water" placeholder="你感受到了什么？…" oninput="autoSave()"></textarea>
+    <div class="hint">身体比头脑聪明。有时候胃里的拧劲儿就是答案。</div>
+  </div>
+
+  <!-- 木 -->
+  <div class="path-card" id="card-wood">
+    <div class="path-badge wood">🌿 木 · 关系</div>
+    <div class="q">这个决定涉及谁？</div>
+    <div class="q-sub">如果钱和原则冲突——你的原则是什么？</div>
+    <textarea id="a-wood" placeholder="在这里写下你的答案…" oninput="autoSave()"></textarea>
+    <div class="hint">关系网里的每一条线，都是你的一部分。</div>
+  </div>
+
+  <!-- 火 -->
+  <div class="path-card" id="card-fire">
+    <div class="path-badge fire">🔥 火 · 直觉</div>
+    <div class="q">把分析放一边。</div>
+    <div class="q-sub">心里第一个冒出来的方向——是什么？</div>
+    <textarea id="a-fire" placeholder="第一反应是什么？…" oninput="autoSave()"></textarea>
+    <div class="hint">别改。第一个答案往往是最诚实的那个。</div>
+  </div>
+
+  <!-- Actions -->
+  <div class="action-row">
+    <button class="btn-primary" onclick="showResult()">👁️ 看看你的答案</button>
+    <button class="btn-secondary" onclick="clearAll()">清空重来</button>
+  </div>
+  <div class="saved-indicator" id="savedBadge">💾 已自动保存</div>
+</div>
+
+<!-- ===== Result Overlay ===== -->
+<div class="result-overlay" id="resultOverlay">
+  <div class="result-card">
+    <h2>🎋 五路汇合</h2>
+    <div class="result-sub">五个维度，一个声音</div>
+    <div class="result-list" id="resultList"></div>
+    <div class="result-verdict" id="resultVerdict"></div>
+    <div class="result-close">
+      <button class="btn-secondary" onclick="closeResult()">✕ 关闭</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Back Link ===== -->
+<div class="back-link"><a href="go.html">← 返回决策通道</a></div>
+
+<!-- ===== Feedback Component (preserved) ===== -->
+<p style="text-align:center;font-size:10px;opacity:0.35;padding:4px;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</p>
 <div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
   <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个内容对你有用吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
@@ -24,7 +181,134 @@
   <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
   <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
 </div>
+
 <script>
+// =============================================
+// Five Paths Walker — Interactive Experience
+// =============================================
+
+const PATHS = ['earth','metal','water','wood','fire'];
+const PATH_EMOJI = {earth:'🪨 土 · 根基',metal:'⚙️ 金 · 精要',water:'💧 水 · 感知',wood:'🌿 木 · 关系',fire:'🔥 火 · 直觉'};
+const STORAGE_KEY = 'sri_5paths';
+
+// --- Auto-save / Load ---
+function autoSave() {
+  const data = {};
+  PATHS.forEach(p => { data[p] = document.getElementById('a-'+p).value; });
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  const badge = document.getElementById('savedBadge');
+  badge.classList.add('show');
+  clearTimeout(badge._t);
+  badge._t = setTimeout(() => badge.classList.remove('show'), 1500);
+}
+
+function loadSaved() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    PATHS.forEach(p => {
+      if (data[p]) document.getElementById('a-'+p).value = data[p];
+    });
+  } catch(e) { /* ignore */ }
+}
+
+function clearAll() {
+  if (!confirm('确定要清空所有答案吗？此操作不可恢复。')) return;
+  PATHS.forEach(p => { document.getElementById('a-'+p).value = ''; });
+  localStorage.removeItem(STORAGE_KEY);
+  document.getElementById('savedBadge').classList.remove('show');
+}
+
+// --- Result Analysis ---
+function analyzeAnswers() {
+  const answers = {};
+  PATHS.forEach(p => { answers[p] = document.getElementById('a-'+p).value.trim(); });
+  const filled = PATHS.filter(p => answers[p].length > 0);
+  const empty = PATHS.filter(p => answers[p].length === 0);
+
+  // Simple approach: compare lengths as rough "investment" proxy
+  // The "conflict" detection: find which dimensions have very different
+  // character lengths compared to others (suggesting uneven attention)
+  if (filled.length < 2) return { answers, verdict: 'empty', conflict: [], filled, empty };
+
+  const lengths = filled.map(p => answers[p].length);
+  const avgLen = lengths.reduce((a,b)=>a+b,0) / lengths.length;
+  // Flag answers whose length deviates >50% from average
+  const conflict = filled.filter(p => Math.abs(answers[p].length - avgLen) / Math.max(avgLen,1) > 0.6);
+
+  // Simplified: if any path has very short answer while others are long → potential conflict
+  // But the real verdict comes from user reflection, not AI judgment
+  const hasConflict = conflict.length > 0 && conflict.length < filled.length;
+
+  return { answers, verdict: hasConflict ? 'pause' : 'go', conflict, filled, empty };
+}
+
+function showResult() {
+  const { answers, verdict, conflict, filled, empty } = analyzeAnswers();
+
+  if (filled.length < 2) {
+    alert('先走完至少两条通道，再来看看对比吧。🌿');
+    return;
+  }
+
+  const listEl = document.getElementById('resultList');
+  const verdictEl = document.getElementById('resultVerdict');
+
+  let listHTML = '';
+  PATHS.forEach(p => {
+    const text = answers[p] || '（未填写）';
+    const isConflict = conflict.includes(p);
+    const cls = isConflict ? 'conflict' : '';
+    const hint = isConflict ? ' ⚠️ 与其他维度投入差异较大' : '';
+    listHTML += `<div class="result-item ${cls}">
+      <div class="result-label">${PATH_EMOJI[p]}${hint}</div>
+      <div class="result-text">${escHtml(text)}</div>
+    </div>`;
+  });
+  listEl.innerHTML = listHTML;
+
+  if (empty.length > 0) {
+    const emptyNames = empty.map(p => PATH_EMOJI[p].split(' ')[0]).join('、');
+    verdictEl.innerHTML = `<div style="font-size:13px;color:#999;margin-bottom:8px;">${emptyNames} 还没填完——但没关系，随时可以回来补上。</div>`;
+  }
+
+  if (verdict === 'go') {
+    verdictEl.className = 'result-verdict go';
+    verdictEl.innerHTML += '<div>✅ 维度之间比较均衡。</div><div style="font-size:14px;font-weight:400;margin-top:6px;">答案在你心里——现在需要的，只是行动。</div>';
+  } else {
+    verdictEl.className = 'result-verdict pause';
+    const conflictNames = conflict.map(p => PATH_EMOJI[p].split(' ·')[0]).join('、');
+    verdictEl.innerHTML += `<div>⚡ 在 ${conflictNames} 维度上，你的投入和其他维度不太一样。</div><div style="font-size:14px;font-weight:400;margin-top:6px;">不急。在那个分歧最大的维度上，再多花 10 分钟。</div>`;
+  }
+
+  document.getElementById('resultOverlay').classList.add('open');
+}
+
+function closeResult() {
+  document.getElementById('resultOverlay').classList.remove('open');
+}
+
+// Click backdrop to close
+document.getElementById('resultOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeResult();
+});
+
+// Esc to close
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeResult();
+});
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// --- Init ---
+loadSaved();
+
+// =============================================
+// Feedback Component (preserved as-is)
+// =============================================
 (function(){
   let page=location.pathname.split('/').pop()||'index';
   let key='sri_fb_'+page;

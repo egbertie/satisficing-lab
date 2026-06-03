@@ -20,8 +20,10 @@
   .tag { display:inline-block; padding:1px 6px; border-radius:8px; font-size:10px; background:rgba(194,59,34,0.08); color:var(--sri-red); margin:1px; }
   .btn { padding:8px 18px; border-radius:16px; background:var(--sri-red); color:#fff; border:none; cursor:pointer; font-size:13px; margin:4px; }
   .empty { text-align:center; padding:40px; opacity:0.5; }
+@media(max-width:480px){body{font-size:14px}}
 </style>
 <link rel="stylesheet" href="vi_quick_ref.css">
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
@@ -97,5 +99,15 @@
   <a href="go.html" style="color:#C23B22;text-decoration:none;display:inline-flex;align-items:center;gap:4px;">← 返回决策通道</a>
   <span style="float:right;font-size:12px;color:#6E6E6E;">满意解研究所</span>
 </div>
+<p style="text-align:center;font-size:10px;opacity:0.35;padding:4px;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</p>
+
+<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px">
+  <div id="fbQ" style="color:#4A4A4A;font-weight:600;margin-bottom:10px">这个页面对你有用吗？</div>
+  <div id="fbBtns" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px">
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'up');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">👍 有用</button>
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'text');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">💬 有建议</button>
+  </div>
+</div>
+
 </body>
 </html>

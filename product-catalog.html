@@ -2,271 +2,144 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" href="assets/favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>产品目录 · 满意解研究所</title>
+<title>线上产品库 · 满意解研究所</title>
 <style>
-:root{--red:#C23B22;--gold:#B8860B;--bg:#F5F0E6;--text:#4A4A4A;--title:#2A2A2A;--border:#E0D5C0;--card:#FFFFFF}
+:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0;--sri-green:#4A8C5C}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-.topbar{background:var(--title);color:#fff;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
-.topbar h1{font-size:16px;font-weight:600}
-.topbar a{color:var(--gold);text-decoration:none;font-size:13px}
-.topbar a:hover{text-decoration:underline}
-.main{max-width:1200px;margin:0 auto;padding:16px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:8px;margin-bottom:12px}
-.stat{background:var(--card);border-radius:8px;padding:10px;text-align:center;border:1px solid var(--border)}
-.stat .n{font-size:20px;font-weight:700;color:var(--red)}
-.stat .l{font-size:10px;color:var(--text);opacity:0.6;margin-top:2px}
-.filters{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px}
-.fbtn{padding:4px 12px;border-radius:12px;font-size:11px;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--text);transition:all .2s}
-.fbtn:hover{border-color:var(--gold)}
-.fbtn.active{background:var(--red);color:#fff;border-color:var(--red)}
-.search-wrap{display:flex;gap:8px;margin-bottom:12px}
-.search-wrap input{flex:1;padding:8px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;outline:none;background:var(--card)}
-.search-wrap input:focus{border-color:var(--gold)}
-.search-wrap select{padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:12px;background:var(--card);cursor:pointer}
-.table-wrap{overflow-x:auto;background:var(--card);border-radius:10px;border:1px solid var(--border)}
-table{width:100%;border-collapse:collapse;font-size:12px}
-th{background:var(--red);color:#fff;padding:8px 6px;text-align:left;font-size:10px;cursor:pointer;white-space:nowrap;user-select:none}
-th:hover{opacity:0.9}
-td{padding:6px;border-bottom:1px solid #f0e8d8;font-size:11px}
-tr:hover td{background:rgba(194,59,34,0.02)}
-td a{color:var(--red);text-decoration:none;font-weight:500}
-td a:hover{text-decoration:underline}
-.badge{display:inline-block;padding:1px 5px;border-radius:4px;font-size:9px;font-weight:500}
-.bg-gold{background:rgba(184,134,11,.12);color:var(--gold)}
-.bg-green{background:rgba(61,122,79,.12);color:#3D7A4F}
-.bg-red{background:rgba(194,59,34,.08);color:var(--red)}
-.bg-gray{background:rgba(0,0,0,.05);color:#888}
-.count{text-align:center;font-size:11px;opacity:.5;padding:10px}
-.loading{text-align:center;padding:40px;color:#888}
-.error{text-align:center;padding:40px;color:var(--red)}
-.footer{padding:20px;text-align:center;font-size:11px;opacity:0.4}
-.footer a{color:var(--gold);text-decoration:none}
-@media(max-width:768px){
-  .main{padding:10px}
-  .stats{grid-template-columns:repeat(3,1fr)}
-  .stat{padding:8px}.stat .n{font-size:16px}
-  .search-wrap{flex-direction:column}
-  .filters{overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}
-  .fbtn{white-space:nowrap;font-size:10px;padding:3px 8px}
-  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-  table{font-size:10px}
-  th{padding:6px 4px;font-size:9px}
-  td{padding:5px 4px;font-size:10px}
-  td a{font-size:11px}
-  .topbar h1{font-size:14px}
-  .topbar a{font-size:11px}
-  .badge{font-size:8px}
-}
-@media(max-width:400px){
-  .stats{grid-template-columns:repeat(2,1fr)}
-}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
+.hero{background:var(--title-color);color:#F5F0E6;padding:32px 20px 24px;text-align:center}
+.hero h1{font-size:20px;font-weight:700}
+.hero p{font-size:12px;opacity:0.8}
+.main{max-width:960px;margin:0 auto;padding:16px}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-bottom:16px}
+.stat{background:#fff;border-radius:10px;padding:12px;text-align:center;border:1px solid var(--border)}
+.stat .num{font-size:22px;font-weight:700;color:var(--sri-red)}
+.stat .label{font-size:10px;opacity:.6}
+
+.filter-bar{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px;justify-content:center}
+.fbtn{padding:5px 12px;border-radius:12px;font-size:10px;cursor:pointer;border:1px solid var(--border);background:#fff;font-family:inherit}
+.fbtn.active{background:var(--sri-red);color:#fff;border-color:var(--sri-red)}
+
+.search{width:100%;padding:8px 12px;border:1.5px solid var(--border);border-radius:10px;margin-bottom:12px;font-size:13px;font-family:inherit}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;font-size:11px}
+th{background:var(--sri-red);color:#fff;padding:8px 4px;text-align:left;font-size:10px}
+td{padding:6px 4px;border-bottom:1px solid #f0e8d8;font-size:10px}
+tr:hover td{background:rgba(194,59,34,0.03)}
+td a{color:var(--sri-red);text-decoration:none}
+.badge{display:inline-block;padding:1px 5px;border-radius:4px;font-size:9px}
+.badge-green{background:rgba(74,140,92,.12);color:var(--sri-green)}
+.badge-amber{background:rgba(184,134,11,.12);color:var(--sri-gold)}
+
+.footer{text-align:center;padding:20px;font-size:10px;opacity:.4}
+@media(max-width:480px){body{font-size:14px}}
 </style>
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
 <body>
-
-<div class="topbar">
-  <h1>📦 产品目录</h1>
-  <a href="dashboard-v3.html">← 返回驾驶舱</a>
-</div>
-
+<div class="hero"><h1>📦 线上产品库</h1><p>动态加载 · 实时同步 · 精品18+线上167=185件面向客户</p></div>
 <div class="main">
-  <div class="stats" id="stats"></div>
-  <div class="search-wrap">
-    <input type="text" id="search" placeholder="搜索产品名/描述/URL/族/状态..." oninput="render()">
-    <select id="sortBy" onchange="render()">
-      <option value="default">默认排序</option>
-      <option value="quality_desc">Q值 ↓</option>
-      <option value="quality_asc">Q值 ↑</option>
-      <option value="llm_desc">LLM评分 ↓</option>
-      <option value="name_asc">名称 A-Z</option>
-    </select>
-    <select id="psychoFilter" onchange="render()">
-      <option value="全部">心理类型:全部</option>
-      <option value="镜子">🔍 镜子</option>
-      <option value="翻译">🤝 翻译</option>
-      <option value="地图">🗺️ 地图</option>
-      <option value="解药">💊 解药</option>
-    <select id="userFacingFilter" onchange="render()">
-      <option value="全部">👤 面向:全部</option>
-      <option value="🏆 human_external">🏆 人类客户</option>
-      <option value="🧭 ai_agent">🧭 AI灯塔</option>
-      <option value="🔧 human_internal">🔧 内部工具</option>
-      <option value="⚙️ raw_material">⚙️ 蒸馏原料</option>
-    </select>
-  </div>
-  <div class="filters" id="filters"></div>
-  <div class="table-wrap">
-    <table>
-      <thead><tr>
-        <th>产品名</th><th>面向</th><th>象限</th><th>Gate</th><th>链接</th>
-      </tr></thead>
-      <tbody id="tbody"></tbody>
-    </table>
-    <div class="count" id="count"></div>
-  </div>
-  <p style="font-size:11px;color:var(--text-muted);text-align:center;margin-top:12px">
-    🧠 双光谱评价体系 · L=(金+土)/2 R=(水+火)/2 · 平衡度=1-|L-R|/100
-  </p>
+  <div class="stats" id="statsBar"></div>
+  <input class="search" id="searchInput" placeholder="🔍 搜索产品..." oninput="renderTable()">
+  <div class="filter-bar" id="filterBar"></div>
+  <table id="productTable">
+    <thead><tr><th>名称</th><th>族</th><th>状态</th><th>阶段</th><th>链接</th></tr></thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+  <div id="tableCount" style="text-align:center;font-size:11px;opacity:.5;padding:8px;"></div>
 </div>
-
 <div class="footer">
-  满意解研究所 · 产品目录 · v4.0生命体系(用户面向四象限+蒸馏闭环) · 数据来源 entities_index.json
-  · <a href="dashboard-v3.html">🧠 产品大脑</a>
-  · <a href="index.html">返回首页</a>
+  满意解研究所 · 动态数据源: entities_index.json<br>
+  <span style="color:var(--sri-gold)">火承土印·鼎玉契晋·三脉两翼·五维相生</span>
 </div>
 
 <script>
-var ALL=[], FILT='全部', SORT='default';
+var allProds = [];
+var currentFilter = 'all';
+var filters = {};
 
-function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-
-function load(){
-  fetch('entities_index.json').then(function(r){
-    if(!r.ok) throw Error('HTTP '+r.status);
-    return r.json();
-  }).then(function(d){
-    ALL = (d.products||[]).map(function(p,i){
-      var sp = p.spectrum || {};
-      var fe = sp.five_elements || {};
-      return {
-        id: p.id||('SP-'+String(i+1).padStart(3,'0')),
-        name: p.name||'?',
-        family: p.family||'未归类',
-        userFacing: p.user_facing_v4 || '⚙️ raw_material',
-        quadrant: sp.hemisphere || '未评估',
-        L: sp.L !== undefined ? sp.L : null,
-        R: sp.R !== undefined ? sp.R : null,
-        balance: sp.balance !== undefined ? sp.balance : null,
-        gatePass: p.quality_12gate_pass || 0,
-        qualityTier: p.quality_tier_v3 || '?',
-        elem_earth: fe['土_时间轴'] || null,
-        elem_metal: fe['金_可行域'] || null,
-        elem_water: fe['水_身心流'] || null,
-        elem_wood: fe['木_信义观'] || null,
-        elem_fire: fe['火_直觉阈'] || null,
-        primary_elem: sp.primary_element || '',
-        status: p.status||p.maturity||'?',
-        quality: p.quality_score!==undefined?p.quality_score:'-',
-        llm: p.llm_rating!==undefined?p.llm_rating:null,
-        desc: (p.description||'').substring(0,80),
-        url: p.url||'',
-      };
+// 加载 entities_index.json
+fetch('memory/_data/entities_index.json')
+  .then(function(r){return r.json();})
+  .then(function(data){
+    allProds = data.products || [];
+    // 统计
+    var st = {};
+    allProds.forEach(function(p){
+      var s = p.status||'?';
+      st[s] = (st[s]||0) + 1;
     });
-    render();
-  }).catch(function(e){
-    document.getElementById('tbody').innerHTML='<tr><td colspan="7" class="error">⚠️ 加载失败: '+esc(e.message)+'</td></tr>';
+    var html = '';
+    var fams = {};
+    allProds.forEach(function(p){
+      var f = p.family||'?';
+      fams[f] = (fams[f]||0) + 1;
+      filters[f] = true;
+    });
+    for(var k in st){
+      html += '<div class="stat"><div class="num">'+st[k]+'</div><div class="label">'+k+'</div></div>';
+    }
+    document.getElementById('statsBar').innerHTML = html;
+    
+    // 筛选栏
+    var fhtml = '<button class="fbtn active" onclick="setFilter(\'all\',this)">全部('+allProds.length+')</button>';
+    for(var f in fams){
+      fhtml += '<button class="fbtn" onclick="setFilter(\''+f+'\',this)">'+f+'('+fams[f]+')</button>';
+    }
+    document.getElementById('filterBar').innerHTML = fhtml;
+    
+    renderTable();
+  })
+  .catch(function(){
+    document.getElementById('tableBody').innerHTML = '<tr><td colspan="5" style="text-align:center;padding:20px">⚠️ 数据加载中...请稍后刷新</td></tr>';
   });
+
+function setFilter(f, btn){
+  currentFilter = f;
+  document.querySelectorAll('.fbtn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  renderTable();
 }
 
-var ALL=[], QUAD_FILT='全部', UF_FILT='全部';
-
-function render(){
-  var q=document.getElementById('search').value.toLowerCase();
-  SORT=document.getElementById('sortBy').value;
-  QUAD_FILT=(document.getElementById('quadrantFilter')||{}).value||'全部';
-  UF_FILT=(document.getElementById('userFacingFilter')||{}).value||'全部';
-  var filtered=ALL.filter(function(p){
-    if(QUAD_FILT!=='全部' && p.quadrant!==QUAD_FILT) return false;
-    if(UF_FILT!=='全部' && p.userFacing!==UF_FILT) return false;
-    if(q && p.name.toLowerCase().indexOf(q)===-1 && (p.desc||'').toLowerCase().indexOf(q)===-1 && (p.quadrant||'').toLowerCase().indexOf(q)===-1 && (p.userFacing||'').toLowerCase().indexOf(q)===-1) return false;
+function renderTable(){
+  var query = (document.getElementById('searchInput').value||'').toLowerCase();
+  var filtered = allProds.filter(function(p){
+    if(currentFilter!='all' && p.family!=currentFilter) return false;
+    var name = (p.name||'').toLowerCase();
+    if(query && name.indexOf(query)==-1) return false;
     return true;
   });
-
-  if(SORT==='quality_desc') filtered.sort(function(a,b){return (b.quality=== '-'?-1:b.quality)-(a.quality==='-'?-1:a.quality)});
-  else if(SORT==='quality_asc') filtered.sort(function(a,b){return (a.quality==='-'?999:a.quality)-(b.quality==='-'?999:b.quality)});
-  else if(SORT==='llm_desc') filtered.sort(function(a,b){return (b.llm||0)-(a.llm||0)});
-  else if(SORT==='name_asc') filtered.sort(function(a,b){return a.name.localeCompare(b.name,'zh')});
-  else if(SORT==='L_desc') filtered.sort(function(a,b){return (b.L||0)-(a.L||0)});
-  else if(SORT==='R_desc') filtered.sort(function(a,b){return (b.R||0)-(a.R||0)});
-  else if(SORT==='balance_desc') filtered.sort(function(a,b){return (b.balance||0)-(a.balance||0)});
-
-  var h='';
-  for(var i=0;i<filtered.length;i++){
-    var p=filtered[i];
-    
-    // 象限颜色
-    var qColor='#888', qBg='rgba(136,136,136,.1)';
-    if(p.quadrant==='Ⅰ·全脑型'){qColor='#7B68EE';qBg='rgba(123,104,238,.12)';}
-    else if(p.quadrant==='Ⅱ·体验型'){qColor='#FF6B6B';qBg='rgba(255,107,107,.12)';}
-    else if(p.quadrant==='Ⅲ·真空型'){qColor='#AAA';qBg='rgba(170,170,170,.08)';}
-    else if(p.quadrant==='Ⅳ·分析型'){qColor='#4A90D9';qBg='rgba(74,144,217,.12)';}
-    
-    // 五维迷你条
-    var elemStr='';
-    var dims=[{k:'土',v:p.elem_earth,c:'#A08060'},{k:'金',v:p.elem_metal,c:'#C0C0C0'},{k:'水',v:p.elem_water,c:'#6080A0'},{k:'木',v:p.elem_wood,c:'#70A060'},{k:'火',v:p.elem_fire,c:'#C23B22'}];
-    for(var di=0;di<dims.length;di++){
-      var dv = dims[di].v || 0;
-      elemStr += '<span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:'+dims[di].c+';opacity:'+(dv/100*0.6+0.4)+';margin:0 1px" title="'+dims[di].k+':'+dv+'"></span>';
-    }
-    
-    // 平衡度颜色
-    var bal = p.balance || 0;
-    var balColor = bal >= 0.8 ? '#3D7A4F' : (bal >= 0.5 ? '#C2780A' : '#C23B22');
-
-    // 用户面向颜色
-    var ufLabel='?', ufColor='#888', ufBg='rgba(136,136,136,.08)';
-    if(p.userFacing==='🏆 human_external'){ufLabel='🏆人物';ufColor='#C23B22';ufBg='rgba(194,59,34,.1)';}
-    else if(p.userFacing==='🧭 ai_agent'){ufLabel='🧭AI';ufColor='#B8860B';ufBg='rgba(184,134,11,.1)';}
-    else if(p.userFacing==='🔧 human_internal'){ufLabel='🔧内部';ufColor='#6080A0';ufBg='rgba(96,128,160,.1)';}
-    else if(p.userFacing==='⚙️ raw_material'){ufLabel='⚙️原料';ufColor='#AAA';ufBg='rgba(170,170,170,.08)';}
-    
-    // Gate颜色
-    var gate = p.gatePass||0;
-    var gateColor = gate>=11?'#3D7A4F':(gate>=9?'#C2780A':(gate>=6?'#6080A0':'#888'));
-
-    h+='<tr>'+
-      '<td style="font-weight:500">'+esc(p.name)+'</td>'+
-      '<td><span style="display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;background:'+ufBg+';color:'+ufColor+'">'+ufLabel+'</span></td>'+
-      '<td><span style="display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;background:'+qBg+';color:'+qColor+'">'+esc(p.quadrant)+'</span></td>'+
-      '<td style="font-variant-numeric:tabular-nums;font-weight:600;color:'+gateColor+'">'+gate+'/12</td>'+
-      '<td>'+(p.url?'<a href="'+esc(p.url)+'" target="_blank">→</a>':'-')+'</td>'+
-      '</tr>';
-  }
-  document.getElementById('tbody').innerHTML=h||'<tr><td colspan="7" style="text-align:center;padding:20px;color:#888">无匹配产品</td></tr>';
-  document.getElementById('count').textContent='显示 '+filtered.length+' / '+ALL.length+' 个产品';
-
-  // Stats with spectrum + v3 quality tiers
-  var quadDist = {};
-  ALL.forEach(function(p){ quadDist[p.quadrant] = (quadDist[p.quadrant]||0)+1 });
-  var avgL = ALL.reduce(function(s,p){return s+(p.L||0)},0)/ALL.length;
-  var avgR = ALL.reduce(function(s,p){return s+(p.R||0)},0)/ALL.length;
-  var premium12 = ALL.filter(function(p){return (p.gatePass||0)>=10}).length;
-  var gateAvg = ALL.reduce(function(s,p){return s+(p.gatePass||0)},0)/ALL.length;
-  document.getElementById('stats').innerHTML=
-    '<div class="stat"><div class="n">'+ALL.length+'</div><div class="l">📦 总数</div></div>'+
-    '<div class="stat"><div class="n">'+premium12+'</div><div class="l">🏆 精品(10+门)</div></div>'+
-    '<div class="stat"><div class="n">'+(gateAvg.toFixed(1))+'</div><div class="l">🚪 均Gate</div></div>'+
-    '<div class="stat"><div class="n">'+(avgL.toFixed(0))+'</div><div class="l">📐 左脑</div></div>'+
-    '<div class="stat"><div class="n">'+(avgR.toFixed(0))+'</div><div class="l">🎨 右脑</div></div>'+
-    '<div class="stat"><div class="n">'+(quadDist['Ⅱ·体验型']||0)+'</div><div class="l">🔴 体验</div></div>';
+  
+  var html = '';
+  filtered.forEach(function(p){
+    var url = p.url||'';
+    var link = url ? '<a href="'+url+'">🔗</a>' : '-';
+    html += '<tr>';
+    html += '<td>'+(p.name||'?')+'</td>';
+    html += '<td>'+p.family+'</td>';
+    html += '<td><span class="badge '+(p.status=='精品'?'badge-green':'badge-amber')+'">'+(p.status||'?')+'</span></td>';
+    html += '<td>'+(p.lifecycle_stage||'?')+'</td>';
+    html += '<td>'+link+'</td>';
+    html += '</tr>';
+  });
+  
+  document.getElementById('tableBody').innerHTML = html || '<tr><td colspan="5" style="text-align:center;padding:20px">无匹配结果</td></tr>';
+  document.getElementById('tableCount').textContent = '显示 '+filtered.length+'/'+allProds.length+' 件';
 }
-
-// Filter buttons — quadrant based
-(function(){
-  var fo=['全部','Ⅰ·全脑型','Ⅳ·分析型','Ⅱ·体验型','Ⅲ·真空型'];
-  var labels={'全部':'全部','Ⅰ·全脑型':'🟣全脑','Ⅳ·分析型':'🔵分析','Ⅱ·体验型':'🔴体验','Ⅲ·真空型':'⬜真空'};
-  var h='';
-  for(var i=0;i<fo.length;i++){
-    h+='<button class="fbtn'+(fo[i]==='全部'?' active':'')+'" onclick="setQuadFilt(\''+fo[i]+'\',this)">'+labels[fo[i]]+'</button>';
-  }
-  document.getElementById('filters').innerHTML=h;
-})();
-
-function setQuadFilt(f,btn){
-  QUAD_FILT=f;
-  document.getElementById('quadrantFilter').value=f;
-  var bs=document.querySelectorAll('.fbtn');
-  for(var i=0;i<bs.length;i++) bs[i].classList.remove('active');
-  btn.classList.add('active');
-  render();
-}
-
-load();
 </script>
+
+<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px">
+  <div id="fbQ" style="color:#4A4A4A;font-weight:600;margin-bottom:10px">这个页面对你有用吗？</div>
+  <div id="fbBtns" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px">
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'up');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">👍 有用</button>
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'text');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">💬 有建议</button>
+  </div>
+</div>
+
+
+<p style="text-align:center;padding:10px;font-size:11px"><a href="go.html" style="color:#C23B22;text-decoration:none">← 返回决策通道</a></p>
 </body>
 </html>

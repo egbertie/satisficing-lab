@@ -2,9 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" href="assets/favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>合伙人决策卡牌 · 线上交互版</title>
+<title>合伙人决策卡牌 · 线上版 | 满意解研究所</title>
 <style>
   :root {
     --sri-red: #C23B22; --sri-gold: #B8860B; --sri-bg: #F5F0E6;
@@ -88,8 +87,10 @@
 
   .footer { text-align:center; padding:24px 16px; font-size:11px; color:#999; }
   .footer a { color:var(--sri-red); text-decoration:none; }
+@media(max-width:480px){body{font-size:14px}}
 </style>
 <link rel="stylesheet" href="vi_quick_ref.css">
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
@@ -127,15 +128,12 @@
 </script>
 
 <body>
-<div style="background:linear-gradient(135deg,#C23B22,#B8860B);color:#fff;padding:12px 20px;text-align:center;font-size:13px;letter-spacing:.5px">
-  🏆 v5.0真精品 · 12/12门·L=35 R=83体验型·火L5🔥水L4💧 · 满意解研究所 · <span style="opacity:.7">20-30分钟·创始人/合伙人/团队Leader</span>
-</div>
-<a href="index.html"><img src="assets/liangyi-small.png" alt="" style="width:36px;height:auto;vertical-align:middle;margin-right:8px"></a>
-
-<a href="go.html" style="display:inline-block;padding:8px 16px;margin:10px 0 0 16px;font-size:13px;color:var(--sri-red);text-decoration:none;font-weight:500;border:1px solid var(--sri-red);border-radius:6px">← 返回决策通道</a>
 
 <div class="app">
-  <div class="hero" style="background:linear-gradient(135deg,#C23B22,#B8860B);color:#fff;padding:40px 24px 28px;text-align:center"><h1>合伙人决策卡牌</h1><p style="font-size:14px;margin-top:6px">把不可讨论的，变成可以讨论的</p><p style="font-size:12px;opacity:0.7;margin-top:4px">选一张卡牌，翻开——你们之间的对话会从此不同</p></div>
+  <div class="hero">
+    <h1>🎴 合伙人决策卡牌</h1>
+    <div class="sub">满意解研究所 · 硬科技创始人的决策教练</div>
+  </div>
 
   <!-- Deck Selection -->
   <div class="deck-select" id="deckSelect">
@@ -667,6 +665,7 @@ ${gameCards.length}张卡牌，${bad}张触发冲突预警。
 </script>
 
 
+<p style="text-align:center;font-size:10px;opacity:0.35;padding:4px;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</p>
 <div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
   <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">

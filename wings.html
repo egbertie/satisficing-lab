@@ -3,49 +3,109 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>章·双翼 | 左翼右翼 | 满意解研究所</title>
+<title>章·双翼|左右翼自评|满意解研究所</title>
 <style>
-  :root { --sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title:#2A2A2A }
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
-  .hero{background:linear-gradient(135deg,var(--title),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
-  .hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
-  .article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}
-  .article h2{font-size:18px;color:var(--title);margin:24px 0 10px}
-  .article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}
-  .article p{margin:8px 0}
-  .article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}
-  .article .highlight{color:var(--sri-red);font-weight:600}
-  .footer{text-align:center;padding:24px 16px 40px;font-size:11px;color:#999}
-  .footer a{color:var(--sri-red);text-decoration:none}
+:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0;--sri-green:#4A8C5C;--left-color:#3A6B8C;--right-color:#C23B22}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
+.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
+.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
+.article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}
+.article h2{font-size:18px;color:var(--title-color);margin:24px 0 10px;text-align:center}
+.article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}
+.article p{margin:8px 0}
+.article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}
+.article .highlight{color:var(--sri-red);font-weight:600}
+
+/* ── 自评区 ── */
+.self-zone{max-width:560px;margin:28px auto;padding:24px;background:#fff;border-radius:14px;border:2px solid var(--sri-gold);text-align:center}
+.self-zone h3{font-size:16px;color:var(--title-color);margin-bottom:12px}
+.wing-row{display:flex;gap:12px;margin-bottom:16px}
+@media(max-width:500px){.wing-row{flex-direction:column}}
+.wing-box{flex:1;padding:16px;border-radius:12px;text-align:center}
+.wing-box.left{background:rgba(58,107,140,0.06);border:1.5px solid var(--left-color)}
+.wing-box.right{background:rgba(194,59,34,0.04);border:1.5px solid var(--right-color)}
+.wing-box .wing-icon{font-size:24px;margin-bottom:6px}
+.wing-box .wing-label{font-size:13px;font-weight:600;margin-bottom:4px}
+.wing-box.left .wing-label{color:var(--left-color)}
+.wing-box.right .wing-label{color:var(--right-color)}
+.wing-box input{width:60px;text-align:center;font-size:24px;font-weight:700;border:1.5px solid var(--border);border-radius:8px;padding:6px;font-family:inherit;background:#fff}
+.wing-box input:focus{outline:none;border-color:var(--sri-gold)}
+.wing-box .wing-hint{font-size:11px;color:#999;margin-top:4px}
+
+.balance-bar{height:8px;background:linear-gradient(90deg,var(--left-color),#ccc,var(--right-color));border-radius:4px;margin:16px 0;position:relative}
+.balance-dot{position:absolute;top:-4px;width:16px;height:16px;background:#fff;border:3px solid var(--title-color);border-radius:50%;transform:translateX(-50%);transition:left 0.5s ease-out}
+
+.balance-result{font-size:14px;line-height:2;padding:12px;background:rgba(184,134,11,0.04);border-radius:10px;text-align:left;display:none}
+.balance-result.show{display:block}
+.balance-result .result-label{font-weight:600;color:var(--title-color)}
+
+.history-box{margin-top:16px;text-align:left;display:none}
+.history-box.show{display:block}
+.history-box h4{font-size:13px;color:var(--title-color);margin-bottom:8px}
+.hist-item{padding:8px 12px;background:rgba(184,134,11,0.04);border-radius:8px;margin:4px 0;font-size:12px;display:flex;align-items:center;gap:10px}
+.hist-item .hist-balance{font-weight:600;color:var(--title-color)}
+.hist-item .hist-time{color:#ccc;font-size:10px;margin-left:auto}
+
+.btn-save{padding:8px 22px;border-radius:18px;border:none;background:var(--title-color);color:#fff;font-size:13px;font-weight:600;cursor:pointer;margin-top:12px;font-family:inherit;transition:background 0.2s}
+.btn-save:hover{background:var(--sri-gold)}
+
+.back-link{text-align:center;padding:20px;font-size:11px;color:#999}
+.back-link a{color:var(--sri-red);text-decoration:none}
+.feedback-zone{max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid var(--border);padding-top:20px}
 </style>
-<link rel="stylesheet" href="vi_quick_ref.css">
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
 <body>
 <div class="hero"><h1>🦅 章·双翼</h1><p>左翼·右翼 · 双引擎决策体系</p></div>
-<div class="article"><h2>为什么要两翼？</h2>
-<p>Kahneman说：人有两个思考系统——系统1（快·直觉）和系统2（慢·理性）。</p>
-<p>而Egbertie的六重认证恰好也是两组：<span class="highlight">CBIIP右脑直觉×CDAA左脑量化</span>。</p>
-<p>这不是巧合——是完整的决策需要两个引擎同时工作。一个人同时拥有两个引擎——这就是满意解研究所的"两翼"。</p>
 
-<h2>左翼：理性·学术·风控</h2>
-<p>38篇论文构成的学术骨架：从Simon的满意解理论到Damasio的躯体标记到Wasserman的股权陷阱到Gottman的四骑士预测。</p>
-<p>Star Memory的浪漫：<span class="highlight">记住一切，永远不忘。</span></p>
-<p>双经济约束：Token×时间×效益——不是"尽可能多"，是"用最少的资源达到满意解"。</p>
+<div class="article">
+  <h2>为什么要两翼？</h2>
+  <p>Kahneman说：人有两个思考系统——系统1（快·直觉）和系统2（慢·理性）。</p>
+  <p>最好的决策不是"左脑赢了"或"右脑赢了"——是<span class="highlight">当数据都摆在你面前，你的身体也告诉你一个答案，而它们指向同一个方向。</span></p>
 
-<h2>右翼：直觉·温度·感知</h2>
-<p>星月传奇三个故事背后的人的温度：盖碗茶局里"我理解你"的沉默、卡片游戏里"我也有过这种感觉"的共鸣、免费工具里"你先看看，不急"的邀请。</p>
-<p>十三类型不是分类学——是<span class="highlight">见过太多"散了"的创始人之后产生的共情。</span></p>
-<p>右翼的核心能力不是"分析"——是"看见"。</p>
+  <h2>左翼：理性·学术·风控</h2>
+  <p>38篇论文构成的学术骨架。从Simon的满意解理论到Damasio的躯体标记到Wasserman的股权陷阱到Gottman的四骑士预测。</p>
+  <p>Star Memory的浪漫：<span class="highlight">记住一切，永远不忘。</span></p>
 
-<h2>两翼的融合</h2>
-<p>最好的决策不是"左脑赢了"或"右脑赢了"——是<span class="highlight">当数据都摆在你面前，你的身体也告诉你一个答案，而它们指向同一个方向。</span></p>
-<p>这就是两翼融合的"满意解"。</p></div>
-<div class="footer"><p><a href="go.html">← 返回决策通道</a></p><p style="margin-top:4px">满意解研究所 · 章·双翼 · 满意解研究所</p></div>
+  <h2>右翼：直觉·温度·感知</h2>
+  <p>星月传奇三个故事背后的人的温度。十三类型不是分类学——是<span class="highlight">见过太多"散了"的创始人之后产生的共情。</span></p>
+  <p>右翼的核心能力不是"分析"——是"看见"。</p>
 
-<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
+  <h2>两翼融合</h2>
+  <p>这就是满意解。</p>
+</div>
+
+<div class="self-zone">
+  <h3>🦅 你的双翼平衡度</h3>
+  <p style="font-size:13px;color:#999;margin-bottom:16px">给自己打两个分——左翼理性·右翼直觉（1-10）</p>
+
+  <div class="wing-row">
+    <div class="wing-box left">
+      <div class="wing-icon">🧠</div>
+      <div class="wing-label">左翼·理性</div>
+      <input type="number" id="leftScore" min="1" max="10" value="5" oninput="updateBalance()">
+      <div class="wing-hint">数据·逻辑·风控</div>
+    </div>
+    <div class="wing-box right">
+      <div class="wing-icon">❤️</div>
+      <div class="wing-label">右翼·直觉</div>
+      <input type="number" id="rightScore" min="1" max="10" value="5" oninput="updateBalance()">
+      <div class="wing-hint">感受·温度·看见</div>
+    </div>
+  </div>
+
+  <div class="balance-bar"><div class="balance-dot" id="balanceDot" style="left:50%"></div></div>
+  <div class="balance-result" id="balanceResult"><div class="result-label"></div></div>
+  <button class="btn-save" onclick="saveBalance()">💾 记录这一刻</button>
+  <div class="history-box" id="historyBox"><h4>📊 你的双翼轨迹</h4><div id="histList"></div></div>
+</div>
+
+<div class="back-link"><a href="go.html">← 返回决策通道</a></div>
+
+<div class="feedback-zone">
   <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
     <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
@@ -53,11 +113,68 @@
   </div>
   <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
   <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
-  <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
+  <div id="fbThanks" style="display:none;color:var(--sri-green);font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
   <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
-  <p style="font-size:10px;opacity:0.4;margin-top:8px;"><a href="go.html" style="color:inherit;">返回决策通道</a></p>
 </div>
+
 <script>
+var WING_KEY = 'sri_wings…lance';
+
+function updateBalance(){
+  var l = parseInt(document.getElementById('leftScore').value)||5;
+  var r = parseInt(document.getElementById('rightScore').value)||5;
+  l = Math.max(1,Math.min(10,l));
+  r = Math.max(1,Math.min(10,r));
+
+  var pct = (l/(l+r))*100;
+  document.getElementById('balanceDot').style.left = pct+'%';
+
+  var diff = Math.abs(l-r);
+  var result = document.getElementById('balanceResult');
+  if(diff<=1){
+    result.innerHTML = '<div class="result-label">⚖️ 高度平衡</div>你的左翼和右翼几乎同步——这是很少见的状态。两翼都在为你工作。';
+  } else if(l>r){
+    result.innerHTML = '<div class="result-label">🧠 偏左翼</div>你更信任数据和逻辑。这是力量——但也偶尔问问：身体在说什么？直觉在说什么？';
+  } else {
+    result.innerHTML = '<div class="result-label">❤️ 偏右翼</div>你的直觉和感受很强。这是礼物——但也偶尔问问：这个感觉有数据支撑吗？';
+  }
+  result.classList.add('show');
+}
+
+function loadHistory(){try{return JSON.parse(localStorage.getItem(WING_KEY))||[];}catch(e){return[];}}
+function saveHistory(h){localStorage.setItem(WING_KEY,JSON.stringify(h));}
+
+function saveBalance(){
+  var l = parseInt(document.getElementById('leftScore').value)||5;
+  var r = parseInt(document.getElementById('rightScore').value)||5;
+  var h = loadHistory();
+  h.unshift({left:l, right:r, time:new Date().toISOString()});
+  if(h.length>20) h = h.slice(0,20);
+  saveHistory(h);
+  renderHistory();
+}
+
+function renderHistory(){
+  var h = loadHistory();
+  if(h.length===0) return;
+  var box = document.getElementById('historyBox');
+  box.classList.add('show');
+  var list = document.getElementById('histList');
+  var html = '';
+  h.forEach(function(item){
+    var d = new Date(item.time);
+    var ts = (d.getMonth()+1)+'/'+d.getDate()+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+    var diff = Math.abs(item.left-item.right);
+    var label = diff<=1 ? '⚖️ 平衡' : item.left>item.right ? '🧠 偏左' : '❤️ 偏右';
+    html += '<div class="hist-item"><span>🧠'+item.left+' : '+item.right+'❤️</span><span class="hist-balance">'+label+'</span><span class="hist-time">'+ts+'</span></div>';
+  });
+  list.innerHTML = html;
+}
+
+updateBalance();
+renderHistory();
+
+// ===== 反馈组件 =====
 (function(){
   let page=location.pathname.split('/').pop()||'index';
   let key='sri_fb_'+page;
@@ -94,5 +211,6 @@
 })();
 </script>
 
+<div style="text-align:center;padding:8px 0;font-size:10px;opacity:0.25;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</div>
 </body>
 </html>

@@ -3,19 +3,20 @@
 <head>
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>案例库诊断</title>
-  <meta name="description" content="<a href="index.html"><img src="assets/jin-small.png" alt="晋" style="width:48px;height:auto;vertical-align:middle;margin-right:8px"></a>满意解研究所 · 案例库诊断">
+  <meta name="description" content="满意解研究所 · 案例库诊断">
 <style>
 body{font-family:-apple-system,sans-serif;padding:20px;background:#F5F0E6}
 button{padding:10px 20px;margin:4px;border-radius:8px;border:1px solid #999;background:#fff;cursor:pointer;font-size:14px}
 button.on{background:#C23B22;color:#fff}
 .test{background:#fff;border-radius:12px;padding:16px;margin:12px 0;border:1px solid #e0d5c8}
 .pass{color:green}.fail{color:red}
+@media(max-width:480px){body{font-size:14px}}
 </style>
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
 <body>
-<h1 style="font-size:1.5em;padding:16px">cases</h1>
 <div style="max-width:800px;margin:0 auto;padding:24px 16px 60px">
 <div style="text-align:center;padding:24px 0"><h1 style="font-size:24px;color:#C23B22">传灯 · 84案例精选</h1><p style="font-size:13px;color:#6E6E6E;margin-top:4px">每个结论有真实案例</p></div>
 
@@ -65,5 +66,15 @@ function back(){
   document.getElementById('detail').style.display='none';
 }
 renderList();
-</script></body>
+</script><p style="text-align:center;font-size:10px;opacity:0.35;padding:4px;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</p>
+
+<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px">
+  <div id="fbQ" style="color:#4A4A4A;font-weight:600;margin-bottom:10px">这个页面对你有用吗？</div>
+  <div id="fbBtns" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px">
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'up');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">👍 有用</button>
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'text');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">💬 有建议</button>
+  </div>
+</div>
+
+</body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>匹配引擎 · 合伙人匹配度评估</title>
+<title>契·择伴 | 合伙人匹配度 | 满意解研究所</title>
 <style>
   :root { --sri-red:#C23B22; --sri-gold:#B8860B; --sri-bg:#F5F0E6; --text:#4A4A4A; --title:#2A2A2A; --border:#D4C5A0; }
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -35,8 +35,10 @@
   .btn-outline { background:transparent; border:1.5px solid var(--sri-red); color:var(--sri-red); }
   .footer { text-align:center; padding:24px 16px 40px; font-size:11px; color:#999; }
   .footer a { color:var(--sri-red); text-decoration:none; }
+@media(max-width:480px){body{font-size:14px}}
 </style>
 <link rel="stylesheet" href="vi_quick_ref.css">
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
@@ -74,7 +76,7 @@
 </script>
 
 <body>
-<div class="hero" style="background:linear-gradient(135deg,#C23B22,#B8860B);color:#fff;padding:40px 24px 28px;text-align:center"><h1>匹配引擎</h1><p style="font-size:14px;margin-top:6px">在决定合伙之前，看看你们的匹配度</p><p style="font-size:12px;opacity:0.7;margin-top:4px">有些差异是互补的，有些是致命的——区别是关键</p></div>
+<div class="hero"><h1>🤝 契·择伴</h1><p>选择合伙人之前——先过这五关</p></div>
 <div class="main">
   <p style="font-size:13px;text-align:center;margin-bottom:16px;color:var(--text);opacity:0.7;">Wasserman研究了10000+创始人：大多数合伙关系的失败，不是"后来出了问题"——是"一开始就不该在一起"。</p>
 
@@ -86,7 +88,7 @@
   <div class="step" id="s2"><h3>第二关：能力互补</h3><p>司马贺·可行域——不是相似，是互补</p>
     <div class="scale"><button class="scale-btn" onclick="choose('a',1,this)">全面重叠</button><button class="scale-btn" onclick="choose('a',2,this)">大部分重叠</button><button class="scale-btn" onclick="choose('a',3,this)">各有侧重</button><button class="scale-btn" onclick="choose('a',4,this)">明显互补</button><button class="scale-btn" onclick="choose('a',5,this)">完美拼图</button></div></div>
 
-  <div class="step" id="s3"><h3>第三关：冲突模式</h3><p>水月观音·身心流——当分歧出现时，你们怎么处理</p>
+  <div class="step" id="s3"><h3>第三关：冲突模式</h3><p>观自在·身心流——当分歧出现时，你们怎么处理</p>
     <div class="scale"><button class="scale-btn" onclick="choose('c',1,this)">回避冲突</button><button class="scale-btn" onclick="choose('c',2,this)">偶尔争执</button><button class="scale-btn" onclick="choose('c',3,this)">能讨论</button><button class="scale-btn" onclick="choose('c',4,this)">建设性冲突</button><button class="scale-btn" onclick="choose('c',5,this)">坦诚且成长</button></div></div>
 
   <div class="step" id="s4"><h3>第四关：时间节奏</h3><p>刘禹锡·时间轴——你们对"快慢"的理解一样吗</p>
@@ -144,6 +146,7 @@ function resetAll() {
 }
 </script>
 
+<p style="text-align:center;font-size:10px;opacity:0.35;padding:4px;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</p>
 <div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
   <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">

@@ -5,38 +5,293 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>觉·冲突|13类型冲突诊断卡|满意解研究所</title>
 <style>
-  :root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0}
+  :root{
+    --sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;
+    --text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0;
+    --card-w:300px;--card-h:420px;
+  }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
-  .hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
-  .hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
-  .article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}
-  .article h2{font-size:18px;color:var(--title-color);margin:24px 0 10px}
-  .article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}
-  .article p{margin:8px 0}
-  .article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}
-  .article .highlight{color:var(--sri-red);font-weight:600}
-  .article ul{padding-left:20px}
-  .article li{margin:6px 0;font-size:14px}
+  body{
+    font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;
+    background:var(--sri-bg);color:var(--text);min-height:100vh;
+    overflow-x:hidden;
+  }
+
+  /* Hero */
+  .hero{
+    background:linear-gradient(135deg,var(--title-color),var(--sri-gold));
+    color:#F5F0E6;padding:32px 20px 24px;text-align:center;
+  }
+  .hero h1{font-size:22px;font-weight:700;letter-spacing:2px}
+  .hero p{font-size:12px;opacity:.85;margin-top:6px}
+
+  /* Main container */
+  .main{
+    max-width:480px;margin:0 auto;padding:24px 16px 40px;
+    display:flex;flex-direction:column;align-items:center;
+    position:relative;
+  }
+
+  /* Draw button */
+  .draw-btn-wrap{margin-bottom:24px;text-align:center}
+  .draw-btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:16px 36px;font-size:18px;font-weight:700;
+    background:var(--sri-red);color:#fff;border:none;
+    border-radius:50px;cursor:pointer;
+    box-shadow:0 4px 16px rgba(194,59,34,0.3);
+    transition:transform .2s,box-shadow .2s;
+    letter-spacing:1px;
+  }
+  .draw-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(194,59,34,0.4)}
+  .draw-btn:active{transform:translateY(0);box-shadow:0 2px 8px rgba(194,59,34,0.3)}
+  .draw-btn.drawing{animation:pulse .8s ease-in-out}
+  .draw-hint{font-size:12px;color:var(--sri-gold);margin-top:8px}
+
+  /* Card stage */
+  .card-stage{
+    position:relative;width:var(--card-w);height:var(--card-h);
+    perspective:1200px;margin:0 auto 16px;
+  }
+  .card-stage.flipped .card-inner{transform:rotateY(180deg)}
+
+  .card-inner{
+    position:relative;width:100%;height:100%;
+    transform-style:preserve-3d;
+    transition:transform .6s cubic-bezier(.4,0,.2,1);
+  }
+
+  .card-face{
+    position:absolute;width:100%;height:100%;
+    backface-visibility:hidden;
+    border-radius:16px;overflow:hidden;
+    box-shadow:0 8px 32px rgba(0,0,0,.12);
+    display:flex;flex-direction:column;
+  }
+
+  /* Front face */
+  .card-front{
+    background:linear-gradient(160deg,#2A2A2A 0%,#3A3020 100%);
+    color:#F5F0E6;justify-content:center;align-items:center;
+    padding:32px 24px;text-align:center;
+    border:2px solid var(--sri-gold);
+    cursor:pointer;position:relative;
+  }
+  .card-front::before{
+    content:'';position:absolute;inset:8px;
+    border:1px solid rgba(184,134,11,.3);border-radius:10px;pointer-events:none;
+  }
+  .card-front .card-icon{
+    font-size:56px;margin-bottom:16px;
+    filter:drop-shadow(0 2px 8px rgba(0,0,0,.3));
+  }
+  .card-front .card-number{
+    font-size:11px;letter-spacing:3px;opacity:.5;
+    text-transform:uppercase;margin-bottom:8px;
+  }
+  .card-front .card-type{
+    font-size:22px;font-weight:700;letter-spacing:1px;
+    line-height:1.4;
+  }
+  .card-front .tap-hint{
+    position:absolute;bottom:16px;left:0;right:0;
+    font-size:11px;opacity:.45;letter-spacing:1px;
+  }
+
+  /* Back face */
+  .card-back{
+    background:#FFFBF5;
+    border:2px solid var(--border);
+    transform:rotateY(180deg);
+    padding:20px;
+    overflow-y:auto;
+    font-size:13px;line-height:1.75;
+  }
+  .card-back .section{
+    margin-bottom:14px;
+  }
+  .card-back .section-label{
+    font-size:11px;font-weight:700;letter-spacing:1px;
+    margin-bottom:4px;display:flex;align-items:center;gap:6px;
+  }
+  .card-back .section-label .dot{
+    display:inline-block;width:8px;height:8px;border-radius:50%;
+  }
+  .section-label.symptoms .dot{background:var(--sri-red)}
+  .section-label.root .dot{background:var(--sri-gold)}
+  .section-label.intervene .dot{background:#2E7D32}
+  .section-label.prognosis .dot{background:#1565C0}
+  .card-back .section-content{
+    color:var(--title-color);font-size:13px;
+    padding-left:14px;border-left:2px solid #eee;
+  }
+  .card-back .section-content strong{color:var(--sri-red);font-weight:600}
+
+  /* Actions after card reveal */
+  .card-actions{
+    display:none;gap:12px;justify-content:center;
+    flex-wrap:wrap;margin-bottom:20px;
+  }
+  .card-actions.visible{display:flex}
+  .mark-btn{
+    padding:10px 24px;border-radius:24px;border:1.5px solid var(--border);
+    background:#fff;cursor:pointer;font-size:14px;font-weight:600;
+    transition:all .2s;color:var(--text);
+    display:flex;align-items:center;gap:6px;
+  }
+  .mark-btn:hover{border-color:var(--sri-red);color:var(--sri-red)}
+  .mark-btn.marked{
+    background:var(--sri-red);color:#fff;border-color:var(--sri-red);
+  }
+  .mark-btn.marked-never{
+    background:#777;color:#fff;border-color:#777;
+  }
+
+  /* Draw another */
+  .draw-another{
+    display:none;margin-bottom:20px;
+    font-size:13px;color:var(--sri-red);cursor:pointer;
+    text-decoration:underline;text-underline-offset:3px;
+  }
+  .draw-another.visible{display:inline-block}
+
+  /* Statistics bar */
+  .stats-bar{
+    display:flex;gap:16px;justify-content:center;
+    flex-wrap:wrap;margin-bottom:20px;
+    padding:12px 16px;
+    background:rgba(255,255,255,.6);
+    border-radius:12px;
+    border:1px solid var(--border);
+  }
+  .stat-item{
+    text-align:center;
+    font-size:12px;color:var(--text);
+  }
+  .stat-item .stat-num{
+    font-size:22px;font-weight:700;color:var(--sri-red);
+    display:block;line-height:1.2;
+  }
+  .stat-item .stat-label{
+    font-size:11px;color:#888;margin-top:2px;
+  }
+
+  /* Pool preview */
+  .pool-preview{
+    display:flex;flex-wrap:wrap;gap:6px;justify-content:center;
+    margin-bottom:24px;max-width:var(--card-w);
+  }
+  .pool-chip{
+    font-size:11px;padding:4px 10px;
+    border-radius:12px;border:1px solid var(--border);
+    background:#fff;color:var(--text);
+    transition:all .2s;
+  }
+  .pool-chip.seen{opacity:.35;text-decoration:line-through}
+  .pool-chip.seen-marked::after{content:' ✓';color:var(--sri-red);font-weight:700}
+
+  /* Reset */
+  .reset-link{
+    font-size:11px;color:#999;cursor:pointer;
+    text-decoration:underline;margin-top:8px;
+  }
+
+  @keyframes pulse{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.04)}
+  }
+
+  @keyframes cardDeal{
+    from{opacity:0;transform:translateY(40px) rotateZ(-5deg)}
+    to{opacity:1;transform:translateY(0) rotateZ(0)}
+  }
+  .card-dealt{animation:cardDeal .4s ease-out}
+
+  /* Mobile */
+  @media(max-width:400px){
+    :root{--card-w:280px;--card-h:400px}
+    .hero h1{font-size:19px}
+    .draw-btn{font-size:16px;padding:14px 28px}
+    .card-front .card-type{font-size:19px}
+    .card-back{font-size:12px;padding:16px}
+  }
 </style>
-<link rel="stylesheet" href="vi_quick_ref.css">
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
 <body>
-<div class="hero"><h1>🎮 觉·冲突</h1><p>游戏工厂·13类型冲突·诊断卡</p></div>
-<div class="article"><h2>13类型冲突·诊断卡</h2><p>从84个真实案例中提炼的<span class="highlight">13种合伙人冲突类型</span>。每种类型一张诊断卡——包含症状、根因、干预方案和预后。</p>
-<h3>四维结构（每张卡）</h3><p><strong>症状</strong>：完整的冲突表现描述<br><strong>根因</strong>：追溯到Gottman四骑士/Wasserman股权陷阱<br><strong>干预</strong>：具体的行动建议（对标扣子1-3-1格式）<br><strong>预后</strong>："如果做了A→6个月后可能的结果"</p>
-<h3>13种类型</h3><p>股权分配·控制权争夺·利益分配·退出机制·责任边界·价值观念·信任破裂·能力不匹配·引入新合伙人·家族关系·融资估值·知识产权·心理契约</p>
-<div class="quote">不是分类学——是三次迭代从血和案例中长出来的<br>满意姐·游戏工厂V2.0</div></div>
 
+<div class="hero">
+  <h1>🃏 觉·冲突</h1>
+  <p>游戏工厂·13类型冲突·诊断卡</p>
+</div>
+
+<div class="main">
+
+  <!-- Draw button -->
+  <div class="draw-btn-wrap">
+    <button class="draw-btn" id="drawBtn" onclick="drawCard()">
+      🃏 抽一张冲突卡
+    </button>
+    <div class="draw-hint" id="drawHint">还剩 13 种冲突等你探索</div>
+  </div>
+
+  <!-- Card stage -->
+  <div class="card-stage" id="cardStage">
+    <div class="card-inner">
+      <div class="card-face card-front" id="cardFront" onclick="flipCard()">
+        <div class="card-icon">🃏</div>
+        <div class="card-type">点击上方按钮<br>抽取一张卡牌</div>
+      </div>
+      <div class="card-face card-back" id="cardBack"></div>
+    </div>
+  </div>
+
+  <!-- Mark buttons -->
+  <div class="card-actions" id="cardActions">
+    <button class="mark-btn" id="markEncountered" onclick="markCard('encountered')">
+      ✅ 我遇到过
+    </button>
+    <button class="mark-btn" id="markNever" onclick="markCard('never')">
+      ❌ 没遇到过
+    </button>
+  </div>
+
+  <!-- Draw another -->
+  <a class="draw-another" id="drawAnother" onclick="drawCard()">🎲 再抽一张</a>
+
+  <!-- Statistics -->
+  <div class="stats-bar" id="statsBar">
+    <div class="stat-item">
+      <span class="stat-num" id="statSeen">0</span>
+      <span class="stat-label">已探索</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" id="statEncountered">0</span>
+      <span class="stat-label">遇到过</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" id="statNever">0</span>
+      <span class="stat-label">未遇到</span>
+    </div>
+  </div>
+
+  <!-- Pool preview -->
+  <div class="pool-preview" id="poolPreview"></div>
+  <a class="reset-link" onclick="resetAll()">↺ 重置记录</a>
+
+</div>
+
+<!-- Footer -->
 <div style="text-align:center;padding:24px 16px 40px;font-size:11px;color:#999;">
   <p><a href="go.html" style="color:#C23B22;text-decoration:none;">← 返回决策通道</a></p>
   <p style="margin-top:4px;">满意解研究所 · 硬科技创始人的决策教练</p>
 </div>
 
-<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
-  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个内容对你有用吗？</div>
+<!-- Feedback -->
+<div style="max-width:480px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
+  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这些冲突卡对你有启发吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
     <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
     <button onclick="showFeedbackText()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">💬</span>有建议</button>
@@ -46,9 +301,282 @@
   <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
   <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
 </div>
+
 <script>
+// ===== CARD DATA =====
+const CARDS = [
+  {
+    id:1, type:'股权分配', icon:'💰',
+    symptoms:'创始团队股份比例模糊，口头约定无书面记录。出钱的和出力的各执一词。',
+    root:'Wasserman股权陷阱——静态分配无法回应动态贡献。',
+    intervene:'①立即书面确认现有比例 ②引入vesting（4年+1年悬崖） ③预留15%期权池。',
+    prognosis:'6个月后若完成vesting签署→团队稳定性提升40%'
+  },
+  {
+    id:2, type:'控制权争夺', icon:'👑',
+    symptoms:'谁说了算没定好，重大决策卡壳，团队开始站队。',
+    root:'Gottman四骑士·批判——从讨论变成攻击。',
+    intervene:'①明确定义"重大决策"范围 ②设定CEO一票决定权+董事会否决权 ③每月一次"决策复盘"。',
+    prognosis:'权力边界清晰后→决策速度+60%'
+  },
+  {
+    id:3, type:'利益分配', icon:'💸',
+    symptoms:'赚了钱怎么分没提前说好，第一笔收入到账反而引发矛盾。',
+    root:'Wasserman动态股权——贡献变了但比例不变。',
+    intervene:'①利益分配公式提前约定 ②T+1年首次回顾调整 ③设立"贡献争议"仲裁机制。',
+    prognosis:'公式化后→分配争议减少80%'
+  },
+  {
+    id:4, type:'退出机制', icon:'🚪',
+    symptoms:'有人想走但没规则，手里的股份怎么办？其他合伙人恐慌。',
+    root:'缺乏vesting+回购条款。',
+    intervene:'①4年vesting+1年悬崖 ②离职回购公式（成本价/市场价/折中） ③Good Leaver vs Bad Leaver定义。',
+    prognosis:'规则清晰后→退出事件从危机降级为流程'
+  },
+  {
+    id:5, type:'责任边界', icon:'🗺️',
+    symptoms:'事情越来越多但没人知道该谁做。互相等对方先动。',
+    root:'角色定义模糊——创始人都想做CEO的部分，没人想做COO的部分。',
+    intervene:'①DACI决策矩阵（每类决策指定Driver/Approver/Consulted/Informed） ②每周一次角色复盘 ③"没人做的事"临时认领机制。',
+    prognosis:'DACI落地后→跨边界冲突减少50%'
+  },
+  {
+    id:6, type:'价值观念', icon:'🧭',
+    symptoms:'一个觉得"先活下来"，一个觉得"要做就做最好的"。方向不同不是谁对谁错，是价值观不同。',
+    root:'Gottman四骑士·轻蔑——认为对方的价值判断低一等。',
+    intervene:'①价值观排序练习（各自排Top5→找重叠） ②"不妥协"清单（每人写"什么不能让步"） ③找第三方做价值观对齐。',
+    prognosis:'价值观对齐后→战略讨论效率+35%'
+  },
+  {
+    id:7, type:'信任破裂', icon:'💔',
+    symptoms:'某件事后不再完全相信对方。检查对方的决定，留备份。',
+    root:'Gottman四骑士·防御——被质疑后筑墙。',
+    intervene:'①"信任恢复计划"——小承诺→兑现→再扩大 ②每周一次"信任温度计"打分 ③找一件可以完全交给对方的事重新开始。',
+    prognosis:'连续4周小承诺兑现后→信任指数回升50%'
+  },
+  {
+    id:8, type:'能力不匹配', icon:'📉',
+    symptoms:'早期一起打天下，公司大了他/她跟不上了。不说伤感情，说了不知道怎么开口。',
+    root:'角色进化——创业需要的技能和增长期需要的技能不同。',
+    intervene:'①"能力评估"不做排名做角色匹配 ②设置3-6个月能力build-up计划 ③若无法匹配→转顾问/减股不清退。',
+    prognosis:'真诚对话后→要么能力对齐，要么角色对齐'
+  },
+  {
+    id:9, type:'引入新合伙人', icon:'🤝',
+    symptoms:'想拉新人入伙，现有合伙人担心被稀释。新人嫌股份少。',
+    root:'静态股权思维——零和博弈。',
+    intervene:'①用期权池而非老股 ②新人vesting（4年+1年悬崖） ③明确新人带来的增量→增量中的份额。',
+    prognosis:'期权池+vesting→三方安全感均提升'
+  },
+  {
+    id:10, type:'家族关系', icon:'🏠',
+    symptoms:'夫妻/父子/兄弟合伙——家里的角色和公司的角色互相干扰。',
+    root:'关系身份重叠——CEO和配偶/父亲和下属同时存在。',
+    intervene:'①"公司角色"和"家庭角色"分时切换（工作时间=公司角色） ②独立董事或外部顾问做缓冲 ③家族宪章（比公司协议更早签署）。',
+    prognosis:'角色分离机制运行3个月后→家庭冲突减少70%'
+  },
+  {
+    id:11, type:'融资估值', icon:'📊',
+    symptoms:'对赌条款没细看就签了。业绩压力传到合伙人内部——互相甩锅。',
+    root:'VC压力→合伙人关系承受外部冲击。',
+    intervene:'①对赌条款逐条律师审查（不只财务看） ②设定"最坏情况"应对预案 ③合伙人内部先对齐"能接受的最大风险"。',
+    prognosis:'条款清晰+预案→面对压力时团队不乱'
+  },
+  {
+    id:12, type:'知识产权', icon:'🧠',
+    symptoms:'核心技术在谁的脑子里？离职时能不能带走？入职前写的代码算谁的？',
+    root:'IP归属未约定——默认属于创造者（法律上不一定）。',
+    intervene:'①所有IP归公司（入职协议明确） ②离职后竞业限制+IP检查清单 ③开源代码使用需预审。',
+    prognosis:'IP归属协议签署→离职事件中IP纠纷归零'
+  },
+  {
+    id:13, type:'心理契约', icon:'🫥',
+    symptoms:'嘴上说"没问题"，心里说"凭什么"。没写下来的期望正在发酵。',
+    root:'期望不对称——每个人心里有一本"应得的账"。',
+    intervene:'①"未说出口的期望"匿名交换 ②每季度一次"心理契约审计" ③把暗的变成明的——写完才算数。',
+    prognosis:'心理契约书面化后→隐怨爆发率下降90%'
+  }
+];
+
+// ===== STATE =====
+const STORAGE_KEY = 'sri_conflict_cards';
+let currentCard = null;
+let isFlipped = false;
+
+function loadState(){
+  try{
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {seen:{}, marks:{}};
+  }catch(e){ return {seen:{}, marks:{}}; }
+}
+function saveState(s){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+}
+
+function getStats(){
+  const s = loadState();
+  const seen = Object.keys(s.seen).length;
+  const encountered = Object.values(s.marks).filter(m=>m==='encountered').length;
+  const never = Object.values(s.marks).filter(m=>m==='never').length;
+  return {seen, encountered, never};
+}
+
+function getRemaining(){
+  const s = loadState();
+  return CARDS.filter(c=>!s.seen[c.id]);
+}
+
+function getSeenCardIds(){
+  const s = loadState();
+  return Object.keys(s.seen).map(Number);
+}
+
+// ===== RENDER =====
+function updateStats(){
+  const stats = getStats();
+  document.getElementById('statSeen').textContent = stats.seen;
+  document.getElementById('statEncountered').textContent = stats.encountered;
+  document.getElementById('statNever').textContent = stats.never;
+  document.getElementById('drawHint').textContent = `还剩 ${13-stats.seen} 种冲突等你探索`;
+}
+
+function renderPool(){
+  const s = loadState();
+  const container = document.getElementById('poolPreview');
+  container.innerHTML = CARDS.map(c=>{
+    let cls = 'pool-chip';
+    if(s.seen[c.id]) cls += ' seen';
+    if(s.marks[c.id]) cls += ' seen-marked';
+    return `<span class="${cls}">${c.icon} ${c.type}</span>`;
+  }).join('');
+}
+
+function updateMarkButtons(){
+  const s = loadState();
+  const encBtn = document.getElementById('markEncountered');
+  const nevBtn = document.getElementById('markNever');
+  if(!currentCard){
+    encBtn.classList.remove('marked');
+    nevBtn.classList.remove('marked-never');
+    return;
+  }
+  const mark = s.marks[currentCard.id];
+  encBtn.classList.toggle('marked', mark==='encountered');
+  nevBtn.classList.toggle('marked-never', mark==='never');
+}
+
+function renderBack(card){
+  return `
+    <div class="section">
+      <div class="section-label symptoms"><span class="dot"></span>症状</div>
+      <div class="section-content">${card.symptoms}</div>
+    </div>
+    <div class="section">
+      <div class="section-label root"><span class="dot"></span>根因</div>
+      <div class="section-content"><strong>${card.root}</strong></div>
+    </div>
+    <div class="section">
+      <div class="section-label intervene"><span class="dot"></span>干预</div>
+      <div class="section-content">${card.intervene}</div>
+    </div>
+    <div class="section">
+      <div class="section-label prognosis"><span class="dot"></span>预后</div>
+      <div class="section-content">${card.prognosis}</div>
+    </div>
+  `;
+}
+
+function renderFront(card){
+  return `
+    <div class="card-icon">${card.icon}</div>
+    <div class="card-number">冲突诊断卡 #${card.id}</div>
+    <div class="card-type">${card.type}</div>
+    <div class="tap-hint">👆 点击卡牌翻面查看详情</div>
+  `;
+}
+
+// ===== ACTIONS =====
+function drawCard(){
+  const remaining = getRemaining();
+  if(remaining.length === 0){
+    // All seen — reshuffle
+    const s = loadState();
+    s.seen = {};
+    s.marks = {};
+    saveState(s);
+    updateStats();
+    renderPool();
+    return drawCard();
+  }
+
+  const idx = Math.floor(Math.random() * remaining.length);
+  const card = remaining[idx];
+  currentCard = card;
+  isFlipped = false;
+
+  // Mark as seen
+  const s = loadState();
+  s.seen[card.id] = true;
+  saveState(s);
+
+  // Reset stage
+  const stage = document.getElementById('cardStage');
+  stage.classList.remove('flipped');
+
+  // Update front face
+  document.getElementById('cardFront').innerHTML = renderFront(card);
+  document.getElementById('cardBack').innerHTML = renderBack(card);
+
+  // Add deal animation
+  stage.classList.remove('card-dealt');
+  void stage.offsetWidth; // trigger reflow
+  stage.classList.add('card-dealt');
+
+  // Show actions
+  document.getElementById('cardActions').classList.add('visible');
+  document.getElementById('drawAnother').classList.add('visible');
+  updateMarkButtons();
+  updateStats();
+  renderPool();
+}
+
+function flipCard(){
+  if(!currentCard) return;
+  const stage = document.getElementById('cardStage');
+  stage.classList.toggle('flipped');
+  isFlipped = !isFlipped;
+}
+
+function markCard(type){
+  if(!currentCard) return;
+  const s = loadState();
+  s.marks[currentCard.id] = type;
+  saveState(s);
+  updateMarkButtons();
+  updateStats();
+  renderPool();
+}
+
+function resetAll(){
+  if(!confirm('确定要重置所有抽卡记录和标记吗？')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  currentCard = null;
+  isFlipped = false;
+  document.getElementById('cardStage').classList.remove('flipped');
+  document.getElementById('cardFront').innerHTML = '<div class="card-icon">🃏</div><div class="card-type">点击上方按钮<br>抽取一张卡牌</div>';
+  document.getElementById('cardBack').innerHTML = '';
+  document.getElementById('cardActions').classList.remove('visible');
+  document.getElementById('drawAnother').classList.remove('visible');
+  updateStats();
+  renderPool();
+}
+
+// ===== INIT =====
+updateStats();
+renderPool();
+
+// ===== FEEDBACK (preserved) =====
 (function(){
-  let page=location.pathname.split('/').pop()||'index';
+  let page='game-conflict.html';
   let key='sri_fb_'+page;
   let data=JSON.parse(localStorage.getItem(key)||'{}');
   if(data.sent){document.getElementById('fbQuestion').textContent='感谢你的反馈！';document.getElementById('fbActions').style.display='none';}
@@ -83,6 +611,7 @@
 })();
 </script>
 
-</body>
 
+<div style="text-align:center;padding:8px 0;font-size:10px;opacity:0.25;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</div>
+</body>
 </html>

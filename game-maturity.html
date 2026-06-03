@@ -5,48 +5,279 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>觉·成熟|决策成熟度测评卡|满意解研究所</title>
 <style>
-  :root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0}
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
-  .hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
-  .hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
-  .article{max-width:600px;margin:0 auto;padding:24px 16px 40px;font-size:15px;line-height:2}
-  .article h2{font-size:18px;color:var(--title-color);margin:24px 0 10px}
-  .article h3{font-size:15px;color:var(--sri-red);margin:20px 0 8px}
-  .article p{margin:8px 0}
-  .article .quote{padding:12px 16px;margin:12px 0;border-left:3px solid var(--sri-red);font-style:italic;color:var(--sri-red);background:rgba(194,59,34,0.04);border-radius:0 8px 8px 0}
-  .article .highlight{color:var(--sri-red);font-weight:600}
-  .article ul{padding-left:20px}
-  .article li{margin:6px 0;font-size:14px}
+:root{--sri-red:#C23B22;--sri-gold:#B8860B;--sri-bg:#F5F0E6;--text:#4A4A4A;--title-color:#2A2A2A;--border:#D4C5A0;--sri-green:#4A8C5C}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--sri-bg);color:var(--text);min-height:100vh}
+.hero{background:linear-gradient(135deg,var(--title-color),var(--sri-gold));color:#F5F0E6;padding:36px 20px 28px;text-align:center}
+.hero h1{font-size:21px;font-weight:700}.hero p{font-size:12px;opacity:.8}
+
+.quiz-zone{max-width:560px;margin:0 auto;padding:24px 16px 40px}
+.quiz-zone .intro{font-size:14px;line-height:2;text-align:center;margin-bottom:24px}
+.quiz-zone .intro em{color:var(--sri-red);font-style:normal;font-weight:600}
+
+/* 进度条 */
+.progress-bar{height:4px;background:#f0e8d8;border-radius:2px;margin-bottom:28px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--sri-red),var(--sri-gold));border-radius:2px;transition:width 0.4s}
+
+.q-card{background:#fff;border-radius:16px;padding:28px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.04);display:none;animation:fadeIn 0.4s}
+.q-card.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.q-card .q-num{font-size:12px;color:var(--sri-gold);margin-bottom:8px;font-weight:600;letter-spacing:1px}
+.q-card .q-text{font-size:16px;color:var(--title-color);font-weight:600;line-height:1.8;margin-bottom:20px}
+.q-card .q-dim{font-size:11px;color:#999;margin-bottom:16px;padding:4px 10px;background:#faf8f3;border-radius:6px;display:inline-block}
+
+.opt-list{display:flex;flex-direction:column;gap:8px}
+.opt-item{padding:14px 16px;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;transition:all 0.2s;text-align:center;font-size:14px;line-height:1.5}
+.opt-item:hover{background:rgba(184,134,11,0.04);border-color:var(--sri-gold)}
+.opt-item.selected{background:rgba(194,59,34,0.06);border-color:var(--sri-red);font-weight:600}
+
+/* 结果 */
+.result-card{display:none;background:#fff;border-radius:16px;padding:28px 24px;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.06);animation:fadeIn 0.6s}
+.result-card.show{display:block}
+.result-card .score-big{font-size:56px;font-weight:900;color:var(--sri-red);line-height:1}
+.result-card .score-label{font-size:14px;color:var(--text);margin:8px 0 20px}
+.result-card .dim-bar{margin:8px 0;text-align:left}
+.result-card .dim-bar .dim-label{font-size:12px;font-weight:600;color:var(--title-color);margin-bottom:4px}
+.result-card .dim-bar .bar-track{height:8px;background:#f0e8d8;border-radius:4px;overflow:hidden}
+.result-card .dim-bar .bar-fill{height:100%;border-radius:4px;transition:width 0.8s ease-out}
+.result-card .insight{padding:14px;margin-top:16px;background:rgba(184,134,11,0.06);border-radius:10px;font-size:14px;line-height:1.8;text-align:left}
+.result-card .btn-retake{padding:8px 24px;border-radius:18px;border:1.5px solid var(--sri-gold);background:#fff;color:var(--sri-gold);font-size:13px;cursor:pointer;font-family:inherit;margin-top:16px;transition:all 0.2s}
+.result-card .btn-retake:hover{background:var(--sri-gold);color:#fff}
+
+.back-link{text-align:center;padding:20px;font-size:11px;color:#999}
+.back-link a{color:var(--sri-red);text-decoration:none}
+.feedback-zone{max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px}
+@media(max-width:480px){body{font-size:14px}}
 </style>
-<link rel="stylesheet" href="vi_quick_ref.css">
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
 <body>
-<div class="hero"><h1>🎮 觉·成熟</h1><p>游戏工厂·决策成熟度·测评卡</p></div>
-<div class="article"><h2>决策成熟度·测评卡</h2><p>不是测评"你对不对"——是测评<span class="highlight">"你的决策过程成不成熟"</span>。</p>
-<h3>五个成熟度等级</h3><p><strong>L1·本能决策</strong>：凭直觉，没有结构<br><strong>L2·单一维度</strong>：只考虑一个维度（通常是钱）<br><strong>L3·双维拉锯</strong>：在两个维度之间摇摆<br><strong>L4·系统扫描</strong>：五个维度都过了一遍<br><strong>L5·满意解</strong>：找到"够好"的方案并行动</p>
-<h3>测评方式</h3><p>10个决策场景·每个场景选择你的处理方式·系统自动匹配成熟度等级·给出升级路径</p>
-<div class="quote">不是"你做对了吗"——是"你的决策过程成熟吗"<br>游戏工厂V2.0</div></div>
+<div class="hero"><h1>🎯 觉·成熟</h1><p>游戏工厂·决策成熟度·测评卡</p></div>
 
-<div style="text-align:center;padding:24px 16px 40px;font-size:11px;color:#999;">
-  <p><a href="go.html" style="color:#C23B22;text-decoration:none;">← 返回决策通道</a></p>
-  <p style="margin-top:4px;">满意解研究所 · 硬科技创始人的决策教练</p>
+<div class="quiz-zone">
+  <div class="intro"><p>10道题，看看<em>你的决策团队</em>在哪一层。<br>不是考你——是照一面镜子。</p></div>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+
+  <div id="quizContainer"></div>
+
+  <div class="result-card" id="resultCard">
+    <div class="score-big" id="scoreBig"></div>
+    <div class="score-label" id="scoreLabel"></div>
+    <div id="dimBars"></div>
+    <div class="insight" id="insightText"></div>
+    <button class="btn-retake" onclick="retake()">🔄 重新测评</button>
+  </div>
 </div>
 
-<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
-  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个内容对你有用吗？</div>
+<div class="back-link"><a href="go.html">← 返回决策通道</a></div>
+
+<div class="feedback-zone">
+  <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">
     <button onclick="submitFeedback('up')" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">👍</span>有用</button>
     <button onclick="showFeedbackText()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">💬</span>有建议</button>
   </div>
   <textarea id="fbText" style="display:none;width:100%;max-width:400px;height:60px;border:1.5px solid #D4C5A0;border-radius:10px;padding:10px;font-size:13px;font-family:inherit;background:#fff;margin:8px auto;resize:vertical;" placeholder="你的建议会帮我们改进..."></textarea>
   <button id="fbSubmit" style="display:none;padding:8px 18px;border-radius:20px;border:1.5px solid #C23B22;background:#fff;cursor:pointer;font-size:13px;color:#C23B22;font-weight:600;margin:4px auto;" onclick="submitFeedbackText()">发送反馈 →</button>
-  <div id="fbThanks" style="display:none;color:#4A8C5C;font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
+  <div id="fbThanks" style="display:none;color:var(--sri-green);font-weight:600;padding:8px;">收到！感谢你的反馈。</div>
   <div id="fbTally" style="font-size:11px;color:#999;margin-top:4px;"></div>
 </div>
+
 <script>
+var QUESTIONS = [
+  {q:'重大决策时，你们通常怎么决定？', dim:'土', opts:[
+    {t:'一个人说了算，其他人执行', v:1},
+    {t:'两个人商量，偶尔问第三个人', v:2},
+    {t:'三个人以上讨论，投票决定', v:3},
+    {t:'有明确的DACI角色，每个人知道自己该做什么', v:4}
+  ]},
+  {q:'你们谈过"退出"这件事吗？', dim:'金', opts:[
+    {t:'没谈过——觉得不太吉利', v:1},
+    {t:'提过一次，没人接话', v:2},
+    {t:'口头聊过，但没有书面约定', v:3},
+    {t:'有书面vesting+回购条款', v:4}
+  ]},
+  {q:'意见不一致的时候——通常怎么处理？', dim:'水', opts:[
+    {t:'强势的那个人赢', v:1},
+    {t:'各退一步，折中', v:2},
+    {t:'深入讨论，试图说服对方', v:3},
+    {t:'先感受分歧——然后找到分歧的根因', v:4}
+  ]},
+  {q:'你们之间有"不能说的话"吗？', dim:'木', opts:[
+    {t:'蛮多的——有些话题不敢碰', v:1},
+    {t:'有1-2件事大家回避', v:2},
+    {t:'基本都能说，但有时会绕弯子', v:3},
+    {t:'定期有"坦诚对话"机制，该说的都说', v:4}
+  ]},
+  {q:'上一次做完决定后——有复盘吗？', dim:'土', opts:[
+    {t:'从来没有', v:1},
+    {t:'出问题了才复盘', v:2},
+    {t:'偶尔会聊一下', v:3},
+    {t:'每次重大决定后都有复盘记录', v:4}
+  ]},
+  {q:'你们的股权分配是怎么定的？', dim:'金', opts:[
+    {t:'口头商量了一下', v:1},
+    {t:'大概按出钱比例', v:2},
+    {t:'考虑了出钱+出力，但没有定期调整机制', v:3},
+    {t:'书面协议+vesting+定期回顾调整机制', v:4}
+  ]},
+  {q:'你身体出现过"决策信号"吗？（胃紧·失眠·心慌）', dim:'水', opts:[
+    {t:'经常——每次重大决策前都这样', v:1},
+    {t:'偶尔有，但不管它', v:2},
+    {t:'有，会注意但不知道怎么用', v:3},
+    {t:'能感受到并主动用身体信号做参考', v:4}
+  ]},
+  {q:'你们有"原则"吗？——白纸黑字写下来的那种。', dim:'木', opts:[
+    {t:'没有——靠默契', v:1},
+    {t:'有一些模糊的原则但没写下来', v:2},
+    {t:'写了一些，但不经常回顾', v:3},
+    {t:'有书面原则+每季度回顾+可修订', v:4}
+  ]},
+  {q:'做重大决定时——你的直觉占多少？', dim:'火', opts:[
+    {t:'几乎不靠直觉——都靠分析', v:1},
+    {t:'有直觉但不太敢信', v:2},
+    {t:'会听直觉，但最后靠分析决定', v:3},
+    {t:'直觉和分析各占一半，互相校准', v:4}
+  ]},
+  {q:'如果明天你们要拆伙——你们知道怎么拆吗？', dim:'火', opts:[
+    {t:'完全不知道', v:1},
+    {t:'大概有个想法但没聊过', v:2},
+    {t:'聊过一些但没定下来', v:3},
+    {t:'有清晰的退出协议和公平流程', v:4}
+  ]}
+];
+
+var answers = {};
+var currentQ = 0;
+
+function renderQuiz(){
+  var container = document.getElementById('quizContainer');
+  var html = '';
+  QUESTIONS.forEach(function(q, i){
+    html += '<div class="q-card'+(i===0?' active':'')+'" id="qc-'+i+'">';
+    html += '<div class="q-num">第'+(i+1)+'/'+QUESTIONS.length+'题 · '+q.dim+'维度</div>';
+    html += '<div class="q-text">'+q.q+'</div>';
+    html += '<div class="q-dim">'+getDimLabel(q.dim)+'</div>';
+    html += '<div class="opt-list">';
+    q.opts.forEach(function(o, j){
+      html += '<div class="opt-item" id="opt-'+i+'-'+j+'" onclick="selectOpt('+i+','+j+')">'+o.t+'</div>';
+    });
+    html += '</div></div>';
+  });
+  container.innerHTML = html;
+}
+
+function getDimLabel(dim){
+  var map = {土:'🪨 长期视角 · 时间轴', 金:'⚙️ 有限理性 · 可行域', 水:'💧 身体智慧 · 身心流', 木:'🌿 原则与关系 · 信义观', 火:'🔥 直觉与果断 · 直觉阈'};
+  return map[dim]||'';
+}
+
+function selectOpt(qIdx, oIdx){
+  // 清除旧选择
+  var qc = document.getElementById('qc-'+qIdx);
+  qc.querySelectorAll('.opt-item').forEach(function(el){el.classList.remove('selected');});
+  document.getElementById('opt-'+qIdx+'-'+oIdx).classList.add('selected');
+
+  answers[qIdx] = QUESTIONS[qIdx].opts[oIdx].v;
+
+  // 自动前进
+  setTimeout(function(){
+    if(qIdx < QUESTIONS.length-1){
+      // 下一题
+      document.getElementById('qc-'+qIdx).classList.remove('active');
+      document.getElementById('qc-'+(qIdx+1)).classList.add('active');
+      document.getElementById('qc-'+(qIdx+1)).scrollIntoView({behavior:'smooth',block:'center'});
+    } else {
+      // 最后一道
+      showResult();
+    }
+    updateProgress();
+  }, 300);
+}
+
+function updateProgress(){
+  var answered = Object.keys(answers).length;
+  var pct = (answered/QUESTIONS.length)*100;
+  document.getElementById('progressFill').style.width = pct+'%';
+}
+
+function showResult(){
+  // 计算5维得分
+  var dims = {土:[],金:[],水:[],木:[],火:[]};
+  QUESTIONS.forEach(function(q, i){
+    dims[q.dim].push(answers[i]||0);
+  });
+  var dimScores = {};
+  var total = 0;
+  for(var d in dims){
+    var vals = dims[d];
+    if(vals.length===0){dimScores[d]=0;continue;}
+    var sum = vals.reduce(function(a,b){return a+b;},0);
+    dimScores[d] = Math.round((sum/(vals.length*4))*100);
+    total += dimScores[d];
+  }
+  total = Math.round(total/5);
+
+  // 显示
+  document.getElementById('quizContainer').style.display = 'none';
+  document.getElementById('progressFill').style.width = '100%';
+  var rc = document.getElementById('resultCard');
+  rc.classList.add('show');
+  document.getElementById('scoreBig').textContent = total;
+  document.getElementById('scoreLabel').textContent = getLevel(total);
+
+  // 维度条
+  var bars = document.getElementById('dimBars');
+  var dimNames = {土:'🪨 时间轴',金:'⚙️ 可行域',水:'💧 身心流',木:'🌿 信义观',火:'🔥 直觉阈'};
+  var dimColors = {土:'#8B6914',金:'#6B7B8D',水:'#3A6B8C',木:'#5A7A4A',火:'#C23B22'};
+  var html = '';
+  for(var d in dimScores){
+    html += '<div class="dim-bar"><div class="dim-label">'+dimNames[d]+' · '+dimScores[d]+'%</div><div class="bar-track"><div class="bar-fill" style="width:'+dimScores[d]+'%;background:'+dimColors[d]+'"></div></div></div>';
+  }
+  bars.innerHTML = html;
+
+  // 洞察
+  document.getElementById('insightText').innerHTML = getInsight(total, dimScores);
+  rc.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function getLevel(score){
+  if(score>=80) return '🏆 成熟期 · 决策体系完整';
+  if(score>=60) return '📈 成长期 · 有些地方可以更好';
+  if(score>=40) return '🌱 探索期 · 正在建立决策习惯';
+  return '🔍 萌芽期 · 是时候认真对待了';
+}
+
+function getInsight(total, dims){
+  var map = {土:'长期视角和复盘',金:'规则和机制',水:'身体感知和情绪觉察',木:'原则和坦诚对话',火:'直觉和果断力'};
+  // 找最低分
+  var minD='',minS=100;
+  var maxD='',maxS=0;
+  for(var d in dims){if(dims[d]<minS){minS=dims[d];minD=d;}if(dims[d]>maxS){maxS=dims[d];maxD=d;}}
+  var html = '📌 <strong>你的最强维度</strong>：'+map[maxD]+'<br>';
+  html += '⚡ <strong>最需要关注的</strong>：'+map[minD]+'<br><br>';
+  html += '这不是分数——是镜子。你看见的差距，就是下一步可以走的路。';
+  return html;
+}
+
+function retake(){
+  answers = {};
+  currentQ = 0;
+  document.getElementById('resultCard').classList.remove('show');
+  document.getElementById('quizContainer').style.display = 'block';
+  document.getElementById('progressFill').style.width = '0%';
+  // 重置所有卡片和选择
+  document.querySelectorAll('.q-card').forEach(function(el,i){el.classList.toggle('active',i===0);});
+  document.querySelectorAll('.opt-item').forEach(function(el){el.classList.remove('selected');});
+  document.querySelector('.quiz-zone').scrollIntoView({behavior:'smooth'});
+}
+
+renderQuiz();
+
+// ===== 反馈组件（完整保留） =====
 (function(){
   let page=location.pathname.split('/').pop()||'index';
   let key='sri_fb_'+page;
@@ -83,7 +314,6 @@
 })();
 </script>
 
-<p style="text-align:center;font-size:10px;opacity:0.5;padding:10px;">📚 来源: 满意姐·游戏工厂V2.0 · 满意解研究所产品化</p>
+<div style="text-align:center;padding:8px 0;font-size:10px;opacity:0.25;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</div>
 </body>
-
 </html>

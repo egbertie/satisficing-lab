@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>分割饼 · 股权贡献量化工具</title>
+<title>衡·分利 | SlicingPie贡献记账 | 满意解研究所</title>
 <style>
   :root { --sri-red:#C23B22; --sri-gold:#B8860B; --sri-bg:#F5F0E6; --text:#4A4A4A; --title:#2A2A2A; --border:#D4C5A0; }
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -36,8 +36,10 @@
   .btn-outline { background:transparent; border:1.5px solid var(--sri-red); color:var(--sri-red); }
   .footer { text-align:center; padding:24px 16px 40px; font-size:11px; color:#999; }
   .footer a { color:var(--sri-red); text-decoration:none; }
+@media(max-width:480px){body{font-size:14px}}
 </style>
 <link rel="stylesheet" href="vi_quick_ref.css">
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
@@ -75,9 +77,31 @@
 </script>
 
 <body>
-<a href="index.html"><img src="assets/kexing-small.png" alt="" style="width:36px;height:auto;vertical-align:middle;margin-right:8px"></a>
 
-<div class="hero" style="background:linear-gradient(135deg,#C23B22,#B8860B);color:#fff;padding:40px 24px 28px;text-align:center"><h1>分割饼</h1><p style="font-size:14px;margin-top:6px">贡献有价，信任有度——让股权分配不再靠感觉</p><p style="font-size:12px;opacity:0.7;margin-top:4px">输入每人贡献，看到每个人的公平份额</p></div>
+<div class="hero">
+  <h1>🥧 SlicingPie 贡献量化</h1>
+  <p>股权不是分出来的——是记账记出来的</p>
+</div>
+
+<div class="main">
+  <div class="explain">
+    <strong>Moyer的SlicingPie公式：</strong>
+    <span class="formula">你的股权 = 你的贡献(公平市价 - 已获报酬) ÷ 所有合伙人的总贡献</span>
+    <p style="margin-top:8px;">核心思想：股权应该动态反映实际贡献——不是"一开始说好多少就永远多少"。</p>
+    <p style="margin-top:4px;font-size:11px;opacity:0.7;">Moyer·Slicing Pie: "股权不是激励——是记账。"</p>
+  </div>
+
+  <!-- Partner A -->
+  <div class="partner-box">
+    <h3>👤 合伙人A（你）</h3>
+    <div class="row"><label>投入时间</label><select id="aTime"><option value="1">全职(100%)</option><option value="0.75">大部分(75%)</option><option value="0.5">一半(50%)</option><option value="0.25">兼职(25%)</option></select></div>
+    <div class="row"><label>投入月数</label><input type="number" id="aMonths" value="12" min="1" max="60"></div>
+    <div class="row"><label>放弃年薪(万)</label><input type="number" id="aSalary" value="60" min="0" step="1"></div>
+    <div class="row"><label>已获报酬(万)</label><input type="number" id="aPaid" value="0" min="0" step="1"></div>
+    <div class="row"><label>现金投入(万)</label><input type="number" id="aCash" value="10" min="0" step="1"></div>
+    <div class="row"><label>额外价值</label><input type="text" id="aExtra" placeholder="专利/客户/品牌...（可估算为万）" value=""></div>
+    <div class="row"><label>额外估值(万)</label><input type="number" id="aExtraVal" value="0" min="0" step="1"></div>
+  </div>
 
   <!-- Partner B -->
   <div class="partner-box">
@@ -162,6 +186,7 @@ function calculate() {
 }
 </script>
 
+<p style="text-align:center;font-size:10px;opacity:0.35;padding:4px;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</p>
 <div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px;">
   <div id="fbQuestion" style="color:#4A4A4A;font-weight:600;margin-bottom:10px;">这个工具对你有用吗？</div>
   <div id="fbActions" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px;">

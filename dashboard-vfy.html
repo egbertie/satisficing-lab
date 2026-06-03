@@ -11,13 +11,13 @@ body{font-family:-apple-system,"PingFang SC",sans-serif;background:#F5F0E6;color
 .btn{padding:6px 14px;border-radius:12px;border:none;cursor:pointer;font-size:12px;font-weight:600;background:#C23B22;color:#fff;margin:4px}
 h2{font-size:16px;color:#2A2A2A;margin-bottom:8px}
 pre{background:#f0e8d8;padding:8px;border-radius:8px;font-size:11px;overflow-x:auto}
+@media(max-width:480px){body{font-size:14px}}
 </style>
+
 <script src="sri-track.js"></script>
 <script src="sri-api.js"></script>
 </head>
 <body>
-<a href="index.html" style="display:inline-block;padding:6px 14px;margin:8px 0 0 12px;font-size:12px;color:#C23B22;text-decoration:none;border:1px solid #C23B22;border-radius:6px">← 返回首页</a>
-
 <h1>🔧 驾驶舱引擎逐步验证</h1>
 <p style="color:#6E6E6E;font-size:12px;margin-bottom:12px">按步骤加载正式版dashboard.html的组件，定位失败点</p>
 
@@ -91,7 +91,7 @@ function runStep2() {
       seed: function() {
         if (!this.pw().length) dbsv('sri_db_passwords', [{ id: 1, code: '123654', products: 'all', customer: '内测', status: '启用' }]);
         if (!this.qu().length) dbsv('sri_db_quality', [
-          { qm_id: 'QM-001', standard: 'L0提案审核', status: '待执行', assignee: '<a href="index.html"><img src="assets/luopan-small.png" alt="" style="width:36px;height:auto;vertical-align:middle;margin-right:8px"></a>满意解研究所', deadline: '06-07', priority: 'P0' },
+          { qm_id: 'QM-001', standard: 'L0提案审核', status: '待执行', assignee: '满意解研究所', deadline: '06-07', priority: 'P0' },
           { qm_id: 'QM-002', standard: 'L1方法论审核', status: '55%', assignee: '满意解研究所', deadline: '06-07', priority: 'P0' }
         ]);
         if (!this.gr().length) dbsv('sri_db_gr', [
@@ -168,5 +168,17 @@ async function runStep4() {
 </script>
 
 <p style="font-size:10px;color:#6E6E6E;opacity:0.5;margin-top:24px">引擎验证 V1.0 · 逐步加载正式版组件</p>
+<p style="text-align:center;font-size:10px;opacity:0.35;padding:4px;letter-spacing:1px">火承土印·鼎玉契晋·三脉两翼·五维相生</p>
+
+<div style="max-width:600px;margin:24px auto;padding:0 16px;text-align:center;font-size:13px;border-top:1px solid #D4C5A0;padding-top:20px">
+  <div id="fbQ" style="color:#4A4A4A;font-weight:600;margin-bottom:10px">这个页面对你有用吗？</div>
+  <div id="fbBtns" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px">
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'up');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">👍 有用</button>
+    <button onclick="(function(){var k='fb_'+location.pathname.split('/').pop();localStorage.setItem(k,'text');document.getElementById('fbBtns').style.display='none';document.getElementById('fbQ').textContent='感谢反馈！'})()" style="padding:8px 18px;border-radius:20px;border:1.5px solid #D4C5A0;background:#fff;cursor:pointer;font-size:13px">💬 有建议</button>
+  </div>
+</div>
+
+
+<p style="text-align:center;padding:10px;font-size:11px"><a href="go.html" style="color:#C23B22;text-decoration:none">← 返回决策通道</a></p>
 </body>
 </html>
