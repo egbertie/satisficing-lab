@@ -106,6 +106,17 @@
 
 ## 反模式（不要重复的错误）
 
+### 🚫 飞书创建文件必须用 user_access_token，绝不能用 tenant_access_token
+**2026-06-03 惨痛教训**：用 `tenant_access_token`（应用身份）创建的多维表格，owner 是应用，用户在飞书云文档里**完全看不到**。折腾了 3 轮创建+删除，最后才发现问题。
+**根因**：`tenant_access_token` → 应用身份 → 文件 owner = 应用 → 用户不可见
+**正确做法**：必须先用 OAuth 获取 `user_access_token`（用户身份），再用它创建，文件才会出现在用户云文档里。
+**获取 user_access_token 的完整路径**：
+1. 飞书开发者后台 → 安全设置 → 重定向 URL → 添加 `http://127.0.0.1:9292/callback`
+2. 用户浏览器打开授权链接 → 授权 → callback 返回 code
+3. POST `authen/v1/access_token` 用 code 换 user_access_token（需传 app_id + app_secret）
+4. 用 user_access_token 创建文件 → 用户可见 ✅
+**保存位置**：`/tmp/feishu_user_tokens.json`（access_token 有效期约 2 小时，refresh_token 有效期约 30 天）
+
 ### 🚫 邮箱检查时先问授权码再试
 **2026-06-03 教训**：用户说「再试试邮箱」时，直接用已有授权码测试，不要先去网页验证或让用户重新生成。先试，失败了再找用户要新授权码。
 **规则**：邮箱测试 → 直接用已有授权码 IMAP 登录 → 失败了才让用户提供新授权码。
