@@ -1,9 +1,4 @@
-[2026-06-04 03:08 CST] 数据管道扫描 — FAILED
-原因: memory/_scripts/sri_data_pipeline.py 不存在。
-可用候选脚本: data_init_pipeline.py, sri_orchestrator.py, sri_product_scanner.py 等 sri_* 系列脚本均不符名称。
-→ 可能需要: (1) 创建 sri_data_pipeline.py 脚本; (2) 或修正 cron 配置指向现有脚本如 data_init_pipeline.py。
-
---- 2026-06-04 09:13 SCAN ---
-[FAIL] python3 memory/_scripts/sri_data_pipeline.py scan → 脚本不存在 (FileNotFoundError)
-注：memory/_scripts/ 下无 sri_data_pipeline.py 文件。附近候选：sri_product_scanner.py, sri_portfolio_rationalizer.py。需确认是否另有关联脚本或名称变更。
+[2026-06-04 15:19 CST] pipeline scan — FAILED
+Reason: script not found — memory/_scripts/sri_data_pipeline.py does not exist
+Output: Python can't open file, Errno 2
 [FIN-A]
