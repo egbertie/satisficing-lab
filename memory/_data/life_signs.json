@@ -7,41 +7,90 @@
       "status": "✅ pass",
       "name": "数据完整性",
       "checks": {
-        "entities_index_json": {"status": "pass", "detail": "342 products, 37 entity types, kg_density 100%"},
-        "dashboard_seed_v2": {"status": "pass", "detail": "valid JSON, products/customers/scan_info"},
-        "files_index_json": {"status": "pass", "detail": "4.1MB, 16067 entries"},
-        "今日日志": {"status": "pass", "detail": "memory/2026-06-02.md (7060 bytes)"}
+        "entities_index_json": {
+          "status": "pass",
+          "detail": "342 products, 37 entity types, kg_density 100%"
+        },
+        "dashboard_seed_v2": {
+          "status": "pass",
+          "detail": "valid JSON, products/customers/scan_info"
+        },
+        "files_index_json": {
+          "status": "pass",
+          "detail": "4.1MB, 16067 entries"
+        },
+        "今日日志": {
+          "status": "pass",
+          "detail": "memory/2026-06-02.md (7060 bytes)"
+        }
       }
     },
     "L1_physical": {
       "status": "✅ pass",
       "name": "文件权限",
       "checks": {
-        "site_html_permissions": {"status": "pass", "detail": "0 world-writable files"},
-        "key_file_permissions": {"status": "pass", "detail": "all 600 (owner-only)"},
-        "git_dir": {"status": "pass", "detail": "drwx------"}
+        "site_html_permissions": {
+          "status": "pass",
+          "detail": "0 world-writable files"
+        },
+        "key_file_permissions": {
+          "status": "pass",
+          "detail": "all 600 (owner-only)"
+        },
+        "git_dir": {
+          "status": "pass",
+          "detail": "drwx------"
+        }
       }
     },
     "L2_innate": {
       "status": "✅ pass",
       "name": "dev.sh验证",
       "checks": {
-        "dev_sh_verify": {"status": "pass", "detail": "9/9 通过"},
-        "syntax_dashboard": {"status": "pass"},
-        "syntax_admin": {"status": "pass"},
-        "brand_check": {"status": "pass", "detail": "满意红已清零"},
-        "escHtml_check": {"status": "pass", "detail": "无push/fetch误替换"},
-        "data_validity": {"status": "pass", "detail": "entities_index + open_tasks_audit OK"}
+        "dev_sh_verify": {
+          "status": "pass",
+          "detail": "9/9 通过"
+        },
+        "syntax_dashboard": {
+          "status": "pass"
+        },
+        "syntax_admin": {
+          "status": "pass"
+        },
+        "brand_check": {
+          "status": "pass",
+          "detail": "满意红已清零"
+        },
+        "escHtml_check": {
+          "status": "pass",
+          "detail": "无push/fetch误替换"
+        },
+        "data_validity": {
+          "status": "pass",
+          "detail": "entities_index + open_tasks_audit OK"
+        }
       }
     },
     "L3_isolation": {
       "status": "✅ pass",
       "name": "备份隔离",
       "checks": {
-        "bak_size": {"status": "pass", "detail": ".bak 38M, site/.bak 84K, memory/_backups 232M"},
-        "bak_freshness": {"status": "pass", "detail": "272 files modified in last 24h"},
-        "site_deprecated": {"status": "pass", "detail": "4 deprecated dashboards in site/.bak"},
-        "total_html_backups": {"status": "pass", "detail": "783 + 4 HTML backups"}
+        "bak_size": {
+          "status": "pass",
+          "detail": ".bak 38M, site/.bak 84K, memory/_backups 232M"
+        },
+        "bak_freshness": {
+          "status": "pass",
+          "detail": "272 files modified in last 24h"
+        },
+        "site_deprecated": {
+          "status": "pass",
+          "detail": "4 deprecated dashboards in site/.bak"
+        },
+        "total_html_backups": {
+          "status": "pass",
+          "detail": "783 + 4 HTML backups"
+        }
       }
     },
     "L4_adaptive": {
@@ -77,5 +126,13 @@
     "修复3个jobs的delivery.channel: feishu→openclaw-weixin 或移除delivery",
     "增加超时job的timeoutSeconds (120→300)",
     "飞轮·日报生成连续3次失败，需重点排查"
+  ],
+  "alerts": [
+    {
+      "ts": "2026-06-04T08:11:43+08:00",
+      "source": "cron_token_health_scan",
+      "level": "yellow",
+      "message": "morning-ritual-comprehensive 连续4次失败. Token 0%. daily_exec 45/60, error_rate 6.5%"
+    }
   ]
 }

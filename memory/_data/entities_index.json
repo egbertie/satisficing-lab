@@ -46882,6 +46882,33 @@
           "flywheel_data": []
         },
         "total_fixes": 0
+      },
+      {
+        "healed_at": "2026-06-04T00:11:44.559045+00:00",
+        "dry_run": false,
+        "fixes": {
+          "meta_tags": [
+            {
+              "entity_id": "PROD-147",
+              "file": "case-xhs-zhangxue.html",
+              "fixes": [
+                "added meta description"
+              ]
+            },
+            {
+              "entity_id": "PROD-150",
+              "file": "deep-chronicle-v2.html",
+              "fixes": [
+                "added meta description"
+              ]
+            }
+          ],
+          "broken_links": [],
+          "duplicates": [],
+          "missing_fields": [],
+          "flywheel_data": []
+        },
+        "total_fixes": 2
       }
     ],
     "portfolio_rationalization": {
@@ -48123,20 +48150,20 @@
     },
     "chemical_governor": {
       "version": "2.0",
-      "executed_at": "2026-06-03T22:44:07.346357+00:00",
+      "executed_at": "2026-06-04T00:30:23.910739+00:00",
       "state": "steady",
-      "current_heat": 1720.5,
-      "setpoint": "1658.8-1758.8",
+      "current_heat": 1716.0,
+      "setpoint": "1670.5-1770.5",
       "speed_multiplier": 1.0,
       "effect": "neutral",
       "learning": "保持·设定点适应中",
       "strategy": "稳态运行",
-      "heat_delta": 0.0,
-      "stability_score": 100,
-      "learning_progress": 70,
-      "total_runs": 14,
+      "heat_delta": -4.5,
+      "stability_score": 99.5,
+      "learning_progress": 80,
+      "total_runs": 16,
       "principle": "第二阶控制论·系统观察自己的调控·调整设定点·反脆弱训练",
-      "antifragile_level": 70
+      "antifragile_level": 80
     },
     "_tuning_history": [
       {
@@ -48373,6 +48400,24 @@
         "window_used": "7d",
         "samples": 14,
         "drift": "STABLE"
+      },
+      {
+        "run": 16,
+        "timestamp": "2026-06-04T00:30:23.910739+00:00",
+        "state": "steady",
+        "speed": 1.0,
+        "heat_before": 1720.5,
+        "heat_after": 1716.0,
+        "heat_delta": -4.5,
+        "setpoint_low": 1670.5,
+        "setpoint_high": 1770.5,
+        "effect": "neutral",
+        "learning": "保持·设定点适应中",
+        "strategy": "稳态运行",
+        "health_score": 96.4,
+        "stability_score": 99.5,
+        "learning_progress": 80,
+        "perturbation": 0
       }
     ],
     "bottleneck_analysis": {
@@ -48393,20 +48438,20 @@
     },
     "perpetual_control": {
       "version": "2.0",
-      "executed_at": "2026-06-03T22:44:07.346357+00:00",
+      "executed_at": "2026-06-04T00:30:23.910739+00:00",
       "state": "steady",
-      "current_heat": 1720.5,
-      "setpoint": "1658.8-1758.8",
+      "current_heat": 1716.0,
+      "setpoint": "1670.5-1770.5",
       "speed_multiplier": 1.0,
       "effect": "neutral",
       "learning": "保持·设定点适应中",
       "strategy": "稳态运行",
-      "heat_delta": 0.0,
-      "stability_score": 100,
-      "learning_progress": 70,
-      "total_runs": 14,
+      "heat_delta": -4.5,
+      "stability_score": 99.5,
+      "learning_progress": 80,
+      "total_runs": 16,
       "principle": "第二阶控制论·系统观察自己的调控·调整设定点·反脆弱训练",
-      "antifragile_level": 70
+      "antifragile_level": 80
     },
     "second_order": {
       "observed_at": "2026-06-03T22:44:08.286572+00:00",
