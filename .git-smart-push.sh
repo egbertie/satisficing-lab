@@ -79,7 +79,10 @@ if [ -n "$(git ls-files --others --exclude-standard 2>/dev/null)" ]; then
 fi
 
 if $has_changes; then
-  last_change=$now
+  # 只在首次检测到变更或push后重新检测到变更时重置冷却计时
+  if [ "$pending" = "false" ]; then
+    last_change=$now
+  fi
   pending="true"
   save_state $last_push $last_change $push_count_today "true"
   echo "[$(date '+%H:%M')] Changes detected, pending push" >> "$LOG_FILE"

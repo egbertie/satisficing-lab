@@ -133,6 +133,26 @@
       "source": "cron_token_health_scan",
       "level": "yellow",
       "message": "morning-ritual-comprehensive 连续4次失败. Token 0%. daily_exec 45/60, error_rate 6.5%"
+    },
+    {
+      "ts": "2026-06-04T20:06:29+08:00",
+      "type": "cron_health_red",
+      "health": "red",
+      "token_pct": 0,
+      "cron_total": 32,
+      "cron_redline": 31,
+      "daily_exec": 69,
+      "daily_redline": 60,
+      "failures": {
+        "morning-ritual-comprehensive": 4
+      },
+      "action": "enforce_noop_under_threshold"
+    }
+  ],
+  "health_log": [
+    {
+      "ts": "2026-06-04T20:06:29+08:00",
+      "health": "red"
     }
   ]
 }
