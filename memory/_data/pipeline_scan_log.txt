@@ -1,13 +1,11 @@
-[2026-06-04 21:19 CST] 数据管道扫描 + Token检查
-===========================================
-Token%: 0% (正常, <85%, 无需压缩)
-数据管道扫描: ❌ 失败
-原因: memory/_scripts/sri_data_pipeline.py 不存在
-相关脚本检查: sri_* 系列共计29个脚本，但无 sri_data_pipeline.py
-建议: 确认脚本正确名称，或补充该脚本后再启用此cron
-===========================================
-[FIN-A]
---- 2026-06-05 03:35 CST (cron 6h) ---
-Token: 0% (ok, no action needed)
-Pipeline: FAILED — sri_data_pipeline.py not found at memory/_scripts/
+=== Pipeline Scan Log ===
+Time: 2026-06-05 06:33 (Asia/Shanghai)
+Source: cron (1111e988-6074-4445-9938-6671419fcf59)
+
+[TOKEN CHECK] Context: 0/1.0m (0%) — OK, no action needed.
+
+[DATA PIPELINE] python3 memory/_scripts/sri_data_pipeline.py scan
+  Status: FAILED — script not found at memory/_scripts/sri_data_pipeline.py
+  Error: [Errno 2] No such file or directory
+
 [FIN-A]
