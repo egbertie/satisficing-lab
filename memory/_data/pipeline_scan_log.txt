@@ -1,7 +1,11 @@
-[FIN-A] 2026-06-05 18:33 CST — 数据管道扫描
+=== Pipeline Scan Log ===
+Time: 2026-06-06T00:33 (Asia/Shanghai)
 
-1. Token检查: OK (7%, 远低于阈值, 无需压缩)
-2. 数据管道扫描: FAILED
-   - 原因: memory/_scripts/sri_data_pipeline.py 文件不存在
-   - 输出: Python can't open file, Errno 2 No such file or directory
-3. 结论: 管道脚本未部署，跳过扫描。Token安全。
+1. Token Check: 0% — OK, no compression needed.
+
+2. Data Pipeline Scan:
+   ERROR: sri_data_pipeline.py not found at memory/_scripts/.
+   Candidates found: data_init_pipeline.py (runs full init, not scan mode)
+   — No scan subcommand available. Skipped.
+
+Status: [FIN-A] — Scan skipped (script missing).
