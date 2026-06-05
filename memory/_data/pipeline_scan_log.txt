@@ -1,11 +1,13 @@
-=== Pipeline Scan Log ===
-Time: 2026-06-06T00:33 (Asia/Shanghai)
+===== Pipeline Scan Log =====
+Time: 2026-06-06 06:33 CST
+Source: cron [数据管道·每6小时扫描]
 
-1. Token Check: 0% — OK, no compression needed.
+--- Token检查 ---
+Context: 0/1.0m (0%) — 正常，无需压缩
 
-2. Data Pipeline Scan:
-   ERROR: sri_data_pipeline.py not found at memory/_scripts/.
-   Candidates found: data_init_pipeline.py (runs full init, not scan mode)
-   — No scan subcommand available. Skipped.
+--- 数据管道扫描 ---
+结果: FAILED
+原因: memory/_scripts/sri_data_pipeline.py 不存在。相关脚本 data_init_pipeline.py 存在但未运行（命名不匹配）。
+建议: 检查 cron 配置中的脚本路径，或重命名/创建 sri_data_pipeline.py。
 
-Status: [FIN-A] — Scan skipped (script missing).
+===== [FIN-A] =====
