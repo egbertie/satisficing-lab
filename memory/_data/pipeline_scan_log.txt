@@ -1,13 +1,7 @@
-=== Pipeline Scan Log ===
-Time: 2026-06-05 12:33 CST (Asia/Shanghai)
-Job: 数据管道·每6小时扫描 (cron:1111e988)
+[FIN-A] 2026-06-05 18:33 CST — 数据管道扫描
 
-[1/2] Token检查: 通过
-- 上下文使用: 0% (0/1.0m) — ✅ 无需压缩
-
-[2/2] 数据管道扫描: ❌ 失败
-- 脚本 memory/_scripts/sri_data_pipeline.py 不存在
-- 已检查 _scripts/ 目录，最接近的候选: data_init_pipeline.py
-- 可能需要确认正确的脚本名称
-
-[FIN-A]
+1. Token检查: OK (7%, 远低于阈值, 无需压缩)
+2. 数据管道扫描: FAILED
+   - 原因: memory/_scripts/sri_data_pipeline.py 文件不存在
+   - 输出: Python can't open file, Errno 2 No such file or directory
+3. 结论: 管道脚本未部署，跳过扫描。Token安全。
