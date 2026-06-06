@@ -1,7 +1,56 @@
 # MEMORY.md — 满意红的长时记忆
 
-> 最后更新: 2026-06-04 00:01 · 体系v7.1 + 文化体系V1.0 + Coze三人协作体系V1.0
+> 最后更新: 2026-06-06 23:10 · 体系v7.1 + 文化体系V1.0 + Coze三人协作体系V1.0 + 腾讯云CVM生产部署V1.0
 > 这不是日记。这是从经验中蒸馏出来的东西。
+
+---
+
+## 腾讯云 CVM 生产环境 (2026-06-06 建立)
+
+### 服务器信息
+- **实例ID**: ins-h3yc7m0w · **公网IP**: 101.33.219.144 · **区域**: 广州七区
+- **OS**: TencentOS Server 4 · **CPU**: 2核 AMD EPYC · **内存**: 3.6GB
+- **系统盘**: 50GB SSD (/dev/vda1, XFS) · **数据盘**: 50GB SSD (/dev/vdb, EXT4, /mnt/datadisk0)
+- **安全组**: sg-rviz2a9t (TCP:22/80/443 已放通)
+
+### 服务架构
+- **Nginx :80**: 静态文件 (/mnt/datadisk0/satisficing-lab/) + 安全头 + /api/ 反向代理
+- **Gunicorn :5050**: 2 workers · Flask app · systemd 守护 · EnvironmentFile=/etc/sriserver/env
+- **SSH :22**: 仅密钥认证 · 禁密码 · PermitRootLogin prohibit-password
+- **iptables**: policy DROP · 仅开 22/80/443/ICMP · 持久化 /etc/iptables/rules.v4
+
+### 备份体系
+- **每日3点**: tar 备份项目→/mnt/datadisk0/backups/ · 保留7天
+- **logrotate**: 每日轮转 · 7天保留 · 压缩
+- **SSH 恢复**: VNC → `cp /etc/ssh/sshd_config.orig /etc/ssh/sshd_config` → `systemctl restart sshd`
+- **iptables 恢复**: VNC → `iptables -F`
+
+### 关键文件位置
+| 文件 | 用途 |
+|:--|:--|
+| `/mnt/datadisk0/satisficing-lab/` | 项目根 |
+| `/mnt/datadisk0/backups/` | 备份 |
+| `/etc/sriserver/env` | 飞书Secret(600) |
+| `/etc/nginx/conf.d/satisficing-lab.conf` | Nginx站点 |
+| `/etc/systemd/system/sri-api.service` | Gunicorn服务 |
+| `/etc/cron.d/sriserver-health` | 云端Cron |
+| `/usr/local/bin/sri-backup.sh` | 备份脚本 |
+
+### 部署教训（不可重犯）
+1. **🚫 绝不 sed 改 sshd_config 的 Port 行** → 端口隔离用 iptables，不动 sshd
+2. **🚫 macOS tar 打包不可靠** → 始终用 rsync
+3. **🚫 任何危险操作前保存 .orig → 验证 → 再应用**
+4. **🚫 VNC 是最后通道**，网络操作必须确保有恢复手段
+5. **🚫 Flask dev server 不上生产** → Gunicorn + systemd
+6. **🚫 Secret 禁止 config.py 明文** → EnvironmentFile 注入
+
+### GitHub 迁移到腾讯云计划 (待执行)
+- **目标**: 关闭 GitHub，所有能力迁移到腾讯云
+- **Git 仓库**: 腾讯云 → CodeCommit 兼容或自建 Git 服务
+- **CI/CD**: .github/workflows/mirror-backup.yml → 腾讯云 Cron 替代
+- **备份仓库**: satisficing-lab-backup → 腾讯云 COS 或本地备份
+- **Pages 托管**: GitHub Pages → 腾讯云 Nginx (已完成)
+- **驾驶舱集成**: 腾讯云使用情况（磁盘/服务/Cron/备份）→ dashboard-v3.html
 
 ---
 
