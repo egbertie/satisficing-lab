@@ -1,15 +1,15 @@
-===== 数据管道扫描日志 =====
-时间: 2026-06-06 12:34 CST (Asia/Shanghai)
-触发: cron 每6小时扫描
+========================================
+Pipeline Scan Log — 2026-06-06 18:33 CST
+========================================
 
---- Token检查 ---
-Context: 0/1.0m (0%) — 安全，无需压缩
+[TOKEN CHECK]
+Session: deepseek/deepseek-v4-pro
+Token usage: 135k/1.0m (14%) — OK, no compaction needed.
+Cache: 91% hit. Status: healthy.
 
---- 数据管道扫描 ---
-脚本: data_init_pipeline.py (原 sri_data_pipeline.py 不存在，使用替代脚本)
-结果: ✅ 成功
-- Stage 1: 41398 文件扫描完成
-- Stage 2: 1413 文件元数据提取完成
-- 分类: 系统记忆385, 对话记录169, 扣子知识库100, 项目资产79, 脚本工具31, etc.
+[DATA PIPELINE SCAN]
+Script not found: memory/_scripts/sri_data_pipeline.py does not exist.
+Scan skipped. No pipeline action taken.
 
-状态: 正常 [FIN-A]
+[FIN-A]
+========================================
