@@ -234,19 +234,34 @@ function switchTab(name, btn) {
 }
 
 // Profile management
-function saveProfile() {
+async function saveProfile() {
+  let name = document.getElementById('name').value.trim();
+  let company = document.getElementById('company').value.trim();
+  let email = document.getElementById('email').value.trim();
+  let role = document.getElementById('role').value;
+  let industry = document.getElementById('industry').value;
+  
+  if (!name) { alert('请至少填写姓名'); return; }
+  
   let profile = {
-    name: document.getElementById('name').value.trim(),
-    company: document.getElementById('company').value.trim(),
-    email: document.getElementById('email').value.trim(),
-    role: document.getElementById('role').value,
-    industry: document.getElementById('industry').value,
+    name, company, email, role, industry,
     customerId: 'SRI-' + Date.now().toString(36).toUpperCase(),
     registered: new Date().toISOString(),
     toolsUsed: JSON.parse(localStorage.getItem('sri_usage_log') || '[]').length || 0,
     refCount: parseInt(localStorage.getItem('sri_ref_count') || '0'),
   };
-  if (!profile.name) { alert('请至少填写姓名'); return; }
+
+  // 优先后端注册
+  if (email && email.includes('@')) {
+    try {
+      let r = await fetch('/api/auth/register', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ name, email, company, role, industry,
+          password: email.replace(/[^a-zA-Z0-9]/g,'').slice(0,6)+'@SRI' })
+      });
+      if (r.ok) profile.customerId = (await r.json()).customer_id || profile.customerId;
+    } catch(e) { console.log('后端注册fallback到本地'); }
+  }
   
   localStorage.setItem('sri_profile', JSON.stringify(profile));
   loadProfile();
