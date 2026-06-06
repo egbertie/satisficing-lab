@@ -134,14 +134,25 @@ with app.test_client() as c:
     ;;
 
   push)
-    echo "📤 推送到 GitHub Pages..."
+    echo "📤 推送到腾讯云 (生产)..."
     git add -A
     git commit -m "update: $(date '+%Y-%m-%d %H:%M')" || true
-    git push origin main
-    echo "✅ 已推送"
+    echo "  → 腾讯云 CVM (101.33.219.144)..."
+    git push tencent main
+    echo ""
+    echo "✅ 已推送 → 自动部署 → 网站更新"
+    echo "  验证: http://101.33.219.144/"
+    ;;
+
+  push-github)
+    echo "📤 推送到 GitHub (备份)..."
+    git add -A
+    git commit -m "backup: $(date '+%Y-%m-%d %H:%M')" || true
+    git push origin main || echo "⚠️  GitHub push 失败 (可能已关闭)"
+    echo "✅ GitHub 备份完成"
     ;;
 
   *)
-    echo "用法: ./dev.sh [test|verify|push|db-reset]"
+    echo "用法: ./dev.sh [test|verify|push|push-github|db-reset]"
     ;;
 esac

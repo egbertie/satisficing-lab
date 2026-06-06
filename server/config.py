@@ -36,8 +36,9 @@ DEBUG = os.environ.get("SRI_DEBUG", "false").lower() == "true"
 CORS_ORIGINS = [
     "http://localhost:8766",      # dev.sh 本地测试
     "http://127.0.0.1:8766",
-    "https://egbertie.github.io",  # GitHub Pages
-    "http://localhost:5000",
+    "https://egbertie.github.io",  # GitHub Pages (过渡)
+    "http://101.33.219.144",       # 腾讯云 CVM
+    "http://localhost:5050",
 ]
 
 # === 产品交付 ===
