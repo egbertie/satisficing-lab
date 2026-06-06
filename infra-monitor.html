@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>满意解研究所 · 基础设施监控</title>
+<link rel="stylesheet" href="sri-design.css">
+<style>
+:root { --red:#C23B22; --gold:#B8860B; --bg:#F5F0E6; --ink:#4A4A4A; --title:#2A2A2A; --border:#E0D5C0; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'PingFang SC','Helvetica Neue',sans-serif; background:var(--bg); color:var(--ink); padding:20px; }
+.container { max-width:1400px; margin:0 auto; }
+.header { text-align:center; margin-bottom:30px; border-bottom:2px solid var(--border); padding-bottom:20px; }
+.header h1 { color:var(--title); font-size:24px; margin-bottom:5px; }
+.header .sub { color:var(--ink); opacity:0.6; font-size:13px; }
+.update-bar { font-size:12px; color:var(--ink); opacity:0.5; text-align:right; margin-bottom:10px; }
+
+/* 双列布局 */
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+
+/* 区域 */
+.zone { background:#fff; border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+.zone-header { display:flex; align-items:center; gap:8px; padding:12px 16px; border-bottom:1px solid var(--border); }
+.zone-header .icon { font-size:20px; }
+.zone-header .title { font-weight:600; color:var(--title); }
+.zone-header .host { font-size:12px; color:var(--ink); opacity:0.5; margin-left:auto; }
+.zone-body { padding:16px; }
+
+/* 卡片网格 */
+.cards { display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:12px; }
+.card { padding:12px; border:1px solid var(--border); border-radius:6px; }
+.card-label { font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:4px; }
+.card-value { font-size:20px; font-weight:700; color:var(--title); }
+.card-sub { font-size:12px; color:var(--ink); opacity:0.5; margin-top:2px; }
+
+/* 进度条 */
+.progress { height:6px; background:var(--border); border-radius:3px; margin-top:6px; }
+.progress-fill { height:100%; border-radius:3px; transition:width .5s; }
+.progress-fill.green { background:#4CAF50; }
+.progress-fill.yellow { background:#FF9800; }
+.progress-fill.red { background:var(--red); }
+
+/* 服务指示灯 */
+.service-row { display:flex; align-items:center; gap:8px; padding:6px 0; border-bottom:1px solid var(--border); border-bottom-style:dotted; }
+.service-name { flex:1; font-size:13px; }
+.dot { width:10px; height:10px; border-radius:50%; display:inline-block; }
+.dot.on { background:#4CAF50; }
+.dot.off { background:var(--red); }
+.service-info { font-size:11px; color:var(--ink); opacity:0.5; }
+
+/* 备份列表 */
+.backup-row { font-size:12px; padding:4px 0; display:flex; justify-content:space-between; }
+
+/* 负载条 */
+.load-bars { display:flex; gap:4px; align-items:end; height:40px; margin-top:8px; }
+.load-bar { flex:1; background:var(--border); border-radius:2px 2px 0 0; transition:height .5s; }
+.load-bar.high { background:var(--red); }
+.load-bar.mid { background:#FF9800; }
+.load-bar.low { background:#4CAF50; }
+
+@media (max-width:900px) { .grid-2 { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🔧 基础设施监控</h1>
+    <div class="sub">满意解研究所 · 腾讯云 CVM + 本地 Mac · 一体化监控</div>
+  </div>
+  <div class="update-bar" id="updateTime">加载中...</div>
+
+  <div class="grid-2">
+    <!-- ==================== 腾讯云 CVM ==================== -->
+    <div class="zone" id="zone-cvm">
+      <div class="zone-header">
+        <span class="icon">☁️</span>
+        <span class="title">腾讯云 CVM</span>
+        <span class="host" id="cvm-host">广州 · ins-h3yc7m0w</span>
+      </div>
+      <div class="zone-body">
+        <div class="cards" id="cvm-cards">
+          <div class="card"><div class="card-label">🖥️ 状态</div><div class="card-value">-</div></div>
+          <div class="card"><div class="card-label">💾 系统盘</div><div class="card-value">-</div></div>
+          <div class="card"><div class="card-label">📀 数据盘</div><div class="card-value">-</div></div>
+          <div class="card"><div class="card-label">🧠 内存</div><div class="card-value">-</div></div>
+          <div class="card"><div class="card-label">📦 备份</div><div class="card-value">-</div></div>
+          <div class="card"><div class="card-label">🏪 服务</div><div class="card-value">-</div></div>
+        </div>
+        <div style="margin-top:16px;">
+          <div class="zone-header" style="border:0; padding:4px 0; margin-bottom:8px;">
+            <span class="title" style="font-size:13px;">服务状态</span>
+          </div>
+          <div id="cvm-services"></div>
+        </div>
+        <div style="margin-top:16px;">
+          <div class="zone-header" style="border:0; padding:4px 0; margin-bottom:8px;">
+            <span class="title" style="font-size:13px;">备份历史</span>
+          </div>
+          <div id="cvm-backups" style="font-size:12px; color:var(--ink); opacity:0.6;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 本地 Mac ==================== -->
+    <div class="zone" id="zone-mac">
+      <div class="zone-header">
+        <span class="icon">💻</span>
+        <span class="title">本地 Mac</span>
+        <span class="host" id="mac-host">192.168.0.120</span>
+      </div>
+      <div class="zone-body">
+        <div class="cards" id="mac-cards">
+          <div class="card"><div class="card-label">🖥️ CPU</div><div class="card-value">-</div></div>
+          <div class="card"><div class="card-label">🧠 内存</div><div class="card-value">-</div></div>
+          <div class="card"><div class="card-label">💾 系统盘</div><div class="card-value">-</div></div>
+          <div class="card"><div class="card-label">📊 数据盘</div><div class="card-value">-</div></div>
+          <div class="card"><div class="card-label">⚡ 负载(1m)</div><div class="card-value">-</div></div>
+          <div class="card"><div class="card-label">📝 Git提交</div><div class="card-value">-</div></div>
+        </div>
+        <div style="margin-top:16px;">
+          <div class="zone-header" style="border:0; padding:4px 0; margin-bottom:8px;">
+            <span class="title" style="font-size:13px;">关键进程</span>
+          </div>
+          <div id="mac-processes"></div>
+        </div>
+        <div style="margin-top:16px;">
+          <div class="zone-header" style="border:0; padding:4px 0; margin-bottom:8px;">
+            <span class="title" style="font-size:13px;">CPU 负载</span>
+          </div>
+          <div class="load-bars" id="mac-loadbars">
+            <div class="load-bar" style="height:0;"></div>
+            <div class="load-bar" style="height:0;"></div>
+            <div class="load-bar" style="height:0;"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:11px; opacity:0.5; margin-top:4px;">
+            <span>1分钟</span><span>5分钟</span><span>15分钟</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 飞书集成 & 安全 ==================== -->
+  <div class="grid-2" style="margin-top:24px;">
+    <div class="zone">
+      <div class="zone-header">
+        <span class="icon">🔗</span>
+        <span class="title">飞书集成</span>
+      </div>
+      <div class="zone-body">
+        <div id="feishu-status"></div>
+      </div>
+    </div>
+    <div class="zone">
+      <div class="zone-header">
+        <span class="icon">🔒</span>
+        <span class="title">安全状态</span>
+      </div>
+      <div class="zone-body">
+        <div id="security-status"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Git 推送链路 ==================== -->
+  <div style="margin-top:24px;">
+    <div class="zone">
+      <div class="zone-header">
+        <span class="icon">🔄</span>
+        <span class="title">代码推送链路</span>
+      </div>
+      <div class="zone-body" style="text-align:center; padding:24px; font-size:14px;" id="git-flow">
+        Mac (./dev.sh push) → git push tencent → CVM post-receive hook → checkout → chmod → restart sri-api → 备份 → 网站更新
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部状态条 -->
+  <div style="margin-top:24px; text-align:center; font-size:11px; color:var(--ink); opacity:0.4;" id="footer-status">
+    满意解研究所 · 火承土印 · 光的接力
+  </div>
+</div>
+
+<script>
+const API_MAC = '../memory/_data/infra_state_mac.json';
+const API_CVM = 'http://101.33.219.144/infra_state_cvm.json';
+
+function fmtPct(val, max) {
+  let pct = val;
+  if (max) pct = Math.round(val / max * 100);
+  let cls = pct < 50 ? 'green' : pct < 80 ? 'yellow' : 'red';
+  return `<div class="progress"><div class="progress-fill ${cls}" style="width:${pct}%"></div></div>`;
+}
+
+function svcDot(active) {
+  return `<span class="dot ${active ? 'on' : 'off'}"></span>`;
+}
+
+async function loadData(url) {
+  try {
+    let res = await fetch(url, {cache:'no-store'});
+    return await res.json();
+  } catch(e) { return null; }
+}
+
+async function refresh() {
+  let [cvm, mac] = await Promise.all([loadData(API_CVM), loadData(API_MAC)]);
+  let now = new Date().toLocaleTimeString('zh-CN');
+  document.getElementById('updateTime').textContent = `更新时间: ${now}`;
+
+  // --- CVM ---
+  if (cvm) {
+    document.getElementById('cvm-host').textContent = `${cvm.host.region} · ${cvm.host.instance_id} · ${cvm.host.ip_public}`;
+    let cvmCards = document.getElementById('cvm-cards');
+    let sysDisk = cvm.disk['/'] || {};
+    let dataDisk = cvm.disk['/mnt/datadisk0'] || {};
+    
+    let svcOk = Object.values(cvm.services || {}).filter(v=>v).length;
+    let svcTotal = Object.keys(cvm.services || {}).length;
+    let svcAllOk = svcOk === svcTotal;
+
+    cvmCards.innerHTML = `
+      <div class="card"><div class="card-label">🖥️ 运行状态</div><div class="card-value">${svcAllOk ? '✅ 正常' : '❌ 异常'}</div><div class="card-sub">${svcOk}/${svcTotal} 服务</div></div>
+      <div class="card"><div class="card-label">💾 系统盘</div><div class="card-value">${sysDisk.used_pct || '?'}%</div><div class="card-sub">${sysDisk.used || '?'}/${sysDisk.total || '?'}</div>${fmtPct(sysDisk.used_pct||0)}</div>
+      <div class="card"><div class="card-label">📀 数据盘</div><div class="card-value">${dataDisk.used_pct || '?'}%</div><div class="card-sub">${dataDisk.used || '?'}/${dataDisk.total || '?'}</div>${fmtPct(dataDisk.used_pct||0)}</div>
+      <div class="card"><div class="card-label">🧠 内存</div><div class="card-value">${cvm.host.memory_total_gb}GB</div><div class="card-sub">${cvm.load}</div></div>
+      <div class="card"><div class="card-label">📦 备份</div><div class="card-value">${cvm.backups.count || 0}个</div><div class="card-sub">${cvm.backups.latest_size || '-'}</div></div>
+      <div class="card"><div class="card-label">⏰ Cron</div><div class="card-value">${cvm.cron.count || 0}条</div><div class="card-sub">每5分钟采集</div></div>
+    `;
+
+    let svcHtml = '';
+    let svcPorts = {nginx:'80', 'sri-api':'5050 (Gunicorn)', sshd:'22'};
+    for (let [name, active] of Object.entries(cvm.services || {})) {
+      svcHtml += `<div class="service-row">
+        ${svcDot(active)}<span class="service-name">${name}</span>
+        <span class="service-info">:${svcPorts[name] || '?'}</span>
+        <span style="font-size:11px; color:${active?'#4CAF50':'var(--red)'}">${active?'运行中':'已停止'}</span>
+      </div>`;
+    }
+    document.getElementById('cvm-services').innerHTML = svcHtml;
+
+    if (cvm.backups.latest_file) {
+      document.getElementById('cvm-backups').innerHTML = 
+        `<div class="backup-row"><span>最近备份</span><span>${cvm.backups.last_backup || '-'}</span></div>
+         <div class="backup-row"><span>文件</span><span>${cvm.backups.latest_file}</span></div>
+         <div class="backup-row"><span>大小</span><span>${cvm.backups.latest_size}</span></div>`;
+    }
+  }
+
+  // --- Mac ---
+  if (mac) {
+    document.getElementById('mac-host').textContent = `${mac.host.name} · ${mac.host.os}`;
+    let macCards = document.getElementById('mac-cards');
+    let rootDisk = mac.disk['/'] || {};
+    let dataDisk = mac.disk['/System/Volumes/Data'] || {};
+
+    macCards.innerHTML = `
+      <div class="card"><div class="card-label">🖥️ CPU</div><div class="card-value">${mac.host.cpu}</div><div class="card-sub">${mac.host.cores}核 · ${mac.host.memory_total_gb}GB</div></div>
+      <div class="card"><div class="card-label">🧠 内存</div><div class="card-value">${mac.host.memory_total_gb}GB</div><div class="card-sub">Apple Silicon</div></div>
+      <div class="card"><div class="card-label">💾 系统盘</div><div class="card-value">${rootDisk.used_pct || '?'}%</div><div class="card-sub">${rootDisk.used || '?'}/${rootDisk.total || '?'}</div>${fmtPct(rootDisk.used_pct||0)}</div>
+      <div class="card"><div class="card-label">📊 数据盘</div><div class="card-value">${dataDisk.used_pct || '?'}%</div><div class="card-sub">${dataDisk.used || '?'}/${dataDisk.total || '?'}</div>${fmtPct(dataDisk.used_pct||0)}</div>
+      <div class="card"><div class="card-label">⚡ 负载</div><div class="card-value">${mac.load.load_1m.toFixed(1)}</div><div class="card-sub">${mac.load.load_5m.toFixed(1)} / ${mac.load.load_15m.toFixed(1)}</div></div>
+      <div class="card"><div class="card-label">📝 Git</div><div class="card-value">${mac.repo.last_commit}</div><div class="card-sub">${mac.repo.commits}次提交</div></div>
+    `;
+
+    document.getElementById('mac-processes').innerHTML = `
+      <div class="service-row">
+        ${svcDot(mac.services.openclaw > 0)}<span class="service-name">OpenClaw</span>
+        <span class="service-info">${mac.services.openclaw}进程</span>
+        <span style="font-size:11px; color:${mac.services.openclaw>0?'#4CAF50':'var(--red)'}">${mac.services.openclaw>0?'运行中':'已停止'}</span>
+      </div>
+      <div class="service-row">
+        ${svcDot(mac.services.chrome > 0)}<span class="service-name">Chrome</span>
+        <span class="service-info">${mac.services.chrome}进程</span>
+        <span style="font-size:11px; color:${mac.services.chrome>0?'#4CAF50':'var(--ink)'}">${mac.services.chrome>0?'运行中':'未启动'}</span>
+      </div>
+    `;
+
+    // 负载柱状图
+    let bars = document.querySelectorAll('#mac-loadbars .load-bar');
+    let loads = [mac.load.load_1m || 0, mac.load.load_5m || 0, mac.load.load_15m || 0];
+    let maxLoad = Math.max(...loads, mac.host.cores || 4);
+    bars.forEach((bar, i) => {
+      let h = Math.min(loads[i] / maxLoad * 100, 100);
+      bar.style.height = h + '%';
+      bar.className = 'load-bar ' + (h > 80 ? 'high' : h > 40 ? 'mid' : 'low');
+    });
+  }
+
+  // --- 飞书 ---
+  if (cvm) {
+    let fs = cvm.feishu || {};
+    document.getElementById('feishu-status').innerHTML = `
+      <div class="service-row">${svcDot(fs.webhook)}<span class="service-name">Webhook 通知</span><span class="service-info">${fs.webhook?'已配置':'未配置'}</span></div>
+      <div class="service-row">${svcDot(fs.token)}<span class="service-name">App Token</span><span class="service-info">${fs.token?'正常':'需确认 Secret'}</span></div>
+      <div class="service-row">${svcDot(fs.bitable)}<span class="service-name">多维表格</span><span class="service-info">${fs.bitable?'已连接':'依赖 Token'}</span></div>
+    `;
+  }
+
+  // --- 安全 ---
+  if (cvm && cvm.iptables) {
+    document.getElementById('security-status').innerHTML = `
+      <div class="service-row">${svcDot(cvm.iptables.policy === 'DROP')}<span class="service-name">iptables 防火墙</span><span class="service-info">policy ${cvm.iptables.policy}</span></div>
+      <div class="service-row"><span class="dot on"></span><span class="service-name">SSH 密钥认证</span><span class="service-info">仅密钥 · 禁密码</span></div>
+      <div class="service-row"><span class="dot on"></span><span class="service-name">Secret 环境变量</span><span class="service-info">/etc/sriserver/env (600)</span></div>
+      <div class="service-row"><span class="dot on"></span><span class="service-name">SSL 安全头</span><span class="service-info">X-Frame-Options · XSS · Referrer</span></div>
+    `;
+  }
+}
+
+// 自动刷新每30秒
+refresh();
+setInterval(refresh, 30000);
+</script>
+</body>
+</html>
