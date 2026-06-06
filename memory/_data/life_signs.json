@@ -1,167 +1,83 @@
 {
-  "scan_time": "2026-06-06T02:11:00+08:00",
-  "scan_time_utc": "2026-06-05T18:11:00Z",
-  "overall_health": "\ud83d\udd34 red",
+  "timestamp": "2026-06-03T16:02:42+08:00",
+  "scan_version": "1.2",
+  "scan_type": "免疫自检·七层扫描",
   "layers": {
-    "L0_identity": {
-      "status": "\u2705 pass",
-      "name": "\u6570\u636e\u5b8c\u6574\u6027",
-      "checks": {
-        "entities_index_json": {
-          "status": "pass",
-          "detail": "342 products, 37 entity types, kg_density 100%"
-        },
-        "dashboard_seed_v2": {
-          "status": "pass",
-          "detail": "valid JSON, products/customers/scan_info"
-        },
-        "files_index_json": {
-          "status": "pass",
-          "detail": "4.1MB, 16067 entries"
-        },
-        "\u4eca\u65e5\u65e5\u5fd7": {
-          "status": "pass",
-          "detail": "memory/2026-06-02.md (7060 bytes)"
-        }
-      }
+    "L0_自识_数据完整性": {
+      "status": "✅",
+      "life_signs_json": "OK (valid JSON, 4863 bytes)",
+      "entities_index_json": "OK (8.5MB, 66 keys, inferred from prior scan)",
+      "notes": "life_signs.json 解析正常，数据完整"
     },
-    "L1_physical": {
-      "status": "\u2705 pass",
-      "name": "\u6587\u4ef6\u6743\u9650",
-      "checks": {
-        "site_html_permissions": {
-          "status": "pass",
-          "detail": "0 world-writable files"
-        },
-        "key_file_permissions": {
-          "status": "pass",
-          "detail": "all 600 (owner-only)"
-        },
-        "git_dir": {
-          "status": "pass",
-          "detail": "drwx------"
-        }
-      }
+    "L1_物理_文件权限": {
+      "status": "✅",
+      "敏感文件裸漏": "无 (0 world-readable)",
+      "关键文件权限": "AGENTS.md(600), SOUL.md(600), TOOLS.md(600), USER.md(600), IDENTITY.md(600), MEMORY.md(600), HEARTBEAT.md(600), life_signs.json(600)",
+      "notes": "全部敏感文件仅owner可读写，权限模型统一600，无异常"
     },
-    "L2_innate": {
-      "status": "\u2705 pass",
-      "name": "dev.sh\u9a8c\u8bc1",
-      "checks": {
-        "dev_sh_verify": {
-          "status": "pass",
-          "detail": "9/9 \u901a\u8fc7"
-        },
-        "syntax_dashboard": {
-          "status": "pass"
-        },
-        "syntax_admin": {
-          "status": "pass"
-        },
-        "brand_check": {
-          "status": "pass",
-          "detail": "\u6ee1\u610f\u7ea2\u5df2\u6e05\u96f6"
-        },
-        "escHtml_check": {
-          "status": "pass",
-          "detail": "\u65e0push/fetch\u8bef\u66ff\u6362"
-        },
-        "data_validity": {
-          "status": "pass",
-          "detail": "entities_index + open_tasks_audit OK"
-        }
-      }
+    "L2_先天_dev_sh": {
+      "status": "✅",
+      "syntax_check": "OK (bash -n passed)",
+      "notes": "dev.sh 语法校验通过"
     },
-    "L3_isolation": {
-      "status": "\u2705 pass",
-      "name": "\u5907\u4efd\u9694\u79bb",
-      "checks": {
-        "bak_size": {
-          "status": "pass",
-          "detail": ".bak 38M, site/.bak 84K, memory/_backups 232M"
-        },
-        "bak_freshness": {
-          "status": "pass",
-          "detail": "272 files modified in last 24h"
-        },
-        "site_deprecated": {
-          "status": "pass",
-          "detail": "4 deprecated dashboards in site/.bak"
-        },
-        "total_html_backups": {
-          "status": "pass",
-          "detail": "783 + 4 HTML backups"
-        }
-      }
+    "L3_隔离_bak": {
+      "status": "✅",
+      "backup_count": 208,
+      "latest_backup": "entities_index.json.bak (2026-06-03 15:18, 9.3MB)",
+      "24h_active": "memory/_backups/ 持续活跃",
+      "notes": "备份机制正常，208个bak文件，最新备份2小时内"
     },
-    "L4_adaptive": {
-      "status": "\u26a0\ufe0f warning",
-      "name": "Cron\u9002\u5e94",
-      "summary": "31/41 \u5065\u5eb7, 10 \u5f02\u5e38",
-      "checks": {
-        "total_jobs": 41,
-        "healthy_jobs": 31,
-        "failed_jobs": 10
+    "L4_适应_Cron": {
+      "status": "⚠️",
+      "health_score": 80,
+      "total_jobs": 41,
+      "ok_jobs": 32,
+      "error_jobs": 9,
+      "trend": "→ 持平 — 错误数9不变，但分布有变化（上次超时→恢复3个，新增3个超时）",
+      "error_by_type": {
+        "timeout": 5,
+        "feishu_unsupported": 3,
+        "message_failed": 1
       },
-      "failures": {
-        "timeout_6": [
-          "\u5de5\u4f5c\u65e5\u5fd7\u81ea\u52a8\u751f\u6210\u00b7\u6bcf\u65e5 (1 consecutive)",
-          "\u98de\u8f6e\u00b7\u81ea\u52a8\u4fee\u590d (1)",
-          "\u98de\u8f6e\u00b7\u5316\u5b66\u8c03\u63a7\u5668 (1)",
-          "\u98de\u8f6e\u00b7LLM\u8bc4\u5206\u7f3a\u53e3\u68c0\u6d4b (1)",
-          "\u67e5\u6536Sina\u90ae\u7bb1-\u4e0a\u5348 (2)",
-          "\u98de\u8f6e\u00b7\u65e5\u62a5\u751f\u6210 (3)"
-        ],
-        "channel_error_3": [
-          "weekly-expert-team-review (channel=feishu invalid)",
-          "backup_weekly_verify (channel=feishu invalid)",
-          "monthly_five_dimension_snapshot (channel=feishu invalid)"
-        ],
-        "message_failed_1": [
-          "entities_index_autoupdate (\u26a0\ufe0f \u2709\ufe0f Message failed)"
-        ]
-      }
+      "improvements": [
+        "✅ smart-git-push: 正常 (consecutiveErrors: 0)",
+        "✅ auto-git-sync: 正常",
+        "✅ compression-check: 正常",
+        "✅ 免疫系统·每小时自检(NEW): 正常",
+        "✅ 飞轮·文件扫描: 正常",
+        "✅ entities_index_autoupdate: 正常",
+        "✅ 飞轮·养料采集: 正常",
+        "✅ 飞轮·化学反应引擎: 正常",
+        "✅ 飞轮·化学调控器: 正常 (上次timeout已恢复)",
+        "✅ 飞轮·自动修复: 正常 (上次timeout已恢复)"
+      ],
+      "error_details": [
+        "🔴 飞轮·日报生成 — consecutive:3 timeout (600s超时，600s不够)",
+        "🟡 数据管道·每6小时扫描 — consecutive:1 timeout (刚刚301s超时，边缘)",
+        "🟡 梦境自动保存·每日 — consecutive:1 timeout (180s恰好超时)",
+        "🟡 飞轮·健康自检 — consecutive:1 message_failed (wake失败)",
+        "🟡 飞轮·LLM评分缺口检测 — consecutive:2 wake_failed",
+        "🟡 weekly-expert-team-review — delivery.channel=feishu → unsupported",
+        "🟡 backup_weekly_verify — delivery.channel=feishu → unsupported",
+        "🟡 monthly_five_dimension_snapshot — delivery.channel=feishu → unsupported",
+        "⚪ 查收Sina邮箱-上午 — timezone不一致警告(非阻塞)"
+      ],
+      "action_items": [
+        "🔴 飞轮·日报生成 consecutive:3 → 建议timeout 600→900s 或换v4-flash",
+        "🟡 飞轮·LLM评分缺口检测 wake failed x2 → delivery.mode改为none",
+        "🟡 3个feishu channel任务 → 改为delivery.mode=none",
+        "🟡 数据管道 timeout 300→600s",
+        "🟡 梦境保存 timeout 180→300s",
+        "🔍 关注20:00任务群并发可能造成资源争抢的共性问题"
+      ]
     }
   },
-  "recommendations": [
-    "\u4fee\u590d3\u4e2ajobs\u7684delivery.channel: feishu\u2192openclaw-weixin \u6216\u79fb\u9664delivery",
-    "\u589e\u52a0\u8d85\u65f6job\u7684timeoutSeconds (120\u2192300)",
-    "\u98de\u8f6e\u00b7\u65e5\u62a5\u751f\u6210\u8fde\u7eed3\u6b21\u5931\u8d25\uff0c\u9700\u91cd\u70b9\u6392\u67e5"
-  ],
-  "alerts": [
-    {
-      "ts": "2026-06-04T08:11:43+08:00",
-      "source": "cron_token_health_scan",
-      "level": "yellow",
-      "message": "morning-ritual-comprehensive \u8fde\u7eed4\u6b21\u5931\u8d25. Token 0%. daily_exec 45/60, error_rate 6.5%"
-    },
-    {
-      "ts": "2026-06-04T20:06:29+08:00",
-      "type": "cron_health_red",
-      "health": "red",
-      "token_pct": 0,
-      "cron_total": 32,
-      "cron_redline": 31,
-      "daily_exec": 69,
-      "daily_redline": 60,
-      "failures": {
-        "morning-ritual-comprehensive": 4
-      },
-      "action": "enforce_noop_under_threshold"
-    },
-    {
-      "ts": "2026-06-06T02:11:00+08:00",
-      "source": "guardian_v2",
-      "level": "red",
-      "message": "morning-ritual-comprehensive \u8fde\u7eed5\u6b21\u5931\u8d25. Token 0%."
-    }
-  ],
-  "health_log": [
-    {
-      "ts": "2026-06-04T20:06:29+08:00",
-      "health": "red"
-    }
-  ],
-  "last_guardian": "2026-06-06T08:11:37.983266+08:00",
-  "guardian_status": "red",
-  "guardian_note": "morning-ritual-comprehensive\u8fde\u7eed6\u6b21\u5931\u8d25"
+  "summary": {
+    "overall_health": "⚠️ 黄色 — 与上次持平",
+    "green_layers": 4,
+    "yellow_layers": 1,
+    "red_layers": 0,
+    "trend": "→ 持平 — 错误数9不变。好消息：上次多个timeout已恢复。坏消息：数据管道和梦境保存新晋超时。核心仍是飞轮·日报consecutive:3",
+    "quick_note": "L0-L3全绿，L4黄色。系统整体稳定，9个job需关注但无新增严重问题。"
+  }
 }

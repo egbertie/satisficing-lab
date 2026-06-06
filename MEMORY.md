@@ -1,6 +1,6 @@
 # MEMORY.md — 满意红的长时记忆
 
-> 最后更新: 2026-06-06 23:10 · 体系v7.1 + 文化体系V1.0 + Coze三人协作体系V1.0 + 腾讯云CVM生产部署V1.0
+> 最后更新: 2026-06-06 23:35 · 体系v7.1 + 文化体系V1.0 + Coze三人协作体系V1.0 + 腾讯云CVM生产部署V1.0 + Cron精简v2.0
 > 这不是日记。这是从经验中蒸馏出来的东西。
 
 ---
@@ -33,8 +33,9 @@
 | `/etc/sriserver/env` | 飞书Secret(600) |
 | `/etc/nginx/conf.d/satisficing-lab.conf` | Nginx站点 |
 | `/etc/systemd/system/sri-api.service` | Gunicorn服务 |
-| `/etc/cron.d/sriserver-health` | 云端Cron |
+| `/etc/cron.d/sriserver-health` | 云端Cron (精简v2.0 · 3条 · 日均3次) |
 | `/usr/local/bin/sri-backup.sh` | 备份脚本 |
+| `/usr/local/bin/sri-health-check.sh` | 每日健康简报脚本 |
 
 ### 部署教训（不可重犯）
 1. **🚫 绝不 sed 改 sshd_config 的 Port 行** → 端口隔离用 iptables，不动 sshd
