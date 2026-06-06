@@ -90,6 +90,10 @@ def create_app() -> Flask:
     return app
 
 
+# Gunicorn entry point (for production deployment)
+app = create_app()
+
+
 if __name__ == "__main__":
     app = create_app()
     print(f"""

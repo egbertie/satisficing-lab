@@ -11,13 +11,13 @@ SERVER_DIR = BASE_DIR / "server"
 DATA_DIR = BASE_DIR / "memory" / "_data"
 
 # === 飞书配置 ===
-FEISHU_APP_ID = "cli_a973d0912c78dcef"
-FEISHU_APP_SECRET = "JJJ2NhhiPHCKZdLy6CzEPTKQ61ULaF"
-FEISHU_WEBHOOK = "https://open.feishu.cn/open-apis/bot/v2/hook/10cdb92c-ee3f-479c-85b4-78144c9988c8"
+FEISHU_APP_ID = os.environ.get("FEISHU_APP_ID", "cli_a973d0912c78dcef")
+FEISHU_APP_SECRET = os.environ.get("FEISHU_APP_SECRET", "")
+FEISHU_WEBHOOK = os.environ.get("FEISHU_WEBHOOK", "")
 
 # 飞书多维表格（客户数据中心）
-FEISHU_BITABLE_TOKEN = "ErBVb6ZHqaFXcvsFlHxcXp8Enjd"
-FEISHU_BITABLE_TABLE_ID = "tblG65JNbsbAVpjp"
+FEISHU_BITABLE_TOKEN = os.environ.get("FEISHU_BITABLE_TOKEN", "")
+FEISHU_BITABLE_TABLE_ID = os.environ.get("FEISHU_BITABLE_TABLE_ID", "")
 
 # === 数据库 ===
 DATABASE_PATH = SERVER_DIR / "data" / "sri.db"
@@ -29,8 +29,8 @@ JWT_EXPIRES_HOURS = 72
 
 # === 服务器 ===
 HOST = "127.0.0.1"
-PORT = 5000
-DEBUG = True
+PORT = int(os.environ.get("SRI_PORT", 5050))
+DEBUG = os.environ.get("SRI_DEBUG", "false").lower() == "true"
 
 # === CORS ===
 CORS_ORIGINS = [
