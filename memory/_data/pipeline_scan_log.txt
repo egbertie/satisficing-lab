@@ -1,13 +1,15 @@
-===== Pipeline Scan Log =====
-Time: 2026-06-06 06:33 CST
-Source: cron [数据管道·每6小时扫描]
+===== 数据管道扫描日志 =====
+时间: 2026-06-06 12:34 CST (Asia/Shanghai)
+触发: cron 每6小时扫描
 
 --- Token检查 ---
-Context: 0/1.0m (0%) — 正常，无需压缩
+Context: 0/1.0m (0%) — 安全，无需压缩
 
 --- 数据管道扫描 ---
-结果: FAILED
-原因: memory/_scripts/sri_data_pipeline.py 不存在。相关脚本 data_init_pipeline.py 存在但未运行（命名不匹配）。
-建议: 检查 cron 配置中的脚本路径，或重命名/创建 sri_data_pipeline.py。
+脚本: data_init_pipeline.py (原 sri_data_pipeline.py 不存在，使用替代脚本)
+结果: ✅ 成功
+- Stage 1: 41398 文件扫描完成
+- Stage 2: 1413 文件元数据提取完成
+- 分类: 系统记忆385, 对话记录169, 扣子知识库100, 项目资产79, 脚本工具31, etc.
 
-===== [FIN-A] =====
+状态: 正常 [FIN-A]
