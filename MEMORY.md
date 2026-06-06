@@ -1,6 +1,6 @@
 # MEMORY.md — 满意红的长时记忆
 
-> 最后更新: 2026-06-06 23:35 · 体系v7.1 + 文化体系V1.0 + Coze三人协作体系V1.0 + 腾讯云CVM生产部署V1.0 + Cron精简v2.0
+> 最后更新: 2026-06-07 00:42 · 体系v7.1 + 文化体系V1.0 + Coze三人协作体系V1.0 + 腾讯云CVM生产部署V1.0 + Cron精简v2.0
 > 这不是日记。这是从经验中蒸馏出来的东西。
 
 ---
@@ -19,8 +19,14 @@
 - **SSH :22**: 仅密钥认证 · 禁密码 · PermitRootLogin prohibit-password
 - **iptables**: policy DROP · 仅开 22/80/443/ICMP · 持久化 /etc/iptables/rules.v4
 
-### 备份体系
-- **每日3点**: tar 备份项目→/mnt/datadisk0/backups/ · 保留7天
+### 飞书集成状态 (2026-06-07 00:40 全面打通)
+- **App ID**: cli_a973d0912c78dcef
+- **App Secret**: JJJ2NhhiPHCKZdLy6CzEPTKQ61ULaF4u (32位, 已验证有效)
+- **Webhook**: https://open.feishu.cn/open-apis/bot/v2/hook/10cdb92c-ee3f-479c-85b4-78144c9988c8
+- **Bitable Token**: ErBVb6ZHqaFXcvsFlHxcXp8Enjd
+- **Bitable Table**: tblG65JNbsbAVpjp (客户信息表)
+- **Token 有效期**: 2小时 (需每次请求前获取或缓存)
+- **Secret 存储**: /etc/sriserver/env (chmod 600) · MEMORY.md (本段)
 - **logrotate**: 每日轮转 · 7天保留 · 压缩
 - **SSH 恢复**: VNC → `cp /etc/ssh/sshd_config.orig /etc/ssh/sshd_config` → `systemctl restart sshd`
 - **iptables 恢复**: VNC → `iptables -F`
