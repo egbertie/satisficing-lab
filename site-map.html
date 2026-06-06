@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>站点地图 · 满意解研究所</title>
+<style>
+:root{--red:#C23B22;--gold:#B8860B;--bg:#F5F0E6;--ink:#4A4A4A;--title:#2A2A2A;--border:#E0D5C0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'PingFang SC','Helvetica Neue',sans-serif;background:var(--bg);color:var(--ink);padding:20px}
+.container{max-width:1200px;margin:0 auto}
+h1{text-align:center;color:var(--title);margin-bottom:8px;font-size:22px}
+.sub{text-align:center;color:var(--ink);opacity:0.5;font-size:12px;margin-bottom:24px}
+
+.flow{display:flex;flex-direction:column;gap:20px}
+.layer{border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.layer-header{padding:10px 16px;font-weight:700;font-size:14px}
+.layer-header.l0{background:var(--red);color:#fff}
+.layer-header.l1{background:var(--gold);color:#fff}
+.layer-header.l2{background:#4A4A4A;color:#fff}
+.layer-header.l3{background:#8B7355;color:#fff}
+.layer-body{padding:12px 16px;display:flex;flex-wrap:wrap;gap:6px;background:#fff}
+.page-link{display:inline-block;padding:4px 10px;border-radius:4px;font-size:12px;color:var(--ink);background:var(--bg);border:1px solid var(--border);text-decoration:none;transition:all .15s}
+.page-link:hover{background:var(--red);color:#fff;border-color:var(--red)}
+.page-link.core{font-weight:700}
+.page-link.new{background:#E8F5E9;border-color:#3D7A4F;color:#3D7A4F}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin-bottom:20px}
+.stat{padding:10px;background:#fff;border-radius:6px;border:1px solid var(--border);text-align:center}
+.stat-num{font-size:20px;font-weight:700;color:var(--red)}
+.stat-label{font-size:11px;color:var(--ink);opacity:0.5}
+
+.arrows{text-align:center;color:var(--ink);opacity:0.3;font-size:14px;padding:4px}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🗺️ 站点地图 · 满意解研究所</h1>
+<div class="sub">270页 · 15类别 · 部署于腾讯云CVM</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">270</div><div class="stat-label">HTML 页面</div></div>
+  <div class="stat"><div class="stat-num">15</div><div class="stat-label">产品类别</div></div>
+  <div class="stat"><div class="stat-num">3</div><div class="stat-label">API 端点</div></div>
+  <div class="stat"><div class="stat-num">1</div><div class="stat-label">服务器</div></div>
+</div>
+
+<div class="flow">
+  <!-- L0: 品牌入口 -->
+  <div class="layer">
+    <div class="layer-header l0">🏠 L0 · 品牌入口 (用户第一接触点)</div>
+    <div class="layer-body">
+      <a class="page-link core" href="index.html">🏠 首页</a>
+      <a class="page-link core" href="go.html">🗺️ 全站入口</a>
+      <a class="page-link" href="go-gallery.html">🖼️ 画廊</a>
+      <a class="page-link new" href="client.html">🤝 客户门户 v2</a>
+      <a class="page-link" href="gate.html">🚪 入口选择</a>
+      <a class="page-link" href="about.html">📖 关于我们</a>
+      <a class="page-link" href="culture.html">🏛️ 企业文化</a>
+    </div>
+  </div>
+
+  <div class="arrows">▼ ▼ ▼</div>
+
+  <!-- L1: 驾驶舱 + 客户互动 -->
+  <div class="layer">
+    <div class="layer-header l1">🎛️ L1 · 驾驶舱 + 客户互动</div>
+    <div class="layer-body">
+      <a class="page-link core" href="dashboard-v3.html">📊 驾驶舱</a>
+      <a class="page-link core" href="admin-windows.html">⚙️ 管理后台</a>
+      <a class="page-link new" href="infra-monitor.html">🔧 基础设施监控</a>
+      <a class="page-link new" href="interact.html">🚨 团队健康检测</a>
+      <a class="page-link" href="account.html">👤 用户中心</a>
+      <a class="page-link" href="register.html">📋 注册</a>
+      <a class="page-link" href="guide.html">📘 新手指南</a>
+      <a class="page-link" href="onboarding.html">🚀 入驻向导</a>
+    </div>
+  </div>
+
+  <div class="arrows">▼ ▼ ▼</div>
+
+  <!-- L2: 核心产品 -->
+  <div class="layer">
+    <div class="layer-header l2">🎯 L2 · 核心产品 (14件)</div>
+    <div class="layer-body">
+      <a class="page-link core" href="assessment.html">📊 五维评估</a>
+      <a class="page-link" href="radar.html">📡 团队雷达</a>
+      <a class="page-link" href="match.html">🤝 合伙人匹配</a>
+      <a class="page-link" href="cards.html">🃏 决策卡牌</a>
+      <a class="page-link" href="cards-play.html">🎴 卡牌玩法</a>
+      <a class="page-link" href="fulldiag.html">🔍 全面诊断</a>
+      <a class="page-link" href="thermometer.html">🌡️ 团队温度</a>
+      <a class="page-link" href="slicing-pie.html">🍕 切片派</a>
+      <a class="page-link" href="decision-theatre.html">🎭 决策剧场</a>
+      <a class="page-link" href="crisis-sim.html">🚨 危机模拟</a>
+      <a class="page-link" href="exit-guide.html">🚪 退出指南</a>
+      <a class="page-link" href="checklist.html">✅ 检查清单</a>
+    </div>
+  </div>
+
+  <div class="arrows">▼ ▼ ▼</div>
+
+  <!-- L3: 产品生态 -->
+  <div class="layer">
+    <div class="layer-header l3">📦 L3 · 产品生态</div>
+    <div class="layer-body">
+      <span style="font-size:11px;opacity:0.5;margin-right:6px">游戏(7):</span>
+      <a class="page-link" href="game-conflict.html">冲突牌</a>
+      <a class="page-link" href="game-duo.html">二人牌</a>
+      <a class="page-link" href="game-totem.html">图腾</a>
+      <a class="page-link" href="game-quick.html">速评</a>
+      <span style="font-size:9px;opacity:0.3;margin:0 6px">+3</span>
+      <span style="font-size:11px;opacity:0.5;margin-left:12px;margin-right:6px">深度(14):</span>
+      <a class="page-link" href="deep-altman.html">Altman</a>
+      <a class="page-link" href="deep-gottman.html">Gottman</a>
+      <a class="page-link" href="deep-lencioni.html">Lencioni</a>
+      <a class="page-link" href="deep-wasserman.html">Wasserman</a>
+      <a class="page-link" href="deep-manifesto.html">宣言</a>
+      <span style="font-size:9px;opacity:0.3;margin:0 6px">+9</span>
+      <span style="font-size:11px;opacity:0.5;margin-left:12px;margin-right:6px">案例(8):</span>
+      <a class="page-link" href="case-birui.html">碧瑞</a>
+      <a class="page-link" href="case-dji-2007.html">DJI</a>
+      <a class="page-link" href="case-zhangxue.html">张雪</a>
+      <span style="font-size:9px;opacity:0.3;margin:0 6px">+5</span>
+      <br><br>
+      <span style="font-size:11px;opacity:0.5;margin-right:6px">技能(35)</span>
+      <span style="font-size:11px;opacity:0.5;margin-right:12px">血脉(14)</span>
+      <span style="font-size:11px;opacity:0.5;margin-right:12px">飞轮(12)</span>
+      <span style="font-size:11px;opacity:0.5;margin-right:12px">运营(26)</span>
+      <span style="font-size:11px;opacity:0.5;margin-right:12px">微信(7)</span>
+      <span style="font-size:11px;opacity:0.5;margin-right:12px">媒体(6)</span>
+      <span style="font-size:11px;opacity:0.5;margin-right:12px">对话(8)</span>
+      <span style="font-size:11px;opacity:0.5">追踪(5)</span>
+      <span style="font-size:9px;opacity:0.3;margin-left:12px">更多见 go.html 全站入口</span>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;margin-top:24px;font-size:11px;color:var(--ink);opacity:0.3">
+  满意解研究所 · 火承土印 · 鼎玉契晋 · 三脉两翼 · 五维相生<br>
+  <a href="go.html" style="color:var(--gold);text-decoration:none">返回全站入口</a>
+</div>
+</div>
+</body>
+</html>
