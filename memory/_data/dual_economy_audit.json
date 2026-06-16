@@ -1,0 +1,91 @@
+{
+  "ts": "2026-06-17T05:33:21.197256+08:00",
+  "token_economy": {
+    "daily": {
+      "2026-06-15": {
+        "cost": 2.7712,
+        "pro_cost": 2.7651,
+        "flash_cost": 0.0061,
+        "total_input": 5778215,
+        "total_cache": 38023296,
+        "cache_ratio": 6.58,
+        "total_calls": 423
+      },
+      "2026-06-16": {
+        "cost": 19.3655,
+        "pro_cost": 19.3326,
+        "flash_cost": 0.0329,
+        "total_input": 42135385,
+        "total_cache": 241719168,
+        "cache_ratio": 5.737,
+        "total_calls": 2381
+      }
+    },
+    "alerts": [
+      {
+        "date": "2026-06-15",
+        "type": "high_daily_cost",
+        "value": 2.7712,
+        "threshold": 0.5
+      },
+      {
+        "date": "2026-06-16",
+        "type": "high_daily_cost",
+        "value": 19.3655,
+        "threshold": 0.5
+      }
+    ],
+    "total_14d_cost": 22.1367,
+    "avg_daily_cost": 11.0683,
+    "estimated_monthly": 332.05
+  },
+  "zombie_audit": {
+    "orphan_files": 24,
+    "idle_zombies": 1,
+    "heartbeat_zombies": 1,
+    "alerts": [
+      {
+        "type": "orphan_files_exceeded",
+        "value": 24,
+        "threshold": 20
+      }
+    ]
+  },
+  "cron_efficiency": {
+    "total_crons": 17,
+    "enabled": 17,
+    "error_crons": [
+      "周三整周体检(知识+Token合并)",
+      "下载扣子飞书对话文件夹每日同步",
+      "weekly-decision-evaluation"
+    ],
+    "timeout_crons": [
+      "周三整周体检(知识+Token合并)"
+    ],
+    "alerts": []
+  },
+  "time_economy": {
+    "estimated_cron_waste_hours": 0.1,
+    "zombie_idle_hours": 24,
+    "alerts": []
+  },
+  "all_alerts": [
+    {
+      "date": "2026-06-15",
+      "type": "high_daily_cost",
+      "value": 2.7712,
+      "threshold": 0.5
+    },
+    {
+      "date": "2026-06-16",
+      "type": "high_daily_cost",
+      "value": 19.3655,
+      "threshold": 0.5
+    },
+    {
+      "type": "orphan_files_exceeded",
+      "value": 24,
+      "threshold": 20
+    }
+  ]
+}
